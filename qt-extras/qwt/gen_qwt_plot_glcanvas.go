@@ -32,6 +32,11 @@ const (
 	QwtPlotGLCanvas__Panel   QwtPlotGLCanvas__Shape = 2
 )
 
+//export miqt_exec_callback_handle_release_QwtPlotGLCanvas
+func miqt_exec_callback_handle_release_QwtPlotGLCanvas(cb C.intptr_t) {
+	cgo.Handle(cb).Delete()
+}
+
 type QwtPlotGLCanvas struct {
 	h *C.QwtPlotGLCanvas
 	*opengl.QGLWidget
@@ -370,7 +375,11 @@ func (this *QwtPlotGLCanvas) callVirtualBase_Event(param1 *qt.QEvent) bool {
 
 }
 func (this *QwtPlotGLCanvas) OnEvent(slot func(super func(param1 *qt.QEvent) bool, param1 *qt.QEvent) bool) {
-	ok := C.QwtPlotGLCanvas_override_virtual_event(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QwtPlotGLCanvas_override_virtual_event(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -398,7 +407,11 @@ func (this *QwtPlotGLCanvas) callVirtualBase_PaintEvent(param1 *qt.QPaintEvent) 
 
 }
 func (this *QwtPlotGLCanvas) OnPaintEvent(slot func(super func(param1 *qt.QPaintEvent), param1 *qt.QPaintEvent)) {
-	ok := C.QwtPlotGLCanvas_override_virtual_paintEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QwtPlotGLCanvas_override_virtual_paintEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -424,7 +437,11 @@ func (this *QwtPlotGLCanvas) callVirtualBase_DrawBackground(param1 *qt.QPainter)
 
 }
 func (this *QwtPlotGLCanvas) OnDrawBackground(slot func(super func(param1 *qt.QPainter), param1 *qt.QPainter)) {
-	ok := C.QwtPlotGLCanvas_override_virtual_drawBackground(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QwtPlotGLCanvas_override_virtual_drawBackground(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -450,7 +467,11 @@ func (this *QwtPlotGLCanvas) callVirtualBase_DrawBorder(param1 *qt.QPainter) {
 
 }
 func (this *QwtPlotGLCanvas) OnDrawBorder(slot func(super func(param1 *qt.QPainter), param1 *qt.QPainter)) {
-	ok := C.QwtPlotGLCanvas_override_virtual_drawBorder(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QwtPlotGLCanvas_override_virtual_drawBorder(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -476,7 +497,11 @@ func (this *QwtPlotGLCanvas) callVirtualBase_DrawItems(param1 *qt.QPainter) {
 
 }
 func (this *QwtPlotGLCanvas) OnDrawItems(slot func(super func(param1 *qt.QPainter), param1 *qt.QPainter)) {
-	ok := C.QwtPlotGLCanvas_override_virtual_drawItems(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QwtPlotGLCanvas_override_virtual_drawItems(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -502,7 +527,11 @@ func (this *QwtPlotGLCanvas) callVirtualBase_PaintEngine() *qt.QPaintEngine {
 
 }
 func (this *QwtPlotGLCanvas) OnPaintEngine(slot func(super func() *qt.QPaintEngine) *qt.QPaintEngine) {
-	ok := C.QwtPlotGLCanvas_override_virtual_paintEngine(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QwtPlotGLCanvas_override_virtual_paintEngine(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -527,7 +556,11 @@ func (this *QwtPlotGLCanvas) callVirtualBase_UpdateGL() {
 
 }
 func (this *QwtPlotGLCanvas) OnUpdateGL(slot func(super func())) {
-	ok := C.QwtPlotGLCanvas_override_virtual_updateGL(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QwtPlotGLCanvas_override_virtual_updateGL(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -550,7 +583,11 @@ func (this *QwtPlotGLCanvas) callVirtualBase_UpdateOverlayGL() {
 
 }
 func (this *QwtPlotGLCanvas) OnUpdateOverlayGL(slot func(super func())) {
-	ok := C.QwtPlotGLCanvas_override_virtual_updateOverlayGL(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QwtPlotGLCanvas_override_virtual_updateOverlayGL(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -573,7 +610,11 @@ func (this *QwtPlotGLCanvas) callVirtualBase_InitializeGL() {
 
 }
 func (this *QwtPlotGLCanvas) OnInitializeGL(slot func(super func())) {
-	ok := C.QwtPlotGLCanvas_override_virtual_initializeGL(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QwtPlotGLCanvas_override_virtual_initializeGL(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -596,7 +637,11 @@ func (this *QwtPlotGLCanvas) callVirtualBase_ResizeGL(w int, h int) {
 
 }
 func (this *QwtPlotGLCanvas) OnResizeGL(slot func(super func(w int, h int), w int, h int)) {
-	ok := C.QwtPlotGLCanvas_override_virtual_resizeGL(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QwtPlotGLCanvas_override_virtual_resizeGL(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -624,7 +669,11 @@ func (this *QwtPlotGLCanvas) callVirtualBase_PaintGL() {
 
 }
 func (this *QwtPlotGLCanvas) OnPaintGL(slot func(super func())) {
-	ok := C.QwtPlotGLCanvas_override_virtual_paintGL(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QwtPlotGLCanvas_override_virtual_paintGL(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -647,7 +696,11 @@ func (this *QwtPlotGLCanvas) callVirtualBase_InitializeOverlayGL() {
 
 }
 func (this *QwtPlotGLCanvas) OnInitializeOverlayGL(slot func(super func())) {
-	ok := C.QwtPlotGLCanvas_override_virtual_initializeOverlayGL(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QwtPlotGLCanvas_override_virtual_initializeOverlayGL(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -670,7 +723,11 @@ func (this *QwtPlotGLCanvas) callVirtualBase_ResizeOverlayGL(w int, h int) {
 
 }
 func (this *QwtPlotGLCanvas) OnResizeOverlayGL(slot func(super func(w int, h int), w int, h int)) {
-	ok := C.QwtPlotGLCanvas_override_virtual_resizeOverlayGL(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QwtPlotGLCanvas_override_virtual_resizeOverlayGL(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -698,7 +755,11 @@ func (this *QwtPlotGLCanvas) callVirtualBase_PaintOverlayGL() {
 
 }
 func (this *QwtPlotGLCanvas) OnPaintOverlayGL(slot func(super func())) {
-	ok := C.QwtPlotGLCanvas_override_virtual_paintOverlayGL(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QwtPlotGLCanvas_override_virtual_paintOverlayGL(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -721,7 +782,11 @@ func (this *QwtPlotGLCanvas) callVirtualBase_ResizeEvent(param1 *qt.QResizeEvent
 
 }
 func (this *QwtPlotGLCanvas) OnResizeEvent(slot func(super func(param1 *qt.QResizeEvent), param1 *qt.QResizeEvent)) {
-	ok := C.QwtPlotGLCanvas_override_virtual_resizeEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QwtPlotGLCanvas_override_virtual_resizeEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -747,7 +812,11 @@ func (this *QwtPlotGLCanvas) callVirtualBase_GlInit() {
 
 }
 func (this *QwtPlotGLCanvas) OnGlInit(slot func(super func())) {
-	ok := C.QwtPlotGLCanvas_override_virtual_glInit(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QwtPlotGLCanvas_override_virtual_glInit(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -770,7 +839,11 @@ func (this *QwtPlotGLCanvas) callVirtualBase_GlDraw() {
 
 }
 func (this *QwtPlotGLCanvas) OnGlDraw(slot func(super func())) {
-	ok := C.QwtPlotGLCanvas_override_virtual_glDraw(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QwtPlotGLCanvas_override_virtual_glDraw(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -793,7 +866,11 @@ func (this *QwtPlotGLCanvas) callVirtualBase_DevType() int {
 
 }
 func (this *QwtPlotGLCanvas) OnDevType(slot func(super func() int) int) {
-	ok := C.QwtPlotGLCanvas_override_virtual_devType(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QwtPlotGLCanvas_override_virtual_devType(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -818,7 +895,11 @@ func (this *QwtPlotGLCanvas) callVirtualBase_SetVisible(visible bool) {
 
 }
 func (this *QwtPlotGLCanvas) OnSetVisible(slot func(super func(visible bool), visible bool)) {
-	ok := C.QwtPlotGLCanvas_override_virtual_setVisible(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QwtPlotGLCanvas_override_virtual_setVisible(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -846,7 +927,11 @@ func (this *QwtPlotGLCanvas) callVirtualBase_SizeHint() *qt.QSize {
 
 }
 func (this *QwtPlotGLCanvas) OnSizeHint(slot func(super func() *qt.QSize) *qt.QSize) {
-	ok := C.QwtPlotGLCanvas_override_virtual_sizeHint(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QwtPlotGLCanvas_override_virtual_sizeHint(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -873,7 +958,11 @@ func (this *QwtPlotGLCanvas) callVirtualBase_MinimumSizeHint() *qt.QSize {
 
 }
 func (this *QwtPlotGLCanvas) OnMinimumSizeHint(slot func(super func() *qt.QSize) *qt.QSize) {
-	ok := C.QwtPlotGLCanvas_override_virtual_minimumSizeHint(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QwtPlotGLCanvas_override_virtual_minimumSizeHint(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -898,7 +987,11 @@ func (this *QwtPlotGLCanvas) callVirtualBase_HeightForWidth(param1 int) int {
 
 }
 func (this *QwtPlotGLCanvas) OnHeightForWidth(slot func(super func(param1 int) int, param1 int) int) {
-	ok := C.QwtPlotGLCanvas_override_virtual_heightForWidth(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QwtPlotGLCanvas_override_virtual_heightForWidth(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -926,7 +1019,11 @@ func (this *QwtPlotGLCanvas) callVirtualBase_HasHeightForWidth() bool {
 
 }
 func (this *QwtPlotGLCanvas) OnHasHeightForWidth(slot func(super func() bool) bool) {
-	ok := C.QwtPlotGLCanvas_override_virtual_hasHeightForWidth(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QwtPlotGLCanvas_override_virtual_hasHeightForWidth(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -951,7 +1048,11 @@ func (this *QwtPlotGLCanvas) callVirtualBase_MousePressEvent(event *qt.QMouseEve
 
 }
 func (this *QwtPlotGLCanvas) OnMousePressEvent(slot func(super func(event *qt.QMouseEvent), event *qt.QMouseEvent)) {
-	ok := C.QwtPlotGLCanvas_override_virtual_mousePressEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QwtPlotGLCanvas_override_virtual_mousePressEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -977,7 +1078,11 @@ func (this *QwtPlotGLCanvas) callVirtualBase_MouseReleaseEvent(event *qt.QMouseE
 
 }
 func (this *QwtPlotGLCanvas) OnMouseReleaseEvent(slot func(super func(event *qt.QMouseEvent), event *qt.QMouseEvent)) {
-	ok := C.QwtPlotGLCanvas_override_virtual_mouseReleaseEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QwtPlotGLCanvas_override_virtual_mouseReleaseEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1003,7 +1108,11 @@ func (this *QwtPlotGLCanvas) callVirtualBase_MouseDoubleClickEvent(event *qt.QMo
 
 }
 func (this *QwtPlotGLCanvas) OnMouseDoubleClickEvent(slot func(super func(event *qt.QMouseEvent), event *qt.QMouseEvent)) {
-	ok := C.QwtPlotGLCanvas_override_virtual_mouseDoubleClickEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QwtPlotGLCanvas_override_virtual_mouseDoubleClickEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1029,7 +1138,11 @@ func (this *QwtPlotGLCanvas) callVirtualBase_MouseMoveEvent(event *qt.QMouseEven
 
 }
 func (this *QwtPlotGLCanvas) OnMouseMoveEvent(slot func(super func(event *qt.QMouseEvent), event *qt.QMouseEvent)) {
-	ok := C.QwtPlotGLCanvas_override_virtual_mouseMoveEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QwtPlotGLCanvas_override_virtual_mouseMoveEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1055,7 +1168,11 @@ func (this *QwtPlotGLCanvas) callVirtualBase_WheelEvent(event *qt.QWheelEvent) {
 
 }
 func (this *QwtPlotGLCanvas) OnWheelEvent(slot func(super func(event *qt.QWheelEvent), event *qt.QWheelEvent)) {
-	ok := C.QwtPlotGLCanvas_override_virtual_wheelEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QwtPlotGLCanvas_override_virtual_wheelEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1081,7 +1198,11 @@ func (this *QwtPlotGLCanvas) callVirtualBase_KeyPressEvent(event *qt.QKeyEvent) 
 
 }
 func (this *QwtPlotGLCanvas) OnKeyPressEvent(slot func(super func(event *qt.QKeyEvent), event *qt.QKeyEvent)) {
-	ok := C.QwtPlotGLCanvas_override_virtual_keyPressEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QwtPlotGLCanvas_override_virtual_keyPressEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1107,7 +1228,11 @@ func (this *QwtPlotGLCanvas) callVirtualBase_KeyReleaseEvent(event *qt.QKeyEvent
 
 }
 func (this *QwtPlotGLCanvas) OnKeyReleaseEvent(slot func(super func(event *qt.QKeyEvent), event *qt.QKeyEvent)) {
-	ok := C.QwtPlotGLCanvas_override_virtual_keyReleaseEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QwtPlotGLCanvas_override_virtual_keyReleaseEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1133,7 +1258,11 @@ func (this *QwtPlotGLCanvas) callVirtualBase_FocusInEvent(event *qt.QFocusEvent)
 
 }
 func (this *QwtPlotGLCanvas) OnFocusInEvent(slot func(super func(event *qt.QFocusEvent), event *qt.QFocusEvent)) {
-	ok := C.QwtPlotGLCanvas_override_virtual_focusInEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QwtPlotGLCanvas_override_virtual_focusInEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1159,7 +1288,11 @@ func (this *QwtPlotGLCanvas) callVirtualBase_FocusOutEvent(event *qt.QFocusEvent
 
 }
 func (this *QwtPlotGLCanvas) OnFocusOutEvent(slot func(super func(event *qt.QFocusEvent), event *qt.QFocusEvent)) {
-	ok := C.QwtPlotGLCanvas_override_virtual_focusOutEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QwtPlotGLCanvas_override_virtual_focusOutEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1185,7 +1318,11 @@ func (this *QwtPlotGLCanvas) callVirtualBase_EnterEvent(event *qt.QEvent) {
 
 }
 func (this *QwtPlotGLCanvas) OnEnterEvent(slot func(super func(event *qt.QEvent), event *qt.QEvent)) {
-	ok := C.QwtPlotGLCanvas_override_virtual_enterEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QwtPlotGLCanvas_override_virtual_enterEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1211,7 +1348,11 @@ func (this *QwtPlotGLCanvas) callVirtualBase_LeaveEvent(event *qt.QEvent) {
 
 }
 func (this *QwtPlotGLCanvas) OnLeaveEvent(slot func(super func(event *qt.QEvent), event *qt.QEvent)) {
-	ok := C.QwtPlotGLCanvas_override_virtual_leaveEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QwtPlotGLCanvas_override_virtual_leaveEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1237,7 +1378,11 @@ func (this *QwtPlotGLCanvas) callVirtualBase_MoveEvent(event *qt.QMoveEvent) {
 
 }
 func (this *QwtPlotGLCanvas) OnMoveEvent(slot func(super func(event *qt.QMoveEvent), event *qt.QMoveEvent)) {
-	ok := C.QwtPlotGLCanvas_override_virtual_moveEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QwtPlotGLCanvas_override_virtual_moveEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1263,7 +1408,11 @@ func (this *QwtPlotGLCanvas) callVirtualBase_CloseEvent(event *qt.QCloseEvent) {
 
 }
 func (this *QwtPlotGLCanvas) OnCloseEvent(slot func(super func(event *qt.QCloseEvent), event *qt.QCloseEvent)) {
-	ok := C.QwtPlotGLCanvas_override_virtual_closeEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QwtPlotGLCanvas_override_virtual_closeEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1289,7 +1438,11 @@ func (this *QwtPlotGLCanvas) callVirtualBase_ContextMenuEvent(event *qt.QContext
 
 }
 func (this *QwtPlotGLCanvas) OnContextMenuEvent(slot func(super func(event *qt.QContextMenuEvent), event *qt.QContextMenuEvent)) {
-	ok := C.QwtPlotGLCanvas_override_virtual_contextMenuEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QwtPlotGLCanvas_override_virtual_contextMenuEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1315,7 +1468,11 @@ func (this *QwtPlotGLCanvas) callVirtualBase_TabletEvent(event *qt.QTabletEvent)
 
 }
 func (this *QwtPlotGLCanvas) OnTabletEvent(slot func(super func(event *qt.QTabletEvent), event *qt.QTabletEvent)) {
-	ok := C.QwtPlotGLCanvas_override_virtual_tabletEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QwtPlotGLCanvas_override_virtual_tabletEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1341,7 +1498,11 @@ func (this *QwtPlotGLCanvas) callVirtualBase_ActionEvent(event *qt.QActionEvent)
 
 }
 func (this *QwtPlotGLCanvas) OnActionEvent(slot func(super func(event *qt.QActionEvent), event *qt.QActionEvent)) {
-	ok := C.QwtPlotGLCanvas_override_virtual_actionEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QwtPlotGLCanvas_override_virtual_actionEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1367,7 +1528,11 @@ func (this *QwtPlotGLCanvas) callVirtualBase_DragEnterEvent(event *qt.QDragEnter
 
 }
 func (this *QwtPlotGLCanvas) OnDragEnterEvent(slot func(super func(event *qt.QDragEnterEvent), event *qt.QDragEnterEvent)) {
-	ok := C.QwtPlotGLCanvas_override_virtual_dragEnterEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QwtPlotGLCanvas_override_virtual_dragEnterEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1393,7 +1558,11 @@ func (this *QwtPlotGLCanvas) callVirtualBase_DragMoveEvent(event *qt.QDragMoveEv
 
 }
 func (this *QwtPlotGLCanvas) OnDragMoveEvent(slot func(super func(event *qt.QDragMoveEvent), event *qt.QDragMoveEvent)) {
-	ok := C.QwtPlotGLCanvas_override_virtual_dragMoveEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QwtPlotGLCanvas_override_virtual_dragMoveEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1419,7 +1588,11 @@ func (this *QwtPlotGLCanvas) callVirtualBase_DragLeaveEvent(event *qt.QDragLeave
 
 }
 func (this *QwtPlotGLCanvas) OnDragLeaveEvent(slot func(super func(event *qt.QDragLeaveEvent), event *qt.QDragLeaveEvent)) {
-	ok := C.QwtPlotGLCanvas_override_virtual_dragLeaveEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QwtPlotGLCanvas_override_virtual_dragLeaveEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1445,7 +1618,11 @@ func (this *QwtPlotGLCanvas) callVirtualBase_DropEvent(event *qt.QDropEvent) {
 
 }
 func (this *QwtPlotGLCanvas) OnDropEvent(slot func(super func(event *qt.QDropEvent), event *qt.QDropEvent)) {
-	ok := C.QwtPlotGLCanvas_override_virtual_dropEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QwtPlotGLCanvas_override_virtual_dropEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1471,7 +1648,11 @@ func (this *QwtPlotGLCanvas) callVirtualBase_ShowEvent(event *qt.QShowEvent) {
 
 }
 func (this *QwtPlotGLCanvas) OnShowEvent(slot func(super func(event *qt.QShowEvent), event *qt.QShowEvent)) {
-	ok := C.QwtPlotGLCanvas_override_virtual_showEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QwtPlotGLCanvas_override_virtual_showEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1497,7 +1678,11 @@ func (this *QwtPlotGLCanvas) callVirtualBase_HideEvent(event *qt.QHideEvent) {
 
 }
 func (this *QwtPlotGLCanvas) OnHideEvent(slot func(super func(event *qt.QHideEvent), event *qt.QHideEvent)) {
-	ok := C.QwtPlotGLCanvas_override_virtual_hideEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QwtPlotGLCanvas_override_virtual_hideEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1530,7 +1715,11 @@ func (this *QwtPlotGLCanvas) callVirtualBase_NativeEvent(eventType []byte, messa
 
 }
 func (this *QwtPlotGLCanvas) OnNativeEvent(slot func(super func(eventType []byte, message unsafe.Pointer, result *int64) bool, eventType []byte, message unsafe.Pointer, result *int64) bool) {
-	ok := C.QwtPlotGLCanvas_override_virtual_nativeEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QwtPlotGLCanvas_override_virtual_nativeEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1564,7 +1753,11 @@ func (this *QwtPlotGLCanvas) callVirtualBase_ChangeEvent(param1 *qt.QEvent) {
 
 }
 func (this *QwtPlotGLCanvas) OnChangeEvent(slot func(super func(param1 *qt.QEvent), param1 *qt.QEvent)) {
-	ok := C.QwtPlotGLCanvas_override_virtual_changeEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QwtPlotGLCanvas_override_virtual_changeEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1590,7 +1783,11 @@ func (this *QwtPlotGLCanvas) callVirtualBase_Metric(param1 qt.QPaintDevice__Pain
 
 }
 func (this *QwtPlotGLCanvas) OnMetric(slot func(super func(param1 qt.QPaintDevice__PaintDeviceMetric) int, param1 qt.QPaintDevice__PaintDeviceMetric) int) {
-	ok := C.QwtPlotGLCanvas_override_virtual_metric(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QwtPlotGLCanvas_override_virtual_metric(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1618,7 +1815,11 @@ func (this *QwtPlotGLCanvas) callVirtualBase_InitPainter(painter *qt.QPainter) {
 
 }
 func (this *QwtPlotGLCanvas) OnInitPainter(slot func(super func(painter *qt.QPainter), painter *qt.QPainter)) {
-	ok := C.QwtPlotGLCanvas_override_virtual_initPainter(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QwtPlotGLCanvas_override_virtual_initPainter(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1644,7 +1845,11 @@ func (this *QwtPlotGLCanvas) callVirtualBase_Redirected(offset *qt.QPoint) *qt.Q
 
 }
 func (this *QwtPlotGLCanvas) OnRedirected(slot func(super func(offset *qt.QPoint) *qt.QPaintDevice, offset *qt.QPoint) *qt.QPaintDevice) {
-	ok := C.QwtPlotGLCanvas_override_virtual_redirected(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QwtPlotGLCanvas_override_virtual_redirected(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1672,7 +1877,11 @@ func (this *QwtPlotGLCanvas) callVirtualBase_SharedPainter() *qt.QPainter {
 
 }
 func (this *QwtPlotGLCanvas) OnSharedPainter(slot func(super func() *qt.QPainter) *qt.QPainter) {
-	ok := C.QwtPlotGLCanvas_override_virtual_sharedPainter(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QwtPlotGLCanvas_override_virtual_sharedPainter(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1697,7 +1906,11 @@ func (this *QwtPlotGLCanvas) callVirtualBase_InputMethodEvent(param1 *qt.QInputM
 
 }
 func (this *QwtPlotGLCanvas) OnInputMethodEvent(slot func(super func(param1 *qt.QInputMethodEvent), param1 *qt.QInputMethodEvent)) {
-	ok := C.QwtPlotGLCanvas_override_virtual_inputMethodEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QwtPlotGLCanvas_override_virtual_inputMethodEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1725,7 +1938,11 @@ func (this *QwtPlotGLCanvas) callVirtualBase_InputMethodQuery(param1 qt.InputMet
 
 }
 func (this *QwtPlotGLCanvas) OnInputMethodQuery(slot func(super func(param1 qt.InputMethodQuery) *qt.QVariant, param1 qt.InputMethodQuery) *qt.QVariant) {
-	ok := C.QwtPlotGLCanvas_override_virtual_inputMethodQuery(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QwtPlotGLCanvas_override_virtual_inputMethodQuery(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1753,7 +1970,11 @@ func (this *QwtPlotGLCanvas) callVirtualBase_FocusNextPrevChild(next bool) bool 
 
 }
 func (this *QwtPlotGLCanvas) OnFocusNextPrevChild(slot func(super func(next bool) bool, next bool) bool) {
-	ok := C.QwtPlotGLCanvas_override_virtual_focusNextPrevChild(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QwtPlotGLCanvas_override_virtual_focusNextPrevChild(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1781,7 +2002,11 @@ func (this *QwtPlotGLCanvas) callVirtualBase_EventFilter(watched *qt.QObject, ev
 
 }
 func (this *QwtPlotGLCanvas) OnEventFilter(slot func(super func(watched *qt.QObject, event *qt.QEvent) bool, watched *qt.QObject, event *qt.QEvent) bool) {
-	ok := C.QwtPlotGLCanvas_override_virtual_eventFilter(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QwtPlotGLCanvas_override_virtual_eventFilter(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1811,7 +2036,11 @@ func (this *QwtPlotGLCanvas) callVirtualBase_TimerEvent(event *qt.QTimerEvent) {
 
 }
 func (this *QwtPlotGLCanvas) OnTimerEvent(slot func(super func(event *qt.QTimerEvent), event *qt.QTimerEvent)) {
-	ok := C.QwtPlotGLCanvas_override_virtual_timerEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QwtPlotGLCanvas_override_virtual_timerEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1837,7 +2066,11 @@ func (this *QwtPlotGLCanvas) callVirtualBase_ChildEvent(event *qt.QChildEvent) {
 
 }
 func (this *QwtPlotGLCanvas) OnChildEvent(slot func(super func(event *qt.QChildEvent), event *qt.QChildEvent)) {
-	ok := C.QwtPlotGLCanvas_override_virtual_childEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QwtPlotGLCanvas_override_virtual_childEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1863,7 +2096,11 @@ func (this *QwtPlotGLCanvas) callVirtualBase_CustomEvent(event *qt.QEvent) {
 
 }
 func (this *QwtPlotGLCanvas) OnCustomEvent(slot func(super func(event *qt.QEvent), event *qt.QEvent)) {
-	ok := C.QwtPlotGLCanvas_override_virtual_customEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QwtPlotGLCanvas_override_virtual_customEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1889,7 +2126,11 @@ func (this *QwtPlotGLCanvas) callVirtualBase_ConnectNotify(signal *qt.QMetaMetho
 
 }
 func (this *QwtPlotGLCanvas) OnConnectNotify(slot func(super func(signal *qt.QMetaMethod), signal *qt.QMetaMethod)) {
-	ok := C.QwtPlotGLCanvas_override_virtual_connectNotify(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QwtPlotGLCanvas_override_virtual_connectNotify(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1915,7 +2156,11 @@ func (this *QwtPlotGLCanvas) callVirtualBase_DisconnectNotify(signal *qt.QMetaMe
 
 }
 func (this *QwtPlotGLCanvas) OnDisconnectNotify(slot func(super func(signal *qt.QMetaMethod), signal *qt.QMetaMethod)) {
-	ok := C.QwtPlotGLCanvas_override_virtual_disconnectNotify(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QwtPlotGLCanvas_override_virtual_disconnectNotify(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}

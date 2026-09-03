@@ -31,6 +31,11 @@ const (
 	QPrintPreviewWidget__FitInView  QPrintPreviewWidget__ZoomMode = 2
 )
 
+//export miqt_exec_callback_handle_release_QPrintPreviewWidget
+func miqt_exec_callback_handle_release_QPrintPreviewWidget(cb C.intptr_t) {
+	cgo.Handle(cb).Delete()
+}
+
 type QPrintPreviewWidget struct {
 	h *C.QPrintPreviewWidget
 	*qt.QWidget
@@ -226,8 +231,10 @@ func (this *QPrintPreviewWidget) UpdatePreview() {
 func (this *QPrintPreviewWidget) PaintRequested(printer *QPrinter) {
 	C.QPrintPreviewWidget_paintRequested(this.h, printer.cPointer())
 }
-func (this *QPrintPreviewWidget) OnPaintRequested(slot func(printer *QPrinter)) {
-	C.QPrintPreviewWidget_connect_paintRequested(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QPrintPreviewWidget) OnPaintRequested(slot func(printer *QPrinter)) *qt.SignalConnection {
+	_goptr := qt.UnsafeNewQMetaObject__Connection(C.QPrintPreviewWidget_connect_paintRequested(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QPrintPreviewWidget_paintRequested
@@ -246,8 +253,10 @@ func miqt_exec_callback_QPrintPreviewWidget_paintRequested(cb C.intptr_t, printe
 func (this *QPrintPreviewWidget) PreviewChanged() {
 	C.QPrintPreviewWidget_previewChanged(this.h)
 }
-func (this *QPrintPreviewWidget) OnPreviewChanged(slot func()) {
-	C.QPrintPreviewWidget_connect_previewChanged(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QPrintPreviewWidget) OnPreviewChanged(slot func()) *qt.SignalConnection {
+	_goptr := qt.UnsafeNewQMetaObject__Connection(C.QPrintPreviewWidget_connect_previewChanged(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QPrintPreviewWidget_previewChanged
@@ -440,7 +449,11 @@ func (this *QPrintPreviewWidget) callVirtualBase_SetVisible(visible bool) {
 
 }
 func (this *QPrintPreviewWidget) OnSetVisible(slot func(super func(visible bool), visible bool)) {
-	ok := C.QPrintPreviewWidget_override_virtual_setVisible(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QPrintPreviewWidget_override_virtual_setVisible(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -466,7 +479,11 @@ func (this *QPrintPreviewWidget) callVirtualBase_DevType() int {
 
 }
 func (this *QPrintPreviewWidget) OnDevType(slot func(super func() int) int) {
-	ok := C.QPrintPreviewWidget_override_virtual_devType(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QPrintPreviewWidget_override_virtual_devType(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -493,7 +510,11 @@ func (this *QPrintPreviewWidget) callVirtualBase_SizeHint() *qt.QSize {
 
 }
 func (this *QPrintPreviewWidget) OnSizeHint(slot func(super func() *qt.QSize) *qt.QSize) {
-	ok := C.QPrintPreviewWidget_override_virtual_sizeHint(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QPrintPreviewWidget_override_virtual_sizeHint(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -520,7 +541,11 @@ func (this *QPrintPreviewWidget) callVirtualBase_MinimumSizeHint() *qt.QSize {
 
 }
 func (this *QPrintPreviewWidget) OnMinimumSizeHint(slot func(super func() *qt.QSize) *qt.QSize) {
-	ok := C.QPrintPreviewWidget_override_virtual_minimumSizeHint(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QPrintPreviewWidget_override_virtual_minimumSizeHint(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -545,7 +570,11 @@ func (this *QPrintPreviewWidget) callVirtualBase_HeightForWidth(param1 int) int 
 
 }
 func (this *QPrintPreviewWidget) OnHeightForWidth(slot func(super func(param1 int) int, param1 int) int) {
-	ok := C.QPrintPreviewWidget_override_virtual_heightForWidth(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QPrintPreviewWidget_override_virtual_heightForWidth(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -573,7 +602,11 @@ func (this *QPrintPreviewWidget) callVirtualBase_HasHeightForWidth() bool {
 
 }
 func (this *QPrintPreviewWidget) OnHasHeightForWidth(slot func(super func() bool) bool) {
-	ok := C.QPrintPreviewWidget_override_virtual_hasHeightForWidth(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QPrintPreviewWidget_override_virtual_hasHeightForWidth(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -598,7 +631,11 @@ func (this *QPrintPreviewWidget) callVirtualBase_PaintEngine() *qt.QPaintEngine 
 
 }
 func (this *QPrintPreviewWidget) OnPaintEngine(slot func(super func() *qt.QPaintEngine) *qt.QPaintEngine) {
-	ok := C.QPrintPreviewWidget_override_virtual_paintEngine(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QPrintPreviewWidget_override_virtual_paintEngine(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -623,7 +660,11 @@ func (this *QPrintPreviewWidget) callVirtualBase_Event(event *qt.QEvent) bool {
 
 }
 func (this *QPrintPreviewWidget) OnEvent(slot func(super func(event *qt.QEvent) bool, event *qt.QEvent) bool) {
-	ok := C.QPrintPreviewWidget_override_virtual_event(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QPrintPreviewWidget_override_virtual_event(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -651,7 +692,11 @@ func (this *QPrintPreviewWidget) callVirtualBase_MousePressEvent(event *qt.QMous
 
 }
 func (this *QPrintPreviewWidget) OnMousePressEvent(slot func(super func(event *qt.QMouseEvent), event *qt.QMouseEvent)) {
-	ok := C.QPrintPreviewWidget_override_virtual_mousePressEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QPrintPreviewWidget_override_virtual_mousePressEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -677,7 +722,11 @@ func (this *QPrintPreviewWidget) callVirtualBase_MouseReleaseEvent(event *qt.QMo
 
 }
 func (this *QPrintPreviewWidget) OnMouseReleaseEvent(slot func(super func(event *qt.QMouseEvent), event *qt.QMouseEvent)) {
-	ok := C.QPrintPreviewWidget_override_virtual_mouseReleaseEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QPrintPreviewWidget_override_virtual_mouseReleaseEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -703,7 +752,11 @@ func (this *QPrintPreviewWidget) callVirtualBase_MouseDoubleClickEvent(event *qt
 
 }
 func (this *QPrintPreviewWidget) OnMouseDoubleClickEvent(slot func(super func(event *qt.QMouseEvent), event *qt.QMouseEvent)) {
-	ok := C.QPrintPreviewWidget_override_virtual_mouseDoubleClickEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QPrintPreviewWidget_override_virtual_mouseDoubleClickEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -729,7 +782,11 @@ func (this *QPrintPreviewWidget) callVirtualBase_MouseMoveEvent(event *qt.QMouse
 
 }
 func (this *QPrintPreviewWidget) OnMouseMoveEvent(slot func(super func(event *qt.QMouseEvent), event *qt.QMouseEvent)) {
-	ok := C.QPrintPreviewWidget_override_virtual_mouseMoveEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QPrintPreviewWidget_override_virtual_mouseMoveEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -755,7 +812,11 @@ func (this *QPrintPreviewWidget) callVirtualBase_WheelEvent(event *qt.QWheelEven
 
 }
 func (this *QPrintPreviewWidget) OnWheelEvent(slot func(super func(event *qt.QWheelEvent), event *qt.QWheelEvent)) {
-	ok := C.QPrintPreviewWidget_override_virtual_wheelEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QPrintPreviewWidget_override_virtual_wheelEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -781,7 +842,11 @@ func (this *QPrintPreviewWidget) callVirtualBase_KeyPressEvent(event *qt.QKeyEve
 
 }
 func (this *QPrintPreviewWidget) OnKeyPressEvent(slot func(super func(event *qt.QKeyEvent), event *qt.QKeyEvent)) {
-	ok := C.QPrintPreviewWidget_override_virtual_keyPressEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QPrintPreviewWidget_override_virtual_keyPressEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -807,7 +872,11 @@ func (this *QPrintPreviewWidget) callVirtualBase_KeyReleaseEvent(event *qt.QKeyE
 
 }
 func (this *QPrintPreviewWidget) OnKeyReleaseEvent(slot func(super func(event *qt.QKeyEvent), event *qt.QKeyEvent)) {
-	ok := C.QPrintPreviewWidget_override_virtual_keyReleaseEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QPrintPreviewWidget_override_virtual_keyReleaseEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -833,7 +902,11 @@ func (this *QPrintPreviewWidget) callVirtualBase_FocusInEvent(event *qt.QFocusEv
 
 }
 func (this *QPrintPreviewWidget) OnFocusInEvent(slot func(super func(event *qt.QFocusEvent), event *qt.QFocusEvent)) {
-	ok := C.QPrintPreviewWidget_override_virtual_focusInEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QPrintPreviewWidget_override_virtual_focusInEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -859,7 +932,11 @@ func (this *QPrintPreviewWidget) callVirtualBase_FocusOutEvent(event *qt.QFocusE
 
 }
 func (this *QPrintPreviewWidget) OnFocusOutEvent(slot func(super func(event *qt.QFocusEvent), event *qt.QFocusEvent)) {
-	ok := C.QPrintPreviewWidget_override_virtual_focusOutEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QPrintPreviewWidget_override_virtual_focusOutEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -885,7 +962,11 @@ func (this *QPrintPreviewWidget) callVirtualBase_EnterEvent(event *qt.QEvent) {
 
 }
 func (this *QPrintPreviewWidget) OnEnterEvent(slot func(super func(event *qt.QEvent), event *qt.QEvent)) {
-	ok := C.QPrintPreviewWidget_override_virtual_enterEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QPrintPreviewWidget_override_virtual_enterEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -911,7 +992,11 @@ func (this *QPrintPreviewWidget) callVirtualBase_LeaveEvent(event *qt.QEvent) {
 
 }
 func (this *QPrintPreviewWidget) OnLeaveEvent(slot func(super func(event *qt.QEvent), event *qt.QEvent)) {
-	ok := C.QPrintPreviewWidget_override_virtual_leaveEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QPrintPreviewWidget_override_virtual_leaveEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -937,7 +1022,11 @@ func (this *QPrintPreviewWidget) callVirtualBase_PaintEvent(event *qt.QPaintEven
 
 }
 func (this *QPrintPreviewWidget) OnPaintEvent(slot func(super func(event *qt.QPaintEvent), event *qt.QPaintEvent)) {
-	ok := C.QPrintPreviewWidget_override_virtual_paintEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QPrintPreviewWidget_override_virtual_paintEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -963,7 +1052,11 @@ func (this *QPrintPreviewWidget) callVirtualBase_MoveEvent(event *qt.QMoveEvent)
 
 }
 func (this *QPrintPreviewWidget) OnMoveEvent(slot func(super func(event *qt.QMoveEvent), event *qt.QMoveEvent)) {
-	ok := C.QPrintPreviewWidget_override_virtual_moveEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QPrintPreviewWidget_override_virtual_moveEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -989,7 +1082,11 @@ func (this *QPrintPreviewWidget) callVirtualBase_ResizeEvent(event *qt.QResizeEv
 
 }
 func (this *QPrintPreviewWidget) OnResizeEvent(slot func(super func(event *qt.QResizeEvent), event *qt.QResizeEvent)) {
-	ok := C.QPrintPreviewWidget_override_virtual_resizeEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QPrintPreviewWidget_override_virtual_resizeEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1015,7 +1112,11 @@ func (this *QPrintPreviewWidget) callVirtualBase_CloseEvent(event *qt.QCloseEven
 
 }
 func (this *QPrintPreviewWidget) OnCloseEvent(slot func(super func(event *qt.QCloseEvent), event *qt.QCloseEvent)) {
-	ok := C.QPrintPreviewWidget_override_virtual_closeEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QPrintPreviewWidget_override_virtual_closeEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1041,7 +1142,11 @@ func (this *QPrintPreviewWidget) callVirtualBase_ContextMenuEvent(event *qt.QCon
 
 }
 func (this *QPrintPreviewWidget) OnContextMenuEvent(slot func(super func(event *qt.QContextMenuEvent), event *qt.QContextMenuEvent)) {
-	ok := C.QPrintPreviewWidget_override_virtual_contextMenuEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QPrintPreviewWidget_override_virtual_contextMenuEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1067,7 +1172,11 @@ func (this *QPrintPreviewWidget) callVirtualBase_TabletEvent(event *qt.QTabletEv
 
 }
 func (this *QPrintPreviewWidget) OnTabletEvent(slot func(super func(event *qt.QTabletEvent), event *qt.QTabletEvent)) {
-	ok := C.QPrintPreviewWidget_override_virtual_tabletEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QPrintPreviewWidget_override_virtual_tabletEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1093,7 +1202,11 @@ func (this *QPrintPreviewWidget) callVirtualBase_ActionEvent(event *qt.QActionEv
 
 }
 func (this *QPrintPreviewWidget) OnActionEvent(slot func(super func(event *qt.QActionEvent), event *qt.QActionEvent)) {
-	ok := C.QPrintPreviewWidget_override_virtual_actionEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QPrintPreviewWidget_override_virtual_actionEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1119,7 +1232,11 @@ func (this *QPrintPreviewWidget) callVirtualBase_DragEnterEvent(event *qt.QDragE
 
 }
 func (this *QPrintPreviewWidget) OnDragEnterEvent(slot func(super func(event *qt.QDragEnterEvent), event *qt.QDragEnterEvent)) {
-	ok := C.QPrintPreviewWidget_override_virtual_dragEnterEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QPrintPreviewWidget_override_virtual_dragEnterEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1145,7 +1262,11 @@ func (this *QPrintPreviewWidget) callVirtualBase_DragMoveEvent(event *qt.QDragMo
 
 }
 func (this *QPrintPreviewWidget) OnDragMoveEvent(slot func(super func(event *qt.QDragMoveEvent), event *qt.QDragMoveEvent)) {
-	ok := C.QPrintPreviewWidget_override_virtual_dragMoveEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QPrintPreviewWidget_override_virtual_dragMoveEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1171,7 +1292,11 @@ func (this *QPrintPreviewWidget) callVirtualBase_DragLeaveEvent(event *qt.QDragL
 
 }
 func (this *QPrintPreviewWidget) OnDragLeaveEvent(slot func(super func(event *qt.QDragLeaveEvent), event *qt.QDragLeaveEvent)) {
-	ok := C.QPrintPreviewWidget_override_virtual_dragLeaveEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QPrintPreviewWidget_override_virtual_dragLeaveEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1197,7 +1322,11 @@ func (this *QPrintPreviewWidget) callVirtualBase_DropEvent(event *qt.QDropEvent)
 
 }
 func (this *QPrintPreviewWidget) OnDropEvent(slot func(super func(event *qt.QDropEvent), event *qt.QDropEvent)) {
-	ok := C.QPrintPreviewWidget_override_virtual_dropEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QPrintPreviewWidget_override_virtual_dropEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1223,7 +1352,11 @@ func (this *QPrintPreviewWidget) callVirtualBase_ShowEvent(event *qt.QShowEvent)
 
 }
 func (this *QPrintPreviewWidget) OnShowEvent(slot func(super func(event *qt.QShowEvent), event *qt.QShowEvent)) {
-	ok := C.QPrintPreviewWidget_override_virtual_showEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QPrintPreviewWidget_override_virtual_showEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1249,7 +1382,11 @@ func (this *QPrintPreviewWidget) callVirtualBase_HideEvent(event *qt.QHideEvent)
 
 }
 func (this *QPrintPreviewWidget) OnHideEvent(slot func(super func(event *qt.QHideEvent), event *qt.QHideEvent)) {
-	ok := C.QPrintPreviewWidget_override_virtual_hideEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QPrintPreviewWidget_override_virtual_hideEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1282,7 +1419,11 @@ func (this *QPrintPreviewWidget) callVirtualBase_NativeEvent(eventType []byte, m
 
 }
 func (this *QPrintPreviewWidget) OnNativeEvent(slot func(super func(eventType []byte, message unsafe.Pointer, result *int64) bool, eventType []byte, message unsafe.Pointer, result *int64) bool) {
-	ok := C.QPrintPreviewWidget_override_virtual_nativeEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QPrintPreviewWidget_override_virtual_nativeEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1316,7 +1457,11 @@ func (this *QPrintPreviewWidget) callVirtualBase_ChangeEvent(param1 *qt.QEvent) 
 
 }
 func (this *QPrintPreviewWidget) OnChangeEvent(slot func(super func(param1 *qt.QEvent), param1 *qt.QEvent)) {
-	ok := C.QPrintPreviewWidget_override_virtual_changeEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QPrintPreviewWidget_override_virtual_changeEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1342,7 +1487,11 @@ func (this *QPrintPreviewWidget) callVirtualBase_Metric(param1 qt.QPaintDevice__
 
 }
 func (this *QPrintPreviewWidget) OnMetric(slot func(super func(param1 qt.QPaintDevice__PaintDeviceMetric) int, param1 qt.QPaintDevice__PaintDeviceMetric) int) {
-	ok := C.QPrintPreviewWidget_override_virtual_metric(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QPrintPreviewWidget_override_virtual_metric(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1370,7 +1519,11 @@ func (this *QPrintPreviewWidget) callVirtualBase_InitPainter(painter *qt.QPainte
 
 }
 func (this *QPrintPreviewWidget) OnInitPainter(slot func(super func(painter *qt.QPainter), painter *qt.QPainter)) {
-	ok := C.QPrintPreviewWidget_override_virtual_initPainter(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QPrintPreviewWidget_override_virtual_initPainter(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1396,7 +1549,11 @@ func (this *QPrintPreviewWidget) callVirtualBase_Redirected(offset *qt.QPoint) *
 
 }
 func (this *QPrintPreviewWidget) OnRedirected(slot func(super func(offset *qt.QPoint) *qt.QPaintDevice, offset *qt.QPoint) *qt.QPaintDevice) {
-	ok := C.QPrintPreviewWidget_override_virtual_redirected(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QPrintPreviewWidget_override_virtual_redirected(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1424,7 +1581,11 @@ func (this *QPrintPreviewWidget) callVirtualBase_SharedPainter() *qt.QPainter {
 
 }
 func (this *QPrintPreviewWidget) OnSharedPainter(slot func(super func() *qt.QPainter) *qt.QPainter) {
-	ok := C.QPrintPreviewWidget_override_virtual_sharedPainter(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QPrintPreviewWidget_override_virtual_sharedPainter(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1449,7 +1610,11 @@ func (this *QPrintPreviewWidget) callVirtualBase_InputMethodEvent(param1 *qt.QIn
 
 }
 func (this *QPrintPreviewWidget) OnInputMethodEvent(slot func(super func(param1 *qt.QInputMethodEvent), param1 *qt.QInputMethodEvent)) {
-	ok := C.QPrintPreviewWidget_override_virtual_inputMethodEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QPrintPreviewWidget_override_virtual_inputMethodEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1477,7 +1642,11 @@ func (this *QPrintPreviewWidget) callVirtualBase_InputMethodQuery(param1 qt.Inpu
 
 }
 func (this *QPrintPreviewWidget) OnInputMethodQuery(slot func(super func(param1 qt.InputMethodQuery) *qt.QVariant, param1 qt.InputMethodQuery) *qt.QVariant) {
-	ok := C.QPrintPreviewWidget_override_virtual_inputMethodQuery(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QPrintPreviewWidget_override_virtual_inputMethodQuery(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1505,7 +1674,11 @@ func (this *QPrintPreviewWidget) callVirtualBase_FocusNextPrevChild(next bool) b
 
 }
 func (this *QPrintPreviewWidget) OnFocusNextPrevChild(slot func(super func(next bool) bool, next bool) bool) {
-	ok := C.QPrintPreviewWidget_override_virtual_focusNextPrevChild(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QPrintPreviewWidget_override_virtual_focusNextPrevChild(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1533,7 +1706,11 @@ func (this *QPrintPreviewWidget) callVirtualBase_EventFilter(watched *qt.QObject
 
 }
 func (this *QPrintPreviewWidget) OnEventFilter(slot func(super func(watched *qt.QObject, event *qt.QEvent) bool, watched *qt.QObject, event *qt.QEvent) bool) {
-	ok := C.QPrintPreviewWidget_override_virtual_eventFilter(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QPrintPreviewWidget_override_virtual_eventFilter(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1563,7 +1740,11 @@ func (this *QPrintPreviewWidget) callVirtualBase_TimerEvent(event *qt.QTimerEven
 
 }
 func (this *QPrintPreviewWidget) OnTimerEvent(slot func(super func(event *qt.QTimerEvent), event *qt.QTimerEvent)) {
-	ok := C.QPrintPreviewWidget_override_virtual_timerEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QPrintPreviewWidget_override_virtual_timerEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1589,7 +1770,11 @@ func (this *QPrintPreviewWidget) callVirtualBase_ChildEvent(event *qt.QChildEven
 
 }
 func (this *QPrintPreviewWidget) OnChildEvent(slot func(super func(event *qt.QChildEvent), event *qt.QChildEvent)) {
-	ok := C.QPrintPreviewWidget_override_virtual_childEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QPrintPreviewWidget_override_virtual_childEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1615,7 +1800,11 @@ func (this *QPrintPreviewWidget) callVirtualBase_CustomEvent(event *qt.QEvent) {
 
 }
 func (this *QPrintPreviewWidget) OnCustomEvent(slot func(super func(event *qt.QEvent), event *qt.QEvent)) {
-	ok := C.QPrintPreviewWidget_override_virtual_customEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QPrintPreviewWidget_override_virtual_customEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1641,7 +1830,11 @@ func (this *QPrintPreviewWidget) callVirtualBase_ConnectNotify(signal *qt.QMetaM
 
 }
 func (this *QPrintPreviewWidget) OnConnectNotify(slot func(super func(signal *qt.QMetaMethod), signal *qt.QMetaMethod)) {
-	ok := C.QPrintPreviewWidget_override_virtual_connectNotify(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QPrintPreviewWidget_override_virtual_connectNotify(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1667,7 +1860,11 @@ func (this *QPrintPreviewWidget) callVirtualBase_DisconnectNotify(signal *qt.QMe
 
 }
 func (this *QPrintPreviewWidget) OnDisconnectNotify(slot func(super func(signal *qt.QMetaMethod), signal *qt.QMetaMethod)) {
-	ok := C.QPrintPreviewWidget_override_virtual_disconnectNotify(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QPrintPreviewWidget_override_virtual_disconnectNotify(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}

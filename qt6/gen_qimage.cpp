@@ -1,3 +1,5 @@
+#include <memory>
+#include <utility>
 #include <QByteArray>
 #include <QByteArrayView>
 #include <QColor>
@@ -26,6 +28,7 @@
 extern "C" {
 #endif
 
+void miqt_exec_callback_handle_release_QImage(intptr_t);
 int miqt_exec_callback_QImage_devType(const QImage*, intptr_t);
 QPaintEngine* miqt_exec_callback_QImage_paintEngine(const QImage*, intptr_t);
 int miqt_exec_callback_QImage_metric(const QImage*, intptr_t, int);
@@ -53,95 +56,95 @@ public:
 	virtual ~MiqtVirtualQImage() override = default;
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__devType = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QImage> handle__devType;
 
 	// Subclass to allow providing a Go implementation
 	virtual int devType() const override {
-		if (handle__devType == 0) {
+		if (!handle__devType) {
 			return QImage::devType();
 		}
 
-		int callback_return_value = miqt_exec_callback_QImage_devType(this, handle__devType);
+		int callback_return_value = miqt_exec_callback_QImage_devType(this, handle__devType.value());
 		return static_cast<int>(callback_return_value);
 	}
 
 	friend int QImage_virtualbase_devType(const void* self);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__paintEngine = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QImage> handle__paintEngine;
 
 	// Subclass to allow providing a Go implementation
 	virtual QPaintEngine* paintEngine() const override {
-		if (handle__paintEngine == 0) {
+		if (!handle__paintEngine) {
 			return QImage::paintEngine();
 		}
 
-		QPaintEngine* callback_return_value = miqt_exec_callback_QImage_paintEngine(this, handle__paintEngine);
+		QPaintEngine* callback_return_value = miqt_exec_callback_QImage_paintEngine(this, handle__paintEngine.value());
 		return callback_return_value;
 	}
 
 	friend QPaintEngine* QImage_virtualbase_paintEngine(const void* self);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__metric = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QImage> handle__metric;
 
 	// Subclass to allow providing a Go implementation
 	virtual int metric(QPaintDevice::PaintDeviceMetric metric) const override {
-		if (handle__metric == 0) {
+		if (!handle__metric) {
 			return QImage::metric(metric);
 		}
 
 		QPaintDevice::PaintDeviceMetric metric_ret = metric;
 		int sigval1 = static_cast<int>(metric_ret);
-		int callback_return_value = miqt_exec_callback_QImage_metric(this, handle__metric, sigval1);
+		int callback_return_value = miqt_exec_callback_QImage_metric(this, handle__metric.value(), sigval1);
 		return static_cast<int>(callback_return_value);
 	}
 
 	friend int QImage_virtualbase_metric(const void* self, int metric);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__initPainter = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QImage> handle__initPainter;
 
 	// Subclass to allow providing a Go implementation
 	virtual void initPainter(QPainter* painter) const override {
-		if (handle__initPainter == 0) {
+		if (!handle__initPainter) {
 			QImage::initPainter(painter);
 			return;
 		}
 
 		QPainter* sigval1 = painter;
-		miqt_exec_callback_QImage_initPainter(this, handle__initPainter, sigval1);
+		miqt_exec_callback_QImage_initPainter(this, handle__initPainter.value(), sigval1);
 
 	}
 
 	friend void QImage_virtualbase_initPainter(const void* self, QPainter* painter);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__redirected = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QImage> handle__redirected;
 
 	// Subclass to allow providing a Go implementation
 	virtual QPaintDevice* redirected(QPoint* offset) const override {
-		if (handle__redirected == 0) {
+		if (!handle__redirected) {
 			return QImage::redirected(offset);
 		}
 
 		QPoint* sigval1 = offset;
-		QPaintDevice* callback_return_value = miqt_exec_callback_QImage_redirected(this, handle__redirected, sigval1);
+		QPaintDevice* callback_return_value = miqt_exec_callback_QImage_redirected(this, handle__redirected.value(), sigval1);
 		return callback_return_value;
 	}
 
 	friend QPaintDevice* QImage_virtualbase_redirected(const void* self, QPoint* offset);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__sharedPainter = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QImage> handle__sharedPainter;
 
 	// Subclass to allow providing a Go implementation
 	virtual QPainter* sharedPainter() const override {
-		if (handle__sharedPainter == 0) {
+		if (!handle__sharedPainter) {
 			return QImage::sharedPainter();
 		}
 
-		QPainter* callback_return_value = miqt_exec_callback_QImage_sharedPainter(this, handle__sharedPainter);
+		QPainter* callback_return_value = miqt_exec_callback_QImage_sharedPainter(this, handle__sharedPainter.value());
 		return callback_return_value;
 	}
 
@@ -830,12 +833,13 @@ struct miqt_string QImage_textWithKey(const QImage* self, struct miqt_string key
 }
 
 bool QImage_override_virtual_devType(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QImage> slot_handle(slot);
 	MiqtVirtualQImage* self_cast = dynamic_cast<MiqtVirtualQImage*>( (QImage*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__devType = slot;
+	self_cast->handle__devType = std::move(slot_handle);
 	return true;
 }
 
@@ -844,12 +848,13 @@ int QImage_virtualbase_devType(const void* self) {
 }
 
 bool QImage_override_virtual_paintEngine(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QImage> slot_handle(slot);
 	MiqtVirtualQImage* self_cast = dynamic_cast<MiqtVirtualQImage*>( (QImage*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__paintEngine = slot;
+	self_cast->handle__paintEngine = std::move(slot_handle);
 	return true;
 }
 
@@ -858,12 +863,13 @@ QPaintEngine* QImage_virtualbase_paintEngine(const void* self) {
 }
 
 bool QImage_override_virtual_metric(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QImage> slot_handle(slot);
 	MiqtVirtualQImage* self_cast = dynamic_cast<MiqtVirtualQImage*>( (QImage*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__metric = slot;
+	self_cast->handle__metric = std::move(slot_handle);
 	return true;
 }
 
@@ -872,12 +878,13 @@ int QImage_virtualbase_metric(const void* self, int metric) {
 }
 
 bool QImage_override_virtual_initPainter(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QImage> slot_handle(slot);
 	MiqtVirtualQImage* self_cast = dynamic_cast<MiqtVirtualQImage*>( (QImage*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__initPainter = slot;
+	self_cast->handle__initPainter = std::move(slot_handle);
 	return true;
 }
 
@@ -886,12 +893,13 @@ void QImage_virtualbase_initPainter(const void* self, QPainter* painter) {
 }
 
 bool QImage_override_virtual_redirected(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QImage> slot_handle(slot);
 	MiqtVirtualQImage* self_cast = dynamic_cast<MiqtVirtualQImage*>( (QImage*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__redirected = slot;
+	self_cast->handle__redirected = std::move(slot_handle);
 	return true;
 }
 
@@ -900,12 +908,13 @@ QPaintDevice* QImage_virtualbase_redirected(const void* self, QPoint* offset) {
 }
 
 bool QImage_override_virtual_sharedPainter(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QImage> slot_handle(slot);
 	MiqtVirtualQImage* self_cast = dynamic_cast<MiqtVirtualQImage*>( (QImage*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__sharedPainter = slot;
+	self_cast->handle__sharedPainter = std::move(slot_handle);
 	return true;
 }
 

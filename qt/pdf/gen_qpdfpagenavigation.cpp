@@ -1,3 +1,5 @@
+#include <memory>
+#include <utility>
 #include <QChildEvent>
 #include <QEvent>
 #include <QMetaMethod>
@@ -16,6 +18,7 @@
 extern "C" {
 #endif
 
+void miqt_exec_callback_handle_release_QPdfPageNavigation(intptr_t);
 void miqt_exec_callback_QPdfPageNavigation_documentChanged(intptr_t, QPdfDocument*);
 void miqt_exec_callback_QPdfPageNavigation_currentPageChanged(intptr_t, int);
 void miqt_exec_callback_QPdfPageNavigation_pageCountChanged(intptr_t, int);
@@ -41,95 +44,95 @@ public:
 	virtual ~MiqtVirtualQPdfPageNavigation() override = default;
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__event = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QPdfPageNavigation> handle__event;
 
 	// Subclass to allow providing a Go implementation
 	virtual bool event(QEvent* event) override {
-		if (handle__event == 0) {
+		if (!handle__event) {
 			return QPdfPageNavigation::event(event);
 		}
 
 		QEvent* sigval1 = event;
-		bool callback_return_value = miqt_exec_callback_QPdfPageNavigation_event(this, handle__event, sigval1);
+		bool callback_return_value = miqt_exec_callback_QPdfPageNavigation_event(this, handle__event.value(), sigval1);
 		return callback_return_value;
 	}
 
 	friend bool QPdfPageNavigation_virtualbase_event(void* self, QEvent* event);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__eventFilter = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QPdfPageNavigation> handle__eventFilter;
 
 	// Subclass to allow providing a Go implementation
 	virtual bool eventFilter(QObject* watched, QEvent* event) override {
-		if (handle__eventFilter == 0) {
+		if (!handle__eventFilter) {
 			return QPdfPageNavigation::eventFilter(watched, event);
 		}
 
 		QObject* sigval1 = watched;
 		QEvent* sigval2 = event;
-		bool callback_return_value = miqt_exec_callback_QPdfPageNavigation_eventFilter(this, handle__eventFilter, sigval1, sigval2);
+		bool callback_return_value = miqt_exec_callback_QPdfPageNavigation_eventFilter(this, handle__eventFilter.value(), sigval1, sigval2);
 		return callback_return_value;
 	}
 
 	friend bool QPdfPageNavigation_virtualbase_eventFilter(void* self, QObject* watched, QEvent* event);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__timerEvent = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QPdfPageNavigation> handle__timerEvent;
 
 	// Subclass to allow providing a Go implementation
 	virtual void timerEvent(QTimerEvent* event) override {
-		if (handle__timerEvent == 0) {
+		if (!handle__timerEvent) {
 			QPdfPageNavigation::timerEvent(event);
 			return;
 		}
 
 		QTimerEvent* sigval1 = event;
-		miqt_exec_callback_QPdfPageNavigation_timerEvent(this, handle__timerEvent, sigval1);
+		miqt_exec_callback_QPdfPageNavigation_timerEvent(this, handle__timerEvent.value(), sigval1);
 
 	}
 
 	friend void QPdfPageNavigation_virtualbase_timerEvent(void* self, QTimerEvent* event);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__childEvent = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QPdfPageNavigation> handle__childEvent;
 
 	// Subclass to allow providing a Go implementation
 	virtual void childEvent(QChildEvent* event) override {
-		if (handle__childEvent == 0) {
+		if (!handle__childEvent) {
 			QPdfPageNavigation::childEvent(event);
 			return;
 		}
 
 		QChildEvent* sigval1 = event;
-		miqt_exec_callback_QPdfPageNavigation_childEvent(this, handle__childEvent, sigval1);
+		miqt_exec_callback_QPdfPageNavigation_childEvent(this, handle__childEvent.value(), sigval1);
 
 	}
 
 	friend void QPdfPageNavigation_virtualbase_childEvent(void* self, QChildEvent* event);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__customEvent = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QPdfPageNavigation> handle__customEvent;
 
 	// Subclass to allow providing a Go implementation
 	virtual void customEvent(QEvent* event) override {
-		if (handle__customEvent == 0) {
+		if (!handle__customEvent) {
 			QPdfPageNavigation::customEvent(event);
 			return;
 		}
 
 		QEvent* sigval1 = event;
-		miqt_exec_callback_QPdfPageNavigation_customEvent(this, handle__customEvent, sigval1);
+		miqt_exec_callback_QPdfPageNavigation_customEvent(this, handle__customEvent.value(), sigval1);
 
 	}
 
 	friend void QPdfPageNavigation_virtualbase_customEvent(void* self, QEvent* event);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__connectNotify = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QPdfPageNavigation> handle__connectNotify;
 
 	// Subclass to allow providing a Go implementation
 	virtual void connectNotify(const QMetaMethod& signal) override {
-		if (handle__connectNotify == 0) {
+		if (!handle__connectNotify) {
 			QPdfPageNavigation::connectNotify(signal);
 			return;
 		}
@@ -137,18 +140,18 @@ public:
 		const QMetaMethod& signal_ret = signal;
 		// Cast returned reference into pointer
 		QMetaMethod* sigval1 = const_cast<QMetaMethod*>(&signal_ret);
-		miqt_exec_callback_QPdfPageNavigation_connectNotify(this, handle__connectNotify, sigval1);
+		miqt_exec_callback_QPdfPageNavigation_connectNotify(this, handle__connectNotify.value(), sigval1);
 
 	}
 
 	friend void QPdfPageNavigation_virtualbase_connectNotify(void* self, QMetaMethod* signal);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__disconnectNotify = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QPdfPageNavigation> handle__disconnectNotify;
 
 	// Subclass to allow providing a Go implementation
 	virtual void disconnectNotify(const QMetaMethod& signal) override {
-		if (handle__disconnectNotify == 0) {
+		if (!handle__disconnectNotify) {
 			QPdfPageNavigation::disconnectNotify(signal);
 			return;
 		}
@@ -156,7 +159,7 @@ public:
 		const QMetaMethod& signal_ret = signal;
 		// Cast returned reference into pointer
 		QMetaMethod* sigval1 = const_cast<QMetaMethod*>(&signal_ret);
-		miqt_exec_callback_QPdfPageNavigation_disconnectNotify(this, handle__disconnectNotify, sigval1);
+		miqt_exec_callback_QPdfPageNavigation_disconnectNotify(this, handle__disconnectNotify.value(), sigval1);
 
 	}
 
@@ -251,55 +254,65 @@ void QPdfPageNavigation_documentChanged(QPdfPageNavigation* self, QPdfDocument* 
 	self->documentChanged(document);
 }
 
-void QPdfPageNavigation_connect_documentChanged(QPdfPageNavigation* self, intptr_t slot) {
-	QPdfPageNavigation::connect(self, static_cast<void (QPdfPageNavigation::*)(QPdfDocument*)>(&QPdfPageNavigation::documentChanged), self, [=](QPdfDocument* document) {
+void* QPdfPageNavigation_connect_documentChanged(QPdfPageNavigation* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QPdfPageNavigation>>(slot);
+	return new QMetaObject::Connection(QPdfPageNavigation::connect(self, static_cast<void (QPdfPageNavigation::*)(QPdfDocument*)>(&QPdfPageNavigation::documentChanged), self, [slot_handle](QPdfDocument* document) {
+		intptr_t slot = slot_handle->value();
 		QPdfDocument* sigval1 = document;
 		miqt_exec_callback_QPdfPageNavigation_documentChanged(slot, sigval1);
-	});
+	}));
 }
 
 void QPdfPageNavigation_currentPageChanged(QPdfPageNavigation* self, int currentPage) {
 	self->currentPageChanged(static_cast<int>(currentPage));
 }
 
-void QPdfPageNavigation_connect_currentPageChanged(QPdfPageNavigation* self, intptr_t slot) {
-	QPdfPageNavigation::connect(self, static_cast<void (QPdfPageNavigation::*)(int)>(&QPdfPageNavigation::currentPageChanged), self, [=](int currentPage) {
+void* QPdfPageNavigation_connect_currentPageChanged(QPdfPageNavigation* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QPdfPageNavigation>>(slot);
+	return new QMetaObject::Connection(QPdfPageNavigation::connect(self, static_cast<void (QPdfPageNavigation::*)(int)>(&QPdfPageNavigation::currentPageChanged), self, [slot_handle](int currentPage) {
+		intptr_t slot = slot_handle->value();
 		int sigval1 = currentPage;
 		miqt_exec_callback_QPdfPageNavigation_currentPageChanged(slot, sigval1);
-	});
+	}));
 }
 
 void QPdfPageNavigation_pageCountChanged(QPdfPageNavigation* self, int pageCount) {
 	self->pageCountChanged(static_cast<int>(pageCount));
 }
 
-void QPdfPageNavigation_connect_pageCountChanged(QPdfPageNavigation* self, intptr_t slot) {
-	QPdfPageNavigation::connect(self, static_cast<void (QPdfPageNavigation::*)(int)>(&QPdfPageNavigation::pageCountChanged), self, [=](int pageCount) {
+void* QPdfPageNavigation_connect_pageCountChanged(QPdfPageNavigation* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QPdfPageNavigation>>(slot);
+	return new QMetaObject::Connection(QPdfPageNavigation::connect(self, static_cast<void (QPdfPageNavigation::*)(int)>(&QPdfPageNavigation::pageCountChanged), self, [slot_handle](int pageCount) {
+		intptr_t slot = slot_handle->value();
 		int sigval1 = pageCount;
 		miqt_exec_callback_QPdfPageNavigation_pageCountChanged(slot, sigval1);
-	});
+	}));
 }
 
 void QPdfPageNavigation_canGoToPreviousPageChanged(QPdfPageNavigation* self, bool canGo) {
 	self->canGoToPreviousPageChanged(canGo);
 }
 
-void QPdfPageNavigation_connect_canGoToPreviousPageChanged(QPdfPageNavigation* self, intptr_t slot) {
-	QPdfPageNavigation::connect(self, static_cast<void (QPdfPageNavigation::*)(bool)>(&QPdfPageNavigation::canGoToPreviousPageChanged), self, [=](bool canGo) {
+void* QPdfPageNavigation_connect_canGoToPreviousPageChanged(QPdfPageNavigation* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QPdfPageNavigation>>(slot);
+	return new QMetaObject::Connection(QPdfPageNavigation::connect(self, static_cast<void (QPdfPageNavigation::*)(bool)>(&QPdfPageNavigation::canGoToPreviousPageChanged), self, [slot_handle](bool canGo) {
+		intptr_t slot = slot_handle->value();
 		bool sigval1 = canGo;
 		miqt_exec_callback_QPdfPageNavigation_canGoToPreviousPageChanged(slot, sigval1);
-	});
+	}));
 }
 
 void QPdfPageNavigation_canGoToNextPageChanged(QPdfPageNavigation* self, bool canGo) {
 	self->canGoToNextPageChanged(canGo);
 }
 
-void QPdfPageNavigation_connect_canGoToNextPageChanged(QPdfPageNavigation* self, intptr_t slot) {
-	QPdfPageNavigation::connect(self, static_cast<void (QPdfPageNavigation::*)(bool)>(&QPdfPageNavigation::canGoToNextPageChanged), self, [=](bool canGo) {
+void* QPdfPageNavigation_connect_canGoToNextPageChanged(QPdfPageNavigation* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QPdfPageNavigation>>(slot);
+	return new QMetaObject::Connection(QPdfPageNavigation::connect(self, static_cast<void (QPdfPageNavigation::*)(bool)>(&QPdfPageNavigation::canGoToNextPageChanged), self, [slot_handle](bool canGo) {
+		intptr_t slot = slot_handle->value();
 		bool sigval1 = canGo;
 		miqt_exec_callback_QPdfPageNavigation_canGoToNextPageChanged(slot, sigval1);
-	});
+	}));
 }
 
 struct miqt_string QPdfPageNavigation_tr2(const char* s, const char* c) {
@@ -347,12 +360,13 @@ struct miqt_string QPdfPageNavigation_trUtf83(const char* s, const char* c, int 
 }
 
 bool QPdfPageNavigation_override_virtual_event(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QPdfPageNavigation> slot_handle(slot);
 	MiqtVirtualQPdfPageNavigation* self_cast = dynamic_cast<MiqtVirtualQPdfPageNavigation*>( (QPdfPageNavigation*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__event = slot;
+	self_cast->handle__event = std::move(slot_handle);
 	return true;
 }
 
@@ -361,12 +375,13 @@ bool QPdfPageNavigation_virtualbase_event(void* self, QEvent* event) {
 }
 
 bool QPdfPageNavigation_override_virtual_eventFilter(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QPdfPageNavigation> slot_handle(slot);
 	MiqtVirtualQPdfPageNavigation* self_cast = dynamic_cast<MiqtVirtualQPdfPageNavigation*>( (QPdfPageNavigation*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__eventFilter = slot;
+	self_cast->handle__eventFilter = std::move(slot_handle);
 	return true;
 }
 
@@ -375,12 +390,13 @@ bool QPdfPageNavigation_virtualbase_eventFilter(void* self, QObject* watched, QE
 }
 
 bool QPdfPageNavigation_override_virtual_timerEvent(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QPdfPageNavigation> slot_handle(slot);
 	MiqtVirtualQPdfPageNavigation* self_cast = dynamic_cast<MiqtVirtualQPdfPageNavigation*>( (QPdfPageNavigation*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__timerEvent = slot;
+	self_cast->handle__timerEvent = std::move(slot_handle);
 	return true;
 }
 
@@ -389,12 +405,13 @@ void QPdfPageNavigation_virtualbase_timerEvent(void* self, QTimerEvent* event) {
 }
 
 bool QPdfPageNavigation_override_virtual_childEvent(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QPdfPageNavigation> slot_handle(slot);
 	MiqtVirtualQPdfPageNavigation* self_cast = dynamic_cast<MiqtVirtualQPdfPageNavigation*>( (QPdfPageNavigation*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__childEvent = slot;
+	self_cast->handle__childEvent = std::move(slot_handle);
 	return true;
 }
 
@@ -403,12 +420,13 @@ void QPdfPageNavigation_virtualbase_childEvent(void* self, QChildEvent* event) {
 }
 
 bool QPdfPageNavigation_override_virtual_customEvent(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QPdfPageNavigation> slot_handle(slot);
 	MiqtVirtualQPdfPageNavigation* self_cast = dynamic_cast<MiqtVirtualQPdfPageNavigation*>( (QPdfPageNavigation*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__customEvent = slot;
+	self_cast->handle__customEvent = std::move(slot_handle);
 	return true;
 }
 
@@ -417,12 +435,13 @@ void QPdfPageNavigation_virtualbase_customEvent(void* self, QEvent* event) {
 }
 
 bool QPdfPageNavigation_override_virtual_connectNotify(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QPdfPageNavigation> slot_handle(slot);
 	MiqtVirtualQPdfPageNavigation* self_cast = dynamic_cast<MiqtVirtualQPdfPageNavigation*>( (QPdfPageNavigation*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__connectNotify = slot;
+	self_cast->handle__connectNotify = std::move(slot_handle);
 	return true;
 }
 
@@ -431,12 +450,13 @@ void QPdfPageNavigation_virtualbase_connectNotify(void* self, QMetaMethod* signa
 }
 
 bool QPdfPageNavigation_override_virtual_disconnectNotify(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QPdfPageNavigation> slot_handle(slot);
 	MiqtVirtualQPdfPageNavigation* self_cast = dynamic_cast<MiqtVirtualQPdfPageNavigation*>( (QPdfPageNavigation*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__disconnectNotify = slot;
+	self_cast->handle__disconnectNotify = std::move(slot_handle);
 	return true;
 }
 

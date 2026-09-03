@@ -21,6 +21,11 @@ const (
 	QPlainTextEdit__WidgetWidth QPlainTextEdit__LineWrapMode = 1
 )
 
+//export miqt_exec_callback_handle_release_QPlainTextEdit
+func miqt_exec_callback_handle_release_QPlainTextEdit(cb C.intptr_t) {
+	cgo.Handle(cb).Delete()
+}
+
 type QPlainTextEdit struct {
 	h *C.QPlainTextEdit
 	*QAbstractScrollArea
@@ -474,8 +479,10 @@ func (this *QPlainTextEdit) ZoomOut() {
 func (this *QPlainTextEdit) TextChanged() {
 	C.QPlainTextEdit_textChanged(this.h)
 }
-func (this *QPlainTextEdit) OnTextChanged(slot func()) {
-	C.QPlainTextEdit_connect_textChanged(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QPlainTextEdit) OnTextChanged(slot func()) *SignalConnection {
+	_goptr := UnsafeNewQMetaObject__Connection(C.QPlainTextEdit_connect_textChanged(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QPlainTextEdit_textChanged
@@ -491,8 +498,10 @@ func miqt_exec_callback_QPlainTextEdit_textChanged(cb C.intptr_t) {
 func (this *QPlainTextEdit) UndoAvailable(b bool) {
 	C.QPlainTextEdit_undoAvailable(this.h, (C.bool)(b))
 }
-func (this *QPlainTextEdit) OnUndoAvailable(slot func(b bool)) {
-	C.QPlainTextEdit_connect_undoAvailable(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QPlainTextEdit) OnUndoAvailable(slot func(b bool)) *SignalConnection {
+	_goptr := UnsafeNewQMetaObject__Connection(C.QPlainTextEdit_connect_undoAvailable(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QPlainTextEdit_undoAvailable
@@ -511,8 +520,10 @@ func miqt_exec_callback_QPlainTextEdit_undoAvailable(cb C.intptr_t, b C.bool) {
 func (this *QPlainTextEdit) RedoAvailable(b bool) {
 	C.QPlainTextEdit_redoAvailable(this.h, (C.bool)(b))
 }
-func (this *QPlainTextEdit) OnRedoAvailable(slot func(b bool)) {
-	C.QPlainTextEdit_connect_redoAvailable(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QPlainTextEdit) OnRedoAvailable(slot func(b bool)) *SignalConnection {
+	_goptr := UnsafeNewQMetaObject__Connection(C.QPlainTextEdit_connect_redoAvailable(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QPlainTextEdit_redoAvailable
@@ -531,8 +542,10 @@ func miqt_exec_callback_QPlainTextEdit_redoAvailable(cb C.intptr_t, b C.bool) {
 func (this *QPlainTextEdit) CopyAvailable(b bool) {
 	C.QPlainTextEdit_copyAvailable(this.h, (C.bool)(b))
 }
-func (this *QPlainTextEdit) OnCopyAvailable(slot func(b bool)) {
-	C.QPlainTextEdit_connect_copyAvailable(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QPlainTextEdit) OnCopyAvailable(slot func(b bool)) *SignalConnection {
+	_goptr := UnsafeNewQMetaObject__Connection(C.QPlainTextEdit_connect_copyAvailable(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QPlainTextEdit_copyAvailable
@@ -551,8 +564,10 @@ func miqt_exec_callback_QPlainTextEdit_copyAvailable(cb C.intptr_t, b C.bool) {
 func (this *QPlainTextEdit) SelectionChanged() {
 	C.QPlainTextEdit_selectionChanged(this.h)
 }
-func (this *QPlainTextEdit) OnSelectionChanged(slot func()) {
-	C.QPlainTextEdit_connect_selectionChanged(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QPlainTextEdit) OnSelectionChanged(slot func()) *SignalConnection {
+	_goptr := UnsafeNewQMetaObject__Connection(C.QPlainTextEdit_connect_selectionChanged(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QPlainTextEdit_selectionChanged
@@ -568,8 +583,10 @@ func miqt_exec_callback_QPlainTextEdit_selectionChanged(cb C.intptr_t) {
 func (this *QPlainTextEdit) CursorPositionChanged() {
 	C.QPlainTextEdit_cursorPositionChanged(this.h)
 }
-func (this *QPlainTextEdit) OnCursorPositionChanged(slot func()) {
-	C.QPlainTextEdit_connect_cursorPositionChanged(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QPlainTextEdit) OnCursorPositionChanged(slot func()) *SignalConnection {
+	_goptr := UnsafeNewQMetaObject__Connection(C.QPlainTextEdit_connect_cursorPositionChanged(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QPlainTextEdit_cursorPositionChanged
@@ -585,8 +602,10 @@ func miqt_exec_callback_QPlainTextEdit_cursorPositionChanged(cb C.intptr_t) {
 func (this *QPlainTextEdit) UpdateRequest(rect *QRect, dy int) {
 	C.QPlainTextEdit_updateRequest(this.h, rect.cPointer(), (C.int)(dy))
 }
-func (this *QPlainTextEdit) OnUpdateRequest(slot func(rect *QRect, dy int)) {
-	C.QPlainTextEdit_connect_updateRequest(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QPlainTextEdit) OnUpdateRequest(slot func(rect *QRect, dy int)) *SignalConnection {
+	_goptr := UnsafeNewQMetaObject__Connection(C.QPlainTextEdit_connect_updateRequest(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QPlainTextEdit_updateRequest
@@ -607,8 +626,10 @@ func miqt_exec_callback_QPlainTextEdit_updateRequest(cb C.intptr_t, rect *C.QRec
 func (this *QPlainTextEdit) BlockCountChanged(newBlockCount int) {
 	C.QPlainTextEdit_blockCountChanged(this.h, (C.int)(newBlockCount))
 }
-func (this *QPlainTextEdit) OnBlockCountChanged(slot func(newBlockCount int)) {
-	C.QPlainTextEdit_connect_blockCountChanged(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QPlainTextEdit) OnBlockCountChanged(slot func(newBlockCount int)) *SignalConnection {
+	_goptr := UnsafeNewQMetaObject__Connection(C.QPlainTextEdit_connect_blockCountChanged(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QPlainTextEdit_blockCountChanged
@@ -627,8 +648,10 @@ func miqt_exec_callback_QPlainTextEdit_blockCountChanged(cb C.intptr_t, newBlock
 func (this *QPlainTextEdit) ModificationChanged(param1 bool) {
 	C.QPlainTextEdit_modificationChanged(this.h, (C.bool)(param1))
 }
-func (this *QPlainTextEdit) OnModificationChanged(slot func(param1 bool)) {
-	C.QPlainTextEdit_connect_modificationChanged(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QPlainTextEdit) OnModificationChanged(slot func(param1 bool)) *SignalConnection {
+	_goptr := UnsafeNewQMetaObject__Connection(C.QPlainTextEdit_connect_modificationChanged(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QPlainTextEdit_modificationChanged
@@ -990,7 +1013,11 @@ func (this *QPlainTextEdit) callVirtualBase_LoadResource(typeVal int, name *QUrl
 
 }
 func (this *QPlainTextEdit) OnLoadResource(slot func(super func(typeVal int, name *QUrl) *QVariant, typeVal int, name *QUrl) *QVariant) {
-	ok := C.QPlainTextEdit_override_virtual_loadResource(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QPlainTextEdit_override_virtual_loadResource(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1022,7 +1049,11 @@ func (this *QPlainTextEdit) callVirtualBase_InputMethodQuery(property InputMetho
 
 }
 func (this *QPlainTextEdit) OnInputMethodQuery(slot func(super func(property InputMethodQuery) *QVariant, property InputMethodQuery) *QVariant) {
-	ok := C.QPlainTextEdit_override_virtual_inputMethodQuery(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QPlainTextEdit_override_virtual_inputMethodQuery(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1050,7 +1081,11 @@ func (this *QPlainTextEdit) callVirtualBase_Event(e *QEvent) bool {
 
 }
 func (this *QPlainTextEdit) OnEvent(slot func(super func(e *QEvent) bool, e *QEvent) bool) {
-	ok := C.QPlainTextEdit_override_virtual_event(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QPlainTextEdit_override_virtual_event(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1078,7 +1113,11 @@ func (this *QPlainTextEdit) callVirtualBase_TimerEvent(e *QTimerEvent) {
 
 }
 func (this *QPlainTextEdit) OnTimerEvent(slot func(super func(e *QTimerEvent), e *QTimerEvent)) {
-	ok := C.QPlainTextEdit_override_virtual_timerEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QPlainTextEdit_override_virtual_timerEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1104,7 +1143,11 @@ func (this *QPlainTextEdit) callVirtualBase_KeyPressEvent(e *QKeyEvent) {
 
 }
 func (this *QPlainTextEdit) OnKeyPressEvent(slot func(super func(e *QKeyEvent), e *QKeyEvent)) {
-	ok := C.QPlainTextEdit_override_virtual_keyPressEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QPlainTextEdit_override_virtual_keyPressEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1130,7 +1173,11 @@ func (this *QPlainTextEdit) callVirtualBase_KeyReleaseEvent(e *QKeyEvent) {
 
 }
 func (this *QPlainTextEdit) OnKeyReleaseEvent(slot func(super func(e *QKeyEvent), e *QKeyEvent)) {
-	ok := C.QPlainTextEdit_override_virtual_keyReleaseEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QPlainTextEdit_override_virtual_keyReleaseEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1156,7 +1203,11 @@ func (this *QPlainTextEdit) callVirtualBase_ResizeEvent(e *QResizeEvent) {
 
 }
 func (this *QPlainTextEdit) OnResizeEvent(slot func(super func(e *QResizeEvent), e *QResizeEvent)) {
-	ok := C.QPlainTextEdit_override_virtual_resizeEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QPlainTextEdit_override_virtual_resizeEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1182,7 +1233,11 @@ func (this *QPlainTextEdit) callVirtualBase_PaintEvent(e *QPaintEvent) {
 
 }
 func (this *QPlainTextEdit) OnPaintEvent(slot func(super func(e *QPaintEvent), e *QPaintEvent)) {
-	ok := C.QPlainTextEdit_override_virtual_paintEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QPlainTextEdit_override_virtual_paintEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1208,7 +1263,11 @@ func (this *QPlainTextEdit) callVirtualBase_MousePressEvent(e *QMouseEvent) {
 
 }
 func (this *QPlainTextEdit) OnMousePressEvent(slot func(super func(e *QMouseEvent), e *QMouseEvent)) {
-	ok := C.QPlainTextEdit_override_virtual_mousePressEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QPlainTextEdit_override_virtual_mousePressEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1234,7 +1293,11 @@ func (this *QPlainTextEdit) callVirtualBase_MouseMoveEvent(e *QMouseEvent) {
 
 }
 func (this *QPlainTextEdit) OnMouseMoveEvent(slot func(super func(e *QMouseEvent), e *QMouseEvent)) {
-	ok := C.QPlainTextEdit_override_virtual_mouseMoveEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QPlainTextEdit_override_virtual_mouseMoveEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1260,7 +1323,11 @@ func (this *QPlainTextEdit) callVirtualBase_MouseReleaseEvent(e *QMouseEvent) {
 
 }
 func (this *QPlainTextEdit) OnMouseReleaseEvent(slot func(super func(e *QMouseEvent), e *QMouseEvent)) {
-	ok := C.QPlainTextEdit_override_virtual_mouseReleaseEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QPlainTextEdit_override_virtual_mouseReleaseEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1286,7 +1353,11 @@ func (this *QPlainTextEdit) callVirtualBase_MouseDoubleClickEvent(e *QMouseEvent
 
 }
 func (this *QPlainTextEdit) OnMouseDoubleClickEvent(slot func(super func(e *QMouseEvent), e *QMouseEvent)) {
-	ok := C.QPlainTextEdit_override_virtual_mouseDoubleClickEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QPlainTextEdit_override_virtual_mouseDoubleClickEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1312,7 +1383,11 @@ func (this *QPlainTextEdit) callVirtualBase_FocusNextPrevChild(next bool) bool {
 
 }
 func (this *QPlainTextEdit) OnFocusNextPrevChild(slot func(super func(next bool) bool, next bool) bool) {
-	ok := C.QPlainTextEdit_override_virtual_focusNextPrevChild(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QPlainTextEdit_override_virtual_focusNextPrevChild(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1340,7 +1415,11 @@ func (this *QPlainTextEdit) callVirtualBase_ContextMenuEvent(e *QContextMenuEven
 
 }
 func (this *QPlainTextEdit) OnContextMenuEvent(slot func(super func(e *QContextMenuEvent), e *QContextMenuEvent)) {
-	ok := C.QPlainTextEdit_override_virtual_contextMenuEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QPlainTextEdit_override_virtual_contextMenuEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1366,7 +1445,11 @@ func (this *QPlainTextEdit) callVirtualBase_DragEnterEvent(e *QDragEnterEvent) {
 
 }
 func (this *QPlainTextEdit) OnDragEnterEvent(slot func(super func(e *QDragEnterEvent), e *QDragEnterEvent)) {
-	ok := C.QPlainTextEdit_override_virtual_dragEnterEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QPlainTextEdit_override_virtual_dragEnterEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1392,7 +1475,11 @@ func (this *QPlainTextEdit) callVirtualBase_DragLeaveEvent(e *QDragLeaveEvent) {
 
 }
 func (this *QPlainTextEdit) OnDragLeaveEvent(slot func(super func(e *QDragLeaveEvent), e *QDragLeaveEvent)) {
-	ok := C.QPlainTextEdit_override_virtual_dragLeaveEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QPlainTextEdit_override_virtual_dragLeaveEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1418,7 +1505,11 @@ func (this *QPlainTextEdit) callVirtualBase_DragMoveEvent(e *QDragMoveEvent) {
 
 }
 func (this *QPlainTextEdit) OnDragMoveEvent(slot func(super func(e *QDragMoveEvent), e *QDragMoveEvent)) {
-	ok := C.QPlainTextEdit_override_virtual_dragMoveEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QPlainTextEdit_override_virtual_dragMoveEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1444,7 +1535,11 @@ func (this *QPlainTextEdit) callVirtualBase_DropEvent(e *QDropEvent) {
 
 }
 func (this *QPlainTextEdit) OnDropEvent(slot func(super func(e *QDropEvent), e *QDropEvent)) {
-	ok := C.QPlainTextEdit_override_virtual_dropEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QPlainTextEdit_override_virtual_dropEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1470,7 +1565,11 @@ func (this *QPlainTextEdit) callVirtualBase_FocusInEvent(e *QFocusEvent) {
 
 }
 func (this *QPlainTextEdit) OnFocusInEvent(slot func(super func(e *QFocusEvent), e *QFocusEvent)) {
-	ok := C.QPlainTextEdit_override_virtual_focusInEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QPlainTextEdit_override_virtual_focusInEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1496,7 +1595,11 @@ func (this *QPlainTextEdit) callVirtualBase_FocusOutEvent(e *QFocusEvent) {
 
 }
 func (this *QPlainTextEdit) OnFocusOutEvent(slot func(super func(e *QFocusEvent), e *QFocusEvent)) {
-	ok := C.QPlainTextEdit_override_virtual_focusOutEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QPlainTextEdit_override_virtual_focusOutEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1522,7 +1625,11 @@ func (this *QPlainTextEdit) callVirtualBase_ShowEvent(param1 *QShowEvent) {
 
 }
 func (this *QPlainTextEdit) OnShowEvent(slot func(super func(param1 *QShowEvent), param1 *QShowEvent)) {
-	ok := C.QPlainTextEdit_override_virtual_showEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QPlainTextEdit_override_virtual_showEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1548,7 +1655,11 @@ func (this *QPlainTextEdit) callVirtualBase_ChangeEvent(e *QEvent) {
 
 }
 func (this *QPlainTextEdit) OnChangeEvent(slot func(super func(e *QEvent), e *QEvent)) {
-	ok := C.QPlainTextEdit_override_virtual_changeEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QPlainTextEdit_override_virtual_changeEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1574,7 +1685,11 @@ func (this *QPlainTextEdit) callVirtualBase_WheelEvent(e *QWheelEvent) {
 
 }
 func (this *QPlainTextEdit) OnWheelEvent(slot func(super func(e *QWheelEvent), e *QWheelEvent)) {
-	ok := C.QPlainTextEdit_override_virtual_wheelEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QPlainTextEdit_override_virtual_wheelEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1600,7 +1715,11 @@ func (this *QPlainTextEdit) callVirtualBase_CreateMimeDataFromSelection() *QMime
 
 }
 func (this *QPlainTextEdit) OnCreateMimeDataFromSelection(slot func(super func() *QMimeData) *QMimeData) {
-	ok := C.QPlainTextEdit_override_virtual_createMimeDataFromSelection(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QPlainTextEdit_override_virtual_createMimeDataFromSelection(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1625,7 +1744,11 @@ func (this *QPlainTextEdit) callVirtualBase_CanInsertFromMimeData(source *QMimeD
 
 }
 func (this *QPlainTextEdit) OnCanInsertFromMimeData(slot func(super func(source *QMimeData) bool, source *QMimeData) bool) {
-	ok := C.QPlainTextEdit_override_virtual_canInsertFromMimeData(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QPlainTextEdit_override_virtual_canInsertFromMimeData(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1653,7 +1776,11 @@ func (this *QPlainTextEdit) callVirtualBase_InsertFromMimeData(source *QMimeData
 
 }
 func (this *QPlainTextEdit) OnInsertFromMimeData(slot func(super func(source *QMimeData), source *QMimeData)) {
-	ok := C.QPlainTextEdit_override_virtual_insertFromMimeData(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QPlainTextEdit_override_virtual_insertFromMimeData(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1679,7 +1806,11 @@ func (this *QPlainTextEdit) callVirtualBase_InputMethodEvent(param1 *QInputMetho
 
 }
 func (this *QPlainTextEdit) OnInputMethodEvent(slot func(super func(param1 *QInputMethodEvent), param1 *QInputMethodEvent)) {
-	ok := C.QPlainTextEdit_override_virtual_inputMethodEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QPlainTextEdit_override_virtual_inputMethodEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1705,7 +1836,11 @@ func (this *QPlainTextEdit) callVirtualBase_ScrollContentsBy(dx int, dy int) {
 
 }
 func (this *QPlainTextEdit) OnScrollContentsBy(slot func(super func(dx int, dy int), dx int, dy int)) {
-	ok := C.QPlainTextEdit_override_virtual_scrollContentsBy(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QPlainTextEdit_override_virtual_scrollContentsBy(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1733,7 +1868,11 @@ func (this *QPlainTextEdit) callVirtualBase_DoSetTextCursor(cursor *QTextCursor)
 
 }
 func (this *QPlainTextEdit) OnDoSetTextCursor(slot func(super func(cursor *QTextCursor), cursor *QTextCursor)) {
-	ok := C.QPlainTextEdit_override_virtual_doSetTextCursor(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QPlainTextEdit_override_virtual_doSetTextCursor(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1761,7 +1900,11 @@ func (this *QPlainTextEdit) callVirtualBase_MinimumSizeHint() *QSize {
 
 }
 func (this *QPlainTextEdit) OnMinimumSizeHint(slot func(super func() *QSize) *QSize) {
-	ok := C.QPlainTextEdit_override_virtual_minimumSizeHint(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QPlainTextEdit_override_virtual_minimumSizeHint(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1788,7 +1931,11 @@ func (this *QPlainTextEdit) callVirtualBase_SizeHint() *QSize {
 
 }
 func (this *QPlainTextEdit) OnSizeHint(slot func(super func() *QSize) *QSize) {
-	ok := C.QPlainTextEdit_override_virtual_sizeHint(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QPlainTextEdit_override_virtual_sizeHint(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1813,7 +1960,11 @@ func (this *QPlainTextEdit) callVirtualBase_SetupViewport(viewport *QWidget) {
 
 }
 func (this *QPlainTextEdit) OnSetupViewport(slot func(super func(viewport *QWidget), viewport *QWidget)) {
-	ok := C.QPlainTextEdit_override_virtual_setupViewport(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QPlainTextEdit_override_virtual_setupViewport(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1839,7 +1990,11 @@ func (this *QPlainTextEdit) callVirtualBase_EventFilter(param1 *QObject, param2 
 
 }
 func (this *QPlainTextEdit) OnEventFilter(slot func(super func(param1 *QObject, param2 *QEvent) bool, param1 *QObject, param2 *QEvent) bool) {
-	ok := C.QPlainTextEdit_override_virtual_eventFilter(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QPlainTextEdit_override_virtual_eventFilter(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1869,7 +2024,11 @@ func (this *QPlainTextEdit) callVirtualBase_ViewportEvent(param1 *QEvent) bool {
 
 }
 func (this *QPlainTextEdit) OnViewportEvent(slot func(super func(param1 *QEvent) bool, param1 *QEvent) bool) {
-	ok := C.QPlainTextEdit_override_virtual_viewportEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QPlainTextEdit_override_virtual_viewportEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1899,7 +2058,11 @@ func (this *QPlainTextEdit) callVirtualBase_ViewportSizeHint() *QSize {
 
 }
 func (this *QPlainTextEdit) OnViewportSizeHint(slot func(super func() *QSize) *QSize) {
-	ok := C.QPlainTextEdit_override_virtual_viewportSizeHint(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QPlainTextEdit_override_virtual_viewportSizeHint(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1924,7 +2087,11 @@ func (this *QPlainTextEdit) callVirtualBase_DevType() int {
 
 }
 func (this *QPlainTextEdit) OnDevType(slot func(super func() int) int) {
-	ok := C.QPlainTextEdit_override_virtual_devType(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QPlainTextEdit_override_virtual_devType(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1949,7 +2116,11 @@ func (this *QPlainTextEdit) callVirtualBase_SetVisible(visible bool) {
 
 }
 func (this *QPlainTextEdit) OnSetVisible(slot func(super func(visible bool), visible bool)) {
-	ok := C.QPlainTextEdit_override_virtual_setVisible(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QPlainTextEdit_override_virtual_setVisible(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1975,7 +2146,11 @@ func (this *QPlainTextEdit) callVirtualBase_HeightForWidth(param1 int) int {
 
 }
 func (this *QPlainTextEdit) OnHeightForWidth(slot func(super func(param1 int) int, param1 int) int) {
-	ok := C.QPlainTextEdit_override_virtual_heightForWidth(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QPlainTextEdit_override_virtual_heightForWidth(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -2003,7 +2178,11 @@ func (this *QPlainTextEdit) callVirtualBase_HasHeightForWidth() bool {
 
 }
 func (this *QPlainTextEdit) OnHasHeightForWidth(slot func(super func() bool) bool) {
-	ok := C.QPlainTextEdit_override_virtual_hasHeightForWidth(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QPlainTextEdit_override_virtual_hasHeightForWidth(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -2028,7 +2207,11 @@ func (this *QPlainTextEdit) callVirtualBase_PaintEngine() *QPaintEngine {
 
 }
 func (this *QPlainTextEdit) OnPaintEngine(slot func(super func() *QPaintEngine) *QPaintEngine) {
-	ok := C.QPlainTextEdit_override_virtual_paintEngine(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QPlainTextEdit_override_virtual_paintEngine(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -2053,7 +2236,11 @@ func (this *QPlainTextEdit) callVirtualBase_EnterEvent(event *QEvent) {
 
 }
 func (this *QPlainTextEdit) OnEnterEvent(slot func(super func(event *QEvent), event *QEvent)) {
-	ok := C.QPlainTextEdit_override_virtual_enterEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QPlainTextEdit_override_virtual_enterEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -2079,7 +2266,11 @@ func (this *QPlainTextEdit) callVirtualBase_LeaveEvent(event *QEvent) {
 
 }
 func (this *QPlainTextEdit) OnLeaveEvent(slot func(super func(event *QEvent), event *QEvent)) {
-	ok := C.QPlainTextEdit_override_virtual_leaveEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QPlainTextEdit_override_virtual_leaveEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -2105,7 +2296,11 @@ func (this *QPlainTextEdit) callVirtualBase_MoveEvent(event *QMoveEvent) {
 
 }
 func (this *QPlainTextEdit) OnMoveEvent(slot func(super func(event *QMoveEvent), event *QMoveEvent)) {
-	ok := C.QPlainTextEdit_override_virtual_moveEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QPlainTextEdit_override_virtual_moveEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -2131,7 +2326,11 @@ func (this *QPlainTextEdit) callVirtualBase_CloseEvent(event *QCloseEvent) {
 
 }
 func (this *QPlainTextEdit) OnCloseEvent(slot func(super func(event *QCloseEvent), event *QCloseEvent)) {
-	ok := C.QPlainTextEdit_override_virtual_closeEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QPlainTextEdit_override_virtual_closeEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -2157,7 +2356,11 @@ func (this *QPlainTextEdit) callVirtualBase_TabletEvent(event *QTabletEvent) {
 
 }
 func (this *QPlainTextEdit) OnTabletEvent(slot func(super func(event *QTabletEvent), event *QTabletEvent)) {
-	ok := C.QPlainTextEdit_override_virtual_tabletEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QPlainTextEdit_override_virtual_tabletEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -2183,7 +2386,11 @@ func (this *QPlainTextEdit) callVirtualBase_ActionEvent(event *QActionEvent) {
 
 }
 func (this *QPlainTextEdit) OnActionEvent(slot func(super func(event *QActionEvent), event *QActionEvent)) {
-	ok := C.QPlainTextEdit_override_virtual_actionEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QPlainTextEdit_override_virtual_actionEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -2209,7 +2416,11 @@ func (this *QPlainTextEdit) callVirtualBase_HideEvent(event *QHideEvent) {
 
 }
 func (this *QPlainTextEdit) OnHideEvent(slot func(super func(event *QHideEvent), event *QHideEvent)) {
-	ok := C.QPlainTextEdit_override_virtual_hideEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QPlainTextEdit_override_virtual_hideEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -2242,7 +2453,11 @@ func (this *QPlainTextEdit) callVirtualBase_NativeEvent(eventType []byte, messag
 
 }
 func (this *QPlainTextEdit) OnNativeEvent(slot func(super func(eventType []byte, message unsafe.Pointer, result *int64) bool, eventType []byte, message unsafe.Pointer, result *int64) bool) {
-	ok := C.QPlainTextEdit_override_virtual_nativeEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QPlainTextEdit_override_virtual_nativeEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -2276,7 +2491,11 @@ func (this *QPlainTextEdit) callVirtualBase_Metric(param1 QPaintDevice__PaintDev
 
 }
 func (this *QPlainTextEdit) OnMetric(slot func(super func(param1 QPaintDevice__PaintDeviceMetric) int, param1 QPaintDevice__PaintDeviceMetric) int) {
-	ok := C.QPlainTextEdit_override_virtual_metric(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QPlainTextEdit_override_virtual_metric(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -2304,7 +2523,11 @@ func (this *QPlainTextEdit) callVirtualBase_InitPainter(painter *QPainter) {
 
 }
 func (this *QPlainTextEdit) OnInitPainter(slot func(super func(painter *QPainter), painter *QPainter)) {
-	ok := C.QPlainTextEdit_override_virtual_initPainter(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QPlainTextEdit_override_virtual_initPainter(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -2330,7 +2553,11 @@ func (this *QPlainTextEdit) callVirtualBase_Redirected(offset *QPoint) *QPaintDe
 
 }
 func (this *QPlainTextEdit) OnRedirected(slot func(super func(offset *QPoint) *QPaintDevice, offset *QPoint) *QPaintDevice) {
-	ok := C.QPlainTextEdit_override_virtual_redirected(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QPlainTextEdit_override_virtual_redirected(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -2358,7 +2585,11 @@ func (this *QPlainTextEdit) callVirtualBase_SharedPainter() *QPainter {
 
 }
 func (this *QPlainTextEdit) OnSharedPainter(slot func(super func() *QPainter) *QPainter) {
-	ok := C.QPlainTextEdit_override_virtual_sharedPainter(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QPlainTextEdit_override_virtual_sharedPainter(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -2383,7 +2614,11 @@ func (this *QPlainTextEdit) callVirtualBase_ChildEvent(event *QChildEvent) {
 
 }
 func (this *QPlainTextEdit) OnChildEvent(slot func(super func(event *QChildEvent), event *QChildEvent)) {
-	ok := C.QPlainTextEdit_override_virtual_childEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QPlainTextEdit_override_virtual_childEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -2409,7 +2644,11 @@ func (this *QPlainTextEdit) callVirtualBase_CustomEvent(event *QEvent) {
 
 }
 func (this *QPlainTextEdit) OnCustomEvent(slot func(super func(event *QEvent), event *QEvent)) {
-	ok := C.QPlainTextEdit_override_virtual_customEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QPlainTextEdit_override_virtual_customEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -2435,7 +2674,11 @@ func (this *QPlainTextEdit) callVirtualBase_ConnectNotify(signal *QMetaMethod) {
 
 }
 func (this *QPlainTextEdit) OnConnectNotify(slot func(super func(signal *QMetaMethod), signal *QMetaMethod)) {
-	ok := C.QPlainTextEdit_override_virtual_connectNotify(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QPlainTextEdit_override_virtual_connectNotify(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -2461,7 +2704,11 @@ func (this *QPlainTextEdit) callVirtualBase_DisconnectNotify(signal *QMetaMethod
 
 }
 func (this *QPlainTextEdit) OnDisconnectNotify(slot func(super func(signal *QMetaMethod), signal *QMetaMethod)) {
-	ok := C.QPlainTextEdit_override_virtual_disconnectNotify(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QPlainTextEdit_override_virtual_disconnectNotify(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -2493,6 +2740,11 @@ func (this *QPlainTextEdit) GoGC() {
 		this.Delete()
 		runtime.KeepAlive(this.h)
 	})
+}
+
+//export miqt_exec_callback_handle_release_QPlainTextDocumentLayout
+func miqt_exec_callback_handle_release_QPlainTextDocumentLayout(cb C.intptr_t) {
+	cgo.Handle(cb).Delete()
 }
 
 type QPlainTextDocumentLayout struct {
@@ -2749,7 +3001,11 @@ func (this *QPlainTextDocumentLayout) callVirtualBase_Draw(param1 *QPainter, par
 
 }
 func (this *QPlainTextDocumentLayout) OnDraw(slot func(super func(param1 *QPainter, param2 *QAbstractTextDocumentLayout__PaintContext), param1 *QPainter, param2 *QAbstractTextDocumentLayout__PaintContext)) {
-	ok := C.QPlainTextDocumentLayout_override_virtual_draw(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QPlainTextDocumentLayout_override_virtual_draw(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -2777,7 +3033,11 @@ func (this *QPlainTextDocumentLayout) callVirtualBase_HitTest(param1 *QPointF, p
 
 }
 func (this *QPlainTextDocumentLayout) OnHitTest(slot func(super func(param1 *QPointF, param2 HitTestAccuracy) int, param1 *QPointF, param2 HitTestAccuracy) int) {
-	ok := C.QPlainTextDocumentLayout_override_virtual_hitTest(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QPlainTextDocumentLayout_override_virtual_hitTest(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -2807,7 +3067,11 @@ func (this *QPlainTextDocumentLayout) callVirtualBase_PageCount() int {
 
 }
 func (this *QPlainTextDocumentLayout) OnPageCount(slot func(super func() int) int) {
-	ok := C.QPlainTextDocumentLayout_override_virtual_pageCount(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QPlainTextDocumentLayout_override_virtual_pageCount(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -2834,7 +3098,11 @@ func (this *QPlainTextDocumentLayout) callVirtualBase_DocumentSize() *QSizeF {
 
 }
 func (this *QPlainTextDocumentLayout) OnDocumentSize(slot func(super func() *QSizeF) *QSizeF) {
-	ok := C.QPlainTextDocumentLayout_override_virtual_documentSize(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QPlainTextDocumentLayout_override_virtual_documentSize(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -2861,7 +3129,11 @@ func (this *QPlainTextDocumentLayout) callVirtualBase_FrameBoundingRect(param1 *
 
 }
 func (this *QPlainTextDocumentLayout) OnFrameBoundingRect(slot func(super func(param1 *QTextFrame) *QRectF, param1 *QTextFrame) *QRectF) {
-	ok := C.QPlainTextDocumentLayout_override_virtual_frameBoundingRect(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QPlainTextDocumentLayout_override_virtual_frameBoundingRect(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -2891,7 +3163,11 @@ func (this *QPlainTextDocumentLayout) callVirtualBase_BlockBoundingRect(block *Q
 
 }
 func (this *QPlainTextDocumentLayout) OnBlockBoundingRect(slot func(super func(block *QTextBlock) *QRectF, block *QTextBlock) *QRectF) {
-	ok := C.QPlainTextDocumentLayout_override_virtual_blockBoundingRect(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QPlainTextDocumentLayout_override_virtual_blockBoundingRect(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -2919,7 +3195,11 @@ func (this *QPlainTextDocumentLayout) callVirtualBase_DocumentChanged(from int, 
 
 }
 func (this *QPlainTextDocumentLayout) OnDocumentChanged(slot func(super func(from int, param2 int, charsAdded int), from int, param2 int, charsAdded int)) {
-	ok := C.QPlainTextDocumentLayout_override_virtual_documentChanged(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QPlainTextDocumentLayout_override_virtual_documentChanged(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -2949,7 +3229,11 @@ func (this *QPlainTextDocumentLayout) callVirtualBase_ResizeInlineObject(item QT
 
 }
 func (this *QPlainTextDocumentLayout) OnResizeInlineObject(slot func(super func(item QTextInlineObject, posInDocument int, format *QTextFormat), item QTextInlineObject, posInDocument int, format *QTextFormat)) {
-	ok := C.QPlainTextDocumentLayout_override_virtual_resizeInlineObject(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QPlainTextDocumentLayout_override_virtual_resizeInlineObject(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -2981,7 +3265,11 @@ func (this *QPlainTextDocumentLayout) callVirtualBase_PositionInlineObject(item 
 
 }
 func (this *QPlainTextDocumentLayout) OnPositionInlineObject(slot func(super func(item QTextInlineObject, posInDocument int, format *QTextFormat), item QTextInlineObject, posInDocument int, format *QTextFormat)) {
-	ok := C.QPlainTextDocumentLayout_override_virtual_positionInlineObject(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QPlainTextDocumentLayout_override_virtual_positionInlineObject(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -3013,7 +3301,11 @@ func (this *QPlainTextDocumentLayout) callVirtualBase_DrawInlineObject(painter *
 
 }
 func (this *QPlainTextDocumentLayout) OnDrawInlineObject(slot func(super func(painter *QPainter, rect *QRectF, object QTextInlineObject, posInDocument int, format *QTextFormat), painter *QPainter, rect *QRectF, object QTextInlineObject, posInDocument int, format *QTextFormat)) {
-	ok := C.QPlainTextDocumentLayout_override_virtual_drawInlineObject(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QPlainTextDocumentLayout_override_virtual_drawInlineObject(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -3049,7 +3341,11 @@ func (this *QPlainTextDocumentLayout) callVirtualBase_Event(event *QEvent) bool 
 
 }
 func (this *QPlainTextDocumentLayout) OnEvent(slot func(super func(event *QEvent) bool, event *QEvent) bool) {
-	ok := C.QPlainTextDocumentLayout_override_virtual_event(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QPlainTextDocumentLayout_override_virtual_event(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -3077,7 +3373,11 @@ func (this *QPlainTextDocumentLayout) callVirtualBase_EventFilter(watched *QObje
 
 }
 func (this *QPlainTextDocumentLayout) OnEventFilter(slot func(super func(watched *QObject, event *QEvent) bool, watched *QObject, event *QEvent) bool) {
-	ok := C.QPlainTextDocumentLayout_override_virtual_eventFilter(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QPlainTextDocumentLayout_override_virtual_eventFilter(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -3107,7 +3407,11 @@ func (this *QPlainTextDocumentLayout) callVirtualBase_TimerEvent(event *QTimerEv
 
 }
 func (this *QPlainTextDocumentLayout) OnTimerEvent(slot func(super func(event *QTimerEvent), event *QTimerEvent)) {
-	ok := C.QPlainTextDocumentLayout_override_virtual_timerEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QPlainTextDocumentLayout_override_virtual_timerEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -3133,7 +3437,11 @@ func (this *QPlainTextDocumentLayout) callVirtualBase_ChildEvent(event *QChildEv
 
 }
 func (this *QPlainTextDocumentLayout) OnChildEvent(slot func(super func(event *QChildEvent), event *QChildEvent)) {
-	ok := C.QPlainTextDocumentLayout_override_virtual_childEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QPlainTextDocumentLayout_override_virtual_childEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -3159,7 +3467,11 @@ func (this *QPlainTextDocumentLayout) callVirtualBase_CustomEvent(event *QEvent)
 
 }
 func (this *QPlainTextDocumentLayout) OnCustomEvent(slot func(super func(event *QEvent), event *QEvent)) {
-	ok := C.QPlainTextDocumentLayout_override_virtual_customEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QPlainTextDocumentLayout_override_virtual_customEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -3185,7 +3497,11 @@ func (this *QPlainTextDocumentLayout) callVirtualBase_ConnectNotify(signal *QMet
 
 }
 func (this *QPlainTextDocumentLayout) OnConnectNotify(slot func(super func(signal *QMetaMethod), signal *QMetaMethod)) {
-	ok := C.QPlainTextDocumentLayout_override_virtual_connectNotify(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QPlainTextDocumentLayout_override_virtual_connectNotify(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -3211,7 +3527,11 @@ func (this *QPlainTextDocumentLayout) callVirtualBase_DisconnectNotify(signal *Q
 
 }
 func (this *QPlainTextDocumentLayout) OnDisconnectNotify(slot func(super func(signal *QMetaMethod), signal *QMetaMethod)) {
-	ok := C.QPlainTextDocumentLayout_override_virtual_disconnectNotify(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QPlainTextDocumentLayout_override_virtual_disconnectNotify(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}

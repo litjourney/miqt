@@ -30,6 +30,11 @@ const (
 	QPdfBookmarkModel__PageNumberRole QPdfBookmarkModel__Role = 257
 )
 
+//export miqt_exec_callback_handle_release_QPdfBookmarkModel
+func miqt_exec_callback_handle_release_QPdfBookmarkModel(cb C.intptr_t) {
+	cgo.Handle(cb).Delete()
+}
+
 type QPdfBookmarkModel struct {
 	h *C.QPdfBookmarkModel
 	*qt.QAbstractItemModel
@@ -168,8 +173,10 @@ func (this *QPdfBookmarkModel) RoleNames() map[int][]byte {
 func (this *QPdfBookmarkModel) DocumentChanged(document *QPdfDocument) {
 	C.QPdfBookmarkModel_documentChanged(this.h, document.cPointer())
 }
-func (this *QPdfBookmarkModel) OnDocumentChanged(slot func(document *QPdfDocument)) {
-	C.QPdfBookmarkModel_connect_documentChanged(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QPdfBookmarkModel) OnDocumentChanged(slot func(document *QPdfDocument)) *qt.SignalConnection {
+	_goptr := qt.UnsafeNewQMetaObject__Connection(C.QPdfBookmarkModel_connect_documentChanged(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QPdfBookmarkModel_documentChanged
@@ -188,8 +195,10 @@ func miqt_exec_callback_QPdfBookmarkModel_documentChanged(cb C.intptr_t, documen
 func (this *QPdfBookmarkModel) StructureModeChanged(structureMode QPdfBookmarkModel__StructureMode) {
 	C.QPdfBookmarkModel_structureModeChanged(this.h, (C.int)(structureMode))
 }
-func (this *QPdfBookmarkModel) OnStructureModeChanged(slot func(structureMode QPdfBookmarkModel__StructureMode)) {
-	C.QPdfBookmarkModel_connect_structureModeChanged(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QPdfBookmarkModel) OnStructureModeChanged(slot func(structureMode QPdfBookmarkModel__StructureMode)) *qt.SignalConnection {
+	_goptr := qt.UnsafeNewQMetaObject__Connection(C.QPdfBookmarkModel_connect_structureModeChanged(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QPdfBookmarkModel_structureModeChanged
@@ -605,7 +614,11 @@ func (this *QPdfBookmarkModel) callVirtualBase_Data(index *qt.QModelIndex, role 
 
 }
 func (this *QPdfBookmarkModel) OnData(slot func(super func(index *qt.QModelIndex, role int) *qt.QVariant, index *qt.QModelIndex, role int) *qt.QVariant) {
-	ok := C.QPdfBookmarkModel_override_virtual_data(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QPdfBookmarkModel_override_virtual_data(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -637,7 +650,11 @@ func (this *QPdfBookmarkModel) callVirtualBase_Index(row int, column int, parent
 
 }
 func (this *QPdfBookmarkModel) OnIndex(slot func(super func(row int, column int, parent *qt.QModelIndex) *qt.QModelIndex, row int, column int, parent *qt.QModelIndex) *qt.QModelIndex) {
-	ok := C.QPdfBookmarkModel_override_virtual_index(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QPdfBookmarkModel_override_virtual_index(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -671,7 +688,11 @@ func (this *QPdfBookmarkModel) callVirtualBase_Parent(index *qt.QModelIndex) *qt
 
 }
 func (this *QPdfBookmarkModel) OnParent(slot func(super func(index *qt.QModelIndex) *qt.QModelIndex, index *qt.QModelIndex) *qt.QModelIndex) {
-	ok := C.QPdfBookmarkModel_override_virtual_parent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QPdfBookmarkModel_override_virtual_parent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -699,7 +720,11 @@ func (this *QPdfBookmarkModel) callVirtualBase_RowCount(parent *qt.QModelIndex) 
 
 }
 func (this *QPdfBookmarkModel) OnRowCount(slot func(super func(parent *qt.QModelIndex) int, parent *qt.QModelIndex) int) {
-	ok := C.QPdfBookmarkModel_override_virtual_rowCount(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QPdfBookmarkModel_override_virtual_rowCount(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -727,7 +752,11 @@ func (this *QPdfBookmarkModel) callVirtualBase_ColumnCount(parent *qt.QModelInde
 
 }
 func (this *QPdfBookmarkModel) OnColumnCount(slot func(super func(parent *qt.QModelIndex) int, parent *qt.QModelIndex) int) {
-	ok := C.QPdfBookmarkModel_override_virtual_columnCount(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QPdfBookmarkModel_override_virtual_columnCount(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -768,7 +797,11 @@ func (this *QPdfBookmarkModel) callVirtualBase_RoleNames() map[int][]byte {
 
 }
 func (this *QPdfBookmarkModel) OnRoleNames(slot func(super func() map[int][]byte) map[int][]byte) {
-	ok := C.QPdfBookmarkModel_override_virtual_roleNames(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QPdfBookmarkModel_override_virtual_roleNames(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -815,7 +848,11 @@ func (this *QPdfBookmarkModel) callVirtualBase_Sibling(row int, column int, idx 
 
 }
 func (this *QPdfBookmarkModel) OnSibling(slot func(super func(row int, column int, idx *qt.QModelIndex) *qt.QModelIndex, row int, column int, idx *qt.QModelIndex) *qt.QModelIndex) {
-	ok := C.QPdfBookmarkModel_override_virtual_sibling(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QPdfBookmarkModel_override_virtual_sibling(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -847,7 +884,11 @@ func (this *QPdfBookmarkModel) callVirtualBase_HasChildren(parent *qt.QModelInde
 
 }
 func (this *QPdfBookmarkModel) OnHasChildren(slot func(super func(parent *qt.QModelIndex) bool, parent *qt.QModelIndex) bool) {
-	ok := C.QPdfBookmarkModel_override_virtual_hasChildren(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QPdfBookmarkModel_override_virtual_hasChildren(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -875,7 +916,11 @@ func (this *QPdfBookmarkModel) callVirtualBase_SetData(index *qt.QModelIndex, va
 
 }
 func (this *QPdfBookmarkModel) OnSetData(slot func(super func(index *qt.QModelIndex, value *qt.QVariant, role int) bool, index *qt.QModelIndex, value *qt.QVariant, role int) bool) {
-	ok := C.QPdfBookmarkModel_override_virtual_setData(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QPdfBookmarkModel_override_virtual_setData(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -909,7 +954,11 @@ func (this *QPdfBookmarkModel) callVirtualBase_HeaderData(section int, orientati
 
 }
 func (this *QPdfBookmarkModel) OnHeaderData(slot func(super func(section int, orientation qt.Orientation, role int) *qt.QVariant, section int, orientation qt.Orientation, role int) *qt.QVariant) {
-	ok := C.QPdfBookmarkModel_override_virtual_headerData(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QPdfBookmarkModel_override_virtual_headerData(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -941,7 +990,11 @@ func (this *QPdfBookmarkModel) callVirtualBase_SetHeaderData(section int, orient
 
 }
 func (this *QPdfBookmarkModel) OnSetHeaderData(slot func(super func(section int, orientation qt.Orientation, value *qt.QVariant, role int) bool, section int, orientation qt.Orientation, value *qt.QVariant, role int) bool) {
-	ok := C.QPdfBookmarkModel_override_virtual_setHeaderData(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QPdfBookmarkModel_override_virtual_setHeaderData(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -988,7 +1041,11 @@ func (this *QPdfBookmarkModel) callVirtualBase_ItemData(index *qt.QModelIndex) m
 
 }
 func (this *QPdfBookmarkModel) OnItemData(slot func(super func(index *qt.QModelIndex) map[int]qt.QVariant, index *qt.QModelIndex) map[int]qt.QVariant) {
-	ok := C.QPdfBookmarkModel_override_virtual_itemData(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QPdfBookmarkModel_override_virtual_itemData(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1044,7 +1101,11 @@ func (this *QPdfBookmarkModel) callVirtualBase_SetItemData(index *qt.QModelIndex
 
 }
 func (this *QPdfBookmarkModel) OnSetItemData(slot func(super func(index *qt.QModelIndex, roles map[int]qt.QVariant) bool, index *qt.QModelIndex, roles map[int]qt.QVariant) bool) {
-	ok := C.QPdfBookmarkModel_override_virtual_setItemData(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QPdfBookmarkModel_override_virtual_setItemData(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1096,7 +1157,11 @@ func (this *QPdfBookmarkModel) callVirtualBase_MimeTypes() []string {
 
 }
 func (this *QPdfBookmarkModel) OnMimeTypes(slot func(super func() []string) []string) {
-	ok := C.QPdfBookmarkModel_override_virtual_mimeTypes(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QPdfBookmarkModel_override_virtual_mimeTypes(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1135,7 +1200,11 @@ func (this *QPdfBookmarkModel) callVirtualBase_MimeData(indexes []qt.QModelIndex
 
 }
 func (this *QPdfBookmarkModel) OnMimeData(slot func(super func(indexes []qt.QModelIndex) *qt.QMimeData, indexes []qt.QModelIndex) *qt.QMimeData) {
-	ok := C.QPdfBookmarkModel_override_virtual_mimeData(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QPdfBookmarkModel_override_virtual_mimeData(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1171,7 +1240,11 @@ func (this *QPdfBookmarkModel) callVirtualBase_CanDropMimeData(data *qt.QMimeDat
 
 }
 func (this *QPdfBookmarkModel) OnCanDropMimeData(slot func(super func(data *qt.QMimeData, action qt.DropAction, row int, column int, parent *qt.QModelIndex) bool, data *qt.QMimeData, action qt.DropAction, row int, column int, parent *qt.QModelIndex) bool) {
-	ok := C.QPdfBookmarkModel_override_virtual_canDropMimeData(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QPdfBookmarkModel_override_virtual_canDropMimeData(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1207,7 +1280,11 @@ func (this *QPdfBookmarkModel) callVirtualBase_DropMimeData(data *qt.QMimeData, 
 
 }
 func (this *QPdfBookmarkModel) OnDropMimeData(slot func(super func(data *qt.QMimeData, action qt.DropAction, row int, column int, parent *qt.QModelIndex) bool, data *qt.QMimeData, action qt.DropAction, row int, column int, parent *qt.QModelIndex) bool) {
-	ok := C.QPdfBookmarkModel_override_virtual_dropMimeData(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QPdfBookmarkModel_override_virtual_dropMimeData(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1243,7 +1320,11 @@ func (this *QPdfBookmarkModel) callVirtualBase_SupportedDropActions() qt.DropAct
 
 }
 func (this *QPdfBookmarkModel) OnSupportedDropActions(slot func(super func() qt.DropAction) qt.DropAction) {
-	ok := C.QPdfBookmarkModel_override_virtual_supportedDropActions(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QPdfBookmarkModel_override_virtual_supportedDropActions(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1268,7 +1349,11 @@ func (this *QPdfBookmarkModel) callVirtualBase_SupportedDragActions() qt.DropAct
 
 }
 func (this *QPdfBookmarkModel) OnSupportedDragActions(slot func(super func() qt.DropAction) qt.DropAction) {
-	ok := C.QPdfBookmarkModel_override_virtual_supportedDragActions(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QPdfBookmarkModel_override_virtual_supportedDragActions(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1293,7 +1378,11 @@ func (this *QPdfBookmarkModel) callVirtualBase_InsertRows(row int, count int, pa
 
 }
 func (this *QPdfBookmarkModel) OnInsertRows(slot func(super func(row int, count int, parent *qt.QModelIndex) bool, row int, count int, parent *qt.QModelIndex) bool) {
-	ok := C.QPdfBookmarkModel_override_virtual_insertRows(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QPdfBookmarkModel_override_virtual_insertRows(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1325,7 +1414,11 @@ func (this *QPdfBookmarkModel) callVirtualBase_InsertColumns(column int, count i
 
 }
 func (this *QPdfBookmarkModel) OnInsertColumns(slot func(super func(column int, count int, parent *qt.QModelIndex) bool, column int, count int, parent *qt.QModelIndex) bool) {
-	ok := C.QPdfBookmarkModel_override_virtual_insertColumns(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QPdfBookmarkModel_override_virtual_insertColumns(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1357,7 +1450,11 @@ func (this *QPdfBookmarkModel) callVirtualBase_RemoveRows(row int, count int, pa
 
 }
 func (this *QPdfBookmarkModel) OnRemoveRows(slot func(super func(row int, count int, parent *qt.QModelIndex) bool, row int, count int, parent *qt.QModelIndex) bool) {
-	ok := C.QPdfBookmarkModel_override_virtual_removeRows(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QPdfBookmarkModel_override_virtual_removeRows(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1389,7 +1486,11 @@ func (this *QPdfBookmarkModel) callVirtualBase_RemoveColumns(column int, count i
 
 }
 func (this *QPdfBookmarkModel) OnRemoveColumns(slot func(super func(column int, count int, parent *qt.QModelIndex) bool, column int, count int, parent *qt.QModelIndex) bool) {
-	ok := C.QPdfBookmarkModel_override_virtual_removeColumns(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QPdfBookmarkModel_override_virtual_removeColumns(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1421,7 +1522,11 @@ func (this *QPdfBookmarkModel) callVirtualBase_MoveRows(sourceParent *qt.QModelI
 
 }
 func (this *QPdfBookmarkModel) OnMoveRows(slot func(super func(sourceParent *qt.QModelIndex, sourceRow int, count int, destinationParent *qt.QModelIndex, destinationChild int) bool, sourceParent *qt.QModelIndex, sourceRow int, count int, destinationParent *qt.QModelIndex, destinationChild int) bool) {
-	ok := C.QPdfBookmarkModel_override_virtual_moveRows(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QPdfBookmarkModel_override_virtual_moveRows(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1457,7 +1562,11 @@ func (this *QPdfBookmarkModel) callVirtualBase_MoveColumns(sourceParent *qt.QMod
 
 }
 func (this *QPdfBookmarkModel) OnMoveColumns(slot func(super func(sourceParent *qt.QModelIndex, sourceColumn int, count int, destinationParent *qt.QModelIndex, destinationChild int) bool, sourceParent *qt.QModelIndex, sourceColumn int, count int, destinationParent *qt.QModelIndex, destinationChild int) bool) {
-	ok := C.QPdfBookmarkModel_override_virtual_moveColumns(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QPdfBookmarkModel_override_virtual_moveColumns(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1493,7 +1602,11 @@ func (this *QPdfBookmarkModel) callVirtualBase_FetchMore(parent *qt.QModelIndex)
 
 }
 func (this *QPdfBookmarkModel) OnFetchMore(slot func(super func(parent *qt.QModelIndex), parent *qt.QModelIndex)) {
-	ok := C.QPdfBookmarkModel_override_virtual_fetchMore(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QPdfBookmarkModel_override_virtual_fetchMore(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1519,7 +1632,11 @@ func (this *QPdfBookmarkModel) callVirtualBase_CanFetchMore(parent *qt.QModelInd
 
 }
 func (this *QPdfBookmarkModel) OnCanFetchMore(slot func(super func(parent *qt.QModelIndex) bool, parent *qt.QModelIndex) bool) {
-	ok := C.QPdfBookmarkModel_override_virtual_canFetchMore(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QPdfBookmarkModel_override_virtual_canFetchMore(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1547,7 +1664,11 @@ func (this *QPdfBookmarkModel) callVirtualBase_Flags(index *qt.QModelIndex) qt.I
 
 }
 func (this *QPdfBookmarkModel) OnFlags(slot func(super func(index *qt.QModelIndex) qt.ItemFlag, index *qt.QModelIndex) qt.ItemFlag) {
-	ok := C.QPdfBookmarkModel_override_virtual_flags(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QPdfBookmarkModel_override_virtual_flags(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1575,7 +1696,11 @@ func (this *QPdfBookmarkModel) callVirtualBase_Sort(column int, order qt.SortOrd
 
 }
 func (this *QPdfBookmarkModel) OnSort(slot func(super func(column int, order qt.SortOrder), column int, order qt.SortOrder)) {
-	ok := C.QPdfBookmarkModel_override_virtual_sort(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QPdfBookmarkModel_override_virtual_sort(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1605,7 +1730,11 @@ func (this *QPdfBookmarkModel) callVirtualBase_Buddy(index *qt.QModelIndex) *qt.
 
 }
 func (this *QPdfBookmarkModel) OnBuddy(slot func(super func(index *qt.QModelIndex) *qt.QModelIndex, index *qt.QModelIndex) *qt.QModelIndex) {
-	ok := C.QPdfBookmarkModel_override_virtual_buddy(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QPdfBookmarkModel_override_virtual_buddy(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1641,7 +1770,11 @@ func (this *QPdfBookmarkModel) callVirtualBase_Match(start *qt.QModelIndex, role
 
 }
 func (this *QPdfBookmarkModel) OnMatch(slot func(super func(start *qt.QModelIndex, role int, value *qt.QVariant, hits int, flags qt.MatchFlag) []qt.QModelIndex, start *qt.QModelIndex, role int, value *qt.QVariant, hits int, flags qt.MatchFlag) []qt.QModelIndex) {
-	ok := C.QPdfBookmarkModel_override_virtual_match(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QPdfBookmarkModel_override_virtual_match(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1684,7 +1817,11 @@ func (this *QPdfBookmarkModel) callVirtualBase_Span(index *qt.QModelIndex) *qt.Q
 
 }
 func (this *QPdfBookmarkModel) OnSpan(slot func(super func(index *qt.QModelIndex) *qt.QSize, index *qt.QModelIndex) *qt.QSize) {
-	ok := C.QPdfBookmarkModel_override_virtual_span(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QPdfBookmarkModel_override_virtual_span(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1712,7 +1849,11 @@ func (this *QPdfBookmarkModel) callVirtualBase_Submit() bool {
 
 }
 func (this *QPdfBookmarkModel) OnSubmit(slot func(super func() bool) bool) {
-	ok := C.QPdfBookmarkModel_override_virtual_submit(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QPdfBookmarkModel_override_virtual_submit(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1737,7 +1878,11 @@ func (this *QPdfBookmarkModel) callVirtualBase_Revert() {
 
 }
 func (this *QPdfBookmarkModel) OnRevert(slot func(super func())) {
-	ok := C.QPdfBookmarkModel_override_virtual_revert(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QPdfBookmarkModel_override_virtual_revert(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1760,7 +1905,11 @@ func (this *QPdfBookmarkModel) callVirtualBase_Event(event *qt.QEvent) bool {
 
 }
 func (this *QPdfBookmarkModel) OnEvent(slot func(super func(event *qt.QEvent) bool, event *qt.QEvent) bool) {
-	ok := C.QPdfBookmarkModel_override_virtual_event(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QPdfBookmarkModel_override_virtual_event(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1788,7 +1937,11 @@ func (this *QPdfBookmarkModel) callVirtualBase_EventFilter(watched *qt.QObject, 
 
 }
 func (this *QPdfBookmarkModel) OnEventFilter(slot func(super func(watched *qt.QObject, event *qt.QEvent) bool, watched *qt.QObject, event *qt.QEvent) bool) {
-	ok := C.QPdfBookmarkModel_override_virtual_eventFilter(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QPdfBookmarkModel_override_virtual_eventFilter(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1818,7 +1971,11 @@ func (this *QPdfBookmarkModel) callVirtualBase_TimerEvent(event *qt.QTimerEvent)
 
 }
 func (this *QPdfBookmarkModel) OnTimerEvent(slot func(super func(event *qt.QTimerEvent), event *qt.QTimerEvent)) {
-	ok := C.QPdfBookmarkModel_override_virtual_timerEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QPdfBookmarkModel_override_virtual_timerEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1844,7 +2001,11 @@ func (this *QPdfBookmarkModel) callVirtualBase_ChildEvent(event *qt.QChildEvent)
 
 }
 func (this *QPdfBookmarkModel) OnChildEvent(slot func(super func(event *qt.QChildEvent), event *qt.QChildEvent)) {
-	ok := C.QPdfBookmarkModel_override_virtual_childEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QPdfBookmarkModel_override_virtual_childEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1870,7 +2031,11 @@ func (this *QPdfBookmarkModel) callVirtualBase_CustomEvent(event *qt.QEvent) {
 
 }
 func (this *QPdfBookmarkModel) OnCustomEvent(slot func(super func(event *qt.QEvent), event *qt.QEvent)) {
-	ok := C.QPdfBookmarkModel_override_virtual_customEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QPdfBookmarkModel_override_virtual_customEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1896,7 +2061,11 @@ func (this *QPdfBookmarkModel) callVirtualBase_ConnectNotify(signal *qt.QMetaMet
 
 }
 func (this *QPdfBookmarkModel) OnConnectNotify(slot func(super func(signal *qt.QMetaMethod), signal *qt.QMetaMethod)) {
-	ok := C.QPdfBookmarkModel_override_virtual_connectNotify(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QPdfBookmarkModel_override_virtual_connectNotify(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1922,7 +2091,11 @@ func (this *QPdfBookmarkModel) callVirtualBase_DisconnectNotify(signal *qt.QMeta
 
 }
 func (this *QPdfBookmarkModel) OnDisconnectNotify(slot func(super func(signal *qt.QMetaMethod), signal *qt.QMetaMethod)) {
-	ok := C.QPdfBookmarkModel_override_virtual_disconnectNotify(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QPdfBookmarkModel_override_virtual_disconnectNotify(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}

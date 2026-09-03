@@ -1,3 +1,5 @@
+#include <memory>
+#include <utility>
 #include <QChar>
 #include <QMetaMethod>
 #include <QMetaObject>
@@ -13,6 +15,7 @@
 extern "C" {
 #endif
 
+void miqt_exec_callback_handle_release_QStyleHints(intptr_t);
 void miqt_exec_callback_QStyleHints_cursorFlashTimeChanged(intptr_t, int);
 void miqt_exec_callback_QStyleHints_keyboardInputIntervalChanged(intptr_t, int);
 void miqt_exec_callback_QStyleHints_mouseDoubleClickIntervalChanged(intptr_t, int);
@@ -193,122 +196,144 @@ void QStyleHints_cursorFlashTimeChanged(QStyleHints* self, int cursorFlashTime) 
 	self->cursorFlashTimeChanged(static_cast<int>(cursorFlashTime));
 }
 
-void QStyleHints_connect_cursorFlashTimeChanged(QStyleHints* self, intptr_t slot) {
-	QStyleHints::connect(self, static_cast<void (QStyleHints::*)(int)>(&QStyleHints::cursorFlashTimeChanged), self, [=](int cursorFlashTime) {
+void* QStyleHints_connect_cursorFlashTimeChanged(QStyleHints* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QStyleHints>>(slot);
+	return new QMetaObject::Connection(QStyleHints::connect(self, static_cast<void (QStyleHints::*)(int)>(&QStyleHints::cursorFlashTimeChanged), self, [slot_handle](int cursorFlashTime) {
+		intptr_t slot = slot_handle->value();
 		int sigval1 = cursorFlashTime;
 		miqt_exec_callback_QStyleHints_cursorFlashTimeChanged(slot, sigval1);
-	});
+	}));
 }
 
 void QStyleHints_keyboardInputIntervalChanged(QStyleHints* self, int keyboardInputInterval) {
 	self->keyboardInputIntervalChanged(static_cast<int>(keyboardInputInterval));
 }
 
-void QStyleHints_connect_keyboardInputIntervalChanged(QStyleHints* self, intptr_t slot) {
-	QStyleHints::connect(self, static_cast<void (QStyleHints::*)(int)>(&QStyleHints::keyboardInputIntervalChanged), self, [=](int keyboardInputInterval) {
+void* QStyleHints_connect_keyboardInputIntervalChanged(QStyleHints* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QStyleHints>>(slot);
+	return new QMetaObject::Connection(QStyleHints::connect(self, static_cast<void (QStyleHints::*)(int)>(&QStyleHints::keyboardInputIntervalChanged), self, [slot_handle](int keyboardInputInterval) {
+		intptr_t slot = slot_handle->value();
 		int sigval1 = keyboardInputInterval;
 		miqt_exec_callback_QStyleHints_keyboardInputIntervalChanged(slot, sigval1);
-	});
+	}));
 }
 
 void QStyleHints_mouseDoubleClickIntervalChanged(QStyleHints* self, int mouseDoubleClickInterval) {
 	self->mouseDoubleClickIntervalChanged(static_cast<int>(mouseDoubleClickInterval));
 }
 
-void QStyleHints_connect_mouseDoubleClickIntervalChanged(QStyleHints* self, intptr_t slot) {
-	QStyleHints::connect(self, static_cast<void (QStyleHints::*)(int)>(&QStyleHints::mouseDoubleClickIntervalChanged), self, [=](int mouseDoubleClickInterval) {
+void* QStyleHints_connect_mouseDoubleClickIntervalChanged(QStyleHints* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QStyleHints>>(slot);
+	return new QMetaObject::Connection(QStyleHints::connect(self, static_cast<void (QStyleHints::*)(int)>(&QStyleHints::mouseDoubleClickIntervalChanged), self, [slot_handle](int mouseDoubleClickInterval) {
+		intptr_t slot = slot_handle->value();
 		int sigval1 = mouseDoubleClickInterval;
 		miqt_exec_callback_QStyleHints_mouseDoubleClickIntervalChanged(slot, sigval1);
-	});
+	}));
 }
 
 void QStyleHints_mousePressAndHoldIntervalChanged(QStyleHints* self, int mousePressAndHoldInterval) {
 	self->mousePressAndHoldIntervalChanged(static_cast<int>(mousePressAndHoldInterval));
 }
 
-void QStyleHints_connect_mousePressAndHoldIntervalChanged(QStyleHints* self, intptr_t slot) {
-	QStyleHints::connect(self, static_cast<void (QStyleHints::*)(int)>(&QStyleHints::mousePressAndHoldIntervalChanged), self, [=](int mousePressAndHoldInterval) {
+void* QStyleHints_connect_mousePressAndHoldIntervalChanged(QStyleHints* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QStyleHints>>(slot);
+	return new QMetaObject::Connection(QStyleHints::connect(self, static_cast<void (QStyleHints::*)(int)>(&QStyleHints::mousePressAndHoldIntervalChanged), self, [slot_handle](int mousePressAndHoldInterval) {
+		intptr_t slot = slot_handle->value();
 		int sigval1 = mousePressAndHoldInterval;
 		miqt_exec_callback_QStyleHints_mousePressAndHoldIntervalChanged(slot, sigval1);
-	});
+	}));
 }
 
 void QStyleHints_startDragDistanceChanged(QStyleHints* self, int startDragDistance) {
 	self->startDragDistanceChanged(static_cast<int>(startDragDistance));
 }
 
-void QStyleHints_connect_startDragDistanceChanged(QStyleHints* self, intptr_t slot) {
-	QStyleHints::connect(self, static_cast<void (QStyleHints::*)(int)>(&QStyleHints::startDragDistanceChanged), self, [=](int startDragDistance) {
+void* QStyleHints_connect_startDragDistanceChanged(QStyleHints* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QStyleHints>>(slot);
+	return new QMetaObject::Connection(QStyleHints::connect(self, static_cast<void (QStyleHints::*)(int)>(&QStyleHints::startDragDistanceChanged), self, [slot_handle](int startDragDistance) {
+		intptr_t slot = slot_handle->value();
 		int sigval1 = startDragDistance;
 		miqt_exec_callback_QStyleHints_startDragDistanceChanged(slot, sigval1);
-	});
+	}));
 }
 
 void QStyleHints_startDragTimeChanged(QStyleHints* self, int startDragTime) {
 	self->startDragTimeChanged(static_cast<int>(startDragTime));
 }
 
-void QStyleHints_connect_startDragTimeChanged(QStyleHints* self, intptr_t slot) {
-	QStyleHints::connect(self, static_cast<void (QStyleHints::*)(int)>(&QStyleHints::startDragTimeChanged), self, [=](int startDragTime) {
+void* QStyleHints_connect_startDragTimeChanged(QStyleHints* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QStyleHints>>(slot);
+	return new QMetaObject::Connection(QStyleHints::connect(self, static_cast<void (QStyleHints::*)(int)>(&QStyleHints::startDragTimeChanged), self, [slot_handle](int startDragTime) {
+		intptr_t slot = slot_handle->value();
 		int sigval1 = startDragTime;
 		miqt_exec_callback_QStyleHints_startDragTimeChanged(slot, sigval1);
-	});
+	}));
 }
 
 void QStyleHints_tabFocusBehaviorChanged(QStyleHints* self, int tabFocusBehavior) {
 	self->tabFocusBehaviorChanged(static_cast<Qt::TabFocusBehavior>(tabFocusBehavior));
 }
 
-void QStyleHints_connect_tabFocusBehaviorChanged(QStyleHints* self, intptr_t slot) {
-	QStyleHints::connect(self, static_cast<void (QStyleHints::*)(Qt::TabFocusBehavior)>(&QStyleHints::tabFocusBehaviorChanged), self, [=](Qt::TabFocusBehavior tabFocusBehavior) {
+void* QStyleHints_connect_tabFocusBehaviorChanged(QStyleHints* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QStyleHints>>(slot);
+	return new QMetaObject::Connection(QStyleHints::connect(self, static_cast<void (QStyleHints::*)(Qt::TabFocusBehavior)>(&QStyleHints::tabFocusBehaviorChanged), self, [slot_handle](Qt::TabFocusBehavior tabFocusBehavior) {
+		intptr_t slot = slot_handle->value();
 		Qt::TabFocusBehavior tabFocusBehavior_ret = tabFocusBehavior;
 		int sigval1 = static_cast<int>(tabFocusBehavior_ret);
 		miqt_exec_callback_QStyleHints_tabFocusBehaviorChanged(slot, sigval1);
-	});
+	}));
 }
 
 void QStyleHints_useHoverEffectsChanged(QStyleHints* self, bool useHoverEffects) {
 	self->useHoverEffectsChanged(useHoverEffects);
 }
 
-void QStyleHints_connect_useHoverEffectsChanged(QStyleHints* self, intptr_t slot) {
-	QStyleHints::connect(self, static_cast<void (QStyleHints::*)(bool)>(&QStyleHints::useHoverEffectsChanged), self, [=](bool useHoverEffects) {
+void* QStyleHints_connect_useHoverEffectsChanged(QStyleHints* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QStyleHints>>(slot);
+	return new QMetaObject::Connection(QStyleHints::connect(self, static_cast<void (QStyleHints::*)(bool)>(&QStyleHints::useHoverEffectsChanged), self, [slot_handle](bool useHoverEffects) {
+		intptr_t slot = slot_handle->value();
 		bool sigval1 = useHoverEffects;
 		miqt_exec_callback_QStyleHints_useHoverEffectsChanged(slot, sigval1);
-	});
+	}));
 }
 
 void QStyleHints_showShortcutsInContextMenusChanged(QStyleHints* self, bool param1) {
 	self->showShortcutsInContextMenusChanged(param1);
 }
 
-void QStyleHints_connect_showShortcutsInContextMenusChanged(QStyleHints* self, intptr_t slot) {
-	QStyleHints::connect(self, static_cast<void (QStyleHints::*)(bool)>(&QStyleHints::showShortcutsInContextMenusChanged), self, [=](bool param1) {
+void* QStyleHints_connect_showShortcutsInContextMenusChanged(QStyleHints* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QStyleHints>>(slot);
+	return new QMetaObject::Connection(QStyleHints::connect(self, static_cast<void (QStyleHints::*)(bool)>(&QStyleHints::showShortcutsInContextMenusChanged), self, [slot_handle](bool param1) {
+		intptr_t slot = slot_handle->value();
 		bool sigval1 = param1;
 		miqt_exec_callback_QStyleHints_showShortcutsInContextMenusChanged(slot, sigval1);
-	});
+	}));
 }
 
 void QStyleHints_wheelScrollLinesChanged(QStyleHints* self, int scrollLines) {
 	self->wheelScrollLinesChanged(static_cast<int>(scrollLines));
 }
 
-void QStyleHints_connect_wheelScrollLinesChanged(QStyleHints* self, intptr_t slot) {
-	QStyleHints::connect(self, static_cast<void (QStyleHints::*)(int)>(&QStyleHints::wheelScrollLinesChanged), self, [=](int scrollLines) {
+void* QStyleHints_connect_wheelScrollLinesChanged(QStyleHints* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QStyleHints>>(slot);
+	return new QMetaObject::Connection(QStyleHints::connect(self, static_cast<void (QStyleHints::*)(int)>(&QStyleHints::wheelScrollLinesChanged), self, [slot_handle](int scrollLines) {
+		intptr_t slot = slot_handle->value();
 		int sigval1 = scrollLines;
 		miqt_exec_callback_QStyleHints_wheelScrollLinesChanged(slot, sigval1);
-	});
+	}));
 }
 
 void QStyleHints_mouseQuickSelectionThresholdChanged(QStyleHints* self, int threshold) {
 	self->mouseQuickSelectionThresholdChanged(static_cast<int>(threshold));
 }
 
-void QStyleHints_connect_mouseQuickSelectionThresholdChanged(QStyleHints* self, intptr_t slot) {
-	QStyleHints::connect(self, static_cast<void (QStyleHints::*)(int)>(&QStyleHints::mouseQuickSelectionThresholdChanged), self, [=](int threshold) {
+void* QStyleHints_connect_mouseQuickSelectionThresholdChanged(QStyleHints* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QStyleHints>>(slot);
+	return new QMetaObject::Connection(QStyleHints::connect(self, static_cast<void (QStyleHints::*)(int)>(&QStyleHints::mouseQuickSelectionThresholdChanged), self, [slot_handle](int threshold) {
+		intptr_t slot = slot_handle->value();
 		int sigval1 = threshold;
 		miqt_exec_callback_QStyleHints_mouseQuickSelectionThresholdChanged(slot, sigval1);
-	});
+	}));
 }
 
 struct miqt_string QStyleHints_tr2(const char* s, const char* c) {

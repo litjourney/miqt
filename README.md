@@ -114,7 +114,9 @@ Memory management:
 
 Events and signals:
 - The `connect(sourceObject, sourceSignal, targetObject, targetSlot)` is projected as `targetObject.onSourceSignal(func()...)`.
+- Every `OnSignal` method returns a `*SignalConnection`. Call `Disconnect()` when a long-lived Qt object no longer needs the callback. Ignoring the return value keeps the connection active until Qt destroys or disconnects it.
 - You can also override virtual methods like PaintEvent in the same way. Your callback `func()` receives `super()` as a first argument that can be used to call the base class implementation.
+- Calling a virtual override setter with `nil` removes the current override. Signal and virtual callback handles are released automatically when their owning Qt connection or object is destroyed.
 
 Class pointers:
 - Qt class inherited types are projected as a Go embedded struct. For example, to pass a `var myLabel *qt.QLabel` to a function taking only the `*qt.QWidget` base class, write `myLabel.QWidget`.

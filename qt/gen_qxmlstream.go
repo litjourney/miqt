@@ -473,6 +473,11 @@ func (this *QXmlStreamEntityDeclaration) GoGC() {
 	})
 }
 
+//export miqt_exec_callback_handle_release_QXmlStreamEntityResolver
+func miqt_exec_callback_handle_release_QXmlStreamEntityResolver(cb C.intptr_t) {
+	cgo.Handle(cb).Delete()
+}
+
 type QXmlStreamEntityResolver struct {
 	h *C.QXmlStreamEntityResolver
 }
@@ -553,7 +558,11 @@ func (this *QXmlStreamEntityResolver) callVirtualBase_ResolveEntity(publicId str
 	return _ret
 }
 func (this *QXmlStreamEntityResolver) OnResolveEntity(slot func(super func(publicId string, systemId string) string, publicId string, systemId string) string) {
-	ok := C.QXmlStreamEntityResolver_override_virtual_resolveEntity(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QXmlStreamEntityResolver_override_virtual_resolveEntity(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -597,7 +606,11 @@ func (this *QXmlStreamEntityResolver) callVirtualBase_ResolveUndeclaredEntity(na
 	return _ret
 }
 func (this *QXmlStreamEntityResolver) OnResolveUndeclaredEntity(slot func(super func(name string) string, name string) string) {
-	ok := C.QXmlStreamEntityResolver_override_virtual_resolveUndeclaredEntity(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QXmlStreamEntityResolver_override_virtual_resolveUndeclaredEntity(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}

@@ -1,3 +1,5 @@
+#include <memory>
+#include <utility>
 #include <QMediaControl>
 #include <QMediaRecorderControl>
 #include <QMetaMethod>
@@ -14,6 +16,7 @@
 extern "C" {
 #endif
 
+void miqt_exec_callback_handle_release_QMediaRecorderControl(intptr_t);
 void miqt_exec_callback_QMediaRecorderControl_stateChanged(intptr_t, int);
 void miqt_exec_callback_QMediaRecorderControl_statusChanged(intptr_t, int);
 void miqt_exec_callback_QMediaRecorderControl_durationChanged(intptr_t, long long);
@@ -99,72 +102,84 @@ void QMediaRecorderControl_stateChanged(QMediaRecorderControl* self, int state) 
 	self->stateChanged(static_cast<QMediaRecorder::State>(state));
 }
 
-void QMediaRecorderControl_connect_stateChanged(QMediaRecorderControl* self, intptr_t slot) {
-	QMediaRecorderControl::connect(self, static_cast<void (QMediaRecorderControl::*)(QMediaRecorder::State)>(&QMediaRecorderControl::stateChanged), self, [=](QMediaRecorder::State state) {
+void* QMediaRecorderControl_connect_stateChanged(QMediaRecorderControl* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QMediaRecorderControl>>(slot);
+	return new QMetaObject::Connection(QMediaRecorderControl::connect(self, static_cast<void (QMediaRecorderControl::*)(QMediaRecorder::State)>(&QMediaRecorderControl::stateChanged), self, [slot_handle](QMediaRecorder::State state) {
+		intptr_t slot = slot_handle->value();
 		QMediaRecorder::State state_ret = state;
 		int sigval1 = static_cast<int>(state_ret);
 		miqt_exec_callback_QMediaRecorderControl_stateChanged(slot, sigval1);
-	});
+	}));
 }
 
 void QMediaRecorderControl_statusChanged(QMediaRecorderControl* self, int status) {
 	self->statusChanged(static_cast<QMediaRecorder::Status>(status));
 }
 
-void QMediaRecorderControl_connect_statusChanged(QMediaRecorderControl* self, intptr_t slot) {
-	QMediaRecorderControl::connect(self, static_cast<void (QMediaRecorderControl::*)(QMediaRecorder::Status)>(&QMediaRecorderControl::statusChanged), self, [=](QMediaRecorder::Status status) {
+void* QMediaRecorderControl_connect_statusChanged(QMediaRecorderControl* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QMediaRecorderControl>>(slot);
+	return new QMetaObject::Connection(QMediaRecorderControl::connect(self, static_cast<void (QMediaRecorderControl::*)(QMediaRecorder::Status)>(&QMediaRecorderControl::statusChanged), self, [slot_handle](QMediaRecorder::Status status) {
+		intptr_t slot = slot_handle->value();
 		QMediaRecorder::Status status_ret = status;
 		int sigval1 = static_cast<int>(status_ret);
 		miqt_exec_callback_QMediaRecorderControl_statusChanged(slot, sigval1);
-	});
+	}));
 }
 
 void QMediaRecorderControl_durationChanged(QMediaRecorderControl* self, long long position) {
 	self->durationChanged(static_cast<qint64>(position));
 }
 
-void QMediaRecorderControl_connect_durationChanged(QMediaRecorderControl* self, intptr_t slot) {
-	QMediaRecorderControl::connect(self, static_cast<void (QMediaRecorderControl::*)(qint64)>(&QMediaRecorderControl::durationChanged), self, [=](qint64 position) {
+void* QMediaRecorderControl_connect_durationChanged(QMediaRecorderControl* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QMediaRecorderControl>>(slot);
+	return new QMetaObject::Connection(QMediaRecorderControl::connect(self, static_cast<void (QMediaRecorderControl::*)(qint64)>(&QMediaRecorderControl::durationChanged), self, [slot_handle](qint64 position) {
+		intptr_t slot = slot_handle->value();
 		qint64 position_ret = position;
 		long long sigval1 = static_cast<long long>(position_ret);
 		miqt_exec_callback_QMediaRecorderControl_durationChanged(slot, sigval1);
-	});
+	}));
 }
 
 void QMediaRecorderControl_mutedChanged(QMediaRecorderControl* self, bool muted) {
 	self->mutedChanged(muted);
 }
 
-void QMediaRecorderControl_connect_mutedChanged(QMediaRecorderControl* self, intptr_t slot) {
-	QMediaRecorderControl::connect(self, static_cast<void (QMediaRecorderControl::*)(bool)>(&QMediaRecorderControl::mutedChanged), self, [=](bool muted) {
+void* QMediaRecorderControl_connect_mutedChanged(QMediaRecorderControl* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QMediaRecorderControl>>(slot);
+	return new QMetaObject::Connection(QMediaRecorderControl::connect(self, static_cast<void (QMediaRecorderControl::*)(bool)>(&QMediaRecorderControl::mutedChanged), self, [slot_handle](bool muted) {
+		intptr_t slot = slot_handle->value();
 		bool sigval1 = muted;
 		miqt_exec_callback_QMediaRecorderControl_mutedChanged(slot, sigval1);
-	});
+	}));
 }
 
 void QMediaRecorderControl_volumeChanged(QMediaRecorderControl* self, double volume) {
 	self->volumeChanged(static_cast<qreal>(volume));
 }
 
-void QMediaRecorderControl_connect_volumeChanged(QMediaRecorderControl* self, intptr_t slot) {
-	QMediaRecorderControl::connect(self, static_cast<void (QMediaRecorderControl::*)(qreal)>(&QMediaRecorderControl::volumeChanged), self, [=](qreal volume) {
+void* QMediaRecorderControl_connect_volumeChanged(QMediaRecorderControl* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QMediaRecorderControl>>(slot);
+	return new QMetaObject::Connection(QMediaRecorderControl::connect(self, static_cast<void (QMediaRecorderControl::*)(qreal)>(&QMediaRecorderControl::volumeChanged), self, [slot_handle](qreal volume) {
+		intptr_t slot = slot_handle->value();
 		qreal volume_ret = volume;
 		double sigval1 = static_cast<double>(volume_ret);
 		miqt_exec_callback_QMediaRecorderControl_volumeChanged(slot, sigval1);
-	});
+	}));
 }
 
 void QMediaRecorderControl_actualLocationChanged(QMediaRecorderControl* self, QUrl* location) {
 	self->actualLocationChanged(*location);
 }
 
-void QMediaRecorderControl_connect_actualLocationChanged(QMediaRecorderControl* self, intptr_t slot) {
-	QMediaRecorderControl::connect(self, static_cast<void (QMediaRecorderControl::*)(const QUrl&)>(&QMediaRecorderControl::actualLocationChanged), self, [=](const QUrl& location) {
+void* QMediaRecorderControl_connect_actualLocationChanged(QMediaRecorderControl* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QMediaRecorderControl>>(slot);
+	return new QMetaObject::Connection(QMediaRecorderControl::connect(self, static_cast<void (QMediaRecorderControl::*)(const QUrl&)>(&QMediaRecorderControl::actualLocationChanged), self, [slot_handle](const QUrl& location) {
+		intptr_t slot = slot_handle->value();
 		const QUrl& location_ret = location;
 		// Cast returned reference into pointer
 		QUrl* sigval1 = const_cast<QUrl*>(&location_ret);
 		miqt_exec_callback_QMediaRecorderControl_actualLocationChanged(slot, sigval1);
-	});
+	}));
 }
 
 void QMediaRecorderControl_error(QMediaRecorderControl* self, int error, struct miqt_string errorString) {
@@ -172,8 +187,10 @@ void QMediaRecorderControl_error(QMediaRecorderControl* self, int error, struct 
 	self->error(static_cast<int>(error), errorString_QString);
 }
 
-void QMediaRecorderControl_connect_error(QMediaRecorderControl* self, intptr_t slot) {
-	QMediaRecorderControl::connect(self, static_cast<void (QMediaRecorderControl::*)(int, const QString&)>(&QMediaRecorderControl::error), self, [=](int error, const QString& errorString) {
+void* QMediaRecorderControl_connect_error(QMediaRecorderControl* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QMediaRecorderControl>>(slot);
+	return new QMetaObject::Connection(QMediaRecorderControl::connect(self, static_cast<void (QMediaRecorderControl::*)(int, const QString&)>(&QMediaRecorderControl::error), self, [slot_handle](int error, const QString& errorString) {
+		intptr_t slot = slot_handle->value();
 		int sigval1 = error;
 		const QString errorString_ret = errorString;
 		// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
@@ -184,7 +201,7 @@ void QMediaRecorderControl_connect_error(QMediaRecorderControl* self, intptr_t s
 		memcpy(errorString_ms.data, errorString_b.data(), errorString_ms.len);
 		struct miqt_string sigval2 = errorString_ms;
 		miqt_exec_callback_QMediaRecorderControl_error(slot, sigval1, sigval2);
-	});
+	}));
 }
 
 void QMediaRecorderControl_setState(QMediaRecorderControl* self, int state) {

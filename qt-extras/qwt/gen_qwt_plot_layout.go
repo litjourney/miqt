@@ -26,6 +26,11 @@ const (
 	QwtPlotLayout__IgnoreFooter     QwtPlotLayout__Option = 32
 )
 
+//export miqt_exec_callback_handle_release_QwtPlotLayout
+func miqt_exec_callback_handle_release_QwtPlotLayout(cb C.intptr_t) {
+	cgo.Handle(cb).Delete()
+}
+
 type QwtPlotLayout struct {
 	h *C.QwtPlotLayout
 }
@@ -288,7 +293,11 @@ func (this *QwtPlotLayout) callVirtualBase_MinimumSizeHint(param1 *QwtPlot) *qt.
 
 }
 func (this *QwtPlotLayout) OnMinimumSizeHint(slot func(super func(param1 *QwtPlot) *qt.QSize, param1 *QwtPlot) *qt.QSize) {
-	ok := C.QwtPlotLayout_override_virtual_minimumSizeHint(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QwtPlotLayout_override_virtual_minimumSizeHint(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -316,7 +325,11 @@ func (this *QwtPlotLayout) callVirtualBase_Activate(param1 *QwtPlot, plotRect *q
 
 }
 func (this *QwtPlotLayout) OnActivate(slot func(super func(param1 *QwtPlot, plotRect *qt.QRectF, options QwtPlotLayout__Option), param1 *QwtPlot, plotRect *qt.QRectF, options QwtPlotLayout__Option)) {
-	ok := C.QwtPlotLayout_override_virtual_activate(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QwtPlotLayout_override_virtual_activate(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -346,7 +359,11 @@ func (this *QwtPlotLayout) callVirtualBase_Invalidate() {
 
 }
 func (this *QwtPlotLayout) OnInvalidate(slot func(super func())) {
-	ok := C.QwtPlotLayout_override_virtual_invalidate(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QwtPlotLayout_override_virtual_invalidate(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}

@@ -15,6 +15,11 @@ import (
 	"unsafe"
 )
 
+//export miqt_exec_callback_handle_release_QwtPlotZoomer
+func miqt_exec_callback_handle_release_QwtPlotZoomer(cb C.intptr_t) {
+	cgo.Handle(cb).Delete()
+}
+
 type QwtPlotZoomer struct {
 	h *C.QwtPlotZoomer
 	*QwtPlotPicker
@@ -158,8 +163,10 @@ func (this *QwtPlotZoomer) ZoomWithOffset(offset int) {
 func (this *QwtPlotZoomer) Zoomed(rect *qt.QRectF) {
 	C.QwtPlotZoomer_zoomed(this.h, (*C.QRectF)(rect.UnsafePointer()))
 }
-func (this *QwtPlotZoomer) OnZoomed(slot func(rect *qt.QRectF)) {
-	C.QwtPlotZoomer_connect_zoomed(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QwtPlotZoomer) OnZoomed(slot func(rect *qt.QRectF)) *qt.SignalConnection {
+	_goptr := qt.UnsafeNewQMetaObject__Connection(C.QwtPlotZoomer_connect_zoomed(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QwtPlotZoomer_zoomed
@@ -359,7 +366,11 @@ func (this *QwtPlotZoomer) callVirtualBase_SetZoomBase(doReplot bool) {
 
 }
 func (this *QwtPlotZoomer) OnSetZoomBase(slot func(super func(doReplot bool), doReplot bool)) {
-	ok := C.QwtPlotZoomer_override_virtual_setZoomBase(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QwtPlotZoomer_override_virtual_setZoomBase(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -385,7 +396,11 @@ func (this *QwtPlotZoomer) callVirtualBase_SetZoomBaseWithZoomBase(zoomBase *qt.
 
 }
 func (this *QwtPlotZoomer) OnSetZoomBaseWithZoomBase(slot func(super func(zoomBase *qt.QRectF), zoomBase *qt.QRectF)) {
-	ok := C.QwtPlotZoomer_override_virtual_setZoomBaseWithZoomBase(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QwtPlotZoomer_override_virtual_setZoomBaseWithZoomBase(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -411,7 +426,11 @@ func (this *QwtPlotZoomer) callVirtualBase_SetAxis(xAxis int, yAxis int) {
 
 }
 func (this *QwtPlotZoomer) OnSetAxis(slot func(super func(xAxis int, yAxis int), xAxis int, yAxis int)) {
-	ok := C.QwtPlotZoomer_override_virtual_setAxis(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QwtPlotZoomer_override_virtual_setAxis(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -439,7 +458,11 @@ func (this *QwtPlotZoomer) callVirtualBase_MoveTo(param1 *qt.QPointF) {
 
 }
 func (this *QwtPlotZoomer) OnMoveTo(slot func(super func(param1 *qt.QPointF), param1 *qt.QPointF)) {
-	ok := C.QwtPlotZoomer_override_virtual_moveTo(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QwtPlotZoomer_override_virtual_moveTo(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -465,7 +488,11 @@ func (this *QwtPlotZoomer) callVirtualBase_Zoom(param1 *qt.QRectF) {
 
 }
 func (this *QwtPlotZoomer) OnZoom(slot func(super func(param1 *qt.QRectF), param1 *qt.QRectF)) {
-	ok := C.QwtPlotZoomer_override_virtual_zoom(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QwtPlotZoomer_override_virtual_zoom(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -491,7 +518,11 @@ func (this *QwtPlotZoomer) callVirtualBase_ZoomWithOffset(offset int) {
 
 }
 func (this *QwtPlotZoomer) OnZoomWithOffset(slot func(super func(offset int), offset int)) {
-	ok := C.QwtPlotZoomer_override_virtual_zoomWithOffset(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QwtPlotZoomer_override_virtual_zoomWithOffset(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -517,7 +548,11 @@ func (this *QwtPlotZoomer) callVirtualBase_Rescale() {
 
 }
 func (this *QwtPlotZoomer) OnRescale(slot func(super func())) {
-	ok := C.QwtPlotZoomer_override_virtual_rescale(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QwtPlotZoomer_override_virtual_rescale(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -542,7 +577,11 @@ func (this *QwtPlotZoomer) callVirtualBase_MinZoomSize() *qt.QSizeF {
 
 }
 func (this *QwtPlotZoomer) OnMinZoomSize(slot func(super func() *qt.QSizeF) *qt.QSizeF) {
-	ok := C.QwtPlotZoomer_override_virtual_minZoomSize(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QwtPlotZoomer_override_virtual_minZoomSize(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -567,7 +606,11 @@ func (this *QwtPlotZoomer) callVirtualBase_WidgetMouseReleaseEvent(param1 *qt.QM
 
 }
 func (this *QwtPlotZoomer) OnWidgetMouseReleaseEvent(slot func(super func(param1 *qt.QMouseEvent), param1 *qt.QMouseEvent)) {
-	ok := C.QwtPlotZoomer_override_virtual_widgetMouseReleaseEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QwtPlotZoomer_override_virtual_widgetMouseReleaseEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -593,7 +636,11 @@ func (this *QwtPlotZoomer) callVirtualBase_WidgetKeyPressEvent(param1 *qt.QKeyEv
 
 }
 func (this *QwtPlotZoomer) OnWidgetKeyPressEvent(slot func(super func(param1 *qt.QKeyEvent), param1 *qt.QKeyEvent)) {
-	ok := C.QwtPlotZoomer_override_virtual_widgetKeyPressEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QwtPlotZoomer_override_virtual_widgetKeyPressEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -619,7 +666,11 @@ func (this *QwtPlotZoomer) callVirtualBase_Begin() {
 
 }
 func (this *QwtPlotZoomer) OnBegin(slot func(super func())) {
-	ok := C.QwtPlotZoomer_override_virtual_begin(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QwtPlotZoomer_override_virtual_begin(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -642,7 +693,11 @@ func (this *QwtPlotZoomer) callVirtualBase_End(ok bool) bool {
 
 }
 func (this *QwtPlotZoomer) OnEnd(slot func(super func(ok bool) bool, ok bool) bool) {
-	ok := C.QwtPlotZoomer_override_virtual_end(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QwtPlotZoomer_override_virtual_end(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -672,7 +727,11 @@ func (this *QwtPlotZoomer) callVirtualBase_TrackerText(param1 *qt.QPoint) *QwtTe
 
 }
 func (this *QwtPlotZoomer) OnTrackerText(slot func(super func(param1 *qt.QPoint) *QwtText, param1 *qt.QPoint) *QwtText) {
-	ok := C.QwtPlotZoomer_override_virtual_trackerText(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QwtPlotZoomer_override_virtual_trackerText(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -702,7 +761,11 @@ func (this *QwtPlotZoomer) callVirtualBase_TrackerTextF(param1 *qt.QPointF) *Qwt
 
 }
 func (this *QwtPlotZoomer) OnTrackerTextF(slot func(super func(param1 *qt.QPointF) *QwtText, param1 *qt.QPointF) *QwtText) {
-	ok := C.QwtPlotZoomer_override_virtual_trackerTextF(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QwtPlotZoomer_override_virtual_trackerTextF(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -730,7 +793,11 @@ func (this *QwtPlotZoomer) callVirtualBase_Move(param1 *qt.QPoint) {
 
 }
 func (this *QwtPlotZoomer) OnMove(slot func(super func(param1 *qt.QPoint), param1 *qt.QPoint)) {
-	ok := C.QwtPlotZoomer_override_virtual_move(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QwtPlotZoomer_override_virtual_move(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -756,7 +823,11 @@ func (this *QwtPlotZoomer) callVirtualBase_Append(param1 *qt.QPoint) {
 
 }
 func (this *QwtPlotZoomer) OnAppend(slot func(super func(param1 *qt.QPoint), param1 *qt.QPoint)) {
-	ok := C.QwtPlotZoomer_override_virtual_append(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QwtPlotZoomer_override_virtual_append(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -782,7 +853,11 @@ func (this *QwtPlotZoomer) callVirtualBase_EventFilter(param1 *qt.QObject, param
 
 }
 func (this *QwtPlotZoomer) OnEventFilter(slot func(super func(param1 *qt.QObject, param2 *qt.QEvent) bool, param1 *qt.QObject, param2 *qt.QEvent) bool) {
-	ok := C.QwtPlotZoomer_override_virtual_eventFilter(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QwtPlotZoomer_override_virtual_eventFilter(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -814,7 +889,11 @@ func (this *QwtPlotZoomer) callVirtualBase_PickArea() *qt.QPainterPath {
 
 }
 func (this *QwtPlotZoomer) OnPickArea(slot func(super func() *qt.QPainterPath) *qt.QPainterPath) {
-	ok := C.QwtPlotZoomer_override_virtual_pickArea(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QwtPlotZoomer_override_virtual_pickArea(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -839,7 +918,11 @@ func (this *QwtPlotZoomer) callVirtualBase_DrawRubberBand(param1 *qt.QPainter) {
 
 }
 func (this *QwtPlotZoomer) OnDrawRubberBand(slot func(super func(param1 *qt.QPainter), param1 *qt.QPainter)) {
-	ok := C.QwtPlotZoomer_override_virtual_drawRubberBand(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QwtPlotZoomer_override_virtual_drawRubberBand(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -865,7 +948,11 @@ func (this *QwtPlotZoomer) callVirtualBase_DrawTracker(param1 *qt.QPainter) {
 
 }
 func (this *QwtPlotZoomer) OnDrawTracker(slot func(super func(param1 *qt.QPainter), param1 *qt.QPainter)) {
-	ok := C.QwtPlotZoomer_override_virtual_drawTracker(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QwtPlotZoomer_override_virtual_drawTracker(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -893,7 +980,11 @@ func (this *QwtPlotZoomer) callVirtualBase_RubberBandMask() *qt.QRegion {
 
 }
 func (this *QwtPlotZoomer) OnRubberBandMask(slot func(super func() *qt.QRegion) *qt.QRegion) {
-	ok := C.QwtPlotZoomer_override_virtual_rubberBandMask(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QwtPlotZoomer_override_virtual_rubberBandMask(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -920,7 +1011,11 @@ func (this *QwtPlotZoomer) callVirtualBase_TrackerRect(param1 *qt.QFont) *qt.QRe
 
 }
 func (this *QwtPlotZoomer) OnTrackerRect(slot func(super func(param1 *qt.QFont) *qt.QRect, param1 *qt.QFont) *qt.QRect) {
-	ok := C.QwtPlotZoomer_override_virtual_trackerRect(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QwtPlotZoomer_override_virtual_trackerRect(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -948,7 +1043,11 @@ func (this *QwtPlotZoomer) callVirtualBase_Transition(param1 *qt.QEvent) {
 
 }
 func (this *QwtPlotZoomer) OnTransition(slot func(super func(param1 *qt.QEvent), param1 *qt.QEvent)) {
-	ok := C.QwtPlotZoomer_override_virtual_transition(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QwtPlotZoomer_override_virtual_transition(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -974,7 +1073,11 @@ func (this *QwtPlotZoomer) callVirtualBase_Remove() {
 
 }
 func (this *QwtPlotZoomer) OnRemove(slot func(super func())) {
-	ok := C.QwtPlotZoomer_override_virtual_remove(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QwtPlotZoomer_override_virtual_remove(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -997,7 +1100,11 @@ func (this *QwtPlotZoomer) callVirtualBase_Reset() {
 
 }
 func (this *QwtPlotZoomer) OnReset(slot func(super func())) {
-	ok := C.QwtPlotZoomer_override_virtual_reset(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QwtPlotZoomer_override_virtual_reset(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1020,7 +1127,11 @@ func (this *QwtPlotZoomer) callVirtualBase_WidgetMousePressEvent(param1 *qt.QMou
 
 }
 func (this *QwtPlotZoomer) OnWidgetMousePressEvent(slot func(super func(param1 *qt.QMouseEvent), param1 *qt.QMouseEvent)) {
-	ok := C.QwtPlotZoomer_override_virtual_widgetMousePressEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QwtPlotZoomer_override_virtual_widgetMousePressEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1046,7 +1157,11 @@ func (this *QwtPlotZoomer) callVirtualBase_WidgetMouseDoubleClickEvent(param1 *q
 
 }
 func (this *QwtPlotZoomer) OnWidgetMouseDoubleClickEvent(slot func(super func(param1 *qt.QMouseEvent), param1 *qt.QMouseEvent)) {
-	ok := C.QwtPlotZoomer_override_virtual_widgetMouseDoubleClickEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QwtPlotZoomer_override_virtual_widgetMouseDoubleClickEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1072,7 +1187,11 @@ func (this *QwtPlotZoomer) callVirtualBase_WidgetMouseMoveEvent(param1 *qt.QMous
 
 }
 func (this *QwtPlotZoomer) OnWidgetMouseMoveEvent(slot func(super func(param1 *qt.QMouseEvent), param1 *qt.QMouseEvent)) {
-	ok := C.QwtPlotZoomer_override_virtual_widgetMouseMoveEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QwtPlotZoomer_override_virtual_widgetMouseMoveEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1098,7 +1217,11 @@ func (this *QwtPlotZoomer) callVirtualBase_WidgetWheelEvent(param1 *qt.QWheelEve
 
 }
 func (this *QwtPlotZoomer) OnWidgetWheelEvent(slot func(super func(param1 *qt.QWheelEvent), param1 *qt.QWheelEvent)) {
-	ok := C.QwtPlotZoomer_override_virtual_widgetWheelEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QwtPlotZoomer_override_virtual_widgetWheelEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1124,7 +1247,11 @@ func (this *QwtPlotZoomer) callVirtualBase_WidgetKeyReleaseEvent(param1 *qt.QKey
 
 }
 func (this *QwtPlotZoomer) OnWidgetKeyReleaseEvent(slot func(super func(param1 *qt.QKeyEvent), param1 *qt.QKeyEvent)) {
-	ok := C.QwtPlotZoomer_override_virtual_widgetKeyReleaseEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QwtPlotZoomer_override_virtual_widgetKeyReleaseEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1150,7 +1277,11 @@ func (this *QwtPlotZoomer) callVirtualBase_WidgetEnterEvent(param1 *qt.QEvent) {
 
 }
 func (this *QwtPlotZoomer) OnWidgetEnterEvent(slot func(super func(param1 *qt.QEvent), param1 *qt.QEvent)) {
-	ok := C.QwtPlotZoomer_override_virtual_widgetEnterEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QwtPlotZoomer_override_virtual_widgetEnterEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1176,7 +1307,11 @@ func (this *QwtPlotZoomer) callVirtualBase_WidgetLeaveEvent(param1 *qt.QEvent) {
 
 }
 func (this *QwtPlotZoomer) OnWidgetLeaveEvent(slot func(super func(param1 *qt.QEvent), param1 *qt.QEvent)) {
-	ok := C.QwtPlotZoomer_override_virtual_widgetLeaveEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QwtPlotZoomer_override_virtual_widgetLeaveEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1202,7 +1337,11 @@ func (this *QwtPlotZoomer) callVirtualBase_StretchSelection(oldSize *qt.QSize, n
 
 }
 func (this *QwtPlotZoomer) OnStretchSelection(slot func(super func(oldSize *qt.QSize, newSize *qt.QSize), oldSize *qt.QSize, newSize *qt.QSize)) {
-	ok := C.QwtPlotZoomer_override_virtual_stretchSelection(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QwtPlotZoomer_override_virtual_stretchSelection(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1230,7 +1369,11 @@ func (this *QwtPlotZoomer) callVirtualBase_UpdateDisplay() {
 
 }
 func (this *QwtPlotZoomer) OnUpdateDisplay(slot func(super func())) {
-	ok := C.QwtPlotZoomer_override_virtual_updateDisplay(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QwtPlotZoomer_override_virtual_updateDisplay(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1253,7 +1396,11 @@ func (this *QwtPlotZoomer) callVirtualBase_Event(event *qt.QEvent) bool {
 
 }
 func (this *QwtPlotZoomer) OnEvent(slot func(super func(event *qt.QEvent) bool, event *qt.QEvent) bool) {
-	ok := C.QwtPlotZoomer_override_virtual_event(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QwtPlotZoomer_override_virtual_event(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1281,7 +1428,11 @@ func (this *QwtPlotZoomer) callVirtualBase_TimerEvent(event *qt.QTimerEvent) {
 
 }
 func (this *QwtPlotZoomer) OnTimerEvent(slot func(super func(event *qt.QTimerEvent), event *qt.QTimerEvent)) {
-	ok := C.QwtPlotZoomer_override_virtual_timerEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QwtPlotZoomer_override_virtual_timerEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1307,7 +1458,11 @@ func (this *QwtPlotZoomer) callVirtualBase_ChildEvent(event *qt.QChildEvent) {
 
 }
 func (this *QwtPlotZoomer) OnChildEvent(slot func(super func(event *qt.QChildEvent), event *qt.QChildEvent)) {
-	ok := C.QwtPlotZoomer_override_virtual_childEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QwtPlotZoomer_override_virtual_childEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1333,7 +1488,11 @@ func (this *QwtPlotZoomer) callVirtualBase_CustomEvent(event *qt.QEvent) {
 
 }
 func (this *QwtPlotZoomer) OnCustomEvent(slot func(super func(event *qt.QEvent), event *qt.QEvent)) {
-	ok := C.QwtPlotZoomer_override_virtual_customEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QwtPlotZoomer_override_virtual_customEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1359,7 +1518,11 @@ func (this *QwtPlotZoomer) callVirtualBase_ConnectNotify(signal *qt.QMetaMethod)
 
 }
 func (this *QwtPlotZoomer) OnConnectNotify(slot func(super func(signal *qt.QMetaMethod), signal *qt.QMetaMethod)) {
-	ok := C.QwtPlotZoomer_override_virtual_connectNotify(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QwtPlotZoomer_override_virtual_connectNotify(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1385,7 +1548,11 @@ func (this *QwtPlotZoomer) callVirtualBase_DisconnectNotify(signal *qt.QMetaMeth
 
 }
 func (this *QwtPlotZoomer) OnDisconnectNotify(slot func(super func(signal *qt.QMetaMethod), signal *qt.QMetaMethod)) {
-	ok := C.QwtPlotZoomer_override_virtual_disconnectNotify(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QwtPlotZoomer_override_virtual_disconnectNotify(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1411,7 +1578,11 @@ func (this *QwtPlotZoomer) callVirtualBase_MouseMatch2(param1 *QwtEventPattern__
 
 }
 func (this *QwtPlotZoomer) OnMouseMatch2(slot func(super func(param1 *QwtEventPattern__MousePattern, param2 *qt.QMouseEvent) bool, param1 *QwtEventPattern__MousePattern, param2 *qt.QMouseEvent) bool) {
-	ok := C.QwtPlotZoomer_override_virtual_mouseMatch2(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QwtPlotZoomer_override_virtual_mouseMatch2(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1441,7 +1612,11 @@ func (this *QwtPlotZoomer) callVirtualBase_KeyMatch2(param1 *QwtEventPattern__Ke
 
 }
 func (this *QwtPlotZoomer) OnKeyMatch2(slot func(super func(param1 *QwtEventPattern__KeyPattern, param2 *qt.QKeyEvent) bool, param1 *QwtEventPattern__KeyPattern, param2 *qt.QKeyEvent) bool) {
-	ok := C.QwtPlotZoomer_override_virtual_keyMatch2(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QwtPlotZoomer_override_virtual_keyMatch2(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}

@@ -156,6 +156,11 @@ func (this *QGraphicsAnchor) GoGC() {
 	})
 }
 
+//export miqt_exec_callback_handle_release_QGraphicsAnchorLayout
+func miqt_exec_callback_handle_release_QGraphicsAnchorLayout(cb C.intptr_t) {
+	cgo.Handle(cb).Delete()
+}
+
 type QGraphicsAnchorLayout struct {
 	h *C.QGraphicsAnchorLayout
 	*QGraphicsLayout
@@ -306,7 +311,11 @@ func (this *QGraphicsAnchorLayout) callVirtualBase_RemoveAt(index int) {
 
 }
 func (this *QGraphicsAnchorLayout) OnRemoveAt(slot func(super func(index int), index int)) {
-	ok := C.QGraphicsAnchorLayout_override_virtual_removeAt(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QGraphicsAnchorLayout_override_virtual_removeAt(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -332,7 +341,11 @@ func (this *QGraphicsAnchorLayout) callVirtualBase_SetGeometry(rect *QRectF) {
 
 }
 func (this *QGraphicsAnchorLayout) OnSetGeometry(slot func(super func(rect *QRectF), rect *QRectF)) {
-	ok := C.QGraphicsAnchorLayout_override_virtual_setGeometry(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QGraphicsAnchorLayout_override_virtual_setGeometry(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -358,7 +371,11 @@ func (this *QGraphicsAnchorLayout) callVirtualBase_Count() int {
 
 }
 func (this *QGraphicsAnchorLayout) OnCount(slot func(super func() int) int) {
-	ok := C.QGraphicsAnchorLayout_override_virtual_count(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QGraphicsAnchorLayout_override_virtual_count(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -383,7 +400,11 @@ func (this *QGraphicsAnchorLayout) callVirtualBase_ItemAt(index int) *QGraphicsL
 
 }
 func (this *QGraphicsAnchorLayout) OnItemAt(slot func(super func(index int) *QGraphicsLayoutItem, index int) *QGraphicsLayoutItem) {
-	ok := C.QGraphicsAnchorLayout_override_virtual_itemAt(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QGraphicsAnchorLayout_override_virtual_itemAt(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -411,7 +432,11 @@ func (this *QGraphicsAnchorLayout) callVirtualBase_Invalidate() {
 
 }
 func (this *QGraphicsAnchorLayout) OnInvalidate(slot func(super func())) {
-	ok := C.QGraphicsAnchorLayout_override_virtual_invalidate(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QGraphicsAnchorLayout_override_virtual_invalidate(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -436,7 +461,11 @@ func (this *QGraphicsAnchorLayout) callVirtualBase_SizeHint(which SizeHint, cons
 
 }
 func (this *QGraphicsAnchorLayout) OnSizeHint(slot func(super func(which SizeHint, constraint *QSizeF) *QSizeF, which SizeHint, constraint *QSizeF) *QSizeF) {
-	ok := C.QGraphicsAnchorLayout_override_virtual_sizeHint(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QGraphicsAnchorLayout_override_virtual_sizeHint(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -466,7 +495,11 @@ func (this *QGraphicsAnchorLayout) callVirtualBase_GetContentsMargins(left *floa
 
 }
 func (this *QGraphicsAnchorLayout) OnGetContentsMargins(slot func(super func(left *float64, top *float64, right *float64, bottom *float64), left *float64, top *float64, right *float64, bottom *float64)) {
-	ok := C.QGraphicsAnchorLayout_override_virtual_getContentsMargins(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QGraphicsAnchorLayout_override_virtual_getContentsMargins(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -498,7 +531,11 @@ func (this *QGraphicsAnchorLayout) callVirtualBase_UpdateGeometry() {
 
 }
 func (this *QGraphicsAnchorLayout) OnUpdateGeometry(slot func(super func())) {
-	ok := C.QGraphicsAnchorLayout_override_virtual_updateGeometry(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QGraphicsAnchorLayout_override_virtual_updateGeometry(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -521,7 +558,11 @@ func (this *QGraphicsAnchorLayout) callVirtualBase_WidgetEvent(e *QEvent) {
 
 }
 func (this *QGraphicsAnchorLayout) OnWidgetEvent(slot func(super func(e *QEvent), e *QEvent)) {
-	ok := C.QGraphicsAnchorLayout_override_virtual_widgetEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QGraphicsAnchorLayout_override_virtual_widgetEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}

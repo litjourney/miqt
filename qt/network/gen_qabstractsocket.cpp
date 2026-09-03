@@ -1,3 +1,5 @@
+#include <memory>
+#include <utility>
 #include <QAbstractSocket>
 #include <QAuthenticator>
 #include <QChildEvent>
@@ -20,6 +22,7 @@
 extern "C" {
 #endif
 
+void miqt_exec_callback_handle_release_QAbstractSocket(intptr_t);
 void miqt_exec_callback_QAbstractSocket_hostFound(intptr_t);
 void miqt_exec_callback_QAbstractSocket_connected(intptr_t);
 void miqt_exec_callback_QAbstractSocket_disconnected(intptr_t);
@@ -73,27 +76,27 @@ public:
 	virtual ~MiqtVirtualQAbstractSocket() override = default;
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__resume = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QAbstractSocket> handle__resume;
 
 	// Subclass to allow providing a Go implementation
 	virtual void resume() override {
-		if (handle__resume == 0) {
+		if (!handle__resume) {
 			QAbstractSocket::resume();
 			return;
 		}
 
-		miqt_exec_callback_QAbstractSocket_resume(this, handle__resume);
+		miqt_exec_callback_QAbstractSocket_resume(this, handle__resume.value());
 
 	}
 
 	friend void QAbstractSocket_virtualbase_resume(void* self);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__connectToHost = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QAbstractSocket> handle__connectToHost;
 
 	// Subclass to allow providing a Go implementation
 	virtual void connectToHost(const QString& hostName, quint16 port, QIODevice::OpenMode mode, QAbstractSocket::NetworkLayerProtocol protocol) override {
-		if (handle__connectToHost == 0) {
+		if (!handle__connectToHost) {
 			QAbstractSocket::connectToHost(hostName, port, mode, protocol);
 			return;
 		}
@@ -112,18 +115,18 @@ public:
 		int sigval3 = static_cast<int>(mode_ret);
 		QAbstractSocket::NetworkLayerProtocol protocol_ret = protocol;
 		int sigval4 = static_cast<int>(protocol_ret);
-		miqt_exec_callback_QAbstractSocket_connectToHost(this, handle__connectToHost, sigval1, sigval2, sigval3, sigval4);
+		miqt_exec_callback_QAbstractSocket_connectToHost(this, handle__connectToHost.value(), sigval1, sigval2, sigval3, sigval4);
 
 	}
 
 	friend void QAbstractSocket_virtualbase_connectToHost(void* self, struct miqt_string hostName, unsigned short port, int mode, int protocol);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__connectToHost2 = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QAbstractSocket> handle__connectToHost2;
 
 	// Subclass to allow providing a Go implementation
 	virtual void connectToHost(const QHostAddress& address, quint16 port, QIODevice::OpenMode mode) override {
-		if (handle__connectToHost2 == 0) {
+		if (!handle__connectToHost2) {
 			QAbstractSocket::connectToHost(address, port, mode);
 			return;
 		}
@@ -135,112 +138,112 @@ public:
 		unsigned short sigval2 = static_cast<unsigned short>(port_ret);
 		QIODevice::OpenMode mode_ret = mode;
 		int sigval3 = static_cast<int>(mode_ret);
-		miqt_exec_callback_QAbstractSocket_connectToHost2(this, handle__connectToHost2, sigval1, sigval2, sigval3);
+		miqt_exec_callback_QAbstractSocket_connectToHost2(this, handle__connectToHost2.value(), sigval1, sigval2, sigval3);
 
 	}
 
 	friend void QAbstractSocket_virtualbase_connectToHost2(void* self, QHostAddress* address, unsigned short port, int mode);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__disconnectFromHost = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QAbstractSocket> handle__disconnectFromHost;
 
 	// Subclass to allow providing a Go implementation
 	virtual void disconnectFromHost() override {
-		if (handle__disconnectFromHost == 0) {
+		if (!handle__disconnectFromHost) {
 			QAbstractSocket::disconnectFromHost();
 			return;
 		}
 
-		miqt_exec_callback_QAbstractSocket_disconnectFromHost(this, handle__disconnectFromHost);
+		miqt_exec_callback_QAbstractSocket_disconnectFromHost(this, handle__disconnectFromHost.value());
 
 	}
 
 	friend void QAbstractSocket_virtualbase_disconnectFromHost(void* self);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__bytesAvailable = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QAbstractSocket> handle__bytesAvailable;
 
 	// Subclass to allow providing a Go implementation
 	virtual qint64 bytesAvailable() const override {
-		if (handle__bytesAvailable == 0) {
+		if (!handle__bytesAvailable) {
 			return QAbstractSocket::bytesAvailable();
 		}
 
-		long long callback_return_value = miqt_exec_callback_QAbstractSocket_bytesAvailable(this, handle__bytesAvailable);
+		long long callback_return_value = miqt_exec_callback_QAbstractSocket_bytesAvailable(this, handle__bytesAvailable.value());
 		return static_cast<qint64>(callback_return_value);
 	}
 
 	friend long long QAbstractSocket_virtualbase_bytesAvailable(const void* self);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__bytesToWrite = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QAbstractSocket> handle__bytesToWrite;
 
 	// Subclass to allow providing a Go implementation
 	virtual qint64 bytesToWrite() const override {
-		if (handle__bytesToWrite == 0) {
+		if (!handle__bytesToWrite) {
 			return QAbstractSocket::bytesToWrite();
 		}
 
-		long long callback_return_value = miqt_exec_callback_QAbstractSocket_bytesToWrite(this, handle__bytesToWrite);
+		long long callback_return_value = miqt_exec_callback_QAbstractSocket_bytesToWrite(this, handle__bytesToWrite.value());
 		return static_cast<qint64>(callback_return_value);
 	}
 
 	friend long long QAbstractSocket_virtualbase_bytesToWrite(const void* self);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__canReadLine = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QAbstractSocket> handle__canReadLine;
 
 	// Subclass to allow providing a Go implementation
 	virtual bool canReadLine() const override {
-		if (handle__canReadLine == 0) {
+		if (!handle__canReadLine) {
 			return QAbstractSocket::canReadLine();
 		}
 
-		bool callback_return_value = miqt_exec_callback_QAbstractSocket_canReadLine(this, handle__canReadLine);
+		bool callback_return_value = miqt_exec_callback_QAbstractSocket_canReadLine(this, handle__canReadLine.value());
 		return callback_return_value;
 	}
 
 	friend bool QAbstractSocket_virtualbase_canReadLine(const void* self);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__setReadBufferSize = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QAbstractSocket> handle__setReadBufferSize;
 
 	// Subclass to allow providing a Go implementation
 	virtual void setReadBufferSize(qint64 size) override {
-		if (handle__setReadBufferSize == 0) {
+		if (!handle__setReadBufferSize) {
 			QAbstractSocket::setReadBufferSize(size);
 			return;
 		}
 
 		qint64 size_ret = size;
 		long long sigval1 = static_cast<long long>(size_ret);
-		miqt_exec_callback_QAbstractSocket_setReadBufferSize(this, handle__setReadBufferSize, sigval1);
+		miqt_exec_callback_QAbstractSocket_setReadBufferSize(this, handle__setReadBufferSize.value(), sigval1);
 
 	}
 
 	friend void QAbstractSocket_virtualbase_setReadBufferSize(void* self, long long size);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__socketDescriptor = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QAbstractSocket> handle__socketDescriptor;
 
 	// Subclass to allow providing a Go implementation
 	virtual qintptr socketDescriptor() const override {
-		if (handle__socketDescriptor == 0) {
+		if (!handle__socketDescriptor) {
 			return QAbstractSocket::socketDescriptor();
 		}
 
-		intptr_t callback_return_value = miqt_exec_callback_QAbstractSocket_socketDescriptor(this, handle__socketDescriptor);
+		intptr_t callback_return_value = miqt_exec_callback_QAbstractSocket_socketDescriptor(this, handle__socketDescriptor.value());
 		return (qintptr)(callback_return_value);
 	}
 
 	friend intptr_t QAbstractSocket_virtualbase_socketDescriptor(const void* self);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__setSocketDescriptor = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QAbstractSocket> handle__setSocketDescriptor;
 
 	// Subclass to allow providing a Go implementation
 	virtual bool setSocketDescriptor(qintptr socketDescriptor, QAbstractSocket::SocketState state, QIODevice::OpenMode openMode) override {
-		if (handle__setSocketDescriptor == 0) {
+		if (!handle__setSocketDescriptor) {
 			return QAbstractSocket::setSocketDescriptor(socketDescriptor, state, openMode);
 		}
 
@@ -250,18 +253,18 @@ public:
 		int sigval2 = static_cast<int>(state_ret);
 		QIODevice::OpenMode openMode_ret = openMode;
 		int sigval3 = static_cast<int>(openMode_ret);
-		bool callback_return_value = miqt_exec_callback_QAbstractSocket_setSocketDescriptor(this, handle__setSocketDescriptor, sigval1, sigval2, sigval3);
+		bool callback_return_value = miqt_exec_callback_QAbstractSocket_setSocketDescriptor(this, handle__setSocketDescriptor.value(), sigval1, sigval2, sigval3);
 		return callback_return_value;
 	}
 
 	friend bool QAbstractSocket_virtualbase_setSocketDescriptor(void* self, intptr_t socketDescriptor, int state, int openMode);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__setSocketOption = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QAbstractSocket> handle__setSocketOption;
 
 	// Subclass to allow providing a Go implementation
 	virtual void setSocketOption(QAbstractSocket::SocketOption option, const QVariant& value) override {
-		if (handle__setSocketOption == 0) {
+		if (!handle__setSocketOption) {
 			QAbstractSocket::setSocketOption(option, value);
 			return;
 		}
@@ -271,362 +274,362 @@ public:
 		const QVariant& value_ret = value;
 		// Cast returned reference into pointer
 		QVariant* sigval2 = const_cast<QVariant*>(&value_ret);
-		miqt_exec_callback_QAbstractSocket_setSocketOption(this, handle__setSocketOption, sigval1, sigval2);
+		miqt_exec_callback_QAbstractSocket_setSocketOption(this, handle__setSocketOption.value(), sigval1, sigval2);
 
 	}
 
 	friend void QAbstractSocket_virtualbase_setSocketOption(void* self, int option, QVariant* value);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__socketOption = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QAbstractSocket> handle__socketOption;
 
 	// Subclass to allow providing a Go implementation
 	virtual QVariant socketOption(QAbstractSocket::SocketOption option) override {
-		if (handle__socketOption == 0) {
+		if (!handle__socketOption) {
 			return QAbstractSocket::socketOption(option);
 		}
 
 		QAbstractSocket::SocketOption option_ret = option;
 		int sigval1 = static_cast<int>(option_ret);
-		QVariant* callback_return_value = miqt_exec_callback_QAbstractSocket_socketOption(this, handle__socketOption, sigval1);
+		QVariant* callback_return_value = miqt_exec_callback_QAbstractSocket_socketOption(this, handle__socketOption.value(), sigval1);
 		return *callback_return_value;
 	}
 
 	friend QVariant* QAbstractSocket_virtualbase_socketOption(void* self, int option);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__close = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QAbstractSocket> handle__close;
 
 	// Subclass to allow providing a Go implementation
 	virtual void close() override {
-		if (handle__close == 0) {
+		if (!handle__close) {
 			QAbstractSocket::close();
 			return;
 		}
 
-		miqt_exec_callback_QAbstractSocket_close(this, handle__close);
+		miqt_exec_callback_QAbstractSocket_close(this, handle__close.value());
 
 	}
 
 	friend void QAbstractSocket_virtualbase_close(void* self);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__isSequential = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QAbstractSocket> handle__isSequential;
 
 	// Subclass to allow providing a Go implementation
 	virtual bool isSequential() const override {
-		if (handle__isSequential == 0) {
+		if (!handle__isSequential) {
 			return QAbstractSocket::isSequential();
 		}
 
-		bool callback_return_value = miqt_exec_callback_QAbstractSocket_isSequential(this, handle__isSequential);
+		bool callback_return_value = miqt_exec_callback_QAbstractSocket_isSequential(this, handle__isSequential.value());
 		return callback_return_value;
 	}
 
 	friend bool QAbstractSocket_virtualbase_isSequential(const void* self);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__atEnd = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QAbstractSocket> handle__atEnd;
 
 	// Subclass to allow providing a Go implementation
 	virtual bool atEnd() const override {
-		if (handle__atEnd == 0) {
+		if (!handle__atEnd) {
 			return QAbstractSocket::atEnd();
 		}
 
-		bool callback_return_value = miqt_exec_callback_QAbstractSocket_atEnd(this, handle__atEnd);
+		bool callback_return_value = miqt_exec_callback_QAbstractSocket_atEnd(this, handle__atEnd.value());
 		return callback_return_value;
 	}
 
 	friend bool QAbstractSocket_virtualbase_atEnd(const void* self);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__waitForConnected = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QAbstractSocket> handle__waitForConnected;
 
 	// Subclass to allow providing a Go implementation
 	virtual bool waitForConnected(int msecs) override {
-		if (handle__waitForConnected == 0) {
+		if (!handle__waitForConnected) {
 			return QAbstractSocket::waitForConnected(msecs);
 		}
 
 		int sigval1 = msecs;
-		bool callback_return_value = miqt_exec_callback_QAbstractSocket_waitForConnected(this, handle__waitForConnected, sigval1);
+		bool callback_return_value = miqt_exec_callback_QAbstractSocket_waitForConnected(this, handle__waitForConnected.value(), sigval1);
 		return callback_return_value;
 	}
 
 	friend bool QAbstractSocket_virtualbase_waitForConnected(void* self, int msecs);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__waitForReadyRead = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QAbstractSocket> handle__waitForReadyRead;
 
 	// Subclass to allow providing a Go implementation
 	virtual bool waitForReadyRead(int msecs) override {
-		if (handle__waitForReadyRead == 0) {
+		if (!handle__waitForReadyRead) {
 			return QAbstractSocket::waitForReadyRead(msecs);
 		}
 
 		int sigval1 = msecs;
-		bool callback_return_value = miqt_exec_callback_QAbstractSocket_waitForReadyRead(this, handle__waitForReadyRead, sigval1);
+		bool callback_return_value = miqt_exec_callback_QAbstractSocket_waitForReadyRead(this, handle__waitForReadyRead.value(), sigval1);
 		return callback_return_value;
 	}
 
 	friend bool QAbstractSocket_virtualbase_waitForReadyRead(void* self, int msecs);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__waitForBytesWritten = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QAbstractSocket> handle__waitForBytesWritten;
 
 	// Subclass to allow providing a Go implementation
 	virtual bool waitForBytesWritten(int msecs) override {
-		if (handle__waitForBytesWritten == 0) {
+		if (!handle__waitForBytesWritten) {
 			return QAbstractSocket::waitForBytesWritten(msecs);
 		}
 
 		int sigval1 = msecs;
-		bool callback_return_value = miqt_exec_callback_QAbstractSocket_waitForBytesWritten(this, handle__waitForBytesWritten, sigval1);
+		bool callback_return_value = miqt_exec_callback_QAbstractSocket_waitForBytesWritten(this, handle__waitForBytesWritten.value(), sigval1);
 		return callback_return_value;
 	}
 
 	friend bool QAbstractSocket_virtualbase_waitForBytesWritten(void* self, int msecs);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__waitForDisconnected = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QAbstractSocket> handle__waitForDisconnected;
 
 	// Subclass to allow providing a Go implementation
 	virtual bool waitForDisconnected(int msecs) override {
-		if (handle__waitForDisconnected == 0) {
+		if (!handle__waitForDisconnected) {
 			return QAbstractSocket::waitForDisconnected(msecs);
 		}
 
 		int sigval1 = msecs;
-		bool callback_return_value = miqt_exec_callback_QAbstractSocket_waitForDisconnected(this, handle__waitForDisconnected, sigval1);
+		bool callback_return_value = miqt_exec_callback_QAbstractSocket_waitForDisconnected(this, handle__waitForDisconnected.value(), sigval1);
 		return callback_return_value;
 	}
 
 	friend bool QAbstractSocket_virtualbase_waitForDisconnected(void* self, int msecs);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__readData = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QAbstractSocket> handle__readData;
 
 	// Subclass to allow providing a Go implementation
 	virtual qint64 readData(char* data, qint64 maxlen) override {
-		if (handle__readData == 0) {
+		if (!handle__readData) {
 			return QAbstractSocket::readData(data, maxlen);
 		}
 
 		char* sigval1 = data;
 		qint64 maxlen_ret = maxlen;
 		long long sigval2 = static_cast<long long>(maxlen_ret);
-		long long callback_return_value = miqt_exec_callback_QAbstractSocket_readData(this, handle__readData, sigval1, sigval2);
+		long long callback_return_value = miqt_exec_callback_QAbstractSocket_readData(this, handle__readData.value(), sigval1, sigval2);
 		return static_cast<qint64>(callback_return_value);
 	}
 
 	friend long long QAbstractSocket_virtualbase_readData(void* self, char* data, long long maxlen);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__readLineData = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QAbstractSocket> handle__readLineData;
 
 	// Subclass to allow providing a Go implementation
 	virtual qint64 readLineData(char* data, qint64 maxlen) override {
-		if (handle__readLineData == 0) {
+		if (!handle__readLineData) {
 			return QAbstractSocket::readLineData(data, maxlen);
 		}
 
 		char* sigval1 = data;
 		qint64 maxlen_ret = maxlen;
 		long long sigval2 = static_cast<long long>(maxlen_ret);
-		long long callback_return_value = miqt_exec_callback_QAbstractSocket_readLineData(this, handle__readLineData, sigval1, sigval2);
+		long long callback_return_value = miqt_exec_callback_QAbstractSocket_readLineData(this, handle__readLineData.value(), sigval1, sigval2);
 		return static_cast<qint64>(callback_return_value);
 	}
 
 	friend long long QAbstractSocket_virtualbase_readLineData(void* self, char* data, long long maxlen);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__writeData = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QAbstractSocket> handle__writeData;
 
 	// Subclass to allow providing a Go implementation
 	virtual qint64 writeData(const char* data, qint64 len) override {
-		if (handle__writeData == 0) {
+		if (!handle__writeData) {
 			return QAbstractSocket::writeData(data, len);
 		}
 
 		const char* sigval1 = (const char*) data;
 		qint64 len_ret = len;
 		long long sigval2 = static_cast<long long>(len_ret);
-		long long callback_return_value = miqt_exec_callback_QAbstractSocket_writeData(this, handle__writeData, sigval1, sigval2);
+		long long callback_return_value = miqt_exec_callback_QAbstractSocket_writeData(this, handle__writeData.value(), sigval1, sigval2);
 		return static_cast<qint64>(callback_return_value);
 	}
 
 	friend long long QAbstractSocket_virtualbase_writeData(void* self, const char* data, long long len);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__open = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QAbstractSocket> handle__open;
 
 	// Subclass to allow providing a Go implementation
 	virtual bool open(QIODevice::OpenMode mode) override {
-		if (handle__open == 0) {
+		if (!handle__open) {
 			return QAbstractSocket::open(mode);
 		}
 
 		QIODevice::OpenMode mode_ret = mode;
 		int sigval1 = static_cast<int>(mode_ret);
-		bool callback_return_value = miqt_exec_callback_QAbstractSocket_open(this, handle__open, sigval1);
+		bool callback_return_value = miqt_exec_callback_QAbstractSocket_open(this, handle__open.value(), sigval1);
 		return callback_return_value;
 	}
 
 	friend bool QAbstractSocket_virtualbase_open(void* self, int mode);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__pos = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QAbstractSocket> handle__pos;
 
 	// Subclass to allow providing a Go implementation
 	virtual qint64 pos() const override {
-		if (handle__pos == 0) {
+		if (!handle__pos) {
 			return QAbstractSocket::pos();
 		}
 
-		long long callback_return_value = miqt_exec_callback_QAbstractSocket_pos(this, handle__pos);
+		long long callback_return_value = miqt_exec_callback_QAbstractSocket_pos(this, handle__pos.value());
 		return static_cast<qint64>(callback_return_value);
 	}
 
 	friend long long QAbstractSocket_virtualbase_pos(const void* self);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__size = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QAbstractSocket> handle__size;
 
 	// Subclass to allow providing a Go implementation
 	virtual qint64 size() const override {
-		if (handle__size == 0) {
+		if (!handle__size) {
 			return QAbstractSocket::size();
 		}
 
-		long long callback_return_value = miqt_exec_callback_QAbstractSocket_size(this, handle__size);
+		long long callback_return_value = miqt_exec_callback_QAbstractSocket_size(this, handle__size.value());
 		return static_cast<qint64>(callback_return_value);
 	}
 
 	friend long long QAbstractSocket_virtualbase_size(const void* self);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__seek = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QAbstractSocket> handle__seek;
 
 	// Subclass to allow providing a Go implementation
 	virtual bool seek(qint64 pos) override {
-		if (handle__seek == 0) {
+		if (!handle__seek) {
 			return QAbstractSocket::seek(pos);
 		}
 
 		qint64 pos_ret = pos;
 		long long sigval1 = static_cast<long long>(pos_ret);
-		bool callback_return_value = miqt_exec_callback_QAbstractSocket_seek(this, handle__seek, sigval1);
+		bool callback_return_value = miqt_exec_callback_QAbstractSocket_seek(this, handle__seek.value(), sigval1);
 		return callback_return_value;
 	}
 
 	friend bool QAbstractSocket_virtualbase_seek(void* self, long long pos);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__reset = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QAbstractSocket> handle__reset;
 
 	// Subclass to allow providing a Go implementation
 	virtual bool reset() override {
-		if (handle__reset == 0) {
+		if (!handle__reset) {
 			return QAbstractSocket::reset();
 		}
 
-		bool callback_return_value = miqt_exec_callback_QAbstractSocket_reset(this, handle__reset);
+		bool callback_return_value = miqt_exec_callback_QAbstractSocket_reset(this, handle__reset.value());
 		return callback_return_value;
 	}
 
 	friend bool QAbstractSocket_virtualbase_reset(void* self);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__event = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QAbstractSocket> handle__event;
 
 	// Subclass to allow providing a Go implementation
 	virtual bool event(QEvent* event) override {
-		if (handle__event == 0) {
+		if (!handle__event) {
 			return QAbstractSocket::event(event);
 		}
 
 		QEvent* sigval1 = event;
-		bool callback_return_value = miqt_exec_callback_QAbstractSocket_event(this, handle__event, sigval1);
+		bool callback_return_value = miqt_exec_callback_QAbstractSocket_event(this, handle__event.value(), sigval1);
 		return callback_return_value;
 	}
 
 	friend bool QAbstractSocket_virtualbase_event(void* self, QEvent* event);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__eventFilter = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QAbstractSocket> handle__eventFilter;
 
 	// Subclass to allow providing a Go implementation
 	virtual bool eventFilter(QObject* watched, QEvent* event) override {
-		if (handle__eventFilter == 0) {
+		if (!handle__eventFilter) {
 			return QAbstractSocket::eventFilter(watched, event);
 		}
 
 		QObject* sigval1 = watched;
 		QEvent* sigval2 = event;
-		bool callback_return_value = miqt_exec_callback_QAbstractSocket_eventFilter(this, handle__eventFilter, sigval1, sigval2);
+		bool callback_return_value = miqt_exec_callback_QAbstractSocket_eventFilter(this, handle__eventFilter.value(), sigval1, sigval2);
 		return callback_return_value;
 	}
 
 	friend bool QAbstractSocket_virtualbase_eventFilter(void* self, QObject* watched, QEvent* event);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__timerEvent = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QAbstractSocket> handle__timerEvent;
 
 	// Subclass to allow providing a Go implementation
 	virtual void timerEvent(QTimerEvent* event) override {
-		if (handle__timerEvent == 0) {
+		if (!handle__timerEvent) {
 			QAbstractSocket::timerEvent(event);
 			return;
 		}
 
 		QTimerEvent* sigval1 = event;
-		miqt_exec_callback_QAbstractSocket_timerEvent(this, handle__timerEvent, sigval1);
+		miqt_exec_callback_QAbstractSocket_timerEvent(this, handle__timerEvent.value(), sigval1);
 
 	}
 
 	friend void QAbstractSocket_virtualbase_timerEvent(void* self, QTimerEvent* event);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__childEvent = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QAbstractSocket> handle__childEvent;
 
 	// Subclass to allow providing a Go implementation
 	virtual void childEvent(QChildEvent* event) override {
-		if (handle__childEvent == 0) {
+		if (!handle__childEvent) {
 			QAbstractSocket::childEvent(event);
 			return;
 		}
 
 		QChildEvent* sigval1 = event;
-		miqt_exec_callback_QAbstractSocket_childEvent(this, handle__childEvent, sigval1);
+		miqt_exec_callback_QAbstractSocket_childEvent(this, handle__childEvent.value(), sigval1);
 
 	}
 
 	friend void QAbstractSocket_virtualbase_childEvent(void* self, QChildEvent* event);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__customEvent = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QAbstractSocket> handle__customEvent;
 
 	// Subclass to allow providing a Go implementation
 	virtual void customEvent(QEvent* event) override {
-		if (handle__customEvent == 0) {
+		if (!handle__customEvent) {
 			QAbstractSocket::customEvent(event);
 			return;
 		}
 
 		QEvent* sigval1 = event;
-		miqt_exec_callback_QAbstractSocket_customEvent(this, handle__customEvent, sigval1);
+		miqt_exec_callback_QAbstractSocket_customEvent(this, handle__customEvent.value(), sigval1);
 
 	}
 
 	friend void QAbstractSocket_virtualbase_customEvent(void* self, QEvent* event);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__connectNotify = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QAbstractSocket> handle__connectNotify;
 
 	// Subclass to allow providing a Go implementation
 	virtual void connectNotify(const QMetaMethod& signal) override {
-		if (handle__connectNotify == 0) {
+		if (!handle__connectNotify) {
 			QAbstractSocket::connectNotify(signal);
 			return;
 		}
@@ -634,18 +637,18 @@ public:
 		const QMetaMethod& signal_ret = signal;
 		// Cast returned reference into pointer
 		QMetaMethod* sigval1 = const_cast<QMetaMethod*>(&signal_ret);
-		miqt_exec_callback_QAbstractSocket_connectNotify(this, handle__connectNotify, sigval1);
+		miqt_exec_callback_QAbstractSocket_connectNotify(this, handle__connectNotify.value(), sigval1);
 
 	}
 
 	friend void QAbstractSocket_virtualbase_connectNotify(void* self, QMetaMethod* signal);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__disconnectNotify = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QAbstractSocket> handle__disconnectNotify;
 
 	// Subclass to allow providing a Go implementation
 	virtual void disconnectNotify(const QMetaMethod& signal) override {
-		if (handle__disconnectNotify == 0) {
+		if (!handle__disconnectNotify) {
 			QAbstractSocket::disconnectNotify(signal);
 			return;
 		}
@@ -653,7 +656,7 @@ public:
 		const QMetaMethod& signal_ret = signal;
 		// Cast returned reference into pointer
 		QMetaMethod* sigval1 = const_cast<QMetaMethod*>(&signal_ret);
-		miqt_exec_callback_QAbstractSocket_disconnectNotify(this, handle__disconnectNotify, sigval1);
+		miqt_exec_callback_QAbstractSocket_disconnectNotify(this, handle__disconnectNotify.value(), sigval1);
 
 	}
 
@@ -899,80 +902,94 @@ void QAbstractSocket_hostFound(QAbstractSocket* self) {
 	self->hostFound();
 }
 
-void QAbstractSocket_connect_hostFound(QAbstractSocket* self, intptr_t slot) {
-	QAbstractSocket::connect(self, static_cast<void (QAbstractSocket::*)()>(&QAbstractSocket::hostFound), self, [=]() {
+void* QAbstractSocket_connect_hostFound(QAbstractSocket* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QAbstractSocket>>(slot);
+	return new QMetaObject::Connection(QAbstractSocket::connect(self, static_cast<void (QAbstractSocket::*)()>(&QAbstractSocket::hostFound), self, [slot_handle]() {
+		intptr_t slot = slot_handle->value();
 		miqt_exec_callback_QAbstractSocket_hostFound(slot);
-	});
+	}));
 }
 
 void QAbstractSocket_connected(QAbstractSocket* self) {
 	self->connected();
 }
 
-void QAbstractSocket_connect_connected(QAbstractSocket* self, intptr_t slot) {
-	QAbstractSocket::connect(self, static_cast<void (QAbstractSocket::*)()>(&QAbstractSocket::connected), self, [=]() {
+void* QAbstractSocket_connect_connected(QAbstractSocket* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QAbstractSocket>>(slot);
+	return new QMetaObject::Connection(QAbstractSocket::connect(self, static_cast<void (QAbstractSocket::*)()>(&QAbstractSocket::connected), self, [slot_handle]() {
+		intptr_t slot = slot_handle->value();
 		miqt_exec_callback_QAbstractSocket_connected(slot);
-	});
+	}));
 }
 
 void QAbstractSocket_disconnected(QAbstractSocket* self) {
 	self->disconnected();
 }
 
-void QAbstractSocket_connect_disconnected(QAbstractSocket* self, intptr_t slot) {
-	QAbstractSocket::connect(self, static_cast<void (QAbstractSocket::*)()>(&QAbstractSocket::disconnected), self, [=]() {
+void* QAbstractSocket_connect_disconnected(QAbstractSocket* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QAbstractSocket>>(slot);
+	return new QMetaObject::Connection(QAbstractSocket::connect(self, static_cast<void (QAbstractSocket::*)()>(&QAbstractSocket::disconnected), self, [slot_handle]() {
+		intptr_t slot = slot_handle->value();
 		miqt_exec_callback_QAbstractSocket_disconnected(slot);
-	});
+	}));
 }
 
 void QAbstractSocket_stateChanged(QAbstractSocket* self, int param1) {
 	self->stateChanged(static_cast<QAbstractSocket::SocketState>(param1));
 }
 
-void QAbstractSocket_connect_stateChanged(QAbstractSocket* self, intptr_t slot) {
-	QAbstractSocket::connect(self, static_cast<void (QAbstractSocket::*)(QAbstractSocket::SocketState)>(&QAbstractSocket::stateChanged), self, [=](QAbstractSocket::SocketState param1) {
+void* QAbstractSocket_connect_stateChanged(QAbstractSocket* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QAbstractSocket>>(slot);
+	return new QMetaObject::Connection(QAbstractSocket::connect(self, static_cast<void (QAbstractSocket::*)(QAbstractSocket::SocketState)>(&QAbstractSocket::stateChanged), self, [slot_handle](QAbstractSocket::SocketState param1) {
+		intptr_t slot = slot_handle->value();
 		QAbstractSocket::SocketState param1_ret = param1;
 		int sigval1 = static_cast<int>(param1_ret);
 		miqt_exec_callback_QAbstractSocket_stateChanged(slot, sigval1);
-	});
+	}));
 }
 
 void QAbstractSocket_errorWithQAbstractSocketSocketError(QAbstractSocket* self, int param1) {
 	self->error(static_cast<QAbstractSocket::SocketError>(param1));
 }
 
-void QAbstractSocket_connect_errorWithQAbstractSocketSocketError(QAbstractSocket* self, intptr_t slot) {
-	QAbstractSocket::connect(self, static_cast<void (QAbstractSocket::*)(QAbstractSocket::SocketError)>(&QAbstractSocket::error), self, [=](QAbstractSocket::SocketError param1) {
+void* QAbstractSocket_connect_errorWithQAbstractSocketSocketError(QAbstractSocket* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QAbstractSocket>>(slot);
+	return new QMetaObject::Connection(QAbstractSocket::connect(self, static_cast<void (QAbstractSocket::*)(QAbstractSocket::SocketError)>(&QAbstractSocket::error), self, [slot_handle](QAbstractSocket::SocketError param1) {
+		intptr_t slot = slot_handle->value();
 		QAbstractSocket::SocketError param1_ret = param1;
 		int sigval1 = static_cast<int>(param1_ret);
 		miqt_exec_callback_QAbstractSocket_errorWithQAbstractSocketSocketError(slot, sigval1);
-	});
+	}));
 }
 
 void QAbstractSocket_errorOccurred(QAbstractSocket* self, int param1) {
 	self->errorOccurred(static_cast<QAbstractSocket::SocketError>(param1));
 }
 
-void QAbstractSocket_connect_errorOccurred(QAbstractSocket* self, intptr_t slot) {
-	QAbstractSocket::connect(self, static_cast<void (QAbstractSocket::*)(QAbstractSocket::SocketError)>(&QAbstractSocket::errorOccurred), self, [=](QAbstractSocket::SocketError param1) {
+void* QAbstractSocket_connect_errorOccurred(QAbstractSocket* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QAbstractSocket>>(slot);
+	return new QMetaObject::Connection(QAbstractSocket::connect(self, static_cast<void (QAbstractSocket::*)(QAbstractSocket::SocketError)>(&QAbstractSocket::errorOccurred), self, [slot_handle](QAbstractSocket::SocketError param1) {
+		intptr_t slot = slot_handle->value();
 		QAbstractSocket::SocketError param1_ret = param1;
 		int sigval1 = static_cast<int>(param1_ret);
 		miqt_exec_callback_QAbstractSocket_errorOccurred(slot, sigval1);
-	});
+	}));
 }
 
 void QAbstractSocket_proxyAuthenticationRequired(QAbstractSocket* self, QNetworkProxy* proxy, QAuthenticator* authenticator) {
 	self->proxyAuthenticationRequired(*proxy, authenticator);
 }
 
-void QAbstractSocket_connect_proxyAuthenticationRequired(QAbstractSocket* self, intptr_t slot) {
-	QAbstractSocket::connect(self, static_cast<void (QAbstractSocket::*)(const QNetworkProxy&, QAuthenticator*)>(&QAbstractSocket::proxyAuthenticationRequired), self, [=](const QNetworkProxy& proxy, QAuthenticator* authenticator) {
+void* QAbstractSocket_connect_proxyAuthenticationRequired(QAbstractSocket* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QAbstractSocket>>(slot);
+	return new QMetaObject::Connection(QAbstractSocket::connect(self, static_cast<void (QAbstractSocket::*)(const QNetworkProxy&, QAuthenticator*)>(&QAbstractSocket::proxyAuthenticationRequired), self, [slot_handle](const QNetworkProxy& proxy, QAuthenticator* authenticator) {
+		intptr_t slot = slot_handle->value();
 		const QNetworkProxy& proxy_ret = proxy;
 		// Cast returned reference into pointer
 		QNetworkProxy* sigval1 = const_cast<QNetworkProxy*>(&proxy_ret);
 		QAuthenticator* sigval2 = authenticator;
 		miqt_exec_callback_QAbstractSocket_proxyAuthenticationRequired(slot, sigval1, sigval2);
-	});
+	}));
 }
 
 struct miqt_string QAbstractSocket_tr2(const char* s, const char* c) {
@@ -1036,12 +1053,13 @@ bool QAbstractSocket_bind5(QAbstractSocket* self, unsigned short port, int mode)
 }
 
 bool QAbstractSocket_override_virtual_resume(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QAbstractSocket> slot_handle(slot);
 	MiqtVirtualQAbstractSocket* self_cast = dynamic_cast<MiqtVirtualQAbstractSocket*>( (QAbstractSocket*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__resume = slot;
+	self_cast->handle__resume = std::move(slot_handle);
 	return true;
 }
 
@@ -1050,12 +1068,13 @@ void QAbstractSocket_virtualbase_resume(void* self) {
 }
 
 bool QAbstractSocket_override_virtual_connectToHost(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QAbstractSocket> slot_handle(slot);
 	MiqtVirtualQAbstractSocket* self_cast = dynamic_cast<MiqtVirtualQAbstractSocket*>( (QAbstractSocket*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__connectToHost = slot;
+	self_cast->handle__connectToHost = std::move(slot_handle);
 	return true;
 }
 
@@ -1065,12 +1084,13 @@ void QAbstractSocket_virtualbase_connectToHost(void* self, struct miqt_string ho
 }
 
 bool QAbstractSocket_override_virtual_connectToHost2(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QAbstractSocket> slot_handle(slot);
 	MiqtVirtualQAbstractSocket* self_cast = dynamic_cast<MiqtVirtualQAbstractSocket*>( (QAbstractSocket*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__connectToHost2 = slot;
+	self_cast->handle__connectToHost2 = std::move(slot_handle);
 	return true;
 }
 
@@ -1079,12 +1099,13 @@ void QAbstractSocket_virtualbase_connectToHost2(void* self, QHostAddress* addres
 }
 
 bool QAbstractSocket_override_virtual_disconnectFromHost(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QAbstractSocket> slot_handle(slot);
 	MiqtVirtualQAbstractSocket* self_cast = dynamic_cast<MiqtVirtualQAbstractSocket*>( (QAbstractSocket*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__disconnectFromHost = slot;
+	self_cast->handle__disconnectFromHost = std::move(slot_handle);
 	return true;
 }
 
@@ -1093,12 +1114,13 @@ void QAbstractSocket_virtualbase_disconnectFromHost(void* self) {
 }
 
 bool QAbstractSocket_override_virtual_bytesAvailable(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QAbstractSocket> slot_handle(slot);
 	MiqtVirtualQAbstractSocket* self_cast = dynamic_cast<MiqtVirtualQAbstractSocket*>( (QAbstractSocket*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__bytesAvailable = slot;
+	self_cast->handle__bytesAvailable = std::move(slot_handle);
 	return true;
 }
 
@@ -1108,12 +1130,13 @@ long long QAbstractSocket_virtualbase_bytesAvailable(const void* self) {
 }
 
 bool QAbstractSocket_override_virtual_bytesToWrite(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QAbstractSocket> slot_handle(slot);
 	MiqtVirtualQAbstractSocket* self_cast = dynamic_cast<MiqtVirtualQAbstractSocket*>( (QAbstractSocket*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__bytesToWrite = slot;
+	self_cast->handle__bytesToWrite = std::move(slot_handle);
 	return true;
 }
 
@@ -1123,12 +1146,13 @@ long long QAbstractSocket_virtualbase_bytesToWrite(const void* self) {
 }
 
 bool QAbstractSocket_override_virtual_canReadLine(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QAbstractSocket> slot_handle(slot);
 	MiqtVirtualQAbstractSocket* self_cast = dynamic_cast<MiqtVirtualQAbstractSocket*>( (QAbstractSocket*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__canReadLine = slot;
+	self_cast->handle__canReadLine = std::move(slot_handle);
 	return true;
 }
 
@@ -1137,12 +1161,13 @@ bool QAbstractSocket_virtualbase_canReadLine(const void* self) {
 }
 
 bool QAbstractSocket_override_virtual_setReadBufferSize(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QAbstractSocket> slot_handle(slot);
 	MiqtVirtualQAbstractSocket* self_cast = dynamic_cast<MiqtVirtualQAbstractSocket*>( (QAbstractSocket*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__setReadBufferSize = slot;
+	self_cast->handle__setReadBufferSize = std::move(slot_handle);
 	return true;
 }
 
@@ -1151,12 +1176,13 @@ void QAbstractSocket_virtualbase_setReadBufferSize(void* self, long long size) {
 }
 
 bool QAbstractSocket_override_virtual_socketDescriptor(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QAbstractSocket> slot_handle(slot);
 	MiqtVirtualQAbstractSocket* self_cast = dynamic_cast<MiqtVirtualQAbstractSocket*>( (QAbstractSocket*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__socketDescriptor = slot;
+	self_cast->handle__socketDescriptor = std::move(slot_handle);
 	return true;
 }
 
@@ -1166,12 +1192,13 @@ intptr_t QAbstractSocket_virtualbase_socketDescriptor(const void* self) {
 }
 
 bool QAbstractSocket_override_virtual_setSocketDescriptor(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QAbstractSocket> slot_handle(slot);
 	MiqtVirtualQAbstractSocket* self_cast = dynamic_cast<MiqtVirtualQAbstractSocket*>( (QAbstractSocket*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__setSocketDescriptor = slot;
+	self_cast->handle__setSocketDescriptor = std::move(slot_handle);
 	return true;
 }
 
@@ -1180,12 +1207,13 @@ bool QAbstractSocket_virtualbase_setSocketDescriptor(void* self, intptr_t socket
 }
 
 bool QAbstractSocket_override_virtual_setSocketOption(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QAbstractSocket> slot_handle(slot);
 	MiqtVirtualQAbstractSocket* self_cast = dynamic_cast<MiqtVirtualQAbstractSocket*>( (QAbstractSocket*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__setSocketOption = slot;
+	self_cast->handle__setSocketOption = std::move(slot_handle);
 	return true;
 }
 
@@ -1194,12 +1222,13 @@ void QAbstractSocket_virtualbase_setSocketOption(void* self, int option, QVarian
 }
 
 bool QAbstractSocket_override_virtual_socketOption(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QAbstractSocket> slot_handle(slot);
 	MiqtVirtualQAbstractSocket* self_cast = dynamic_cast<MiqtVirtualQAbstractSocket*>( (QAbstractSocket*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__socketOption = slot;
+	self_cast->handle__socketOption = std::move(slot_handle);
 	return true;
 }
 
@@ -1208,12 +1237,13 @@ QVariant* QAbstractSocket_virtualbase_socketOption(void* self, int option) {
 }
 
 bool QAbstractSocket_override_virtual_close(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QAbstractSocket> slot_handle(slot);
 	MiqtVirtualQAbstractSocket* self_cast = dynamic_cast<MiqtVirtualQAbstractSocket*>( (QAbstractSocket*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__close = slot;
+	self_cast->handle__close = std::move(slot_handle);
 	return true;
 }
 
@@ -1222,12 +1252,13 @@ void QAbstractSocket_virtualbase_close(void* self) {
 }
 
 bool QAbstractSocket_override_virtual_isSequential(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QAbstractSocket> slot_handle(slot);
 	MiqtVirtualQAbstractSocket* self_cast = dynamic_cast<MiqtVirtualQAbstractSocket*>( (QAbstractSocket*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__isSequential = slot;
+	self_cast->handle__isSequential = std::move(slot_handle);
 	return true;
 }
 
@@ -1236,12 +1267,13 @@ bool QAbstractSocket_virtualbase_isSequential(const void* self) {
 }
 
 bool QAbstractSocket_override_virtual_atEnd(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QAbstractSocket> slot_handle(slot);
 	MiqtVirtualQAbstractSocket* self_cast = dynamic_cast<MiqtVirtualQAbstractSocket*>( (QAbstractSocket*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__atEnd = slot;
+	self_cast->handle__atEnd = std::move(slot_handle);
 	return true;
 }
 
@@ -1250,12 +1282,13 @@ bool QAbstractSocket_virtualbase_atEnd(const void* self) {
 }
 
 bool QAbstractSocket_override_virtual_waitForConnected(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QAbstractSocket> slot_handle(slot);
 	MiqtVirtualQAbstractSocket* self_cast = dynamic_cast<MiqtVirtualQAbstractSocket*>( (QAbstractSocket*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__waitForConnected = slot;
+	self_cast->handle__waitForConnected = std::move(slot_handle);
 	return true;
 }
 
@@ -1264,12 +1297,13 @@ bool QAbstractSocket_virtualbase_waitForConnected(void* self, int msecs) {
 }
 
 bool QAbstractSocket_override_virtual_waitForReadyRead(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QAbstractSocket> slot_handle(slot);
 	MiqtVirtualQAbstractSocket* self_cast = dynamic_cast<MiqtVirtualQAbstractSocket*>( (QAbstractSocket*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__waitForReadyRead = slot;
+	self_cast->handle__waitForReadyRead = std::move(slot_handle);
 	return true;
 }
 
@@ -1278,12 +1312,13 @@ bool QAbstractSocket_virtualbase_waitForReadyRead(void* self, int msecs) {
 }
 
 bool QAbstractSocket_override_virtual_waitForBytesWritten(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QAbstractSocket> slot_handle(slot);
 	MiqtVirtualQAbstractSocket* self_cast = dynamic_cast<MiqtVirtualQAbstractSocket*>( (QAbstractSocket*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__waitForBytesWritten = slot;
+	self_cast->handle__waitForBytesWritten = std::move(slot_handle);
 	return true;
 }
 
@@ -1292,12 +1327,13 @@ bool QAbstractSocket_virtualbase_waitForBytesWritten(void* self, int msecs) {
 }
 
 bool QAbstractSocket_override_virtual_waitForDisconnected(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QAbstractSocket> slot_handle(slot);
 	MiqtVirtualQAbstractSocket* self_cast = dynamic_cast<MiqtVirtualQAbstractSocket*>( (QAbstractSocket*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__waitForDisconnected = slot;
+	self_cast->handle__waitForDisconnected = std::move(slot_handle);
 	return true;
 }
 
@@ -1306,12 +1342,13 @@ bool QAbstractSocket_virtualbase_waitForDisconnected(void* self, int msecs) {
 }
 
 bool QAbstractSocket_override_virtual_readData(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QAbstractSocket> slot_handle(slot);
 	MiqtVirtualQAbstractSocket* self_cast = dynamic_cast<MiqtVirtualQAbstractSocket*>( (QAbstractSocket*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__readData = slot;
+	self_cast->handle__readData = std::move(slot_handle);
 	return true;
 }
 
@@ -1321,12 +1358,13 @@ long long QAbstractSocket_virtualbase_readData(void* self, char* data, long long
 }
 
 bool QAbstractSocket_override_virtual_readLineData(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QAbstractSocket> slot_handle(slot);
 	MiqtVirtualQAbstractSocket* self_cast = dynamic_cast<MiqtVirtualQAbstractSocket*>( (QAbstractSocket*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__readLineData = slot;
+	self_cast->handle__readLineData = std::move(slot_handle);
 	return true;
 }
 
@@ -1336,12 +1374,13 @@ long long QAbstractSocket_virtualbase_readLineData(void* self, char* data, long 
 }
 
 bool QAbstractSocket_override_virtual_writeData(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QAbstractSocket> slot_handle(slot);
 	MiqtVirtualQAbstractSocket* self_cast = dynamic_cast<MiqtVirtualQAbstractSocket*>( (QAbstractSocket*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__writeData = slot;
+	self_cast->handle__writeData = std::move(slot_handle);
 	return true;
 }
 
@@ -1351,12 +1390,13 @@ long long QAbstractSocket_virtualbase_writeData(void* self, const char* data, lo
 }
 
 bool QAbstractSocket_override_virtual_open(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QAbstractSocket> slot_handle(slot);
 	MiqtVirtualQAbstractSocket* self_cast = dynamic_cast<MiqtVirtualQAbstractSocket*>( (QAbstractSocket*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__open = slot;
+	self_cast->handle__open = std::move(slot_handle);
 	return true;
 }
 
@@ -1365,12 +1405,13 @@ bool QAbstractSocket_virtualbase_open(void* self, int mode) {
 }
 
 bool QAbstractSocket_override_virtual_pos(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QAbstractSocket> slot_handle(slot);
 	MiqtVirtualQAbstractSocket* self_cast = dynamic_cast<MiqtVirtualQAbstractSocket*>( (QAbstractSocket*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__pos = slot;
+	self_cast->handle__pos = std::move(slot_handle);
 	return true;
 }
 
@@ -1380,12 +1421,13 @@ long long QAbstractSocket_virtualbase_pos(const void* self) {
 }
 
 bool QAbstractSocket_override_virtual_size(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QAbstractSocket> slot_handle(slot);
 	MiqtVirtualQAbstractSocket* self_cast = dynamic_cast<MiqtVirtualQAbstractSocket*>( (QAbstractSocket*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__size = slot;
+	self_cast->handle__size = std::move(slot_handle);
 	return true;
 }
 
@@ -1395,12 +1437,13 @@ long long QAbstractSocket_virtualbase_size(const void* self) {
 }
 
 bool QAbstractSocket_override_virtual_seek(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QAbstractSocket> slot_handle(slot);
 	MiqtVirtualQAbstractSocket* self_cast = dynamic_cast<MiqtVirtualQAbstractSocket*>( (QAbstractSocket*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__seek = slot;
+	self_cast->handle__seek = std::move(slot_handle);
 	return true;
 }
 
@@ -1409,12 +1452,13 @@ bool QAbstractSocket_virtualbase_seek(void* self, long long pos) {
 }
 
 bool QAbstractSocket_override_virtual_reset(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QAbstractSocket> slot_handle(slot);
 	MiqtVirtualQAbstractSocket* self_cast = dynamic_cast<MiqtVirtualQAbstractSocket*>( (QAbstractSocket*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__reset = slot;
+	self_cast->handle__reset = std::move(slot_handle);
 	return true;
 }
 
@@ -1423,12 +1467,13 @@ bool QAbstractSocket_virtualbase_reset(void* self) {
 }
 
 bool QAbstractSocket_override_virtual_event(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QAbstractSocket> slot_handle(slot);
 	MiqtVirtualQAbstractSocket* self_cast = dynamic_cast<MiqtVirtualQAbstractSocket*>( (QAbstractSocket*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__event = slot;
+	self_cast->handle__event = std::move(slot_handle);
 	return true;
 }
 
@@ -1437,12 +1482,13 @@ bool QAbstractSocket_virtualbase_event(void* self, QEvent* event) {
 }
 
 bool QAbstractSocket_override_virtual_eventFilter(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QAbstractSocket> slot_handle(slot);
 	MiqtVirtualQAbstractSocket* self_cast = dynamic_cast<MiqtVirtualQAbstractSocket*>( (QAbstractSocket*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__eventFilter = slot;
+	self_cast->handle__eventFilter = std::move(slot_handle);
 	return true;
 }
 
@@ -1451,12 +1497,13 @@ bool QAbstractSocket_virtualbase_eventFilter(void* self, QObject* watched, QEven
 }
 
 bool QAbstractSocket_override_virtual_timerEvent(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QAbstractSocket> slot_handle(slot);
 	MiqtVirtualQAbstractSocket* self_cast = dynamic_cast<MiqtVirtualQAbstractSocket*>( (QAbstractSocket*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__timerEvent = slot;
+	self_cast->handle__timerEvent = std::move(slot_handle);
 	return true;
 }
 
@@ -1465,12 +1512,13 @@ void QAbstractSocket_virtualbase_timerEvent(void* self, QTimerEvent* event) {
 }
 
 bool QAbstractSocket_override_virtual_childEvent(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QAbstractSocket> slot_handle(slot);
 	MiqtVirtualQAbstractSocket* self_cast = dynamic_cast<MiqtVirtualQAbstractSocket*>( (QAbstractSocket*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__childEvent = slot;
+	self_cast->handle__childEvent = std::move(slot_handle);
 	return true;
 }
 
@@ -1479,12 +1527,13 @@ void QAbstractSocket_virtualbase_childEvent(void* self, QChildEvent* event) {
 }
 
 bool QAbstractSocket_override_virtual_customEvent(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QAbstractSocket> slot_handle(slot);
 	MiqtVirtualQAbstractSocket* self_cast = dynamic_cast<MiqtVirtualQAbstractSocket*>( (QAbstractSocket*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__customEvent = slot;
+	self_cast->handle__customEvent = std::move(slot_handle);
 	return true;
 }
 
@@ -1493,12 +1542,13 @@ void QAbstractSocket_virtualbase_customEvent(void* self, QEvent* event) {
 }
 
 bool QAbstractSocket_override_virtual_connectNotify(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QAbstractSocket> slot_handle(slot);
 	MiqtVirtualQAbstractSocket* self_cast = dynamic_cast<MiqtVirtualQAbstractSocket*>( (QAbstractSocket*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__connectNotify = slot;
+	self_cast->handle__connectNotify = std::move(slot_handle);
 	return true;
 }
 
@@ -1507,12 +1557,13 @@ void QAbstractSocket_virtualbase_connectNotify(void* self, QMetaMethod* signal) 
 }
 
 bool QAbstractSocket_override_virtual_disconnectNotify(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QAbstractSocket> slot_handle(slot);
 	MiqtVirtualQAbstractSocket* self_cast = dynamic_cast<MiqtVirtualQAbstractSocket*>( (QAbstractSocket*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__disconnectNotify = slot;
+	self_cast->handle__disconnectNotify = std::move(slot_handle);
 	return true;
 }
 

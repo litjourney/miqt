@@ -39,6 +39,11 @@ const (
 	QDtls__HandshakeComplete      QDtls__HandshakeState = 3
 )
 
+//export miqt_exec_callback_handle_release_QDtlsClientVerifier
+func miqt_exec_callback_handle_release_QDtlsClientVerifier(cb C.intptr_t) {
+	cgo.Handle(cb).Delete()
+}
+
 type QDtlsClientVerifier struct {
 	h *C.QDtlsClientVerifier
 	*qt6.QObject
@@ -231,7 +236,11 @@ func (this *QDtlsClientVerifier) callVirtualBase_Event(event *qt6.QEvent) bool {
 
 }
 func (this *QDtlsClientVerifier) OnEvent(slot func(super func(event *qt6.QEvent) bool, event *qt6.QEvent) bool) {
-	ok := C.QDtlsClientVerifier_override_virtual_event(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QDtlsClientVerifier_override_virtual_event(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -259,7 +268,11 @@ func (this *QDtlsClientVerifier) callVirtualBase_EventFilter(watched *qt6.QObjec
 
 }
 func (this *QDtlsClientVerifier) OnEventFilter(slot func(super func(watched *qt6.QObject, event *qt6.QEvent) bool, watched *qt6.QObject, event *qt6.QEvent) bool) {
-	ok := C.QDtlsClientVerifier_override_virtual_eventFilter(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QDtlsClientVerifier_override_virtual_eventFilter(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -289,7 +302,11 @@ func (this *QDtlsClientVerifier) callVirtualBase_TimerEvent(event *qt6.QTimerEve
 
 }
 func (this *QDtlsClientVerifier) OnTimerEvent(slot func(super func(event *qt6.QTimerEvent), event *qt6.QTimerEvent)) {
-	ok := C.QDtlsClientVerifier_override_virtual_timerEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QDtlsClientVerifier_override_virtual_timerEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -315,7 +332,11 @@ func (this *QDtlsClientVerifier) callVirtualBase_ChildEvent(event *qt6.QChildEve
 
 }
 func (this *QDtlsClientVerifier) OnChildEvent(slot func(super func(event *qt6.QChildEvent), event *qt6.QChildEvent)) {
-	ok := C.QDtlsClientVerifier_override_virtual_childEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QDtlsClientVerifier_override_virtual_childEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -341,7 +362,11 @@ func (this *QDtlsClientVerifier) callVirtualBase_CustomEvent(event *qt6.QEvent) 
 
 }
 func (this *QDtlsClientVerifier) OnCustomEvent(slot func(super func(event *qt6.QEvent), event *qt6.QEvent)) {
-	ok := C.QDtlsClientVerifier_override_virtual_customEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QDtlsClientVerifier_override_virtual_customEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -367,7 +392,11 @@ func (this *QDtlsClientVerifier) callVirtualBase_ConnectNotify(signal *qt6.QMeta
 
 }
 func (this *QDtlsClientVerifier) OnConnectNotify(slot func(super func(signal *qt6.QMetaMethod), signal *qt6.QMetaMethod)) {
-	ok := C.QDtlsClientVerifier_override_virtual_connectNotify(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QDtlsClientVerifier_override_virtual_connectNotify(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -393,7 +422,11 @@ func (this *QDtlsClientVerifier) callVirtualBase_DisconnectNotify(signal *qt6.QM
 
 }
 func (this *QDtlsClientVerifier) OnDisconnectNotify(slot func(super func(signal *qt6.QMetaMethod), signal *qt6.QMetaMethod)) {
-	ok := C.QDtlsClientVerifier_override_virtual_disconnectNotify(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QDtlsClientVerifier_override_virtual_disconnectNotify(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -425,6 +458,11 @@ func (this *QDtlsClientVerifier) GoGC() {
 		this.Delete()
 		runtime.KeepAlive(this.h)
 	})
+}
+
+//export miqt_exec_callback_handle_release_QDtls
+func miqt_exec_callback_handle_release_QDtls(cb C.intptr_t) {
+	cgo.Handle(cb).Delete()
 }
 
 type QDtls struct {
@@ -654,8 +692,10 @@ func (this *QDtls) IgnoreVerificationErrors(errorsToIgnore []network.QSslError) 
 func (this *QDtls) PskRequired(authenticator *network.QSslPreSharedKeyAuthenticator) {
 	C.QDtls_pskRequired(this.h, (*C.QSslPreSharedKeyAuthenticator)(authenticator.UnsafePointer()))
 }
-func (this *QDtls) OnPskRequired(slot func(authenticator *network.QSslPreSharedKeyAuthenticator)) {
-	C.QDtls_connect_pskRequired(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QDtls) OnPskRequired(slot func(authenticator *network.QSslPreSharedKeyAuthenticator)) *qt6.SignalConnection {
+	_goptr := qt6.UnsafeNewQMetaObject__Connection(C.QDtls_connect_pskRequired(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QDtls_pskRequired
@@ -674,8 +714,10 @@ func miqt_exec_callback_QDtls_pskRequired(cb C.intptr_t, authenticator *C.QSslPr
 func (this *QDtls) HandshakeTimeout() {
 	C.QDtls_handshakeTimeout(this.h)
 }
-func (this *QDtls) OnHandshakeTimeout(slot func()) {
-	C.QDtls_connect_handshakeTimeout(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QDtls) OnHandshakeTimeout(slot func()) *qt6.SignalConnection {
+	_goptr := qt6.UnsafeNewQMetaObject__Connection(C.QDtls_connect_handshakeTimeout(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QDtls_handshakeTimeout
@@ -793,7 +835,11 @@ func (this *QDtls) callVirtualBase_Event(event *qt6.QEvent) bool {
 
 }
 func (this *QDtls) OnEvent(slot func(super func(event *qt6.QEvent) bool, event *qt6.QEvent) bool) {
-	ok := C.QDtls_override_virtual_event(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QDtls_override_virtual_event(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -821,7 +867,11 @@ func (this *QDtls) callVirtualBase_EventFilter(watched *qt6.QObject, event *qt6.
 
 }
 func (this *QDtls) OnEventFilter(slot func(super func(watched *qt6.QObject, event *qt6.QEvent) bool, watched *qt6.QObject, event *qt6.QEvent) bool) {
-	ok := C.QDtls_override_virtual_eventFilter(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QDtls_override_virtual_eventFilter(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -851,7 +901,11 @@ func (this *QDtls) callVirtualBase_TimerEvent(event *qt6.QTimerEvent) {
 
 }
 func (this *QDtls) OnTimerEvent(slot func(super func(event *qt6.QTimerEvent), event *qt6.QTimerEvent)) {
-	ok := C.QDtls_override_virtual_timerEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QDtls_override_virtual_timerEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -877,7 +931,11 @@ func (this *QDtls) callVirtualBase_ChildEvent(event *qt6.QChildEvent) {
 
 }
 func (this *QDtls) OnChildEvent(slot func(super func(event *qt6.QChildEvent), event *qt6.QChildEvent)) {
-	ok := C.QDtls_override_virtual_childEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QDtls_override_virtual_childEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -903,7 +961,11 @@ func (this *QDtls) callVirtualBase_CustomEvent(event *qt6.QEvent) {
 
 }
 func (this *QDtls) OnCustomEvent(slot func(super func(event *qt6.QEvent), event *qt6.QEvent)) {
-	ok := C.QDtls_override_virtual_customEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QDtls_override_virtual_customEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -929,7 +991,11 @@ func (this *QDtls) callVirtualBase_ConnectNotify(signal *qt6.QMetaMethod) {
 
 }
 func (this *QDtls) OnConnectNotify(slot func(super func(signal *qt6.QMetaMethod), signal *qt6.QMetaMethod)) {
-	ok := C.QDtls_override_virtual_connectNotify(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QDtls_override_virtual_connectNotify(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -955,7 +1021,11 @@ func (this *QDtls) callVirtualBase_DisconnectNotify(signal *qt6.QMetaMethod) {
 
 }
 func (this *QDtls) OnDisconnectNotify(slot func(super func(signal *qt6.QMetaMethod), signal *qt6.QMetaMethod)) {
-	ok := C.QDtls_override_virtual_disconnectNotify(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QDtls_override_virtual_disconnectNotify(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}

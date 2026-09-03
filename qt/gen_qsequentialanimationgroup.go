@@ -14,6 +14,11 @@ import (
 	"unsafe"
 )
 
+//export miqt_exec_callback_handle_release_QSequentialAnimationGroup
+func miqt_exec_callback_handle_release_QSequentialAnimationGroup(cb C.intptr_t) {
+	cgo.Handle(cb).Delete()
+}
+
 type QSequentialAnimationGroup struct {
 	h *C.QSequentialAnimationGroup
 	*QAnimationGroup
@@ -109,8 +114,10 @@ func (this *QSequentialAnimationGroup) Duration() int {
 func (this *QSequentialAnimationGroup) CurrentAnimationChanged(current *QAbstractAnimation) {
 	C.QSequentialAnimationGroup_currentAnimationChanged(this.h, current.cPointer())
 }
-func (this *QSequentialAnimationGroup) OnCurrentAnimationChanged(slot func(current *QAbstractAnimation)) {
-	C.QSequentialAnimationGroup_connect_currentAnimationChanged(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QSequentialAnimationGroup) OnCurrentAnimationChanged(slot func(current *QAbstractAnimation)) *SignalConnection {
+	_goptr := UnsafeNewQMetaObject__Connection(C.QSequentialAnimationGroup_connect_currentAnimationChanged(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QSequentialAnimationGroup_currentAnimationChanged
@@ -234,7 +241,11 @@ func (this *QSequentialAnimationGroup) callVirtualBase_Duration() int {
 
 }
 func (this *QSequentialAnimationGroup) OnDuration(slot func(super func() int) int) {
-	ok := C.QSequentialAnimationGroup_override_virtual_duration(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QSequentialAnimationGroup_override_virtual_duration(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -259,7 +270,11 @@ func (this *QSequentialAnimationGroup) callVirtualBase_Event(event *QEvent) bool
 
 }
 func (this *QSequentialAnimationGroup) OnEvent(slot func(super func(event *QEvent) bool, event *QEvent) bool) {
-	ok := C.QSequentialAnimationGroup_override_virtual_event(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QSequentialAnimationGroup_override_virtual_event(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -287,7 +302,11 @@ func (this *QSequentialAnimationGroup) callVirtualBase_UpdateCurrentTime(param1 
 
 }
 func (this *QSequentialAnimationGroup) OnUpdateCurrentTime(slot func(super func(param1 int), param1 int)) {
-	ok := C.QSequentialAnimationGroup_override_virtual_updateCurrentTime(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QSequentialAnimationGroup_override_virtual_updateCurrentTime(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -313,7 +332,11 @@ func (this *QSequentialAnimationGroup) callVirtualBase_UpdateState(newState QAbs
 
 }
 func (this *QSequentialAnimationGroup) OnUpdateState(slot func(super func(newState QAbstractAnimation__State, oldState QAbstractAnimation__State), newState QAbstractAnimation__State, oldState QAbstractAnimation__State)) {
-	ok := C.QSequentialAnimationGroup_override_virtual_updateState(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QSequentialAnimationGroup_override_virtual_updateState(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -341,7 +364,11 @@ func (this *QSequentialAnimationGroup) callVirtualBase_UpdateDirection(direction
 
 }
 func (this *QSequentialAnimationGroup) OnUpdateDirection(slot func(super func(direction QAbstractAnimation__Direction), direction QAbstractAnimation__Direction)) {
-	ok := C.QSequentialAnimationGroup_override_virtual_updateDirection(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QSequentialAnimationGroup_override_virtual_updateDirection(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -367,7 +394,11 @@ func (this *QSequentialAnimationGroup) callVirtualBase_EventFilter(watched *QObj
 
 }
 func (this *QSequentialAnimationGroup) OnEventFilter(slot func(super func(watched *QObject, event *QEvent) bool, watched *QObject, event *QEvent) bool) {
-	ok := C.QSequentialAnimationGroup_override_virtual_eventFilter(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QSequentialAnimationGroup_override_virtual_eventFilter(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -397,7 +428,11 @@ func (this *QSequentialAnimationGroup) callVirtualBase_TimerEvent(event *QTimerE
 
 }
 func (this *QSequentialAnimationGroup) OnTimerEvent(slot func(super func(event *QTimerEvent), event *QTimerEvent)) {
-	ok := C.QSequentialAnimationGroup_override_virtual_timerEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QSequentialAnimationGroup_override_virtual_timerEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -423,7 +458,11 @@ func (this *QSequentialAnimationGroup) callVirtualBase_ChildEvent(event *QChildE
 
 }
 func (this *QSequentialAnimationGroup) OnChildEvent(slot func(super func(event *QChildEvent), event *QChildEvent)) {
-	ok := C.QSequentialAnimationGroup_override_virtual_childEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QSequentialAnimationGroup_override_virtual_childEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -449,7 +488,11 @@ func (this *QSequentialAnimationGroup) callVirtualBase_CustomEvent(event *QEvent
 
 }
 func (this *QSequentialAnimationGroup) OnCustomEvent(slot func(super func(event *QEvent), event *QEvent)) {
-	ok := C.QSequentialAnimationGroup_override_virtual_customEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QSequentialAnimationGroup_override_virtual_customEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -475,7 +518,11 @@ func (this *QSequentialAnimationGroup) callVirtualBase_ConnectNotify(signal *QMe
 
 }
 func (this *QSequentialAnimationGroup) OnConnectNotify(slot func(super func(signal *QMetaMethod), signal *QMetaMethod)) {
-	ok := C.QSequentialAnimationGroup_override_virtual_connectNotify(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QSequentialAnimationGroup_override_virtual_connectNotify(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -501,7 +548,11 @@ func (this *QSequentialAnimationGroup) callVirtualBase_DisconnectNotify(signal *
 
 }
 func (this *QSequentialAnimationGroup) OnDisconnectNotify(slot func(super func(signal *QMetaMethod), signal *QMetaMethod)) {
-	ok := C.QSequentialAnimationGroup_override_virtual_disconnectNotify(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QSequentialAnimationGroup_override_virtual_disconnectNotify(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}

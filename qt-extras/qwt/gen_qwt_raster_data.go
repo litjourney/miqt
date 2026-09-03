@@ -22,6 +22,11 @@ const (
 	QwtRasterData__IgnoreOutOfRange         QwtRasterData__ConrecFlag = 2
 )
 
+//export miqt_exec_callback_handle_release_QwtRasterData
+func miqt_exec_callback_handle_release_QwtRasterData(cb C.intptr_t) {
+	cgo.Handle(cb).Delete()
+}
+
 type QwtRasterData struct {
 	h *C.QwtRasterData
 }
@@ -92,7 +97,11 @@ func (this *QwtRasterData) callVirtualBase_SetInterval(param1 qt.Axis, param2 *Q
 
 }
 func (this *QwtRasterData) OnSetInterval(slot func(super func(param1 qt.Axis, param2 *QwtInterval), param1 qt.Axis, param2 *QwtInterval)) {
-	ok := C.QwtRasterData_override_virtual_setInterval(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QwtRasterData_override_virtual_setInterval(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -122,7 +131,11 @@ func (this *QwtRasterData) callVirtualBase_PixelHint(param1 *qt.QRectF) *qt.QRec
 
 }
 func (this *QwtRasterData) OnPixelHint(slot func(super func(param1 *qt.QRectF) *qt.QRectF, param1 *qt.QRectF) *qt.QRectF) {
-	ok := C.QwtRasterData_override_virtual_pixelHint(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QwtRasterData_override_virtual_pixelHint(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -150,7 +163,11 @@ func (this *QwtRasterData) callVirtualBase_InitRaster(param1 *qt.QRectF, raster 
 
 }
 func (this *QwtRasterData) OnInitRaster(slot func(super func(param1 *qt.QRectF, raster *qt.QSize), param1 *qt.QRectF, raster *qt.QSize)) {
-	ok := C.QwtRasterData_override_virtual_initRaster(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QwtRasterData_override_virtual_initRaster(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -178,7 +195,11 @@ func (this *QwtRasterData) callVirtualBase_DiscardRaster() {
 
 }
 func (this *QwtRasterData) OnDiscardRaster(slot func(super func())) {
-	ok := C.QwtRasterData_override_virtual_discardRaster(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QwtRasterData_override_virtual_discardRaster(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -195,7 +216,11 @@ func miqt_exec_callback_QwtRasterData_discardRaster(self *C.QwtRasterData, cb C.
 
 }
 func (this *QwtRasterData) OnValue(slot func(x float64, y float64) float64) {
-	ok := C.QwtRasterData_override_virtual_value(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QwtRasterData_override_virtual_value(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}

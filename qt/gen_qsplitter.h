@@ -124,7 +124,7 @@ void QSplitter_getRange(const QSplitter* self, int index, int* param2, int* para
 QSplitterHandle* QSplitter_handle(const QSplitter* self, int index);
 void QSplitter_setStretchFactor(QSplitter* self, int index, int stretch);
 void QSplitter_splitterMoved(QSplitter* self, int pos, int index);
-void QSplitter_connect_splitterMoved(QSplitter* self, intptr_t slot);
+void* QSplitter_connect_splitterMoved(QSplitter* self, intptr_t slot);
 QSplitterHandle* QSplitter_createHandle(QSplitter* self);
 void QSplitter_childEvent(QSplitter* self, QChildEvent* param1);
 bool QSplitter_event(QSplitter* self, QEvent* param1);

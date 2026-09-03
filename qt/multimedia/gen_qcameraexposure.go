@@ -64,6 +64,11 @@ const (
 	QCameraExposure__MeteringSpot    QCameraExposure__MeteringMode = 3
 )
 
+//export miqt_exec_callback_handle_release_QCameraExposure
+func miqt_exec_callback_handle_release_QCameraExposure(cb C.intptr_t) {
+	cgo.Handle(cb).Delete()
+}
+
 type QCameraExposure struct {
 	h *C.QCameraExposure
 	*qt.QObject
@@ -271,8 +276,10 @@ func (this *QCameraExposure) SetAutoShutterSpeed() {
 func (this *QCameraExposure) FlashReady(param1 bool) {
 	C.QCameraExposure_flashReady(this.h, (C.bool)(param1))
 }
-func (this *QCameraExposure) OnFlashReady(slot func(param1 bool)) {
-	C.QCameraExposure_connect_flashReady(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QCameraExposure) OnFlashReady(slot func(param1 bool)) *qt.SignalConnection {
+	_goptr := qt.UnsafeNewQMetaObject__Connection(C.QCameraExposure_connect_flashReady(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QCameraExposure_flashReady
@@ -291,8 +298,10 @@ func miqt_exec_callback_QCameraExposure_flashReady(cb C.intptr_t, param1 C.bool)
 func (this *QCameraExposure) ApertureChanged(param1 float64) {
 	C.QCameraExposure_apertureChanged(this.h, (C.double)(param1))
 }
-func (this *QCameraExposure) OnApertureChanged(slot func(param1 float64)) {
-	C.QCameraExposure_connect_apertureChanged(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QCameraExposure) OnApertureChanged(slot func(param1 float64)) *qt.SignalConnection {
+	_goptr := qt.UnsafeNewQMetaObject__Connection(C.QCameraExposure_connect_apertureChanged(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QCameraExposure_apertureChanged
@@ -311,8 +320,10 @@ func miqt_exec_callback_QCameraExposure_apertureChanged(cb C.intptr_t, param1 C.
 func (this *QCameraExposure) ApertureRangeChanged() {
 	C.QCameraExposure_apertureRangeChanged(this.h)
 }
-func (this *QCameraExposure) OnApertureRangeChanged(slot func()) {
-	C.QCameraExposure_connect_apertureRangeChanged(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QCameraExposure) OnApertureRangeChanged(slot func()) *qt.SignalConnection {
+	_goptr := qt.UnsafeNewQMetaObject__Connection(C.QCameraExposure_connect_apertureRangeChanged(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QCameraExposure_apertureRangeChanged
@@ -328,8 +339,10 @@ func miqt_exec_callback_QCameraExposure_apertureRangeChanged(cb C.intptr_t) {
 func (this *QCameraExposure) ShutterSpeedChanged(speed float64) {
 	C.QCameraExposure_shutterSpeedChanged(this.h, (C.double)(speed))
 }
-func (this *QCameraExposure) OnShutterSpeedChanged(slot func(speed float64)) {
-	C.QCameraExposure_connect_shutterSpeedChanged(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QCameraExposure) OnShutterSpeedChanged(slot func(speed float64)) *qt.SignalConnection {
+	_goptr := qt.UnsafeNewQMetaObject__Connection(C.QCameraExposure_connect_shutterSpeedChanged(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QCameraExposure_shutterSpeedChanged
@@ -348,8 +361,10 @@ func miqt_exec_callback_QCameraExposure_shutterSpeedChanged(cb C.intptr_t, speed
 func (this *QCameraExposure) ShutterSpeedRangeChanged() {
 	C.QCameraExposure_shutterSpeedRangeChanged(this.h)
 }
-func (this *QCameraExposure) OnShutterSpeedRangeChanged(slot func()) {
-	C.QCameraExposure_connect_shutterSpeedRangeChanged(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QCameraExposure) OnShutterSpeedRangeChanged(slot func()) *qt.SignalConnection {
+	_goptr := qt.UnsafeNewQMetaObject__Connection(C.QCameraExposure_connect_shutterSpeedRangeChanged(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QCameraExposure_shutterSpeedRangeChanged
@@ -365,8 +380,10 @@ func miqt_exec_callback_QCameraExposure_shutterSpeedRangeChanged(cb C.intptr_t) 
 func (this *QCameraExposure) IsoSensitivityChanged(param1 int) {
 	C.QCameraExposure_isoSensitivityChanged(this.h, (C.int)(param1))
 }
-func (this *QCameraExposure) OnIsoSensitivityChanged(slot func(param1 int)) {
-	C.QCameraExposure_connect_isoSensitivityChanged(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QCameraExposure) OnIsoSensitivityChanged(slot func(param1 int)) *qt.SignalConnection {
+	_goptr := qt.UnsafeNewQMetaObject__Connection(C.QCameraExposure_connect_isoSensitivityChanged(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QCameraExposure_isoSensitivityChanged
@@ -385,8 +402,10 @@ func miqt_exec_callback_QCameraExposure_isoSensitivityChanged(cb C.intptr_t, par
 func (this *QCameraExposure) ExposureCompensationChanged(param1 float64) {
 	C.QCameraExposure_exposureCompensationChanged(this.h, (C.double)(param1))
 }
-func (this *QCameraExposure) OnExposureCompensationChanged(slot func(param1 float64)) {
-	C.QCameraExposure_connect_exposureCompensationChanged(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QCameraExposure) OnExposureCompensationChanged(slot func(param1 float64)) *qt.SignalConnection {
+	_goptr := qt.UnsafeNewQMetaObject__Connection(C.QCameraExposure_connect_exposureCompensationChanged(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QCameraExposure_exposureCompensationChanged

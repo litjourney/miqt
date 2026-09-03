@@ -1,3 +1,5 @@
+#include <memory>
+#include <utility>
 #include <QPainter>
 #include <QPalette>
 #include <QRectF>
@@ -8,6 +10,7 @@
 extern "C" {
 #endif
 
+void miqt_exec_callback_handle_release_QwtColumnSymbol(intptr_t);
 void miqt_exec_callback_QwtColumnSymbol_draw(const QwtColumnSymbol*, intptr_t, QPainter*, QwtColumnRect*);
 #ifdef __cplusplus
 } /* extern C */
@@ -64,11 +67,11 @@ public:
 	virtual ~MiqtVirtualQwtColumnSymbol() override = default;
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__draw = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtColumnSymbol> handle__draw;
 
 	// Subclass to allow providing a Go implementation
 	virtual void draw(QPainter* param1, const QwtColumnRect& param2) const override {
-		if (handle__draw == 0) {
+		if (!handle__draw) {
 			QwtColumnSymbol::draw(param1, param2);
 			return;
 		}
@@ -77,7 +80,7 @@ public:
 		const QwtColumnRect& param2_ret = param2;
 		// Cast returned reference into pointer
 		QwtColumnRect* sigval2 = const_cast<QwtColumnRect*>(&param2_ret);
-		miqt_exec_callback_QwtColumnSymbol_draw(this, handle__draw, sigval1, sigval2);
+		miqt_exec_callback_QwtColumnSymbol_draw(this, handle__draw.value(), sigval1, sigval2);
 
 	}
 
@@ -140,12 +143,13 @@ void QwtColumnSymbol_operatorAssign(QwtColumnSymbol* self, QwtColumnSymbol* para
 }
 
 bool QwtColumnSymbol_override_virtual_draw(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtColumnSymbol> slot_handle(slot);
 	MiqtVirtualQwtColumnSymbol* self_cast = dynamic_cast<MiqtVirtualQwtColumnSymbol*>( (QwtColumnSymbol*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__draw = slot;
+	self_cast->handle__draw = std::move(slot_handle);
 	return true;
 }
 

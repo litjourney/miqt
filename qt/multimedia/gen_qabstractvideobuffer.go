@@ -37,6 +37,11 @@ const (
 	QAbstractVideoBuffer__ReadWrite QAbstractVideoBuffer__MapMode = 3
 )
 
+//export miqt_exec_callback_handle_release_QAbstractVideoBuffer
+func miqt_exec_callback_handle_release_QAbstractVideoBuffer(cb C.intptr_t) {
+	cgo.Handle(cb).Delete()
+}
+
 type QAbstractVideoBuffer struct {
 	h *C.QAbstractVideoBuffer
 }
@@ -107,7 +112,11 @@ func (this *QAbstractVideoBuffer) callVirtualBase_Release() {
 
 }
 func (this *QAbstractVideoBuffer) OnRelease(slot func(super func())) {
-	ok := C.QAbstractVideoBuffer_override_virtual_release(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QAbstractVideoBuffer_override_virtual_release(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -124,7 +133,11 @@ func miqt_exec_callback_QAbstractVideoBuffer_release(self *C.QAbstractVideoBuffe
 
 }
 func (this *QAbstractVideoBuffer) OnMapMode(slot func() QAbstractVideoBuffer__MapMode) {
-	ok := C.QAbstractVideoBuffer_override_virtual_mapMode(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QAbstractVideoBuffer_override_virtual_mapMode(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -143,7 +156,11 @@ func miqt_exec_callback_QAbstractVideoBuffer_mapMode(self *C.QAbstractVideoBuffe
 
 }
 func (this *QAbstractVideoBuffer) OnMap(slot func(mode QAbstractVideoBuffer__MapMode, numBytes *int, bytesPerLine *int) *byte) {
-	ok := C.QAbstractVideoBuffer_override_virtual_map(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QAbstractVideoBuffer_override_virtual_map(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -169,7 +186,11 @@ func miqt_exec_callback_QAbstractVideoBuffer_map(self *C.QAbstractVideoBuffer, c
 
 }
 func (this *QAbstractVideoBuffer) OnUnmap(slot func()) {
-	ok := C.QAbstractVideoBuffer_override_virtual_unmap(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QAbstractVideoBuffer_override_virtual_unmap(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -194,7 +215,11 @@ func (this *QAbstractVideoBuffer) callVirtualBase_Handle() *qt.QVariant {
 
 }
 func (this *QAbstractVideoBuffer) OnHandle(slot func(super func() *qt.QVariant) *qt.QVariant) {
-	ok := C.QAbstractVideoBuffer_override_virtual_handle(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QAbstractVideoBuffer_override_virtual_handle(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}

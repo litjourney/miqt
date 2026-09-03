@@ -1,3 +1,5 @@
+#include <memory>
+#include <utility>
 #include <QAudioEngine>
 #include <QChildEvent>
 #include <QEvent>
@@ -19,6 +21,7 @@
 extern "C" {
 #endif
 
+void miqt_exec_callback_handle_release_QSpatialSound(intptr_t);
 void miqt_exec_callback_QSpatialSound_sourceChanged(intptr_t);
 void miqt_exec_callback_QSpatialSound_loopsChanged(intptr_t);
 void miqt_exec_callback_QSpatialSound_autoPlayChanged(intptr_t);
@@ -52,95 +55,95 @@ public:
 	virtual ~MiqtVirtualQSpatialSound() override = default;
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__event = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QSpatialSound> handle__event;
 
 	// Subclass to allow providing a Go implementation
 	virtual bool event(QEvent* event) override {
-		if (handle__event == 0) {
+		if (!handle__event) {
 			return QSpatialSound::event(event);
 		}
 
 		QEvent* sigval1 = event;
-		bool callback_return_value = miqt_exec_callback_QSpatialSound_event(this, handle__event, sigval1);
+		bool callback_return_value = miqt_exec_callback_QSpatialSound_event(this, handle__event.value(), sigval1);
 		return callback_return_value;
 	}
 
 	friend bool QSpatialSound_virtualbase_event(void* self, QEvent* event);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__eventFilter = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QSpatialSound> handle__eventFilter;
 
 	// Subclass to allow providing a Go implementation
 	virtual bool eventFilter(QObject* watched, QEvent* event) override {
-		if (handle__eventFilter == 0) {
+		if (!handle__eventFilter) {
 			return QSpatialSound::eventFilter(watched, event);
 		}
 
 		QObject* sigval1 = watched;
 		QEvent* sigval2 = event;
-		bool callback_return_value = miqt_exec_callback_QSpatialSound_eventFilter(this, handle__eventFilter, sigval1, sigval2);
+		bool callback_return_value = miqt_exec_callback_QSpatialSound_eventFilter(this, handle__eventFilter.value(), sigval1, sigval2);
 		return callback_return_value;
 	}
 
 	friend bool QSpatialSound_virtualbase_eventFilter(void* self, QObject* watched, QEvent* event);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__timerEvent = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QSpatialSound> handle__timerEvent;
 
 	// Subclass to allow providing a Go implementation
 	virtual void timerEvent(QTimerEvent* event) override {
-		if (handle__timerEvent == 0) {
+		if (!handle__timerEvent) {
 			QSpatialSound::timerEvent(event);
 			return;
 		}
 
 		QTimerEvent* sigval1 = event;
-		miqt_exec_callback_QSpatialSound_timerEvent(this, handle__timerEvent, sigval1);
+		miqt_exec_callback_QSpatialSound_timerEvent(this, handle__timerEvent.value(), sigval1);
 
 	}
 
 	friend void QSpatialSound_virtualbase_timerEvent(void* self, QTimerEvent* event);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__childEvent = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QSpatialSound> handle__childEvent;
 
 	// Subclass to allow providing a Go implementation
 	virtual void childEvent(QChildEvent* event) override {
-		if (handle__childEvent == 0) {
+		if (!handle__childEvent) {
 			QSpatialSound::childEvent(event);
 			return;
 		}
 
 		QChildEvent* sigval1 = event;
-		miqt_exec_callback_QSpatialSound_childEvent(this, handle__childEvent, sigval1);
+		miqt_exec_callback_QSpatialSound_childEvent(this, handle__childEvent.value(), sigval1);
 
 	}
 
 	friend void QSpatialSound_virtualbase_childEvent(void* self, QChildEvent* event);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__customEvent = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QSpatialSound> handle__customEvent;
 
 	// Subclass to allow providing a Go implementation
 	virtual void customEvent(QEvent* event) override {
-		if (handle__customEvent == 0) {
+		if (!handle__customEvent) {
 			QSpatialSound::customEvent(event);
 			return;
 		}
 
 		QEvent* sigval1 = event;
-		miqt_exec_callback_QSpatialSound_customEvent(this, handle__customEvent, sigval1);
+		miqt_exec_callback_QSpatialSound_customEvent(this, handle__customEvent.value(), sigval1);
 
 	}
 
 	friend void QSpatialSound_virtualbase_customEvent(void* self, QEvent* event);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__connectNotify = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QSpatialSound> handle__connectNotify;
 
 	// Subclass to allow providing a Go implementation
 	virtual void connectNotify(const QMetaMethod& signal) override {
-		if (handle__connectNotify == 0) {
+		if (!handle__connectNotify) {
 			QSpatialSound::connectNotify(signal);
 			return;
 		}
@@ -148,18 +151,18 @@ public:
 		const QMetaMethod& signal_ret = signal;
 		// Cast returned reference into pointer
 		QMetaMethod* sigval1 = const_cast<QMetaMethod*>(&signal_ret);
-		miqt_exec_callback_QSpatialSound_connectNotify(this, handle__connectNotify, sigval1);
+		miqt_exec_callback_QSpatialSound_connectNotify(this, handle__connectNotify.value(), sigval1);
 
 	}
 
 	friend void QSpatialSound_virtualbase_connectNotify(void* self, QMetaMethod* signal);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__disconnectNotify = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QSpatialSound> handle__disconnectNotify;
 
 	// Subclass to allow providing a Go implementation
 	virtual void disconnectNotify(const QMetaMethod& signal) override {
-		if (handle__disconnectNotify == 0) {
+		if (!handle__disconnectNotify) {
 			QSpatialSound::disconnectNotify(signal);
 			return;
 		}
@@ -167,7 +170,7 @@ public:
 		const QMetaMethod& signal_ret = signal;
 		// Cast returned reference into pointer
 		QMetaMethod* sigval1 = const_cast<QMetaMethod*>(&signal_ret);
-		miqt_exec_callback_QSpatialSound_disconnectNotify(this, handle__disconnectNotify, sigval1);
+		miqt_exec_callback_QSpatialSound_disconnectNotify(this, handle__disconnectNotify.value(), sigval1);
 
 	}
 
@@ -328,140 +331,168 @@ void QSpatialSound_sourceChanged(QSpatialSound* self) {
 	self->sourceChanged();
 }
 
-void QSpatialSound_connect_sourceChanged(QSpatialSound* self, intptr_t slot) {
-	QSpatialSound::connect(self, static_cast<void (QSpatialSound::*)()>(&QSpatialSound::sourceChanged), self, [=]() {
+void* QSpatialSound_connect_sourceChanged(QSpatialSound* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QSpatialSound>>(slot);
+	return new QMetaObject::Connection(QSpatialSound::connect(self, static_cast<void (QSpatialSound::*)()>(&QSpatialSound::sourceChanged), self, [slot_handle]() {
+		intptr_t slot = slot_handle->value();
 		miqt_exec_callback_QSpatialSound_sourceChanged(slot);
-	});
+	}));
 }
 
 void QSpatialSound_loopsChanged(QSpatialSound* self) {
 	self->loopsChanged();
 }
 
-void QSpatialSound_connect_loopsChanged(QSpatialSound* self, intptr_t slot) {
-	QSpatialSound::connect(self, static_cast<void (QSpatialSound::*)()>(&QSpatialSound::loopsChanged), self, [=]() {
+void* QSpatialSound_connect_loopsChanged(QSpatialSound* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QSpatialSound>>(slot);
+	return new QMetaObject::Connection(QSpatialSound::connect(self, static_cast<void (QSpatialSound::*)()>(&QSpatialSound::loopsChanged), self, [slot_handle]() {
+		intptr_t slot = slot_handle->value();
 		miqt_exec_callback_QSpatialSound_loopsChanged(slot);
-	});
+	}));
 }
 
 void QSpatialSound_autoPlayChanged(QSpatialSound* self) {
 	self->autoPlayChanged();
 }
 
-void QSpatialSound_connect_autoPlayChanged(QSpatialSound* self, intptr_t slot) {
-	QSpatialSound::connect(self, static_cast<void (QSpatialSound::*)()>(&QSpatialSound::autoPlayChanged), self, [=]() {
+void* QSpatialSound_connect_autoPlayChanged(QSpatialSound* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QSpatialSound>>(slot);
+	return new QMetaObject::Connection(QSpatialSound::connect(self, static_cast<void (QSpatialSound::*)()>(&QSpatialSound::autoPlayChanged), self, [slot_handle]() {
+		intptr_t slot = slot_handle->value();
 		miqt_exec_callback_QSpatialSound_autoPlayChanged(slot);
-	});
+	}));
 }
 
 void QSpatialSound_positionChanged(QSpatialSound* self) {
 	self->positionChanged();
 }
 
-void QSpatialSound_connect_positionChanged(QSpatialSound* self, intptr_t slot) {
-	QSpatialSound::connect(self, static_cast<void (QSpatialSound::*)()>(&QSpatialSound::positionChanged), self, [=]() {
+void* QSpatialSound_connect_positionChanged(QSpatialSound* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QSpatialSound>>(slot);
+	return new QMetaObject::Connection(QSpatialSound::connect(self, static_cast<void (QSpatialSound::*)()>(&QSpatialSound::positionChanged), self, [slot_handle]() {
+		intptr_t slot = slot_handle->value();
 		miqt_exec_callback_QSpatialSound_positionChanged(slot);
-	});
+	}));
 }
 
 void QSpatialSound_rotationChanged(QSpatialSound* self) {
 	self->rotationChanged();
 }
 
-void QSpatialSound_connect_rotationChanged(QSpatialSound* self, intptr_t slot) {
-	QSpatialSound::connect(self, static_cast<void (QSpatialSound::*)()>(&QSpatialSound::rotationChanged), self, [=]() {
+void* QSpatialSound_connect_rotationChanged(QSpatialSound* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QSpatialSound>>(slot);
+	return new QMetaObject::Connection(QSpatialSound::connect(self, static_cast<void (QSpatialSound::*)()>(&QSpatialSound::rotationChanged), self, [slot_handle]() {
+		intptr_t slot = slot_handle->value();
 		miqt_exec_callback_QSpatialSound_rotationChanged(slot);
-	});
+	}));
 }
 
 void QSpatialSound_volumeChanged(QSpatialSound* self) {
 	self->volumeChanged();
 }
 
-void QSpatialSound_connect_volumeChanged(QSpatialSound* self, intptr_t slot) {
-	QSpatialSound::connect(self, static_cast<void (QSpatialSound::*)()>(&QSpatialSound::volumeChanged), self, [=]() {
+void* QSpatialSound_connect_volumeChanged(QSpatialSound* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QSpatialSound>>(slot);
+	return new QMetaObject::Connection(QSpatialSound::connect(self, static_cast<void (QSpatialSound::*)()>(&QSpatialSound::volumeChanged), self, [slot_handle]() {
+		intptr_t slot = slot_handle->value();
 		miqt_exec_callback_QSpatialSound_volumeChanged(slot);
-	});
+	}));
 }
 
 void QSpatialSound_distanceModelChanged(QSpatialSound* self) {
 	self->distanceModelChanged();
 }
 
-void QSpatialSound_connect_distanceModelChanged(QSpatialSound* self, intptr_t slot) {
-	QSpatialSound::connect(self, static_cast<void (QSpatialSound::*)()>(&QSpatialSound::distanceModelChanged), self, [=]() {
+void* QSpatialSound_connect_distanceModelChanged(QSpatialSound* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QSpatialSound>>(slot);
+	return new QMetaObject::Connection(QSpatialSound::connect(self, static_cast<void (QSpatialSound::*)()>(&QSpatialSound::distanceModelChanged), self, [slot_handle]() {
+		intptr_t slot = slot_handle->value();
 		miqt_exec_callback_QSpatialSound_distanceModelChanged(slot);
-	});
+	}));
 }
 
 void QSpatialSound_sizeChanged(QSpatialSound* self) {
 	self->sizeChanged();
 }
 
-void QSpatialSound_connect_sizeChanged(QSpatialSound* self, intptr_t slot) {
-	QSpatialSound::connect(self, static_cast<void (QSpatialSound::*)()>(&QSpatialSound::sizeChanged), self, [=]() {
+void* QSpatialSound_connect_sizeChanged(QSpatialSound* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QSpatialSound>>(slot);
+	return new QMetaObject::Connection(QSpatialSound::connect(self, static_cast<void (QSpatialSound::*)()>(&QSpatialSound::sizeChanged), self, [slot_handle]() {
+		intptr_t slot = slot_handle->value();
 		miqt_exec_callback_QSpatialSound_sizeChanged(slot);
-	});
+	}));
 }
 
 void QSpatialSound_distanceCutoffChanged(QSpatialSound* self) {
 	self->distanceCutoffChanged();
 }
 
-void QSpatialSound_connect_distanceCutoffChanged(QSpatialSound* self, intptr_t slot) {
-	QSpatialSound::connect(self, static_cast<void (QSpatialSound::*)()>(&QSpatialSound::distanceCutoffChanged), self, [=]() {
+void* QSpatialSound_connect_distanceCutoffChanged(QSpatialSound* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QSpatialSound>>(slot);
+	return new QMetaObject::Connection(QSpatialSound::connect(self, static_cast<void (QSpatialSound::*)()>(&QSpatialSound::distanceCutoffChanged), self, [slot_handle]() {
+		intptr_t slot = slot_handle->value();
 		miqt_exec_callback_QSpatialSound_distanceCutoffChanged(slot);
-	});
+	}));
 }
 
 void QSpatialSound_manualAttenuationChanged(QSpatialSound* self) {
 	self->manualAttenuationChanged();
 }
 
-void QSpatialSound_connect_manualAttenuationChanged(QSpatialSound* self, intptr_t slot) {
-	QSpatialSound::connect(self, static_cast<void (QSpatialSound::*)()>(&QSpatialSound::manualAttenuationChanged), self, [=]() {
+void* QSpatialSound_connect_manualAttenuationChanged(QSpatialSound* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QSpatialSound>>(slot);
+	return new QMetaObject::Connection(QSpatialSound::connect(self, static_cast<void (QSpatialSound::*)()>(&QSpatialSound::manualAttenuationChanged), self, [slot_handle]() {
+		intptr_t slot = slot_handle->value();
 		miqt_exec_callback_QSpatialSound_manualAttenuationChanged(slot);
-	});
+	}));
 }
 
 void QSpatialSound_occlusionIntensityChanged(QSpatialSound* self) {
 	self->occlusionIntensityChanged();
 }
 
-void QSpatialSound_connect_occlusionIntensityChanged(QSpatialSound* self, intptr_t slot) {
-	QSpatialSound::connect(self, static_cast<void (QSpatialSound::*)()>(&QSpatialSound::occlusionIntensityChanged), self, [=]() {
+void* QSpatialSound_connect_occlusionIntensityChanged(QSpatialSound* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QSpatialSound>>(slot);
+	return new QMetaObject::Connection(QSpatialSound::connect(self, static_cast<void (QSpatialSound::*)()>(&QSpatialSound::occlusionIntensityChanged), self, [slot_handle]() {
+		intptr_t slot = slot_handle->value();
 		miqt_exec_callback_QSpatialSound_occlusionIntensityChanged(slot);
-	});
+	}));
 }
 
 void QSpatialSound_directivityChanged(QSpatialSound* self) {
 	self->directivityChanged();
 }
 
-void QSpatialSound_connect_directivityChanged(QSpatialSound* self, intptr_t slot) {
-	QSpatialSound::connect(self, static_cast<void (QSpatialSound::*)()>(&QSpatialSound::directivityChanged), self, [=]() {
+void* QSpatialSound_connect_directivityChanged(QSpatialSound* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QSpatialSound>>(slot);
+	return new QMetaObject::Connection(QSpatialSound::connect(self, static_cast<void (QSpatialSound::*)()>(&QSpatialSound::directivityChanged), self, [slot_handle]() {
+		intptr_t slot = slot_handle->value();
 		miqt_exec_callback_QSpatialSound_directivityChanged(slot);
-	});
+	}));
 }
 
 void QSpatialSound_directivityOrderChanged(QSpatialSound* self) {
 	self->directivityOrderChanged();
 }
 
-void QSpatialSound_connect_directivityOrderChanged(QSpatialSound* self, intptr_t slot) {
-	QSpatialSound::connect(self, static_cast<void (QSpatialSound::*)()>(&QSpatialSound::directivityOrderChanged), self, [=]() {
+void* QSpatialSound_connect_directivityOrderChanged(QSpatialSound* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QSpatialSound>>(slot);
+	return new QMetaObject::Connection(QSpatialSound::connect(self, static_cast<void (QSpatialSound::*)()>(&QSpatialSound::directivityOrderChanged), self, [slot_handle]() {
+		intptr_t slot = slot_handle->value();
 		miqt_exec_callback_QSpatialSound_directivityOrderChanged(slot);
-	});
+	}));
 }
 
 void QSpatialSound_nearFieldGainChanged(QSpatialSound* self) {
 	self->nearFieldGainChanged();
 }
 
-void QSpatialSound_connect_nearFieldGainChanged(QSpatialSound* self, intptr_t slot) {
-	QSpatialSound::connect(self, static_cast<void (QSpatialSound::*)()>(&QSpatialSound::nearFieldGainChanged), self, [=]() {
+void* QSpatialSound_connect_nearFieldGainChanged(QSpatialSound* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QSpatialSound>>(slot);
+	return new QMetaObject::Connection(QSpatialSound::connect(self, static_cast<void (QSpatialSound::*)()>(&QSpatialSound::nearFieldGainChanged), self, [slot_handle]() {
+		intptr_t slot = slot_handle->value();
 		miqt_exec_callback_QSpatialSound_nearFieldGainChanged(slot);
-	});
+	}));
 }
 
 void QSpatialSound_play(QSpatialSound* self) {
@@ -499,12 +530,13 @@ struct miqt_string QSpatialSound_tr3(const char* s, const char* c, int n) {
 }
 
 bool QSpatialSound_override_virtual_event(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QSpatialSound> slot_handle(slot);
 	MiqtVirtualQSpatialSound* self_cast = dynamic_cast<MiqtVirtualQSpatialSound*>( (QSpatialSound*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__event = slot;
+	self_cast->handle__event = std::move(slot_handle);
 	return true;
 }
 
@@ -513,12 +545,13 @@ bool QSpatialSound_virtualbase_event(void* self, QEvent* event) {
 }
 
 bool QSpatialSound_override_virtual_eventFilter(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QSpatialSound> slot_handle(slot);
 	MiqtVirtualQSpatialSound* self_cast = dynamic_cast<MiqtVirtualQSpatialSound*>( (QSpatialSound*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__eventFilter = slot;
+	self_cast->handle__eventFilter = std::move(slot_handle);
 	return true;
 }
 
@@ -527,12 +560,13 @@ bool QSpatialSound_virtualbase_eventFilter(void* self, QObject* watched, QEvent*
 }
 
 bool QSpatialSound_override_virtual_timerEvent(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QSpatialSound> slot_handle(slot);
 	MiqtVirtualQSpatialSound* self_cast = dynamic_cast<MiqtVirtualQSpatialSound*>( (QSpatialSound*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__timerEvent = slot;
+	self_cast->handle__timerEvent = std::move(slot_handle);
 	return true;
 }
 
@@ -541,12 +575,13 @@ void QSpatialSound_virtualbase_timerEvent(void* self, QTimerEvent* event) {
 }
 
 bool QSpatialSound_override_virtual_childEvent(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QSpatialSound> slot_handle(slot);
 	MiqtVirtualQSpatialSound* self_cast = dynamic_cast<MiqtVirtualQSpatialSound*>( (QSpatialSound*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__childEvent = slot;
+	self_cast->handle__childEvent = std::move(slot_handle);
 	return true;
 }
 
@@ -555,12 +590,13 @@ void QSpatialSound_virtualbase_childEvent(void* self, QChildEvent* event) {
 }
 
 bool QSpatialSound_override_virtual_customEvent(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QSpatialSound> slot_handle(slot);
 	MiqtVirtualQSpatialSound* self_cast = dynamic_cast<MiqtVirtualQSpatialSound*>( (QSpatialSound*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__customEvent = slot;
+	self_cast->handle__customEvent = std::move(slot_handle);
 	return true;
 }
 
@@ -569,12 +605,13 @@ void QSpatialSound_virtualbase_customEvent(void* self, QEvent* event) {
 }
 
 bool QSpatialSound_override_virtual_connectNotify(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QSpatialSound> slot_handle(slot);
 	MiqtVirtualQSpatialSound* self_cast = dynamic_cast<MiqtVirtualQSpatialSound*>( (QSpatialSound*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__connectNotify = slot;
+	self_cast->handle__connectNotify = std::move(slot_handle);
 	return true;
 }
 
@@ -583,12 +620,13 @@ void QSpatialSound_virtualbase_connectNotify(void* self, QMetaMethod* signal) {
 }
 
 bool QSpatialSound_override_virtual_disconnectNotify(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QSpatialSound> slot_handle(slot);
 	MiqtVirtualQSpatialSound* self_cast = dynamic_cast<MiqtVirtualQSpatialSound*>( (QSpatialSound*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__disconnectNotify = slot;
+	self_cast->handle__disconnectNotify = std::move(slot_handle);
 	return true;
 }
 

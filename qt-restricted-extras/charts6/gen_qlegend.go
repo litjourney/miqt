@@ -28,6 +28,11 @@ const (
 	QLegend__MarkerShapePentagon         QLegend__MarkerShape = 7
 )
 
+//export miqt_exec_callback_handle_release_QLegend
+func miqt_exec_callback_handle_release_QLegend(cb C.intptr_t) {
+	cgo.Handle(cb).Delete()
+}
+
 type QLegend struct {
 	h *C.QLegend
 	*qt6.QGraphicsWidget
@@ -230,8 +235,10 @@ func (this *QLegend) SetMarkerShape(shape QLegend__MarkerShape) {
 func (this *QLegend) BackgroundVisibleChanged(visible bool) {
 	C.QLegend_backgroundVisibleChanged(this.h, (C.bool)(visible))
 }
-func (this *QLegend) OnBackgroundVisibleChanged(slot func(visible bool)) {
-	C.QLegend_connect_backgroundVisibleChanged(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QLegend) OnBackgroundVisibleChanged(slot func(visible bool)) *qt6.SignalConnection {
+	_goptr := qt6.UnsafeNewQMetaObject__Connection(C.QLegend_connect_backgroundVisibleChanged(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QLegend_backgroundVisibleChanged
@@ -250,8 +257,10 @@ func miqt_exec_callback_QLegend_backgroundVisibleChanged(cb C.intptr_t, visible 
 func (this *QLegend) ColorChanged(color qt6.QColor) {
 	C.QLegend_colorChanged(this.h, (*C.QColor)(color.UnsafePointer()))
 }
-func (this *QLegend) OnColorChanged(slot func(color qt6.QColor)) {
-	C.QLegend_connect_colorChanged(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QLegend) OnColorChanged(slot func(color qt6.QColor)) *qt6.SignalConnection {
+	_goptr := qt6.UnsafeNewQMetaObject__Connection(C.QLegend_connect_colorChanged(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QLegend_colorChanged
@@ -272,8 +281,10 @@ func miqt_exec_callback_QLegend_colorChanged(cb C.intptr_t, color *C.QColor) {
 func (this *QLegend) BorderColorChanged(color qt6.QColor) {
 	C.QLegend_borderColorChanged(this.h, (*C.QColor)(color.UnsafePointer()))
 }
-func (this *QLegend) OnBorderColorChanged(slot func(color qt6.QColor)) {
-	C.QLegend_connect_borderColorChanged(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QLegend) OnBorderColorChanged(slot func(color qt6.QColor)) *qt6.SignalConnection {
+	_goptr := qt6.UnsafeNewQMetaObject__Connection(C.QLegend_connect_borderColorChanged(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QLegend_borderColorChanged
@@ -294,8 +305,10 @@ func miqt_exec_callback_QLegend_borderColorChanged(cb C.intptr_t, color *C.QColo
 func (this *QLegend) FontChanged(font qt6.QFont) {
 	C.QLegend_fontChanged(this.h, (*C.QFont)(font.UnsafePointer()))
 }
-func (this *QLegend) OnFontChanged(slot func(font qt6.QFont)) {
-	C.QLegend_connect_fontChanged(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QLegend) OnFontChanged(slot func(font qt6.QFont)) *qt6.SignalConnection {
+	_goptr := qt6.UnsafeNewQMetaObject__Connection(C.QLegend_connect_fontChanged(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QLegend_fontChanged
@@ -316,8 +329,10 @@ func miqt_exec_callback_QLegend_fontChanged(cb C.intptr_t, font *C.QFont) {
 func (this *QLegend) LabelColorChanged(color qt6.QColor) {
 	C.QLegend_labelColorChanged(this.h, (*C.QColor)(color.UnsafePointer()))
 }
-func (this *QLegend) OnLabelColorChanged(slot func(color qt6.QColor)) {
-	C.QLegend_connect_labelColorChanged(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QLegend) OnLabelColorChanged(slot func(color qt6.QColor)) *qt6.SignalConnection {
+	_goptr := qt6.UnsafeNewQMetaObject__Connection(C.QLegend_connect_labelColorChanged(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QLegend_labelColorChanged
@@ -338,8 +353,10 @@ func miqt_exec_callback_QLegend_labelColorChanged(cb C.intptr_t, color *C.QColor
 func (this *QLegend) ReverseMarkersChanged(reverseMarkers bool) {
 	C.QLegend_reverseMarkersChanged(this.h, (C.bool)(reverseMarkers))
 }
-func (this *QLegend) OnReverseMarkersChanged(slot func(reverseMarkers bool)) {
-	C.QLegend_connect_reverseMarkersChanged(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QLegend) OnReverseMarkersChanged(slot func(reverseMarkers bool)) *qt6.SignalConnection {
+	_goptr := qt6.UnsafeNewQMetaObject__Connection(C.QLegend_connect_reverseMarkersChanged(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QLegend_reverseMarkersChanged
@@ -358,8 +375,10 @@ func miqt_exec_callback_QLegend_reverseMarkersChanged(cb C.intptr_t, reverseMark
 func (this *QLegend) ShowToolTipsChanged(showToolTips bool) {
 	C.QLegend_showToolTipsChanged(this.h, (C.bool)(showToolTips))
 }
-func (this *QLegend) OnShowToolTipsChanged(slot func(showToolTips bool)) {
-	C.QLegend_connect_showToolTipsChanged(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QLegend) OnShowToolTipsChanged(slot func(showToolTips bool)) *qt6.SignalConnection {
+	_goptr := qt6.UnsafeNewQMetaObject__Connection(C.QLegend_connect_showToolTipsChanged(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QLegend_showToolTipsChanged
@@ -378,8 +397,10 @@ func miqt_exec_callback_QLegend_showToolTipsChanged(cb C.intptr_t, showToolTips 
 func (this *QLegend) MarkerShapeChanged(shape QLegend__MarkerShape) {
 	C.QLegend_markerShapeChanged(this.h, (C.int)(shape))
 }
-func (this *QLegend) OnMarkerShapeChanged(slot func(shape QLegend__MarkerShape)) {
-	C.QLegend_connect_markerShapeChanged(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QLegend) OnMarkerShapeChanged(slot func(shape QLegend__MarkerShape)) *qt6.SignalConnection {
+	_goptr := qt6.UnsafeNewQMetaObject__Connection(C.QLegend_connect_markerShapeChanged(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QLegend_markerShapeChanged
@@ -398,8 +419,10 @@ func miqt_exec_callback_QLegend_markerShapeChanged(cb C.intptr_t, shape C.int) {
 func (this *QLegend) AttachedToChartChanged(attachedToChart bool) {
 	C.QLegend_attachedToChartChanged(this.h, (C.bool)(attachedToChart))
 }
-func (this *QLegend) OnAttachedToChartChanged(slot func(attachedToChart bool)) {
-	C.QLegend_connect_attachedToChartChanged(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QLegend) OnAttachedToChartChanged(slot func(attachedToChart bool)) *qt6.SignalConnection {
+	_goptr := qt6.UnsafeNewQMetaObject__Connection(C.QLegend_connect_attachedToChartChanged(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QLegend_attachedToChartChanged
@@ -418,8 +441,10 @@ func miqt_exec_callback_QLegend_attachedToChartChanged(cb C.intptr_t, attachedTo
 func (this *QLegend) InteractiveChanged(interactive bool) {
 	C.QLegend_interactiveChanged(this.h, (C.bool)(interactive))
 }
-func (this *QLegend) OnInteractiveChanged(slot func(interactive bool)) {
-	C.QLegend_connect_interactiveChanged(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QLegend) OnInteractiveChanged(slot func(interactive bool)) *qt6.SignalConnection {
+	_goptr := qt6.UnsafeNewQMetaObject__Connection(C.QLegend_connect_interactiveChanged(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QLegend_interactiveChanged

@@ -1,3 +1,5 @@
+#include <memory>
+#include <utility>
 #include <QEvent>
 #include <QList>
 #include <qwt_picker_machine.h>
@@ -7,13 +9,21 @@
 extern "C" {
 #endif
 
+void miqt_exec_callback_handle_release_QwtPickerMachine(intptr_t);
 struct miqt_array /* of int */  miqt_exec_callback_QwtPickerMachine_transition(QwtPickerMachine*, intptr_t, QwtEventPattern*, QEvent*);
+void miqt_exec_callback_handle_release_QwtPickerTrackerMachine(intptr_t);
 struct miqt_array /* of int */  miqt_exec_callback_QwtPickerTrackerMachine_transition(QwtPickerTrackerMachine*, intptr_t, QwtEventPattern*, QEvent*);
+void miqt_exec_callback_handle_release_QwtPickerClickPointMachine(intptr_t);
 struct miqt_array /* of int */  miqt_exec_callback_QwtPickerClickPointMachine_transition(QwtPickerClickPointMachine*, intptr_t, QwtEventPattern*, QEvent*);
+void miqt_exec_callback_handle_release_QwtPickerDragPointMachine(intptr_t);
 struct miqt_array /* of int */  miqt_exec_callback_QwtPickerDragPointMachine_transition(QwtPickerDragPointMachine*, intptr_t, QwtEventPattern*, QEvent*);
+void miqt_exec_callback_handle_release_QwtPickerClickRectMachine(intptr_t);
 struct miqt_array /* of int */  miqt_exec_callback_QwtPickerClickRectMachine_transition(QwtPickerClickRectMachine*, intptr_t, QwtEventPattern*, QEvent*);
+void miqt_exec_callback_handle_release_QwtPickerDragRectMachine(intptr_t);
 struct miqt_array /* of int */  miqt_exec_callback_QwtPickerDragRectMachine_transition(QwtPickerDragRectMachine*, intptr_t, QwtEventPattern*, QEvent*);
+void miqt_exec_callback_handle_release_QwtPickerDragLineMachine(intptr_t);
 struct miqt_array /* of int */  miqt_exec_callback_QwtPickerDragLineMachine_transition(QwtPickerDragLineMachine*, intptr_t, QwtEventPattern*, QEvent*);
+void miqt_exec_callback_handle_release_QwtPickerPolygonMachine(intptr_t);
 struct miqt_array /* of int */  miqt_exec_callback_QwtPickerPolygonMachine_transition(QwtPickerPolygonMachine*, intptr_t, QwtEventPattern*, QEvent*);
 #ifdef __cplusplus
 } /* extern C */
@@ -28,11 +38,11 @@ public:
 	virtual ~MiqtVirtualQwtPickerMachine() override = default;
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__transition = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtPickerMachine> handle__transition;
 
 	// Subclass to allow providing a Go implementation
 	virtual QList<QwtPickerMachine::Command> transition(const QwtEventPattern& param1, const QEvent* param2) override {
-		if (handle__transition == 0) {
+		if (!handle__transition) {
 			return QList<QwtPickerMachine::Command>(); // Pure virtual, there is no base we can call
 		}
 
@@ -40,7 +50,7 @@ public:
 		// Cast returned reference into pointer
 		QwtEventPattern* sigval1 = const_cast<QwtEventPattern*>(&param1_ret);
 		QEvent* sigval2 = (QEvent*) param2;
-		struct miqt_array /* of int */  callback_return_value = miqt_exec_callback_QwtPickerMachine_transition(this, handle__transition, sigval1, sigval2);
+		struct miqt_array /* of int */  callback_return_value = miqt_exec_callback_QwtPickerMachine_transition(this, handle__transition.value(), sigval1, sigval2);
 		QList<QwtPickerMachine::Command> callback_return_value_QList;
 		callback_return_value_QList.reserve(callback_return_value.len);
 		int* callback_return_value_arr = static_cast<int*>(callback_return_value.data);
@@ -93,12 +103,13 @@ int QwtPickerMachine_selectionType(const QwtPickerMachine* self) {
 }
 
 bool QwtPickerMachine_override_virtual_transition(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtPickerMachine> slot_handle(slot);
 	MiqtVirtualQwtPickerMachine* self_cast = dynamic_cast<MiqtVirtualQwtPickerMachine*>( (QwtPickerMachine*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__transition = slot;
+	self_cast->handle__transition = std::move(slot_handle);
 	return true;
 }
 
@@ -115,11 +126,11 @@ public:
 	virtual ~MiqtVirtualQwtPickerTrackerMachine() override = default;
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__transition = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtPickerTrackerMachine> handle__transition;
 
 	// Subclass to allow providing a Go implementation
 	virtual QList<QwtPickerMachine::Command> transition(const QwtEventPattern& param1, const QEvent* param2) override {
-		if (handle__transition == 0) {
+		if (!handle__transition) {
 			return QwtPickerTrackerMachine::transition(param1, param2);
 		}
 
@@ -127,7 +138,7 @@ public:
 		// Cast returned reference into pointer
 		QwtEventPattern* sigval1 = const_cast<QwtEventPattern*>(&param1_ret);
 		QEvent* sigval2 = (QEvent*) param2;
-		struct miqt_array /* of int */  callback_return_value = miqt_exec_callback_QwtPickerTrackerMachine_transition(this, handle__transition, sigval1, sigval2);
+		struct miqt_array /* of int */  callback_return_value = miqt_exec_callback_QwtPickerTrackerMachine_transition(this, handle__transition.value(), sigval1, sigval2);
 		QList<QwtPickerMachine::Command> callback_return_value_QList;
 		callback_return_value_QList.reserve(callback_return_value.len);
 		int* callback_return_value_arr = static_cast<int*>(callback_return_value.data);
@@ -169,12 +180,13 @@ struct miqt_array /* of int */  QwtPickerTrackerMachine_transition(QwtPickerTrac
 }
 
 bool QwtPickerTrackerMachine_override_virtual_transition(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtPickerTrackerMachine> slot_handle(slot);
 	MiqtVirtualQwtPickerTrackerMachine* self_cast = dynamic_cast<MiqtVirtualQwtPickerTrackerMachine*>( (QwtPickerTrackerMachine*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__transition = slot;
+	self_cast->handle__transition = std::move(slot_handle);
 	return true;
 }
 
@@ -205,11 +217,11 @@ public:
 	virtual ~MiqtVirtualQwtPickerClickPointMachine() override = default;
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__transition = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtPickerClickPointMachine> handle__transition;
 
 	// Subclass to allow providing a Go implementation
 	virtual QList<QwtPickerMachine::Command> transition(const QwtEventPattern& param1, const QEvent* param2) override {
-		if (handle__transition == 0) {
+		if (!handle__transition) {
 			return QwtPickerClickPointMachine::transition(param1, param2);
 		}
 
@@ -217,7 +229,7 @@ public:
 		// Cast returned reference into pointer
 		QwtEventPattern* sigval1 = const_cast<QwtEventPattern*>(&param1_ret);
 		QEvent* sigval2 = (QEvent*) param2;
-		struct miqt_array /* of int */  callback_return_value = miqt_exec_callback_QwtPickerClickPointMachine_transition(this, handle__transition, sigval1, sigval2);
+		struct miqt_array /* of int */  callback_return_value = miqt_exec_callback_QwtPickerClickPointMachine_transition(this, handle__transition.value(), sigval1, sigval2);
 		QList<QwtPickerMachine::Command> callback_return_value_QList;
 		callback_return_value_QList.reserve(callback_return_value.len);
 		int* callback_return_value_arr = static_cast<int*>(callback_return_value.data);
@@ -259,12 +271,13 @@ struct miqt_array /* of int */  QwtPickerClickPointMachine_transition(QwtPickerC
 }
 
 bool QwtPickerClickPointMachine_override_virtual_transition(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtPickerClickPointMachine> slot_handle(slot);
 	MiqtVirtualQwtPickerClickPointMachine* self_cast = dynamic_cast<MiqtVirtualQwtPickerClickPointMachine*>( (QwtPickerClickPointMachine*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__transition = slot;
+	self_cast->handle__transition = std::move(slot_handle);
 	return true;
 }
 
@@ -295,11 +308,11 @@ public:
 	virtual ~MiqtVirtualQwtPickerDragPointMachine() override = default;
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__transition = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtPickerDragPointMachine> handle__transition;
 
 	// Subclass to allow providing a Go implementation
 	virtual QList<QwtPickerMachine::Command> transition(const QwtEventPattern& param1, const QEvent* param2) override {
-		if (handle__transition == 0) {
+		if (!handle__transition) {
 			return QwtPickerDragPointMachine::transition(param1, param2);
 		}
 
@@ -307,7 +320,7 @@ public:
 		// Cast returned reference into pointer
 		QwtEventPattern* sigval1 = const_cast<QwtEventPattern*>(&param1_ret);
 		QEvent* sigval2 = (QEvent*) param2;
-		struct miqt_array /* of int */  callback_return_value = miqt_exec_callback_QwtPickerDragPointMachine_transition(this, handle__transition, sigval1, sigval2);
+		struct miqt_array /* of int */  callback_return_value = miqt_exec_callback_QwtPickerDragPointMachine_transition(this, handle__transition.value(), sigval1, sigval2);
 		QList<QwtPickerMachine::Command> callback_return_value_QList;
 		callback_return_value_QList.reserve(callback_return_value.len);
 		int* callback_return_value_arr = static_cast<int*>(callback_return_value.data);
@@ -349,12 +362,13 @@ struct miqt_array /* of int */  QwtPickerDragPointMachine_transition(QwtPickerDr
 }
 
 bool QwtPickerDragPointMachine_override_virtual_transition(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtPickerDragPointMachine> slot_handle(slot);
 	MiqtVirtualQwtPickerDragPointMachine* self_cast = dynamic_cast<MiqtVirtualQwtPickerDragPointMachine*>( (QwtPickerDragPointMachine*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__transition = slot;
+	self_cast->handle__transition = std::move(slot_handle);
 	return true;
 }
 
@@ -385,11 +399,11 @@ public:
 	virtual ~MiqtVirtualQwtPickerClickRectMachine() override = default;
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__transition = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtPickerClickRectMachine> handle__transition;
 
 	// Subclass to allow providing a Go implementation
 	virtual QList<QwtPickerMachine::Command> transition(const QwtEventPattern& param1, const QEvent* param2) override {
-		if (handle__transition == 0) {
+		if (!handle__transition) {
 			return QwtPickerClickRectMachine::transition(param1, param2);
 		}
 
@@ -397,7 +411,7 @@ public:
 		// Cast returned reference into pointer
 		QwtEventPattern* sigval1 = const_cast<QwtEventPattern*>(&param1_ret);
 		QEvent* sigval2 = (QEvent*) param2;
-		struct miqt_array /* of int */  callback_return_value = miqt_exec_callback_QwtPickerClickRectMachine_transition(this, handle__transition, sigval1, sigval2);
+		struct miqt_array /* of int */  callback_return_value = miqt_exec_callback_QwtPickerClickRectMachine_transition(this, handle__transition.value(), sigval1, sigval2);
 		QList<QwtPickerMachine::Command> callback_return_value_QList;
 		callback_return_value_QList.reserve(callback_return_value.len);
 		int* callback_return_value_arr = static_cast<int*>(callback_return_value.data);
@@ -439,12 +453,13 @@ struct miqt_array /* of int */  QwtPickerClickRectMachine_transition(QwtPickerCl
 }
 
 bool QwtPickerClickRectMachine_override_virtual_transition(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtPickerClickRectMachine> slot_handle(slot);
 	MiqtVirtualQwtPickerClickRectMachine* self_cast = dynamic_cast<MiqtVirtualQwtPickerClickRectMachine*>( (QwtPickerClickRectMachine*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__transition = slot;
+	self_cast->handle__transition = std::move(slot_handle);
 	return true;
 }
 
@@ -475,11 +490,11 @@ public:
 	virtual ~MiqtVirtualQwtPickerDragRectMachine() override = default;
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__transition = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtPickerDragRectMachine> handle__transition;
 
 	// Subclass to allow providing a Go implementation
 	virtual QList<QwtPickerMachine::Command> transition(const QwtEventPattern& param1, const QEvent* param2) override {
-		if (handle__transition == 0) {
+		if (!handle__transition) {
 			return QwtPickerDragRectMachine::transition(param1, param2);
 		}
 
@@ -487,7 +502,7 @@ public:
 		// Cast returned reference into pointer
 		QwtEventPattern* sigval1 = const_cast<QwtEventPattern*>(&param1_ret);
 		QEvent* sigval2 = (QEvent*) param2;
-		struct miqt_array /* of int */  callback_return_value = miqt_exec_callback_QwtPickerDragRectMachine_transition(this, handle__transition, sigval1, sigval2);
+		struct miqt_array /* of int */  callback_return_value = miqt_exec_callback_QwtPickerDragRectMachine_transition(this, handle__transition.value(), sigval1, sigval2);
 		QList<QwtPickerMachine::Command> callback_return_value_QList;
 		callback_return_value_QList.reserve(callback_return_value.len);
 		int* callback_return_value_arr = static_cast<int*>(callback_return_value.data);
@@ -529,12 +544,13 @@ struct miqt_array /* of int */  QwtPickerDragRectMachine_transition(QwtPickerDra
 }
 
 bool QwtPickerDragRectMachine_override_virtual_transition(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtPickerDragRectMachine> slot_handle(slot);
 	MiqtVirtualQwtPickerDragRectMachine* self_cast = dynamic_cast<MiqtVirtualQwtPickerDragRectMachine*>( (QwtPickerDragRectMachine*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__transition = slot;
+	self_cast->handle__transition = std::move(slot_handle);
 	return true;
 }
 
@@ -565,11 +581,11 @@ public:
 	virtual ~MiqtVirtualQwtPickerDragLineMachine() override = default;
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__transition = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtPickerDragLineMachine> handle__transition;
 
 	// Subclass to allow providing a Go implementation
 	virtual QList<QwtPickerMachine::Command> transition(const QwtEventPattern& param1, const QEvent* param2) override {
-		if (handle__transition == 0) {
+		if (!handle__transition) {
 			return QwtPickerDragLineMachine::transition(param1, param2);
 		}
 
@@ -577,7 +593,7 @@ public:
 		// Cast returned reference into pointer
 		QwtEventPattern* sigval1 = const_cast<QwtEventPattern*>(&param1_ret);
 		QEvent* sigval2 = (QEvent*) param2;
-		struct miqt_array /* of int */  callback_return_value = miqt_exec_callback_QwtPickerDragLineMachine_transition(this, handle__transition, sigval1, sigval2);
+		struct miqt_array /* of int */  callback_return_value = miqt_exec_callback_QwtPickerDragLineMachine_transition(this, handle__transition.value(), sigval1, sigval2);
 		QList<QwtPickerMachine::Command> callback_return_value_QList;
 		callback_return_value_QList.reserve(callback_return_value.len);
 		int* callback_return_value_arr = static_cast<int*>(callback_return_value.data);
@@ -619,12 +635,13 @@ struct miqt_array /* of int */  QwtPickerDragLineMachine_transition(QwtPickerDra
 }
 
 bool QwtPickerDragLineMachine_override_virtual_transition(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtPickerDragLineMachine> slot_handle(slot);
 	MiqtVirtualQwtPickerDragLineMachine* self_cast = dynamic_cast<MiqtVirtualQwtPickerDragLineMachine*>( (QwtPickerDragLineMachine*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__transition = slot;
+	self_cast->handle__transition = std::move(slot_handle);
 	return true;
 }
 
@@ -655,11 +672,11 @@ public:
 	virtual ~MiqtVirtualQwtPickerPolygonMachine() override = default;
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__transition = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtPickerPolygonMachine> handle__transition;
 
 	// Subclass to allow providing a Go implementation
 	virtual QList<QwtPickerMachine::Command> transition(const QwtEventPattern& param1, const QEvent* param2) override {
-		if (handle__transition == 0) {
+		if (!handle__transition) {
 			return QwtPickerPolygonMachine::transition(param1, param2);
 		}
 
@@ -667,7 +684,7 @@ public:
 		// Cast returned reference into pointer
 		QwtEventPattern* sigval1 = const_cast<QwtEventPattern*>(&param1_ret);
 		QEvent* sigval2 = (QEvent*) param2;
-		struct miqt_array /* of int */  callback_return_value = miqt_exec_callback_QwtPickerPolygonMachine_transition(this, handle__transition, sigval1, sigval2);
+		struct miqt_array /* of int */  callback_return_value = miqt_exec_callback_QwtPickerPolygonMachine_transition(this, handle__transition.value(), sigval1, sigval2);
 		QList<QwtPickerMachine::Command> callback_return_value_QList;
 		callback_return_value_QList.reserve(callback_return_value.len);
 		int* callback_return_value_arr = static_cast<int*>(callback_return_value.data);
@@ -709,12 +726,13 @@ struct miqt_array /* of int */  QwtPickerPolygonMachine_transition(QwtPickerPoly
 }
 
 bool QwtPickerPolygonMachine_override_virtual_transition(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtPickerPolygonMachine> slot_handle(slot);
 	MiqtVirtualQwtPickerPolygonMachine* self_cast = dynamic_cast<MiqtVirtualQwtPickerPolygonMachine*>( (QwtPickerPolygonMachine*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__transition = slot;
+	self_cast->handle__transition = std::move(slot_handle);
 	return true;
 }
 

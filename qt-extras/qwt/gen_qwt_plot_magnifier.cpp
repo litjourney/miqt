@@ -1,3 +1,5 @@
+#include <memory>
+#include <utility>
 #include <QChildEvent>
 #include <QEvent>
 #include <QKeyEvent>
@@ -18,6 +20,7 @@
 extern "C" {
 #endif
 
+void miqt_exec_callback_handle_release_QwtPlotMagnifier(intptr_t);
 void miqt_exec_callback_QwtPlotMagnifier_rescale(QwtPlotMagnifier*, intptr_t, double);
 bool miqt_exec_callback_QwtPlotMagnifier_eventFilter(QwtPlotMagnifier*, intptr_t, QObject*, QEvent*);
 void miqt_exec_callback_QwtPlotMagnifier_widgetMousePressEvent(QwtPlotMagnifier*, intptr_t, QMouseEvent*);
@@ -44,214 +47,214 @@ public:
 	virtual ~MiqtVirtualQwtPlotMagnifier() override = default;
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__rescale = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtPlotMagnifier> handle__rescale;
 
 	// Subclass to allow providing a Go implementation
 	virtual void rescale(double factor) override {
-		if (handle__rescale == 0) {
+		if (!handle__rescale) {
 			QwtPlotMagnifier::rescale(factor);
 			return;
 		}
 
 		double sigval1 = factor;
-		miqt_exec_callback_QwtPlotMagnifier_rescale(this, handle__rescale, sigval1);
+		miqt_exec_callback_QwtPlotMagnifier_rescale(this, handle__rescale.value(), sigval1);
 
 	}
 
 	friend void QwtPlotMagnifier_virtualbase_rescale(void* self, double factor);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__eventFilter = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtPlotMagnifier> handle__eventFilter;
 
 	// Subclass to allow providing a Go implementation
 	virtual bool eventFilter(QObject* param1, QEvent* param2) override {
-		if (handle__eventFilter == 0) {
+		if (!handle__eventFilter) {
 			return QwtPlotMagnifier::eventFilter(param1, param2);
 		}
 
 		QObject* sigval1 = param1;
 		QEvent* sigval2 = param2;
-		bool callback_return_value = miqt_exec_callback_QwtPlotMagnifier_eventFilter(this, handle__eventFilter, sigval1, sigval2);
+		bool callback_return_value = miqt_exec_callback_QwtPlotMagnifier_eventFilter(this, handle__eventFilter.value(), sigval1, sigval2);
 		return callback_return_value;
 	}
 
 	friend bool QwtPlotMagnifier_virtualbase_eventFilter(void* self, QObject* param1, QEvent* param2);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__widgetMousePressEvent = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtPlotMagnifier> handle__widgetMousePressEvent;
 
 	// Subclass to allow providing a Go implementation
 	virtual void widgetMousePressEvent(QMouseEvent* param1) override {
-		if (handle__widgetMousePressEvent == 0) {
+		if (!handle__widgetMousePressEvent) {
 			QwtPlotMagnifier::widgetMousePressEvent(param1);
 			return;
 		}
 
 		QMouseEvent* sigval1 = param1;
-		miqt_exec_callback_QwtPlotMagnifier_widgetMousePressEvent(this, handle__widgetMousePressEvent, sigval1);
+		miqt_exec_callback_QwtPlotMagnifier_widgetMousePressEvent(this, handle__widgetMousePressEvent.value(), sigval1);
 
 	}
 
 	friend void QwtPlotMagnifier_virtualbase_widgetMousePressEvent(void* self, QMouseEvent* param1);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__widgetMouseReleaseEvent = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtPlotMagnifier> handle__widgetMouseReleaseEvent;
 
 	// Subclass to allow providing a Go implementation
 	virtual void widgetMouseReleaseEvent(QMouseEvent* param1) override {
-		if (handle__widgetMouseReleaseEvent == 0) {
+		if (!handle__widgetMouseReleaseEvent) {
 			QwtPlotMagnifier::widgetMouseReleaseEvent(param1);
 			return;
 		}
 
 		QMouseEvent* sigval1 = param1;
-		miqt_exec_callback_QwtPlotMagnifier_widgetMouseReleaseEvent(this, handle__widgetMouseReleaseEvent, sigval1);
+		miqt_exec_callback_QwtPlotMagnifier_widgetMouseReleaseEvent(this, handle__widgetMouseReleaseEvent.value(), sigval1);
 
 	}
 
 	friend void QwtPlotMagnifier_virtualbase_widgetMouseReleaseEvent(void* self, QMouseEvent* param1);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__widgetMouseMoveEvent = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtPlotMagnifier> handle__widgetMouseMoveEvent;
 
 	// Subclass to allow providing a Go implementation
 	virtual void widgetMouseMoveEvent(QMouseEvent* param1) override {
-		if (handle__widgetMouseMoveEvent == 0) {
+		if (!handle__widgetMouseMoveEvent) {
 			QwtPlotMagnifier::widgetMouseMoveEvent(param1);
 			return;
 		}
 
 		QMouseEvent* sigval1 = param1;
-		miqt_exec_callback_QwtPlotMagnifier_widgetMouseMoveEvent(this, handle__widgetMouseMoveEvent, sigval1);
+		miqt_exec_callback_QwtPlotMagnifier_widgetMouseMoveEvent(this, handle__widgetMouseMoveEvent.value(), sigval1);
 
 	}
 
 	friend void QwtPlotMagnifier_virtualbase_widgetMouseMoveEvent(void* self, QMouseEvent* param1);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__widgetWheelEvent = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtPlotMagnifier> handle__widgetWheelEvent;
 
 	// Subclass to allow providing a Go implementation
 	virtual void widgetWheelEvent(QWheelEvent* param1) override {
-		if (handle__widgetWheelEvent == 0) {
+		if (!handle__widgetWheelEvent) {
 			QwtPlotMagnifier::widgetWheelEvent(param1);
 			return;
 		}
 
 		QWheelEvent* sigval1 = param1;
-		miqt_exec_callback_QwtPlotMagnifier_widgetWheelEvent(this, handle__widgetWheelEvent, sigval1);
+		miqt_exec_callback_QwtPlotMagnifier_widgetWheelEvent(this, handle__widgetWheelEvent.value(), sigval1);
 
 	}
 
 	friend void QwtPlotMagnifier_virtualbase_widgetWheelEvent(void* self, QWheelEvent* param1);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__widgetKeyPressEvent = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtPlotMagnifier> handle__widgetKeyPressEvent;
 
 	// Subclass to allow providing a Go implementation
 	virtual void widgetKeyPressEvent(QKeyEvent* param1) override {
-		if (handle__widgetKeyPressEvent == 0) {
+		if (!handle__widgetKeyPressEvent) {
 			QwtPlotMagnifier::widgetKeyPressEvent(param1);
 			return;
 		}
 
 		QKeyEvent* sigval1 = param1;
-		miqt_exec_callback_QwtPlotMagnifier_widgetKeyPressEvent(this, handle__widgetKeyPressEvent, sigval1);
+		miqt_exec_callback_QwtPlotMagnifier_widgetKeyPressEvent(this, handle__widgetKeyPressEvent.value(), sigval1);
 
 	}
 
 	friend void QwtPlotMagnifier_virtualbase_widgetKeyPressEvent(void* self, QKeyEvent* param1);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__widgetKeyReleaseEvent = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtPlotMagnifier> handle__widgetKeyReleaseEvent;
 
 	// Subclass to allow providing a Go implementation
 	virtual void widgetKeyReleaseEvent(QKeyEvent* param1) override {
-		if (handle__widgetKeyReleaseEvent == 0) {
+		if (!handle__widgetKeyReleaseEvent) {
 			QwtPlotMagnifier::widgetKeyReleaseEvent(param1);
 			return;
 		}
 
 		QKeyEvent* sigval1 = param1;
-		miqt_exec_callback_QwtPlotMagnifier_widgetKeyReleaseEvent(this, handle__widgetKeyReleaseEvent, sigval1);
+		miqt_exec_callback_QwtPlotMagnifier_widgetKeyReleaseEvent(this, handle__widgetKeyReleaseEvent.value(), sigval1);
 
 	}
 
 	friend void QwtPlotMagnifier_virtualbase_widgetKeyReleaseEvent(void* self, QKeyEvent* param1);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__event = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtPlotMagnifier> handle__event;
 
 	// Subclass to allow providing a Go implementation
 	virtual bool event(QEvent* event) override {
-		if (handle__event == 0) {
+		if (!handle__event) {
 			return QwtPlotMagnifier::event(event);
 		}
 
 		QEvent* sigval1 = event;
-		bool callback_return_value = miqt_exec_callback_QwtPlotMagnifier_event(this, handle__event, sigval1);
+		bool callback_return_value = miqt_exec_callback_QwtPlotMagnifier_event(this, handle__event.value(), sigval1);
 		return callback_return_value;
 	}
 
 	friend bool QwtPlotMagnifier_virtualbase_event(void* self, QEvent* event);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__timerEvent = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtPlotMagnifier> handle__timerEvent;
 
 	// Subclass to allow providing a Go implementation
 	virtual void timerEvent(QTimerEvent* event) override {
-		if (handle__timerEvent == 0) {
+		if (!handle__timerEvent) {
 			QwtPlotMagnifier::timerEvent(event);
 			return;
 		}
 
 		QTimerEvent* sigval1 = event;
-		miqt_exec_callback_QwtPlotMagnifier_timerEvent(this, handle__timerEvent, sigval1);
+		miqt_exec_callback_QwtPlotMagnifier_timerEvent(this, handle__timerEvent.value(), sigval1);
 
 	}
 
 	friend void QwtPlotMagnifier_virtualbase_timerEvent(void* self, QTimerEvent* event);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__childEvent = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtPlotMagnifier> handle__childEvent;
 
 	// Subclass to allow providing a Go implementation
 	virtual void childEvent(QChildEvent* event) override {
-		if (handle__childEvent == 0) {
+		if (!handle__childEvent) {
 			QwtPlotMagnifier::childEvent(event);
 			return;
 		}
 
 		QChildEvent* sigval1 = event;
-		miqt_exec_callback_QwtPlotMagnifier_childEvent(this, handle__childEvent, sigval1);
+		miqt_exec_callback_QwtPlotMagnifier_childEvent(this, handle__childEvent.value(), sigval1);
 
 	}
 
 	friend void QwtPlotMagnifier_virtualbase_childEvent(void* self, QChildEvent* event);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__customEvent = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtPlotMagnifier> handle__customEvent;
 
 	// Subclass to allow providing a Go implementation
 	virtual void customEvent(QEvent* event) override {
-		if (handle__customEvent == 0) {
+		if (!handle__customEvent) {
 			QwtPlotMagnifier::customEvent(event);
 			return;
 		}
 
 		QEvent* sigval1 = event;
-		miqt_exec_callback_QwtPlotMagnifier_customEvent(this, handle__customEvent, sigval1);
+		miqt_exec_callback_QwtPlotMagnifier_customEvent(this, handle__customEvent.value(), sigval1);
 
 	}
 
 	friend void QwtPlotMagnifier_virtualbase_customEvent(void* self, QEvent* event);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__connectNotify = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtPlotMagnifier> handle__connectNotify;
 
 	// Subclass to allow providing a Go implementation
 	virtual void connectNotify(const QMetaMethod& signal) override {
-		if (handle__connectNotify == 0) {
+		if (!handle__connectNotify) {
 			QwtPlotMagnifier::connectNotify(signal);
 			return;
 		}
@@ -259,18 +262,18 @@ public:
 		const QMetaMethod& signal_ret = signal;
 		// Cast returned reference into pointer
 		QMetaMethod* sigval1 = const_cast<QMetaMethod*>(&signal_ret);
-		miqt_exec_callback_QwtPlotMagnifier_connectNotify(this, handle__connectNotify, sigval1);
+		miqt_exec_callback_QwtPlotMagnifier_connectNotify(this, handle__connectNotify.value(), sigval1);
 
 	}
 
 	friend void QwtPlotMagnifier_virtualbase_connectNotify(void* self, QMetaMethod* signal);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__disconnectNotify = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtPlotMagnifier> handle__disconnectNotify;
 
 	// Subclass to allow providing a Go implementation
 	virtual void disconnectNotify(const QMetaMethod& signal) override {
-		if (handle__disconnectNotify == 0) {
+		if (!handle__disconnectNotify) {
 			QwtPlotMagnifier::disconnectNotify(signal);
 			return;
 		}
@@ -278,7 +281,7 @@ public:
 		const QMetaMethod& signal_ret = signal;
 		// Cast returned reference into pointer
 		QMetaMethod* sigval1 = const_cast<QMetaMethod*>(&signal_ret);
-		miqt_exec_callback_QwtPlotMagnifier_disconnectNotify(this, handle__disconnectNotify, sigval1);
+		miqt_exec_callback_QwtPlotMagnifier_disconnectNotify(this, handle__disconnectNotify.value(), sigval1);
 
 	}
 
@@ -398,12 +401,13 @@ struct miqt_string QwtPlotMagnifier_trUtf83(const char* s, const char* c, int n)
 }
 
 bool QwtPlotMagnifier_override_virtual_rescale(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtPlotMagnifier> slot_handle(slot);
 	MiqtVirtualQwtPlotMagnifier* self_cast = dynamic_cast<MiqtVirtualQwtPlotMagnifier*>( (QwtPlotMagnifier*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__rescale = slot;
+	self_cast->handle__rescale = std::move(slot_handle);
 	return true;
 }
 
@@ -412,12 +416,13 @@ void QwtPlotMagnifier_virtualbase_rescale(void* self, double factor) {
 }
 
 bool QwtPlotMagnifier_override_virtual_eventFilter(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtPlotMagnifier> slot_handle(slot);
 	MiqtVirtualQwtPlotMagnifier* self_cast = dynamic_cast<MiqtVirtualQwtPlotMagnifier*>( (QwtPlotMagnifier*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__eventFilter = slot;
+	self_cast->handle__eventFilter = std::move(slot_handle);
 	return true;
 }
 
@@ -426,12 +431,13 @@ bool QwtPlotMagnifier_virtualbase_eventFilter(void* self, QObject* param1, QEven
 }
 
 bool QwtPlotMagnifier_override_virtual_widgetMousePressEvent(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtPlotMagnifier> slot_handle(slot);
 	MiqtVirtualQwtPlotMagnifier* self_cast = dynamic_cast<MiqtVirtualQwtPlotMagnifier*>( (QwtPlotMagnifier*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__widgetMousePressEvent = slot;
+	self_cast->handle__widgetMousePressEvent = std::move(slot_handle);
 	return true;
 }
 
@@ -440,12 +446,13 @@ void QwtPlotMagnifier_virtualbase_widgetMousePressEvent(void* self, QMouseEvent*
 }
 
 bool QwtPlotMagnifier_override_virtual_widgetMouseReleaseEvent(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtPlotMagnifier> slot_handle(slot);
 	MiqtVirtualQwtPlotMagnifier* self_cast = dynamic_cast<MiqtVirtualQwtPlotMagnifier*>( (QwtPlotMagnifier*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__widgetMouseReleaseEvent = slot;
+	self_cast->handle__widgetMouseReleaseEvent = std::move(slot_handle);
 	return true;
 }
 
@@ -454,12 +461,13 @@ void QwtPlotMagnifier_virtualbase_widgetMouseReleaseEvent(void* self, QMouseEven
 }
 
 bool QwtPlotMagnifier_override_virtual_widgetMouseMoveEvent(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtPlotMagnifier> slot_handle(slot);
 	MiqtVirtualQwtPlotMagnifier* self_cast = dynamic_cast<MiqtVirtualQwtPlotMagnifier*>( (QwtPlotMagnifier*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__widgetMouseMoveEvent = slot;
+	self_cast->handle__widgetMouseMoveEvent = std::move(slot_handle);
 	return true;
 }
 
@@ -468,12 +476,13 @@ void QwtPlotMagnifier_virtualbase_widgetMouseMoveEvent(void* self, QMouseEvent* 
 }
 
 bool QwtPlotMagnifier_override_virtual_widgetWheelEvent(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtPlotMagnifier> slot_handle(slot);
 	MiqtVirtualQwtPlotMagnifier* self_cast = dynamic_cast<MiqtVirtualQwtPlotMagnifier*>( (QwtPlotMagnifier*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__widgetWheelEvent = slot;
+	self_cast->handle__widgetWheelEvent = std::move(slot_handle);
 	return true;
 }
 
@@ -482,12 +491,13 @@ void QwtPlotMagnifier_virtualbase_widgetWheelEvent(void* self, QWheelEvent* para
 }
 
 bool QwtPlotMagnifier_override_virtual_widgetKeyPressEvent(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtPlotMagnifier> slot_handle(slot);
 	MiqtVirtualQwtPlotMagnifier* self_cast = dynamic_cast<MiqtVirtualQwtPlotMagnifier*>( (QwtPlotMagnifier*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__widgetKeyPressEvent = slot;
+	self_cast->handle__widgetKeyPressEvent = std::move(slot_handle);
 	return true;
 }
 
@@ -496,12 +506,13 @@ void QwtPlotMagnifier_virtualbase_widgetKeyPressEvent(void* self, QKeyEvent* par
 }
 
 bool QwtPlotMagnifier_override_virtual_widgetKeyReleaseEvent(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtPlotMagnifier> slot_handle(slot);
 	MiqtVirtualQwtPlotMagnifier* self_cast = dynamic_cast<MiqtVirtualQwtPlotMagnifier*>( (QwtPlotMagnifier*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__widgetKeyReleaseEvent = slot;
+	self_cast->handle__widgetKeyReleaseEvent = std::move(slot_handle);
 	return true;
 }
 
@@ -510,12 +521,13 @@ void QwtPlotMagnifier_virtualbase_widgetKeyReleaseEvent(void* self, QKeyEvent* p
 }
 
 bool QwtPlotMagnifier_override_virtual_event(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtPlotMagnifier> slot_handle(slot);
 	MiqtVirtualQwtPlotMagnifier* self_cast = dynamic_cast<MiqtVirtualQwtPlotMagnifier*>( (QwtPlotMagnifier*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__event = slot;
+	self_cast->handle__event = std::move(slot_handle);
 	return true;
 }
 
@@ -524,12 +536,13 @@ bool QwtPlotMagnifier_virtualbase_event(void* self, QEvent* event) {
 }
 
 bool QwtPlotMagnifier_override_virtual_timerEvent(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtPlotMagnifier> slot_handle(slot);
 	MiqtVirtualQwtPlotMagnifier* self_cast = dynamic_cast<MiqtVirtualQwtPlotMagnifier*>( (QwtPlotMagnifier*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__timerEvent = slot;
+	self_cast->handle__timerEvent = std::move(slot_handle);
 	return true;
 }
 
@@ -538,12 +551,13 @@ void QwtPlotMagnifier_virtualbase_timerEvent(void* self, QTimerEvent* event) {
 }
 
 bool QwtPlotMagnifier_override_virtual_childEvent(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtPlotMagnifier> slot_handle(slot);
 	MiqtVirtualQwtPlotMagnifier* self_cast = dynamic_cast<MiqtVirtualQwtPlotMagnifier*>( (QwtPlotMagnifier*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__childEvent = slot;
+	self_cast->handle__childEvent = std::move(slot_handle);
 	return true;
 }
 
@@ -552,12 +566,13 @@ void QwtPlotMagnifier_virtualbase_childEvent(void* self, QChildEvent* event) {
 }
 
 bool QwtPlotMagnifier_override_virtual_customEvent(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtPlotMagnifier> slot_handle(slot);
 	MiqtVirtualQwtPlotMagnifier* self_cast = dynamic_cast<MiqtVirtualQwtPlotMagnifier*>( (QwtPlotMagnifier*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__customEvent = slot;
+	self_cast->handle__customEvent = std::move(slot_handle);
 	return true;
 }
 
@@ -566,12 +581,13 @@ void QwtPlotMagnifier_virtualbase_customEvent(void* self, QEvent* event) {
 }
 
 bool QwtPlotMagnifier_override_virtual_connectNotify(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtPlotMagnifier> slot_handle(slot);
 	MiqtVirtualQwtPlotMagnifier* self_cast = dynamic_cast<MiqtVirtualQwtPlotMagnifier*>( (QwtPlotMagnifier*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__connectNotify = slot;
+	self_cast->handle__connectNotify = std::move(slot_handle);
 	return true;
 }
 
@@ -580,12 +596,13 @@ void QwtPlotMagnifier_virtualbase_connectNotify(void* self, QMetaMethod* signal)
 }
 
 bool QwtPlotMagnifier_override_virtual_disconnectNotify(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtPlotMagnifier> slot_handle(slot);
 	MiqtVirtualQwtPlotMagnifier* self_cast = dynamic_cast<MiqtVirtualQwtPlotMagnifier*>( (QwtPlotMagnifier*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__disconnectNotify = slot;
+	self_cast->handle__disconnectNotify = std::move(slot_handle);
 	return true;
 }
 

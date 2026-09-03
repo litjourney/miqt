@@ -1,3 +1,5 @@
+#include <memory>
+#include <utility>
 #include <QMediaControl>
 #include <QMetaMethod>
 #include <QMetaObject>
@@ -13,6 +15,7 @@
 extern "C" {
 #endif
 
+void miqt_exec_callback_handle_release_QRadioDataControl(intptr_t);
 void miqt_exec_callback_QRadioDataControl_stationIdChanged(intptr_t, struct miqt_string);
 void miqt_exec_callback_QRadioDataControl_programTypeChanged(intptr_t, int);
 void miqt_exec_callback_QRadioDataControl_programTypeNameChanged(intptr_t, struct miqt_string);
@@ -136,8 +139,10 @@ void QRadioDataControl_stationIdChanged(QRadioDataControl* self, struct miqt_str
 	self->stationIdChanged(stationId_QString);
 }
 
-void QRadioDataControl_connect_stationIdChanged(QRadioDataControl* self, intptr_t slot) {
-	QRadioDataControl::connect(self, static_cast<void (QRadioDataControl::*)(QString)>(&QRadioDataControl::stationIdChanged), self, [=](QString stationId) {
+void* QRadioDataControl_connect_stationIdChanged(QRadioDataControl* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QRadioDataControl>>(slot);
+	return new QMetaObject::Connection(QRadioDataControl::connect(self, static_cast<void (QRadioDataControl::*)(QString)>(&QRadioDataControl::stationIdChanged), self, [slot_handle](QString stationId) {
+		intptr_t slot = slot_handle->value();
 		QString stationId_ret = stationId;
 		// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 		QByteArray stationId_b = stationId_ret.toUtf8();
@@ -147,19 +152,21 @@ void QRadioDataControl_connect_stationIdChanged(QRadioDataControl* self, intptr_
 		memcpy(stationId_ms.data, stationId_b.data(), stationId_ms.len);
 		struct miqt_string sigval1 = stationId_ms;
 		miqt_exec_callback_QRadioDataControl_stationIdChanged(slot, sigval1);
-	});
+	}));
 }
 
 void QRadioDataControl_programTypeChanged(QRadioDataControl* self, int programType) {
 	self->programTypeChanged(static_cast<QRadioData::ProgramType>(programType));
 }
 
-void QRadioDataControl_connect_programTypeChanged(QRadioDataControl* self, intptr_t slot) {
-	QRadioDataControl::connect(self, static_cast<void (QRadioDataControl::*)(QRadioData::ProgramType)>(&QRadioDataControl::programTypeChanged), self, [=](QRadioData::ProgramType programType) {
+void* QRadioDataControl_connect_programTypeChanged(QRadioDataControl* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QRadioDataControl>>(slot);
+	return new QMetaObject::Connection(QRadioDataControl::connect(self, static_cast<void (QRadioDataControl::*)(QRadioData::ProgramType)>(&QRadioDataControl::programTypeChanged), self, [slot_handle](QRadioData::ProgramType programType) {
+		intptr_t slot = slot_handle->value();
 		QRadioData::ProgramType programType_ret = programType;
 		int sigval1 = static_cast<int>(programType_ret);
 		miqt_exec_callback_QRadioDataControl_programTypeChanged(slot, sigval1);
-	});
+	}));
 }
 
 void QRadioDataControl_programTypeNameChanged(QRadioDataControl* self, struct miqt_string programTypeName) {
@@ -167,8 +174,10 @@ void QRadioDataControl_programTypeNameChanged(QRadioDataControl* self, struct mi
 	self->programTypeNameChanged(programTypeName_QString);
 }
 
-void QRadioDataControl_connect_programTypeNameChanged(QRadioDataControl* self, intptr_t slot) {
-	QRadioDataControl::connect(self, static_cast<void (QRadioDataControl::*)(QString)>(&QRadioDataControl::programTypeNameChanged), self, [=](QString programTypeName) {
+void* QRadioDataControl_connect_programTypeNameChanged(QRadioDataControl* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QRadioDataControl>>(slot);
+	return new QMetaObject::Connection(QRadioDataControl::connect(self, static_cast<void (QRadioDataControl::*)(QString)>(&QRadioDataControl::programTypeNameChanged), self, [slot_handle](QString programTypeName) {
+		intptr_t slot = slot_handle->value();
 		QString programTypeName_ret = programTypeName;
 		// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 		QByteArray programTypeName_b = programTypeName_ret.toUtf8();
@@ -178,7 +187,7 @@ void QRadioDataControl_connect_programTypeNameChanged(QRadioDataControl* self, i
 		memcpy(programTypeName_ms.data, programTypeName_b.data(), programTypeName_ms.len);
 		struct miqt_string sigval1 = programTypeName_ms;
 		miqt_exec_callback_QRadioDataControl_programTypeNameChanged(slot, sigval1);
-	});
+	}));
 }
 
 void QRadioDataControl_stationNameChanged(QRadioDataControl* self, struct miqt_string stationName) {
@@ -186,8 +195,10 @@ void QRadioDataControl_stationNameChanged(QRadioDataControl* self, struct miqt_s
 	self->stationNameChanged(stationName_QString);
 }
 
-void QRadioDataControl_connect_stationNameChanged(QRadioDataControl* self, intptr_t slot) {
-	QRadioDataControl::connect(self, static_cast<void (QRadioDataControl::*)(QString)>(&QRadioDataControl::stationNameChanged), self, [=](QString stationName) {
+void* QRadioDataControl_connect_stationNameChanged(QRadioDataControl* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QRadioDataControl>>(slot);
+	return new QMetaObject::Connection(QRadioDataControl::connect(self, static_cast<void (QRadioDataControl::*)(QString)>(&QRadioDataControl::stationNameChanged), self, [slot_handle](QString stationName) {
+		intptr_t slot = slot_handle->value();
 		QString stationName_ret = stationName;
 		// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 		QByteArray stationName_b = stationName_ret.toUtf8();
@@ -197,7 +208,7 @@ void QRadioDataControl_connect_stationNameChanged(QRadioDataControl* self, intpt
 		memcpy(stationName_ms.data, stationName_b.data(), stationName_ms.len);
 		struct miqt_string sigval1 = stationName_ms;
 		miqt_exec_callback_QRadioDataControl_stationNameChanged(slot, sigval1);
-	});
+	}));
 }
 
 void QRadioDataControl_radioTextChanged(QRadioDataControl* self, struct miqt_string radioText) {
@@ -205,8 +216,10 @@ void QRadioDataControl_radioTextChanged(QRadioDataControl* self, struct miqt_str
 	self->radioTextChanged(radioText_QString);
 }
 
-void QRadioDataControl_connect_radioTextChanged(QRadioDataControl* self, intptr_t slot) {
-	QRadioDataControl::connect(self, static_cast<void (QRadioDataControl::*)(QString)>(&QRadioDataControl::radioTextChanged), self, [=](QString radioText) {
+void* QRadioDataControl_connect_radioTextChanged(QRadioDataControl* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QRadioDataControl>>(slot);
+	return new QMetaObject::Connection(QRadioDataControl::connect(self, static_cast<void (QRadioDataControl::*)(QString)>(&QRadioDataControl::radioTextChanged), self, [slot_handle](QString radioText) {
+		intptr_t slot = slot_handle->value();
 		QString radioText_ret = radioText;
 		// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 		QByteArray radioText_b = radioText_ret.toUtf8();
@@ -216,30 +229,34 @@ void QRadioDataControl_connect_radioTextChanged(QRadioDataControl* self, intptr_
 		memcpy(radioText_ms.data, radioText_b.data(), radioText_ms.len);
 		struct miqt_string sigval1 = radioText_ms;
 		miqt_exec_callback_QRadioDataControl_radioTextChanged(slot, sigval1);
-	});
+	}));
 }
 
 void QRadioDataControl_alternativeFrequenciesEnabledChanged(QRadioDataControl* self, bool enabled) {
 	self->alternativeFrequenciesEnabledChanged(enabled);
 }
 
-void QRadioDataControl_connect_alternativeFrequenciesEnabledChanged(QRadioDataControl* self, intptr_t slot) {
-	QRadioDataControl::connect(self, static_cast<void (QRadioDataControl::*)(bool)>(&QRadioDataControl::alternativeFrequenciesEnabledChanged), self, [=](bool enabled) {
+void* QRadioDataControl_connect_alternativeFrequenciesEnabledChanged(QRadioDataControl* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QRadioDataControl>>(slot);
+	return new QMetaObject::Connection(QRadioDataControl::connect(self, static_cast<void (QRadioDataControl::*)(bool)>(&QRadioDataControl::alternativeFrequenciesEnabledChanged), self, [slot_handle](bool enabled) {
+		intptr_t slot = slot_handle->value();
 		bool sigval1 = enabled;
 		miqt_exec_callback_QRadioDataControl_alternativeFrequenciesEnabledChanged(slot, sigval1);
-	});
+	}));
 }
 
 void QRadioDataControl_errorWithErr(QRadioDataControl* self, int err) {
 	self->error(static_cast<QRadioData::Error>(err));
 }
 
-void QRadioDataControl_connect_errorWithErr(QRadioDataControl* self, intptr_t slot) {
-	QRadioDataControl::connect(self, static_cast<void (QRadioDataControl::*)(QRadioData::Error)>(&QRadioDataControl::error), self, [=](QRadioData::Error err) {
+void* QRadioDataControl_connect_errorWithErr(QRadioDataControl* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QRadioDataControl>>(slot);
+	return new QMetaObject::Connection(QRadioDataControl::connect(self, static_cast<void (QRadioDataControl::*)(QRadioData::Error)>(&QRadioDataControl::error), self, [slot_handle](QRadioData::Error err) {
+		intptr_t slot = slot_handle->value();
 		QRadioData::Error err_ret = err;
 		int sigval1 = static_cast<int>(err_ret);
 		miqt_exec_callback_QRadioDataControl_errorWithErr(slot, sigval1);
-	});
+	}));
 }
 
 struct miqt_string QRadioDataControl_tr2(const char* s, const char* c) {

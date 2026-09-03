@@ -1,3 +1,5 @@
+#include <memory>
+#include <utility>
 #include <QKeyEvent>
 #include <QMouseEvent>
 #include <QVector>
@@ -10,6 +12,7 @@
 extern "C" {
 #endif
 
+void miqt_exec_callback_handle_release_QwtEventPattern(intptr_t);
 bool miqt_exec_callback_QwtEventPattern_mouseMatch2(const QwtEventPattern*, intptr_t, QwtEventPattern__MousePattern*, QMouseEvent*);
 bool miqt_exec_callback_QwtEventPattern_keyMatch2(const QwtEventPattern*, intptr_t, QwtEventPattern__KeyPattern*, QKeyEvent*);
 #ifdef __cplusplus
@@ -25,11 +28,11 @@ public:
 	virtual ~MiqtVirtualQwtEventPattern() override = default;
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__mouseMatch2 = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtEventPattern> handle__mouseMatch2;
 
 	// Subclass to allow providing a Go implementation
 	virtual bool mouseMatch(const QwtEventPattern::MousePattern& param1, const QMouseEvent* param2) const override {
-		if (handle__mouseMatch2 == 0) {
+		if (!handle__mouseMatch2) {
 			return QwtEventPattern::mouseMatch(param1, param2);
 		}
 
@@ -37,18 +40,18 @@ public:
 		// Cast returned reference into pointer
 		QwtEventPattern__MousePattern* sigval1 = const_cast<QwtEventPattern::MousePattern*>(&param1_ret);
 		QMouseEvent* sigval2 = (QMouseEvent*) param2;
-		bool callback_return_value = miqt_exec_callback_QwtEventPattern_mouseMatch2(this, handle__mouseMatch2, sigval1, sigval2);
+		bool callback_return_value = miqt_exec_callback_QwtEventPattern_mouseMatch2(this, handle__mouseMatch2.value(), sigval1, sigval2);
 		return callback_return_value;
 	}
 
 	friend bool QwtEventPattern_virtualbase_mouseMatch2(const void* self, QwtEventPattern__MousePattern* param1, QMouseEvent* param2);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__keyMatch2 = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtEventPattern> handle__keyMatch2;
 
 	// Subclass to allow providing a Go implementation
 	virtual bool keyMatch(const QwtEventPattern::KeyPattern& param1, const QKeyEvent* param2) const override {
-		if (handle__keyMatch2 == 0) {
+		if (!handle__keyMatch2) {
 			return QwtEventPattern::keyMatch(param1, param2);
 		}
 
@@ -56,7 +59,7 @@ public:
 		// Cast returned reference into pointer
 		QwtEventPattern__KeyPattern* sigval1 = const_cast<QwtEventPattern::KeyPattern*>(&param1_ret);
 		QKeyEvent* sigval2 = (QKeyEvent*) param2;
-		bool callback_return_value = miqt_exec_callback_QwtEventPattern_keyMatch2(this, handle__keyMatch2, sigval1, sigval2);
+		bool callback_return_value = miqt_exec_callback_QwtEventPattern_keyMatch2(this, handle__keyMatch2.value(), sigval1, sigval2);
 		return callback_return_value;
 	}
 
@@ -181,12 +184,13 @@ void QwtEventPattern_setKeyPattern2(QwtEventPattern* self, int param1, int key, 
 }
 
 bool QwtEventPattern_override_virtual_mouseMatch2(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtEventPattern> slot_handle(slot);
 	MiqtVirtualQwtEventPattern* self_cast = dynamic_cast<MiqtVirtualQwtEventPattern*>( (QwtEventPattern*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__mouseMatch2 = slot;
+	self_cast->handle__mouseMatch2 = std::move(slot_handle);
 	return true;
 }
 
@@ -195,12 +199,13 @@ bool QwtEventPattern_virtualbase_mouseMatch2(const void* self, QwtEventPattern__
 }
 
 bool QwtEventPattern_override_virtual_keyMatch2(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtEventPattern> slot_handle(slot);
 	MiqtVirtualQwtEventPattern* self_cast = dynamic_cast<MiqtVirtualQwtEventPattern*>( (QwtEventPattern*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__keyMatch2 = slot;
+	self_cast->handle__keyMatch2 = std::move(slot_handle);
 	return true;
 }
 

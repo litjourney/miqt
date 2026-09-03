@@ -1,3 +1,5 @@
+#include <memory>
+#include <utility>
 #include <QAbstractAxis>
 #include <QBrush>
 #include <QColor>
@@ -17,6 +19,7 @@
 extern "C" {
 #endif
 
+void miqt_exec_callback_handle_release_QAbstractAxis(intptr_t);
 void miqt_exec_callback_QAbstractAxis_visibleChanged(intptr_t, bool);
 void miqt_exec_callback_QAbstractAxis_linePenChanged(intptr_t, QPen*);
 void miqt_exec_callback_QAbstractAxis_lineVisibleChanged(intptr_t, bool);
@@ -339,179 +342,209 @@ void QAbstractAxis_visibleChanged(QAbstractAxis* self, bool visible) {
 	self->visibleChanged(visible);
 }
 
-void QAbstractAxis_connect_visibleChanged(QAbstractAxis* self, intptr_t slot) {
-	QAbstractAxis::connect(self, static_cast<void (QAbstractAxis::*)(bool)>(&QAbstractAxis::visibleChanged), self, [=](bool visible) {
+void* QAbstractAxis_connect_visibleChanged(QAbstractAxis* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QAbstractAxis>>(slot);
+	return new QMetaObject::Connection(QAbstractAxis::connect(self, static_cast<void (QAbstractAxis::*)(bool)>(&QAbstractAxis::visibleChanged), self, [slot_handle](bool visible) {
+		intptr_t slot = slot_handle->value();
 		bool sigval1 = visible;
 		miqt_exec_callback_QAbstractAxis_visibleChanged(slot, sigval1);
-	});
+	}));
 }
 
 void QAbstractAxis_linePenChanged(QAbstractAxis* self, QPen* pen) {
 	self->linePenChanged(*pen);
 }
 
-void QAbstractAxis_connect_linePenChanged(QAbstractAxis* self, intptr_t slot) {
-	QAbstractAxis::connect(self, static_cast<void (QAbstractAxis::*)(const QPen&)>(&QAbstractAxis::linePenChanged), self, [=](const QPen& pen) {
+void* QAbstractAxis_connect_linePenChanged(QAbstractAxis* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QAbstractAxis>>(slot);
+	return new QMetaObject::Connection(QAbstractAxis::connect(self, static_cast<void (QAbstractAxis::*)(const QPen&)>(&QAbstractAxis::linePenChanged), self, [slot_handle](const QPen& pen) {
+		intptr_t slot = slot_handle->value();
 		const QPen& pen_ret = pen;
 		// Cast returned reference into pointer
 		QPen* sigval1 = const_cast<QPen*>(&pen_ret);
 		miqt_exec_callback_QAbstractAxis_linePenChanged(slot, sigval1);
-	});
+	}));
 }
 
 void QAbstractAxis_lineVisibleChanged(QAbstractAxis* self, bool visible) {
 	self->lineVisibleChanged(visible);
 }
 
-void QAbstractAxis_connect_lineVisibleChanged(QAbstractAxis* self, intptr_t slot) {
-	QAbstractAxis::connect(self, static_cast<void (QAbstractAxis::*)(bool)>(&QAbstractAxis::lineVisibleChanged), self, [=](bool visible) {
+void* QAbstractAxis_connect_lineVisibleChanged(QAbstractAxis* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QAbstractAxis>>(slot);
+	return new QMetaObject::Connection(QAbstractAxis::connect(self, static_cast<void (QAbstractAxis::*)(bool)>(&QAbstractAxis::lineVisibleChanged), self, [slot_handle](bool visible) {
+		intptr_t slot = slot_handle->value();
 		bool sigval1 = visible;
 		miqt_exec_callback_QAbstractAxis_lineVisibleChanged(slot, sigval1);
-	});
+	}));
 }
 
 void QAbstractAxis_labelsVisibleChanged(QAbstractAxis* self, bool visible) {
 	self->labelsVisibleChanged(visible);
 }
 
-void QAbstractAxis_connect_labelsVisibleChanged(QAbstractAxis* self, intptr_t slot) {
-	QAbstractAxis::connect(self, static_cast<void (QAbstractAxis::*)(bool)>(&QAbstractAxis::labelsVisibleChanged), self, [=](bool visible) {
+void* QAbstractAxis_connect_labelsVisibleChanged(QAbstractAxis* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QAbstractAxis>>(slot);
+	return new QMetaObject::Connection(QAbstractAxis::connect(self, static_cast<void (QAbstractAxis::*)(bool)>(&QAbstractAxis::labelsVisibleChanged), self, [slot_handle](bool visible) {
+		intptr_t slot = slot_handle->value();
 		bool sigval1 = visible;
 		miqt_exec_callback_QAbstractAxis_labelsVisibleChanged(slot, sigval1);
-	});
+	}));
 }
 
 void QAbstractAxis_labelsBrushChanged(QAbstractAxis* self, QBrush* brush) {
 	self->labelsBrushChanged(*brush);
 }
 
-void QAbstractAxis_connect_labelsBrushChanged(QAbstractAxis* self, intptr_t slot) {
-	QAbstractAxis::connect(self, static_cast<void (QAbstractAxis::*)(const QBrush&)>(&QAbstractAxis::labelsBrushChanged), self, [=](const QBrush& brush) {
+void* QAbstractAxis_connect_labelsBrushChanged(QAbstractAxis* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QAbstractAxis>>(slot);
+	return new QMetaObject::Connection(QAbstractAxis::connect(self, static_cast<void (QAbstractAxis::*)(const QBrush&)>(&QAbstractAxis::labelsBrushChanged), self, [slot_handle](const QBrush& brush) {
+		intptr_t slot = slot_handle->value();
 		const QBrush& brush_ret = brush;
 		// Cast returned reference into pointer
 		QBrush* sigval1 = const_cast<QBrush*>(&brush_ret);
 		miqt_exec_callback_QAbstractAxis_labelsBrushChanged(slot, sigval1);
-	});
+	}));
 }
 
 void QAbstractAxis_labelsFontChanged(QAbstractAxis* self, QFont* pen) {
 	self->labelsFontChanged(*pen);
 }
 
-void QAbstractAxis_connect_labelsFontChanged(QAbstractAxis* self, intptr_t slot) {
-	QAbstractAxis::connect(self, static_cast<void (QAbstractAxis::*)(const QFont&)>(&QAbstractAxis::labelsFontChanged), self, [=](const QFont& pen) {
+void* QAbstractAxis_connect_labelsFontChanged(QAbstractAxis* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QAbstractAxis>>(slot);
+	return new QMetaObject::Connection(QAbstractAxis::connect(self, static_cast<void (QAbstractAxis::*)(const QFont&)>(&QAbstractAxis::labelsFontChanged), self, [slot_handle](const QFont& pen) {
+		intptr_t slot = slot_handle->value();
 		const QFont& pen_ret = pen;
 		// Cast returned reference into pointer
 		QFont* sigval1 = const_cast<QFont*>(&pen_ret);
 		miqt_exec_callback_QAbstractAxis_labelsFontChanged(slot, sigval1);
-	});
+	}));
 }
 
 void QAbstractAxis_labelsAngleChanged(QAbstractAxis* self, int angle) {
 	self->labelsAngleChanged(static_cast<int>(angle));
 }
 
-void QAbstractAxis_connect_labelsAngleChanged(QAbstractAxis* self, intptr_t slot) {
-	QAbstractAxis::connect(self, static_cast<void (QAbstractAxis::*)(int)>(&QAbstractAxis::labelsAngleChanged), self, [=](int angle) {
+void* QAbstractAxis_connect_labelsAngleChanged(QAbstractAxis* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QAbstractAxis>>(slot);
+	return new QMetaObject::Connection(QAbstractAxis::connect(self, static_cast<void (QAbstractAxis::*)(int)>(&QAbstractAxis::labelsAngleChanged), self, [slot_handle](int angle) {
+		intptr_t slot = slot_handle->value();
 		int sigval1 = angle;
 		miqt_exec_callback_QAbstractAxis_labelsAngleChanged(slot, sigval1);
-	});
+	}));
 }
 
 void QAbstractAxis_gridLinePenChanged(QAbstractAxis* self, QPen* pen) {
 	self->gridLinePenChanged(*pen);
 }
 
-void QAbstractAxis_connect_gridLinePenChanged(QAbstractAxis* self, intptr_t slot) {
-	QAbstractAxis::connect(self, static_cast<void (QAbstractAxis::*)(const QPen&)>(&QAbstractAxis::gridLinePenChanged), self, [=](const QPen& pen) {
+void* QAbstractAxis_connect_gridLinePenChanged(QAbstractAxis* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QAbstractAxis>>(slot);
+	return new QMetaObject::Connection(QAbstractAxis::connect(self, static_cast<void (QAbstractAxis::*)(const QPen&)>(&QAbstractAxis::gridLinePenChanged), self, [slot_handle](const QPen& pen) {
+		intptr_t slot = slot_handle->value();
 		const QPen& pen_ret = pen;
 		// Cast returned reference into pointer
 		QPen* sigval1 = const_cast<QPen*>(&pen_ret);
 		miqt_exec_callback_QAbstractAxis_gridLinePenChanged(slot, sigval1);
-	});
+	}));
 }
 
 void QAbstractAxis_gridVisibleChanged(QAbstractAxis* self, bool visible) {
 	self->gridVisibleChanged(visible);
 }
 
-void QAbstractAxis_connect_gridVisibleChanged(QAbstractAxis* self, intptr_t slot) {
-	QAbstractAxis::connect(self, static_cast<void (QAbstractAxis::*)(bool)>(&QAbstractAxis::gridVisibleChanged), self, [=](bool visible) {
+void* QAbstractAxis_connect_gridVisibleChanged(QAbstractAxis* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QAbstractAxis>>(slot);
+	return new QMetaObject::Connection(QAbstractAxis::connect(self, static_cast<void (QAbstractAxis::*)(bool)>(&QAbstractAxis::gridVisibleChanged), self, [slot_handle](bool visible) {
+		intptr_t slot = slot_handle->value();
 		bool sigval1 = visible;
 		miqt_exec_callback_QAbstractAxis_gridVisibleChanged(slot, sigval1);
-	});
+	}));
 }
 
 void QAbstractAxis_minorGridVisibleChanged(QAbstractAxis* self, bool visible) {
 	self->minorGridVisibleChanged(visible);
 }
 
-void QAbstractAxis_connect_minorGridVisibleChanged(QAbstractAxis* self, intptr_t slot) {
-	QAbstractAxis::connect(self, static_cast<void (QAbstractAxis::*)(bool)>(&QAbstractAxis::minorGridVisibleChanged), self, [=](bool visible) {
+void* QAbstractAxis_connect_minorGridVisibleChanged(QAbstractAxis* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QAbstractAxis>>(slot);
+	return new QMetaObject::Connection(QAbstractAxis::connect(self, static_cast<void (QAbstractAxis::*)(bool)>(&QAbstractAxis::minorGridVisibleChanged), self, [slot_handle](bool visible) {
+		intptr_t slot = slot_handle->value();
 		bool sigval1 = visible;
 		miqt_exec_callback_QAbstractAxis_minorGridVisibleChanged(slot, sigval1);
-	});
+	}));
 }
 
 void QAbstractAxis_minorGridLinePenChanged(QAbstractAxis* self, QPen* pen) {
 	self->minorGridLinePenChanged(*pen);
 }
 
-void QAbstractAxis_connect_minorGridLinePenChanged(QAbstractAxis* self, intptr_t slot) {
-	QAbstractAxis::connect(self, static_cast<void (QAbstractAxis::*)(const QPen&)>(&QAbstractAxis::minorGridLinePenChanged), self, [=](const QPen& pen) {
+void* QAbstractAxis_connect_minorGridLinePenChanged(QAbstractAxis* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QAbstractAxis>>(slot);
+	return new QMetaObject::Connection(QAbstractAxis::connect(self, static_cast<void (QAbstractAxis::*)(const QPen&)>(&QAbstractAxis::minorGridLinePenChanged), self, [slot_handle](const QPen& pen) {
+		intptr_t slot = slot_handle->value();
 		const QPen& pen_ret = pen;
 		// Cast returned reference into pointer
 		QPen* sigval1 = const_cast<QPen*>(&pen_ret);
 		miqt_exec_callback_QAbstractAxis_minorGridLinePenChanged(slot, sigval1);
-	});
+	}));
 }
 
 void QAbstractAxis_gridLineColorChanged(QAbstractAxis* self, QColor* color) {
 	self->gridLineColorChanged(*color);
 }
 
-void QAbstractAxis_connect_gridLineColorChanged(QAbstractAxis* self, intptr_t slot) {
-	QAbstractAxis::connect(self, static_cast<void (QAbstractAxis::*)(const QColor&)>(&QAbstractAxis::gridLineColorChanged), self, [=](const QColor& color) {
+void* QAbstractAxis_connect_gridLineColorChanged(QAbstractAxis* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QAbstractAxis>>(slot);
+	return new QMetaObject::Connection(QAbstractAxis::connect(self, static_cast<void (QAbstractAxis::*)(const QColor&)>(&QAbstractAxis::gridLineColorChanged), self, [slot_handle](const QColor& color) {
+		intptr_t slot = slot_handle->value();
 		const QColor& color_ret = color;
 		// Cast returned reference into pointer
 		QColor* sigval1 = const_cast<QColor*>(&color_ret);
 		miqt_exec_callback_QAbstractAxis_gridLineColorChanged(slot, sigval1);
-	});
+	}));
 }
 
 void QAbstractAxis_minorGridLineColorChanged(QAbstractAxis* self, QColor* color) {
 	self->minorGridLineColorChanged(*color);
 }
 
-void QAbstractAxis_connect_minorGridLineColorChanged(QAbstractAxis* self, intptr_t slot) {
-	QAbstractAxis::connect(self, static_cast<void (QAbstractAxis::*)(const QColor&)>(&QAbstractAxis::minorGridLineColorChanged), self, [=](const QColor& color) {
+void* QAbstractAxis_connect_minorGridLineColorChanged(QAbstractAxis* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QAbstractAxis>>(slot);
+	return new QMetaObject::Connection(QAbstractAxis::connect(self, static_cast<void (QAbstractAxis::*)(const QColor&)>(&QAbstractAxis::minorGridLineColorChanged), self, [slot_handle](const QColor& color) {
+		intptr_t slot = slot_handle->value();
 		const QColor& color_ret = color;
 		// Cast returned reference into pointer
 		QColor* sigval1 = const_cast<QColor*>(&color_ret);
 		miqt_exec_callback_QAbstractAxis_minorGridLineColorChanged(slot, sigval1);
-	});
+	}));
 }
 
 void QAbstractAxis_colorChanged(QAbstractAxis* self, QColor* color) {
 	self->colorChanged(*color);
 }
 
-void QAbstractAxis_connect_colorChanged(QAbstractAxis* self, intptr_t slot) {
-	QAbstractAxis::connect(self, static_cast<void (QAbstractAxis::*)(QColor)>(&QAbstractAxis::colorChanged), self, [=](QColor color) {
+void* QAbstractAxis_connect_colorChanged(QAbstractAxis* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QAbstractAxis>>(slot);
+	return new QMetaObject::Connection(QAbstractAxis::connect(self, static_cast<void (QAbstractAxis::*)(QColor)>(&QAbstractAxis::colorChanged), self, [slot_handle](QColor color) {
+		intptr_t slot = slot_handle->value();
 		QColor* sigval1 = new QColor(color);
 		miqt_exec_callback_QAbstractAxis_colorChanged(slot, sigval1);
-	});
+	}));
 }
 
 void QAbstractAxis_labelsColorChanged(QAbstractAxis* self, QColor* color) {
 	self->labelsColorChanged(*color);
 }
 
-void QAbstractAxis_connect_labelsColorChanged(QAbstractAxis* self, intptr_t slot) {
-	QAbstractAxis::connect(self, static_cast<void (QAbstractAxis::*)(QColor)>(&QAbstractAxis::labelsColorChanged), self, [=](QColor color) {
+void* QAbstractAxis_connect_labelsColorChanged(QAbstractAxis* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QAbstractAxis>>(slot);
+	return new QMetaObject::Connection(QAbstractAxis::connect(self, static_cast<void (QAbstractAxis::*)(QColor)>(&QAbstractAxis::labelsColorChanged), self, [slot_handle](QColor color) {
+		intptr_t slot = slot_handle->value();
 		QColor* sigval1 = new QColor(color);
 		miqt_exec_callback_QAbstractAxis_labelsColorChanged(slot, sigval1);
-	});
+	}));
 }
 
 void QAbstractAxis_titleTextChanged(QAbstractAxis* self, struct miqt_string title) {
@@ -519,8 +552,10 @@ void QAbstractAxis_titleTextChanged(QAbstractAxis* self, struct miqt_string titl
 	self->titleTextChanged(title_QString);
 }
 
-void QAbstractAxis_connect_titleTextChanged(QAbstractAxis* self, intptr_t slot) {
-	QAbstractAxis::connect(self, static_cast<void (QAbstractAxis::*)(const QString&)>(&QAbstractAxis::titleTextChanged), self, [=](const QString& title) {
+void* QAbstractAxis_connect_titleTextChanged(QAbstractAxis* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QAbstractAxis>>(slot);
+	return new QMetaObject::Connection(QAbstractAxis::connect(self, static_cast<void (QAbstractAxis::*)(const QString&)>(&QAbstractAxis::titleTextChanged), self, [slot_handle](const QString& title) {
+		intptr_t slot = slot_handle->value();
 		const QString title_ret = title;
 		// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 		QByteArray title_b = title_ret.toUtf8();
@@ -530,147 +565,171 @@ void QAbstractAxis_connect_titleTextChanged(QAbstractAxis* self, intptr_t slot) 
 		memcpy(title_ms.data, title_b.data(), title_ms.len);
 		struct miqt_string sigval1 = title_ms;
 		miqt_exec_callback_QAbstractAxis_titleTextChanged(slot, sigval1);
-	});
+	}));
 }
 
 void QAbstractAxis_titleBrushChanged(QAbstractAxis* self, QBrush* brush) {
 	self->titleBrushChanged(*brush);
 }
 
-void QAbstractAxis_connect_titleBrushChanged(QAbstractAxis* self, intptr_t slot) {
-	QAbstractAxis::connect(self, static_cast<void (QAbstractAxis::*)(const QBrush&)>(&QAbstractAxis::titleBrushChanged), self, [=](const QBrush& brush) {
+void* QAbstractAxis_connect_titleBrushChanged(QAbstractAxis* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QAbstractAxis>>(slot);
+	return new QMetaObject::Connection(QAbstractAxis::connect(self, static_cast<void (QAbstractAxis::*)(const QBrush&)>(&QAbstractAxis::titleBrushChanged), self, [slot_handle](const QBrush& brush) {
+		intptr_t slot = slot_handle->value();
 		const QBrush& brush_ret = brush;
 		// Cast returned reference into pointer
 		QBrush* sigval1 = const_cast<QBrush*>(&brush_ret);
 		miqt_exec_callback_QAbstractAxis_titleBrushChanged(slot, sigval1);
-	});
+	}));
 }
 
 void QAbstractAxis_titleVisibleChanged(QAbstractAxis* self, bool visible) {
 	self->titleVisibleChanged(visible);
 }
 
-void QAbstractAxis_connect_titleVisibleChanged(QAbstractAxis* self, intptr_t slot) {
-	QAbstractAxis::connect(self, static_cast<void (QAbstractAxis::*)(bool)>(&QAbstractAxis::titleVisibleChanged), self, [=](bool visible) {
+void* QAbstractAxis_connect_titleVisibleChanged(QAbstractAxis* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QAbstractAxis>>(slot);
+	return new QMetaObject::Connection(QAbstractAxis::connect(self, static_cast<void (QAbstractAxis::*)(bool)>(&QAbstractAxis::titleVisibleChanged), self, [slot_handle](bool visible) {
+		intptr_t slot = slot_handle->value();
 		bool sigval1 = visible;
 		miqt_exec_callback_QAbstractAxis_titleVisibleChanged(slot, sigval1);
-	});
+	}));
 }
 
 void QAbstractAxis_titleFontChanged(QAbstractAxis* self, QFont* font) {
 	self->titleFontChanged(*font);
 }
 
-void QAbstractAxis_connect_titleFontChanged(QAbstractAxis* self, intptr_t slot) {
-	QAbstractAxis::connect(self, static_cast<void (QAbstractAxis::*)(const QFont&)>(&QAbstractAxis::titleFontChanged), self, [=](const QFont& font) {
+void* QAbstractAxis_connect_titleFontChanged(QAbstractAxis* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QAbstractAxis>>(slot);
+	return new QMetaObject::Connection(QAbstractAxis::connect(self, static_cast<void (QAbstractAxis::*)(const QFont&)>(&QAbstractAxis::titleFontChanged), self, [slot_handle](const QFont& font) {
+		intptr_t slot = slot_handle->value();
 		const QFont& font_ret = font;
 		// Cast returned reference into pointer
 		QFont* sigval1 = const_cast<QFont*>(&font_ret);
 		miqt_exec_callback_QAbstractAxis_titleFontChanged(slot, sigval1);
-	});
+	}));
 }
 
 void QAbstractAxis_shadesVisibleChanged(QAbstractAxis* self, bool visible) {
 	self->shadesVisibleChanged(visible);
 }
 
-void QAbstractAxis_connect_shadesVisibleChanged(QAbstractAxis* self, intptr_t slot) {
-	QAbstractAxis::connect(self, static_cast<void (QAbstractAxis::*)(bool)>(&QAbstractAxis::shadesVisibleChanged), self, [=](bool visible) {
+void* QAbstractAxis_connect_shadesVisibleChanged(QAbstractAxis* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QAbstractAxis>>(slot);
+	return new QMetaObject::Connection(QAbstractAxis::connect(self, static_cast<void (QAbstractAxis::*)(bool)>(&QAbstractAxis::shadesVisibleChanged), self, [slot_handle](bool visible) {
+		intptr_t slot = slot_handle->value();
 		bool sigval1 = visible;
 		miqt_exec_callback_QAbstractAxis_shadesVisibleChanged(slot, sigval1);
-	});
+	}));
 }
 
 void QAbstractAxis_shadesColorChanged(QAbstractAxis* self, QColor* color) {
 	self->shadesColorChanged(*color);
 }
 
-void QAbstractAxis_connect_shadesColorChanged(QAbstractAxis* self, intptr_t slot) {
-	QAbstractAxis::connect(self, static_cast<void (QAbstractAxis::*)(QColor)>(&QAbstractAxis::shadesColorChanged), self, [=](QColor color) {
+void* QAbstractAxis_connect_shadesColorChanged(QAbstractAxis* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QAbstractAxis>>(slot);
+	return new QMetaObject::Connection(QAbstractAxis::connect(self, static_cast<void (QAbstractAxis::*)(QColor)>(&QAbstractAxis::shadesColorChanged), self, [slot_handle](QColor color) {
+		intptr_t slot = slot_handle->value();
 		QColor* sigval1 = new QColor(color);
 		miqt_exec_callback_QAbstractAxis_shadesColorChanged(slot, sigval1);
-	});
+	}));
 }
 
 void QAbstractAxis_shadesBorderColorChanged(QAbstractAxis* self, QColor* color) {
 	self->shadesBorderColorChanged(*color);
 }
 
-void QAbstractAxis_connect_shadesBorderColorChanged(QAbstractAxis* self, intptr_t slot) {
-	QAbstractAxis::connect(self, static_cast<void (QAbstractAxis::*)(QColor)>(&QAbstractAxis::shadesBorderColorChanged), self, [=](QColor color) {
+void* QAbstractAxis_connect_shadesBorderColorChanged(QAbstractAxis* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QAbstractAxis>>(slot);
+	return new QMetaObject::Connection(QAbstractAxis::connect(self, static_cast<void (QAbstractAxis::*)(QColor)>(&QAbstractAxis::shadesBorderColorChanged), self, [slot_handle](QColor color) {
+		intptr_t slot = slot_handle->value();
 		QColor* sigval1 = new QColor(color);
 		miqt_exec_callback_QAbstractAxis_shadesBorderColorChanged(slot, sigval1);
-	});
+	}));
 }
 
 void QAbstractAxis_shadesPenChanged(QAbstractAxis* self, QPen* pen) {
 	self->shadesPenChanged(*pen);
 }
 
-void QAbstractAxis_connect_shadesPenChanged(QAbstractAxis* self, intptr_t slot) {
-	QAbstractAxis::connect(self, static_cast<void (QAbstractAxis::*)(const QPen&)>(&QAbstractAxis::shadesPenChanged), self, [=](const QPen& pen) {
+void* QAbstractAxis_connect_shadesPenChanged(QAbstractAxis* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QAbstractAxis>>(slot);
+	return new QMetaObject::Connection(QAbstractAxis::connect(self, static_cast<void (QAbstractAxis::*)(const QPen&)>(&QAbstractAxis::shadesPenChanged), self, [slot_handle](const QPen& pen) {
+		intptr_t slot = slot_handle->value();
 		const QPen& pen_ret = pen;
 		// Cast returned reference into pointer
 		QPen* sigval1 = const_cast<QPen*>(&pen_ret);
 		miqt_exec_callback_QAbstractAxis_shadesPenChanged(slot, sigval1);
-	});
+	}));
 }
 
 void QAbstractAxis_shadesBrushChanged(QAbstractAxis* self, QBrush* brush) {
 	self->shadesBrushChanged(*brush);
 }
 
-void QAbstractAxis_connect_shadesBrushChanged(QAbstractAxis* self, intptr_t slot) {
-	QAbstractAxis::connect(self, static_cast<void (QAbstractAxis::*)(const QBrush&)>(&QAbstractAxis::shadesBrushChanged), self, [=](const QBrush& brush) {
+void* QAbstractAxis_connect_shadesBrushChanged(QAbstractAxis* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QAbstractAxis>>(slot);
+	return new QMetaObject::Connection(QAbstractAxis::connect(self, static_cast<void (QAbstractAxis::*)(const QBrush&)>(&QAbstractAxis::shadesBrushChanged), self, [slot_handle](const QBrush& brush) {
+		intptr_t slot = slot_handle->value();
 		const QBrush& brush_ret = brush;
 		// Cast returned reference into pointer
 		QBrush* sigval1 = const_cast<QBrush*>(&brush_ret);
 		miqt_exec_callback_QAbstractAxis_shadesBrushChanged(slot, sigval1);
-	});
+	}));
 }
 
 void QAbstractAxis_reverseChanged(QAbstractAxis* self, bool reverse) {
 	self->reverseChanged(reverse);
 }
 
-void QAbstractAxis_connect_reverseChanged(QAbstractAxis* self, intptr_t slot) {
-	QAbstractAxis::connect(self, static_cast<void (QAbstractAxis::*)(bool)>(&QAbstractAxis::reverseChanged), self, [=](bool reverse) {
+void* QAbstractAxis_connect_reverseChanged(QAbstractAxis* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QAbstractAxis>>(slot);
+	return new QMetaObject::Connection(QAbstractAxis::connect(self, static_cast<void (QAbstractAxis::*)(bool)>(&QAbstractAxis::reverseChanged), self, [slot_handle](bool reverse) {
+		intptr_t slot = slot_handle->value();
 		bool sigval1 = reverse;
 		miqt_exec_callback_QAbstractAxis_reverseChanged(slot, sigval1);
-	});
+	}));
 }
 
 void QAbstractAxis_labelsEditableChanged(QAbstractAxis* self, bool editable) {
 	self->labelsEditableChanged(editable);
 }
 
-void QAbstractAxis_connect_labelsEditableChanged(QAbstractAxis* self, intptr_t slot) {
-	QAbstractAxis::connect(self, static_cast<void (QAbstractAxis::*)(bool)>(&QAbstractAxis::labelsEditableChanged), self, [=](bool editable) {
+void* QAbstractAxis_connect_labelsEditableChanged(QAbstractAxis* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QAbstractAxis>>(slot);
+	return new QMetaObject::Connection(QAbstractAxis::connect(self, static_cast<void (QAbstractAxis::*)(bool)>(&QAbstractAxis::labelsEditableChanged), self, [slot_handle](bool editable) {
+		intptr_t slot = slot_handle->value();
 		bool sigval1 = editable;
 		miqt_exec_callback_QAbstractAxis_labelsEditableChanged(slot, sigval1);
-	});
+	}));
 }
 
 void QAbstractAxis_labelsTruncatedChanged(QAbstractAxis* self, bool labelsTruncated) {
 	self->labelsTruncatedChanged(labelsTruncated);
 }
 
-void QAbstractAxis_connect_labelsTruncatedChanged(QAbstractAxis* self, intptr_t slot) {
-	QAbstractAxis::connect(self, static_cast<void (QAbstractAxis::*)(bool)>(&QAbstractAxis::labelsTruncatedChanged), self, [=](bool labelsTruncated) {
+void* QAbstractAxis_connect_labelsTruncatedChanged(QAbstractAxis* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QAbstractAxis>>(slot);
+	return new QMetaObject::Connection(QAbstractAxis::connect(self, static_cast<void (QAbstractAxis::*)(bool)>(&QAbstractAxis::labelsTruncatedChanged), self, [slot_handle](bool labelsTruncated) {
+		intptr_t slot = slot_handle->value();
 		bool sigval1 = labelsTruncated;
 		miqt_exec_callback_QAbstractAxis_labelsTruncatedChanged(slot, sigval1);
-	});
+	}));
 }
 
 void QAbstractAxis_truncateLabelsChanged(QAbstractAxis* self, bool truncateLabels) {
 	self->truncateLabelsChanged(truncateLabels);
 }
 
-void QAbstractAxis_connect_truncateLabelsChanged(QAbstractAxis* self, intptr_t slot) {
-	QAbstractAxis::connect(self, static_cast<void (QAbstractAxis::*)(bool)>(&QAbstractAxis::truncateLabelsChanged), self, [=](bool truncateLabels) {
+void* QAbstractAxis_connect_truncateLabelsChanged(QAbstractAxis* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QAbstractAxis>>(slot);
+	return new QMetaObject::Connection(QAbstractAxis::connect(self, static_cast<void (QAbstractAxis::*)(bool)>(&QAbstractAxis::truncateLabelsChanged), self, [slot_handle](bool truncateLabels) {
+		intptr_t slot = slot_handle->value();
 		bool sigval1 = truncateLabels;
 		miqt_exec_callback_QAbstractAxis_truncateLabelsChanged(slot, sigval1);
-	});
+	}));
 }
 
 struct miqt_string QAbstractAxis_tr2(const char* s, const char* c) {

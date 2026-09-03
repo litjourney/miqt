@@ -1,3 +1,5 @@
+#include <memory>
+#include <utility>
 #include <QChildEvent>
 #include <QEvent>
 #include <QIcon>
@@ -18,6 +20,7 @@
 extern "C" {
 #endif
 
+void miqt_exec_callback_handle_release_QSystemTrayIcon(intptr_t);
 void miqt_exec_callback_QSystemTrayIcon_activated(intptr_t, int);
 void miqt_exec_callback_QSystemTrayIcon_messageClicked(intptr_t);
 bool miqt_exec_callback_QSystemTrayIcon_event(QSystemTrayIcon*, intptr_t, QEvent*);
@@ -42,95 +45,95 @@ public:
 	virtual ~MiqtVirtualQSystemTrayIcon() override = default;
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__event = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QSystemTrayIcon> handle__event;
 
 	// Subclass to allow providing a Go implementation
 	virtual bool event(QEvent* event) override {
-		if (handle__event == 0) {
+		if (!handle__event) {
 			return QSystemTrayIcon::event(event);
 		}
 
 		QEvent* sigval1 = event;
-		bool callback_return_value = miqt_exec_callback_QSystemTrayIcon_event(this, handle__event, sigval1);
+		bool callback_return_value = miqt_exec_callback_QSystemTrayIcon_event(this, handle__event.value(), sigval1);
 		return callback_return_value;
 	}
 
 	friend bool QSystemTrayIcon_virtualbase_event(void* self, QEvent* event);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__eventFilter = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QSystemTrayIcon> handle__eventFilter;
 
 	// Subclass to allow providing a Go implementation
 	virtual bool eventFilter(QObject* watched, QEvent* event) override {
-		if (handle__eventFilter == 0) {
+		if (!handle__eventFilter) {
 			return QSystemTrayIcon::eventFilter(watched, event);
 		}
 
 		QObject* sigval1 = watched;
 		QEvent* sigval2 = event;
-		bool callback_return_value = miqt_exec_callback_QSystemTrayIcon_eventFilter(this, handle__eventFilter, sigval1, sigval2);
+		bool callback_return_value = miqt_exec_callback_QSystemTrayIcon_eventFilter(this, handle__eventFilter.value(), sigval1, sigval2);
 		return callback_return_value;
 	}
 
 	friend bool QSystemTrayIcon_virtualbase_eventFilter(void* self, QObject* watched, QEvent* event);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__timerEvent = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QSystemTrayIcon> handle__timerEvent;
 
 	// Subclass to allow providing a Go implementation
 	virtual void timerEvent(QTimerEvent* event) override {
-		if (handle__timerEvent == 0) {
+		if (!handle__timerEvent) {
 			QSystemTrayIcon::timerEvent(event);
 			return;
 		}
 
 		QTimerEvent* sigval1 = event;
-		miqt_exec_callback_QSystemTrayIcon_timerEvent(this, handle__timerEvent, sigval1);
+		miqt_exec_callback_QSystemTrayIcon_timerEvent(this, handle__timerEvent.value(), sigval1);
 
 	}
 
 	friend void QSystemTrayIcon_virtualbase_timerEvent(void* self, QTimerEvent* event);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__childEvent = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QSystemTrayIcon> handle__childEvent;
 
 	// Subclass to allow providing a Go implementation
 	virtual void childEvent(QChildEvent* event) override {
-		if (handle__childEvent == 0) {
+		if (!handle__childEvent) {
 			QSystemTrayIcon::childEvent(event);
 			return;
 		}
 
 		QChildEvent* sigval1 = event;
-		miqt_exec_callback_QSystemTrayIcon_childEvent(this, handle__childEvent, sigval1);
+		miqt_exec_callback_QSystemTrayIcon_childEvent(this, handle__childEvent.value(), sigval1);
 
 	}
 
 	friend void QSystemTrayIcon_virtualbase_childEvent(void* self, QChildEvent* event);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__customEvent = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QSystemTrayIcon> handle__customEvent;
 
 	// Subclass to allow providing a Go implementation
 	virtual void customEvent(QEvent* event) override {
-		if (handle__customEvent == 0) {
+		if (!handle__customEvent) {
 			QSystemTrayIcon::customEvent(event);
 			return;
 		}
 
 		QEvent* sigval1 = event;
-		miqt_exec_callback_QSystemTrayIcon_customEvent(this, handle__customEvent, sigval1);
+		miqt_exec_callback_QSystemTrayIcon_customEvent(this, handle__customEvent.value(), sigval1);
 
 	}
 
 	friend void QSystemTrayIcon_virtualbase_customEvent(void* self, QEvent* event);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__connectNotify = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QSystemTrayIcon> handle__connectNotify;
 
 	// Subclass to allow providing a Go implementation
 	virtual void connectNotify(const QMetaMethod& signal) override {
-		if (handle__connectNotify == 0) {
+		if (!handle__connectNotify) {
 			QSystemTrayIcon::connectNotify(signal);
 			return;
 		}
@@ -138,18 +141,18 @@ public:
 		const QMetaMethod& signal_ret = signal;
 		// Cast returned reference into pointer
 		QMetaMethod* sigval1 = const_cast<QMetaMethod*>(&signal_ret);
-		miqt_exec_callback_QSystemTrayIcon_connectNotify(this, handle__connectNotify, sigval1);
+		miqt_exec_callback_QSystemTrayIcon_connectNotify(this, handle__connectNotify.value(), sigval1);
 
 	}
 
 	friend void QSystemTrayIcon_virtualbase_connectNotify(void* self, QMetaMethod* signal);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__disconnectNotify = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QSystemTrayIcon> handle__disconnectNotify;
 
 	// Subclass to allow providing a Go implementation
 	virtual void disconnectNotify(const QMetaMethod& signal) override {
-		if (handle__disconnectNotify == 0) {
+		if (!handle__disconnectNotify) {
 			QSystemTrayIcon::disconnectNotify(signal);
 			return;
 		}
@@ -157,7 +160,7 @@ public:
 		const QMetaMethod& signal_ret = signal;
 		// Cast returned reference into pointer
 		QMetaMethod* sigval1 = const_cast<QMetaMethod*>(&signal_ret);
-		miqt_exec_callback_QSystemTrayIcon_disconnectNotify(this, handle__disconnectNotify, sigval1);
+		miqt_exec_callback_QSystemTrayIcon_disconnectNotify(this, handle__disconnectNotify.value(), sigval1);
 
 	}
 
@@ -296,22 +299,26 @@ void QSystemTrayIcon_activated(QSystemTrayIcon* self, int reason) {
 	self->activated(static_cast<QSystemTrayIcon::ActivationReason>(reason));
 }
 
-void QSystemTrayIcon_connect_activated(QSystemTrayIcon* self, intptr_t slot) {
-	QSystemTrayIcon::connect(self, static_cast<void (QSystemTrayIcon::*)(QSystemTrayIcon::ActivationReason)>(&QSystemTrayIcon::activated), self, [=](QSystemTrayIcon::ActivationReason reason) {
+void* QSystemTrayIcon_connect_activated(QSystemTrayIcon* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QSystemTrayIcon>>(slot);
+	return new QMetaObject::Connection(QSystemTrayIcon::connect(self, static_cast<void (QSystemTrayIcon::*)(QSystemTrayIcon::ActivationReason)>(&QSystemTrayIcon::activated), self, [slot_handle](QSystemTrayIcon::ActivationReason reason) {
+		intptr_t slot = slot_handle->value();
 		QSystemTrayIcon::ActivationReason reason_ret = reason;
 		int sigval1 = static_cast<int>(reason_ret);
 		miqt_exec_callback_QSystemTrayIcon_activated(slot, sigval1);
-	});
+	}));
 }
 
 void QSystemTrayIcon_messageClicked(QSystemTrayIcon* self) {
 	self->messageClicked();
 }
 
-void QSystemTrayIcon_connect_messageClicked(QSystemTrayIcon* self, intptr_t slot) {
-	QSystemTrayIcon::connect(self, static_cast<void (QSystemTrayIcon::*)()>(&QSystemTrayIcon::messageClicked), self, [=]() {
+void* QSystemTrayIcon_connect_messageClicked(QSystemTrayIcon* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QSystemTrayIcon>>(slot);
+	return new QMetaObject::Connection(QSystemTrayIcon::connect(self, static_cast<void (QSystemTrayIcon::*)()>(&QSystemTrayIcon::messageClicked), self, [slot_handle]() {
+		intptr_t slot = slot_handle->value();
 		miqt_exec_callback_QSystemTrayIcon_messageClicked(slot);
-	});
+	}));
 }
 
 struct miqt_string QSystemTrayIcon_tr2(const char* s, const char* c) {
@@ -377,12 +384,13 @@ void QSystemTrayIcon_showMessage5(QSystemTrayIcon* self, struct miqt_string titl
 }
 
 bool QSystemTrayIcon_override_virtual_event(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QSystemTrayIcon> slot_handle(slot);
 	MiqtVirtualQSystemTrayIcon* self_cast = dynamic_cast<MiqtVirtualQSystemTrayIcon*>( (QSystemTrayIcon*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__event = slot;
+	self_cast->handle__event = std::move(slot_handle);
 	return true;
 }
 
@@ -391,12 +399,13 @@ bool QSystemTrayIcon_virtualbase_event(void* self, QEvent* event) {
 }
 
 bool QSystemTrayIcon_override_virtual_eventFilter(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QSystemTrayIcon> slot_handle(slot);
 	MiqtVirtualQSystemTrayIcon* self_cast = dynamic_cast<MiqtVirtualQSystemTrayIcon*>( (QSystemTrayIcon*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__eventFilter = slot;
+	self_cast->handle__eventFilter = std::move(slot_handle);
 	return true;
 }
 
@@ -405,12 +414,13 @@ bool QSystemTrayIcon_virtualbase_eventFilter(void* self, QObject* watched, QEven
 }
 
 bool QSystemTrayIcon_override_virtual_timerEvent(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QSystemTrayIcon> slot_handle(slot);
 	MiqtVirtualQSystemTrayIcon* self_cast = dynamic_cast<MiqtVirtualQSystemTrayIcon*>( (QSystemTrayIcon*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__timerEvent = slot;
+	self_cast->handle__timerEvent = std::move(slot_handle);
 	return true;
 }
 
@@ -419,12 +429,13 @@ void QSystemTrayIcon_virtualbase_timerEvent(void* self, QTimerEvent* event) {
 }
 
 bool QSystemTrayIcon_override_virtual_childEvent(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QSystemTrayIcon> slot_handle(slot);
 	MiqtVirtualQSystemTrayIcon* self_cast = dynamic_cast<MiqtVirtualQSystemTrayIcon*>( (QSystemTrayIcon*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__childEvent = slot;
+	self_cast->handle__childEvent = std::move(slot_handle);
 	return true;
 }
 
@@ -433,12 +444,13 @@ void QSystemTrayIcon_virtualbase_childEvent(void* self, QChildEvent* event) {
 }
 
 bool QSystemTrayIcon_override_virtual_customEvent(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QSystemTrayIcon> slot_handle(slot);
 	MiqtVirtualQSystemTrayIcon* self_cast = dynamic_cast<MiqtVirtualQSystemTrayIcon*>( (QSystemTrayIcon*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__customEvent = slot;
+	self_cast->handle__customEvent = std::move(slot_handle);
 	return true;
 }
 
@@ -447,12 +459,13 @@ void QSystemTrayIcon_virtualbase_customEvent(void* self, QEvent* event) {
 }
 
 bool QSystemTrayIcon_override_virtual_connectNotify(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QSystemTrayIcon> slot_handle(slot);
 	MiqtVirtualQSystemTrayIcon* self_cast = dynamic_cast<MiqtVirtualQSystemTrayIcon*>( (QSystemTrayIcon*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__connectNotify = slot;
+	self_cast->handle__connectNotify = std::move(slot_handle);
 	return true;
 }
 
@@ -461,12 +474,13 @@ void QSystemTrayIcon_virtualbase_connectNotify(void* self, QMetaMethod* signal) 
 }
 
 bool QSystemTrayIcon_override_virtual_disconnectNotify(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QSystemTrayIcon> slot_handle(slot);
 	MiqtVirtualQSystemTrayIcon* self_cast = dynamic_cast<MiqtVirtualQSystemTrayIcon*>( (QSystemTrayIcon*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__disconnectNotify = slot;
+	self_cast->handle__disconnectNotify = std::move(slot_handle);
 	return true;
 }
 

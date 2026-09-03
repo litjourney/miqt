@@ -63,9 +63,9 @@ void QScroller_ensureVisible(QScroller* self, QRectF* rect, double xmargin, doub
 void QScroller_ensureVisible2(QScroller* self, QRectF* rect, double xmargin, double ymargin, int scrollTime);
 void QScroller_resendPrepareEvent(QScroller* self);
 void QScroller_stateChanged(QScroller* self, int newstate);
-void QScroller_connect_stateChanged(QScroller* self, intptr_t slot);
+void* QScroller_connect_stateChanged(QScroller* self, intptr_t slot);
 void QScroller_scrollerPropertiesChanged(QScroller* self, QScrollerProperties* param1);
-void QScroller_connect_scrollerPropertiesChanged(QScroller* self, intptr_t slot);
+void* QScroller_connect_scrollerPropertiesChanged(QScroller* self, intptr_t slot);
 struct miqt_string QScroller_tr2(const char* s, const char* c);
 struct miqt_string QScroller_tr3(const char* s, const char* c, int n);
 struct miqt_string QScroller_trUtf82(const char* s, const char* c);

@@ -1,3 +1,5 @@
+#include <memory>
+#include <utility>
 #include <QPointF>
 #include <QRectF>
 #include <QVector>
@@ -8,12 +10,15 @@
 extern "C" {
 #endif
 
+void miqt_exec_callback_handle_release_QwtPointArrayData(intptr_t);
 QRectF* miqt_exec_callback_QwtPointArrayData_boundingRect(const QwtPointArrayData*, intptr_t);
 size_t miqt_exec_callback_QwtPointArrayData_size(const QwtPointArrayData*, intptr_t);
 QPointF* miqt_exec_callback_QwtPointArrayData_sample(const QwtPointArrayData*, intptr_t, size_t);
+void miqt_exec_callback_handle_release_QwtCPointerData(intptr_t);
 QRectF* miqt_exec_callback_QwtCPointerData_boundingRect(const QwtCPointerData*, intptr_t);
 size_t miqt_exec_callback_QwtCPointerData_size(const QwtCPointerData*, intptr_t);
 QPointF* miqt_exec_callback_QwtCPointerData_sample(const QwtCPointerData*, intptr_t, size_t);
+void miqt_exec_callback_handle_release_QwtSyntheticPointData(intptr_t);
 size_t miqt_exec_callback_QwtSyntheticPointData_size(const QwtSyntheticPointData*, intptr_t);
 QRectF* miqt_exec_callback_QwtSyntheticPointData_boundingRect(const QwtSyntheticPointData*, intptr_t);
 QPointF* miqt_exec_callback_QwtSyntheticPointData_sample(const QwtSyntheticPointData*, intptr_t, size_t);
@@ -34,46 +39,46 @@ public:
 	virtual ~MiqtVirtualQwtPointArrayData() override = default;
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__boundingRect = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtPointArrayData> handle__boundingRect;
 
 	// Subclass to allow providing a Go implementation
 	virtual QRectF boundingRect() const override {
-		if (handle__boundingRect == 0) {
+		if (!handle__boundingRect) {
 			return QwtPointArrayData::boundingRect();
 		}
 
-		QRectF* callback_return_value = miqt_exec_callback_QwtPointArrayData_boundingRect(this, handle__boundingRect);
+		QRectF* callback_return_value = miqt_exec_callback_QwtPointArrayData_boundingRect(this, handle__boundingRect.value());
 		return *callback_return_value;
 	}
 
 	friend QRectF* QwtPointArrayData_virtualbase_boundingRect(const void* self);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__size = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtPointArrayData> handle__size;
 
 	// Subclass to allow providing a Go implementation
 	virtual size_t size() const override {
-		if (handle__size == 0) {
+		if (!handle__size) {
 			return QwtPointArrayData::size();
 		}
 
-		size_t callback_return_value = miqt_exec_callback_QwtPointArrayData_size(this, handle__size);
+		size_t callback_return_value = miqt_exec_callback_QwtPointArrayData_size(this, handle__size.value());
 		return static_cast<size_t>(callback_return_value);
 	}
 
 	friend size_t QwtPointArrayData_virtualbase_size(const void* self);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__sample = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtPointArrayData> handle__sample;
 
 	// Subclass to allow providing a Go implementation
 	virtual QPointF sample(size_t index) const override {
-		if (handle__sample == 0) {
+		if (!handle__sample) {
 			return QwtPointArrayData::sample(index);
 		}
 
 		size_t sigval1 = index;
-		QPointF* callback_return_value = miqt_exec_callback_QwtPointArrayData_sample(this, handle__sample, sigval1);
+		QPointF* callback_return_value = miqt_exec_callback_QwtPointArrayData_sample(this, handle__sample.value(), sigval1);
 		return *callback_return_value;
 	}
 
@@ -144,12 +149,13 @@ struct miqt_array /* of double */  QwtPointArrayData_yData(const QwtPointArrayDa
 }
 
 bool QwtPointArrayData_override_virtual_boundingRect(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtPointArrayData> slot_handle(slot);
 	MiqtVirtualQwtPointArrayData* self_cast = dynamic_cast<MiqtVirtualQwtPointArrayData*>( (QwtPointArrayData*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__boundingRect = slot;
+	self_cast->handle__boundingRect = std::move(slot_handle);
 	return true;
 }
 
@@ -158,12 +164,13 @@ QRectF* QwtPointArrayData_virtualbase_boundingRect(const void* self) {
 }
 
 bool QwtPointArrayData_override_virtual_size(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtPointArrayData> slot_handle(slot);
 	MiqtVirtualQwtPointArrayData* self_cast = dynamic_cast<MiqtVirtualQwtPointArrayData*>( (QwtPointArrayData*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__size = slot;
+	self_cast->handle__size = std::move(slot_handle);
 	return true;
 }
 
@@ -172,12 +179,13 @@ size_t QwtPointArrayData_virtualbase_size(const void* self) {
 }
 
 bool QwtPointArrayData_override_virtual_sample(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtPointArrayData> slot_handle(slot);
 	MiqtVirtualQwtPointArrayData* self_cast = dynamic_cast<MiqtVirtualQwtPointArrayData*>( (QwtPointArrayData*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__sample = slot;
+	self_cast->handle__sample = std::move(slot_handle);
 	return true;
 }
 
@@ -198,46 +206,46 @@ public:
 	virtual ~MiqtVirtualQwtCPointerData() override = default;
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__boundingRect = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtCPointerData> handle__boundingRect;
 
 	// Subclass to allow providing a Go implementation
 	virtual QRectF boundingRect() const override {
-		if (handle__boundingRect == 0) {
+		if (!handle__boundingRect) {
 			return QwtCPointerData::boundingRect();
 		}
 
-		QRectF* callback_return_value = miqt_exec_callback_QwtCPointerData_boundingRect(this, handle__boundingRect);
+		QRectF* callback_return_value = miqt_exec_callback_QwtCPointerData_boundingRect(this, handle__boundingRect.value());
 		return *callback_return_value;
 	}
 
 	friend QRectF* QwtCPointerData_virtualbase_boundingRect(const void* self);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__size = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtCPointerData> handle__size;
 
 	// Subclass to allow providing a Go implementation
 	virtual size_t size() const override {
-		if (handle__size == 0) {
+		if (!handle__size) {
 			return QwtCPointerData::size();
 		}
 
-		size_t callback_return_value = miqt_exec_callback_QwtCPointerData_size(this, handle__size);
+		size_t callback_return_value = miqt_exec_callback_QwtCPointerData_size(this, handle__size.value());
 		return static_cast<size_t>(callback_return_value);
 	}
 
 	friend size_t QwtCPointerData_virtualbase_size(const void* self);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__sample = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtCPointerData> handle__sample;
 
 	// Subclass to allow providing a Go implementation
 	virtual QPointF sample(size_t index) const override {
-		if (handle__sample == 0) {
+		if (!handle__sample) {
 			return QwtCPointerData::sample(index);
 		}
 
 		size_t sigval1 = index;
-		QPointF* callback_return_value = miqt_exec_callback_QwtCPointerData_sample(this, handle__sample, sigval1);
+		QPointF* callback_return_value = miqt_exec_callback_QwtCPointerData_sample(this, handle__sample.value(), sigval1);
 		return *callback_return_value;
 	}
 
@@ -274,12 +282,13 @@ const double* QwtCPointerData_yData(const QwtCPointerData* self) {
 }
 
 bool QwtCPointerData_override_virtual_boundingRect(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtCPointerData> slot_handle(slot);
 	MiqtVirtualQwtCPointerData* self_cast = dynamic_cast<MiqtVirtualQwtCPointerData*>( (QwtCPointerData*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__boundingRect = slot;
+	self_cast->handle__boundingRect = std::move(slot_handle);
 	return true;
 }
 
@@ -288,12 +297,13 @@ QRectF* QwtCPointerData_virtualbase_boundingRect(const void* self) {
 }
 
 bool QwtCPointerData_override_virtual_size(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtCPointerData> slot_handle(slot);
 	MiqtVirtualQwtCPointerData* self_cast = dynamic_cast<MiqtVirtualQwtCPointerData*>( (QwtCPointerData*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__size = slot;
+	self_cast->handle__size = std::move(slot_handle);
 	return true;
 }
 
@@ -302,12 +312,13 @@ size_t QwtCPointerData_virtualbase_size(const void* self) {
 }
 
 bool QwtCPointerData_override_virtual_sample(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtCPointerData> slot_handle(slot);
 	MiqtVirtualQwtCPointerData* self_cast = dynamic_cast<MiqtVirtualQwtCPointerData*>( (QwtCPointerData*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__sample = slot;
+	self_cast->handle__sample = std::move(slot_handle);
 	return true;
 }
 
@@ -329,88 +340,88 @@ public:
 	virtual ~MiqtVirtualQwtSyntheticPointData() override = default;
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__size = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtSyntheticPointData> handle__size;
 
 	// Subclass to allow providing a Go implementation
 	virtual size_t size() const override {
-		if (handle__size == 0) {
+		if (!handle__size) {
 			return QwtSyntheticPointData::size();
 		}
 
-		size_t callback_return_value = miqt_exec_callback_QwtSyntheticPointData_size(this, handle__size);
+		size_t callback_return_value = miqt_exec_callback_QwtSyntheticPointData_size(this, handle__size.value());
 		return static_cast<size_t>(callback_return_value);
 	}
 
 	friend size_t QwtSyntheticPointData_virtualbase_size(const void* self);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__boundingRect = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtSyntheticPointData> handle__boundingRect;
 
 	// Subclass to allow providing a Go implementation
 	virtual QRectF boundingRect() const override {
-		if (handle__boundingRect == 0) {
+		if (!handle__boundingRect) {
 			return QwtSyntheticPointData::boundingRect();
 		}
 
-		QRectF* callback_return_value = miqt_exec_callback_QwtSyntheticPointData_boundingRect(this, handle__boundingRect);
+		QRectF* callback_return_value = miqt_exec_callback_QwtSyntheticPointData_boundingRect(this, handle__boundingRect.value());
 		return *callback_return_value;
 	}
 
 	friend QRectF* QwtSyntheticPointData_virtualbase_boundingRect(const void* self);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__sample = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtSyntheticPointData> handle__sample;
 
 	// Subclass to allow providing a Go implementation
 	virtual QPointF sample(size_t index) const override {
-		if (handle__sample == 0) {
+		if (!handle__sample) {
 			return QwtSyntheticPointData::sample(index);
 		}
 
 		size_t sigval1 = index;
-		QPointF* callback_return_value = miqt_exec_callback_QwtSyntheticPointData_sample(this, handle__sample, sigval1);
+		QPointF* callback_return_value = miqt_exec_callback_QwtSyntheticPointData_sample(this, handle__sample.value(), sigval1);
 		return *callback_return_value;
 	}
 
 	friend QPointF* QwtSyntheticPointData_virtualbase_sample(const void* self, size_t index);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__y = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtSyntheticPointData> handle__y;
 
 	// Subclass to allow providing a Go implementation
 	virtual double y(double x) const override {
-		if (handle__y == 0) {
+		if (!handle__y) {
 			return 0; // Pure virtual, there is no base we can call
 		}
 
 		double sigval1 = x;
-		double callback_return_value = miqt_exec_callback_QwtSyntheticPointData_y(this, handle__y, sigval1);
+		double callback_return_value = miqt_exec_callback_QwtSyntheticPointData_y(this, handle__y.value(), sigval1);
 		return static_cast<double>(callback_return_value);
 	}
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__x = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtSyntheticPointData> handle__x;
 
 	// Subclass to allow providing a Go implementation
 	virtual double x(uint index) const override {
-		if (handle__x == 0) {
+		if (!handle__x) {
 			return QwtSyntheticPointData::x(index);
 		}
 
 		uint index_ret = index;
 		unsigned int sigval1 = static_cast<unsigned int>(index_ret);
-		double callback_return_value = miqt_exec_callback_QwtSyntheticPointData_x(this, handle__x, sigval1);
+		double callback_return_value = miqt_exec_callback_QwtSyntheticPointData_x(this, handle__x.value(), sigval1);
 		return static_cast<double>(callback_return_value);
 	}
 
 	friend double QwtSyntheticPointData_virtualbase_x(const void* self, unsigned int index);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__setRectOfInterest = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtSyntheticPointData> handle__setRectOfInterest;
 
 	// Subclass to allow providing a Go implementation
 	virtual void setRectOfInterest(const QRectF& rectOfInterest) override {
-		if (handle__setRectOfInterest == 0) {
+		if (!handle__setRectOfInterest) {
 			QwtSyntheticPointData::setRectOfInterest(rectOfInterest);
 			return;
 		}
@@ -418,7 +429,7 @@ public:
 		const QRectF& rectOfInterest_ret = rectOfInterest;
 		// Cast returned reference into pointer
 		QRectF* sigval1 = const_cast<QRectF*>(&rectOfInterest_ret);
-		miqt_exec_callback_QwtSyntheticPointData_setRectOfInterest(this, handle__setRectOfInterest, sigval1);
+		miqt_exec_callback_QwtSyntheticPointData_setRectOfInterest(this, handle__setRectOfInterest.value(), sigval1);
 
 	}
 
@@ -479,12 +490,13 @@ QRectF* QwtSyntheticPointData_rectOfInterest(const QwtSyntheticPointData* self) 
 }
 
 bool QwtSyntheticPointData_override_virtual_size(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtSyntheticPointData> slot_handle(slot);
 	MiqtVirtualQwtSyntheticPointData* self_cast = dynamic_cast<MiqtVirtualQwtSyntheticPointData*>( (QwtSyntheticPointData*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__size = slot;
+	self_cast->handle__size = std::move(slot_handle);
 	return true;
 }
 
@@ -493,12 +505,13 @@ size_t QwtSyntheticPointData_virtualbase_size(const void* self) {
 }
 
 bool QwtSyntheticPointData_override_virtual_boundingRect(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtSyntheticPointData> slot_handle(slot);
 	MiqtVirtualQwtSyntheticPointData* self_cast = dynamic_cast<MiqtVirtualQwtSyntheticPointData*>( (QwtSyntheticPointData*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__boundingRect = slot;
+	self_cast->handle__boundingRect = std::move(slot_handle);
 	return true;
 }
 
@@ -507,12 +520,13 @@ QRectF* QwtSyntheticPointData_virtualbase_boundingRect(const void* self) {
 }
 
 bool QwtSyntheticPointData_override_virtual_sample(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtSyntheticPointData> slot_handle(slot);
 	MiqtVirtualQwtSyntheticPointData* self_cast = dynamic_cast<MiqtVirtualQwtSyntheticPointData*>( (QwtSyntheticPointData*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__sample = slot;
+	self_cast->handle__sample = std::move(slot_handle);
 	return true;
 }
 
@@ -521,22 +535,24 @@ QPointF* QwtSyntheticPointData_virtualbase_sample(const void* self, size_t index
 }
 
 bool QwtSyntheticPointData_override_virtual_y(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtSyntheticPointData> slot_handle(slot);
 	MiqtVirtualQwtSyntheticPointData* self_cast = dynamic_cast<MiqtVirtualQwtSyntheticPointData*>( (QwtSyntheticPointData*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__y = slot;
+	self_cast->handle__y = std::move(slot_handle);
 	return true;
 }
 
 bool QwtSyntheticPointData_override_virtual_x(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtSyntheticPointData> slot_handle(slot);
 	MiqtVirtualQwtSyntheticPointData* self_cast = dynamic_cast<MiqtVirtualQwtSyntheticPointData*>( (QwtSyntheticPointData*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__x = slot;
+	self_cast->handle__x = std::move(slot_handle);
 	return true;
 }
 
@@ -545,12 +561,13 @@ double QwtSyntheticPointData_virtualbase_x(const void* self, unsigned int index)
 }
 
 bool QwtSyntheticPointData_override_virtual_setRectOfInterest(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtSyntheticPointData> slot_handle(slot);
 	MiqtVirtualQwtSyntheticPointData* self_cast = dynamic_cast<MiqtVirtualQwtSyntheticPointData*>( (QwtSyntheticPointData*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__setRectOfInterest = slot;
+	self_cast->handle__setRectOfInterest = std::move(slot_handle);
 	return true;
 }
 

@@ -23,6 +23,11 @@ const (
 	QwtPlotDirectPainter__CopyBackingStore QwtPlotDirectPainter__Attribute = 4
 )
 
+//export miqt_exec_callback_handle_release_QwtPlotDirectPainter
+func miqt_exec_callback_handle_release_QwtPlotDirectPainter(cb C.intptr_t) {
+	cgo.Handle(cb).Delete()
+}
+
 type QwtPlotDirectPainter struct {
 	h *C.QwtPlotDirectPainter
 	*qt.QObject
@@ -173,7 +178,11 @@ func (this *QwtPlotDirectPainter) callVirtualBase_EventFilter(param1 *qt.QObject
 
 }
 func (this *QwtPlotDirectPainter) OnEventFilter(slot func(super func(param1 *qt.QObject, param2 *qt.QEvent) bool, param1 *qt.QObject, param2 *qt.QEvent) bool) {
-	ok := C.QwtPlotDirectPainter_override_virtual_eventFilter(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QwtPlotDirectPainter_override_virtual_eventFilter(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -203,7 +212,11 @@ func (this *QwtPlotDirectPainter) callVirtualBase_Event(event *qt.QEvent) bool {
 
 }
 func (this *QwtPlotDirectPainter) OnEvent(slot func(super func(event *qt.QEvent) bool, event *qt.QEvent) bool) {
-	ok := C.QwtPlotDirectPainter_override_virtual_event(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QwtPlotDirectPainter_override_virtual_event(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -231,7 +244,11 @@ func (this *QwtPlotDirectPainter) callVirtualBase_TimerEvent(event *qt.QTimerEve
 
 }
 func (this *QwtPlotDirectPainter) OnTimerEvent(slot func(super func(event *qt.QTimerEvent), event *qt.QTimerEvent)) {
-	ok := C.QwtPlotDirectPainter_override_virtual_timerEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QwtPlotDirectPainter_override_virtual_timerEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -257,7 +274,11 @@ func (this *QwtPlotDirectPainter) callVirtualBase_ChildEvent(event *qt.QChildEve
 
 }
 func (this *QwtPlotDirectPainter) OnChildEvent(slot func(super func(event *qt.QChildEvent), event *qt.QChildEvent)) {
-	ok := C.QwtPlotDirectPainter_override_virtual_childEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QwtPlotDirectPainter_override_virtual_childEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -283,7 +304,11 @@ func (this *QwtPlotDirectPainter) callVirtualBase_CustomEvent(event *qt.QEvent) 
 
 }
 func (this *QwtPlotDirectPainter) OnCustomEvent(slot func(super func(event *qt.QEvent), event *qt.QEvent)) {
-	ok := C.QwtPlotDirectPainter_override_virtual_customEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QwtPlotDirectPainter_override_virtual_customEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -309,7 +334,11 @@ func (this *QwtPlotDirectPainter) callVirtualBase_ConnectNotify(signal *qt.QMeta
 
 }
 func (this *QwtPlotDirectPainter) OnConnectNotify(slot func(super func(signal *qt.QMetaMethod), signal *qt.QMetaMethod)) {
-	ok := C.QwtPlotDirectPainter_override_virtual_connectNotify(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QwtPlotDirectPainter_override_virtual_connectNotify(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -335,7 +364,11 @@ func (this *QwtPlotDirectPainter) callVirtualBase_DisconnectNotify(signal *qt.QM
 
 }
 func (this *QwtPlotDirectPainter) OnDisconnectNotify(slot func(super func(signal *qt.QMetaMethod), signal *qt.QMetaMethod)) {
-	ok := C.QwtPlotDirectPainter_override_virtual_disconnectNotify(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QwtPlotDirectPainter_override_virtual_disconnectNotify(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}

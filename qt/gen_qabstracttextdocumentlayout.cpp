@@ -1,3 +1,5 @@
+#include <memory>
+#include <utility>
 #include <QAbstractTextDocumentLayout>
 #define WORKAROUND_INNER_CLASS_DEFINITION_QAbstractTextDocumentLayout__PaintContext
 #define WORKAROUND_INNER_CLASS_DEFINITION_QAbstractTextDocumentLayout__Selection
@@ -32,6 +34,7 @@
 extern "C" {
 #endif
 
+void miqt_exec_callback_handle_release_QAbstractTextDocumentLayout(intptr_t);
 void miqt_exec_callback_QAbstractTextDocumentLayout_update(intptr_t);
 void miqt_exec_callback_QAbstractTextDocumentLayout_updateBlock(intptr_t, QTextBlock*);
 void miqt_exec_callback_QAbstractTextDocumentLayout_documentSizeChanged(intptr_t, QSizeF*);
@@ -66,11 +69,11 @@ public:
 	virtual ~MiqtVirtualQAbstractTextDocumentLayout() override = default;
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__draw = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QAbstractTextDocumentLayout> handle__draw;
 
 	// Subclass to allow providing a Go implementation
 	virtual void draw(QPainter* painter, const QAbstractTextDocumentLayout::PaintContext& context) override {
-		if (handle__draw == 0) {
+		if (!handle__draw) {
 			return; // Pure virtual, there is no base we can call
 		}
 
@@ -78,16 +81,16 @@ public:
 		const QAbstractTextDocumentLayout::PaintContext& context_ret = context;
 		// Cast returned reference into pointer
 		QAbstractTextDocumentLayout__PaintContext* sigval2 = const_cast<QAbstractTextDocumentLayout::PaintContext*>(&context_ret);
-		miqt_exec_callback_QAbstractTextDocumentLayout_draw(this, handle__draw, sigval1, sigval2);
+		miqt_exec_callback_QAbstractTextDocumentLayout_draw(this, handle__draw.value(), sigval1, sigval2);
 
 	}
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__hitTest = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QAbstractTextDocumentLayout> handle__hitTest;
 
 	// Subclass to allow providing a Go implementation
 	virtual int hitTest(const QPointF& point, Qt::HitTestAccuracy accuracy) const override {
-		if (handle__hitTest == 0) {
+		if (!handle__hitTest) {
 			return 0; // Pure virtual, there is no base we can call
 		}
 
@@ -96,88 +99,88 @@ public:
 		QPointF* sigval1 = const_cast<QPointF*>(&point_ret);
 		Qt::HitTestAccuracy accuracy_ret = accuracy;
 		int sigval2 = static_cast<int>(accuracy_ret);
-		int callback_return_value = miqt_exec_callback_QAbstractTextDocumentLayout_hitTest(this, handle__hitTest, sigval1, sigval2);
+		int callback_return_value = miqt_exec_callback_QAbstractTextDocumentLayout_hitTest(this, handle__hitTest.value(), sigval1, sigval2);
 		return static_cast<int>(callback_return_value);
 	}
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__pageCount = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QAbstractTextDocumentLayout> handle__pageCount;
 
 	// Subclass to allow providing a Go implementation
 	virtual int pageCount() const override {
-		if (handle__pageCount == 0) {
+		if (!handle__pageCount) {
 			return 0; // Pure virtual, there is no base we can call
 		}
 
-		int callback_return_value = miqt_exec_callback_QAbstractTextDocumentLayout_pageCount(this, handle__pageCount);
+		int callback_return_value = miqt_exec_callback_QAbstractTextDocumentLayout_pageCount(this, handle__pageCount.value());
 		return static_cast<int>(callback_return_value);
 	}
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__documentSize = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QAbstractTextDocumentLayout> handle__documentSize;
 
 	// Subclass to allow providing a Go implementation
 	virtual QSizeF documentSize() const override {
-		if (handle__documentSize == 0) {
+		if (!handle__documentSize) {
 			return QSizeF(); // Pure virtual, there is no base we can call
 		}
 
-		QSizeF* callback_return_value = miqt_exec_callback_QAbstractTextDocumentLayout_documentSize(this, handle__documentSize);
+		QSizeF* callback_return_value = miqt_exec_callback_QAbstractTextDocumentLayout_documentSize(this, handle__documentSize.value());
 		return *callback_return_value;
 	}
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__frameBoundingRect = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QAbstractTextDocumentLayout> handle__frameBoundingRect;
 
 	// Subclass to allow providing a Go implementation
 	virtual QRectF frameBoundingRect(QTextFrame* frame) const override {
-		if (handle__frameBoundingRect == 0) {
+		if (!handle__frameBoundingRect) {
 			return QRectF(); // Pure virtual, there is no base we can call
 		}
 
 		QTextFrame* sigval1 = frame;
-		QRectF* callback_return_value = miqt_exec_callback_QAbstractTextDocumentLayout_frameBoundingRect(this, handle__frameBoundingRect, sigval1);
+		QRectF* callback_return_value = miqt_exec_callback_QAbstractTextDocumentLayout_frameBoundingRect(this, handle__frameBoundingRect.value(), sigval1);
 		return *callback_return_value;
 	}
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__blockBoundingRect = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QAbstractTextDocumentLayout> handle__blockBoundingRect;
 
 	// Subclass to allow providing a Go implementation
 	virtual QRectF blockBoundingRect(const QTextBlock& block) const override {
-		if (handle__blockBoundingRect == 0) {
+		if (!handle__blockBoundingRect) {
 			return QRectF(); // Pure virtual, there is no base we can call
 		}
 
 		const QTextBlock& block_ret = block;
 		// Cast returned reference into pointer
 		QTextBlock* sigval1 = const_cast<QTextBlock*>(&block_ret);
-		QRectF* callback_return_value = miqt_exec_callback_QAbstractTextDocumentLayout_blockBoundingRect(this, handle__blockBoundingRect, sigval1);
+		QRectF* callback_return_value = miqt_exec_callback_QAbstractTextDocumentLayout_blockBoundingRect(this, handle__blockBoundingRect.value(), sigval1);
 		return *callback_return_value;
 	}
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__documentChanged = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QAbstractTextDocumentLayout> handle__documentChanged;
 
 	// Subclass to allow providing a Go implementation
 	virtual void documentChanged(int from, int charsRemoved, int charsAdded) override {
-		if (handle__documentChanged == 0) {
+		if (!handle__documentChanged) {
 			return; // Pure virtual, there is no base we can call
 		}
 
 		int sigval1 = from;
 		int sigval2 = charsRemoved;
 		int sigval3 = charsAdded;
-		miqt_exec_callback_QAbstractTextDocumentLayout_documentChanged(this, handle__documentChanged, sigval1, sigval2, sigval3);
+		miqt_exec_callback_QAbstractTextDocumentLayout_documentChanged(this, handle__documentChanged.value(), sigval1, sigval2, sigval3);
 
 	}
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__resizeInlineObject = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QAbstractTextDocumentLayout> handle__resizeInlineObject;
 
 	// Subclass to allow providing a Go implementation
 	virtual void resizeInlineObject(QTextInlineObject item, int posInDocument, const QTextFormat& format) override {
-		if (handle__resizeInlineObject == 0) {
+		if (!handle__resizeInlineObject) {
 			QAbstractTextDocumentLayout::resizeInlineObject(item, posInDocument, format);
 			return;
 		}
@@ -187,18 +190,18 @@ public:
 		const QTextFormat& format_ret = format;
 		// Cast returned reference into pointer
 		QTextFormat* sigval3 = const_cast<QTextFormat*>(&format_ret);
-		miqt_exec_callback_QAbstractTextDocumentLayout_resizeInlineObject(this, handle__resizeInlineObject, sigval1, sigval2, sigval3);
+		miqt_exec_callback_QAbstractTextDocumentLayout_resizeInlineObject(this, handle__resizeInlineObject.value(), sigval1, sigval2, sigval3);
 
 	}
 
 	friend void QAbstractTextDocumentLayout_virtualbase_resizeInlineObject(void* self, QTextInlineObject* item, int posInDocument, QTextFormat* format);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__positionInlineObject = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QAbstractTextDocumentLayout> handle__positionInlineObject;
 
 	// Subclass to allow providing a Go implementation
 	virtual void positionInlineObject(QTextInlineObject item, int posInDocument, const QTextFormat& format) override {
-		if (handle__positionInlineObject == 0) {
+		if (!handle__positionInlineObject) {
 			QAbstractTextDocumentLayout::positionInlineObject(item, posInDocument, format);
 			return;
 		}
@@ -208,18 +211,18 @@ public:
 		const QTextFormat& format_ret = format;
 		// Cast returned reference into pointer
 		QTextFormat* sigval3 = const_cast<QTextFormat*>(&format_ret);
-		miqt_exec_callback_QAbstractTextDocumentLayout_positionInlineObject(this, handle__positionInlineObject, sigval1, sigval2, sigval3);
+		miqt_exec_callback_QAbstractTextDocumentLayout_positionInlineObject(this, handle__positionInlineObject.value(), sigval1, sigval2, sigval3);
 
 	}
 
 	friend void QAbstractTextDocumentLayout_virtualbase_positionInlineObject(void* self, QTextInlineObject* item, int posInDocument, QTextFormat* format);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__drawInlineObject = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QAbstractTextDocumentLayout> handle__drawInlineObject;
 
 	// Subclass to allow providing a Go implementation
 	virtual void drawInlineObject(QPainter* painter, const QRectF& rect, QTextInlineObject object, int posInDocument, const QTextFormat& format) override {
-		if (handle__drawInlineObject == 0) {
+		if (!handle__drawInlineObject) {
 			QAbstractTextDocumentLayout::drawInlineObject(painter, rect, object, posInDocument, format);
 			return;
 		}
@@ -233,102 +236,102 @@ public:
 		const QTextFormat& format_ret = format;
 		// Cast returned reference into pointer
 		QTextFormat* sigval5 = const_cast<QTextFormat*>(&format_ret);
-		miqt_exec_callback_QAbstractTextDocumentLayout_drawInlineObject(this, handle__drawInlineObject, sigval1, sigval2, sigval3, sigval4, sigval5);
+		miqt_exec_callback_QAbstractTextDocumentLayout_drawInlineObject(this, handle__drawInlineObject.value(), sigval1, sigval2, sigval3, sigval4, sigval5);
 
 	}
 
 	friend void QAbstractTextDocumentLayout_virtualbase_drawInlineObject(void* self, QPainter* painter, QRectF* rect, QTextInlineObject* object, int posInDocument, QTextFormat* format);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__event = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QAbstractTextDocumentLayout> handle__event;
 
 	// Subclass to allow providing a Go implementation
 	virtual bool event(QEvent* event) override {
-		if (handle__event == 0) {
+		if (!handle__event) {
 			return QAbstractTextDocumentLayout::event(event);
 		}
 
 		QEvent* sigval1 = event;
-		bool callback_return_value = miqt_exec_callback_QAbstractTextDocumentLayout_event(this, handle__event, sigval1);
+		bool callback_return_value = miqt_exec_callback_QAbstractTextDocumentLayout_event(this, handle__event.value(), sigval1);
 		return callback_return_value;
 	}
 
 	friend bool QAbstractTextDocumentLayout_virtualbase_event(void* self, QEvent* event);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__eventFilter = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QAbstractTextDocumentLayout> handle__eventFilter;
 
 	// Subclass to allow providing a Go implementation
 	virtual bool eventFilter(QObject* watched, QEvent* event) override {
-		if (handle__eventFilter == 0) {
+		if (!handle__eventFilter) {
 			return QAbstractTextDocumentLayout::eventFilter(watched, event);
 		}
 
 		QObject* sigval1 = watched;
 		QEvent* sigval2 = event;
-		bool callback_return_value = miqt_exec_callback_QAbstractTextDocumentLayout_eventFilter(this, handle__eventFilter, sigval1, sigval2);
+		bool callback_return_value = miqt_exec_callback_QAbstractTextDocumentLayout_eventFilter(this, handle__eventFilter.value(), sigval1, sigval2);
 		return callback_return_value;
 	}
 
 	friend bool QAbstractTextDocumentLayout_virtualbase_eventFilter(void* self, QObject* watched, QEvent* event);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__timerEvent = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QAbstractTextDocumentLayout> handle__timerEvent;
 
 	// Subclass to allow providing a Go implementation
 	virtual void timerEvent(QTimerEvent* event) override {
-		if (handle__timerEvent == 0) {
+		if (!handle__timerEvent) {
 			QAbstractTextDocumentLayout::timerEvent(event);
 			return;
 		}
 
 		QTimerEvent* sigval1 = event;
-		miqt_exec_callback_QAbstractTextDocumentLayout_timerEvent(this, handle__timerEvent, sigval1);
+		miqt_exec_callback_QAbstractTextDocumentLayout_timerEvent(this, handle__timerEvent.value(), sigval1);
 
 	}
 
 	friend void QAbstractTextDocumentLayout_virtualbase_timerEvent(void* self, QTimerEvent* event);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__childEvent = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QAbstractTextDocumentLayout> handle__childEvent;
 
 	// Subclass to allow providing a Go implementation
 	virtual void childEvent(QChildEvent* event) override {
-		if (handle__childEvent == 0) {
+		if (!handle__childEvent) {
 			QAbstractTextDocumentLayout::childEvent(event);
 			return;
 		}
 
 		QChildEvent* sigval1 = event;
-		miqt_exec_callback_QAbstractTextDocumentLayout_childEvent(this, handle__childEvent, sigval1);
+		miqt_exec_callback_QAbstractTextDocumentLayout_childEvent(this, handle__childEvent.value(), sigval1);
 
 	}
 
 	friend void QAbstractTextDocumentLayout_virtualbase_childEvent(void* self, QChildEvent* event);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__customEvent = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QAbstractTextDocumentLayout> handle__customEvent;
 
 	// Subclass to allow providing a Go implementation
 	virtual void customEvent(QEvent* event) override {
-		if (handle__customEvent == 0) {
+		if (!handle__customEvent) {
 			QAbstractTextDocumentLayout::customEvent(event);
 			return;
 		}
 
 		QEvent* sigval1 = event;
-		miqt_exec_callback_QAbstractTextDocumentLayout_customEvent(this, handle__customEvent, sigval1);
+		miqt_exec_callback_QAbstractTextDocumentLayout_customEvent(this, handle__customEvent.value(), sigval1);
 
 	}
 
 	friend void QAbstractTextDocumentLayout_virtualbase_customEvent(void* self, QEvent* event);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__connectNotify = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QAbstractTextDocumentLayout> handle__connectNotify;
 
 	// Subclass to allow providing a Go implementation
 	virtual void connectNotify(const QMetaMethod& signal) override {
-		if (handle__connectNotify == 0) {
+		if (!handle__connectNotify) {
 			QAbstractTextDocumentLayout::connectNotify(signal);
 			return;
 		}
@@ -336,18 +339,18 @@ public:
 		const QMetaMethod& signal_ret = signal;
 		// Cast returned reference into pointer
 		QMetaMethod* sigval1 = const_cast<QMetaMethod*>(&signal_ret);
-		miqt_exec_callback_QAbstractTextDocumentLayout_connectNotify(this, handle__connectNotify, sigval1);
+		miqt_exec_callback_QAbstractTextDocumentLayout_connectNotify(this, handle__connectNotify.value(), sigval1);
 
 	}
 
 	friend void QAbstractTextDocumentLayout_virtualbase_connectNotify(void* self, QMetaMethod* signal);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__disconnectNotify = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QAbstractTextDocumentLayout> handle__disconnectNotify;
 
 	// Subclass to allow providing a Go implementation
 	virtual void disconnectNotify(const QMetaMethod& signal) override {
-		if (handle__disconnectNotify == 0) {
+		if (!handle__disconnectNotify) {
 			QAbstractTextDocumentLayout::disconnectNotify(signal);
 			return;
 		}
@@ -355,7 +358,7 @@ public:
 		const QMetaMethod& signal_ret = signal;
 		// Cast returned reference into pointer
 		QMetaMethod* sigval1 = const_cast<QMetaMethod*>(&signal_ret);
-		miqt_exec_callback_QAbstractTextDocumentLayout_disconnectNotify(this, handle__disconnectNotify, sigval1);
+		miqt_exec_callback_QAbstractTextDocumentLayout_disconnectNotify(this, handle__disconnectNotify.value(), sigval1);
 
 	}
 
@@ -490,47 +493,55 @@ void QAbstractTextDocumentLayout_update(QAbstractTextDocumentLayout* self) {
 	self->update();
 }
 
-void QAbstractTextDocumentLayout_connect_update(QAbstractTextDocumentLayout* self, intptr_t slot) {
-	QAbstractTextDocumentLayout::connect(self, static_cast<void (QAbstractTextDocumentLayout::*)(const QRectF&)>(&QAbstractTextDocumentLayout::update), self, [=]() {
+void* QAbstractTextDocumentLayout_connect_update(QAbstractTextDocumentLayout* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QAbstractTextDocumentLayout>>(slot);
+	return new QMetaObject::Connection(QAbstractTextDocumentLayout::connect(self, static_cast<void (QAbstractTextDocumentLayout::*)(const QRectF&)>(&QAbstractTextDocumentLayout::update), self, [slot_handle]() {
+		intptr_t slot = slot_handle->value();
 		miqt_exec_callback_QAbstractTextDocumentLayout_update(slot);
-	});
+	}));
 }
 
 void QAbstractTextDocumentLayout_updateBlock(QAbstractTextDocumentLayout* self, QTextBlock* block) {
 	self->updateBlock(*block);
 }
 
-void QAbstractTextDocumentLayout_connect_updateBlock(QAbstractTextDocumentLayout* self, intptr_t slot) {
-	QAbstractTextDocumentLayout::connect(self, static_cast<void (QAbstractTextDocumentLayout::*)(const QTextBlock&)>(&QAbstractTextDocumentLayout::updateBlock), self, [=](const QTextBlock& block) {
+void* QAbstractTextDocumentLayout_connect_updateBlock(QAbstractTextDocumentLayout* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QAbstractTextDocumentLayout>>(slot);
+	return new QMetaObject::Connection(QAbstractTextDocumentLayout::connect(self, static_cast<void (QAbstractTextDocumentLayout::*)(const QTextBlock&)>(&QAbstractTextDocumentLayout::updateBlock), self, [slot_handle](const QTextBlock& block) {
+		intptr_t slot = slot_handle->value();
 		const QTextBlock& block_ret = block;
 		// Cast returned reference into pointer
 		QTextBlock* sigval1 = const_cast<QTextBlock*>(&block_ret);
 		miqt_exec_callback_QAbstractTextDocumentLayout_updateBlock(slot, sigval1);
-	});
+	}));
 }
 
 void QAbstractTextDocumentLayout_documentSizeChanged(QAbstractTextDocumentLayout* self, QSizeF* newSize) {
 	self->documentSizeChanged(*newSize);
 }
 
-void QAbstractTextDocumentLayout_connect_documentSizeChanged(QAbstractTextDocumentLayout* self, intptr_t slot) {
-	QAbstractTextDocumentLayout::connect(self, static_cast<void (QAbstractTextDocumentLayout::*)(const QSizeF&)>(&QAbstractTextDocumentLayout::documentSizeChanged), self, [=](const QSizeF& newSize) {
+void* QAbstractTextDocumentLayout_connect_documentSizeChanged(QAbstractTextDocumentLayout* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QAbstractTextDocumentLayout>>(slot);
+	return new QMetaObject::Connection(QAbstractTextDocumentLayout::connect(self, static_cast<void (QAbstractTextDocumentLayout::*)(const QSizeF&)>(&QAbstractTextDocumentLayout::documentSizeChanged), self, [slot_handle](const QSizeF& newSize) {
+		intptr_t slot = slot_handle->value();
 		const QSizeF& newSize_ret = newSize;
 		// Cast returned reference into pointer
 		QSizeF* sigval1 = const_cast<QSizeF*>(&newSize_ret);
 		miqt_exec_callback_QAbstractTextDocumentLayout_documentSizeChanged(slot, sigval1);
-	});
+	}));
 }
 
 void QAbstractTextDocumentLayout_pageCountChanged(QAbstractTextDocumentLayout* self, int newPages) {
 	self->pageCountChanged(static_cast<int>(newPages));
 }
 
-void QAbstractTextDocumentLayout_connect_pageCountChanged(QAbstractTextDocumentLayout* self, intptr_t slot) {
-	QAbstractTextDocumentLayout::connect(self, static_cast<void (QAbstractTextDocumentLayout::*)(int)>(&QAbstractTextDocumentLayout::pageCountChanged), self, [=](int newPages) {
+void* QAbstractTextDocumentLayout_connect_pageCountChanged(QAbstractTextDocumentLayout* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QAbstractTextDocumentLayout>>(slot);
+	return new QMetaObject::Connection(QAbstractTextDocumentLayout::connect(self, static_cast<void (QAbstractTextDocumentLayout::*)(int)>(&QAbstractTextDocumentLayout::pageCountChanged), self, [slot_handle](int newPages) {
+		intptr_t slot = slot_handle->value();
 		int sigval1 = newPages;
 		miqt_exec_callback_QAbstractTextDocumentLayout_pageCountChanged(slot, sigval1);
-	});
+	}));
 }
 
 struct miqt_string QAbstractTextDocumentLayout_tr2(const char* s, const char* c) {
@@ -585,92 +596,102 @@ void QAbstractTextDocumentLayout_updateWithQRectF(QAbstractTextDocumentLayout* s
 	self->update(*param1);
 }
 
-void QAbstractTextDocumentLayout_connect_updateWithQRectF(QAbstractTextDocumentLayout* self, intptr_t slot) {
-	QAbstractTextDocumentLayout::connect(self, static_cast<void (QAbstractTextDocumentLayout::*)(const QRectF&)>(&QAbstractTextDocumentLayout::update), self, [=](const QRectF& param1) {
+void* QAbstractTextDocumentLayout_connect_updateWithQRectF(QAbstractTextDocumentLayout* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QAbstractTextDocumentLayout>>(slot);
+	return new QMetaObject::Connection(QAbstractTextDocumentLayout::connect(self, static_cast<void (QAbstractTextDocumentLayout::*)(const QRectF&)>(&QAbstractTextDocumentLayout::update), self, [slot_handle](const QRectF& param1) {
+		intptr_t slot = slot_handle->value();
 		const QRectF& param1_ret = param1;
 		// Cast returned reference into pointer
 		QRectF* sigval1 = const_cast<QRectF*>(&param1_ret);
 		miqt_exec_callback_QAbstractTextDocumentLayout_updateWithQRectF(slot, sigval1);
-	});
+	}));
 }
 
 bool QAbstractTextDocumentLayout_override_virtual_draw(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QAbstractTextDocumentLayout> slot_handle(slot);
 	MiqtVirtualQAbstractTextDocumentLayout* self_cast = dynamic_cast<MiqtVirtualQAbstractTextDocumentLayout*>( (QAbstractTextDocumentLayout*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__draw = slot;
+	self_cast->handle__draw = std::move(slot_handle);
 	return true;
 }
 
 bool QAbstractTextDocumentLayout_override_virtual_hitTest(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QAbstractTextDocumentLayout> slot_handle(slot);
 	MiqtVirtualQAbstractTextDocumentLayout* self_cast = dynamic_cast<MiqtVirtualQAbstractTextDocumentLayout*>( (QAbstractTextDocumentLayout*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__hitTest = slot;
+	self_cast->handle__hitTest = std::move(slot_handle);
 	return true;
 }
 
 bool QAbstractTextDocumentLayout_override_virtual_pageCount(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QAbstractTextDocumentLayout> slot_handle(slot);
 	MiqtVirtualQAbstractTextDocumentLayout* self_cast = dynamic_cast<MiqtVirtualQAbstractTextDocumentLayout*>( (QAbstractTextDocumentLayout*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__pageCount = slot;
+	self_cast->handle__pageCount = std::move(slot_handle);
 	return true;
 }
 
 bool QAbstractTextDocumentLayout_override_virtual_documentSize(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QAbstractTextDocumentLayout> slot_handle(slot);
 	MiqtVirtualQAbstractTextDocumentLayout* self_cast = dynamic_cast<MiqtVirtualQAbstractTextDocumentLayout*>( (QAbstractTextDocumentLayout*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__documentSize = slot;
+	self_cast->handle__documentSize = std::move(slot_handle);
 	return true;
 }
 
 bool QAbstractTextDocumentLayout_override_virtual_frameBoundingRect(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QAbstractTextDocumentLayout> slot_handle(slot);
 	MiqtVirtualQAbstractTextDocumentLayout* self_cast = dynamic_cast<MiqtVirtualQAbstractTextDocumentLayout*>( (QAbstractTextDocumentLayout*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__frameBoundingRect = slot;
+	self_cast->handle__frameBoundingRect = std::move(slot_handle);
 	return true;
 }
 
 bool QAbstractTextDocumentLayout_override_virtual_blockBoundingRect(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QAbstractTextDocumentLayout> slot_handle(slot);
 	MiqtVirtualQAbstractTextDocumentLayout* self_cast = dynamic_cast<MiqtVirtualQAbstractTextDocumentLayout*>( (QAbstractTextDocumentLayout*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__blockBoundingRect = slot;
+	self_cast->handle__blockBoundingRect = std::move(slot_handle);
 	return true;
 }
 
 bool QAbstractTextDocumentLayout_override_virtual_documentChanged(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QAbstractTextDocumentLayout> slot_handle(slot);
 	MiqtVirtualQAbstractTextDocumentLayout* self_cast = dynamic_cast<MiqtVirtualQAbstractTextDocumentLayout*>( (QAbstractTextDocumentLayout*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__documentChanged = slot;
+	self_cast->handle__documentChanged = std::move(slot_handle);
 	return true;
 }
 
 bool QAbstractTextDocumentLayout_override_virtual_resizeInlineObject(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QAbstractTextDocumentLayout> slot_handle(slot);
 	MiqtVirtualQAbstractTextDocumentLayout* self_cast = dynamic_cast<MiqtVirtualQAbstractTextDocumentLayout*>( (QAbstractTextDocumentLayout*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__resizeInlineObject = slot;
+	self_cast->handle__resizeInlineObject = std::move(slot_handle);
 	return true;
 }
 
@@ -679,12 +700,13 @@ void QAbstractTextDocumentLayout_virtualbase_resizeInlineObject(void* self, QTex
 }
 
 bool QAbstractTextDocumentLayout_override_virtual_positionInlineObject(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QAbstractTextDocumentLayout> slot_handle(slot);
 	MiqtVirtualQAbstractTextDocumentLayout* self_cast = dynamic_cast<MiqtVirtualQAbstractTextDocumentLayout*>( (QAbstractTextDocumentLayout*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__positionInlineObject = slot;
+	self_cast->handle__positionInlineObject = std::move(slot_handle);
 	return true;
 }
 
@@ -693,12 +715,13 @@ void QAbstractTextDocumentLayout_virtualbase_positionInlineObject(void* self, QT
 }
 
 bool QAbstractTextDocumentLayout_override_virtual_drawInlineObject(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QAbstractTextDocumentLayout> slot_handle(slot);
 	MiqtVirtualQAbstractTextDocumentLayout* self_cast = dynamic_cast<MiqtVirtualQAbstractTextDocumentLayout*>( (QAbstractTextDocumentLayout*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__drawInlineObject = slot;
+	self_cast->handle__drawInlineObject = std::move(slot_handle);
 	return true;
 }
 
@@ -707,12 +730,13 @@ void QAbstractTextDocumentLayout_virtualbase_drawInlineObject(void* self, QPaint
 }
 
 bool QAbstractTextDocumentLayout_override_virtual_event(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QAbstractTextDocumentLayout> slot_handle(slot);
 	MiqtVirtualQAbstractTextDocumentLayout* self_cast = dynamic_cast<MiqtVirtualQAbstractTextDocumentLayout*>( (QAbstractTextDocumentLayout*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__event = slot;
+	self_cast->handle__event = std::move(slot_handle);
 	return true;
 }
 
@@ -721,12 +745,13 @@ bool QAbstractTextDocumentLayout_virtualbase_event(void* self, QEvent* event) {
 }
 
 bool QAbstractTextDocumentLayout_override_virtual_eventFilter(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QAbstractTextDocumentLayout> slot_handle(slot);
 	MiqtVirtualQAbstractTextDocumentLayout* self_cast = dynamic_cast<MiqtVirtualQAbstractTextDocumentLayout*>( (QAbstractTextDocumentLayout*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__eventFilter = slot;
+	self_cast->handle__eventFilter = std::move(slot_handle);
 	return true;
 }
 
@@ -735,12 +760,13 @@ bool QAbstractTextDocumentLayout_virtualbase_eventFilter(void* self, QObject* wa
 }
 
 bool QAbstractTextDocumentLayout_override_virtual_timerEvent(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QAbstractTextDocumentLayout> slot_handle(slot);
 	MiqtVirtualQAbstractTextDocumentLayout* self_cast = dynamic_cast<MiqtVirtualQAbstractTextDocumentLayout*>( (QAbstractTextDocumentLayout*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__timerEvent = slot;
+	self_cast->handle__timerEvent = std::move(slot_handle);
 	return true;
 }
 
@@ -749,12 +775,13 @@ void QAbstractTextDocumentLayout_virtualbase_timerEvent(void* self, QTimerEvent*
 }
 
 bool QAbstractTextDocumentLayout_override_virtual_childEvent(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QAbstractTextDocumentLayout> slot_handle(slot);
 	MiqtVirtualQAbstractTextDocumentLayout* self_cast = dynamic_cast<MiqtVirtualQAbstractTextDocumentLayout*>( (QAbstractTextDocumentLayout*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__childEvent = slot;
+	self_cast->handle__childEvent = std::move(slot_handle);
 	return true;
 }
 
@@ -763,12 +790,13 @@ void QAbstractTextDocumentLayout_virtualbase_childEvent(void* self, QChildEvent*
 }
 
 bool QAbstractTextDocumentLayout_override_virtual_customEvent(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QAbstractTextDocumentLayout> slot_handle(slot);
 	MiqtVirtualQAbstractTextDocumentLayout* self_cast = dynamic_cast<MiqtVirtualQAbstractTextDocumentLayout*>( (QAbstractTextDocumentLayout*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__customEvent = slot;
+	self_cast->handle__customEvent = std::move(slot_handle);
 	return true;
 }
 
@@ -777,12 +805,13 @@ void QAbstractTextDocumentLayout_virtualbase_customEvent(void* self, QEvent* eve
 }
 
 bool QAbstractTextDocumentLayout_override_virtual_connectNotify(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QAbstractTextDocumentLayout> slot_handle(slot);
 	MiqtVirtualQAbstractTextDocumentLayout* self_cast = dynamic_cast<MiqtVirtualQAbstractTextDocumentLayout*>( (QAbstractTextDocumentLayout*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__connectNotify = slot;
+	self_cast->handle__connectNotify = std::move(slot_handle);
 	return true;
 }
 
@@ -791,12 +820,13 @@ void QAbstractTextDocumentLayout_virtualbase_connectNotify(void* self, QMetaMeth
 }
 
 bool QAbstractTextDocumentLayout_override_virtual_disconnectNotify(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QAbstractTextDocumentLayout> slot_handle(slot);
 	MiqtVirtualQAbstractTextDocumentLayout* self_cast = dynamic_cast<MiqtVirtualQAbstractTextDocumentLayout*>( (QAbstractTextDocumentLayout*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__disconnectNotify = slot;
+	self_cast->handle__disconnectNotify = std::move(slot_handle);
 	return true;
 }
 

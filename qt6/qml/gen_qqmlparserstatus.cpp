@@ -1,3 +1,5 @@
+#include <memory>
+#include <utility>
 #include <QQmlParserStatus>
 #include <qqmlparserstatus.h>
 #include "gen_qqmlparserstatus.h"
@@ -6,6 +8,7 @@
 extern "C" {
 #endif
 
+void miqt_exec_callback_handle_release_QQmlParserStatus(intptr_t);
 void miqt_exec_callback_QQmlParserStatus_classBegin(QQmlParserStatus*, intptr_t);
 void miqt_exec_callback_QQmlParserStatus_componentComplete(QQmlParserStatus*, intptr_t);
 #ifdef __cplusplus
@@ -20,28 +23,28 @@ public:
 	virtual ~MiqtVirtualQQmlParserStatus() override = default;
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__classBegin = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QQmlParserStatus> handle__classBegin;
 
 	// Subclass to allow providing a Go implementation
 	virtual void classBegin() override {
-		if (handle__classBegin == 0) {
+		if (!handle__classBegin) {
 			return; // Pure virtual, there is no base we can call
 		}
 
-		miqt_exec_callback_QQmlParserStatus_classBegin(this, handle__classBegin);
+		miqt_exec_callback_QQmlParserStatus_classBegin(this, handle__classBegin.value());
 
 	}
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__componentComplete = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QQmlParserStatus> handle__componentComplete;
 
 	// Subclass to allow providing a Go implementation
 	virtual void componentComplete() override {
-		if (handle__componentComplete == 0) {
+		if (!handle__componentComplete) {
 			return; // Pure virtual, there is no base we can call
 		}
 
-		miqt_exec_callback_QQmlParserStatus_componentComplete(this, handle__componentComplete);
+		miqt_exec_callback_QQmlParserStatus_componentComplete(this, handle__componentComplete.value());
 
 	}
 
@@ -64,22 +67,24 @@ void QQmlParserStatus_operatorAssign(QQmlParserStatus* self, QQmlParserStatus* p
 }
 
 bool QQmlParserStatus_override_virtual_classBegin(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QQmlParserStatus> slot_handle(slot);
 	MiqtVirtualQQmlParserStatus* self_cast = dynamic_cast<MiqtVirtualQQmlParserStatus*>( (QQmlParserStatus*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__classBegin = slot;
+	self_cast->handle__classBegin = std::move(slot_handle);
 	return true;
 }
 
 bool QQmlParserStatus_override_virtual_componentComplete(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QQmlParserStatus> slot_handle(slot);
 	MiqtVirtualQQmlParserStatus* self_cast = dynamic_cast<MiqtVirtualQQmlParserStatus*>( (QQmlParserStatus*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__componentComplete = slot;
+	self_cast->handle__componentComplete = std::move(slot_handle);
 	return true;
 }
 

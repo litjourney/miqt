@@ -1,3 +1,5 @@
+#include <memory>
+#include <utility>
 #include <QAbstractTextDocumentLayout>
 #include <QAbstractUndoItem>
 #include <QByteArray>
@@ -35,6 +37,7 @@
 extern "C" {
 #endif
 
+void miqt_exec_callback_handle_release_QTextDocument(intptr_t);
 void miqt_exec_callback_QTextDocument_contentsChange(intptr_t, int, int, int);
 void miqt_exec_callback_QTextDocument_contentsChanged(intptr_t);
 void miqt_exec_callback_QTextDocument_undoAvailable(intptr_t, bool);
@@ -86,45 +89,45 @@ public:
 	virtual ~MiqtVirtualQTextDocument() override = default;
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__clear = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QTextDocument> handle__clear;
 
 	// Subclass to allow providing a Go implementation
 	virtual void clear() override {
-		if (handle__clear == 0) {
+		if (!handle__clear) {
 			QTextDocument::clear();
 			return;
 		}
 
-		miqt_exec_callback_QTextDocument_clear(this, handle__clear);
+		miqt_exec_callback_QTextDocument_clear(this, handle__clear.value());
 
 	}
 
 	friend void QTextDocument_virtualbase_clear(void* self);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__createObject = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QTextDocument> handle__createObject;
 
 	// Subclass to allow providing a Go implementation
 	virtual QTextObject* createObject(const QTextFormat& f) override {
-		if (handle__createObject == 0) {
+		if (!handle__createObject) {
 			return QTextDocument::createObject(f);
 		}
 
 		const QTextFormat& f_ret = f;
 		// Cast returned reference into pointer
 		QTextFormat* sigval1 = const_cast<QTextFormat*>(&f_ret);
-		QTextObject* callback_return_value = miqt_exec_callback_QTextDocument_createObject(this, handle__createObject, sigval1);
+		QTextObject* callback_return_value = miqt_exec_callback_QTextDocument_createObject(this, handle__createObject.value(), sigval1);
 		return callback_return_value;
 	}
 
 	friend QTextObject* QTextDocument_virtualbase_createObject(void* self, QTextFormat* f);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__loadResource = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QTextDocument> handle__loadResource;
 
 	// Subclass to allow providing a Go implementation
 	virtual QVariant loadResource(int type, const QUrl& name) override {
-		if (handle__loadResource == 0) {
+		if (!handle__loadResource) {
 			return QTextDocument::loadResource(type, name);
 		}
 
@@ -132,102 +135,102 @@ public:
 		const QUrl& name_ret = name;
 		// Cast returned reference into pointer
 		QUrl* sigval2 = const_cast<QUrl*>(&name_ret);
-		QVariant* callback_return_value = miqt_exec_callback_QTextDocument_loadResource(this, handle__loadResource, sigval1, sigval2);
+		QVariant* callback_return_value = miqt_exec_callback_QTextDocument_loadResource(this, handle__loadResource.value(), sigval1, sigval2);
 		return *callback_return_value;
 	}
 
 	friend QVariant* QTextDocument_virtualbase_loadResource(void* self, int type, QUrl* name);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__event = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QTextDocument> handle__event;
 
 	// Subclass to allow providing a Go implementation
 	virtual bool event(QEvent* event) override {
-		if (handle__event == 0) {
+		if (!handle__event) {
 			return QTextDocument::event(event);
 		}
 
 		QEvent* sigval1 = event;
-		bool callback_return_value = miqt_exec_callback_QTextDocument_event(this, handle__event, sigval1);
+		bool callback_return_value = miqt_exec_callback_QTextDocument_event(this, handle__event.value(), sigval1);
 		return callback_return_value;
 	}
 
 	friend bool QTextDocument_virtualbase_event(void* self, QEvent* event);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__eventFilter = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QTextDocument> handle__eventFilter;
 
 	// Subclass to allow providing a Go implementation
 	virtual bool eventFilter(QObject* watched, QEvent* event) override {
-		if (handle__eventFilter == 0) {
+		if (!handle__eventFilter) {
 			return QTextDocument::eventFilter(watched, event);
 		}
 
 		QObject* sigval1 = watched;
 		QEvent* sigval2 = event;
-		bool callback_return_value = miqt_exec_callback_QTextDocument_eventFilter(this, handle__eventFilter, sigval1, sigval2);
+		bool callback_return_value = miqt_exec_callback_QTextDocument_eventFilter(this, handle__eventFilter.value(), sigval1, sigval2);
 		return callback_return_value;
 	}
 
 	friend bool QTextDocument_virtualbase_eventFilter(void* self, QObject* watched, QEvent* event);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__timerEvent = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QTextDocument> handle__timerEvent;
 
 	// Subclass to allow providing a Go implementation
 	virtual void timerEvent(QTimerEvent* event) override {
-		if (handle__timerEvent == 0) {
+		if (!handle__timerEvent) {
 			QTextDocument::timerEvent(event);
 			return;
 		}
 
 		QTimerEvent* sigval1 = event;
-		miqt_exec_callback_QTextDocument_timerEvent(this, handle__timerEvent, sigval1);
+		miqt_exec_callback_QTextDocument_timerEvent(this, handle__timerEvent.value(), sigval1);
 
 	}
 
 	friend void QTextDocument_virtualbase_timerEvent(void* self, QTimerEvent* event);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__childEvent = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QTextDocument> handle__childEvent;
 
 	// Subclass to allow providing a Go implementation
 	virtual void childEvent(QChildEvent* event) override {
-		if (handle__childEvent == 0) {
+		if (!handle__childEvent) {
 			QTextDocument::childEvent(event);
 			return;
 		}
 
 		QChildEvent* sigval1 = event;
-		miqt_exec_callback_QTextDocument_childEvent(this, handle__childEvent, sigval1);
+		miqt_exec_callback_QTextDocument_childEvent(this, handle__childEvent.value(), sigval1);
 
 	}
 
 	friend void QTextDocument_virtualbase_childEvent(void* self, QChildEvent* event);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__customEvent = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QTextDocument> handle__customEvent;
 
 	// Subclass to allow providing a Go implementation
 	virtual void customEvent(QEvent* event) override {
-		if (handle__customEvent == 0) {
+		if (!handle__customEvent) {
 			QTextDocument::customEvent(event);
 			return;
 		}
 
 		QEvent* sigval1 = event;
-		miqt_exec_callback_QTextDocument_customEvent(this, handle__customEvent, sigval1);
+		miqt_exec_callback_QTextDocument_customEvent(this, handle__customEvent.value(), sigval1);
 
 	}
 
 	friend void QTextDocument_virtualbase_customEvent(void* self, QEvent* event);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__connectNotify = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QTextDocument> handle__connectNotify;
 
 	// Subclass to allow providing a Go implementation
 	virtual void connectNotify(const QMetaMethod& signal) override {
-		if (handle__connectNotify == 0) {
+		if (!handle__connectNotify) {
 			QTextDocument::connectNotify(signal);
 			return;
 		}
@@ -235,18 +238,18 @@ public:
 		const QMetaMethod& signal_ret = signal;
 		// Cast returned reference into pointer
 		QMetaMethod* sigval1 = const_cast<QMetaMethod*>(&signal_ret);
-		miqt_exec_callback_QTextDocument_connectNotify(this, handle__connectNotify, sigval1);
+		miqt_exec_callback_QTextDocument_connectNotify(this, handle__connectNotify.value(), sigval1);
 
 	}
 
 	friend void QTextDocument_virtualbase_connectNotify(void* self, QMetaMethod* signal);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__disconnectNotify = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QTextDocument> handle__disconnectNotify;
 
 	// Subclass to allow providing a Go implementation
 	virtual void disconnectNotify(const QMetaMethod& signal) override {
-		if (handle__disconnectNotify == 0) {
+		if (!handle__disconnectNotify) {
 			QTextDocument::disconnectNotify(signal);
 			return;
 		}
@@ -254,7 +257,7 @@ public:
 		const QMetaMethod& signal_ret = signal;
 		// Cast returned reference into pointer
 		QMetaMethod* sigval1 = const_cast<QMetaMethod*>(&signal_ret);
-		miqt_exec_callback_QTextDocument_disconnectNotify(this, handle__disconnectNotify, sigval1);
+		miqt_exec_callback_QTextDocument_disconnectNotify(this, handle__disconnectNotify.value(), sigval1);
 
 	}
 
@@ -698,113 +701,133 @@ void QTextDocument_contentsChange(QTextDocument* self, int from, int charsRemove
 	self->contentsChange(static_cast<int>(from), static_cast<int>(charsRemoved), static_cast<int>(charsAdded));
 }
 
-void QTextDocument_connect_contentsChange(QTextDocument* self, intptr_t slot) {
-	QTextDocument::connect(self, static_cast<void (QTextDocument::*)(int, int, int)>(&QTextDocument::contentsChange), self, [=](int from, int charsRemoved, int charsAdded) {
+void* QTextDocument_connect_contentsChange(QTextDocument* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QTextDocument>>(slot);
+	return new QMetaObject::Connection(QTextDocument::connect(self, static_cast<void (QTextDocument::*)(int, int, int)>(&QTextDocument::contentsChange), self, [slot_handle](int from, int charsRemoved, int charsAdded) {
+		intptr_t slot = slot_handle->value();
 		int sigval1 = from;
 		int sigval2 = charsRemoved;
 		int sigval3 = charsAdded;
 		miqt_exec_callback_QTextDocument_contentsChange(slot, sigval1, sigval2, sigval3);
-	});
+	}));
 }
 
 void QTextDocument_contentsChanged(QTextDocument* self) {
 	self->contentsChanged();
 }
 
-void QTextDocument_connect_contentsChanged(QTextDocument* self, intptr_t slot) {
-	QTextDocument::connect(self, static_cast<void (QTextDocument::*)()>(&QTextDocument::contentsChanged), self, [=]() {
+void* QTextDocument_connect_contentsChanged(QTextDocument* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QTextDocument>>(slot);
+	return new QMetaObject::Connection(QTextDocument::connect(self, static_cast<void (QTextDocument::*)()>(&QTextDocument::contentsChanged), self, [slot_handle]() {
+		intptr_t slot = slot_handle->value();
 		miqt_exec_callback_QTextDocument_contentsChanged(slot);
-	});
+	}));
 }
 
 void QTextDocument_undoAvailable(QTextDocument* self, bool param1) {
 	self->undoAvailable(param1);
 }
 
-void QTextDocument_connect_undoAvailable(QTextDocument* self, intptr_t slot) {
-	QTextDocument::connect(self, static_cast<void (QTextDocument::*)(bool)>(&QTextDocument::undoAvailable), self, [=](bool param1) {
+void* QTextDocument_connect_undoAvailable(QTextDocument* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QTextDocument>>(slot);
+	return new QMetaObject::Connection(QTextDocument::connect(self, static_cast<void (QTextDocument::*)(bool)>(&QTextDocument::undoAvailable), self, [slot_handle](bool param1) {
+		intptr_t slot = slot_handle->value();
 		bool sigval1 = param1;
 		miqt_exec_callback_QTextDocument_undoAvailable(slot, sigval1);
-	});
+	}));
 }
 
 void QTextDocument_redoAvailable(QTextDocument* self, bool param1) {
 	self->redoAvailable(param1);
 }
 
-void QTextDocument_connect_redoAvailable(QTextDocument* self, intptr_t slot) {
-	QTextDocument::connect(self, static_cast<void (QTextDocument::*)(bool)>(&QTextDocument::redoAvailable), self, [=](bool param1) {
+void* QTextDocument_connect_redoAvailable(QTextDocument* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QTextDocument>>(slot);
+	return new QMetaObject::Connection(QTextDocument::connect(self, static_cast<void (QTextDocument::*)(bool)>(&QTextDocument::redoAvailable), self, [slot_handle](bool param1) {
+		intptr_t slot = slot_handle->value();
 		bool sigval1 = param1;
 		miqt_exec_callback_QTextDocument_redoAvailable(slot, sigval1);
-	});
+	}));
 }
 
 void QTextDocument_undoCommandAdded(QTextDocument* self) {
 	self->undoCommandAdded();
 }
 
-void QTextDocument_connect_undoCommandAdded(QTextDocument* self, intptr_t slot) {
-	QTextDocument::connect(self, static_cast<void (QTextDocument::*)()>(&QTextDocument::undoCommandAdded), self, [=]() {
+void* QTextDocument_connect_undoCommandAdded(QTextDocument* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QTextDocument>>(slot);
+	return new QMetaObject::Connection(QTextDocument::connect(self, static_cast<void (QTextDocument::*)()>(&QTextDocument::undoCommandAdded), self, [slot_handle]() {
+		intptr_t slot = slot_handle->value();
 		miqt_exec_callback_QTextDocument_undoCommandAdded(slot);
-	});
+	}));
 }
 
 void QTextDocument_modificationChanged(QTextDocument* self, bool m) {
 	self->modificationChanged(m);
 }
 
-void QTextDocument_connect_modificationChanged(QTextDocument* self, intptr_t slot) {
-	QTextDocument::connect(self, static_cast<void (QTextDocument::*)(bool)>(&QTextDocument::modificationChanged), self, [=](bool m) {
+void* QTextDocument_connect_modificationChanged(QTextDocument* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QTextDocument>>(slot);
+	return new QMetaObject::Connection(QTextDocument::connect(self, static_cast<void (QTextDocument::*)(bool)>(&QTextDocument::modificationChanged), self, [slot_handle](bool m) {
+		intptr_t slot = slot_handle->value();
 		bool sigval1 = m;
 		miqt_exec_callback_QTextDocument_modificationChanged(slot, sigval1);
-	});
+	}));
 }
 
 void QTextDocument_cursorPositionChanged(QTextDocument* self, QTextCursor* cursor) {
 	self->cursorPositionChanged(*cursor);
 }
 
-void QTextDocument_connect_cursorPositionChanged(QTextDocument* self, intptr_t slot) {
-	QTextDocument::connect(self, static_cast<void (QTextDocument::*)(const QTextCursor&)>(&QTextDocument::cursorPositionChanged), self, [=](const QTextCursor& cursor) {
+void* QTextDocument_connect_cursorPositionChanged(QTextDocument* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QTextDocument>>(slot);
+	return new QMetaObject::Connection(QTextDocument::connect(self, static_cast<void (QTextDocument::*)(const QTextCursor&)>(&QTextDocument::cursorPositionChanged), self, [slot_handle](const QTextCursor& cursor) {
+		intptr_t slot = slot_handle->value();
 		const QTextCursor& cursor_ret = cursor;
 		// Cast returned reference into pointer
 		QTextCursor* sigval1 = const_cast<QTextCursor*>(&cursor_ret);
 		miqt_exec_callback_QTextDocument_cursorPositionChanged(slot, sigval1);
-	});
+	}));
 }
 
 void QTextDocument_blockCountChanged(QTextDocument* self, int newBlockCount) {
 	self->blockCountChanged(static_cast<int>(newBlockCount));
 }
 
-void QTextDocument_connect_blockCountChanged(QTextDocument* self, intptr_t slot) {
-	QTextDocument::connect(self, static_cast<void (QTextDocument::*)(int)>(&QTextDocument::blockCountChanged), self, [=](int newBlockCount) {
+void* QTextDocument_connect_blockCountChanged(QTextDocument* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QTextDocument>>(slot);
+	return new QMetaObject::Connection(QTextDocument::connect(self, static_cast<void (QTextDocument::*)(int)>(&QTextDocument::blockCountChanged), self, [slot_handle](int newBlockCount) {
+		intptr_t slot = slot_handle->value();
 		int sigval1 = newBlockCount;
 		miqt_exec_callback_QTextDocument_blockCountChanged(slot, sigval1);
-	});
+	}));
 }
 
 void QTextDocument_baseUrlChanged(QTextDocument* self, QUrl* url) {
 	self->baseUrlChanged(*url);
 }
 
-void QTextDocument_connect_baseUrlChanged(QTextDocument* self, intptr_t slot) {
-	QTextDocument::connect(self, static_cast<void (QTextDocument::*)(const QUrl&)>(&QTextDocument::baseUrlChanged), self, [=](const QUrl& url) {
+void* QTextDocument_connect_baseUrlChanged(QTextDocument* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QTextDocument>>(slot);
+	return new QMetaObject::Connection(QTextDocument::connect(self, static_cast<void (QTextDocument::*)(const QUrl&)>(&QTextDocument::baseUrlChanged), self, [slot_handle](const QUrl& url) {
+		intptr_t slot = slot_handle->value();
 		const QUrl& url_ret = url;
 		// Cast returned reference into pointer
 		QUrl* sigval1 = const_cast<QUrl*>(&url_ret);
 		miqt_exec_callback_QTextDocument_baseUrlChanged(slot, sigval1);
-	});
+	}));
 }
 
 void QTextDocument_documentLayoutChanged(QTextDocument* self) {
 	self->documentLayoutChanged();
 }
 
-void QTextDocument_connect_documentLayoutChanged(QTextDocument* self, intptr_t slot) {
-	QTextDocument::connect(self, static_cast<void (QTextDocument::*)()>(&QTextDocument::documentLayoutChanged), self, [=]() {
+void* QTextDocument_connect_documentLayoutChanged(QTextDocument* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QTextDocument>>(slot);
+	return new QMetaObject::Connection(QTextDocument::connect(self, static_cast<void (QTextDocument::*)()>(&QTextDocument::documentLayoutChanged), self, [slot_handle]() {
+		intptr_t slot = slot_handle->value();
 		miqt_exec_callback_QTextDocument_documentLayoutChanged(slot);
-	});
+	}));
 }
 
 void QTextDocument_undo2(QTextDocument* self) {
@@ -951,12 +974,13 @@ void QTextDocument_setModifiedWithBool(QTextDocument* self, bool m) {
 }
 
 bool QTextDocument_override_virtual_clear(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QTextDocument> slot_handle(slot);
 	MiqtVirtualQTextDocument* self_cast = dynamic_cast<MiqtVirtualQTextDocument*>( (QTextDocument*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__clear = slot;
+	self_cast->handle__clear = std::move(slot_handle);
 	return true;
 }
 
@@ -965,12 +989,13 @@ void QTextDocument_virtualbase_clear(void* self) {
 }
 
 bool QTextDocument_override_virtual_createObject(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QTextDocument> slot_handle(slot);
 	MiqtVirtualQTextDocument* self_cast = dynamic_cast<MiqtVirtualQTextDocument*>( (QTextDocument*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__createObject = slot;
+	self_cast->handle__createObject = std::move(slot_handle);
 	return true;
 }
 
@@ -979,12 +1004,13 @@ QTextObject* QTextDocument_virtualbase_createObject(void* self, QTextFormat* f) 
 }
 
 bool QTextDocument_override_virtual_loadResource(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QTextDocument> slot_handle(slot);
 	MiqtVirtualQTextDocument* self_cast = dynamic_cast<MiqtVirtualQTextDocument*>( (QTextDocument*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__loadResource = slot;
+	self_cast->handle__loadResource = std::move(slot_handle);
 	return true;
 }
 
@@ -993,12 +1019,13 @@ QVariant* QTextDocument_virtualbase_loadResource(void* self, int type, QUrl* nam
 }
 
 bool QTextDocument_override_virtual_event(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QTextDocument> slot_handle(slot);
 	MiqtVirtualQTextDocument* self_cast = dynamic_cast<MiqtVirtualQTextDocument*>( (QTextDocument*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__event = slot;
+	self_cast->handle__event = std::move(slot_handle);
 	return true;
 }
 
@@ -1007,12 +1034,13 @@ bool QTextDocument_virtualbase_event(void* self, QEvent* event) {
 }
 
 bool QTextDocument_override_virtual_eventFilter(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QTextDocument> slot_handle(slot);
 	MiqtVirtualQTextDocument* self_cast = dynamic_cast<MiqtVirtualQTextDocument*>( (QTextDocument*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__eventFilter = slot;
+	self_cast->handle__eventFilter = std::move(slot_handle);
 	return true;
 }
 
@@ -1021,12 +1049,13 @@ bool QTextDocument_virtualbase_eventFilter(void* self, QObject* watched, QEvent*
 }
 
 bool QTextDocument_override_virtual_timerEvent(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QTextDocument> slot_handle(slot);
 	MiqtVirtualQTextDocument* self_cast = dynamic_cast<MiqtVirtualQTextDocument*>( (QTextDocument*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__timerEvent = slot;
+	self_cast->handle__timerEvent = std::move(slot_handle);
 	return true;
 }
 
@@ -1035,12 +1064,13 @@ void QTextDocument_virtualbase_timerEvent(void* self, QTimerEvent* event) {
 }
 
 bool QTextDocument_override_virtual_childEvent(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QTextDocument> slot_handle(slot);
 	MiqtVirtualQTextDocument* self_cast = dynamic_cast<MiqtVirtualQTextDocument*>( (QTextDocument*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__childEvent = slot;
+	self_cast->handle__childEvent = std::move(slot_handle);
 	return true;
 }
 
@@ -1049,12 +1079,13 @@ void QTextDocument_virtualbase_childEvent(void* self, QChildEvent* event) {
 }
 
 bool QTextDocument_override_virtual_customEvent(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QTextDocument> slot_handle(slot);
 	MiqtVirtualQTextDocument* self_cast = dynamic_cast<MiqtVirtualQTextDocument*>( (QTextDocument*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__customEvent = slot;
+	self_cast->handle__customEvent = std::move(slot_handle);
 	return true;
 }
 
@@ -1063,12 +1094,13 @@ void QTextDocument_virtualbase_customEvent(void* self, QEvent* event) {
 }
 
 bool QTextDocument_override_virtual_connectNotify(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QTextDocument> slot_handle(slot);
 	MiqtVirtualQTextDocument* self_cast = dynamic_cast<MiqtVirtualQTextDocument*>( (QTextDocument*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__connectNotify = slot;
+	self_cast->handle__connectNotify = std::move(slot_handle);
 	return true;
 }
 
@@ -1077,12 +1109,13 @@ void QTextDocument_virtualbase_connectNotify(void* self, QMetaMethod* signal) {
 }
 
 bool QTextDocument_override_virtual_disconnectNotify(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QTextDocument> slot_handle(slot);
 	MiqtVirtualQTextDocument* self_cast = dynamic_cast<MiqtVirtualQTextDocument*>( (QTextDocument*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__disconnectNotify = slot;
+	self_cast->handle__disconnectNotify = std::move(slot_handle);
 	return true;
 }
 

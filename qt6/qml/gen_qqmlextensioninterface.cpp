@@ -1,3 +1,5 @@
+#include <memory>
+#include <utility>
 #include <QQmlEngine>
 #include <QQmlEngineExtensionInterface>
 #include <QQmlExtensionInterface>
@@ -9,7 +11,9 @@
 extern "C" {
 #endif
 
+void miqt_exec_callback_handle_release_QQmlTypesExtensionInterface(intptr_t);
 void miqt_exec_callback_QQmlTypesExtensionInterface_registerTypes(QQmlTypesExtensionInterface*, intptr_t, const char*);
+void miqt_exec_callback_handle_release_QQmlExtensionInterface(intptr_t);
 void miqt_exec_callback_QQmlExtensionInterface_initializeEngine(QQmlExtensionInterface*, intptr_t, QQmlEngine*, const char*);
 void miqt_exec_callback_QQmlExtensionInterface_registerTypes(QQmlExtensionInterface*, intptr_t, const char*);
 #ifdef __cplusplus
@@ -24,16 +28,16 @@ public:
 	virtual ~MiqtVirtualQQmlTypesExtensionInterface() override = default;
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__registerTypes = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QQmlTypesExtensionInterface> handle__registerTypes;
 
 	// Subclass to allow providing a Go implementation
 	virtual void registerTypes(const char* uri) override {
-		if (handle__registerTypes == 0) {
+		if (!handle__registerTypes) {
 			return; // Pure virtual, there is no base we can call
 		}
 
 		const char* sigval1 = (const char*) uri;
-		miqt_exec_callback_QQmlTypesExtensionInterface_registerTypes(this, handle__registerTypes, sigval1);
+		miqt_exec_callback_QQmlTypesExtensionInterface_registerTypes(this, handle__registerTypes.value(), sigval1);
 
 	}
 
@@ -52,12 +56,13 @@ void QQmlTypesExtensionInterface_operatorAssign(QQmlTypesExtensionInterface* sel
 }
 
 bool QQmlTypesExtensionInterface_override_virtual_registerTypes(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QQmlTypesExtensionInterface> slot_handle(slot);
 	MiqtVirtualQQmlTypesExtensionInterface* self_cast = dynamic_cast<MiqtVirtualQQmlTypesExtensionInterface*>( (QQmlTypesExtensionInterface*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__registerTypes = slot;
+	self_cast->handle__registerTypes = std::move(slot_handle);
 	return true;
 }
 
@@ -73,31 +78,31 @@ public:
 	virtual ~MiqtVirtualQQmlExtensionInterface() override = default;
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__initializeEngine = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QQmlExtensionInterface> handle__initializeEngine;
 
 	// Subclass to allow providing a Go implementation
 	virtual void initializeEngine(QQmlEngine* engine, const char* uri) override {
-		if (handle__initializeEngine == 0) {
+		if (!handle__initializeEngine) {
 			return; // Pure virtual, there is no base we can call
 		}
 
 		QQmlEngine* sigval1 = engine;
 		const char* sigval2 = (const char*) uri;
-		miqt_exec_callback_QQmlExtensionInterface_initializeEngine(this, handle__initializeEngine, sigval1, sigval2);
+		miqt_exec_callback_QQmlExtensionInterface_initializeEngine(this, handle__initializeEngine.value(), sigval1, sigval2);
 
 	}
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__registerTypes = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QQmlExtensionInterface> handle__registerTypes;
 
 	// Subclass to allow providing a Go implementation
 	virtual void registerTypes(const char* uri) override {
-		if (handle__registerTypes == 0) {
+		if (!handle__registerTypes) {
 			return; // Pure virtual, there is no base we can call
 		}
 
 		const char* sigval1 = (const char*) uri;
-		miqt_exec_callback_QQmlExtensionInterface_registerTypes(this, handle__registerTypes, sigval1);
+		miqt_exec_callback_QQmlExtensionInterface_registerTypes(this, handle__registerTypes.value(), sigval1);
 
 	}
 
@@ -120,22 +125,24 @@ void QQmlExtensionInterface_operatorAssign(QQmlExtensionInterface* self, QQmlExt
 }
 
 bool QQmlExtensionInterface_override_virtual_initializeEngine(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QQmlExtensionInterface> slot_handle(slot);
 	MiqtVirtualQQmlExtensionInterface* self_cast = dynamic_cast<MiqtVirtualQQmlExtensionInterface*>( (QQmlExtensionInterface*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__initializeEngine = slot;
+	self_cast->handle__initializeEngine = std::move(slot_handle);
 	return true;
 }
 
 bool QQmlExtensionInterface_override_virtual_registerTypes(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QQmlExtensionInterface> slot_handle(slot);
 	MiqtVirtualQQmlExtensionInterface* self_cast = dynamic_cast<MiqtVirtualQQmlExtensionInterface*>( (QQmlExtensionInterface*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__registerTypes = slot;
+	self_cast->handle__registerTypes = std::move(slot_handle);
 	return true;
 }
 

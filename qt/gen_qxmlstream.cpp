@@ -1,3 +1,5 @@
+#include <memory>
+#include <utility>
 #include <QByteArray>
 #include <QIODevice>
 #include <QString>
@@ -20,6 +22,7 @@
 extern "C" {
 #endif
 
+void miqt_exec_callback_handle_release_QXmlStreamEntityResolver(intptr_t);
 struct miqt_string miqt_exec_callback_QXmlStreamEntityResolver_resolveEntity(QXmlStreamEntityResolver*, intptr_t, struct miqt_string, struct miqt_string);
 struct miqt_string miqt_exec_callback_QXmlStreamEntityResolver_resolveUndeclaredEntity(QXmlStreamEntityResolver*, intptr_t, struct miqt_string);
 #ifdef __cplusplus
@@ -201,11 +204,11 @@ public:
 	virtual ~MiqtVirtualQXmlStreamEntityResolver() override = default;
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__resolveEntity = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QXmlStreamEntityResolver> handle__resolveEntity;
 
 	// Subclass to allow providing a Go implementation
 	virtual QString resolveEntity(const QString& publicId, const QString& systemId) override {
-		if (handle__resolveEntity == 0) {
+		if (!handle__resolveEntity) {
 			return QXmlStreamEntityResolver::resolveEntity(publicId, systemId);
 		}
 
@@ -225,7 +228,7 @@ public:
 		systemId_ms.data = static_cast<char*>(malloc(systemId_ms.len));
 		memcpy(systemId_ms.data, systemId_b.data(), systemId_ms.len);
 		struct miqt_string sigval2 = systemId_ms;
-		struct miqt_string callback_return_value = miqt_exec_callback_QXmlStreamEntityResolver_resolveEntity(this, handle__resolveEntity, sigval1, sigval2);
+		struct miqt_string callback_return_value = miqt_exec_callback_QXmlStreamEntityResolver_resolveEntity(this, handle__resolveEntity.value(), sigval1, sigval2);
 		QString callback_return_value_QString = QString::fromUtf8(callback_return_value.data, callback_return_value.len);
 		free(callback_return_value.data);
 		return callback_return_value_QString;
@@ -234,11 +237,11 @@ public:
 	friend struct miqt_string QXmlStreamEntityResolver_virtualbase_resolveEntity(void* self, struct miqt_string publicId, struct miqt_string systemId);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__resolveUndeclaredEntity = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QXmlStreamEntityResolver> handle__resolveUndeclaredEntity;
 
 	// Subclass to allow providing a Go implementation
 	virtual QString resolveUndeclaredEntity(const QString& name) override {
-		if (handle__resolveUndeclaredEntity == 0) {
+		if (!handle__resolveUndeclaredEntity) {
 			return QXmlStreamEntityResolver::resolveUndeclaredEntity(name);
 		}
 
@@ -250,7 +253,7 @@ public:
 		name_ms.data = static_cast<char*>(malloc(name_ms.len));
 		memcpy(name_ms.data, name_b.data(), name_ms.len);
 		struct miqt_string sigval1 = name_ms;
-		struct miqt_string callback_return_value = miqt_exec_callback_QXmlStreamEntityResolver_resolveUndeclaredEntity(this, handle__resolveUndeclaredEntity, sigval1);
+		struct miqt_string callback_return_value = miqt_exec_callback_QXmlStreamEntityResolver_resolveUndeclaredEntity(this, handle__resolveUndeclaredEntity.value(), sigval1);
 		QString callback_return_value_QString = QString::fromUtf8(callback_return_value.data, callback_return_value.len);
 		free(callback_return_value.data);
 		return callback_return_value_QString;
@@ -290,12 +293,13 @@ struct miqt_string QXmlStreamEntityResolver_resolveUndeclaredEntity(QXmlStreamEn
 }
 
 bool QXmlStreamEntityResolver_override_virtual_resolveEntity(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QXmlStreamEntityResolver> slot_handle(slot);
 	MiqtVirtualQXmlStreamEntityResolver* self_cast = dynamic_cast<MiqtVirtualQXmlStreamEntityResolver*>( (QXmlStreamEntityResolver*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__resolveEntity = slot;
+	self_cast->handle__resolveEntity = std::move(slot_handle);
 	return true;
 }
 
@@ -313,12 +317,13 @@ struct miqt_string QXmlStreamEntityResolver_virtualbase_resolveEntity(void* self
 }
 
 bool QXmlStreamEntityResolver_override_virtual_resolveUndeclaredEntity(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QXmlStreamEntityResolver> slot_handle(slot);
 	MiqtVirtualQXmlStreamEntityResolver* self_cast = dynamic_cast<MiqtVirtualQXmlStreamEntityResolver*>( (QXmlStreamEntityResolver*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__resolveUndeclaredEntity = slot;
+	self_cast->handle__resolveUndeclaredEntity = std::move(slot_handle);
 	return true;
 }
 

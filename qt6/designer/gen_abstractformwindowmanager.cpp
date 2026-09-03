@@ -1,3 +1,5 @@
+#include <memory>
+#include <utility>
 #include <QAction>
 #include <QActionGroup>
 #include <QChildEvent>
@@ -23,6 +25,7 @@
 extern "C" {
 #endif
 
+void miqt_exec_callback_handle_release_QDesignerFormWindowManagerInterface(intptr_t);
 void miqt_exec_callback_QDesignerFormWindowManagerInterface_formWindowAdded(intptr_t, QDesignerFormWindowInterface*);
 void miqt_exec_callback_QDesignerFormWindowManagerInterface_formWindowRemoved(intptr_t, QDesignerFormWindowInterface*);
 void miqt_exec_callback_QDesignerFormWindowManagerInterface_activeFormWindowChanged(intptr_t, QDesignerFormWindowInterface*);
@@ -62,110 +65,110 @@ public:
 	virtual ~MiqtVirtualQDesignerFormWindowManagerInterface() override = default;
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__action = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QDesignerFormWindowManagerInterface> handle__action;
 
 	// Subclass to allow providing a Go implementation
 	virtual QAction* action(QDesignerFormWindowManagerInterface::Action action) const override {
-		if (handle__action == 0) {
+		if (!handle__action) {
 			return nullptr; // Pure virtual, there is no base we can call
 		}
 
 		QDesignerFormWindowManagerInterface::Action action_ret = action;
 		int sigval1 = static_cast<int>(action_ret);
-		QAction* callback_return_value = miqt_exec_callback_QDesignerFormWindowManagerInterface_action(this, handle__action, sigval1);
+		QAction* callback_return_value = miqt_exec_callback_QDesignerFormWindowManagerInterface_action(this, handle__action.value(), sigval1);
 		return callback_return_value;
 	}
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__actionGroup = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QDesignerFormWindowManagerInterface> handle__actionGroup;
 
 	// Subclass to allow providing a Go implementation
 	virtual QActionGroup* actionGroup(QDesignerFormWindowManagerInterface::ActionGroup actionGroup) const override {
-		if (handle__actionGroup == 0) {
+		if (!handle__actionGroup) {
 			return nullptr; // Pure virtual, there is no base we can call
 		}
 
 		QDesignerFormWindowManagerInterface::ActionGroup actionGroup_ret = actionGroup;
 		int sigval1 = static_cast<int>(actionGroup_ret);
-		QActionGroup* callback_return_value = miqt_exec_callback_QDesignerFormWindowManagerInterface_actionGroup(this, handle__actionGroup, sigval1);
+		QActionGroup* callback_return_value = miqt_exec_callback_QDesignerFormWindowManagerInterface_actionGroup(this, handle__actionGroup.value(), sigval1);
 		return callback_return_value;
 	}
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__activeFormWindow = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QDesignerFormWindowManagerInterface> handle__activeFormWindow;
 
 	// Subclass to allow providing a Go implementation
 	virtual QDesignerFormWindowInterface* activeFormWindow() const override {
-		if (handle__activeFormWindow == 0) {
+		if (!handle__activeFormWindow) {
 			return nullptr; // Pure virtual, there is no base we can call
 		}
 
-		QDesignerFormWindowInterface* callback_return_value = miqt_exec_callback_QDesignerFormWindowManagerInterface_activeFormWindow(this, handle__activeFormWindow);
+		QDesignerFormWindowInterface* callback_return_value = miqt_exec_callback_QDesignerFormWindowManagerInterface_activeFormWindow(this, handle__activeFormWindow.value());
 		return callback_return_value;
 	}
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__formWindowCount = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QDesignerFormWindowManagerInterface> handle__formWindowCount;
 
 	// Subclass to allow providing a Go implementation
 	virtual int formWindowCount() const override {
-		if (handle__formWindowCount == 0) {
+		if (!handle__formWindowCount) {
 			return 0; // Pure virtual, there is no base we can call
 		}
 
-		int callback_return_value = miqt_exec_callback_QDesignerFormWindowManagerInterface_formWindowCount(this, handle__formWindowCount);
+		int callback_return_value = miqt_exec_callback_QDesignerFormWindowManagerInterface_formWindowCount(this, handle__formWindowCount.value());
 		return static_cast<int>(callback_return_value);
 	}
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__formWindow = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QDesignerFormWindowManagerInterface> handle__formWindow;
 
 	// Subclass to allow providing a Go implementation
 	virtual QDesignerFormWindowInterface* formWindow(int index) const override {
-		if (handle__formWindow == 0) {
+		if (!handle__formWindow) {
 			return nullptr; // Pure virtual, there is no base we can call
 		}
 
 		int sigval1 = index;
-		QDesignerFormWindowInterface* callback_return_value = miqt_exec_callback_QDesignerFormWindowManagerInterface_formWindow(this, handle__formWindow, sigval1);
+		QDesignerFormWindowInterface* callback_return_value = miqt_exec_callback_QDesignerFormWindowManagerInterface_formWindow(this, handle__formWindow.value(), sigval1);
 		return callback_return_value;
 	}
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__createFormWindow = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QDesignerFormWindowManagerInterface> handle__createFormWindow;
 
 	// Subclass to allow providing a Go implementation
 	virtual QDesignerFormWindowInterface* createFormWindow(QWidget* parentWidget, Qt::WindowFlags flags) override {
-		if (handle__createFormWindow == 0) {
+		if (!handle__createFormWindow) {
 			return nullptr; // Pure virtual, there is no base we can call
 		}
 
 		QWidget* sigval1 = parentWidget;
 		Qt::WindowFlags flags_ret = flags;
 		int sigval2 = static_cast<int>(flags_ret);
-		QDesignerFormWindowInterface* callback_return_value = miqt_exec_callback_QDesignerFormWindowManagerInterface_createFormWindow(this, handle__createFormWindow, sigval1, sigval2);
+		QDesignerFormWindowInterface* callback_return_value = miqt_exec_callback_QDesignerFormWindowManagerInterface_createFormWindow(this, handle__createFormWindow.value(), sigval1, sigval2);
 		return callback_return_value;
 	}
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__core = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QDesignerFormWindowManagerInterface> handle__core;
 
 	// Subclass to allow providing a Go implementation
 	virtual QDesignerFormEditorInterface* core() const override {
-		if (handle__core == 0) {
+		if (!handle__core) {
 			return nullptr; // Pure virtual, there is no base we can call
 		}
 
-		QDesignerFormEditorInterface* callback_return_value = miqt_exec_callback_QDesignerFormWindowManagerInterface_core(this, handle__core);
+		QDesignerFormEditorInterface* callback_return_value = miqt_exec_callback_QDesignerFormWindowManagerInterface_core(this, handle__core.value());
 		return callback_return_value;
 	}
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__dragItems = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QDesignerFormWindowManagerInterface> handle__dragItems;
 
 	// Subclass to allow providing a Go implementation
 	virtual void dragItems(const QList<QDesignerDnDItemInterface *>& item_list) override {
-		if (handle__dragItems == 0) {
+		if (!handle__dragItems) {
 			return; // Pure virtual, there is no base we can call
 		}
 
@@ -179,194 +182,194 @@ public:
 		item_list_out.len = item_list_ret.length();
 		item_list_out.data = static_cast<void*>(item_list_arr);
 		struct miqt_array /* of QDesignerDnDItemInterface* */  sigval1 = item_list_out;
-		miqt_exec_callback_QDesignerFormWindowManagerInterface_dragItems(this, handle__dragItems, sigval1);
+		miqt_exec_callback_QDesignerFormWindowManagerInterface_dragItems(this, handle__dragItems.value(), sigval1);
 
 	}
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__createPreviewPixmap = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QDesignerFormWindowManagerInterface> handle__createPreviewPixmap;
 
 	// Subclass to allow providing a Go implementation
 	virtual QPixmap createPreviewPixmap() const override {
-		if (handle__createPreviewPixmap == 0) {
+		if (!handle__createPreviewPixmap) {
 			return QPixmap(); // Pure virtual, there is no base we can call
 		}
 
-		QPixmap* callback_return_value = miqt_exec_callback_QDesignerFormWindowManagerInterface_createPreviewPixmap(this, handle__createPreviewPixmap);
+		QPixmap* callback_return_value = miqt_exec_callback_QDesignerFormWindowManagerInterface_createPreviewPixmap(this, handle__createPreviewPixmap.value());
 		return *callback_return_value;
 	}
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__addFormWindow = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QDesignerFormWindowManagerInterface> handle__addFormWindow;
 
 	// Subclass to allow providing a Go implementation
 	virtual void addFormWindow(QDesignerFormWindowInterface* formWindow) override {
-		if (handle__addFormWindow == 0) {
+		if (!handle__addFormWindow) {
 			return; // Pure virtual, there is no base we can call
 		}
 
 		QDesignerFormWindowInterface* sigval1 = formWindow;
-		miqt_exec_callback_QDesignerFormWindowManagerInterface_addFormWindow(this, handle__addFormWindow, sigval1);
+		miqt_exec_callback_QDesignerFormWindowManagerInterface_addFormWindow(this, handle__addFormWindow.value(), sigval1);
 
 	}
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__removeFormWindow = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QDesignerFormWindowManagerInterface> handle__removeFormWindow;
 
 	// Subclass to allow providing a Go implementation
 	virtual void removeFormWindow(QDesignerFormWindowInterface* formWindow) override {
-		if (handle__removeFormWindow == 0) {
+		if (!handle__removeFormWindow) {
 			return; // Pure virtual, there is no base we can call
 		}
 
 		QDesignerFormWindowInterface* sigval1 = formWindow;
-		miqt_exec_callback_QDesignerFormWindowManagerInterface_removeFormWindow(this, handle__removeFormWindow, sigval1);
+		miqt_exec_callback_QDesignerFormWindowManagerInterface_removeFormWindow(this, handle__removeFormWindow.value(), sigval1);
 
 	}
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__setActiveFormWindow = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QDesignerFormWindowManagerInterface> handle__setActiveFormWindow;
 
 	// Subclass to allow providing a Go implementation
 	virtual void setActiveFormWindow(QDesignerFormWindowInterface* formWindow) override {
-		if (handle__setActiveFormWindow == 0) {
+		if (!handle__setActiveFormWindow) {
 			return; // Pure virtual, there is no base we can call
 		}
 
 		QDesignerFormWindowInterface* sigval1 = formWindow;
-		miqt_exec_callback_QDesignerFormWindowManagerInterface_setActiveFormWindow(this, handle__setActiveFormWindow, sigval1);
+		miqt_exec_callback_QDesignerFormWindowManagerInterface_setActiveFormWindow(this, handle__setActiveFormWindow.value(), sigval1);
 
 	}
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__showPreview = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QDesignerFormWindowManagerInterface> handle__showPreview;
 
 	// Subclass to allow providing a Go implementation
 	virtual void showPreview() override {
-		if (handle__showPreview == 0) {
+		if (!handle__showPreview) {
 			return; // Pure virtual, there is no base we can call
 		}
 
-		miqt_exec_callback_QDesignerFormWindowManagerInterface_showPreview(this, handle__showPreview);
+		miqt_exec_callback_QDesignerFormWindowManagerInterface_showPreview(this, handle__showPreview.value());
 
 	}
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__closeAllPreviews = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QDesignerFormWindowManagerInterface> handle__closeAllPreviews;
 
 	// Subclass to allow providing a Go implementation
 	virtual void closeAllPreviews() override {
-		if (handle__closeAllPreviews == 0) {
+		if (!handle__closeAllPreviews) {
 			return; // Pure virtual, there is no base we can call
 		}
 
-		miqt_exec_callback_QDesignerFormWindowManagerInterface_closeAllPreviews(this, handle__closeAllPreviews);
+		miqt_exec_callback_QDesignerFormWindowManagerInterface_closeAllPreviews(this, handle__closeAllPreviews.value());
 
 	}
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__showPluginDialog = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QDesignerFormWindowManagerInterface> handle__showPluginDialog;
 
 	// Subclass to allow providing a Go implementation
 	virtual void showPluginDialog() override {
-		if (handle__showPluginDialog == 0) {
+		if (!handle__showPluginDialog) {
 			return; // Pure virtual, there is no base we can call
 		}
 
-		miqt_exec_callback_QDesignerFormWindowManagerInterface_showPluginDialog(this, handle__showPluginDialog);
+		miqt_exec_callback_QDesignerFormWindowManagerInterface_showPluginDialog(this, handle__showPluginDialog.value());
 
 	}
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__event = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QDesignerFormWindowManagerInterface> handle__event;
 
 	// Subclass to allow providing a Go implementation
 	virtual bool event(QEvent* event) override {
-		if (handle__event == 0) {
+		if (!handle__event) {
 			return QDesignerFormWindowManagerInterface::event(event);
 		}
 
 		QEvent* sigval1 = event;
-		bool callback_return_value = miqt_exec_callback_QDesignerFormWindowManagerInterface_event(this, handle__event, sigval1);
+		bool callback_return_value = miqt_exec_callback_QDesignerFormWindowManagerInterface_event(this, handle__event.value(), sigval1);
 		return callback_return_value;
 	}
 
 	friend bool QDesignerFormWindowManagerInterface_virtualbase_event(void* self, QEvent* event);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__eventFilter = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QDesignerFormWindowManagerInterface> handle__eventFilter;
 
 	// Subclass to allow providing a Go implementation
 	virtual bool eventFilter(QObject* watched, QEvent* event) override {
-		if (handle__eventFilter == 0) {
+		if (!handle__eventFilter) {
 			return QDesignerFormWindowManagerInterface::eventFilter(watched, event);
 		}
 
 		QObject* sigval1 = watched;
 		QEvent* sigval2 = event;
-		bool callback_return_value = miqt_exec_callback_QDesignerFormWindowManagerInterface_eventFilter(this, handle__eventFilter, sigval1, sigval2);
+		bool callback_return_value = miqt_exec_callback_QDesignerFormWindowManagerInterface_eventFilter(this, handle__eventFilter.value(), sigval1, sigval2);
 		return callback_return_value;
 	}
 
 	friend bool QDesignerFormWindowManagerInterface_virtualbase_eventFilter(void* self, QObject* watched, QEvent* event);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__timerEvent = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QDesignerFormWindowManagerInterface> handle__timerEvent;
 
 	// Subclass to allow providing a Go implementation
 	virtual void timerEvent(QTimerEvent* event) override {
-		if (handle__timerEvent == 0) {
+		if (!handle__timerEvent) {
 			QDesignerFormWindowManagerInterface::timerEvent(event);
 			return;
 		}
 
 		QTimerEvent* sigval1 = event;
-		miqt_exec_callback_QDesignerFormWindowManagerInterface_timerEvent(this, handle__timerEvent, sigval1);
+		miqt_exec_callback_QDesignerFormWindowManagerInterface_timerEvent(this, handle__timerEvent.value(), sigval1);
 
 	}
 
 	friend void QDesignerFormWindowManagerInterface_virtualbase_timerEvent(void* self, QTimerEvent* event);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__childEvent = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QDesignerFormWindowManagerInterface> handle__childEvent;
 
 	// Subclass to allow providing a Go implementation
 	virtual void childEvent(QChildEvent* event) override {
-		if (handle__childEvent == 0) {
+		if (!handle__childEvent) {
 			QDesignerFormWindowManagerInterface::childEvent(event);
 			return;
 		}
 
 		QChildEvent* sigval1 = event;
-		miqt_exec_callback_QDesignerFormWindowManagerInterface_childEvent(this, handle__childEvent, sigval1);
+		miqt_exec_callback_QDesignerFormWindowManagerInterface_childEvent(this, handle__childEvent.value(), sigval1);
 
 	}
 
 	friend void QDesignerFormWindowManagerInterface_virtualbase_childEvent(void* self, QChildEvent* event);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__customEvent = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QDesignerFormWindowManagerInterface> handle__customEvent;
 
 	// Subclass to allow providing a Go implementation
 	virtual void customEvent(QEvent* event) override {
-		if (handle__customEvent == 0) {
+		if (!handle__customEvent) {
 			QDesignerFormWindowManagerInterface::customEvent(event);
 			return;
 		}
 
 		QEvent* sigval1 = event;
-		miqt_exec_callback_QDesignerFormWindowManagerInterface_customEvent(this, handle__customEvent, sigval1);
+		miqt_exec_callback_QDesignerFormWindowManagerInterface_customEvent(this, handle__customEvent.value(), sigval1);
 
 	}
 
 	friend void QDesignerFormWindowManagerInterface_virtualbase_customEvent(void* self, QEvent* event);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__connectNotify = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QDesignerFormWindowManagerInterface> handle__connectNotify;
 
 	// Subclass to allow providing a Go implementation
 	virtual void connectNotify(const QMetaMethod& signal) override {
-		if (handle__connectNotify == 0) {
+		if (!handle__connectNotify) {
 			QDesignerFormWindowManagerInterface::connectNotify(signal);
 			return;
 		}
@@ -374,18 +377,18 @@ public:
 		const QMetaMethod& signal_ret = signal;
 		// Cast returned reference into pointer
 		QMetaMethod* sigval1 = const_cast<QMetaMethod*>(&signal_ret);
-		miqt_exec_callback_QDesignerFormWindowManagerInterface_connectNotify(this, handle__connectNotify, sigval1);
+		miqt_exec_callback_QDesignerFormWindowManagerInterface_connectNotify(this, handle__connectNotify.value(), sigval1);
 
 	}
 
 	friend void QDesignerFormWindowManagerInterface_virtualbase_connectNotify(void* self, QMetaMethod* signal);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__disconnectNotify = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QDesignerFormWindowManagerInterface> handle__disconnectNotify;
 
 	// Subclass to allow providing a Go implementation
 	virtual void disconnectNotify(const QMetaMethod& signal) override {
-		if (handle__disconnectNotify == 0) {
+		if (!handle__disconnectNotify) {
 			QDesignerFormWindowManagerInterface::disconnectNotify(signal);
 			return;
 		}
@@ -393,7 +396,7 @@ public:
 		const QMetaMethod& signal_ret = signal;
 		// Cast returned reference into pointer
 		QMetaMethod* sigval1 = const_cast<QMetaMethod*>(&signal_ret);
-		miqt_exec_callback_QDesignerFormWindowManagerInterface_disconnectNotify(this, handle__disconnectNotify, sigval1);
+		miqt_exec_callback_QDesignerFormWindowManagerInterface_disconnectNotify(this, handle__disconnectNotify.value(), sigval1);
 
 	}
 
@@ -555,44 +558,52 @@ void QDesignerFormWindowManagerInterface_formWindowAdded(QDesignerFormWindowMana
 	self->formWindowAdded(formWindow);
 }
 
-void QDesignerFormWindowManagerInterface_connect_formWindowAdded(QDesignerFormWindowManagerInterface* self, intptr_t slot) {
-	QDesignerFormWindowManagerInterface::connect(self, static_cast<void (QDesignerFormWindowManagerInterface::*)(QDesignerFormWindowInterface*)>(&QDesignerFormWindowManagerInterface::formWindowAdded), self, [=](QDesignerFormWindowInterface* formWindow) {
+void* QDesignerFormWindowManagerInterface_connect_formWindowAdded(QDesignerFormWindowManagerInterface* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QDesignerFormWindowManagerInterface>>(slot);
+	return new QMetaObject::Connection(QDesignerFormWindowManagerInterface::connect(self, static_cast<void (QDesignerFormWindowManagerInterface::*)(QDesignerFormWindowInterface*)>(&QDesignerFormWindowManagerInterface::formWindowAdded), self, [slot_handle](QDesignerFormWindowInterface* formWindow) {
+		intptr_t slot = slot_handle->value();
 		QDesignerFormWindowInterface* sigval1 = formWindow;
 		miqt_exec_callback_QDesignerFormWindowManagerInterface_formWindowAdded(slot, sigval1);
-	});
+	}));
 }
 
 void QDesignerFormWindowManagerInterface_formWindowRemoved(QDesignerFormWindowManagerInterface* self, QDesignerFormWindowInterface* formWindow) {
 	self->formWindowRemoved(formWindow);
 }
 
-void QDesignerFormWindowManagerInterface_connect_formWindowRemoved(QDesignerFormWindowManagerInterface* self, intptr_t slot) {
-	QDesignerFormWindowManagerInterface::connect(self, static_cast<void (QDesignerFormWindowManagerInterface::*)(QDesignerFormWindowInterface*)>(&QDesignerFormWindowManagerInterface::formWindowRemoved), self, [=](QDesignerFormWindowInterface* formWindow) {
+void* QDesignerFormWindowManagerInterface_connect_formWindowRemoved(QDesignerFormWindowManagerInterface* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QDesignerFormWindowManagerInterface>>(slot);
+	return new QMetaObject::Connection(QDesignerFormWindowManagerInterface::connect(self, static_cast<void (QDesignerFormWindowManagerInterface::*)(QDesignerFormWindowInterface*)>(&QDesignerFormWindowManagerInterface::formWindowRemoved), self, [slot_handle](QDesignerFormWindowInterface* formWindow) {
+		intptr_t slot = slot_handle->value();
 		QDesignerFormWindowInterface* sigval1 = formWindow;
 		miqt_exec_callback_QDesignerFormWindowManagerInterface_formWindowRemoved(slot, sigval1);
-	});
+	}));
 }
 
 void QDesignerFormWindowManagerInterface_activeFormWindowChanged(QDesignerFormWindowManagerInterface* self, QDesignerFormWindowInterface* formWindow) {
 	self->activeFormWindowChanged(formWindow);
 }
 
-void QDesignerFormWindowManagerInterface_connect_activeFormWindowChanged(QDesignerFormWindowManagerInterface* self, intptr_t slot) {
-	QDesignerFormWindowManagerInterface::connect(self, static_cast<void (QDesignerFormWindowManagerInterface::*)(QDesignerFormWindowInterface*)>(&QDesignerFormWindowManagerInterface::activeFormWindowChanged), self, [=](QDesignerFormWindowInterface* formWindow) {
+void* QDesignerFormWindowManagerInterface_connect_activeFormWindowChanged(QDesignerFormWindowManagerInterface* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QDesignerFormWindowManagerInterface>>(slot);
+	return new QMetaObject::Connection(QDesignerFormWindowManagerInterface::connect(self, static_cast<void (QDesignerFormWindowManagerInterface::*)(QDesignerFormWindowInterface*)>(&QDesignerFormWindowManagerInterface::activeFormWindowChanged), self, [slot_handle](QDesignerFormWindowInterface* formWindow) {
+		intptr_t slot = slot_handle->value();
 		QDesignerFormWindowInterface* sigval1 = formWindow;
 		miqt_exec_callback_QDesignerFormWindowManagerInterface_activeFormWindowChanged(slot, sigval1);
-	});
+	}));
 }
 
 void QDesignerFormWindowManagerInterface_formWindowSettingsChanged(QDesignerFormWindowManagerInterface* self, QDesignerFormWindowInterface* fw) {
 	self->formWindowSettingsChanged(fw);
 }
 
-void QDesignerFormWindowManagerInterface_connect_formWindowSettingsChanged(QDesignerFormWindowManagerInterface* self, intptr_t slot) {
-	QDesignerFormWindowManagerInterface::connect(self, static_cast<void (QDesignerFormWindowManagerInterface::*)(QDesignerFormWindowInterface*)>(&QDesignerFormWindowManagerInterface::formWindowSettingsChanged), self, [=](QDesignerFormWindowInterface* fw) {
+void* QDesignerFormWindowManagerInterface_connect_formWindowSettingsChanged(QDesignerFormWindowManagerInterface* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QDesignerFormWindowManagerInterface>>(slot);
+	return new QMetaObject::Connection(QDesignerFormWindowManagerInterface::connect(self, static_cast<void (QDesignerFormWindowManagerInterface::*)(QDesignerFormWindowInterface*)>(&QDesignerFormWindowManagerInterface::formWindowSettingsChanged), self, [slot_handle](QDesignerFormWindowInterface* fw) {
+		intptr_t slot = slot_handle->value();
 		QDesignerFormWindowInterface* sigval1 = fw;
 		miqt_exec_callback_QDesignerFormWindowManagerInterface_formWindowSettingsChanged(slot, sigval1);
-	});
+	}));
 }
 
 void QDesignerFormWindowManagerInterface_addFormWindow(QDesignerFormWindowManagerInterface* self, QDesignerFormWindowInterface* formWindow) {
@@ -642,162 +653,178 @@ struct miqt_string QDesignerFormWindowManagerInterface_tr3(const char* s, const 
 }
 
 bool QDesignerFormWindowManagerInterface_override_virtual_action(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QDesignerFormWindowManagerInterface> slot_handle(slot);
 	MiqtVirtualQDesignerFormWindowManagerInterface* self_cast = dynamic_cast<MiqtVirtualQDesignerFormWindowManagerInterface*>( (QDesignerFormWindowManagerInterface*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__action = slot;
+	self_cast->handle__action = std::move(slot_handle);
 	return true;
 }
 
 bool QDesignerFormWindowManagerInterface_override_virtual_actionGroup(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QDesignerFormWindowManagerInterface> slot_handle(slot);
 	MiqtVirtualQDesignerFormWindowManagerInterface* self_cast = dynamic_cast<MiqtVirtualQDesignerFormWindowManagerInterface*>( (QDesignerFormWindowManagerInterface*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__actionGroup = slot;
+	self_cast->handle__actionGroup = std::move(slot_handle);
 	return true;
 }
 
 bool QDesignerFormWindowManagerInterface_override_virtual_activeFormWindow(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QDesignerFormWindowManagerInterface> slot_handle(slot);
 	MiqtVirtualQDesignerFormWindowManagerInterface* self_cast = dynamic_cast<MiqtVirtualQDesignerFormWindowManagerInterface*>( (QDesignerFormWindowManagerInterface*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__activeFormWindow = slot;
+	self_cast->handle__activeFormWindow = std::move(slot_handle);
 	return true;
 }
 
 bool QDesignerFormWindowManagerInterface_override_virtual_formWindowCount(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QDesignerFormWindowManagerInterface> slot_handle(slot);
 	MiqtVirtualQDesignerFormWindowManagerInterface* self_cast = dynamic_cast<MiqtVirtualQDesignerFormWindowManagerInterface*>( (QDesignerFormWindowManagerInterface*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__formWindowCount = slot;
+	self_cast->handle__formWindowCount = std::move(slot_handle);
 	return true;
 }
 
 bool QDesignerFormWindowManagerInterface_override_virtual_formWindow(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QDesignerFormWindowManagerInterface> slot_handle(slot);
 	MiqtVirtualQDesignerFormWindowManagerInterface* self_cast = dynamic_cast<MiqtVirtualQDesignerFormWindowManagerInterface*>( (QDesignerFormWindowManagerInterface*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__formWindow = slot;
+	self_cast->handle__formWindow = std::move(slot_handle);
 	return true;
 }
 
 bool QDesignerFormWindowManagerInterface_override_virtual_createFormWindow(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QDesignerFormWindowManagerInterface> slot_handle(slot);
 	MiqtVirtualQDesignerFormWindowManagerInterface* self_cast = dynamic_cast<MiqtVirtualQDesignerFormWindowManagerInterface*>( (QDesignerFormWindowManagerInterface*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__createFormWindow = slot;
+	self_cast->handle__createFormWindow = std::move(slot_handle);
 	return true;
 }
 
 bool QDesignerFormWindowManagerInterface_override_virtual_core(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QDesignerFormWindowManagerInterface> slot_handle(slot);
 	MiqtVirtualQDesignerFormWindowManagerInterface* self_cast = dynamic_cast<MiqtVirtualQDesignerFormWindowManagerInterface*>( (QDesignerFormWindowManagerInterface*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__core = slot;
+	self_cast->handle__core = std::move(slot_handle);
 	return true;
 }
 
 bool QDesignerFormWindowManagerInterface_override_virtual_dragItems(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QDesignerFormWindowManagerInterface> slot_handle(slot);
 	MiqtVirtualQDesignerFormWindowManagerInterface* self_cast = dynamic_cast<MiqtVirtualQDesignerFormWindowManagerInterface*>( (QDesignerFormWindowManagerInterface*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__dragItems = slot;
+	self_cast->handle__dragItems = std::move(slot_handle);
 	return true;
 }
 
 bool QDesignerFormWindowManagerInterface_override_virtual_createPreviewPixmap(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QDesignerFormWindowManagerInterface> slot_handle(slot);
 	MiqtVirtualQDesignerFormWindowManagerInterface* self_cast = dynamic_cast<MiqtVirtualQDesignerFormWindowManagerInterface*>( (QDesignerFormWindowManagerInterface*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__createPreviewPixmap = slot;
+	self_cast->handle__createPreviewPixmap = std::move(slot_handle);
 	return true;
 }
 
 bool QDesignerFormWindowManagerInterface_override_virtual_addFormWindow(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QDesignerFormWindowManagerInterface> slot_handle(slot);
 	MiqtVirtualQDesignerFormWindowManagerInterface* self_cast = dynamic_cast<MiqtVirtualQDesignerFormWindowManagerInterface*>( (QDesignerFormWindowManagerInterface*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__addFormWindow = slot;
+	self_cast->handle__addFormWindow = std::move(slot_handle);
 	return true;
 }
 
 bool QDesignerFormWindowManagerInterface_override_virtual_removeFormWindow(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QDesignerFormWindowManagerInterface> slot_handle(slot);
 	MiqtVirtualQDesignerFormWindowManagerInterface* self_cast = dynamic_cast<MiqtVirtualQDesignerFormWindowManagerInterface*>( (QDesignerFormWindowManagerInterface*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__removeFormWindow = slot;
+	self_cast->handle__removeFormWindow = std::move(slot_handle);
 	return true;
 }
 
 bool QDesignerFormWindowManagerInterface_override_virtual_setActiveFormWindow(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QDesignerFormWindowManagerInterface> slot_handle(slot);
 	MiqtVirtualQDesignerFormWindowManagerInterface* self_cast = dynamic_cast<MiqtVirtualQDesignerFormWindowManagerInterface*>( (QDesignerFormWindowManagerInterface*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__setActiveFormWindow = slot;
+	self_cast->handle__setActiveFormWindow = std::move(slot_handle);
 	return true;
 }
 
 bool QDesignerFormWindowManagerInterface_override_virtual_showPreview(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QDesignerFormWindowManagerInterface> slot_handle(slot);
 	MiqtVirtualQDesignerFormWindowManagerInterface* self_cast = dynamic_cast<MiqtVirtualQDesignerFormWindowManagerInterface*>( (QDesignerFormWindowManagerInterface*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__showPreview = slot;
+	self_cast->handle__showPreview = std::move(slot_handle);
 	return true;
 }
 
 bool QDesignerFormWindowManagerInterface_override_virtual_closeAllPreviews(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QDesignerFormWindowManagerInterface> slot_handle(slot);
 	MiqtVirtualQDesignerFormWindowManagerInterface* self_cast = dynamic_cast<MiqtVirtualQDesignerFormWindowManagerInterface*>( (QDesignerFormWindowManagerInterface*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__closeAllPreviews = slot;
+	self_cast->handle__closeAllPreviews = std::move(slot_handle);
 	return true;
 }
 
 bool QDesignerFormWindowManagerInterface_override_virtual_showPluginDialog(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QDesignerFormWindowManagerInterface> slot_handle(slot);
 	MiqtVirtualQDesignerFormWindowManagerInterface* self_cast = dynamic_cast<MiqtVirtualQDesignerFormWindowManagerInterface*>( (QDesignerFormWindowManagerInterface*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__showPluginDialog = slot;
+	self_cast->handle__showPluginDialog = std::move(slot_handle);
 	return true;
 }
 
 bool QDesignerFormWindowManagerInterface_override_virtual_event(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QDesignerFormWindowManagerInterface> slot_handle(slot);
 	MiqtVirtualQDesignerFormWindowManagerInterface* self_cast = dynamic_cast<MiqtVirtualQDesignerFormWindowManagerInterface*>( (QDesignerFormWindowManagerInterface*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__event = slot;
+	self_cast->handle__event = std::move(slot_handle);
 	return true;
 }
 
@@ -806,12 +833,13 @@ bool QDesignerFormWindowManagerInterface_virtualbase_event(void* self, QEvent* e
 }
 
 bool QDesignerFormWindowManagerInterface_override_virtual_eventFilter(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QDesignerFormWindowManagerInterface> slot_handle(slot);
 	MiqtVirtualQDesignerFormWindowManagerInterface* self_cast = dynamic_cast<MiqtVirtualQDesignerFormWindowManagerInterface*>( (QDesignerFormWindowManagerInterface*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__eventFilter = slot;
+	self_cast->handle__eventFilter = std::move(slot_handle);
 	return true;
 }
 
@@ -820,12 +848,13 @@ bool QDesignerFormWindowManagerInterface_virtualbase_eventFilter(void* self, QOb
 }
 
 bool QDesignerFormWindowManagerInterface_override_virtual_timerEvent(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QDesignerFormWindowManagerInterface> slot_handle(slot);
 	MiqtVirtualQDesignerFormWindowManagerInterface* self_cast = dynamic_cast<MiqtVirtualQDesignerFormWindowManagerInterface*>( (QDesignerFormWindowManagerInterface*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__timerEvent = slot;
+	self_cast->handle__timerEvent = std::move(slot_handle);
 	return true;
 }
 
@@ -834,12 +863,13 @@ void QDesignerFormWindowManagerInterface_virtualbase_timerEvent(void* self, QTim
 }
 
 bool QDesignerFormWindowManagerInterface_override_virtual_childEvent(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QDesignerFormWindowManagerInterface> slot_handle(slot);
 	MiqtVirtualQDesignerFormWindowManagerInterface* self_cast = dynamic_cast<MiqtVirtualQDesignerFormWindowManagerInterface*>( (QDesignerFormWindowManagerInterface*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__childEvent = slot;
+	self_cast->handle__childEvent = std::move(slot_handle);
 	return true;
 }
 
@@ -848,12 +878,13 @@ void QDesignerFormWindowManagerInterface_virtualbase_childEvent(void* self, QChi
 }
 
 bool QDesignerFormWindowManagerInterface_override_virtual_customEvent(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QDesignerFormWindowManagerInterface> slot_handle(slot);
 	MiqtVirtualQDesignerFormWindowManagerInterface* self_cast = dynamic_cast<MiqtVirtualQDesignerFormWindowManagerInterface*>( (QDesignerFormWindowManagerInterface*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__customEvent = slot;
+	self_cast->handle__customEvent = std::move(slot_handle);
 	return true;
 }
 
@@ -862,12 +893,13 @@ void QDesignerFormWindowManagerInterface_virtualbase_customEvent(void* self, QEv
 }
 
 bool QDesignerFormWindowManagerInterface_override_virtual_connectNotify(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QDesignerFormWindowManagerInterface> slot_handle(slot);
 	MiqtVirtualQDesignerFormWindowManagerInterface* self_cast = dynamic_cast<MiqtVirtualQDesignerFormWindowManagerInterface*>( (QDesignerFormWindowManagerInterface*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__connectNotify = slot;
+	self_cast->handle__connectNotify = std::move(slot_handle);
 	return true;
 }
 
@@ -876,12 +908,13 @@ void QDesignerFormWindowManagerInterface_virtualbase_connectNotify(void* self, Q
 }
 
 bool QDesignerFormWindowManagerInterface_override_virtual_disconnectNotify(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QDesignerFormWindowManagerInterface> slot_handle(slot);
 	MiqtVirtualQDesignerFormWindowManagerInterface* self_cast = dynamic_cast<MiqtVirtualQDesignerFormWindowManagerInterface*>( (QDesignerFormWindowManagerInterface*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__disconnectNotify = slot;
+	self_cast->handle__disconnectNotify = std::move(slot_handle);
 	return true;
 }
 

@@ -15,6 +15,11 @@ import (
 	"unsafe"
 )
 
+//export miqt_exec_callback_handle_release_QMediaAudioProbeControl
+func miqt_exec_callback_handle_release_QMediaAudioProbeControl(cb C.intptr_t) {
+	cgo.Handle(cb).Delete()
+}
+
 type QMediaAudioProbeControl struct {
 	h *C.QMediaAudioProbeControl
 	*QMediaControl
@@ -82,8 +87,10 @@ func QMediaAudioProbeControl_TrUtf8(s string) string {
 func (this *QMediaAudioProbeControl) AudioBufferProbed(buffer *QAudioBuffer) {
 	C.QMediaAudioProbeControl_audioBufferProbed(this.h, buffer.cPointer())
 }
-func (this *QMediaAudioProbeControl) OnAudioBufferProbed(slot func(buffer *QAudioBuffer)) {
-	C.QMediaAudioProbeControl_connect_audioBufferProbed(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QMediaAudioProbeControl) OnAudioBufferProbed(slot func(buffer *QAudioBuffer)) *qt.SignalConnection {
+	_goptr := qt.UnsafeNewQMetaObject__Connection(C.QMediaAudioProbeControl_connect_audioBufferProbed(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QMediaAudioProbeControl_audioBufferProbed
@@ -102,8 +109,10 @@ func miqt_exec_callback_QMediaAudioProbeControl_audioBufferProbed(cb C.intptr_t,
 func (this *QMediaAudioProbeControl) Flush() {
 	C.QMediaAudioProbeControl_flush(this.h)
 }
-func (this *QMediaAudioProbeControl) OnFlush(slot func()) {
-	C.QMediaAudioProbeControl_connect_flush(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QMediaAudioProbeControl) OnFlush(slot func()) *qt.SignalConnection {
+	_goptr := qt.UnsafeNewQMetaObject__Connection(C.QMediaAudioProbeControl_connect_flush(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QMediaAudioProbeControl_flush

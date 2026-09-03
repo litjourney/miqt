@@ -61,13 +61,13 @@ void QScatterSeries_setMarkerShape(QScatterSeries* self, int shape);
 double QScatterSeries_markerSize(const QScatterSeries* self);
 void QScatterSeries_setMarkerSize(QScatterSeries* self, double size);
 void QScatterSeries_colorChanged(QScatterSeries* self, QColor* color);
-void QScatterSeries_connect_colorChanged(QScatterSeries* self, intptr_t slot);
+void* QScatterSeries_connect_colorChanged(QScatterSeries* self, intptr_t slot);
 void QScatterSeries_borderColorChanged(QScatterSeries* self, QColor* color);
-void QScatterSeries_connect_borderColorChanged(QScatterSeries* self, intptr_t slot);
+void* QScatterSeries_connect_borderColorChanged(QScatterSeries* self, intptr_t slot);
 void QScatterSeries_markerShapeChanged(QScatterSeries* self, int shape);
-void QScatterSeries_connect_markerShapeChanged(QScatterSeries* self, intptr_t slot);
+void* QScatterSeries_connect_markerShapeChanged(QScatterSeries* self, intptr_t slot);
 void QScatterSeries_markerSizeChanged(QScatterSeries* self, double size);
-void QScatterSeries_connect_markerSizeChanged(QScatterSeries* self, intptr_t slot);
+void* QScatterSeries_connect_markerSizeChanged(QScatterSeries* self, intptr_t slot);
 struct miqt_string QScatterSeries_tr2(const char* s, const char* c);
 struct miqt_string QScatterSeries_tr3(const char* s, const char* c, int n);
 

@@ -27,6 +27,11 @@ const (
 	QNetworkConfigurationManager__NetworkSessionRequired    QNetworkConfigurationManager__Capability = 64
 )
 
+//export miqt_exec_callback_handle_release_QNetworkConfigurationManager
+func miqt_exec_callback_handle_release_QNetworkConfigurationManager(cb C.intptr_t) {
+	cgo.Handle(cb).Delete()
+}
+
 type QNetworkConfigurationManager struct {
 	h *C.QNetworkConfigurationManager
 	*qt.QObject
@@ -146,8 +151,10 @@ func (this *QNetworkConfigurationManager) UpdateConfigurations() {
 func (this *QNetworkConfigurationManager) ConfigurationAdded(config *QNetworkConfiguration) {
 	C.QNetworkConfigurationManager_configurationAdded(this.h, config.cPointer())
 }
-func (this *QNetworkConfigurationManager) OnConfigurationAdded(slot func(config *QNetworkConfiguration)) {
-	C.QNetworkConfigurationManager_connect_configurationAdded(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QNetworkConfigurationManager) OnConfigurationAdded(slot func(config *QNetworkConfiguration)) *qt.SignalConnection {
+	_goptr := qt.UnsafeNewQMetaObject__Connection(C.QNetworkConfigurationManager_connect_configurationAdded(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QNetworkConfigurationManager_configurationAdded
@@ -166,8 +173,10 @@ func miqt_exec_callback_QNetworkConfigurationManager_configurationAdded(cb C.int
 func (this *QNetworkConfigurationManager) ConfigurationRemoved(config *QNetworkConfiguration) {
 	C.QNetworkConfigurationManager_configurationRemoved(this.h, config.cPointer())
 }
-func (this *QNetworkConfigurationManager) OnConfigurationRemoved(slot func(config *QNetworkConfiguration)) {
-	C.QNetworkConfigurationManager_connect_configurationRemoved(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QNetworkConfigurationManager) OnConfigurationRemoved(slot func(config *QNetworkConfiguration)) *qt.SignalConnection {
+	_goptr := qt.UnsafeNewQMetaObject__Connection(C.QNetworkConfigurationManager_connect_configurationRemoved(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QNetworkConfigurationManager_configurationRemoved
@@ -186,8 +195,10 @@ func miqt_exec_callback_QNetworkConfigurationManager_configurationRemoved(cb C.i
 func (this *QNetworkConfigurationManager) ConfigurationChanged(config *QNetworkConfiguration) {
 	C.QNetworkConfigurationManager_configurationChanged(this.h, config.cPointer())
 }
-func (this *QNetworkConfigurationManager) OnConfigurationChanged(slot func(config *QNetworkConfiguration)) {
-	C.QNetworkConfigurationManager_connect_configurationChanged(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QNetworkConfigurationManager) OnConfigurationChanged(slot func(config *QNetworkConfiguration)) *qt.SignalConnection {
+	_goptr := qt.UnsafeNewQMetaObject__Connection(C.QNetworkConfigurationManager_connect_configurationChanged(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QNetworkConfigurationManager_configurationChanged
@@ -206,8 +217,10 @@ func miqt_exec_callback_QNetworkConfigurationManager_configurationChanged(cb C.i
 func (this *QNetworkConfigurationManager) OnlineStateChanged(isOnline bool) {
 	C.QNetworkConfigurationManager_onlineStateChanged(this.h, (C.bool)(isOnline))
 }
-func (this *QNetworkConfigurationManager) OnOnlineStateChanged(slot func(isOnline bool)) {
-	C.QNetworkConfigurationManager_connect_onlineStateChanged(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QNetworkConfigurationManager) OnOnlineStateChanged(slot func(isOnline bool)) *qt.SignalConnection {
+	_goptr := qt.UnsafeNewQMetaObject__Connection(C.QNetworkConfigurationManager_connect_onlineStateChanged(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QNetworkConfigurationManager_onlineStateChanged
@@ -226,8 +239,10 @@ func miqt_exec_callback_QNetworkConfigurationManager_onlineStateChanged(cb C.int
 func (this *QNetworkConfigurationManager) UpdateCompleted() {
 	C.QNetworkConfigurationManager_updateCompleted(this.h)
 }
-func (this *QNetworkConfigurationManager) OnUpdateCompleted(slot func()) {
-	C.QNetworkConfigurationManager_connect_updateCompleted(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QNetworkConfigurationManager) OnUpdateCompleted(slot func()) *qt.SignalConnection {
+	_goptr := qt.UnsafeNewQMetaObject__Connection(C.QNetworkConfigurationManager_connect_updateCompleted(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QNetworkConfigurationManager_updateCompleted
@@ -360,7 +375,11 @@ func (this *QNetworkConfigurationManager) callVirtualBase_Event(event *qt.QEvent
 
 }
 func (this *QNetworkConfigurationManager) OnEvent(slot func(super func(event *qt.QEvent) bool, event *qt.QEvent) bool) {
-	ok := C.QNetworkConfigurationManager_override_virtual_event(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QNetworkConfigurationManager_override_virtual_event(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -388,7 +407,11 @@ func (this *QNetworkConfigurationManager) callVirtualBase_EventFilter(watched *q
 
 }
 func (this *QNetworkConfigurationManager) OnEventFilter(slot func(super func(watched *qt.QObject, event *qt.QEvent) bool, watched *qt.QObject, event *qt.QEvent) bool) {
-	ok := C.QNetworkConfigurationManager_override_virtual_eventFilter(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QNetworkConfigurationManager_override_virtual_eventFilter(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -418,7 +441,11 @@ func (this *QNetworkConfigurationManager) callVirtualBase_TimerEvent(event *qt.Q
 
 }
 func (this *QNetworkConfigurationManager) OnTimerEvent(slot func(super func(event *qt.QTimerEvent), event *qt.QTimerEvent)) {
-	ok := C.QNetworkConfigurationManager_override_virtual_timerEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QNetworkConfigurationManager_override_virtual_timerEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -444,7 +471,11 @@ func (this *QNetworkConfigurationManager) callVirtualBase_ChildEvent(event *qt.Q
 
 }
 func (this *QNetworkConfigurationManager) OnChildEvent(slot func(super func(event *qt.QChildEvent), event *qt.QChildEvent)) {
-	ok := C.QNetworkConfigurationManager_override_virtual_childEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QNetworkConfigurationManager_override_virtual_childEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -470,7 +501,11 @@ func (this *QNetworkConfigurationManager) callVirtualBase_CustomEvent(event *qt.
 
 }
 func (this *QNetworkConfigurationManager) OnCustomEvent(slot func(super func(event *qt.QEvent), event *qt.QEvent)) {
-	ok := C.QNetworkConfigurationManager_override_virtual_customEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QNetworkConfigurationManager_override_virtual_customEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -496,7 +531,11 @@ func (this *QNetworkConfigurationManager) callVirtualBase_ConnectNotify(signal *
 
 }
 func (this *QNetworkConfigurationManager) OnConnectNotify(slot func(super func(signal *qt.QMetaMethod), signal *qt.QMetaMethod)) {
-	ok := C.QNetworkConfigurationManager_override_virtual_connectNotify(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QNetworkConfigurationManager_override_virtual_connectNotify(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -522,7 +561,11 @@ func (this *QNetworkConfigurationManager) callVirtualBase_DisconnectNotify(signa
 
 }
 func (this *QNetworkConfigurationManager) OnDisconnectNotify(slot func(super func(signal *qt.QMetaMethod), signal *qt.QMetaMethod)) {
-	ok := C.QNetworkConfigurationManager_override_virtual_disconnectNotify(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QNetworkConfigurationManager_override_virtual_disconnectNotify(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}

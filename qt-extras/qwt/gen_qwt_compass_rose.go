@@ -15,6 +15,11 @@ import (
 	"unsafe"
 )
 
+//export miqt_exec_callback_handle_release_QwtCompassRose
+func miqt_exec_callback_handle_release_QwtCompassRose(cb C.intptr_t) {
+	cgo.Handle(cb).Delete()
+}
+
 type QwtCompassRose struct {
 	h *C.QwtCompassRose
 }
@@ -75,7 +80,11 @@ func (this *QwtCompassRose) callVirtualBase_SetPalette(p *qt.QPalette) {
 
 }
 func (this *QwtCompassRose) OnSetPalette(slot func(super func(p *qt.QPalette), p *qt.QPalette)) {
-	ok := C.QwtCompassRose_override_virtual_setPalette(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QwtCompassRose_override_virtual_setPalette(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -95,7 +104,11 @@ func miqt_exec_callback_QwtCompassRose_setPalette(self *C.QwtCompassRose, cb C.i
 
 }
 func (this *QwtCompassRose) OnDraw(slot func(painter *qt.QPainter, center *qt.QPointF, radius float64, north float64, colorGroup qt.QPalette__ColorGroup)) {
-	ok := C.QwtCompassRose_override_virtual_draw(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QwtCompassRose_override_virtual_draw(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -135,6 +148,11 @@ func (this *QwtCompassRose) GoGC() {
 		this.Delete()
 		runtime.KeepAlive(this.h)
 	})
+}
+
+//export miqt_exec_callback_handle_release_QwtSimpleCompassRose
+func miqt_exec_callback_handle_release_QwtSimpleCompassRose(cb C.intptr_t) {
+	cgo.Handle(cb).Delete()
 }
 
 type QwtSimpleCompassRose struct {
@@ -247,7 +265,11 @@ func (this *QwtSimpleCompassRose) callVirtualBase_Draw(param1 *qt.QPainter, cent
 
 }
 func (this *QwtSimpleCompassRose) OnDraw(slot func(super func(param1 *qt.QPainter, center *qt.QPointF, radius float64, north float64, param5 qt.QPalette__ColorGroup), param1 *qt.QPainter, center *qt.QPointF, radius float64, north float64, param5 qt.QPalette__ColorGroup)) {
-	ok := C.QwtSimpleCompassRose_override_virtual_draw(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QwtSimpleCompassRose_override_virtual_draw(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -281,7 +303,11 @@ func (this *QwtSimpleCompassRose) callVirtualBase_SetPalette(p *qt.QPalette) {
 
 }
 func (this *QwtSimpleCompassRose) OnSetPalette(slot func(super func(p *qt.QPalette), p *qt.QPalette)) {
-	ok := C.QwtSimpleCompassRose_override_virtual_setPalette(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QwtSimpleCompassRose_override_virtual_setPalette(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}

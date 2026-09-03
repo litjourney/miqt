@@ -1,3 +1,5 @@
+#include <memory>
+#include <utility>
 #include <QChildEvent>
 #include <QEvent>
 #include <QImage>
@@ -19,6 +21,7 @@
 extern "C" {
 #endif
 
+void miqt_exec_callback_handle_release_QPdfPageRenderer(intptr_t);
 void miqt_exec_callback_QPdfPageRenderer_documentChanged(intptr_t, QPdfDocument*);
 void miqt_exec_callback_QPdfPageRenderer_renderModeChanged(intptr_t, int);
 void miqt_exec_callback_QPdfPageRenderer_pageRendered(intptr_t, int, QSize*, QImage*, QPdfDocumentRenderOptions*, unsigned long long);
@@ -42,95 +45,95 @@ public:
 	virtual ~MiqtVirtualQPdfPageRenderer() override = default;
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__event = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QPdfPageRenderer> handle__event;
 
 	// Subclass to allow providing a Go implementation
 	virtual bool event(QEvent* event) override {
-		if (handle__event == 0) {
+		if (!handle__event) {
 			return QPdfPageRenderer::event(event);
 		}
 
 		QEvent* sigval1 = event;
-		bool callback_return_value = miqt_exec_callback_QPdfPageRenderer_event(this, handle__event, sigval1);
+		bool callback_return_value = miqt_exec_callback_QPdfPageRenderer_event(this, handle__event.value(), sigval1);
 		return callback_return_value;
 	}
 
 	friend bool QPdfPageRenderer_virtualbase_event(void* self, QEvent* event);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__eventFilter = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QPdfPageRenderer> handle__eventFilter;
 
 	// Subclass to allow providing a Go implementation
 	virtual bool eventFilter(QObject* watched, QEvent* event) override {
-		if (handle__eventFilter == 0) {
+		if (!handle__eventFilter) {
 			return QPdfPageRenderer::eventFilter(watched, event);
 		}
 
 		QObject* sigval1 = watched;
 		QEvent* sigval2 = event;
-		bool callback_return_value = miqt_exec_callback_QPdfPageRenderer_eventFilter(this, handle__eventFilter, sigval1, sigval2);
+		bool callback_return_value = miqt_exec_callback_QPdfPageRenderer_eventFilter(this, handle__eventFilter.value(), sigval1, sigval2);
 		return callback_return_value;
 	}
 
 	friend bool QPdfPageRenderer_virtualbase_eventFilter(void* self, QObject* watched, QEvent* event);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__timerEvent = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QPdfPageRenderer> handle__timerEvent;
 
 	// Subclass to allow providing a Go implementation
 	virtual void timerEvent(QTimerEvent* event) override {
-		if (handle__timerEvent == 0) {
+		if (!handle__timerEvent) {
 			QPdfPageRenderer::timerEvent(event);
 			return;
 		}
 
 		QTimerEvent* sigval1 = event;
-		miqt_exec_callback_QPdfPageRenderer_timerEvent(this, handle__timerEvent, sigval1);
+		miqt_exec_callback_QPdfPageRenderer_timerEvent(this, handle__timerEvent.value(), sigval1);
 
 	}
 
 	friend void QPdfPageRenderer_virtualbase_timerEvent(void* self, QTimerEvent* event);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__childEvent = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QPdfPageRenderer> handle__childEvent;
 
 	// Subclass to allow providing a Go implementation
 	virtual void childEvent(QChildEvent* event) override {
-		if (handle__childEvent == 0) {
+		if (!handle__childEvent) {
 			QPdfPageRenderer::childEvent(event);
 			return;
 		}
 
 		QChildEvent* sigval1 = event;
-		miqt_exec_callback_QPdfPageRenderer_childEvent(this, handle__childEvent, sigval1);
+		miqt_exec_callback_QPdfPageRenderer_childEvent(this, handle__childEvent.value(), sigval1);
 
 	}
 
 	friend void QPdfPageRenderer_virtualbase_childEvent(void* self, QChildEvent* event);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__customEvent = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QPdfPageRenderer> handle__customEvent;
 
 	// Subclass to allow providing a Go implementation
 	virtual void customEvent(QEvent* event) override {
-		if (handle__customEvent == 0) {
+		if (!handle__customEvent) {
 			QPdfPageRenderer::customEvent(event);
 			return;
 		}
 
 		QEvent* sigval1 = event;
-		miqt_exec_callback_QPdfPageRenderer_customEvent(this, handle__customEvent, sigval1);
+		miqt_exec_callback_QPdfPageRenderer_customEvent(this, handle__customEvent.value(), sigval1);
 
 	}
 
 	friend void QPdfPageRenderer_virtualbase_customEvent(void* self, QEvent* event);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__connectNotify = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QPdfPageRenderer> handle__connectNotify;
 
 	// Subclass to allow providing a Go implementation
 	virtual void connectNotify(const QMetaMethod& signal) override {
-		if (handle__connectNotify == 0) {
+		if (!handle__connectNotify) {
 			QPdfPageRenderer::connectNotify(signal);
 			return;
 		}
@@ -138,18 +141,18 @@ public:
 		const QMetaMethod& signal_ret = signal;
 		// Cast returned reference into pointer
 		QMetaMethod* sigval1 = const_cast<QMetaMethod*>(&signal_ret);
-		miqt_exec_callback_QPdfPageRenderer_connectNotify(this, handle__connectNotify, sigval1);
+		miqt_exec_callback_QPdfPageRenderer_connectNotify(this, handle__connectNotify.value(), sigval1);
 
 	}
 
 	friend void QPdfPageRenderer_virtualbase_connectNotify(void* self, QMetaMethod* signal);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__disconnectNotify = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QPdfPageRenderer> handle__disconnectNotify;
 
 	// Subclass to allow providing a Go implementation
 	virtual void disconnectNotify(const QMetaMethod& signal) override {
-		if (handle__disconnectNotify == 0) {
+		if (!handle__disconnectNotify) {
 			QPdfPageRenderer::disconnectNotify(signal);
 			return;
 		}
@@ -157,7 +160,7 @@ public:
 		const QMetaMethod& signal_ret = signal;
 		// Cast returned reference into pointer
 		QMetaMethod* sigval1 = const_cast<QMetaMethod*>(&signal_ret);
-		miqt_exec_callback_QPdfPageRenderer_disconnectNotify(this, handle__disconnectNotify, sigval1);
+		miqt_exec_callback_QPdfPageRenderer_disconnectNotify(this, handle__disconnectNotify.value(), sigval1);
 
 	}
 
@@ -238,31 +241,37 @@ void QPdfPageRenderer_documentChanged(QPdfPageRenderer* self, QPdfDocument* docu
 	self->documentChanged(document);
 }
 
-void QPdfPageRenderer_connect_documentChanged(QPdfPageRenderer* self, intptr_t slot) {
-	QPdfPageRenderer::connect(self, static_cast<void (QPdfPageRenderer::*)(QPdfDocument*)>(&QPdfPageRenderer::documentChanged), self, [=](QPdfDocument* document) {
+void* QPdfPageRenderer_connect_documentChanged(QPdfPageRenderer* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QPdfPageRenderer>>(slot);
+	return new QMetaObject::Connection(QPdfPageRenderer::connect(self, static_cast<void (QPdfPageRenderer::*)(QPdfDocument*)>(&QPdfPageRenderer::documentChanged), self, [slot_handle](QPdfDocument* document) {
+		intptr_t slot = slot_handle->value();
 		QPdfDocument* sigval1 = document;
 		miqt_exec_callback_QPdfPageRenderer_documentChanged(slot, sigval1);
-	});
+	}));
 }
 
 void QPdfPageRenderer_renderModeChanged(QPdfPageRenderer* self, int renderMode) {
 	self->renderModeChanged(static_cast<QPdfPageRenderer::RenderMode>(renderMode));
 }
 
-void QPdfPageRenderer_connect_renderModeChanged(QPdfPageRenderer* self, intptr_t slot) {
-	QPdfPageRenderer::connect(self, static_cast<void (QPdfPageRenderer::*)(QPdfPageRenderer::RenderMode)>(&QPdfPageRenderer::renderModeChanged), self, [=](QPdfPageRenderer::RenderMode renderMode) {
+void* QPdfPageRenderer_connect_renderModeChanged(QPdfPageRenderer* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QPdfPageRenderer>>(slot);
+	return new QMetaObject::Connection(QPdfPageRenderer::connect(self, static_cast<void (QPdfPageRenderer::*)(QPdfPageRenderer::RenderMode)>(&QPdfPageRenderer::renderModeChanged), self, [slot_handle](QPdfPageRenderer::RenderMode renderMode) {
+		intptr_t slot = slot_handle->value();
 		QPdfPageRenderer::RenderMode renderMode_ret = renderMode;
 		int sigval1 = static_cast<int>(renderMode_ret);
 		miqt_exec_callback_QPdfPageRenderer_renderModeChanged(slot, sigval1);
-	});
+	}));
 }
 
 void QPdfPageRenderer_pageRendered(QPdfPageRenderer* self, int pageNumber, QSize* imageSize, QImage* image, QPdfDocumentRenderOptions* options, unsigned long long requestId) {
 	self->pageRendered(static_cast<int>(pageNumber), *imageSize, *image, *options, static_cast<quint64>(requestId));
 }
 
-void QPdfPageRenderer_connect_pageRendered(QPdfPageRenderer* self, intptr_t slot) {
-	QPdfPageRenderer::connect(self, static_cast<void (QPdfPageRenderer::*)(int, QSize, const QImage&, QPdfDocumentRenderOptions, quint64)>(&QPdfPageRenderer::pageRendered), self, [=](int pageNumber, QSize imageSize, const QImage& image, QPdfDocumentRenderOptions options, quint64 requestId) {
+void* QPdfPageRenderer_connect_pageRendered(QPdfPageRenderer* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QPdfPageRenderer>>(slot);
+	return new QMetaObject::Connection(QPdfPageRenderer::connect(self, static_cast<void (QPdfPageRenderer::*)(int, QSize, const QImage&, QPdfDocumentRenderOptions, quint64)>(&QPdfPageRenderer::pageRendered), self, [slot_handle](int pageNumber, QSize imageSize, const QImage& image, QPdfDocumentRenderOptions options, quint64 requestId) {
+		intptr_t slot = slot_handle->value();
 		int sigval1 = pageNumber;
 		QSize* sigval2 = new QSize(imageSize);
 		const QImage& image_ret = image;
@@ -272,7 +281,7 @@ void QPdfPageRenderer_connect_pageRendered(QPdfPageRenderer* self, intptr_t slot
 		quint64 requestId_ret = requestId;
 		unsigned long long sigval5 = static_cast<unsigned long long>(requestId_ret);
 		miqt_exec_callback_QPdfPageRenderer_pageRendered(slot, sigval1, sigval2, sigval3, sigval4, sigval5);
-	});
+	}));
 }
 
 struct miqt_string QPdfPageRenderer_tr2(const char* s, const char* c) {
@@ -325,12 +334,13 @@ unsigned long long QPdfPageRenderer_requestPage2(QPdfPageRenderer* self, int pag
 }
 
 bool QPdfPageRenderer_override_virtual_event(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QPdfPageRenderer> slot_handle(slot);
 	MiqtVirtualQPdfPageRenderer* self_cast = dynamic_cast<MiqtVirtualQPdfPageRenderer*>( (QPdfPageRenderer*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__event = slot;
+	self_cast->handle__event = std::move(slot_handle);
 	return true;
 }
 
@@ -339,12 +349,13 @@ bool QPdfPageRenderer_virtualbase_event(void* self, QEvent* event) {
 }
 
 bool QPdfPageRenderer_override_virtual_eventFilter(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QPdfPageRenderer> slot_handle(slot);
 	MiqtVirtualQPdfPageRenderer* self_cast = dynamic_cast<MiqtVirtualQPdfPageRenderer*>( (QPdfPageRenderer*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__eventFilter = slot;
+	self_cast->handle__eventFilter = std::move(slot_handle);
 	return true;
 }
 
@@ -353,12 +364,13 @@ bool QPdfPageRenderer_virtualbase_eventFilter(void* self, QObject* watched, QEve
 }
 
 bool QPdfPageRenderer_override_virtual_timerEvent(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QPdfPageRenderer> slot_handle(slot);
 	MiqtVirtualQPdfPageRenderer* self_cast = dynamic_cast<MiqtVirtualQPdfPageRenderer*>( (QPdfPageRenderer*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__timerEvent = slot;
+	self_cast->handle__timerEvent = std::move(slot_handle);
 	return true;
 }
 
@@ -367,12 +379,13 @@ void QPdfPageRenderer_virtualbase_timerEvent(void* self, QTimerEvent* event) {
 }
 
 bool QPdfPageRenderer_override_virtual_childEvent(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QPdfPageRenderer> slot_handle(slot);
 	MiqtVirtualQPdfPageRenderer* self_cast = dynamic_cast<MiqtVirtualQPdfPageRenderer*>( (QPdfPageRenderer*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__childEvent = slot;
+	self_cast->handle__childEvent = std::move(slot_handle);
 	return true;
 }
 
@@ -381,12 +394,13 @@ void QPdfPageRenderer_virtualbase_childEvent(void* self, QChildEvent* event) {
 }
 
 bool QPdfPageRenderer_override_virtual_customEvent(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QPdfPageRenderer> slot_handle(slot);
 	MiqtVirtualQPdfPageRenderer* self_cast = dynamic_cast<MiqtVirtualQPdfPageRenderer*>( (QPdfPageRenderer*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__customEvent = slot;
+	self_cast->handle__customEvent = std::move(slot_handle);
 	return true;
 }
 
@@ -395,12 +409,13 @@ void QPdfPageRenderer_virtualbase_customEvent(void* self, QEvent* event) {
 }
 
 bool QPdfPageRenderer_override_virtual_connectNotify(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QPdfPageRenderer> slot_handle(slot);
 	MiqtVirtualQPdfPageRenderer* self_cast = dynamic_cast<MiqtVirtualQPdfPageRenderer*>( (QPdfPageRenderer*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__connectNotify = slot;
+	self_cast->handle__connectNotify = std::move(slot_handle);
 	return true;
 }
 
@@ -409,12 +424,13 @@ void QPdfPageRenderer_virtualbase_connectNotify(void* self, QMetaMethod* signal)
 }
 
 bool QPdfPageRenderer_override_virtual_disconnectNotify(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QPdfPageRenderer> slot_handle(slot);
 	MiqtVirtualQPdfPageRenderer* self_cast = dynamic_cast<MiqtVirtualQPdfPageRenderer*>( (QPdfPageRenderer*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__disconnectNotify = slot;
+	self_cast->handle__disconnectNotify = std::move(slot_handle);
 	return true;
 }
 

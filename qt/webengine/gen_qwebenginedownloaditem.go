@@ -72,6 +72,11 @@ const (
 	QWebEngineDownloadItem__SavePage          QWebEngineDownloadItem__DownloadType = 3
 )
 
+//export miqt_exec_callback_handle_release_QWebEngineDownloadItem
+func miqt_exec_callback_handle_release_QWebEngineDownloadItem(cb C.intptr_t) {
+	cgo.Handle(cb).Delete()
+}
+
 type QWebEngineDownloadItem struct {
 	h *C.QWebEngineDownloadItem
 	*qt.QObject
@@ -275,8 +280,10 @@ func (this *QWebEngineDownloadItem) Resume() {
 func (this *QWebEngineDownloadItem) Finished() {
 	C.QWebEngineDownloadItem_finished(this.h)
 }
-func (this *QWebEngineDownloadItem) OnFinished(slot func()) {
-	C.QWebEngineDownloadItem_connect_finished(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QWebEngineDownloadItem) OnFinished(slot func()) *qt.SignalConnection {
+	_goptr := qt.UnsafeNewQMetaObject__Connection(C.QWebEngineDownloadItem_connect_finished(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QWebEngineDownloadItem_finished
@@ -292,8 +299,10 @@ func miqt_exec_callback_QWebEngineDownloadItem_finished(cb C.intptr_t) {
 func (this *QWebEngineDownloadItem) StateChanged(state QWebEngineDownloadItem__DownloadState) {
 	C.QWebEngineDownloadItem_stateChanged(this.h, (C.int)(state))
 }
-func (this *QWebEngineDownloadItem) OnStateChanged(slot func(state QWebEngineDownloadItem__DownloadState)) {
-	C.QWebEngineDownloadItem_connect_stateChanged(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QWebEngineDownloadItem) OnStateChanged(slot func(state QWebEngineDownloadItem__DownloadState)) *qt.SignalConnection {
+	_goptr := qt.UnsafeNewQMetaObject__Connection(C.QWebEngineDownloadItem_connect_stateChanged(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QWebEngineDownloadItem_stateChanged
@@ -312,8 +321,10 @@ func miqt_exec_callback_QWebEngineDownloadItem_stateChanged(cb C.intptr_t, state
 func (this *QWebEngineDownloadItem) DownloadProgress(bytesReceived int64, bytesTotal int64) {
 	C.QWebEngineDownloadItem_downloadProgress(this.h, (C.longlong)(bytesReceived), (C.longlong)(bytesTotal))
 }
-func (this *QWebEngineDownloadItem) OnDownloadProgress(slot func(bytesReceived int64, bytesTotal int64)) {
-	C.QWebEngineDownloadItem_connect_downloadProgress(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QWebEngineDownloadItem) OnDownloadProgress(slot func(bytesReceived int64, bytesTotal int64)) *qt.SignalConnection {
+	_goptr := qt.UnsafeNewQMetaObject__Connection(C.QWebEngineDownloadItem_connect_downloadProgress(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QWebEngineDownloadItem_downloadProgress
@@ -334,8 +345,10 @@ func miqt_exec_callback_QWebEngineDownloadItem_downloadProgress(cb C.intptr_t, b
 func (this *QWebEngineDownloadItem) IsPausedChanged(isPaused bool) {
 	C.QWebEngineDownloadItem_isPausedChanged(this.h, (C.bool)(isPaused))
 }
-func (this *QWebEngineDownloadItem) OnIsPausedChanged(slot func(isPaused bool)) {
-	C.QWebEngineDownloadItem_connect_isPausedChanged(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QWebEngineDownloadItem) OnIsPausedChanged(slot func(isPaused bool)) *qt.SignalConnection {
+	_goptr := qt.UnsafeNewQMetaObject__Connection(C.QWebEngineDownloadItem_connect_isPausedChanged(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QWebEngineDownloadItem_isPausedChanged

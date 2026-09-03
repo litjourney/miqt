@@ -1,3 +1,5 @@
+#include <memory>
+#include <utility>
 #include <QAbstractAudioDeviceInfo>
 #include <QAbstractAudioInput>
 #include <QAbstractAudioOutput>
@@ -17,9 +19,11 @@
 extern "C" {
 #endif
 
+void miqt_exec_callback_handle_release_QAbstractAudioOutput(intptr_t);
 void miqt_exec_callback_QAbstractAudioOutput_errorChanged(intptr_t, int);
 void miqt_exec_callback_QAbstractAudioOutput_stateChanged(intptr_t, int);
 void miqt_exec_callback_QAbstractAudioOutput_notify(intptr_t);
+void miqt_exec_callback_handle_release_QAbstractAudioInput(intptr_t);
 void miqt_exec_callback_QAbstractAudioInput_errorChanged(intptr_t, int);
 void miqt_exec_callback_QAbstractAudioInput_stateChanged(intptr_t, int);
 void miqt_exec_callback_QAbstractAudioInput_notify(intptr_t);
@@ -354,34 +358,40 @@ void QAbstractAudioOutput_errorChanged(QAbstractAudioOutput* self, int error) {
 	self->errorChanged(static_cast<QAudio::Error>(error));
 }
 
-void QAbstractAudioOutput_connect_errorChanged(QAbstractAudioOutput* self, intptr_t slot) {
-	QAbstractAudioOutput::connect(self, static_cast<void (QAbstractAudioOutput::*)(QAudio::Error)>(&QAbstractAudioOutput::errorChanged), self, [=](QAudio::Error error) {
+void* QAbstractAudioOutput_connect_errorChanged(QAbstractAudioOutput* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QAbstractAudioOutput>>(slot);
+	return new QMetaObject::Connection(QAbstractAudioOutput::connect(self, static_cast<void (QAbstractAudioOutput::*)(QAudio::Error)>(&QAbstractAudioOutput::errorChanged), self, [slot_handle](QAudio::Error error) {
+		intptr_t slot = slot_handle->value();
 		QAudio::Error error_ret = error;
 		int sigval1 = static_cast<int>(error_ret);
 		miqt_exec_callback_QAbstractAudioOutput_errorChanged(slot, sigval1);
-	});
+	}));
 }
 
 void QAbstractAudioOutput_stateChanged(QAbstractAudioOutput* self, int state) {
 	self->stateChanged(static_cast<QAudio::State>(state));
 }
 
-void QAbstractAudioOutput_connect_stateChanged(QAbstractAudioOutput* self, intptr_t slot) {
-	QAbstractAudioOutput::connect(self, static_cast<void (QAbstractAudioOutput::*)(QAudio::State)>(&QAbstractAudioOutput::stateChanged), self, [=](QAudio::State state) {
+void* QAbstractAudioOutput_connect_stateChanged(QAbstractAudioOutput* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QAbstractAudioOutput>>(slot);
+	return new QMetaObject::Connection(QAbstractAudioOutput::connect(self, static_cast<void (QAbstractAudioOutput::*)(QAudio::State)>(&QAbstractAudioOutput::stateChanged), self, [slot_handle](QAudio::State state) {
+		intptr_t slot = slot_handle->value();
 		QAudio::State state_ret = state;
 		int sigval1 = static_cast<int>(state_ret);
 		miqt_exec_callback_QAbstractAudioOutput_stateChanged(slot, sigval1);
-	});
+	}));
 }
 
 void QAbstractAudioOutput_notify(QAbstractAudioOutput* self) {
 	self->notify();
 }
 
-void QAbstractAudioOutput_connect_notify(QAbstractAudioOutput* self, intptr_t slot) {
-	QAbstractAudioOutput::connect(self, static_cast<void (QAbstractAudioOutput::*)()>(&QAbstractAudioOutput::notify), self, [=]() {
+void* QAbstractAudioOutput_connect_notify(QAbstractAudioOutput* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QAbstractAudioOutput>>(slot);
+	return new QMetaObject::Connection(QAbstractAudioOutput::connect(self, static_cast<void (QAbstractAudioOutput::*)()>(&QAbstractAudioOutput::notify), self, [slot_handle]() {
+		intptr_t slot = slot_handle->value();
 		miqt_exec_callback_QAbstractAudioOutput_notify(slot);
-	});
+	}));
 }
 
 struct miqt_string QAbstractAudioOutput_tr2(const char* s, const char* c) {
@@ -555,34 +565,40 @@ void QAbstractAudioInput_errorChanged(QAbstractAudioInput* self, int error) {
 	self->errorChanged(static_cast<QAudio::Error>(error));
 }
 
-void QAbstractAudioInput_connect_errorChanged(QAbstractAudioInput* self, intptr_t slot) {
-	QAbstractAudioInput::connect(self, static_cast<void (QAbstractAudioInput::*)(QAudio::Error)>(&QAbstractAudioInput::errorChanged), self, [=](QAudio::Error error) {
+void* QAbstractAudioInput_connect_errorChanged(QAbstractAudioInput* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QAbstractAudioInput>>(slot);
+	return new QMetaObject::Connection(QAbstractAudioInput::connect(self, static_cast<void (QAbstractAudioInput::*)(QAudio::Error)>(&QAbstractAudioInput::errorChanged), self, [slot_handle](QAudio::Error error) {
+		intptr_t slot = slot_handle->value();
 		QAudio::Error error_ret = error;
 		int sigval1 = static_cast<int>(error_ret);
 		miqt_exec_callback_QAbstractAudioInput_errorChanged(slot, sigval1);
-	});
+	}));
 }
 
 void QAbstractAudioInput_stateChanged(QAbstractAudioInput* self, int state) {
 	self->stateChanged(static_cast<QAudio::State>(state));
 }
 
-void QAbstractAudioInput_connect_stateChanged(QAbstractAudioInput* self, intptr_t slot) {
-	QAbstractAudioInput::connect(self, static_cast<void (QAbstractAudioInput::*)(QAudio::State)>(&QAbstractAudioInput::stateChanged), self, [=](QAudio::State state) {
+void* QAbstractAudioInput_connect_stateChanged(QAbstractAudioInput* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QAbstractAudioInput>>(slot);
+	return new QMetaObject::Connection(QAbstractAudioInput::connect(self, static_cast<void (QAbstractAudioInput::*)(QAudio::State)>(&QAbstractAudioInput::stateChanged), self, [slot_handle](QAudio::State state) {
+		intptr_t slot = slot_handle->value();
 		QAudio::State state_ret = state;
 		int sigval1 = static_cast<int>(state_ret);
 		miqt_exec_callback_QAbstractAudioInput_stateChanged(slot, sigval1);
-	});
+	}));
 }
 
 void QAbstractAudioInput_notify(QAbstractAudioInput* self) {
 	self->notify();
 }
 
-void QAbstractAudioInput_connect_notify(QAbstractAudioInput* self, intptr_t slot) {
-	QAbstractAudioInput::connect(self, static_cast<void (QAbstractAudioInput::*)()>(&QAbstractAudioInput::notify), self, [=]() {
+void* QAbstractAudioInput_connect_notify(QAbstractAudioInput* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QAbstractAudioInput>>(slot);
+	return new QMetaObject::Connection(QAbstractAudioInput::connect(self, static_cast<void (QAbstractAudioInput::*)()>(&QAbstractAudioInput::notify), self, [slot_handle]() {
+		intptr_t slot = slot_handle->value();
 		miqt_exec_callback_QAbstractAudioInput_notify(slot);
-	});
+	}));
 }
 
 struct miqt_string QAbstractAudioInput_tr2(const char* s, const char* c) {

@@ -196,6 +196,11 @@ func (this *QItemSelectionRange) GoGC() {
 	})
 }
 
+//export miqt_exec_callback_handle_release_QItemSelectionModel
+func miqt_exec_callback_handle_release_QItemSelectionModel(cb C.intptr_t) {
+	cgo.Handle(cb).Delete()
+}
+
 type QItemSelectionModel struct {
 	h *C.QItemSelectionModel
 	*QObject
@@ -384,8 +389,10 @@ func (this *QItemSelectionModel) ClearCurrentIndex() {
 func (this *QItemSelectionModel) SelectionChanged(selected *QItemSelection, deselected *QItemSelection) {
 	C.QItemSelectionModel_selectionChanged(this.h, selected.cPointer(), deselected.cPointer())
 }
-func (this *QItemSelectionModel) OnSelectionChanged(slot func(selected *QItemSelection, deselected *QItemSelection)) {
-	C.QItemSelectionModel_connect_selectionChanged(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QItemSelectionModel) OnSelectionChanged(slot func(selected *QItemSelection, deselected *QItemSelection)) *SignalConnection {
+	_goptr := UnsafeNewQMetaObject__Connection(C.QItemSelectionModel_connect_selectionChanged(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QItemSelectionModel_selectionChanged
@@ -406,8 +413,10 @@ func miqt_exec_callback_QItemSelectionModel_selectionChanged(cb C.intptr_t, sele
 func (this *QItemSelectionModel) CurrentChanged(current *QModelIndex, previous *QModelIndex) {
 	C.QItemSelectionModel_currentChanged(this.h, current.cPointer(), previous.cPointer())
 }
-func (this *QItemSelectionModel) OnCurrentChanged(slot func(current *QModelIndex, previous *QModelIndex)) {
-	C.QItemSelectionModel_connect_currentChanged(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QItemSelectionModel) OnCurrentChanged(slot func(current *QModelIndex, previous *QModelIndex)) *SignalConnection {
+	_goptr := UnsafeNewQMetaObject__Connection(C.QItemSelectionModel_connect_currentChanged(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QItemSelectionModel_currentChanged
@@ -428,8 +437,10 @@ func miqt_exec_callback_QItemSelectionModel_currentChanged(cb C.intptr_t, curren
 func (this *QItemSelectionModel) CurrentRowChanged(current *QModelIndex, previous *QModelIndex) {
 	C.QItemSelectionModel_currentRowChanged(this.h, current.cPointer(), previous.cPointer())
 }
-func (this *QItemSelectionModel) OnCurrentRowChanged(slot func(current *QModelIndex, previous *QModelIndex)) {
-	C.QItemSelectionModel_connect_currentRowChanged(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QItemSelectionModel) OnCurrentRowChanged(slot func(current *QModelIndex, previous *QModelIndex)) *SignalConnection {
+	_goptr := UnsafeNewQMetaObject__Connection(C.QItemSelectionModel_connect_currentRowChanged(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QItemSelectionModel_currentRowChanged
@@ -450,8 +461,10 @@ func miqt_exec_callback_QItemSelectionModel_currentRowChanged(cb C.intptr_t, cur
 func (this *QItemSelectionModel) CurrentColumnChanged(current *QModelIndex, previous *QModelIndex) {
 	C.QItemSelectionModel_currentColumnChanged(this.h, current.cPointer(), previous.cPointer())
 }
-func (this *QItemSelectionModel) OnCurrentColumnChanged(slot func(current *QModelIndex, previous *QModelIndex)) {
-	C.QItemSelectionModel_connect_currentColumnChanged(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QItemSelectionModel) OnCurrentColumnChanged(slot func(current *QModelIndex, previous *QModelIndex)) *SignalConnection {
+	_goptr := UnsafeNewQMetaObject__Connection(C.QItemSelectionModel_connect_currentColumnChanged(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QItemSelectionModel_currentColumnChanged
@@ -472,8 +485,10 @@ func miqt_exec_callback_QItemSelectionModel_currentColumnChanged(cb C.intptr_t, 
 func (this *QItemSelectionModel) ModelChanged(model *QAbstractItemModel) {
 	C.QItemSelectionModel_modelChanged(this.h, model.cPointer())
 }
-func (this *QItemSelectionModel) OnModelChanged(slot func(model *QAbstractItemModel)) {
-	C.QItemSelectionModel_connect_modelChanged(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QItemSelectionModel) OnModelChanged(slot func(model *QAbstractItemModel)) *SignalConnection {
+	_goptr := UnsafeNewQMetaObject__Connection(C.QItemSelectionModel_connect_modelChanged(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QItemSelectionModel_modelChanged
@@ -627,7 +642,11 @@ func (this *QItemSelectionModel) callVirtualBase_SetCurrentIndex(index *QModelIn
 
 }
 func (this *QItemSelectionModel) OnSetCurrentIndex(slot func(super func(index *QModelIndex, command QItemSelectionModel__SelectionFlag), index *QModelIndex, command QItemSelectionModel__SelectionFlag)) {
-	ok := C.QItemSelectionModel_override_virtual_setCurrentIndex(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QItemSelectionModel_override_virtual_setCurrentIndex(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -655,7 +674,11 @@ func (this *QItemSelectionModel) callVirtualBase_Select(index *QModelIndex, comm
 
 }
 func (this *QItemSelectionModel) OnSelect(slot func(super func(index *QModelIndex, command QItemSelectionModel__SelectionFlag), index *QModelIndex, command QItemSelectionModel__SelectionFlag)) {
-	ok := C.QItemSelectionModel_override_virtual_select(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QItemSelectionModel_override_virtual_select(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -683,7 +706,11 @@ func (this *QItemSelectionModel) callVirtualBase_Select2(selection *QItemSelecti
 
 }
 func (this *QItemSelectionModel) OnSelect2(slot func(super func(selection *QItemSelection, command QItemSelectionModel__SelectionFlag), selection *QItemSelection, command QItemSelectionModel__SelectionFlag)) {
-	ok := C.QItemSelectionModel_override_virtual_select2(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QItemSelectionModel_override_virtual_select2(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -711,7 +738,11 @@ func (this *QItemSelectionModel) callVirtualBase_Clear() {
 
 }
 func (this *QItemSelectionModel) OnClear(slot func(super func())) {
-	ok := C.QItemSelectionModel_override_virtual_clear(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QItemSelectionModel_override_virtual_clear(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -734,7 +765,11 @@ func (this *QItemSelectionModel) callVirtualBase_Reset() {
 
 }
 func (this *QItemSelectionModel) OnReset(slot func(super func())) {
-	ok := C.QItemSelectionModel_override_virtual_reset(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QItemSelectionModel_override_virtual_reset(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -757,7 +792,11 @@ func (this *QItemSelectionModel) callVirtualBase_ClearCurrentIndex() {
 
 }
 func (this *QItemSelectionModel) OnClearCurrentIndex(slot func(super func())) {
-	ok := C.QItemSelectionModel_override_virtual_clearCurrentIndex(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QItemSelectionModel_override_virtual_clearCurrentIndex(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -780,7 +819,11 @@ func (this *QItemSelectionModel) callVirtualBase_Event(event *QEvent) bool {
 
 }
 func (this *QItemSelectionModel) OnEvent(slot func(super func(event *QEvent) bool, event *QEvent) bool) {
-	ok := C.QItemSelectionModel_override_virtual_event(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QItemSelectionModel_override_virtual_event(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -808,7 +851,11 @@ func (this *QItemSelectionModel) callVirtualBase_EventFilter(watched *QObject, e
 
 }
 func (this *QItemSelectionModel) OnEventFilter(slot func(super func(watched *QObject, event *QEvent) bool, watched *QObject, event *QEvent) bool) {
-	ok := C.QItemSelectionModel_override_virtual_eventFilter(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QItemSelectionModel_override_virtual_eventFilter(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -838,7 +885,11 @@ func (this *QItemSelectionModel) callVirtualBase_TimerEvent(event *QTimerEvent) 
 
 }
 func (this *QItemSelectionModel) OnTimerEvent(slot func(super func(event *QTimerEvent), event *QTimerEvent)) {
-	ok := C.QItemSelectionModel_override_virtual_timerEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QItemSelectionModel_override_virtual_timerEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -864,7 +915,11 @@ func (this *QItemSelectionModel) callVirtualBase_ChildEvent(event *QChildEvent) 
 
 }
 func (this *QItemSelectionModel) OnChildEvent(slot func(super func(event *QChildEvent), event *QChildEvent)) {
-	ok := C.QItemSelectionModel_override_virtual_childEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QItemSelectionModel_override_virtual_childEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -890,7 +945,11 @@ func (this *QItemSelectionModel) callVirtualBase_CustomEvent(event *QEvent) {
 
 }
 func (this *QItemSelectionModel) OnCustomEvent(slot func(super func(event *QEvent), event *QEvent)) {
-	ok := C.QItemSelectionModel_override_virtual_customEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QItemSelectionModel_override_virtual_customEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -916,7 +975,11 @@ func (this *QItemSelectionModel) callVirtualBase_ConnectNotify(signal *QMetaMeth
 
 }
 func (this *QItemSelectionModel) OnConnectNotify(slot func(super func(signal *QMetaMethod), signal *QMetaMethod)) {
-	ok := C.QItemSelectionModel_override_virtual_connectNotify(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QItemSelectionModel_override_virtual_connectNotify(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -942,7 +1005,11 @@ func (this *QItemSelectionModel) callVirtualBase_DisconnectNotify(signal *QMetaM
 
 }
 func (this *QItemSelectionModel) OnDisconnectNotify(slot func(super func(signal *QMetaMethod), signal *QMetaMethod)) {
-	ok := C.QItemSelectionModel_override_virtual_disconnectNotify(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QItemSelectionModel_override_virtual_disconnectNotify(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}

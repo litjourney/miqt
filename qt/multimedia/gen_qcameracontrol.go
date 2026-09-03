@@ -25,6 +25,11 @@ const (
 	QCameraControl__ViewfinderSettings    QCameraControl__PropertyChangeType = 5
 )
 
+//export miqt_exec_callback_handle_release_QCameraControl
+func miqt_exec_callback_handle_release_QCameraControl(cb C.intptr_t) {
+	cgo.Handle(cb).Delete()
+}
+
 type QCameraControl struct {
 	h *C.QCameraControl
 	*QMediaControl
@@ -120,8 +125,10 @@ func (this *QCameraControl) CanChangeProperty(changeType QCameraControl__Propert
 func (this *QCameraControl) StateChanged(param1 QCamera__State) {
 	C.QCameraControl_stateChanged(this.h, (C.int)(param1))
 }
-func (this *QCameraControl) OnStateChanged(slot func(param1 QCamera__State)) {
-	C.QCameraControl_connect_stateChanged(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QCameraControl) OnStateChanged(slot func(param1 QCamera__State)) *qt.SignalConnection {
+	_goptr := qt.UnsafeNewQMetaObject__Connection(C.QCameraControl_connect_stateChanged(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QCameraControl_stateChanged
@@ -140,8 +147,10 @@ func miqt_exec_callback_QCameraControl_stateChanged(cb C.intptr_t, param1 C.int)
 func (this *QCameraControl) StatusChanged(param1 QCamera__Status) {
 	C.QCameraControl_statusChanged(this.h, (C.int)(param1))
 }
-func (this *QCameraControl) OnStatusChanged(slot func(param1 QCamera__Status)) {
-	C.QCameraControl_connect_statusChanged(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QCameraControl) OnStatusChanged(slot func(param1 QCamera__Status)) *qt.SignalConnection {
+	_goptr := qt.UnsafeNewQMetaObject__Connection(C.QCameraControl_connect_statusChanged(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QCameraControl_statusChanged
@@ -164,8 +173,10 @@ func (this *QCameraControl) Error(error int, errorString string) {
 	defer C.free(unsafe.Pointer(errorString_ms.data))
 	C.QCameraControl_error(this.h, (C.int)(error), errorString_ms)
 }
-func (this *QCameraControl) OnError(slot func(error int, errorString string)) {
-	C.QCameraControl_connect_error(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QCameraControl) OnError(slot func(error int, errorString string)) *qt.SignalConnection {
+	_goptr := qt.UnsafeNewQMetaObject__Connection(C.QCameraControl_connect_error(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QCameraControl_error
@@ -189,8 +200,10 @@ func miqt_exec_callback_QCameraControl_error(cb C.intptr_t, error C.int, errorSt
 func (this *QCameraControl) CaptureModeChanged(mode QCamera__CaptureMode) {
 	C.QCameraControl_captureModeChanged(this.h, (C.int)(mode))
 }
-func (this *QCameraControl) OnCaptureModeChanged(slot func(mode QCamera__CaptureMode)) {
-	C.QCameraControl_connect_captureModeChanged(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QCameraControl) OnCaptureModeChanged(slot func(mode QCamera__CaptureMode)) *qt.SignalConnection {
+	_goptr := qt.UnsafeNewQMetaObject__Connection(C.QCameraControl_connect_captureModeChanged(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QCameraControl_captureModeChanged

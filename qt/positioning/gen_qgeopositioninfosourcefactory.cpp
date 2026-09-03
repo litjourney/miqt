@@ -1,3 +1,5 @@
+#include <memory>
+#include <utility>
 #include <QGeoAreaMonitorSource>
 #include <QGeoPositionInfoSource>
 #include <QGeoPositionInfoSourceFactory>
@@ -15,9 +17,11 @@
 extern "C" {
 #endif
 
+void miqt_exec_callback_handle_release_QGeoPositionInfoSourceFactory(intptr_t);
 QGeoPositionInfoSource* miqt_exec_callback_QGeoPositionInfoSourceFactory_positionInfoSource(QGeoPositionInfoSourceFactory*, intptr_t, QObject*);
 QGeoSatelliteInfoSource* miqt_exec_callback_QGeoPositionInfoSourceFactory_satelliteInfoSource(QGeoPositionInfoSourceFactory*, intptr_t, QObject*);
 QGeoAreaMonitorSource* miqt_exec_callback_QGeoPositionInfoSourceFactory_areaMonitor(QGeoPositionInfoSourceFactory*, intptr_t, QObject*);
+void miqt_exec_callback_handle_release_QGeoPositionInfoSourceFactoryV2(intptr_t);
 QGeoPositionInfoSource* miqt_exec_callback_QGeoPositionInfoSourceFactoryV2_positionInfoSourceWithParameters(QGeoPositionInfoSourceFactoryV2*, intptr_t, QObject*, struct miqt_map /* of struct miqt_string to QVariant* */ );
 QGeoSatelliteInfoSource* miqt_exec_callback_QGeoPositionInfoSourceFactoryV2_satelliteInfoSourceWithParameters(QGeoPositionInfoSourceFactoryV2*, intptr_t, QObject*, struct miqt_map /* of struct miqt_string to QVariant* */ );
 QGeoAreaMonitorSource* miqt_exec_callback_QGeoPositionInfoSourceFactoryV2_areaMonitorWithParameters(QGeoPositionInfoSourceFactoryV2*, intptr_t, QObject*, struct miqt_map /* of struct miqt_string to QVariant* */ );
@@ -36,44 +40,44 @@ public:
 	virtual ~MiqtVirtualQGeoPositionInfoSourceFactory() override = default;
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__positionInfoSource = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QGeoPositionInfoSourceFactory> handle__positionInfoSource;
 
 	// Subclass to allow providing a Go implementation
 	virtual QGeoPositionInfoSource* positionInfoSource(QObject* parent) override {
-		if (handle__positionInfoSource == 0) {
+		if (!handle__positionInfoSource) {
 			return nullptr; // Pure virtual, there is no base we can call
 		}
 
 		QObject* sigval1 = parent;
-		QGeoPositionInfoSource* callback_return_value = miqt_exec_callback_QGeoPositionInfoSourceFactory_positionInfoSource(this, handle__positionInfoSource, sigval1);
+		QGeoPositionInfoSource* callback_return_value = miqt_exec_callback_QGeoPositionInfoSourceFactory_positionInfoSource(this, handle__positionInfoSource.value(), sigval1);
 		return callback_return_value;
 	}
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__satelliteInfoSource = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QGeoPositionInfoSourceFactory> handle__satelliteInfoSource;
 
 	// Subclass to allow providing a Go implementation
 	virtual QGeoSatelliteInfoSource* satelliteInfoSource(QObject* parent) override {
-		if (handle__satelliteInfoSource == 0) {
+		if (!handle__satelliteInfoSource) {
 			return nullptr; // Pure virtual, there is no base we can call
 		}
 
 		QObject* sigval1 = parent;
-		QGeoSatelliteInfoSource* callback_return_value = miqt_exec_callback_QGeoPositionInfoSourceFactory_satelliteInfoSource(this, handle__satelliteInfoSource, sigval1);
+		QGeoSatelliteInfoSource* callback_return_value = miqt_exec_callback_QGeoPositionInfoSourceFactory_satelliteInfoSource(this, handle__satelliteInfoSource.value(), sigval1);
 		return callback_return_value;
 	}
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__areaMonitor = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QGeoPositionInfoSourceFactory> handle__areaMonitor;
 
 	// Subclass to allow providing a Go implementation
 	virtual QGeoAreaMonitorSource* areaMonitor(QObject* parent) override {
-		if (handle__areaMonitor == 0) {
+		if (!handle__areaMonitor) {
 			return nullptr; // Pure virtual, there is no base we can call
 		}
 
 		QObject* sigval1 = parent;
-		QGeoAreaMonitorSource* callback_return_value = miqt_exec_callback_QGeoPositionInfoSourceFactory_areaMonitor(this, handle__areaMonitor, sigval1);
+		QGeoAreaMonitorSource* callback_return_value = miqt_exec_callback_QGeoPositionInfoSourceFactory_areaMonitor(this, handle__areaMonitor.value(), sigval1);
 		return callback_return_value;
 	}
 
@@ -100,32 +104,35 @@ void QGeoPositionInfoSourceFactory_operatorAssign(QGeoPositionInfoSourceFactory*
 }
 
 bool QGeoPositionInfoSourceFactory_override_virtual_positionInfoSource(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QGeoPositionInfoSourceFactory> slot_handle(slot);
 	MiqtVirtualQGeoPositionInfoSourceFactory* self_cast = dynamic_cast<MiqtVirtualQGeoPositionInfoSourceFactory*>( (QGeoPositionInfoSourceFactory*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__positionInfoSource = slot;
+	self_cast->handle__positionInfoSource = std::move(slot_handle);
 	return true;
 }
 
 bool QGeoPositionInfoSourceFactory_override_virtual_satelliteInfoSource(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QGeoPositionInfoSourceFactory> slot_handle(slot);
 	MiqtVirtualQGeoPositionInfoSourceFactory* self_cast = dynamic_cast<MiqtVirtualQGeoPositionInfoSourceFactory*>( (QGeoPositionInfoSourceFactory*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__satelliteInfoSource = slot;
+	self_cast->handle__satelliteInfoSource = std::move(slot_handle);
 	return true;
 }
 
 bool QGeoPositionInfoSourceFactory_override_virtual_areaMonitor(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QGeoPositionInfoSourceFactory> slot_handle(slot);
 	MiqtVirtualQGeoPositionInfoSourceFactory* self_cast = dynamic_cast<MiqtVirtualQGeoPositionInfoSourceFactory*>( (QGeoPositionInfoSourceFactory*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__areaMonitor = slot;
+	self_cast->handle__areaMonitor = std::move(slot_handle);
 	return true;
 }
 
@@ -141,11 +148,11 @@ public:
 	virtual ~MiqtVirtualQGeoPositionInfoSourceFactoryV2() override = default;
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__positionInfoSourceWithParameters = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QGeoPositionInfoSourceFactoryV2> handle__positionInfoSourceWithParameters;
 
 	// Subclass to allow providing a Go implementation
 	virtual QGeoPositionInfoSource* positionInfoSourceWithParameters(QObject* parent, const QVariantMap& parameters) override {
-		if (handle__positionInfoSourceWithParameters == 0) {
+		if (!handle__positionInfoSourceWithParameters) {
 			return nullptr; // Pure virtual, there is no base we can call
 		}
 
@@ -172,16 +179,16 @@ public:
 		parameters_out.keys = static_cast<void*>(parameters_karr);
 		parameters_out.values = static_cast<void*>(parameters_varr);
 		struct miqt_map /* of struct miqt_string to QVariant* */  sigval2 = parameters_out;
-		QGeoPositionInfoSource* callback_return_value = miqt_exec_callback_QGeoPositionInfoSourceFactoryV2_positionInfoSourceWithParameters(this, handle__positionInfoSourceWithParameters, sigval1, sigval2);
+		QGeoPositionInfoSource* callback_return_value = miqt_exec_callback_QGeoPositionInfoSourceFactoryV2_positionInfoSourceWithParameters(this, handle__positionInfoSourceWithParameters.value(), sigval1, sigval2);
 		return callback_return_value;
 	}
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__satelliteInfoSourceWithParameters = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QGeoPositionInfoSourceFactoryV2> handle__satelliteInfoSourceWithParameters;
 
 	// Subclass to allow providing a Go implementation
 	virtual QGeoSatelliteInfoSource* satelliteInfoSourceWithParameters(QObject* parent, const QVariantMap& parameters) override {
-		if (handle__satelliteInfoSourceWithParameters == 0) {
+		if (!handle__satelliteInfoSourceWithParameters) {
 			return nullptr; // Pure virtual, there is no base we can call
 		}
 
@@ -208,16 +215,16 @@ public:
 		parameters_out.keys = static_cast<void*>(parameters_karr);
 		parameters_out.values = static_cast<void*>(parameters_varr);
 		struct miqt_map /* of struct miqt_string to QVariant* */  sigval2 = parameters_out;
-		QGeoSatelliteInfoSource* callback_return_value = miqt_exec_callback_QGeoPositionInfoSourceFactoryV2_satelliteInfoSourceWithParameters(this, handle__satelliteInfoSourceWithParameters, sigval1, sigval2);
+		QGeoSatelliteInfoSource* callback_return_value = miqt_exec_callback_QGeoPositionInfoSourceFactoryV2_satelliteInfoSourceWithParameters(this, handle__satelliteInfoSourceWithParameters.value(), sigval1, sigval2);
 		return callback_return_value;
 	}
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__areaMonitorWithParameters = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QGeoPositionInfoSourceFactoryV2> handle__areaMonitorWithParameters;
 
 	// Subclass to allow providing a Go implementation
 	virtual QGeoAreaMonitorSource* areaMonitorWithParameters(QObject* parent, const QVariantMap& parameters) override {
-		if (handle__areaMonitorWithParameters == 0) {
+		if (!handle__areaMonitorWithParameters) {
 			return nullptr; // Pure virtual, there is no base we can call
 		}
 
@@ -244,49 +251,49 @@ public:
 		parameters_out.keys = static_cast<void*>(parameters_karr);
 		parameters_out.values = static_cast<void*>(parameters_varr);
 		struct miqt_map /* of struct miqt_string to QVariant* */  sigval2 = parameters_out;
-		QGeoAreaMonitorSource* callback_return_value = miqt_exec_callback_QGeoPositionInfoSourceFactoryV2_areaMonitorWithParameters(this, handle__areaMonitorWithParameters, sigval1, sigval2);
+		QGeoAreaMonitorSource* callback_return_value = miqt_exec_callback_QGeoPositionInfoSourceFactoryV2_areaMonitorWithParameters(this, handle__areaMonitorWithParameters.value(), sigval1, sigval2);
 		return callback_return_value;
 	}
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__positionInfoSource = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QGeoPositionInfoSourceFactoryV2> handle__positionInfoSource;
 
 	// Subclass to allow providing a Go implementation
 	virtual QGeoPositionInfoSource* positionInfoSource(QObject* parent) override {
-		if (handle__positionInfoSource == 0) {
+		if (!handle__positionInfoSource) {
 			return nullptr; // Pure virtual, there is no base we can call
 		}
 
 		QObject* sigval1 = parent;
-		QGeoPositionInfoSource* callback_return_value = miqt_exec_callback_QGeoPositionInfoSourceFactoryV2_positionInfoSource(this, handle__positionInfoSource, sigval1);
+		QGeoPositionInfoSource* callback_return_value = miqt_exec_callback_QGeoPositionInfoSourceFactoryV2_positionInfoSource(this, handle__positionInfoSource.value(), sigval1);
 		return callback_return_value;
 	}
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__satelliteInfoSource = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QGeoPositionInfoSourceFactoryV2> handle__satelliteInfoSource;
 
 	// Subclass to allow providing a Go implementation
 	virtual QGeoSatelliteInfoSource* satelliteInfoSource(QObject* parent) override {
-		if (handle__satelliteInfoSource == 0) {
+		if (!handle__satelliteInfoSource) {
 			return nullptr; // Pure virtual, there is no base we can call
 		}
 
 		QObject* sigval1 = parent;
-		QGeoSatelliteInfoSource* callback_return_value = miqt_exec_callback_QGeoPositionInfoSourceFactoryV2_satelliteInfoSource(this, handle__satelliteInfoSource, sigval1);
+		QGeoSatelliteInfoSource* callback_return_value = miqt_exec_callback_QGeoPositionInfoSourceFactoryV2_satelliteInfoSource(this, handle__satelliteInfoSource.value(), sigval1);
 		return callback_return_value;
 	}
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__areaMonitor = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QGeoPositionInfoSourceFactoryV2> handle__areaMonitor;
 
 	// Subclass to allow providing a Go implementation
 	virtual QGeoAreaMonitorSource* areaMonitor(QObject* parent) override {
-		if (handle__areaMonitor == 0) {
+		if (!handle__areaMonitor) {
 			return nullptr; // Pure virtual, there is no base we can call
 		}
 
 		QObject* sigval1 = parent;
-		QGeoAreaMonitorSource* callback_return_value = miqt_exec_callback_QGeoPositionInfoSourceFactoryV2_areaMonitor(this, handle__areaMonitor, sigval1);
+		QGeoAreaMonitorSource* callback_return_value = miqt_exec_callback_QGeoPositionInfoSourceFactoryV2_areaMonitor(this, handle__areaMonitor.value(), sigval1);
 		return callback_return_value;
 	}
 
@@ -338,62 +345,68 @@ void QGeoPositionInfoSourceFactoryV2_operatorAssign(QGeoPositionInfoSourceFactor
 }
 
 bool QGeoPositionInfoSourceFactoryV2_override_virtual_positionInfoSourceWithParameters(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QGeoPositionInfoSourceFactoryV2> slot_handle(slot);
 	MiqtVirtualQGeoPositionInfoSourceFactoryV2* self_cast = dynamic_cast<MiqtVirtualQGeoPositionInfoSourceFactoryV2*>( (QGeoPositionInfoSourceFactoryV2*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__positionInfoSourceWithParameters = slot;
+	self_cast->handle__positionInfoSourceWithParameters = std::move(slot_handle);
 	return true;
 }
 
 bool QGeoPositionInfoSourceFactoryV2_override_virtual_satelliteInfoSourceWithParameters(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QGeoPositionInfoSourceFactoryV2> slot_handle(slot);
 	MiqtVirtualQGeoPositionInfoSourceFactoryV2* self_cast = dynamic_cast<MiqtVirtualQGeoPositionInfoSourceFactoryV2*>( (QGeoPositionInfoSourceFactoryV2*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__satelliteInfoSourceWithParameters = slot;
+	self_cast->handle__satelliteInfoSourceWithParameters = std::move(slot_handle);
 	return true;
 }
 
 bool QGeoPositionInfoSourceFactoryV2_override_virtual_areaMonitorWithParameters(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QGeoPositionInfoSourceFactoryV2> slot_handle(slot);
 	MiqtVirtualQGeoPositionInfoSourceFactoryV2* self_cast = dynamic_cast<MiqtVirtualQGeoPositionInfoSourceFactoryV2*>( (QGeoPositionInfoSourceFactoryV2*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__areaMonitorWithParameters = slot;
+	self_cast->handle__areaMonitorWithParameters = std::move(slot_handle);
 	return true;
 }
 
 bool QGeoPositionInfoSourceFactoryV2_override_virtual_positionInfoSource(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QGeoPositionInfoSourceFactoryV2> slot_handle(slot);
 	MiqtVirtualQGeoPositionInfoSourceFactoryV2* self_cast = dynamic_cast<MiqtVirtualQGeoPositionInfoSourceFactoryV2*>( (QGeoPositionInfoSourceFactoryV2*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__positionInfoSource = slot;
+	self_cast->handle__positionInfoSource = std::move(slot_handle);
 	return true;
 }
 
 bool QGeoPositionInfoSourceFactoryV2_override_virtual_satelliteInfoSource(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QGeoPositionInfoSourceFactoryV2> slot_handle(slot);
 	MiqtVirtualQGeoPositionInfoSourceFactoryV2* self_cast = dynamic_cast<MiqtVirtualQGeoPositionInfoSourceFactoryV2*>( (QGeoPositionInfoSourceFactoryV2*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__satelliteInfoSource = slot;
+	self_cast->handle__satelliteInfoSource = std::move(slot_handle);
 	return true;
 }
 
 bool QGeoPositionInfoSourceFactoryV2_override_virtual_areaMonitor(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QGeoPositionInfoSourceFactoryV2> slot_handle(slot);
 	MiqtVirtualQGeoPositionInfoSourceFactoryV2* self_cast = dynamic_cast<MiqtVirtualQGeoPositionInfoSourceFactoryV2*>( (QGeoPositionInfoSourceFactoryV2*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__areaMonitor = slot;
+	self_cast->handle__areaMonitor = std::move(slot_handle);
 	return true;
 }
 

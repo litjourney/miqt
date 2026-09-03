@@ -1,3 +1,5 @@
+#include <memory>
+#include <utility>
 #include <QChildEvent>
 #include <QDrag>
 #include <QEvent>
@@ -18,6 +20,7 @@
 extern "C" {
 #endif
 
+void miqt_exec_callback_handle_release_QDrag(intptr_t);
 void miqt_exec_callback_QDrag_actionChanged(intptr_t, int);
 void miqt_exec_callback_QDrag_targetChanged(intptr_t, QObject*);
 bool miqt_exec_callback_QDrag_event(QDrag*, intptr_t, QEvent*);
@@ -39,95 +42,95 @@ public:
 	virtual ~MiqtVirtualQDrag() override = default;
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__event = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QDrag> handle__event;
 
 	// Subclass to allow providing a Go implementation
 	virtual bool event(QEvent* event) override {
-		if (handle__event == 0) {
+		if (!handle__event) {
 			return QDrag::event(event);
 		}
 
 		QEvent* sigval1 = event;
-		bool callback_return_value = miqt_exec_callback_QDrag_event(this, handle__event, sigval1);
+		bool callback_return_value = miqt_exec_callback_QDrag_event(this, handle__event.value(), sigval1);
 		return callback_return_value;
 	}
 
 	friend bool QDrag_virtualbase_event(void* self, QEvent* event);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__eventFilter = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QDrag> handle__eventFilter;
 
 	// Subclass to allow providing a Go implementation
 	virtual bool eventFilter(QObject* watched, QEvent* event) override {
-		if (handle__eventFilter == 0) {
+		if (!handle__eventFilter) {
 			return QDrag::eventFilter(watched, event);
 		}
 
 		QObject* sigval1 = watched;
 		QEvent* sigval2 = event;
-		bool callback_return_value = miqt_exec_callback_QDrag_eventFilter(this, handle__eventFilter, sigval1, sigval2);
+		bool callback_return_value = miqt_exec_callback_QDrag_eventFilter(this, handle__eventFilter.value(), sigval1, sigval2);
 		return callback_return_value;
 	}
 
 	friend bool QDrag_virtualbase_eventFilter(void* self, QObject* watched, QEvent* event);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__timerEvent = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QDrag> handle__timerEvent;
 
 	// Subclass to allow providing a Go implementation
 	virtual void timerEvent(QTimerEvent* event) override {
-		if (handle__timerEvent == 0) {
+		if (!handle__timerEvent) {
 			QDrag::timerEvent(event);
 			return;
 		}
 
 		QTimerEvent* sigval1 = event;
-		miqt_exec_callback_QDrag_timerEvent(this, handle__timerEvent, sigval1);
+		miqt_exec_callback_QDrag_timerEvent(this, handle__timerEvent.value(), sigval1);
 
 	}
 
 	friend void QDrag_virtualbase_timerEvent(void* self, QTimerEvent* event);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__childEvent = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QDrag> handle__childEvent;
 
 	// Subclass to allow providing a Go implementation
 	virtual void childEvent(QChildEvent* event) override {
-		if (handle__childEvent == 0) {
+		if (!handle__childEvent) {
 			QDrag::childEvent(event);
 			return;
 		}
 
 		QChildEvent* sigval1 = event;
-		miqt_exec_callback_QDrag_childEvent(this, handle__childEvent, sigval1);
+		miqt_exec_callback_QDrag_childEvent(this, handle__childEvent.value(), sigval1);
 
 	}
 
 	friend void QDrag_virtualbase_childEvent(void* self, QChildEvent* event);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__customEvent = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QDrag> handle__customEvent;
 
 	// Subclass to allow providing a Go implementation
 	virtual void customEvent(QEvent* event) override {
-		if (handle__customEvent == 0) {
+		if (!handle__customEvent) {
 			QDrag::customEvent(event);
 			return;
 		}
 
 		QEvent* sigval1 = event;
-		miqt_exec_callback_QDrag_customEvent(this, handle__customEvent, sigval1);
+		miqt_exec_callback_QDrag_customEvent(this, handle__customEvent.value(), sigval1);
 
 	}
 
 	friend void QDrag_virtualbase_customEvent(void* self, QEvent* event);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__connectNotify = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QDrag> handle__connectNotify;
 
 	// Subclass to allow providing a Go implementation
 	virtual void connectNotify(const QMetaMethod& signal) override {
-		if (handle__connectNotify == 0) {
+		if (!handle__connectNotify) {
 			QDrag::connectNotify(signal);
 			return;
 		}
@@ -135,18 +138,18 @@ public:
 		const QMetaMethod& signal_ret = signal;
 		// Cast returned reference into pointer
 		QMetaMethod* sigval1 = const_cast<QMetaMethod*>(&signal_ret);
-		miqt_exec_callback_QDrag_connectNotify(this, handle__connectNotify, sigval1);
+		miqt_exec_callback_QDrag_connectNotify(this, handle__connectNotify.value(), sigval1);
 
 	}
 
 	friend void QDrag_virtualbase_connectNotify(void* self, QMetaMethod* signal);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__disconnectNotify = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QDrag> handle__disconnectNotify;
 
 	// Subclass to allow providing a Go implementation
 	virtual void disconnectNotify(const QMetaMethod& signal) override {
-		if (handle__disconnectNotify == 0) {
+		if (!handle__disconnectNotify) {
 			QDrag::disconnectNotify(signal);
 			return;
 		}
@@ -154,7 +157,7 @@ public:
 		const QMetaMethod& signal_ret = signal;
 		// Cast returned reference into pointer
 		QMetaMethod* sigval1 = const_cast<QMetaMethod*>(&signal_ret);
-		miqt_exec_callback_QDrag_disconnectNotify(this, handle__disconnectNotify, sigval1);
+		miqt_exec_callback_QDrag_disconnectNotify(this, handle__disconnectNotify.value(), sigval1);
 
 	}
 
@@ -278,23 +281,27 @@ void QDrag_actionChanged(QDrag* self, int action) {
 	self->actionChanged(static_cast<Qt::DropAction>(action));
 }
 
-void QDrag_connect_actionChanged(QDrag* self, intptr_t slot) {
-	QDrag::connect(self, static_cast<void (QDrag::*)(Qt::DropAction)>(&QDrag::actionChanged), self, [=](Qt::DropAction action) {
+void* QDrag_connect_actionChanged(QDrag* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QDrag>>(slot);
+	return new QMetaObject::Connection(QDrag::connect(self, static_cast<void (QDrag::*)(Qt::DropAction)>(&QDrag::actionChanged), self, [slot_handle](Qt::DropAction action) {
+		intptr_t slot = slot_handle->value();
 		Qt::DropAction action_ret = action;
 		int sigval1 = static_cast<int>(action_ret);
 		miqt_exec_callback_QDrag_actionChanged(slot, sigval1);
-	});
+	}));
 }
 
 void QDrag_targetChanged(QDrag* self, QObject* newTarget) {
 	self->targetChanged(newTarget);
 }
 
-void QDrag_connect_targetChanged(QDrag* self, intptr_t slot) {
-	QDrag::connect(self, static_cast<void (QDrag::*)(QObject*)>(&QDrag::targetChanged), self, [=](QObject* newTarget) {
+void* QDrag_connect_targetChanged(QDrag* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QDrag>>(slot);
+	return new QMetaObject::Connection(QDrag::connect(self, static_cast<void (QDrag::*)(QObject*)>(&QDrag::targetChanged), self, [slot_handle](QObject* newTarget) {
+		intptr_t slot = slot_handle->value();
 		QObject* sigval1 = newTarget;
 		miqt_exec_callback_QDrag_targetChanged(slot, sigval1);
-	});
+	}));
 }
 
 struct miqt_string QDrag_tr2(const char* s, const char* c) {
@@ -352,12 +359,13 @@ int QDrag_execWithSupportedActions(QDrag* self, int supportedActions) {
 }
 
 bool QDrag_override_virtual_event(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QDrag> slot_handle(slot);
 	MiqtVirtualQDrag* self_cast = dynamic_cast<MiqtVirtualQDrag*>( (QDrag*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__event = slot;
+	self_cast->handle__event = std::move(slot_handle);
 	return true;
 }
 
@@ -366,12 +374,13 @@ bool QDrag_virtualbase_event(void* self, QEvent* event) {
 }
 
 bool QDrag_override_virtual_eventFilter(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QDrag> slot_handle(slot);
 	MiqtVirtualQDrag* self_cast = dynamic_cast<MiqtVirtualQDrag*>( (QDrag*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__eventFilter = slot;
+	self_cast->handle__eventFilter = std::move(slot_handle);
 	return true;
 }
 
@@ -380,12 +389,13 @@ bool QDrag_virtualbase_eventFilter(void* self, QObject* watched, QEvent* event) 
 }
 
 bool QDrag_override_virtual_timerEvent(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QDrag> slot_handle(slot);
 	MiqtVirtualQDrag* self_cast = dynamic_cast<MiqtVirtualQDrag*>( (QDrag*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__timerEvent = slot;
+	self_cast->handle__timerEvent = std::move(slot_handle);
 	return true;
 }
 
@@ -394,12 +404,13 @@ void QDrag_virtualbase_timerEvent(void* self, QTimerEvent* event) {
 }
 
 bool QDrag_override_virtual_childEvent(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QDrag> slot_handle(slot);
 	MiqtVirtualQDrag* self_cast = dynamic_cast<MiqtVirtualQDrag*>( (QDrag*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__childEvent = slot;
+	self_cast->handle__childEvent = std::move(slot_handle);
 	return true;
 }
 
@@ -408,12 +419,13 @@ void QDrag_virtualbase_childEvent(void* self, QChildEvent* event) {
 }
 
 bool QDrag_override_virtual_customEvent(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QDrag> slot_handle(slot);
 	MiqtVirtualQDrag* self_cast = dynamic_cast<MiqtVirtualQDrag*>( (QDrag*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__customEvent = slot;
+	self_cast->handle__customEvent = std::move(slot_handle);
 	return true;
 }
 
@@ -422,12 +434,13 @@ void QDrag_virtualbase_customEvent(void* self, QEvent* event) {
 }
 
 bool QDrag_override_virtual_connectNotify(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QDrag> slot_handle(slot);
 	MiqtVirtualQDrag* self_cast = dynamic_cast<MiqtVirtualQDrag*>( (QDrag*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__connectNotify = slot;
+	self_cast->handle__connectNotify = std::move(slot_handle);
 	return true;
 }
 
@@ -436,12 +449,13 @@ void QDrag_virtualbase_connectNotify(void* self, QMetaMethod* signal) {
 }
 
 bool QDrag_override_virtual_disconnectNotify(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QDrag> slot_handle(slot);
 	MiqtVirtualQDrag* self_cast = dynamic_cast<MiqtVirtualQDrag*>( (QDrag*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__disconnectNotify = slot;
+	self_cast->handle__disconnectNotify = std::move(slot_handle);
 	return true;
 }
 

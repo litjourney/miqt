@@ -15,6 +15,11 @@ import (
 	"unsafe"
 )
 
+//export miqt_exec_callback_handle_release_QAudioInput
+func miqt_exec_callback_handle_release_QAudioInput(cb C.intptr_t) {
+	cgo.Handle(cb).Delete()
+}
+
 type QAudioInput struct {
 	h *C.QAudioInput
 	*qt6.QObject
@@ -123,8 +128,10 @@ func (this *QAudioInput) SetMuted(muted bool) {
 func (this *QAudioInput) DeviceChanged() {
 	C.QAudioInput_deviceChanged(this.h)
 }
-func (this *QAudioInput) OnDeviceChanged(slot func()) {
-	C.QAudioInput_connect_deviceChanged(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QAudioInput) OnDeviceChanged(slot func()) *qt6.SignalConnection {
+	_goptr := qt6.UnsafeNewQMetaObject__Connection(C.QAudioInput_connect_deviceChanged(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QAudioInput_deviceChanged
@@ -140,8 +147,10 @@ func miqt_exec_callback_QAudioInput_deviceChanged(cb C.intptr_t) {
 func (this *QAudioInput) VolumeChanged(volume float32) {
 	C.QAudioInput_volumeChanged(this.h, (C.float)(volume))
 }
-func (this *QAudioInput) OnVolumeChanged(slot func(volume float32)) {
-	C.QAudioInput_connect_volumeChanged(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QAudioInput) OnVolumeChanged(slot func(volume float32)) *qt6.SignalConnection {
+	_goptr := qt6.UnsafeNewQMetaObject__Connection(C.QAudioInput_connect_volumeChanged(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QAudioInput_volumeChanged
@@ -160,8 +169,10 @@ func miqt_exec_callback_QAudioInput_volumeChanged(cb C.intptr_t, volume C.float)
 func (this *QAudioInput) MutedChanged(muted bool) {
 	C.QAudioInput_mutedChanged(this.h, (C.bool)(muted))
 }
-func (this *QAudioInput) OnMutedChanged(slot func(muted bool)) {
-	C.QAudioInput_connect_mutedChanged(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QAudioInput) OnMutedChanged(slot func(muted bool)) *qt6.SignalConnection {
+	_goptr := qt6.UnsafeNewQMetaObject__Connection(C.QAudioInput_connect_mutedChanged(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QAudioInput_mutedChanged
@@ -263,7 +274,11 @@ func (this *QAudioInput) callVirtualBase_Event(event *qt6.QEvent) bool {
 
 }
 func (this *QAudioInput) OnEvent(slot func(super func(event *qt6.QEvent) bool, event *qt6.QEvent) bool) {
-	ok := C.QAudioInput_override_virtual_event(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QAudioInput_override_virtual_event(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -291,7 +306,11 @@ func (this *QAudioInput) callVirtualBase_EventFilter(watched *qt6.QObject, event
 
 }
 func (this *QAudioInput) OnEventFilter(slot func(super func(watched *qt6.QObject, event *qt6.QEvent) bool, watched *qt6.QObject, event *qt6.QEvent) bool) {
-	ok := C.QAudioInput_override_virtual_eventFilter(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QAudioInput_override_virtual_eventFilter(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -321,7 +340,11 @@ func (this *QAudioInput) callVirtualBase_TimerEvent(event *qt6.QTimerEvent) {
 
 }
 func (this *QAudioInput) OnTimerEvent(slot func(super func(event *qt6.QTimerEvent), event *qt6.QTimerEvent)) {
-	ok := C.QAudioInput_override_virtual_timerEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QAudioInput_override_virtual_timerEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -347,7 +370,11 @@ func (this *QAudioInput) callVirtualBase_ChildEvent(event *qt6.QChildEvent) {
 
 }
 func (this *QAudioInput) OnChildEvent(slot func(super func(event *qt6.QChildEvent), event *qt6.QChildEvent)) {
-	ok := C.QAudioInput_override_virtual_childEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QAudioInput_override_virtual_childEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -373,7 +400,11 @@ func (this *QAudioInput) callVirtualBase_CustomEvent(event *qt6.QEvent) {
 
 }
 func (this *QAudioInput) OnCustomEvent(slot func(super func(event *qt6.QEvent), event *qt6.QEvent)) {
-	ok := C.QAudioInput_override_virtual_customEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QAudioInput_override_virtual_customEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -399,7 +430,11 @@ func (this *QAudioInput) callVirtualBase_ConnectNotify(signal *qt6.QMetaMethod) 
 
 }
 func (this *QAudioInput) OnConnectNotify(slot func(super func(signal *qt6.QMetaMethod), signal *qt6.QMetaMethod)) {
-	ok := C.QAudioInput_override_virtual_connectNotify(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QAudioInput_override_virtual_connectNotify(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -425,7 +460,11 @@ func (this *QAudioInput) callVirtualBase_DisconnectNotify(signal *qt6.QMetaMetho
 
 }
 func (this *QAudioInput) OnDisconnectNotify(slot func(super func(signal *qt6.QMetaMethod), signal *qt6.QMetaMethod)) {
-	ok := C.QAudioInput_override_virtual_disconnectNotify(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QAudioInput_override_virtual_disconnectNotify(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}

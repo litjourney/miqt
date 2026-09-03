@@ -54,6 +54,11 @@ const (
 	QNetworkReply__UnknownServerError                QNetworkReply__NetworkError = 499
 )
 
+//export miqt_exec_callback_handle_release_QNetworkReply
+func miqt_exec_callback_handle_release_QNetworkReply(cb C.intptr_t) {
+	cgo.Handle(cb).Delete()
+}
+
 type QNetworkReply struct {
 	h *C.QNetworkReply
 	*qt6.QIODevice
@@ -268,8 +273,10 @@ func (this *QNetworkReply) IgnoreSslErrors2() {
 func (this *QNetworkReply) SocketStartedConnecting() {
 	C.QNetworkReply_socketStartedConnecting(this.h)
 }
-func (this *QNetworkReply) OnSocketStartedConnecting(slot func()) {
-	C.QNetworkReply_connect_socketStartedConnecting(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QNetworkReply) OnSocketStartedConnecting(slot func()) *qt6.SignalConnection {
+	_goptr := qt6.UnsafeNewQMetaObject__Connection(C.QNetworkReply_connect_socketStartedConnecting(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QNetworkReply_socketStartedConnecting
@@ -285,8 +292,10 @@ func miqt_exec_callback_QNetworkReply_socketStartedConnecting(cb C.intptr_t) {
 func (this *QNetworkReply) RequestSent() {
 	C.QNetworkReply_requestSent(this.h)
 }
-func (this *QNetworkReply) OnRequestSent(slot func()) {
-	C.QNetworkReply_connect_requestSent(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QNetworkReply) OnRequestSent(slot func()) *qt6.SignalConnection {
+	_goptr := qt6.UnsafeNewQMetaObject__Connection(C.QNetworkReply_connect_requestSent(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QNetworkReply_requestSent
@@ -302,8 +311,10 @@ func miqt_exec_callback_QNetworkReply_requestSent(cb C.intptr_t) {
 func (this *QNetworkReply) MetaDataChanged() {
 	C.QNetworkReply_metaDataChanged(this.h)
 }
-func (this *QNetworkReply) OnMetaDataChanged(slot func()) {
-	C.QNetworkReply_connect_metaDataChanged(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QNetworkReply) OnMetaDataChanged(slot func()) *qt6.SignalConnection {
+	_goptr := qt6.UnsafeNewQMetaObject__Connection(C.QNetworkReply_connect_metaDataChanged(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QNetworkReply_metaDataChanged
@@ -319,8 +330,10 @@ func miqt_exec_callback_QNetworkReply_metaDataChanged(cb C.intptr_t) {
 func (this *QNetworkReply) Finished() {
 	C.QNetworkReply_finished(this.h)
 }
-func (this *QNetworkReply) OnFinished(slot func()) {
-	C.QNetworkReply_connect_finished(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QNetworkReply) OnFinished(slot func()) *qt6.SignalConnection {
+	_goptr := qt6.UnsafeNewQMetaObject__Connection(C.QNetworkReply_connect_finished(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QNetworkReply_finished
@@ -336,8 +349,10 @@ func miqt_exec_callback_QNetworkReply_finished(cb C.intptr_t) {
 func (this *QNetworkReply) ErrorOccurred(param1 QNetworkReply__NetworkError) {
 	C.QNetworkReply_errorOccurred(this.h, (C.int)(param1))
 }
-func (this *QNetworkReply) OnErrorOccurred(slot func(param1 QNetworkReply__NetworkError)) {
-	C.QNetworkReply_connect_errorOccurred(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QNetworkReply) OnErrorOccurred(slot func(param1 QNetworkReply__NetworkError)) *qt6.SignalConnection {
+	_goptr := qt6.UnsafeNewQMetaObject__Connection(C.QNetworkReply_connect_errorOccurred(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QNetworkReply_errorOccurred
@@ -356,8 +371,10 @@ func miqt_exec_callback_QNetworkReply_errorOccurred(cb C.intptr_t, param1 C.int)
 func (this *QNetworkReply) Encrypted() {
 	C.QNetworkReply_encrypted(this.h)
 }
-func (this *QNetworkReply) OnEncrypted(slot func()) {
-	C.QNetworkReply_connect_encrypted(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QNetworkReply) OnEncrypted(slot func()) *qt6.SignalConnection {
+	_goptr := qt6.UnsafeNewQMetaObject__Connection(C.QNetworkReply_connect_encrypted(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QNetworkReply_encrypted
@@ -379,8 +396,10 @@ func (this *QNetworkReply) SslErrors(errors []QSslError) {
 	errors_ma := C.struct_miqt_array{len: C.size_t(len(errors)), data: unsafe.Pointer(errors_CArray)}
 	C.QNetworkReply_sslErrors(this.h, errors_ma)
 }
-func (this *QNetworkReply) OnSslErrors(slot func(errors []QSslError)) {
-	C.QNetworkReply_connect_sslErrors(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QNetworkReply) OnSslErrors(slot func(errors []QSslError)) *qt6.SignalConnection {
+	_goptr := qt6.UnsafeNewQMetaObject__Connection(C.QNetworkReply_connect_sslErrors(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QNetworkReply_sslErrors
@@ -407,8 +426,10 @@ func miqt_exec_callback_QNetworkReply_sslErrors(cb C.intptr_t, errors C.struct_m
 func (this *QNetworkReply) PreSharedKeyAuthenticationRequired(authenticator *QSslPreSharedKeyAuthenticator) {
 	C.QNetworkReply_preSharedKeyAuthenticationRequired(this.h, authenticator.cPointer())
 }
-func (this *QNetworkReply) OnPreSharedKeyAuthenticationRequired(slot func(authenticator *QSslPreSharedKeyAuthenticator)) {
-	C.QNetworkReply_connect_preSharedKeyAuthenticationRequired(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QNetworkReply) OnPreSharedKeyAuthenticationRequired(slot func(authenticator *QSslPreSharedKeyAuthenticator)) *qt6.SignalConnection {
+	_goptr := qt6.UnsafeNewQMetaObject__Connection(C.QNetworkReply_connect_preSharedKeyAuthenticationRequired(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QNetworkReply_preSharedKeyAuthenticationRequired
@@ -427,8 +448,10 @@ func miqt_exec_callback_QNetworkReply_preSharedKeyAuthenticationRequired(cb C.in
 func (this *QNetworkReply) Redirected(url *qt6.QUrl) {
 	C.QNetworkReply_redirected(this.h, (*C.QUrl)(url.UnsafePointer()))
 }
-func (this *QNetworkReply) OnRedirected(slot func(url *qt6.QUrl)) {
-	C.QNetworkReply_connect_redirected(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QNetworkReply) OnRedirected(slot func(url *qt6.QUrl)) *qt6.SignalConnection {
+	_goptr := qt6.UnsafeNewQMetaObject__Connection(C.QNetworkReply_connect_redirected(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QNetworkReply_redirected
@@ -447,8 +470,10 @@ func miqt_exec_callback_QNetworkReply_redirected(cb C.intptr_t, url *C.QUrl) {
 func (this *QNetworkReply) RedirectAllowed() {
 	C.QNetworkReply_redirectAllowed(this.h)
 }
-func (this *QNetworkReply) OnRedirectAllowed(slot func()) {
-	C.QNetworkReply_connect_redirectAllowed(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QNetworkReply) OnRedirectAllowed(slot func()) *qt6.SignalConnection {
+	_goptr := qt6.UnsafeNewQMetaObject__Connection(C.QNetworkReply_connect_redirectAllowed(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QNetworkReply_redirectAllowed
@@ -464,8 +489,10 @@ func miqt_exec_callback_QNetworkReply_redirectAllowed(cb C.intptr_t) {
 func (this *QNetworkReply) UploadProgress(bytesSent int64, bytesTotal int64) {
 	C.QNetworkReply_uploadProgress(this.h, (C.longlong)(bytesSent), (C.longlong)(bytesTotal))
 }
-func (this *QNetworkReply) OnUploadProgress(slot func(bytesSent int64, bytesTotal int64)) {
-	C.QNetworkReply_connect_uploadProgress(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QNetworkReply) OnUploadProgress(slot func(bytesSent int64, bytesTotal int64)) *qt6.SignalConnection {
+	_goptr := qt6.UnsafeNewQMetaObject__Connection(C.QNetworkReply_connect_uploadProgress(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QNetworkReply_uploadProgress
@@ -486,8 +513,10 @@ func miqt_exec_callback_QNetworkReply_uploadProgress(cb C.intptr_t, bytesSent C.
 func (this *QNetworkReply) DownloadProgress(bytesReceived int64, bytesTotal int64) {
 	C.QNetworkReply_downloadProgress(this.h, (C.longlong)(bytesReceived), (C.longlong)(bytesTotal))
 }
-func (this *QNetworkReply) OnDownloadProgress(slot func(bytesReceived int64, bytesTotal int64)) {
-	C.QNetworkReply_connect_downloadProgress(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QNetworkReply) OnDownloadProgress(slot func(bytesReceived int64, bytesTotal int64)) *qt6.SignalConnection {
+	_goptr := qt6.UnsafeNewQMetaObject__Connection(C.QNetworkReply_connect_downloadProgress(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QNetworkReply_downloadProgress

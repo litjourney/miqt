@@ -78,8 +78,8 @@ int QSignalTransition_protectedbase_senderSignalIndex(bool* _dynamic_cast_ok, co
 int QSignalTransition_protectedbase_receivers(bool* _dynamic_cast_ok, const void* self, const char* signal);
 bool QSignalTransition_protectedbase_isSignalConnected(bool* _dynamic_cast_ok, const void* self, QMetaMethod* signal);
 
-void QSignalTransition_connect_senderObjectChanged(QSignalTransition* self, intptr_t slot);
-void QSignalTransition_connect_signalChanged(QSignalTransition* self, intptr_t slot);
+void* QSignalTransition_connect_senderObjectChanged(QSignalTransition* self, intptr_t slot);
+void* QSignalTransition_connect_signalChanged(QSignalTransition* self, intptr_t slot);
 
 void QSignalTransition_delete(QSignalTransition* self);
 

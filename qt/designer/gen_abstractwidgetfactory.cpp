@@ -1,3 +1,5 @@
+#include <memory>
+#include <utility>
 #include <QChildEvent>
 #include <QDesignerFormEditorInterface>
 #include <QDesignerWidgetFactoryInterface>
@@ -18,6 +20,7 @@
 extern "C" {
 #endif
 
+void miqt_exec_callback_handle_release_QDesignerWidgetFactoryInterface(intptr_t);
 QDesignerFormEditorInterface* miqt_exec_callback_QDesignerWidgetFactoryInterface_core(const QDesignerWidgetFactoryInterface*, intptr_t);
 QWidget* miqt_exec_callback_QDesignerWidgetFactoryInterface_containerOfWidget(const QDesignerWidgetFactoryInterface*, intptr_t, QWidget*);
 QWidget* miqt_exec_callback_QDesignerWidgetFactoryInterface_widgetOfContainer(const QDesignerWidgetFactoryInterface*, intptr_t, QWidget*);
@@ -45,52 +48,52 @@ public:
 	virtual ~MiqtVirtualQDesignerWidgetFactoryInterface() override = default;
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__core = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QDesignerWidgetFactoryInterface> handle__core;
 
 	// Subclass to allow providing a Go implementation
 	virtual QDesignerFormEditorInterface* core() const override {
-		if (handle__core == 0) {
+		if (!handle__core) {
 			return nullptr; // Pure virtual, there is no base we can call
 		}
 
-		QDesignerFormEditorInterface* callback_return_value = miqt_exec_callback_QDesignerWidgetFactoryInterface_core(this, handle__core);
+		QDesignerFormEditorInterface* callback_return_value = miqt_exec_callback_QDesignerWidgetFactoryInterface_core(this, handle__core.value());
 		return callback_return_value;
 	}
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__containerOfWidget = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QDesignerWidgetFactoryInterface> handle__containerOfWidget;
 
 	// Subclass to allow providing a Go implementation
 	virtual QWidget* containerOfWidget(QWidget* w) const override {
-		if (handle__containerOfWidget == 0) {
+		if (!handle__containerOfWidget) {
 			return nullptr; // Pure virtual, there is no base we can call
 		}
 
 		QWidget* sigval1 = w;
-		QWidget* callback_return_value = miqt_exec_callback_QDesignerWidgetFactoryInterface_containerOfWidget(this, handle__containerOfWidget, sigval1);
+		QWidget* callback_return_value = miqt_exec_callback_QDesignerWidgetFactoryInterface_containerOfWidget(this, handle__containerOfWidget.value(), sigval1);
 		return callback_return_value;
 	}
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__widgetOfContainer = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QDesignerWidgetFactoryInterface> handle__widgetOfContainer;
 
 	// Subclass to allow providing a Go implementation
 	virtual QWidget* widgetOfContainer(QWidget* w) const override {
-		if (handle__widgetOfContainer == 0) {
+		if (!handle__widgetOfContainer) {
 			return nullptr; // Pure virtual, there is no base we can call
 		}
 
 		QWidget* sigval1 = w;
-		QWidget* callback_return_value = miqt_exec_callback_QDesignerWidgetFactoryInterface_widgetOfContainer(this, handle__widgetOfContainer, sigval1);
+		QWidget* callback_return_value = miqt_exec_callback_QDesignerWidgetFactoryInterface_widgetOfContainer(this, handle__widgetOfContainer.value(), sigval1);
 		return callback_return_value;
 	}
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__createWidget = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QDesignerWidgetFactoryInterface> handle__createWidget;
 
 	// Subclass to allow providing a Go implementation
 	virtual QWidget* createWidget(const QString& name, QWidget* parentWidget) const override {
-		if (handle__createWidget == 0) {
+		if (!handle__createWidget) {
 			return nullptr; // Pure virtual, there is no base we can call
 		}
 
@@ -103,144 +106,144 @@ public:
 		memcpy(name_ms.data, name_b.data(), name_ms.len);
 		struct miqt_string sigval1 = name_ms;
 		QWidget* sigval2 = parentWidget;
-		QWidget* callback_return_value = miqt_exec_callback_QDesignerWidgetFactoryInterface_createWidget(this, handle__createWidget, sigval1, sigval2);
+		QWidget* callback_return_value = miqt_exec_callback_QDesignerWidgetFactoryInterface_createWidget(this, handle__createWidget.value(), sigval1, sigval2);
 		return callback_return_value;
 	}
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__createLayout = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QDesignerWidgetFactoryInterface> handle__createLayout;
 
 	// Subclass to allow providing a Go implementation
 	virtual QLayout* createLayout(QWidget* widget, QLayout* layout, int type) const override {
-		if (handle__createLayout == 0) {
+		if (!handle__createLayout) {
 			return nullptr; // Pure virtual, there is no base we can call
 		}
 
 		QWidget* sigval1 = widget;
 		QLayout* sigval2 = layout;
 		int sigval3 = type;
-		QLayout* callback_return_value = miqt_exec_callback_QDesignerWidgetFactoryInterface_createLayout(this, handle__createLayout, sigval1, sigval2, sigval3);
+		QLayout* callback_return_value = miqt_exec_callback_QDesignerWidgetFactoryInterface_createLayout(this, handle__createLayout.value(), sigval1, sigval2, sigval3);
 		return callback_return_value;
 	}
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__isPassiveInteractor = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QDesignerWidgetFactoryInterface> handle__isPassiveInteractor;
 
 	// Subclass to allow providing a Go implementation
 	virtual bool isPassiveInteractor(QWidget* widget) override {
-		if (handle__isPassiveInteractor == 0) {
+		if (!handle__isPassiveInteractor) {
 			return false; // Pure virtual, there is no base we can call
 		}
 
 		QWidget* sigval1 = widget;
-		bool callback_return_value = miqt_exec_callback_QDesignerWidgetFactoryInterface_isPassiveInteractor(this, handle__isPassiveInteractor, sigval1);
+		bool callback_return_value = miqt_exec_callback_QDesignerWidgetFactoryInterface_isPassiveInteractor(this, handle__isPassiveInteractor.value(), sigval1);
 		return callback_return_value;
 	}
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__initialize = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QDesignerWidgetFactoryInterface> handle__initialize;
 
 	// Subclass to allow providing a Go implementation
 	virtual void initialize(QObject* object) const override {
-		if (handle__initialize == 0) {
+		if (!handle__initialize) {
 			return; // Pure virtual, there is no base we can call
 		}
 
 		QObject* sigval1 = object;
-		miqt_exec_callback_QDesignerWidgetFactoryInterface_initialize(this, handle__initialize, sigval1);
+		miqt_exec_callback_QDesignerWidgetFactoryInterface_initialize(this, handle__initialize.value(), sigval1);
 
 	}
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__event = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QDesignerWidgetFactoryInterface> handle__event;
 
 	// Subclass to allow providing a Go implementation
 	virtual bool event(QEvent* event) override {
-		if (handle__event == 0) {
+		if (!handle__event) {
 			return QDesignerWidgetFactoryInterface::event(event);
 		}
 
 		QEvent* sigval1 = event;
-		bool callback_return_value = miqt_exec_callback_QDesignerWidgetFactoryInterface_event(this, handle__event, sigval1);
+		bool callback_return_value = miqt_exec_callback_QDesignerWidgetFactoryInterface_event(this, handle__event.value(), sigval1);
 		return callback_return_value;
 	}
 
 	friend bool QDesignerWidgetFactoryInterface_virtualbase_event(void* self, QEvent* event);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__eventFilter = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QDesignerWidgetFactoryInterface> handle__eventFilter;
 
 	// Subclass to allow providing a Go implementation
 	virtual bool eventFilter(QObject* watched, QEvent* event) override {
-		if (handle__eventFilter == 0) {
+		if (!handle__eventFilter) {
 			return QDesignerWidgetFactoryInterface::eventFilter(watched, event);
 		}
 
 		QObject* sigval1 = watched;
 		QEvent* sigval2 = event;
-		bool callback_return_value = miqt_exec_callback_QDesignerWidgetFactoryInterface_eventFilter(this, handle__eventFilter, sigval1, sigval2);
+		bool callback_return_value = miqt_exec_callback_QDesignerWidgetFactoryInterface_eventFilter(this, handle__eventFilter.value(), sigval1, sigval2);
 		return callback_return_value;
 	}
 
 	friend bool QDesignerWidgetFactoryInterface_virtualbase_eventFilter(void* self, QObject* watched, QEvent* event);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__timerEvent = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QDesignerWidgetFactoryInterface> handle__timerEvent;
 
 	// Subclass to allow providing a Go implementation
 	virtual void timerEvent(QTimerEvent* event) override {
-		if (handle__timerEvent == 0) {
+		if (!handle__timerEvent) {
 			QDesignerWidgetFactoryInterface::timerEvent(event);
 			return;
 		}
 
 		QTimerEvent* sigval1 = event;
-		miqt_exec_callback_QDesignerWidgetFactoryInterface_timerEvent(this, handle__timerEvent, sigval1);
+		miqt_exec_callback_QDesignerWidgetFactoryInterface_timerEvent(this, handle__timerEvent.value(), sigval1);
 
 	}
 
 	friend void QDesignerWidgetFactoryInterface_virtualbase_timerEvent(void* self, QTimerEvent* event);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__childEvent = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QDesignerWidgetFactoryInterface> handle__childEvent;
 
 	// Subclass to allow providing a Go implementation
 	virtual void childEvent(QChildEvent* event) override {
-		if (handle__childEvent == 0) {
+		if (!handle__childEvent) {
 			QDesignerWidgetFactoryInterface::childEvent(event);
 			return;
 		}
 
 		QChildEvent* sigval1 = event;
-		miqt_exec_callback_QDesignerWidgetFactoryInterface_childEvent(this, handle__childEvent, sigval1);
+		miqt_exec_callback_QDesignerWidgetFactoryInterface_childEvent(this, handle__childEvent.value(), sigval1);
 
 	}
 
 	friend void QDesignerWidgetFactoryInterface_virtualbase_childEvent(void* self, QChildEvent* event);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__customEvent = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QDesignerWidgetFactoryInterface> handle__customEvent;
 
 	// Subclass to allow providing a Go implementation
 	virtual void customEvent(QEvent* event) override {
-		if (handle__customEvent == 0) {
+		if (!handle__customEvent) {
 			QDesignerWidgetFactoryInterface::customEvent(event);
 			return;
 		}
 
 		QEvent* sigval1 = event;
-		miqt_exec_callback_QDesignerWidgetFactoryInterface_customEvent(this, handle__customEvent, sigval1);
+		miqt_exec_callback_QDesignerWidgetFactoryInterface_customEvent(this, handle__customEvent.value(), sigval1);
 
 	}
 
 	friend void QDesignerWidgetFactoryInterface_virtualbase_customEvent(void* self, QEvent* event);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__connectNotify = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QDesignerWidgetFactoryInterface> handle__connectNotify;
 
 	// Subclass to allow providing a Go implementation
 	virtual void connectNotify(const QMetaMethod& signal) override {
-		if (handle__connectNotify == 0) {
+		if (!handle__connectNotify) {
 			QDesignerWidgetFactoryInterface::connectNotify(signal);
 			return;
 		}
@@ -248,18 +251,18 @@ public:
 		const QMetaMethod& signal_ret = signal;
 		// Cast returned reference into pointer
 		QMetaMethod* sigval1 = const_cast<QMetaMethod*>(&signal_ret);
-		miqt_exec_callback_QDesignerWidgetFactoryInterface_connectNotify(this, handle__connectNotify, sigval1);
+		miqt_exec_callback_QDesignerWidgetFactoryInterface_connectNotify(this, handle__connectNotify.value(), sigval1);
 
 	}
 
 	friend void QDesignerWidgetFactoryInterface_virtualbase_connectNotify(void* self, QMetaMethod* signal);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__disconnectNotify = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QDesignerWidgetFactoryInterface> handle__disconnectNotify;
 
 	// Subclass to allow providing a Go implementation
 	virtual void disconnectNotify(const QMetaMethod& signal) override {
-		if (handle__disconnectNotify == 0) {
+		if (!handle__disconnectNotify) {
 			QDesignerWidgetFactoryInterface::disconnectNotify(signal);
 			return;
 		}
@@ -267,7 +270,7 @@ public:
 		const QMetaMethod& signal_ret = signal;
 		// Cast returned reference into pointer
 		QMetaMethod* sigval1 = const_cast<QMetaMethod*>(&signal_ret);
-		miqt_exec_callback_QDesignerWidgetFactoryInterface_disconnectNotify(this, handle__disconnectNotify, sigval1);
+		miqt_exec_callback_QDesignerWidgetFactoryInterface_disconnectNotify(this, handle__disconnectNotify.value(), sigval1);
 
 	}
 
@@ -396,82 +399,90 @@ struct miqt_string QDesignerWidgetFactoryInterface_trUtf83(const char* s, const 
 }
 
 bool QDesignerWidgetFactoryInterface_override_virtual_core(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QDesignerWidgetFactoryInterface> slot_handle(slot);
 	MiqtVirtualQDesignerWidgetFactoryInterface* self_cast = dynamic_cast<MiqtVirtualQDesignerWidgetFactoryInterface*>( (QDesignerWidgetFactoryInterface*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__core = slot;
+	self_cast->handle__core = std::move(slot_handle);
 	return true;
 }
 
 bool QDesignerWidgetFactoryInterface_override_virtual_containerOfWidget(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QDesignerWidgetFactoryInterface> slot_handle(slot);
 	MiqtVirtualQDesignerWidgetFactoryInterface* self_cast = dynamic_cast<MiqtVirtualQDesignerWidgetFactoryInterface*>( (QDesignerWidgetFactoryInterface*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__containerOfWidget = slot;
+	self_cast->handle__containerOfWidget = std::move(slot_handle);
 	return true;
 }
 
 bool QDesignerWidgetFactoryInterface_override_virtual_widgetOfContainer(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QDesignerWidgetFactoryInterface> slot_handle(slot);
 	MiqtVirtualQDesignerWidgetFactoryInterface* self_cast = dynamic_cast<MiqtVirtualQDesignerWidgetFactoryInterface*>( (QDesignerWidgetFactoryInterface*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__widgetOfContainer = slot;
+	self_cast->handle__widgetOfContainer = std::move(slot_handle);
 	return true;
 }
 
 bool QDesignerWidgetFactoryInterface_override_virtual_createWidget(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QDesignerWidgetFactoryInterface> slot_handle(slot);
 	MiqtVirtualQDesignerWidgetFactoryInterface* self_cast = dynamic_cast<MiqtVirtualQDesignerWidgetFactoryInterface*>( (QDesignerWidgetFactoryInterface*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__createWidget = slot;
+	self_cast->handle__createWidget = std::move(slot_handle);
 	return true;
 }
 
 bool QDesignerWidgetFactoryInterface_override_virtual_createLayout(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QDesignerWidgetFactoryInterface> slot_handle(slot);
 	MiqtVirtualQDesignerWidgetFactoryInterface* self_cast = dynamic_cast<MiqtVirtualQDesignerWidgetFactoryInterface*>( (QDesignerWidgetFactoryInterface*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__createLayout = slot;
+	self_cast->handle__createLayout = std::move(slot_handle);
 	return true;
 }
 
 bool QDesignerWidgetFactoryInterface_override_virtual_isPassiveInteractor(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QDesignerWidgetFactoryInterface> slot_handle(slot);
 	MiqtVirtualQDesignerWidgetFactoryInterface* self_cast = dynamic_cast<MiqtVirtualQDesignerWidgetFactoryInterface*>( (QDesignerWidgetFactoryInterface*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__isPassiveInteractor = slot;
+	self_cast->handle__isPassiveInteractor = std::move(slot_handle);
 	return true;
 }
 
 bool QDesignerWidgetFactoryInterface_override_virtual_initialize(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QDesignerWidgetFactoryInterface> slot_handle(slot);
 	MiqtVirtualQDesignerWidgetFactoryInterface* self_cast = dynamic_cast<MiqtVirtualQDesignerWidgetFactoryInterface*>( (QDesignerWidgetFactoryInterface*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__initialize = slot;
+	self_cast->handle__initialize = std::move(slot_handle);
 	return true;
 }
 
 bool QDesignerWidgetFactoryInterface_override_virtual_event(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QDesignerWidgetFactoryInterface> slot_handle(slot);
 	MiqtVirtualQDesignerWidgetFactoryInterface* self_cast = dynamic_cast<MiqtVirtualQDesignerWidgetFactoryInterface*>( (QDesignerWidgetFactoryInterface*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__event = slot;
+	self_cast->handle__event = std::move(slot_handle);
 	return true;
 }
 
@@ -480,12 +491,13 @@ bool QDesignerWidgetFactoryInterface_virtualbase_event(void* self, QEvent* event
 }
 
 bool QDesignerWidgetFactoryInterface_override_virtual_eventFilter(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QDesignerWidgetFactoryInterface> slot_handle(slot);
 	MiqtVirtualQDesignerWidgetFactoryInterface* self_cast = dynamic_cast<MiqtVirtualQDesignerWidgetFactoryInterface*>( (QDesignerWidgetFactoryInterface*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__eventFilter = slot;
+	self_cast->handle__eventFilter = std::move(slot_handle);
 	return true;
 }
 
@@ -494,12 +506,13 @@ bool QDesignerWidgetFactoryInterface_virtualbase_eventFilter(void* self, QObject
 }
 
 bool QDesignerWidgetFactoryInterface_override_virtual_timerEvent(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QDesignerWidgetFactoryInterface> slot_handle(slot);
 	MiqtVirtualQDesignerWidgetFactoryInterface* self_cast = dynamic_cast<MiqtVirtualQDesignerWidgetFactoryInterface*>( (QDesignerWidgetFactoryInterface*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__timerEvent = slot;
+	self_cast->handle__timerEvent = std::move(slot_handle);
 	return true;
 }
 
@@ -508,12 +521,13 @@ void QDesignerWidgetFactoryInterface_virtualbase_timerEvent(void* self, QTimerEv
 }
 
 bool QDesignerWidgetFactoryInterface_override_virtual_childEvent(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QDesignerWidgetFactoryInterface> slot_handle(slot);
 	MiqtVirtualQDesignerWidgetFactoryInterface* self_cast = dynamic_cast<MiqtVirtualQDesignerWidgetFactoryInterface*>( (QDesignerWidgetFactoryInterface*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__childEvent = slot;
+	self_cast->handle__childEvent = std::move(slot_handle);
 	return true;
 }
 
@@ -522,12 +536,13 @@ void QDesignerWidgetFactoryInterface_virtualbase_childEvent(void* self, QChildEv
 }
 
 bool QDesignerWidgetFactoryInterface_override_virtual_customEvent(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QDesignerWidgetFactoryInterface> slot_handle(slot);
 	MiqtVirtualQDesignerWidgetFactoryInterface* self_cast = dynamic_cast<MiqtVirtualQDesignerWidgetFactoryInterface*>( (QDesignerWidgetFactoryInterface*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__customEvent = slot;
+	self_cast->handle__customEvent = std::move(slot_handle);
 	return true;
 }
 
@@ -536,12 +551,13 @@ void QDesignerWidgetFactoryInterface_virtualbase_customEvent(void* self, QEvent*
 }
 
 bool QDesignerWidgetFactoryInterface_override_virtual_connectNotify(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QDesignerWidgetFactoryInterface> slot_handle(slot);
 	MiqtVirtualQDesignerWidgetFactoryInterface* self_cast = dynamic_cast<MiqtVirtualQDesignerWidgetFactoryInterface*>( (QDesignerWidgetFactoryInterface*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__connectNotify = slot;
+	self_cast->handle__connectNotify = std::move(slot_handle);
 	return true;
 }
 
@@ -550,12 +566,13 @@ void QDesignerWidgetFactoryInterface_virtualbase_connectNotify(void* self, QMeta
 }
 
 bool QDesignerWidgetFactoryInterface_override_virtual_disconnectNotify(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QDesignerWidgetFactoryInterface> slot_handle(slot);
 	MiqtVirtualQDesignerWidgetFactoryInterface* self_cast = dynamic_cast<MiqtVirtualQDesignerWidgetFactoryInterface*>( (QDesignerWidgetFactoryInterface*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__disconnectNotify = slot;
+	self_cast->handle__disconnectNotify = std::move(slot_handle);
 	return true;
 }
 

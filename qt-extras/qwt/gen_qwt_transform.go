@@ -14,6 +14,11 @@ import (
 	"unsafe"
 )
 
+//export miqt_exec_callback_handle_release_QwtTransform
+func miqt_exec_callback_handle_release_QwtTransform(cb C.intptr_t) {
+	cgo.Handle(cb).Delete()
+}
+
 type QwtTransform struct {
 	h *C.QwtTransform
 }
@@ -84,7 +89,11 @@ func (this *QwtTransform) callVirtualBase_Bounded(value float64) float64 {
 
 }
 func (this *QwtTransform) OnBounded(slot func(super func(value float64) float64, value float64) float64) {
-	ok := C.QwtTransform_override_virtual_bounded(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QwtTransform_override_virtual_bounded(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -106,7 +115,11 @@ func miqt_exec_callback_QwtTransform_bounded(self *C.QwtTransform, cb C.intptr_t
 
 }
 func (this *QwtTransform) OnTransform(slot func(value float64) float64) {
-	ok := C.QwtTransform_override_virtual_transform(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QwtTransform_override_virtual_transform(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -128,7 +141,11 @@ func miqt_exec_callback_QwtTransform_transform(self *C.QwtTransform, cb C.intptr
 
 }
 func (this *QwtTransform) OnInvTransform(slot func(value float64) float64) {
-	ok := C.QwtTransform_override_virtual_invTransform(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QwtTransform_override_virtual_invTransform(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -150,7 +167,11 @@ func miqt_exec_callback_QwtTransform_invTransform(self *C.QwtTransform, cb C.int
 
 }
 func (this *QwtTransform) OnCopy(slot func() *QwtTransform) {
-	ok := C.QwtTransform_override_virtual_copy(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QwtTransform_override_virtual_copy(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -181,6 +202,11 @@ func (this *QwtTransform) GoGC() {
 		this.Delete()
 		runtime.KeepAlive(this.h)
 	})
+}
+
+//export miqt_exec_callback_handle_release_QwtNullTransform
+func miqt_exec_callback_handle_release_QwtNullTransform(cb C.intptr_t) {
+	cgo.Handle(cb).Delete()
 }
 
 type QwtNullTransform struct {
@@ -253,7 +279,11 @@ func (this *QwtNullTransform) callVirtualBase_Transform(value float64) float64 {
 
 }
 func (this *QwtNullTransform) OnTransform(slot func(super func(value float64) float64, value float64) float64) {
-	ok := C.QwtNullTransform_override_virtual_transform(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QwtNullTransform_override_virtual_transform(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -281,7 +311,11 @@ func (this *QwtNullTransform) callVirtualBase_InvTransform(value float64) float6
 
 }
 func (this *QwtNullTransform) OnInvTransform(slot func(super func(value float64) float64, value float64) float64) {
-	ok := C.QwtNullTransform_override_virtual_invTransform(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QwtNullTransform_override_virtual_invTransform(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -309,7 +343,11 @@ func (this *QwtNullTransform) callVirtualBase_Copy() *QwtTransform {
 
 }
 func (this *QwtNullTransform) OnCopy(slot func(super func() *QwtTransform) *QwtTransform) {
-	ok := C.QwtNullTransform_override_virtual_copy(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QwtNullTransform_override_virtual_copy(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -334,7 +372,11 @@ func (this *QwtNullTransform) callVirtualBase_Bounded(value float64) float64 {
 
 }
 func (this *QwtNullTransform) OnBounded(slot func(super func(value float64) float64, value float64) float64) {
-	ok := C.QwtNullTransform_override_virtual_bounded(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QwtNullTransform_override_virtual_bounded(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -368,6 +410,11 @@ func (this *QwtNullTransform) GoGC() {
 		this.Delete()
 		runtime.KeepAlive(this.h)
 	})
+}
+
+//export miqt_exec_callback_handle_release_QwtLogTransform
+func miqt_exec_callback_handle_release_QwtLogTransform(cb C.intptr_t) {
+	cgo.Handle(cb).Delete()
 }
 
 type QwtLogTransform struct {
@@ -444,7 +491,11 @@ func (this *QwtLogTransform) callVirtualBase_Transform(value float64) float64 {
 
 }
 func (this *QwtLogTransform) OnTransform(slot func(super func(value float64) float64, value float64) float64) {
-	ok := C.QwtLogTransform_override_virtual_transform(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QwtLogTransform_override_virtual_transform(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -472,7 +523,11 @@ func (this *QwtLogTransform) callVirtualBase_InvTransform(value float64) float64
 
 }
 func (this *QwtLogTransform) OnInvTransform(slot func(super func(value float64) float64, value float64) float64) {
-	ok := C.QwtLogTransform_override_virtual_invTransform(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QwtLogTransform_override_virtual_invTransform(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -500,7 +555,11 @@ func (this *QwtLogTransform) callVirtualBase_Bounded(value float64) float64 {
 
 }
 func (this *QwtLogTransform) OnBounded(slot func(super func(value float64) float64, value float64) float64) {
-	ok := C.QwtLogTransform_override_virtual_bounded(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QwtLogTransform_override_virtual_bounded(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -528,7 +587,11 @@ func (this *QwtLogTransform) callVirtualBase_Copy() *QwtTransform {
 
 }
 func (this *QwtLogTransform) OnCopy(slot func(super func() *QwtTransform) *QwtTransform) {
-	ok := C.QwtLogTransform_override_virtual_copy(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QwtLogTransform_override_virtual_copy(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -559,6 +622,11 @@ func (this *QwtLogTransform) GoGC() {
 		this.Delete()
 		runtime.KeepAlive(this.h)
 	})
+}
+
+//export miqt_exec_callback_handle_release_QwtPowerTransform
+func miqt_exec_callback_handle_release_QwtPowerTransform(cb C.intptr_t) {
+	cgo.Handle(cb).Delete()
 }
 
 type QwtPowerTransform struct {
@@ -627,7 +695,11 @@ func (this *QwtPowerTransform) callVirtualBase_Transform(value float64) float64 
 
 }
 func (this *QwtPowerTransform) OnTransform(slot func(super func(value float64) float64, value float64) float64) {
-	ok := C.QwtPowerTransform_override_virtual_transform(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QwtPowerTransform_override_virtual_transform(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -655,7 +727,11 @@ func (this *QwtPowerTransform) callVirtualBase_InvTransform(value float64) float
 
 }
 func (this *QwtPowerTransform) OnInvTransform(slot func(super func(value float64) float64, value float64) float64) {
-	ok := C.QwtPowerTransform_override_virtual_invTransform(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QwtPowerTransform_override_virtual_invTransform(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -683,7 +759,11 @@ func (this *QwtPowerTransform) callVirtualBase_Copy() *QwtTransform {
 
 }
 func (this *QwtPowerTransform) OnCopy(slot func(super func() *QwtTransform) *QwtTransform) {
-	ok := C.QwtPowerTransform_override_virtual_copy(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QwtPowerTransform_override_virtual_copy(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -708,7 +788,11 @@ func (this *QwtPowerTransform) callVirtualBase_Bounded(value float64) float64 {
 
 }
 func (this *QwtPowerTransform) OnBounded(slot func(super func(value float64) float64, value float64) float64) {
-	ok := C.QwtPowerTransform_override_virtual_bounded(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QwtPowerTransform_override_virtual_bounded(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}

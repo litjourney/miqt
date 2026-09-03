@@ -15,6 +15,11 @@ import (
 	"unsafe"
 )
 
+//export miqt_exec_callback_handle_release_QwtDateScaleDraw
+func miqt_exec_callback_handle_release_QwtDateScaleDraw(cb C.intptr_t) {
+	cgo.Handle(cb).Delete()
+}
+
 type QwtDateScaleDraw struct {
 	h *C.QwtDateScaleDraw
 	*QwtScaleDraw
@@ -164,7 +169,11 @@ func (this *QwtDateScaleDraw) callVirtualBase_Label(param1 float64) *QwtText {
 
 }
 func (this *QwtDateScaleDraw) OnLabel(slot func(super func(param1 float64) *QwtText, param1 float64) *QwtText) {
-	ok := C.QwtDateScaleDraw_override_virtual_label(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QwtDateScaleDraw_override_virtual_label(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -192,7 +201,11 @@ func (this *QwtDateScaleDraw) callVirtualBase_IntervalType(param1 *QwtScaleDiv) 
 
 }
 func (this *QwtDateScaleDraw) OnIntervalType(slot func(super func(param1 *QwtScaleDiv) QwtDate__IntervalType, param1 *QwtScaleDiv) QwtDate__IntervalType) {
-	ok := C.QwtDateScaleDraw_override_virtual_intervalType(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QwtDateScaleDraw_override_virtual_intervalType(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -222,7 +235,11 @@ func (this *QwtDateScaleDraw) callVirtualBase_DateFormatOfDate(param1 *qt.QDateT
 	return _ret
 }
 func (this *QwtDateScaleDraw) OnDateFormatOfDate(slot func(super func(param1 *qt.QDateTime, param2 QwtDate__IntervalType) string, param1 *qt.QDateTime, param2 QwtDate__IntervalType) string) {
-	ok := C.QwtDateScaleDraw_override_virtual_dateFormatOfDate(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QwtDateScaleDraw_override_virtual_dateFormatOfDate(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -255,7 +272,11 @@ func (this *QwtDateScaleDraw) callVirtualBase_Extent(param1 *qt.QFont) float64 {
 
 }
 func (this *QwtDateScaleDraw) OnExtent(slot func(super func(param1 *qt.QFont) float64, param1 *qt.QFont) float64) {
-	ok := C.QwtDateScaleDraw_override_virtual_extent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QwtDateScaleDraw_override_virtual_extent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -283,7 +304,11 @@ func (this *QwtDateScaleDraw) callVirtualBase_DrawTick(param1 *qt.QPainter, valu
 
 }
 func (this *QwtDateScaleDraw) OnDrawTick(slot func(super func(param1 *qt.QPainter, value float64, lenVal float64), param1 *qt.QPainter, value float64, lenVal float64)) {
-	ok := C.QwtDateScaleDraw_override_virtual_drawTick(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QwtDateScaleDraw_override_virtual_drawTick(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -313,7 +338,11 @@ func (this *QwtDateScaleDraw) callVirtualBase_DrawBackbone(param1 *qt.QPainter) 
 
 }
 func (this *QwtDateScaleDraw) OnDrawBackbone(slot func(super func(param1 *qt.QPainter), param1 *qt.QPainter)) {
-	ok := C.QwtDateScaleDraw_override_virtual_drawBackbone(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QwtDateScaleDraw_override_virtual_drawBackbone(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -339,7 +368,11 @@ func (this *QwtDateScaleDraw) callVirtualBase_DrawLabel(param1 *qt.QPainter, val
 
 }
 func (this *QwtDateScaleDraw) OnDrawLabel(slot func(super func(param1 *qt.QPainter, value float64), param1 *qt.QPainter, value float64)) {
-	ok := C.QwtDateScaleDraw_override_virtual_drawLabel(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QwtDateScaleDraw_override_virtual_drawLabel(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -367,7 +400,11 @@ func (this *QwtDateScaleDraw) callVirtualBase_Draw(param1 *qt.QPainter, param2 *
 
 }
 func (this *QwtDateScaleDraw) OnDraw(slot func(super func(param1 *qt.QPainter, param2 *qt.QPalette), param1 *qt.QPainter, param2 *qt.QPalette)) {
-	ok := C.QwtDateScaleDraw_override_virtual_draw(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QwtDateScaleDraw_override_virtual_draw(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}

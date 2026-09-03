@@ -1,3 +1,5 @@
+#include <memory>
+#include <utility>
 #include <QByteArray>
 #include <QChildEvent>
 #include <QDynamicPropertyChangeEvent>
@@ -11,12 +13,16 @@
 extern "C" {
 #endif
 
+void miqt_exec_callback_handle_release_QEvent(intptr_t);
 void miqt_exec_callback_QEvent_setAccepted(QEvent*, intptr_t, bool);
 QEvent* miqt_exec_callback_QEvent_clone(const QEvent*, intptr_t);
+void miqt_exec_callback_handle_release_QTimerEvent(intptr_t);
 QTimerEvent* miqt_exec_callback_QTimerEvent_clone(const QTimerEvent*, intptr_t);
 void miqt_exec_callback_QTimerEvent_setAccepted(QTimerEvent*, intptr_t, bool);
+void miqt_exec_callback_handle_release_QChildEvent(intptr_t);
 QChildEvent* miqt_exec_callback_QChildEvent_clone(const QChildEvent*, intptr_t);
 void miqt_exec_callback_QChildEvent_setAccepted(QChildEvent*, intptr_t, bool);
+void miqt_exec_callback_handle_release_QDynamicPropertyChangeEvent(intptr_t);
 QDynamicPropertyChangeEvent* miqt_exec_callback_QDynamicPropertyChangeEvent_clone(const QDynamicPropertyChangeEvent*, intptr_t);
 void miqt_exec_callback_QDynamicPropertyChangeEvent_setAccepted(QDynamicPropertyChangeEvent*, intptr_t, bool);
 #ifdef __cplusplus
@@ -31,32 +37,32 @@ public:
 	virtual ~MiqtVirtualQEvent() override = default;
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__setAccepted = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QEvent> handle__setAccepted;
 
 	// Subclass to allow providing a Go implementation
 	virtual void setAccepted(bool accepted) override {
-		if (handle__setAccepted == 0) {
+		if (!handle__setAccepted) {
 			QEvent::setAccepted(accepted);
 			return;
 		}
 
 		bool sigval1 = accepted;
-		miqt_exec_callback_QEvent_setAccepted(this, handle__setAccepted, sigval1);
+		miqt_exec_callback_QEvent_setAccepted(this, handle__setAccepted.value(), sigval1);
 
 	}
 
 	friend void QEvent_virtualbase_setAccepted(void* self, bool accepted);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__clone = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QEvent> handle__clone;
 
 	// Subclass to allow providing a Go implementation
 	virtual QEvent* clone() const override {
-		if (handle__clone == 0) {
+		if (!handle__clone) {
 			return QEvent::clone();
 		}
 
-		QEvent* callback_return_value = miqt_exec_callback_QEvent_clone(this, handle__clone);
+		QEvent* callback_return_value = miqt_exec_callback_QEvent_clone(this, handle__clone.value());
 		return callback_return_value;
 	}
 
@@ -118,12 +124,13 @@ int QEvent_registerEventTypeWithHint(int hint) {
 }
 
 bool QEvent_override_virtual_setAccepted(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QEvent> slot_handle(slot);
 	MiqtVirtualQEvent* self_cast = dynamic_cast<MiqtVirtualQEvent*>( (QEvent*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__setAccepted = slot;
+	self_cast->handle__setAccepted = std::move(slot_handle);
 	return true;
 }
 
@@ -132,12 +139,13 @@ void QEvent_virtualbase_setAccepted(void* self, bool accepted) {
 }
 
 bool QEvent_override_virtual_clone(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QEvent> slot_handle(slot);
 	MiqtVirtualQEvent* self_cast = dynamic_cast<MiqtVirtualQEvent*>( (QEvent*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__clone = slot;
+	self_cast->handle__clone = std::move(slot_handle);
 	return true;
 }
 
@@ -157,32 +165,32 @@ public:
 	virtual ~MiqtVirtualQTimerEvent() override = default;
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__clone = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QTimerEvent> handle__clone;
 
 	// Subclass to allow providing a Go implementation
 	virtual QTimerEvent* clone() const override {
-		if (handle__clone == 0) {
+		if (!handle__clone) {
 			return QTimerEvent::clone();
 		}
 
-		QTimerEvent* callback_return_value = miqt_exec_callback_QTimerEvent_clone(this, handle__clone);
+		QTimerEvent* callback_return_value = miqt_exec_callback_QTimerEvent_clone(this, handle__clone.value());
 		return callback_return_value;
 	}
 
 	friend QTimerEvent* QTimerEvent_virtualbase_clone(const void* self);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__setAccepted = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QTimerEvent> handle__setAccepted;
 
 	// Subclass to allow providing a Go implementation
 	virtual void setAccepted(bool accepted) override {
-		if (handle__setAccepted == 0) {
+		if (!handle__setAccepted) {
 			QTimerEvent::setAccepted(accepted);
 			return;
 		}
 
 		bool sigval1 = accepted;
-		miqt_exec_callback_QTimerEvent_setAccepted(this, handle__setAccepted, sigval1);
+		miqt_exec_callback_QTimerEvent_setAccepted(this, handle__setAccepted.value(), sigval1);
 
 	}
 
@@ -207,12 +215,13 @@ int QTimerEvent_timerId(const QTimerEvent* self) {
 }
 
 bool QTimerEvent_override_virtual_clone(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QTimerEvent> slot_handle(slot);
 	MiqtVirtualQTimerEvent* self_cast = dynamic_cast<MiqtVirtualQTimerEvent*>( (QTimerEvent*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__clone = slot;
+	self_cast->handle__clone = std::move(slot_handle);
 	return true;
 }
 
@@ -221,12 +230,13 @@ QTimerEvent* QTimerEvent_virtualbase_clone(const void* self) {
 }
 
 bool QTimerEvent_override_virtual_setAccepted(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QTimerEvent> slot_handle(slot);
 	MiqtVirtualQTimerEvent* self_cast = dynamic_cast<MiqtVirtualQTimerEvent*>( (QTimerEvent*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__setAccepted = slot;
+	self_cast->handle__setAccepted = std::move(slot_handle);
 	return true;
 }
 
@@ -246,32 +256,32 @@ public:
 	virtual ~MiqtVirtualQChildEvent() override = default;
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__clone = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QChildEvent> handle__clone;
 
 	// Subclass to allow providing a Go implementation
 	virtual QChildEvent* clone() const override {
-		if (handle__clone == 0) {
+		if (!handle__clone) {
 			return QChildEvent::clone();
 		}
 
-		QChildEvent* callback_return_value = miqt_exec_callback_QChildEvent_clone(this, handle__clone);
+		QChildEvent* callback_return_value = miqt_exec_callback_QChildEvent_clone(this, handle__clone.value());
 		return callback_return_value;
 	}
 
 	friend QChildEvent* QChildEvent_virtualbase_clone(const void* self);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__setAccepted = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QChildEvent> handle__setAccepted;
 
 	// Subclass to allow providing a Go implementation
 	virtual void setAccepted(bool accepted) override {
-		if (handle__setAccepted == 0) {
+		if (!handle__setAccepted) {
 			QChildEvent::setAccepted(accepted);
 			return;
 		}
 
 		bool sigval1 = accepted;
-		miqt_exec_callback_QChildEvent_setAccepted(this, handle__setAccepted, sigval1);
+		miqt_exec_callback_QChildEvent_setAccepted(this, handle__setAccepted.value(), sigval1);
 
 	}
 
@@ -308,12 +318,13 @@ bool QChildEvent_removed(const QChildEvent* self) {
 }
 
 bool QChildEvent_override_virtual_clone(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QChildEvent> slot_handle(slot);
 	MiqtVirtualQChildEvent* self_cast = dynamic_cast<MiqtVirtualQChildEvent*>( (QChildEvent*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__clone = slot;
+	self_cast->handle__clone = std::move(slot_handle);
 	return true;
 }
 
@@ -322,12 +333,13 @@ QChildEvent* QChildEvent_virtualbase_clone(const void* self) {
 }
 
 bool QChildEvent_override_virtual_setAccepted(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QChildEvent> slot_handle(slot);
 	MiqtVirtualQChildEvent* self_cast = dynamic_cast<MiqtVirtualQChildEvent*>( (QChildEvent*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__setAccepted = slot;
+	self_cast->handle__setAccepted = std::move(slot_handle);
 	return true;
 }
 
@@ -347,32 +359,32 @@ public:
 	virtual ~MiqtVirtualQDynamicPropertyChangeEvent() override = default;
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__clone = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QDynamicPropertyChangeEvent> handle__clone;
 
 	// Subclass to allow providing a Go implementation
 	virtual QDynamicPropertyChangeEvent* clone() const override {
-		if (handle__clone == 0) {
+		if (!handle__clone) {
 			return QDynamicPropertyChangeEvent::clone();
 		}
 
-		QDynamicPropertyChangeEvent* callback_return_value = miqt_exec_callback_QDynamicPropertyChangeEvent_clone(this, handle__clone);
+		QDynamicPropertyChangeEvent* callback_return_value = miqt_exec_callback_QDynamicPropertyChangeEvent_clone(this, handle__clone.value());
 		return callback_return_value;
 	}
 
 	friend QDynamicPropertyChangeEvent* QDynamicPropertyChangeEvent_virtualbase_clone(const void* self);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__setAccepted = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QDynamicPropertyChangeEvent> handle__setAccepted;
 
 	// Subclass to allow providing a Go implementation
 	virtual void setAccepted(bool accepted) override {
-		if (handle__setAccepted == 0) {
+		if (!handle__setAccepted) {
 			QDynamicPropertyChangeEvent::setAccepted(accepted);
 			return;
 		}
 
 		bool sigval1 = accepted;
-		miqt_exec_callback_QDynamicPropertyChangeEvent_setAccepted(this, handle__setAccepted, sigval1);
+		miqt_exec_callback_QDynamicPropertyChangeEvent_setAccepted(this, handle__setAccepted.value(), sigval1);
 
 	}
 
@@ -403,12 +415,13 @@ struct miqt_string QDynamicPropertyChangeEvent_propertyName(const QDynamicProper
 }
 
 bool QDynamicPropertyChangeEvent_override_virtual_clone(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QDynamicPropertyChangeEvent> slot_handle(slot);
 	MiqtVirtualQDynamicPropertyChangeEvent* self_cast = dynamic_cast<MiqtVirtualQDynamicPropertyChangeEvent*>( (QDynamicPropertyChangeEvent*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__clone = slot;
+	self_cast->handle__clone = std::move(slot_handle);
 	return true;
 }
 
@@ -417,12 +430,13 @@ QDynamicPropertyChangeEvent* QDynamicPropertyChangeEvent_virtualbase_clone(const
 }
 
 bool QDynamicPropertyChangeEvent_override_virtual_setAccepted(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QDynamicPropertyChangeEvent> slot_handle(slot);
 	MiqtVirtualQDynamicPropertyChangeEvent* self_cast = dynamic_cast<MiqtVirtualQDynamicPropertyChangeEvent*>( (QDynamicPropertyChangeEvent*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__setAccepted = slot;
+	self_cast->handle__setAccepted = std::move(slot_handle);
 	return true;
 }
 

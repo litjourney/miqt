@@ -1,3 +1,5 @@
+#include <memory>
+#include <utility>
 #include <QList>
 #include <QMediaControl>
 #include <QMetaDataReaderControl>
@@ -15,6 +17,7 @@
 extern "C" {
 #endif
 
+void miqt_exec_callback_handle_release_QMetaDataReaderControl(intptr_t);
 void miqt_exec_callback_QMetaDataReaderControl_metaDataChanged(intptr_t);
 void miqt_exec_callback_QMetaDataReaderControl_metaDataChanged2(intptr_t, struct miqt_string, QVariant*);
 void miqt_exec_callback_QMetaDataReaderControl_metaDataAvailableChanged(intptr_t, bool);
@@ -89,10 +92,12 @@ void QMetaDataReaderControl_metaDataChanged(QMetaDataReaderControl* self) {
 	self->metaDataChanged();
 }
 
-void QMetaDataReaderControl_connect_metaDataChanged(QMetaDataReaderControl* self, intptr_t slot) {
-	QMetaDataReaderControl::connect(self, static_cast<void (QMetaDataReaderControl::*)()>(&QMetaDataReaderControl::metaDataChanged), self, [=]() {
+void* QMetaDataReaderControl_connect_metaDataChanged(QMetaDataReaderControl* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QMetaDataReaderControl>>(slot);
+	return new QMetaObject::Connection(QMetaDataReaderControl::connect(self, static_cast<void (QMetaDataReaderControl::*)()>(&QMetaDataReaderControl::metaDataChanged), self, [slot_handle]() {
+		intptr_t slot = slot_handle->value();
 		miqt_exec_callback_QMetaDataReaderControl_metaDataChanged(slot);
-	});
+	}));
 }
 
 void QMetaDataReaderControl_metaDataChanged2(QMetaDataReaderControl* self, struct miqt_string key, QVariant* value) {
@@ -100,8 +105,10 @@ void QMetaDataReaderControl_metaDataChanged2(QMetaDataReaderControl* self, struc
 	self->metaDataChanged(key_QString, *value);
 }
 
-void QMetaDataReaderControl_connect_metaDataChanged2(QMetaDataReaderControl* self, intptr_t slot) {
-	QMetaDataReaderControl::connect(self, static_cast<void (QMetaDataReaderControl::*)(const QString&, const QVariant&)>(&QMetaDataReaderControl::metaDataChanged), self, [=](const QString& key, const QVariant& value) {
+void* QMetaDataReaderControl_connect_metaDataChanged2(QMetaDataReaderControl* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QMetaDataReaderControl>>(slot);
+	return new QMetaObject::Connection(QMetaDataReaderControl::connect(self, static_cast<void (QMetaDataReaderControl::*)(const QString&, const QVariant&)>(&QMetaDataReaderControl::metaDataChanged), self, [slot_handle](const QString& key, const QVariant& value) {
+		intptr_t slot = slot_handle->value();
 		const QString key_ret = key;
 		// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 		QByteArray key_b = key_ret.toUtf8();
@@ -114,18 +121,20 @@ void QMetaDataReaderControl_connect_metaDataChanged2(QMetaDataReaderControl* sel
 		// Cast returned reference into pointer
 		QVariant* sigval2 = const_cast<QVariant*>(&value_ret);
 		miqt_exec_callback_QMetaDataReaderControl_metaDataChanged2(slot, sigval1, sigval2);
-	});
+	}));
 }
 
 void QMetaDataReaderControl_metaDataAvailableChanged(QMetaDataReaderControl* self, bool available) {
 	self->metaDataAvailableChanged(available);
 }
 
-void QMetaDataReaderControl_connect_metaDataAvailableChanged(QMetaDataReaderControl* self, intptr_t slot) {
-	QMetaDataReaderControl::connect(self, static_cast<void (QMetaDataReaderControl::*)(bool)>(&QMetaDataReaderControl::metaDataAvailableChanged), self, [=](bool available) {
+void* QMetaDataReaderControl_connect_metaDataAvailableChanged(QMetaDataReaderControl* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QMetaDataReaderControl>>(slot);
+	return new QMetaObject::Connection(QMetaDataReaderControl::connect(self, static_cast<void (QMetaDataReaderControl::*)(bool)>(&QMetaDataReaderControl::metaDataAvailableChanged), self, [slot_handle](bool available) {
+		intptr_t slot = slot_handle->value();
 		bool sigval1 = available;
 		miqt_exec_callback_QMetaDataReaderControl_metaDataAvailableChanged(slot, sigval1);
-	});
+	}));
 }
 
 struct miqt_string QMetaDataReaderControl_tr2(const char* s, const char* c) {

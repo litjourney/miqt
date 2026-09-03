@@ -1,3 +1,5 @@
+#include <memory>
+#include <utility>
 #include <QCameraFocusControl>
 #include <QCameraFocusZone>
 #include <QList>
@@ -16,6 +18,7 @@
 extern "C" {
 #endif
 
+void miqt_exec_callback_handle_release_QCameraFocusControl(intptr_t);
 void miqt_exec_callback_QCameraFocusControl_focusModeChanged(intptr_t, int);
 void miqt_exec_callback_QCameraFocusControl_focusPointModeChanged(intptr_t, int);
 void miqt_exec_callback_QCameraFocusControl_customFocusPointChanged(intptr_t, QPointF*);
@@ -109,47 +112,55 @@ void QCameraFocusControl_focusModeChanged(QCameraFocusControl* self, int mode) {
 	self->focusModeChanged(static_cast<QCameraFocus::FocusModes>(mode));
 }
 
-void QCameraFocusControl_connect_focusModeChanged(QCameraFocusControl* self, intptr_t slot) {
-	QCameraFocusControl::connect(self, static_cast<void (QCameraFocusControl::*)(QCameraFocus::FocusModes)>(&QCameraFocusControl::focusModeChanged), self, [=](QCameraFocus::FocusModes mode) {
+void* QCameraFocusControl_connect_focusModeChanged(QCameraFocusControl* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QCameraFocusControl>>(slot);
+	return new QMetaObject::Connection(QCameraFocusControl::connect(self, static_cast<void (QCameraFocusControl::*)(QCameraFocus::FocusModes)>(&QCameraFocusControl::focusModeChanged), self, [slot_handle](QCameraFocus::FocusModes mode) {
+		intptr_t slot = slot_handle->value();
 		QCameraFocus::FocusModes mode_ret = mode;
 		int sigval1 = static_cast<int>(mode_ret);
 		miqt_exec_callback_QCameraFocusControl_focusModeChanged(slot, sigval1);
-	});
+	}));
 }
 
 void QCameraFocusControl_focusPointModeChanged(QCameraFocusControl* self, int mode) {
 	self->focusPointModeChanged(static_cast<QCameraFocus::FocusPointMode>(mode));
 }
 
-void QCameraFocusControl_connect_focusPointModeChanged(QCameraFocusControl* self, intptr_t slot) {
-	QCameraFocusControl::connect(self, static_cast<void (QCameraFocusControl::*)(QCameraFocus::FocusPointMode)>(&QCameraFocusControl::focusPointModeChanged), self, [=](QCameraFocus::FocusPointMode mode) {
+void* QCameraFocusControl_connect_focusPointModeChanged(QCameraFocusControl* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QCameraFocusControl>>(slot);
+	return new QMetaObject::Connection(QCameraFocusControl::connect(self, static_cast<void (QCameraFocusControl::*)(QCameraFocus::FocusPointMode)>(&QCameraFocusControl::focusPointModeChanged), self, [slot_handle](QCameraFocus::FocusPointMode mode) {
+		intptr_t slot = slot_handle->value();
 		QCameraFocus::FocusPointMode mode_ret = mode;
 		int sigval1 = static_cast<int>(mode_ret);
 		miqt_exec_callback_QCameraFocusControl_focusPointModeChanged(slot, sigval1);
-	});
+	}));
 }
 
 void QCameraFocusControl_customFocusPointChanged(QCameraFocusControl* self, QPointF* point) {
 	self->customFocusPointChanged(*point);
 }
 
-void QCameraFocusControl_connect_customFocusPointChanged(QCameraFocusControl* self, intptr_t slot) {
-	QCameraFocusControl::connect(self, static_cast<void (QCameraFocusControl::*)(const QPointF&)>(&QCameraFocusControl::customFocusPointChanged), self, [=](const QPointF& point) {
+void* QCameraFocusControl_connect_customFocusPointChanged(QCameraFocusControl* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QCameraFocusControl>>(slot);
+	return new QMetaObject::Connection(QCameraFocusControl::connect(self, static_cast<void (QCameraFocusControl::*)(const QPointF&)>(&QCameraFocusControl::customFocusPointChanged), self, [slot_handle](const QPointF& point) {
+		intptr_t slot = slot_handle->value();
 		const QPointF& point_ret = point;
 		// Cast returned reference into pointer
 		QPointF* sigval1 = const_cast<QPointF*>(&point_ret);
 		miqt_exec_callback_QCameraFocusControl_customFocusPointChanged(slot, sigval1);
-	});
+	}));
 }
 
 void QCameraFocusControl_focusZonesChanged(QCameraFocusControl* self) {
 	self->focusZonesChanged();
 }
 
-void QCameraFocusControl_connect_focusZonesChanged(QCameraFocusControl* self, intptr_t slot) {
-	QCameraFocusControl::connect(self, static_cast<void (QCameraFocusControl::*)()>(&QCameraFocusControl::focusZonesChanged), self, [=]() {
+void* QCameraFocusControl_connect_focusZonesChanged(QCameraFocusControl* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QCameraFocusControl>>(slot);
+	return new QMetaObject::Connection(QCameraFocusControl::connect(self, static_cast<void (QCameraFocusControl::*)()>(&QCameraFocusControl::focusZonesChanged), self, [slot_handle]() {
+		intptr_t slot = slot_handle->value();
 		miqt_exec_callback_QCameraFocusControl_focusZonesChanged(slot);
-	});
+	}));
 }
 
 struct miqt_string QCameraFocusControl_tr2(const char* s, const char* c) {

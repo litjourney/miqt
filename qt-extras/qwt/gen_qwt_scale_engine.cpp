@@ -1,3 +1,5 @@
+#include <memory>
+#include <utility>
 #include <QList>
 #include <qwt_scale_engine.h>
 #include "gen_qwt_scale_engine.h"
@@ -6,10 +8,13 @@
 extern "C" {
 #endif
 
+void miqt_exec_callback_handle_release_QwtScaleEngine(intptr_t);
 void miqt_exec_callback_QwtScaleEngine_autoScale(const QwtScaleEngine*, intptr_t, int, double*, double*, double*);
 QwtScaleDiv* miqt_exec_callback_QwtScaleEngine_divideScale(const QwtScaleEngine*, intptr_t, double, double, int, int, double);
+void miqt_exec_callback_handle_release_QwtLinearScaleEngine(intptr_t);
 void miqt_exec_callback_QwtLinearScaleEngine_autoScale(const QwtLinearScaleEngine*, intptr_t, int, double*, double*, double*);
 QwtScaleDiv* miqt_exec_callback_QwtLinearScaleEngine_divideScale(const QwtLinearScaleEngine*, intptr_t, double, double, int, int, double);
+void miqt_exec_callback_handle_release_QwtLogScaleEngine(intptr_t);
 void miqt_exec_callback_QwtLogScaleEngine_autoScale(const QwtLogScaleEngine*, intptr_t, int, double*, double*, double*);
 QwtScaleDiv* miqt_exec_callback_QwtLogScaleEngine_divideScale(const QwtLogScaleEngine*, intptr_t, double, double, int, int, double);
 #ifdef __cplusplus
@@ -46,11 +51,11 @@ public:
 	virtual ~MiqtVirtualQwtScaleEngine() override = default;
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__autoScale = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtScaleEngine> handle__autoScale;
 
 	// Subclass to allow providing a Go implementation
 	virtual void autoScale(int maxNumSteps, double& x1, double& x2, double& stepSize) const override {
-		if (handle__autoScale == 0) {
+		if (!handle__autoScale) {
 			return; // Pure virtual, there is no base we can call
 		}
 
@@ -58,16 +63,16 @@ public:
 		double* sigval2 = &x1;
 		double* sigval3 = &x2;
 		double* sigval4 = &stepSize;
-		miqt_exec_callback_QwtScaleEngine_autoScale(this, handle__autoScale, sigval1, sigval2, sigval3, sigval4);
+		miqt_exec_callback_QwtScaleEngine_autoScale(this, handle__autoScale.value(), sigval1, sigval2, sigval3, sigval4);
 
 	}
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__divideScale = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtScaleEngine> handle__divideScale;
 
 	// Subclass to allow providing a Go implementation
 	virtual QwtScaleDiv divideScale(double x1, double x2, int maxMajorSteps, int maxMinorSteps, double stepSize) const override {
-		if (handle__divideScale == 0) {
+		if (!handle__divideScale) {
 			return QwtScaleDiv(); // Pure virtual, there is no base we can call
 		}
 
@@ -76,7 +81,7 @@ public:
 		int sigval3 = maxMajorSteps;
 		int sigval4 = maxMinorSteps;
 		double sigval5 = stepSize;
-		QwtScaleDiv* callback_return_value = miqt_exec_callback_QwtScaleEngine_divideScale(this, handle__divideScale, sigval1, sigval2, sigval3, sigval4, sigval5);
+		QwtScaleDiv* callback_return_value = miqt_exec_callback_QwtScaleEngine_divideScale(this, handle__divideScale.value(), sigval1, sigval2, sigval3, sigval4, sigval5);
 		return *callback_return_value;
 	}
 
@@ -170,22 +175,24 @@ void QwtScaleEngine_setAttribute2(QwtScaleEngine* self, int param1, bool on) {
 }
 
 bool QwtScaleEngine_override_virtual_autoScale(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtScaleEngine> slot_handle(slot);
 	MiqtVirtualQwtScaleEngine* self_cast = dynamic_cast<MiqtVirtualQwtScaleEngine*>( (QwtScaleEngine*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__autoScale = slot;
+	self_cast->handle__autoScale = std::move(slot_handle);
 	return true;
 }
 
 bool QwtScaleEngine_override_virtual_divideScale(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtScaleEngine> slot_handle(slot);
 	MiqtVirtualQwtScaleEngine* self_cast = dynamic_cast<MiqtVirtualQwtScaleEngine*>( (QwtScaleEngine*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__divideScale = slot;
+	self_cast->handle__divideScale = std::move(slot_handle);
 	return true;
 }
 
@@ -262,11 +269,11 @@ public:
 	virtual ~MiqtVirtualQwtLinearScaleEngine() override = default;
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__autoScale = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtLinearScaleEngine> handle__autoScale;
 
 	// Subclass to allow providing a Go implementation
 	virtual void autoScale(int maxNumSteps, double& x1, double& x2, double& stepSize) const override {
-		if (handle__autoScale == 0) {
+		if (!handle__autoScale) {
 			QwtLinearScaleEngine::autoScale(maxNumSteps, x1, x2, stepSize);
 			return;
 		}
@@ -275,18 +282,18 @@ public:
 		double* sigval2 = &x1;
 		double* sigval3 = &x2;
 		double* sigval4 = &stepSize;
-		miqt_exec_callback_QwtLinearScaleEngine_autoScale(this, handle__autoScale, sigval1, sigval2, sigval3, sigval4);
+		miqt_exec_callback_QwtLinearScaleEngine_autoScale(this, handle__autoScale.value(), sigval1, sigval2, sigval3, sigval4);
 
 	}
 
 	friend void QwtLinearScaleEngine_virtualbase_autoScale(const void* self, int maxNumSteps, double* x1, double* x2, double* stepSize);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__divideScale = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtLinearScaleEngine> handle__divideScale;
 
 	// Subclass to allow providing a Go implementation
 	virtual QwtScaleDiv divideScale(double x1, double x2, int maxMajorSteps, int maxMinorSteps, double stepSize) const override {
-		if (handle__divideScale == 0) {
+		if (!handle__divideScale) {
 			return QwtLinearScaleEngine::divideScale(x1, x2, maxMajorSteps, maxMinorSteps, stepSize);
 		}
 
@@ -295,7 +302,7 @@ public:
 		int sigval3 = maxMajorSteps;
 		int sigval4 = maxMinorSteps;
 		double sigval5 = stepSize;
-		QwtScaleDiv* callback_return_value = miqt_exec_callback_QwtLinearScaleEngine_divideScale(this, handle__divideScale, sigval1, sigval2, sigval3, sigval4, sigval5);
+		QwtScaleDiv* callback_return_value = miqt_exec_callback_QwtLinearScaleEngine_divideScale(this, handle__divideScale.value(), sigval1, sigval2, sigval3, sigval4, sigval5);
 		return *callback_return_value;
 	}
 
@@ -341,12 +348,13 @@ void QwtLinearScaleEngine_operatorAssign(QwtLinearScaleEngine* self, QwtLinearSc
 }
 
 bool QwtLinearScaleEngine_override_virtual_autoScale(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtLinearScaleEngine> slot_handle(slot);
 	MiqtVirtualQwtLinearScaleEngine* self_cast = dynamic_cast<MiqtVirtualQwtLinearScaleEngine*>( (QwtLinearScaleEngine*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__autoScale = slot;
+	self_cast->handle__autoScale = std::move(slot_handle);
 	return true;
 }
 
@@ -355,12 +363,13 @@ void QwtLinearScaleEngine_virtualbase_autoScale(const void* self, int maxNumStep
 }
 
 bool QwtLinearScaleEngine_override_virtual_divideScale(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtLinearScaleEngine> slot_handle(slot);
 	MiqtVirtualQwtLinearScaleEngine* self_cast = dynamic_cast<MiqtVirtualQwtLinearScaleEngine*>( (QwtLinearScaleEngine*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__divideScale = slot;
+	self_cast->handle__divideScale = std::move(slot_handle);
 	return true;
 }
 
@@ -518,11 +527,11 @@ public:
 	virtual ~MiqtVirtualQwtLogScaleEngine() override = default;
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__autoScale = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtLogScaleEngine> handle__autoScale;
 
 	// Subclass to allow providing a Go implementation
 	virtual void autoScale(int maxNumSteps, double& x1, double& x2, double& stepSize) const override {
-		if (handle__autoScale == 0) {
+		if (!handle__autoScale) {
 			QwtLogScaleEngine::autoScale(maxNumSteps, x1, x2, stepSize);
 			return;
 		}
@@ -531,18 +540,18 @@ public:
 		double* sigval2 = &x1;
 		double* sigval3 = &x2;
 		double* sigval4 = &stepSize;
-		miqt_exec_callback_QwtLogScaleEngine_autoScale(this, handle__autoScale, sigval1, sigval2, sigval3, sigval4);
+		miqt_exec_callback_QwtLogScaleEngine_autoScale(this, handle__autoScale.value(), sigval1, sigval2, sigval3, sigval4);
 
 	}
 
 	friend void QwtLogScaleEngine_virtualbase_autoScale(const void* self, int maxNumSteps, double* x1, double* x2, double* stepSize);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__divideScale = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtLogScaleEngine> handle__divideScale;
 
 	// Subclass to allow providing a Go implementation
 	virtual QwtScaleDiv divideScale(double x1, double x2, int maxMajorSteps, int maxMinorSteps, double stepSize) const override {
-		if (handle__divideScale == 0) {
+		if (!handle__divideScale) {
 			return QwtLogScaleEngine::divideScale(x1, x2, maxMajorSteps, maxMinorSteps, stepSize);
 		}
 
@@ -551,7 +560,7 @@ public:
 		int sigval3 = maxMajorSteps;
 		int sigval4 = maxMinorSteps;
 		double sigval5 = stepSize;
-		QwtScaleDiv* callback_return_value = miqt_exec_callback_QwtLogScaleEngine_divideScale(this, handle__divideScale, sigval1, sigval2, sigval3, sigval4, sigval5);
+		QwtScaleDiv* callback_return_value = miqt_exec_callback_QwtLogScaleEngine_divideScale(this, handle__divideScale.value(), sigval1, sigval2, sigval3, sigval4, sigval5);
 		return *callback_return_value;
 	}
 
@@ -597,12 +606,13 @@ void QwtLogScaleEngine_operatorAssign(QwtLogScaleEngine* self, QwtLogScaleEngine
 }
 
 bool QwtLogScaleEngine_override_virtual_autoScale(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtLogScaleEngine> slot_handle(slot);
 	MiqtVirtualQwtLogScaleEngine* self_cast = dynamic_cast<MiqtVirtualQwtLogScaleEngine*>( (QwtLogScaleEngine*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__autoScale = slot;
+	self_cast->handle__autoScale = std::move(slot_handle);
 	return true;
 }
 
@@ -611,12 +621,13 @@ void QwtLogScaleEngine_virtualbase_autoScale(const void* self, int maxNumSteps, 
 }
 
 bool QwtLogScaleEngine_override_virtual_divideScale(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtLogScaleEngine> slot_handle(slot);
 	MiqtVirtualQwtLogScaleEngine* self_cast = dynamic_cast<MiqtVirtualQwtLogScaleEngine*>( (QwtLogScaleEngine*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__divideScale = slot;
+	self_cast->handle__divideScale = std::move(slot_handle);
 	return true;
 }
 

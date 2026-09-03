@@ -15,6 +15,11 @@ import (
 	"unsafe"
 )
 
+//export miqt_exec_callback_handle_release_QScriptExtensionInterface
+func miqt_exec_callback_handle_release_QScriptExtensionInterface(cb C.intptr_t) {
+	cgo.Handle(cb).Delete()
+}
+
 type QScriptExtensionInterface struct {
 	h *C.QScriptExtensionInterface
 	*qt.QFactoryInterface
@@ -69,7 +74,11 @@ func (this *QScriptExtensionInterface) OperatorAssign(param1 *QScriptExtensionIn
 	C.QScriptExtensionInterface_operatorAssign(this.h, param1.cPointer())
 }
 func (this *QScriptExtensionInterface) OnInitialize(slot func(key string, engine *QScriptEngine)) {
-	ok := C.QScriptExtensionInterface_override_virtual_initialize(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QScriptExtensionInterface_override_virtual_initialize(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -93,7 +102,11 @@ func miqt_exec_callback_QScriptExtensionInterface_initialize(self *C.QScriptExte
 
 }
 func (this *QScriptExtensionInterface) OnKeys(slot func() []string) {
-	ok := C.QScriptExtensionInterface_override_virtual_keys(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QScriptExtensionInterface_override_virtual_keys(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}

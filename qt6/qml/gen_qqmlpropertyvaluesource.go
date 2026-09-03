@@ -14,6 +14,11 @@ import (
 	"unsafe"
 )
 
+//export miqt_exec_callback_handle_release_QQmlPropertyValueSource
+func miqt_exec_callback_handle_release_QQmlPropertyValueSource(cb C.intptr_t) {
+	cgo.Handle(cb).Delete()
+}
+
 type QQmlPropertyValueSource struct {
 	h *C.QQmlPropertyValueSource
 }
@@ -60,7 +65,11 @@ func (this *QQmlPropertyValueSource) OperatorAssign(param1 *QQmlPropertyValueSou
 	C.QQmlPropertyValueSource_operatorAssign(this.h, param1.cPointer())
 }
 func (this *QQmlPropertyValueSource) OnSetTarget(slot func(target *QQmlProperty)) {
-	ok := C.QQmlPropertyValueSource_override_virtual_setTarget(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QQmlPropertyValueSource_override_virtual_setTarget(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}

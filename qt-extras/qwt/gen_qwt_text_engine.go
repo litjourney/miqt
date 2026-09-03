@@ -15,6 +15,11 @@ import (
 	"unsafe"
 )
 
+//export miqt_exec_callback_handle_release_QwtTextEngine
+func miqt_exec_callback_handle_release_QwtTextEngine(cb C.intptr_t) {
+	cgo.Handle(cb).Delete()
+}
+
 type QwtTextEngine struct {
 	h *C.QwtTextEngine
 }
@@ -99,7 +104,11 @@ func (this *QwtTextEngine) OperatorAssign(param1 *QwtTextEngine) {
 	C.QwtTextEngine_operatorAssign(this.h, param1.cPointer())
 }
 func (this *QwtTextEngine) OnHeightForWidth(slot func(font *qt.QFont, flags int, text string, width float64) float64) {
-	ok := C.QwtTextEngine_override_virtual_heightForWidth(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QwtTextEngine_override_virtual_heightForWidth(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -129,7 +138,11 @@ func miqt_exec_callback_QwtTextEngine_heightForWidth(self *C.QwtTextEngine, cb C
 
 }
 func (this *QwtTextEngine) OnTextSize(slot func(font *qt.QFont, flags int, text string) *qt.QSizeF) {
-	ok := C.QwtTextEngine_override_virtual_textSize(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QwtTextEngine_override_virtual_textSize(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -158,7 +171,11 @@ func miqt_exec_callback_QwtTextEngine_textSize(self *C.QwtTextEngine, cb C.intpt
 
 }
 func (this *QwtTextEngine) OnMightRender(slot func(text string) bool) {
-	ok := C.QwtTextEngine_override_virtual_mightRender(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QwtTextEngine_override_virtual_mightRender(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -183,7 +200,11 @@ func miqt_exec_callback_QwtTextEngine_mightRender(self *C.QwtTextEngine, cb C.in
 
 }
 func (this *QwtTextEngine) OnTextMargins(slot func(font *qt.QFont, text string, left *float64, right *float64, top *float64, bottom *float64)) {
-	ok := C.QwtTextEngine_override_virtual_textMargins(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QwtTextEngine_override_virtual_textMargins(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -215,7 +236,11 @@ func miqt_exec_callback_QwtTextEngine_textMargins(self *C.QwtTextEngine, cb C.in
 
 }
 func (this *QwtTextEngine) OnDraw(slot func(painter *qt.QPainter, rect *qt.QRectF, flags int, text string)) {
-	ok := C.QwtTextEngine_override_virtual_draw(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QwtTextEngine_override_virtual_draw(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -256,6 +281,11 @@ func (this *QwtTextEngine) GoGC() {
 		this.Delete()
 		runtime.KeepAlive(this.h)
 	})
+}
+
+//export miqt_exec_callback_handle_release_QwtPlainTextEngine
+func miqt_exec_callback_handle_release_QwtPlainTextEngine(cb C.intptr_t) {
+	cgo.Handle(cb).Delete()
 }
 
 type QwtPlainTextEngine struct {
@@ -362,7 +392,11 @@ func (this *QwtPlainTextEngine) callVirtualBase_HeightForWidth(font *qt.QFont, f
 
 }
 func (this *QwtPlainTextEngine) OnHeightForWidth(slot func(super func(font *qt.QFont, flags int, text string, width float64) float64, font *qt.QFont, flags int, text string, width float64) float64) {
-	ok := C.QwtPlainTextEngine_override_virtual_heightForWidth(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QwtPlainTextEngine_override_virtual_heightForWidth(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -404,7 +438,11 @@ func (this *QwtPlainTextEngine) callVirtualBase_TextSize(font *qt.QFont, flags i
 
 }
 func (this *QwtPlainTextEngine) OnTextSize(slot func(super func(font *qt.QFont, flags int, text string) *qt.QSizeF, font *qt.QFont, flags int, text string) *qt.QSizeF) {
-	ok := C.QwtPlainTextEngine_override_virtual_textSize(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QwtPlainTextEngine_override_virtual_textSize(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -443,7 +481,11 @@ func (this *QwtPlainTextEngine) callVirtualBase_Draw(painter *qt.QPainter, rect 
 
 }
 func (this *QwtPlainTextEngine) OnDraw(slot func(super func(painter *qt.QPainter, rect *qt.QRectF, flags int, text string), painter *qt.QPainter, rect *qt.QRectF, flags int, text string)) {
-	ok := C.QwtPlainTextEngine_override_virtual_draw(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QwtPlainTextEngine_override_virtual_draw(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -482,7 +524,11 @@ func (this *QwtPlainTextEngine) callVirtualBase_MightRender(param1 string) bool 
 
 }
 func (this *QwtPlainTextEngine) OnMightRender(slot func(super func(param1 string) bool, param1 string) bool) {
-	ok := C.QwtPlainTextEngine_override_virtual_mightRender(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QwtPlainTextEngine_override_virtual_mightRender(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -517,7 +563,11 @@ func (this *QwtPlainTextEngine) callVirtualBase_TextMargins(param1 *qt.QFont, pa
 
 }
 func (this *QwtPlainTextEngine) OnTextMargins(slot func(super func(param1 *qt.QFont, param2 string, left *float64, right *float64, top *float64, bottom *float64), param1 *qt.QFont, param2 string, left *float64, right *float64, top *float64, bottom *float64)) {
-	ok := C.QwtPlainTextEngine_override_virtual_textMargins(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QwtPlainTextEngine_override_virtual_textMargins(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -561,6 +611,11 @@ func (this *QwtPlainTextEngine) GoGC() {
 		this.Delete()
 		runtime.KeepAlive(this.h)
 	})
+}
+
+//export miqt_exec_callback_handle_release_QwtRichTextEngine
+func miqt_exec_callback_handle_release_QwtRichTextEngine(cb C.intptr_t) {
+	cgo.Handle(cb).Delete()
 }
 
 type QwtRichTextEngine struct {
@@ -667,7 +722,11 @@ func (this *QwtRichTextEngine) callVirtualBase_HeightForWidth(font *qt.QFont, fl
 
 }
 func (this *QwtRichTextEngine) OnHeightForWidth(slot func(super func(font *qt.QFont, flags int, text string, width float64) float64, font *qt.QFont, flags int, text string, width float64) float64) {
-	ok := C.QwtRichTextEngine_override_virtual_heightForWidth(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QwtRichTextEngine_override_virtual_heightForWidth(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -709,7 +768,11 @@ func (this *QwtRichTextEngine) callVirtualBase_TextSize(font *qt.QFont, flags in
 
 }
 func (this *QwtRichTextEngine) OnTextSize(slot func(super func(font *qt.QFont, flags int, text string) *qt.QSizeF, font *qt.QFont, flags int, text string) *qt.QSizeF) {
-	ok := C.QwtRichTextEngine_override_virtual_textSize(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QwtRichTextEngine_override_virtual_textSize(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -748,7 +811,11 @@ func (this *QwtRichTextEngine) callVirtualBase_Draw(painter *qt.QPainter, rect *
 
 }
 func (this *QwtRichTextEngine) OnDraw(slot func(super func(painter *qt.QPainter, rect *qt.QRectF, flags int, text string), painter *qt.QPainter, rect *qt.QRectF, flags int, text string)) {
-	ok := C.QwtRichTextEngine_override_virtual_draw(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QwtRichTextEngine_override_virtual_draw(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -787,7 +854,11 @@ func (this *QwtRichTextEngine) callVirtualBase_MightRender(param1 string) bool {
 
 }
 func (this *QwtRichTextEngine) OnMightRender(slot func(super func(param1 string) bool, param1 string) bool) {
-	ok := C.QwtRichTextEngine_override_virtual_mightRender(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QwtRichTextEngine_override_virtual_mightRender(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -822,7 +893,11 @@ func (this *QwtRichTextEngine) callVirtualBase_TextMargins(param1 *qt.QFont, par
 
 }
 func (this *QwtRichTextEngine) OnTextMargins(slot func(super func(param1 *qt.QFont, param2 string, left *float64, right *float64, top *float64, bottom *float64), param1 *qt.QFont, param2 string, left *float64, right *float64, top *float64, bottom *float64)) {
-	ok := C.QwtRichTextEngine_override_virtual_textMargins(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QwtRichTextEngine_override_virtual_textMargins(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}

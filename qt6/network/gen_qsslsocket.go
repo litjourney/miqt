@@ -32,6 +32,11 @@ const (
 	QSslSocket__AutoVerifyPeer QSslSocket__PeerVerifyMode = 3
 )
 
+//export miqt_exec_callback_handle_release_QSslSocket
+func miqt_exec_callback_handle_release_QSslSocket(cb C.intptr_t) {
+	cgo.Handle(cb).Delete()
+}
+
 type QSslSocket struct {
 	h *C.QSslSocket
 	*QTcpSocket
@@ -493,8 +498,10 @@ func (this *QSslSocket) IgnoreSslErrors2() {
 func (this *QSslSocket) Encrypted() {
 	C.QSslSocket_encrypted(this.h)
 }
-func (this *QSslSocket) OnEncrypted(slot func()) {
-	C.QSslSocket_connect_encrypted(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QSslSocket) OnEncrypted(slot func()) *qt6.SignalConnection {
+	_goptr := qt6.UnsafeNewQMetaObject__Connection(C.QSslSocket_connect_encrypted(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QSslSocket_encrypted
@@ -510,8 +517,10 @@ func miqt_exec_callback_QSslSocket_encrypted(cb C.intptr_t) {
 func (this *QSslSocket) PeerVerifyError(error *QSslError) {
 	C.QSslSocket_peerVerifyError(this.h, error.cPointer())
 }
-func (this *QSslSocket) OnPeerVerifyError(slot func(error *QSslError)) {
-	C.QSslSocket_connect_peerVerifyError(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QSslSocket) OnPeerVerifyError(slot func(error *QSslError)) *qt6.SignalConnection {
+	_goptr := qt6.UnsafeNewQMetaObject__Connection(C.QSslSocket_connect_peerVerifyError(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QSslSocket_peerVerifyError
@@ -536,8 +545,10 @@ func (this *QSslSocket) SslErrors(errors []QSslError) {
 	errors_ma := C.struct_miqt_array{len: C.size_t(len(errors)), data: unsafe.Pointer(errors_CArray)}
 	C.QSslSocket_sslErrors(this.h, errors_ma)
 }
-func (this *QSslSocket) OnSslErrors(slot func(errors []QSslError)) {
-	C.QSslSocket_connect_sslErrors(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QSslSocket) OnSslErrors(slot func(errors []QSslError)) *qt6.SignalConnection {
+	_goptr := qt6.UnsafeNewQMetaObject__Connection(C.QSslSocket_connect_sslErrors(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QSslSocket_sslErrors
@@ -564,8 +575,10 @@ func miqt_exec_callback_QSslSocket_sslErrors(cb C.intptr_t, errors C.struct_miqt
 func (this *QSslSocket) ModeChanged(newMode QSslSocket__SslMode) {
 	C.QSslSocket_modeChanged(this.h, (C.int)(newMode))
 }
-func (this *QSslSocket) OnModeChanged(slot func(newMode QSslSocket__SslMode)) {
-	C.QSslSocket_connect_modeChanged(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QSslSocket) OnModeChanged(slot func(newMode QSslSocket__SslMode)) *qt6.SignalConnection {
+	_goptr := qt6.UnsafeNewQMetaObject__Connection(C.QSslSocket_connect_modeChanged(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QSslSocket_modeChanged
@@ -584,8 +597,10 @@ func miqt_exec_callback_QSslSocket_modeChanged(cb C.intptr_t, newMode C.int) {
 func (this *QSslSocket) EncryptedBytesWritten(totalBytes int64) {
 	C.QSslSocket_encryptedBytesWritten(this.h, (C.longlong)(totalBytes))
 }
-func (this *QSslSocket) OnEncryptedBytesWritten(slot func(totalBytes int64)) {
-	C.QSslSocket_connect_encryptedBytesWritten(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QSslSocket) OnEncryptedBytesWritten(slot func(totalBytes int64)) *qt6.SignalConnection {
+	_goptr := qt6.UnsafeNewQMetaObject__Connection(C.QSslSocket_connect_encryptedBytesWritten(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QSslSocket_encryptedBytesWritten
@@ -604,8 +619,10 @@ func miqt_exec_callback_QSslSocket_encryptedBytesWritten(cb C.intptr_t, totalByt
 func (this *QSslSocket) PreSharedKeyAuthenticationRequired(authenticator *QSslPreSharedKeyAuthenticator) {
 	C.QSslSocket_preSharedKeyAuthenticationRequired(this.h, authenticator.cPointer())
 }
-func (this *QSslSocket) OnPreSharedKeyAuthenticationRequired(slot func(authenticator *QSslPreSharedKeyAuthenticator)) {
-	C.QSslSocket_connect_preSharedKeyAuthenticationRequired(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QSslSocket) OnPreSharedKeyAuthenticationRequired(slot func(authenticator *QSslPreSharedKeyAuthenticator)) *qt6.SignalConnection {
+	_goptr := qt6.UnsafeNewQMetaObject__Connection(C.QSslSocket_connect_preSharedKeyAuthenticationRequired(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QSslSocket_preSharedKeyAuthenticationRequired
@@ -624,8 +641,10 @@ func miqt_exec_callback_QSslSocket_preSharedKeyAuthenticationRequired(cb C.intpt
 func (this *QSslSocket) NewSessionTicketReceived() {
 	C.QSslSocket_newSessionTicketReceived(this.h)
 }
-func (this *QSslSocket) OnNewSessionTicketReceived(slot func()) {
-	C.QSslSocket_connect_newSessionTicketReceived(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QSslSocket) OnNewSessionTicketReceived(slot func()) *qt6.SignalConnection {
+	_goptr := qt6.UnsafeNewQMetaObject__Connection(C.QSslSocket_connect_newSessionTicketReceived(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QSslSocket_newSessionTicketReceived
@@ -645,8 +664,10 @@ func (this *QSslSocket) AlertSent(level QSsl__AlertLevel, typeVal QSsl__AlertTyp
 	defer C.free(unsafe.Pointer(description_ms.data))
 	C.QSslSocket_alertSent(this.h, (C.int)(level), (C.int)(typeVal), description_ms)
 }
-func (this *QSslSocket) OnAlertSent(slot func(level QSsl__AlertLevel, typeVal QSsl__AlertType, description string)) {
-	C.QSslSocket_connect_alertSent(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QSslSocket) OnAlertSent(slot func(level QSsl__AlertLevel, typeVal QSsl__AlertType, description string)) *qt6.SignalConnection {
+	_goptr := qt6.UnsafeNewQMetaObject__Connection(C.QSslSocket_connect_alertSent(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QSslSocket_alertSent
@@ -676,8 +697,10 @@ func (this *QSslSocket) AlertReceived(level QSsl__AlertLevel, typeVal QSsl__Aler
 	defer C.free(unsafe.Pointer(description_ms.data))
 	C.QSslSocket_alertReceived(this.h, (C.int)(level), (C.int)(typeVal), description_ms)
 }
-func (this *QSslSocket) OnAlertReceived(slot func(level QSsl__AlertLevel, typeVal QSsl__AlertType, description string)) {
-	C.QSslSocket_connect_alertReceived(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QSslSocket) OnAlertReceived(slot func(level QSsl__AlertLevel, typeVal QSsl__AlertType, description string)) *qt6.SignalConnection {
+	_goptr := qt6.UnsafeNewQMetaObject__Connection(C.QSslSocket_connect_alertReceived(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QSslSocket_alertReceived
@@ -703,8 +726,10 @@ func miqt_exec_callback_QSslSocket_alertReceived(cb C.intptr_t, level C.int, typ
 func (this *QSslSocket) HandshakeInterruptedOnError(error *QSslError) {
 	C.QSslSocket_handshakeInterruptedOnError(this.h, error.cPointer())
 }
-func (this *QSslSocket) OnHandshakeInterruptedOnError(slot func(error *QSslError)) {
-	C.QSslSocket_connect_handshakeInterruptedOnError(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QSslSocket) OnHandshakeInterruptedOnError(slot func(error *QSslError)) *qt6.SignalConnection {
+	_goptr := qt6.UnsafeNewQMetaObject__Connection(C.QSslSocket_connect_handshakeInterruptedOnError(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QSslSocket_handshakeInterruptedOnError
@@ -1071,7 +1096,11 @@ func (this *QSslSocket) callVirtualBase_Resume() {
 
 }
 func (this *QSslSocket) OnResume(slot func(super func())) {
-	ok := C.QSslSocket_override_virtual_resume(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QSslSocket_override_virtual_resume(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1094,7 +1123,11 @@ func (this *QSslSocket) callVirtualBase_SetSocketDescriptor(socketDescriptor uin
 
 }
 func (this *QSslSocket) OnSetSocketDescriptor(slot func(super func(socketDescriptor uintptr, state QAbstractSocket__SocketState, openMode qt6.QIODeviceBase__OpenModeFlag) bool, socketDescriptor uintptr, state QAbstractSocket__SocketState, openMode qt6.QIODeviceBase__OpenModeFlag) bool) {
-	ok := C.QSslSocket_override_virtual_setSocketDescriptor(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QSslSocket_override_virtual_setSocketDescriptor(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1130,7 +1163,11 @@ func (this *QSslSocket) callVirtualBase_ConnectToHost(hostName string, port uint
 
 }
 func (this *QSslSocket) OnConnectToHost(slot func(super func(hostName string, port uint16, openMode qt6.QIODeviceBase__OpenModeFlag, protocol QAbstractSocket__NetworkLayerProtocol), hostName string, port uint16, openMode qt6.QIODeviceBase__OpenModeFlag, protocol QAbstractSocket__NetworkLayerProtocol)) {
-	ok := C.QSslSocket_override_virtual_connectToHost(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QSslSocket_override_virtual_connectToHost(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1164,7 +1201,11 @@ func (this *QSslSocket) callVirtualBase_DisconnectFromHost() {
 
 }
 func (this *QSslSocket) OnDisconnectFromHost(slot func(super func())) {
-	ok := C.QSslSocket_override_virtual_disconnectFromHost(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QSslSocket_override_virtual_disconnectFromHost(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1187,7 +1228,11 @@ func (this *QSslSocket) callVirtualBase_SetSocketOption(option QAbstractSocket__
 
 }
 func (this *QSslSocket) OnSetSocketOption(slot func(super func(option QAbstractSocket__SocketOption, value *qt6.QVariant), option QAbstractSocket__SocketOption, value *qt6.QVariant)) {
-	ok := C.QSslSocket_override_virtual_setSocketOption(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QSslSocket_override_virtual_setSocketOption(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1217,7 +1262,11 @@ func (this *QSslSocket) callVirtualBase_SocketOption(option QAbstractSocket__Soc
 
 }
 func (this *QSslSocket) OnSocketOption(slot func(super func(option QAbstractSocket__SocketOption) *qt6.QVariant, option QAbstractSocket__SocketOption) *qt6.QVariant) {
-	ok := C.QSslSocket_override_virtual_socketOption(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QSslSocket_override_virtual_socketOption(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1245,7 +1294,11 @@ func (this *QSslSocket) callVirtualBase_BytesAvailable() int64 {
 
 }
 func (this *QSslSocket) OnBytesAvailable(slot func(super func() int64) int64) {
-	ok := C.QSslSocket_override_virtual_bytesAvailable(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QSslSocket_override_virtual_bytesAvailable(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1270,7 +1323,11 @@ func (this *QSslSocket) callVirtualBase_BytesToWrite() int64 {
 
 }
 func (this *QSslSocket) OnBytesToWrite(slot func(super func() int64) int64) {
-	ok := C.QSslSocket_override_virtual_bytesToWrite(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QSslSocket_override_virtual_bytesToWrite(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1295,7 +1352,11 @@ func (this *QSslSocket) callVirtualBase_CanReadLine() bool {
 
 }
 func (this *QSslSocket) OnCanReadLine(slot func(super func() bool) bool) {
-	ok := C.QSslSocket_override_virtual_canReadLine(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QSslSocket_override_virtual_canReadLine(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1320,7 +1381,11 @@ func (this *QSslSocket) callVirtualBase_Close() {
 
 }
 func (this *QSslSocket) OnClose(slot func(super func())) {
-	ok := C.QSslSocket_override_virtual_close(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QSslSocket_override_virtual_close(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1343,7 +1408,11 @@ func (this *QSslSocket) callVirtualBase_AtEnd() bool {
 
 }
 func (this *QSslSocket) OnAtEnd(slot func(super func() bool) bool) {
-	ok := C.QSslSocket_override_virtual_atEnd(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QSslSocket_override_virtual_atEnd(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1368,7 +1437,11 @@ func (this *QSslSocket) callVirtualBase_SetReadBufferSize(size int64) {
 
 }
 func (this *QSslSocket) OnSetReadBufferSize(slot func(super func(size int64), size int64)) {
-	ok := C.QSslSocket_override_virtual_setReadBufferSize(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QSslSocket_override_virtual_setReadBufferSize(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1394,7 +1467,11 @@ func (this *QSslSocket) callVirtualBase_WaitForConnected(msecs int) bool {
 
 }
 func (this *QSslSocket) OnWaitForConnected(slot func(super func(msecs int) bool, msecs int) bool) {
-	ok := C.QSslSocket_override_virtual_waitForConnected(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QSslSocket_override_virtual_waitForConnected(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1422,7 +1499,11 @@ func (this *QSslSocket) callVirtualBase_WaitForReadyRead(msecs int) bool {
 
 }
 func (this *QSslSocket) OnWaitForReadyRead(slot func(super func(msecs int) bool, msecs int) bool) {
-	ok := C.QSslSocket_override_virtual_waitForReadyRead(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QSslSocket_override_virtual_waitForReadyRead(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1450,7 +1531,11 @@ func (this *QSslSocket) callVirtualBase_WaitForBytesWritten(msecs int) bool {
 
 }
 func (this *QSslSocket) OnWaitForBytesWritten(slot func(super func(msecs int) bool, msecs int) bool) {
-	ok := C.QSslSocket_override_virtual_waitForBytesWritten(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QSslSocket_override_virtual_waitForBytesWritten(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1478,7 +1563,11 @@ func (this *QSslSocket) callVirtualBase_WaitForDisconnected(msecs int) bool {
 
 }
 func (this *QSslSocket) OnWaitForDisconnected(slot func(super func(msecs int) bool, msecs int) bool) {
-	ok := C.QSslSocket_override_virtual_waitForDisconnected(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QSslSocket_override_virtual_waitForDisconnected(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1508,7 +1597,11 @@ func (this *QSslSocket) callVirtualBase_ReadData(data string, maxlen int64) int6
 
 }
 func (this *QSslSocket) OnReadData(slot func(super func(data string, maxlen int64) int64, data string, maxlen int64) int64) {
-	ok := C.QSslSocket_override_virtual_readData(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QSslSocket_override_virtual_readData(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1539,7 +1632,11 @@ func (this *QSslSocket) callVirtualBase_SkipData(maxSize int64) int64 {
 
 }
 func (this *QSslSocket) OnSkipData(slot func(super func(maxSize int64) int64, maxSize int64) int64) {
-	ok := C.QSslSocket_override_virtual_skipData(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QSslSocket_override_virtual_skipData(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1569,7 +1666,11 @@ func (this *QSslSocket) callVirtualBase_WriteData(data string, lenVal int64) int
 
 }
 func (this *QSslSocket) OnWriteData(slot func(super func(data string, lenVal int64) int64, data string, lenVal int64) int64) {
-	ok := C.QSslSocket_override_virtual_writeData(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QSslSocket_override_virtual_writeData(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1600,7 +1701,11 @@ func (this *QSslSocket) callVirtualBase_Bind(address *QHostAddress, port uint16,
 
 }
 func (this *QSslSocket) OnBind(slot func(super func(address *QHostAddress, port uint16, mode QAbstractSocket__BindFlag) bool, address *QHostAddress, port uint16, mode QAbstractSocket__BindFlag) bool) {
-	ok := C.QSslSocket_override_virtual_bind(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QSslSocket_override_virtual_bind(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1632,7 +1737,11 @@ func (this *QSslSocket) callVirtualBase_SocketDescriptor() uintptr {
 
 }
 func (this *QSslSocket) OnSocketDescriptor(slot func(super func() uintptr) uintptr) {
-	ok := C.QSslSocket_override_virtual_socketDescriptor(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QSslSocket_override_virtual_socketDescriptor(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1657,7 +1766,11 @@ func (this *QSslSocket) callVirtualBase_IsSequential() bool {
 
 }
 func (this *QSslSocket) OnIsSequential(slot func(super func() bool) bool) {
-	ok := C.QSslSocket_override_virtual_isSequential(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QSslSocket_override_virtual_isSequential(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1684,7 +1797,11 @@ func (this *QSslSocket) callVirtualBase_ReadLineData(data string, maxlen int64) 
 
 }
 func (this *QSslSocket) OnReadLineData(slot func(super func(data string, maxlen int64) int64, data string, maxlen int64) int64) {
-	ok := C.QSslSocket_override_virtual_readLineData(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QSslSocket_override_virtual_readLineData(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1715,7 +1832,11 @@ func (this *QSslSocket) callVirtualBase_Open(mode qt6.QIODeviceBase__OpenModeFla
 
 }
 func (this *QSslSocket) OnOpen(slot func(super func(mode qt6.QIODeviceBase__OpenModeFlag) bool, mode qt6.QIODeviceBase__OpenModeFlag) bool) {
-	ok := C.QSslSocket_override_virtual_open(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QSslSocket_override_virtual_open(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1743,7 +1864,11 @@ func (this *QSslSocket) callVirtualBase_Pos() int64 {
 
 }
 func (this *QSslSocket) OnPos(slot func(super func() int64) int64) {
-	ok := C.QSslSocket_override_virtual_pos(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QSslSocket_override_virtual_pos(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1768,7 +1893,11 @@ func (this *QSslSocket) callVirtualBase_Size() int64 {
 
 }
 func (this *QSslSocket) OnSize(slot func(super func() int64) int64) {
-	ok := C.QSslSocket_override_virtual_size(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QSslSocket_override_virtual_size(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1793,7 +1922,11 @@ func (this *QSslSocket) callVirtualBase_Seek(pos int64) bool {
 
 }
 func (this *QSslSocket) OnSeek(slot func(super func(pos int64) bool, pos int64) bool) {
-	ok := C.QSslSocket_override_virtual_seek(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QSslSocket_override_virtual_seek(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1821,7 +1954,11 @@ func (this *QSslSocket) callVirtualBase_Reset() bool {
 
 }
 func (this *QSslSocket) OnReset(slot func(super func() bool) bool) {
-	ok := C.QSslSocket_override_virtual_reset(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QSslSocket_override_virtual_reset(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1846,7 +1983,11 @@ func (this *QSslSocket) callVirtualBase_Event(event *qt6.QEvent) bool {
 
 }
 func (this *QSslSocket) OnEvent(slot func(super func(event *qt6.QEvent) bool, event *qt6.QEvent) bool) {
-	ok := C.QSslSocket_override_virtual_event(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QSslSocket_override_virtual_event(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1874,7 +2015,11 @@ func (this *QSslSocket) callVirtualBase_EventFilter(watched *qt6.QObject, event 
 
 }
 func (this *QSslSocket) OnEventFilter(slot func(super func(watched *qt6.QObject, event *qt6.QEvent) bool, watched *qt6.QObject, event *qt6.QEvent) bool) {
-	ok := C.QSslSocket_override_virtual_eventFilter(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QSslSocket_override_virtual_eventFilter(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1904,7 +2049,11 @@ func (this *QSslSocket) callVirtualBase_TimerEvent(event *qt6.QTimerEvent) {
 
 }
 func (this *QSslSocket) OnTimerEvent(slot func(super func(event *qt6.QTimerEvent), event *qt6.QTimerEvent)) {
-	ok := C.QSslSocket_override_virtual_timerEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QSslSocket_override_virtual_timerEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1930,7 +2079,11 @@ func (this *QSslSocket) callVirtualBase_ChildEvent(event *qt6.QChildEvent) {
 
 }
 func (this *QSslSocket) OnChildEvent(slot func(super func(event *qt6.QChildEvent), event *qt6.QChildEvent)) {
-	ok := C.QSslSocket_override_virtual_childEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QSslSocket_override_virtual_childEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1956,7 +2109,11 @@ func (this *QSslSocket) callVirtualBase_CustomEvent(event *qt6.QEvent) {
 
 }
 func (this *QSslSocket) OnCustomEvent(slot func(super func(event *qt6.QEvent), event *qt6.QEvent)) {
-	ok := C.QSslSocket_override_virtual_customEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QSslSocket_override_virtual_customEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1982,7 +2139,11 @@ func (this *QSslSocket) callVirtualBase_ConnectNotify(signal *qt6.QMetaMethod) {
 
 }
 func (this *QSslSocket) OnConnectNotify(slot func(super func(signal *qt6.QMetaMethod), signal *qt6.QMetaMethod)) {
-	ok := C.QSslSocket_override_virtual_connectNotify(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QSslSocket_override_virtual_connectNotify(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -2008,7 +2169,11 @@ func (this *QSslSocket) callVirtualBase_DisconnectNotify(signal *qt6.QMetaMethod
 
 }
 func (this *QSslSocket) OnDisconnectNotify(slot func(super func(signal *qt6.QMetaMethod), signal *qt6.QMetaMethod)) {
-	ok := C.QSslSocket_override_virtual_disconnectNotify(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QSslSocket_override_virtual_disconnectNotify(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}

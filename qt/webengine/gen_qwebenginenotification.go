@@ -15,6 +15,11 @@ import (
 	"unsafe"
 )
 
+//export miqt_exec_callback_handle_release_QWebEngineNotification
+func miqt_exec_callback_handle_release_QWebEngineNotification(cb C.intptr_t) {
+	cgo.Handle(cb).Delete()
+}
+
 type QWebEngineNotification struct {
 	h *C.QWebEngineNotification
 	*qt.QObject
@@ -142,8 +147,10 @@ func (this *QWebEngineNotification) Close() {
 func (this *QWebEngineNotification) Closed() {
 	C.QWebEngineNotification_closed(this.h)
 }
-func (this *QWebEngineNotification) OnClosed(slot func()) {
-	C.QWebEngineNotification_connect_closed(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QWebEngineNotification) OnClosed(slot func()) *qt.SignalConnection {
+	_goptr := qt.UnsafeNewQMetaObject__Connection(C.QWebEngineNotification_connect_closed(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QWebEngineNotification_closed

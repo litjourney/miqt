@@ -1,3 +1,5 @@
+#include <memory>
+#include <utility>
 #include <QAbstractSeries>
 #include <QBrush>
 #include <QColor>
@@ -24,6 +26,7 @@
 extern "C" {
 #endif
 
+void miqt_exec_callback_handle_release_QXYSeries(intptr_t);
 void miqt_exec_callback_QXYSeries_clicked(intptr_t, QPointF*);
 void miqt_exec_callback_QXYSeries_hovered(intptr_t, QPointF*, bool);
 void miqt_exec_callback_QXYSeries_pressed(intptr_t, QPointF*);
@@ -546,133 +549,155 @@ void QXYSeries_clicked(QXYSeries* self, QPointF* point) {
 	self->clicked(*point);
 }
 
-void QXYSeries_connect_clicked(QXYSeries* self, intptr_t slot) {
-	QXYSeries::connect(self, static_cast<void (QXYSeries::*)(const QPointF&)>(&QXYSeries::clicked), self, [=](const QPointF& point) {
+void* QXYSeries_connect_clicked(QXYSeries* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QXYSeries>>(slot);
+	return new QMetaObject::Connection(QXYSeries::connect(self, static_cast<void (QXYSeries::*)(const QPointF&)>(&QXYSeries::clicked), self, [slot_handle](const QPointF& point) {
+		intptr_t slot = slot_handle->value();
 		const QPointF& point_ret = point;
 		// Cast returned reference into pointer
 		QPointF* sigval1 = const_cast<QPointF*>(&point_ret);
 		miqt_exec_callback_QXYSeries_clicked(slot, sigval1);
-	});
+	}));
 }
 
 void QXYSeries_hovered(QXYSeries* self, QPointF* point, bool state) {
 	self->hovered(*point, state);
 }
 
-void QXYSeries_connect_hovered(QXYSeries* self, intptr_t slot) {
-	QXYSeries::connect(self, static_cast<void (QXYSeries::*)(const QPointF&, bool)>(&QXYSeries::hovered), self, [=](const QPointF& point, bool state) {
+void* QXYSeries_connect_hovered(QXYSeries* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QXYSeries>>(slot);
+	return new QMetaObject::Connection(QXYSeries::connect(self, static_cast<void (QXYSeries::*)(const QPointF&, bool)>(&QXYSeries::hovered), self, [slot_handle](const QPointF& point, bool state) {
+		intptr_t slot = slot_handle->value();
 		const QPointF& point_ret = point;
 		// Cast returned reference into pointer
 		QPointF* sigval1 = const_cast<QPointF*>(&point_ret);
 		bool sigval2 = state;
 		miqt_exec_callback_QXYSeries_hovered(slot, sigval1, sigval2);
-	});
+	}));
 }
 
 void QXYSeries_pressed(QXYSeries* self, QPointF* point) {
 	self->pressed(*point);
 }
 
-void QXYSeries_connect_pressed(QXYSeries* self, intptr_t slot) {
-	QXYSeries::connect(self, static_cast<void (QXYSeries::*)(const QPointF&)>(&QXYSeries::pressed), self, [=](const QPointF& point) {
+void* QXYSeries_connect_pressed(QXYSeries* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QXYSeries>>(slot);
+	return new QMetaObject::Connection(QXYSeries::connect(self, static_cast<void (QXYSeries::*)(const QPointF&)>(&QXYSeries::pressed), self, [slot_handle](const QPointF& point) {
+		intptr_t slot = slot_handle->value();
 		const QPointF& point_ret = point;
 		// Cast returned reference into pointer
 		QPointF* sigval1 = const_cast<QPointF*>(&point_ret);
 		miqt_exec_callback_QXYSeries_pressed(slot, sigval1);
-	});
+	}));
 }
 
 void QXYSeries_released(QXYSeries* self, QPointF* point) {
 	self->released(*point);
 }
 
-void QXYSeries_connect_released(QXYSeries* self, intptr_t slot) {
-	QXYSeries::connect(self, static_cast<void (QXYSeries::*)(const QPointF&)>(&QXYSeries::released), self, [=](const QPointF& point) {
+void* QXYSeries_connect_released(QXYSeries* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QXYSeries>>(slot);
+	return new QMetaObject::Connection(QXYSeries::connect(self, static_cast<void (QXYSeries::*)(const QPointF&)>(&QXYSeries::released), self, [slot_handle](const QPointF& point) {
+		intptr_t slot = slot_handle->value();
 		const QPointF& point_ret = point;
 		// Cast returned reference into pointer
 		QPointF* sigval1 = const_cast<QPointF*>(&point_ret);
 		miqt_exec_callback_QXYSeries_released(slot, sigval1);
-	});
+	}));
 }
 
 void QXYSeries_doubleClicked(QXYSeries* self, QPointF* point) {
 	self->doubleClicked(*point);
 }
 
-void QXYSeries_connect_doubleClicked(QXYSeries* self, intptr_t slot) {
-	QXYSeries::connect(self, static_cast<void (QXYSeries::*)(const QPointF&)>(&QXYSeries::doubleClicked), self, [=](const QPointF& point) {
+void* QXYSeries_connect_doubleClicked(QXYSeries* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QXYSeries>>(slot);
+	return new QMetaObject::Connection(QXYSeries::connect(self, static_cast<void (QXYSeries::*)(const QPointF&)>(&QXYSeries::doubleClicked), self, [slot_handle](const QPointF& point) {
+		intptr_t slot = slot_handle->value();
 		const QPointF& point_ret = point;
 		// Cast returned reference into pointer
 		QPointF* sigval1 = const_cast<QPointF*>(&point_ret);
 		miqt_exec_callback_QXYSeries_doubleClicked(slot, sigval1);
-	});
+	}));
 }
 
 void QXYSeries_pointReplaced(QXYSeries* self, int index) {
 	self->pointReplaced(static_cast<int>(index));
 }
 
-void QXYSeries_connect_pointReplaced(QXYSeries* self, intptr_t slot) {
-	QXYSeries::connect(self, static_cast<void (QXYSeries::*)(int)>(&QXYSeries::pointReplaced), self, [=](int index) {
+void* QXYSeries_connect_pointReplaced(QXYSeries* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QXYSeries>>(slot);
+	return new QMetaObject::Connection(QXYSeries::connect(self, static_cast<void (QXYSeries::*)(int)>(&QXYSeries::pointReplaced), self, [slot_handle](int index) {
+		intptr_t slot = slot_handle->value();
 		int sigval1 = index;
 		miqt_exec_callback_QXYSeries_pointReplaced(slot, sigval1);
-	});
+	}));
 }
 
 void QXYSeries_pointRemoved(QXYSeries* self, int index) {
 	self->pointRemoved(static_cast<int>(index));
 }
 
-void QXYSeries_connect_pointRemoved(QXYSeries* self, intptr_t slot) {
-	QXYSeries::connect(self, static_cast<void (QXYSeries::*)(int)>(&QXYSeries::pointRemoved), self, [=](int index) {
+void* QXYSeries_connect_pointRemoved(QXYSeries* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QXYSeries>>(slot);
+	return new QMetaObject::Connection(QXYSeries::connect(self, static_cast<void (QXYSeries::*)(int)>(&QXYSeries::pointRemoved), self, [slot_handle](int index) {
+		intptr_t slot = slot_handle->value();
 		int sigval1 = index;
 		miqt_exec_callback_QXYSeries_pointRemoved(slot, sigval1);
-	});
+	}));
 }
 
 void QXYSeries_pointAdded(QXYSeries* self, int index) {
 	self->pointAdded(static_cast<int>(index));
 }
 
-void QXYSeries_connect_pointAdded(QXYSeries* self, intptr_t slot) {
-	QXYSeries::connect(self, static_cast<void (QXYSeries::*)(int)>(&QXYSeries::pointAdded), self, [=](int index) {
+void* QXYSeries_connect_pointAdded(QXYSeries* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QXYSeries>>(slot);
+	return new QMetaObject::Connection(QXYSeries::connect(self, static_cast<void (QXYSeries::*)(int)>(&QXYSeries::pointAdded), self, [slot_handle](int index) {
+		intptr_t slot = slot_handle->value();
 		int sigval1 = index;
 		miqt_exec_callback_QXYSeries_pointAdded(slot, sigval1);
-	});
+	}));
 }
 
 void QXYSeries_colorChanged(QXYSeries* self, QColor* color) {
 	self->colorChanged(*color);
 }
 
-void QXYSeries_connect_colorChanged(QXYSeries* self, intptr_t slot) {
-	QXYSeries::connect(self, static_cast<void (QXYSeries::*)(QColor)>(&QXYSeries::colorChanged), self, [=](QColor color) {
+void* QXYSeries_connect_colorChanged(QXYSeries* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QXYSeries>>(slot);
+	return new QMetaObject::Connection(QXYSeries::connect(self, static_cast<void (QXYSeries::*)(QColor)>(&QXYSeries::colorChanged), self, [slot_handle](QColor color) {
+		intptr_t slot = slot_handle->value();
 		QColor* sigval1 = new QColor(color);
 		miqt_exec_callback_QXYSeries_colorChanged(slot, sigval1);
-	});
+	}));
 }
 
 void QXYSeries_selectedColorChanged(QXYSeries* self, QColor* color) {
 	self->selectedColorChanged(*color);
 }
 
-void QXYSeries_connect_selectedColorChanged(QXYSeries* self, intptr_t slot) {
-	QXYSeries::connect(self, static_cast<void (QXYSeries::*)(const QColor&)>(&QXYSeries::selectedColorChanged), self, [=](const QColor& color) {
+void* QXYSeries_connect_selectedColorChanged(QXYSeries* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QXYSeries>>(slot);
+	return new QMetaObject::Connection(QXYSeries::connect(self, static_cast<void (QXYSeries::*)(const QColor&)>(&QXYSeries::selectedColorChanged), self, [slot_handle](const QColor& color) {
+		intptr_t slot = slot_handle->value();
 		const QColor& color_ret = color;
 		// Cast returned reference into pointer
 		QColor* sigval1 = const_cast<QColor*>(&color_ret);
 		miqt_exec_callback_QXYSeries_selectedColorChanged(slot, sigval1);
-	});
+	}));
 }
 
 void QXYSeries_pointsReplaced(QXYSeries* self) {
 	self->pointsReplaced();
 }
 
-void QXYSeries_connect_pointsReplaced(QXYSeries* self, intptr_t slot) {
-	QXYSeries::connect(self, static_cast<void (QXYSeries::*)()>(&QXYSeries::pointsReplaced), self, [=]() {
+void* QXYSeries_connect_pointsReplaced(QXYSeries* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QXYSeries>>(slot);
+	return new QMetaObject::Connection(QXYSeries::connect(self, static_cast<void (QXYSeries::*)()>(&QXYSeries::pointsReplaced), self, [slot_handle]() {
+		intptr_t slot = slot_handle->value();
 		miqt_exec_callback_QXYSeries_pointsReplaced(slot);
-	});
+	}));
 }
 
 void QXYSeries_pointLabelsFormatChanged(QXYSeries* self, struct miqt_string format) {
@@ -680,8 +705,10 @@ void QXYSeries_pointLabelsFormatChanged(QXYSeries* self, struct miqt_string form
 	self->pointLabelsFormatChanged(format_QString);
 }
 
-void QXYSeries_connect_pointLabelsFormatChanged(QXYSeries* self, intptr_t slot) {
-	QXYSeries::connect(self, static_cast<void (QXYSeries::*)(const QString&)>(&QXYSeries::pointLabelsFormatChanged), self, [=](const QString& format) {
+void* QXYSeries_connect_pointLabelsFormatChanged(QXYSeries* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QXYSeries>>(slot);
+	return new QMetaObject::Connection(QXYSeries::connect(self, static_cast<void (QXYSeries::*)(const QString&)>(&QXYSeries::pointLabelsFormatChanged), self, [slot_handle](const QString& format) {
+		intptr_t slot = slot_handle->value();
 		const QString format_ret = format;
 		// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 		QByteArray format_b = format_ret.toUtf8();
@@ -691,153 +718,177 @@ void QXYSeries_connect_pointLabelsFormatChanged(QXYSeries* self, intptr_t slot) 
 		memcpy(format_ms.data, format_b.data(), format_ms.len);
 		struct miqt_string sigval1 = format_ms;
 		miqt_exec_callback_QXYSeries_pointLabelsFormatChanged(slot, sigval1);
-	});
+	}));
 }
 
 void QXYSeries_pointLabelsVisibilityChanged(QXYSeries* self, bool visible) {
 	self->pointLabelsVisibilityChanged(visible);
 }
 
-void QXYSeries_connect_pointLabelsVisibilityChanged(QXYSeries* self, intptr_t slot) {
-	QXYSeries::connect(self, static_cast<void (QXYSeries::*)(bool)>(&QXYSeries::pointLabelsVisibilityChanged), self, [=](bool visible) {
+void* QXYSeries_connect_pointLabelsVisibilityChanged(QXYSeries* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QXYSeries>>(slot);
+	return new QMetaObject::Connection(QXYSeries::connect(self, static_cast<void (QXYSeries::*)(bool)>(&QXYSeries::pointLabelsVisibilityChanged), self, [slot_handle](bool visible) {
+		intptr_t slot = slot_handle->value();
 		bool sigval1 = visible;
 		miqt_exec_callback_QXYSeries_pointLabelsVisibilityChanged(slot, sigval1);
-	});
+	}));
 }
 
 void QXYSeries_pointLabelsFontChanged(QXYSeries* self, QFont* font) {
 	self->pointLabelsFontChanged(*font);
 }
 
-void QXYSeries_connect_pointLabelsFontChanged(QXYSeries* self, intptr_t slot) {
-	QXYSeries::connect(self, static_cast<void (QXYSeries::*)(const QFont&)>(&QXYSeries::pointLabelsFontChanged), self, [=](const QFont& font) {
+void* QXYSeries_connect_pointLabelsFontChanged(QXYSeries* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QXYSeries>>(slot);
+	return new QMetaObject::Connection(QXYSeries::connect(self, static_cast<void (QXYSeries::*)(const QFont&)>(&QXYSeries::pointLabelsFontChanged), self, [slot_handle](const QFont& font) {
+		intptr_t slot = slot_handle->value();
 		const QFont& font_ret = font;
 		// Cast returned reference into pointer
 		QFont* sigval1 = const_cast<QFont*>(&font_ret);
 		miqt_exec_callback_QXYSeries_pointLabelsFontChanged(slot, sigval1);
-	});
+	}));
 }
 
 void QXYSeries_pointLabelsColorChanged(QXYSeries* self, QColor* color) {
 	self->pointLabelsColorChanged(*color);
 }
 
-void QXYSeries_connect_pointLabelsColorChanged(QXYSeries* self, intptr_t slot) {
-	QXYSeries::connect(self, static_cast<void (QXYSeries::*)(const QColor&)>(&QXYSeries::pointLabelsColorChanged), self, [=](const QColor& color) {
+void* QXYSeries_connect_pointLabelsColorChanged(QXYSeries* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QXYSeries>>(slot);
+	return new QMetaObject::Connection(QXYSeries::connect(self, static_cast<void (QXYSeries::*)(const QColor&)>(&QXYSeries::pointLabelsColorChanged), self, [slot_handle](const QColor& color) {
+		intptr_t slot = slot_handle->value();
 		const QColor& color_ret = color;
 		// Cast returned reference into pointer
 		QColor* sigval1 = const_cast<QColor*>(&color_ret);
 		miqt_exec_callback_QXYSeries_pointLabelsColorChanged(slot, sigval1);
-	});
+	}));
 }
 
 void QXYSeries_pointLabelsClippingChanged(QXYSeries* self, bool clipping) {
 	self->pointLabelsClippingChanged(clipping);
 }
 
-void QXYSeries_connect_pointLabelsClippingChanged(QXYSeries* self, intptr_t slot) {
-	QXYSeries::connect(self, static_cast<void (QXYSeries::*)(bool)>(&QXYSeries::pointLabelsClippingChanged), self, [=](bool clipping) {
+void* QXYSeries_connect_pointLabelsClippingChanged(QXYSeries* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QXYSeries>>(slot);
+	return new QMetaObject::Connection(QXYSeries::connect(self, static_cast<void (QXYSeries::*)(bool)>(&QXYSeries::pointLabelsClippingChanged), self, [slot_handle](bool clipping) {
+		intptr_t slot = slot_handle->value();
 		bool sigval1 = clipping;
 		miqt_exec_callback_QXYSeries_pointLabelsClippingChanged(slot, sigval1);
-	});
+	}));
 }
 
 void QXYSeries_pointsRemoved(QXYSeries* self, int index, int count) {
 	self->pointsRemoved(static_cast<int>(index), static_cast<int>(count));
 }
 
-void QXYSeries_connect_pointsRemoved(QXYSeries* self, intptr_t slot) {
-	QXYSeries::connect(self, static_cast<void (QXYSeries::*)(int, int)>(&QXYSeries::pointsRemoved), self, [=](int index, int count) {
+void* QXYSeries_connect_pointsRemoved(QXYSeries* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QXYSeries>>(slot);
+	return new QMetaObject::Connection(QXYSeries::connect(self, static_cast<void (QXYSeries::*)(int, int)>(&QXYSeries::pointsRemoved), self, [slot_handle](int index, int count) {
+		intptr_t slot = slot_handle->value();
 		int sigval1 = index;
 		int sigval2 = count;
 		miqt_exec_callback_QXYSeries_pointsRemoved(slot, sigval1, sigval2);
-	});
+	}));
 }
 
 void QXYSeries_penChanged(QXYSeries* self, QPen* pen) {
 	self->penChanged(*pen);
 }
 
-void QXYSeries_connect_penChanged(QXYSeries* self, intptr_t slot) {
-	QXYSeries::connect(self, static_cast<void (QXYSeries::*)(const QPen&)>(&QXYSeries::penChanged), self, [=](const QPen& pen) {
+void* QXYSeries_connect_penChanged(QXYSeries* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QXYSeries>>(slot);
+	return new QMetaObject::Connection(QXYSeries::connect(self, static_cast<void (QXYSeries::*)(const QPen&)>(&QXYSeries::penChanged), self, [slot_handle](const QPen& pen) {
+		intptr_t slot = slot_handle->value();
 		const QPen& pen_ret = pen;
 		// Cast returned reference into pointer
 		QPen* sigval1 = const_cast<QPen*>(&pen_ret);
 		miqt_exec_callback_QXYSeries_penChanged(slot, sigval1);
-	});
+	}));
 }
 
 void QXYSeries_selectedPointsChanged(QXYSeries* self) {
 	self->selectedPointsChanged();
 }
 
-void QXYSeries_connect_selectedPointsChanged(QXYSeries* self, intptr_t slot) {
-	QXYSeries::connect(self, static_cast<void (QXYSeries::*)()>(&QXYSeries::selectedPointsChanged), self, [=]() {
+void* QXYSeries_connect_selectedPointsChanged(QXYSeries* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QXYSeries>>(slot);
+	return new QMetaObject::Connection(QXYSeries::connect(self, static_cast<void (QXYSeries::*)()>(&QXYSeries::selectedPointsChanged), self, [slot_handle]() {
+		intptr_t slot = slot_handle->value();
 		miqt_exec_callback_QXYSeries_selectedPointsChanged(slot);
-	});
+	}));
 }
 
 void QXYSeries_lightMarkerChanged(QXYSeries* self, QImage* lightMarker) {
 	self->lightMarkerChanged(*lightMarker);
 }
 
-void QXYSeries_connect_lightMarkerChanged(QXYSeries* self, intptr_t slot) {
-	QXYSeries::connect(self, static_cast<void (QXYSeries::*)(const QImage&)>(&QXYSeries::lightMarkerChanged), self, [=](const QImage& lightMarker) {
+void* QXYSeries_connect_lightMarkerChanged(QXYSeries* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QXYSeries>>(slot);
+	return new QMetaObject::Connection(QXYSeries::connect(self, static_cast<void (QXYSeries::*)(const QImage&)>(&QXYSeries::lightMarkerChanged), self, [slot_handle](const QImage& lightMarker) {
+		intptr_t slot = slot_handle->value();
 		const QImage& lightMarker_ret = lightMarker;
 		// Cast returned reference into pointer
 		QImage* sigval1 = const_cast<QImage*>(&lightMarker_ret);
 		miqt_exec_callback_QXYSeries_lightMarkerChanged(slot, sigval1);
-	});
+	}));
 }
 
 void QXYSeries_selectedLightMarkerChanged(QXYSeries* self, QImage* selectedLightMarker) {
 	self->selectedLightMarkerChanged(*selectedLightMarker);
 }
 
-void QXYSeries_connect_selectedLightMarkerChanged(QXYSeries* self, intptr_t slot) {
-	QXYSeries::connect(self, static_cast<void (QXYSeries::*)(const QImage&)>(&QXYSeries::selectedLightMarkerChanged), self, [=](const QImage& selectedLightMarker) {
+void* QXYSeries_connect_selectedLightMarkerChanged(QXYSeries* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QXYSeries>>(slot);
+	return new QMetaObject::Connection(QXYSeries::connect(self, static_cast<void (QXYSeries::*)(const QImage&)>(&QXYSeries::selectedLightMarkerChanged), self, [slot_handle](const QImage& selectedLightMarker) {
+		intptr_t slot = slot_handle->value();
 		const QImage& selectedLightMarker_ret = selectedLightMarker;
 		// Cast returned reference into pointer
 		QImage* sigval1 = const_cast<QImage*>(&selectedLightMarker_ret);
 		miqt_exec_callback_QXYSeries_selectedLightMarkerChanged(slot, sigval1);
-	});
+	}));
 }
 
 void QXYSeries_bestFitLineVisibilityChanged(QXYSeries* self, bool visible) {
 	self->bestFitLineVisibilityChanged(visible);
 }
 
-void QXYSeries_connect_bestFitLineVisibilityChanged(QXYSeries* self, intptr_t slot) {
-	QXYSeries::connect(self, static_cast<void (QXYSeries::*)(bool)>(&QXYSeries::bestFitLineVisibilityChanged), self, [=](bool visible) {
+void* QXYSeries_connect_bestFitLineVisibilityChanged(QXYSeries* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QXYSeries>>(slot);
+	return new QMetaObject::Connection(QXYSeries::connect(self, static_cast<void (QXYSeries::*)(bool)>(&QXYSeries::bestFitLineVisibilityChanged), self, [slot_handle](bool visible) {
+		intptr_t slot = slot_handle->value();
 		bool sigval1 = visible;
 		miqt_exec_callback_QXYSeries_bestFitLineVisibilityChanged(slot, sigval1);
-	});
+	}));
 }
 
 void QXYSeries_bestFitLinePenChanged(QXYSeries* self, QPen* pen) {
 	self->bestFitLinePenChanged(*pen);
 }
 
-void QXYSeries_connect_bestFitLinePenChanged(QXYSeries* self, intptr_t slot) {
-	QXYSeries::connect(self, static_cast<void (QXYSeries::*)(const QPen&)>(&QXYSeries::bestFitLinePenChanged), self, [=](const QPen& pen) {
+void* QXYSeries_connect_bestFitLinePenChanged(QXYSeries* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QXYSeries>>(slot);
+	return new QMetaObject::Connection(QXYSeries::connect(self, static_cast<void (QXYSeries::*)(const QPen&)>(&QXYSeries::bestFitLinePenChanged), self, [slot_handle](const QPen& pen) {
+		intptr_t slot = slot_handle->value();
 		const QPen& pen_ret = pen;
 		// Cast returned reference into pointer
 		QPen* sigval1 = const_cast<QPen*>(&pen_ret);
 		miqt_exec_callback_QXYSeries_bestFitLinePenChanged(slot, sigval1);
-	});
+	}));
 }
 
 void QXYSeries_bestFitLineColorChanged(QXYSeries* self, QColor* color) {
 	self->bestFitLineColorChanged(*color);
 }
 
-void QXYSeries_connect_bestFitLineColorChanged(QXYSeries* self, intptr_t slot) {
-	QXYSeries::connect(self, static_cast<void (QXYSeries::*)(const QColor&)>(&QXYSeries::bestFitLineColorChanged), self, [=](const QColor& color) {
+void* QXYSeries_connect_bestFitLineColorChanged(QXYSeries* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QXYSeries>>(slot);
+	return new QMetaObject::Connection(QXYSeries::connect(self, static_cast<void (QXYSeries::*)(const QColor&)>(&QXYSeries::bestFitLineColorChanged), self, [slot_handle](const QColor& color) {
+		intptr_t slot = slot_handle->value();
 		const QColor& color_ret = color;
 		// Cast returned reference into pointer
 		QColor* sigval1 = const_cast<QColor*>(&color_ret);
 		miqt_exec_callback_QXYSeries_bestFitLineColorChanged(slot, sigval1);
-	});
+	}));
 }
 
 void QXYSeries_pointsConfigurationChanged(QXYSeries* self, struct miqt_map /* of int to struct miqt_map  of int to QVariant*   */  configuration) {
@@ -858,8 +909,10 @@ void QXYSeries_pointsConfigurationChanged(QXYSeries* self, struct miqt_map /* of
 	self->pointsConfigurationChanged(configuration_QMap);
 }
 
-void QXYSeries_connect_pointsConfigurationChanged(QXYSeries* self, intptr_t slot) {
-	QXYSeries::connect(self, static_cast<void (QXYSeries::*)(const QHash<int, QHash<QXYSeries::PointConfiguration, QVariant>>&)>(&QXYSeries::pointsConfigurationChanged), self, [=](const QHash<int, QHash<QXYSeries::PointConfiguration, QVariant>>& configuration) {
+void* QXYSeries_connect_pointsConfigurationChanged(QXYSeries* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QXYSeries>>(slot);
+	return new QMetaObject::Connection(QXYSeries::connect(self, static_cast<void (QXYSeries::*)(const QHash<int, QHash<QXYSeries::PointConfiguration, QVariant>>&)>(&QXYSeries::pointsConfigurationChanged), self, [slot_handle](const QHash<int, QHash<QXYSeries::PointConfiguration, QVariant>>& configuration) {
+		intptr_t slot = slot_handle->value();
 		const QHash<int, QHash<QXYSeries::PointConfiguration, QVariant>>& configuration_ret = configuration;
 		// Convert QMap<> from C++ memory to manually-managed C memory
 		int* configuration_karr = static_cast<int*>(malloc(sizeof(int) * configuration_ret.size()));
@@ -891,19 +944,21 @@ void QXYSeries_connect_pointsConfigurationChanged(QXYSeries* self, intptr_t slot
 		configuration_out.values = static_cast<void*>(configuration_varr);
 		struct miqt_map /* of int to struct miqt_map  of int to QVariant*   */  sigval1 = configuration_out;
 		miqt_exec_callback_QXYSeries_pointsConfigurationChanged(slot, sigval1);
-	});
+	}));
 }
 
 void QXYSeries_markerSizeChanged(QXYSeries* self, double size) {
 	self->markerSizeChanged(static_cast<qreal>(size));
 }
 
-void QXYSeries_connect_markerSizeChanged(QXYSeries* self, intptr_t slot) {
-	QXYSeries::connect(self, static_cast<void (QXYSeries::*)(qreal)>(&QXYSeries::markerSizeChanged), self, [=](qreal size) {
+void* QXYSeries_connect_markerSizeChanged(QXYSeries* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QXYSeries>>(slot);
+	return new QMetaObject::Connection(QXYSeries::connect(self, static_cast<void (QXYSeries::*)(qreal)>(&QXYSeries::markerSizeChanged), self, [slot_handle](qreal size) {
+		intptr_t slot = slot_handle->value();
 		qreal size_ret = size;
 		double sigval1 = static_cast<double>(size_ret);
 		miqt_exec_callback_QXYSeries_markerSizeChanged(slot, sigval1);
-	});
+	}));
 }
 
 struct miqt_string QXYSeries_tr2(const char* s, const char* c) {

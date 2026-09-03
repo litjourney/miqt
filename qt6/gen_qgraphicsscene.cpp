@@ -1,3 +1,5 @@
+#include <memory>
+#include <utility>
 #include <QBrush>
 #include <QChildEvent>
 #include <QEvent>
@@ -50,6 +52,7 @@
 extern "C" {
 #endif
 
+void miqt_exec_callback_handle_release_QGraphicsScene(intptr_t);
 void miqt_exec_callback_QGraphicsScene_changed(intptr_t, struct miqt_array /* of QRectF* */ );
 void miqt_exec_callback_QGraphicsScene_sceneRectChanged(intptr_t, QRectF*);
 void miqt_exec_callback_QGraphicsScene_selectionChanged(intptr_t);
@@ -98,333 +101,333 @@ public:
 	virtual ~MiqtVirtualQGraphicsScene() override = default;
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__inputMethodQuery = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QGraphicsScene> handle__inputMethodQuery;
 
 	// Subclass to allow providing a Go implementation
 	virtual QVariant inputMethodQuery(Qt::InputMethodQuery query) const override {
-		if (handle__inputMethodQuery == 0) {
+		if (!handle__inputMethodQuery) {
 			return QGraphicsScene::inputMethodQuery(query);
 		}
 
 		Qt::InputMethodQuery query_ret = query;
 		int sigval1 = static_cast<int>(query_ret);
-		QVariant* callback_return_value = miqt_exec_callback_QGraphicsScene_inputMethodQuery(this, handle__inputMethodQuery, sigval1);
+		QVariant* callback_return_value = miqt_exec_callback_QGraphicsScene_inputMethodQuery(this, handle__inputMethodQuery.value(), sigval1);
 		return *callback_return_value;
 	}
 
 	friend QVariant* QGraphicsScene_virtualbase_inputMethodQuery(const void* self, int query);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__event = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QGraphicsScene> handle__event;
 
 	// Subclass to allow providing a Go implementation
 	virtual bool event(QEvent* event) override {
-		if (handle__event == 0) {
+		if (!handle__event) {
 			return QGraphicsScene::event(event);
 		}
 
 		QEvent* sigval1 = event;
-		bool callback_return_value = miqt_exec_callback_QGraphicsScene_event(this, handle__event, sigval1);
+		bool callback_return_value = miqt_exec_callback_QGraphicsScene_event(this, handle__event.value(), sigval1);
 		return callback_return_value;
 	}
 
 	friend bool QGraphicsScene_virtualbase_event(void* self, QEvent* event);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__eventFilter = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QGraphicsScene> handle__eventFilter;
 
 	// Subclass to allow providing a Go implementation
 	virtual bool eventFilter(QObject* watched, QEvent* event) override {
-		if (handle__eventFilter == 0) {
+		if (!handle__eventFilter) {
 			return QGraphicsScene::eventFilter(watched, event);
 		}
 
 		QObject* sigval1 = watched;
 		QEvent* sigval2 = event;
-		bool callback_return_value = miqt_exec_callback_QGraphicsScene_eventFilter(this, handle__eventFilter, sigval1, sigval2);
+		bool callback_return_value = miqt_exec_callback_QGraphicsScene_eventFilter(this, handle__eventFilter.value(), sigval1, sigval2);
 		return callback_return_value;
 	}
 
 	friend bool QGraphicsScene_virtualbase_eventFilter(void* self, QObject* watched, QEvent* event);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__contextMenuEvent = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QGraphicsScene> handle__contextMenuEvent;
 
 	// Subclass to allow providing a Go implementation
 	virtual void contextMenuEvent(QGraphicsSceneContextMenuEvent* event) override {
-		if (handle__contextMenuEvent == 0) {
+		if (!handle__contextMenuEvent) {
 			QGraphicsScene::contextMenuEvent(event);
 			return;
 		}
 
 		QGraphicsSceneContextMenuEvent* sigval1 = event;
-		miqt_exec_callback_QGraphicsScene_contextMenuEvent(this, handle__contextMenuEvent, sigval1);
+		miqt_exec_callback_QGraphicsScene_contextMenuEvent(this, handle__contextMenuEvent.value(), sigval1);
 
 	}
 
 	friend void QGraphicsScene_virtualbase_contextMenuEvent(void* self, QGraphicsSceneContextMenuEvent* event);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__dragEnterEvent = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QGraphicsScene> handle__dragEnterEvent;
 
 	// Subclass to allow providing a Go implementation
 	virtual void dragEnterEvent(QGraphicsSceneDragDropEvent* event) override {
-		if (handle__dragEnterEvent == 0) {
+		if (!handle__dragEnterEvent) {
 			QGraphicsScene::dragEnterEvent(event);
 			return;
 		}
 
 		QGraphicsSceneDragDropEvent* sigval1 = event;
-		miqt_exec_callback_QGraphicsScene_dragEnterEvent(this, handle__dragEnterEvent, sigval1);
+		miqt_exec_callback_QGraphicsScene_dragEnterEvent(this, handle__dragEnterEvent.value(), sigval1);
 
 	}
 
 	friend void QGraphicsScene_virtualbase_dragEnterEvent(void* self, QGraphicsSceneDragDropEvent* event);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__dragMoveEvent = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QGraphicsScene> handle__dragMoveEvent;
 
 	// Subclass to allow providing a Go implementation
 	virtual void dragMoveEvent(QGraphicsSceneDragDropEvent* event) override {
-		if (handle__dragMoveEvent == 0) {
+		if (!handle__dragMoveEvent) {
 			QGraphicsScene::dragMoveEvent(event);
 			return;
 		}
 
 		QGraphicsSceneDragDropEvent* sigval1 = event;
-		miqt_exec_callback_QGraphicsScene_dragMoveEvent(this, handle__dragMoveEvent, sigval1);
+		miqt_exec_callback_QGraphicsScene_dragMoveEvent(this, handle__dragMoveEvent.value(), sigval1);
 
 	}
 
 	friend void QGraphicsScene_virtualbase_dragMoveEvent(void* self, QGraphicsSceneDragDropEvent* event);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__dragLeaveEvent = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QGraphicsScene> handle__dragLeaveEvent;
 
 	// Subclass to allow providing a Go implementation
 	virtual void dragLeaveEvent(QGraphicsSceneDragDropEvent* event) override {
-		if (handle__dragLeaveEvent == 0) {
+		if (!handle__dragLeaveEvent) {
 			QGraphicsScene::dragLeaveEvent(event);
 			return;
 		}
 
 		QGraphicsSceneDragDropEvent* sigval1 = event;
-		miqt_exec_callback_QGraphicsScene_dragLeaveEvent(this, handle__dragLeaveEvent, sigval1);
+		miqt_exec_callback_QGraphicsScene_dragLeaveEvent(this, handle__dragLeaveEvent.value(), sigval1);
 
 	}
 
 	friend void QGraphicsScene_virtualbase_dragLeaveEvent(void* self, QGraphicsSceneDragDropEvent* event);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__dropEvent = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QGraphicsScene> handle__dropEvent;
 
 	// Subclass to allow providing a Go implementation
 	virtual void dropEvent(QGraphicsSceneDragDropEvent* event) override {
-		if (handle__dropEvent == 0) {
+		if (!handle__dropEvent) {
 			QGraphicsScene::dropEvent(event);
 			return;
 		}
 
 		QGraphicsSceneDragDropEvent* sigval1 = event;
-		miqt_exec_callback_QGraphicsScene_dropEvent(this, handle__dropEvent, sigval1);
+		miqt_exec_callback_QGraphicsScene_dropEvent(this, handle__dropEvent.value(), sigval1);
 
 	}
 
 	friend void QGraphicsScene_virtualbase_dropEvent(void* self, QGraphicsSceneDragDropEvent* event);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__focusInEvent = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QGraphicsScene> handle__focusInEvent;
 
 	// Subclass to allow providing a Go implementation
 	virtual void focusInEvent(QFocusEvent* event) override {
-		if (handle__focusInEvent == 0) {
+		if (!handle__focusInEvent) {
 			QGraphicsScene::focusInEvent(event);
 			return;
 		}
 
 		QFocusEvent* sigval1 = event;
-		miqt_exec_callback_QGraphicsScene_focusInEvent(this, handle__focusInEvent, sigval1);
+		miqt_exec_callback_QGraphicsScene_focusInEvent(this, handle__focusInEvent.value(), sigval1);
 
 	}
 
 	friend void QGraphicsScene_virtualbase_focusInEvent(void* self, QFocusEvent* event);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__focusOutEvent = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QGraphicsScene> handle__focusOutEvent;
 
 	// Subclass to allow providing a Go implementation
 	virtual void focusOutEvent(QFocusEvent* event) override {
-		if (handle__focusOutEvent == 0) {
+		if (!handle__focusOutEvent) {
 			QGraphicsScene::focusOutEvent(event);
 			return;
 		}
 
 		QFocusEvent* sigval1 = event;
-		miqt_exec_callback_QGraphicsScene_focusOutEvent(this, handle__focusOutEvent, sigval1);
+		miqt_exec_callback_QGraphicsScene_focusOutEvent(this, handle__focusOutEvent.value(), sigval1);
 
 	}
 
 	friend void QGraphicsScene_virtualbase_focusOutEvent(void* self, QFocusEvent* event);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__helpEvent = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QGraphicsScene> handle__helpEvent;
 
 	// Subclass to allow providing a Go implementation
 	virtual void helpEvent(QGraphicsSceneHelpEvent* event) override {
-		if (handle__helpEvent == 0) {
+		if (!handle__helpEvent) {
 			QGraphicsScene::helpEvent(event);
 			return;
 		}
 
 		QGraphicsSceneHelpEvent* sigval1 = event;
-		miqt_exec_callback_QGraphicsScene_helpEvent(this, handle__helpEvent, sigval1);
+		miqt_exec_callback_QGraphicsScene_helpEvent(this, handle__helpEvent.value(), sigval1);
 
 	}
 
 	friend void QGraphicsScene_virtualbase_helpEvent(void* self, QGraphicsSceneHelpEvent* event);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__keyPressEvent = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QGraphicsScene> handle__keyPressEvent;
 
 	// Subclass to allow providing a Go implementation
 	virtual void keyPressEvent(QKeyEvent* event) override {
-		if (handle__keyPressEvent == 0) {
+		if (!handle__keyPressEvent) {
 			QGraphicsScene::keyPressEvent(event);
 			return;
 		}
 
 		QKeyEvent* sigval1 = event;
-		miqt_exec_callback_QGraphicsScene_keyPressEvent(this, handle__keyPressEvent, sigval1);
+		miqt_exec_callback_QGraphicsScene_keyPressEvent(this, handle__keyPressEvent.value(), sigval1);
 
 	}
 
 	friend void QGraphicsScene_virtualbase_keyPressEvent(void* self, QKeyEvent* event);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__keyReleaseEvent = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QGraphicsScene> handle__keyReleaseEvent;
 
 	// Subclass to allow providing a Go implementation
 	virtual void keyReleaseEvent(QKeyEvent* event) override {
-		if (handle__keyReleaseEvent == 0) {
+		if (!handle__keyReleaseEvent) {
 			QGraphicsScene::keyReleaseEvent(event);
 			return;
 		}
 
 		QKeyEvent* sigval1 = event;
-		miqt_exec_callback_QGraphicsScene_keyReleaseEvent(this, handle__keyReleaseEvent, sigval1);
+		miqt_exec_callback_QGraphicsScene_keyReleaseEvent(this, handle__keyReleaseEvent.value(), sigval1);
 
 	}
 
 	friend void QGraphicsScene_virtualbase_keyReleaseEvent(void* self, QKeyEvent* event);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__mousePressEvent = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QGraphicsScene> handle__mousePressEvent;
 
 	// Subclass to allow providing a Go implementation
 	virtual void mousePressEvent(QGraphicsSceneMouseEvent* event) override {
-		if (handle__mousePressEvent == 0) {
+		if (!handle__mousePressEvent) {
 			QGraphicsScene::mousePressEvent(event);
 			return;
 		}
 
 		QGraphicsSceneMouseEvent* sigval1 = event;
-		miqt_exec_callback_QGraphicsScene_mousePressEvent(this, handle__mousePressEvent, sigval1);
+		miqt_exec_callback_QGraphicsScene_mousePressEvent(this, handle__mousePressEvent.value(), sigval1);
 
 	}
 
 	friend void QGraphicsScene_virtualbase_mousePressEvent(void* self, QGraphicsSceneMouseEvent* event);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__mouseMoveEvent = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QGraphicsScene> handle__mouseMoveEvent;
 
 	// Subclass to allow providing a Go implementation
 	virtual void mouseMoveEvent(QGraphicsSceneMouseEvent* event) override {
-		if (handle__mouseMoveEvent == 0) {
+		if (!handle__mouseMoveEvent) {
 			QGraphicsScene::mouseMoveEvent(event);
 			return;
 		}
 
 		QGraphicsSceneMouseEvent* sigval1 = event;
-		miqt_exec_callback_QGraphicsScene_mouseMoveEvent(this, handle__mouseMoveEvent, sigval1);
+		miqt_exec_callback_QGraphicsScene_mouseMoveEvent(this, handle__mouseMoveEvent.value(), sigval1);
 
 	}
 
 	friend void QGraphicsScene_virtualbase_mouseMoveEvent(void* self, QGraphicsSceneMouseEvent* event);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__mouseReleaseEvent = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QGraphicsScene> handle__mouseReleaseEvent;
 
 	// Subclass to allow providing a Go implementation
 	virtual void mouseReleaseEvent(QGraphicsSceneMouseEvent* event) override {
-		if (handle__mouseReleaseEvent == 0) {
+		if (!handle__mouseReleaseEvent) {
 			QGraphicsScene::mouseReleaseEvent(event);
 			return;
 		}
 
 		QGraphicsSceneMouseEvent* sigval1 = event;
-		miqt_exec_callback_QGraphicsScene_mouseReleaseEvent(this, handle__mouseReleaseEvent, sigval1);
+		miqt_exec_callback_QGraphicsScene_mouseReleaseEvent(this, handle__mouseReleaseEvent.value(), sigval1);
 
 	}
 
 	friend void QGraphicsScene_virtualbase_mouseReleaseEvent(void* self, QGraphicsSceneMouseEvent* event);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__mouseDoubleClickEvent = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QGraphicsScene> handle__mouseDoubleClickEvent;
 
 	// Subclass to allow providing a Go implementation
 	virtual void mouseDoubleClickEvent(QGraphicsSceneMouseEvent* event) override {
-		if (handle__mouseDoubleClickEvent == 0) {
+		if (!handle__mouseDoubleClickEvent) {
 			QGraphicsScene::mouseDoubleClickEvent(event);
 			return;
 		}
 
 		QGraphicsSceneMouseEvent* sigval1 = event;
-		miqt_exec_callback_QGraphicsScene_mouseDoubleClickEvent(this, handle__mouseDoubleClickEvent, sigval1);
+		miqt_exec_callback_QGraphicsScene_mouseDoubleClickEvent(this, handle__mouseDoubleClickEvent.value(), sigval1);
 
 	}
 
 	friend void QGraphicsScene_virtualbase_mouseDoubleClickEvent(void* self, QGraphicsSceneMouseEvent* event);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__wheelEvent = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QGraphicsScene> handle__wheelEvent;
 
 	// Subclass to allow providing a Go implementation
 	virtual void wheelEvent(QGraphicsSceneWheelEvent* event) override {
-		if (handle__wheelEvent == 0) {
+		if (!handle__wheelEvent) {
 			QGraphicsScene::wheelEvent(event);
 			return;
 		}
 
 		QGraphicsSceneWheelEvent* sigval1 = event;
-		miqt_exec_callback_QGraphicsScene_wheelEvent(this, handle__wheelEvent, sigval1);
+		miqt_exec_callback_QGraphicsScene_wheelEvent(this, handle__wheelEvent.value(), sigval1);
 
 	}
 
 	friend void QGraphicsScene_virtualbase_wheelEvent(void* self, QGraphicsSceneWheelEvent* event);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__inputMethodEvent = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QGraphicsScene> handle__inputMethodEvent;
 
 	// Subclass to allow providing a Go implementation
 	virtual void inputMethodEvent(QInputMethodEvent* event) override {
-		if (handle__inputMethodEvent == 0) {
+		if (!handle__inputMethodEvent) {
 			QGraphicsScene::inputMethodEvent(event);
 			return;
 		}
 
 		QInputMethodEvent* sigval1 = event;
-		miqt_exec_callback_QGraphicsScene_inputMethodEvent(this, handle__inputMethodEvent, sigval1);
+		miqt_exec_callback_QGraphicsScene_inputMethodEvent(this, handle__inputMethodEvent.value(), sigval1);
 
 	}
 
 	friend void QGraphicsScene_virtualbase_inputMethodEvent(void* self, QInputMethodEvent* event);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__drawBackground = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QGraphicsScene> handle__drawBackground;
 
 	// Subclass to allow providing a Go implementation
 	virtual void drawBackground(QPainter* painter, const QRectF& rect) override {
-		if (handle__drawBackground == 0) {
+		if (!handle__drawBackground) {
 			QGraphicsScene::drawBackground(painter, rect);
 			return;
 		}
@@ -433,18 +436,18 @@ public:
 		const QRectF& rect_ret = rect;
 		// Cast returned reference into pointer
 		QRectF* sigval2 = const_cast<QRectF*>(&rect_ret);
-		miqt_exec_callback_QGraphicsScene_drawBackground(this, handle__drawBackground, sigval1, sigval2);
+		miqt_exec_callback_QGraphicsScene_drawBackground(this, handle__drawBackground.value(), sigval1, sigval2);
 
 	}
 
 	friend void QGraphicsScene_virtualbase_drawBackground(void* self, QPainter* painter, QRectF* rect);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__drawForeground = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QGraphicsScene> handle__drawForeground;
 
 	// Subclass to allow providing a Go implementation
 	virtual void drawForeground(QPainter* painter, const QRectF& rect) override {
-		if (handle__drawForeground == 0) {
+		if (!handle__drawForeground) {
 			QGraphicsScene::drawForeground(painter, rect);
 			return;
 		}
@@ -453,85 +456,85 @@ public:
 		const QRectF& rect_ret = rect;
 		// Cast returned reference into pointer
 		QRectF* sigval2 = const_cast<QRectF*>(&rect_ret);
-		miqt_exec_callback_QGraphicsScene_drawForeground(this, handle__drawForeground, sigval1, sigval2);
+		miqt_exec_callback_QGraphicsScene_drawForeground(this, handle__drawForeground.value(), sigval1, sigval2);
 
 	}
 
 	friend void QGraphicsScene_virtualbase_drawForeground(void* self, QPainter* painter, QRectF* rect);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__focusNextPrevChild = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QGraphicsScene> handle__focusNextPrevChild;
 
 	// Subclass to allow providing a Go implementation
 	virtual bool focusNextPrevChild(bool next) override {
-		if (handle__focusNextPrevChild == 0) {
+		if (!handle__focusNextPrevChild) {
 			return QGraphicsScene::focusNextPrevChild(next);
 		}
 
 		bool sigval1 = next;
-		bool callback_return_value = miqt_exec_callback_QGraphicsScene_focusNextPrevChild(this, handle__focusNextPrevChild, sigval1);
+		bool callback_return_value = miqt_exec_callback_QGraphicsScene_focusNextPrevChild(this, handle__focusNextPrevChild.value(), sigval1);
 		return callback_return_value;
 	}
 
 	friend bool QGraphicsScene_virtualbase_focusNextPrevChild(void* self, bool next);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__timerEvent = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QGraphicsScene> handle__timerEvent;
 
 	// Subclass to allow providing a Go implementation
 	virtual void timerEvent(QTimerEvent* event) override {
-		if (handle__timerEvent == 0) {
+		if (!handle__timerEvent) {
 			QGraphicsScene::timerEvent(event);
 			return;
 		}
 
 		QTimerEvent* sigval1 = event;
-		miqt_exec_callback_QGraphicsScene_timerEvent(this, handle__timerEvent, sigval1);
+		miqt_exec_callback_QGraphicsScene_timerEvent(this, handle__timerEvent.value(), sigval1);
 
 	}
 
 	friend void QGraphicsScene_virtualbase_timerEvent(void* self, QTimerEvent* event);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__childEvent = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QGraphicsScene> handle__childEvent;
 
 	// Subclass to allow providing a Go implementation
 	virtual void childEvent(QChildEvent* event) override {
-		if (handle__childEvent == 0) {
+		if (!handle__childEvent) {
 			QGraphicsScene::childEvent(event);
 			return;
 		}
 
 		QChildEvent* sigval1 = event;
-		miqt_exec_callback_QGraphicsScene_childEvent(this, handle__childEvent, sigval1);
+		miqt_exec_callback_QGraphicsScene_childEvent(this, handle__childEvent.value(), sigval1);
 
 	}
 
 	friend void QGraphicsScene_virtualbase_childEvent(void* self, QChildEvent* event);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__customEvent = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QGraphicsScene> handle__customEvent;
 
 	// Subclass to allow providing a Go implementation
 	virtual void customEvent(QEvent* event) override {
-		if (handle__customEvent == 0) {
+		if (!handle__customEvent) {
 			QGraphicsScene::customEvent(event);
 			return;
 		}
 
 		QEvent* sigval1 = event;
-		miqt_exec_callback_QGraphicsScene_customEvent(this, handle__customEvent, sigval1);
+		miqt_exec_callback_QGraphicsScene_customEvent(this, handle__customEvent.value(), sigval1);
 
 	}
 
 	friend void QGraphicsScene_virtualbase_customEvent(void* self, QEvent* event);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__connectNotify = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QGraphicsScene> handle__connectNotify;
 
 	// Subclass to allow providing a Go implementation
 	virtual void connectNotify(const QMetaMethod& signal) override {
-		if (handle__connectNotify == 0) {
+		if (!handle__connectNotify) {
 			QGraphicsScene::connectNotify(signal);
 			return;
 		}
@@ -539,18 +542,18 @@ public:
 		const QMetaMethod& signal_ret = signal;
 		// Cast returned reference into pointer
 		QMetaMethod* sigval1 = const_cast<QMetaMethod*>(&signal_ret);
-		miqt_exec_callback_QGraphicsScene_connectNotify(this, handle__connectNotify, sigval1);
+		miqt_exec_callback_QGraphicsScene_connectNotify(this, handle__connectNotify.value(), sigval1);
 
 	}
 
 	friend void QGraphicsScene_virtualbase_connectNotify(void* self, QMetaMethod* signal);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__disconnectNotify = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QGraphicsScene> handle__disconnectNotify;
 
 	// Subclass to allow providing a Go implementation
 	virtual void disconnectNotify(const QMetaMethod& signal) override {
-		if (handle__disconnectNotify == 0) {
+		if (!handle__disconnectNotify) {
 			QGraphicsScene::disconnectNotify(signal);
 			return;
 		}
@@ -558,7 +561,7 @@ public:
 		const QMetaMethod& signal_ret = signal;
 		// Cast returned reference into pointer
 		QMetaMethod* sigval1 = const_cast<QMetaMethod*>(&signal_ret);
-		miqt_exec_callback_QGraphicsScene_disconnectNotify(this, handle__disconnectNotify, sigval1);
+		miqt_exec_callback_QGraphicsScene_disconnectNotify(this, handle__disconnectNotify.value(), sigval1);
 
 	}
 
@@ -1012,8 +1015,10 @@ void QGraphicsScene_changed(QGraphicsScene* self, struct miqt_array /* of QRectF
 	self->changed(region_QList);
 }
 
-void QGraphicsScene_connect_changed(QGraphicsScene* self, intptr_t slot) {
-	QGraphicsScene::connect(self, static_cast<void (QGraphicsScene::*)(const QList<QRectF>&)>(&QGraphicsScene::changed), self, [=](const QList<QRectF>& region) {
+void* QGraphicsScene_connect_changed(QGraphicsScene* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QGraphicsScene>>(slot);
+	return new QMetaObject::Connection(QGraphicsScene::connect(self, static_cast<void (QGraphicsScene::*)(const QList<QRectF>&)>(&QGraphicsScene::changed), self, [slot_handle](const QList<QRectF>& region) {
+		intptr_t slot = slot_handle->value();
 		const QList<QRectF>& region_ret = region;
 		// Convert QList<> from C++ memory to manually-managed C memory
 		QRectF** region_arr = static_cast<QRectF**>(malloc(sizeof(QRectF*) * region_ret.length()));
@@ -1025,44 +1030,50 @@ void QGraphicsScene_connect_changed(QGraphicsScene* self, intptr_t slot) {
 		region_out.data = static_cast<void*>(region_arr);
 		struct miqt_array /* of QRectF* */  sigval1 = region_out;
 		miqt_exec_callback_QGraphicsScene_changed(slot, sigval1);
-	});
+	}));
 }
 
 void QGraphicsScene_sceneRectChanged(QGraphicsScene* self, QRectF* rect) {
 	self->sceneRectChanged(*rect);
 }
 
-void QGraphicsScene_connect_sceneRectChanged(QGraphicsScene* self, intptr_t slot) {
-	QGraphicsScene::connect(self, static_cast<void (QGraphicsScene::*)(const QRectF&)>(&QGraphicsScene::sceneRectChanged), self, [=](const QRectF& rect) {
+void* QGraphicsScene_connect_sceneRectChanged(QGraphicsScene* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QGraphicsScene>>(slot);
+	return new QMetaObject::Connection(QGraphicsScene::connect(self, static_cast<void (QGraphicsScene::*)(const QRectF&)>(&QGraphicsScene::sceneRectChanged), self, [slot_handle](const QRectF& rect) {
+		intptr_t slot = slot_handle->value();
 		const QRectF& rect_ret = rect;
 		// Cast returned reference into pointer
 		QRectF* sigval1 = const_cast<QRectF*>(&rect_ret);
 		miqt_exec_callback_QGraphicsScene_sceneRectChanged(slot, sigval1);
-	});
+	}));
 }
 
 void QGraphicsScene_selectionChanged(QGraphicsScene* self) {
 	self->selectionChanged();
 }
 
-void QGraphicsScene_connect_selectionChanged(QGraphicsScene* self, intptr_t slot) {
-	QGraphicsScene::connect(self, static_cast<void (QGraphicsScene::*)()>(&QGraphicsScene::selectionChanged), self, [=]() {
+void* QGraphicsScene_connect_selectionChanged(QGraphicsScene* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QGraphicsScene>>(slot);
+	return new QMetaObject::Connection(QGraphicsScene::connect(self, static_cast<void (QGraphicsScene::*)()>(&QGraphicsScene::selectionChanged), self, [slot_handle]() {
+		intptr_t slot = slot_handle->value();
 		miqt_exec_callback_QGraphicsScene_selectionChanged(slot);
-	});
+	}));
 }
 
 void QGraphicsScene_focusItemChanged(QGraphicsScene* self, QGraphicsItem* newFocus, QGraphicsItem* oldFocus, int reason) {
 	self->focusItemChanged(newFocus, oldFocus, static_cast<Qt::FocusReason>(reason));
 }
 
-void QGraphicsScene_connect_focusItemChanged(QGraphicsScene* self, intptr_t slot) {
-	QGraphicsScene::connect(self, static_cast<void (QGraphicsScene::*)(QGraphicsItem*, QGraphicsItem*, Qt::FocusReason)>(&QGraphicsScene::focusItemChanged), self, [=](QGraphicsItem* newFocus, QGraphicsItem* oldFocus, Qt::FocusReason reason) {
+void* QGraphicsScene_connect_focusItemChanged(QGraphicsScene* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QGraphicsScene>>(slot);
+	return new QMetaObject::Connection(QGraphicsScene::connect(self, static_cast<void (QGraphicsScene::*)(QGraphicsItem*, QGraphicsItem*, Qt::FocusReason)>(&QGraphicsScene::focusItemChanged), self, [slot_handle](QGraphicsItem* newFocus, QGraphicsItem* oldFocus, Qt::FocusReason reason) {
+		intptr_t slot = slot_handle->value();
 		QGraphicsItem* sigval1 = newFocus;
 		QGraphicsItem* sigval2 = oldFocus;
 		Qt::FocusReason reason_ret = reason;
 		int sigval3 = static_cast<int>(reason_ret);
 		miqt_exec_callback_QGraphicsScene_focusItemChanged(slot, sigval1, sigval2, sigval3);
-	});
+	}));
 }
 
 struct miqt_string QGraphicsScene_tr2(const char* s, const char* c) {
@@ -1354,12 +1365,13 @@ void QGraphicsScene_invalidate4(QGraphicsScene* self, QRectF* rect, int layers) 
 }
 
 bool QGraphicsScene_override_virtual_inputMethodQuery(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QGraphicsScene> slot_handle(slot);
 	MiqtVirtualQGraphicsScene* self_cast = dynamic_cast<MiqtVirtualQGraphicsScene*>( (QGraphicsScene*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__inputMethodQuery = slot;
+	self_cast->handle__inputMethodQuery = std::move(slot_handle);
 	return true;
 }
 
@@ -1368,12 +1380,13 @@ QVariant* QGraphicsScene_virtualbase_inputMethodQuery(const void* self, int quer
 }
 
 bool QGraphicsScene_override_virtual_event(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QGraphicsScene> slot_handle(slot);
 	MiqtVirtualQGraphicsScene* self_cast = dynamic_cast<MiqtVirtualQGraphicsScene*>( (QGraphicsScene*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__event = slot;
+	self_cast->handle__event = std::move(slot_handle);
 	return true;
 }
 
@@ -1382,12 +1395,13 @@ bool QGraphicsScene_virtualbase_event(void* self, QEvent* event) {
 }
 
 bool QGraphicsScene_override_virtual_eventFilter(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QGraphicsScene> slot_handle(slot);
 	MiqtVirtualQGraphicsScene* self_cast = dynamic_cast<MiqtVirtualQGraphicsScene*>( (QGraphicsScene*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__eventFilter = slot;
+	self_cast->handle__eventFilter = std::move(slot_handle);
 	return true;
 }
 
@@ -1396,12 +1410,13 @@ bool QGraphicsScene_virtualbase_eventFilter(void* self, QObject* watched, QEvent
 }
 
 bool QGraphicsScene_override_virtual_contextMenuEvent(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QGraphicsScene> slot_handle(slot);
 	MiqtVirtualQGraphicsScene* self_cast = dynamic_cast<MiqtVirtualQGraphicsScene*>( (QGraphicsScene*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__contextMenuEvent = slot;
+	self_cast->handle__contextMenuEvent = std::move(slot_handle);
 	return true;
 }
 
@@ -1410,12 +1425,13 @@ void QGraphicsScene_virtualbase_contextMenuEvent(void* self, QGraphicsSceneConte
 }
 
 bool QGraphicsScene_override_virtual_dragEnterEvent(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QGraphicsScene> slot_handle(slot);
 	MiqtVirtualQGraphicsScene* self_cast = dynamic_cast<MiqtVirtualQGraphicsScene*>( (QGraphicsScene*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__dragEnterEvent = slot;
+	self_cast->handle__dragEnterEvent = std::move(slot_handle);
 	return true;
 }
 
@@ -1424,12 +1440,13 @@ void QGraphicsScene_virtualbase_dragEnterEvent(void* self, QGraphicsSceneDragDro
 }
 
 bool QGraphicsScene_override_virtual_dragMoveEvent(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QGraphicsScene> slot_handle(slot);
 	MiqtVirtualQGraphicsScene* self_cast = dynamic_cast<MiqtVirtualQGraphicsScene*>( (QGraphicsScene*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__dragMoveEvent = slot;
+	self_cast->handle__dragMoveEvent = std::move(slot_handle);
 	return true;
 }
 
@@ -1438,12 +1455,13 @@ void QGraphicsScene_virtualbase_dragMoveEvent(void* self, QGraphicsSceneDragDrop
 }
 
 bool QGraphicsScene_override_virtual_dragLeaveEvent(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QGraphicsScene> slot_handle(slot);
 	MiqtVirtualQGraphicsScene* self_cast = dynamic_cast<MiqtVirtualQGraphicsScene*>( (QGraphicsScene*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__dragLeaveEvent = slot;
+	self_cast->handle__dragLeaveEvent = std::move(slot_handle);
 	return true;
 }
 
@@ -1452,12 +1470,13 @@ void QGraphicsScene_virtualbase_dragLeaveEvent(void* self, QGraphicsSceneDragDro
 }
 
 bool QGraphicsScene_override_virtual_dropEvent(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QGraphicsScene> slot_handle(slot);
 	MiqtVirtualQGraphicsScene* self_cast = dynamic_cast<MiqtVirtualQGraphicsScene*>( (QGraphicsScene*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__dropEvent = slot;
+	self_cast->handle__dropEvent = std::move(slot_handle);
 	return true;
 }
 
@@ -1466,12 +1485,13 @@ void QGraphicsScene_virtualbase_dropEvent(void* self, QGraphicsSceneDragDropEven
 }
 
 bool QGraphicsScene_override_virtual_focusInEvent(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QGraphicsScene> slot_handle(slot);
 	MiqtVirtualQGraphicsScene* self_cast = dynamic_cast<MiqtVirtualQGraphicsScene*>( (QGraphicsScene*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__focusInEvent = slot;
+	self_cast->handle__focusInEvent = std::move(slot_handle);
 	return true;
 }
 
@@ -1480,12 +1500,13 @@ void QGraphicsScene_virtualbase_focusInEvent(void* self, QFocusEvent* event) {
 }
 
 bool QGraphicsScene_override_virtual_focusOutEvent(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QGraphicsScene> slot_handle(slot);
 	MiqtVirtualQGraphicsScene* self_cast = dynamic_cast<MiqtVirtualQGraphicsScene*>( (QGraphicsScene*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__focusOutEvent = slot;
+	self_cast->handle__focusOutEvent = std::move(slot_handle);
 	return true;
 }
 
@@ -1494,12 +1515,13 @@ void QGraphicsScene_virtualbase_focusOutEvent(void* self, QFocusEvent* event) {
 }
 
 bool QGraphicsScene_override_virtual_helpEvent(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QGraphicsScene> slot_handle(slot);
 	MiqtVirtualQGraphicsScene* self_cast = dynamic_cast<MiqtVirtualQGraphicsScene*>( (QGraphicsScene*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__helpEvent = slot;
+	self_cast->handle__helpEvent = std::move(slot_handle);
 	return true;
 }
 
@@ -1508,12 +1530,13 @@ void QGraphicsScene_virtualbase_helpEvent(void* self, QGraphicsSceneHelpEvent* e
 }
 
 bool QGraphicsScene_override_virtual_keyPressEvent(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QGraphicsScene> slot_handle(slot);
 	MiqtVirtualQGraphicsScene* self_cast = dynamic_cast<MiqtVirtualQGraphicsScene*>( (QGraphicsScene*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__keyPressEvent = slot;
+	self_cast->handle__keyPressEvent = std::move(slot_handle);
 	return true;
 }
 
@@ -1522,12 +1545,13 @@ void QGraphicsScene_virtualbase_keyPressEvent(void* self, QKeyEvent* event) {
 }
 
 bool QGraphicsScene_override_virtual_keyReleaseEvent(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QGraphicsScene> slot_handle(slot);
 	MiqtVirtualQGraphicsScene* self_cast = dynamic_cast<MiqtVirtualQGraphicsScene*>( (QGraphicsScene*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__keyReleaseEvent = slot;
+	self_cast->handle__keyReleaseEvent = std::move(slot_handle);
 	return true;
 }
 
@@ -1536,12 +1560,13 @@ void QGraphicsScene_virtualbase_keyReleaseEvent(void* self, QKeyEvent* event) {
 }
 
 bool QGraphicsScene_override_virtual_mousePressEvent(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QGraphicsScene> slot_handle(slot);
 	MiqtVirtualQGraphicsScene* self_cast = dynamic_cast<MiqtVirtualQGraphicsScene*>( (QGraphicsScene*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__mousePressEvent = slot;
+	self_cast->handle__mousePressEvent = std::move(slot_handle);
 	return true;
 }
 
@@ -1550,12 +1575,13 @@ void QGraphicsScene_virtualbase_mousePressEvent(void* self, QGraphicsSceneMouseE
 }
 
 bool QGraphicsScene_override_virtual_mouseMoveEvent(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QGraphicsScene> slot_handle(slot);
 	MiqtVirtualQGraphicsScene* self_cast = dynamic_cast<MiqtVirtualQGraphicsScene*>( (QGraphicsScene*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__mouseMoveEvent = slot;
+	self_cast->handle__mouseMoveEvent = std::move(slot_handle);
 	return true;
 }
 
@@ -1564,12 +1590,13 @@ void QGraphicsScene_virtualbase_mouseMoveEvent(void* self, QGraphicsSceneMouseEv
 }
 
 bool QGraphicsScene_override_virtual_mouseReleaseEvent(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QGraphicsScene> slot_handle(slot);
 	MiqtVirtualQGraphicsScene* self_cast = dynamic_cast<MiqtVirtualQGraphicsScene*>( (QGraphicsScene*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__mouseReleaseEvent = slot;
+	self_cast->handle__mouseReleaseEvent = std::move(slot_handle);
 	return true;
 }
 
@@ -1578,12 +1605,13 @@ void QGraphicsScene_virtualbase_mouseReleaseEvent(void* self, QGraphicsSceneMous
 }
 
 bool QGraphicsScene_override_virtual_mouseDoubleClickEvent(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QGraphicsScene> slot_handle(slot);
 	MiqtVirtualQGraphicsScene* self_cast = dynamic_cast<MiqtVirtualQGraphicsScene*>( (QGraphicsScene*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__mouseDoubleClickEvent = slot;
+	self_cast->handle__mouseDoubleClickEvent = std::move(slot_handle);
 	return true;
 }
 
@@ -1592,12 +1620,13 @@ void QGraphicsScene_virtualbase_mouseDoubleClickEvent(void* self, QGraphicsScene
 }
 
 bool QGraphicsScene_override_virtual_wheelEvent(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QGraphicsScene> slot_handle(slot);
 	MiqtVirtualQGraphicsScene* self_cast = dynamic_cast<MiqtVirtualQGraphicsScene*>( (QGraphicsScene*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__wheelEvent = slot;
+	self_cast->handle__wheelEvent = std::move(slot_handle);
 	return true;
 }
 
@@ -1606,12 +1635,13 @@ void QGraphicsScene_virtualbase_wheelEvent(void* self, QGraphicsSceneWheelEvent*
 }
 
 bool QGraphicsScene_override_virtual_inputMethodEvent(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QGraphicsScene> slot_handle(slot);
 	MiqtVirtualQGraphicsScene* self_cast = dynamic_cast<MiqtVirtualQGraphicsScene*>( (QGraphicsScene*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__inputMethodEvent = slot;
+	self_cast->handle__inputMethodEvent = std::move(slot_handle);
 	return true;
 }
 
@@ -1620,12 +1650,13 @@ void QGraphicsScene_virtualbase_inputMethodEvent(void* self, QInputMethodEvent* 
 }
 
 bool QGraphicsScene_override_virtual_drawBackground(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QGraphicsScene> slot_handle(slot);
 	MiqtVirtualQGraphicsScene* self_cast = dynamic_cast<MiqtVirtualQGraphicsScene*>( (QGraphicsScene*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__drawBackground = slot;
+	self_cast->handle__drawBackground = std::move(slot_handle);
 	return true;
 }
 
@@ -1634,12 +1665,13 @@ void QGraphicsScene_virtualbase_drawBackground(void* self, QPainter* painter, QR
 }
 
 bool QGraphicsScene_override_virtual_drawForeground(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QGraphicsScene> slot_handle(slot);
 	MiqtVirtualQGraphicsScene* self_cast = dynamic_cast<MiqtVirtualQGraphicsScene*>( (QGraphicsScene*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__drawForeground = slot;
+	self_cast->handle__drawForeground = std::move(slot_handle);
 	return true;
 }
 
@@ -1648,12 +1680,13 @@ void QGraphicsScene_virtualbase_drawForeground(void* self, QPainter* painter, QR
 }
 
 bool QGraphicsScene_override_virtual_focusNextPrevChild(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QGraphicsScene> slot_handle(slot);
 	MiqtVirtualQGraphicsScene* self_cast = dynamic_cast<MiqtVirtualQGraphicsScene*>( (QGraphicsScene*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__focusNextPrevChild = slot;
+	self_cast->handle__focusNextPrevChild = std::move(slot_handle);
 	return true;
 }
 
@@ -1662,12 +1695,13 @@ bool QGraphicsScene_virtualbase_focusNextPrevChild(void* self, bool next) {
 }
 
 bool QGraphicsScene_override_virtual_timerEvent(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QGraphicsScene> slot_handle(slot);
 	MiqtVirtualQGraphicsScene* self_cast = dynamic_cast<MiqtVirtualQGraphicsScene*>( (QGraphicsScene*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__timerEvent = slot;
+	self_cast->handle__timerEvent = std::move(slot_handle);
 	return true;
 }
 
@@ -1676,12 +1710,13 @@ void QGraphicsScene_virtualbase_timerEvent(void* self, QTimerEvent* event) {
 }
 
 bool QGraphicsScene_override_virtual_childEvent(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QGraphicsScene> slot_handle(slot);
 	MiqtVirtualQGraphicsScene* self_cast = dynamic_cast<MiqtVirtualQGraphicsScene*>( (QGraphicsScene*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__childEvent = slot;
+	self_cast->handle__childEvent = std::move(slot_handle);
 	return true;
 }
 
@@ -1690,12 +1725,13 @@ void QGraphicsScene_virtualbase_childEvent(void* self, QChildEvent* event) {
 }
 
 bool QGraphicsScene_override_virtual_customEvent(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QGraphicsScene> slot_handle(slot);
 	MiqtVirtualQGraphicsScene* self_cast = dynamic_cast<MiqtVirtualQGraphicsScene*>( (QGraphicsScene*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__customEvent = slot;
+	self_cast->handle__customEvent = std::move(slot_handle);
 	return true;
 }
 
@@ -1704,12 +1740,13 @@ void QGraphicsScene_virtualbase_customEvent(void* self, QEvent* event) {
 }
 
 bool QGraphicsScene_override_virtual_connectNotify(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QGraphicsScene> slot_handle(slot);
 	MiqtVirtualQGraphicsScene* self_cast = dynamic_cast<MiqtVirtualQGraphicsScene*>( (QGraphicsScene*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__connectNotify = slot;
+	self_cast->handle__connectNotify = std::move(slot_handle);
 	return true;
 }
 
@@ -1718,12 +1755,13 @@ void QGraphicsScene_virtualbase_connectNotify(void* self, QMetaMethod* signal) {
 }
 
 bool QGraphicsScene_override_virtual_disconnectNotify(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QGraphicsScene> slot_handle(slot);
 	MiqtVirtualQGraphicsScene* self_cast = dynamic_cast<MiqtVirtualQGraphicsScene*>( (QGraphicsScene*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__disconnectNotify = slot;
+	self_cast->handle__disconnectNotify = std::move(slot_handle);
 	return true;
 }
 

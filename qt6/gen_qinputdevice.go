@@ -49,6 +49,11 @@ const (
 	QInputDevice__All                QInputDevice__Capability = 2147483647
 )
 
+//export miqt_exec_callback_handle_release_QInputDevice
+func miqt_exec_callback_handle_release_QInputDevice(cb C.intptr_t) {
+	cgo.Handle(cb).Delete()
+}
+
 type QInputDevice struct {
 	h *C.QInputDevice
 	*QObject
@@ -224,8 +229,10 @@ func (this *QInputDevice) OperatorEqual(other *QInputDevice) bool {
 func (this *QInputDevice) AvailableVirtualGeometryChanged(area QRect) {
 	C.QInputDevice_availableVirtualGeometryChanged(this.h, area.cPointer())
 }
-func (this *QInputDevice) OnAvailableVirtualGeometryChanged(slot func(area QRect)) {
-	C.QInputDevice_connect_availableVirtualGeometryChanged(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QInputDevice) OnAvailableVirtualGeometryChanged(slot func(area QRect)) *SignalConnection {
+	_goptr := UnsafeNewQMetaObject__Connection(C.QInputDevice_connect_availableVirtualGeometryChanged(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QInputDevice_availableVirtualGeometryChanged
@@ -337,7 +344,11 @@ func (this *QInputDevice) callVirtualBase_Event(event *QEvent) bool {
 
 }
 func (this *QInputDevice) OnEvent(slot func(super func(event *QEvent) bool, event *QEvent) bool) {
-	ok := C.QInputDevice_override_virtual_event(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QInputDevice_override_virtual_event(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -365,7 +376,11 @@ func (this *QInputDevice) callVirtualBase_EventFilter(watched *QObject, event *Q
 
 }
 func (this *QInputDevice) OnEventFilter(slot func(super func(watched *QObject, event *QEvent) bool, watched *QObject, event *QEvent) bool) {
-	ok := C.QInputDevice_override_virtual_eventFilter(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QInputDevice_override_virtual_eventFilter(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -395,7 +410,11 @@ func (this *QInputDevice) callVirtualBase_TimerEvent(event *QTimerEvent) {
 
 }
 func (this *QInputDevice) OnTimerEvent(slot func(super func(event *QTimerEvent), event *QTimerEvent)) {
-	ok := C.QInputDevice_override_virtual_timerEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QInputDevice_override_virtual_timerEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -421,7 +440,11 @@ func (this *QInputDevice) callVirtualBase_ChildEvent(event *QChildEvent) {
 
 }
 func (this *QInputDevice) OnChildEvent(slot func(super func(event *QChildEvent), event *QChildEvent)) {
-	ok := C.QInputDevice_override_virtual_childEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QInputDevice_override_virtual_childEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -447,7 +470,11 @@ func (this *QInputDevice) callVirtualBase_CustomEvent(event *QEvent) {
 
 }
 func (this *QInputDevice) OnCustomEvent(slot func(super func(event *QEvent), event *QEvent)) {
-	ok := C.QInputDevice_override_virtual_customEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QInputDevice_override_virtual_customEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -473,7 +500,11 @@ func (this *QInputDevice) callVirtualBase_ConnectNotify(signal *QMetaMethod) {
 
 }
 func (this *QInputDevice) OnConnectNotify(slot func(super func(signal *QMetaMethod), signal *QMetaMethod)) {
-	ok := C.QInputDevice_override_virtual_connectNotify(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QInputDevice_override_virtual_connectNotify(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -499,7 +530,11 @@ func (this *QInputDevice) callVirtualBase_DisconnectNotify(signal *QMetaMethod) 
 
 }
 func (this *QInputDevice) OnDisconnectNotify(slot func(super func(signal *QMetaMethod), signal *QMetaMethod)) {
-	ok := C.QInputDevice_override_virtual_disconnectNotify(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QInputDevice_override_virtual_disconnectNotify(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}

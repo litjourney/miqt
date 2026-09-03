@@ -31,6 +31,11 @@ const (
 	QwtPlotRescaler__ExpandBoth QwtPlotRescaler__ExpandingDirection = 2
 )
 
+//export miqt_exec_callback_handle_release_QwtPlotRescaler
+func miqt_exec_callback_handle_release_QwtPlotRescaler(cb C.intptr_t) {
+	cgo.Handle(cb).Delete()
+}
+
 type QwtPlotRescaler struct {
 	h *C.QwtPlotRescaler
 	*qt.QObject
@@ -277,7 +282,11 @@ func (this *QwtPlotRescaler) callVirtualBase_EventFilter(param1 *qt.QObject, par
 
 }
 func (this *QwtPlotRescaler) OnEventFilter(slot func(super func(param1 *qt.QObject, param2 *qt.QEvent) bool, param1 *qt.QObject, param2 *qt.QEvent) bool) {
-	ok := C.QwtPlotRescaler_override_virtual_eventFilter(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QwtPlotRescaler_override_virtual_eventFilter(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -307,7 +316,11 @@ func (this *QwtPlotRescaler) callVirtualBase_CanvasResizeEvent(param1 *qt.QResiz
 
 }
 func (this *QwtPlotRescaler) OnCanvasResizeEvent(slot func(super func(param1 *qt.QResizeEvent), param1 *qt.QResizeEvent)) {
-	ok := C.QwtPlotRescaler_override_virtual_canvasResizeEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QwtPlotRescaler_override_virtual_canvasResizeEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -333,7 +346,11 @@ func (this *QwtPlotRescaler) callVirtualBase_Rescale2(oldSize *qt.QSize, newSize
 
 }
 func (this *QwtPlotRescaler) OnRescale2(slot func(super func(oldSize *qt.QSize, newSize *qt.QSize), oldSize *qt.QSize, newSize *qt.QSize)) {
-	ok := C.QwtPlotRescaler_override_virtual_rescale2(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QwtPlotRescaler_override_virtual_rescale2(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -363,7 +380,11 @@ func (this *QwtPlotRescaler) callVirtualBase_ExpandScale(axis int, oldSize *qt.Q
 
 }
 func (this *QwtPlotRescaler) OnExpandScale(slot func(super func(axis int, oldSize *qt.QSize, newSize *qt.QSize) *QwtInterval, axis int, oldSize *qt.QSize, newSize *qt.QSize) *QwtInterval) {
-	ok := C.QwtPlotRescaler_override_virtual_expandScale(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QwtPlotRescaler_override_virtual_expandScale(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -397,7 +418,11 @@ func (this *QwtPlotRescaler) callVirtualBase_SyncScale(axis int, reference *QwtI
 
 }
 func (this *QwtPlotRescaler) OnSyncScale(slot func(super func(axis int, reference *QwtInterval, size *qt.QSize) *QwtInterval, axis int, reference *QwtInterval, size *qt.QSize) *QwtInterval) {
-	ok := C.QwtPlotRescaler_override_virtual_syncScale(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QwtPlotRescaler_override_virtual_syncScale(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -429,7 +454,11 @@ func (this *QwtPlotRescaler) callVirtualBase_UpdateScales(intervals *QwtInterval
 
 }
 func (this *QwtPlotRescaler) OnUpdateScales(slot func(super func(intervals *QwtInterval), intervals *QwtInterval)) {
-	ok := C.QwtPlotRescaler_override_virtual_updateScales(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QwtPlotRescaler_override_virtual_updateScales(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -455,7 +484,11 @@ func (this *QwtPlotRescaler) callVirtualBase_Event(event *qt.QEvent) bool {
 
 }
 func (this *QwtPlotRescaler) OnEvent(slot func(super func(event *qt.QEvent) bool, event *qt.QEvent) bool) {
-	ok := C.QwtPlotRescaler_override_virtual_event(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QwtPlotRescaler_override_virtual_event(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -483,7 +516,11 @@ func (this *QwtPlotRescaler) callVirtualBase_TimerEvent(event *qt.QTimerEvent) {
 
 }
 func (this *QwtPlotRescaler) OnTimerEvent(slot func(super func(event *qt.QTimerEvent), event *qt.QTimerEvent)) {
-	ok := C.QwtPlotRescaler_override_virtual_timerEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QwtPlotRescaler_override_virtual_timerEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -509,7 +546,11 @@ func (this *QwtPlotRescaler) callVirtualBase_ChildEvent(event *qt.QChildEvent) {
 
 }
 func (this *QwtPlotRescaler) OnChildEvent(slot func(super func(event *qt.QChildEvent), event *qt.QChildEvent)) {
-	ok := C.QwtPlotRescaler_override_virtual_childEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QwtPlotRescaler_override_virtual_childEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -535,7 +576,11 @@ func (this *QwtPlotRescaler) callVirtualBase_CustomEvent(event *qt.QEvent) {
 
 }
 func (this *QwtPlotRescaler) OnCustomEvent(slot func(super func(event *qt.QEvent), event *qt.QEvent)) {
-	ok := C.QwtPlotRescaler_override_virtual_customEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QwtPlotRescaler_override_virtual_customEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -561,7 +606,11 @@ func (this *QwtPlotRescaler) callVirtualBase_ConnectNotify(signal *qt.QMetaMetho
 
 }
 func (this *QwtPlotRescaler) OnConnectNotify(slot func(super func(signal *qt.QMetaMethod), signal *qt.QMetaMethod)) {
-	ok := C.QwtPlotRescaler_override_virtual_connectNotify(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QwtPlotRescaler_override_virtual_connectNotify(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -587,7 +636,11 @@ func (this *QwtPlotRescaler) callVirtualBase_DisconnectNotify(signal *qt.QMetaMe
 
 }
 func (this *QwtPlotRescaler) OnDisconnectNotify(slot func(super func(signal *qt.QMetaMethod), signal *qt.QMetaMethod)) {
-	ok := C.QwtPlotRescaler_override_virtual_disconnectNotify(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QwtPlotRescaler_override_virtual_disconnectNotify(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}

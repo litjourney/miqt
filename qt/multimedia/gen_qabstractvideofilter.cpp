@@ -1,3 +1,5 @@
+#include <memory>
+#include <utility>
 #include <QAbstractVideoFilter>
 #include <QChildEvent>
 #include <QEvent>
@@ -18,6 +20,7 @@
 extern "C" {
 #endif
 
+void miqt_exec_callback_handle_release_QAbstractVideoFilter(intptr_t);
 void miqt_exec_callback_QAbstractVideoFilter_activeChanged(intptr_t);
 QVideoFilterRunnable* miqt_exec_callback_QAbstractVideoFilter_createFilterRunnable(QAbstractVideoFilter*, intptr_t);
 bool miqt_exec_callback_QAbstractVideoFilter_event(QAbstractVideoFilter*, intptr_t, QEvent*);
@@ -52,108 +55,108 @@ public:
 	virtual ~MiqtVirtualQAbstractVideoFilter() override = default;
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__createFilterRunnable = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QAbstractVideoFilter> handle__createFilterRunnable;
 
 	// Subclass to allow providing a Go implementation
 	virtual QVideoFilterRunnable* createFilterRunnable() override {
-		if (handle__createFilterRunnable == 0) {
+		if (!handle__createFilterRunnable) {
 			return nullptr; // Pure virtual, there is no base we can call
 		}
 
-		QVideoFilterRunnable* callback_return_value = miqt_exec_callback_QAbstractVideoFilter_createFilterRunnable(this, handle__createFilterRunnable);
+		QVideoFilterRunnable* callback_return_value = miqt_exec_callback_QAbstractVideoFilter_createFilterRunnable(this, handle__createFilterRunnable.value());
 		return callback_return_value;
 	}
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__event = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QAbstractVideoFilter> handle__event;
 
 	// Subclass to allow providing a Go implementation
 	virtual bool event(QEvent* event) override {
-		if (handle__event == 0) {
+		if (!handle__event) {
 			return QAbstractVideoFilter::event(event);
 		}
 
 		QEvent* sigval1 = event;
-		bool callback_return_value = miqt_exec_callback_QAbstractVideoFilter_event(this, handle__event, sigval1);
+		bool callback_return_value = miqt_exec_callback_QAbstractVideoFilter_event(this, handle__event.value(), sigval1);
 		return callback_return_value;
 	}
 
 	friend bool QAbstractVideoFilter_virtualbase_event(void* self, QEvent* event);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__eventFilter = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QAbstractVideoFilter> handle__eventFilter;
 
 	// Subclass to allow providing a Go implementation
 	virtual bool eventFilter(QObject* watched, QEvent* event) override {
-		if (handle__eventFilter == 0) {
+		if (!handle__eventFilter) {
 			return QAbstractVideoFilter::eventFilter(watched, event);
 		}
 
 		QObject* sigval1 = watched;
 		QEvent* sigval2 = event;
-		bool callback_return_value = miqt_exec_callback_QAbstractVideoFilter_eventFilter(this, handle__eventFilter, sigval1, sigval2);
+		bool callback_return_value = miqt_exec_callback_QAbstractVideoFilter_eventFilter(this, handle__eventFilter.value(), sigval1, sigval2);
 		return callback_return_value;
 	}
 
 	friend bool QAbstractVideoFilter_virtualbase_eventFilter(void* self, QObject* watched, QEvent* event);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__timerEvent = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QAbstractVideoFilter> handle__timerEvent;
 
 	// Subclass to allow providing a Go implementation
 	virtual void timerEvent(QTimerEvent* event) override {
-		if (handle__timerEvent == 0) {
+		if (!handle__timerEvent) {
 			QAbstractVideoFilter::timerEvent(event);
 			return;
 		}
 
 		QTimerEvent* sigval1 = event;
-		miqt_exec_callback_QAbstractVideoFilter_timerEvent(this, handle__timerEvent, sigval1);
+		miqt_exec_callback_QAbstractVideoFilter_timerEvent(this, handle__timerEvent.value(), sigval1);
 
 	}
 
 	friend void QAbstractVideoFilter_virtualbase_timerEvent(void* self, QTimerEvent* event);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__childEvent = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QAbstractVideoFilter> handle__childEvent;
 
 	// Subclass to allow providing a Go implementation
 	virtual void childEvent(QChildEvent* event) override {
-		if (handle__childEvent == 0) {
+		if (!handle__childEvent) {
 			QAbstractVideoFilter::childEvent(event);
 			return;
 		}
 
 		QChildEvent* sigval1 = event;
-		miqt_exec_callback_QAbstractVideoFilter_childEvent(this, handle__childEvent, sigval1);
+		miqt_exec_callback_QAbstractVideoFilter_childEvent(this, handle__childEvent.value(), sigval1);
 
 	}
 
 	friend void QAbstractVideoFilter_virtualbase_childEvent(void* self, QChildEvent* event);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__customEvent = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QAbstractVideoFilter> handle__customEvent;
 
 	// Subclass to allow providing a Go implementation
 	virtual void customEvent(QEvent* event) override {
-		if (handle__customEvent == 0) {
+		if (!handle__customEvent) {
 			QAbstractVideoFilter::customEvent(event);
 			return;
 		}
 
 		QEvent* sigval1 = event;
-		miqt_exec_callback_QAbstractVideoFilter_customEvent(this, handle__customEvent, sigval1);
+		miqt_exec_callback_QAbstractVideoFilter_customEvent(this, handle__customEvent.value(), sigval1);
 
 	}
 
 	friend void QAbstractVideoFilter_virtualbase_customEvent(void* self, QEvent* event);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__connectNotify = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QAbstractVideoFilter> handle__connectNotify;
 
 	// Subclass to allow providing a Go implementation
 	virtual void connectNotify(const QMetaMethod& signal) override {
-		if (handle__connectNotify == 0) {
+		if (!handle__connectNotify) {
 			QAbstractVideoFilter::connectNotify(signal);
 			return;
 		}
@@ -161,18 +164,18 @@ public:
 		const QMetaMethod& signal_ret = signal;
 		// Cast returned reference into pointer
 		QMetaMethod* sigval1 = const_cast<QMetaMethod*>(&signal_ret);
-		miqt_exec_callback_QAbstractVideoFilter_connectNotify(this, handle__connectNotify, sigval1);
+		miqt_exec_callback_QAbstractVideoFilter_connectNotify(this, handle__connectNotify.value(), sigval1);
 
 	}
 
 	friend void QAbstractVideoFilter_virtualbase_connectNotify(void* self, QMetaMethod* signal);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__disconnectNotify = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QAbstractVideoFilter> handle__disconnectNotify;
 
 	// Subclass to allow providing a Go implementation
 	virtual void disconnectNotify(const QMetaMethod& signal) override {
-		if (handle__disconnectNotify == 0) {
+		if (!handle__disconnectNotify) {
 			QAbstractVideoFilter::disconnectNotify(signal);
 			return;
 		}
@@ -180,7 +183,7 @@ public:
 		const QMetaMethod& signal_ret = signal;
 		// Cast returned reference into pointer
 		QMetaMethod* sigval1 = const_cast<QMetaMethod*>(&signal_ret);
-		miqt_exec_callback_QAbstractVideoFilter_disconnectNotify(this, handle__disconnectNotify, sigval1);
+		miqt_exec_callback_QAbstractVideoFilter_disconnectNotify(this, handle__disconnectNotify.value(), sigval1);
 
 	}
 
@@ -251,10 +254,12 @@ void QAbstractVideoFilter_activeChanged(QAbstractVideoFilter* self) {
 	self->activeChanged();
 }
 
-void QAbstractVideoFilter_connect_activeChanged(QAbstractVideoFilter* self, intptr_t slot) {
-	QAbstractVideoFilter::connect(self, static_cast<void (QAbstractVideoFilter::*)()>(&QAbstractVideoFilter::activeChanged), self, [=]() {
+void* QAbstractVideoFilter_connect_activeChanged(QAbstractVideoFilter* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QAbstractVideoFilter>>(slot);
+	return new QMetaObject::Connection(QAbstractVideoFilter::connect(self, static_cast<void (QAbstractVideoFilter::*)()>(&QAbstractVideoFilter::activeChanged), self, [slot_handle]() {
+		intptr_t slot = slot_handle->value();
 		miqt_exec_callback_QAbstractVideoFilter_activeChanged(slot);
-	});
+	}));
 }
 
 struct miqt_string QAbstractVideoFilter_tr2(const char* s, const char* c) {
@@ -302,22 +307,24 @@ struct miqt_string QAbstractVideoFilter_trUtf83(const char* s, const char* c, in
 }
 
 bool QAbstractVideoFilter_override_virtual_createFilterRunnable(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QAbstractVideoFilter> slot_handle(slot);
 	MiqtVirtualQAbstractVideoFilter* self_cast = dynamic_cast<MiqtVirtualQAbstractVideoFilter*>( (QAbstractVideoFilter*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__createFilterRunnable = slot;
+	self_cast->handle__createFilterRunnable = std::move(slot_handle);
 	return true;
 }
 
 bool QAbstractVideoFilter_override_virtual_event(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QAbstractVideoFilter> slot_handle(slot);
 	MiqtVirtualQAbstractVideoFilter* self_cast = dynamic_cast<MiqtVirtualQAbstractVideoFilter*>( (QAbstractVideoFilter*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__event = slot;
+	self_cast->handle__event = std::move(slot_handle);
 	return true;
 }
 
@@ -326,12 +333,13 @@ bool QAbstractVideoFilter_virtualbase_event(void* self, QEvent* event) {
 }
 
 bool QAbstractVideoFilter_override_virtual_eventFilter(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QAbstractVideoFilter> slot_handle(slot);
 	MiqtVirtualQAbstractVideoFilter* self_cast = dynamic_cast<MiqtVirtualQAbstractVideoFilter*>( (QAbstractVideoFilter*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__eventFilter = slot;
+	self_cast->handle__eventFilter = std::move(slot_handle);
 	return true;
 }
 
@@ -340,12 +348,13 @@ bool QAbstractVideoFilter_virtualbase_eventFilter(void* self, QObject* watched, 
 }
 
 bool QAbstractVideoFilter_override_virtual_timerEvent(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QAbstractVideoFilter> slot_handle(slot);
 	MiqtVirtualQAbstractVideoFilter* self_cast = dynamic_cast<MiqtVirtualQAbstractVideoFilter*>( (QAbstractVideoFilter*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__timerEvent = slot;
+	self_cast->handle__timerEvent = std::move(slot_handle);
 	return true;
 }
 
@@ -354,12 +363,13 @@ void QAbstractVideoFilter_virtualbase_timerEvent(void* self, QTimerEvent* event)
 }
 
 bool QAbstractVideoFilter_override_virtual_childEvent(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QAbstractVideoFilter> slot_handle(slot);
 	MiqtVirtualQAbstractVideoFilter* self_cast = dynamic_cast<MiqtVirtualQAbstractVideoFilter*>( (QAbstractVideoFilter*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__childEvent = slot;
+	self_cast->handle__childEvent = std::move(slot_handle);
 	return true;
 }
 
@@ -368,12 +378,13 @@ void QAbstractVideoFilter_virtualbase_childEvent(void* self, QChildEvent* event)
 }
 
 bool QAbstractVideoFilter_override_virtual_customEvent(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QAbstractVideoFilter> slot_handle(slot);
 	MiqtVirtualQAbstractVideoFilter* self_cast = dynamic_cast<MiqtVirtualQAbstractVideoFilter*>( (QAbstractVideoFilter*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__customEvent = slot;
+	self_cast->handle__customEvent = std::move(slot_handle);
 	return true;
 }
 
@@ -382,12 +393,13 @@ void QAbstractVideoFilter_virtualbase_customEvent(void* self, QEvent* event) {
 }
 
 bool QAbstractVideoFilter_override_virtual_connectNotify(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QAbstractVideoFilter> slot_handle(slot);
 	MiqtVirtualQAbstractVideoFilter* self_cast = dynamic_cast<MiqtVirtualQAbstractVideoFilter*>( (QAbstractVideoFilter*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__connectNotify = slot;
+	self_cast->handle__connectNotify = std::move(slot_handle);
 	return true;
 }
 
@@ -396,12 +408,13 @@ void QAbstractVideoFilter_virtualbase_connectNotify(void* self, QMetaMethod* sig
 }
 
 bool QAbstractVideoFilter_override_virtual_disconnectNotify(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QAbstractVideoFilter> slot_handle(slot);
 	MiqtVirtualQAbstractVideoFilter* self_cast = dynamic_cast<MiqtVirtualQAbstractVideoFilter*>( (QAbstractVideoFilter*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__disconnectNotify = slot;
+	self_cast->handle__disconnectNotify = std::move(slot_handle);
 	return true;
 }
 

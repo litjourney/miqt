@@ -1,3 +1,5 @@
+#include <memory>
+#include <utility>
 #include <QBrush>
 #include <QColor>
 #include <QPainter>
@@ -10,6 +12,7 @@
 extern "C" {
 #endif
 
+void miqt_exec_callback_handle_release_QwtIntervalSymbol(intptr_t);
 void miqt_exec_callback_QwtIntervalSymbol_draw(const QwtIntervalSymbol*, intptr_t, QPainter*, int, QPointF*, QPointF*);
 #ifdef __cplusplus
 } /* extern C */
@@ -25,11 +28,11 @@ public:
 	virtual ~MiqtVirtualQwtIntervalSymbol() override = default;
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__draw = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtIntervalSymbol> handle__draw;
 
 	// Subclass to allow providing a Go implementation
 	virtual void draw(QPainter* param1, Qt::Orientation param2, const QPointF& from, const QPointF& to) const override {
-		if (handle__draw == 0) {
+		if (!handle__draw) {
 			QwtIntervalSymbol::draw(param1, param2, from, to);
 			return;
 		}
@@ -43,7 +46,7 @@ public:
 		const QPointF& to_ret = to;
 		// Cast returned reference into pointer
 		QPointF* sigval4 = const_cast<QPointF*>(&to_ret);
-		miqt_exec_callback_QwtIntervalSymbol_draw(this, handle__draw, sigval1, sigval2, sigval3, sigval4);
+		miqt_exec_callback_QwtIntervalSymbol_draw(this, handle__draw.value(), sigval1, sigval2, sigval3, sigval4);
 
 	}
 
@@ -129,12 +132,13 @@ void QwtIntervalSymbol_setPen3(QwtIntervalSymbol* self, QColor* param1, double w
 }
 
 bool QwtIntervalSymbol_override_virtual_draw(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtIntervalSymbol> slot_handle(slot);
 	MiqtVirtualQwtIntervalSymbol* self_cast = dynamic_cast<MiqtVirtualQwtIntervalSymbol*>( (QwtIntervalSymbol*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__draw = slot;
+	self_cast->handle__draw = std::move(slot_handle);
 	return true;
 }
 

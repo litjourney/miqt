@@ -15,6 +15,11 @@ import (
 	"unsafe"
 )
 
+//export miqt_exec_callback_handle_release_QMediaRecorderControl
+func miqt_exec_callback_handle_release_QMediaRecorderControl(cb C.intptr_t) {
+	cgo.Handle(cb).Delete()
+}
+
 type QMediaRecorderControl struct {
 	h *C.QMediaRecorderControl
 	*QMediaControl
@@ -116,8 +121,10 @@ func (this *QMediaRecorderControl) ApplySettings() {
 func (this *QMediaRecorderControl) StateChanged(state QMediaRecorder__State) {
 	C.QMediaRecorderControl_stateChanged(this.h, (C.int)(state))
 }
-func (this *QMediaRecorderControl) OnStateChanged(slot func(state QMediaRecorder__State)) {
-	C.QMediaRecorderControl_connect_stateChanged(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QMediaRecorderControl) OnStateChanged(slot func(state QMediaRecorder__State)) *qt.SignalConnection {
+	_goptr := qt.UnsafeNewQMetaObject__Connection(C.QMediaRecorderControl_connect_stateChanged(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QMediaRecorderControl_stateChanged
@@ -136,8 +143,10 @@ func miqt_exec_callback_QMediaRecorderControl_stateChanged(cb C.intptr_t, state 
 func (this *QMediaRecorderControl) StatusChanged(status QMediaRecorder__Status) {
 	C.QMediaRecorderControl_statusChanged(this.h, (C.int)(status))
 }
-func (this *QMediaRecorderControl) OnStatusChanged(slot func(status QMediaRecorder__Status)) {
-	C.QMediaRecorderControl_connect_statusChanged(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QMediaRecorderControl) OnStatusChanged(slot func(status QMediaRecorder__Status)) *qt.SignalConnection {
+	_goptr := qt.UnsafeNewQMetaObject__Connection(C.QMediaRecorderControl_connect_statusChanged(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QMediaRecorderControl_statusChanged
@@ -156,8 +165,10 @@ func miqt_exec_callback_QMediaRecorderControl_statusChanged(cb C.intptr_t, statu
 func (this *QMediaRecorderControl) DurationChanged(position int64) {
 	C.QMediaRecorderControl_durationChanged(this.h, (C.longlong)(position))
 }
-func (this *QMediaRecorderControl) OnDurationChanged(slot func(position int64)) {
-	C.QMediaRecorderControl_connect_durationChanged(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QMediaRecorderControl) OnDurationChanged(slot func(position int64)) *qt.SignalConnection {
+	_goptr := qt.UnsafeNewQMetaObject__Connection(C.QMediaRecorderControl_connect_durationChanged(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QMediaRecorderControl_durationChanged
@@ -176,8 +187,10 @@ func miqt_exec_callback_QMediaRecorderControl_durationChanged(cb C.intptr_t, pos
 func (this *QMediaRecorderControl) MutedChanged(muted bool) {
 	C.QMediaRecorderControl_mutedChanged(this.h, (C.bool)(muted))
 }
-func (this *QMediaRecorderControl) OnMutedChanged(slot func(muted bool)) {
-	C.QMediaRecorderControl_connect_mutedChanged(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QMediaRecorderControl) OnMutedChanged(slot func(muted bool)) *qt.SignalConnection {
+	_goptr := qt.UnsafeNewQMetaObject__Connection(C.QMediaRecorderControl_connect_mutedChanged(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QMediaRecorderControl_mutedChanged
@@ -196,8 +209,10 @@ func miqt_exec_callback_QMediaRecorderControl_mutedChanged(cb C.intptr_t, muted 
 func (this *QMediaRecorderControl) VolumeChanged(volume float64) {
 	C.QMediaRecorderControl_volumeChanged(this.h, (C.double)(volume))
 }
-func (this *QMediaRecorderControl) OnVolumeChanged(slot func(volume float64)) {
-	C.QMediaRecorderControl_connect_volumeChanged(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QMediaRecorderControl) OnVolumeChanged(slot func(volume float64)) *qt.SignalConnection {
+	_goptr := qt.UnsafeNewQMetaObject__Connection(C.QMediaRecorderControl_connect_volumeChanged(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QMediaRecorderControl_volumeChanged
@@ -216,8 +231,10 @@ func miqt_exec_callback_QMediaRecorderControl_volumeChanged(cb C.intptr_t, volum
 func (this *QMediaRecorderControl) ActualLocationChanged(location *qt.QUrl) {
 	C.QMediaRecorderControl_actualLocationChanged(this.h, (*C.QUrl)(location.UnsafePointer()))
 }
-func (this *QMediaRecorderControl) OnActualLocationChanged(slot func(location *qt.QUrl)) {
-	C.QMediaRecorderControl_connect_actualLocationChanged(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QMediaRecorderControl) OnActualLocationChanged(slot func(location *qt.QUrl)) *qt.SignalConnection {
+	_goptr := qt.UnsafeNewQMetaObject__Connection(C.QMediaRecorderControl_connect_actualLocationChanged(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QMediaRecorderControl_actualLocationChanged
@@ -240,8 +257,10 @@ func (this *QMediaRecorderControl) Error(error int, errorString string) {
 	defer C.free(unsafe.Pointer(errorString_ms.data))
 	C.QMediaRecorderControl_error(this.h, (C.int)(error), errorString_ms)
 }
-func (this *QMediaRecorderControl) OnError(slot func(error int, errorString string)) {
-	C.QMediaRecorderControl_connect_error(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QMediaRecorderControl) OnError(slot func(error int, errorString string)) *qt.SignalConnection {
+	_goptr := qt.UnsafeNewQMetaObject__Connection(C.QMediaRecorderControl_connect_error(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QMediaRecorderControl_error

@@ -74,6 +74,11 @@ const (
 	QSqlDriver__DB2         QSqlDriver__DbmsType = 8
 )
 
+//export miqt_exec_callback_handle_release_QSqlDriver
+func miqt_exec_callback_handle_release_QSqlDriver(cb C.intptr_t) {
+	cgo.Handle(cb).Delete()
+}
+
 type QSqlDriver struct {
 	h *C.QSqlDriver
 	*qt6.QObject
@@ -346,8 +351,10 @@ func (this *QSqlDriver) Notification(name string, source QSqlDriver__Notificatio
 	defer C.free(unsafe.Pointer(name_ms.data))
 	C.QSqlDriver_notification(this.h, name_ms, (C.int)(source), (*C.QVariant)(payload.UnsafePointer()))
 }
-func (this *QSqlDriver) OnNotification(slot func(name string, source QSqlDriver__NotificationSource, payload *qt6.QVariant)) {
-	C.QSqlDriver_connect_notification(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QSqlDriver) OnNotification(slot func(name string, source QSqlDriver__NotificationSource, payload *qt6.QVariant)) *qt6.SignalConnection {
+	_goptr := qt6.UnsafeNewQMetaObject__Connection(C.QSqlDriver_connect_notification(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QSqlDriver_notification
@@ -455,7 +462,11 @@ func (this *QSqlDriver) callVirtualBase_IsOpen() bool {
 
 }
 func (this *QSqlDriver) OnIsOpen(slot func(super func() bool) bool) {
-	ok := C.QSqlDriver_override_virtual_isOpen(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QSqlDriver_override_virtual_isOpen(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -480,7 +491,11 @@ func (this *QSqlDriver) callVirtualBase_BeginTransaction() bool {
 
 }
 func (this *QSqlDriver) OnBeginTransaction(slot func(super func() bool) bool) {
-	ok := C.QSqlDriver_override_virtual_beginTransaction(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QSqlDriver_override_virtual_beginTransaction(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -505,7 +520,11 @@ func (this *QSqlDriver) callVirtualBase_CommitTransaction() bool {
 
 }
 func (this *QSqlDriver) OnCommitTransaction(slot func(super func() bool) bool) {
-	ok := C.QSqlDriver_override_virtual_commitTransaction(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QSqlDriver_override_virtual_commitTransaction(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -530,7 +549,11 @@ func (this *QSqlDriver) callVirtualBase_RollbackTransaction() bool {
 
 }
 func (this *QSqlDriver) OnRollbackTransaction(slot func(super func() bool) bool) {
-	ok := C.QSqlDriver_override_virtual_rollbackTransaction(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QSqlDriver_override_virtual_rollbackTransaction(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -564,7 +587,11 @@ func (this *QSqlDriver) callVirtualBase_Tables(tableType QSql__TableType) []stri
 
 }
 func (this *QSqlDriver) OnTables(slot func(super func(tableType QSql__TableType) []string, tableType QSql__TableType) []string) {
-	ok := C.QSqlDriver_override_virtual_tables(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QSqlDriver_override_virtual_tables(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -606,7 +633,11 @@ func (this *QSqlDriver) callVirtualBase_PrimaryIndex(tableName string) *QSqlInde
 
 }
 func (this *QSqlDriver) OnPrimaryIndex(slot func(super func(tableName string) *QSqlIndex, tableName string) *QSqlIndex) {
-	ok := C.QSqlDriver_override_virtual_primaryIndex(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QSqlDriver_override_virtual_primaryIndex(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -643,7 +674,11 @@ func (this *QSqlDriver) callVirtualBase_Record(tableName string) *QSqlRecord {
 
 }
 func (this *QSqlDriver) OnRecord(slot func(super func(tableName string) *QSqlRecord, tableName string) *QSqlRecord) {
-	ok := C.QSqlDriver_override_virtual_record(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QSqlDriver_override_virtual_record(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -676,7 +711,11 @@ func (this *QSqlDriver) callVirtualBase_FormatValue(field *QSqlField, trimString
 	return _ret
 }
 func (this *QSqlDriver) OnFormatValue(slot func(super func(field *QSqlField, trimStrings bool) string, field *QSqlField, trimStrings bool) string) {
-	ok := C.QSqlDriver_override_virtual_formatValue(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QSqlDriver_override_virtual_formatValue(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -715,7 +754,11 @@ func (this *QSqlDriver) callVirtualBase_EscapeIdentifier(identifier string, type
 	return _ret
 }
 func (this *QSqlDriver) OnEscapeIdentifier(slot func(super func(identifier string, typeVal QSqlDriver__IdentifierType) string, identifier string, typeVal QSqlDriver__IdentifierType) string) {
-	ok := C.QSqlDriver_override_virtual_escapeIdentifier(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QSqlDriver_override_virtual_escapeIdentifier(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -756,7 +799,11 @@ func (this *QSqlDriver) callVirtualBase_SqlStatement(typeVal QSqlDriver__Stateme
 	return _ret
 }
 func (this *QSqlDriver) OnSqlStatement(slot func(super func(typeVal QSqlDriver__StatementType, tableName string, rec *QSqlRecord, preparedStatement bool) string, typeVal QSqlDriver__StatementType, tableName string, rec *QSqlRecord, preparedStatement bool) string) {
-	ok := C.QSqlDriver_override_virtual_sqlStatement(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QSqlDriver_override_virtual_sqlStatement(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -797,7 +844,11 @@ func (this *QSqlDriver) callVirtualBase_Handle() *qt6.QVariant {
 
 }
 func (this *QSqlDriver) OnHandle(slot func(super func() *qt6.QVariant) *qt6.QVariant) {
-	ok := C.QSqlDriver_override_virtual_handle(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QSqlDriver_override_virtual_handle(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -816,7 +867,11 @@ func miqt_exec_callback_QSqlDriver_handle(self *C.QSqlDriver, cb C.intptr_t) *C.
 
 }
 func (this *QSqlDriver) OnHasFeature(slot func(f QSqlDriver__DriverFeature) bool) {
-	ok := C.QSqlDriver_override_virtual_hasFeature(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QSqlDriver_override_virtual_hasFeature(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -838,7 +893,11 @@ func miqt_exec_callback_QSqlDriver_hasFeature(self *C.QSqlDriver, cb C.intptr_t,
 
 }
 func (this *QSqlDriver) OnClose(slot func()) {
-	ok := C.QSqlDriver_override_virtual_close(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QSqlDriver_override_virtual_close(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -855,7 +914,11 @@ func miqt_exec_callback_QSqlDriver_close(self *C.QSqlDriver, cb C.intptr_t) {
 
 }
 func (this *QSqlDriver) OnCreateResult(slot func() *QSqlResult) {
-	ok := C.QSqlDriver_override_virtual_createResult(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QSqlDriver_override_virtual_createResult(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -874,7 +937,11 @@ func miqt_exec_callback_QSqlDriver_createResult(self *C.QSqlDriver, cb C.intptr_
 
 }
 func (this *QSqlDriver) OnOpen(slot func(db string, user string, password string, host string, port int, connOpts string) bool) {
-	ok := C.QSqlDriver_override_virtual_open(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QSqlDriver_override_virtual_open(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -927,7 +994,11 @@ func (this *QSqlDriver) callVirtualBase_SubscribeToNotification(name string) boo
 
 }
 func (this *QSqlDriver) OnSubscribeToNotification(slot func(super func(name string) bool, name string) bool) {
-	ok := C.QSqlDriver_override_virtual_subscribeToNotification(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QSqlDriver_override_virtual_subscribeToNotification(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -962,7 +1033,11 @@ func (this *QSqlDriver) callVirtualBase_UnsubscribeFromNotification(name string)
 
 }
 func (this *QSqlDriver) OnUnsubscribeFromNotification(slot func(super func(name string) bool, name string) bool) {
-	ok := C.QSqlDriver_override_virtual_unsubscribeFromNotification(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QSqlDriver_override_virtual_unsubscribeFromNotification(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1002,7 +1077,11 @@ func (this *QSqlDriver) callVirtualBase_SubscribedToNotifications() []string {
 
 }
 func (this *QSqlDriver) OnSubscribedToNotifications(slot func(super func() []string) []string) {
-	ok := C.QSqlDriver_override_virtual_subscribedToNotifications(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QSqlDriver_override_virtual_subscribedToNotifications(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1039,7 +1118,11 @@ func (this *QSqlDriver) callVirtualBase_IsIdentifierEscaped(identifier string, t
 
 }
 func (this *QSqlDriver) OnIsIdentifierEscaped(slot func(super func(identifier string, typeVal QSqlDriver__IdentifierType) bool, identifier string, typeVal QSqlDriver__IdentifierType) bool) {
-	ok := C.QSqlDriver_override_virtual_isIdentifierEscaped(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QSqlDriver_override_virtual_isIdentifierEscaped(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1077,7 +1160,11 @@ func (this *QSqlDriver) callVirtualBase_StripDelimiters(identifier string, typeV
 	return _ret
 }
 func (this *QSqlDriver) OnStripDelimiters(slot func(super func(identifier string, typeVal QSqlDriver__IdentifierType) string, identifier string, typeVal QSqlDriver__IdentifierType) string) {
-	ok := C.QSqlDriver_override_virtual_stripDelimiters(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QSqlDriver_override_virtual_stripDelimiters(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1112,7 +1199,11 @@ func (this *QSqlDriver) callVirtualBase_MaximumIdentifierLength(typeVal QSqlDriv
 
 }
 func (this *QSqlDriver) OnMaximumIdentifierLength(slot func(super func(typeVal QSqlDriver__IdentifierType) int, typeVal QSqlDriver__IdentifierType) int) {
-	ok := C.QSqlDriver_override_virtual_maximumIdentifierLength(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QSqlDriver_override_virtual_maximumIdentifierLength(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1140,7 +1231,11 @@ func (this *QSqlDriver) callVirtualBase_CancelQuery() bool {
 
 }
 func (this *QSqlDriver) OnCancelQuery(slot func(super func() bool) bool) {
-	ok := C.QSqlDriver_override_virtual_cancelQuery(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QSqlDriver_override_virtual_cancelQuery(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1165,7 +1260,11 @@ func (this *QSqlDriver) callVirtualBase_SetOpen(o bool) {
 
 }
 func (this *QSqlDriver) OnSetOpen(slot func(super func(o bool), o bool)) {
-	ok := C.QSqlDriver_override_virtual_setOpen(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QSqlDriver_override_virtual_setOpen(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1191,7 +1290,11 @@ func (this *QSqlDriver) callVirtualBase_SetOpenError(e bool) {
 
 }
 func (this *QSqlDriver) OnSetOpenError(slot func(super func(e bool), e bool)) {
-	ok := C.QSqlDriver_override_virtual_setOpenError(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QSqlDriver_override_virtual_setOpenError(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1217,7 +1320,11 @@ func (this *QSqlDriver) callVirtualBase_SetLastError(e *QSqlError) {
 
 }
 func (this *QSqlDriver) OnSetLastError(slot func(super func(e *QSqlError), e *QSqlError)) {
-	ok := C.QSqlDriver_override_virtual_setLastError(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QSqlDriver_override_virtual_setLastError(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1243,7 +1350,11 @@ func (this *QSqlDriver) callVirtualBase_Event(event *qt6.QEvent) bool {
 
 }
 func (this *QSqlDriver) OnEvent(slot func(super func(event *qt6.QEvent) bool, event *qt6.QEvent) bool) {
-	ok := C.QSqlDriver_override_virtual_event(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QSqlDriver_override_virtual_event(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1271,7 +1382,11 @@ func (this *QSqlDriver) callVirtualBase_EventFilter(watched *qt6.QObject, event 
 
 }
 func (this *QSqlDriver) OnEventFilter(slot func(super func(watched *qt6.QObject, event *qt6.QEvent) bool, watched *qt6.QObject, event *qt6.QEvent) bool) {
-	ok := C.QSqlDriver_override_virtual_eventFilter(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QSqlDriver_override_virtual_eventFilter(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1301,7 +1416,11 @@ func (this *QSqlDriver) callVirtualBase_TimerEvent(event *qt6.QTimerEvent) {
 
 }
 func (this *QSqlDriver) OnTimerEvent(slot func(super func(event *qt6.QTimerEvent), event *qt6.QTimerEvent)) {
-	ok := C.QSqlDriver_override_virtual_timerEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QSqlDriver_override_virtual_timerEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1327,7 +1446,11 @@ func (this *QSqlDriver) callVirtualBase_ChildEvent(event *qt6.QChildEvent) {
 
 }
 func (this *QSqlDriver) OnChildEvent(slot func(super func(event *qt6.QChildEvent), event *qt6.QChildEvent)) {
-	ok := C.QSqlDriver_override_virtual_childEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QSqlDriver_override_virtual_childEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1353,7 +1476,11 @@ func (this *QSqlDriver) callVirtualBase_CustomEvent(event *qt6.QEvent) {
 
 }
 func (this *QSqlDriver) OnCustomEvent(slot func(super func(event *qt6.QEvent), event *qt6.QEvent)) {
-	ok := C.QSqlDriver_override_virtual_customEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QSqlDriver_override_virtual_customEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1379,7 +1506,11 @@ func (this *QSqlDriver) callVirtualBase_ConnectNotify(signal *qt6.QMetaMethod) {
 
 }
 func (this *QSqlDriver) OnConnectNotify(slot func(super func(signal *qt6.QMetaMethod), signal *qt6.QMetaMethod)) {
-	ok := C.QSqlDriver_override_virtual_connectNotify(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QSqlDriver_override_virtual_connectNotify(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1405,7 +1536,11 @@ func (this *QSqlDriver) callVirtualBase_DisconnectNotify(signal *qt6.QMetaMethod
 
 }
 func (this *QSqlDriver) OnDisconnectNotify(slot func(super func(signal *qt6.QMetaMethod), signal *qt6.QMetaMethod)) {
-	ok := C.QSqlDriver_override_virtual_disconnectNotify(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QSqlDriver_override_virtual_disconnectNotify(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}

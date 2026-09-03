@@ -204,6 +204,11 @@ func (this *QWebHitTestResult) GoGC() {
 	})
 }
 
+//export miqt_exec_callback_handle_release_QWebFrame
+func miqt_exec_callback_handle_release_QWebFrame(cb C.intptr_t) {
+	cgo.Handle(cb).Delete()
+}
+
 type QWebFrame struct {
 	h *C.QWebFrame
 	*qt.QObject
@@ -544,8 +549,10 @@ func (this *QWebFrame) Print(printer *printsupport.QPrinter) {
 func (this *QWebFrame) JavaScriptWindowObjectCleared() {
 	C.QWebFrame_javaScriptWindowObjectCleared(this.h)
 }
-func (this *QWebFrame) OnJavaScriptWindowObjectCleared(slot func()) {
-	C.QWebFrame_connect_javaScriptWindowObjectCleared(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QWebFrame) OnJavaScriptWindowObjectCleared(slot func()) *qt.SignalConnection {
+	_goptr := qt.UnsafeNewQMetaObject__Connection(C.QWebFrame_connect_javaScriptWindowObjectCleared(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QWebFrame_javaScriptWindowObjectCleared
@@ -561,8 +568,10 @@ func miqt_exec_callback_QWebFrame_javaScriptWindowObjectCleared(cb C.intptr_t) {
 func (this *QWebFrame) ProvisionalLoad() {
 	C.QWebFrame_provisionalLoad(this.h)
 }
-func (this *QWebFrame) OnProvisionalLoad(slot func()) {
-	C.QWebFrame_connect_provisionalLoad(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QWebFrame) OnProvisionalLoad(slot func()) *qt.SignalConnection {
+	_goptr := qt.UnsafeNewQMetaObject__Connection(C.QWebFrame_connect_provisionalLoad(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QWebFrame_provisionalLoad
@@ -582,8 +591,10 @@ func (this *QWebFrame) TitleChanged(title string) {
 	defer C.free(unsafe.Pointer(title_ms.data))
 	C.QWebFrame_titleChanged(this.h, title_ms)
 }
-func (this *QWebFrame) OnTitleChanged(slot func(title string)) {
-	C.QWebFrame_connect_titleChanged(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QWebFrame) OnTitleChanged(slot func(title string)) *qt.SignalConnection {
+	_goptr := qt.UnsafeNewQMetaObject__Connection(C.QWebFrame_connect_titleChanged(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QWebFrame_titleChanged
@@ -605,8 +616,10 @@ func miqt_exec_callback_QWebFrame_titleChanged(cb C.intptr_t, title C.struct_miq
 func (this *QWebFrame) UrlChanged(url *qt.QUrl) {
 	C.QWebFrame_urlChanged(this.h, (*C.QUrl)(url.UnsafePointer()))
 }
-func (this *QWebFrame) OnUrlChanged(slot func(url *qt.QUrl)) {
-	C.QWebFrame_connect_urlChanged(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QWebFrame) OnUrlChanged(slot func(url *qt.QUrl)) *qt.SignalConnection {
+	_goptr := qt.UnsafeNewQMetaObject__Connection(C.QWebFrame_connect_urlChanged(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QWebFrame_urlChanged
@@ -625,8 +638,10 @@ func miqt_exec_callback_QWebFrame_urlChanged(cb C.intptr_t, url *C.QUrl) {
 func (this *QWebFrame) InitialLayoutCompleted() {
 	C.QWebFrame_initialLayoutCompleted(this.h)
 }
-func (this *QWebFrame) OnInitialLayoutCompleted(slot func()) {
-	C.QWebFrame_connect_initialLayoutCompleted(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QWebFrame) OnInitialLayoutCompleted(slot func()) *qt.SignalConnection {
+	_goptr := qt.UnsafeNewQMetaObject__Connection(C.QWebFrame_connect_initialLayoutCompleted(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QWebFrame_initialLayoutCompleted
@@ -642,8 +657,10 @@ func miqt_exec_callback_QWebFrame_initialLayoutCompleted(cb C.intptr_t) {
 func (this *QWebFrame) IconChanged() {
 	C.QWebFrame_iconChanged(this.h)
 }
-func (this *QWebFrame) OnIconChanged(slot func()) {
-	C.QWebFrame_connect_iconChanged(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QWebFrame) OnIconChanged(slot func()) *qt.SignalConnection {
+	_goptr := qt.UnsafeNewQMetaObject__Connection(C.QWebFrame_connect_iconChanged(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QWebFrame_iconChanged
@@ -659,8 +676,10 @@ func miqt_exec_callback_QWebFrame_iconChanged(cb C.intptr_t) {
 func (this *QWebFrame) ContentsSizeChanged(size *qt.QSize) {
 	C.QWebFrame_contentsSizeChanged(this.h, (*C.QSize)(size.UnsafePointer()))
 }
-func (this *QWebFrame) OnContentsSizeChanged(slot func(size *qt.QSize)) {
-	C.QWebFrame_connect_contentsSizeChanged(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QWebFrame) OnContentsSizeChanged(slot func(size *qt.QSize)) *qt.SignalConnection {
+	_goptr := qt.UnsafeNewQMetaObject__Connection(C.QWebFrame_connect_contentsSizeChanged(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QWebFrame_contentsSizeChanged
@@ -679,8 +698,10 @@ func miqt_exec_callback_QWebFrame_contentsSizeChanged(cb C.intptr_t, size *C.QSi
 func (this *QWebFrame) LoadStarted() {
 	C.QWebFrame_loadStarted(this.h)
 }
-func (this *QWebFrame) OnLoadStarted(slot func()) {
-	C.QWebFrame_connect_loadStarted(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QWebFrame) OnLoadStarted(slot func()) *qt.SignalConnection {
+	_goptr := qt.UnsafeNewQMetaObject__Connection(C.QWebFrame_connect_loadStarted(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QWebFrame_loadStarted
@@ -696,8 +717,10 @@ func miqt_exec_callback_QWebFrame_loadStarted(cb C.intptr_t) {
 func (this *QWebFrame) LoadFinished(ok bool) {
 	C.QWebFrame_loadFinished(this.h, (C.bool)(ok))
 }
-func (this *QWebFrame) OnLoadFinished(slot func(ok bool)) {
-	C.QWebFrame_connect_loadFinished(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QWebFrame) OnLoadFinished(slot func(ok bool)) *qt.SignalConnection {
+	_goptr := qt.UnsafeNewQMetaObject__Connection(C.QWebFrame_connect_loadFinished(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QWebFrame_loadFinished
@@ -716,8 +739,10 @@ func miqt_exec_callback_QWebFrame_loadFinished(cb C.intptr_t, ok C.bool) {
 func (this *QWebFrame) PageChanged() {
 	C.QWebFrame_pageChanged(this.h)
 }
-func (this *QWebFrame) OnPageChanged(slot func()) {
-	C.QWebFrame_connect_pageChanged(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QWebFrame) OnPageChanged(slot func()) *qt.SignalConnection {
+	_goptr := qt.UnsafeNewQMetaObject__Connection(C.QWebFrame_connect_pageChanged(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QWebFrame_pageChanged

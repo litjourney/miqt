@@ -15,6 +15,11 @@ import (
 	"unsafe"
 )
 
+//export miqt_exec_callback_handle_release_QwtLegend
+func miqt_exec_callback_handle_release_QwtLegend(cb C.intptr_t) {
+	cgo.Handle(cb).Delete()
+}
+
 type QwtLegend struct {
 	h *C.QwtLegend
 	*QwtAbstractLegend
@@ -176,8 +181,10 @@ func (this *QwtLegend) ScrollExtent(param1 qt.Orientation) int {
 func (this *QwtLegend) Clicked(itemInfo *qt.QVariant, index int) {
 	C.QwtLegend_clicked(this.h, (*C.QVariant)(itemInfo.UnsafePointer()), (C.int)(index))
 }
-func (this *QwtLegend) OnClicked(slot func(itemInfo *qt.QVariant, index int)) {
-	C.QwtLegend_connect_clicked(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QwtLegend) OnClicked(slot func(itemInfo *qt.QVariant, index int)) *qt.SignalConnection {
+	_goptr := qt.UnsafeNewQMetaObject__Connection(C.QwtLegend_connect_clicked(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QwtLegend_clicked
@@ -198,8 +205,10 @@ func miqt_exec_callback_QwtLegend_clicked(cb C.intptr_t, itemInfo *C.QVariant, i
 func (this *QwtLegend) Checked(itemInfo *qt.QVariant, on bool, index int) {
 	C.QwtLegend_checked(this.h, (*C.QVariant)(itemInfo.UnsafePointer()), (C.bool)(on), (C.int)(index))
 }
-func (this *QwtLegend) OnChecked(slot func(itemInfo *qt.QVariant, on bool, index int)) {
-	C.QwtLegend_connect_checked(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QwtLegend) OnChecked(slot func(itemInfo *qt.QVariant, on bool, index int)) *qt.SignalConnection {
+	_goptr := qt.UnsafeNewQMetaObject__Connection(C.QwtLegend_connect_checked(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QwtLegend_checked
@@ -449,7 +458,11 @@ func (this *QwtLegend) callVirtualBase_EventFilter(param1 *qt.QObject, param2 *q
 
 }
 func (this *QwtLegend) OnEventFilter(slot func(super func(param1 *qt.QObject, param2 *qt.QEvent) bool, param1 *qt.QObject, param2 *qt.QEvent) bool) {
-	ok := C.QwtLegend_override_virtual_eventFilter(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QwtLegend_override_virtual_eventFilter(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -481,7 +494,11 @@ func (this *QwtLegend) callVirtualBase_SizeHint() *qt.QSize {
 
 }
 func (this *QwtLegend) OnSizeHint(slot func(super func() *qt.QSize) *qt.QSize) {
-	ok := C.QwtLegend_override_virtual_sizeHint(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QwtLegend_override_virtual_sizeHint(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -506,7 +523,11 @@ func (this *QwtLegend) callVirtualBase_HeightForWidth(width int) int {
 
 }
 func (this *QwtLegend) OnHeightForWidth(slot func(super func(width int) int, width int) int) {
-	ok := C.QwtLegend_override_virtual_heightForWidth(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QwtLegend_override_virtual_heightForWidth(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -534,7 +555,11 @@ func (this *QwtLegend) callVirtualBase_RenderLegend(param1 *qt.QPainter, param2 
 
 }
 func (this *QwtLegend) OnRenderLegend(slot func(super func(param1 *qt.QPainter, param2 *qt.QRectF, fillBackground bool), param1 *qt.QPainter, param2 *qt.QRectF, fillBackground bool)) {
-	ok := C.QwtLegend_override_virtual_renderLegend(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QwtLegend_override_virtual_renderLegend(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -564,7 +589,11 @@ func (this *QwtLegend) callVirtualBase_RenderItem(param1 *qt.QPainter, param2 *q
 
 }
 func (this *QwtLegend) OnRenderItem(slot func(super func(param1 *qt.QPainter, param2 *qt.QWidget, param3 *qt.QRectF, fillBackground bool), param1 *qt.QPainter, param2 *qt.QWidget, param3 *qt.QRectF, fillBackground bool)) {
-	ok := C.QwtLegend_override_virtual_renderItem(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QwtLegend_override_virtual_renderItem(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -596,7 +625,11 @@ func (this *QwtLegend) callVirtualBase_IsEmpty() bool {
 
 }
 func (this *QwtLegend) OnIsEmpty(slot func(super func() bool) bool) {
-	ok := C.QwtLegend_override_virtual_isEmpty(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QwtLegend_override_virtual_isEmpty(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -621,7 +654,11 @@ func (this *QwtLegend) callVirtualBase_ScrollExtent(param1 qt.Orientation) int {
 
 }
 func (this *QwtLegend) OnScrollExtent(slot func(super func(param1 qt.Orientation) int, param1 qt.Orientation) int) {
-	ok := C.QwtLegend_override_virtual_scrollExtent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QwtLegend_override_virtual_scrollExtent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -655,7 +692,11 @@ func (this *QwtLegend) callVirtualBase_UpdateLegend(param1 *qt.QVariant, param2 
 
 }
 func (this *QwtLegend) OnUpdateLegend(slot func(super func(param1 *qt.QVariant, param2 []QwtLegendData), param1 *qt.QVariant, param2 []QwtLegendData)) {
-	ok := C.QwtLegend_override_virtual_updateLegend(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QwtLegend_override_virtual_updateLegend(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -691,7 +732,11 @@ func (this *QwtLegend) callVirtualBase_CreateWidget(param1 *QwtLegendData) *qt.Q
 
 }
 func (this *QwtLegend) OnCreateWidget(slot func(super func(param1 *QwtLegendData) *qt.QWidget, param1 *QwtLegendData) *qt.QWidget) {
-	ok := C.QwtLegend_override_virtual_createWidget(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QwtLegend_override_virtual_createWidget(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -719,7 +764,11 @@ func (this *QwtLegend) callVirtualBase_UpdateWidget(widget *qt.QWidget, param2 *
 
 }
 func (this *QwtLegend) OnUpdateWidget(slot func(super func(widget *qt.QWidget, param2 *QwtLegendData), widget *qt.QWidget, param2 *QwtLegendData)) {
-	ok := C.QwtLegend_override_virtual_updateWidget(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QwtLegend_override_virtual_updateWidget(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -747,7 +796,11 @@ func (this *QwtLegend) callVirtualBase_Event(e *qt.QEvent) bool {
 
 }
 func (this *QwtLegend) OnEvent(slot func(super func(e *qt.QEvent) bool, e *qt.QEvent) bool) {
-	ok := C.QwtLegend_override_virtual_event(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QwtLegend_override_virtual_event(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -775,7 +828,11 @@ func (this *QwtLegend) callVirtualBase_PaintEvent(param1 *qt.QPaintEvent) {
 
 }
 func (this *QwtLegend) OnPaintEvent(slot func(super func(param1 *qt.QPaintEvent), param1 *qt.QPaintEvent)) {
-	ok := C.QwtLegend_override_virtual_paintEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QwtLegend_override_virtual_paintEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -801,7 +858,11 @@ func (this *QwtLegend) callVirtualBase_ChangeEvent(param1 *qt.QEvent) {
 
 }
 func (this *QwtLegend) OnChangeEvent(slot func(super func(param1 *qt.QEvent), param1 *qt.QEvent)) {
-	ok := C.QwtLegend_override_virtual_changeEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QwtLegend_override_virtual_changeEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -827,7 +888,11 @@ func (this *QwtLegend) callVirtualBase_DevType() int {
 
 }
 func (this *QwtLegend) OnDevType(slot func(super func() int) int) {
-	ok := C.QwtLegend_override_virtual_devType(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QwtLegend_override_virtual_devType(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -852,7 +917,11 @@ func (this *QwtLegend) callVirtualBase_SetVisible(visible bool) {
 
 }
 func (this *QwtLegend) OnSetVisible(slot func(super func(visible bool), visible bool)) {
-	ok := C.QwtLegend_override_virtual_setVisible(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QwtLegend_override_virtual_setVisible(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -880,7 +949,11 @@ func (this *QwtLegend) callVirtualBase_MinimumSizeHint() *qt.QSize {
 
 }
 func (this *QwtLegend) OnMinimumSizeHint(slot func(super func() *qt.QSize) *qt.QSize) {
-	ok := C.QwtLegend_override_virtual_minimumSizeHint(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QwtLegend_override_virtual_minimumSizeHint(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -905,7 +978,11 @@ func (this *QwtLegend) callVirtualBase_HasHeightForWidth() bool {
 
 }
 func (this *QwtLegend) OnHasHeightForWidth(slot func(super func() bool) bool) {
-	ok := C.QwtLegend_override_virtual_hasHeightForWidth(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QwtLegend_override_virtual_hasHeightForWidth(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -930,7 +1007,11 @@ func (this *QwtLegend) callVirtualBase_PaintEngine() *qt.QPaintEngine {
 
 }
 func (this *QwtLegend) OnPaintEngine(slot func(super func() *qt.QPaintEngine) *qt.QPaintEngine) {
-	ok := C.QwtLegend_override_virtual_paintEngine(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QwtLegend_override_virtual_paintEngine(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -955,7 +1036,11 @@ func (this *QwtLegend) callVirtualBase_MousePressEvent(event *qt.QMouseEvent) {
 
 }
 func (this *QwtLegend) OnMousePressEvent(slot func(super func(event *qt.QMouseEvent), event *qt.QMouseEvent)) {
-	ok := C.QwtLegend_override_virtual_mousePressEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QwtLegend_override_virtual_mousePressEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -981,7 +1066,11 @@ func (this *QwtLegend) callVirtualBase_MouseReleaseEvent(event *qt.QMouseEvent) 
 
 }
 func (this *QwtLegend) OnMouseReleaseEvent(slot func(super func(event *qt.QMouseEvent), event *qt.QMouseEvent)) {
-	ok := C.QwtLegend_override_virtual_mouseReleaseEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QwtLegend_override_virtual_mouseReleaseEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1007,7 +1096,11 @@ func (this *QwtLegend) callVirtualBase_MouseDoubleClickEvent(event *qt.QMouseEve
 
 }
 func (this *QwtLegend) OnMouseDoubleClickEvent(slot func(super func(event *qt.QMouseEvent), event *qt.QMouseEvent)) {
-	ok := C.QwtLegend_override_virtual_mouseDoubleClickEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QwtLegend_override_virtual_mouseDoubleClickEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1033,7 +1126,11 @@ func (this *QwtLegend) callVirtualBase_MouseMoveEvent(event *qt.QMouseEvent) {
 
 }
 func (this *QwtLegend) OnMouseMoveEvent(slot func(super func(event *qt.QMouseEvent), event *qt.QMouseEvent)) {
-	ok := C.QwtLegend_override_virtual_mouseMoveEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QwtLegend_override_virtual_mouseMoveEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1059,7 +1156,11 @@ func (this *QwtLegend) callVirtualBase_WheelEvent(event *qt.QWheelEvent) {
 
 }
 func (this *QwtLegend) OnWheelEvent(slot func(super func(event *qt.QWheelEvent), event *qt.QWheelEvent)) {
-	ok := C.QwtLegend_override_virtual_wheelEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QwtLegend_override_virtual_wheelEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1085,7 +1186,11 @@ func (this *QwtLegend) callVirtualBase_KeyPressEvent(event *qt.QKeyEvent) {
 
 }
 func (this *QwtLegend) OnKeyPressEvent(slot func(super func(event *qt.QKeyEvent), event *qt.QKeyEvent)) {
-	ok := C.QwtLegend_override_virtual_keyPressEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QwtLegend_override_virtual_keyPressEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1111,7 +1216,11 @@ func (this *QwtLegend) callVirtualBase_KeyReleaseEvent(event *qt.QKeyEvent) {
 
 }
 func (this *QwtLegend) OnKeyReleaseEvent(slot func(super func(event *qt.QKeyEvent), event *qt.QKeyEvent)) {
-	ok := C.QwtLegend_override_virtual_keyReleaseEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QwtLegend_override_virtual_keyReleaseEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1137,7 +1246,11 @@ func (this *QwtLegend) callVirtualBase_FocusInEvent(event *qt.QFocusEvent) {
 
 }
 func (this *QwtLegend) OnFocusInEvent(slot func(super func(event *qt.QFocusEvent), event *qt.QFocusEvent)) {
-	ok := C.QwtLegend_override_virtual_focusInEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QwtLegend_override_virtual_focusInEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1163,7 +1276,11 @@ func (this *QwtLegend) callVirtualBase_FocusOutEvent(event *qt.QFocusEvent) {
 
 }
 func (this *QwtLegend) OnFocusOutEvent(slot func(super func(event *qt.QFocusEvent), event *qt.QFocusEvent)) {
-	ok := C.QwtLegend_override_virtual_focusOutEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QwtLegend_override_virtual_focusOutEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1189,7 +1306,11 @@ func (this *QwtLegend) callVirtualBase_EnterEvent(event *qt.QEvent) {
 
 }
 func (this *QwtLegend) OnEnterEvent(slot func(super func(event *qt.QEvent), event *qt.QEvent)) {
-	ok := C.QwtLegend_override_virtual_enterEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QwtLegend_override_virtual_enterEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1215,7 +1336,11 @@ func (this *QwtLegend) callVirtualBase_LeaveEvent(event *qt.QEvent) {
 
 }
 func (this *QwtLegend) OnLeaveEvent(slot func(super func(event *qt.QEvent), event *qt.QEvent)) {
-	ok := C.QwtLegend_override_virtual_leaveEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QwtLegend_override_virtual_leaveEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1241,7 +1366,11 @@ func (this *QwtLegend) callVirtualBase_MoveEvent(event *qt.QMoveEvent) {
 
 }
 func (this *QwtLegend) OnMoveEvent(slot func(super func(event *qt.QMoveEvent), event *qt.QMoveEvent)) {
-	ok := C.QwtLegend_override_virtual_moveEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QwtLegend_override_virtual_moveEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1267,7 +1396,11 @@ func (this *QwtLegend) callVirtualBase_ResizeEvent(event *qt.QResizeEvent) {
 
 }
 func (this *QwtLegend) OnResizeEvent(slot func(super func(event *qt.QResizeEvent), event *qt.QResizeEvent)) {
-	ok := C.QwtLegend_override_virtual_resizeEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QwtLegend_override_virtual_resizeEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1293,7 +1426,11 @@ func (this *QwtLegend) callVirtualBase_CloseEvent(event *qt.QCloseEvent) {
 
 }
 func (this *QwtLegend) OnCloseEvent(slot func(super func(event *qt.QCloseEvent), event *qt.QCloseEvent)) {
-	ok := C.QwtLegend_override_virtual_closeEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QwtLegend_override_virtual_closeEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1319,7 +1456,11 @@ func (this *QwtLegend) callVirtualBase_ContextMenuEvent(event *qt.QContextMenuEv
 
 }
 func (this *QwtLegend) OnContextMenuEvent(slot func(super func(event *qt.QContextMenuEvent), event *qt.QContextMenuEvent)) {
-	ok := C.QwtLegend_override_virtual_contextMenuEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QwtLegend_override_virtual_contextMenuEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1345,7 +1486,11 @@ func (this *QwtLegend) callVirtualBase_TabletEvent(event *qt.QTabletEvent) {
 
 }
 func (this *QwtLegend) OnTabletEvent(slot func(super func(event *qt.QTabletEvent), event *qt.QTabletEvent)) {
-	ok := C.QwtLegend_override_virtual_tabletEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QwtLegend_override_virtual_tabletEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1371,7 +1516,11 @@ func (this *QwtLegend) callVirtualBase_ActionEvent(event *qt.QActionEvent) {
 
 }
 func (this *QwtLegend) OnActionEvent(slot func(super func(event *qt.QActionEvent), event *qt.QActionEvent)) {
-	ok := C.QwtLegend_override_virtual_actionEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QwtLegend_override_virtual_actionEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1397,7 +1546,11 @@ func (this *QwtLegend) callVirtualBase_DragEnterEvent(event *qt.QDragEnterEvent)
 
 }
 func (this *QwtLegend) OnDragEnterEvent(slot func(super func(event *qt.QDragEnterEvent), event *qt.QDragEnterEvent)) {
-	ok := C.QwtLegend_override_virtual_dragEnterEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QwtLegend_override_virtual_dragEnterEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1423,7 +1576,11 @@ func (this *QwtLegend) callVirtualBase_DragMoveEvent(event *qt.QDragMoveEvent) {
 
 }
 func (this *QwtLegend) OnDragMoveEvent(slot func(super func(event *qt.QDragMoveEvent), event *qt.QDragMoveEvent)) {
-	ok := C.QwtLegend_override_virtual_dragMoveEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QwtLegend_override_virtual_dragMoveEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1449,7 +1606,11 @@ func (this *QwtLegend) callVirtualBase_DragLeaveEvent(event *qt.QDragLeaveEvent)
 
 }
 func (this *QwtLegend) OnDragLeaveEvent(slot func(super func(event *qt.QDragLeaveEvent), event *qt.QDragLeaveEvent)) {
-	ok := C.QwtLegend_override_virtual_dragLeaveEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QwtLegend_override_virtual_dragLeaveEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1475,7 +1636,11 @@ func (this *QwtLegend) callVirtualBase_DropEvent(event *qt.QDropEvent) {
 
 }
 func (this *QwtLegend) OnDropEvent(slot func(super func(event *qt.QDropEvent), event *qt.QDropEvent)) {
-	ok := C.QwtLegend_override_virtual_dropEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QwtLegend_override_virtual_dropEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1501,7 +1666,11 @@ func (this *QwtLegend) callVirtualBase_ShowEvent(event *qt.QShowEvent) {
 
 }
 func (this *QwtLegend) OnShowEvent(slot func(super func(event *qt.QShowEvent), event *qt.QShowEvent)) {
-	ok := C.QwtLegend_override_virtual_showEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QwtLegend_override_virtual_showEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1527,7 +1696,11 @@ func (this *QwtLegend) callVirtualBase_HideEvent(event *qt.QHideEvent) {
 
 }
 func (this *QwtLegend) OnHideEvent(slot func(super func(event *qt.QHideEvent), event *qt.QHideEvent)) {
-	ok := C.QwtLegend_override_virtual_hideEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QwtLegend_override_virtual_hideEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1560,7 +1733,11 @@ func (this *QwtLegend) callVirtualBase_NativeEvent(eventType []byte, message uns
 
 }
 func (this *QwtLegend) OnNativeEvent(slot func(super func(eventType []byte, message unsafe.Pointer, result *int64) bool, eventType []byte, message unsafe.Pointer, result *int64) bool) {
-	ok := C.QwtLegend_override_virtual_nativeEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QwtLegend_override_virtual_nativeEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1594,7 +1771,11 @@ func (this *QwtLegend) callVirtualBase_Metric(param1 qt.QPaintDevice__PaintDevic
 
 }
 func (this *QwtLegend) OnMetric(slot func(super func(param1 qt.QPaintDevice__PaintDeviceMetric) int, param1 qt.QPaintDevice__PaintDeviceMetric) int) {
-	ok := C.QwtLegend_override_virtual_metric(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QwtLegend_override_virtual_metric(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1622,7 +1803,11 @@ func (this *QwtLegend) callVirtualBase_InitPainter(painter *qt.QPainter) {
 
 }
 func (this *QwtLegend) OnInitPainter(slot func(super func(painter *qt.QPainter), painter *qt.QPainter)) {
-	ok := C.QwtLegend_override_virtual_initPainter(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QwtLegend_override_virtual_initPainter(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1648,7 +1833,11 @@ func (this *QwtLegend) callVirtualBase_Redirected(offset *qt.QPoint) *qt.QPaintD
 
 }
 func (this *QwtLegend) OnRedirected(slot func(super func(offset *qt.QPoint) *qt.QPaintDevice, offset *qt.QPoint) *qt.QPaintDevice) {
-	ok := C.QwtLegend_override_virtual_redirected(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QwtLegend_override_virtual_redirected(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1676,7 +1865,11 @@ func (this *QwtLegend) callVirtualBase_SharedPainter() *qt.QPainter {
 
 }
 func (this *QwtLegend) OnSharedPainter(slot func(super func() *qt.QPainter) *qt.QPainter) {
-	ok := C.QwtLegend_override_virtual_sharedPainter(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QwtLegend_override_virtual_sharedPainter(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1701,7 +1894,11 @@ func (this *QwtLegend) callVirtualBase_InputMethodEvent(param1 *qt.QInputMethodE
 
 }
 func (this *QwtLegend) OnInputMethodEvent(slot func(super func(param1 *qt.QInputMethodEvent), param1 *qt.QInputMethodEvent)) {
-	ok := C.QwtLegend_override_virtual_inputMethodEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QwtLegend_override_virtual_inputMethodEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1729,7 +1926,11 @@ func (this *QwtLegend) callVirtualBase_InputMethodQuery(param1 qt.InputMethodQue
 
 }
 func (this *QwtLegend) OnInputMethodQuery(slot func(super func(param1 qt.InputMethodQuery) *qt.QVariant, param1 qt.InputMethodQuery) *qt.QVariant) {
-	ok := C.QwtLegend_override_virtual_inputMethodQuery(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QwtLegend_override_virtual_inputMethodQuery(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1757,7 +1958,11 @@ func (this *QwtLegend) callVirtualBase_FocusNextPrevChild(next bool) bool {
 
 }
 func (this *QwtLegend) OnFocusNextPrevChild(slot func(super func(next bool) bool, next bool) bool) {
-	ok := C.QwtLegend_override_virtual_focusNextPrevChild(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QwtLegend_override_virtual_focusNextPrevChild(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1785,7 +1990,11 @@ func (this *QwtLegend) callVirtualBase_TimerEvent(event *qt.QTimerEvent) {
 
 }
 func (this *QwtLegend) OnTimerEvent(slot func(super func(event *qt.QTimerEvent), event *qt.QTimerEvent)) {
-	ok := C.QwtLegend_override_virtual_timerEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QwtLegend_override_virtual_timerEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1811,7 +2020,11 @@ func (this *QwtLegend) callVirtualBase_ChildEvent(event *qt.QChildEvent) {
 
 }
 func (this *QwtLegend) OnChildEvent(slot func(super func(event *qt.QChildEvent), event *qt.QChildEvent)) {
-	ok := C.QwtLegend_override_virtual_childEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QwtLegend_override_virtual_childEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1837,7 +2050,11 @@ func (this *QwtLegend) callVirtualBase_CustomEvent(event *qt.QEvent) {
 
 }
 func (this *QwtLegend) OnCustomEvent(slot func(super func(event *qt.QEvent), event *qt.QEvent)) {
-	ok := C.QwtLegend_override_virtual_customEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QwtLegend_override_virtual_customEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1863,7 +2080,11 @@ func (this *QwtLegend) callVirtualBase_ConnectNotify(signal *qt.QMetaMethod) {
 
 }
 func (this *QwtLegend) OnConnectNotify(slot func(super func(signal *qt.QMetaMethod), signal *qt.QMetaMethod)) {
-	ok := C.QwtLegend_override_virtual_connectNotify(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QwtLegend_override_virtual_connectNotify(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1889,7 +2110,11 @@ func (this *QwtLegend) callVirtualBase_DisconnectNotify(signal *qt.QMetaMethod) 
 
 }
 func (this *QwtLegend) OnDisconnectNotify(slot func(super func(signal *qt.QMetaMethod), signal *qt.QMetaMethod)) {
-	ok := C.QwtLegend_override_virtual_disconnectNotify(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QwtLegend_override_virtual_disconnectNotify(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}

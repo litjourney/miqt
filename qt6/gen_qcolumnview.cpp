@@ -1,3 +1,5 @@
+#include <memory>
+#include <utility>
 #include <QAbstractItemDelegate>
 #include <QAbstractItemModel>
 #include <QAbstractItemView>
@@ -56,6 +58,7 @@
 extern "C" {
 #endif
 
+void miqt_exec_callback_handle_release_QColumnView(intptr_t);
 void miqt_exec_callback_QColumnView_updatePreviewWidget(intptr_t, QModelIndex*);
 QModelIndex* miqt_exec_callback_QColumnView_indexAt(const QColumnView*, intptr_t, QPoint*);
 void miqt_exec_callback_QColumnView_scrollTo(QColumnView*, intptr_t, QModelIndex*, int);
@@ -162,29 +165,29 @@ public:
 	virtual ~MiqtVirtualQColumnView() override = default;
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__indexAt = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QColumnView> handle__indexAt;
 
 	// Subclass to allow providing a Go implementation
 	virtual QModelIndex indexAt(const QPoint& point) const override {
-		if (handle__indexAt == 0) {
+		if (!handle__indexAt) {
 			return QColumnView::indexAt(point);
 		}
 
 		const QPoint& point_ret = point;
 		// Cast returned reference into pointer
 		QPoint* sigval1 = const_cast<QPoint*>(&point_ret);
-		QModelIndex* callback_return_value = miqt_exec_callback_QColumnView_indexAt(this, handle__indexAt, sigval1);
+		QModelIndex* callback_return_value = miqt_exec_callback_QColumnView_indexAt(this, handle__indexAt.value(), sigval1);
 		return *callback_return_value;
 	}
 
 	friend QModelIndex* QColumnView_virtualbase_indexAt(const void* self, QPoint* point);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__scrollTo = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QColumnView> handle__scrollTo;
 
 	// Subclass to allow providing a Go implementation
 	virtual void scrollTo(const QModelIndex& index, QAbstractItemView::ScrollHint hint) override {
-		if (handle__scrollTo == 0) {
+		if (!handle__scrollTo) {
 			QColumnView::scrollTo(index, hint);
 			return;
 		}
@@ -194,85 +197,85 @@ public:
 		QModelIndex* sigval1 = const_cast<QModelIndex*>(&index_ret);
 		QAbstractItemView::ScrollHint hint_ret = hint;
 		int sigval2 = static_cast<int>(hint_ret);
-		miqt_exec_callback_QColumnView_scrollTo(this, handle__scrollTo, sigval1, sigval2);
+		miqt_exec_callback_QColumnView_scrollTo(this, handle__scrollTo.value(), sigval1, sigval2);
 
 	}
 
 	friend void QColumnView_virtualbase_scrollTo(void* self, QModelIndex* index, int hint);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__sizeHint = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QColumnView> handle__sizeHint;
 
 	// Subclass to allow providing a Go implementation
 	virtual QSize sizeHint() const override {
-		if (handle__sizeHint == 0) {
+		if (!handle__sizeHint) {
 			return QColumnView::sizeHint();
 		}
 
-		QSize* callback_return_value = miqt_exec_callback_QColumnView_sizeHint(this, handle__sizeHint);
+		QSize* callback_return_value = miqt_exec_callback_QColumnView_sizeHint(this, handle__sizeHint.value());
 		return *callback_return_value;
 	}
 
 	friend QSize* QColumnView_virtualbase_sizeHint(const void* self);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__visualRect = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QColumnView> handle__visualRect;
 
 	// Subclass to allow providing a Go implementation
 	virtual QRect visualRect(const QModelIndex& index) const override {
-		if (handle__visualRect == 0) {
+		if (!handle__visualRect) {
 			return QColumnView::visualRect(index);
 		}
 
 		const QModelIndex& index_ret = index;
 		// Cast returned reference into pointer
 		QModelIndex* sigval1 = const_cast<QModelIndex*>(&index_ret);
-		QRect* callback_return_value = miqt_exec_callback_QColumnView_visualRect(this, handle__visualRect, sigval1);
+		QRect* callback_return_value = miqt_exec_callback_QColumnView_visualRect(this, handle__visualRect.value(), sigval1);
 		return *callback_return_value;
 	}
 
 	friend QRect* QColumnView_virtualbase_visualRect(const void* self, QModelIndex* index);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__setModel = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QColumnView> handle__setModel;
 
 	// Subclass to allow providing a Go implementation
 	virtual void setModel(QAbstractItemModel* model) override {
-		if (handle__setModel == 0) {
+		if (!handle__setModel) {
 			QColumnView::setModel(model);
 			return;
 		}
 
 		QAbstractItemModel* sigval1 = model;
-		miqt_exec_callback_QColumnView_setModel(this, handle__setModel, sigval1);
+		miqt_exec_callback_QColumnView_setModel(this, handle__setModel.value(), sigval1);
 
 	}
 
 	friend void QColumnView_virtualbase_setModel(void* self, QAbstractItemModel* model);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__setSelectionModel = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QColumnView> handle__setSelectionModel;
 
 	// Subclass to allow providing a Go implementation
 	virtual void setSelectionModel(QItemSelectionModel* selectionModel) override {
-		if (handle__setSelectionModel == 0) {
+		if (!handle__setSelectionModel) {
 			QColumnView::setSelectionModel(selectionModel);
 			return;
 		}
 
 		QItemSelectionModel* sigval1 = selectionModel;
-		miqt_exec_callback_QColumnView_setSelectionModel(this, handle__setSelectionModel, sigval1);
+		miqt_exec_callback_QColumnView_setSelectionModel(this, handle__setSelectionModel.value(), sigval1);
 
 	}
 
 	friend void QColumnView_virtualbase_setSelectionModel(void* self, QItemSelectionModel* selectionModel);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__setRootIndex = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QColumnView> handle__setRootIndex;
 
 	// Subclass to allow providing a Go implementation
 	virtual void setRootIndex(const QModelIndex& index) override {
-		if (handle__setRootIndex == 0) {
+		if (!handle__setRootIndex) {
 			QColumnView::setRootIndex(index);
 			return;
 		}
@@ -280,52 +283,52 @@ public:
 		const QModelIndex& index_ret = index;
 		// Cast returned reference into pointer
 		QModelIndex* sigval1 = const_cast<QModelIndex*>(&index_ret);
-		miqt_exec_callback_QColumnView_setRootIndex(this, handle__setRootIndex, sigval1);
+		miqt_exec_callback_QColumnView_setRootIndex(this, handle__setRootIndex.value(), sigval1);
 
 	}
 
 	friend void QColumnView_virtualbase_setRootIndex(void* self, QModelIndex* index);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__selectAll = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QColumnView> handle__selectAll;
 
 	// Subclass to allow providing a Go implementation
 	virtual void selectAll() override {
-		if (handle__selectAll == 0) {
+		if (!handle__selectAll) {
 			QColumnView::selectAll();
 			return;
 		}
 
-		miqt_exec_callback_QColumnView_selectAll(this, handle__selectAll);
+		miqt_exec_callback_QColumnView_selectAll(this, handle__selectAll.value());
 
 	}
 
 	friend void QColumnView_virtualbase_selectAll(void* self);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__isIndexHidden = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QColumnView> handle__isIndexHidden;
 
 	// Subclass to allow providing a Go implementation
 	virtual bool isIndexHidden(const QModelIndex& index) const override {
-		if (handle__isIndexHidden == 0) {
+		if (!handle__isIndexHidden) {
 			return QColumnView::isIndexHidden(index);
 		}
 
 		const QModelIndex& index_ret = index;
 		// Cast returned reference into pointer
 		QModelIndex* sigval1 = const_cast<QModelIndex*>(&index_ret);
-		bool callback_return_value = miqt_exec_callback_QColumnView_isIndexHidden(this, handle__isIndexHidden, sigval1);
+		bool callback_return_value = miqt_exec_callback_QColumnView_isIndexHidden(this, handle__isIndexHidden.value(), sigval1);
 		return callback_return_value;
 	}
 
 	friend bool QColumnView_virtualbase_isIndexHidden(const void* self, QModelIndex* index);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__moveCursor = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QColumnView> handle__moveCursor;
 
 	// Subclass to allow providing a Go implementation
 	virtual QModelIndex moveCursor(QAbstractItemView::CursorAction cursorAction, Qt::KeyboardModifiers modifiers) override {
-		if (handle__moveCursor == 0) {
+		if (!handle__moveCursor) {
 			return QColumnView::moveCursor(cursorAction, modifiers);
 		}
 
@@ -333,35 +336,35 @@ public:
 		int sigval1 = static_cast<int>(cursorAction_ret);
 		Qt::KeyboardModifiers modifiers_ret = modifiers;
 		int sigval2 = static_cast<int>(modifiers_ret);
-		QModelIndex* callback_return_value = miqt_exec_callback_QColumnView_moveCursor(this, handle__moveCursor, sigval1, sigval2);
+		QModelIndex* callback_return_value = miqt_exec_callback_QColumnView_moveCursor(this, handle__moveCursor.value(), sigval1, sigval2);
 		return *callback_return_value;
 	}
 
 	friend QModelIndex* QColumnView_virtualbase_moveCursor(void* self, int cursorAction, int modifiers);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__resizeEvent = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QColumnView> handle__resizeEvent;
 
 	// Subclass to allow providing a Go implementation
 	virtual void resizeEvent(QResizeEvent* event) override {
-		if (handle__resizeEvent == 0) {
+		if (!handle__resizeEvent) {
 			QColumnView::resizeEvent(event);
 			return;
 		}
 
 		QResizeEvent* sigval1 = event;
-		miqt_exec_callback_QColumnView_resizeEvent(this, handle__resizeEvent, sigval1);
+		miqt_exec_callback_QColumnView_resizeEvent(this, handle__resizeEvent.value(), sigval1);
 
 	}
 
 	friend void QColumnView_virtualbase_resizeEvent(void* self, QResizeEvent* event);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__setSelection = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QColumnView> handle__setSelection;
 
 	// Subclass to allow providing a Go implementation
 	virtual void setSelection(const QRect& rect, QItemSelectionModel::SelectionFlags command) override {
-		if (handle__setSelection == 0) {
+		if (!handle__setSelection) {
 			QColumnView::setSelection(rect, command);
 			return;
 		}
@@ -371,66 +374,66 @@ public:
 		QRect* sigval1 = const_cast<QRect*>(&rect_ret);
 		QItemSelectionModel::SelectionFlags command_ret = command;
 		int sigval2 = static_cast<int>(command_ret);
-		miqt_exec_callback_QColumnView_setSelection(this, handle__setSelection, sigval1, sigval2);
+		miqt_exec_callback_QColumnView_setSelection(this, handle__setSelection.value(), sigval1, sigval2);
 
 	}
 
 	friend void QColumnView_virtualbase_setSelection(void* self, QRect* rect, int command);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__visualRegionForSelection = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QColumnView> handle__visualRegionForSelection;
 
 	// Subclass to allow providing a Go implementation
 	virtual QRegion visualRegionForSelection(const QItemSelection& selection) const override {
-		if (handle__visualRegionForSelection == 0) {
+		if (!handle__visualRegionForSelection) {
 			return QColumnView::visualRegionForSelection(selection);
 		}
 
 		const QItemSelection& selection_ret = selection;
 		// Cast returned reference into pointer
 		QItemSelection* sigval1 = const_cast<QItemSelection*>(&selection_ret);
-		QRegion* callback_return_value = miqt_exec_callback_QColumnView_visualRegionForSelection(this, handle__visualRegionForSelection, sigval1);
+		QRegion* callback_return_value = miqt_exec_callback_QColumnView_visualRegionForSelection(this, handle__visualRegionForSelection.value(), sigval1);
 		return *callback_return_value;
 	}
 
 	friend QRegion* QColumnView_virtualbase_visualRegionForSelection(const void* self, QItemSelection* selection);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__horizontalOffset = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QColumnView> handle__horizontalOffset;
 
 	// Subclass to allow providing a Go implementation
 	virtual int horizontalOffset() const override {
-		if (handle__horizontalOffset == 0) {
+		if (!handle__horizontalOffset) {
 			return QColumnView::horizontalOffset();
 		}
 
-		int callback_return_value = miqt_exec_callback_QColumnView_horizontalOffset(this, handle__horizontalOffset);
+		int callback_return_value = miqt_exec_callback_QColumnView_horizontalOffset(this, handle__horizontalOffset.value());
 		return static_cast<int>(callback_return_value);
 	}
 
 	friend int QColumnView_virtualbase_horizontalOffset(const void* self);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__verticalOffset = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QColumnView> handle__verticalOffset;
 
 	// Subclass to allow providing a Go implementation
 	virtual int verticalOffset() const override {
-		if (handle__verticalOffset == 0) {
+		if (!handle__verticalOffset) {
 			return QColumnView::verticalOffset();
 		}
 
-		int callback_return_value = miqt_exec_callback_QColumnView_verticalOffset(this, handle__verticalOffset);
+		int callback_return_value = miqt_exec_callback_QColumnView_verticalOffset(this, handle__verticalOffset.value());
 		return static_cast<int>(callback_return_value);
 	}
 
 	friend int QColumnView_virtualbase_verticalOffset(const void* self);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__rowsInserted = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QColumnView> handle__rowsInserted;
 
 	// Subclass to allow providing a Go implementation
 	virtual void rowsInserted(const QModelIndex& parent, int start, int end) override {
-		if (handle__rowsInserted == 0) {
+		if (!handle__rowsInserted) {
 			QColumnView::rowsInserted(parent, start, end);
 			return;
 		}
@@ -440,18 +443,18 @@ public:
 		QModelIndex* sigval1 = const_cast<QModelIndex*>(&parent_ret);
 		int sigval2 = start;
 		int sigval3 = end;
-		miqt_exec_callback_QColumnView_rowsInserted(this, handle__rowsInserted, sigval1, sigval2, sigval3);
+		miqt_exec_callback_QColumnView_rowsInserted(this, handle__rowsInserted.value(), sigval1, sigval2, sigval3);
 
 	}
 
 	friend void QColumnView_virtualbase_rowsInserted(void* self, QModelIndex* parent, int start, int end);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__currentChanged = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QColumnView> handle__currentChanged;
 
 	// Subclass to allow providing a Go implementation
 	virtual void currentChanged(const QModelIndex& current, const QModelIndex& previous) override {
-		if (handle__currentChanged == 0) {
+		if (!handle__currentChanged) {
 			QColumnView::currentChanged(current, previous);
 			return;
 		}
@@ -462,54 +465,54 @@ public:
 		const QModelIndex& previous_ret = previous;
 		// Cast returned reference into pointer
 		QModelIndex* sigval2 = const_cast<QModelIndex*>(&previous_ret);
-		miqt_exec_callback_QColumnView_currentChanged(this, handle__currentChanged, sigval1, sigval2);
+		miqt_exec_callback_QColumnView_currentChanged(this, handle__currentChanged.value(), sigval1, sigval2);
 
 	}
 
 	friend void QColumnView_virtualbase_currentChanged(void* self, QModelIndex* current, QModelIndex* previous);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__scrollContentsBy = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QColumnView> handle__scrollContentsBy;
 
 	// Subclass to allow providing a Go implementation
 	virtual void scrollContentsBy(int dx, int dy) override {
-		if (handle__scrollContentsBy == 0) {
+		if (!handle__scrollContentsBy) {
 			QColumnView::scrollContentsBy(dx, dy);
 			return;
 		}
 
 		int sigval1 = dx;
 		int sigval2 = dy;
-		miqt_exec_callback_QColumnView_scrollContentsBy(this, handle__scrollContentsBy, sigval1, sigval2);
+		miqt_exec_callback_QColumnView_scrollContentsBy(this, handle__scrollContentsBy.value(), sigval1, sigval2);
 
 	}
 
 	friend void QColumnView_virtualbase_scrollContentsBy(void* self, int dx, int dy);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__createColumn = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QColumnView> handle__createColumn;
 
 	// Subclass to allow providing a Go implementation
 	virtual QAbstractItemView* createColumn(const QModelIndex& rootIndex) override {
-		if (handle__createColumn == 0) {
+		if (!handle__createColumn) {
 			return QColumnView::createColumn(rootIndex);
 		}
 
 		const QModelIndex& rootIndex_ret = rootIndex;
 		// Cast returned reference into pointer
 		QModelIndex* sigval1 = const_cast<QModelIndex*>(&rootIndex_ret);
-		QAbstractItemView* callback_return_value = miqt_exec_callback_QColumnView_createColumn(this, handle__createColumn, sigval1);
+		QAbstractItemView* callback_return_value = miqt_exec_callback_QColumnView_createColumn(this, handle__createColumn.value(), sigval1);
 		return callback_return_value;
 	}
 
 	friend QAbstractItemView* QColumnView_virtualbase_createColumn(void* self, QModelIndex* rootIndex);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__keyboardSearch = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QColumnView> handle__keyboardSearch;
 
 	// Subclass to allow providing a Go implementation
 	virtual void keyboardSearch(const QString& search) override {
-		if (handle__keyboardSearch == 0) {
+		if (!handle__keyboardSearch) {
 			QColumnView::keyboardSearch(search);
 			return;
 		}
@@ -522,117 +525,117 @@ public:
 		search_ms.data = static_cast<char*>(malloc(search_ms.len));
 		memcpy(search_ms.data, search_b.data(), search_ms.len);
 		struct miqt_string sigval1 = search_ms;
-		miqt_exec_callback_QColumnView_keyboardSearch(this, handle__keyboardSearch, sigval1);
+		miqt_exec_callback_QColumnView_keyboardSearch(this, handle__keyboardSearch.value(), sigval1);
 
 	}
 
 	friend void QColumnView_virtualbase_keyboardSearch(void* self, struct miqt_string search);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__sizeHintForRow = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QColumnView> handle__sizeHintForRow;
 
 	// Subclass to allow providing a Go implementation
 	virtual int sizeHintForRow(int row) const override {
-		if (handle__sizeHintForRow == 0) {
+		if (!handle__sizeHintForRow) {
 			return QColumnView::sizeHintForRow(row);
 		}
 
 		int sigval1 = row;
-		int callback_return_value = miqt_exec_callback_QColumnView_sizeHintForRow(this, handle__sizeHintForRow, sigval1);
+		int callback_return_value = miqt_exec_callback_QColumnView_sizeHintForRow(this, handle__sizeHintForRow.value(), sigval1);
 		return static_cast<int>(callback_return_value);
 	}
 
 	friend int QColumnView_virtualbase_sizeHintForRow(const void* self, int row);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__sizeHintForColumn = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QColumnView> handle__sizeHintForColumn;
 
 	// Subclass to allow providing a Go implementation
 	virtual int sizeHintForColumn(int column) const override {
-		if (handle__sizeHintForColumn == 0) {
+		if (!handle__sizeHintForColumn) {
 			return QColumnView::sizeHintForColumn(column);
 		}
 
 		int sigval1 = column;
-		int callback_return_value = miqt_exec_callback_QColumnView_sizeHintForColumn(this, handle__sizeHintForColumn, sigval1);
+		int callback_return_value = miqt_exec_callback_QColumnView_sizeHintForColumn(this, handle__sizeHintForColumn.value(), sigval1);
 		return static_cast<int>(callback_return_value);
 	}
 
 	friend int QColumnView_virtualbase_sizeHintForColumn(const void* self, int column);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__itemDelegateForIndex = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QColumnView> handle__itemDelegateForIndex;
 
 	// Subclass to allow providing a Go implementation
 	virtual QAbstractItemDelegate* itemDelegateForIndex(const QModelIndex& index) const override {
-		if (handle__itemDelegateForIndex == 0) {
+		if (!handle__itemDelegateForIndex) {
 			return QColumnView::itemDelegateForIndex(index);
 		}
 
 		const QModelIndex& index_ret = index;
 		// Cast returned reference into pointer
 		QModelIndex* sigval1 = const_cast<QModelIndex*>(&index_ret);
-		QAbstractItemDelegate* callback_return_value = miqt_exec_callback_QColumnView_itemDelegateForIndex(this, handle__itemDelegateForIndex, sigval1);
+		QAbstractItemDelegate* callback_return_value = miqt_exec_callback_QColumnView_itemDelegateForIndex(this, handle__itemDelegateForIndex.value(), sigval1);
 		return callback_return_value;
 	}
 
 	friend QAbstractItemDelegate* QColumnView_virtualbase_itemDelegateForIndex(const void* self, QModelIndex* index);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__inputMethodQuery = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QColumnView> handle__inputMethodQuery;
 
 	// Subclass to allow providing a Go implementation
 	virtual QVariant inputMethodQuery(Qt::InputMethodQuery query) const override {
-		if (handle__inputMethodQuery == 0) {
+		if (!handle__inputMethodQuery) {
 			return QColumnView::inputMethodQuery(query);
 		}
 
 		Qt::InputMethodQuery query_ret = query;
 		int sigval1 = static_cast<int>(query_ret);
-		QVariant* callback_return_value = miqt_exec_callback_QColumnView_inputMethodQuery(this, handle__inputMethodQuery, sigval1);
+		QVariant* callback_return_value = miqt_exec_callback_QColumnView_inputMethodQuery(this, handle__inputMethodQuery.value(), sigval1);
 		return *callback_return_value;
 	}
 
 	friend QVariant* QColumnView_virtualbase_inputMethodQuery(const void* self, int query);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__reset = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QColumnView> handle__reset;
 
 	// Subclass to allow providing a Go implementation
 	virtual void reset() override {
-		if (handle__reset == 0) {
+		if (!handle__reset) {
 			QColumnView::reset();
 			return;
 		}
 
-		miqt_exec_callback_QColumnView_reset(this, handle__reset);
+		miqt_exec_callback_QColumnView_reset(this, handle__reset.value());
 
 	}
 
 	friend void QColumnView_virtualbase_reset(void* self);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__doItemsLayout = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QColumnView> handle__doItemsLayout;
 
 	// Subclass to allow providing a Go implementation
 	virtual void doItemsLayout() override {
-		if (handle__doItemsLayout == 0) {
+		if (!handle__doItemsLayout) {
 			QColumnView::doItemsLayout();
 			return;
 		}
 
-		miqt_exec_callback_QColumnView_doItemsLayout(this, handle__doItemsLayout);
+		miqt_exec_callback_QColumnView_doItemsLayout(this, handle__doItemsLayout.value());
 
 	}
 
 	friend void QColumnView_virtualbase_doItemsLayout(void* self);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__dataChanged = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QColumnView> handle__dataChanged;
 
 	// Subclass to allow providing a Go implementation
 	virtual void dataChanged(const QModelIndex& topLeft, const QModelIndex& bottomRight, const QList<int>& roles) override {
-		if (handle__dataChanged == 0) {
+		if (!handle__dataChanged) {
 			QColumnView::dataChanged(topLeft, bottomRight, roles);
 			return;
 		}
@@ -653,18 +656,18 @@ public:
 		roles_out.len = roles_ret.length();
 		roles_out.data = static_cast<void*>(roles_arr);
 		struct miqt_array /* of int */  sigval3 = roles_out;
-		miqt_exec_callback_QColumnView_dataChanged(this, handle__dataChanged, sigval1, sigval2, sigval3);
+		miqt_exec_callback_QColumnView_dataChanged(this, handle__dataChanged.value(), sigval1, sigval2, sigval3);
 
 	}
 
 	friend void QColumnView_virtualbase_dataChanged(void* self, QModelIndex* topLeft, QModelIndex* bottomRight, struct miqt_array /* of int */  roles);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__rowsAboutToBeRemoved = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QColumnView> handle__rowsAboutToBeRemoved;
 
 	// Subclass to allow providing a Go implementation
 	virtual void rowsAboutToBeRemoved(const QModelIndex& parent, int start, int end) override {
-		if (handle__rowsAboutToBeRemoved == 0) {
+		if (!handle__rowsAboutToBeRemoved) {
 			QColumnView::rowsAboutToBeRemoved(parent, start, end);
 			return;
 		}
@@ -674,18 +677,18 @@ public:
 		QModelIndex* sigval1 = const_cast<QModelIndex*>(&parent_ret);
 		int sigval2 = start;
 		int sigval3 = end;
-		miqt_exec_callback_QColumnView_rowsAboutToBeRemoved(this, handle__rowsAboutToBeRemoved, sigval1, sigval2, sigval3);
+		miqt_exec_callback_QColumnView_rowsAboutToBeRemoved(this, handle__rowsAboutToBeRemoved.value(), sigval1, sigval2, sigval3);
 
 	}
 
 	friend void QColumnView_virtualbase_rowsAboutToBeRemoved(void* self, QModelIndex* parent, int start, int end);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__selectionChanged = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QColumnView> handle__selectionChanged;
 
 	// Subclass to allow providing a Go implementation
 	virtual void selectionChanged(const QItemSelection& selected, const QItemSelection& deselected) override {
-		if (handle__selectionChanged == 0) {
+		if (!handle__selectionChanged) {
 			QColumnView::selectionChanged(selected, deselected);
 			return;
 		}
@@ -696,134 +699,134 @@ public:
 		const QItemSelection& deselected_ret = deselected;
 		// Cast returned reference into pointer
 		QItemSelection* sigval2 = const_cast<QItemSelection*>(&deselected_ret);
-		miqt_exec_callback_QColumnView_selectionChanged(this, handle__selectionChanged, sigval1, sigval2);
+		miqt_exec_callback_QColumnView_selectionChanged(this, handle__selectionChanged.value(), sigval1, sigval2);
 
 	}
 
 	friend void QColumnView_virtualbase_selectionChanged(void* self, QItemSelection* selected, QItemSelection* deselected);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__updateEditorData = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QColumnView> handle__updateEditorData;
 
 	// Subclass to allow providing a Go implementation
 	virtual void updateEditorData() override {
-		if (handle__updateEditorData == 0) {
+		if (!handle__updateEditorData) {
 			QColumnView::updateEditorData();
 			return;
 		}
 
-		miqt_exec_callback_QColumnView_updateEditorData(this, handle__updateEditorData);
+		miqt_exec_callback_QColumnView_updateEditorData(this, handle__updateEditorData.value());
 
 	}
 
 	friend void QColumnView_virtualbase_updateEditorData(void* self);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__updateEditorGeometries = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QColumnView> handle__updateEditorGeometries;
 
 	// Subclass to allow providing a Go implementation
 	virtual void updateEditorGeometries() override {
-		if (handle__updateEditorGeometries == 0) {
+		if (!handle__updateEditorGeometries) {
 			QColumnView::updateEditorGeometries();
 			return;
 		}
 
-		miqt_exec_callback_QColumnView_updateEditorGeometries(this, handle__updateEditorGeometries);
+		miqt_exec_callback_QColumnView_updateEditorGeometries(this, handle__updateEditorGeometries.value());
 
 	}
 
 	friend void QColumnView_virtualbase_updateEditorGeometries(void* self);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__updateGeometries = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QColumnView> handle__updateGeometries;
 
 	// Subclass to allow providing a Go implementation
 	virtual void updateGeometries() override {
-		if (handle__updateGeometries == 0) {
+		if (!handle__updateGeometries) {
 			QColumnView::updateGeometries();
 			return;
 		}
 
-		miqt_exec_callback_QColumnView_updateGeometries(this, handle__updateGeometries);
+		miqt_exec_callback_QColumnView_updateGeometries(this, handle__updateGeometries.value());
 
 	}
 
 	friend void QColumnView_virtualbase_updateGeometries(void* self);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__verticalScrollbarAction = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QColumnView> handle__verticalScrollbarAction;
 
 	// Subclass to allow providing a Go implementation
 	virtual void verticalScrollbarAction(int action) override {
-		if (handle__verticalScrollbarAction == 0) {
+		if (!handle__verticalScrollbarAction) {
 			QColumnView::verticalScrollbarAction(action);
 			return;
 		}
 
 		int sigval1 = action;
-		miqt_exec_callback_QColumnView_verticalScrollbarAction(this, handle__verticalScrollbarAction, sigval1);
+		miqt_exec_callback_QColumnView_verticalScrollbarAction(this, handle__verticalScrollbarAction.value(), sigval1);
 
 	}
 
 	friend void QColumnView_virtualbase_verticalScrollbarAction(void* self, int action);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__horizontalScrollbarAction = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QColumnView> handle__horizontalScrollbarAction;
 
 	// Subclass to allow providing a Go implementation
 	virtual void horizontalScrollbarAction(int action) override {
-		if (handle__horizontalScrollbarAction == 0) {
+		if (!handle__horizontalScrollbarAction) {
 			QColumnView::horizontalScrollbarAction(action);
 			return;
 		}
 
 		int sigval1 = action;
-		miqt_exec_callback_QColumnView_horizontalScrollbarAction(this, handle__horizontalScrollbarAction, sigval1);
+		miqt_exec_callback_QColumnView_horizontalScrollbarAction(this, handle__horizontalScrollbarAction.value(), sigval1);
 
 	}
 
 	friend void QColumnView_virtualbase_horizontalScrollbarAction(void* self, int action);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__verticalScrollbarValueChanged = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QColumnView> handle__verticalScrollbarValueChanged;
 
 	// Subclass to allow providing a Go implementation
 	virtual void verticalScrollbarValueChanged(int value) override {
-		if (handle__verticalScrollbarValueChanged == 0) {
+		if (!handle__verticalScrollbarValueChanged) {
 			QColumnView::verticalScrollbarValueChanged(value);
 			return;
 		}
 
 		int sigval1 = value;
-		miqt_exec_callback_QColumnView_verticalScrollbarValueChanged(this, handle__verticalScrollbarValueChanged, sigval1);
+		miqt_exec_callback_QColumnView_verticalScrollbarValueChanged(this, handle__verticalScrollbarValueChanged.value(), sigval1);
 
 	}
 
 	friend void QColumnView_virtualbase_verticalScrollbarValueChanged(void* self, int value);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__horizontalScrollbarValueChanged = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QColumnView> handle__horizontalScrollbarValueChanged;
 
 	// Subclass to allow providing a Go implementation
 	virtual void horizontalScrollbarValueChanged(int value) override {
-		if (handle__horizontalScrollbarValueChanged == 0) {
+		if (!handle__horizontalScrollbarValueChanged) {
 			QColumnView::horizontalScrollbarValueChanged(value);
 			return;
 		}
 
 		int sigval1 = value;
-		miqt_exec_callback_QColumnView_horizontalScrollbarValueChanged(this, handle__horizontalScrollbarValueChanged, sigval1);
+		miqt_exec_callback_QColumnView_horizontalScrollbarValueChanged(this, handle__horizontalScrollbarValueChanged.value(), sigval1);
 
 	}
 
 	friend void QColumnView_virtualbase_horizontalScrollbarValueChanged(void* self, int value);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__closeEditor = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QColumnView> handle__closeEditor;
 
 	// Subclass to allow providing a Go implementation
 	virtual void closeEditor(QWidget* editor, QAbstractItemDelegate::EndEditHint hint) override {
-		if (handle__closeEditor == 0) {
+		if (!handle__closeEditor) {
 			QColumnView::closeEditor(editor, hint);
 			return;
 		}
@@ -831,56 +834,56 @@ public:
 		QWidget* sigval1 = editor;
 		QAbstractItemDelegate::EndEditHint hint_ret = hint;
 		int sigval2 = static_cast<int>(hint_ret);
-		miqt_exec_callback_QColumnView_closeEditor(this, handle__closeEditor, sigval1, sigval2);
+		miqt_exec_callback_QColumnView_closeEditor(this, handle__closeEditor.value(), sigval1, sigval2);
 
 	}
 
 	friend void QColumnView_virtualbase_closeEditor(void* self, QWidget* editor, int hint);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__commitData = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QColumnView> handle__commitData;
 
 	// Subclass to allow providing a Go implementation
 	virtual void commitData(QWidget* editor) override {
-		if (handle__commitData == 0) {
+		if (!handle__commitData) {
 			QColumnView::commitData(editor);
 			return;
 		}
 
 		QWidget* sigval1 = editor;
-		miqt_exec_callback_QColumnView_commitData(this, handle__commitData, sigval1);
+		miqt_exec_callback_QColumnView_commitData(this, handle__commitData.value(), sigval1);
 
 	}
 
 	friend void QColumnView_virtualbase_commitData(void* self, QWidget* editor);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__editorDestroyed = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QColumnView> handle__editorDestroyed;
 
 	// Subclass to allow providing a Go implementation
 	virtual void editorDestroyed(QObject* editor) override {
-		if (handle__editorDestroyed == 0) {
+		if (!handle__editorDestroyed) {
 			QColumnView::editorDestroyed(editor);
 			return;
 		}
 
 		QObject* sigval1 = editor;
-		miqt_exec_callback_QColumnView_editorDestroyed(this, handle__editorDestroyed, sigval1);
+		miqt_exec_callback_QColumnView_editorDestroyed(this, handle__editorDestroyed.value(), sigval1);
 
 	}
 
 	friend void QColumnView_virtualbase_editorDestroyed(void* self, QObject* editor);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__selectedIndexes = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QColumnView> handle__selectedIndexes;
 
 	// Subclass to allow providing a Go implementation
 	virtual QModelIndexList selectedIndexes() const override {
-		if (handle__selectedIndexes == 0) {
+		if (!handle__selectedIndexes) {
 			return QColumnView::selectedIndexes();
 		}
 
-		struct miqt_array /* of QModelIndex* */  callback_return_value = miqt_exec_callback_QColumnView_selectedIndexes(this, handle__selectedIndexes);
+		struct miqt_array /* of QModelIndex* */  callback_return_value = miqt_exec_callback_QColumnView_selectedIndexes(this, handle__selectedIndexes.value());
 		QModelIndexList callback_return_value_QList;
 		callback_return_value_QList.reserve(callback_return_value.len);
 		QModelIndex** callback_return_value_arr = static_cast<QModelIndex**>(callback_return_value.data);
@@ -894,11 +897,11 @@ public:
 	friend struct miqt_array /* of QModelIndex* */  QColumnView_virtualbase_selectedIndexes(const void* self);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__edit2 = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QColumnView> handle__edit2;
 
 	// Subclass to allow providing a Go implementation
 	virtual bool edit(const QModelIndex& index, QAbstractItemView::EditTrigger trigger, QEvent* event) override {
-		if (handle__edit2 == 0) {
+		if (!handle__edit2) {
 			return QColumnView::edit(index, trigger, event);
 		}
 
@@ -908,18 +911,18 @@ public:
 		QAbstractItemView::EditTrigger trigger_ret = trigger;
 		int sigval2 = static_cast<int>(trigger_ret);
 		QEvent* sigval3 = event;
-		bool callback_return_value = miqt_exec_callback_QColumnView_edit2(this, handle__edit2, sigval1, sigval2, sigval3);
+		bool callback_return_value = miqt_exec_callback_QColumnView_edit2(this, handle__edit2.value(), sigval1, sigval2, sigval3);
 		return callback_return_value;
 	}
 
 	friend bool QColumnView_virtualbase_edit2(void* self, QModelIndex* index, int trigger, QEvent* event);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__selectionCommand = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QColumnView> handle__selectionCommand;
 
 	// Subclass to allow providing a Go implementation
 	virtual QItemSelectionModel::SelectionFlags selectionCommand(const QModelIndex& index, const QEvent* event) const override {
-		if (handle__selectionCommand == 0) {
+		if (!handle__selectionCommand) {
 			return QColumnView::selectionCommand(index, event);
 		}
 
@@ -927,702 +930,702 @@ public:
 		// Cast returned reference into pointer
 		QModelIndex* sigval1 = const_cast<QModelIndex*>(&index_ret);
 		QEvent* sigval2 = (QEvent*) event;
-		int callback_return_value = miqt_exec_callback_QColumnView_selectionCommand(this, handle__selectionCommand, sigval1, sigval2);
+		int callback_return_value = miqt_exec_callback_QColumnView_selectionCommand(this, handle__selectionCommand.value(), sigval1, sigval2);
 		return static_cast<QItemSelectionModel::SelectionFlags>(callback_return_value);
 	}
 
 	friend int QColumnView_virtualbase_selectionCommand(const void* self, QModelIndex* index, QEvent* event);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__startDrag = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QColumnView> handle__startDrag;
 
 	// Subclass to allow providing a Go implementation
 	virtual void startDrag(Qt::DropActions supportedActions) override {
-		if (handle__startDrag == 0) {
+		if (!handle__startDrag) {
 			QColumnView::startDrag(supportedActions);
 			return;
 		}
 
 		Qt::DropActions supportedActions_ret = supportedActions;
 		int sigval1 = static_cast<int>(supportedActions_ret);
-		miqt_exec_callback_QColumnView_startDrag(this, handle__startDrag, sigval1);
+		miqt_exec_callback_QColumnView_startDrag(this, handle__startDrag.value(), sigval1);
 
 	}
 
 	friend void QColumnView_virtualbase_startDrag(void* self, int supportedActions);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__initViewItemOption = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QColumnView> handle__initViewItemOption;
 
 	// Subclass to allow providing a Go implementation
 	virtual void initViewItemOption(QStyleOptionViewItem* option) const override {
-		if (handle__initViewItemOption == 0) {
+		if (!handle__initViewItemOption) {
 			QColumnView::initViewItemOption(option);
 			return;
 		}
 
 		QStyleOptionViewItem* sigval1 = option;
-		miqt_exec_callback_QColumnView_initViewItemOption(this, handle__initViewItemOption, sigval1);
+		miqt_exec_callback_QColumnView_initViewItemOption(this, handle__initViewItemOption.value(), sigval1);
 
 	}
 
 	friend void QColumnView_virtualbase_initViewItemOption(const void* self, QStyleOptionViewItem* option);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__focusNextPrevChild = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QColumnView> handle__focusNextPrevChild;
 
 	// Subclass to allow providing a Go implementation
 	virtual bool focusNextPrevChild(bool next) override {
-		if (handle__focusNextPrevChild == 0) {
+		if (!handle__focusNextPrevChild) {
 			return QColumnView::focusNextPrevChild(next);
 		}
 
 		bool sigval1 = next;
-		bool callback_return_value = miqt_exec_callback_QColumnView_focusNextPrevChild(this, handle__focusNextPrevChild, sigval1);
+		bool callback_return_value = miqt_exec_callback_QColumnView_focusNextPrevChild(this, handle__focusNextPrevChild.value(), sigval1);
 		return callback_return_value;
 	}
 
 	friend bool QColumnView_virtualbase_focusNextPrevChild(void* self, bool next);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__event = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QColumnView> handle__event;
 
 	// Subclass to allow providing a Go implementation
 	virtual bool event(QEvent* event) override {
-		if (handle__event == 0) {
+		if (!handle__event) {
 			return QColumnView::event(event);
 		}
 
 		QEvent* sigval1 = event;
-		bool callback_return_value = miqt_exec_callback_QColumnView_event(this, handle__event, sigval1);
+		bool callback_return_value = miqt_exec_callback_QColumnView_event(this, handle__event.value(), sigval1);
 		return callback_return_value;
 	}
 
 	friend bool QColumnView_virtualbase_event(void* self, QEvent* event);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__viewportEvent = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QColumnView> handle__viewportEvent;
 
 	// Subclass to allow providing a Go implementation
 	virtual bool viewportEvent(QEvent* event) override {
-		if (handle__viewportEvent == 0) {
+		if (!handle__viewportEvent) {
 			return QColumnView::viewportEvent(event);
 		}
 
 		QEvent* sigval1 = event;
-		bool callback_return_value = miqt_exec_callback_QColumnView_viewportEvent(this, handle__viewportEvent, sigval1);
+		bool callback_return_value = miqt_exec_callback_QColumnView_viewportEvent(this, handle__viewportEvent.value(), sigval1);
 		return callback_return_value;
 	}
 
 	friend bool QColumnView_virtualbase_viewportEvent(void* self, QEvent* event);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__mousePressEvent = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QColumnView> handle__mousePressEvent;
 
 	// Subclass to allow providing a Go implementation
 	virtual void mousePressEvent(QMouseEvent* event) override {
-		if (handle__mousePressEvent == 0) {
+		if (!handle__mousePressEvent) {
 			QColumnView::mousePressEvent(event);
 			return;
 		}
 
 		QMouseEvent* sigval1 = event;
-		miqt_exec_callback_QColumnView_mousePressEvent(this, handle__mousePressEvent, sigval1);
+		miqt_exec_callback_QColumnView_mousePressEvent(this, handle__mousePressEvent.value(), sigval1);
 
 	}
 
 	friend void QColumnView_virtualbase_mousePressEvent(void* self, QMouseEvent* event);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__mouseMoveEvent = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QColumnView> handle__mouseMoveEvent;
 
 	// Subclass to allow providing a Go implementation
 	virtual void mouseMoveEvent(QMouseEvent* event) override {
-		if (handle__mouseMoveEvent == 0) {
+		if (!handle__mouseMoveEvent) {
 			QColumnView::mouseMoveEvent(event);
 			return;
 		}
 
 		QMouseEvent* sigval1 = event;
-		miqt_exec_callback_QColumnView_mouseMoveEvent(this, handle__mouseMoveEvent, sigval1);
+		miqt_exec_callback_QColumnView_mouseMoveEvent(this, handle__mouseMoveEvent.value(), sigval1);
 
 	}
 
 	friend void QColumnView_virtualbase_mouseMoveEvent(void* self, QMouseEvent* event);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__mouseReleaseEvent = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QColumnView> handle__mouseReleaseEvent;
 
 	// Subclass to allow providing a Go implementation
 	virtual void mouseReleaseEvent(QMouseEvent* event) override {
-		if (handle__mouseReleaseEvent == 0) {
+		if (!handle__mouseReleaseEvent) {
 			QColumnView::mouseReleaseEvent(event);
 			return;
 		}
 
 		QMouseEvent* sigval1 = event;
-		miqt_exec_callback_QColumnView_mouseReleaseEvent(this, handle__mouseReleaseEvent, sigval1);
+		miqt_exec_callback_QColumnView_mouseReleaseEvent(this, handle__mouseReleaseEvent.value(), sigval1);
 
 	}
 
 	friend void QColumnView_virtualbase_mouseReleaseEvent(void* self, QMouseEvent* event);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__mouseDoubleClickEvent = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QColumnView> handle__mouseDoubleClickEvent;
 
 	// Subclass to allow providing a Go implementation
 	virtual void mouseDoubleClickEvent(QMouseEvent* event) override {
-		if (handle__mouseDoubleClickEvent == 0) {
+		if (!handle__mouseDoubleClickEvent) {
 			QColumnView::mouseDoubleClickEvent(event);
 			return;
 		}
 
 		QMouseEvent* sigval1 = event;
-		miqt_exec_callback_QColumnView_mouseDoubleClickEvent(this, handle__mouseDoubleClickEvent, sigval1);
+		miqt_exec_callback_QColumnView_mouseDoubleClickEvent(this, handle__mouseDoubleClickEvent.value(), sigval1);
 
 	}
 
 	friend void QColumnView_virtualbase_mouseDoubleClickEvent(void* self, QMouseEvent* event);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__dragEnterEvent = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QColumnView> handle__dragEnterEvent;
 
 	// Subclass to allow providing a Go implementation
 	virtual void dragEnterEvent(QDragEnterEvent* event) override {
-		if (handle__dragEnterEvent == 0) {
+		if (!handle__dragEnterEvent) {
 			QColumnView::dragEnterEvent(event);
 			return;
 		}
 
 		QDragEnterEvent* sigval1 = event;
-		miqt_exec_callback_QColumnView_dragEnterEvent(this, handle__dragEnterEvent, sigval1);
+		miqt_exec_callback_QColumnView_dragEnterEvent(this, handle__dragEnterEvent.value(), sigval1);
 
 	}
 
 	friend void QColumnView_virtualbase_dragEnterEvent(void* self, QDragEnterEvent* event);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__dragMoveEvent = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QColumnView> handle__dragMoveEvent;
 
 	// Subclass to allow providing a Go implementation
 	virtual void dragMoveEvent(QDragMoveEvent* event) override {
-		if (handle__dragMoveEvent == 0) {
+		if (!handle__dragMoveEvent) {
 			QColumnView::dragMoveEvent(event);
 			return;
 		}
 
 		QDragMoveEvent* sigval1 = event;
-		miqt_exec_callback_QColumnView_dragMoveEvent(this, handle__dragMoveEvent, sigval1);
+		miqt_exec_callback_QColumnView_dragMoveEvent(this, handle__dragMoveEvent.value(), sigval1);
 
 	}
 
 	friend void QColumnView_virtualbase_dragMoveEvent(void* self, QDragMoveEvent* event);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__dragLeaveEvent = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QColumnView> handle__dragLeaveEvent;
 
 	// Subclass to allow providing a Go implementation
 	virtual void dragLeaveEvent(QDragLeaveEvent* event) override {
-		if (handle__dragLeaveEvent == 0) {
+		if (!handle__dragLeaveEvent) {
 			QColumnView::dragLeaveEvent(event);
 			return;
 		}
 
 		QDragLeaveEvent* sigval1 = event;
-		miqt_exec_callback_QColumnView_dragLeaveEvent(this, handle__dragLeaveEvent, sigval1);
+		miqt_exec_callback_QColumnView_dragLeaveEvent(this, handle__dragLeaveEvent.value(), sigval1);
 
 	}
 
 	friend void QColumnView_virtualbase_dragLeaveEvent(void* self, QDragLeaveEvent* event);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__dropEvent = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QColumnView> handle__dropEvent;
 
 	// Subclass to allow providing a Go implementation
 	virtual void dropEvent(QDropEvent* event) override {
-		if (handle__dropEvent == 0) {
+		if (!handle__dropEvent) {
 			QColumnView::dropEvent(event);
 			return;
 		}
 
 		QDropEvent* sigval1 = event;
-		miqt_exec_callback_QColumnView_dropEvent(this, handle__dropEvent, sigval1);
+		miqt_exec_callback_QColumnView_dropEvent(this, handle__dropEvent.value(), sigval1);
 
 	}
 
 	friend void QColumnView_virtualbase_dropEvent(void* self, QDropEvent* event);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__focusInEvent = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QColumnView> handle__focusInEvent;
 
 	// Subclass to allow providing a Go implementation
 	virtual void focusInEvent(QFocusEvent* event) override {
-		if (handle__focusInEvent == 0) {
+		if (!handle__focusInEvent) {
 			QColumnView::focusInEvent(event);
 			return;
 		}
 
 		QFocusEvent* sigval1 = event;
-		miqt_exec_callback_QColumnView_focusInEvent(this, handle__focusInEvent, sigval1);
+		miqt_exec_callback_QColumnView_focusInEvent(this, handle__focusInEvent.value(), sigval1);
 
 	}
 
 	friend void QColumnView_virtualbase_focusInEvent(void* self, QFocusEvent* event);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__focusOutEvent = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QColumnView> handle__focusOutEvent;
 
 	// Subclass to allow providing a Go implementation
 	virtual void focusOutEvent(QFocusEvent* event) override {
-		if (handle__focusOutEvent == 0) {
+		if (!handle__focusOutEvent) {
 			QColumnView::focusOutEvent(event);
 			return;
 		}
 
 		QFocusEvent* sigval1 = event;
-		miqt_exec_callback_QColumnView_focusOutEvent(this, handle__focusOutEvent, sigval1);
+		miqt_exec_callback_QColumnView_focusOutEvent(this, handle__focusOutEvent.value(), sigval1);
 
 	}
 
 	friend void QColumnView_virtualbase_focusOutEvent(void* self, QFocusEvent* event);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__keyPressEvent = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QColumnView> handle__keyPressEvent;
 
 	// Subclass to allow providing a Go implementation
 	virtual void keyPressEvent(QKeyEvent* event) override {
-		if (handle__keyPressEvent == 0) {
+		if (!handle__keyPressEvent) {
 			QColumnView::keyPressEvent(event);
 			return;
 		}
 
 		QKeyEvent* sigval1 = event;
-		miqt_exec_callback_QColumnView_keyPressEvent(this, handle__keyPressEvent, sigval1);
+		miqt_exec_callback_QColumnView_keyPressEvent(this, handle__keyPressEvent.value(), sigval1);
 
 	}
 
 	friend void QColumnView_virtualbase_keyPressEvent(void* self, QKeyEvent* event);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__timerEvent = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QColumnView> handle__timerEvent;
 
 	// Subclass to allow providing a Go implementation
 	virtual void timerEvent(QTimerEvent* event) override {
-		if (handle__timerEvent == 0) {
+		if (!handle__timerEvent) {
 			QColumnView::timerEvent(event);
 			return;
 		}
 
 		QTimerEvent* sigval1 = event;
-		miqt_exec_callback_QColumnView_timerEvent(this, handle__timerEvent, sigval1);
+		miqt_exec_callback_QColumnView_timerEvent(this, handle__timerEvent.value(), sigval1);
 
 	}
 
 	friend void QColumnView_virtualbase_timerEvent(void* self, QTimerEvent* event);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__inputMethodEvent = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QColumnView> handle__inputMethodEvent;
 
 	// Subclass to allow providing a Go implementation
 	virtual void inputMethodEvent(QInputMethodEvent* event) override {
-		if (handle__inputMethodEvent == 0) {
+		if (!handle__inputMethodEvent) {
 			QColumnView::inputMethodEvent(event);
 			return;
 		}
 
 		QInputMethodEvent* sigval1 = event;
-		miqt_exec_callback_QColumnView_inputMethodEvent(this, handle__inputMethodEvent, sigval1);
+		miqt_exec_callback_QColumnView_inputMethodEvent(this, handle__inputMethodEvent.value(), sigval1);
 
 	}
 
 	friend void QColumnView_virtualbase_inputMethodEvent(void* self, QInputMethodEvent* event);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__eventFilter = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QColumnView> handle__eventFilter;
 
 	// Subclass to allow providing a Go implementation
 	virtual bool eventFilter(QObject* object, QEvent* event) override {
-		if (handle__eventFilter == 0) {
+		if (!handle__eventFilter) {
 			return QColumnView::eventFilter(object, event);
 		}
 
 		QObject* sigval1 = object;
 		QEvent* sigval2 = event;
-		bool callback_return_value = miqt_exec_callback_QColumnView_eventFilter(this, handle__eventFilter, sigval1, sigval2);
+		bool callback_return_value = miqt_exec_callback_QColumnView_eventFilter(this, handle__eventFilter.value(), sigval1, sigval2);
 		return callback_return_value;
 	}
 
 	friend bool QColumnView_virtualbase_eventFilter(void* self, QObject* object, QEvent* event);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__viewportSizeHint = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QColumnView> handle__viewportSizeHint;
 
 	// Subclass to allow providing a Go implementation
 	virtual QSize viewportSizeHint() const override {
-		if (handle__viewportSizeHint == 0) {
+		if (!handle__viewportSizeHint) {
 			return QColumnView::viewportSizeHint();
 		}
 
-		QSize* callback_return_value = miqt_exec_callback_QColumnView_viewportSizeHint(this, handle__viewportSizeHint);
+		QSize* callback_return_value = miqt_exec_callback_QColumnView_viewportSizeHint(this, handle__viewportSizeHint.value());
 		return *callback_return_value;
 	}
 
 	friend QSize* QColumnView_virtualbase_viewportSizeHint(const void* self);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__minimumSizeHint = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QColumnView> handle__minimumSizeHint;
 
 	// Subclass to allow providing a Go implementation
 	virtual QSize minimumSizeHint() const override {
-		if (handle__minimumSizeHint == 0) {
+		if (!handle__minimumSizeHint) {
 			return QColumnView::minimumSizeHint();
 		}
 
-		QSize* callback_return_value = miqt_exec_callback_QColumnView_minimumSizeHint(this, handle__minimumSizeHint);
+		QSize* callback_return_value = miqt_exec_callback_QColumnView_minimumSizeHint(this, handle__minimumSizeHint.value());
 		return *callback_return_value;
 	}
 
 	friend QSize* QColumnView_virtualbase_minimumSizeHint(const void* self);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__setupViewport = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QColumnView> handle__setupViewport;
 
 	// Subclass to allow providing a Go implementation
 	virtual void setupViewport(QWidget* viewport) override {
-		if (handle__setupViewport == 0) {
+		if (!handle__setupViewport) {
 			QColumnView::setupViewport(viewport);
 			return;
 		}
 
 		QWidget* sigval1 = viewport;
-		miqt_exec_callback_QColumnView_setupViewport(this, handle__setupViewport, sigval1);
+		miqt_exec_callback_QColumnView_setupViewport(this, handle__setupViewport.value(), sigval1);
 
 	}
 
 	friend void QColumnView_virtualbase_setupViewport(void* self, QWidget* viewport);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__paintEvent = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QColumnView> handle__paintEvent;
 
 	// Subclass to allow providing a Go implementation
 	virtual void paintEvent(QPaintEvent* param1) override {
-		if (handle__paintEvent == 0) {
+		if (!handle__paintEvent) {
 			QColumnView::paintEvent(param1);
 			return;
 		}
 
 		QPaintEvent* sigval1 = param1;
-		miqt_exec_callback_QColumnView_paintEvent(this, handle__paintEvent, sigval1);
+		miqt_exec_callback_QColumnView_paintEvent(this, handle__paintEvent.value(), sigval1);
 
 	}
 
 	friend void QColumnView_virtualbase_paintEvent(void* self, QPaintEvent* param1);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__wheelEvent = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QColumnView> handle__wheelEvent;
 
 	// Subclass to allow providing a Go implementation
 	virtual void wheelEvent(QWheelEvent* param1) override {
-		if (handle__wheelEvent == 0) {
+		if (!handle__wheelEvent) {
 			QColumnView::wheelEvent(param1);
 			return;
 		}
 
 		QWheelEvent* sigval1 = param1;
-		miqt_exec_callback_QColumnView_wheelEvent(this, handle__wheelEvent, sigval1);
+		miqt_exec_callback_QColumnView_wheelEvent(this, handle__wheelEvent.value(), sigval1);
 
 	}
 
 	friend void QColumnView_virtualbase_wheelEvent(void* self, QWheelEvent* param1);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__contextMenuEvent = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QColumnView> handle__contextMenuEvent;
 
 	// Subclass to allow providing a Go implementation
 	virtual void contextMenuEvent(QContextMenuEvent* param1) override {
-		if (handle__contextMenuEvent == 0) {
+		if (!handle__contextMenuEvent) {
 			QColumnView::contextMenuEvent(param1);
 			return;
 		}
 
 		QContextMenuEvent* sigval1 = param1;
-		miqt_exec_callback_QColumnView_contextMenuEvent(this, handle__contextMenuEvent, sigval1);
+		miqt_exec_callback_QColumnView_contextMenuEvent(this, handle__contextMenuEvent.value(), sigval1);
 
 	}
 
 	friend void QColumnView_virtualbase_contextMenuEvent(void* self, QContextMenuEvent* param1);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__changeEvent = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QColumnView> handle__changeEvent;
 
 	// Subclass to allow providing a Go implementation
 	virtual void changeEvent(QEvent* param1) override {
-		if (handle__changeEvent == 0) {
+		if (!handle__changeEvent) {
 			QColumnView::changeEvent(param1);
 			return;
 		}
 
 		QEvent* sigval1 = param1;
-		miqt_exec_callback_QColumnView_changeEvent(this, handle__changeEvent, sigval1);
+		miqt_exec_callback_QColumnView_changeEvent(this, handle__changeEvent.value(), sigval1);
 
 	}
 
 	friend void QColumnView_virtualbase_changeEvent(void* self, QEvent* param1);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__initStyleOption = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QColumnView> handle__initStyleOption;
 
 	// Subclass to allow providing a Go implementation
 	virtual void initStyleOption(QStyleOptionFrame* option) const override {
-		if (handle__initStyleOption == 0) {
+		if (!handle__initStyleOption) {
 			QColumnView::initStyleOption(option);
 			return;
 		}
 
 		QStyleOptionFrame* sigval1 = option;
-		miqt_exec_callback_QColumnView_initStyleOption(this, handle__initStyleOption, sigval1);
+		miqt_exec_callback_QColumnView_initStyleOption(this, handle__initStyleOption.value(), sigval1);
 
 	}
 
 	friend void QColumnView_virtualbase_initStyleOption(const void* self, QStyleOptionFrame* option);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__devType = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QColumnView> handle__devType;
 
 	// Subclass to allow providing a Go implementation
 	virtual int devType() const override {
-		if (handle__devType == 0) {
+		if (!handle__devType) {
 			return QColumnView::devType();
 		}
 
-		int callback_return_value = miqt_exec_callback_QColumnView_devType(this, handle__devType);
+		int callback_return_value = miqt_exec_callback_QColumnView_devType(this, handle__devType.value());
 		return static_cast<int>(callback_return_value);
 	}
 
 	friend int QColumnView_virtualbase_devType(const void* self);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__setVisible = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QColumnView> handle__setVisible;
 
 	// Subclass to allow providing a Go implementation
 	virtual void setVisible(bool visible) override {
-		if (handle__setVisible == 0) {
+		if (!handle__setVisible) {
 			QColumnView::setVisible(visible);
 			return;
 		}
 
 		bool sigval1 = visible;
-		miqt_exec_callback_QColumnView_setVisible(this, handle__setVisible, sigval1);
+		miqt_exec_callback_QColumnView_setVisible(this, handle__setVisible.value(), sigval1);
 
 	}
 
 	friend void QColumnView_virtualbase_setVisible(void* self, bool visible);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__heightForWidth = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QColumnView> handle__heightForWidth;
 
 	// Subclass to allow providing a Go implementation
 	virtual int heightForWidth(int param1) const override {
-		if (handle__heightForWidth == 0) {
+		if (!handle__heightForWidth) {
 			return QColumnView::heightForWidth(param1);
 		}
 
 		int sigval1 = param1;
-		int callback_return_value = miqt_exec_callback_QColumnView_heightForWidth(this, handle__heightForWidth, sigval1);
+		int callback_return_value = miqt_exec_callback_QColumnView_heightForWidth(this, handle__heightForWidth.value(), sigval1);
 		return static_cast<int>(callback_return_value);
 	}
 
 	friend int QColumnView_virtualbase_heightForWidth(const void* self, int param1);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__hasHeightForWidth = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QColumnView> handle__hasHeightForWidth;
 
 	// Subclass to allow providing a Go implementation
 	virtual bool hasHeightForWidth() const override {
-		if (handle__hasHeightForWidth == 0) {
+		if (!handle__hasHeightForWidth) {
 			return QColumnView::hasHeightForWidth();
 		}
 
-		bool callback_return_value = miqt_exec_callback_QColumnView_hasHeightForWidth(this, handle__hasHeightForWidth);
+		bool callback_return_value = miqt_exec_callback_QColumnView_hasHeightForWidth(this, handle__hasHeightForWidth.value());
 		return callback_return_value;
 	}
 
 	friend bool QColumnView_virtualbase_hasHeightForWidth(const void* self);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__paintEngine = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QColumnView> handle__paintEngine;
 
 	// Subclass to allow providing a Go implementation
 	virtual QPaintEngine* paintEngine() const override {
-		if (handle__paintEngine == 0) {
+		if (!handle__paintEngine) {
 			return QColumnView::paintEngine();
 		}
 
-		QPaintEngine* callback_return_value = miqt_exec_callback_QColumnView_paintEngine(this, handle__paintEngine);
+		QPaintEngine* callback_return_value = miqt_exec_callback_QColumnView_paintEngine(this, handle__paintEngine.value());
 		return callback_return_value;
 	}
 
 	friend QPaintEngine* QColumnView_virtualbase_paintEngine(const void* self);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__keyReleaseEvent = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QColumnView> handle__keyReleaseEvent;
 
 	// Subclass to allow providing a Go implementation
 	virtual void keyReleaseEvent(QKeyEvent* event) override {
-		if (handle__keyReleaseEvent == 0) {
+		if (!handle__keyReleaseEvent) {
 			QColumnView::keyReleaseEvent(event);
 			return;
 		}
 
 		QKeyEvent* sigval1 = event;
-		miqt_exec_callback_QColumnView_keyReleaseEvent(this, handle__keyReleaseEvent, sigval1);
+		miqt_exec_callback_QColumnView_keyReleaseEvent(this, handle__keyReleaseEvent.value(), sigval1);
 
 	}
 
 	friend void QColumnView_virtualbase_keyReleaseEvent(void* self, QKeyEvent* event);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__enterEvent = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QColumnView> handle__enterEvent;
 
 	// Subclass to allow providing a Go implementation
 	virtual void enterEvent(QEnterEvent* event) override {
-		if (handle__enterEvent == 0) {
+		if (!handle__enterEvent) {
 			QColumnView::enterEvent(event);
 			return;
 		}
 
 		QEnterEvent* sigval1 = event;
-		miqt_exec_callback_QColumnView_enterEvent(this, handle__enterEvent, sigval1);
+		miqt_exec_callback_QColumnView_enterEvent(this, handle__enterEvent.value(), sigval1);
 
 	}
 
 	friend void QColumnView_virtualbase_enterEvent(void* self, QEnterEvent* event);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__leaveEvent = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QColumnView> handle__leaveEvent;
 
 	// Subclass to allow providing a Go implementation
 	virtual void leaveEvent(QEvent* event) override {
-		if (handle__leaveEvent == 0) {
+		if (!handle__leaveEvent) {
 			QColumnView::leaveEvent(event);
 			return;
 		}
 
 		QEvent* sigval1 = event;
-		miqt_exec_callback_QColumnView_leaveEvent(this, handle__leaveEvent, sigval1);
+		miqt_exec_callback_QColumnView_leaveEvent(this, handle__leaveEvent.value(), sigval1);
 
 	}
 
 	friend void QColumnView_virtualbase_leaveEvent(void* self, QEvent* event);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__moveEvent = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QColumnView> handle__moveEvent;
 
 	// Subclass to allow providing a Go implementation
 	virtual void moveEvent(QMoveEvent* event) override {
-		if (handle__moveEvent == 0) {
+		if (!handle__moveEvent) {
 			QColumnView::moveEvent(event);
 			return;
 		}
 
 		QMoveEvent* sigval1 = event;
-		miqt_exec_callback_QColumnView_moveEvent(this, handle__moveEvent, sigval1);
+		miqt_exec_callback_QColumnView_moveEvent(this, handle__moveEvent.value(), sigval1);
 
 	}
 
 	friend void QColumnView_virtualbase_moveEvent(void* self, QMoveEvent* event);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__closeEvent = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QColumnView> handle__closeEvent;
 
 	// Subclass to allow providing a Go implementation
 	virtual void closeEvent(QCloseEvent* event) override {
-		if (handle__closeEvent == 0) {
+		if (!handle__closeEvent) {
 			QColumnView::closeEvent(event);
 			return;
 		}
 
 		QCloseEvent* sigval1 = event;
-		miqt_exec_callback_QColumnView_closeEvent(this, handle__closeEvent, sigval1);
+		miqt_exec_callback_QColumnView_closeEvent(this, handle__closeEvent.value(), sigval1);
 
 	}
 
 	friend void QColumnView_virtualbase_closeEvent(void* self, QCloseEvent* event);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__tabletEvent = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QColumnView> handle__tabletEvent;
 
 	// Subclass to allow providing a Go implementation
 	virtual void tabletEvent(QTabletEvent* event) override {
-		if (handle__tabletEvent == 0) {
+		if (!handle__tabletEvent) {
 			QColumnView::tabletEvent(event);
 			return;
 		}
 
 		QTabletEvent* sigval1 = event;
-		miqt_exec_callback_QColumnView_tabletEvent(this, handle__tabletEvent, sigval1);
+		miqt_exec_callback_QColumnView_tabletEvent(this, handle__tabletEvent.value(), sigval1);
 
 	}
 
 	friend void QColumnView_virtualbase_tabletEvent(void* self, QTabletEvent* event);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__actionEvent = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QColumnView> handle__actionEvent;
 
 	// Subclass to allow providing a Go implementation
 	virtual void actionEvent(QActionEvent* event) override {
-		if (handle__actionEvent == 0) {
+		if (!handle__actionEvent) {
 			QColumnView::actionEvent(event);
 			return;
 		}
 
 		QActionEvent* sigval1 = event;
-		miqt_exec_callback_QColumnView_actionEvent(this, handle__actionEvent, sigval1);
+		miqt_exec_callback_QColumnView_actionEvent(this, handle__actionEvent.value(), sigval1);
 
 	}
 
 	friend void QColumnView_virtualbase_actionEvent(void* self, QActionEvent* event);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__showEvent = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QColumnView> handle__showEvent;
 
 	// Subclass to allow providing a Go implementation
 	virtual void showEvent(QShowEvent* event) override {
-		if (handle__showEvent == 0) {
+		if (!handle__showEvent) {
 			QColumnView::showEvent(event);
 			return;
 		}
 
 		QShowEvent* sigval1 = event;
-		miqt_exec_callback_QColumnView_showEvent(this, handle__showEvent, sigval1);
+		miqt_exec_callback_QColumnView_showEvent(this, handle__showEvent.value(), sigval1);
 
 	}
 
 	friend void QColumnView_virtualbase_showEvent(void* self, QShowEvent* event);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__hideEvent = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QColumnView> handle__hideEvent;
 
 	// Subclass to allow providing a Go implementation
 	virtual void hideEvent(QHideEvent* event) override {
-		if (handle__hideEvent == 0) {
+		if (!handle__hideEvent) {
 			QColumnView::hideEvent(event);
 			return;
 		}
 
 		QHideEvent* sigval1 = event;
-		miqt_exec_callback_QColumnView_hideEvent(this, handle__hideEvent, sigval1);
+		miqt_exec_callback_QColumnView_hideEvent(this, handle__hideEvent.value(), sigval1);
 
 	}
 
 	friend void QColumnView_virtualbase_hideEvent(void* self, QHideEvent* event);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__nativeEvent = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QColumnView> handle__nativeEvent;
 
 	// Subclass to allow providing a Go implementation
 	virtual bool nativeEvent(const QByteArray& eventType, void* message, qintptr* result) override {
-		if (handle__nativeEvent == 0) {
+		if (!handle__nativeEvent) {
 			return QColumnView::nativeEvent(eventType, message, result);
 		}
 
@@ -1635,117 +1638,117 @@ public:
 		void* sigval2 = message;
 		qintptr* result_ret = result;
 		intptr_t* sigval3 = (intptr_t*)(result_ret);
-		bool callback_return_value = miqt_exec_callback_QColumnView_nativeEvent(this, handle__nativeEvent, sigval1, sigval2, sigval3);
+		bool callback_return_value = miqt_exec_callback_QColumnView_nativeEvent(this, handle__nativeEvent.value(), sigval1, sigval2, sigval3);
 		return callback_return_value;
 	}
 
 	friend bool QColumnView_virtualbase_nativeEvent(void* self, struct miqt_string eventType, void* message, intptr_t* result);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__metric = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QColumnView> handle__metric;
 
 	// Subclass to allow providing a Go implementation
 	virtual int metric(QPaintDevice::PaintDeviceMetric param1) const override {
-		if (handle__metric == 0) {
+		if (!handle__metric) {
 			return QColumnView::metric(param1);
 		}
 
 		QPaintDevice::PaintDeviceMetric param1_ret = param1;
 		int sigval1 = static_cast<int>(param1_ret);
-		int callback_return_value = miqt_exec_callback_QColumnView_metric(this, handle__metric, sigval1);
+		int callback_return_value = miqt_exec_callback_QColumnView_metric(this, handle__metric.value(), sigval1);
 		return static_cast<int>(callback_return_value);
 	}
 
 	friend int QColumnView_virtualbase_metric(const void* self, int param1);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__initPainter = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QColumnView> handle__initPainter;
 
 	// Subclass to allow providing a Go implementation
 	virtual void initPainter(QPainter* painter) const override {
-		if (handle__initPainter == 0) {
+		if (!handle__initPainter) {
 			QColumnView::initPainter(painter);
 			return;
 		}
 
 		QPainter* sigval1 = painter;
-		miqt_exec_callback_QColumnView_initPainter(this, handle__initPainter, sigval1);
+		miqt_exec_callback_QColumnView_initPainter(this, handle__initPainter.value(), sigval1);
 
 	}
 
 	friend void QColumnView_virtualbase_initPainter(const void* self, QPainter* painter);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__redirected = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QColumnView> handle__redirected;
 
 	// Subclass to allow providing a Go implementation
 	virtual QPaintDevice* redirected(QPoint* offset) const override {
-		if (handle__redirected == 0) {
+		if (!handle__redirected) {
 			return QColumnView::redirected(offset);
 		}
 
 		QPoint* sigval1 = offset;
-		QPaintDevice* callback_return_value = miqt_exec_callback_QColumnView_redirected(this, handle__redirected, sigval1);
+		QPaintDevice* callback_return_value = miqt_exec_callback_QColumnView_redirected(this, handle__redirected.value(), sigval1);
 		return callback_return_value;
 	}
 
 	friend QPaintDevice* QColumnView_virtualbase_redirected(const void* self, QPoint* offset);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__sharedPainter = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QColumnView> handle__sharedPainter;
 
 	// Subclass to allow providing a Go implementation
 	virtual QPainter* sharedPainter() const override {
-		if (handle__sharedPainter == 0) {
+		if (!handle__sharedPainter) {
 			return QColumnView::sharedPainter();
 		}
 
-		QPainter* callback_return_value = miqt_exec_callback_QColumnView_sharedPainter(this, handle__sharedPainter);
+		QPainter* callback_return_value = miqt_exec_callback_QColumnView_sharedPainter(this, handle__sharedPainter.value());
 		return callback_return_value;
 	}
 
 	friend QPainter* QColumnView_virtualbase_sharedPainter(const void* self);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__childEvent = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QColumnView> handle__childEvent;
 
 	// Subclass to allow providing a Go implementation
 	virtual void childEvent(QChildEvent* event) override {
-		if (handle__childEvent == 0) {
+		if (!handle__childEvent) {
 			QColumnView::childEvent(event);
 			return;
 		}
 
 		QChildEvent* sigval1 = event;
-		miqt_exec_callback_QColumnView_childEvent(this, handle__childEvent, sigval1);
+		miqt_exec_callback_QColumnView_childEvent(this, handle__childEvent.value(), sigval1);
 
 	}
 
 	friend void QColumnView_virtualbase_childEvent(void* self, QChildEvent* event);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__customEvent = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QColumnView> handle__customEvent;
 
 	// Subclass to allow providing a Go implementation
 	virtual void customEvent(QEvent* event) override {
-		if (handle__customEvent == 0) {
+		if (!handle__customEvent) {
 			QColumnView::customEvent(event);
 			return;
 		}
 
 		QEvent* sigval1 = event;
-		miqt_exec_callback_QColumnView_customEvent(this, handle__customEvent, sigval1);
+		miqt_exec_callback_QColumnView_customEvent(this, handle__customEvent.value(), sigval1);
 
 	}
 
 	friend void QColumnView_virtualbase_customEvent(void* self, QEvent* event);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__connectNotify = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QColumnView> handle__connectNotify;
 
 	// Subclass to allow providing a Go implementation
 	virtual void connectNotify(const QMetaMethod& signal) override {
-		if (handle__connectNotify == 0) {
+		if (!handle__connectNotify) {
 			QColumnView::connectNotify(signal);
 			return;
 		}
@@ -1753,18 +1756,18 @@ public:
 		const QMetaMethod& signal_ret = signal;
 		// Cast returned reference into pointer
 		QMetaMethod* sigval1 = const_cast<QMetaMethod*>(&signal_ret);
-		miqt_exec_callback_QColumnView_connectNotify(this, handle__connectNotify, sigval1);
+		miqt_exec_callback_QColumnView_connectNotify(this, handle__connectNotify.value(), sigval1);
 
 	}
 
 	friend void QColumnView_virtualbase_connectNotify(void* self, QMetaMethod* signal);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__disconnectNotify = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QColumnView> handle__disconnectNotify;
 
 	// Subclass to allow providing a Go implementation
 	virtual void disconnectNotify(const QMetaMethod& signal) override {
-		if (handle__disconnectNotify == 0) {
+		if (!handle__disconnectNotify) {
 			QColumnView::disconnectNotify(signal);
 			return;
 		}
@@ -1772,7 +1775,7 @@ public:
 		const QMetaMethod& signal_ret = signal;
 		// Cast returned reference into pointer
 		QMetaMethod* sigval1 = const_cast<QMetaMethod*>(&signal_ret);
-		miqt_exec_callback_QColumnView_disconnectNotify(this, handle__disconnectNotify, sigval1);
+		miqt_exec_callback_QColumnView_disconnectNotify(this, handle__disconnectNotify.value(), sigval1);
 
 	}
 
@@ -1840,13 +1843,15 @@ void QColumnView_updatePreviewWidget(QColumnView* self, QModelIndex* index) {
 	self->updatePreviewWidget(*index);
 }
 
-void QColumnView_connect_updatePreviewWidget(QColumnView* self, intptr_t slot) {
-	QColumnView::connect(self, static_cast<void (QColumnView::*)(const QModelIndex&)>(&QColumnView::updatePreviewWidget), self, [=](const QModelIndex& index) {
+void* QColumnView_connect_updatePreviewWidget(QColumnView* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QColumnView>>(slot);
+	return new QMetaObject::Connection(QColumnView::connect(self, static_cast<void (QColumnView::*)(const QModelIndex&)>(&QColumnView::updatePreviewWidget), self, [slot_handle](const QModelIndex& index) {
+		intptr_t slot = slot_handle->value();
 		const QModelIndex& index_ret = index;
 		// Cast returned reference into pointer
 		QModelIndex* sigval1 = const_cast<QModelIndex*>(&index_ret);
 		miqt_exec_callback_QColumnView_updatePreviewWidget(slot, sigval1);
-	});
+	}));
 }
 
 QModelIndex* QColumnView_indexAt(const QColumnView* self, QPoint* point) {
@@ -1943,12 +1948,13 @@ struct miqt_string QColumnView_tr3(const char* s, const char* c, int n) {
 }
 
 bool QColumnView_override_virtual_indexAt(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QColumnView> slot_handle(slot);
 	MiqtVirtualQColumnView* self_cast = dynamic_cast<MiqtVirtualQColumnView*>( (QColumnView*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__indexAt = slot;
+	self_cast->handle__indexAt = std::move(slot_handle);
 	return true;
 }
 
@@ -1957,12 +1963,13 @@ QModelIndex* QColumnView_virtualbase_indexAt(const void* self, QPoint* point) {
 }
 
 bool QColumnView_override_virtual_scrollTo(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QColumnView> slot_handle(slot);
 	MiqtVirtualQColumnView* self_cast = dynamic_cast<MiqtVirtualQColumnView*>( (QColumnView*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__scrollTo = slot;
+	self_cast->handle__scrollTo = std::move(slot_handle);
 	return true;
 }
 
@@ -1971,12 +1978,13 @@ void QColumnView_virtualbase_scrollTo(void* self, QModelIndex* index, int hint) 
 }
 
 bool QColumnView_override_virtual_sizeHint(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QColumnView> slot_handle(slot);
 	MiqtVirtualQColumnView* self_cast = dynamic_cast<MiqtVirtualQColumnView*>( (QColumnView*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__sizeHint = slot;
+	self_cast->handle__sizeHint = std::move(slot_handle);
 	return true;
 }
 
@@ -1985,12 +1993,13 @@ QSize* QColumnView_virtualbase_sizeHint(const void* self) {
 }
 
 bool QColumnView_override_virtual_visualRect(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QColumnView> slot_handle(slot);
 	MiqtVirtualQColumnView* self_cast = dynamic_cast<MiqtVirtualQColumnView*>( (QColumnView*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__visualRect = slot;
+	self_cast->handle__visualRect = std::move(slot_handle);
 	return true;
 }
 
@@ -1999,12 +2008,13 @@ QRect* QColumnView_virtualbase_visualRect(const void* self, QModelIndex* index) 
 }
 
 bool QColumnView_override_virtual_setModel(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QColumnView> slot_handle(slot);
 	MiqtVirtualQColumnView* self_cast = dynamic_cast<MiqtVirtualQColumnView*>( (QColumnView*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__setModel = slot;
+	self_cast->handle__setModel = std::move(slot_handle);
 	return true;
 }
 
@@ -2013,12 +2023,13 @@ void QColumnView_virtualbase_setModel(void* self, QAbstractItemModel* model) {
 }
 
 bool QColumnView_override_virtual_setSelectionModel(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QColumnView> slot_handle(slot);
 	MiqtVirtualQColumnView* self_cast = dynamic_cast<MiqtVirtualQColumnView*>( (QColumnView*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__setSelectionModel = slot;
+	self_cast->handle__setSelectionModel = std::move(slot_handle);
 	return true;
 }
 
@@ -2027,12 +2038,13 @@ void QColumnView_virtualbase_setSelectionModel(void* self, QItemSelectionModel* 
 }
 
 bool QColumnView_override_virtual_setRootIndex(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QColumnView> slot_handle(slot);
 	MiqtVirtualQColumnView* self_cast = dynamic_cast<MiqtVirtualQColumnView*>( (QColumnView*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__setRootIndex = slot;
+	self_cast->handle__setRootIndex = std::move(slot_handle);
 	return true;
 }
 
@@ -2041,12 +2053,13 @@ void QColumnView_virtualbase_setRootIndex(void* self, QModelIndex* index) {
 }
 
 bool QColumnView_override_virtual_selectAll(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QColumnView> slot_handle(slot);
 	MiqtVirtualQColumnView* self_cast = dynamic_cast<MiqtVirtualQColumnView*>( (QColumnView*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__selectAll = slot;
+	self_cast->handle__selectAll = std::move(slot_handle);
 	return true;
 }
 
@@ -2055,12 +2068,13 @@ void QColumnView_virtualbase_selectAll(void* self) {
 }
 
 bool QColumnView_override_virtual_isIndexHidden(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QColumnView> slot_handle(slot);
 	MiqtVirtualQColumnView* self_cast = dynamic_cast<MiqtVirtualQColumnView*>( (QColumnView*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__isIndexHidden = slot;
+	self_cast->handle__isIndexHidden = std::move(slot_handle);
 	return true;
 }
 
@@ -2069,12 +2083,13 @@ bool QColumnView_virtualbase_isIndexHidden(const void* self, QModelIndex* index)
 }
 
 bool QColumnView_override_virtual_moveCursor(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QColumnView> slot_handle(slot);
 	MiqtVirtualQColumnView* self_cast = dynamic_cast<MiqtVirtualQColumnView*>( (QColumnView*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__moveCursor = slot;
+	self_cast->handle__moveCursor = std::move(slot_handle);
 	return true;
 }
 
@@ -2083,12 +2098,13 @@ QModelIndex* QColumnView_virtualbase_moveCursor(void* self, int cursorAction, in
 }
 
 bool QColumnView_override_virtual_resizeEvent(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QColumnView> slot_handle(slot);
 	MiqtVirtualQColumnView* self_cast = dynamic_cast<MiqtVirtualQColumnView*>( (QColumnView*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__resizeEvent = slot;
+	self_cast->handle__resizeEvent = std::move(slot_handle);
 	return true;
 }
 
@@ -2097,12 +2113,13 @@ void QColumnView_virtualbase_resizeEvent(void* self, QResizeEvent* event) {
 }
 
 bool QColumnView_override_virtual_setSelection(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QColumnView> slot_handle(slot);
 	MiqtVirtualQColumnView* self_cast = dynamic_cast<MiqtVirtualQColumnView*>( (QColumnView*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__setSelection = slot;
+	self_cast->handle__setSelection = std::move(slot_handle);
 	return true;
 }
 
@@ -2111,12 +2128,13 @@ void QColumnView_virtualbase_setSelection(void* self, QRect* rect, int command) 
 }
 
 bool QColumnView_override_virtual_visualRegionForSelection(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QColumnView> slot_handle(slot);
 	MiqtVirtualQColumnView* self_cast = dynamic_cast<MiqtVirtualQColumnView*>( (QColumnView*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__visualRegionForSelection = slot;
+	self_cast->handle__visualRegionForSelection = std::move(slot_handle);
 	return true;
 }
 
@@ -2125,12 +2143,13 @@ QRegion* QColumnView_virtualbase_visualRegionForSelection(const void* self, QIte
 }
 
 bool QColumnView_override_virtual_horizontalOffset(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QColumnView> slot_handle(slot);
 	MiqtVirtualQColumnView* self_cast = dynamic_cast<MiqtVirtualQColumnView*>( (QColumnView*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__horizontalOffset = slot;
+	self_cast->handle__horizontalOffset = std::move(slot_handle);
 	return true;
 }
 
@@ -2139,12 +2158,13 @@ int QColumnView_virtualbase_horizontalOffset(const void* self) {
 }
 
 bool QColumnView_override_virtual_verticalOffset(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QColumnView> slot_handle(slot);
 	MiqtVirtualQColumnView* self_cast = dynamic_cast<MiqtVirtualQColumnView*>( (QColumnView*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__verticalOffset = slot;
+	self_cast->handle__verticalOffset = std::move(slot_handle);
 	return true;
 }
 
@@ -2153,12 +2173,13 @@ int QColumnView_virtualbase_verticalOffset(const void* self) {
 }
 
 bool QColumnView_override_virtual_rowsInserted(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QColumnView> slot_handle(slot);
 	MiqtVirtualQColumnView* self_cast = dynamic_cast<MiqtVirtualQColumnView*>( (QColumnView*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__rowsInserted = slot;
+	self_cast->handle__rowsInserted = std::move(slot_handle);
 	return true;
 }
 
@@ -2167,12 +2188,13 @@ void QColumnView_virtualbase_rowsInserted(void* self, QModelIndex* parent, int s
 }
 
 bool QColumnView_override_virtual_currentChanged(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QColumnView> slot_handle(slot);
 	MiqtVirtualQColumnView* self_cast = dynamic_cast<MiqtVirtualQColumnView*>( (QColumnView*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__currentChanged = slot;
+	self_cast->handle__currentChanged = std::move(slot_handle);
 	return true;
 }
 
@@ -2181,12 +2203,13 @@ void QColumnView_virtualbase_currentChanged(void* self, QModelIndex* current, QM
 }
 
 bool QColumnView_override_virtual_scrollContentsBy(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QColumnView> slot_handle(slot);
 	MiqtVirtualQColumnView* self_cast = dynamic_cast<MiqtVirtualQColumnView*>( (QColumnView*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__scrollContentsBy = slot;
+	self_cast->handle__scrollContentsBy = std::move(slot_handle);
 	return true;
 }
 
@@ -2195,12 +2218,13 @@ void QColumnView_virtualbase_scrollContentsBy(void* self, int dx, int dy) {
 }
 
 bool QColumnView_override_virtual_createColumn(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QColumnView> slot_handle(slot);
 	MiqtVirtualQColumnView* self_cast = dynamic_cast<MiqtVirtualQColumnView*>( (QColumnView*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__createColumn = slot;
+	self_cast->handle__createColumn = std::move(slot_handle);
 	return true;
 }
 
@@ -2209,12 +2233,13 @@ QAbstractItemView* QColumnView_virtualbase_createColumn(void* self, QModelIndex*
 }
 
 bool QColumnView_override_virtual_keyboardSearch(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QColumnView> slot_handle(slot);
 	MiqtVirtualQColumnView* self_cast = dynamic_cast<MiqtVirtualQColumnView*>( (QColumnView*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__keyboardSearch = slot;
+	self_cast->handle__keyboardSearch = std::move(slot_handle);
 	return true;
 }
 
@@ -2224,12 +2249,13 @@ void QColumnView_virtualbase_keyboardSearch(void* self, struct miqt_string searc
 }
 
 bool QColumnView_override_virtual_sizeHintForRow(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QColumnView> slot_handle(slot);
 	MiqtVirtualQColumnView* self_cast = dynamic_cast<MiqtVirtualQColumnView*>( (QColumnView*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__sizeHintForRow = slot;
+	self_cast->handle__sizeHintForRow = std::move(slot_handle);
 	return true;
 }
 
@@ -2238,12 +2264,13 @@ int QColumnView_virtualbase_sizeHintForRow(const void* self, int row) {
 }
 
 bool QColumnView_override_virtual_sizeHintForColumn(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QColumnView> slot_handle(slot);
 	MiqtVirtualQColumnView* self_cast = dynamic_cast<MiqtVirtualQColumnView*>( (QColumnView*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__sizeHintForColumn = slot;
+	self_cast->handle__sizeHintForColumn = std::move(slot_handle);
 	return true;
 }
 
@@ -2252,12 +2279,13 @@ int QColumnView_virtualbase_sizeHintForColumn(const void* self, int column) {
 }
 
 bool QColumnView_override_virtual_itemDelegateForIndex(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QColumnView> slot_handle(slot);
 	MiqtVirtualQColumnView* self_cast = dynamic_cast<MiqtVirtualQColumnView*>( (QColumnView*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__itemDelegateForIndex = slot;
+	self_cast->handle__itemDelegateForIndex = std::move(slot_handle);
 	return true;
 }
 
@@ -2266,12 +2294,13 @@ QAbstractItemDelegate* QColumnView_virtualbase_itemDelegateForIndex(const void* 
 }
 
 bool QColumnView_override_virtual_inputMethodQuery(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QColumnView> slot_handle(slot);
 	MiqtVirtualQColumnView* self_cast = dynamic_cast<MiqtVirtualQColumnView*>( (QColumnView*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__inputMethodQuery = slot;
+	self_cast->handle__inputMethodQuery = std::move(slot_handle);
 	return true;
 }
 
@@ -2280,12 +2309,13 @@ QVariant* QColumnView_virtualbase_inputMethodQuery(const void* self, int query) 
 }
 
 bool QColumnView_override_virtual_reset(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QColumnView> slot_handle(slot);
 	MiqtVirtualQColumnView* self_cast = dynamic_cast<MiqtVirtualQColumnView*>( (QColumnView*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__reset = slot;
+	self_cast->handle__reset = std::move(slot_handle);
 	return true;
 }
 
@@ -2294,12 +2324,13 @@ void QColumnView_virtualbase_reset(void* self) {
 }
 
 bool QColumnView_override_virtual_doItemsLayout(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QColumnView> slot_handle(slot);
 	MiqtVirtualQColumnView* self_cast = dynamic_cast<MiqtVirtualQColumnView*>( (QColumnView*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__doItemsLayout = slot;
+	self_cast->handle__doItemsLayout = std::move(slot_handle);
 	return true;
 }
 
@@ -2308,12 +2339,13 @@ void QColumnView_virtualbase_doItemsLayout(void* self) {
 }
 
 bool QColumnView_override_virtual_dataChanged(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QColumnView> slot_handle(slot);
 	MiqtVirtualQColumnView* self_cast = dynamic_cast<MiqtVirtualQColumnView*>( (QColumnView*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__dataChanged = slot;
+	self_cast->handle__dataChanged = std::move(slot_handle);
 	return true;
 }
 
@@ -2328,12 +2360,13 @@ void QColumnView_virtualbase_dataChanged(void* self, QModelIndex* topLeft, QMode
 }
 
 bool QColumnView_override_virtual_rowsAboutToBeRemoved(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QColumnView> slot_handle(slot);
 	MiqtVirtualQColumnView* self_cast = dynamic_cast<MiqtVirtualQColumnView*>( (QColumnView*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__rowsAboutToBeRemoved = slot;
+	self_cast->handle__rowsAboutToBeRemoved = std::move(slot_handle);
 	return true;
 }
 
@@ -2342,12 +2375,13 @@ void QColumnView_virtualbase_rowsAboutToBeRemoved(void* self, QModelIndex* paren
 }
 
 bool QColumnView_override_virtual_selectionChanged(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QColumnView> slot_handle(slot);
 	MiqtVirtualQColumnView* self_cast = dynamic_cast<MiqtVirtualQColumnView*>( (QColumnView*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__selectionChanged = slot;
+	self_cast->handle__selectionChanged = std::move(slot_handle);
 	return true;
 }
 
@@ -2356,12 +2390,13 @@ void QColumnView_virtualbase_selectionChanged(void* self, QItemSelection* select
 }
 
 bool QColumnView_override_virtual_updateEditorData(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QColumnView> slot_handle(slot);
 	MiqtVirtualQColumnView* self_cast = dynamic_cast<MiqtVirtualQColumnView*>( (QColumnView*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__updateEditorData = slot;
+	self_cast->handle__updateEditorData = std::move(slot_handle);
 	return true;
 }
 
@@ -2370,12 +2405,13 @@ void QColumnView_virtualbase_updateEditorData(void* self) {
 }
 
 bool QColumnView_override_virtual_updateEditorGeometries(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QColumnView> slot_handle(slot);
 	MiqtVirtualQColumnView* self_cast = dynamic_cast<MiqtVirtualQColumnView*>( (QColumnView*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__updateEditorGeometries = slot;
+	self_cast->handle__updateEditorGeometries = std::move(slot_handle);
 	return true;
 }
 
@@ -2384,12 +2420,13 @@ void QColumnView_virtualbase_updateEditorGeometries(void* self) {
 }
 
 bool QColumnView_override_virtual_updateGeometries(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QColumnView> slot_handle(slot);
 	MiqtVirtualQColumnView* self_cast = dynamic_cast<MiqtVirtualQColumnView*>( (QColumnView*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__updateGeometries = slot;
+	self_cast->handle__updateGeometries = std::move(slot_handle);
 	return true;
 }
 
@@ -2398,12 +2435,13 @@ void QColumnView_virtualbase_updateGeometries(void* self) {
 }
 
 bool QColumnView_override_virtual_verticalScrollbarAction(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QColumnView> slot_handle(slot);
 	MiqtVirtualQColumnView* self_cast = dynamic_cast<MiqtVirtualQColumnView*>( (QColumnView*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__verticalScrollbarAction = slot;
+	self_cast->handle__verticalScrollbarAction = std::move(slot_handle);
 	return true;
 }
 
@@ -2412,12 +2450,13 @@ void QColumnView_virtualbase_verticalScrollbarAction(void* self, int action) {
 }
 
 bool QColumnView_override_virtual_horizontalScrollbarAction(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QColumnView> slot_handle(slot);
 	MiqtVirtualQColumnView* self_cast = dynamic_cast<MiqtVirtualQColumnView*>( (QColumnView*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__horizontalScrollbarAction = slot;
+	self_cast->handle__horizontalScrollbarAction = std::move(slot_handle);
 	return true;
 }
 
@@ -2426,12 +2465,13 @@ void QColumnView_virtualbase_horizontalScrollbarAction(void* self, int action) {
 }
 
 bool QColumnView_override_virtual_verticalScrollbarValueChanged(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QColumnView> slot_handle(slot);
 	MiqtVirtualQColumnView* self_cast = dynamic_cast<MiqtVirtualQColumnView*>( (QColumnView*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__verticalScrollbarValueChanged = slot;
+	self_cast->handle__verticalScrollbarValueChanged = std::move(slot_handle);
 	return true;
 }
 
@@ -2440,12 +2480,13 @@ void QColumnView_virtualbase_verticalScrollbarValueChanged(void* self, int value
 }
 
 bool QColumnView_override_virtual_horizontalScrollbarValueChanged(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QColumnView> slot_handle(slot);
 	MiqtVirtualQColumnView* self_cast = dynamic_cast<MiqtVirtualQColumnView*>( (QColumnView*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__horizontalScrollbarValueChanged = slot;
+	self_cast->handle__horizontalScrollbarValueChanged = std::move(slot_handle);
 	return true;
 }
 
@@ -2454,12 +2495,13 @@ void QColumnView_virtualbase_horizontalScrollbarValueChanged(void* self, int val
 }
 
 bool QColumnView_override_virtual_closeEditor(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QColumnView> slot_handle(slot);
 	MiqtVirtualQColumnView* self_cast = dynamic_cast<MiqtVirtualQColumnView*>( (QColumnView*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__closeEditor = slot;
+	self_cast->handle__closeEditor = std::move(slot_handle);
 	return true;
 }
 
@@ -2468,12 +2510,13 @@ void QColumnView_virtualbase_closeEditor(void* self, QWidget* editor, int hint) 
 }
 
 bool QColumnView_override_virtual_commitData(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QColumnView> slot_handle(slot);
 	MiqtVirtualQColumnView* self_cast = dynamic_cast<MiqtVirtualQColumnView*>( (QColumnView*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__commitData = slot;
+	self_cast->handle__commitData = std::move(slot_handle);
 	return true;
 }
 
@@ -2482,12 +2525,13 @@ void QColumnView_virtualbase_commitData(void* self, QWidget* editor) {
 }
 
 bool QColumnView_override_virtual_editorDestroyed(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QColumnView> slot_handle(slot);
 	MiqtVirtualQColumnView* self_cast = dynamic_cast<MiqtVirtualQColumnView*>( (QColumnView*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__editorDestroyed = slot;
+	self_cast->handle__editorDestroyed = std::move(slot_handle);
 	return true;
 }
 
@@ -2496,12 +2540,13 @@ void QColumnView_virtualbase_editorDestroyed(void* self, QObject* editor) {
 }
 
 bool QColumnView_override_virtual_selectedIndexes(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QColumnView> slot_handle(slot);
 	MiqtVirtualQColumnView* self_cast = dynamic_cast<MiqtVirtualQColumnView*>( (QColumnView*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__selectedIndexes = slot;
+	self_cast->handle__selectedIndexes = std::move(slot_handle);
 	return true;
 }
 
@@ -2519,12 +2564,13 @@ struct miqt_array /* of QModelIndex* */  QColumnView_virtualbase_selectedIndexes
 }
 
 bool QColumnView_override_virtual_edit2(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QColumnView> slot_handle(slot);
 	MiqtVirtualQColumnView* self_cast = dynamic_cast<MiqtVirtualQColumnView*>( (QColumnView*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__edit2 = slot;
+	self_cast->handle__edit2 = std::move(slot_handle);
 	return true;
 }
 
@@ -2533,12 +2579,13 @@ bool QColumnView_virtualbase_edit2(void* self, QModelIndex* index, int trigger, 
 }
 
 bool QColumnView_override_virtual_selectionCommand(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QColumnView> slot_handle(slot);
 	MiqtVirtualQColumnView* self_cast = dynamic_cast<MiqtVirtualQColumnView*>( (QColumnView*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__selectionCommand = slot;
+	self_cast->handle__selectionCommand = std::move(slot_handle);
 	return true;
 }
 
@@ -2548,12 +2595,13 @@ int QColumnView_virtualbase_selectionCommand(const void* self, QModelIndex* inde
 }
 
 bool QColumnView_override_virtual_startDrag(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QColumnView> slot_handle(slot);
 	MiqtVirtualQColumnView* self_cast = dynamic_cast<MiqtVirtualQColumnView*>( (QColumnView*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__startDrag = slot;
+	self_cast->handle__startDrag = std::move(slot_handle);
 	return true;
 }
 
@@ -2562,12 +2610,13 @@ void QColumnView_virtualbase_startDrag(void* self, int supportedActions) {
 }
 
 bool QColumnView_override_virtual_initViewItemOption(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QColumnView> slot_handle(slot);
 	MiqtVirtualQColumnView* self_cast = dynamic_cast<MiqtVirtualQColumnView*>( (QColumnView*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__initViewItemOption = slot;
+	self_cast->handle__initViewItemOption = std::move(slot_handle);
 	return true;
 }
 
@@ -2576,12 +2625,13 @@ void QColumnView_virtualbase_initViewItemOption(const void* self, QStyleOptionVi
 }
 
 bool QColumnView_override_virtual_focusNextPrevChild(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QColumnView> slot_handle(slot);
 	MiqtVirtualQColumnView* self_cast = dynamic_cast<MiqtVirtualQColumnView*>( (QColumnView*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__focusNextPrevChild = slot;
+	self_cast->handle__focusNextPrevChild = std::move(slot_handle);
 	return true;
 }
 
@@ -2590,12 +2640,13 @@ bool QColumnView_virtualbase_focusNextPrevChild(void* self, bool next) {
 }
 
 bool QColumnView_override_virtual_event(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QColumnView> slot_handle(slot);
 	MiqtVirtualQColumnView* self_cast = dynamic_cast<MiqtVirtualQColumnView*>( (QColumnView*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__event = slot;
+	self_cast->handle__event = std::move(slot_handle);
 	return true;
 }
 
@@ -2604,12 +2655,13 @@ bool QColumnView_virtualbase_event(void* self, QEvent* event) {
 }
 
 bool QColumnView_override_virtual_viewportEvent(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QColumnView> slot_handle(slot);
 	MiqtVirtualQColumnView* self_cast = dynamic_cast<MiqtVirtualQColumnView*>( (QColumnView*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__viewportEvent = slot;
+	self_cast->handle__viewportEvent = std::move(slot_handle);
 	return true;
 }
 
@@ -2618,12 +2670,13 @@ bool QColumnView_virtualbase_viewportEvent(void* self, QEvent* event) {
 }
 
 bool QColumnView_override_virtual_mousePressEvent(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QColumnView> slot_handle(slot);
 	MiqtVirtualQColumnView* self_cast = dynamic_cast<MiqtVirtualQColumnView*>( (QColumnView*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__mousePressEvent = slot;
+	self_cast->handle__mousePressEvent = std::move(slot_handle);
 	return true;
 }
 
@@ -2632,12 +2685,13 @@ void QColumnView_virtualbase_mousePressEvent(void* self, QMouseEvent* event) {
 }
 
 bool QColumnView_override_virtual_mouseMoveEvent(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QColumnView> slot_handle(slot);
 	MiqtVirtualQColumnView* self_cast = dynamic_cast<MiqtVirtualQColumnView*>( (QColumnView*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__mouseMoveEvent = slot;
+	self_cast->handle__mouseMoveEvent = std::move(slot_handle);
 	return true;
 }
 
@@ -2646,12 +2700,13 @@ void QColumnView_virtualbase_mouseMoveEvent(void* self, QMouseEvent* event) {
 }
 
 bool QColumnView_override_virtual_mouseReleaseEvent(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QColumnView> slot_handle(slot);
 	MiqtVirtualQColumnView* self_cast = dynamic_cast<MiqtVirtualQColumnView*>( (QColumnView*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__mouseReleaseEvent = slot;
+	self_cast->handle__mouseReleaseEvent = std::move(slot_handle);
 	return true;
 }
 
@@ -2660,12 +2715,13 @@ void QColumnView_virtualbase_mouseReleaseEvent(void* self, QMouseEvent* event) {
 }
 
 bool QColumnView_override_virtual_mouseDoubleClickEvent(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QColumnView> slot_handle(slot);
 	MiqtVirtualQColumnView* self_cast = dynamic_cast<MiqtVirtualQColumnView*>( (QColumnView*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__mouseDoubleClickEvent = slot;
+	self_cast->handle__mouseDoubleClickEvent = std::move(slot_handle);
 	return true;
 }
 
@@ -2674,12 +2730,13 @@ void QColumnView_virtualbase_mouseDoubleClickEvent(void* self, QMouseEvent* even
 }
 
 bool QColumnView_override_virtual_dragEnterEvent(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QColumnView> slot_handle(slot);
 	MiqtVirtualQColumnView* self_cast = dynamic_cast<MiqtVirtualQColumnView*>( (QColumnView*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__dragEnterEvent = slot;
+	self_cast->handle__dragEnterEvent = std::move(slot_handle);
 	return true;
 }
 
@@ -2688,12 +2745,13 @@ void QColumnView_virtualbase_dragEnterEvent(void* self, QDragEnterEvent* event) 
 }
 
 bool QColumnView_override_virtual_dragMoveEvent(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QColumnView> slot_handle(slot);
 	MiqtVirtualQColumnView* self_cast = dynamic_cast<MiqtVirtualQColumnView*>( (QColumnView*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__dragMoveEvent = slot;
+	self_cast->handle__dragMoveEvent = std::move(slot_handle);
 	return true;
 }
 
@@ -2702,12 +2760,13 @@ void QColumnView_virtualbase_dragMoveEvent(void* self, QDragMoveEvent* event) {
 }
 
 bool QColumnView_override_virtual_dragLeaveEvent(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QColumnView> slot_handle(slot);
 	MiqtVirtualQColumnView* self_cast = dynamic_cast<MiqtVirtualQColumnView*>( (QColumnView*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__dragLeaveEvent = slot;
+	self_cast->handle__dragLeaveEvent = std::move(slot_handle);
 	return true;
 }
 
@@ -2716,12 +2775,13 @@ void QColumnView_virtualbase_dragLeaveEvent(void* self, QDragLeaveEvent* event) 
 }
 
 bool QColumnView_override_virtual_dropEvent(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QColumnView> slot_handle(slot);
 	MiqtVirtualQColumnView* self_cast = dynamic_cast<MiqtVirtualQColumnView*>( (QColumnView*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__dropEvent = slot;
+	self_cast->handle__dropEvent = std::move(slot_handle);
 	return true;
 }
 
@@ -2730,12 +2790,13 @@ void QColumnView_virtualbase_dropEvent(void* self, QDropEvent* event) {
 }
 
 bool QColumnView_override_virtual_focusInEvent(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QColumnView> slot_handle(slot);
 	MiqtVirtualQColumnView* self_cast = dynamic_cast<MiqtVirtualQColumnView*>( (QColumnView*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__focusInEvent = slot;
+	self_cast->handle__focusInEvent = std::move(slot_handle);
 	return true;
 }
 
@@ -2744,12 +2805,13 @@ void QColumnView_virtualbase_focusInEvent(void* self, QFocusEvent* event) {
 }
 
 bool QColumnView_override_virtual_focusOutEvent(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QColumnView> slot_handle(slot);
 	MiqtVirtualQColumnView* self_cast = dynamic_cast<MiqtVirtualQColumnView*>( (QColumnView*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__focusOutEvent = slot;
+	self_cast->handle__focusOutEvent = std::move(slot_handle);
 	return true;
 }
 
@@ -2758,12 +2820,13 @@ void QColumnView_virtualbase_focusOutEvent(void* self, QFocusEvent* event) {
 }
 
 bool QColumnView_override_virtual_keyPressEvent(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QColumnView> slot_handle(slot);
 	MiqtVirtualQColumnView* self_cast = dynamic_cast<MiqtVirtualQColumnView*>( (QColumnView*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__keyPressEvent = slot;
+	self_cast->handle__keyPressEvent = std::move(slot_handle);
 	return true;
 }
 
@@ -2772,12 +2835,13 @@ void QColumnView_virtualbase_keyPressEvent(void* self, QKeyEvent* event) {
 }
 
 bool QColumnView_override_virtual_timerEvent(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QColumnView> slot_handle(slot);
 	MiqtVirtualQColumnView* self_cast = dynamic_cast<MiqtVirtualQColumnView*>( (QColumnView*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__timerEvent = slot;
+	self_cast->handle__timerEvent = std::move(slot_handle);
 	return true;
 }
 
@@ -2786,12 +2850,13 @@ void QColumnView_virtualbase_timerEvent(void* self, QTimerEvent* event) {
 }
 
 bool QColumnView_override_virtual_inputMethodEvent(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QColumnView> slot_handle(slot);
 	MiqtVirtualQColumnView* self_cast = dynamic_cast<MiqtVirtualQColumnView*>( (QColumnView*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__inputMethodEvent = slot;
+	self_cast->handle__inputMethodEvent = std::move(slot_handle);
 	return true;
 }
 
@@ -2800,12 +2865,13 @@ void QColumnView_virtualbase_inputMethodEvent(void* self, QInputMethodEvent* eve
 }
 
 bool QColumnView_override_virtual_eventFilter(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QColumnView> slot_handle(slot);
 	MiqtVirtualQColumnView* self_cast = dynamic_cast<MiqtVirtualQColumnView*>( (QColumnView*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__eventFilter = slot;
+	self_cast->handle__eventFilter = std::move(slot_handle);
 	return true;
 }
 
@@ -2814,12 +2880,13 @@ bool QColumnView_virtualbase_eventFilter(void* self, QObject* object, QEvent* ev
 }
 
 bool QColumnView_override_virtual_viewportSizeHint(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QColumnView> slot_handle(slot);
 	MiqtVirtualQColumnView* self_cast = dynamic_cast<MiqtVirtualQColumnView*>( (QColumnView*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__viewportSizeHint = slot;
+	self_cast->handle__viewportSizeHint = std::move(slot_handle);
 	return true;
 }
 
@@ -2828,12 +2895,13 @@ QSize* QColumnView_virtualbase_viewportSizeHint(const void* self) {
 }
 
 bool QColumnView_override_virtual_minimumSizeHint(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QColumnView> slot_handle(slot);
 	MiqtVirtualQColumnView* self_cast = dynamic_cast<MiqtVirtualQColumnView*>( (QColumnView*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__minimumSizeHint = slot;
+	self_cast->handle__minimumSizeHint = std::move(slot_handle);
 	return true;
 }
 
@@ -2842,12 +2910,13 @@ QSize* QColumnView_virtualbase_minimumSizeHint(const void* self) {
 }
 
 bool QColumnView_override_virtual_setupViewport(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QColumnView> slot_handle(slot);
 	MiqtVirtualQColumnView* self_cast = dynamic_cast<MiqtVirtualQColumnView*>( (QColumnView*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__setupViewport = slot;
+	self_cast->handle__setupViewport = std::move(slot_handle);
 	return true;
 }
 
@@ -2856,12 +2925,13 @@ void QColumnView_virtualbase_setupViewport(void* self, QWidget* viewport) {
 }
 
 bool QColumnView_override_virtual_paintEvent(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QColumnView> slot_handle(slot);
 	MiqtVirtualQColumnView* self_cast = dynamic_cast<MiqtVirtualQColumnView*>( (QColumnView*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__paintEvent = slot;
+	self_cast->handle__paintEvent = std::move(slot_handle);
 	return true;
 }
 
@@ -2870,12 +2940,13 @@ void QColumnView_virtualbase_paintEvent(void* self, QPaintEvent* param1) {
 }
 
 bool QColumnView_override_virtual_wheelEvent(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QColumnView> slot_handle(slot);
 	MiqtVirtualQColumnView* self_cast = dynamic_cast<MiqtVirtualQColumnView*>( (QColumnView*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__wheelEvent = slot;
+	self_cast->handle__wheelEvent = std::move(slot_handle);
 	return true;
 }
 
@@ -2884,12 +2955,13 @@ void QColumnView_virtualbase_wheelEvent(void* self, QWheelEvent* param1) {
 }
 
 bool QColumnView_override_virtual_contextMenuEvent(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QColumnView> slot_handle(slot);
 	MiqtVirtualQColumnView* self_cast = dynamic_cast<MiqtVirtualQColumnView*>( (QColumnView*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__contextMenuEvent = slot;
+	self_cast->handle__contextMenuEvent = std::move(slot_handle);
 	return true;
 }
 
@@ -2898,12 +2970,13 @@ void QColumnView_virtualbase_contextMenuEvent(void* self, QContextMenuEvent* par
 }
 
 bool QColumnView_override_virtual_changeEvent(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QColumnView> slot_handle(slot);
 	MiqtVirtualQColumnView* self_cast = dynamic_cast<MiqtVirtualQColumnView*>( (QColumnView*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__changeEvent = slot;
+	self_cast->handle__changeEvent = std::move(slot_handle);
 	return true;
 }
 
@@ -2912,12 +2985,13 @@ void QColumnView_virtualbase_changeEvent(void* self, QEvent* param1) {
 }
 
 bool QColumnView_override_virtual_initStyleOption(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QColumnView> slot_handle(slot);
 	MiqtVirtualQColumnView* self_cast = dynamic_cast<MiqtVirtualQColumnView*>( (QColumnView*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__initStyleOption = slot;
+	self_cast->handle__initStyleOption = std::move(slot_handle);
 	return true;
 }
 
@@ -2926,12 +3000,13 @@ void QColumnView_virtualbase_initStyleOption(const void* self, QStyleOptionFrame
 }
 
 bool QColumnView_override_virtual_devType(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QColumnView> slot_handle(slot);
 	MiqtVirtualQColumnView* self_cast = dynamic_cast<MiqtVirtualQColumnView*>( (QColumnView*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__devType = slot;
+	self_cast->handle__devType = std::move(slot_handle);
 	return true;
 }
 
@@ -2940,12 +3015,13 @@ int QColumnView_virtualbase_devType(const void* self) {
 }
 
 bool QColumnView_override_virtual_setVisible(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QColumnView> slot_handle(slot);
 	MiqtVirtualQColumnView* self_cast = dynamic_cast<MiqtVirtualQColumnView*>( (QColumnView*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__setVisible = slot;
+	self_cast->handle__setVisible = std::move(slot_handle);
 	return true;
 }
 
@@ -2954,12 +3030,13 @@ void QColumnView_virtualbase_setVisible(void* self, bool visible) {
 }
 
 bool QColumnView_override_virtual_heightForWidth(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QColumnView> slot_handle(slot);
 	MiqtVirtualQColumnView* self_cast = dynamic_cast<MiqtVirtualQColumnView*>( (QColumnView*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__heightForWidth = slot;
+	self_cast->handle__heightForWidth = std::move(slot_handle);
 	return true;
 }
 
@@ -2968,12 +3045,13 @@ int QColumnView_virtualbase_heightForWidth(const void* self, int param1) {
 }
 
 bool QColumnView_override_virtual_hasHeightForWidth(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QColumnView> slot_handle(slot);
 	MiqtVirtualQColumnView* self_cast = dynamic_cast<MiqtVirtualQColumnView*>( (QColumnView*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__hasHeightForWidth = slot;
+	self_cast->handle__hasHeightForWidth = std::move(slot_handle);
 	return true;
 }
 
@@ -2982,12 +3060,13 @@ bool QColumnView_virtualbase_hasHeightForWidth(const void* self) {
 }
 
 bool QColumnView_override_virtual_paintEngine(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QColumnView> slot_handle(slot);
 	MiqtVirtualQColumnView* self_cast = dynamic_cast<MiqtVirtualQColumnView*>( (QColumnView*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__paintEngine = slot;
+	self_cast->handle__paintEngine = std::move(slot_handle);
 	return true;
 }
 
@@ -2996,12 +3075,13 @@ QPaintEngine* QColumnView_virtualbase_paintEngine(const void* self) {
 }
 
 bool QColumnView_override_virtual_keyReleaseEvent(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QColumnView> slot_handle(slot);
 	MiqtVirtualQColumnView* self_cast = dynamic_cast<MiqtVirtualQColumnView*>( (QColumnView*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__keyReleaseEvent = slot;
+	self_cast->handle__keyReleaseEvent = std::move(slot_handle);
 	return true;
 }
 
@@ -3010,12 +3090,13 @@ void QColumnView_virtualbase_keyReleaseEvent(void* self, QKeyEvent* event) {
 }
 
 bool QColumnView_override_virtual_enterEvent(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QColumnView> slot_handle(slot);
 	MiqtVirtualQColumnView* self_cast = dynamic_cast<MiqtVirtualQColumnView*>( (QColumnView*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__enterEvent = slot;
+	self_cast->handle__enterEvent = std::move(slot_handle);
 	return true;
 }
 
@@ -3024,12 +3105,13 @@ void QColumnView_virtualbase_enterEvent(void* self, QEnterEvent* event) {
 }
 
 bool QColumnView_override_virtual_leaveEvent(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QColumnView> slot_handle(slot);
 	MiqtVirtualQColumnView* self_cast = dynamic_cast<MiqtVirtualQColumnView*>( (QColumnView*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__leaveEvent = slot;
+	self_cast->handle__leaveEvent = std::move(slot_handle);
 	return true;
 }
 
@@ -3038,12 +3120,13 @@ void QColumnView_virtualbase_leaveEvent(void* self, QEvent* event) {
 }
 
 bool QColumnView_override_virtual_moveEvent(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QColumnView> slot_handle(slot);
 	MiqtVirtualQColumnView* self_cast = dynamic_cast<MiqtVirtualQColumnView*>( (QColumnView*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__moveEvent = slot;
+	self_cast->handle__moveEvent = std::move(slot_handle);
 	return true;
 }
 
@@ -3052,12 +3135,13 @@ void QColumnView_virtualbase_moveEvent(void* self, QMoveEvent* event) {
 }
 
 bool QColumnView_override_virtual_closeEvent(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QColumnView> slot_handle(slot);
 	MiqtVirtualQColumnView* self_cast = dynamic_cast<MiqtVirtualQColumnView*>( (QColumnView*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__closeEvent = slot;
+	self_cast->handle__closeEvent = std::move(slot_handle);
 	return true;
 }
 
@@ -3066,12 +3150,13 @@ void QColumnView_virtualbase_closeEvent(void* self, QCloseEvent* event) {
 }
 
 bool QColumnView_override_virtual_tabletEvent(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QColumnView> slot_handle(slot);
 	MiqtVirtualQColumnView* self_cast = dynamic_cast<MiqtVirtualQColumnView*>( (QColumnView*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__tabletEvent = slot;
+	self_cast->handle__tabletEvent = std::move(slot_handle);
 	return true;
 }
 
@@ -3080,12 +3165,13 @@ void QColumnView_virtualbase_tabletEvent(void* self, QTabletEvent* event) {
 }
 
 bool QColumnView_override_virtual_actionEvent(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QColumnView> slot_handle(slot);
 	MiqtVirtualQColumnView* self_cast = dynamic_cast<MiqtVirtualQColumnView*>( (QColumnView*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__actionEvent = slot;
+	self_cast->handle__actionEvent = std::move(slot_handle);
 	return true;
 }
 
@@ -3094,12 +3180,13 @@ void QColumnView_virtualbase_actionEvent(void* self, QActionEvent* event) {
 }
 
 bool QColumnView_override_virtual_showEvent(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QColumnView> slot_handle(slot);
 	MiqtVirtualQColumnView* self_cast = dynamic_cast<MiqtVirtualQColumnView*>( (QColumnView*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__showEvent = slot;
+	self_cast->handle__showEvent = std::move(slot_handle);
 	return true;
 }
 
@@ -3108,12 +3195,13 @@ void QColumnView_virtualbase_showEvent(void* self, QShowEvent* event) {
 }
 
 bool QColumnView_override_virtual_hideEvent(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QColumnView> slot_handle(slot);
 	MiqtVirtualQColumnView* self_cast = dynamic_cast<MiqtVirtualQColumnView*>( (QColumnView*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__hideEvent = slot;
+	self_cast->handle__hideEvent = std::move(slot_handle);
 	return true;
 }
 
@@ -3122,12 +3210,13 @@ void QColumnView_virtualbase_hideEvent(void* self, QHideEvent* event) {
 }
 
 bool QColumnView_override_virtual_nativeEvent(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QColumnView> slot_handle(slot);
 	MiqtVirtualQColumnView* self_cast = dynamic_cast<MiqtVirtualQColumnView*>( (QColumnView*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__nativeEvent = slot;
+	self_cast->handle__nativeEvent = std::move(slot_handle);
 	return true;
 }
 
@@ -3137,12 +3226,13 @@ bool QColumnView_virtualbase_nativeEvent(void* self, struct miqt_string eventTyp
 }
 
 bool QColumnView_override_virtual_metric(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QColumnView> slot_handle(slot);
 	MiqtVirtualQColumnView* self_cast = dynamic_cast<MiqtVirtualQColumnView*>( (QColumnView*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__metric = slot;
+	self_cast->handle__metric = std::move(slot_handle);
 	return true;
 }
 
@@ -3151,12 +3241,13 @@ int QColumnView_virtualbase_metric(const void* self, int param1) {
 }
 
 bool QColumnView_override_virtual_initPainter(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QColumnView> slot_handle(slot);
 	MiqtVirtualQColumnView* self_cast = dynamic_cast<MiqtVirtualQColumnView*>( (QColumnView*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__initPainter = slot;
+	self_cast->handle__initPainter = std::move(slot_handle);
 	return true;
 }
 
@@ -3165,12 +3256,13 @@ void QColumnView_virtualbase_initPainter(const void* self, QPainter* painter) {
 }
 
 bool QColumnView_override_virtual_redirected(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QColumnView> slot_handle(slot);
 	MiqtVirtualQColumnView* self_cast = dynamic_cast<MiqtVirtualQColumnView*>( (QColumnView*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__redirected = slot;
+	self_cast->handle__redirected = std::move(slot_handle);
 	return true;
 }
 
@@ -3179,12 +3271,13 @@ QPaintDevice* QColumnView_virtualbase_redirected(const void* self, QPoint* offse
 }
 
 bool QColumnView_override_virtual_sharedPainter(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QColumnView> slot_handle(slot);
 	MiqtVirtualQColumnView* self_cast = dynamic_cast<MiqtVirtualQColumnView*>( (QColumnView*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__sharedPainter = slot;
+	self_cast->handle__sharedPainter = std::move(slot_handle);
 	return true;
 }
 
@@ -3193,12 +3286,13 @@ QPainter* QColumnView_virtualbase_sharedPainter(const void* self) {
 }
 
 bool QColumnView_override_virtual_childEvent(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QColumnView> slot_handle(slot);
 	MiqtVirtualQColumnView* self_cast = dynamic_cast<MiqtVirtualQColumnView*>( (QColumnView*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__childEvent = slot;
+	self_cast->handle__childEvent = std::move(slot_handle);
 	return true;
 }
 
@@ -3207,12 +3301,13 @@ void QColumnView_virtualbase_childEvent(void* self, QChildEvent* event) {
 }
 
 bool QColumnView_override_virtual_customEvent(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QColumnView> slot_handle(slot);
 	MiqtVirtualQColumnView* self_cast = dynamic_cast<MiqtVirtualQColumnView*>( (QColumnView*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__customEvent = slot;
+	self_cast->handle__customEvent = std::move(slot_handle);
 	return true;
 }
 
@@ -3221,12 +3316,13 @@ void QColumnView_virtualbase_customEvent(void* self, QEvent* event) {
 }
 
 bool QColumnView_override_virtual_connectNotify(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QColumnView> slot_handle(slot);
 	MiqtVirtualQColumnView* self_cast = dynamic_cast<MiqtVirtualQColumnView*>( (QColumnView*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__connectNotify = slot;
+	self_cast->handle__connectNotify = std::move(slot_handle);
 	return true;
 }
 
@@ -3235,12 +3331,13 @@ void QColumnView_virtualbase_connectNotify(void* self, QMetaMethod* signal) {
 }
 
 bool QColumnView_override_virtual_disconnectNotify(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QColumnView> slot_handle(slot);
 	MiqtVirtualQColumnView* self_cast = dynamic_cast<MiqtVirtualQColumnView*>( (QColumnView*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__disconnectNotify = slot;
+	self_cast->handle__disconnectNotify = std::move(slot_handle);
 	return true;
 }
 

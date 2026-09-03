@@ -1,3 +1,5 @@
+#include <memory>
+#include <utility>
 #include <QChildEvent>
 #include <QEvent>
 #include <QList>
@@ -22,6 +24,7 @@
 extern "C" {
 #endif
 
+void miqt_exec_callback_handle_release_QSslServer(intptr_t);
 void miqt_exec_callback_QSslServer_sslErrors(intptr_t, QSslSocket*, struct miqt_array /* of QSslError* */ );
 void miqt_exec_callback_QSslServer_peerVerifyError(intptr_t, QSslSocket*, QSslError*);
 void miqt_exec_callback_QSslServer_errorOccurred(intptr_t, QSslSocket*, int);
@@ -53,143 +56,143 @@ public:
 	virtual ~MiqtVirtualQSslServer() override = default;
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__incomingConnection = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QSslServer> handle__incomingConnection;
 
 	// Subclass to allow providing a Go implementation
 	virtual void incomingConnection(qintptr socket) override {
-		if (handle__incomingConnection == 0) {
+		if (!handle__incomingConnection) {
 			QSslServer::incomingConnection(socket);
 			return;
 		}
 
 		qintptr socket_ret = socket;
 		intptr_t sigval1 = (intptr_t)(socket_ret);
-		miqt_exec_callback_QSslServer_incomingConnection(this, handle__incomingConnection, sigval1);
+		miqt_exec_callback_QSslServer_incomingConnection(this, handle__incomingConnection.value(), sigval1);
 
 	}
 
 	friend void QSslServer_virtualbase_incomingConnection(void* self, intptr_t socket);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__hasPendingConnections = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QSslServer> handle__hasPendingConnections;
 
 	// Subclass to allow providing a Go implementation
 	virtual bool hasPendingConnections() const override {
-		if (handle__hasPendingConnections == 0) {
+		if (!handle__hasPendingConnections) {
 			return QSslServer::hasPendingConnections();
 		}
 
-		bool callback_return_value = miqt_exec_callback_QSslServer_hasPendingConnections(this, handle__hasPendingConnections);
+		bool callback_return_value = miqt_exec_callback_QSslServer_hasPendingConnections(this, handle__hasPendingConnections.value());
 		return callback_return_value;
 	}
 
 	friend bool QSslServer_virtualbase_hasPendingConnections(const void* self);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__nextPendingConnection = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QSslServer> handle__nextPendingConnection;
 
 	// Subclass to allow providing a Go implementation
 	virtual QTcpSocket* nextPendingConnection() override {
-		if (handle__nextPendingConnection == 0) {
+		if (!handle__nextPendingConnection) {
 			return QSslServer::nextPendingConnection();
 		}
 
-		QTcpSocket* callback_return_value = miqt_exec_callback_QSslServer_nextPendingConnection(this, handle__nextPendingConnection);
+		QTcpSocket* callback_return_value = miqt_exec_callback_QSslServer_nextPendingConnection(this, handle__nextPendingConnection.value());
 		return callback_return_value;
 	}
 
 	friend QTcpSocket* QSslServer_virtualbase_nextPendingConnection(void* self);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__event = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QSslServer> handle__event;
 
 	// Subclass to allow providing a Go implementation
 	virtual bool event(QEvent* event) override {
-		if (handle__event == 0) {
+		if (!handle__event) {
 			return QSslServer::event(event);
 		}
 
 		QEvent* sigval1 = event;
-		bool callback_return_value = miqt_exec_callback_QSslServer_event(this, handle__event, sigval1);
+		bool callback_return_value = miqt_exec_callback_QSslServer_event(this, handle__event.value(), sigval1);
 		return callback_return_value;
 	}
 
 	friend bool QSslServer_virtualbase_event(void* self, QEvent* event);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__eventFilter = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QSslServer> handle__eventFilter;
 
 	// Subclass to allow providing a Go implementation
 	virtual bool eventFilter(QObject* watched, QEvent* event) override {
-		if (handle__eventFilter == 0) {
+		if (!handle__eventFilter) {
 			return QSslServer::eventFilter(watched, event);
 		}
 
 		QObject* sigval1 = watched;
 		QEvent* sigval2 = event;
-		bool callback_return_value = miqt_exec_callback_QSslServer_eventFilter(this, handle__eventFilter, sigval1, sigval2);
+		bool callback_return_value = miqt_exec_callback_QSslServer_eventFilter(this, handle__eventFilter.value(), sigval1, sigval2);
 		return callback_return_value;
 	}
 
 	friend bool QSslServer_virtualbase_eventFilter(void* self, QObject* watched, QEvent* event);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__timerEvent = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QSslServer> handle__timerEvent;
 
 	// Subclass to allow providing a Go implementation
 	virtual void timerEvent(QTimerEvent* event) override {
-		if (handle__timerEvent == 0) {
+		if (!handle__timerEvent) {
 			QSslServer::timerEvent(event);
 			return;
 		}
 
 		QTimerEvent* sigval1 = event;
-		miqt_exec_callback_QSslServer_timerEvent(this, handle__timerEvent, sigval1);
+		miqt_exec_callback_QSslServer_timerEvent(this, handle__timerEvent.value(), sigval1);
 
 	}
 
 	friend void QSslServer_virtualbase_timerEvent(void* self, QTimerEvent* event);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__childEvent = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QSslServer> handle__childEvent;
 
 	// Subclass to allow providing a Go implementation
 	virtual void childEvent(QChildEvent* event) override {
-		if (handle__childEvent == 0) {
+		if (!handle__childEvent) {
 			QSslServer::childEvent(event);
 			return;
 		}
 
 		QChildEvent* sigval1 = event;
-		miqt_exec_callback_QSslServer_childEvent(this, handle__childEvent, sigval1);
+		miqt_exec_callback_QSslServer_childEvent(this, handle__childEvent.value(), sigval1);
 
 	}
 
 	friend void QSslServer_virtualbase_childEvent(void* self, QChildEvent* event);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__customEvent = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QSslServer> handle__customEvent;
 
 	// Subclass to allow providing a Go implementation
 	virtual void customEvent(QEvent* event) override {
-		if (handle__customEvent == 0) {
+		if (!handle__customEvent) {
 			QSslServer::customEvent(event);
 			return;
 		}
 
 		QEvent* sigval1 = event;
-		miqt_exec_callback_QSslServer_customEvent(this, handle__customEvent, sigval1);
+		miqt_exec_callback_QSslServer_customEvent(this, handle__customEvent.value(), sigval1);
 
 	}
 
 	friend void QSslServer_virtualbase_customEvent(void* self, QEvent* event);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__connectNotify = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QSslServer> handle__connectNotify;
 
 	// Subclass to allow providing a Go implementation
 	virtual void connectNotify(const QMetaMethod& signal) override {
-		if (handle__connectNotify == 0) {
+		if (!handle__connectNotify) {
 			QSslServer::connectNotify(signal);
 			return;
 		}
@@ -197,18 +200,18 @@ public:
 		const QMetaMethod& signal_ret = signal;
 		// Cast returned reference into pointer
 		QMetaMethod* sigval1 = const_cast<QMetaMethod*>(&signal_ret);
-		miqt_exec_callback_QSslServer_connectNotify(this, handle__connectNotify, sigval1);
+		miqt_exec_callback_QSslServer_connectNotify(this, handle__connectNotify.value(), sigval1);
 
 	}
 
 	friend void QSslServer_virtualbase_connectNotify(void* self, QMetaMethod* signal);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__disconnectNotify = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QSslServer> handle__disconnectNotify;
 
 	// Subclass to allow providing a Go implementation
 	virtual void disconnectNotify(const QMetaMethod& signal) override {
-		if (handle__disconnectNotify == 0) {
+		if (!handle__disconnectNotify) {
 			QSslServer::disconnectNotify(signal);
 			return;
 		}
@@ -216,7 +219,7 @@ public:
 		const QMetaMethod& signal_ret = signal;
 		// Cast returned reference into pointer
 		QMetaMethod* sigval1 = const_cast<QMetaMethod*>(&signal_ret);
-		miqt_exec_callback_QSslServer_disconnectNotify(this, handle__disconnectNotify, sigval1);
+		miqt_exec_callback_QSslServer_disconnectNotify(this, handle__disconnectNotify.value(), sigval1);
 
 	}
 
@@ -287,8 +290,10 @@ void QSslServer_sslErrors(QSslServer* self, QSslSocket* socket, struct miqt_arra
 	self->sslErrors(socket, errors_QList);
 }
 
-void QSslServer_connect_sslErrors(QSslServer* self, intptr_t slot) {
-	QSslServer::connect(self, static_cast<void (QSslServer::*)(QSslSocket*, const QList<QSslError>&)>(&QSslServer::sslErrors), self, [=](QSslSocket* socket, const QList<QSslError>& errors) {
+void* QSslServer_connect_sslErrors(QSslServer* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QSslServer>>(slot);
+	return new QMetaObject::Connection(QSslServer::connect(self, static_cast<void (QSslServer::*)(QSslSocket*, const QList<QSslError>&)>(&QSslServer::sslErrors), self, [slot_handle](QSslSocket* socket, const QList<QSslError>& errors) {
+		intptr_t slot = slot_handle->value();
 		QSslSocket* sigval1 = socket;
 		const QList<QSslError>& errors_ret = errors;
 		// Convert QList<> from C++ memory to manually-managed C memory
@@ -301,46 +306,52 @@ void QSslServer_connect_sslErrors(QSslServer* self, intptr_t slot) {
 		errors_out.data = static_cast<void*>(errors_arr);
 		struct miqt_array /* of QSslError* */  sigval2 = errors_out;
 		miqt_exec_callback_QSslServer_sslErrors(slot, sigval1, sigval2);
-	});
+	}));
 }
 
 void QSslServer_peerVerifyError(QSslServer* self, QSslSocket* socket, QSslError* error) {
 	self->peerVerifyError(socket, *error);
 }
 
-void QSslServer_connect_peerVerifyError(QSslServer* self, intptr_t slot) {
-	QSslServer::connect(self, static_cast<void (QSslServer::*)(QSslSocket*, const QSslError&)>(&QSslServer::peerVerifyError), self, [=](QSslSocket* socket, const QSslError& error) {
+void* QSslServer_connect_peerVerifyError(QSslServer* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QSslServer>>(slot);
+	return new QMetaObject::Connection(QSslServer::connect(self, static_cast<void (QSslServer::*)(QSslSocket*, const QSslError&)>(&QSslServer::peerVerifyError), self, [slot_handle](QSslSocket* socket, const QSslError& error) {
+		intptr_t slot = slot_handle->value();
 		QSslSocket* sigval1 = socket;
 		const QSslError& error_ret = error;
 		// Cast returned reference into pointer
 		QSslError* sigval2 = const_cast<QSslError*>(&error_ret);
 		miqt_exec_callback_QSslServer_peerVerifyError(slot, sigval1, sigval2);
-	});
+	}));
 }
 
 void QSslServer_errorOccurred(QSslServer* self, QSslSocket* socket, int error) {
 	self->errorOccurred(socket, static_cast<QAbstractSocket::SocketError>(error));
 }
 
-void QSslServer_connect_errorOccurred(QSslServer* self, intptr_t slot) {
-	QSslServer::connect(self, static_cast<void (QSslServer::*)(QSslSocket*, QAbstractSocket::SocketError)>(&QSslServer::errorOccurred), self, [=](QSslSocket* socket, QAbstractSocket::SocketError error) {
+void* QSslServer_connect_errorOccurred(QSslServer* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QSslServer>>(slot);
+	return new QMetaObject::Connection(QSslServer::connect(self, static_cast<void (QSslServer::*)(QSslSocket*, QAbstractSocket::SocketError)>(&QSslServer::errorOccurred), self, [slot_handle](QSslSocket* socket, QAbstractSocket::SocketError error) {
+		intptr_t slot = slot_handle->value();
 		QSslSocket* sigval1 = socket;
 		QAbstractSocket::SocketError error_ret = error;
 		int sigval2 = static_cast<int>(error_ret);
 		miqt_exec_callback_QSslServer_errorOccurred(slot, sigval1, sigval2);
-	});
+	}));
 }
 
 void QSslServer_preSharedKeyAuthenticationRequired(QSslServer* self, QSslSocket* socket, QSslPreSharedKeyAuthenticator* authenticator) {
 	self->preSharedKeyAuthenticationRequired(socket, authenticator);
 }
 
-void QSslServer_connect_preSharedKeyAuthenticationRequired(QSslServer* self, intptr_t slot) {
-	QSslServer::connect(self, static_cast<void (QSslServer::*)(QSslSocket*, QSslPreSharedKeyAuthenticator*)>(&QSslServer::preSharedKeyAuthenticationRequired), self, [=](QSslSocket* socket, QSslPreSharedKeyAuthenticator* authenticator) {
+void* QSslServer_connect_preSharedKeyAuthenticationRequired(QSslServer* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QSslServer>>(slot);
+	return new QMetaObject::Connection(QSslServer::connect(self, static_cast<void (QSslServer::*)(QSslSocket*, QSslPreSharedKeyAuthenticator*)>(&QSslServer::preSharedKeyAuthenticationRequired), self, [slot_handle](QSslSocket* socket, QSslPreSharedKeyAuthenticator* authenticator) {
+		intptr_t slot = slot_handle->value();
 		QSslSocket* sigval1 = socket;
 		QSslPreSharedKeyAuthenticator* sigval2 = authenticator;
 		miqt_exec_callback_QSslServer_preSharedKeyAuthenticationRequired(slot, sigval1, sigval2);
-	});
+	}));
 }
 
 void QSslServer_alertSent(QSslServer* self, QSslSocket* socket, int level, int type, struct miqt_string description) {
@@ -348,8 +359,10 @@ void QSslServer_alertSent(QSslServer* self, QSslSocket* socket, int level, int t
 	self->alertSent(socket, static_cast<QSsl::AlertLevel>(level), static_cast<QSsl::AlertType>(type), description_QString);
 }
 
-void QSslServer_connect_alertSent(QSslServer* self, intptr_t slot) {
-	QSslServer::connect(self, static_cast<void (QSslServer::*)(QSslSocket*, QSsl::AlertLevel, QSsl::AlertType, const QString&)>(&QSslServer::alertSent), self, [=](QSslSocket* socket, QSsl::AlertLevel level, QSsl::AlertType type, const QString& description) {
+void* QSslServer_connect_alertSent(QSslServer* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QSslServer>>(slot);
+	return new QMetaObject::Connection(QSslServer::connect(self, static_cast<void (QSslServer::*)(QSslSocket*, QSsl::AlertLevel, QSsl::AlertType, const QString&)>(&QSslServer::alertSent), self, [slot_handle](QSslSocket* socket, QSsl::AlertLevel level, QSsl::AlertType type, const QString& description) {
+		intptr_t slot = slot_handle->value();
 		QSslSocket* sigval1 = socket;
 		QSsl::AlertLevel level_ret = level;
 		int sigval2 = static_cast<int>(level_ret);
@@ -364,7 +377,7 @@ void QSslServer_connect_alertSent(QSslServer* self, intptr_t slot) {
 		memcpy(description_ms.data, description_b.data(), description_ms.len);
 		struct miqt_string sigval4 = description_ms;
 		miqt_exec_callback_QSslServer_alertSent(slot, sigval1, sigval2, sigval3, sigval4);
-	});
+	}));
 }
 
 void QSslServer_alertReceived(QSslServer* self, QSslSocket* socket, int level, int type, struct miqt_string description) {
@@ -372,8 +385,10 @@ void QSslServer_alertReceived(QSslServer* self, QSslSocket* socket, int level, i
 	self->alertReceived(socket, static_cast<QSsl::AlertLevel>(level), static_cast<QSsl::AlertType>(type), description_QString);
 }
 
-void QSslServer_connect_alertReceived(QSslServer* self, intptr_t slot) {
-	QSslServer::connect(self, static_cast<void (QSslServer::*)(QSslSocket*, QSsl::AlertLevel, QSsl::AlertType, const QString&)>(&QSslServer::alertReceived), self, [=](QSslSocket* socket, QSsl::AlertLevel level, QSsl::AlertType type, const QString& description) {
+void* QSslServer_connect_alertReceived(QSslServer* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QSslServer>>(slot);
+	return new QMetaObject::Connection(QSslServer::connect(self, static_cast<void (QSslServer::*)(QSslSocket*, QSsl::AlertLevel, QSsl::AlertType, const QString&)>(&QSslServer::alertReceived), self, [slot_handle](QSslSocket* socket, QSsl::AlertLevel level, QSsl::AlertType type, const QString& description) {
+		intptr_t slot = slot_handle->value();
 		QSslSocket* sigval1 = socket;
 		QSsl::AlertLevel level_ret = level;
 		int sigval2 = static_cast<int>(level_ret);
@@ -388,32 +403,36 @@ void QSslServer_connect_alertReceived(QSslServer* self, intptr_t slot) {
 		memcpy(description_ms.data, description_b.data(), description_ms.len);
 		struct miqt_string sigval4 = description_ms;
 		miqt_exec_callback_QSslServer_alertReceived(slot, sigval1, sigval2, sigval3, sigval4);
-	});
+	}));
 }
 
 void QSslServer_handshakeInterruptedOnError(QSslServer* self, QSslSocket* socket, QSslError* error) {
 	self->handshakeInterruptedOnError(socket, *error);
 }
 
-void QSslServer_connect_handshakeInterruptedOnError(QSslServer* self, intptr_t slot) {
-	QSslServer::connect(self, static_cast<void (QSslServer::*)(QSslSocket*, const QSslError&)>(&QSslServer::handshakeInterruptedOnError), self, [=](QSslSocket* socket, const QSslError& error) {
+void* QSslServer_connect_handshakeInterruptedOnError(QSslServer* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QSslServer>>(slot);
+	return new QMetaObject::Connection(QSslServer::connect(self, static_cast<void (QSslServer::*)(QSslSocket*, const QSslError&)>(&QSslServer::handshakeInterruptedOnError), self, [slot_handle](QSslSocket* socket, const QSslError& error) {
+		intptr_t slot = slot_handle->value();
 		QSslSocket* sigval1 = socket;
 		const QSslError& error_ret = error;
 		// Cast returned reference into pointer
 		QSslError* sigval2 = const_cast<QSslError*>(&error_ret);
 		miqt_exec_callback_QSslServer_handshakeInterruptedOnError(slot, sigval1, sigval2);
-	});
+	}));
 }
 
 void QSslServer_startedEncryptionHandshake(QSslServer* self, QSslSocket* socket) {
 	self->startedEncryptionHandshake(socket);
 }
 
-void QSslServer_connect_startedEncryptionHandshake(QSslServer* self, intptr_t slot) {
-	QSslServer::connect(self, static_cast<void (QSslServer::*)(QSslSocket*)>(&QSslServer::startedEncryptionHandshake), self, [=](QSslSocket* socket) {
+void* QSslServer_connect_startedEncryptionHandshake(QSslServer* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QSslServer>>(slot);
+	return new QMetaObject::Connection(QSslServer::connect(self, static_cast<void (QSslServer::*)(QSslSocket*)>(&QSslServer::startedEncryptionHandshake), self, [slot_handle](QSslSocket* socket) {
+		intptr_t slot = slot_handle->value();
 		QSslSocket* sigval1 = socket;
 		miqt_exec_callback_QSslServer_startedEncryptionHandshake(slot, sigval1);
-	});
+	}));
 }
 
 struct miqt_string QSslServer_tr2(const char* s, const char* c) {
@@ -439,12 +458,13 @@ struct miqt_string QSslServer_tr3(const char* s, const char* c, int n) {
 }
 
 bool QSslServer_override_virtual_incomingConnection(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QSslServer> slot_handle(slot);
 	MiqtVirtualQSslServer* self_cast = dynamic_cast<MiqtVirtualQSslServer*>( (QSslServer*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__incomingConnection = slot;
+	self_cast->handle__incomingConnection = std::move(slot_handle);
 	return true;
 }
 
@@ -453,12 +473,13 @@ void QSslServer_virtualbase_incomingConnection(void* self, intptr_t socket) {
 }
 
 bool QSslServer_override_virtual_hasPendingConnections(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QSslServer> slot_handle(slot);
 	MiqtVirtualQSslServer* self_cast = dynamic_cast<MiqtVirtualQSslServer*>( (QSslServer*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__hasPendingConnections = slot;
+	self_cast->handle__hasPendingConnections = std::move(slot_handle);
 	return true;
 }
 
@@ -467,12 +488,13 @@ bool QSslServer_virtualbase_hasPendingConnections(const void* self) {
 }
 
 bool QSslServer_override_virtual_nextPendingConnection(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QSslServer> slot_handle(slot);
 	MiqtVirtualQSslServer* self_cast = dynamic_cast<MiqtVirtualQSslServer*>( (QSslServer*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__nextPendingConnection = slot;
+	self_cast->handle__nextPendingConnection = std::move(slot_handle);
 	return true;
 }
 
@@ -481,12 +503,13 @@ QTcpSocket* QSslServer_virtualbase_nextPendingConnection(void* self) {
 }
 
 bool QSslServer_override_virtual_event(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QSslServer> slot_handle(slot);
 	MiqtVirtualQSslServer* self_cast = dynamic_cast<MiqtVirtualQSslServer*>( (QSslServer*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__event = slot;
+	self_cast->handle__event = std::move(slot_handle);
 	return true;
 }
 
@@ -495,12 +518,13 @@ bool QSslServer_virtualbase_event(void* self, QEvent* event) {
 }
 
 bool QSslServer_override_virtual_eventFilter(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QSslServer> slot_handle(slot);
 	MiqtVirtualQSslServer* self_cast = dynamic_cast<MiqtVirtualQSslServer*>( (QSslServer*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__eventFilter = slot;
+	self_cast->handle__eventFilter = std::move(slot_handle);
 	return true;
 }
 
@@ -509,12 +533,13 @@ bool QSslServer_virtualbase_eventFilter(void* self, QObject* watched, QEvent* ev
 }
 
 bool QSslServer_override_virtual_timerEvent(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QSslServer> slot_handle(slot);
 	MiqtVirtualQSslServer* self_cast = dynamic_cast<MiqtVirtualQSslServer*>( (QSslServer*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__timerEvent = slot;
+	self_cast->handle__timerEvent = std::move(slot_handle);
 	return true;
 }
 
@@ -523,12 +548,13 @@ void QSslServer_virtualbase_timerEvent(void* self, QTimerEvent* event) {
 }
 
 bool QSslServer_override_virtual_childEvent(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QSslServer> slot_handle(slot);
 	MiqtVirtualQSslServer* self_cast = dynamic_cast<MiqtVirtualQSslServer*>( (QSslServer*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__childEvent = slot;
+	self_cast->handle__childEvent = std::move(slot_handle);
 	return true;
 }
 
@@ -537,12 +563,13 @@ void QSslServer_virtualbase_childEvent(void* self, QChildEvent* event) {
 }
 
 bool QSslServer_override_virtual_customEvent(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QSslServer> slot_handle(slot);
 	MiqtVirtualQSslServer* self_cast = dynamic_cast<MiqtVirtualQSslServer*>( (QSslServer*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__customEvent = slot;
+	self_cast->handle__customEvent = std::move(slot_handle);
 	return true;
 }
 
@@ -551,12 +578,13 @@ void QSslServer_virtualbase_customEvent(void* self, QEvent* event) {
 }
 
 bool QSslServer_override_virtual_connectNotify(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QSslServer> slot_handle(slot);
 	MiqtVirtualQSslServer* self_cast = dynamic_cast<MiqtVirtualQSslServer*>( (QSslServer*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__connectNotify = slot;
+	self_cast->handle__connectNotify = std::move(slot_handle);
 	return true;
 }
 
@@ -565,12 +593,13 @@ void QSslServer_virtualbase_connectNotify(void* self, QMetaMethod* signal) {
 }
 
 bool QSslServer_override_virtual_disconnectNotify(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QSslServer> slot_handle(slot);
 	MiqtVirtualQSslServer* self_cast = dynamic_cast<MiqtVirtualQSslServer*>( (QSslServer*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__disconnectNotify = slot;
+	self_cast->handle__disconnectNotify = std::move(slot_handle);
 	return true;
 }
 

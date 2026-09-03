@@ -90,13 +90,13 @@ bool QCoreApplication_isQuitLockEnabled();
 void QCoreApplication_setQuitLockEnabled(bool enabled);
 void QCoreApplication_quit();
 void QCoreApplication_organizationNameChanged(QCoreApplication* self);
-void QCoreApplication_connect_organizationNameChanged(QCoreApplication* self, intptr_t slot);
+void* QCoreApplication_connect_organizationNameChanged(QCoreApplication* self, intptr_t slot);
 void QCoreApplication_organizationDomainChanged(QCoreApplication* self);
-void QCoreApplication_connect_organizationDomainChanged(QCoreApplication* self, intptr_t slot);
+void* QCoreApplication_connect_organizationDomainChanged(QCoreApplication* self, intptr_t slot);
 void QCoreApplication_applicationNameChanged(QCoreApplication* self);
-void QCoreApplication_connect_applicationNameChanged(QCoreApplication* self, intptr_t slot);
+void* QCoreApplication_connect_applicationNameChanged(QCoreApplication* self, intptr_t slot);
 void QCoreApplication_applicationVersionChanged(QCoreApplication* self);
-void QCoreApplication_connect_applicationVersionChanged(QCoreApplication* self, intptr_t slot);
+void* QCoreApplication_connect_applicationVersionChanged(QCoreApplication* self, intptr_t slot);
 bool QCoreApplication_event(QCoreApplication* self, QEvent* param1);
 struct miqt_string QCoreApplication_tr2(const char* s, const char* c);
 struct miqt_string QCoreApplication_tr3(const char* s, const char* c, int n);
@@ -134,7 +134,7 @@ int QCoreApplication_protectedbase_senderSignalIndex(bool* _dynamic_cast_ok, con
 int QCoreApplication_protectedbase_receivers(bool* _dynamic_cast_ok, const void* self, const char* signal);
 bool QCoreApplication_protectedbase_isSignalConnected(bool* _dynamic_cast_ok, const void* self, QMetaMethod* signal);
 
-void QCoreApplication_connect_aboutToQuit(QCoreApplication* self, intptr_t slot);
+void* QCoreApplication_connect_aboutToQuit(QCoreApplication* self, intptr_t slot);
 
 void QCoreApplication_delete(QCoreApplication* self);
 

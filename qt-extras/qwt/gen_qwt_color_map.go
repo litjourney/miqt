@@ -29,6 +29,11 @@ const (
 	QwtLinearColorMap__ScaledColors QwtLinearColorMap__Mode = 1
 )
 
+//export miqt_exec_callback_handle_release_QwtColorMap
+func miqt_exec_callback_handle_release_QwtColorMap(cb C.intptr_t) {
+	cgo.Handle(cb).Delete()
+}
+
 type QwtColorMap struct {
 	h *C.QwtColorMap
 }
@@ -105,7 +110,11 @@ func (this *QwtColorMap) OperatorAssign(param1 *QwtColorMap) {
 	C.QwtColorMap_operatorAssign(this.h, param1.cPointer())
 }
 func (this *QwtColorMap) OnRgb(slot func(interval *QwtInterval, value float64) uint) {
-	ok := C.QwtColorMap_override_virtual_rgb(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QwtColorMap_override_virtual_rgb(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -129,7 +138,11 @@ func miqt_exec_callback_QwtColorMap_rgb(self *C.QwtColorMap, cb C.intptr_t, inte
 
 }
 func (this *QwtColorMap) OnColorIndex(slot func(interval *QwtInterval, value float64) byte) {
-	ok := C.QwtColorMap_override_virtual_colorIndex(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QwtColorMap_override_virtual_colorIndex(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -165,7 +178,11 @@ func (this *QwtColorMap) callVirtualBase_ColorTable(param1 *QwtInterval) []uint 
 
 }
 func (this *QwtColorMap) OnColorTable(slot func(super func(param1 *QwtInterval) []uint, param1 *QwtInterval) []uint) {
-	ok := C.QwtColorMap_override_virtual_colorTable(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QwtColorMap_override_virtual_colorTable(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -204,6 +221,11 @@ func (this *QwtColorMap) GoGC() {
 		this.Delete()
 		runtime.KeepAlive(this.h)
 	})
+}
+
+//export miqt_exec_callback_handle_release_QwtLinearColorMap
+func miqt_exec_callback_handle_release_QwtLinearColorMap(cb C.intptr_t) {
+	cgo.Handle(cb).Delete()
 }
 
 type QwtLinearColorMap struct {
@@ -318,7 +340,11 @@ func (this *QwtLinearColorMap) callVirtualBase_Rgb(param1 *QwtInterval, value fl
 
 }
 func (this *QwtLinearColorMap) OnRgb(slot func(super func(param1 *QwtInterval, value float64) uint, param1 *QwtInterval, value float64) uint) {
-	ok := C.QwtLinearColorMap_override_virtual_rgb(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QwtLinearColorMap_override_virtual_rgb(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -348,7 +374,11 @@ func (this *QwtLinearColorMap) callVirtualBase_ColorIndex(param1 *QwtInterval, v
 
 }
 func (this *QwtLinearColorMap) OnColorIndex(slot func(super func(param1 *QwtInterval, value float64) byte, param1 *QwtInterval, value float64) byte) {
-	ok := C.QwtLinearColorMap_override_virtual_colorIndex(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QwtLinearColorMap_override_virtual_colorIndex(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -384,7 +414,11 @@ func (this *QwtLinearColorMap) callVirtualBase_ColorTable(param1 *QwtInterval) [
 
 }
 func (this *QwtLinearColorMap) OnColorTable(slot func(super func(param1 *QwtInterval) []uint, param1 *QwtInterval) []uint) {
-	ok := C.QwtLinearColorMap_override_virtual_colorTable(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QwtLinearColorMap_override_virtual_colorTable(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -423,6 +457,11 @@ func (this *QwtLinearColorMap) GoGC() {
 		this.Delete()
 		runtime.KeepAlive(this.h)
 	})
+}
+
+//export miqt_exec_callback_handle_release_QwtAlphaColorMap
+func miqt_exec_callback_handle_release_QwtAlphaColorMap(cb C.intptr_t) {
+	cgo.Handle(cb).Delete()
 }
 
 type QwtAlphaColorMap struct {
@@ -493,7 +532,11 @@ func (this *QwtAlphaColorMap) callVirtualBase_Rgb(param1 *QwtInterval, value flo
 
 }
 func (this *QwtAlphaColorMap) OnRgb(slot func(super func(param1 *QwtInterval, value float64) uint, param1 *QwtInterval, value float64) uint) {
-	ok := C.QwtAlphaColorMap_override_virtual_rgb(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QwtAlphaColorMap_override_virtual_rgb(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -529,7 +572,11 @@ func (this *QwtAlphaColorMap) callVirtualBase_ColorTable(param1 *QwtInterval) []
 
 }
 func (this *QwtAlphaColorMap) OnColorTable(slot func(super func(param1 *QwtInterval) []uint, param1 *QwtInterval) []uint) {
-	ok := C.QwtAlphaColorMap_override_virtual_colorTable(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QwtAlphaColorMap_override_virtual_colorTable(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}

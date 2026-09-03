@@ -144,6 +144,11 @@ func (this *QCameraFocusZone) GoGC() {
 	})
 }
 
+//export miqt_exec_callback_handle_release_QCameraFocus
+func miqt_exec_callback_handle_release_QCameraFocus(cb C.intptr_t) {
+	cgo.Handle(cb).Delete()
+}
+
 type QCameraFocus struct {
 	h *C.QCameraFocus
 	*qt.QObject
@@ -281,8 +286,10 @@ func (this *QCameraFocus) ZoomTo(opticalZoom float64, digitalZoom float64) {
 func (this *QCameraFocus) OpticalZoomChanged(param1 float64) {
 	C.QCameraFocus_opticalZoomChanged(this.h, (C.double)(param1))
 }
-func (this *QCameraFocus) OnOpticalZoomChanged(slot func(param1 float64)) {
-	C.QCameraFocus_connect_opticalZoomChanged(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QCameraFocus) OnOpticalZoomChanged(slot func(param1 float64)) *qt.SignalConnection {
+	_goptr := qt.UnsafeNewQMetaObject__Connection(C.QCameraFocus_connect_opticalZoomChanged(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QCameraFocus_opticalZoomChanged
@@ -301,8 +308,10 @@ func miqt_exec_callback_QCameraFocus_opticalZoomChanged(cb C.intptr_t, param1 C.
 func (this *QCameraFocus) DigitalZoomChanged(param1 float64) {
 	C.QCameraFocus_digitalZoomChanged(this.h, (C.double)(param1))
 }
-func (this *QCameraFocus) OnDigitalZoomChanged(slot func(param1 float64)) {
-	C.QCameraFocus_connect_digitalZoomChanged(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QCameraFocus) OnDigitalZoomChanged(slot func(param1 float64)) *qt.SignalConnection {
+	_goptr := qt.UnsafeNewQMetaObject__Connection(C.QCameraFocus_connect_digitalZoomChanged(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QCameraFocus_digitalZoomChanged
@@ -321,8 +330,10 @@ func miqt_exec_callback_QCameraFocus_digitalZoomChanged(cb C.intptr_t, param1 C.
 func (this *QCameraFocus) FocusZonesChanged() {
 	C.QCameraFocus_focusZonesChanged(this.h)
 }
-func (this *QCameraFocus) OnFocusZonesChanged(slot func()) {
-	C.QCameraFocus_connect_focusZonesChanged(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QCameraFocus) OnFocusZonesChanged(slot func()) *qt.SignalConnection {
+	_goptr := qt.UnsafeNewQMetaObject__Connection(C.QCameraFocus_connect_focusZonesChanged(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QCameraFocus_focusZonesChanged
@@ -338,8 +349,10 @@ func miqt_exec_callback_QCameraFocus_focusZonesChanged(cb C.intptr_t) {
 func (this *QCameraFocus) MaximumOpticalZoomChanged(param1 float64) {
 	C.QCameraFocus_maximumOpticalZoomChanged(this.h, (C.double)(param1))
 }
-func (this *QCameraFocus) OnMaximumOpticalZoomChanged(slot func(param1 float64)) {
-	C.QCameraFocus_connect_maximumOpticalZoomChanged(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QCameraFocus) OnMaximumOpticalZoomChanged(slot func(param1 float64)) *qt.SignalConnection {
+	_goptr := qt.UnsafeNewQMetaObject__Connection(C.QCameraFocus_connect_maximumOpticalZoomChanged(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QCameraFocus_maximumOpticalZoomChanged
@@ -358,8 +371,10 @@ func miqt_exec_callback_QCameraFocus_maximumOpticalZoomChanged(cb C.intptr_t, pa
 func (this *QCameraFocus) MaximumDigitalZoomChanged(param1 float64) {
 	C.QCameraFocus_maximumDigitalZoomChanged(this.h, (C.double)(param1))
 }
-func (this *QCameraFocus) OnMaximumDigitalZoomChanged(slot func(param1 float64)) {
-	C.QCameraFocus_connect_maximumDigitalZoomChanged(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QCameraFocus) OnMaximumDigitalZoomChanged(slot func(param1 float64)) *qt.SignalConnection {
+	_goptr := qt.UnsafeNewQMetaObject__Connection(C.QCameraFocus_connect_maximumDigitalZoomChanged(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QCameraFocus_maximumDigitalZoomChanged

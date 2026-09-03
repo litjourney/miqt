@@ -24,6 +24,11 @@ const (
 	QAbstractBarSeries__LabelsOutsideEnd QAbstractBarSeries__LabelsPosition = 3
 )
 
+//export miqt_exec_callback_handle_release_QAbstractBarSeries
+func miqt_exec_callback_handle_release_QAbstractBarSeries(cb C.intptr_t) {
+	cgo.Handle(cb).Delete()
+}
+
 type QAbstractBarSeries struct {
 	h *C.QAbstractBarSeries
 	*QAbstractSeries
@@ -181,8 +186,10 @@ func (this *QAbstractBarSeries) LabelsPrecision() int {
 func (this *QAbstractBarSeries) Clicked(index int, barset *QBarSet) {
 	C.QAbstractBarSeries_clicked(this.h, (C.int)(index), barset.cPointer())
 }
-func (this *QAbstractBarSeries) OnClicked(slot func(index int, barset *QBarSet)) {
-	C.QAbstractBarSeries_connect_clicked(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QAbstractBarSeries) OnClicked(slot func(index int, barset *QBarSet)) *qt6.SignalConnection {
+	_goptr := qt6.UnsafeNewQMetaObject__Connection(C.QAbstractBarSeries_connect_clicked(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QAbstractBarSeries_clicked
@@ -203,8 +210,10 @@ func miqt_exec_callback_QAbstractBarSeries_clicked(cb C.intptr_t, index C.int, b
 func (this *QAbstractBarSeries) Hovered(status bool, index int, barset *QBarSet) {
 	C.QAbstractBarSeries_hovered(this.h, (C.bool)(status), (C.int)(index), barset.cPointer())
 }
-func (this *QAbstractBarSeries) OnHovered(slot func(status bool, index int, barset *QBarSet)) {
-	C.QAbstractBarSeries_connect_hovered(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QAbstractBarSeries) OnHovered(slot func(status bool, index int, barset *QBarSet)) *qt6.SignalConnection {
+	_goptr := qt6.UnsafeNewQMetaObject__Connection(C.QAbstractBarSeries_connect_hovered(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QAbstractBarSeries_hovered
@@ -227,8 +236,10 @@ func miqt_exec_callback_QAbstractBarSeries_hovered(cb C.intptr_t, status C.bool,
 func (this *QAbstractBarSeries) Pressed(index int, barset *QBarSet) {
 	C.QAbstractBarSeries_pressed(this.h, (C.int)(index), barset.cPointer())
 }
-func (this *QAbstractBarSeries) OnPressed(slot func(index int, barset *QBarSet)) {
-	C.QAbstractBarSeries_connect_pressed(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QAbstractBarSeries) OnPressed(slot func(index int, barset *QBarSet)) *qt6.SignalConnection {
+	_goptr := qt6.UnsafeNewQMetaObject__Connection(C.QAbstractBarSeries_connect_pressed(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QAbstractBarSeries_pressed
@@ -249,8 +260,10 @@ func miqt_exec_callback_QAbstractBarSeries_pressed(cb C.intptr_t, index C.int, b
 func (this *QAbstractBarSeries) Released(index int, barset *QBarSet) {
 	C.QAbstractBarSeries_released(this.h, (C.int)(index), barset.cPointer())
 }
-func (this *QAbstractBarSeries) OnReleased(slot func(index int, barset *QBarSet)) {
-	C.QAbstractBarSeries_connect_released(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QAbstractBarSeries) OnReleased(slot func(index int, barset *QBarSet)) *qt6.SignalConnection {
+	_goptr := qt6.UnsafeNewQMetaObject__Connection(C.QAbstractBarSeries_connect_released(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QAbstractBarSeries_released
@@ -271,8 +284,10 @@ func miqt_exec_callback_QAbstractBarSeries_released(cb C.intptr_t, index C.int, 
 func (this *QAbstractBarSeries) DoubleClicked(index int, barset *QBarSet) {
 	C.QAbstractBarSeries_doubleClicked(this.h, (C.int)(index), barset.cPointer())
 }
-func (this *QAbstractBarSeries) OnDoubleClicked(slot func(index int, barset *QBarSet)) {
-	C.QAbstractBarSeries_connect_doubleClicked(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QAbstractBarSeries) OnDoubleClicked(slot func(index int, barset *QBarSet)) *qt6.SignalConnection {
+	_goptr := qt6.UnsafeNewQMetaObject__Connection(C.QAbstractBarSeries_connect_doubleClicked(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QAbstractBarSeries_doubleClicked
@@ -293,8 +308,10 @@ func miqt_exec_callback_QAbstractBarSeries_doubleClicked(cb C.intptr_t, index C.
 func (this *QAbstractBarSeries) CountChanged() {
 	C.QAbstractBarSeries_countChanged(this.h)
 }
-func (this *QAbstractBarSeries) OnCountChanged(slot func()) {
-	C.QAbstractBarSeries_connect_countChanged(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QAbstractBarSeries) OnCountChanged(slot func()) *qt6.SignalConnection {
+	_goptr := qt6.UnsafeNewQMetaObject__Connection(C.QAbstractBarSeries_connect_countChanged(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QAbstractBarSeries_countChanged
@@ -310,8 +327,10 @@ func miqt_exec_callback_QAbstractBarSeries_countChanged(cb C.intptr_t) {
 func (this *QAbstractBarSeries) LabelsVisibleChanged() {
 	C.QAbstractBarSeries_labelsVisibleChanged(this.h)
 }
-func (this *QAbstractBarSeries) OnLabelsVisibleChanged(slot func()) {
-	C.QAbstractBarSeries_connect_labelsVisibleChanged(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QAbstractBarSeries) OnLabelsVisibleChanged(slot func()) *qt6.SignalConnection {
+	_goptr := qt6.UnsafeNewQMetaObject__Connection(C.QAbstractBarSeries_connect_labelsVisibleChanged(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QAbstractBarSeries_labelsVisibleChanged
@@ -331,8 +350,10 @@ func (this *QAbstractBarSeries) LabelsFormatChanged(format string) {
 	defer C.free(unsafe.Pointer(format_ms.data))
 	C.QAbstractBarSeries_labelsFormatChanged(this.h, format_ms)
 }
-func (this *QAbstractBarSeries) OnLabelsFormatChanged(slot func(format string)) {
-	C.QAbstractBarSeries_connect_labelsFormatChanged(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QAbstractBarSeries) OnLabelsFormatChanged(slot func(format string)) *qt6.SignalConnection {
+	_goptr := qt6.UnsafeNewQMetaObject__Connection(C.QAbstractBarSeries_connect_labelsFormatChanged(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QAbstractBarSeries_labelsFormatChanged
@@ -354,8 +375,10 @@ func miqt_exec_callback_QAbstractBarSeries_labelsFormatChanged(cb C.intptr_t, fo
 func (this *QAbstractBarSeries) LabelsPositionChanged(position QAbstractBarSeries__LabelsPosition) {
 	C.QAbstractBarSeries_labelsPositionChanged(this.h, (C.int)(position))
 }
-func (this *QAbstractBarSeries) OnLabelsPositionChanged(slot func(position QAbstractBarSeries__LabelsPosition)) {
-	C.QAbstractBarSeries_connect_labelsPositionChanged(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QAbstractBarSeries) OnLabelsPositionChanged(slot func(position QAbstractBarSeries__LabelsPosition)) *qt6.SignalConnection {
+	_goptr := qt6.UnsafeNewQMetaObject__Connection(C.QAbstractBarSeries_connect_labelsPositionChanged(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QAbstractBarSeries_labelsPositionChanged
@@ -374,8 +397,10 @@ func miqt_exec_callback_QAbstractBarSeries_labelsPositionChanged(cb C.intptr_t, 
 func (this *QAbstractBarSeries) LabelsAngleChanged(angle float64) {
 	C.QAbstractBarSeries_labelsAngleChanged(this.h, (C.double)(angle))
 }
-func (this *QAbstractBarSeries) OnLabelsAngleChanged(slot func(angle float64)) {
-	C.QAbstractBarSeries_connect_labelsAngleChanged(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QAbstractBarSeries) OnLabelsAngleChanged(slot func(angle float64)) *qt6.SignalConnection {
+	_goptr := qt6.UnsafeNewQMetaObject__Connection(C.QAbstractBarSeries_connect_labelsAngleChanged(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QAbstractBarSeries_labelsAngleChanged
@@ -394,8 +419,10 @@ func miqt_exec_callback_QAbstractBarSeries_labelsAngleChanged(cb C.intptr_t, ang
 func (this *QAbstractBarSeries) LabelsPrecisionChanged(precision int) {
 	C.QAbstractBarSeries_labelsPrecisionChanged(this.h, (C.int)(precision))
 }
-func (this *QAbstractBarSeries) OnLabelsPrecisionChanged(slot func(precision int)) {
-	C.QAbstractBarSeries_connect_labelsPrecisionChanged(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QAbstractBarSeries) OnLabelsPrecisionChanged(slot func(precision int)) *qt6.SignalConnection {
+	_goptr := qt6.UnsafeNewQMetaObject__Connection(C.QAbstractBarSeries_connect_labelsPrecisionChanged(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QAbstractBarSeries_labelsPrecisionChanged
@@ -420,8 +447,10 @@ func (this *QAbstractBarSeries) BarsetsAdded(sets []*QBarSet) {
 	sets_ma := C.struct_miqt_array{len: C.size_t(len(sets)), data: unsafe.Pointer(sets_CArray)}
 	C.QAbstractBarSeries_barsetsAdded(this.h, sets_ma)
 }
-func (this *QAbstractBarSeries) OnBarsetsAdded(slot func(sets []*QBarSet)) {
-	C.QAbstractBarSeries_connect_barsetsAdded(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QAbstractBarSeries) OnBarsetsAdded(slot func(sets []*QBarSet)) *qt6.SignalConnection {
+	_goptr := qt6.UnsafeNewQMetaObject__Connection(C.QAbstractBarSeries_connect_barsetsAdded(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QAbstractBarSeries_barsetsAdded
@@ -452,8 +481,10 @@ func (this *QAbstractBarSeries) BarsetsRemoved(sets []*QBarSet) {
 	sets_ma := C.struct_miqt_array{len: C.size_t(len(sets)), data: unsafe.Pointer(sets_CArray)}
 	C.QAbstractBarSeries_barsetsRemoved(this.h, sets_ma)
 }
-func (this *QAbstractBarSeries) OnBarsetsRemoved(slot func(sets []*QBarSet)) {
-	C.QAbstractBarSeries_connect_barsetsRemoved(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QAbstractBarSeries) OnBarsetsRemoved(slot func(sets []*QBarSet)) *qt6.SignalConnection {
+	_goptr := qt6.UnsafeNewQMetaObject__Connection(C.QAbstractBarSeries_connect_barsetsRemoved(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QAbstractBarSeries_barsetsRemoved

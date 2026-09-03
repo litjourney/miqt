@@ -1,3 +1,5 @@
+#include <memory>
+#include <utility>
 #include <QAudioBuffer>
 #include <QAudioDecoderControl>
 #include <QAudioFormat>
@@ -16,6 +18,7 @@
 extern "C" {
 #endif
 
+void miqt_exec_callback_handle_release_QAudioDecoderControl(intptr_t);
 void miqt_exec_callback_QAudioDecoderControl_stateChanged(intptr_t, int);
 void miqt_exec_callback_QAudioDecoderControl_formatChanged(intptr_t, QAudioFormat*);
 void miqt_exec_callback_QAudioDecoderControl_sourceChanged(intptr_t);
@@ -130,35 +133,41 @@ void QAudioDecoderControl_stateChanged(QAudioDecoderControl* self, int newState)
 	self->stateChanged(static_cast<QAudioDecoder::State>(newState));
 }
 
-void QAudioDecoderControl_connect_stateChanged(QAudioDecoderControl* self, intptr_t slot) {
-	QAudioDecoderControl::connect(self, static_cast<void (QAudioDecoderControl::*)(QAudioDecoder::State)>(&QAudioDecoderControl::stateChanged), self, [=](QAudioDecoder::State newState) {
+void* QAudioDecoderControl_connect_stateChanged(QAudioDecoderControl* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QAudioDecoderControl>>(slot);
+	return new QMetaObject::Connection(QAudioDecoderControl::connect(self, static_cast<void (QAudioDecoderControl::*)(QAudioDecoder::State)>(&QAudioDecoderControl::stateChanged), self, [slot_handle](QAudioDecoder::State newState) {
+		intptr_t slot = slot_handle->value();
 		QAudioDecoder::State newState_ret = newState;
 		int sigval1 = static_cast<int>(newState_ret);
 		miqt_exec_callback_QAudioDecoderControl_stateChanged(slot, sigval1);
-	});
+	}));
 }
 
 void QAudioDecoderControl_formatChanged(QAudioDecoderControl* self, QAudioFormat* format) {
 	self->formatChanged(*format);
 }
 
-void QAudioDecoderControl_connect_formatChanged(QAudioDecoderControl* self, intptr_t slot) {
-	QAudioDecoderControl::connect(self, static_cast<void (QAudioDecoderControl::*)(const QAudioFormat&)>(&QAudioDecoderControl::formatChanged), self, [=](const QAudioFormat& format) {
+void* QAudioDecoderControl_connect_formatChanged(QAudioDecoderControl* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QAudioDecoderControl>>(slot);
+	return new QMetaObject::Connection(QAudioDecoderControl::connect(self, static_cast<void (QAudioDecoderControl::*)(const QAudioFormat&)>(&QAudioDecoderControl::formatChanged), self, [slot_handle](const QAudioFormat& format) {
+		intptr_t slot = slot_handle->value();
 		const QAudioFormat& format_ret = format;
 		// Cast returned reference into pointer
 		QAudioFormat* sigval1 = const_cast<QAudioFormat*>(&format_ret);
 		miqt_exec_callback_QAudioDecoderControl_formatChanged(slot, sigval1);
-	});
+	}));
 }
 
 void QAudioDecoderControl_sourceChanged(QAudioDecoderControl* self) {
 	self->sourceChanged();
 }
 
-void QAudioDecoderControl_connect_sourceChanged(QAudioDecoderControl* self, intptr_t slot) {
-	QAudioDecoderControl::connect(self, static_cast<void (QAudioDecoderControl::*)()>(&QAudioDecoderControl::sourceChanged), self, [=]() {
+void* QAudioDecoderControl_connect_sourceChanged(QAudioDecoderControl* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QAudioDecoderControl>>(slot);
+	return new QMetaObject::Connection(QAudioDecoderControl::connect(self, static_cast<void (QAudioDecoderControl::*)()>(&QAudioDecoderControl::sourceChanged), self, [slot_handle]() {
+		intptr_t slot = slot_handle->value();
 		miqt_exec_callback_QAudioDecoderControl_sourceChanged(slot);
-	});
+	}));
 }
 
 void QAudioDecoderControl_error(QAudioDecoderControl* self, int error, struct miqt_string errorString) {
@@ -166,8 +175,10 @@ void QAudioDecoderControl_error(QAudioDecoderControl* self, int error, struct mi
 	self->error(static_cast<int>(error), errorString_QString);
 }
 
-void QAudioDecoderControl_connect_error(QAudioDecoderControl* self, intptr_t slot) {
-	QAudioDecoderControl::connect(self, static_cast<void (QAudioDecoderControl::*)(int, const QString&)>(&QAudioDecoderControl::error), self, [=](int error, const QString& errorString) {
+void* QAudioDecoderControl_connect_error(QAudioDecoderControl* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QAudioDecoderControl>>(slot);
+	return new QMetaObject::Connection(QAudioDecoderControl::connect(self, static_cast<void (QAudioDecoderControl::*)(int, const QString&)>(&QAudioDecoderControl::error), self, [slot_handle](int error, const QString& errorString) {
+		intptr_t slot = slot_handle->value();
 		int sigval1 = error;
 		const QString errorString_ret = errorString;
 		// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
@@ -178,62 +189,72 @@ void QAudioDecoderControl_connect_error(QAudioDecoderControl* self, intptr_t slo
 		memcpy(errorString_ms.data, errorString_b.data(), errorString_ms.len);
 		struct miqt_string sigval2 = errorString_ms;
 		miqt_exec_callback_QAudioDecoderControl_error(slot, sigval1, sigval2);
-	});
+	}));
 }
 
 void QAudioDecoderControl_bufferReady(QAudioDecoderControl* self) {
 	self->bufferReady();
 }
 
-void QAudioDecoderControl_connect_bufferReady(QAudioDecoderControl* self, intptr_t slot) {
-	QAudioDecoderControl::connect(self, static_cast<void (QAudioDecoderControl::*)()>(&QAudioDecoderControl::bufferReady), self, [=]() {
+void* QAudioDecoderControl_connect_bufferReady(QAudioDecoderControl* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QAudioDecoderControl>>(slot);
+	return new QMetaObject::Connection(QAudioDecoderControl::connect(self, static_cast<void (QAudioDecoderControl::*)()>(&QAudioDecoderControl::bufferReady), self, [slot_handle]() {
+		intptr_t slot = slot_handle->value();
 		miqt_exec_callback_QAudioDecoderControl_bufferReady(slot);
-	});
+	}));
 }
 
 void QAudioDecoderControl_bufferAvailableChanged(QAudioDecoderControl* self, bool available) {
 	self->bufferAvailableChanged(available);
 }
 
-void QAudioDecoderControl_connect_bufferAvailableChanged(QAudioDecoderControl* self, intptr_t slot) {
-	QAudioDecoderControl::connect(self, static_cast<void (QAudioDecoderControl::*)(bool)>(&QAudioDecoderControl::bufferAvailableChanged), self, [=](bool available) {
+void* QAudioDecoderControl_connect_bufferAvailableChanged(QAudioDecoderControl* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QAudioDecoderControl>>(slot);
+	return new QMetaObject::Connection(QAudioDecoderControl::connect(self, static_cast<void (QAudioDecoderControl::*)(bool)>(&QAudioDecoderControl::bufferAvailableChanged), self, [slot_handle](bool available) {
+		intptr_t slot = slot_handle->value();
 		bool sigval1 = available;
 		miqt_exec_callback_QAudioDecoderControl_bufferAvailableChanged(slot, sigval1);
-	});
+	}));
 }
 
 void QAudioDecoderControl_finished(QAudioDecoderControl* self) {
 	self->finished();
 }
 
-void QAudioDecoderControl_connect_finished(QAudioDecoderControl* self, intptr_t slot) {
-	QAudioDecoderControl::connect(self, static_cast<void (QAudioDecoderControl::*)()>(&QAudioDecoderControl::finished), self, [=]() {
+void* QAudioDecoderControl_connect_finished(QAudioDecoderControl* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QAudioDecoderControl>>(slot);
+	return new QMetaObject::Connection(QAudioDecoderControl::connect(self, static_cast<void (QAudioDecoderControl::*)()>(&QAudioDecoderControl::finished), self, [slot_handle]() {
+		intptr_t slot = slot_handle->value();
 		miqt_exec_callback_QAudioDecoderControl_finished(slot);
-	});
+	}));
 }
 
 void QAudioDecoderControl_positionChanged(QAudioDecoderControl* self, long long position) {
 	self->positionChanged(static_cast<qint64>(position));
 }
 
-void QAudioDecoderControl_connect_positionChanged(QAudioDecoderControl* self, intptr_t slot) {
-	QAudioDecoderControl::connect(self, static_cast<void (QAudioDecoderControl::*)(qint64)>(&QAudioDecoderControl::positionChanged), self, [=](qint64 position) {
+void* QAudioDecoderControl_connect_positionChanged(QAudioDecoderControl* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QAudioDecoderControl>>(slot);
+	return new QMetaObject::Connection(QAudioDecoderControl::connect(self, static_cast<void (QAudioDecoderControl::*)(qint64)>(&QAudioDecoderControl::positionChanged), self, [slot_handle](qint64 position) {
+		intptr_t slot = slot_handle->value();
 		qint64 position_ret = position;
 		long long sigval1 = static_cast<long long>(position_ret);
 		miqt_exec_callback_QAudioDecoderControl_positionChanged(slot, sigval1);
-	});
+	}));
 }
 
 void QAudioDecoderControl_durationChanged(QAudioDecoderControl* self, long long duration) {
 	self->durationChanged(static_cast<qint64>(duration));
 }
 
-void QAudioDecoderControl_connect_durationChanged(QAudioDecoderControl* self, intptr_t slot) {
-	QAudioDecoderControl::connect(self, static_cast<void (QAudioDecoderControl::*)(qint64)>(&QAudioDecoderControl::durationChanged), self, [=](qint64 duration) {
+void* QAudioDecoderControl_connect_durationChanged(QAudioDecoderControl* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QAudioDecoderControl>>(slot);
+	return new QMetaObject::Connection(QAudioDecoderControl::connect(self, static_cast<void (QAudioDecoderControl::*)(qint64)>(&QAudioDecoderControl::durationChanged), self, [slot_handle](qint64 duration) {
+		intptr_t slot = slot_handle->value();
 		qint64 duration_ret = duration;
 		long long sigval1 = static_cast<long long>(duration_ret);
 		miqt_exec_callback_QAudioDecoderControl_durationChanged(slot, sigval1);
-	});
+	}));
 }
 
 struct miqt_string QAudioDecoderControl_tr2(const char* s, const char* c) {

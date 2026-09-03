@@ -207,6 +207,11 @@ const (
 	QWebPage__WebKit    QWebPage__ErrorDomain = 2
 )
 
+//export miqt_exec_callback_handle_release_QWebPage
+func miqt_exec_callback_handle_release_QWebPage(cb C.intptr_t) {
+	cgo.Handle(cb).Delete()
+}
+
 type QWebPage struct {
 	h *C.QWebPage
 	*qt.QObject
@@ -535,8 +540,10 @@ func (this *QWebPage) ShouldInterruptJavaScript() bool {
 func (this *QWebPage) LoadStarted() {
 	C.QWebPage_loadStarted(this.h)
 }
-func (this *QWebPage) OnLoadStarted(slot func()) {
-	C.QWebPage_connect_loadStarted(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QWebPage) OnLoadStarted(slot func()) *qt.SignalConnection {
+	_goptr := qt.UnsafeNewQMetaObject__Connection(C.QWebPage_connect_loadStarted(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QWebPage_loadStarted
@@ -552,8 +559,10 @@ func miqt_exec_callback_QWebPage_loadStarted(cb C.intptr_t) {
 func (this *QWebPage) LoadProgress(progress int) {
 	C.QWebPage_loadProgress(this.h, (C.int)(progress))
 }
-func (this *QWebPage) OnLoadProgress(slot func(progress int)) {
-	C.QWebPage_connect_loadProgress(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QWebPage) OnLoadProgress(slot func(progress int)) *qt.SignalConnection {
+	_goptr := qt.UnsafeNewQMetaObject__Connection(C.QWebPage_connect_loadProgress(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QWebPage_loadProgress
@@ -572,8 +581,10 @@ func miqt_exec_callback_QWebPage_loadProgress(cb C.intptr_t, progress C.int) {
 func (this *QWebPage) LoadFinished(ok bool) {
 	C.QWebPage_loadFinished(this.h, (C.bool)(ok))
 }
-func (this *QWebPage) OnLoadFinished(slot func(ok bool)) {
-	C.QWebPage_connect_loadFinished(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QWebPage) OnLoadFinished(slot func(ok bool)) *qt.SignalConnection {
+	_goptr := qt.UnsafeNewQMetaObject__Connection(C.QWebPage_connect_loadFinished(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QWebPage_loadFinished
@@ -604,8 +615,10 @@ func (this *QWebPage) LinkHovered(link string, title string, textContent string)
 	defer C.free(unsafe.Pointer(textContent_ms.data))
 	C.QWebPage_linkHovered(this.h, link_ms, title_ms, textContent_ms)
 }
-func (this *QWebPage) OnLinkHovered(slot func(link string, title string, textContent string)) {
-	C.QWebPage_connect_linkHovered(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QWebPage) OnLinkHovered(slot func(link string, title string, textContent string)) *qt.SignalConnection {
+	_goptr := qt.UnsafeNewQMetaObject__Connection(C.QWebPage_connect_linkHovered(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QWebPage_linkHovered
@@ -639,8 +652,10 @@ func (this *QWebPage) StatusBarMessage(text string) {
 	defer C.free(unsafe.Pointer(text_ms.data))
 	C.QWebPage_statusBarMessage(this.h, text_ms)
 }
-func (this *QWebPage) OnStatusBarMessage(slot func(text string)) {
-	C.QWebPage_connect_statusBarMessage(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QWebPage) OnStatusBarMessage(slot func(text string)) *qt.SignalConnection {
+	_goptr := qt.UnsafeNewQMetaObject__Connection(C.QWebPage_connect_statusBarMessage(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QWebPage_statusBarMessage
@@ -662,8 +677,10 @@ func miqt_exec_callback_QWebPage_statusBarMessage(cb C.intptr_t, text C.struct_m
 func (this *QWebPage) SelectionChanged() {
 	C.QWebPage_selectionChanged(this.h)
 }
-func (this *QWebPage) OnSelectionChanged(slot func()) {
-	C.QWebPage_connect_selectionChanged(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QWebPage) OnSelectionChanged(slot func()) *qt.SignalConnection {
+	_goptr := qt.UnsafeNewQMetaObject__Connection(C.QWebPage_connect_selectionChanged(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QWebPage_selectionChanged
@@ -679,8 +696,10 @@ func miqt_exec_callback_QWebPage_selectionChanged(cb C.intptr_t) {
 func (this *QWebPage) FrameCreated(frame *QWebFrame) {
 	C.QWebPage_frameCreated(this.h, frame.cPointer())
 }
-func (this *QWebPage) OnFrameCreated(slot func(frame *QWebFrame)) {
-	C.QWebPage_connect_frameCreated(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QWebPage) OnFrameCreated(slot func(frame *QWebFrame)) *qt.SignalConnection {
+	_goptr := qt.UnsafeNewQMetaObject__Connection(C.QWebPage_connect_frameCreated(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QWebPage_frameCreated
@@ -699,8 +718,10 @@ func miqt_exec_callback_QWebPage_frameCreated(cb C.intptr_t, frame *C.QWebFrame)
 func (this *QWebPage) GeometryChangeRequested(geom *qt.QRect) {
 	C.QWebPage_geometryChangeRequested(this.h, (*C.QRect)(geom.UnsafePointer()))
 }
-func (this *QWebPage) OnGeometryChangeRequested(slot func(geom *qt.QRect)) {
-	C.QWebPage_connect_geometryChangeRequested(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QWebPage) OnGeometryChangeRequested(slot func(geom *qt.QRect)) *qt.SignalConnection {
+	_goptr := qt.UnsafeNewQMetaObject__Connection(C.QWebPage_connect_geometryChangeRequested(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QWebPage_geometryChangeRequested
@@ -719,8 +740,10 @@ func miqt_exec_callback_QWebPage_geometryChangeRequested(cb C.intptr_t, geom *C.
 func (this *QWebPage) RepaintRequested(dirtyRect *qt.QRect) {
 	C.QWebPage_repaintRequested(this.h, (*C.QRect)(dirtyRect.UnsafePointer()))
 }
-func (this *QWebPage) OnRepaintRequested(slot func(dirtyRect *qt.QRect)) {
-	C.QWebPage_connect_repaintRequested(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QWebPage) OnRepaintRequested(slot func(dirtyRect *qt.QRect)) *qt.SignalConnection {
+	_goptr := qt.UnsafeNewQMetaObject__Connection(C.QWebPage_connect_repaintRequested(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QWebPage_repaintRequested
@@ -739,8 +762,10 @@ func miqt_exec_callback_QWebPage_repaintRequested(cb C.intptr_t, dirtyRect *C.QR
 func (this *QWebPage) ScrollRequested(dx int, dy int, scrollViewRect *qt.QRect) {
 	C.QWebPage_scrollRequested(this.h, (C.int)(dx), (C.int)(dy), (*C.QRect)(scrollViewRect.UnsafePointer()))
 }
-func (this *QWebPage) OnScrollRequested(slot func(dx int, dy int, scrollViewRect *qt.QRect)) {
-	C.QWebPage_connect_scrollRequested(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QWebPage) OnScrollRequested(slot func(dx int, dy int, scrollViewRect *qt.QRect)) *qt.SignalConnection {
+	_goptr := qt.UnsafeNewQMetaObject__Connection(C.QWebPage_connect_scrollRequested(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QWebPage_scrollRequested
@@ -763,8 +788,10 @@ func miqt_exec_callback_QWebPage_scrollRequested(cb C.intptr_t, dx C.int, dy C.i
 func (this *QWebPage) WindowCloseRequested() {
 	C.QWebPage_windowCloseRequested(this.h)
 }
-func (this *QWebPage) OnWindowCloseRequested(slot func()) {
-	C.QWebPage_connect_windowCloseRequested(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QWebPage) OnWindowCloseRequested(slot func()) *qt.SignalConnection {
+	_goptr := qt.UnsafeNewQMetaObject__Connection(C.QWebPage_connect_windowCloseRequested(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QWebPage_windowCloseRequested
@@ -780,8 +807,10 @@ func miqt_exec_callback_QWebPage_windowCloseRequested(cb C.intptr_t) {
 func (this *QWebPage) PrintRequested(frame *QWebFrame) {
 	C.QWebPage_printRequested(this.h, frame.cPointer())
 }
-func (this *QWebPage) OnPrintRequested(slot func(frame *QWebFrame)) {
-	C.QWebPage_connect_printRequested(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QWebPage) OnPrintRequested(slot func(frame *QWebFrame)) *qt.SignalConnection {
+	_goptr := qt.UnsafeNewQMetaObject__Connection(C.QWebPage_connect_printRequested(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QWebPage_printRequested
@@ -800,8 +829,10 @@ func miqt_exec_callback_QWebPage_printRequested(cb C.intptr_t, frame *C.QWebFram
 func (this *QWebPage) LinkClicked(url *qt.QUrl) {
 	C.QWebPage_linkClicked(this.h, (*C.QUrl)(url.UnsafePointer()))
 }
-func (this *QWebPage) OnLinkClicked(slot func(url *qt.QUrl)) {
-	C.QWebPage_connect_linkClicked(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QWebPage) OnLinkClicked(slot func(url *qt.QUrl)) *qt.SignalConnection {
+	_goptr := qt.UnsafeNewQMetaObject__Connection(C.QWebPage_connect_linkClicked(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QWebPage_linkClicked
@@ -820,8 +851,10 @@ func miqt_exec_callback_QWebPage_linkClicked(cb C.intptr_t, url *C.QUrl) {
 func (this *QWebPage) ToolBarVisibilityChangeRequested(visible bool) {
 	C.QWebPage_toolBarVisibilityChangeRequested(this.h, (C.bool)(visible))
 }
-func (this *QWebPage) OnToolBarVisibilityChangeRequested(slot func(visible bool)) {
-	C.QWebPage_connect_toolBarVisibilityChangeRequested(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QWebPage) OnToolBarVisibilityChangeRequested(slot func(visible bool)) *qt.SignalConnection {
+	_goptr := qt.UnsafeNewQMetaObject__Connection(C.QWebPage_connect_toolBarVisibilityChangeRequested(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QWebPage_toolBarVisibilityChangeRequested
@@ -840,8 +873,10 @@ func miqt_exec_callback_QWebPage_toolBarVisibilityChangeRequested(cb C.intptr_t,
 func (this *QWebPage) StatusBarVisibilityChangeRequested(visible bool) {
 	C.QWebPage_statusBarVisibilityChangeRequested(this.h, (C.bool)(visible))
 }
-func (this *QWebPage) OnStatusBarVisibilityChangeRequested(slot func(visible bool)) {
-	C.QWebPage_connect_statusBarVisibilityChangeRequested(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QWebPage) OnStatusBarVisibilityChangeRequested(slot func(visible bool)) *qt.SignalConnection {
+	_goptr := qt.UnsafeNewQMetaObject__Connection(C.QWebPage_connect_statusBarVisibilityChangeRequested(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QWebPage_statusBarVisibilityChangeRequested
@@ -860,8 +895,10 @@ func miqt_exec_callback_QWebPage_statusBarVisibilityChangeRequested(cb C.intptr_
 func (this *QWebPage) MenuBarVisibilityChangeRequested(visible bool) {
 	C.QWebPage_menuBarVisibilityChangeRequested(this.h, (C.bool)(visible))
 }
-func (this *QWebPage) OnMenuBarVisibilityChangeRequested(slot func(visible bool)) {
-	C.QWebPage_connect_menuBarVisibilityChangeRequested(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QWebPage) OnMenuBarVisibilityChangeRequested(slot func(visible bool)) *qt.SignalConnection {
+	_goptr := qt.UnsafeNewQMetaObject__Connection(C.QWebPage_connect_menuBarVisibilityChangeRequested(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QWebPage_menuBarVisibilityChangeRequested
@@ -880,8 +917,10 @@ func miqt_exec_callback_QWebPage_menuBarVisibilityChangeRequested(cb C.intptr_t,
 func (this *QWebPage) UnsupportedContent(reply *network.QNetworkReply) {
 	C.QWebPage_unsupportedContent(this.h, (*C.QNetworkReply)(reply.UnsafePointer()))
 }
-func (this *QWebPage) OnUnsupportedContent(slot func(reply *network.QNetworkReply)) {
-	C.QWebPage_connect_unsupportedContent(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QWebPage) OnUnsupportedContent(slot func(reply *network.QNetworkReply)) *qt.SignalConnection {
+	_goptr := qt.UnsafeNewQMetaObject__Connection(C.QWebPage_connect_unsupportedContent(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QWebPage_unsupportedContent
@@ -900,8 +939,10 @@ func miqt_exec_callback_QWebPage_unsupportedContent(cb C.intptr_t, reply *C.QNet
 func (this *QWebPage) DownloadRequested(request *network.QNetworkRequest) {
 	C.QWebPage_downloadRequested(this.h, (*C.QNetworkRequest)(request.UnsafePointer()))
 }
-func (this *QWebPage) OnDownloadRequested(slot func(request *network.QNetworkRequest)) {
-	C.QWebPage_connect_downloadRequested(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QWebPage) OnDownloadRequested(slot func(request *network.QNetworkRequest)) *qt.SignalConnection {
+	_goptr := qt.UnsafeNewQMetaObject__Connection(C.QWebPage_connect_downloadRequested(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QWebPage_downloadRequested
@@ -920,8 +961,10 @@ func miqt_exec_callback_QWebPage_downloadRequested(cb C.intptr_t, request *C.QNe
 func (this *QWebPage) FocusedElementChanged(element *QWebElement) {
 	C.QWebPage_focusedElementChanged(this.h, element.cPointer())
 }
-func (this *QWebPage) OnFocusedElementChanged(slot func(element *QWebElement)) {
-	C.QWebPage_connect_focusedElementChanged(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QWebPage) OnFocusedElementChanged(slot func(element *QWebElement)) *qt.SignalConnection {
+	_goptr := qt.UnsafeNewQMetaObject__Connection(C.QWebPage_connect_focusedElementChanged(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QWebPage_focusedElementChanged
@@ -940,8 +983,10 @@ func miqt_exec_callback_QWebPage_focusedElementChanged(cb C.intptr_t, element *C
 func (this *QWebPage) MicroFocusChanged() {
 	C.QWebPage_microFocusChanged(this.h)
 }
-func (this *QWebPage) OnMicroFocusChanged(slot func()) {
-	C.QWebPage_connect_microFocusChanged(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QWebPage) OnMicroFocusChanged(slot func()) *qt.SignalConnection {
+	_goptr := qt.UnsafeNewQMetaObject__Connection(C.QWebPage_connect_microFocusChanged(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QWebPage_microFocusChanged
@@ -957,8 +1002,10 @@ func miqt_exec_callback_QWebPage_microFocusChanged(cb C.intptr_t) {
 func (this *QWebPage) ContentsChanged() {
 	C.QWebPage_contentsChanged(this.h)
 }
-func (this *QWebPage) OnContentsChanged(slot func()) {
-	C.QWebPage_connect_contentsChanged(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QWebPage) OnContentsChanged(slot func()) *qt.SignalConnection {
+	_goptr := qt.UnsafeNewQMetaObject__Connection(C.QWebPage_connect_contentsChanged(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QWebPage_contentsChanged
@@ -978,8 +1025,10 @@ func (this *QWebPage) DatabaseQuotaExceeded(frame *QWebFrame, databaseName strin
 	defer C.free(unsafe.Pointer(databaseName_ms.data))
 	C.QWebPage_databaseQuotaExceeded(this.h, frame.cPointer(), databaseName_ms)
 }
-func (this *QWebPage) OnDatabaseQuotaExceeded(slot func(frame *QWebFrame, databaseName string)) {
-	C.QWebPage_connect_databaseQuotaExceeded(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QWebPage) OnDatabaseQuotaExceeded(slot func(frame *QWebFrame, databaseName string)) *qt.SignalConnection {
+	_goptr := qt.UnsafeNewQMetaObject__Connection(C.QWebPage_connect_databaseQuotaExceeded(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QWebPage_databaseQuotaExceeded
@@ -1003,8 +1052,10 @@ func miqt_exec_callback_QWebPage_databaseQuotaExceeded(cb C.intptr_t, frame *C.Q
 func (this *QWebPage) ApplicationCacheQuotaExceeded(origin *QWebSecurityOrigin, defaultOriginQuota uint64, totalSpaceNeeded uint64) {
 	C.QWebPage_applicationCacheQuotaExceeded(this.h, origin.cPointer(), (C.ulonglong)(defaultOriginQuota), (C.ulonglong)(totalSpaceNeeded))
 }
-func (this *QWebPage) OnApplicationCacheQuotaExceeded(slot func(origin *QWebSecurityOrigin, defaultOriginQuota uint64, totalSpaceNeeded uint64)) {
-	C.QWebPage_connect_applicationCacheQuotaExceeded(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QWebPage) OnApplicationCacheQuotaExceeded(slot func(origin *QWebSecurityOrigin, defaultOriginQuota uint64, totalSpaceNeeded uint64)) *qt.SignalConnection {
+	_goptr := qt.UnsafeNewQMetaObject__Connection(C.QWebPage_connect_applicationCacheQuotaExceeded(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QWebPage_applicationCacheQuotaExceeded
@@ -1027,8 +1078,10 @@ func miqt_exec_callback_QWebPage_applicationCacheQuotaExceeded(cb C.intptr_t, or
 func (this *QWebPage) SaveFrameStateRequested(frame *QWebFrame, item *QWebHistoryItem) {
 	C.QWebPage_saveFrameStateRequested(this.h, frame.cPointer(), item.cPointer())
 }
-func (this *QWebPage) OnSaveFrameStateRequested(slot func(frame *QWebFrame, item *QWebHistoryItem)) {
-	C.QWebPage_connect_saveFrameStateRequested(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QWebPage) OnSaveFrameStateRequested(slot func(frame *QWebFrame, item *QWebHistoryItem)) *qt.SignalConnection {
+	_goptr := qt.UnsafeNewQMetaObject__Connection(C.QWebPage_connect_saveFrameStateRequested(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QWebPage_saveFrameStateRequested
@@ -1049,8 +1102,10 @@ func miqt_exec_callback_QWebPage_saveFrameStateRequested(cb C.intptr_t, frame *C
 func (this *QWebPage) RestoreFrameStateRequested(frame *QWebFrame) {
 	C.QWebPage_restoreFrameStateRequested(this.h, frame.cPointer())
 }
-func (this *QWebPage) OnRestoreFrameStateRequested(slot func(frame *QWebFrame)) {
-	C.QWebPage_connect_restoreFrameStateRequested(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QWebPage) OnRestoreFrameStateRequested(slot func(frame *QWebFrame)) *qt.SignalConnection {
+	_goptr := qt.UnsafeNewQMetaObject__Connection(C.QWebPage_connect_restoreFrameStateRequested(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QWebPage_restoreFrameStateRequested
@@ -1069,8 +1124,10 @@ func miqt_exec_callback_QWebPage_restoreFrameStateRequested(cb C.intptr_t, frame
 func (this *QWebPage) ViewportChangeRequested() {
 	C.QWebPage_viewportChangeRequested(this.h)
 }
-func (this *QWebPage) OnViewportChangeRequested(slot func()) {
-	C.QWebPage_connect_viewportChangeRequested(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QWebPage) OnViewportChangeRequested(slot func()) *qt.SignalConnection {
+	_goptr := qt.UnsafeNewQMetaObject__Connection(C.QWebPage_connect_viewportChangeRequested(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QWebPage_viewportChangeRequested
@@ -1086,8 +1143,10 @@ func miqt_exec_callback_QWebPage_viewportChangeRequested(cb C.intptr_t) {
 func (this *QWebPage) FeaturePermissionRequested(frame *QWebFrame, feature QWebPage__Feature) {
 	C.QWebPage_featurePermissionRequested(this.h, frame.cPointer(), (C.int)(feature))
 }
-func (this *QWebPage) OnFeaturePermissionRequested(slot func(frame *QWebFrame, feature QWebPage__Feature)) {
-	C.QWebPage_connect_featurePermissionRequested(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QWebPage) OnFeaturePermissionRequested(slot func(frame *QWebFrame, feature QWebPage__Feature)) *qt.SignalConnection {
+	_goptr := qt.UnsafeNewQMetaObject__Connection(C.QWebPage_connect_featurePermissionRequested(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QWebPage_featurePermissionRequested
@@ -1108,8 +1167,10 @@ func miqt_exec_callback_QWebPage_featurePermissionRequested(cb C.intptr_t, frame
 func (this *QWebPage) FeaturePermissionRequestCanceled(frame *QWebFrame, feature QWebPage__Feature) {
 	C.QWebPage_featurePermissionRequestCanceled(this.h, frame.cPointer(), (C.int)(feature))
 }
-func (this *QWebPage) OnFeaturePermissionRequestCanceled(slot func(frame *QWebFrame, feature QWebPage__Feature)) {
-	C.QWebPage_connect_featurePermissionRequestCanceled(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QWebPage) OnFeaturePermissionRequestCanceled(slot func(frame *QWebFrame, feature QWebPage__Feature)) *qt.SignalConnection {
+	_goptr := qt.UnsafeNewQMetaObject__Connection(C.QWebPage_connect_featurePermissionRequestCanceled(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QWebPage_featurePermissionRequestCanceled
@@ -1130,8 +1191,10 @@ func miqt_exec_callback_QWebPage_featurePermissionRequestCanceled(cb C.intptr_t,
 func (this *QWebPage) FullScreenRequested(fullScreenRequest QWebFullScreenRequest) {
 	C.QWebPage_fullScreenRequested(this.h, fullScreenRequest.cPointer())
 }
-func (this *QWebPage) OnFullScreenRequested(slot func(fullScreenRequest QWebFullScreenRequest)) {
-	C.QWebPage_connect_fullScreenRequested(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QWebPage) OnFullScreenRequested(slot func(fullScreenRequest QWebFullScreenRequest)) *qt.SignalConnection {
+	_goptr := qt.UnsafeNewQMetaObject__Connection(C.QWebPage_connect_fullScreenRequested(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QWebPage_fullScreenRequested
@@ -1160,8 +1223,10 @@ func (this *QWebPage) ConsoleMessageReceived(source QWebPage__MessageSource, lev
 	defer C.free(unsafe.Pointer(sourceID_ms.data))
 	C.QWebPage_consoleMessageReceived(this.h, (C.int)(source), (C.int)(level), message_ms, (C.int)(lineNumber), sourceID_ms)
 }
-func (this *QWebPage) OnConsoleMessageReceived(slot func(source QWebPage__MessageSource, level QWebPage__MessageLevel, message string, lineNumber int, sourceID string)) {
-	C.QWebPage_connect_consoleMessageReceived(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QWebPage) OnConsoleMessageReceived(slot func(source QWebPage__MessageSource, level QWebPage__MessageLevel, message string, lineNumber int, sourceID string)) *qt.SignalConnection {
+	_goptr := qt.UnsafeNewQMetaObject__Connection(C.QWebPage_connect_consoleMessageReceived(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QWebPage_consoleMessageReceived
@@ -1193,8 +1258,10 @@ func miqt_exec_callback_QWebPage_consoleMessageReceived(cb C.intptr_t, source C.
 func (this *QWebPage) RecentlyAudibleChanged(recentlyAudible bool) {
 	C.QWebPage_recentlyAudibleChanged(this.h, (C.bool)(recentlyAudible))
 }
-func (this *QWebPage) OnRecentlyAudibleChanged(slot func(recentlyAudible bool)) {
-	C.QWebPage_connect_recentlyAudibleChanged(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QWebPage) OnRecentlyAudibleChanged(slot func(recentlyAudible bool)) *qt.SignalConnection {
+	_goptr := qt.UnsafeNewQMetaObject__Connection(C.QWebPage_connect_recentlyAudibleChanged(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QWebPage_recentlyAudibleChanged
@@ -1326,7 +1393,11 @@ func (this *QWebPage) callVirtualBase_TriggerAction(action QWebPage__WebAction, 
 
 }
 func (this *QWebPage) OnTriggerAction(slot func(super func(action QWebPage__WebAction, checked bool), action QWebPage__WebAction, checked bool)) {
-	ok := C.QWebPage_override_virtual_triggerAction(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QWebPage_override_virtual_triggerAction(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1354,7 +1425,11 @@ func (this *QWebPage) callVirtualBase_Event(param1 *qt.QEvent) bool {
 
 }
 func (this *QWebPage) OnEvent(slot func(super func(param1 *qt.QEvent) bool, param1 *qt.QEvent) bool) {
-	ok := C.QWebPage_override_virtual_event(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QWebPage_override_virtual_event(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1382,7 +1457,11 @@ func (this *QWebPage) callVirtualBase_Extension(extension QWebPage__Extension, o
 
 }
 func (this *QWebPage) OnExtension(slot func(super func(extension QWebPage__Extension, option *QWebPage__ExtensionOption, output *QWebPage__ExtensionReturn) bool, extension QWebPage__Extension, option *QWebPage__ExtensionOption, output *QWebPage__ExtensionReturn) bool) {
-	ok := C.QWebPage_override_virtual_extension(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QWebPage_override_virtual_extension(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1414,7 +1493,11 @@ func (this *QWebPage) callVirtualBase_SupportsExtension(extension QWebPage__Exte
 
 }
 func (this *QWebPage) OnSupportsExtension(slot func(super func(extension QWebPage__Extension) bool, extension QWebPage__Extension) bool) {
-	ok := C.QWebPage_override_virtual_supportsExtension(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QWebPage_override_virtual_supportsExtension(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1442,7 +1525,11 @@ func (this *QWebPage) callVirtualBase_ShouldInterruptJavaScript() bool {
 
 }
 func (this *QWebPage) OnShouldInterruptJavaScript(slot func(super func() bool) bool) {
-	ok := C.QWebPage_override_virtual_shouldInterruptJavaScript(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QWebPage_override_virtual_shouldInterruptJavaScript(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1467,7 +1554,11 @@ func (this *QWebPage) callVirtualBase_CreateWindow(typeVal QWebPage__WebWindowTy
 
 }
 func (this *QWebPage) OnCreateWindow(slot func(super func(typeVal QWebPage__WebWindowType) *QWebPage, typeVal QWebPage__WebWindowType) *QWebPage) {
-	ok := C.QWebPage_override_virtual_createWindow(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QWebPage_override_virtual_createWindow(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1519,7 +1610,11 @@ func (this *QWebPage) callVirtualBase_CreatePlugin(classid string, url *qt.QUrl,
 
 }
 func (this *QWebPage) OnCreatePlugin(slot func(super func(classid string, url *qt.QUrl, paramNames []string, paramValues []string) *qt.QObject, classid string, url *qt.QUrl, paramNames []string, paramValues []string) *qt.QObject) {
-	ok := C.QWebPage_override_virtual_createPlugin(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QWebPage_override_virtual_createPlugin(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1573,7 +1668,11 @@ func (this *QWebPage) callVirtualBase_AcceptNavigationRequest(frame *QWebFrame, 
 
 }
 func (this *QWebPage) OnAcceptNavigationRequest(slot func(super func(frame *QWebFrame, request *network.QNetworkRequest, typeVal QWebPage__NavigationType) bool, frame *QWebFrame, request *network.QNetworkRequest, typeVal QWebPage__NavigationType) bool) {
-	ok := C.QWebPage_override_virtual_acceptNavigationRequest(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QWebPage_override_virtual_acceptNavigationRequest(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1611,7 +1710,11 @@ func (this *QWebPage) callVirtualBase_ChooseFile(originatingFrame *QWebFrame, ol
 	return _ret
 }
 func (this *QWebPage) OnChooseFile(slot func(super func(originatingFrame *QWebFrame, oldFile string) string, originatingFrame *QWebFrame, oldFile string) string) {
-	ok := C.QWebPage_override_virtual_chooseFile(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QWebPage_override_virtual_chooseFile(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1651,7 +1754,11 @@ func (this *QWebPage) callVirtualBase_JavaScriptAlert(originatingFrame *QWebFram
 
 }
 func (this *QWebPage) OnJavaScriptAlert(slot func(super func(originatingFrame *QWebFrame, msg string), originatingFrame *QWebFrame, msg string)) {
-	ok := C.QWebPage_override_virtual_javaScriptAlert(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QWebPage_override_virtual_javaScriptAlert(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1686,7 +1793,11 @@ func (this *QWebPage) callVirtualBase_JavaScriptConfirm(originatingFrame *QWebFr
 
 }
 func (this *QWebPage) OnJavaScriptConfirm(slot func(super func(originatingFrame *QWebFrame, msg string) bool, originatingFrame *QWebFrame, msg string) bool) {
-	ok := C.QWebPage_override_virtual_javaScriptConfirm(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QWebPage_override_virtual_javaScriptConfirm(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1727,7 +1838,11 @@ func (this *QWebPage) callVirtualBase_JavaScriptConsoleMessage(message string, l
 
 }
 func (this *QWebPage) OnJavaScriptConsoleMessage(slot func(super func(message string, lineNumber int, sourceID string), message string, lineNumber int, sourceID string)) {
-	ok := C.QWebPage_override_virtual_javaScriptConsoleMessage(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QWebPage_override_virtual_javaScriptConsoleMessage(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1764,7 +1879,11 @@ func (this *QWebPage) callVirtualBase_UserAgentForUrl(url *qt.QUrl) string {
 	return _ret
 }
 func (this *QWebPage) OnUserAgentForUrl(slot func(super func(url *qt.QUrl) string, url *qt.QUrl) string) {
-	ok := C.QWebPage_override_virtual_userAgentForUrl(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QWebPage_override_virtual_userAgentForUrl(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1795,7 +1914,11 @@ func (this *QWebPage) callVirtualBase_EventFilter(watched *qt.QObject, event *qt
 
 }
 func (this *QWebPage) OnEventFilter(slot func(super func(watched *qt.QObject, event *qt.QEvent) bool, watched *qt.QObject, event *qt.QEvent) bool) {
-	ok := C.QWebPage_override_virtual_eventFilter(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QWebPage_override_virtual_eventFilter(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1825,7 +1948,11 @@ func (this *QWebPage) callVirtualBase_TimerEvent(event *qt.QTimerEvent) {
 
 }
 func (this *QWebPage) OnTimerEvent(slot func(super func(event *qt.QTimerEvent), event *qt.QTimerEvent)) {
-	ok := C.QWebPage_override_virtual_timerEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QWebPage_override_virtual_timerEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1851,7 +1978,11 @@ func (this *QWebPage) callVirtualBase_ChildEvent(event *qt.QChildEvent) {
 
 }
 func (this *QWebPage) OnChildEvent(slot func(super func(event *qt.QChildEvent), event *qt.QChildEvent)) {
-	ok := C.QWebPage_override_virtual_childEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QWebPage_override_virtual_childEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1877,7 +2008,11 @@ func (this *QWebPage) callVirtualBase_CustomEvent(event *qt.QEvent) {
 
 }
 func (this *QWebPage) OnCustomEvent(slot func(super func(event *qt.QEvent), event *qt.QEvent)) {
-	ok := C.QWebPage_override_virtual_customEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QWebPage_override_virtual_customEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1903,7 +2038,11 @@ func (this *QWebPage) callVirtualBase_ConnectNotify(signal *qt.QMetaMethod) {
 
 }
 func (this *QWebPage) OnConnectNotify(slot func(super func(signal *qt.QMetaMethod), signal *qt.QMetaMethod)) {
-	ok := C.QWebPage_override_virtual_connectNotify(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QWebPage_override_virtual_connectNotify(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1929,7 +2068,11 @@ func (this *QWebPage) callVirtualBase_DisconnectNotify(signal *qt.QMetaMethod) {
 
 }
 func (this *QWebPage) OnDisconnectNotify(slot func(super func(signal *qt.QMetaMethod), signal *qt.QMetaMethod)) {
-	ok := C.QWebPage_override_virtual_disconnectNotify(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QWebPage_override_virtual_disconnectNotify(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}

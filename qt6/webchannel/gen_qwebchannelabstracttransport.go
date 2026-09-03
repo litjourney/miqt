@@ -15,6 +15,11 @@ import (
 	"unsafe"
 )
 
+//export miqt_exec_callback_handle_release_QWebChannelAbstractTransport
+func miqt_exec_callback_handle_release_QWebChannelAbstractTransport(cb C.intptr_t) {
+	cgo.Handle(cb).Delete()
+}
+
 type QWebChannelAbstractTransport struct {
 	h *C.QWebChannelAbstractTransport
 	*qt6.QObject
@@ -89,8 +94,10 @@ func (this *QWebChannelAbstractTransport) SendMessage(message *qt6.QJsonObject) 
 func (this *QWebChannelAbstractTransport) MessageReceived(message *qt6.QJsonObject, transport *QWebChannelAbstractTransport) {
 	C.QWebChannelAbstractTransport_messageReceived(this.h, (*C.QJsonObject)(message.UnsafePointer()), transport.cPointer())
 }
-func (this *QWebChannelAbstractTransport) OnMessageReceived(slot func(message *qt6.QJsonObject, transport *QWebChannelAbstractTransport)) {
-	C.QWebChannelAbstractTransport_connect_messageReceived(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QWebChannelAbstractTransport) OnMessageReceived(slot func(message *qt6.QJsonObject, transport *QWebChannelAbstractTransport)) *qt6.SignalConnection {
+	_goptr := qt6.UnsafeNewQMetaObject__Connection(C.QWebChannelAbstractTransport_connect_messageReceived(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QWebChannelAbstractTransport_messageReceived
@@ -188,7 +195,11 @@ func (this *QWebChannelAbstractTransport) IsSignalConnected(signal *qt6.QMetaMet
 
 }
 func (this *QWebChannelAbstractTransport) OnSendMessage(slot func(message *qt6.QJsonObject)) {
-	ok := C.QWebChannelAbstractTransport_override_virtual_sendMessage(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QWebChannelAbstractTransport_override_virtual_sendMessage(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -214,7 +225,11 @@ func (this *QWebChannelAbstractTransport) callVirtualBase_Event(event *qt6.QEven
 
 }
 func (this *QWebChannelAbstractTransport) OnEvent(slot func(super func(event *qt6.QEvent) bool, event *qt6.QEvent) bool) {
-	ok := C.QWebChannelAbstractTransport_override_virtual_event(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QWebChannelAbstractTransport_override_virtual_event(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -242,7 +257,11 @@ func (this *QWebChannelAbstractTransport) callVirtualBase_EventFilter(watched *q
 
 }
 func (this *QWebChannelAbstractTransport) OnEventFilter(slot func(super func(watched *qt6.QObject, event *qt6.QEvent) bool, watched *qt6.QObject, event *qt6.QEvent) bool) {
-	ok := C.QWebChannelAbstractTransport_override_virtual_eventFilter(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QWebChannelAbstractTransport_override_virtual_eventFilter(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -272,7 +291,11 @@ func (this *QWebChannelAbstractTransport) callVirtualBase_TimerEvent(event *qt6.
 
 }
 func (this *QWebChannelAbstractTransport) OnTimerEvent(slot func(super func(event *qt6.QTimerEvent), event *qt6.QTimerEvent)) {
-	ok := C.QWebChannelAbstractTransport_override_virtual_timerEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QWebChannelAbstractTransport_override_virtual_timerEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -298,7 +321,11 @@ func (this *QWebChannelAbstractTransport) callVirtualBase_ChildEvent(event *qt6.
 
 }
 func (this *QWebChannelAbstractTransport) OnChildEvent(slot func(super func(event *qt6.QChildEvent), event *qt6.QChildEvent)) {
-	ok := C.QWebChannelAbstractTransport_override_virtual_childEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QWebChannelAbstractTransport_override_virtual_childEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -324,7 +351,11 @@ func (this *QWebChannelAbstractTransport) callVirtualBase_CustomEvent(event *qt6
 
 }
 func (this *QWebChannelAbstractTransport) OnCustomEvent(slot func(super func(event *qt6.QEvent), event *qt6.QEvent)) {
-	ok := C.QWebChannelAbstractTransport_override_virtual_customEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QWebChannelAbstractTransport_override_virtual_customEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -350,7 +381,11 @@ func (this *QWebChannelAbstractTransport) callVirtualBase_ConnectNotify(signal *
 
 }
 func (this *QWebChannelAbstractTransport) OnConnectNotify(slot func(super func(signal *qt6.QMetaMethod), signal *qt6.QMetaMethod)) {
-	ok := C.QWebChannelAbstractTransport_override_virtual_connectNotify(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QWebChannelAbstractTransport_override_virtual_connectNotify(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -376,7 +411,11 @@ func (this *QWebChannelAbstractTransport) callVirtualBase_DisconnectNotify(signa
 
 }
 func (this *QWebChannelAbstractTransport) OnDisconnectNotify(slot func(super func(signal *qt6.QMetaMethod), signal *qt6.QMetaMethod)) {
-	ok := C.QWebChannelAbstractTransport_override_virtual_disconnectNotify(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QWebChannelAbstractTransport_override_virtual_disconnectNotify(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}

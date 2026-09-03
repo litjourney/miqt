@@ -15,6 +15,11 @@ import (
 	"unsafe"
 )
 
+//export miqt_exec_callback_handle_release_QDesignerOptionsPageInterface
+func miqt_exec_callback_handle_release_QDesignerOptionsPageInterface(cb C.intptr_t) {
+	cgo.Handle(cb).Delete()
+}
+
 type QDesignerOptionsPageInterface struct {
 	h *C.QDesignerOptionsPageInterface
 }
@@ -72,7 +77,11 @@ func (this *QDesignerOptionsPageInterface) Finish() {
 	C.QDesignerOptionsPageInterface_finish(this.h)
 }
 func (this *QDesignerOptionsPageInterface) OnName(slot func() string) {
-	ok := C.QDesignerOptionsPageInterface_override_virtual_name(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QDesignerOptionsPageInterface_override_virtual_name(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -94,7 +103,11 @@ func miqt_exec_callback_QDesignerOptionsPageInterface_name(self *C.QDesignerOpti
 
 }
 func (this *QDesignerOptionsPageInterface) OnCreatePage(slot func(parent *qt6.QWidget) *qt6.QWidget) {
-	ok := C.QDesignerOptionsPageInterface_override_virtual_createPage(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QDesignerOptionsPageInterface_override_virtual_createPage(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -116,7 +129,11 @@ func miqt_exec_callback_QDesignerOptionsPageInterface_createPage(self *C.QDesign
 
 }
 func (this *QDesignerOptionsPageInterface) OnApply(slot func()) {
-	ok := C.QDesignerOptionsPageInterface_override_virtual_apply(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QDesignerOptionsPageInterface_override_virtual_apply(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -133,7 +150,11 @@ func miqt_exec_callback_QDesignerOptionsPageInterface_apply(self *C.QDesignerOpt
 
 }
 func (this *QDesignerOptionsPageInterface) OnFinish(slot func()) {
-	ok := C.QDesignerOptionsPageInterface_override_virtual_finish(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QDesignerOptionsPageInterface_override_virtual_finish(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}

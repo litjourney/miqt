@@ -1,3 +1,5 @@
+#include <memory>
+#include <utility>
 #include <QList>
 #include <QMediaControl>
 #include <QMediaNetworkAccessControl>
@@ -15,6 +17,7 @@
 extern "C" {
 #endif
 
+void miqt_exec_callback_handle_release_QMediaNetworkAccessControl(intptr_t);
 void miqt_exec_callback_QMediaNetworkAccessControl_configurationChanged(intptr_t, QNetworkConfiguration*);
 #ifdef __cplusplus
 } /* extern C */
@@ -72,13 +75,15 @@ void QMediaNetworkAccessControl_configurationChanged(QMediaNetworkAccessControl*
 	self->configurationChanged(*configuration);
 }
 
-void QMediaNetworkAccessControl_connect_configurationChanged(QMediaNetworkAccessControl* self, intptr_t slot) {
-	QMediaNetworkAccessControl::connect(self, static_cast<void (QMediaNetworkAccessControl::*)(const QNetworkConfiguration&)>(&QMediaNetworkAccessControl::configurationChanged), self, [=](const QNetworkConfiguration& configuration) {
+void* QMediaNetworkAccessControl_connect_configurationChanged(QMediaNetworkAccessControl* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QMediaNetworkAccessControl>>(slot);
+	return new QMetaObject::Connection(QMediaNetworkAccessControl::connect(self, static_cast<void (QMediaNetworkAccessControl::*)(const QNetworkConfiguration&)>(&QMediaNetworkAccessControl::configurationChanged), self, [slot_handle](const QNetworkConfiguration& configuration) {
+		intptr_t slot = slot_handle->value();
 		const QNetworkConfiguration& configuration_ret = configuration;
 		// Cast returned reference into pointer
 		QNetworkConfiguration* sigval1 = const_cast<QNetworkConfiguration*>(&configuration_ret);
 		miqt_exec_callback_QMediaNetworkAccessControl_configurationChanged(slot, sigval1);
-	});
+	}));
 }
 
 struct miqt_string QMediaNetworkAccessControl_tr2(const char* s, const char* c) {

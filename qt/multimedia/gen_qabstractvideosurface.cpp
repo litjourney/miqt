@@ -1,3 +1,5 @@
+#include <memory>
+#include <utility>
 #include <QAbstractVideoSurface>
 #include <QChildEvent>
 #include <QEvent>
@@ -19,6 +21,7 @@
 extern "C" {
 #endif
 
+void miqt_exec_callback_handle_release_QAbstractVideoSurface(intptr_t);
 void miqt_exec_callback_QAbstractVideoSurface_activeChanged(intptr_t, bool);
 void miqt_exec_callback_QAbstractVideoSurface_surfaceFormatChanged(intptr_t, QVideoSurfaceFormat*);
 void miqt_exec_callback_QAbstractVideoSurface_supportedFormatsChanged(intptr_t);
@@ -49,17 +52,17 @@ public:
 	virtual ~MiqtVirtualQAbstractVideoSurface() override = default;
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__supportedPixelFormats = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QAbstractVideoSurface> handle__supportedPixelFormats;
 
 	// Subclass to allow providing a Go implementation
 	virtual QList<QVideoFrame::PixelFormat> supportedPixelFormats(QAbstractVideoBuffer::HandleType type) const override {
-		if (handle__supportedPixelFormats == 0) {
+		if (!handle__supportedPixelFormats) {
 			return QList<QVideoFrame::PixelFormat>(); // Pure virtual, there is no base we can call
 		}
 
 		QAbstractVideoBuffer::HandleType type_ret = type;
 		int sigval1 = static_cast<int>(type_ret);
-		struct miqt_array /* of int */  callback_return_value = miqt_exec_callback_QAbstractVideoSurface_supportedPixelFormats(this, handle__supportedPixelFormats, sigval1);
+		struct miqt_array /* of int */  callback_return_value = miqt_exec_callback_QAbstractVideoSurface_supportedPixelFormats(this, handle__supportedPixelFormats.value(), sigval1);
 		QList<QVideoFrame::PixelFormat> callback_return_value_QList;
 		callback_return_value_QList.reserve(callback_return_value.len);
 		int* callback_return_value_arr = static_cast<int*>(callback_return_value.data);
@@ -71,181 +74,181 @@ public:
 	}
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__isFormatSupported = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QAbstractVideoSurface> handle__isFormatSupported;
 
 	// Subclass to allow providing a Go implementation
 	virtual bool isFormatSupported(const QVideoSurfaceFormat& format) const override {
-		if (handle__isFormatSupported == 0) {
+		if (!handle__isFormatSupported) {
 			return QAbstractVideoSurface::isFormatSupported(format);
 		}
 
 		const QVideoSurfaceFormat& format_ret = format;
 		// Cast returned reference into pointer
 		QVideoSurfaceFormat* sigval1 = const_cast<QVideoSurfaceFormat*>(&format_ret);
-		bool callback_return_value = miqt_exec_callback_QAbstractVideoSurface_isFormatSupported(this, handle__isFormatSupported, sigval1);
+		bool callback_return_value = miqt_exec_callback_QAbstractVideoSurface_isFormatSupported(this, handle__isFormatSupported.value(), sigval1);
 		return callback_return_value;
 	}
 
 	friend bool QAbstractVideoSurface_virtualbase_isFormatSupported(const void* self, QVideoSurfaceFormat* format);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__nearestFormat = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QAbstractVideoSurface> handle__nearestFormat;
 
 	// Subclass to allow providing a Go implementation
 	virtual QVideoSurfaceFormat nearestFormat(const QVideoSurfaceFormat& format) const override {
-		if (handle__nearestFormat == 0) {
+		if (!handle__nearestFormat) {
 			return QAbstractVideoSurface::nearestFormat(format);
 		}
 
 		const QVideoSurfaceFormat& format_ret = format;
 		// Cast returned reference into pointer
 		QVideoSurfaceFormat* sigval1 = const_cast<QVideoSurfaceFormat*>(&format_ret);
-		QVideoSurfaceFormat* callback_return_value = miqt_exec_callback_QAbstractVideoSurface_nearestFormat(this, handle__nearestFormat, sigval1);
+		QVideoSurfaceFormat* callback_return_value = miqt_exec_callback_QAbstractVideoSurface_nearestFormat(this, handle__nearestFormat.value(), sigval1);
 		return *callback_return_value;
 	}
 
 	friend QVideoSurfaceFormat* QAbstractVideoSurface_virtualbase_nearestFormat(const void* self, QVideoSurfaceFormat* format);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__start = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QAbstractVideoSurface> handle__start;
 
 	// Subclass to allow providing a Go implementation
 	virtual bool start(const QVideoSurfaceFormat& format) override {
-		if (handle__start == 0) {
+		if (!handle__start) {
 			return QAbstractVideoSurface::start(format);
 		}
 
 		const QVideoSurfaceFormat& format_ret = format;
 		// Cast returned reference into pointer
 		QVideoSurfaceFormat* sigval1 = const_cast<QVideoSurfaceFormat*>(&format_ret);
-		bool callback_return_value = miqt_exec_callback_QAbstractVideoSurface_start(this, handle__start, sigval1);
+		bool callback_return_value = miqt_exec_callback_QAbstractVideoSurface_start(this, handle__start.value(), sigval1);
 		return callback_return_value;
 	}
 
 	friend bool QAbstractVideoSurface_virtualbase_start(void* self, QVideoSurfaceFormat* format);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__stop = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QAbstractVideoSurface> handle__stop;
 
 	// Subclass to allow providing a Go implementation
 	virtual void stop() override {
-		if (handle__stop == 0) {
+		if (!handle__stop) {
 			QAbstractVideoSurface::stop();
 			return;
 		}
 
-		miqt_exec_callback_QAbstractVideoSurface_stop(this, handle__stop);
+		miqt_exec_callback_QAbstractVideoSurface_stop(this, handle__stop.value());
 
 	}
 
 	friend void QAbstractVideoSurface_virtualbase_stop(void* self);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__present = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QAbstractVideoSurface> handle__present;
 
 	// Subclass to allow providing a Go implementation
 	virtual bool present(const QVideoFrame& frame) override {
-		if (handle__present == 0) {
+		if (!handle__present) {
 			return false; // Pure virtual, there is no base we can call
 		}
 
 		const QVideoFrame& frame_ret = frame;
 		// Cast returned reference into pointer
 		QVideoFrame* sigval1 = const_cast<QVideoFrame*>(&frame_ret);
-		bool callback_return_value = miqt_exec_callback_QAbstractVideoSurface_present(this, handle__present, sigval1);
+		bool callback_return_value = miqt_exec_callback_QAbstractVideoSurface_present(this, handle__present.value(), sigval1);
 		return callback_return_value;
 	}
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__event = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QAbstractVideoSurface> handle__event;
 
 	// Subclass to allow providing a Go implementation
 	virtual bool event(QEvent* event) override {
-		if (handle__event == 0) {
+		if (!handle__event) {
 			return QAbstractVideoSurface::event(event);
 		}
 
 		QEvent* sigval1 = event;
-		bool callback_return_value = miqt_exec_callback_QAbstractVideoSurface_event(this, handle__event, sigval1);
+		bool callback_return_value = miqt_exec_callback_QAbstractVideoSurface_event(this, handle__event.value(), sigval1);
 		return callback_return_value;
 	}
 
 	friend bool QAbstractVideoSurface_virtualbase_event(void* self, QEvent* event);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__eventFilter = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QAbstractVideoSurface> handle__eventFilter;
 
 	// Subclass to allow providing a Go implementation
 	virtual bool eventFilter(QObject* watched, QEvent* event) override {
-		if (handle__eventFilter == 0) {
+		if (!handle__eventFilter) {
 			return QAbstractVideoSurface::eventFilter(watched, event);
 		}
 
 		QObject* sigval1 = watched;
 		QEvent* sigval2 = event;
-		bool callback_return_value = miqt_exec_callback_QAbstractVideoSurface_eventFilter(this, handle__eventFilter, sigval1, sigval2);
+		bool callback_return_value = miqt_exec_callback_QAbstractVideoSurface_eventFilter(this, handle__eventFilter.value(), sigval1, sigval2);
 		return callback_return_value;
 	}
 
 	friend bool QAbstractVideoSurface_virtualbase_eventFilter(void* self, QObject* watched, QEvent* event);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__timerEvent = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QAbstractVideoSurface> handle__timerEvent;
 
 	// Subclass to allow providing a Go implementation
 	virtual void timerEvent(QTimerEvent* event) override {
-		if (handle__timerEvent == 0) {
+		if (!handle__timerEvent) {
 			QAbstractVideoSurface::timerEvent(event);
 			return;
 		}
 
 		QTimerEvent* sigval1 = event;
-		miqt_exec_callback_QAbstractVideoSurface_timerEvent(this, handle__timerEvent, sigval1);
+		miqt_exec_callback_QAbstractVideoSurface_timerEvent(this, handle__timerEvent.value(), sigval1);
 
 	}
 
 	friend void QAbstractVideoSurface_virtualbase_timerEvent(void* self, QTimerEvent* event);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__childEvent = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QAbstractVideoSurface> handle__childEvent;
 
 	// Subclass to allow providing a Go implementation
 	virtual void childEvent(QChildEvent* event) override {
-		if (handle__childEvent == 0) {
+		if (!handle__childEvent) {
 			QAbstractVideoSurface::childEvent(event);
 			return;
 		}
 
 		QChildEvent* sigval1 = event;
-		miqt_exec_callback_QAbstractVideoSurface_childEvent(this, handle__childEvent, sigval1);
+		miqt_exec_callback_QAbstractVideoSurface_childEvent(this, handle__childEvent.value(), sigval1);
 
 	}
 
 	friend void QAbstractVideoSurface_virtualbase_childEvent(void* self, QChildEvent* event);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__customEvent = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QAbstractVideoSurface> handle__customEvent;
 
 	// Subclass to allow providing a Go implementation
 	virtual void customEvent(QEvent* event) override {
-		if (handle__customEvent == 0) {
+		if (!handle__customEvent) {
 			QAbstractVideoSurface::customEvent(event);
 			return;
 		}
 
 		QEvent* sigval1 = event;
-		miqt_exec_callback_QAbstractVideoSurface_customEvent(this, handle__customEvent, sigval1);
+		miqt_exec_callback_QAbstractVideoSurface_customEvent(this, handle__customEvent.value(), sigval1);
 
 	}
 
 	friend void QAbstractVideoSurface_virtualbase_customEvent(void* self, QEvent* event);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__connectNotify = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QAbstractVideoSurface> handle__connectNotify;
 
 	// Subclass to allow providing a Go implementation
 	virtual void connectNotify(const QMetaMethod& signal) override {
-		if (handle__connectNotify == 0) {
+		if (!handle__connectNotify) {
 			QAbstractVideoSurface::connectNotify(signal);
 			return;
 		}
@@ -253,18 +256,18 @@ public:
 		const QMetaMethod& signal_ret = signal;
 		// Cast returned reference into pointer
 		QMetaMethod* sigval1 = const_cast<QMetaMethod*>(&signal_ret);
-		miqt_exec_callback_QAbstractVideoSurface_connectNotify(this, handle__connectNotify, sigval1);
+		miqt_exec_callback_QAbstractVideoSurface_connectNotify(this, handle__connectNotify.value(), sigval1);
 
 	}
 
 	friend void QAbstractVideoSurface_virtualbase_connectNotify(void* self, QMetaMethod* signal);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__disconnectNotify = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QAbstractVideoSurface> handle__disconnectNotify;
 
 	// Subclass to allow providing a Go implementation
 	virtual void disconnectNotify(const QMetaMethod& signal) override {
-		if (handle__disconnectNotify == 0) {
+		if (!handle__disconnectNotify) {
 			QAbstractVideoSurface::disconnectNotify(signal);
 			return;
 		}
@@ -272,7 +275,7 @@ public:
 		const QMetaMethod& signal_ret = signal;
 		// Cast returned reference into pointer
 		QMetaMethod* sigval1 = const_cast<QMetaMethod*>(&signal_ret);
-		miqt_exec_callback_QAbstractVideoSurface_disconnectNotify(this, handle__disconnectNotify, sigval1);
+		miqt_exec_callback_QAbstractVideoSurface_disconnectNotify(this, handle__disconnectNotify.value(), sigval1);
 
 	}
 
@@ -384,47 +387,55 @@ void QAbstractVideoSurface_activeChanged(QAbstractVideoSurface* self, bool activ
 	self->activeChanged(active);
 }
 
-void QAbstractVideoSurface_connect_activeChanged(QAbstractVideoSurface* self, intptr_t slot) {
-	QAbstractVideoSurface::connect(self, static_cast<void (QAbstractVideoSurface::*)(bool)>(&QAbstractVideoSurface::activeChanged), self, [=](bool active) {
+void* QAbstractVideoSurface_connect_activeChanged(QAbstractVideoSurface* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QAbstractVideoSurface>>(slot);
+	return new QMetaObject::Connection(QAbstractVideoSurface::connect(self, static_cast<void (QAbstractVideoSurface::*)(bool)>(&QAbstractVideoSurface::activeChanged), self, [slot_handle](bool active) {
+		intptr_t slot = slot_handle->value();
 		bool sigval1 = active;
 		miqt_exec_callback_QAbstractVideoSurface_activeChanged(slot, sigval1);
-	});
+	}));
 }
 
 void QAbstractVideoSurface_surfaceFormatChanged(QAbstractVideoSurface* self, QVideoSurfaceFormat* format) {
 	self->surfaceFormatChanged(*format);
 }
 
-void QAbstractVideoSurface_connect_surfaceFormatChanged(QAbstractVideoSurface* self, intptr_t slot) {
-	QAbstractVideoSurface::connect(self, static_cast<void (QAbstractVideoSurface::*)(const QVideoSurfaceFormat&)>(&QAbstractVideoSurface::surfaceFormatChanged), self, [=](const QVideoSurfaceFormat& format) {
+void* QAbstractVideoSurface_connect_surfaceFormatChanged(QAbstractVideoSurface* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QAbstractVideoSurface>>(slot);
+	return new QMetaObject::Connection(QAbstractVideoSurface::connect(self, static_cast<void (QAbstractVideoSurface::*)(const QVideoSurfaceFormat&)>(&QAbstractVideoSurface::surfaceFormatChanged), self, [slot_handle](const QVideoSurfaceFormat& format) {
+		intptr_t slot = slot_handle->value();
 		const QVideoSurfaceFormat& format_ret = format;
 		// Cast returned reference into pointer
 		QVideoSurfaceFormat* sigval1 = const_cast<QVideoSurfaceFormat*>(&format_ret);
 		miqt_exec_callback_QAbstractVideoSurface_surfaceFormatChanged(slot, sigval1);
-	});
+	}));
 }
 
 void QAbstractVideoSurface_supportedFormatsChanged(QAbstractVideoSurface* self) {
 	self->supportedFormatsChanged();
 }
 
-void QAbstractVideoSurface_connect_supportedFormatsChanged(QAbstractVideoSurface* self, intptr_t slot) {
-	QAbstractVideoSurface::connect(self, static_cast<void (QAbstractVideoSurface::*)()>(&QAbstractVideoSurface::supportedFormatsChanged), self, [=]() {
+void* QAbstractVideoSurface_connect_supportedFormatsChanged(QAbstractVideoSurface* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QAbstractVideoSurface>>(slot);
+	return new QMetaObject::Connection(QAbstractVideoSurface::connect(self, static_cast<void (QAbstractVideoSurface::*)()>(&QAbstractVideoSurface::supportedFormatsChanged), self, [slot_handle]() {
+		intptr_t slot = slot_handle->value();
 		miqt_exec_callback_QAbstractVideoSurface_supportedFormatsChanged(slot);
-	});
+	}));
 }
 
 void QAbstractVideoSurface_nativeResolutionChanged(QAbstractVideoSurface* self, QSize* resolution) {
 	self->nativeResolutionChanged(*resolution);
 }
 
-void QAbstractVideoSurface_connect_nativeResolutionChanged(QAbstractVideoSurface* self, intptr_t slot) {
-	QAbstractVideoSurface::connect(self, static_cast<void (QAbstractVideoSurface::*)(const QSize&)>(&QAbstractVideoSurface::nativeResolutionChanged), self, [=](const QSize& resolution) {
+void* QAbstractVideoSurface_connect_nativeResolutionChanged(QAbstractVideoSurface* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QAbstractVideoSurface>>(slot);
+	return new QMetaObject::Connection(QAbstractVideoSurface::connect(self, static_cast<void (QAbstractVideoSurface::*)(const QSize&)>(&QAbstractVideoSurface::nativeResolutionChanged), self, [slot_handle](const QSize& resolution) {
+		intptr_t slot = slot_handle->value();
 		const QSize& resolution_ret = resolution;
 		// Cast returned reference into pointer
 		QSize* sigval1 = const_cast<QSize*>(&resolution_ret);
 		miqt_exec_callback_QAbstractVideoSurface_nativeResolutionChanged(slot, sigval1);
-	});
+	}));
 }
 
 struct miqt_string QAbstractVideoSurface_tr2(const char* s, const char* c) {
@@ -472,22 +483,24 @@ struct miqt_string QAbstractVideoSurface_trUtf83(const char* s, const char* c, i
 }
 
 bool QAbstractVideoSurface_override_virtual_supportedPixelFormats(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QAbstractVideoSurface> slot_handle(slot);
 	MiqtVirtualQAbstractVideoSurface* self_cast = dynamic_cast<MiqtVirtualQAbstractVideoSurface*>( (QAbstractVideoSurface*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__supportedPixelFormats = slot;
+	self_cast->handle__supportedPixelFormats = std::move(slot_handle);
 	return true;
 }
 
 bool QAbstractVideoSurface_override_virtual_isFormatSupported(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QAbstractVideoSurface> slot_handle(slot);
 	MiqtVirtualQAbstractVideoSurface* self_cast = dynamic_cast<MiqtVirtualQAbstractVideoSurface*>( (QAbstractVideoSurface*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__isFormatSupported = slot;
+	self_cast->handle__isFormatSupported = std::move(slot_handle);
 	return true;
 }
 
@@ -496,12 +509,13 @@ bool QAbstractVideoSurface_virtualbase_isFormatSupported(const void* self, QVide
 }
 
 bool QAbstractVideoSurface_override_virtual_nearestFormat(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QAbstractVideoSurface> slot_handle(slot);
 	MiqtVirtualQAbstractVideoSurface* self_cast = dynamic_cast<MiqtVirtualQAbstractVideoSurface*>( (QAbstractVideoSurface*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__nearestFormat = slot;
+	self_cast->handle__nearestFormat = std::move(slot_handle);
 	return true;
 }
 
@@ -510,12 +524,13 @@ QVideoSurfaceFormat* QAbstractVideoSurface_virtualbase_nearestFormat(const void*
 }
 
 bool QAbstractVideoSurface_override_virtual_start(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QAbstractVideoSurface> slot_handle(slot);
 	MiqtVirtualQAbstractVideoSurface* self_cast = dynamic_cast<MiqtVirtualQAbstractVideoSurface*>( (QAbstractVideoSurface*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__start = slot;
+	self_cast->handle__start = std::move(slot_handle);
 	return true;
 }
 
@@ -524,12 +539,13 @@ bool QAbstractVideoSurface_virtualbase_start(void* self, QVideoSurfaceFormat* fo
 }
 
 bool QAbstractVideoSurface_override_virtual_stop(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QAbstractVideoSurface> slot_handle(slot);
 	MiqtVirtualQAbstractVideoSurface* self_cast = dynamic_cast<MiqtVirtualQAbstractVideoSurface*>( (QAbstractVideoSurface*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__stop = slot;
+	self_cast->handle__stop = std::move(slot_handle);
 	return true;
 }
 
@@ -538,22 +554,24 @@ void QAbstractVideoSurface_virtualbase_stop(void* self) {
 }
 
 bool QAbstractVideoSurface_override_virtual_present(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QAbstractVideoSurface> slot_handle(slot);
 	MiqtVirtualQAbstractVideoSurface* self_cast = dynamic_cast<MiqtVirtualQAbstractVideoSurface*>( (QAbstractVideoSurface*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__present = slot;
+	self_cast->handle__present = std::move(slot_handle);
 	return true;
 }
 
 bool QAbstractVideoSurface_override_virtual_event(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QAbstractVideoSurface> slot_handle(slot);
 	MiqtVirtualQAbstractVideoSurface* self_cast = dynamic_cast<MiqtVirtualQAbstractVideoSurface*>( (QAbstractVideoSurface*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__event = slot;
+	self_cast->handle__event = std::move(slot_handle);
 	return true;
 }
 
@@ -562,12 +580,13 @@ bool QAbstractVideoSurface_virtualbase_event(void* self, QEvent* event) {
 }
 
 bool QAbstractVideoSurface_override_virtual_eventFilter(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QAbstractVideoSurface> slot_handle(slot);
 	MiqtVirtualQAbstractVideoSurface* self_cast = dynamic_cast<MiqtVirtualQAbstractVideoSurface*>( (QAbstractVideoSurface*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__eventFilter = slot;
+	self_cast->handle__eventFilter = std::move(slot_handle);
 	return true;
 }
 
@@ -576,12 +595,13 @@ bool QAbstractVideoSurface_virtualbase_eventFilter(void* self, QObject* watched,
 }
 
 bool QAbstractVideoSurface_override_virtual_timerEvent(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QAbstractVideoSurface> slot_handle(slot);
 	MiqtVirtualQAbstractVideoSurface* self_cast = dynamic_cast<MiqtVirtualQAbstractVideoSurface*>( (QAbstractVideoSurface*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__timerEvent = slot;
+	self_cast->handle__timerEvent = std::move(slot_handle);
 	return true;
 }
 
@@ -590,12 +610,13 @@ void QAbstractVideoSurface_virtualbase_timerEvent(void* self, QTimerEvent* event
 }
 
 bool QAbstractVideoSurface_override_virtual_childEvent(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QAbstractVideoSurface> slot_handle(slot);
 	MiqtVirtualQAbstractVideoSurface* self_cast = dynamic_cast<MiqtVirtualQAbstractVideoSurface*>( (QAbstractVideoSurface*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__childEvent = slot;
+	self_cast->handle__childEvent = std::move(slot_handle);
 	return true;
 }
 
@@ -604,12 +625,13 @@ void QAbstractVideoSurface_virtualbase_childEvent(void* self, QChildEvent* event
 }
 
 bool QAbstractVideoSurface_override_virtual_customEvent(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QAbstractVideoSurface> slot_handle(slot);
 	MiqtVirtualQAbstractVideoSurface* self_cast = dynamic_cast<MiqtVirtualQAbstractVideoSurface*>( (QAbstractVideoSurface*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__customEvent = slot;
+	self_cast->handle__customEvent = std::move(slot_handle);
 	return true;
 }
 
@@ -618,12 +640,13 @@ void QAbstractVideoSurface_virtualbase_customEvent(void* self, QEvent* event) {
 }
 
 bool QAbstractVideoSurface_override_virtual_connectNotify(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QAbstractVideoSurface> slot_handle(slot);
 	MiqtVirtualQAbstractVideoSurface* self_cast = dynamic_cast<MiqtVirtualQAbstractVideoSurface*>( (QAbstractVideoSurface*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__connectNotify = slot;
+	self_cast->handle__connectNotify = std::move(slot_handle);
 	return true;
 }
 
@@ -632,12 +655,13 @@ void QAbstractVideoSurface_virtualbase_connectNotify(void* self, QMetaMethod* si
 }
 
 bool QAbstractVideoSurface_override_virtual_disconnectNotify(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QAbstractVideoSurface> slot_handle(slot);
 	MiqtVirtualQAbstractVideoSurface* self_cast = dynamic_cast<MiqtVirtualQAbstractVideoSurface*>( (QAbstractVideoSurface*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__disconnectNotify = slot;
+	self_cast->handle__disconnectNotify = std::move(slot_handle);
 	return true;
 }
 

@@ -57,15 +57,15 @@ void QBarCategoryAxis_setMax(QBarCategoryAxis* self, struct miqt_string maxCateg
 struct miqt_string QBarCategoryAxis_max(const QBarCategoryAxis* self);
 void QBarCategoryAxis_setRange(QBarCategoryAxis* self, struct miqt_string minCategory, struct miqt_string maxCategory);
 void QBarCategoryAxis_categoriesChanged(QBarCategoryAxis* self);
-void QBarCategoryAxis_connect_categoriesChanged(QBarCategoryAxis* self, intptr_t slot);
+void* QBarCategoryAxis_connect_categoriesChanged(QBarCategoryAxis* self, intptr_t slot);
 void QBarCategoryAxis_minChanged(QBarCategoryAxis* self, struct miqt_string min);
-void QBarCategoryAxis_connect_minChanged(QBarCategoryAxis* self, intptr_t slot);
+void* QBarCategoryAxis_connect_minChanged(QBarCategoryAxis* self, intptr_t slot);
 void QBarCategoryAxis_maxChanged(QBarCategoryAxis* self, struct miqt_string max);
-void QBarCategoryAxis_connect_maxChanged(QBarCategoryAxis* self, intptr_t slot);
+void* QBarCategoryAxis_connect_maxChanged(QBarCategoryAxis* self, intptr_t slot);
 void QBarCategoryAxis_rangeChanged(QBarCategoryAxis* self, struct miqt_string min, struct miqt_string max);
-void QBarCategoryAxis_connect_rangeChanged(QBarCategoryAxis* self, intptr_t slot);
+void* QBarCategoryAxis_connect_rangeChanged(QBarCategoryAxis* self, intptr_t slot);
 void QBarCategoryAxis_countChanged(QBarCategoryAxis* self);
-void QBarCategoryAxis_connect_countChanged(QBarCategoryAxis* self, intptr_t slot);
+void* QBarCategoryAxis_connect_countChanged(QBarCategoryAxis* self, intptr_t slot);
 struct miqt_string QBarCategoryAxis_tr2(const char* s, const char* c);
 struct miqt_string QBarCategoryAxis_tr3(const char* s, const char* c, int n);
 

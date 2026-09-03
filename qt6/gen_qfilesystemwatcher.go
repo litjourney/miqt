@@ -14,6 +14,11 @@ import (
 	"unsafe"
 )
 
+//export miqt_exec_callback_handle_release_QFileSystemWatcher
+func miqt_exec_callback_handle_release_QFileSystemWatcher(cb C.intptr_t) {
+	cgo.Handle(cb).Delete()
+}
+
 type QFileSystemWatcher struct {
 	h *C.QFileSystemWatcher
 	*QObject
@@ -287,7 +292,11 @@ func (this *QFileSystemWatcher) callVirtualBase_Event(event *QEvent) bool {
 
 }
 func (this *QFileSystemWatcher) OnEvent(slot func(super func(event *QEvent) bool, event *QEvent) bool) {
-	ok := C.QFileSystemWatcher_override_virtual_event(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QFileSystemWatcher_override_virtual_event(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -315,7 +324,11 @@ func (this *QFileSystemWatcher) callVirtualBase_EventFilter(watched *QObject, ev
 
 }
 func (this *QFileSystemWatcher) OnEventFilter(slot func(super func(watched *QObject, event *QEvent) bool, watched *QObject, event *QEvent) bool) {
-	ok := C.QFileSystemWatcher_override_virtual_eventFilter(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QFileSystemWatcher_override_virtual_eventFilter(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -345,7 +358,11 @@ func (this *QFileSystemWatcher) callVirtualBase_TimerEvent(event *QTimerEvent) {
 
 }
 func (this *QFileSystemWatcher) OnTimerEvent(slot func(super func(event *QTimerEvent), event *QTimerEvent)) {
-	ok := C.QFileSystemWatcher_override_virtual_timerEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QFileSystemWatcher_override_virtual_timerEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -371,7 +388,11 @@ func (this *QFileSystemWatcher) callVirtualBase_ChildEvent(event *QChildEvent) {
 
 }
 func (this *QFileSystemWatcher) OnChildEvent(slot func(super func(event *QChildEvent), event *QChildEvent)) {
-	ok := C.QFileSystemWatcher_override_virtual_childEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QFileSystemWatcher_override_virtual_childEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -397,7 +418,11 @@ func (this *QFileSystemWatcher) callVirtualBase_CustomEvent(event *QEvent) {
 
 }
 func (this *QFileSystemWatcher) OnCustomEvent(slot func(super func(event *QEvent), event *QEvent)) {
-	ok := C.QFileSystemWatcher_override_virtual_customEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QFileSystemWatcher_override_virtual_customEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -423,7 +448,11 @@ func (this *QFileSystemWatcher) callVirtualBase_ConnectNotify(signal *QMetaMetho
 
 }
 func (this *QFileSystemWatcher) OnConnectNotify(slot func(super func(signal *QMetaMethod), signal *QMetaMethod)) {
-	ok := C.QFileSystemWatcher_override_virtual_connectNotify(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QFileSystemWatcher_override_virtual_connectNotify(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -449,7 +478,11 @@ func (this *QFileSystemWatcher) callVirtualBase_DisconnectNotify(signal *QMetaMe
 
 }
 func (this *QFileSystemWatcher) OnDisconnectNotify(slot func(super func(signal *QMetaMethod), signal *QMetaMethod)) {
-	ok := C.QFileSystemWatcher_override_virtual_disconnectNotify(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QFileSystemWatcher_override_virtual_disconnectNotify(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -468,8 +501,10 @@ func miqt_exec_callback_QFileSystemWatcher_disconnectNotify(self *C.QFileSystemW
 	gofunc((&QFileSystemWatcher{h: self}).callVirtualBase_DisconnectNotify, slotval1)
 
 }
-func (this *QFileSystemWatcher) OnFileChanged(slot func(path string)) {
-	C.QFileSystemWatcher_connect_fileChanged(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QFileSystemWatcher) OnFileChanged(slot func(path string)) *SignalConnection {
+	_goptr := UnsafeNewQMetaObject__Connection(C.QFileSystemWatcher_connect_fileChanged(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QFileSystemWatcher_fileChanged
@@ -488,8 +523,10 @@ func miqt_exec_callback_QFileSystemWatcher_fileChanged(cb C.intptr_t, path C.str
 	gofunc(slotval1)
 }
 
-func (this *QFileSystemWatcher) OnDirectoryChanged(slot func(path string)) {
-	C.QFileSystemWatcher_connect_directoryChanged(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QFileSystemWatcher) OnDirectoryChanged(slot func(path string)) *SignalConnection {
+	_goptr := UnsafeNewQMetaObject__Connection(C.QFileSystemWatcher_connect_directoryChanged(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QFileSystemWatcher_directoryChanged

@@ -15,6 +15,11 @@ import (
 	"unsafe"
 )
 
+//export miqt_exec_callback_handle_release_QDesignerResourceBrowserInterface
+func miqt_exec_callback_handle_release_QDesignerResourceBrowserInterface(cb C.intptr_t) {
+	cgo.Handle(cb).Delete()
+}
+
 type QDesignerResourceBrowserInterface struct {
 	h *C.QDesignerResourceBrowserInterface
 	*qt.QWidget
@@ -113,8 +118,10 @@ func (this *QDesignerResourceBrowserInterface) CurrentPathChanged(filePath strin
 	defer C.free(unsafe.Pointer(filePath_ms.data))
 	C.QDesignerResourceBrowserInterface_currentPathChanged(this.h, filePath_ms)
 }
-func (this *QDesignerResourceBrowserInterface) OnCurrentPathChanged(slot func(filePath string)) {
-	C.QDesignerResourceBrowserInterface_connect_currentPathChanged(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QDesignerResourceBrowserInterface) OnCurrentPathChanged(slot func(filePath string)) *qt.SignalConnection {
+	_goptr := qt.UnsafeNewQMetaObject__Connection(C.QDesignerResourceBrowserInterface_connect_currentPathChanged(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QDesignerResourceBrowserInterface_currentPathChanged
@@ -140,8 +147,10 @@ func (this *QDesignerResourceBrowserInterface) PathActivated(filePath string) {
 	defer C.free(unsafe.Pointer(filePath_ms.data))
 	C.QDesignerResourceBrowserInterface_pathActivated(this.h, filePath_ms)
 }
-func (this *QDesignerResourceBrowserInterface) OnPathActivated(slot func(filePath string)) {
-	C.QDesignerResourceBrowserInterface_connect_pathActivated(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QDesignerResourceBrowserInterface) OnPathActivated(slot func(filePath string)) *qt.SignalConnection {
+	_goptr := qt.UnsafeNewQMetaObject__Connection(C.QDesignerResourceBrowserInterface_connect_pathActivated(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QDesignerResourceBrowserInterface_pathActivated
@@ -326,7 +335,11 @@ func (this *QDesignerResourceBrowserInterface) IsSignalConnected(signal *qt.QMet
 
 }
 func (this *QDesignerResourceBrowserInterface) OnSetCurrentPath(slot func(filePath string)) {
-	ok := C.QDesignerResourceBrowserInterface_override_virtual_setCurrentPath(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QDesignerResourceBrowserInterface_override_virtual_setCurrentPath(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -349,7 +362,11 @@ func miqt_exec_callback_QDesignerResourceBrowserInterface_setCurrentPath(self *C
 
 }
 func (this *QDesignerResourceBrowserInterface) OnCurrentPath(slot func() string) {
-	ok := C.QDesignerResourceBrowserInterface_override_virtual_currentPath(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QDesignerResourceBrowserInterface_override_virtual_currentPath(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -377,7 +394,11 @@ func (this *QDesignerResourceBrowserInterface) callVirtualBase_DevType() int {
 
 }
 func (this *QDesignerResourceBrowserInterface) OnDevType(slot func(super func() int) int) {
-	ok := C.QDesignerResourceBrowserInterface_override_virtual_devType(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QDesignerResourceBrowserInterface_override_virtual_devType(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -402,7 +423,11 @@ func (this *QDesignerResourceBrowserInterface) callVirtualBase_SetVisible(visibl
 
 }
 func (this *QDesignerResourceBrowserInterface) OnSetVisible(slot func(super func(visible bool), visible bool)) {
-	ok := C.QDesignerResourceBrowserInterface_override_virtual_setVisible(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QDesignerResourceBrowserInterface_override_virtual_setVisible(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -430,7 +455,11 @@ func (this *QDesignerResourceBrowserInterface) callVirtualBase_SizeHint() *qt.QS
 
 }
 func (this *QDesignerResourceBrowserInterface) OnSizeHint(slot func(super func() *qt.QSize) *qt.QSize) {
-	ok := C.QDesignerResourceBrowserInterface_override_virtual_sizeHint(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QDesignerResourceBrowserInterface_override_virtual_sizeHint(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -457,7 +486,11 @@ func (this *QDesignerResourceBrowserInterface) callVirtualBase_MinimumSizeHint()
 
 }
 func (this *QDesignerResourceBrowserInterface) OnMinimumSizeHint(slot func(super func() *qt.QSize) *qt.QSize) {
-	ok := C.QDesignerResourceBrowserInterface_override_virtual_minimumSizeHint(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QDesignerResourceBrowserInterface_override_virtual_minimumSizeHint(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -482,7 +515,11 @@ func (this *QDesignerResourceBrowserInterface) callVirtualBase_HeightForWidth(pa
 
 }
 func (this *QDesignerResourceBrowserInterface) OnHeightForWidth(slot func(super func(param1 int) int, param1 int) int) {
-	ok := C.QDesignerResourceBrowserInterface_override_virtual_heightForWidth(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QDesignerResourceBrowserInterface_override_virtual_heightForWidth(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -510,7 +547,11 @@ func (this *QDesignerResourceBrowserInterface) callVirtualBase_HasHeightForWidth
 
 }
 func (this *QDesignerResourceBrowserInterface) OnHasHeightForWidth(slot func(super func() bool) bool) {
-	ok := C.QDesignerResourceBrowserInterface_override_virtual_hasHeightForWidth(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QDesignerResourceBrowserInterface_override_virtual_hasHeightForWidth(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -535,7 +576,11 @@ func (this *QDesignerResourceBrowserInterface) callVirtualBase_PaintEngine() *qt
 
 }
 func (this *QDesignerResourceBrowserInterface) OnPaintEngine(slot func(super func() *qt.QPaintEngine) *qt.QPaintEngine) {
-	ok := C.QDesignerResourceBrowserInterface_override_virtual_paintEngine(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QDesignerResourceBrowserInterface_override_virtual_paintEngine(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -560,7 +605,11 @@ func (this *QDesignerResourceBrowserInterface) callVirtualBase_Event(event *qt.Q
 
 }
 func (this *QDesignerResourceBrowserInterface) OnEvent(slot func(super func(event *qt.QEvent) bool, event *qt.QEvent) bool) {
-	ok := C.QDesignerResourceBrowserInterface_override_virtual_event(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QDesignerResourceBrowserInterface_override_virtual_event(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -588,7 +637,11 @@ func (this *QDesignerResourceBrowserInterface) callVirtualBase_MousePressEvent(e
 
 }
 func (this *QDesignerResourceBrowserInterface) OnMousePressEvent(slot func(super func(event *qt.QMouseEvent), event *qt.QMouseEvent)) {
-	ok := C.QDesignerResourceBrowserInterface_override_virtual_mousePressEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QDesignerResourceBrowserInterface_override_virtual_mousePressEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -614,7 +667,11 @@ func (this *QDesignerResourceBrowserInterface) callVirtualBase_MouseReleaseEvent
 
 }
 func (this *QDesignerResourceBrowserInterface) OnMouseReleaseEvent(slot func(super func(event *qt.QMouseEvent), event *qt.QMouseEvent)) {
-	ok := C.QDesignerResourceBrowserInterface_override_virtual_mouseReleaseEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QDesignerResourceBrowserInterface_override_virtual_mouseReleaseEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -640,7 +697,11 @@ func (this *QDesignerResourceBrowserInterface) callVirtualBase_MouseDoubleClickE
 
 }
 func (this *QDesignerResourceBrowserInterface) OnMouseDoubleClickEvent(slot func(super func(event *qt.QMouseEvent), event *qt.QMouseEvent)) {
-	ok := C.QDesignerResourceBrowserInterface_override_virtual_mouseDoubleClickEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QDesignerResourceBrowserInterface_override_virtual_mouseDoubleClickEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -666,7 +727,11 @@ func (this *QDesignerResourceBrowserInterface) callVirtualBase_MouseMoveEvent(ev
 
 }
 func (this *QDesignerResourceBrowserInterface) OnMouseMoveEvent(slot func(super func(event *qt.QMouseEvent), event *qt.QMouseEvent)) {
-	ok := C.QDesignerResourceBrowserInterface_override_virtual_mouseMoveEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QDesignerResourceBrowserInterface_override_virtual_mouseMoveEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -692,7 +757,11 @@ func (this *QDesignerResourceBrowserInterface) callVirtualBase_WheelEvent(event 
 
 }
 func (this *QDesignerResourceBrowserInterface) OnWheelEvent(slot func(super func(event *qt.QWheelEvent), event *qt.QWheelEvent)) {
-	ok := C.QDesignerResourceBrowserInterface_override_virtual_wheelEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QDesignerResourceBrowserInterface_override_virtual_wheelEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -718,7 +787,11 @@ func (this *QDesignerResourceBrowserInterface) callVirtualBase_KeyPressEvent(eve
 
 }
 func (this *QDesignerResourceBrowserInterface) OnKeyPressEvent(slot func(super func(event *qt.QKeyEvent), event *qt.QKeyEvent)) {
-	ok := C.QDesignerResourceBrowserInterface_override_virtual_keyPressEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QDesignerResourceBrowserInterface_override_virtual_keyPressEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -744,7 +817,11 @@ func (this *QDesignerResourceBrowserInterface) callVirtualBase_KeyReleaseEvent(e
 
 }
 func (this *QDesignerResourceBrowserInterface) OnKeyReleaseEvent(slot func(super func(event *qt.QKeyEvent), event *qt.QKeyEvent)) {
-	ok := C.QDesignerResourceBrowserInterface_override_virtual_keyReleaseEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QDesignerResourceBrowserInterface_override_virtual_keyReleaseEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -770,7 +847,11 @@ func (this *QDesignerResourceBrowserInterface) callVirtualBase_FocusInEvent(even
 
 }
 func (this *QDesignerResourceBrowserInterface) OnFocusInEvent(slot func(super func(event *qt.QFocusEvent), event *qt.QFocusEvent)) {
-	ok := C.QDesignerResourceBrowserInterface_override_virtual_focusInEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QDesignerResourceBrowserInterface_override_virtual_focusInEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -796,7 +877,11 @@ func (this *QDesignerResourceBrowserInterface) callVirtualBase_FocusOutEvent(eve
 
 }
 func (this *QDesignerResourceBrowserInterface) OnFocusOutEvent(slot func(super func(event *qt.QFocusEvent), event *qt.QFocusEvent)) {
-	ok := C.QDesignerResourceBrowserInterface_override_virtual_focusOutEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QDesignerResourceBrowserInterface_override_virtual_focusOutEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -822,7 +907,11 @@ func (this *QDesignerResourceBrowserInterface) callVirtualBase_EnterEvent(event 
 
 }
 func (this *QDesignerResourceBrowserInterface) OnEnterEvent(slot func(super func(event *qt.QEvent), event *qt.QEvent)) {
-	ok := C.QDesignerResourceBrowserInterface_override_virtual_enterEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QDesignerResourceBrowserInterface_override_virtual_enterEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -848,7 +937,11 @@ func (this *QDesignerResourceBrowserInterface) callVirtualBase_LeaveEvent(event 
 
 }
 func (this *QDesignerResourceBrowserInterface) OnLeaveEvent(slot func(super func(event *qt.QEvent), event *qt.QEvent)) {
-	ok := C.QDesignerResourceBrowserInterface_override_virtual_leaveEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QDesignerResourceBrowserInterface_override_virtual_leaveEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -874,7 +967,11 @@ func (this *QDesignerResourceBrowserInterface) callVirtualBase_PaintEvent(event 
 
 }
 func (this *QDesignerResourceBrowserInterface) OnPaintEvent(slot func(super func(event *qt.QPaintEvent), event *qt.QPaintEvent)) {
-	ok := C.QDesignerResourceBrowserInterface_override_virtual_paintEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QDesignerResourceBrowserInterface_override_virtual_paintEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -900,7 +997,11 @@ func (this *QDesignerResourceBrowserInterface) callVirtualBase_MoveEvent(event *
 
 }
 func (this *QDesignerResourceBrowserInterface) OnMoveEvent(slot func(super func(event *qt.QMoveEvent), event *qt.QMoveEvent)) {
-	ok := C.QDesignerResourceBrowserInterface_override_virtual_moveEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QDesignerResourceBrowserInterface_override_virtual_moveEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -926,7 +1027,11 @@ func (this *QDesignerResourceBrowserInterface) callVirtualBase_ResizeEvent(event
 
 }
 func (this *QDesignerResourceBrowserInterface) OnResizeEvent(slot func(super func(event *qt.QResizeEvent), event *qt.QResizeEvent)) {
-	ok := C.QDesignerResourceBrowserInterface_override_virtual_resizeEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QDesignerResourceBrowserInterface_override_virtual_resizeEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -952,7 +1057,11 @@ func (this *QDesignerResourceBrowserInterface) callVirtualBase_CloseEvent(event 
 
 }
 func (this *QDesignerResourceBrowserInterface) OnCloseEvent(slot func(super func(event *qt.QCloseEvent), event *qt.QCloseEvent)) {
-	ok := C.QDesignerResourceBrowserInterface_override_virtual_closeEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QDesignerResourceBrowserInterface_override_virtual_closeEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -978,7 +1087,11 @@ func (this *QDesignerResourceBrowserInterface) callVirtualBase_ContextMenuEvent(
 
 }
 func (this *QDesignerResourceBrowserInterface) OnContextMenuEvent(slot func(super func(event *qt.QContextMenuEvent), event *qt.QContextMenuEvent)) {
-	ok := C.QDesignerResourceBrowserInterface_override_virtual_contextMenuEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QDesignerResourceBrowserInterface_override_virtual_contextMenuEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1004,7 +1117,11 @@ func (this *QDesignerResourceBrowserInterface) callVirtualBase_TabletEvent(event
 
 }
 func (this *QDesignerResourceBrowserInterface) OnTabletEvent(slot func(super func(event *qt.QTabletEvent), event *qt.QTabletEvent)) {
-	ok := C.QDesignerResourceBrowserInterface_override_virtual_tabletEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QDesignerResourceBrowserInterface_override_virtual_tabletEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1030,7 +1147,11 @@ func (this *QDesignerResourceBrowserInterface) callVirtualBase_ActionEvent(event
 
 }
 func (this *QDesignerResourceBrowserInterface) OnActionEvent(slot func(super func(event *qt.QActionEvent), event *qt.QActionEvent)) {
-	ok := C.QDesignerResourceBrowserInterface_override_virtual_actionEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QDesignerResourceBrowserInterface_override_virtual_actionEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1056,7 +1177,11 @@ func (this *QDesignerResourceBrowserInterface) callVirtualBase_DragEnterEvent(ev
 
 }
 func (this *QDesignerResourceBrowserInterface) OnDragEnterEvent(slot func(super func(event *qt.QDragEnterEvent), event *qt.QDragEnterEvent)) {
-	ok := C.QDesignerResourceBrowserInterface_override_virtual_dragEnterEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QDesignerResourceBrowserInterface_override_virtual_dragEnterEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1082,7 +1207,11 @@ func (this *QDesignerResourceBrowserInterface) callVirtualBase_DragMoveEvent(eve
 
 }
 func (this *QDesignerResourceBrowserInterface) OnDragMoveEvent(slot func(super func(event *qt.QDragMoveEvent), event *qt.QDragMoveEvent)) {
-	ok := C.QDesignerResourceBrowserInterface_override_virtual_dragMoveEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QDesignerResourceBrowserInterface_override_virtual_dragMoveEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1108,7 +1237,11 @@ func (this *QDesignerResourceBrowserInterface) callVirtualBase_DragLeaveEvent(ev
 
 }
 func (this *QDesignerResourceBrowserInterface) OnDragLeaveEvent(slot func(super func(event *qt.QDragLeaveEvent), event *qt.QDragLeaveEvent)) {
-	ok := C.QDesignerResourceBrowserInterface_override_virtual_dragLeaveEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QDesignerResourceBrowserInterface_override_virtual_dragLeaveEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1134,7 +1267,11 @@ func (this *QDesignerResourceBrowserInterface) callVirtualBase_DropEvent(event *
 
 }
 func (this *QDesignerResourceBrowserInterface) OnDropEvent(slot func(super func(event *qt.QDropEvent), event *qt.QDropEvent)) {
-	ok := C.QDesignerResourceBrowserInterface_override_virtual_dropEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QDesignerResourceBrowserInterface_override_virtual_dropEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1160,7 +1297,11 @@ func (this *QDesignerResourceBrowserInterface) callVirtualBase_ShowEvent(event *
 
 }
 func (this *QDesignerResourceBrowserInterface) OnShowEvent(slot func(super func(event *qt.QShowEvent), event *qt.QShowEvent)) {
-	ok := C.QDesignerResourceBrowserInterface_override_virtual_showEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QDesignerResourceBrowserInterface_override_virtual_showEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1186,7 +1327,11 @@ func (this *QDesignerResourceBrowserInterface) callVirtualBase_HideEvent(event *
 
 }
 func (this *QDesignerResourceBrowserInterface) OnHideEvent(slot func(super func(event *qt.QHideEvent), event *qt.QHideEvent)) {
-	ok := C.QDesignerResourceBrowserInterface_override_virtual_hideEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QDesignerResourceBrowserInterface_override_virtual_hideEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1219,7 +1364,11 @@ func (this *QDesignerResourceBrowserInterface) callVirtualBase_NativeEvent(event
 
 }
 func (this *QDesignerResourceBrowserInterface) OnNativeEvent(slot func(super func(eventType []byte, message unsafe.Pointer, result *int64) bool, eventType []byte, message unsafe.Pointer, result *int64) bool) {
-	ok := C.QDesignerResourceBrowserInterface_override_virtual_nativeEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QDesignerResourceBrowserInterface_override_virtual_nativeEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1253,7 +1402,11 @@ func (this *QDesignerResourceBrowserInterface) callVirtualBase_ChangeEvent(param
 
 }
 func (this *QDesignerResourceBrowserInterface) OnChangeEvent(slot func(super func(param1 *qt.QEvent), param1 *qt.QEvent)) {
-	ok := C.QDesignerResourceBrowserInterface_override_virtual_changeEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QDesignerResourceBrowserInterface_override_virtual_changeEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1279,7 +1432,11 @@ func (this *QDesignerResourceBrowserInterface) callVirtualBase_Metric(param1 qt.
 
 }
 func (this *QDesignerResourceBrowserInterface) OnMetric(slot func(super func(param1 qt.QPaintDevice__PaintDeviceMetric) int, param1 qt.QPaintDevice__PaintDeviceMetric) int) {
-	ok := C.QDesignerResourceBrowserInterface_override_virtual_metric(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QDesignerResourceBrowserInterface_override_virtual_metric(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1307,7 +1464,11 @@ func (this *QDesignerResourceBrowserInterface) callVirtualBase_InitPainter(paint
 
 }
 func (this *QDesignerResourceBrowserInterface) OnInitPainter(slot func(super func(painter *qt.QPainter), painter *qt.QPainter)) {
-	ok := C.QDesignerResourceBrowserInterface_override_virtual_initPainter(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QDesignerResourceBrowserInterface_override_virtual_initPainter(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1333,7 +1494,11 @@ func (this *QDesignerResourceBrowserInterface) callVirtualBase_Redirected(offset
 
 }
 func (this *QDesignerResourceBrowserInterface) OnRedirected(slot func(super func(offset *qt.QPoint) *qt.QPaintDevice, offset *qt.QPoint) *qt.QPaintDevice) {
-	ok := C.QDesignerResourceBrowserInterface_override_virtual_redirected(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QDesignerResourceBrowserInterface_override_virtual_redirected(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1361,7 +1526,11 @@ func (this *QDesignerResourceBrowserInterface) callVirtualBase_SharedPainter() *
 
 }
 func (this *QDesignerResourceBrowserInterface) OnSharedPainter(slot func(super func() *qt.QPainter) *qt.QPainter) {
-	ok := C.QDesignerResourceBrowserInterface_override_virtual_sharedPainter(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QDesignerResourceBrowserInterface_override_virtual_sharedPainter(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1386,7 +1555,11 @@ func (this *QDesignerResourceBrowserInterface) callVirtualBase_InputMethodEvent(
 
 }
 func (this *QDesignerResourceBrowserInterface) OnInputMethodEvent(slot func(super func(param1 *qt.QInputMethodEvent), param1 *qt.QInputMethodEvent)) {
-	ok := C.QDesignerResourceBrowserInterface_override_virtual_inputMethodEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QDesignerResourceBrowserInterface_override_virtual_inputMethodEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1414,7 +1587,11 @@ func (this *QDesignerResourceBrowserInterface) callVirtualBase_InputMethodQuery(
 
 }
 func (this *QDesignerResourceBrowserInterface) OnInputMethodQuery(slot func(super func(param1 qt.InputMethodQuery) *qt.QVariant, param1 qt.InputMethodQuery) *qt.QVariant) {
-	ok := C.QDesignerResourceBrowserInterface_override_virtual_inputMethodQuery(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QDesignerResourceBrowserInterface_override_virtual_inputMethodQuery(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1442,7 +1619,11 @@ func (this *QDesignerResourceBrowserInterface) callVirtualBase_FocusNextPrevChil
 
 }
 func (this *QDesignerResourceBrowserInterface) OnFocusNextPrevChild(slot func(super func(next bool) bool, next bool) bool) {
-	ok := C.QDesignerResourceBrowserInterface_override_virtual_focusNextPrevChild(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QDesignerResourceBrowserInterface_override_virtual_focusNextPrevChild(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1470,7 +1651,11 @@ func (this *QDesignerResourceBrowserInterface) callVirtualBase_EventFilter(watch
 
 }
 func (this *QDesignerResourceBrowserInterface) OnEventFilter(slot func(super func(watched *qt.QObject, event *qt.QEvent) bool, watched *qt.QObject, event *qt.QEvent) bool) {
-	ok := C.QDesignerResourceBrowserInterface_override_virtual_eventFilter(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QDesignerResourceBrowserInterface_override_virtual_eventFilter(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1500,7 +1685,11 @@ func (this *QDesignerResourceBrowserInterface) callVirtualBase_TimerEvent(event 
 
 }
 func (this *QDesignerResourceBrowserInterface) OnTimerEvent(slot func(super func(event *qt.QTimerEvent), event *qt.QTimerEvent)) {
-	ok := C.QDesignerResourceBrowserInterface_override_virtual_timerEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QDesignerResourceBrowserInterface_override_virtual_timerEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1526,7 +1715,11 @@ func (this *QDesignerResourceBrowserInterface) callVirtualBase_ChildEvent(event 
 
 }
 func (this *QDesignerResourceBrowserInterface) OnChildEvent(slot func(super func(event *qt.QChildEvent), event *qt.QChildEvent)) {
-	ok := C.QDesignerResourceBrowserInterface_override_virtual_childEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QDesignerResourceBrowserInterface_override_virtual_childEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1552,7 +1745,11 @@ func (this *QDesignerResourceBrowserInterface) callVirtualBase_CustomEvent(event
 
 }
 func (this *QDesignerResourceBrowserInterface) OnCustomEvent(slot func(super func(event *qt.QEvent), event *qt.QEvent)) {
-	ok := C.QDesignerResourceBrowserInterface_override_virtual_customEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QDesignerResourceBrowserInterface_override_virtual_customEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1578,7 +1775,11 @@ func (this *QDesignerResourceBrowserInterface) callVirtualBase_ConnectNotify(sig
 
 }
 func (this *QDesignerResourceBrowserInterface) OnConnectNotify(slot func(super func(signal *qt.QMetaMethod), signal *qt.QMetaMethod)) {
-	ok := C.QDesignerResourceBrowserInterface_override_virtual_connectNotify(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QDesignerResourceBrowserInterface_override_virtual_connectNotify(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1604,7 +1805,11 @@ func (this *QDesignerResourceBrowserInterface) callVirtualBase_DisconnectNotify(
 
 }
 func (this *QDesignerResourceBrowserInterface) OnDisconnectNotify(slot func(super func(signal *qt.QMetaMethod), signal *qt.QMetaMethod)) {
-	ok := C.QDesignerResourceBrowserInterface_override_virtual_disconnectNotify(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QDesignerResourceBrowserInterface_override_virtual_disconnectNotify(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}

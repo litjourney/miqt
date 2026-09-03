@@ -15,6 +15,11 @@ import (
 	"unsafe"
 )
 
+//export miqt_exec_callback_handle_release_QAudioProbe
+func miqt_exec_callback_handle_release_QAudioProbe(cb C.intptr_t) {
+	cgo.Handle(cb).Delete()
+}
+
 type QAudioProbe struct {
 	h *C.QAudioProbe
 	*qt.QObject
@@ -106,8 +111,10 @@ func (this *QAudioProbe) IsActive() bool {
 func (this *QAudioProbe) AudioBufferProbed(buffer *QAudioBuffer) {
 	C.QAudioProbe_audioBufferProbed(this.h, buffer.cPointer())
 }
-func (this *QAudioProbe) OnAudioBufferProbed(slot func(buffer *QAudioBuffer)) {
-	C.QAudioProbe_connect_audioBufferProbed(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QAudioProbe) OnAudioBufferProbed(slot func(buffer *QAudioBuffer)) *qt.SignalConnection {
+	_goptr := qt.UnsafeNewQMetaObject__Connection(C.QAudioProbe_connect_audioBufferProbed(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QAudioProbe_audioBufferProbed
@@ -126,8 +133,10 @@ func miqt_exec_callback_QAudioProbe_audioBufferProbed(cb C.intptr_t, buffer *C.Q
 func (this *QAudioProbe) Flush() {
 	C.QAudioProbe_flush(this.h)
 }
-func (this *QAudioProbe) OnFlush(slot func()) {
-	C.QAudioProbe_connect_flush(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QAudioProbe) OnFlush(slot func()) *qt.SignalConnection {
+	_goptr := qt.UnsafeNewQMetaObject__Connection(C.QAudioProbe_connect_flush(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QAudioProbe_flush
@@ -248,7 +257,11 @@ func (this *QAudioProbe) callVirtualBase_Event(event *qt.QEvent) bool {
 
 }
 func (this *QAudioProbe) OnEvent(slot func(super func(event *qt.QEvent) bool, event *qt.QEvent) bool) {
-	ok := C.QAudioProbe_override_virtual_event(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QAudioProbe_override_virtual_event(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -276,7 +289,11 @@ func (this *QAudioProbe) callVirtualBase_EventFilter(watched *qt.QObject, event 
 
 }
 func (this *QAudioProbe) OnEventFilter(slot func(super func(watched *qt.QObject, event *qt.QEvent) bool, watched *qt.QObject, event *qt.QEvent) bool) {
-	ok := C.QAudioProbe_override_virtual_eventFilter(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QAudioProbe_override_virtual_eventFilter(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -306,7 +323,11 @@ func (this *QAudioProbe) callVirtualBase_TimerEvent(event *qt.QTimerEvent) {
 
 }
 func (this *QAudioProbe) OnTimerEvent(slot func(super func(event *qt.QTimerEvent), event *qt.QTimerEvent)) {
-	ok := C.QAudioProbe_override_virtual_timerEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QAudioProbe_override_virtual_timerEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -332,7 +353,11 @@ func (this *QAudioProbe) callVirtualBase_ChildEvent(event *qt.QChildEvent) {
 
 }
 func (this *QAudioProbe) OnChildEvent(slot func(super func(event *qt.QChildEvent), event *qt.QChildEvent)) {
-	ok := C.QAudioProbe_override_virtual_childEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QAudioProbe_override_virtual_childEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -358,7 +383,11 @@ func (this *QAudioProbe) callVirtualBase_CustomEvent(event *qt.QEvent) {
 
 }
 func (this *QAudioProbe) OnCustomEvent(slot func(super func(event *qt.QEvent), event *qt.QEvent)) {
-	ok := C.QAudioProbe_override_virtual_customEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QAudioProbe_override_virtual_customEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -384,7 +413,11 @@ func (this *QAudioProbe) callVirtualBase_ConnectNotify(signal *qt.QMetaMethod) {
 
 }
 func (this *QAudioProbe) OnConnectNotify(slot func(super func(signal *qt.QMetaMethod), signal *qt.QMetaMethod)) {
-	ok := C.QAudioProbe_override_virtual_connectNotify(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QAudioProbe_override_virtual_connectNotify(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -410,7 +443,11 @@ func (this *QAudioProbe) callVirtualBase_DisconnectNotify(signal *qt.QMetaMethod
 
 }
 func (this *QAudioProbe) OnDisconnectNotify(slot func(super func(signal *qt.QMetaMethod), signal *qt.QMetaMethod)) {
-	ok := C.QAudioProbe_override_virtual_disconnectNotify(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QAudioProbe_override_virtual_disconnectNotify(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}

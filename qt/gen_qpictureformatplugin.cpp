@@ -1,3 +1,5 @@
+#include <memory>
+#include <utility>
 #include <QChildEvent>
 #include <QEvent>
 #include <QMetaMethod>
@@ -16,6 +18,7 @@
 extern "C" {
 #endif
 
+void miqt_exec_callback_handle_release_QPictureFormatPlugin(intptr_t);
 bool miqt_exec_callback_QPictureFormatPlugin_loadPicture(QPictureFormatPlugin*, intptr_t, struct miqt_string, struct miqt_string, QPicture*);
 bool miqt_exec_callback_QPictureFormatPlugin_savePicture(QPictureFormatPlugin*, intptr_t, struct miqt_string, struct miqt_string, QPicture*);
 bool miqt_exec_callback_QPictureFormatPlugin_installIOHandler(QPictureFormatPlugin*, intptr_t, struct miqt_string);
@@ -39,11 +42,11 @@ public:
 	virtual ~MiqtVirtualQPictureFormatPlugin() override = default;
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__loadPicture = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QPictureFormatPlugin> handle__loadPicture;
 
 	// Subclass to allow providing a Go implementation
 	virtual bool loadPicture(const QString& format, const QString& filename, QPicture* pic) override {
-		if (handle__loadPicture == 0) {
+		if (!handle__loadPicture) {
 			return QPictureFormatPlugin::loadPicture(format, filename, pic);
 		}
 
@@ -64,18 +67,18 @@ public:
 		memcpy(filename_ms.data, filename_b.data(), filename_ms.len);
 		struct miqt_string sigval2 = filename_ms;
 		QPicture* sigval3 = pic;
-		bool callback_return_value = miqt_exec_callback_QPictureFormatPlugin_loadPicture(this, handle__loadPicture, sigval1, sigval2, sigval3);
+		bool callback_return_value = miqt_exec_callback_QPictureFormatPlugin_loadPicture(this, handle__loadPicture.value(), sigval1, sigval2, sigval3);
 		return callback_return_value;
 	}
 
 	friend bool QPictureFormatPlugin_virtualbase_loadPicture(void* self, struct miqt_string format, struct miqt_string filename, QPicture* pic);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__savePicture = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QPictureFormatPlugin> handle__savePicture;
 
 	// Subclass to allow providing a Go implementation
 	virtual bool savePicture(const QString& format, const QString& filename, const QPicture& pic) override {
-		if (handle__savePicture == 0) {
+		if (!handle__savePicture) {
 			return QPictureFormatPlugin::savePicture(format, filename, pic);
 		}
 
@@ -98,18 +101,18 @@ public:
 		const QPicture& pic_ret = pic;
 		// Cast returned reference into pointer
 		QPicture* sigval3 = const_cast<QPicture*>(&pic_ret);
-		bool callback_return_value = miqt_exec_callback_QPictureFormatPlugin_savePicture(this, handle__savePicture, sigval1, sigval2, sigval3);
+		bool callback_return_value = miqt_exec_callback_QPictureFormatPlugin_savePicture(this, handle__savePicture.value(), sigval1, sigval2, sigval3);
 		return callback_return_value;
 	}
 
 	friend bool QPictureFormatPlugin_virtualbase_savePicture(void* self, struct miqt_string format, struct miqt_string filename, QPicture* pic);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__installIOHandler = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QPictureFormatPlugin> handle__installIOHandler;
 
 	// Subclass to allow providing a Go implementation
 	virtual bool installIOHandler(const QString& format) override {
-		if (handle__installIOHandler == 0) {
+		if (!handle__installIOHandler) {
 			return false; // Pure virtual, there is no base we can call
 		}
 
@@ -121,100 +124,100 @@ public:
 		format_ms.data = static_cast<char*>(malloc(format_ms.len));
 		memcpy(format_ms.data, format_b.data(), format_ms.len);
 		struct miqt_string sigval1 = format_ms;
-		bool callback_return_value = miqt_exec_callback_QPictureFormatPlugin_installIOHandler(this, handle__installIOHandler, sigval1);
+		bool callback_return_value = miqt_exec_callback_QPictureFormatPlugin_installIOHandler(this, handle__installIOHandler.value(), sigval1);
 		return callback_return_value;
 	}
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__event = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QPictureFormatPlugin> handle__event;
 
 	// Subclass to allow providing a Go implementation
 	virtual bool event(QEvent* event) override {
-		if (handle__event == 0) {
+		if (!handle__event) {
 			return QPictureFormatPlugin::event(event);
 		}
 
 		QEvent* sigval1 = event;
-		bool callback_return_value = miqt_exec_callback_QPictureFormatPlugin_event(this, handle__event, sigval1);
+		bool callback_return_value = miqt_exec_callback_QPictureFormatPlugin_event(this, handle__event.value(), sigval1);
 		return callback_return_value;
 	}
 
 	friend bool QPictureFormatPlugin_virtualbase_event(void* self, QEvent* event);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__eventFilter = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QPictureFormatPlugin> handle__eventFilter;
 
 	// Subclass to allow providing a Go implementation
 	virtual bool eventFilter(QObject* watched, QEvent* event) override {
-		if (handle__eventFilter == 0) {
+		if (!handle__eventFilter) {
 			return QPictureFormatPlugin::eventFilter(watched, event);
 		}
 
 		QObject* sigval1 = watched;
 		QEvent* sigval2 = event;
-		bool callback_return_value = miqt_exec_callback_QPictureFormatPlugin_eventFilter(this, handle__eventFilter, sigval1, sigval2);
+		bool callback_return_value = miqt_exec_callback_QPictureFormatPlugin_eventFilter(this, handle__eventFilter.value(), sigval1, sigval2);
 		return callback_return_value;
 	}
 
 	friend bool QPictureFormatPlugin_virtualbase_eventFilter(void* self, QObject* watched, QEvent* event);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__timerEvent = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QPictureFormatPlugin> handle__timerEvent;
 
 	// Subclass to allow providing a Go implementation
 	virtual void timerEvent(QTimerEvent* event) override {
-		if (handle__timerEvent == 0) {
+		if (!handle__timerEvent) {
 			QPictureFormatPlugin::timerEvent(event);
 			return;
 		}
 
 		QTimerEvent* sigval1 = event;
-		miqt_exec_callback_QPictureFormatPlugin_timerEvent(this, handle__timerEvent, sigval1);
+		miqt_exec_callback_QPictureFormatPlugin_timerEvent(this, handle__timerEvent.value(), sigval1);
 
 	}
 
 	friend void QPictureFormatPlugin_virtualbase_timerEvent(void* self, QTimerEvent* event);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__childEvent = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QPictureFormatPlugin> handle__childEvent;
 
 	// Subclass to allow providing a Go implementation
 	virtual void childEvent(QChildEvent* event) override {
-		if (handle__childEvent == 0) {
+		if (!handle__childEvent) {
 			QPictureFormatPlugin::childEvent(event);
 			return;
 		}
 
 		QChildEvent* sigval1 = event;
-		miqt_exec_callback_QPictureFormatPlugin_childEvent(this, handle__childEvent, sigval1);
+		miqt_exec_callback_QPictureFormatPlugin_childEvent(this, handle__childEvent.value(), sigval1);
 
 	}
 
 	friend void QPictureFormatPlugin_virtualbase_childEvent(void* self, QChildEvent* event);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__customEvent = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QPictureFormatPlugin> handle__customEvent;
 
 	// Subclass to allow providing a Go implementation
 	virtual void customEvent(QEvent* event) override {
-		if (handle__customEvent == 0) {
+		if (!handle__customEvent) {
 			QPictureFormatPlugin::customEvent(event);
 			return;
 		}
 
 		QEvent* sigval1 = event;
-		miqt_exec_callback_QPictureFormatPlugin_customEvent(this, handle__customEvent, sigval1);
+		miqt_exec_callback_QPictureFormatPlugin_customEvent(this, handle__customEvent.value(), sigval1);
 
 	}
 
 	friend void QPictureFormatPlugin_virtualbase_customEvent(void* self, QEvent* event);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__connectNotify = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QPictureFormatPlugin> handle__connectNotify;
 
 	// Subclass to allow providing a Go implementation
 	virtual void connectNotify(const QMetaMethod& signal) override {
-		if (handle__connectNotify == 0) {
+		if (!handle__connectNotify) {
 			QPictureFormatPlugin::connectNotify(signal);
 			return;
 		}
@@ -222,18 +225,18 @@ public:
 		const QMetaMethod& signal_ret = signal;
 		// Cast returned reference into pointer
 		QMetaMethod* sigval1 = const_cast<QMetaMethod*>(&signal_ret);
-		miqt_exec_callback_QPictureFormatPlugin_connectNotify(this, handle__connectNotify, sigval1);
+		miqt_exec_callback_QPictureFormatPlugin_connectNotify(this, handle__connectNotify.value(), sigval1);
 
 	}
 
 	friend void QPictureFormatPlugin_virtualbase_connectNotify(void* self, QMetaMethod* signal);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__disconnectNotify = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QPictureFormatPlugin> handle__disconnectNotify;
 
 	// Subclass to allow providing a Go implementation
 	virtual void disconnectNotify(const QMetaMethod& signal) override {
-		if (handle__disconnectNotify == 0) {
+		if (!handle__disconnectNotify) {
 			QPictureFormatPlugin::disconnectNotify(signal);
 			return;
 		}
@@ -241,7 +244,7 @@ public:
 		const QMetaMethod& signal_ret = signal;
 		// Cast returned reference into pointer
 		QMetaMethod* sigval1 = const_cast<QMetaMethod*>(&signal_ret);
-		miqt_exec_callback_QPictureFormatPlugin_disconnectNotify(this, handle__disconnectNotify, sigval1);
+		miqt_exec_callback_QPictureFormatPlugin_disconnectNotify(this, handle__disconnectNotify.value(), sigval1);
 
 	}
 
@@ -358,12 +361,13 @@ struct miqt_string QPictureFormatPlugin_trUtf83(const char* s, const char* c, in
 }
 
 bool QPictureFormatPlugin_override_virtual_loadPicture(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QPictureFormatPlugin> slot_handle(slot);
 	MiqtVirtualQPictureFormatPlugin* self_cast = dynamic_cast<MiqtVirtualQPictureFormatPlugin*>( (QPictureFormatPlugin*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__loadPicture = slot;
+	self_cast->handle__loadPicture = std::move(slot_handle);
 	return true;
 }
 
@@ -374,12 +378,13 @@ bool QPictureFormatPlugin_virtualbase_loadPicture(void* self, struct miqt_string
 }
 
 bool QPictureFormatPlugin_override_virtual_savePicture(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QPictureFormatPlugin> slot_handle(slot);
 	MiqtVirtualQPictureFormatPlugin* self_cast = dynamic_cast<MiqtVirtualQPictureFormatPlugin*>( (QPictureFormatPlugin*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__savePicture = slot;
+	self_cast->handle__savePicture = std::move(slot_handle);
 	return true;
 }
 
@@ -390,22 +395,24 @@ bool QPictureFormatPlugin_virtualbase_savePicture(void* self, struct miqt_string
 }
 
 bool QPictureFormatPlugin_override_virtual_installIOHandler(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QPictureFormatPlugin> slot_handle(slot);
 	MiqtVirtualQPictureFormatPlugin* self_cast = dynamic_cast<MiqtVirtualQPictureFormatPlugin*>( (QPictureFormatPlugin*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__installIOHandler = slot;
+	self_cast->handle__installIOHandler = std::move(slot_handle);
 	return true;
 }
 
 bool QPictureFormatPlugin_override_virtual_event(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QPictureFormatPlugin> slot_handle(slot);
 	MiqtVirtualQPictureFormatPlugin* self_cast = dynamic_cast<MiqtVirtualQPictureFormatPlugin*>( (QPictureFormatPlugin*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__event = slot;
+	self_cast->handle__event = std::move(slot_handle);
 	return true;
 }
 
@@ -414,12 +421,13 @@ bool QPictureFormatPlugin_virtualbase_event(void* self, QEvent* event) {
 }
 
 bool QPictureFormatPlugin_override_virtual_eventFilter(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QPictureFormatPlugin> slot_handle(slot);
 	MiqtVirtualQPictureFormatPlugin* self_cast = dynamic_cast<MiqtVirtualQPictureFormatPlugin*>( (QPictureFormatPlugin*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__eventFilter = slot;
+	self_cast->handle__eventFilter = std::move(slot_handle);
 	return true;
 }
 
@@ -428,12 +436,13 @@ bool QPictureFormatPlugin_virtualbase_eventFilter(void* self, QObject* watched, 
 }
 
 bool QPictureFormatPlugin_override_virtual_timerEvent(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QPictureFormatPlugin> slot_handle(slot);
 	MiqtVirtualQPictureFormatPlugin* self_cast = dynamic_cast<MiqtVirtualQPictureFormatPlugin*>( (QPictureFormatPlugin*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__timerEvent = slot;
+	self_cast->handle__timerEvent = std::move(slot_handle);
 	return true;
 }
 
@@ -442,12 +451,13 @@ void QPictureFormatPlugin_virtualbase_timerEvent(void* self, QTimerEvent* event)
 }
 
 bool QPictureFormatPlugin_override_virtual_childEvent(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QPictureFormatPlugin> slot_handle(slot);
 	MiqtVirtualQPictureFormatPlugin* self_cast = dynamic_cast<MiqtVirtualQPictureFormatPlugin*>( (QPictureFormatPlugin*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__childEvent = slot;
+	self_cast->handle__childEvent = std::move(slot_handle);
 	return true;
 }
 
@@ -456,12 +466,13 @@ void QPictureFormatPlugin_virtualbase_childEvent(void* self, QChildEvent* event)
 }
 
 bool QPictureFormatPlugin_override_virtual_customEvent(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QPictureFormatPlugin> slot_handle(slot);
 	MiqtVirtualQPictureFormatPlugin* self_cast = dynamic_cast<MiqtVirtualQPictureFormatPlugin*>( (QPictureFormatPlugin*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__customEvent = slot;
+	self_cast->handle__customEvent = std::move(slot_handle);
 	return true;
 }
 
@@ -470,12 +481,13 @@ void QPictureFormatPlugin_virtualbase_customEvent(void* self, QEvent* event) {
 }
 
 bool QPictureFormatPlugin_override_virtual_connectNotify(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QPictureFormatPlugin> slot_handle(slot);
 	MiqtVirtualQPictureFormatPlugin* self_cast = dynamic_cast<MiqtVirtualQPictureFormatPlugin*>( (QPictureFormatPlugin*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__connectNotify = slot;
+	self_cast->handle__connectNotify = std::move(slot_handle);
 	return true;
 }
 
@@ -484,12 +496,13 @@ void QPictureFormatPlugin_virtualbase_connectNotify(void* self, QMetaMethod* sig
 }
 
 bool QPictureFormatPlugin_override_virtual_disconnectNotify(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QPictureFormatPlugin> slot_handle(slot);
 	MiqtVirtualQPictureFormatPlugin* self_cast = dynamic_cast<MiqtVirtualQPictureFormatPlugin*>( (QPictureFormatPlugin*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__disconnectNotify = slot;
+	self_cast->handle__disconnectNotify = std::move(slot_handle);
 	return true;
 }
 

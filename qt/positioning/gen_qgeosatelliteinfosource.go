@@ -24,6 +24,11 @@ const (
 	QGeoSatelliteInfoSource__UnknownSourceError QGeoSatelliteInfoSource__Error = -1
 )
 
+//export miqt_exec_callback_handle_release_QGeoSatelliteInfoSource
+func miqt_exec_callback_handle_release_QGeoSatelliteInfoSource(cb C.intptr_t) {
+	cgo.Handle(cb).Delete()
+}
+
 type QGeoSatelliteInfoSource struct {
 	h *C.QGeoSatelliteInfoSource
 	*qt.QObject
@@ -213,8 +218,10 @@ func (this *QGeoSatelliteInfoSource) SatellitesInViewUpdated(satellites []QGeoSa
 	satellites_ma := C.struct_miqt_array{len: C.size_t(len(satellites)), data: unsafe.Pointer(satellites_CArray)}
 	C.QGeoSatelliteInfoSource_satellitesInViewUpdated(this.h, satellites_ma)
 }
-func (this *QGeoSatelliteInfoSource) OnSatellitesInViewUpdated(slot func(satellites []QGeoSatelliteInfo)) {
-	C.QGeoSatelliteInfoSource_connect_satellitesInViewUpdated(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QGeoSatelliteInfoSource) OnSatellitesInViewUpdated(slot func(satellites []QGeoSatelliteInfo)) *qt.SignalConnection {
+	_goptr := qt.UnsafeNewQMetaObject__Connection(C.QGeoSatelliteInfoSource_connect_satellitesInViewUpdated(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QGeoSatelliteInfoSource_satellitesInViewUpdated
@@ -247,8 +254,10 @@ func (this *QGeoSatelliteInfoSource) SatellitesInUseUpdated(satellites []QGeoSat
 	satellites_ma := C.struct_miqt_array{len: C.size_t(len(satellites)), data: unsafe.Pointer(satellites_CArray)}
 	C.QGeoSatelliteInfoSource_satellitesInUseUpdated(this.h, satellites_ma)
 }
-func (this *QGeoSatelliteInfoSource) OnSatellitesInUseUpdated(slot func(satellites []QGeoSatelliteInfo)) {
-	C.QGeoSatelliteInfoSource_connect_satellitesInUseUpdated(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QGeoSatelliteInfoSource) OnSatellitesInUseUpdated(slot func(satellites []QGeoSatelliteInfo)) *qt.SignalConnection {
+	_goptr := qt.UnsafeNewQMetaObject__Connection(C.QGeoSatelliteInfoSource_connect_satellitesInUseUpdated(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QGeoSatelliteInfoSource_satellitesInUseUpdated
@@ -275,8 +284,10 @@ func miqt_exec_callback_QGeoSatelliteInfoSource_satellitesInUseUpdated(cb C.intp
 func (this *QGeoSatelliteInfoSource) RequestTimeout() {
 	C.QGeoSatelliteInfoSource_requestTimeout(this.h)
 }
-func (this *QGeoSatelliteInfoSource) OnRequestTimeout(slot func()) {
-	C.QGeoSatelliteInfoSource_connect_requestTimeout(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QGeoSatelliteInfoSource) OnRequestTimeout(slot func()) *qt.SignalConnection {
+	_goptr := qt.UnsafeNewQMetaObject__Connection(C.QGeoSatelliteInfoSource_connect_requestTimeout(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QGeoSatelliteInfoSource_requestTimeout
@@ -292,8 +303,10 @@ func miqt_exec_callback_QGeoSatelliteInfoSource_requestTimeout(cb C.intptr_t) {
 func (this *QGeoSatelliteInfoSource) ErrorWithQGeoSatelliteInfoSourceError(param1 QGeoSatelliteInfoSource__Error) {
 	C.QGeoSatelliteInfoSource_errorWithQGeoSatelliteInfoSourceError(this.h, (C.int)(param1))
 }
-func (this *QGeoSatelliteInfoSource) OnErrorWithQGeoSatelliteInfoSourceError(slot func(param1 QGeoSatelliteInfoSource__Error)) {
-	C.QGeoSatelliteInfoSource_connect_errorWithQGeoSatelliteInfoSourceError(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QGeoSatelliteInfoSource) OnErrorWithQGeoSatelliteInfoSourceError(slot func(param1 QGeoSatelliteInfoSource__Error)) *qt.SignalConnection {
+	_goptr := qt.UnsafeNewQMetaObject__Connection(C.QGeoSatelliteInfoSource_connect_errorWithQGeoSatelliteInfoSourceError(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QGeoSatelliteInfoSource_errorWithQGeoSatelliteInfoSourceError
@@ -417,7 +430,11 @@ func (this *QGeoSatelliteInfoSource) callVirtualBase_SetUpdateInterval(msec int)
 
 }
 func (this *QGeoSatelliteInfoSource) OnSetUpdateInterval(slot func(super func(msec int), msec int)) {
-	ok := C.QGeoSatelliteInfoSource_override_virtual_setUpdateInterval(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QGeoSatelliteInfoSource_override_virtual_setUpdateInterval(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -437,7 +454,11 @@ func miqt_exec_callback_QGeoSatelliteInfoSource_setUpdateInterval(self *C.QGeoSa
 
 }
 func (this *QGeoSatelliteInfoSource) OnMinimumUpdateInterval(slot func() int) {
-	ok := C.QGeoSatelliteInfoSource_override_virtual_minimumUpdateInterval(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QGeoSatelliteInfoSource_override_virtual_minimumUpdateInterval(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -456,7 +477,11 @@ func miqt_exec_callback_QGeoSatelliteInfoSource_minimumUpdateInterval(self *C.QG
 
 }
 func (this *QGeoSatelliteInfoSource) OnError(slot func() QGeoSatelliteInfoSource__Error) {
-	ok := C.QGeoSatelliteInfoSource_override_virtual_error(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QGeoSatelliteInfoSource_override_virtual_error(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -475,7 +500,11 @@ func miqt_exec_callback_QGeoSatelliteInfoSource_error(self *C.QGeoSatelliteInfoS
 
 }
 func (this *QGeoSatelliteInfoSource) OnStartUpdates(slot func()) {
-	ok := C.QGeoSatelliteInfoSource_override_virtual_startUpdates(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QGeoSatelliteInfoSource_override_virtual_startUpdates(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -492,7 +521,11 @@ func miqt_exec_callback_QGeoSatelliteInfoSource_startUpdates(self *C.QGeoSatelli
 
 }
 func (this *QGeoSatelliteInfoSource) OnStopUpdates(slot func()) {
-	ok := C.QGeoSatelliteInfoSource_override_virtual_stopUpdates(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QGeoSatelliteInfoSource_override_virtual_stopUpdates(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -509,7 +542,11 @@ func miqt_exec_callback_QGeoSatelliteInfoSource_stopUpdates(self *C.QGeoSatellit
 
 }
 func (this *QGeoSatelliteInfoSource) OnRequestUpdate(slot func(timeout int)) {
-	ok := C.QGeoSatelliteInfoSource_override_virtual_requestUpdate(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QGeoSatelliteInfoSource_override_virtual_requestUpdate(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -535,7 +572,11 @@ func (this *QGeoSatelliteInfoSource) callVirtualBase_Event(event *qt.QEvent) boo
 
 }
 func (this *QGeoSatelliteInfoSource) OnEvent(slot func(super func(event *qt.QEvent) bool, event *qt.QEvent) bool) {
-	ok := C.QGeoSatelliteInfoSource_override_virtual_event(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QGeoSatelliteInfoSource_override_virtual_event(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -563,7 +604,11 @@ func (this *QGeoSatelliteInfoSource) callVirtualBase_EventFilter(watched *qt.QOb
 
 }
 func (this *QGeoSatelliteInfoSource) OnEventFilter(slot func(super func(watched *qt.QObject, event *qt.QEvent) bool, watched *qt.QObject, event *qt.QEvent) bool) {
-	ok := C.QGeoSatelliteInfoSource_override_virtual_eventFilter(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QGeoSatelliteInfoSource_override_virtual_eventFilter(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -593,7 +638,11 @@ func (this *QGeoSatelliteInfoSource) callVirtualBase_TimerEvent(event *qt.QTimer
 
 }
 func (this *QGeoSatelliteInfoSource) OnTimerEvent(slot func(super func(event *qt.QTimerEvent), event *qt.QTimerEvent)) {
-	ok := C.QGeoSatelliteInfoSource_override_virtual_timerEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QGeoSatelliteInfoSource_override_virtual_timerEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -619,7 +668,11 @@ func (this *QGeoSatelliteInfoSource) callVirtualBase_ChildEvent(event *qt.QChild
 
 }
 func (this *QGeoSatelliteInfoSource) OnChildEvent(slot func(super func(event *qt.QChildEvent), event *qt.QChildEvent)) {
-	ok := C.QGeoSatelliteInfoSource_override_virtual_childEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QGeoSatelliteInfoSource_override_virtual_childEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -645,7 +698,11 @@ func (this *QGeoSatelliteInfoSource) callVirtualBase_CustomEvent(event *qt.QEven
 
 }
 func (this *QGeoSatelliteInfoSource) OnCustomEvent(slot func(super func(event *qt.QEvent), event *qt.QEvent)) {
-	ok := C.QGeoSatelliteInfoSource_override_virtual_customEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QGeoSatelliteInfoSource_override_virtual_customEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -671,7 +728,11 @@ func (this *QGeoSatelliteInfoSource) callVirtualBase_ConnectNotify(signal *qt.QM
 
 }
 func (this *QGeoSatelliteInfoSource) OnConnectNotify(slot func(super func(signal *qt.QMetaMethod), signal *qt.QMetaMethod)) {
-	ok := C.QGeoSatelliteInfoSource_override_virtual_connectNotify(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QGeoSatelliteInfoSource_override_virtual_connectNotify(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -697,7 +758,11 @@ func (this *QGeoSatelliteInfoSource) callVirtualBase_DisconnectNotify(signal *qt
 
 }
 func (this *QGeoSatelliteInfoSource) OnDisconnectNotify(slot func(super func(signal *qt.QMetaMethod), signal *qt.QMetaMethod)) {
-	ok := C.QGeoSatelliteInfoSource_override_virtual_disconnectNotify(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QGeoSatelliteInfoSource_override_virtual_disconnectNotify(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}

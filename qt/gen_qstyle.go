@@ -637,6 +637,11 @@ const (
 	QStyle__SP_CustomBase                       QStyle__StandardPixmap = -268435456
 )
 
+//export miqt_exec_callback_handle_release_QStyle
+func miqt_exec_callback_handle_release_QStyle(cb C.intptr_t) {
+	cgo.Handle(cb).Delete()
+}
+
 type QStyle struct {
 	h *C.QStyle
 	*QObject
@@ -987,7 +992,11 @@ func (this *QStyle) callVirtualBase_Polish(widget *QWidget) {
 
 }
 func (this *QStyle) OnPolish(slot func(super func(widget *QWidget), widget *QWidget)) {
-	ok := C.QStyle_override_virtual_polish(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QStyle_override_virtual_polish(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1013,7 +1022,11 @@ func (this *QStyle) callVirtualBase_Unpolish(widget *QWidget) {
 
 }
 func (this *QStyle) OnUnpolish(slot func(super func(widget *QWidget), widget *QWidget)) {
-	ok := C.QStyle_override_virtual_unpolish(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QStyle_override_virtual_unpolish(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1039,7 +1052,11 @@ func (this *QStyle) callVirtualBase_PolishWithApplication(application *QApplicat
 
 }
 func (this *QStyle) OnPolishWithApplication(slot func(super func(application *QApplication), application *QApplication)) {
-	ok := C.QStyle_override_virtual_polishWithApplication(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QStyle_override_virtual_polishWithApplication(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1065,7 +1082,11 @@ func (this *QStyle) callVirtualBase_UnpolishWithApplication(application *QApplic
 
 }
 func (this *QStyle) OnUnpolishWithApplication(slot func(super func(application *QApplication), application *QApplication)) {
-	ok := C.QStyle_override_virtual_unpolishWithApplication(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QStyle_override_virtual_unpolishWithApplication(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1091,7 +1112,11 @@ func (this *QStyle) callVirtualBase_PolishWithPalette(palette *QPalette) {
 
 }
 func (this *QStyle) OnPolishWithPalette(slot func(super func(palette *QPalette), palette *QPalette)) {
-	ok := C.QStyle_override_virtual_polishWithPalette(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QStyle_override_virtual_polishWithPalette(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1123,7 +1148,11 @@ func (this *QStyle) callVirtualBase_ItemTextRect(fm *QFontMetrics, r *QRect, fla
 
 }
 func (this *QStyle) OnItemTextRect(slot func(super func(fm *QFontMetrics, r *QRect, flags int, enabled bool, text string) *QRect, fm *QFontMetrics, r *QRect, flags int, enabled bool, text string) *QRect) {
-	ok := C.QStyle_override_virtual_itemTextRect(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QStyle_override_virtual_itemTextRect(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1164,7 +1193,11 @@ func (this *QStyle) callVirtualBase_ItemPixmapRect(r *QRect, flags int, pixmap *
 
 }
 func (this *QStyle) OnItemPixmapRect(slot func(super func(r *QRect, flags int, pixmap *QPixmap) *QRect, r *QRect, flags int, pixmap *QPixmap) *QRect) {
-	ok := C.QStyle_override_virtual_itemPixmapRect(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QStyle_override_virtual_itemPixmapRect(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1200,7 +1233,11 @@ func (this *QStyle) callVirtualBase_DrawItemText(painter *QPainter, rect *QRect,
 
 }
 func (this *QStyle) OnDrawItemText(slot func(super func(painter *QPainter, rect *QRect, flags int, pal *QPalette, enabled bool, text string, textRole QPalette__ColorRole), painter *QPainter, rect *QRect, flags int, pal *QPalette, enabled bool, text string, textRole QPalette__ColorRole)) {
-	ok := C.QStyle_override_virtual_drawItemText(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QStyle_override_virtual_drawItemText(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1240,7 +1277,11 @@ func (this *QStyle) callVirtualBase_DrawItemPixmap(painter *QPainter, rect *QRec
 
 }
 func (this *QStyle) OnDrawItemPixmap(slot func(super func(painter *QPainter, rect *QRect, alignment int, pixmap *QPixmap), painter *QPainter, rect *QRect, alignment int, pixmap *QPixmap)) {
-	ok := C.QStyle_override_virtual_drawItemPixmap(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QStyle_override_virtual_drawItemPixmap(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1274,7 +1315,11 @@ func (this *QStyle) callVirtualBase_StandardPalette() *QPalette {
 
 }
 func (this *QStyle) OnStandardPalette(slot func(super func() *QPalette) *QPalette) {
-	ok := C.QStyle_override_virtual_standardPalette(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QStyle_override_virtual_standardPalette(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1293,7 +1338,11 @@ func miqt_exec_callback_QStyle_standardPalette(self *C.QStyle, cb C.intptr_t) *C
 
 }
 func (this *QStyle) OnDrawPrimitive(slot func(pe QStyle__PrimitiveElement, opt *QStyleOption, p *QPainter, w *QWidget)) {
-	ok := C.QStyle_override_virtual_drawPrimitive(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QStyle_override_virtual_drawPrimitive(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1319,7 +1368,11 @@ func miqt_exec_callback_QStyle_drawPrimitive(self *C.QStyle, cb C.intptr_t, pe C
 
 }
 func (this *QStyle) OnDrawControl(slot func(element QStyle__ControlElement, opt *QStyleOption, p *QPainter, w *QWidget)) {
-	ok := C.QStyle_override_virtual_drawControl(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QStyle_override_virtual_drawControl(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1345,7 +1398,11 @@ func miqt_exec_callback_QStyle_drawControl(self *C.QStyle, cb C.intptr_t, elemen
 
 }
 func (this *QStyle) OnSubElementRect(slot func(subElement QStyle__SubElement, option *QStyleOption, widget *QWidget) *QRect) {
-	ok := C.QStyle_override_virtual_subElementRect(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QStyle_override_virtual_subElementRect(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1371,7 +1428,11 @@ func miqt_exec_callback_QStyle_subElementRect(self *C.QStyle, cb C.intptr_t, sub
 
 }
 func (this *QStyle) OnDrawComplexControl(slot func(cc QStyle__ComplexControl, opt *QStyleOptionComplex, p *QPainter, widget *QWidget)) {
-	ok := C.QStyle_override_virtual_drawComplexControl(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QStyle_override_virtual_drawComplexControl(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1397,7 +1458,11 @@ func miqt_exec_callback_QStyle_drawComplexControl(self *C.QStyle, cb C.intptr_t,
 
 }
 func (this *QStyle) OnHitTestComplexControl(slot func(cc QStyle__ComplexControl, opt *QStyleOptionComplex, pt *QPoint, widget *QWidget) QStyle__SubControl) {
-	ok := C.QStyle_override_virtual_hitTestComplexControl(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QStyle_override_virtual_hitTestComplexControl(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1425,7 +1490,11 @@ func miqt_exec_callback_QStyle_hitTestComplexControl(self *C.QStyle, cb C.intptr
 
 }
 func (this *QStyle) OnSubControlRect(slot func(cc QStyle__ComplexControl, opt *QStyleOptionComplex, sc QStyle__SubControl, widget *QWidget) *QRect) {
-	ok := C.QStyle_override_virtual_subControlRect(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QStyle_override_virtual_subControlRect(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1453,7 +1522,11 @@ func miqt_exec_callback_QStyle_subControlRect(self *C.QStyle, cb C.intptr_t, cc 
 
 }
 func (this *QStyle) OnPixelMetric(slot func(metric QStyle__PixelMetric, option *QStyleOption, widget *QWidget) int) {
-	ok := C.QStyle_override_virtual_pixelMetric(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QStyle_override_virtual_pixelMetric(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1479,7 +1552,11 @@ func miqt_exec_callback_QStyle_pixelMetric(self *C.QStyle, cb C.intptr_t, metric
 
 }
 func (this *QStyle) OnSizeFromContents(slot func(ct QStyle__ContentsType, opt *QStyleOption, contentsSize *QSize, w *QWidget) *QSize) {
-	ok := C.QStyle_override_virtual_sizeFromContents(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QStyle_override_virtual_sizeFromContents(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1507,7 +1584,11 @@ func miqt_exec_callback_QStyle_sizeFromContents(self *C.QStyle, cb C.intptr_t, c
 
 }
 func (this *QStyle) OnStyleHint(slot func(stylehint QStyle__StyleHint, opt *QStyleOption, widget *QWidget, returnData *QStyleHintReturn) int) {
-	ok := C.QStyle_override_virtual_styleHint(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QStyle_override_virtual_styleHint(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1535,7 +1616,11 @@ func miqt_exec_callback_QStyle_styleHint(self *C.QStyle, cb C.intptr_t, stylehin
 
 }
 func (this *QStyle) OnStandardPixmap(slot func(standardPixmap QStyle__StandardPixmap, opt *QStyleOption, widget *QWidget) *QPixmap) {
-	ok := C.QStyle_override_virtual_standardPixmap(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QStyle_override_virtual_standardPixmap(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1561,7 +1646,11 @@ func miqt_exec_callback_QStyle_standardPixmap(self *C.QStyle, cb C.intptr_t, sta
 
 }
 func (this *QStyle) OnStandardIcon(slot func(standardIcon QStyle__StandardPixmap, option *QStyleOption, widget *QWidget) *QIcon) {
-	ok := C.QStyle_override_virtual_standardIcon(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QStyle_override_virtual_standardIcon(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1587,7 +1676,11 @@ func miqt_exec_callback_QStyle_standardIcon(self *C.QStyle, cb C.intptr_t, stand
 
 }
 func (this *QStyle) OnGeneratedIconPixmap(slot func(iconMode QIcon__Mode, pixmap *QPixmap, opt *QStyleOption) *QPixmap) {
-	ok := C.QStyle_override_virtual_generatedIconPixmap(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QStyle_override_virtual_generatedIconPixmap(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1613,7 +1706,11 @@ func miqt_exec_callback_QStyle_generatedIconPixmap(self *C.QStyle, cb C.intptr_t
 
 }
 func (this *QStyle) OnLayoutSpacing(slot func(control1 QSizePolicy__ControlType, control2 QSizePolicy__ControlType, orientation Orientation, option *QStyleOption, widget *QWidget) int) {
-	ok := C.QStyle_override_virtual_layoutSpacing(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QStyle_override_virtual_layoutSpacing(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1649,7 +1746,11 @@ func (this *QStyle) callVirtualBase_Event(event *QEvent) bool {
 
 }
 func (this *QStyle) OnEvent(slot func(super func(event *QEvent) bool, event *QEvent) bool) {
-	ok := C.QStyle_override_virtual_event(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QStyle_override_virtual_event(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1677,7 +1778,11 @@ func (this *QStyle) callVirtualBase_EventFilter(watched *QObject, event *QEvent)
 
 }
 func (this *QStyle) OnEventFilter(slot func(super func(watched *QObject, event *QEvent) bool, watched *QObject, event *QEvent) bool) {
-	ok := C.QStyle_override_virtual_eventFilter(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QStyle_override_virtual_eventFilter(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1707,7 +1812,11 @@ func (this *QStyle) callVirtualBase_TimerEvent(event *QTimerEvent) {
 
 }
 func (this *QStyle) OnTimerEvent(slot func(super func(event *QTimerEvent), event *QTimerEvent)) {
-	ok := C.QStyle_override_virtual_timerEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QStyle_override_virtual_timerEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1733,7 +1842,11 @@ func (this *QStyle) callVirtualBase_ChildEvent(event *QChildEvent) {
 
 }
 func (this *QStyle) OnChildEvent(slot func(super func(event *QChildEvent), event *QChildEvent)) {
-	ok := C.QStyle_override_virtual_childEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QStyle_override_virtual_childEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1759,7 +1872,11 @@ func (this *QStyle) callVirtualBase_CustomEvent(event *QEvent) {
 
 }
 func (this *QStyle) OnCustomEvent(slot func(super func(event *QEvent), event *QEvent)) {
-	ok := C.QStyle_override_virtual_customEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QStyle_override_virtual_customEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1785,7 +1902,11 @@ func (this *QStyle) callVirtualBase_ConnectNotify(signal *QMetaMethod) {
 
 }
 func (this *QStyle) OnConnectNotify(slot func(super func(signal *QMetaMethod), signal *QMetaMethod)) {
-	ok := C.QStyle_override_virtual_connectNotify(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QStyle_override_virtual_connectNotify(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1811,7 +1932,11 @@ func (this *QStyle) callVirtualBase_DisconnectNotify(signal *QMetaMethod) {
 
 }
 func (this *QStyle) OnDisconnectNotify(slot func(super func(signal *QMetaMethod), signal *QMetaMethod)) {
-	ok := C.QStyle_override_virtual_disconnectNotify(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QStyle_override_virtual_disconnectNotify(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}

@@ -15,6 +15,11 @@ import (
 	"unsafe"
 )
 
+//export miqt_exec_callback_handle_release_QRadioDataControl
+func miqt_exec_callback_handle_release_QRadioDataControl(cb C.intptr_t) {
+	cgo.Handle(cb).Delete()
+}
+
 type QRadioDataControl struct {
 	h *C.QRadioDataControl
 	*QMediaControl
@@ -137,8 +142,10 @@ func (this *QRadioDataControl) StationIdChanged(stationId string) {
 	defer C.free(unsafe.Pointer(stationId_ms.data))
 	C.QRadioDataControl_stationIdChanged(this.h, stationId_ms)
 }
-func (this *QRadioDataControl) OnStationIdChanged(slot func(stationId string)) {
-	C.QRadioDataControl_connect_stationIdChanged(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QRadioDataControl) OnStationIdChanged(slot func(stationId string)) *qt.SignalConnection {
+	_goptr := qt.UnsafeNewQMetaObject__Connection(C.QRadioDataControl_connect_stationIdChanged(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QRadioDataControl_stationIdChanged
@@ -160,8 +167,10 @@ func miqt_exec_callback_QRadioDataControl_stationIdChanged(cb C.intptr_t, statio
 func (this *QRadioDataControl) ProgramTypeChanged(programType QRadioData__ProgramType) {
 	C.QRadioDataControl_programTypeChanged(this.h, (C.int)(programType))
 }
-func (this *QRadioDataControl) OnProgramTypeChanged(slot func(programType QRadioData__ProgramType)) {
-	C.QRadioDataControl_connect_programTypeChanged(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QRadioDataControl) OnProgramTypeChanged(slot func(programType QRadioData__ProgramType)) *qt.SignalConnection {
+	_goptr := qt.UnsafeNewQMetaObject__Connection(C.QRadioDataControl_connect_programTypeChanged(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QRadioDataControl_programTypeChanged
@@ -184,8 +193,10 @@ func (this *QRadioDataControl) ProgramTypeNameChanged(programTypeName string) {
 	defer C.free(unsafe.Pointer(programTypeName_ms.data))
 	C.QRadioDataControl_programTypeNameChanged(this.h, programTypeName_ms)
 }
-func (this *QRadioDataControl) OnProgramTypeNameChanged(slot func(programTypeName string)) {
-	C.QRadioDataControl_connect_programTypeNameChanged(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QRadioDataControl) OnProgramTypeNameChanged(slot func(programTypeName string)) *qt.SignalConnection {
+	_goptr := qt.UnsafeNewQMetaObject__Connection(C.QRadioDataControl_connect_programTypeNameChanged(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QRadioDataControl_programTypeNameChanged
@@ -211,8 +222,10 @@ func (this *QRadioDataControl) StationNameChanged(stationName string) {
 	defer C.free(unsafe.Pointer(stationName_ms.data))
 	C.QRadioDataControl_stationNameChanged(this.h, stationName_ms)
 }
-func (this *QRadioDataControl) OnStationNameChanged(slot func(stationName string)) {
-	C.QRadioDataControl_connect_stationNameChanged(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QRadioDataControl) OnStationNameChanged(slot func(stationName string)) *qt.SignalConnection {
+	_goptr := qt.UnsafeNewQMetaObject__Connection(C.QRadioDataControl_connect_stationNameChanged(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QRadioDataControl_stationNameChanged
@@ -238,8 +251,10 @@ func (this *QRadioDataControl) RadioTextChanged(radioText string) {
 	defer C.free(unsafe.Pointer(radioText_ms.data))
 	C.QRadioDataControl_radioTextChanged(this.h, radioText_ms)
 }
-func (this *QRadioDataControl) OnRadioTextChanged(slot func(radioText string)) {
-	C.QRadioDataControl_connect_radioTextChanged(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QRadioDataControl) OnRadioTextChanged(slot func(radioText string)) *qt.SignalConnection {
+	_goptr := qt.UnsafeNewQMetaObject__Connection(C.QRadioDataControl_connect_radioTextChanged(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QRadioDataControl_radioTextChanged
@@ -261,8 +276,10 @@ func miqt_exec_callback_QRadioDataControl_radioTextChanged(cb C.intptr_t, radioT
 func (this *QRadioDataControl) AlternativeFrequenciesEnabledChanged(enabled bool) {
 	C.QRadioDataControl_alternativeFrequenciesEnabledChanged(this.h, (C.bool)(enabled))
 }
-func (this *QRadioDataControl) OnAlternativeFrequenciesEnabledChanged(slot func(enabled bool)) {
-	C.QRadioDataControl_connect_alternativeFrequenciesEnabledChanged(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QRadioDataControl) OnAlternativeFrequenciesEnabledChanged(slot func(enabled bool)) *qt.SignalConnection {
+	_goptr := qt.UnsafeNewQMetaObject__Connection(C.QRadioDataControl_connect_alternativeFrequenciesEnabledChanged(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QRadioDataControl_alternativeFrequenciesEnabledChanged
@@ -281,8 +298,10 @@ func miqt_exec_callback_QRadioDataControl_alternativeFrequenciesEnabledChanged(c
 func (this *QRadioDataControl) ErrorWithErr(err QRadioData__Error) {
 	C.QRadioDataControl_errorWithErr(this.h, (C.int)(err))
 }
-func (this *QRadioDataControl) OnErrorWithErr(slot func(err QRadioData__Error)) {
-	C.QRadioDataControl_connect_errorWithErr(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QRadioDataControl) OnErrorWithErr(slot func(err QRadioData__Error)) *qt.SignalConnection {
+	_goptr := qt.UnsafeNewQMetaObject__Connection(C.QRadioDataControl_connect_errorWithErr(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QRadioDataControl_errorWithErr

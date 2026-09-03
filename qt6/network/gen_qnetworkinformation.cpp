@@ -1,3 +1,5 @@
+#include <memory>
+#include <utility>
 #include <QList>
 #include <QMetaMethod>
 #include <QMetaObject>
@@ -13,6 +15,7 @@
 extern "C" {
 #endif
 
+void miqt_exec_callback_handle_release_QNetworkInformation(intptr_t);
 void miqt_exec_callback_QNetworkInformation_reachabilityChanged(intptr_t, int);
 void miqt_exec_callback_QNetworkInformation_isBehindCaptivePortalChanged(intptr_t, bool);
 void miqt_exec_callback_QNetworkInformation_transportMediumChanged(intptr_t, int);
@@ -122,46 +125,54 @@ void QNetworkInformation_reachabilityChanged(QNetworkInformation* self, int newR
 	self->reachabilityChanged(static_cast<QNetworkInformation::Reachability>(newReachability));
 }
 
-void QNetworkInformation_connect_reachabilityChanged(QNetworkInformation* self, intptr_t slot) {
-	QNetworkInformation::connect(self, static_cast<void (QNetworkInformation::*)(QNetworkInformation::Reachability)>(&QNetworkInformation::reachabilityChanged), self, [=](QNetworkInformation::Reachability newReachability) {
+void* QNetworkInformation_connect_reachabilityChanged(QNetworkInformation* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QNetworkInformation>>(slot);
+	return new QMetaObject::Connection(QNetworkInformation::connect(self, static_cast<void (QNetworkInformation::*)(QNetworkInformation::Reachability)>(&QNetworkInformation::reachabilityChanged), self, [slot_handle](QNetworkInformation::Reachability newReachability) {
+		intptr_t slot = slot_handle->value();
 		QNetworkInformation::Reachability newReachability_ret = newReachability;
 		int sigval1 = static_cast<int>(newReachability_ret);
 		miqt_exec_callback_QNetworkInformation_reachabilityChanged(slot, sigval1);
-	});
+	}));
 }
 
 void QNetworkInformation_isBehindCaptivePortalChanged(QNetworkInformation* self, bool state) {
 	self->isBehindCaptivePortalChanged(state);
 }
 
-void QNetworkInformation_connect_isBehindCaptivePortalChanged(QNetworkInformation* self, intptr_t slot) {
-	QNetworkInformation::connect(self, static_cast<void (QNetworkInformation::*)(bool)>(&QNetworkInformation::isBehindCaptivePortalChanged), self, [=](bool state) {
+void* QNetworkInformation_connect_isBehindCaptivePortalChanged(QNetworkInformation* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QNetworkInformation>>(slot);
+	return new QMetaObject::Connection(QNetworkInformation::connect(self, static_cast<void (QNetworkInformation::*)(bool)>(&QNetworkInformation::isBehindCaptivePortalChanged), self, [slot_handle](bool state) {
+		intptr_t slot = slot_handle->value();
 		bool sigval1 = state;
 		miqt_exec_callback_QNetworkInformation_isBehindCaptivePortalChanged(slot, sigval1);
-	});
+	}));
 }
 
 void QNetworkInformation_transportMediumChanged(QNetworkInformation* self, int current) {
 	self->transportMediumChanged(static_cast<QNetworkInformation::TransportMedium>(current));
 }
 
-void QNetworkInformation_connect_transportMediumChanged(QNetworkInformation* self, intptr_t slot) {
-	QNetworkInformation::connect(self, static_cast<void (QNetworkInformation::*)(QNetworkInformation::TransportMedium)>(&QNetworkInformation::transportMediumChanged), self, [=](QNetworkInformation::TransportMedium current) {
+void* QNetworkInformation_connect_transportMediumChanged(QNetworkInformation* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QNetworkInformation>>(slot);
+	return new QMetaObject::Connection(QNetworkInformation::connect(self, static_cast<void (QNetworkInformation::*)(QNetworkInformation::TransportMedium)>(&QNetworkInformation::transportMediumChanged), self, [slot_handle](QNetworkInformation::TransportMedium current) {
+		intptr_t slot = slot_handle->value();
 		QNetworkInformation::TransportMedium current_ret = current;
 		int sigval1 = static_cast<int>(current_ret);
 		miqt_exec_callback_QNetworkInformation_transportMediumChanged(slot, sigval1);
-	});
+	}));
 }
 
 void QNetworkInformation_isMeteredChanged(QNetworkInformation* self, bool isMetered) {
 	self->isMeteredChanged(isMetered);
 }
 
-void QNetworkInformation_connect_isMeteredChanged(QNetworkInformation* self, intptr_t slot) {
-	QNetworkInformation::connect(self, static_cast<void (QNetworkInformation::*)(bool)>(&QNetworkInformation::isMeteredChanged), self, [=](bool isMetered) {
+void* QNetworkInformation_connect_isMeteredChanged(QNetworkInformation* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QNetworkInformation>>(slot);
+	return new QMetaObject::Connection(QNetworkInformation::connect(self, static_cast<void (QNetworkInformation::*)(bool)>(&QNetworkInformation::isMeteredChanged), self, [slot_handle](bool isMetered) {
+		intptr_t slot = slot_handle->value();
 		bool sigval1 = isMetered;
 		miqt_exec_callback_QNetworkInformation_isMeteredChanged(slot, sigval1);
-	});
+	}));
 }
 
 struct miqt_string QNetworkInformation_tr2(const char* s, const char* c) {

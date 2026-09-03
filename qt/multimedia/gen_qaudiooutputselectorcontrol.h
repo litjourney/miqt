@@ -39,9 +39,9 @@ struct miqt_string QAudioOutputSelectorControl_defaultOutput(const QAudioOutputS
 struct miqt_string QAudioOutputSelectorControl_activeOutput(const QAudioOutputSelectorControl* self);
 void QAudioOutputSelectorControl_setActiveOutput(QAudioOutputSelectorControl* self, struct miqt_string name);
 void QAudioOutputSelectorControl_activeOutputChanged(QAudioOutputSelectorControl* self, struct miqt_string name);
-void QAudioOutputSelectorControl_connect_activeOutputChanged(QAudioOutputSelectorControl* self, intptr_t slot);
+void* QAudioOutputSelectorControl_connect_activeOutputChanged(QAudioOutputSelectorControl* self, intptr_t slot);
 void QAudioOutputSelectorControl_availableOutputsChanged(QAudioOutputSelectorControl* self);
-void QAudioOutputSelectorControl_connect_availableOutputsChanged(QAudioOutputSelectorControl* self, intptr_t slot);
+void* QAudioOutputSelectorControl_connect_availableOutputsChanged(QAudioOutputSelectorControl* self, intptr_t slot);
 struct miqt_string QAudioOutputSelectorControl_tr2(const char* s, const char* c);
 struct miqt_string QAudioOutputSelectorControl_tr3(const char* s, const char* c, int n);
 struct miqt_string QAudioOutputSelectorControl_trUtf82(const char* s, const char* c);

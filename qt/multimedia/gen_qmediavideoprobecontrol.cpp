@@ -1,3 +1,5 @@
+#include <memory>
+#include <utility>
 #include <QMediaControl>
 #include <QMediaVideoProbeControl>
 #include <QMetaMethod>
@@ -14,6 +16,7 @@
 extern "C" {
 #endif
 
+void miqt_exec_callback_handle_release_QMediaVideoProbeControl(intptr_t);
 void miqt_exec_callback_QMediaVideoProbeControl_videoFrameProbed(intptr_t, QVideoFrame*);
 void miqt_exec_callback_QMediaVideoProbeControl_flush(intptr_t);
 #ifdef __cplusplus
@@ -58,23 +61,27 @@ void QMediaVideoProbeControl_videoFrameProbed(QMediaVideoProbeControl* self, QVi
 	self->videoFrameProbed(*frame);
 }
 
-void QMediaVideoProbeControl_connect_videoFrameProbed(QMediaVideoProbeControl* self, intptr_t slot) {
-	QMediaVideoProbeControl::connect(self, static_cast<void (QMediaVideoProbeControl::*)(const QVideoFrame&)>(&QMediaVideoProbeControl::videoFrameProbed), self, [=](const QVideoFrame& frame) {
+void* QMediaVideoProbeControl_connect_videoFrameProbed(QMediaVideoProbeControl* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QMediaVideoProbeControl>>(slot);
+	return new QMetaObject::Connection(QMediaVideoProbeControl::connect(self, static_cast<void (QMediaVideoProbeControl::*)(const QVideoFrame&)>(&QMediaVideoProbeControl::videoFrameProbed), self, [slot_handle](const QVideoFrame& frame) {
+		intptr_t slot = slot_handle->value();
 		const QVideoFrame& frame_ret = frame;
 		// Cast returned reference into pointer
 		QVideoFrame* sigval1 = const_cast<QVideoFrame*>(&frame_ret);
 		miqt_exec_callback_QMediaVideoProbeControl_videoFrameProbed(slot, sigval1);
-	});
+	}));
 }
 
 void QMediaVideoProbeControl_flush(QMediaVideoProbeControl* self) {
 	self->flush();
 }
 
-void QMediaVideoProbeControl_connect_flush(QMediaVideoProbeControl* self, intptr_t slot) {
-	QMediaVideoProbeControl::connect(self, static_cast<void (QMediaVideoProbeControl::*)()>(&QMediaVideoProbeControl::flush), self, [=]() {
+void* QMediaVideoProbeControl_connect_flush(QMediaVideoProbeControl* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QMediaVideoProbeControl>>(slot);
+	return new QMetaObject::Connection(QMediaVideoProbeControl::connect(self, static_cast<void (QMediaVideoProbeControl::*)()>(&QMediaVideoProbeControl::flush), self, [slot_handle]() {
+		intptr_t slot = slot_handle->value();
 		miqt_exec_callback_QMediaVideoProbeControl_flush(slot);
-	});
+	}));
 }
 
 struct miqt_string QMediaVideoProbeControl_tr2(const char* s, const char* c) {

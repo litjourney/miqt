@@ -15,6 +15,11 @@ import (
 	"unsafe"
 )
 
+//export miqt_exec_callback_handle_release_QMediaGaplessPlaybackControl
+func miqt_exec_callback_handle_release_QMediaGaplessPlaybackControl(cb C.intptr_t) {
+	cgo.Handle(cb).Delete()
+}
+
 type QMediaGaplessPlaybackControl struct {
 	h *C.QMediaGaplessPlaybackControl
 	*QMediaControl
@@ -104,8 +109,10 @@ func (this *QMediaGaplessPlaybackControl) SetCrossfadeTime(crossfadeTime float64
 func (this *QMediaGaplessPlaybackControl) CrossfadeTimeChanged(crossfadeTime float64) {
 	C.QMediaGaplessPlaybackControl_crossfadeTimeChanged(this.h, (C.double)(crossfadeTime))
 }
-func (this *QMediaGaplessPlaybackControl) OnCrossfadeTimeChanged(slot func(crossfadeTime float64)) {
-	C.QMediaGaplessPlaybackControl_connect_crossfadeTimeChanged(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QMediaGaplessPlaybackControl) OnCrossfadeTimeChanged(slot func(crossfadeTime float64)) *qt.SignalConnection {
+	_goptr := qt.UnsafeNewQMetaObject__Connection(C.QMediaGaplessPlaybackControl_connect_crossfadeTimeChanged(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QMediaGaplessPlaybackControl_crossfadeTimeChanged
@@ -124,8 +131,10 @@ func miqt_exec_callback_QMediaGaplessPlaybackControl_crossfadeTimeChanged(cb C.i
 func (this *QMediaGaplessPlaybackControl) NextMediaChanged(media *QMediaContent) {
 	C.QMediaGaplessPlaybackControl_nextMediaChanged(this.h, media.cPointer())
 }
-func (this *QMediaGaplessPlaybackControl) OnNextMediaChanged(slot func(media *QMediaContent)) {
-	C.QMediaGaplessPlaybackControl_connect_nextMediaChanged(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QMediaGaplessPlaybackControl) OnNextMediaChanged(slot func(media *QMediaContent)) *qt.SignalConnection {
+	_goptr := qt.UnsafeNewQMetaObject__Connection(C.QMediaGaplessPlaybackControl_connect_nextMediaChanged(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QMediaGaplessPlaybackControl_nextMediaChanged
@@ -144,8 +153,10 @@ func miqt_exec_callback_QMediaGaplessPlaybackControl_nextMediaChanged(cb C.intpt
 func (this *QMediaGaplessPlaybackControl) AdvancedToNextMedia() {
 	C.QMediaGaplessPlaybackControl_advancedToNextMedia(this.h)
 }
-func (this *QMediaGaplessPlaybackControl) OnAdvancedToNextMedia(slot func()) {
-	C.QMediaGaplessPlaybackControl_connect_advancedToNextMedia(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QMediaGaplessPlaybackControl) OnAdvancedToNextMedia(slot func()) *qt.SignalConnection {
+	_goptr := qt.UnsafeNewQMetaObject__Connection(C.QMediaGaplessPlaybackControl_connect_advancedToNextMedia(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QMediaGaplessPlaybackControl_advancedToNextMedia

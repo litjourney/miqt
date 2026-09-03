@@ -63,6 +63,11 @@ const (
 	QWebEngineDownloadRequest__UserCanceled            QWebEngineDownloadRequest__DownloadInterruptReason = 40
 )
 
+//export miqt_exec_callback_handle_release_QWebEngineDownloadRequest
+func miqt_exec_callback_handle_release_QWebEngineDownloadRequest(cb C.intptr_t) {
+	cgo.Handle(cb).Delete()
+}
+
 type QWebEngineDownloadRequest struct {
 	h *C.QWebEngineDownloadRequest
 	*qt6.QObject
@@ -238,8 +243,10 @@ func (this *QWebEngineDownloadRequest) Resume() {
 func (this *QWebEngineDownloadRequest) StateChanged(state QWebEngineDownloadRequest__DownloadState) {
 	C.QWebEngineDownloadRequest_stateChanged(this.h, (C.int)(state))
 }
-func (this *QWebEngineDownloadRequest) OnStateChanged(slot func(state QWebEngineDownloadRequest__DownloadState)) {
-	C.QWebEngineDownloadRequest_connect_stateChanged(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QWebEngineDownloadRequest) OnStateChanged(slot func(state QWebEngineDownloadRequest__DownloadState)) *qt6.SignalConnection {
+	_goptr := qt6.UnsafeNewQMetaObject__Connection(C.QWebEngineDownloadRequest_connect_stateChanged(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QWebEngineDownloadRequest_stateChanged
@@ -258,8 +265,10 @@ func miqt_exec_callback_QWebEngineDownloadRequest_stateChanged(cb C.intptr_t, st
 func (this *QWebEngineDownloadRequest) SavePageFormatChanged() {
 	C.QWebEngineDownloadRequest_savePageFormatChanged(this.h)
 }
-func (this *QWebEngineDownloadRequest) OnSavePageFormatChanged(slot func()) {
-	C.QWebEngineDownloadRequest_connect_savePageFormatChanged(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QWebEngineDownloadRequest) OnSavePageFormatChanged(slot func()) *qt6.SignalConnection {
+	_goptr := qt6.UnsafeNewQMetaObject__Connection(C.QWebEngineDownloadRequest_connect_savePageFormatChanged(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QWebEngineDownloadRequest_savePageFormatChanged
@@ -275,8 +284,10 @@ func miqt_exec_callback_QWebEngineDownloadRequest_savePageFormatChanged(cb C.int
 func (this *QWebEngineDownloadRequest) ReceivedBytesChanged() {
 	C.QWebEngineDownloadRequest_receivedBytesChanged(this.h)
 }
-func (this *QWebEngineDownloadRequest) OnReceivedBytesChanged(slot func()) {
-	C.QWebEngineDownloadRequest_connect_receivedBytesChanged(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QWebEngineDownloadRequest) OnReceivedBytesChanged(slot func()) *qt6.SignalConnection {
+	_goptr := qt6.UnsafeNewQMetaObject__Connection(C.QWebEngineDownloadRequest_connect_receivedBytesChanged(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QWebEngineDownloadRequest_receivedBytesChanged
@@ -292,8 +303,10 @@ func miqt_exec_callback_QWebEngineDownloadRequest_receivedBytesChanged(cb C.intp
 func (this *QWebEngineDownloadRequest) TotalBytesChanged() {
 	C.QWebEngineDownloadRequest_totalBytesChanged(this.h)
 }
-func (this *QWebEngineDownloadRequest) OnTotalBytesChanged(slot func()) {
-	C.QWebEngineDownloadRequest_connect_totalBytesChanged(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QWebEngineDownloadRequest) OnTotalBytesChanged(slot func()) *qt6.SignalConnection {
+	_goptr := qt6.UnsafeNewQMetaObject__Connection(C.QWebEngineDownloadRequest_connect_totalBytesChanged(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QWebEngineDownloadRequest_totalBytesChanged
@@ -309,8 +322,10 @@ func miqt_exec_callback_QWebEngineDownloadRequest_totalBytesChanged(cb C.intptr_
 func (this *QWebEngineDownloadRequest) InterruptReasonChanged() {
 	C.QWebEngineDownloadRequest_interruptReasonChanged(this.h)
 }
-func (this *QWebEngineDownloadRequest) OnInterruptReasonChanged(slot func()) {
-	C.QWebEngineDownloadRequest_connect_interruptReasonChanged(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QWebEngineDownloadRequest) OnInterruptReasonChanged(slot func()) *qt6.SignalConnection {
+	_goptr := qt6.UnsafeNewQMetaObject__Connection(C.QWebEngineDownloadRequest_connect_interruptReasonChanged(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QWebEngineDownloadRequest_interruptReasonChanged
@@ -326,8 +341,10 @@ func miqt_exec_callback_QWebEngineDownloadRequest_interruptReasonChanged(cb C.in
 func (this *QWebEngineDownloadRequest) IsFinishedChanged() {
 	C.QWebEngineDownloadRequest_isFinishedChanged(this.h)
 }
-func (this *QWebEngineDownloadRequest) OnIsFinishedChanged(slot func()) {
-	C.QWebEngineDownloadRequest_connect_isFinishedChanged(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QWebEngineDownloadRequest) OnIsFinishedChanged(slot func()) *qt6.SignalConnection {
+	_goptr := qt6.UnsafeNewQMetaObject__Connection(C.QWebEngineDownloadRequest_connect_isFinishedChanged(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QWebEngineDownloadRequest_isFinishedChanged
@@ -343,8 +360,10 @@ func miqt_exec_callback_QWebEngineDownloadRequest_isFinishedChanged(cb C.intptr_
 func (this *QWebEngineDownloadRequest) IsPausedChanged() {
 	C.QWebEngineDownloadRequest_isPausedChanged(this.h)
 }
-func (this *QWebEngineDownloadRequest) OnIsPausedChanged(slot func()) {
-	C.QWebEngineDownloadRequest_connect_isPausedChanged(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QWebEngineDownloadRequest) OnIsPausedChanged(slot func()) *qt6.SignalConnection {
+	_goptr := qt6.UnsafeNewQMetaObject__Connection(C.QWebEngineDownloadRequest_connect_isPausedChanged(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QWebEngineDownloadRequest_isPausedChanged
@@ -360,8 +379,10 @@ func miqt_exec_callback_QWebEngineDownloadRequest_isPausedChanged(cb C.intptr_t)
 func (this *QWebEngineDownloadRequest) DownloadDirectoryChanged() {
 	C.QWebEngineDownloadRequest_downloadDirectoryChanged(this.h)
 }
-func (this *QWebEngineDownloadRequest) OnDownloadDirectoryChanged(slot func()) {
-	C.QWebEngineDownloadRequest_connect_downloadDirectoryChanged(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QWebEngineDownloadRequest) OnDownloadDirectoryChanged(slot func()) *qt6.SignalConnection {
+	_goptr := qt6.UnsafeNewQMetaObject__Connection(C.QWebEngineDownloadRequest_connect_downloadDirectoryChanged(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QWebEngineDownloadRequest_downloadDirectoryChanged
@@ -377,8 +398,10 @@ func miqt_exec_callback_QWebEngineDownloadRequest_downloadDirectoryChanged(cb C.
 func (this *QWebEngineDownloadRequest) DownloadFileNameChanged() {
 	C.QWebEngineDownloadRequest_downloadFileNameChanged(this.h)
 }
-func (this *QWebEngineDownloadRequest) OnDownloadFileNameChanged(slot func()) {
-	C.QWebEngineDownloadRequest_connect_downloadFileNameChanged(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QWebEngineDownloadRequest) OnDownloadFileNameChanged(slot func()) *qt6.SignalConnection {
+	_goptr := qt6.UnsafeNewQMetaObject__Connection(C.QWebEngineDownloadRequest_connect_downloadFileNameChanged(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QWebEngineDownloadRequest_downloadFileNameChanged

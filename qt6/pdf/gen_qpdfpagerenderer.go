@@ -22,6 +22,11 @@ const (
 	QPdfPageRenderer__SingleThreaded QPdfPageRenderer__RenderMode = 1
 )
 
+//export miqt_exec_callback_handle_release_QPdfPageRenderer
+func miqt_exec_callback_handle_release_QPdfPageRenderer(cb C.intptr_t) {
+	cgo.Handle(cb).Delete()
+}
+
 type QPdfPageRenderer struct {
 	h *C.QPdfPageRenderer
 	*qt6.QObject
@@ -112,8 +117,10 @@ func (this *QPdfPageRenderer) RequestPage(pageNumber int, imageSize qt6.QSize) u
 func (this *QPdfPageRenderer) DocumentChanged(document *QPdfDocument) {
 	C.QPdfPageRenderer_documentChanged(this.h, document.cPointer())
 }
-func (this *QPdfPageRenderer) OnDocumentChanged(slot func(document *QPdfDocument)) {
-	C.QPdfPageRenderer_connect_documentChanged(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QPdfPageRenderer) OnDocumentChanged(slot func(document *QPdfDocument)) *qt6.SignalConnection {
+	_goptr := qt6.UnsafeNewQMetaObject__Connection(C.QPdfPageRenderer_connect_documentChanged(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QPdfPageRenderer_documentChanged
@@ -132,8 +139,10 @@ func miqt_exec_callback_QPdfPageRenderer_documentChanged(cb C.intptr_t, document
 func (this *QPdfPageRenderer) RenderModeChanged(renderMode QPdfPageRenderer__RenderMode) {
 	C.QPdfPageRenderer_renderModeChanged(this.h, (C.int)(renderMode))
 }
-func (this *QPdfPageRenderer) OnRenderModeChanged(slot func(renderMode QPdfPageRenderer__RenderMode)) {
-	C.QPdfPageRenderer_connect_renderModeChanged(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QPdfPageRenderer) OnRenderModeChanged(slot func(renderMode QPdfPageRenderer__RenderMode)) *qt6.SignalConnection {
+	_goptr := qt6.UnsafeNewQMetaObject__Connection(C.QPdfPageRenderer_connect_renderModeChanged(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QPdfPageRenderer_renderModeChanged
@@ -152,8 +161,10 @@ func miqt_exec_callback_QPdfPageRenderer_renderModeChanged(cb C.intptr_t, render
 func (this *QPdfPageRenderer) PageRendered(pageNumber int, imageSize qt6.QSize, image *qt6.QImage, options QPdfDocumentRenderOptions, requestId uint64) {
 	C.QPdfPageRenderer_pageRendered(this.h, (C.int)(pageNumber), (*C.QSize)(imageSize.UnsafePointer()), (*C.QImage)(image.UnsafePointer()), options.cPointer(), (C.ulonglong)(requestId))
 }
-func (this *QPdfPageRenderer) OnPageRendered(slot func(pageNumber int, imageSize qt6.QSize, image *qt6.QImage, options QPdfDocumentRenderOptions, requestId uint64)) {
-	C.QPdfPageRenderer_connect_pageRendered(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QPdfPageRenderer) OnPageRendered(slot func(pageNumber int, imageSize qt6.QSize, image *qt6.QImage, options QPdfDocumentRenderOptions, requestId uint64)) *qt6.SignalConnection {
+	_goptr := qt6.UnsafeNewQMetaObject__Connection(C.QPdfPageRenderer_connect_pageRendered(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QPdfPageRenderer_pageRendered
@@ -271,7 +282,11 @@ func (this *QPdfPageRenderer) callVirtualBase_Event(event *qt6.QEvent) bool {
 
 }
 func (this *QPdfPageRenderer) OnEvent(slot func(super func(event *qt6.QEvent) bool, event *qt6.QEvent) bool) {
-	ok := C.QPdfPageRenderer_override_virtual_event(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QPdfPageRenderer_override_virtual_event(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -299,7 +314,11 @@ func (this *QPdfPageRenderer) callVirtualBase_EventFilter(watched *qt6.QObject, 
 
 }
 func (this *QPdfPageRenderer) OnEventFilter(slot func(super func(watched *qt6.QObject, event *qt6.QEvent) bool, watched *qt6.QObject, event *qt6.QEvent) bool) {
-	ok := C.QPdfPageRenderer_override_virtual_eventFilter(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QPdfPageRenderer_override_virtual_eventFilter(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -329,7 +348,11 @@ func (this *QPdfPageRenderer) callVirtualBase_TimerEvent(event *qt6.QTimerEvent)
 
 }
 func (this *QPdfPageRenderer) OnTimerEvent(slot func(super func(event *qt6.QTimerEvent), event *qt6.QTimerEvent)) {
-	ok := C.QPdfPageRenderer_override_virtual_timerEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QPdfPageRenderer_override_virtual_timerEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -355,7 +378,11 @@ func (this *QPdfPageRenderer) callVirtualBase_ChildEvent(event *qt6.QChildEvent)
 
 }
 func (this *QPdfPageRenderer) OnChildEvent(slot func(super func(event *qt6.QChildEvent), event *qt6.QChildEvent)) {
-	ok := C.QPdfPageRenderer_override_virtual_childEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QPdfPageRenderer_override_virtual_childEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -381,7 +408,11 @@ func (this *QPdfPageRenderer) callVirtualBase_CustomEvent(event *qt6.QEvent) {
 
 }
 func (this *QPdfPageRenderer) OnCustomEvent(slot func(super func(event *qt6.QEvent), event *qt6.QEvent)) {
-	ok := C.QPdfPageRenderer_override_virtual_customEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QPdfPageRenderer_override_virtual_customEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -407,7 +438,11 @@ func (this *QPdfPageRenderer) callVirtualBase_ConnectNotify(signal *qt6.QMetaMet
 
 }
 func (this *QPdfPageRenderer) OnConnectNotify(slot func(super func(signal *qt6.QMetaMethod), signal *qt6.QMetaMethod)) {
-	ok := C.QPdfPageRenderer_override_virtual_connectNotify(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QPdfPageRenderer_override_virtual_connectNotify(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -433,7 +468,11 @@ func (this *QPdfPageRenderer) callVirtualBase_DisconnectNotify(signal *qt6.QMeta
 
 }
 func (this *QPdfPageRenderer) OnDisconnectNotify(slot func(super func(signal *qt6.QMetaMethod), signal *qt6.QMetaMethod)) {
-	ok := C.QPdfPageRenderer_override_virtual_disconnectNotify(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QPdfPageRenderer_override_virtual_disconnectNotify(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}

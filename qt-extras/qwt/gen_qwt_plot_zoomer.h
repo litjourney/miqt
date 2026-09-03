@@ -104,7 +104,7 @@ void QwtPlotZoomer_moveTo(QwtPlotZoomer* self, QPointF* param1);
 void QwtPlotZoomer_zoom(QwtPlotZoomer* self, QRectF* param1);
 void QwtPlotZoomer_zoomWithOffset(QwtPlotZoomer* self, int offset);
 void QwtPlotZoomer_zoomed(QwtPlotZoomer* self, QRectF* rect);
-void QwtPlotZoomer_connect_zoomed(QwtPlotZoomer* self, intptr_t slot);
+void* QwtPlotZoomer_connect_zoomed(QwtPlotZoomer* self, intptr_t slot);
 void QwtPlotZoomer_rescale(QwtPlotZoomer* self);
 QSizeF* QwtPlotZoomer_minZoomSize(const QwtPlotZoomer* self);
 void QwtPlotZoomer_widgetMouseReleaseEvent(QwtPlotZoomer* self, QMouseEvent* param1);

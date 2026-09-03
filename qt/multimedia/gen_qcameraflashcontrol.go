@@ -15,6 +15,11 @@ import (
 	"unsafe"
 )
 
+//export miqt_exec_callback_handle_release_QCameraFlashControl
+func miqt_exec_callback_handle_release_QCameraFlashControl(cb C.intptr_t) {
+	cgo.Handle(cb).Delete()
+}
+
 type QCameraFlashControl struct {
 	h *C.QCameraFlashControl
 	*QMediaControl
@@ -98,8 +103,10 @@ func (this *QCameraFlashControl) IsFlashReady() bool {
 func (this *QCameraFlashControl) FlashReady(param1 bool) {
 	C.QCameraFlashControl_flashReady(this.h, (C.bool)(param1))
 }
-func (this *QCameraFlashControl) OnFlashReady(slot func(param1 bool)) {
-	C.QCameraFlashControl_connect_flashReady(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QCameraFlashControl) OnFlashReady(slot func(param1 bool)) *qt.SignalConnection {
+	_goptr := qt.UnsafeNewQMetaObject__Connection(C.QCameraFlashControl_connect_flashReady(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QCameraFlashControl_flashReady

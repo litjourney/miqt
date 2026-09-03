@@ -14,6 +14,11 @@ import (
 	"unsafe"
 )
 
+//export miqt_exec_callback_handle_release_QButtonGroup
+func miqt_exec_callback_handle_release_QButtonGroup(cb C.intptr_t) {
+	cgo.Handle(cb).Delete()
+}
+
 type QButtonGroup struct {
 	h *C.QButtonGroup
 	*QObject
@@ -130,8 +135,10 @@ func (this *QButtonGroup) CheckedId() int {
 func (this *QButtonGroup) ButtonClicked(param1 *QAbstractButton) {
 	C.QButtonGroup_buttonClicked(this.h, param1.cPointer())
 }
-func (this *QButtonGroup) OnButtonClicked(slot func(param1 *QAbstractButton)) {
-	C.QButtonGroup_connect_buttonClicked(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QButtonGroup) OnButtonClicked(slot func(param1 *QAbstractButton)) *SignalConnection {
+	_goptr := UnsafeNewQMetaObject__Connection(C.QButtonGroup_connect_buttonClicked(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QButtonGroup_buttonClicked
@@ -150,8 +157,10 @@ func miqt_exec_callback_QButtonGroup_buttonClicked(cb C.intptr_t, param1 *C.QAbs
 func (this *QButtonGroup) ButtonPressed(param1 *QAbstractButton) {
 	C.QButtonGroup_buttonPressed(this.h, param1.cPointer())
 }
-func (this *QButtonGroup) OnButtonPressed(slot func(param1 *QAbstractButton)) {
-	C.QButtonGroup_connect_buttonPressed(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QButtonGroup) OnButtonPressed(slot func(param1 *QAbstractButton)) *SignalConnection {
+	_goptr := UnsafeNewQMetaObject__Connection(C.QButtonGroup_connect_buttonPressed(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QButtonGroup_buttonPressed
@@ -170,8 +179,10 @@ func miqt_exec_callback_QButtonGroup_buttonPressed(cb C.intptr_t, param1 *C.QAbs
 func (this *QButtonGroup) ButtonReleased(param1 *QAbstractButton) {
 	C.QButtonGroup_buttonReleased(this.h, param1.cPointer())
 }
-func (this *QButtonGroup) OnButtonReleased(slot func(param1 *QAbstractButton)) {
-	C.QButtonGroup_connect_buttonReleased(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QButtonGroup) OnButtonReleased(slot func(param1 *QAbstractButton)) *SignalConnection {
+	_goptr := UnsafeNewQMetaObject__Connection(C.QButtonGroup_connect_buttonReleased(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QButtonGroup_buttonReleased
@@ -190,8 +201,10 @@ func miqt_exec_callback_QButtonGroup_buttonReleased(cb C.intptr_t, param1 *C.QAb
 func (this *QButtonGroup) ButtonToggled(param1 *QAbstractButton, param2 bool) {
 	C.QButtonGroup_buttonToggled(this.h, param1.cPointer(), (C.bool)(param2))
 }
-func (this *QButtonGroup) OnButtonToggled(slot func(param1 *QAbstractButton, param2 bool)) {
-	C.QButtonGroup_connect_buttonToggled(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QButtonGroup) OnButtonToggled(slot func(param1 *QAbstractButton, param2 bool)) *SignalConnection {
+	_goptr := UnsafeNewQMetaObject__Connection(C.QButtonGroup_connect_buttonToggled(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QButtonGroup_buttonToggled
@@ -212,8 +225,10 @@ func miqt_exec_callback_QButtonGroup_buttonToggled(cb C.intptr_t, param1 *C.QAbs
 func (this *QButtonGroup) IdClicked(param1 int) {
 	C.QButtonGroup_idClicked(this.h, (C.int)(param1))
 }
-func (this *QButtonGroup) OnIdClicked(slot func(param1 int)) {
-	C.QButtonGroup_connect_idClicked(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QButtonGroup) OnIdClicked(slot func(param1 int)) *SignalConnection {
+	_goptr := UnsafeNewQMetaObject__Connection(C.QButtonGroup_connect_idClicked(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QButtonGroup_idClicked
@@ -232,8 +247,10 @@ func miqt_exec_callback_QButtonGroup_idClicked(cb C.intptr_t, param1 C.int) {
 func (this *QButtonGroup) IdPressed(param1 int) {
 	C.QButtonGroup_idPressed(this.h, (C.int)(param1))
 }
-func (this *QButtonGroup) OnIdPressed(slot func(param1 int)) {
-	C.QButtonGroup_connect_idPressed(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QButtonGroup) OnIdPressed(slot func(param1 int)) *SignalConnection {
+	_goptr := UnsafeNewQMetaObject__Connection(C.QButtonGroup_connect_idPressed(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QButtonGroup_idPressed
@@ -252,8 +269,10 @@ func miqt_exec_callback_QButtonGroup_idPressed(cb C.intptr_t, param1 C.int) {
 func (this *QButtonGroup) IdReleased(param1 int) {
 	C.QButtonGroup_idReleased(this.h, (C.int)(param1))
 }
-func (this *QButtonGroup) OnIdReleased(slot func(param1 int)) {
-	C.QButtonGroup_connect_idReleased(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QButtonGroup) OnIdReleased(slot func(param1 int)) *SignalConnection {
+	_goptr := UnsafeNewQMetaObject__Connection(C.QButtonGroup_connect_idReleased(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QButtonGroup_idReleased
@@ -272,8 +291,10 @@ func miqt_exec_callback_QButtonGroup_idReleased(cb C.intptr_t, param1 C.int) {
 func (this *QButtonGroup) IdToggled(param1 int, param2 bool) {
 	C.QButtonGroup_idToggled(this.h, (C.int)(param1), (C.bool)(param2))
 }
-func (this *QButtonGroup) OnIdToggled(slot func(param1 int, param2 bool)) {
-	C.QButtonGroup_connect_idToggled(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QButtonGroup) OnIdToggled(slot func(param1 int, param2 bool)) *SignalConnection {
+	_goptr := UnsafeNewQMetaObject__Connection(C.QButtonGroup_connect_idToggled(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QButtonGroup_idToggled
@@ -381,7 +402,11 @@ func (this *QButtonGroup) callVirtualBase_Event(event *QEvent) bool {
 
 }
 func (this *QButtonGroup) OnEvent(slot func(super func(event *QEvent) bool, event *QEvent) bool) {
-	ok := C.QButtonGroup_override_virtual_event(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QButtonGroup_override_virtual_event(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -409,7 +434,11 @@ func (this *QButtonGroup) callVirtualBase_EventFilter(watched *QObject, event *Q
 
 }
 func (this *QButtonGroup) OnEventFilter(slot func(super func(watched *QObject, event *QEvent) bool, watched *QObject, event *QEvent) bool) {
-	ok := C.QButtonGroup_override_virtual_eventFilter(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QButtonGroup_override_virtual_eventFilter(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -439,7 +468,11 @@ func (this *QButtonGroup) callVirtualBase_TimerEvent(event *QTimerEvent) {
 
 }
 func (this *QButtonGroup) OnTimerEvent(slot func(super func(event *QTimerEvent), event *QTimerEvent)) {
-	ok := C.QButtonGroup_override_virtual_timerEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QButtonGroup_override_virtual_timerEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -465,7 +498,11 @@ func (this *QButtonGroup) callVirtualBase_ChildEvent(event *QChildEvent) {
 
 }
 func (this *QButtonGroup) OnChildEvent(slot func(super func(event *QChildEvent), event *QChildEvent)) {
-	ok := C.QButtonGroup_override_virtual_childEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QButtonGroup_override_virtual_childEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -491,7 +528,11 @@ func (this *QButtonGroup) callVirtualBase_CustomEvent(event *QEvent) {
 
 }
 func (this *QButtonGroup) OnCustomEvent(slot func(super func(event *QEvent), event *QEvent)) {
-	ok := C.QButtonGroup_override_virtual_customEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QButtonGroup_override_virtual_customEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -517,7 +558,11 @@ func (this *QButtonGroup) callVirtualBase_ConnectNotify(signal *QMetaMethod) {
 
 }
 func (this *QButtonGroup) OnConnectNotify(slot func(super func(signal *QMetaMethod), signal *QMetaMethod)) {
-	ok := C.QButtonGroup_override_virtual_connectNotify(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QButtonGroup_override_virtual_connectNotify(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -543,7 +588,11 @@ func (this *QButtonGroup) callVirtualBase_DisconnectNotify(signal *QMetaMethod) 
 
 }
 func (this *QButtonGroup) OnDisconnectNotify(slot func(super func(signal *QMetaMethod), signal *QMetaMethod)) {
-	ok := C.QButtonGroup_override_virtual_disconnectNotify(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QButtonGroup_override_virtual_disconnectNotify(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}

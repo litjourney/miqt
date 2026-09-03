@@ -1,3 +1,5 @@
+#include <memory>
+#include <utility>
 #include <QChildEvent>
 #include <QColor>
 #include <QEvent>
@@ -18,6 +20,7 @@
 extern "C" {
 #endif
 
+void miqt_exec_callback_handle_release_QsciLexerLua(intptr_t);
 void miqt_exec_callback_QsciLexerLua_setFoldCompact(QsciLexerLua*, intptr_t, bool);
 const char* miqt_exec_callback_QsciLexerLua_language(const QsciLexerLua*, intptr_t);
 const char* miqt_exec_callback_QsciLexerLua_lexer(const QsciLexerLua*, intptr_t);
@@ -73,90 +76,90 @@ public:
 	virtual ~MiqtVirtualQsciLexerLua() override = default;
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__setFoldCompact = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QsciLexerLua> handle__setFoldCompact;
 
 	// Subclass to allow providing a Go implementation
 	virtual void setFoldCompact(bool fold) override {
-		if (handle__setFoldCompact == 0) {
+		if (!handle__setFoldCompact) {
 			QsciLexerLua::setFoldCompact(fold);
 			return;
 		}
 
 		bool sigval1 = fold;
-		miqt_exec_callback_QsciLexerLua_setFoldCompact(this, handle__setFoldCompact, sigval1);
+		miqt_exec_callback_QsciLexerLua_setFoldCompact(this, handle__setFoldCompact.value(), sigval1);
 
 	}
 
 	friend void QsciLexerLua_virtualbase_setFoldCompact(void* self, bool fold);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__language = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QsciLexerLua> handle__language;
 
 	// Subclass to allow providing a Go implementation
 	virtual const char* language() const override {
-		if (handle__language == 0) {
+		if (!handle__language) {
 			return nullptr; // Pure virtual, there is no base we can call
 		}
 
-		const char* callback_return_value = miqt_exec_callback_QsciLexerLua_language(this, handle__language);
+		const char* callback_return_value = miqt_exec_callback_QsciLexerLua_language(this, handle__language.value());
 		return callback_return_value;
 	}
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__lexer = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QsciLexerLua> handle__lexer;
 
 	// Subclass to allow providing a Go implementation
 	virtual const char* lexer() const override {
-		if (handle__lexer == 0) {
+		if (!handle__lexer) {
 			return QsciLexerLua::lexer();
 		}
 
-		const char* callback_return_value = miqt_exec_callback_QsciLexerLua_lexer(this, handle__lexer);
+		const char* callback_return_value = miqt_exec_callback_QsciLexerLua_lexer(this, handle__lexer.value());
 		return callback_return_value;
 	}
 
 	friend const char* QsciLexerLua_virtualbase_lexer(const void* self);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__lexerId = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QsciLexerLua> handle__lexerId;
 
 	// Subclass to allow providing a Go implementation
 	virtual int lexerId() const override {
-		if (handle__lexerId == 0) {
+		if (!handle__lexerId) {
 			return QsciLexerLua::lexerId();
 		}
 
-		int callback_return_value = miqt_exec_callback_QsciLexerLua_lexerId(this, handle__lexerId);
+		int callback_return_value = miqt_exec_callback_QsciLexerLua_lexerId(this, handle__lexerId.value());
 		return static_cast<int>(callback_return_value);
 	}
 
 	friend int QsciLexerLua_virtualbase_lexerId(const void* self);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__autoCompletionFillups = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QsciLexerLua> handle__autoCompletionFillups;
 
 	// Subclass to allow providing a Go implementation
 	virtual const char* autoCompletionFillups() const override {
-		if (handle__autoCompletionFillups == 0) {
+		if (!handle__autoCompletionFillups) {
 			return QsciLexerLua::autoCompletionFillups();
 		}
 
-		const char* callback_return_value = miqt_exec_callback_QsciLexerLua_autoCompletionFillups(this, handle__autoCompletionFillups);
+		const char* callback_return_value = miqt_exec_callback_QsciLexerLua_autoCompletionFillups(this, handle__autoCompletionFillups.value());
 		return callback_return_value;
 	}
 
 	friend const char* QsciLexerLua_virtualbase_autoCompletionFillups(const void* self);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__autoCompletionWordSeparators = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QsciLexerLua> handle__autoCompletionWordSeparators;
 
 	// Subclass to allow providing a Go implementation
 	virtual QStringList autoCompletionWordSeparators() const override {
-		if (handle__autoCompletionWordSeparators == 0) {
+		if (!handle__autoCompletionWordSeparators) {
 			return QsciLexerLua::autoCompletionWordSeparators();
 		}
 
-		struct miqt_array /* of struct miqt_string */  callback_return_value = miqt_exec_callback_QsciLexerLua_autoCompletionWordSeparators(this, handle__autoCompletionWordSeparators);
+		struct miqt_array /* of struct miqt_string */  callback_return_value = miqt_exec_callback_QsciLexerLua_autoCompletionWordSeparators(this, handle__autoCompletionWordSeparators.value());
 		QStringList callback_return_value_QList;
 		callback_return_value_QList.reserve(callback_return_value.len);
 		struct miqt_string* callback_return_value_arr = static_cast<struct miqt_string*>(callback_return_value.data);
@@ -175,374 +178,374 @@ public:
 	friend struct miqt_array /* of struct miqt_string */  QsciLexerLua_virtualbase_autoCompletionWordSeparators(const void* self);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__blockEnd = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QsciLexerLua> handle__blockEnd;
 
 	// Subclass to allow providing a Go implementation
 	virtual const char* blockEnd(int* style) const override {
-		if (handle__blockEnd == 0) {
+		if (!handle__blockEnd) {
 			return QsciLexerLua::blockEnd(style);
 		}
 
 		int* sigval1 = style;
-		const char* callback_return_value = miqt_exec_callback_QsciLexerLua_blockEnd(this, handle__blockEnd, sigval1);
+		const char* callback_return_value = miqt_exec_callback_QsciLexerLua_blockEnd(this, handle__blockEnd.value(), sigval1);
 		return callback_return_value;
 	}
 
 	friend const char* QsciLexerLua_virtualbase_blockEnd(const void* self, int* style);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__blockLookback = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QsciLexerLua> handle__blockLookback;
 
 	// Subclass to allow providing a Go implementation
 	virtual int blockLookback() const override {
-		if (handle__blockLookback == 0) {
+		if (!handle__blockLookback) {
 			return QsciLexerLua::blockLookback();
 		}
 
-		int callback_return_value = miqt_exec_callback_QsciLexerLua_blockLookback(this, handle__blockLookback);
+		int callback_return_value = miqt_exec_callback_QsciLexerLua_blockLookback(this, handle__blockLookback.value());
 		return static_cast<int>(callback_return_value);
 	}
 
 	friend int QsciLexerLua_virtualbase_blockLookback(const void* self);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__blockStart = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QsciLexerLua> handle__blockStart;
 
 	// Subclass to allow providing a Go implementation
 	virtual const char* blockStart(int* style) const override {
-		if (handle__blockStart == 0) {
+		if (!handle__blockStart) {
 			return QsciLexerLua::blockStart(style);
 		}
 
 		int* sigval1 = style;
-		const char* callback_return_value = miqt_exec_callback_QsciLexerLua_blockStart(this, handle__blockStart, sigval1);
+		const char* callback_return_value = miqt_exec_callback_QsciLexerLua_blockStart(this, handle__blockStart.value(), sigval1);
 		return callback_return_value;
 	}
 
 	friend const char* QsciLexerLua_virtualbase_blockStart(const void* self, int* style);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__blockStartKeyword = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QsciLexerLua> handle__blockStartKeyword;
 
 	// Subclass to allow providing a Go implementation
 	virtual const char* blockStartKeyword(int* style) const override {
-		if (handle__blockStartKeyword == 0) {
+		if (!handle__blockStartKeyword) {
 			return QsciLexerLua::blockStartKeyword(style);
 		}
 
 		int* sigval1 = style;
-		const char* callback_return_value = miqt_exec_callback_QsciLexerLua_blockStartKeyword(this, handle__blockStartKeyword, sigval1);
+		const char* callback_return_value = miqt_exec_callback_QsciLexerLua_blockStartKeyword(this, handle__blockStartKeyword.value(), sigval1);
 		return callback_return_value;
 	}
 
 	friend const char* QsciLexerLua_virtualbase_blockStartKeyword(const void* self, int* style);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__braceStyle = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QsciLexerLua> handle__braceStyle;
 
 	// Subclass to allow providing a Go implementation
 	virtual int braceStyle() const override {
-		if (handle__braceStyle == 0) {
+		if (!handle__braceStyle) {
 			return QsciLexerLua::braceStyle();
 		}
 
-		int callback_return_value = miqt_exec_callback_QsciLexerLua_braceStyle(this, handle__braceStyle);
+		int callback_return_value = miqt_exec_callback_QsciLexerLua_braceStyle(this, handle__braceStyle.value());
 		return static_cast<int>(callback_return_value);
 	}
 
 	friend int QsciLexerLua_virtualbase_braceStyle(const void* self);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__caseSensitive = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QsciLexerLua> handle__caseSensitive;
 
 	// Subclass to allow providing a Go implementation
 	virtual bool caseSensitive() const override {
-		if (handle__caseSensitive == 0) {
+		if (!handle__caseSensitive) {
 			return QsciLexerLua::caseSensitive();
 		}
 
-		bool callback_return_value = miqt_exec_callback_QsciLexerLua_caseSensitive(this, handle__caseSensitive);
+		bool callback_return_value = miqt_exec_callback_QsciLexerLua_caseSensitive(this, handle__caseSensitive.value());
 		return callback_return_value;
 	}
 
 	friend bool QsciLexerLua_virtualbase_caseSensitive(const void* self);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__color = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QsciLexerLua> handle__color;
 
 	// Subclass to allow providing a Go implementation
 	virtual QColor color(int style) const override {
-		if (handle__color == 0) {
+		if (!handle__color) {
 			return QsciLexerLua::color(style);
 		}
 
 		int sigval1 = style;
-		QColor* callback_return_value = miqt_exec_callback_QsciLexerLua_color(this, handle__color, sigval1);
+		QColor* callback_return_value = miqt_exec_callback_QsciLexerLua_color(this, handle__color.value(), sigval1);
 		return *callback_return_value;
 	}
 
 	friend QColor* QsciLexerLua_virtualbase_color(const void* self, int style);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__eolFill = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QsciLexerLua> handle__eolFill;
 
 	// Subclass to allow providing a Go implementation
 	virtual bool eolFill(int style) const override {
-		if (handle__eolFill == 0) {
+		if (!handle__eolFill) {
 			return QsciLexerLua::eolFill(style);
 		}
 
 		int sigval1 = style;
-		bool callback_return_value = miqt_exec_callback_QsciLexerLua_eolFill(this, handle__eolFill, sigval1);
+		bool callback_return_value = miqt_exec_callback_QsciLexerLua_eolFill(this, handle__eolFill.value(), sigval1);
 		return callback_return_value;
 	}
 
 	friend bool QsciLexerLua_virtualbase_eolFill(const void* self, int style);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__font = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QsciLexerLua> handle__font;
 
 	// Subclass to allow providing a Go implementation
 	virtual QFont font(int style) const override {
-		if (handle__font == 0) {
+		if (!handle__font) {
 			return QsciLexerLua::font(style);
 		}
 
 		int sigval1 = style;
-		QFont* callback_return_value = miqt_exec_callback_QsciLexerLua_font(this, handle__font, sigval1);
+		QFont* callback_return_value = miqt_exec_callback_QsciLexerLua_font(this, handle__font.value(), sigval1);
 		return *callback_return_value;
 	}
 
 	friend QFont* QsciLexerLua_virtualbase_font(const void* self, int style);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__indentationGuideView = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QsciLexerLua> handle__indentationGuideView;
 
 	// Subclass to allow providing a Go implementation
 	virtual int indentationGuideView() const override {
-		if (handle__indentationGuideView == 0) {
+		if (!handle__indentationGuideView) {
 			return QsciLexerLua::indentationGuideView();
 		}
 
-		int callback_return_value = miqt_exec_callback_QsciLexerLua_indentationGuideView(this, handle__indentationGuideView);
+		int callback_return_value = miqt_exec_callback_QsciLexerLua_indentationGuideView(this, handle__indentationGuideView.value());
 		return static_cast<int>(callback_return_value);
 	}
 
 	friend int QsciLexerLua_virtualbase_indentationGuideView(const void* self);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__keywords = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QsciLexerLua> handle__keywords;
 
 	// Subclass to allow providing a Go implementation
 	virtual const char* keywords(int set) const override {
-		if (handle__keywords == 0) {
+		if (!handle__keywords) {
 			return QsciLexerLua::keywords(set);
 		}
 
 		int sigval1 = set;
-		const char* callback_return_value = miqt_exec_callback_QsciLexerLua_keywords(this, handle__keywords, sigval1);
+		const char* callback_return_value = miqt_exec_callback_QsciLexerLua_keywords(this, handle__keywords.value(), sigval1);
 		return callback_return_value;
 	}
 
 	friend const char* QsciLexerLua_virtualbase_keywords(const void* self, int set);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__defaultStyle = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QsciLexerLua> handle__defaultStyle;
 
 	// Subclass to allow providing a Go implementation
 	virtual int defaultStyle() const override {
-		if (handle__defaultStyle == 0) {
+		if (!handle__defaultStyle) {
 			return QsciLexerLua::defaultStyle();
 		}
 
-		int callback_return_value = miqt_exec_callback_QsciLexerLua_defaultStyle(this, handle__defaultStyle);
+		int callback_return_value = miqt_exec_callback_QsciLexerLua_defaultStyle(this, handle__defaultStyle.value());
 		return static_cast<int>(callback_return_value);
 	}
 
 	friend int QsciLexerLua_virtualbase_defaultStyle(const void* self);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__description = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QsciLexerLua> handle__description;
 
 	// Subclass to allow providing a Go implementation
 	virtual QString description(int style) const override {
-		if (handle__description == 0) {
+		if (!handle__description) {
 			return QString(); // Pure virtual, there is no base we can call
 		}
 
 		int sigval1 = style;
-		struct miqt_string callback_return_value = miqt_exec_callback_QsciLexerLua_description(this, handle__description, sigval1);
+		struct miqt_string callback_return_value = miqt_exec_callback_QsciLexerLua_description(this, handle__description.value(), sigval1);
 		QString callback_return_value_QString = QString::fromUtf8(callback_return_value.data, callback_return_value.len);
 		free(callback_return_value.data);
 		return callback_return_value_QString;
 	}
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__paper = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QsciLexerLua> handle__paper;
 
 	// Subclass to allow providing a Go implementation
 	virtual QColor paper(int style) const override {
-		if (handle__paper == 0) {
+		if (!handle__paper) {
 			return QsciLexerLua::paper(style);
 		}
 
 		int sigval1 = style;
-		QColor* callback_return_value = miqt_exec_callback_QsciLexerLua_paper(this, handle__paper, sigval1);
+		QColor* callback_return_value = miqt_exec_callback_QsciLexerLua_paper(this, handle__paper.value(), sigval1);
 		return *callback_return_value;
 	}
 
 	friend QColor* QsciLexerLua_virtualbase_paper(const void* self, int style);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__defaultColorWithStyle = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QsciLexerLua> handle__defaultColorWithStyle;
 
 	// Subclass to allow providing a Go implementation
 	virtual QColor defaultColor(int style) const override {
-		if (handle__defaultColorWithStyle == 0) {
+		if (!handle__defaultColorWithStyle) {
 			return QsciLexerLua::defaultColor(style);
 		}
 
 		int sigval1 = style;
-		QColor* callback_return_value = miqt_exec_callback_QsciLexerLua_defaultColorWithStyle(this, handle__defaultColorWithStyle, sigval1);
+		QColor* callback_return_value = miqt_exec_callback_QsciLexerLua_defaultColorWithStyle(this, handle__defaultColorWithStyle.value(), sigval1);
 		return *callback_return_value;
 	}
 
 	friend QColor* QsciLexerLua_virtualbase_defaultColorWithStyle(const void* self, int style);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__defaultEolFill = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QsciLexerLua> handle__defaultEolFill;
 
 	// Subclass to allow providing a Go implementation
 	virtual bool defaultEolFill(int style) const override {
-		if (handle__defaultEolFill == 0) {
+		if (!handle__defaultEolFill) {
 			return QsciLexerLua::defaultEolFill(style);
 		}
 
 		int sigval1 = style;
-		bool callback_return_value = miqt_exec_callback_QsciLexerLua_defaultEolFill(this, handle__defaultEolFill, sigval1);
+		bool callback_return_value = miqt_exec_callback_QsciLexerLua_defaultEolFill(this, handle__defaultEolFill.value(), sigval1);
 		return callback_return_value;
 	}
 
 	friend bool QsciLexerLua_virtualbase_defaultEolFill(const void* self, int style);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__defaultFontWithStyle = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QsciLexerLua> handle__defaultFontWithStyle;
 
 	// Subclass to allow providing a Go implementation
 	virtual QFont defaultFont(int style) const override {
-		if (handle__defaultFontWithStyle == 0) {
+		if (!handle__defaultFontWithStyle) {
 			return QsciLexerLua::defaultFont(style);
 		}
 
 		int sigval1 = style;
-		QFont* callback_return_value = miqt_exec_callback_QsciLexerLua_defaultFontWithStyle(this, handle__defaultFontWithStyle, sigval1);
+		QFont* callback_return_value = miqt_exec_callback_QsciLexerLua_defaultFontWithStyle(this, handle__defaultFontWithStyle.value(), sigval1);
 		return *callback_return_value;
 	}
 
 	friend QFont* QsciLexerLua_virtualbase_defaultFontWithStyle(const void* self, int style);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__defaultPaperWithStyle = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QsciLexerLua> handle__defaultPaperWithStyle;
 
 	// Subclass to allow providing a Go implementation
 	virtual QColor defaultPaper(int style) const override {
-		if (handle__defaultPaperWithStyle == 0) {
+		if (!handle__defaultPaperWithStyle) {
 			return QsciLexerLua::defaultPaper(style);
 		}
 
 		int sigval1 = style;
-		QColor* callback_return_value = miqt_exec_callback_QsciLexerLua_defaultPaperWithStyle(this, handle__defaultPaperWithStyle, sigval1);
+		QColor* callback_return_value = miqt_exec_callback_QsciLexerLua_defaultPaperWithStyle(this, handle__defaultPaperWithStyle.value(), sigval1);
 		return *callback_return_value;
 	}
 
 	friend QColor* QsciLexerLua_virtualbase_defaultPaperWithStyle(const void* self, int style);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__setEditor = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QsciLexerLua> handle__setEditor;
 
 	// Subclass to allow providing a Go implementation
 	virtual void setEditor(QsciScintilla* editor) override {
-		if (handle__setEditor == 0) {
+		if (!handle__setEditor) {
 			QsciLexerLua::setEditor(editor);
 			return;
 		}
 
 		QsciScintilla* sigval1 = editor;
-		miqt_exec_callback_QsciLexerLua_setEditor(this, handle__setEditor, sigval1);
+		miqt_exec_callback_QsciLexerLua_setEditor(this, handle__setEditor.value(), sigval1);
 
 	}
 
 	friend void QsciLexerLua_virtualbase_setEditor(void* self, QsciScintilla* editor);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__refreshProperties = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QsciLexerLua> handle__refreshProperties;
 
 	// Subclass to allow providing a Go implementation
 	virtual void refreshProperties() override {
-		if (handle__refreshProperties == 0) {
+		if (!handle__refreshProperties) {
 			QsciLexerLua::refreshProperties();
 			return;
 		}
 
-		miqt_exec_callback_QsciLexerLua_refreshProperties(this, handle__refreshProperties);
+		miqt_exec_callback_QsciLexerLua_refreshProperties(this, handle__refreshProperties.value());
 
 	}
 
 	friend void QsciLexerLua_virtualbase_refreshProperties(void* self);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__styleBitsNeeded = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QsciLexerLua> handle__styleBitsNeeded;
 
 	// Subclass to allow providing a Go implementation
 	virtual int styleBitsNeeded() const override {
-		if (handle__styleBitsNeeded == 0) {
+		if (!handle__styleBitsNeeded) {
 			return QsciLexerLua::styleBitsNeeded();
 		}
 
-		int callback_return_value = miqt_exec_callback_QsciLexerLua_styleBitsNeeded(this, handle__styleBitsNeeded);
+		int callback_return_value = miqt_exec_callback_QsciLexerLua_styleBitsNeeded(this, handle__styleBitsNeeded.value());
 		return static_cast<int>(callback_return_value);
 	}
 
 	friend int QsciLexerLua_virtualbase_styleBitsNeeded(const void* self);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__wordCharacters = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QsciLexerLua> handle__wordCharacters;
 
 	// Subclass to allow providing a Go implementation
 	virtual const char* wordCharacters() const override {
-		if (handle__wordCharacters == 0) {
+		if (!handle__wordCharacters) {
 			return QsciLexerLua::wordCharacters();
 		}
 
-		const char* callback_return_value = miqt_exec_callback_QsciLexerLua_wordCharacters(this, handle__wordCharacters);
+		const char* callback_return_value = miqt_exec_callback_QsciLexerLua_wordCharacters(this, handle__wordCharacters.value());
 		return callback_return_value;
 	}
 
 	friend const char* QsciLexerLua_virtualbase_wordCharacters(const void* self);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__setAutoIndentStyle = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QsciLexerLua> handle__setAutoIndentStyle;
 
 	// Subclass to allow providing a Go implementation
 	virtual void setAutoIndentStyle(int autoindentstyle) override {
-		if (handle__setAutoIndentStyle == 0) {
+		if (!handle__setAutoIndentStyle) {
 			QsciLexerLua::setAutoIndentStyle(autoindentstyle);
 			return;
 		}
 
 		int sigval1 = autoindentstyle;
-		miqt_exec_callback_QsciLexerLua_setAutoIndentStyle(this, handle__setAutoIndentStyle, sigval1);
+		miqt_exec_callback_QsciLexerLua_setAutoIndentStyle(this, handle__setAutoIndentStyle.value(), sigval1);
 
 	}
 
 	friend void QsciLexerLua_virtualbase_setAutoIndentStyle(void* self, int autoindentstyle);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__setColor = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QsciLexerLua> handle__setColor;
 
 	// Subclass to allow providing a Go implementation
 	virtual void setColor(const QColor& c, int style) override {
-		if (handle__setColor == 0) {
+		if (!handle__setColor) {
 			QsciLexerLua::setColor(c, style);
 			return;
 		}
@@ -551,36 +554,36 @@ public:
 		// Cast returned reference into pointer
 		QColor* sigval1 = const_cast<QColor*>(&c_ret);
 		int sigval2 = style;
-		miqt_exec_callback_QsciLexerLua_setColor(this, handle__setColor, sigval1, sigval2);
+		miqt_exec_callback_QsciLexerLua_setColor(this, handle__setColor.value(), sigval1, sigval2);
 
 	}
 
 	friend void QsciLexerLua_virtualbase_setColor(void* self, QColor* c, int style);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__setEolFill = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QsciLexerLua> handle__setEolFill;
 
 	// Subclass to allow providing a Go implementation
 	virtual void setEolFill(bool eoffill, int style) override {
-		if (handle__setEolFill == 0) {
+		if (!handle__setEolFill) {
 			QsciLexerLua::setEolFill(eoffill, style);
 			return;
 		}
 
 		bool sigval1 = eoffill;
 		int sigval2 = style;
-		miqt_exec_callback_QsciLexerLua_setEolFill(this, handle__setEolFill, sigval1, sigval2);
+		miqt_exec_callback_QsciLexerLua_setEolFill(this, handle__setEolFill.value(), sigval1, sigval2);
 
 	}
 
 	friend void QsciLexerLua_virtualbase_setEolFill(void* self, bool eoffill, int style);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__setFont = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QsciLexerLua> handle__setFont;
 
 	// Subclass to allow providing a Go implementation
 	virtual void setFont(const QFont& f, int style) override {
-		if (handle__setFont == 0) {
+		if (!handle__setFont) {
 			QsciLexerLua::setFont(f, style);
 			return;
 		}
@@ -589,18 +592,18 @@ public:
 		// Cast returned reference into pointer
 		QFont* sigval1 = const_cast<QFont*>(&f_ret);
 		int sigval2 = style;
-		miqt_exec_callback_QsciLexerLua_setFont(this, handle__setFont, sigval1, sigval2);
+		miqt_exec_callback_QsciLexerLua_setFont(this, handle__setFont.value(), sigval1, sigval2);
 
 	}
 
 	friend void QsciLexerLua_virtualbase_setFont(void* self, QFont* f, int style);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__setPaper = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QsciLexerLua> handle__setPaper;
 
 	// Subclass to allow providing a Go implementation
 	virtual void setPaper(const QColor& c, int style) override {
-		if (handle__setPaper == 0) {
+		if (!handle__setPaper) {
 			QsciLexerLua::setPaper(c, style);
 			return;
 		}
@@ -609,18 +612,18 @@ public:
 		// Cast returned reference into pointer
 		QColor* sigval1 = const_cast<QColor*>(&c_ret);
 		int sigval2 = style;
-		miqt_exec_callback_QsciLexerLua_setPaper(this, handle__setPaper, sigval1, sigval2);
+		miqt_exec_callback_QsciLexerLua_setPaper(this, handle__setPaper.value(), sigval1, sigval2);
 
 	}
 
 	friend void QsciLexerLua_virtualbase_setPaper(void* self, QColor* c, int style);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__readProperties = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QsciLexerLua> handle__readProperties;
 
 	// Subclass to allow providing a Go implementation
 	virtual bool readProperties(QSettings& qs, const QString& prefix) override {
-		if (handle__readProperties == 0) {
+		if (!handle__readProperties) {
 			return QsciLexerLua::readProperties(qs, prefix);
 		}
 
@@ -635,18 +638,18 @@ public:
 		prefix_ms.data = static_cast<char*>(malloc(prefix_ms.len));
 		memcpy(prefix_ms.data, prefix_b.data(), prefix_ms.len);
 		struct miqt_string sigval2 = prefix_ms;
-		bool callback_return_value = miqt_exec_callback_QsciLexerLua_readProperties(this, handle__readProperties, sigval1, sigval2);
+		bool callback_return_value = miqt_exec_callback_QsciLexerLua_readProperties(this, handle__readProperties.value(), sigval1, sigval2);
 		return callback_return_value;
 	}
 
 	friend bool QsciLexerLua_virtualbase_readProperties(void* self, QSettings* qs, struct miqt_string prefix);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__writeProperties = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QsciLexerLua> handle__writeProperties;
 
 	// Subclass to allow providing a Go implementation
 	virtual bool writeProperties(QSettings& qs, const QString& prefix) const override {
-		if (handle__writeProperties == 0) {
+		if (!handle__writeProperties) {
 			return QsciLexerLua::writeProperties(qs, prefix);
 		}
 
@@ -661,102 +664,102 @@ public:
 		prefix_ms.data = static_cast<char*>(malloc(prefix_ms.len));
 		memcpy(prefix_ms.data, prefix_b.data(), prefix_ms.len);
 		struct miqt_string sigval2 = prefix_ms;
-		bool callback_return_value = miqt_exec_callback_QsciLexerLua_writeProperties(this, handle__writeProperties, sigval1, sigval2);
+		bool callback_return_value = miqt_exec_callback_QsciLexerLua_writeProperties(this, handle__writeProperties.value(), sigval1, sigval2);
 		return callback_return_value;
 	}
 
 	friend bool QsciLexerLua_virtualbase_writeProperties(const void* self, QSettings* qs, struct miqt_string prefix);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__event = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QsciLexerLua> handle__event;
 
 	// Subclass to allow providing a Go implementation
 	virtual bool event(QEvent* event) override {
-		if (handle__event == 0) {
+		if (!handle__event) {
 			return QsciLexerLua::event(event);
 		}
 
 		QEvent* sigval1 = event;
-		bool callback_return_value = miqt_exec_callback_QsciLexerLua_event(this, handle__event, sigval1);
+		bool callback_return_value = miqt_exec_callback_QsciLexerLua_event(this, handle__event.value(), sigval1);
 		return callback_return_value;
 	}
 
 	friend bool QsciLexerLua_virtualbase_event(void* self, QEvent* event);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__eventFilter = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QsciLexerLua> handle__eventFilter;
 
 	// Subclass to allow providing a Go implementation
 	virtual bool eventFilter(QObject* watched, QEvent* event) override {
-		if (handle__eventFilter == 0) {
+		if (!handle__eventFilter) {
 			return QsciLexerLua::eventFilter(watched, event);
 		}
 
 		QObject* sigval1 = watched;
 		QEvent* sigval2 = event;
-		bool callback_return_value = miqt_exec_callback_QsciLexerLua_eventFilter(this, handle__eventFilter, sigval1, sigval2);
+		bool callback_return_value = miqt_exec_callback_QsciLexerLua_eventFilter(this, handle__eventFilter.value(), sigval1, sigval2);
 		return callback_return_value;
 	}
 
 	friend bool QsciLexerLua_virtualbase_eventFilter(void* self, QObject* watched, QEvent* event);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__timerEvent = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QsciLexerLua> handle__timerEvent;
 
 	// Subclass to allow providing a Go implementation
 	virtual void timerEvent(QTimerEvent* event) override {
-		if (handle__timerEvent == 0) {
+		if (!handle__timerEvent) {
 			QsciLexerLua::timerEvent(event);
 			return;
 		}
 
 		QTimerEvent* sigval1 = event;
-		miqt_exec_callback_QsciLexerLua_timerEvent(this, handle__timerEvent, sigval1);
+		miqt_exec_callback_QsciLexerLua_timerEvent(this, handle__timerEvent.value(), sigval1);
 
 	}
 
 	friend void QsciLexerLua_virtualbase_timerEvent(void* self, QTimerEvent* event);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__childEvent = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QsciLexerLua> handle__childEvent;
 
 	// Subclass to allow providing a Go implementation
 	virtual void childEvent(QChildEvent* event) override {
-		if (handle__childEvent == 0) {
+		if (!handle__childEvent) {
 			QsciLexerLua::childEvent(event);
 			return;
 		}
 
 		QChildEvent* sigval1 = event;
-		miqt_exec_callback_QsciLexerLua_childEvent(this, handle__childEvent, sigval1);
+		miqt_exec_callback_QsciLexerLua_childEvent(this, handle__childEvent.value(), sigval1);
 
 	}
 
 	friend void QsciLexerLua_virtualbase_childEvent(void* self, QChildEvent* event);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__customEvent = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QsciLexerLua> handle__customEvent;
 
 	// Subclass to allow providing a Go implementation
 	virtual void customEvent(QEvent* event) override {
-		if (handle__customEvent == 0) {
+		if (!handle__customEvent) {
 			QsciLexerLua::customEvent(event);
 			return;
 		}
 
 		QEvent* sigval1 = event;
-		miqt_exec_callback_QsciLexerLua_customEvent(this, handle__customEvent, sigval1);
+		miqt_exec_callback_QsciLexerLua_customEvent(this, handle__customEvent.value(), sigval1);
 
 	}
 
 	friend void QsciLexerLua_virtualbase_customEvent(void* self, QEvent* event);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__connectNotify = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QsciLexerLua> handle__connectNotify;
 
 	// Subclass to allow providing a Go implementation
 	virtual void connectNotify(const QMetaMethod& signal) override {
-		if (handle__connectNotify == 0) {
+		if (!handle__connectNotify) {
 			QsciLexerLua::connectNotify(signal);
 			return;
 		}
@@ -764,18 +767,18 @@ public:
 		const QMetaMethod& signal_ret = signal;
 		// Cast returned reference into pointer
 		QMetaMethod* sigval1 = const_cast<QMetaMethod*>(&signal_ret);
-		miqt_exec_callback_QsciLexerLua_connectNotify(this, handle__connectNotify, sigval1);
+		miqt_exec_callback_QsciLexerLua_connectNotify(this, handle__connectNotify.value(), sigval1);
 
 	}
 
 	friend void QsciLexerLua_virtualbase_connectNotify(void* self, QMetaMethod* signal);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__disconnectNotify = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QsciLexerLua> handle__disconnectNotify;
 
 	// Subclass to allow providing a Go implementation
 	virtual void disconnectNotify(const QMetaMethod& signal) override {
-		if (handle__disconnectNotify == 0) {
+		if (!handle__disconnectNotify) {
 			QsciLexerLua::disconnectNotify(signal);
 			return;
 		}
@@ -783,7 +786,7 @@ public:
 		const QMetaMethod& signal_ret = signal;
 		// Cast returned reference into pointer
 		QMetaMethod* sigval1 = const_cast<QMetaMethod*>(&signal_ret);
-		miqt_exec_callback_QsciLexerLua_disconnectNotify(this, handle__disconnectNotify, sigval1);
+		miqt_exec_callback_QsciLexerLua_disconnectNotify(this, handle__disconnectNotify.value(), sigval1);
 
 	}
 
@@ -968,12 +971,13 @@ const char* QsciLexerLua_blockStartWithStyle(const QsciLexerLua* self, int* styl
 }
 
 bool QsciLexerLua_override_virtual_setFoldCompact(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QsciLexerLua> slot_handle(slot);
 	MiqtVirtualQsciLexerLua* self_cast = dynamic_cast<MiqtVirtualQsciLexerLua*>( (QsciLexerLua*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__setFoldCompact = slot;
+	self_cast->handle__setFoldCompact = std::move(slot_handle);
 	return true;
 }
 
@@ -982,22 +986,24 @@ void QsciLexerLua_virtualbase_setFoldCompact(void* self, bool fold) {
 }
 
 bool QsciLexerLua_override_virtual_language(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QsciLexerLua> slot_handle(slot);
 	MiqtVirtualQsciLexerLua* self_cast = dynamic_cast<MiqtVirtualQsciLexerLua*>( (QsciLexerLua*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__language = slot;
+	self_cast->handle__language = std::move(slot_handle);
 	return true;
 }
 
 bool QsciLexerLua_override_virtual_lexer(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QsciLexerLua> slot_handle(slot);
 	MiqtVirtualQsciLexerLua* self_cast = dynamic_cast<MiqtVirtualQsciLexerLua*>( (QsciLexerLua*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__lexer = slot;
+	self_cast->handle__lexer = std::move(slot_handle);
 	return true;
 }
 
@@ -1006,12 +1012,13 @@ const char* QsciLexerLua_virtualbase_lexer(const void* self) {
 }
 
 bool QsciLexerLua_override_virtual_lexerId(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QsciLexerLua> slot_handle(slot);
 	MiqtVirtualQsciLexerLua* self_cast = dynamic_cast<MiqtVirtualQsciLexerLua*>( (QsciLexerLua*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__lexerId = slot;
+	self_cast->handle__lexerId = std::move(slot_handle);
 	return true;
 }
 
@@ -1020,12 +1027,13 @@ int QsciLexerLua_virtualbase_lexerId(const void* self) {
 }
 
 bool QsciLexerLua_override_virtual_autoCompletionFillups(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QsciLexerLua> slot_handle(slot);
 	MiqtVirtualQsciLexerLua* self_cast = dynamic_cast<MiqtVirtualQsciLexerLua*>( (QsciLexerLua*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__autoCompletionFillups = slot;
+	self_cast->handle__autoCompletionFillups = std::move(slot_handle);
 	return true;
 }
 
@@ -1034,12 +1042,13 @@ const char* QsciLexerLua_virtualbase_autoCompletionFillups(const void* self) {
 }
 
 bool QsciLexerLua_override_virtual_autoCompletionWordSeparators(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QsciLexerLua> slot_handle(slot);
 	MiqtVirtualQsciLexerLua* self_cast = dynamic_cast<MiqtVirtualQsciLexerLua*>( (QsciLexerLua*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__autoCompletionWordSeparators = slot;
+	self_cast->handle__autoCompletionWordSeparators = std::move(slot_handle);
 	return true;
 }
 
@@ -1064,12 +1073,13 @@ struct miqt_array /* of struct miqt_string */  QsciLexerLua_virtualbase_autoComp
 }
 
 bool QsciLexerLua_override_virtual_blockEnd(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QsciLexerLua> slot_handle(slot);
 	MiqtVirtualQsciLexerLua* self_cast = dynamic_cast<MiqtVirtualQsciLexerLua*>( (QsciLexerLua*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__blockEnd = slot;
+	self_cast->handle__blockEnd = std::move(slot_handle);
 	return true;
 }
 
@@ -1078,12 +1088,13 @@ const char* QsciLexerLua_virtualbase_blockEnd(const void* self, int* style) {
 }
 
 bool QsciLexerLua_override_virtual_blockLookback(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QsciLexerLua> slot_handle(slot);
 	MiqtVirtualQsciLexerLua* self_cast = dynamic_cast<MiqtVirtualQsciLexerLua*>( (QsciLexerLua*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__blockLookback = slot;
+	self_cast->handle__blockLookback = std::move(slot_handle);
 	return true;
 }
 
@@ -1092,12 +1103,13 @@ int QsciLexerLua_virtualbase_blockLookback(const void* self) {
 }
 
 bool QsciLexerLua_override_virtual_blockStart(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QsciLexerLua> slot_handle(slot);
 	MiqtVirtualQsciLexerLua* self_cast = dynamic_cast<MiqtVirtualQsciLexerLua*>( (QsciLexerLua*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__blockStart = slot;
+	self_cast->handle__blockStart = std::move(slot_handle);
 	return true;
 }
 
@@ -1106,12 +1118,13 @@ const char* QsciLexerLua_virtualbase_blockStart(const void* self, int* style) {
 }
 
 bool QsciLexerLua_override_virtual_blockStartKeyword(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QsciLexerLua> slot_handle(slot);
 	MiqtVirtualQsciLexerLua* self_cast = dynamic_cast<MiqtVirtualQsciLexerLua*>( (QsciLexerLua*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__blockStartKeyword = slot;
+	self_cast->handle__blockStartKeyword = std::move(slot_handle);
 	return true;
 }
 
@@ -1120,12 +1133,13 @@ const char* QsciLexerLua_virtualbase_blockStartKeyword(const void* self, int* st
 }
 
 bool QsciLexerLua_override_virtual_braceStyle(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QsciLexerLua> slot_handle(slot);
 	MiqtVirtualQsciLexerLua* self_cast = dynamic_cast<MiqtVirtualQsciLexerLua*>( (QsciLexerLua*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__braceStyle = slot;
+	self_cast->handle__braceStyle = std::move(slot_handle);
 	return true;
 }
 
@@ -1134,12 +1148,13 @@ int QsciLexerLua_virtualbase_braceStyle(const void* self) {
 }
 
 bool QsciLexerLua_override_virtual_caseSensitive(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QsciLexerLua> slot_handle(slot);
 	MiqtVirtualQsciLexerLua* self_cast = dynamic_cast<MiqtVirtualQsciLexerLua*>( (QsciLexerLua*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__caseSensitive = slot;
+	self_cast->handle__caseSensitive = std::move(slot_handle);
 	return true;
 }
 
@@ -1148,12 +1163,13 @@ bool QsciLexerLua_virtualbase_caseSensitive(const void* self) {
 }
 
 bool QsciLexerLua_override_virtual_color(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QsciLexerLua> slot_handle(slot);
 	MiqtVirtualQsciLexerLua* self_cast = dynamic_cast<MiqtVirtualQsciLexerLua*>( (QsciLexerLua*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__color = slot;
+	self_cast->handle__color = std::move(slot_handle);
 	return true;
 }
 
@@ -1162,12 +1178,13 @@ QColor* QsciLexerLua_virtualbase_color(const void* self, int style) {
 }
 
 bool QsciLexerLua_override_virtual_eolFill(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QsciLexerLua> slot_handle(slot);
 	MiqtVirtualQsciLexerLua* self_cast = dynamic_cast<MiqtVirtualQsciLexerLua*>( (QsciLexerLua*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__eolFill = slot;
+	self_cast->handle__eolFill = std::move(slot_handle);
 	return true;
 }
 
@@ -1176,12 +1193,13 @@ bool QsciLexerLua_virtualbase_eolFill(const void* self, int style) {
 }
 
 bool QsciLexerLua_override_virtual_font(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QsciLexerLua> slot_handle(slot);
 	MiqtVirtualQsciLexerLua* self_cast = dynamic_cast<MiqtVirtualQsciLexerLua*>( (QsciLexerLua*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__font = slot;
+	self_cast->handle__font = std::move(slot_handle);
 	return true;
 }
 
@@ -1190,12 +1208,13 @@ QFont* QsciLexerLua_virtualbase_font(const void* self, int style) {
 }
 
 bool QsciLexerLua_override_virtual_indentationGuideView(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QsciLexerLua> slot_handle(slot);
 	MiqtVirtualQsciLexerLua* self_cast = dynamic_cast<MiqtVirtualQsciLexerLua*>( (QsciLexerLua*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__indentationGuideView = slot;
+	self_cast->handle__indentationGuideView = std::move(slot_handle);
 	return true;
 }
 
@@ -1204,12 +1223,13 @@ int QsciLexerLua_virtualbase_indentationGuideView(const void* self) {
 }
 
 bool QsciLexerLua_override_virtual_keywords(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QsciLexerLua> slot_handle(slot);
 	MiqtVirtualQsciLexerLua* self_cast = dynamic_cast<MiqtVirtualQsciLexerLua*>( (QsciLexerLua*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__keywords = slot;
+	self_cast->handle__keywords = std::move(slot_handle);
 	return true;
 }
 
@@ -1218,12 +1238,13 @@ const char* QsciLexerLua_virtualbase_keywords(const void* self, int set) {
 }
 
 bool QsciLexerLua_override_virtual_defaultStyle(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QsciLexerLua> slot_handle(slot);
 	MiqtVirtualQsciLexerLua* self_cast = dynamic_cast<MiqtVirtualQsciLexerLua*>( (QsciLexerLua*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__defaultStyle = slot;
+	self_cast->handle__defaultStyle = std::move(slot_handle);
 	return true;
 }
 
@@ -1232,22 +1253,24 @@ int QsciLexerLua_virtualbase_defaultStyle(const void* self) {
 }
 
 bool QsciLexerLua_override_virtual_description(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QsciLexerLua> slot_handle(slot);
 	MiqtVirtualQsciLexerLua* self_cast = dynamic_cast<MiqtVirtualQsciLexerLua*>( (QsciLexerLua*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__description = slot;
+	self_cast->handle__description = std::move(slot_handle);
 	return true;
 }
 
 bool QsciLexerLua_override_virtual_paper(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QsciLexerLua> slot_handle(slot);
 	MiqtVirtualQsciLexerLua* self_cast = dynamic_cast<MiqtVirtualQsciLexerLua*>( (QsciLexerLua*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__paper = slot;
+	self_cast->handle__paper = std::move(slot_handle);
 	return true;
 }
 
@@ -1256,12 +1279,13 @@ QColor* QsciLexerLua_virtualbase_paper(const void* self, int style) {
 }
 
 bool QsciLexerLua_override_virtual_defaultColorWithStyle(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QsciLexerLua> slot_handle(slot);
 	MiqtVirtualQsciLexerLua* self_cast = dynamic_cast<MiqtVirtualQsciLexerLua*>( (QsciLexerLua*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__defaultColorWithStyle = slot;
+	self_cast->handle__defaultColorWithStyle = std::move(slot_handle);
 	return true;
 }
 
@@ -1270,12 +1294,13 @@ QColor* QsciLexerLua_virtualbase_defaultColorWithStyle(const void* self, int sty
 }
 
 bool QsciLexerLua_override_virtual_defaultEolFill(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QsciLexerLua> slot_handle(slot);
 	MiqtVirtualQsciLexerLua* self_cast = dynamic_cast<MiqtVirtualQsciLexerLua*>( (QsciLexerLua*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__defaultEolFill = slot;
+	self_cast->handle__defaultEolFill = std::move(slot_handle);
 	return true;
 }
 
@@ -1284,12 +1309,13 @@ bool QsciLexerLua_virtualbase_defaultEolFill(const void* self, int style) {
 }
 
 bool QsciLexerLua_override_virtual_defaultFontWithStyle(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QsciLexerLua> slot_handle(slot);
 	MiqtVirtualQsciLexerLua* self_cast = dynamic_cast<MiqtVirtualQsciLexerLua*>( (QsciLexerLua*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__defaultFontWithStyle = slot;
+	self_cast->handle__defaultFontWithStyle = std::move(slot_handle);
 	return true;
 }
 
@@ -1298,12 +1324,13 @@ QFont* QsciLexerLua_virtualbase_defaultFontWithStyle(const void* self, int style
 }
 
 bool QsciLexerLua_override_virtual_defaultPaperWithStyle(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QsciLexerLua> slot_handle(slot);
 	MiqtVirtualQsciLexerLua* self_cast = dynamic_cast<MiqtVirtualQsciLexerLua*>( (QsciLexerLua*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__defaultPaperWithStyle = slot;
+	self_cast->handle__defaultPaperWithStyle = std::move(slot_handle);
 	return true;
 }
 
@@ -1312,12 +1339,13 @@ QColor* QsciLexerLua_virtualbase_defaultPaperWithStyle(const void* self, int sty
 }
 
 bool QsciLexerLua_override_virtual_setEditor(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QsciLexerLua> slot_handle(slot);
 	MiqtVirtualQsciLexerLua* self_cast = dynamic_cast<MiqtVirtualQsciLexerLua*>( (QsciLexerLua*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__setEditor = slot;
+	self_cast->handle__setEditor = std::move(slot_handle);
 	return true;
 }
 
@@ -1326,12 +1354,13 @@ void QsciLexerLua_virtualbase_setEditor(void* self, QsciScintilla* editor) {
 }
 
 bool QsciLexerLua_override_virtual_refreshProperties(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QsciLexerLua> slot_handle(slot);
 	MiqtVirtualQsciLexerLua* self_cast = dynamic_cast<MiqtVirtualQsciLexerLua*>( (QsciLexerLua*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__refreshProperties = slot;
+	self_cast->handle__refreshProperties = std::move(slot_handle);
 	return true;
 }
 
@@ -1340,12 +1369,13 @@ void QsciLexerLua_virtualbase_refreshProperties(void* self) {
 }
 
 bool QsciLexerLua_override_virtual_styleBitsNeeded(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QsciLexerLua> slot_handle(slot);
 	MiqtVirtualQsciLexerLua* self_cast = dynamic_cast<MiqtVirtualQsciLexerLua*>( (QsciLexerLua*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__styleBitsNeeded = slot;
+	self_cast->handle__styleBitsNeeded = std::move(slot_handle);
 	return true;
 }
 
@@ -1354,12 +1384,13 @@ int QsciLexerLua_virtualbase_styleBitsNeeded(const void* self) {
 }
 
 bool QsciLexerLua_override_virtual_wordCharacters(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QsciLexerLua> slot_handle(slot);
 	MiqtVirtualQsciLexerLua* self_cast = dynamic_cast<MiqtVirtualQsciLexerLua*>( (QsciLexerLua*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__wordCharacters = slot;
+	self_cast->handle__wordCharacters = std::move(slot_handle);
 	return true;
 }
 
@@ -1368,12 +1399,13 @@ const char* QsciLexerLua_virtualbase_wordCharacters(const void* self) {
 }
 
 bool QsciLexerLua_override_virtual_setAutoIndentStyle(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QsciLexerLua> slot_handle(slot);
 	MiqtVirtualQsciLexerLua* self_cast = dynamic_cast<MiqtVirtualQsciLexerLua*>( (QsciLexerLua*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__setAutoIndentStyle = slot;
+	self_cast->handle__setAutoIndentStyle = std::move(slot_handle);
 	return true;
 }
 
@@ -1382,12 +1414,13 @@ void QsciLexerLua_virtualbase_setAutoIndentStyle(void* self, int autoindentstyle
 }
 
 bool QsciLexerLua_override_virtual_setColor(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QsciLexerLua> slot_handle(slot);
 	MiqtVirtualQsciLexerLua* self_cast = dynamic_cast<MiqtVirtualQsciLexerLua*>( (QsciLexerLua*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__setColor = slot;
+	self_cast->handle__setColor = std::move(slot_handle);
 	return true;
 }
 
@@ -1396,12 +1429,13 @@ void QsciLexerLua_virtualbase_setColor(void* self, QColor* c, int style) {
 }
 
 bool QsciLexerLua_override_virtual_setEolFill(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QsciLexerLua> slot_handle(slot);
 	MiqtVirtualQsciLexerLua* self_cast = dynamic_cast<MiqtVirtualQsciLexerLua*>( (QsciLexerLua*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__setEolFill = slot;
+	self_cast->handle__setEolFill = std::move(slot_handle);
 	return true;
 }
 
@@ -1410,12 +1444,13 @@ void QsciLexerLua_virtualbase_setEolFill(void* self, bool eoffill, int style) {
 }
 
 bool QsciLexerLua_override_virtual_setFont(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QsciLexerLua> slot_handle(slot);
 	MiqtVirtualQsciLexerLua* self_cast = dynamic_cast<MiqtVirtualQsciLexerLua*>( (QsciLexerLua*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__setFont = slot;
+	self_cast->handle__setFont = std::move(slot_handle);
 	return true;
 }
 
@@ -1424,12 +1459,13 @@ void QsciLexerLua_virtualbase_setFont(void* self, QFont* f, int style) {
 }
 
 bool QsciLexerLua_override_virtual_setPaper(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QsciLexerLua> slot_handle(slot);
 	MiqtVirtualQsciLexerLua* self_cast = dynamic_cast<MiqtVirtualQsciLexerLua*>( (QsciLexerLua*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__setPaper = slot;
+	self_cast->handle__setPaper = std::move(slot_handle);
 	return true;
 }
 
@@ -1438,12 +1474,13 @@ void QsciLexerLua_virtualbase_setPaper(void* self, QColor* c, int style) {
 }
 
 bool QsciLexerLua_override_virtual_readProperties(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QsciLexerLua> slot_handle(slot);
 	MiqtVirtualQsciLexerLua* self_cast = dynamic_cast<MiqtVirtualQsciLexerLua*>( (QsciLexerLua*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__readProperties = slot;
+	self_cast->handle__readProperties = std::move(slot_handle);
 	return true;
 }
 
@@ -1453,12 +1490,13 @@ bool QsciLexerLua_virtualbase_readProperties(void* self, QSettings* qs, struct m
 }
 
 bool QsciLexerLua_override_virtual_writeProperties(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QsciLexerLua> slot_handle(slot);
 	MiqtVirtualQsciLexerLua* self_cast = dynamic_cast<MiqtVirtualQsciLexerLua*>( (QsciLexerLua*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__writeProperties = slot;
+	self_cast->handle__writeProperties = std::move(slot_handle);
 	return true;
 }
 
@@ -1468,12 +1506,13 @@ bool QsciLexerLua_virtualbase_writeProperties(const void* self, QSettings* qs, s
 }
 
 bool QsciLexerLua_override_virtual_event(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QsciLexerLua> slot_handle(slot);
 	MiqtVirtualQsciLexerLua* self_cast = dynamic_cast<MiqtVirtualQsciLexerLua*>( (QsciLexerLua*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__event = slot;
+	self_cast->handle__event = std::move(slot_handle);
 	return true;
 }
 
@@ -1482,12 +1521,13 @@ bool QsciLexerLua_virtualbase_event(void* self, QEvent* event) {
 }
 
 bool QsciLexerLua_override_virtual_eventFilter(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QsciLexerLua> slot_handle(slot);
 	MiqtVirtualQsciLexerLua* self_cast = dynamic_cast<MiqtVirtualQsciLexerLua*>( (QsciLexerLua*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__eventFilter = slot;
+	self_cast->handle__eventFilter = std::move(slot_handle);
 	return true;
 }
 
@@ -1496,12 +1536,13 @@ bool QsciLexerLua_virtualbase_eventFilter(void* self, QObject* watched, QEvent* 
 }
 
 bool QsciLexerLua_override_virtual_timerEvent(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QsciLexerLua> slot_handle(slot);
 	MiqtVirtualQsciLexerLua* self_cast = dynamic_cast<MiqtVirtualQsciLexerLua*>( (QsciLexerLua*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__timerEvent = slot;
+	self_cast->handle__timerEvent = std::move(slot_handle);
 	return true;
 }
 
@@ -1510,12 +1551,13 @@ void QsciLexerLua_virtualbase_timerEvent(void* self, QTimerEvent* event) {
 }
 
 bool QsciLexerLua_override_virtual_childEvent(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QsciLexerLua> slot_handle(slot);
 	MiqtVirtualQsciLexerLua* self_cast = dynamic_cast<MiqtVirtualQsciLexerLua*>( (QsciLexerLua*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__childEvent = slot;
+	self_cast->handle__childEvent = std::move(slot_handle);
 	return true;
 }
 
@@ -1524,12 +1566,13 @@ void QsciLexerLua_virtualbase_childEvent(void* self, QChildEvent* event) {
 }
 
 bool QsciLexerLua_override_virtual_customEvent(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QsciLexerLua> slot_handle(slot);
 	MiqtVirtualQsciLexerLua* self_cast = dynamic_cast<MiqtVirtualQsciLexerLua*>( (QsciLexerLua*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__customEvent = slot;
+	self_cast->handle__customEvent = std::move(slot_handle);
 	return true;
 }
 
@@ -1538,12 +1581,13 @@ void QsciLexerLua_virtualbase_customEvent(void* self, QEvent* event) {
 }
 
 bool QsciLexerLua_override_virtual_connectNotify(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QsciLexerLua> slot_handle(slot);
 	MiqtVirtualQsciLexerLua* self_cast = dynamic_cast<MiqtVirtualQsciLexerLua*>( (QsciLexerLua*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__connectNotify = slot;
+	self_cast->handle__connectNotify = std::move(slot_handle);
 	return true;
 }
 
@@ -1552,12 +1596,13 @@ void QsciLexerLua_virtualbase_connectNotify(void* self, QMetaMethod* signal) {
 }
 
 bool QsciLexerLua_override_virtual_disconnectNotify(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QsciLexerLua> slot_handle(slot);
 	MiqtVirtualQsciLexerLua* self_cast = dynamic_cast<MiqtVirtualQsciLexerLua*>( (QsciLexerLua*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__disconnectNotify = slot;
+	self_cast->handle__disconnectNotify = std::move(slot_handle);
 	return true;
 }
 

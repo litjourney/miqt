@@ -63,13 +63,13 @@ struct miqt_array /* of QGeoAreaMonitorInfo* */  QGeoAreaMonitorSource_activeMon
 bool QGeoAreaMonitorSource_setBackendProperty(QGeoAreaMonitorSource* self, struct miqt_string name, QVariant* value);
 QVariant* QGeoAreaMonitorSource_backendProperty(const QGeoAreaMonitorSource* self, struct miqt_string name);
 void QGeoAreaMonitorSource_areaEntered(QGeoAreaMonitorSource* self, QGeoAreaMonitorInfo* monitor, QGeoPositionInfo* update);
-void QGeoAreaMonitorSource_connect_areaEntered(QGeoAreaMonitorSource* self, intptr_t slot);
+void* QGeoAreaMonitorSource_connect_areaEntered(QGeoAreaMonitorSource* self, intptr_t slot);
 void QGeoAreaMonitorSource_areaExited(QGeoAreaMonitorSource* self, QGeoAreaMonitorInfo* monitor, QGeoPositionInfo* update);
-void QGeoAreaMonitorSource_connect_areaExited(QGeoAreaMonitorSource* self, intptr_t slot);
+void* QGeoAreaMonitorSource_connect_areaExited(QGeoAreaMonitorSource* self, intptr_t slot);
 void QGeoAreaMonitorSource_monitorExpired(QGeoAreaMonitorSource* self, QGeoAreaMonitorInfo* monitor);
-void QGeoAreaMonitorSource_connect_monitorExpired(QGeoAreaMonitorSource* self, intptr_t slot);
+void* QGeoAreaMonitorSource_connect_monitorExpired(QGeoAreaMonitorSource* self, intptr_t slot);
 void QGeoAreaMonitorSource_errorOccurred(QGeoAreaMonitorSource* self, int error);
-void QGeoAreaMonitorSource_connect_errorOccurred(QGeoAreaMonitorSource* self, intptr_t slot);
+void* QGeoAreaMonitorSource_connect_errorOccurred(QGeoAreaMonitorSource* self, intptr_t slot);
 struct miqt_string QGeoAreaMonitorSource_tr2(const char* s, const char* c);
 struct miqt_string QGeoAreaMonitorSource_tr3(const char* s, const char* c, int n);
 

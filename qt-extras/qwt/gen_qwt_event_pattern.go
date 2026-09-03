@@ -43,6 +43,11 @@ const (
 	QwtEventPattern__KeyPatternCount QwtEventPattern__KeyPatternCode = 10
 )
 
+//export miqt_exec_callback_handle_release_QwtEventPattern
+func miqt_exec_callback_handle_release_QwtEventPattern(cb C.intptr_t) {
+	cgo.Handle(cb).Delete()
+}
+
 type QwtEventPattern struct {
 	h *C.QwtEventPattern
 }
@@ -197,7 +202,11 @@ func (this *QwtEventPattern) callVirtualBase_MouseMatch2(param1 *QwtEventPattern
 
 }
 func (this *QwtEventPattern) OnMouseMatch2(slot func(super func(param1 *QwtEventPattern__MousePattern, param2 *qt.QMouseEvent) bool, param1 *QwtEventPattern__MousePattern, param2 *qt.QMouseEvent) bool) {
-	ok := C.QwtEventPattern_override_virtual_mouseMatch2(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QwtEventPattern_override_virtual_mouseMatch2(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -227,7 +236,11 @@ func (this *QwtEventPattern) callVirtualBase_KeyMatch2(param1 *QwtEventPattern__
 
 }
 func (this *QwtEventPattern) OnKeyMatch2(slot func(super func(param1 *QwtEventPattern__KeyPattern, param2 *qt.QKeyEvent) bool, param1 *QwtEventPattern__KeyPattern, param2 *qt.QKeyEvent) bool) {
-	ok := C.QwtEventPattern_override_virtual_keyMatch2(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QwtEventPattern_override_virtual_keyMatch2(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}

@@ -1,3 +1,5 @@
+#include <memory>
+#include <utility>
 #include <QByteArray>
 #include <QChildEvent>
 #include <QEvent>
@@ -19,6 +21,7 @@
 extern "C" {
 #endif
 
+void miqt_exec_callback_handle_release_QMimeData(intptr_t);
 bool miqt_exec_callback_QMimeData_hasFormat(const QMimeData*, intptr_t, struct miqt_string);
 struct miqt_array /* of struct miqt_string */  miqt_exec_callback_QMimeData_formats(const QMimeData*, intptr_t);
 QVariant* miqt_exec_callback_QMimeData_retrieveData(const QMimeData*, intptr_t, struct miqt_string, int);
@@ -41,11 +44,11 @@ public:
 	virtual ~MiqtVirtualQMimeData() override = default;
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__hasFormat = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QMimeData> handle__hasFormat;
 
 	// Subclass to allow providing a Go implementation
 	virtual bool hasFormat(const QString& mimetype) const override {
-		if (handle__hasFormat == 0) {
+		if (!handle__hasFormat) {
 			return QMimeData::hasFormat(mimetype);
 		}
 
@@ -57,22 +60,22 @@ public:
 		mimetype_ms.data = static_cast<char*>(malloc(mimetype_ms.len));
 		memcpy(mimetype_ms.data, mimetype_b.data(), mimetype_ms.len);
 		struct miqt_string sigval1 = mimetype_ms;
-		bool callback_return_value = miqt_exec_callback_QMimeData_hasFormat(this, handle__hasFormat, sigval1);
+		bool callback_return_value = miqt_exec_callback_QMimeData_hasFormat(this, handle__hasFormat.value(), sigval1);
 		return callback_return_value;
 	}
 
 	friend bool QMimeData_virtualbase_hasFormat(const void* self, struct miqt_string mimetype);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__formats = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QMimeData> handle__formats;
 
 	// Subclass to allow providing a Go implementation
 	virtual QStringList formats() const override {
-		if (handle__formats == 0) {
+		if (!handle__formats) {
 			return QMimeData::formats();
 		}
 
-		struct miqt_array /* of struct miqt_string */  callback_return_value = miqt_exec_callback_QMimeData_formats(this, handle__formats);
+		struct miqt_array /* of struct miqt_string */  callback_return_value = miqt_exec_callback_QMimeData_formats(this, handle__formats.value());
 		QStringList callback_return_value_QList;
 		callback_return_value_QList.reserve(callback_return_value.len);
 		struct miqt_string* callback_return_value_arr = static_cast<struct miqt_string*>(callback_return_value.data);
@@ -91,11 +94,11 @@ public:
 	friend struct miqt_array /* of struct miqt_string */  QMimeData_virtualbase_formats(const void* self);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__retrieveData = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QMimeData> handle__retrieveData;
 
 	// Subclass to allow providing a Go implementation
 	virtual QVariant retrieveData(const QString& mimetype, QVariant::Type preferredType) const override {
-		if (handle__retrieveData == 0) {
+		if (!handle__retrieveData) {
 			return QMimeData::retrieveData(mimetype, preferredType);
 		}
 
@@ -109,102 +112,102 @@ public:
 		struct miqt_string sigval1 = mimetype_ms;
 		QVariant::Type preferredType_ret = preferredType;
 		int sigval2 = static_cast<int>(preferredType_ret);
-		QVariant* callback_return_value = miqt_exec_callback_QMimeData_retrieveData(this, handle__retrieveData, sigval1, sigval2);
+		QVariant* callback_return_value = miqt_exec_callback_QMimeData_retrieveData(this, handle__retrieveData.value(), sigval1, sigval2);
 		return *callback_return_value;
 	}
 
 	friend QVariant* QMimeData_virtualbase_retrieveData(const void* self, struct miqt_string mimetype, int preferredType);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__event = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QMimeData> handle__event;
 
 	// Subclass to allow providing a Go implementation
 	virtual bool event(QEvent* event) override {
-		if (handle__event == 0) {
+		if (!handle__event) {
 			return QMimeData::event(event);
 		}
 
 		QEvent* sigval1 = event;
-		bool callback_return_value = miqt_exec_callback_QMimeData_event(this, handle__event, sigval1);
+		bool callback_return_value = miqt_exec_callback_QMimeData_event(this, handle__event.value(), sigval1);
 		return callback_return_value;
 	}
 
 	friend bool QMimeData_virtualbase_event(void* self, QEvent* event);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__eventFilter = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QMimeData> handle__eventFilter;
 
 	// Subclass to allow providing a Go implementation
 	virtual bool eventFilter(QObject* watched, QEvent* event) override {
-		if (handle__eventFilter == 0) {
+		if (!handle__eventFilter) {
 			return QMimeData::eventFilter(watched, event);
 		}
 
 		QObject* sigval1 = watched;
 		QEvent* sigval2 = event;
-		bool callback_return_value = miqt_exec_callback_QMimeData_eventFilter(this, handle__eventFilter, sigval1, sigval2);
+		bool callback_return_value = miqt_exec_callback_QMimeData_eventFilter(this, handle__eventFilter.value(), sigval1, sigval2);
 		return callback_return_value;
 	}
 
 	friend bool QMimeData_virtualbase_eventFilter(void* self, QObject* watched, QEvent* event);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__timerEvent = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QMimeData> handle__timerEvent;
 
 	// Subclass to allow providing a Go implementation
 	virtual void timerEvent(QTimerEvent* event) override {
-		if (handle__timerEvent == 0) {
+		if (!handle__timerEvent) {
 			QMimeData::timerEvent(event);
 			return;
 		}
 
 		QTimerEvent* sigval1 = event;
-		miqt_exec_callback_QMimeData_timerEvent(this, handle__timerEvent, sigval1);
+		miqt_exec_callback_QMimeData_timerEvent(this, handle__timerEvent.value(), sigval1);
 
 	}
 
 	friend void QMimeData_virtualbase_timerEvent(void* self, QTimerEvent* event);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__childEvent = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QMimeData> handle__childEvent;
 
 	// Subclass to allow providing a Go implementation
 	virtual void childEvent(QChildEvent* event) override {
-		if (handle__childEvent == 0) {
+		if (!handle__childEvent) {
 			QMimeData::childEvent(event);
 			return;
 		}
 
 		QChildEvent* sigval1 = event;
-		miqt_exec_callback_QMimeData_childEvent(this, handle__childEvent, sigval1);
+		miqt_exec_callback_QMimeData_childEvent(this, handle__childEvent.value(), sigval1);
 
 	}
 
 	friend void QMimeData_virtualbase_childEvent(void* self, QChildEvent* event);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__customEvent = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QMimeData> handle__customEvent;
 
 	// Subclass to allow providing a Go implementation
 	virtual void customEvent(QEvent* event) override {
-		if (handle__customEvent == 0) {
+		if (!handle__customEvent) {
 			QMimeData::customEvent(event);
 			return;
 		}
 
 		QEvent* sigval1 = event;
-		miqt_exec_callback_QMimeData_customEvent(this, handle__customEvent, sigval1);
+		miqt_exec_callback_QMimeData_customEvent(this, handle__customEvent.value(), sigval1);
 
 	}
 
 	friend void QMimeData_virtualbase_customEvent(void* self, QEvent* event);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__connectNotify = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QMimeData> handle__connectNotify;
 
 	// Subclass to allow providing a Go implementation
 	virtual void connectNotify(const QMetaMethod& signal) override {
-		if (handle__connectNotify == 0) {
+		if (!handle__connectNotify) {
 			QMimeData::connectNotify(signal);
 			return;
 		}
@@ -212,18 +215,18 @@ public:
 		const QMetaMethod& signal_ret = signal;
 		// Cast returned reference into pointer
 		QMetaMethod* sigval1 = const_cast<QMetaMethod*>(&signal_ret);
-		miqt_exec_callback_QMimeData_connectNotify(this, handle__connectNotify, sigval1);
+		miqt_exec_callback_QMimeData_connectNotify(this, handle__connectNotify.value(), sigval1);
 
 	}
 
 	friend void QMimeData_virtualbase_connectNotify(void* self, QMetaMethod* signal);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__disconnectNotify = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QMimeData> handle__disconnectNotify;
 
 	// Subclass to allow providing a Go implementation
 	virtual void disconnectNotify(const QMetaMethod& signal) override {
-		if (handle__disconnectNotify == 0) {
+		if (!handle__disconnectNotify) {
 			QMimeData::disconnectNotify(signal);
 			return;
 		}
@@ -231,7 +234,7 @@ public:
 		const QMetaMethod& signal_ret = signal;
 		// Cast returned reference into pointer
 		QMetaMethod* sigval1 = const_cast<QMetaMethod*>(&signal_ret);
-		miqt_exec_callback_QMimeData_disconnectNotify(this, handle__disconnectNotify, sigval1);
+		miqt_exec_callback_QMimeData_disconnectNotify(this, handle__disconnectNotify.value(), sigval1);
 
 	}
 
@@ -468,12 +471,13 @@ struct miqt_string QMimeData_trUtf83(const char* s, const char* c, int n) {
 }
 
 bool QMimeData_override_virtual_hasFormat(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QMimeData> slot_handle(slot);
 	MiqtVirtualQMimeData* self_cast = dynamic_cast<MiqtVirtualQMimeData*>( (QMimeData*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__hasFormat = slot;
+	self_cast->handle__hasFormat = std::move(slot_handle);
 	return true;
 }
 
@@ -483,12 +487,13 @@ bool QMimeData_virtualbase_hasFormat(const void* self, struct miqt_string mimety
 }
 
 bool QMimeData_override_virtual_formats(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QMimeData> slot_handle(slot);
 	MiqtVirtualQMimeData* self_cast = dynamic_cast<MiqtVirtualQMimeData*>( (QMimeData*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__formats = slot;
+	self_cast->handle__formats = std::move(slot_handle);
 	return true;
 }
 
@@ -513,12 +518,13 @@ struct miqt_array /* of struct miqt_string */  QMimeData_virtualbase_formats(con
 }
 
 bool QMimeData_override_virtual_retrieveData(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QMimeData> slot_handle(slot);
 	MiqtVirtualQMimeData* self_cast = dynamic_cast<MiqtVirtualQMimeData*>( (QMimeData*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__retrieveData = slot;
+	self_cast->handle__retrieveData = std::move(slot_handle);
 	return true;
 }
 
@@ -528,12 +534,13 @@ QVariant* QMimeData_virtualbase_retrieveData(const void* self, struct miqt_strin
 }
 
 bool QMimeData_override_virtual_event(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QMimeData> slot_handle(slot);
 	MiqtVirtualQMimeData* self_cast = dynamic_cast<MiqtVirtualQMimeData*>( (QMimeData*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__event = slot;
+	self_cast->handle__event = std::move(slot_handle);
 	return true;
 }
 
@@ -542,12 +549,13 @@ bool QMimeData_virtualbase_event(void* self, QEvent* event) {
 }
 
 bool QMimeData_override_virtual_eventFilter(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QMimeData> slot_handle(slot);
 	MiqtVirtualQMimeData* self_cast = dynamic_cast<MiqtVirtualQMimeData*>( (QMimeData*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__eventFilter = slot;
+	self_cast->handle__eventFilter = std::move(slot_handle);
 	return true;
 }
 
@@ -556,12 +564,13 @@ bool QMimeData_virtualbase_eventFilter(void* self, QObject* watched, QEvent* eve
 }
 
 bool QMimeData_override_virtual_timerEvent(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QMimeData> slot_handle(slot);
 	MiqtVirtualQMimeData* self_cast = dynamic_cast<MiqtVirtualQMimeData*>( (QMimeData*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__timerEvent = slot;
+	self_cast->handle__timerEvent = std::move(slot_handle);
 	return true;
 }
 
@@ -570,12 +579,13 @@ void QMimeData_virtualbase_timerEvent(void* self, QTimerEvent* event) {
 }
 
 bool QMimeData_override_virtual_childEvent(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QMimeData> slot_handle(slot);
 	MiqtVirtualQMimeData* self_cast = dynamic_cast<MiqtVirtualQMimeData*>( (QMimeData*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__childEvent = slot;
+	self_cast->handle__childEvent = std::move(slot_handle);
 	return true;
 }
 
@@ -584,12 +594,13 @@ void QMimeData_virtualbase_childEvent(void* self, QChildEvent* event) {
 }
 
 bool QMimeData_override_virtual_customEvent(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QMimeData> slot_handle(slot);
 	MiqtVirtualQMimeData* self_cast = dynamic_cast<MiqtVirtualQMimeData*>( (QMimeData*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__customEvent = slot;
+	self_cast->handle__customEvent = std::move(slot_handle);
 	return true;
 }
 
@@ -598,12 +609,13 @@ void QMimeData_virtualbase_customEvent(void* self, QEvent* event) {
 }
 
 bool QMimeData_override_virtual_connectNotify(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QMimeData> slot_handle(slot);
 	MiqtVirtualQMimeData* self_cast = dynamic_cast<MiqtVirtualQMimeData*>( (QMimeData*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__connectNotify = slot;
+	self_cast->handle__connectNotify = std::move(slot_handle);
 	return true;
 }
 
@@ -612,12 +624,13 @@ void QMimeData_virtualbase_connectNotify(void* self, QMetaMethod* signal) {
 }
 
 bool QMimeData_override_virtual_disconnectNotify(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QMimeData> slot_handle(slot);
 	MiqtVirtualQMimeData* self_cast = dynamic_cast<MiqtVirtualQMimeData*>( (QMimeData*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__disconnectNotify = slot;
+	self_cast->handle__disconnectNotify = std::move(slot_handle);
 	return true;
 }
 

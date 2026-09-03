@@ -15,6 +15,11 @@ import (
 	"unsafe"
 )
 
+//export miqt_exec_callback_handle_release_QWebEngineUrlRequestInterceptor
+func miqt_exec_callback_handle_release_QWebEngineUrlRequestInterceptor(cb C.intptr_t) {
+	cgo.Handle(cb).Delete()
+}
+
 type QWebEngineUrlRequestInterceptor struct {
 	h *C.QWebEngineUrlRequestInterceptor
 	*qt.QObject
@@ -197,7 +202,11 @@ func (this *QWebEngineUrlRequestInterceptor) IsSignalConnected(signal *qt.QMetaM
 
 }
 func (this *QWebEngineUrlRequestInterceptor) OnInterceptRequest(slot func(info *QWebEngineUrlRequestInfo)) {
-	ok := C.QWebEngineUrlRequestInterceptor_override_virtual_interceptRequest(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QWebEngineUrlRequestInterceptor_override_virtual_interceptRequest(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -223,7 +232,11 @@ func (this *QWebEngineUrlRequestInterceptor) callVirtualBase_Event(event *qt.QEv
 
 }
 func (this *QWebEngineUrlRequestInterceptor) OnEvent(slot func(super func(event *qt.QEvent) bool, event *qt.QEvent) bool) {
-	ok := C.QWebEngineUrlRequestInterceptor_override_virtual_event(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QWebEngineUrlRequestInterceptor_override_virtual_event(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -251,7 +264,11 @@ func (this *QWebEngineUrlRequestInterceptor) callVirtualBase_EventFilter(watched
 
 }
 func (this *QWebEngineUrlRequestInterceptor) OnEventFilter(slot func(super func(watched *qt.QObject, event *qt.QEvent) bool, watched *qt.QObject, event *qt.QEvent) bool) {
-	ok := C.QWebEngineUrlRequestInterceptor_override_virtual_eventFilter(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QWebEngineUrlRequestInterceptor_override_virtual_eventFilter(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -281,7 +298,11 @@ func (this *QWebEngineUrlRequestInterceptor) callVirtualBase_TimerEvent(event *q
 
 }
 func (this *QWebEngineUrlRequestInterceptor) OnTimerEvent(slot func(super func(event *qt.QTimerEvent), event *qt.QTimerEvent)) {
-	ok := C.QWebEngineUrlRequestInterceptor_override_virtual_timerEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QWebEngineUrlRequestInterceptor_override_virtual_timerEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -307,7 +328,11 @@ func (this *QWebEngineUrlRequestInterceptor) callVirtualBase_ChildEvent(event *q
 
 }
 func (this *QWebEngineUrlRequestInterceptor) OnChildEvent(slot func(super func(event *qt.QChildEvent), event *qt.QChildEvent)) {
-	ok := C.QWebEngineUrlRequestInterceptor_override_virtual_childEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QWebEngineUrlRequestInterceptor_override_virtual_childEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -333,7 +358,11 @@ func (this *QWebEngineUrlRequestInterceptor) callVirtualBase_CustomEvent(event *
 
 }
 func (this *QWebEngineUrlRequestInterceptor) OnCustomEvent(slot func(super func(event *qt.QEvent), event *qt.QEvent)) {
-	ok := C.QWebEngineUrlRequestInterceptor_override_virtual_customEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QWebEngineUrlRequestInterceptor_override_virtual_customEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -359,7 +388,11 @@ func (this *QWebEngineUrlRequestInterceptor) callVirtualBase_ConnectNotify(signa
 
 }
 func (this *QWebEngineUrlRequestInterceptor) OnConnectNotify(slot func(super func(signal *qt.QMetaMethod), signal *qt.QMetaMethod)) {
-	ok := C.QWebEngineUrlRequestInterceptor_override_virtual_connectNotify(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QWebEngineUrlRequestInterceptor_override_virtual_connectNotify(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -385,7 +418,11 @@ func (this *QWebEngineUrlRequestInterceptor) callVirtualBase_DisconnectNotify(si
 
 }
 func (this *QWebEngineUrlRequestInterceptor) OnDisconnectNotify(slot func(super func(signal *qt.QMetaMethod), signal *qt.QMetaMethod)) {
-	ok := C.QWebEngineUrlRequestInterceptor_override_virtual_disconnectNotify(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QWebEngineUrlRequestInterceptor_override_virtual_disconnectNotify(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}

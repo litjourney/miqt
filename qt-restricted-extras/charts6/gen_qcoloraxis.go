@@ -15,6 +15,11 @@ import (
 	"unsafe"
 )
 
+//export miqt_exec_callback_handle_release_QColorAxis
+func miqt_exec_callback_handle_release_QColorAxis(cb C.intptr_t) {
+	cgo.Handle(cb).Delete()
+}
+
 type QColorAxis struct {
 	h *C.QColorAxis
 	*QAbstractAxis
@@ -143,8 +148,10 @@ func (this *QColorAxis) AutoRange() bool {
 func (this *QColorAxis) MinChanged(min float64) {
 	C.QColorAxis_minChanged(this.h, (C.double)(min))
 }
-func (this *QColorAxis) OnMinChanged(slot func(min float64)) {
-	C.QColorAxis_connect_minChanged(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QColorAxis) OnMinChanged(slot func(min float64)) *qt6.SignalConnection {
+	_goptr := qt6.UnsafeNewQMetaObject__Connection(C.QColorAxis_connect_minChanged(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QColorAxis_minChanged
@@ -163,8 +170,10 @@ func miqt_exec_callback_QColorAxis_minChanged(cb C.intptr_t, min C.double) {
 func (this *QColorAxis) MaxChanged(max float64) {
 	C.QColorAxis_maxChanged(this.h, (C.double)(max))
 }
-func (this *QColorAxis) OnMaxChanged(slot func(max float64)) {
-	C.QColorAxis_connect_maxChanged(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QColorAxis) OnMaxChanged(slot func(max float64)) *qt6.SignalConnection {
+	_goptr := qt6.UnsafeNewQMetaObject__Connection(C.QColorAxis_connect_maxChanged(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QColorAxis_maxChanged
@@ -183,8 +192,10 @@ func miqt_exec_callback_QColorAxis_maxChanged(cb C.intptr_t, max C.double) {
 func (this *QColorAxis) RangeChanged(min float64, max float64) {
 	C.QColorAxis_rangeChanged(this.h, (C.double)(min), (C.double)(max))
 }
-func (this *QColorAxis) OnRangeChanged(slot func(min float64, max float64)) {
-	C.QColorAxis_connect_rangeChanged(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QColorAxis) OnRangeChanged(slot func(min float64, max float64)) *qt6.SignalConnection {
+	_goptr := qt6.UnsafeNewQMetaObject__Connection(C.QColorAxis_connect_rangeChanged(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QColorAxis_rangeChanged
@@ -205,8 +216,10 @@ func miqt_exec_callback_QColorAxis_rangeChanged(cb C.intptr_t, min C.double, max
 func (this *QColorAxis) TickCountChanged(tickCount int) {
 	C.QColorAxis_tickCountChanged(this.h, (C.int)(tickCount))
 }
-func (this *QColorAxis) OnTickCountChanged(slot func(tickCount int)) {
-	C.QColorAxis_connect_tickCountChanged(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QColorAxis) OnTickCountChanged(slot func(tickCount int)) *qt6.SignalConnection {
+	_goptr := qt6.UnsafeNewQMetaObject__Connection(C.QColorAxis_connect_tickCountChanged(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QColorAxis_tickCountChanged
@@ -225,8 +238,10 @@ func miqt_exec_callback_QColorAxis_tickCountChanged(cb C.intptr_t, tickCount C.i
 func (this *QColorAxis) GradientChanged(gradient *qt6.QLinearGradient) {
 	C.QColorAxis_gradientChanged(this.h, (*C.QLinearGradient)(gradient.UnsafePointer()))
 }
-func (this *QColorAxis) OnGradientChanged(slot func(gradient *qt6.QLinearGradient)) {
-	C.QColorAxis_connect_gradientChanged(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QColorAxis) OnGradientChanged(slot func(gradient *qt6.QLinearGradient)) *qt6.SignalConnection {
+	_goptr := qt6.UnsafeNewQMetaObject__Connection(C.QColorAxis_connect_gradientChanged(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QColorAxis_gradientChanged
@@ -245,8 +260,10 @@ func miqt_exec_callback_QColorAxis_gradientChanged(cb C.intptr_t, gradient *C.QL
 func (this *QColorAxis) SizeChanged(size float64) {
 	C.QColorAxis_sizeChanged(this.h, (C.double)(size))
 }
-func (this *QColorAxis) OnSizeChanged(slot func(size float64)) {
-	C.QColorAxis_connect_sizeChanged(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QColorAxis) OnSizeChanged(slot func(size float64)) *qt6.SignalConnection {
+	_goptr := qt6.UnsafeNewQMetaObject__Connection(C.QColorAxis_connect_sizeChanged(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QColorAxis_sizeChanged
@@ -265,8 +282,10 @@ func miqt_exec_callback_QColorAxis_sizeChanged(cb C.intptr_t, size C.double) {
 func (this *QColorAxis) AutoRangeChanged(autoRange bool) {
 	C.QColorAxis_autoRangeChanged(this.h, (C.bool)(autoRange))
 }
-func (this *QColorAxis) OnAutoRangeChanged(slot func(autoRange bool)) {
-	C.QColorAxis_connect_autoRangeChanged(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QColorAxis) OnAutoRangeChanged(slot func(autoRange bool)) *qt6.SignalConnection {
+	_goptr := qt6.UnsafeNewQMetaObject__Connection(C.QColorAxis_connect_autoRangeChanged(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QColorAxis_autoRangeChanged
@@ -368,7 +387,11 @@ func (this *QColorAxis) callVirtualBase_Type() QAbstractAxis__AxisType {
 
 }
 func (this *QColorAxis) OnType(slot func(super func() QAbstractAxis__AxisType) QAbstractAxis__AxisType) {
-	ok := C.QColorAxis_override_virtual_type(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QColorAxis_override_virtual_type(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -393,7 +416,11 @@ func (this *QColorAxis) callVirtualBase_Event(event *qt6.QEvent) bool {
 
 }
 func (this *QColorAxis) OnEvent(slot func(super func(event *qt6.QEvent) bool, event *qt6.QEvent) bool) {
-	ok := C.QColorAxis_override_virtual_event(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QColorAxis_override_virtual_event(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -421,7 +448,11 @@ func (this *QColorAxis) callVirtualBase_EventFilter(watched *qt6.QObject, event 
 
 }
 func (this *QColorAxis) OnEventFilter(slot func(super func(watched *qt6.QObject, event *qt6.QEvent) bool, watched *qt6.QObject, event *qt6.QEvent) bool) {
-	ok := C.QColorAxis_override_virtual_eventFilter(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QColorAxis_override_virtual_eventFilter(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -451,7 +482,11 @@ func (this *QColorAxis) callVirtualBase_TimerEvent(event *qt6.QTimerEvent) {
 
 }
 func (this *QColorAxis) OnTimerEvent(slot func(super func(event *qt6.QTimerEvent), event *qt6.QTimerEvent)) {
-	ok := C.QColorAxis_override_virtual_timerEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QColorAxis_override_virtual_timerEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -477,7 +512,11 @@ func (this *QColorAxis) callVirtualBase_ChildEvent(event *qt6.QChildEvent) {
 
 }
 func (this *QColorAxis) OnChildEvent(slot func(super func(event *qt6.QChildEvent), event *qt6.QChildEvent)) {
-	ok := C.QColorAxis_override_virtual_childEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QColorAxis_override_virtual_childEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -503,7 +542,11 @@ func (this *QColorAxis) callVirtualBase_CustomEvent(event *qt6.QEvent) {
 
 }
 func (this *QColorAxis) OnCustomEvent(slot func(super func(event *qt6.QEvent), event *qt6.QEvent)) {
-	ok := C.QColorAxis_override_virtual_customEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QColorAxis_override_virtual_customEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -529,7 +572,11 @@ func (this *QColorAxis) callVirtualBase_ConnectNotify(signal *qt6.QMetaMethod) {
 
 }
 func (this *QColorAxis) OnConnectNotify(slot func(super func(signal *qt6.QMetaMethod), signal *qt6.QMetaMethod)) {
-	ok := C.QColorAxis_override_virtual_connectNotify(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QColorAxis_override_virtual_connectNotify(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -555,7 +602,11 @@ func (this *QColorAxis) callVirtualBase_DisconnectNotify(signal *qt6.QMetaMethod
 
 }
 func (this *QColorAxis) OnDisconnectNotify(slot func(super func(signal *qt6.QMetaMethod), signal *qt6.QMetaMethod)) {
-	ok := C.QColorAxis_override_virtual_disconnectNotify(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QColorAxis_override_virtual_disconnectNotify(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}

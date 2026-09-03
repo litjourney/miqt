@@ -26,6 +26,11 @@ const (
 	QPdfSearchModel__NRoles        QPdfSearchModel__Role = 261
 )
 
+//export miqt_exec_callback_handle_release_QPdfSearchModel
+func miqt_exec_callback_handle_release_QPdfSearchModel(cb C.intptr_t) {
+	cgo.Handle(cb).Delete()
+}
+
 type QPdfSearchModel struct {
 	h *C.QPdfSearchModel
 	*qt6.QAbstractListModel
@@ -164,8 +169,10 @@ func (this *QPdfSearchModel) SetDocument(document *QPdfDocument) {
 func (this *QPdfSearchModel) DocumentChanged() {
 	C.QPdfSearchModel_documentChanged(this.h)
 }
-func (this *QPdfSearchModel) OnDocumentChanged(slot func()) {
-	C.QPdfSearchModel_connect_documentChanged(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QPdfSearchModel) OnDocumentChanged(slot func()) *qt6.SignalConnection {
+	_goptr := qt6.UnsafeNewQMetaObject__Connection(C.QPdfSearchModel_connect_documentChanged(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QPdfSearchModel_documentChanged
@@ -181,8 +188,10 @@ func miqt_exec_callback_QPdfSearchModel_documentChanged(cb C.intptr_t) {
 func (this *QPdfSearchModel) SearchStringChanged() {
 	C.QPdfSearchModel_searchStringChanged(this.h)
 }
-func (this *QPdfSearchModel) OnSearchStringChanged(slot func()) {
-	C.QPdfSearchModel_connect_searchStringChanged(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QPdfSearchModel) OnSearchStringChanged(slot func()) *qt6.SignalConnection {
+	_goptr := qt6.UnsafeNewQMetaObject__Connection(C.QPdfSearchModel_connect_searchStringChanged(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QPdfSearchModel_searchStringChanged
@@ -584,7 +593,11 @@ func (this *QPdfSearchModel) callVirtualBase_RoleNames() map[int][]byte {
 
 }
 func (this *QPdfSearchModel) OnRoleNames(slot func(super func() map[int][]byte) map[int][]byte) {
-	ok := C.QPdfSearchModel_override_virtual_roleNames(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QPdfSearchModel_override_virtual_roleNames(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -629,7 +642,11 @@ func (this *QPdfSearchModel) callVirtualBase_RowCount(parent *qt6.QModelIndex) i
 
 }
 func (this *QPdfSearchModel) OnRowCount(slot func(super func(parent *qt6.QModelIndex) int, parent *qt6.QModelIndex) int) {
-	ok := C.QPdfSearchModel_override_virtual_rowCount(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QPdfSearchModel_override_virtual_rowCount(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -659,7 +676,11 @@ func (this *QPdfSearchModel) callVirtualBase_Data(index *qt6.QModelIndex, role i
 
 }
 func (this *QPdfSearchModel) OnData(slot func(super func(index *qt6.QModelIndex, role int) *qt6.QVariant, index *qt6.QModelIndex, role int) *qt6.QVariant) {
-	ok := C.QPdfSearchModel_override_virtual_data(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QPdfSearchModel_override_virtual_data(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -689,7 +710,11 @@ func (this *QPdfSearchModel) callVirtualBase_TimerEvent(event *qt6.QTimerEvent) 
 
 }
 func (this *QPdfSearchModel) OnTimerEvent(slot func(super func(event *qt6.QTimerEvent), event *qt6.QTimerEvent)) {
-	ok := C.QPdfSearchModel_override_virtual_timerEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QPdfSearchModel_override_virtual_timerEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -717,7 +742,11 @@ func (this *QPdfSearchModel) callVirtualBase_Index(row int, column int, parent *
 
 }
 func (this *QPdfSearchModel) OnIndex(slot func(super func(row int, column int, parent *qt6.QModelIndex) *qt6.QModelIndex, row int, column int, parent *qt6.QModelIndex) *qt6.QModelIndex) {
-	ok := C.QPdfSearchModel_override_virtual_index(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QPdfSearchModel_override_virtual_index(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -751,7 +780,11 @@ func (this *QPdfSearchModel) callVirtualBase_Sibling(row int, column int, idx *q
 
 }
 func (this *QPdfSearchModel) OnSibling(slot func(super func(row int, column int, idx *qt6.QModelIndex) *qt6.QModelIndex, row int, column int, idx *qt6.QModelIndex) *qt6.QModelIndex) {
-	ok := C.QPdfSearchModel_override_virtual_sibling(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QPdfSearchModel_override_virtual_sibling(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -783,7 +816,11 @@ func (this *QPdfSearchModel) callVirtualBase_DropMimeData(data *qt6.QMimeData, a
 
 }
 func (this *QPdfSearchModel) OnDropMimeData(slot func(super func(data *qt6.QMimeData, action qt6.DropAction, row int, column int, parent *qt6.QModelIndex) bool, data *qt6.QMimeData, action qt6.DropAction, row int, column int, parent *qt6.QModelIndex) bool) {
-	ok := C.QPdfSearchModel_override_virtual_dropMimeData(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QPdfSearchModel_override_virtual_dropMimeData(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -819,7 +856,11 @@ func (this *QPdfSearchModel) callVirtualBase_Flags(index *qt6.QModelIndex) qt6.I
 
 }
 func (this *QPdfSearchModel) OnFlags(slot func(super func(index *qt6.QModelIndex) qt6.ItemFlag, index *qt6.QModelIndex) qt6.ItemFlag) {
-	ok := C.QPdfSearchModel_override_virtual_flags(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QPdfSearchModel_override_virtual_flags(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -847,7 +888,11 @@ func (this *QPdfSearchModel) callVirtualBase_SetData(index *qt6.QModelIndex, val
 
 }
 func (this *QPdfSearchModel) OnSetData(slot func(super func(index *qt6.QModelIndex, value *qt6.QVariant, role int) bool, index *qt6.QModelIndex, value *qt6.QVariant, role int) bool) {
-	ok := C.QPdfSearchModel_override_virtual_setData(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QPdfSearchModel_override_virtual_setData(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -881,7 +926,11 @@ func (this *QPdfSearchModel) callVirtualBase_HeaderData(section int, orientation
 
 }
 func (this *QPdfSearchModel) OnHeaderData(slot func(super func(section int, orientation qt6.Orientation, role int) *qt6.QVariant, section int, orientation qt6.Orientation, role int) *qt6.QVariant) {
-	ok := C.QPdfSearchModel_override_virtual_headerData(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QPdfSearchModel_override_virtual_headerData(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -913,7 +962,11 @@ func (this *QPdfSearchModel) callVirtualBase_SetHeaderData(section int, orientat
 
 }
 func (this *QPdfSearchModel) OnSetHeaderData(slot func(super func(section int, orientation qt6.Orientation, value *qt6.QVariant, role int) bool, section int, orientation qt6.Orientation, value *qt6.QVariant, role int) bool) {
-	ok := C.QPdfSearchModel_override_virtual_setHeaderData(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QPdfSearchModel_override_virtual_setHeaderData(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -960,7 +1013,11 @@ func (this *QPdfSearchModel) callVirtualBase_ItemData(index *qt6.QModelIndex) ma
 
 }
 func (this *QPdfSearchModel) OnItemData(slot func(super func(index *qt6.QModelIndex) map[int]qt6.QVariant, index *qt6.QModelIndex) map[int]qt6.QVariant) {
-	ok := C.QPdfSearchModel_override_virtual_itemData(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QPdfSearchModel_override_virtual_itemData(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1016,7 +1073,11 @@ func (this *QPdfSearchModel) callVirtualBase_SetItemData(index *qt6.QModelIndex,
 
 }
 func (this *QPdfSearchModel) OnSetItemData(slot func(super func(index *qt6.QModelIndex, roles map[int]qt6.QVariant) bool, index *qt6.QModelIndex, roles map[int]qt6.QVariant) bool) {
-	ok := C.QPdfSearchModel_override_virtual_setItemData(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QPdfSearchModel_override_virtual_setItemData(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1059,7 +1120,11 @@ func (this *QPdfSearchModel) callVirtualBase_ClearItemData(index *qt6.QModelInde
 
 }
 func (this *QPdfSearchModel) OnClearItemData(slot func(super func(index *qt6.QModelIndex) bool, index *qt6.QModelIndex) bool) {
-	ok := C.QPdfSearchModel_override_virtual_clearItemData(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QPdfSearchModel_override_virtual_clearItemData(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1096,7 +1161,11 @@ func (this *QPdfSearchModel) callVirtualBase_MimeTypes() []string {
 
 }
 func (this *QPdfSearchModel) OnMimeTypes(slot func(super func() []string) []string) {
-	ok := C.QPdfSearchModel_override_virtual_mimeTypes(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QPdfSearchModel_override_virtual_mimeTypes(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1135,7 +1204,11 @@ func (this *QPdfSearchModel) callVirtualBase_MimeData(indexes []qt6.QModelIndex)
 
 }
 func (this *QPdfSearchModel) OnMimeData(slot func(super func(indexes []qt6.QModelIndex) *qt6.QMimeData, indexes []qt6.QModelIndex) *qt6.QMimeData) {
-	ok := C.QPdfSearchModel_override_virtual_mimeData(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QPdfSearchModel_override_virtual_mimeData(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1171,7 +1244,11 @@ func (this *QPdfSearchModel) callVirtualBase_CanDropMimeData(data *qt6.QMimeData
 
 }
 func (this *QPdfSearchModel) OnCanDropMimeData(slot func(super func(data *qt6.QMimeData, action qt6.DropAction, row int, column int, parent *qt6.QModelIndex) bool, data *qt6.QMimeData, action qt6.DropAction, row int, column int, parent *qt6.QModelIndex) bool) {
-	ok := C.QPdfSearchModel_override_virtual_canDropMimeData(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QPdfSearchModel_override_virtual_canDropMimeData(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1207,7 +1284,11 @@ func (this *QPdfSearchModel) callVirtualBase_SupportedDropActions() qt6.DropActi
 
 }
 func (this *QPdfSearchModel) OnSupportedDropActions(slot func(super func() qt6.DropAction) qt6.DropAction) {
-	ok := C.QPdfSearchModel_override_virtual_supportedDropActions(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QPdfSearchModel_override_virtual_supportedDropActions(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1232,7 +1313,11 @@ func (this *QPdfSearchModel) callVirtualBase_SupportedDragActions() qt6.DropActi
 
 }
 func (this *QPdfSearchModel) OnSupportedDragActions(slot func(super func() qt6.DropAction) qt6.DropAction) {
-	ok := C.QPdfSearchModel_override_virtual_supportedDragActions(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QPdfSearchModel_override_virtual_supportedDragActions(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1257,7 +1342,11 @@ func (this *QPdfSearchModel) callVirtualBase_InsertRows(row int, count int, pare
 
 }
 func (this *QPdfSearchModel) OnInsertRows(slot func(super func(row int, count int, parent *qt6.QModelIndex) bool, row int, count int, parent *qt6.QModelIndex) bool) {
-	ok := C.QPdfSearchModel_override_virtual_insertRows(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QPdfSearchModel_override_virtual_insertRows(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1289,7 +1378,11 @@ func (this *QPdfSearchModel) callVirtualBase_InsertColumns(column int, count int
 
 }
 func (this *QPdfSearchModel) OnInsertColumns(slot func(super func(column int, count int, parent *qt6.QModelIndex) bool, column int, count int, parent *qt6.QModelIndex) bool) {
-	ok := C.QPdfSearchModel_override_virtual_insertColumns(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QPdfSearchModel_override_virtual_insertColumns(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1321,7 +1414,11 @@ func (this *QPdfSearchModel) callVirtualBase_RemoveRows(row int, count int, pare
 
 }
 func (this *QPdfSearchModel) OnRemoveRows(slot func(super func(row int, count int, parent *qt6.QModelIndex) bool, row int, count int, parent *qt6.QModelIndex) bool) {
-	ok := C.QPdfSearchModel_override_virtual_removeRows(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QPdfSearchModel_override_virtual_removeRows(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1353,7 +1450,11 @@ func (this *QPdfSearchModel) callVirtualBase_RemoveColumns(column int, count int
 
 }
 func (this *QPdfSearchModel) OnRemoveColumns(slot func(super func(column int, count int, parent *qt6.QModelIndex) bool, column int, count int, parent *qt6.QModelIndex) bool) {
-	ok := C.QPdfSearchModel_override_virtual_removeColumns(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QPdfSearchModel_override_virtual_removeColumns(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1385,7 +1486,11 @@ func (this *QPdfSearchModel) callVirtualBase_MoveRows(sourceParent *qt6.QModelIn
 
 }
 func (this *QPdfSearchModel) OnMoveRows(slot func(super func(sourceParent *qt6.QModelIndex, sourceRow int, count int, destinationParent *qt6.QModelIndex, destinationChild int) bool, sourceParent *qt6.QModelIndex, sourceRow int, count int, destinationParent *qt6.QModelIndex, destinationChild int) bool) {
-	ok := C.QPdfSearchModel_override_virtual_moveRows(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QPdfSearchModel_override_virtual_moveRows(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1421,7 +1526,11 @@ func (this *QPdfSearchModel) callVirtualBase_MoveColumns(sourceParent *qt6.QMode
 
 }
 func (this *QPdfSearchModel) OnMoveColumns(slot func(super func(sourceParent *qt6.QModelIndex, sourceColumn int, count int, destinationParent *qt6.QModelIndex, destinationChild int) bool, sourceParent *qt6.QModelIndex, sourceColumn int, count int, destinationParent *qt6.QModelIndex, destinationChild int) bool) {
-	ok := C.QPdfSearchModel_override_virtual_moveColumns(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QPdfSearchModel_override_virtual_moveColumns(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1457,7 +1566,11 @@ func (this *QPdfSearchModel) callVirtualBase_FetchMore(parent *qt6.QModelIndex) 
 
 }
 func (this *QPdfSearchModel) OnFetchMore(slot func(super func(parent *qt6.QModelIndex), parent *qt6.QModelIndex)) {
-	ok := C.QPdfSearchModel_override_virtual_fetchMore(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QPdfSearchModel_override_virtual_fetchMore(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1483,7 +1596,11 @@ func (this *QPdfSearchModel) callVirtualBase_CanFetchMore(parent *qt6.QModelInde
 
 }
 func (this *QPdfSearchModel) OnCanFetchMore(slot func(super func(parent *qt6.QModelIndex) bool, parent *qt6.QModelIndex) bool) {
-	ok := C.QPdfSearchModel_override_virtual_canFetchMore(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QPdfSearchModel_override_virtual_canFetchMore(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1511,7 +1628,11 @@ func (this *QPdfSearchModel) callVirtualBase_Sort(column int, order qt6.SortOrde
 
 }
 func (this *QPdfSearchModel) OnSort(slot func(super func(column int, order qt6.SortOrder), column int, order qt6.SortOrder)) {
-	ok := C.QPdfSearchModel_override_virtual_sort(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QPdfSearchModel_override_virtual_sort(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1541,7 +1662,11 @@ func (this *QPdfSearchModel) callVirtualBase_Buddy(index *qt6.QModelIndex) *qt6.
 
 }
 func (this *QPdfSearchModel) OnBuddy(slot func(super func(index *qt6.QModelIndex) *qt6.QModelIndex, index *qt6.QModelIndex) *qt6.QModelIndex) {
-	ok := C.QPdfSearchModel_override_virtual_buddy(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QPdfSearchModel_override_virtual_buddy(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1577,7 +1702,11 @@ func (this *QPdfSearchModel) callVirtualBase_Match(start *qt6.QModelIndex, role 
 
 }
 func (this *QPdfSearchModel) OnMatch(slot func(super func(start *qt6.QModelIndex, role int, value *qt6.QVariant, hits int, flags qt6.MatchFlag) []qt6.QModelIndex, start *qt6.QModelIndex, role int, value *qt6.QVariant, hits int, flags qt6.MatchFlag) []qt6.QModelIndex) {
-	ok := C.QPdfSearchModel_override_virtual_match(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QPdfSearchModel_override_virtual_match(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1620,7 +1749,11 @@ func (this *QPdfSearchModel) callVirtualBase_Span(index *qt6.QModelIndex) *qt6.Q
 
 }
 func (this *QPdfSearchModel) OnSpan(slot func(super func(index *qt6.QModelIndex) *qt6.QSize, index *qt6.QModelIndex) *qt6.QSize) {
-	ok := C.QPdfSearchModel_override_virtual_span(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QPdfSearchModel_override_virtual_span(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1648,7 +1781,11 @@ func (this *QPdfSearchModel) callVirtualBase_MultiData(index *qt6.QModelIndex, r
 
 }
 func (this *QPdfSearchModel) OnMultiData(slot func(super func(index *qt6.QModelIndex, roleDataSpan qt6.QModelRoleDataSpan), index *qt6.QModelIndex, roleDataSpan qt6.QModelRoleDataSpan)) {
-	ok := C.QPdfSearchModel_override_virtual_multiData(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QPdfSearchModel_override_virtual_multiData(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1678,7 +1815,11 @@ func (this *QPdfSearchModel) callVirtualBase_Submit() bool {
 
 }
 func (this *QPdfSearchModel) OnSubmit(slot func(super func() bool) bool) {
-	ok := C.QPdfSearchModel_override_virtual_submit(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QPdfSearchModel_override_virtual_submit(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1703,7 +1844,11 @@ func (this *QPdfSearchModel) callVirtualBase_Revert() {
 
 }
 func (this *QPdfSearchModel) OnRevert(slot func(super func())) {
-	ok := C.QPdfSearchModel_override_virtual_revert(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QPdfSearchModel_override_virtual_revert(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1726,7 +1871,11 @@ func (this *QPdfSearchModel) callVirtualBase_ResetInternalData() {
 
 }
 func (this *QPdfSearchModel) OnResetInternalData(slot func(super func())) {
-	ok := C.QPdfSearchModel_override_virtual_resetInternalData(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QPdfSearchModel_override_virtual_resetInternalData(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1749,7 +1898,11 @@ func (this *QPdfSearchModel) callVirtualBase_Event(event *qt6.QEvent) bool {
 
 }
 func (this *QPdfSearchModel) OnEvent(slot func(super func(event *qt6.QEvent) bool, event *qt6.QEvent) bool) {
-	ok := C.QPdfSearchModel_override_virtual_event(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QPdfSearchModel_override_virtual_event(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1777,7 +1930,11 @@ func (this *QPdfSearchModel) callVirtualBase_EventFilter(watched *qt6.QObject, e
 
 }
 func (this *QPdfSearchModel) OnEventFilter(slot func(super func(watched *qt6.QObject, event *qt6.QEvent) bool, watched *qt6.QObject, event *qt6.QEvent) bool) {
-	ok := C.QPdfSearchModel_override_virtual_eventFilter(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QPdfSearchModel_override_virtual_eventFilter(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1807,7 +1964,11 @@ func (this *QPdfSearchModel) callVirtualBase_ChildEvent(event *qt6.QChildEvent) 
 
 }
 func (this *QPdfSearchModel) OnChildEvent(slot func(super func(event *qt6.QChildEvent), event *qt6.QChildEvent)) {
-	ok := C.QPdfSearchModel_override_virtual_childEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QPdfSearchModel_override_virtual_childEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1833,7 +1994,11 @@ func (this *QPdfSearchModel) callVirtualBase_CustomEvent(event *qt6.QEvent) {
 
 }
 func (this *QPdfSearchModel) OnCustomEvent(slot func(super func(event *qt6.QEvent), event *qt6.QEvent)) {
-	ok := C.QPdfSearchModel_override_virtual_customEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QPdfSearchModel_override_virtual_customEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1859,7 +2024,11 @@ func (this *QPdfSearchModel) callVirtualBase_ConnectNotify(signal *qt6.QMetaMeth
 
 }
 func (this *QPdfSearchModel) OnConnectNotify(slot func(super func(signal *qt6.QMetaMethod), signal *qt6.QMetaMethod)) {
-	ok := C.QPdfSearchModel_override_virtual_connectNotify(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QPdfSearchModel_override_virtual_connectNotify(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1885,7 +2054,11 @@ func (this *QPdfSearchModel) callVirtualBase_DisconnectNotify(signal *qt6.QMetaM
 
 }
 func (this *QPdfSearchModel) OnDisconnectNotify(slot func(super func(signal *qt6.QMetaMethod), signal *qt6.QMetaMethod)) {
-	ok := C.QPdfSearchModel_override_virtual_disconnectNotify(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QPdfSearchModel_override_virtual_disconnectNotify(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}

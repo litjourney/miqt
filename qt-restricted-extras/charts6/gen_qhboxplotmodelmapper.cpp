@@ -1,3 +1,5 @@
+#include <memory>
+#include <utility>
 #include <QAbstractItemModel>
 #include <QBoxPlotModelMapper>
 #include <QBoxPlotSeries>
@@ -18,6 +20,7 @@
 extern "C" {
 #endif
 
+void miqt_exec_callback_handle_release_QHBoxPlotModelMapper(intptr_t);
 void miqt_exec_callback_QHBoxPlotModelMapper_seriesReplaced(intptr_t);
 void miqt_exec_callback_QHBoxPlotModelMapper_modelReplaced(intptr_t);
 void miqt_exec_callback_QHBoxPlotModelMapper_firstBoxSetRowChanged(intptr_t);
@@ -44,95 +47,95 @@ public:
 	virtual ~MiqtVirtualQHBoxPlotModelMapper() override = default;
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__event = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QHBoxPlotModelMapper> handle__event;
 
 	// Subclass to allow providing a Go implementation
 	virtual bool event(QEvent* event) override {
-		if (handle__event == 0) {
+		if (!handle__event) {
 			return QHBoxPlotModelMapper::event(event);
 		}
 
 		QEvent* sigval1 = event;
-		bool callback_return_value = miqt_exec_callback_QHBoxPlotModelMapper_event(this, handle__event, sigval1);
+		bool callback_return_value = miqt_exec_callback_QHBoxPlotModelMapper_event(this, handle__event.value(), sigval1);
 		return callback_return_value;
 	}
 
 	friend bool QHBoxPlotModelMapper_virtualbase_event(void* self, QEvent* event);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__eventFilter = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QHBoxPlotModelMapper> handle__eventFilter;
 
 	// Subclass to allow providing a Go implementation
 	virtual bool eventFilter(QObject* watched, QEvent* event) override {
-		if (handle__eventFilter == 0) {
+		if (!handle__eventFilter) {
 			return QHBoxPlotModelMapper::eventFilter(watched, event);
 		}
 
 		QObject* sigval1 = watched;
 		QEvent* sigval2 = event;
-		bool callback_return_value = miqt_exec_callback_QHBoxPlotModelMapper_eventFilter(this, handle__eventFilter, sigval1, sigval2);
+		bool callback_return_value = miqt_exec_callback_QHBoxPlotModelMapper_eventFilter(this, handle__eventFilter.value(), sigval1, sigval2);
 		return callback_return_value;
 	}
 
 	friend bool QHBoxPlotModelMapper_virtualbase_eventFilter(void* self, QObject* watched, QEvent* event);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__timerEvent = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QHBoxPlotModelMapper> handle__timerEvent;
 
 	// Subclass to allow providing a Go implementation
 	virtual void timerEvent(QTimerEvent* event) override {
-		if (handle__timerEvent == 0) {
+		if (!handle__timerEvent) {
 			QHBoxPlotModelMapper::timerEvent(event);
 			return;
 		}
 
 		QTimerEvent* sigval1 = event;
-		miqt_exec_callback_QHBoxPlotModelMapper_timerEvent(this, handle__timerEvent, sigval1);
+		miqt_exec_callback_QHBoxPlotModelMapper_timerEvent(this, handle__timerEvent.value(), sigval1);
 
 	}
 
 	friend void QHBoxPlotModelMapper_virtualbase_timerEvent(void* self, QTimerEvent* event);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__childEvent = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QHBoxPlotModelMapper> handle__childEvent;
 
 	// Subclass to allow providing a Go implementation
 	virtual void childEvent(QChildEvent* event) override {
-		if (handle__childEvent == 0) {
+		if (!handle__childEvent) {
 			QHBoxPlotModelMapper::childEvent(event);
 			return;
 		}
 
 		QChildEvent* sigval1 = event;
-		miqt_exec_callback_QHBoxPlotModelMapper_childEvent(this, handle__childEvent, sigval1);
+		miqt_exec_callback_QHBoxPlotModelMapper_childEvent(this, handle__childEvent.value(), sigval1);
 
 	}
 
 	friend void QHBoxPlotModelMapper_virtualbase_childEvent(void* self, QChildEvent* event);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__customEvent = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QHBoxPlotModelMapper> handle__customEvent;
 
 	// Subclass to allow providing a Go implementation
 	virtual void customEvent(QEvent* event) override {
-		if (handle__customEvent == 0) {
+		if (!handle__customEvent) {
 			QHBoxPlotModelMapper::customEvent(event);
 			return;
 		}
 
 		QEvent* sigval1 = event;
-		miqt_exec_callback_QHBoxPlotModelMapper_customEvent(this, handle__customEvent, sigval1);
+		miqt_exec_callback_QHBoxPlotModelMapper_customEvent(this, handle__customEvent.value(), sigval1);
 
 	}
 
 	friend void QHBoxPlotModelMapper_virtualbase_customEvent(void* self, QEvent* event);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__connectNotify = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QHBoxPlotModelMapper> handle__connectNotify;
 
 	// Subclass to allow providing a Go implementation
 	virtual void connectNotify(const QMetaMethod& signal) override {
-		if (handle__connectNotify == 0) {
+		if (!handle__connectNotify) {
 			QHBoxPlotModelMapper::connectNotify(signal);
 			return;
 		}
@@ -140,18 +143,18 @@ public:
 		const QMetaMethod& signal_ret = signal;
 		// Cast returned reference into pointer
 		QMetaMethod* sigval1 = const_cast<QMetaMethod*>(&signal_ret);
-		miqt_exec_callback_QHBoxPlotModelMapper_connectNotify(this, handle__connectNotify, sigval1);
+		miqt_exec_callback_QHBoxPlotModelMapper_connectNotify(this, handle__connectNotify.value(), sigval1);
 
 	}
 
 	friend void QHBoxPlotModelMapper_virtualbase_connectNotify(void* self, QMetaMethod* signal);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__disconnectNotify = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QHBoxPlotModelMapper> handle__disconnectNotify;
 
 	// Subclass to allow providing a Go implementation
 	virtual void disconnectNotify(const QMetaMethod& signal) override {
-		if (handle__disconnectNotify == 0) {
+		if (!handle__disconnectNotify) {
 			QHBoxPlotModelMapper::disconnectNotify(signal);
 			return;
 		}
@@ -159,7 +162,7 @@ public:
 		const QMetaMethod& signal_ret = signal;
 		// Cast returned reference into pointer
 		QMetaMethod* sigval1 = const_cast<QMetaMethod*>(&signal_ret);
-		miqt_exec_callback_QHBoxPlotModelMapper_disconnectNotify(this, handle__disconnectNotify, sigval1);
+		miqt_exec_callback_QHBoxPlotModelMapper_disconnectNotify(this, handle__disconnectNotify.value(), sigval1);
 
 	}
 
@@ -265,60 +268,72 @@ void QHBoxPlotModelMapper_seriesReplaced(QHBoxPlotModelMapper* self) {
 	self->seriesReplaced();
 }
 
-void QHBoxPlotModelMapper_connect_seriesReplaced(QHBoxPlotModelMapper* self, intptr_t slot) {
-	QHBoxPlotModelMapper::connect(self, static_cast<void (QHBoxPlotModelMapper::*)()>(&QHBoxPlotModelMapper::seriesReplaced), self, [=]() {
+void* QHBoxPlotModelMapper_connect_seriesReplaced(QHBoxPlotModelMapper* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QHBoxPlotModelMapper>>(slot);
+	return new QMetaObject::Connection(QHBoxPlotModelMapper::connect(self, static_cast<void (QHBoxPlotModelMapper::*)()>(&QHBoxPlotModelMapper::seriesReplaced), self, [slot_handle]() {
+		intptr_t slot = slot_handle->value();
 		miqt_exec_callback_QHBoxPlotModelMapper_seriesReplaced(slot);
-	});
+	}));
 }
 
 void QHBoxPlotModelMapper_modelReplaced(QHBoxPlotModelMapper* self) {
 	self->modelReplaced();
 }
 
-void QHBoxPlotModelMapper_connect_modelReplaced(QHBoxPlotModelMapper* self, intptr_t slot) {
-	QHBoxPlotModelMapper::connect(self, static_cast<void (QHBoxPlotModelMapper::*)()>(&QHBoxPlotModelMapper::modelReplaced), self, [=]() {
+void* QHBoxPlotModelMapper_connect_modelReplaced(QHBoxPlotModelMapper* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QHBoxPlotModelMapper>>(slot);
+	return new QMetaObject::Connection(QHBoxPlotModelMapper::connect(self, static_cast<void (QHBoxPlotModelMapper::*)()>(&QHBoxPlotModelMapper::modelReplaced), self, [slot_handle]() {
+		intptr_t slot = slot_handle->value();
 		miqt_exec_callback_QHBoxPlotModelMapper_modelReplaced(slot);
-	});
+	}));
 }
 
 void QHBoxPlotModelMapper_firstBoxSetRowChanged(QHBoxPlotModelMapper* self) {
 	self->firstBoxSetRowChanged();
 }
 
-void QHBoxPlotModelMapper_connect_firstBoxSetRowChanged(QHBoxPlotModelMapper* self, intptr_t slot) {
-	QHBoxPlotModelMapper::connect(self, static_cast<void (QHBoxPlotModelMapper::*)()>(&QHBoxPlotModelMapper::firstBoxSetRowChanged), self, [=]() {
+void* QHBoxPlotModelMapper_connect_firstBoxSetRowChanged(QHBoxPlotModelMapper* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QHBoxPlotModelMapper>>(slot);
+	return new QMetaObject::Connection(QHBoxPlotModelMapper::connect(self, static_cast<void (QHBoxPlotModelMapper::*)()>(&QHBoxPlotModelMapper::firstBoxSetRowChanged), self, [slot_handle]() {
+		intptr_t slot = slot_handle->value();
 		miqt_exec_callback_QHBoxPlotModelMapper_firstBoxSetRowChanged(slot);
-	});
+	}));
 }
 
 void QHBoxPlotModelMapper_lastBoxSetRowChanged(QHBoxPlotModelMapper* self) {
 	self->lastBoxSetRowChanged();
 }
 
-void QHBoxPlotModelMapper_connect_lastBoxSetRowChanged(QHBoxPlotModelMapper* self, intptr_t slot) {
-	QHBoxPlotModelMapper::connect(self, static_cast<void (QHBoxPlotModelMapper::*)()>(&QHBoxPlotModelMapper::lastBoxSetRowChanged), self, [=]() {
+void* QHBoxPlotModelMapper_connect_lastBoxSetRowChanged(QHBoxPlotModelMapper* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QHBoxPlotModelMapper>>(slot);
+	return new QMetaObject::Connection(QHBoxPlotModelMapper::connect(self, static_cast<void (QHBoxPlotModelMapper::*)()>(&QHBoxPlotModelMapper::lastBoxSetRowChanged), self, [slot_handle]() {
+		intptr_t slot = slot_handle->value();
 		miqt_exec_callback_QHBoxPlotModelMapper_lastBoxSetRowChanged(slot);
-	});
+	}));
 }
 
 void QHBoxPlotModelMapper_firstColumnChanged(QHBoxPlotModelMapper* self) {
 	self->firstColumnChanged();
 }
 
-void QHBoxPlotModelMapper_connect_firstColumnChanged(QHBoxPlotModelMapper* self, intptr_t slot) {
-	QHBoxPlotModelMapper::connect(self, static_cast<void (QHBoxPlotModelMapper::*)()>(&QHBoxPlotModelMapper::firstColumnChanged), self, [=]() {
+void* QHBoxPlotModelMapper_connect_firstColumnChanged(QHBoxPlotModelMapper* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QHBoxPlotModelMapper>>(slot);
+	return new QMetaObject::Connection(QHBoxPlotModelMapper::connect(self, static_cast<void (QHBoxPlotModelMapper::*)()>(&QHBoxPlotModelMapper::firstColumnChanged), self, [slot_handle]() {
+		intptr_t slot = slot_handle->value();
 		miqt_exec_callback_QHBoxPlotModelMapper_firstColumnChanged(slot);
-	});
+	}));
 }
 
 void QHBoxPlotModelMapper_columnCountChanged(QHBoxPlotModelMapper* self) {
 	self->columnCountChanged();
 }
 
-void QHBoxPlotModelMapper_connect_columnCountChanged(QHBoxPlotModelMapper* self, intptr_t slot) {
-	QHBoxPlotModelMapper::connect(self, static_cast<void (QHBoxPlotModelMapper::*)()>(&QHBoxPlotModelMapper::columnCountChanged), self, [=]() {
+void* QHBoxPlotModelMapper_connect_columnCountChanged(QHBoxPlotModelMapper* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QHBoxPlotModelMapper>>(slot);
+	return new QMetaObject::Connection(QHBoxPlotModelMapper::connect(self, static_cast<void (QHBoxPlotModelMapper::*)()>(&QHBoxPlotModelMapper::columnCountChanged), self, [slot_handle]() {
+		intptr_t slot = slot_handle->value();
 		miqt_exec_callback_QHBoxPlotModelMapper_columnCountChanged(slot);
-	});
+	}));
 }
 
 struct miqt_string QHBoxPlotModelMapper_tr2(const char* s, const char* c) {
@@ -344,12 +359,13 @@ struct miqt_string QHBoxPlotModelMapper_tr3(const char* s, const char* c, int n)
 }
 
 bool QHBoxPlotModelMapper_override_virtual_event(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QHBoxPlotModelMapper> slot_handle(slot);
 	MiqtVirtualQHBoxPlotModelMapper* self_cast = dynamic_cast<MiqtVirtualQHBoxPlotModelMapper*>( (QHBoxPlotModelMapper*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__event = slot;
+	self_cast->handle__event = std::move(slot_handle);
 	return true;
 }
 
@@ -358,12 +374,13 @@ bool QHBoxPlotModelMapper_virtualbase_event(void* self, QEvent* event) {
 }
 
 bool QHBoxPlotModelMapper_override_virtual_eventFilter(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QHBoxPlotModelMapper> slot_handle(slot);
 	MiqtVirtualQHBoxPlotModelMapper* self_cast = dynamic_cast<MiqtVirtualQHBoxPlotModelMapper*>( (QHBoxPlotModelMapper*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__eventFilter = slot;
+	self_cast->handle__eventFilter = std::move(slot_handle);
 	return true;
 }
 
@@ -372,12 +389,13 @@ bool QHBoxPlotModelMapper_virtualbase_eventFilter(void* self, QObject* watched, 
 }
 
 bool QHBoxPlotModelMapper_override_virtual_timerEvent(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QHBoxPlotModelMapper> slot_handle(slot);
 	MiqtVirtualQHBoxPlotModelMapper* self_cast = dynamic_cast<MiqtVirtualQHBoxPlotModelMapper*>( (QHBoxPlotModelMapper*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__timerEvent = slot;
+	self_cast->handle__timerEvent = std::move(slot_handle);
 	return true;
 }
 
@@ -386,12 +404,13 @@ void QHBoxPlotModelMapper_virtualbase_timerEvent(void* self, QTimerEvent* event)
 }
 
 bool QHBoxPlotModelMapper_override_virtual_childEvent(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QHBoxPlotModelMapper> slot_handle(slot);
 	MiqtVirtualQHBoxPlotModelMapper* self_cast = dynamic_cast<MiqtVirtualQHBoxPlotModelMapper*>( (QHBoxPlotModelMapper*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__childEvent = slot;
+	self_cast->handle__childEvent = std::move(slot_handle);
 	return true;
 }
 
@@ -400,12 +419,13 @@ void QHBoxPlotModelMapper_virtualbase_childEvent(void* self, QChildEvent* event)
 }
 
 bool QHBoxPlotModelMapper_override_virtual_customEvent(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QHBoxPlotModelMapper> slot_handle(slot);
 	MiqtVirtualQHBoxPlotModelMapper* self_cast = dynamic_cast<MiqtVirtualQHBoxPlotModelMapper*>( (QHBoxPlotModelMapper*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__customEvent = slot;
+	self_cast->handle__customEvent = std::move(slot_handle);
 	return true;
 }
 
@@ -414,12 +434,13 @@ void QHBoxPlotModelMapper_virtualbase_customEvent(void* self, QEvent* event) {
 }
 
 bool QHBoxPlotModelMapper_override_virtual_connectNotify(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QHBoxPlotModelMapper> slot_handle(slot);
 	MiqtVirtualQHBoxPlotModelMapper* self_cast = dynamic_cast<MiqtVirtualQHBoxPlotModelMapper*>( (QHBoxPlotModelMapper*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__connectNotify = slot;
+	self_cast->handle__connectNotify = std::move(slot_handle);
 	return true;
 }
 
@@ -428,12 +449,13 @@ void QHBoxPlotModelMapper_virtualbase_connectNotify(void* self, QMetaMethod* sig
 }
 
 bool QHBoxPlotModelMapper_override_virtual_disconnectNotify(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QHBoxPlotModelMapper> slot_handle(slot);
 	MiqtVirtualQHBoxPlotModelMapper* self_cast = dynamic_cast<MiqtVirtualQHBoxPlotModelMapper*>( (QHBoxPlotModelMapper*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__disconnectNotify = slot;
+	self_cast->handle__disconnectNotify = std::move(slot_handle);
 	return true;
 }
 

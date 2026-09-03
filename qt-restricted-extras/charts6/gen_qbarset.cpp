@@ -1,3 +1,5 @@
+#include <memory>
+#include <utility>
 #include <QBarSet>
 #include <QBrush>
 #include <QChildEvent>
@@ -20,6 +22,7 @@
 extern "C" {
 #endif
 
+void miqt_exec_callback_handle_release_QBarSet(intptr_t);
 void miqt_exec_callback_QBarSet_clicked(intptr_t, int);
 void miqt_exec_callback_QBarSet_hovered(intptr_t, bool, int);
 void miqt_exec_callback_QBarSet_pressed(intptr_t, int);
@@ -58,95 +61,95 @@ public:
 	virtual ~MiqtVirtualQBarSet() override = default;
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__event = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QBarSet> handle__event;
 
 	// Subclass to allow providing a Go implementation
 	virtual bool event(QEvent* event) override {
-		if (handle__event == 0) {
+		if (!handle__event) {
 			return QBarSet::event(event);
 		}
 
 		QEvent* sigval1 = event;
-		bool callback_return_value = miqt_exec_callback_QBarSet_event(this, handle__event, sigval1);
+		bool callback_return_value = miqt_exec_callback_QBarSet_event(this, handle__event.value(), sigval1);
 		return callback_return_value;
 	}
 
 	friend bool QBarSet_virtualbase_event(void* self, QEvent* event);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__eventFilter = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QBarSet> handle__eventFilter;
 
 	// Subclass to allow providing a Go implementation
 	virtual bool eventFilter(QObject* watched, QEvent* event) override {
-		if (handle__eventFilter == 0) {
+		if (!handle__eventFilter) {
 			return QBarSet::eventFilter(watched, event);
 		}
 
 		QObject* sigval1 = watched;
 		QEvent* sigval2 = event;
-		bool callback_return_value = miqt_exec_callback_QBarSet_eventFilter(this, handle__eventFilter, sigval1, sigval2);
+		bool callback_return_value = miqt_exec_callback_QBarSet_eventFilter(this, handle__eventFilter.value(), sigval1, sigval2);
 		return callback_return_value;
 	}
 
 	friend bool QBarSet_virtualbase_eventFilter(void* self, QObject* watched, QEvent* event);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__timerEvent = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QBarSet> handle__timerEvent;
 
 	// Subclass to allow providing a Go implementation
 	virtual void timerEvent(QTimerEvent* event) override {
-		if (handle__timerEvent == 0) {
+		if (!handle__timerEvent) {
 			QBarSet::timerEvent(event);
 			return;
 		}
 
 		QTimerEvent* sigval1 = event;
-		miqt_exec_callback_QBarSet_timerEvent(this, handle__timerEvent, sigval1);
+		miqt_exec_callback_QBarSet_timerEvent(this, handle__timerEvent.value(), sigval1);
 
 	}
 
 	friend void QBarSet_virtualbase_timerEvent(void* self, QTimerEvent* event);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__childEvent = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QBarSet> handle__childEvent;
 
 	// Subclass to allow providing a Go implementation
 	virtual void childEvent(QChildEvent* event) override {
-		if (handle__childEvent == 0) {
+		if (!handle__childEvent) {
 			QBarSet::childEvent(event);
 			return;
 		}
 
 		QChildEvent* sigval1 = event;
-		miqt_exec_callback_QBarSet_childEvent(this, handle__childEvent, sigval1);
+		miqt_exec_callback_QBarSet_childEvent(this, handle__childEvent.value(), sigval1);
 
 	}
 
 	friend void QBarSet_virtualbase_childEvent(void* self, QChildEvent* event);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__customEvent = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QBarSet> handle__customEvent;
 
 	// Subclass to allow providing a Go implementation
 	virtual void customEvent(QEvent* event) override {
-		if (handle__customEvent == 0) {
+		if (!handle__customEvent) {
 			QBarSet::customEvent(event);
 			return;
 		}
 
 		QEvent* sigval1 = event;
-		miqt_exec_callback_QBarSet_customEvent(this, handle__customEvent, sigval1);
+		miqt_exec_callback_QBarSet_customEvent(this, handle__customEvent.value(), sigval1);
 
 	}
 
 	friend void QBarSet_virtualbase_customEvent(void* self, QEvent* event);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__connectNotify = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QBarSet> handle__connectNotify;
 
 	// Subclass to allow providing a Go implementation
 	virtual void connectNotify(const QMetaMethod& signal) override {
-		if (handle__connectNotify == 0) {
+		if (!handle__connectNotify) {
 			QBarSet::connectNotify(signal);
 			return;
 		}
@@ -154,18 +157,18 @@ public:
 		const QMetaMethod& signal_ret = signal;
 		// Cast returned reference into pointer
 		QMetaMethod* sigval1 = const_cast<QMetaMethod*>(&signal_ret);
-		miqt_exec_callback_QBarSet_connectNotify(this, handle__connectNotify, sigval1);
+		miqt_exec_callback_QBarSet_connectNotify(this, handle__connectNotify.value(), sigval1);
 
 	}
 
 	friend void QBarSet_virtualbase_connectNotify(void* self, QMetaMethod* signal);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__disconnectNotify = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QBarSet> handle__disconnectNotify;
 
 	// Subclass to allow providing a Go implementation
 	virtual void disconnectNotify(const QMetaMethod& signal) override {
-		if (handle__disconnectNotify == 0) {
+		if (!handle__disconnectNotify) {
 			QBarSet::disconnectNotify(signal);
 			return;
 		}
@@ -173,7 +176,7 @@ public:
 		const QMetaMethod& signal_ret = signal;
 		// Cast returned reference into pointer
 		QMetaMethod* sigval1 = const_cast<QMetaMethod*>(&signal_ret);
-		miqt_exec_callback_QBarSet_disconnectNotify(this, handle__disconnectNotify, sigval1);
+		miqt_exec_callback_QBarSet_disconnectNotify(this, handle__disconnectNotify.value(), sigval1);
 
 	}
 
@@ -421,187 +424,221 @@ void QBarSet_clicked(QBarSet* self, int index) {
 	self->clicked(static_cast<int>(index));
 }
 
-void QBarSet_connect_clicked(QBarSet* self, intptr_t slot) {
-	QBarSet::connect(self, static_cast<void (QBarSet::*)(int)>(&QBarSet::clicked), self, [=](int index) {
+void* QBarSet_connect_clicked(QBarSet* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QBarSet>>(slot);
+	return new QMetaObject::Connection(QBarSet::connect(self, static_cast<void (QBarSet::*)(int)>(&QBarSet::clicked), self, [slot_handle](int index) {
+		intptr_t slot = slot_handle->value();
 		int sigval1 = index;
 		miqt_exec_callback_QBarSet_clicked(slot, sigval1);
-	});
+	}));
 }
 
 void QBarSet_hovered(QBarSet* self, bool status, int index) {
 	self->hovered(status, static_cast<int>(index));
 }
 
-void QBarSet_connect_hovered(QBarSet* self, intptr_t slot) {
-	QBarSet::connect(self, static_cast<void (QBarSet::*)(bool, int)>(&QBarSet::hovered), self, [=](bool status, int index) {
+void* QBarSet_connect_hovered(QBarSet* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QBarSet>>(slot);
+	return new QMetaObject::Connection(QBarSet::connect(self, static_cast<void (QBarSet::*)(bool, int)>(&QBarSet::hovered), self, [slot_handle](bool status, int index) {
+		intptr_t slot = slot_handle->value();
 		bool sigval1 = status;
 		int sigval2 = index;
 		miqt_exec_callback_QBarSet_hovered(slot, sigval1, sigval2);
-	});
+	}));
 }
 
 void QBarSet_pressed(QBarSet* self, int index) {
 	self->pressed(static_cast<int>(index));
 }
 
-void QBarSet_connect_pressed(QBarSet* self, intptr_t slot) {
-	QBarSet::connect(self, static_cast<void (QBarSet::*)(int)>(&QBarSet::pressed), self, [=](int index) {
+void* QBarSet_connect_pressed(QBarSet* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QBarSet>>(slot);
+	return new QMetaObject::Connection(QBarSet::connect(self, static_cast<void (QBarSet::*)(int)>(&QBarSet::pressed), self, [slot_handle](int index) {
+		intptr_t slot = slot_handle->value();
 		int sigval1 = index;
 		miqt_exec_callback_QBarSet_pressed(slot, sigval1);
-	});
+	}));
 }
 
 void QBarSet_released(QBarSet* self, int index) {
 	self->released(static_cast<int>(index));
 }
 
-void QBarSet_connect_released(QBarSet* self, intptr_t slot) {
-	QBarSet::connect(self, static_cast<void (QBarSet::*)(int)>(&QBarSet::released), self, [=](int index) {
+void* QBarSet_connect_released(QBarSet* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QBarSet>>(slot);
+	return new QMetaObject::Connection(QBarSet::connect(self, static_cast<void (QBarSet::*)(int)>(&QBarSet::released), self, [slot_handle](int index) {
+		intptr_t slot = slot_handle->value();
 		int sigval1 = index;
 		miqt_exec_callback_QBarSet_released(slot, sigval1);
-	});
+	}));
 }
 
 void QBarSet_doubleClicked(QBarSet* self, int index) {
 	self->doubleClicked(static_cast<int>(index));
 }
 
-void QBarSet_connect_doubleClicked(QBarSet* self, intptr_t slot) {
-	QBarSet::connect(self, static_cast<void (QBarSet::*)(int)>(&QBarSet::doubleClicked), self, [=](int index) {
+void* QBarSet_connect_doubleClicked(QBarSet* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QBarSet>>(slot);
+	return new QMetaObject::Connection(QBarSet::connect(self, static_cast<void (QBarSet::*)(int)>(&QBarSet::doubleClicked), self, [slot_handle](int index) {
+		intptr_t slot = slot_handle->value();
 		int sigval1 = index;
 		miqt_exec_callback_QBarSet_doubleClicked(slot, sigval1);
-	});
+	}));
 }
 
 void QBarSet_penChanged(QBarSet* self) {
 	self->penChanged();
 }
 
-void QBarSet_connect_penChanged(QBarSet* self, intptr_t slot) {
-	QBarSet::connect(self, static_cast<void (QBarSet::*)()>(&QBarSet::penChanged), self, [=]() {
+void* QBarSet_connect_penChanged(QBarSet* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QBarSet>>(slot);
+	return new QMetaObject::Connection(QBarSet::connect(self, static_cast<void (QBarSet::*)()>(&QBarSet::penChanged), self, [slot_handle]() {
+		intptr_t slot = slot_handle->value();
 		miqt_exec_callback_QBarSet_penChanged(slot);
-	});
+	}));
 }
 
 void QBarSet_brushChanged(QBarSet* self) {
 	self->brushChanged();
 }
 
-void QBarSet_connect_brushChanged(QBarSet* self, intptr_t slot) {
-	QBarSet::connect(self, static_cast<void (QBarSet::*)()>(&QBarSet::brushChanged), self, [=]() {
+void* QBarSet_connect_brushChanged(QBarSet* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QBarSet>>(slot);
+	return new QMetaObject::Connection(QBarSet::connect(self, static_cast<void (QBarSet::*)()>(&QBarSet::brushChanged), self, [slot_handle]() {
+		intptr_t slot = slot_handle->value();
 		miqt_exec_callback_QBarSet_brushChanged(slot);
-	});
+	}));
 }
 
 void QBarSet_labelChanged(QBarSet* self) {
 	self->labelChanged();
 }
 
-void QBarSet_connect_labelChanged(QBarSet* self, intptr_t slot) {
-	QBarSet::connect(self, static_cast<void (QBarSet::*)()>(&QBarSet::labelChanged), self, [=]() {
+void* QBarSet_connect_labelChanged(QBarSet* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QBarSet>>(slot);
+	return new QMetaObject::Connection(QBarSet::connect(self, static_cast<void (QBarSet::*)()>(&QBarSet::labelChanged), self, [slot_handle]() {
+		intptr_t slot = slot_handle->value();
 		miqt_exec_callback_QBarSet_labelChanged(slot);
-	});
+	}));
 }
 
 void QBarSet_labelBrushChanged(QBarSet* self) {
 	self->labelBrushChanged();
 }
 
-void QBarSet_connect_labelBrushChanged(QBarSet* self, intptr_t slot) {
-	QBarSet::connect(self, static_cast<void (QBarSet::*)()>(&QBarSet::labelBrushChanged), self, [=]() {
+void* QBarSet_connect_labelBrushChanged(QBarSet* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QBarSet>>(slot);
+	return new QMetaObject::Connection(QBarSet::connect(self, static_cast<void (QBarSet::*)()>(&QBarSet::labelBrushChanged), self, [slot_handle]() {
+		intptr_t slot = slot_handle->value();
 		miqt_exec_callback_QBarSet_labelBrushChanged(slot);
-	});
+	}));
 }
 
 void QBarSet_labelFontChanged(QBarSet* self) {
 	self->labelFontChanged();
 }
 
-void QBarSet_connect_labelFontChanged(QBarSet* self, intptr_t slot) {
-	QBarSet::connect(self, static_cast<void (QBarSet::*)()>(&QBarSet::labelFontChanged), self, [=]() {
+void* QBarSet_connect_labelFontChanged(QBarSet* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QBarSet>>(slot);
+	return new QMetaObject::Connection(QBarSet::connect(self, static_cast<void (QBarSet::*)()>(&QBarSet::labelFontChanged), self, [slot_handle]() {
+		intptr_t slot = slot_handle->value();
 		miqt_exec_callback_QBarSet_labelFontChanged(slot);
-	});
+	}));
 }
 
 void QBarSet_colorChanged(QBarSet* self, QColor* color) {
 	self->colorChanged(*color);
 }
 
-void QBarSet_connect_colorChanged(QBarSet* self, intptr_t slot) {
-	QBarSet::connect(self, static_cast<void (QBarSet::*)(QColor)>(&QBarSet::colorChanged), self, [=](QColor color) {
+void* QBarSet_connect_colorChanged(QBarSet* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QBarSet>>(slot);
+	return new QMetaObject::Connection(QBarSet::connect(self, static_cast<void (QBarSet::*)(QColor)>(&QBarSet::colorChanged), self, [slot_handle](QColor color) {
+		intptr_t slot = slot_handle->value();
 		QColor* sigval1 = new QColor(color);
 		miqt_exec_callback_QBarSet_colorChanged(slot, sigval1);
-	});
+	}));
 }
 
 void QBarSet_borderColorChanged(QBarSet* self, QColor* color) {
 	self->borderColorChanged(*color);
 }
 
-void QBarSet_connect_borderColorChanged(QBarSet* self, intptr_t slot) {
-	QBarSet::connect(self, static_cast<void (QBarSet::*)(QColor)>(&QBarSet::borderColorChanged), self, [=](QColor color) {
+void* QBarSet_connect_borderColorChanged(QBarSet* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QBarSet>>(slot);
+	return new QMetaObject::Connection(QBarSet::connect(self, static_cast<void (QBarSet::*)(QColor)>(&QBarSet::borderColorChanged), self, [slot_handle](QColor color) {
+		intptr_t slot = slot_handle->value();
 		QColor* sigval1 = new QColor(color);
 		miqt_exec_callback_QBarSet_borderColorChanged(slot, sigval1);
-	});
+	}));
 }
 
 void QBarSet_labelColorChanged(QBarSet* self, QColor* color) {
 	self->labelColorChanged(*color);
 }
 
-void QBarSet_connect_labelColorChanged(QBarSet* self, intptr_t slot) {
-	QBarSet::connect(self, static_cast<void (QBarSet::*)(QColor)>(&QBarSet::labelColorChanged), self, [=](QColor color) {
+void* QBarSet_connect_labelColorChanged(QBarSet* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QBarSet>>(slot);
+	return new QMetaObject::Connection(QBarSet::connect(self, static_cast<void (QBarSet::*)(QColor)>(&QBarSet::labelColorChanged), self, [slot_handle](QColor color) {
+		intptr_t slot = slot_handle->value();
 		QColor* sigval1 = new QColor(color);
 		miqt_exec_callback_QBarSet_labelColorChanged(slot, sigval1);
-	});
+	}));
 }
 
 void QBarSet_selectedColorChanged(QBarSet* self, QColor* color) {
 	self->selectedColorChanged(*color);
 }
 
-void QBarSet_connect_selectedColorChanged(QBarSet* self, intptr_t slot) {
-	QBarSet::connect(self, static_cast<void (QBarSet::*)(const QColor&)>(&QBarSet::selectedColorChanged), self, [=](const QColor& color) {
+void* QBarSet_connect_selectedColorChanged(QBarSet* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QBarSet>>(slot);
+	return new QMetaObject::Connection(QBarSet::connect(self, static_cast<void (QBarSet::*)(const QColor&)>(&QBarSet::selectedColorChanged), self, [slot_handle](const QColor& color) {
+		intptr_t slot = slot_handle->value();
 		const QColor& color_ret = color;
 		// Cast returned reference into pointer
 		QColor* sigval1 = const_cast<QColor*>(&color_ret);
 		miqt_exec_callback_QBarSet_selectedColorChanged(slot, sigval1);
-	});
+	}));
 }
 
 void QBarSet_valuesAdded(QBarSet* self, int index, int count) {
 	self->valuesAdded(static_cast<int>(index), static_cast<int>(count));
 }
 
-void QBarSet_connect_valuesAdded(QBarSet* self, intptr_t slot) {
-	QBarSet::connect(self, static_cast<void (QBarSet::*)(int, int)>(&QBarSet::valuesAdded), self, [=](int index, int count) {
+void* QBarSet_connect_valuesAdded(QBarSet* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QBarSet>>(slot);
+	return new QMetaObject::Connection(QBarSet::connect(self, static_cast<void (QBarSet::*)(int, int)>(&QBarSet::valuesAdded), self, [slot_handle](int index, int count) {
+		intptr_t slot = slot_handle->value();
 		int sigval1 = index;
 		int sigval2 = count;
 		miqt_exec_callback_QBarSet_valuesAdded(slot, sigval1, sigval2);
-	});
+	}));
 }
 
 void QBarSet_valuesRemoved(QBarSet* self, int index, int count) {
 	self->valuesRemoved(static_cast<int>(index), static_cast<int>(count));
 }
 
-void QBarSet_connect_valuesRemoved(QBarSet* self, intptr_t slot) {
-	QBarSet::connect(self, static_cast<void (QBarSet::*)(int, int)>(&QBarSet::valuesRemoved), self, [=](int index, int count) {
+void* QBarSet_connect_valuesRemoved(QBarSet* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QBarSet>>(slot);
+	return new QMetaObject::Connection(QBarSet::connect(self, static_cast<void (QBarSet::*)(int, int)>(&QBarSet::valuesRemoved), self, [slot_handle](int index, int count) {
+		intptr_t slot = slot_handle->value();
 		int sigval1 = index;
 		int sigval2 = count;
 		miqt_exec_callback_QBarSet_valuesRemoved(slot, sigval1, sigval2);
-	});
+	}));
 }
 
 void QBarSet_valueChanged(QBarSet* self, int index) {
 	self->valueChanged(static_cast<int>(index));
 }
 
-void QBarSet_connect_valueChanged(QBarSet* self, intptr_t slot) {
-	QBarSet::connect(self, static_cast<void (QBarSet::*)(int)>(&QBarSet::valueChanged), self, [=](int index) {
+void* QBarSet_connect_valueChanged(QBarSet* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QBarSet>>(slot);
+	return new QMetaObject::Connection(QBarSet::connect(self, static_cast<void (QBarSet::*)(int)>(&QBarSet::valueChanged), self, [slot_handle](int index) {
+		intptr_t slot = slot_handle->value();
 		int sigval1 = index;
 		miqt_exec_callback_QBarSet_valueChanged(slot, sigval1);
-	});
+	}));
 }
 
 void QBarSet_selectedBarsChanged(QBarSet* self, struct miqt_array /* of int */  indexes) {
@@ -614,8 +651,10 @@ void QBarSet_selectedBarsChanged(QBarSet* self, struct miqt_array /* of int */  
 	self->selectedBarsChanged(indexes_QList);
 }
 
-void QBarSet_connect_selectedBarsChanged(QBarSet* self, intptr_t slot) {
-	QBarSet::connect(self, static_cast<void (QBarSet::*)(const QList<int>&)>(&QBarSet::selectedBarsChanged), self, [=](const QList<int>& indexes) {
+void* QBarSet_connect_selectedBarsChanged(QBarSet* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QBarSet>>(slot);
+	return new QMetaObject::Connection(QBarSet::connect(self, static_cast<void (QBarSet::*)(const QList<int>&)>(&QBarSet::selectedBarsChanged), self, [slot_handle](const QList<int>& indexes) {
+		intptr_t slot = slot_handle->value();
 		const QList<int>& indexes_ret = indexes;
 		// Convert QList<> from C++ memory to manually-managed C memory
 		int* indexes_arr = static_cast<int*>(malloc(sizeof(int) * indexes_ret.length()));
@@ -627,7 +666,7 @@ void QBarSet_connect_selectedBarsChanged(QBarSet* self, intptr_t slot) {
 		indexes_out.data = static_cast<void*>(indexes_arr);
 		struct miqt_array /* of int */  sigval1 = indexes_out;
 		miqt_exec_callback_QBarSet_selectedBarsChanged(slot, sigval1);
-	});
+	}));
 }
 
 struct miqt_string QBarSet_tr2(const char* s, const char* c) {
@@ -657,12 +696,13 @@ void QBarSet_remove2(QBarSet* self, const int index, const int count) {
 }
 
 bool QBarSet_override_virtual_event(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QBarSet> slot_handle(slot);
 	MiqtVirtualQBarSet* self_cast = dynamic_cast<MiqtVirtualQBarSet*>( (QBarSet*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__event = slot;
+	self_cast->handle__event = std::move(slot_handle);
 	return true;
 }
 
@@ -671,12 +711,13 @@ bool QBarSet_virtualbase_event(void* self, QEvent* event) {
 }
 
 bool QBarSet_override_virtual_eventFilter(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QBarSet> slot_handle(slot);
 	MiqtVirtualQBarSet* self_cast = dynamic_cast<MiqtVirtualQBarSet*>( (QBarSet*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__eventFilter = slot;
+	self_cast->handle__eventFilter = std::move(slot_handle);
 	return true;
 }
 
@@ -685,12 +726,13 @@ bool QBarSet_virtualbase_eventFilter(void* self, QObject* watched, QEvent* event
 }
 
 bool QBarSet_override_virtual_timerEvent(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QBarSet> slot_handle(slot);
 	MiqtVirtualQBarSet* self_cast = dynamic_cast<MiqtVirtualQBarSet*>( (QBarSet*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__timerEvent = slot;
+	self_cast->handle__timerEvent = std::move(slot_handle);
 	return true;
 }
 
@@ -699,12 +741,13 @@ void QBarSet_virtualbase_timerEvent(void* self, QTimerEvent* event) {
 }
 
 bool QBarSet_override_virtual_childEvent(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QBarSet> slot_handle(slot);
 	MiqtVirtualQBarSet* self_cast = dynamic_cast<MiqtVirtualQBarSet*>( (QBarSet*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__childEvent = slot;
+	self_cast->handle__childEvent = std::move(slot_handle);
 	return true;
 }
 
@@ -713,12 +756,13 @@ void QBarSet_virtualbase_childEvent(void* self, QChildEvent* event) {
 }
 
 bool QBarSet_override_virtual_customEvent(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QBarSet> slot_handle(slot);
 	MiqtVirtualQBarSet* self_cast = dynamic_cast<MiqtVirtualQBarSet*>( (QBarSet*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__customEvent = slot;
+	self_cast->handle__customEvent = std::move(slot_handle);
 	return true;
 }
 
@@ -727,12 +771,13 @@ void QBarSet_virtualbase_customEvent(void* self, QEvent* event) {
 }
 
 bool QBarSet_override_virtual_connectNotify(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QBarSet> slot_handle(slot);
 	MiqtVirtualQBarSet* self_cast = dynamic_cast<MiqtVirtualQBarSet*>( (QBarSet*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__connectNotify = slot;
+	self_cast->handle__connectNotify = std::move(slot_handle);
 	return true;
 }
 
@@ -741,12 +786,13 @@ void QBarSet_virtualbase_connectNotify(void* self, QMetaMethod* signal) {
 }
 
 bool QBarSet_override_virtual_disconnectNotify(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QBarSet> slot_handle(slot);
 	MiqtVirtualQBarSet* self_cast = dynamic_cast<MiqtVirtualQBarSet*>( (QBarSet*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__disconnectNotify = slot;
+	self_cast->handle__disconnectNotify = std::move(slot_handle);
 	return true;
 }
 

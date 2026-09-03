@@ -1,3 +1,5 @@
+#include <memory>
+#include <utility>
 #include <QAbstractSeries>
 #include <QChildEvent>
 #include <QEvent>
@@ -18,6 +20,7 @@
 extern "C" {
 #endif
 
+void miqt_exec_callback_handle_release_QPieSeries(intptr_t);
 void miqt_exec_callback_QPieSeries_added(intptr_t, struct miqt_array /* of QPieSlice* */ );
 void miqt_exec_callback_QPieSeries_removed(intptr_t, struct miqt_array /* of QPieSlice* */ );
 void miqt_exec_callback_QPieSeries_clicked(intptr_t, QPieSlice*);
@@ -48,110 +51,110 @@ public:
 	virtual ~MiqtVirtualQPieSeries() override = default;
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__type = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QPieSeries> handle__type;
 
 	// Subclass to allow providing a Go implementation
 	virtual QAbstractSeries::SeriesType type() const override {
-		if (handle__type == 0) {
+		if (!handle__type) {
 			return QPieSeries::type();
 		}
 
-		int callback_return_value = miqt_exec_callback_QPieSeries_type(this, handle__type);
+		int callback_return_value = miqt_exec_callback_QPieSeries_type(this, handle__type.value());
 		return static_cast<QAbstractSeries::SeriesType>(callback_return_value);
 	}
 
 	friend int QPieSeries_virtualbase_type(const void* self);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__event = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QPieSeries> handle__event;
 
 	// Subclass to allow providing a Go implementation
 	virtual bool event(QEvent* event) override {
-		if (handle__event == 0) {
+		if (!handle__event) {
 			return QPieSeries::event(event);
 		}
 
 		QEvent* sigval1 = event;
-		bool callback_return_value = miqt_exec_callback_QPieSeries_event(this, handle__event, sigval1);
+		bool callback_return_value = miqt_exec_callback_QPieSeries_event(this, handle__event.value(), sigval1);
 		return callback_return_value;
 	}
 
 	friend bool QPieSeries_virtualbase_event(void* self, QEvent* event);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__eventFilter = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QPieSeries> handle__eventFilter;
 
 	// Subclass to allow providing a Go implementation
 	virtual bool eventFilter(QObject* watched, QEvent* event) override {
-		if (handle__eventFilter == 0) {
+		if (!handle__eventFilter) {
 			return QPieSeries::eventFilter(watched, event);
 		}
 
 		QObject* sigval1 = watched;
 		QEvent* sigval2 = event;
-		bool callback_return_value = miqt_exec_callback_QPieSeries_eventFilter(this, handle__eventFilter, sigval1, sigval2);
+		bool callback_return_value = miqt_exec_callback_QPieSeries_eventFilter(this, handle__eventFilter.value(), sigval1, sigval2);
 		return callback_return_value;
 	}
 
 	friend bool QPieSeries_virtualbase_eventFilter(void* self, QObject* watched, QEvent* event);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__timerEvent = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QPieSeries> handle__timerEvent;
 
 	// Subclass to allow providing a Go implementation
 	virtual void timerEvent(QTimerEvent* event) override {
-		if (handle__timerEvent == 0) {
+		if (!handle__timerEvent) {
 			QPieSeries::timerEvent(event);
 			return;
 		}
 
 		QTimerEvent* sigval1 = event;
-		miqt_exec_callback_QPieSeries_timerEvent(this, handle__timerEvent, sigval1);
+		miqt_exec_callback_QPieSeries_timerEvent(this, handle__timerEvent.value(), sigval1);
 
 	}
 
 	friend void QPieSeries_virtualbase_timerEvent(void* self, QTimerEvent* event);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__childEvent = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QPieSeries> handle__childEvent;
 
 	// Subclass to allow providing a Go implementation
 	virtual void childEvent(QChildEvent* event) override {
-		if (handle__childEvent == 0) {
+		if (!handle__childEvent) {
 			QPieSeries::childEvent(event);
 			return;
 		}
 
 		QChildEvent* sigval1 = event;
-		miqt_exec_callback_QPieSeries_childEvent(this, handle__childEvent, sigval1);
+		miqt_exec_callback_QPieSeries_childEvent(this, handle__childEvent.value(), sigval1);
 
 	}
 
 	friend void QPieSeries_virtualbase_childEvent(void* self, QChildEvent* event);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__customEvent = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QPieSeries> handle__customEvent;
 
 	// Subclass to allow providing a Go implementation
 	virtual void customEvent(QEvent* event) override {
-		if (handle__customEvent == 0) {
+		if (!handle__customEvent) {
 			QPieSeries::customEvent(event);
 			return;
 		}
 
 		QEvent* sigval1 = event;
-		miqt_exec_callback_QPieSeries_customEvent(this, handle__customEvent, sigval1);
+		miqt_exec_callback_QPieSeries_customEvent(this, handle__customEvent.value(), sigval1);
 
 	}
 
 	friend void QPieSeries_virtualbase_customEvent(void* self, QEvent* event);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__connectNotify = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QPieSeries> handle__connectNotify;
 
 	// Subclass to allow providing a Go implementation
 	virtual void connectNotify(const QMetaMethod& signal) override {
-		if (handle__connectNotify == 0) {
+		if (!handle__connectNotify) {
 			QPieSeries::connectNotify(signal);
 			return;
 		}
@@ -159,18 +162,18 @@ public:
 		const QMetaMethod& signal_ret = signal;
 		// Cast returned reference into pointer
 		QMetaMethod* sigval1 = const_cast<QMetaMethod*>(&signal_ret);
-		miqt_exec_callback_QPieSeries_connectNotify(this, handle__connectNotify, sigval1);
+		miqt_exec_callback_QPieSeries_connectNotify(this, handle__connectNotify.value(), sigval1);
 
 	}
 
 	friend void QPieSeries_virtualbase_connectNotify(void* self, QMetaMethod* signal);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__disconnectNotify = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QPieSeries> handle__disconnectNotify;
 
 	// Subclass to allow providing a Go implementation
 	virtual void disconnectNotify(const QMetaMethod& signal) override {
-		if (handle__disconnectNotify == 0) {
+		if (!handle__disconnectNotify) {
 			QPieSeries::disconnectNotify(signal);
 			return;
 		}
@@ -178,7 +181,7 @@ public:
 		const QMetaMethod& signal_ret = signal;
 		// Cast returned reference into pointer
 		QMetaMethod* sigval1 = const_cast<QMetaMethod*>(&signal_ret);
-		miqt_exec_callback_QPieSeries_disconnectNotify(this, handle__disconnectNotify, sigval1);
+		miqt_exec_callback_QPieSeries_disconnectNotify(this, handle__disconnectNotify.value(), sigval1);
 
 	}
 
@@ -366,8 +369,10 @@ void QPieSeries_added(QPieSeries* self, struct miqt_array /* of QPieSlice* */  s
 	self->added(slices_QList);
 }
 
-void QPieSeries_connect_added(QPieSeries* self, intptr_t slot) {
-	QPieSeries::connect(self, static_cast<void (QPieSeries::*)(const QList<QPieSlice *>&)>(&QPieSeries::added), self, [=](const QList<QPieSlice *>& slices) {
+void* QPieSeries_connect_added(QPieSeries* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QPieSeries>>(slot);
+	return new QMetaObject::Connection(QPieSeries::connect(self, static_cast<void (QPieSeries::*)(const QList<QPieSlice *>&)>(&QPieSeries::added), self, [slot_handle](const QList<QPieSlice *>& slices) {
+		intptr_t slot = slot_handle->value();
 		const QList<QPieSlice *>& slices_ret = slices;
 		// Convert QList<> from C++ memory to manually-managed C memory
 		QPieSlice** slices_arr = static_cast<QPieSlice**>(malloc(sizeof(QPieSlice*) * slices_ret.length()));
@@ -379,7 +384,7 @@ void QPieSeries_connect_added(QPieSeries* self, intptr_t slot) {
 		slices_out.data = static_cast<void*>(slices_arr);
 		struct miqt_array /* of QPieSlice* */  sigval1 = slices_out;
 		miqt_exec_callback_QPieSeries_added(slot, sigval1);
-	});
+	}));
 }
 
 void QPieSeries_removed(QPieSeries* self, struct miqt_array /* of QPieSlice* */  slices) {
@@ -392,8 +397,10 @@ void QPieSeries_removed(QPieSeries* self, struct miqt_array /* of QPieSlice* */ 
 	self->removed(slices_QList);
 }
 
-void QPieSeries_connect_removed(QPieSeries* self, intptr_t slot) {
-	QPieSeries::connect(self, static_cast<void (QPieSeries::*)(const QList<QPieSlice *>&)>(&QPieSeries::removed), self, [=](const QList<QPieSlice *>& slices) {
+void* QPieSeries_connect_removed(QPieSeries* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QPieSeries>>(slot);
+	return new QMetaObject::Connection(QPieSeries::connect(self, static_cast<void (QPieSeries::*)(const QList<QPieSlice *>&)>(&QPieSeries::removed), self, [slot_handle](const QList<QPieSlice *>& slices) {
+		intptr_t slot = slot_handle->value();
 		const QList<QPieSlice *>& slices_ret = slices;
 		// Convert QList<> from C++ memory to manually-managed C memory
 		QPieSlice** slices_arr = static_cast<QPieSlice**>(malloc(sizeof(QPieSlice*) * slices_ret.length()));
@@ -405,83 +412,97 @@ void QPieSeries_connect_removed(QPieSeries* self, intptr_t slot) {
 		slices_out.data = static_cast<void*>(slices_arr);
 		struct miqt_array /* of QPieSlice* */  sigval1 = slices_out;
 		miqt_exec_callback_QPieSeries_removed(slot, sigval1);
-	});
+	}));
 }
 
 void QPieSeries_clicked(QPieSeries* self, QPieSlice* slice) {
 	self->clicked(slice);
 }
 
-void QPieSeries_connect_clicked(QPieSeries* self, intptr_t slot) {
-	QPieSeries::connect(self, static_cast<void (QPieSeries::*)(QPieSlice*)>(&QPieSeries::clicked), self, [=](QPieSlice* slice) {
+void* QPieSeries_connect_clicked(QPieSeries* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QPieSeries>>(slot);
+	return new QMetaObject::Connection(QPieSeries::connect(self, static_cast<void (QPieSeries::*)(QPieSlice*)>(&QPieSeries::clicked), self, [slot_handle](QPieSlice* slice) {
+		intptr_t slot = slot_handle->value();
 		QPieSlice* sigval1 = slice;
 		miqt_exec_callback_QPieSeries_clicked(slot, sigval1);
-	});
+	}));
 }
 
 void QPieSeries_hovered(QPieSeries* self, QPieSlice* slice, bool state) {
 	self->hovered(slice, state);
 }
 
-void QPieSeries_connect_hovered(QPieSeries* self, intptr_t slot) {
-	QPieSeries::connect(self, static_cast<void (QPieSeries::*)(QPieSlice*, bool)>(&QPieSeries::hovered), self, [=](QPieSlice* slice, bool state) {
+void* QPieSeries_connect_hovered(QPieSeries* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QPieSeries>>(slot);
+	return new QMetaObject::Connection(QPieSeries::connect(self, static_cast<void (QPieSeries::*)(QPieSlice*, bool)>(&QPieSeries::hovered), self, [slot_handle](QPieSlice* slice, bool state) {
+		intptr_t slot = slot_handle->value();
 		QPieSlice* sigval1 = slice;
 		bool sigval2 = state;
 		miqt_exec_callback_QPieSeries_hovered(slot, sigval1, sigval2);
-	});
+	}));
 }
 
 void QPieSeries_pressed(QPieSeries* self, QPieSlice* slice) {
 	self->pressed(slice);
 }
 
-void QPieSeries_connect_pressed(QPieSeries* self, intptr_t slot) {
-	QPieSeries::connect(self, static_cast<void (QPieSeries::*)(QPieSlice*)>(&QPieSeries::pressed), self, [=](QPieSlice* slice) {
+void* QPieSeries_connect_pressed(QPieSeries* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QPieSeries>>(slot);
+	return new QMetaObject::Connection(QPieSeries::connect(self, static_cast<void (QPieSeries::*)(QPieSlice*)>(&QPieSeries::pressed), self, [slot_handle](QPieSlice* slice) {
+		intptr_t slot = slot_handle->value();
 		QPieSlice* sigval1 = slice;
 		miqt_exec_callback_QPieSeries_pressed(slot, sigval1);
-	});
+	}));
 }
 
 void QPieSeries_released(QPieSeries* self, QPieSlice* slice) {
 	self->released(slice);
 }
 
-void QPieSeries_connect_released(QPieSeries* self, intptr_t slot) {
-	QPieSeries::connect(self, static_cast<void (QPieSeries::*)(QPieSlice*)>(&QPieSeries::released), self, [=](QPieSlice* slice) {
+void* QPieSeries_connect_released(QPieSeries* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QPieSeries>>(slot);
+	return new QMetaObject::Connection(QPieSeries::connect(self, static_cast<void (QPieSeries::*)(QPieSlice*)>(&QPieSeries::released), self, [slot_handle](QPieSlice* slice) {
+		intptr_t slot = slot_handle->value();
 		QPieSlice* sigval1 = slice;
 		miqt_exec_callback_QPieSeries_released(slot, sigval1);
-	});
+	}));
 }
 
 void QPieSeries_doubleClicked(QPieSeries* self, QPieSlice* slice) {
 	self->doubleClicked(slice);
 }
 
-void QPieSeries_connect_doubleClicked(QPieSeries* self, intptr_t slot) {
-	QPieSeries::connect(self, static_cast<void (QPieSeries::*)(QPieSlice*)>(&QPieSeries::doubleClicked), self, [=](QPieSlice* slice) {
+void* QPieSeries_connect_doubleClicked(QPieSeries* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QPieSeries>>(slot);
+	return new QMetaObject::Connection(QPieSeries::connect(self, static_cast<void (QPieSeries::*)(QPieSlice*)>(&QPieSeries::doubleClicked), self, [slot_handle](QPieSlice* slice) {
+		intptr_t slot = slot_handle->value();
 		QPieSlice* sigval1 = slice;
 		miqt_exec_callback_QPieSeries_doubleClicked(slot, sigval1);
-	});
+	}));
 }
 
 void QPieSeries_countChanged(QPieSeries* self) {
 	self->countChanged();
 }
 
-void QPieSeries_connect_countChanged(QPieSeries* self, intptr_t slot) {
-	QPieSeries::connect(self, static_cast<void (QPieSeries::*)()>(&QPieSeries::countChanged), self, [=]() {
+void* QPieSeries_connect_countChanged(QPieSeries* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QPieSeries>>(slot);
+	return new QMetaObject::Connection(QPieSeries::connect(self, static_cast<void (QPieSeries::*)()>(&QPieSeries::countChanged), self, [slot_handle]() {
+		intptr_t slot = slot_handle->value();
 		miqt_exec_callback_QPieSeries_countChanged(slot);
-	});
+	}));
 }
 
 void QPieSeries_sumChanged(QPieSeries* self) {
 	self->sumChanged();
 }
 
-void QPieSeries_connect_sumChanged(QPieSeries* self, intptr_t slot) {
-	QPieSeries::connect(self, static_cast<void (QPieSeries::*)()>(&QPieSeries::sumChanged), self, [=]() {
+void* QPieSeries_connect_sumChanged(QPieSeries* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QPieSeries>>(slot);
+	return new QMetaObject::Connection(QPieSeries::connect(self, static_cast<void (QPieSeries::*)()>(&QPieSeries::sumChanged), self, [slot_handle]() {
+		intptr_t slot = slot_handle->value();
 		miqt_exec_callback_QPieSeries_sumChanged(slot);
-	});
+	}));
 }
 
 struct miqt_string QPieSeries_tr2(const char* s, const char* c) {
@@ -511,12 +532,13 @@ void QPieSeries_setLabelsVisibleWithVisible(QPieSeries* self, bool visible) {
 }
 
 bool QPieSeries_override_virtual_type(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QPieSeries> slot_handle(slot);
 	MiqtVirtualQPieSeries* self_cast = dynamic_cast<MiqtVirtualQPieSeries*>( (QPieSeries*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__type = slot;
+	self_cast->handle__type = std::move(slot_handle);
 	return true;
 }
 
@@ -526,12 +548,13 @@ int QPieSeries_virtualbase_type(const void* self) {
 }
 
 bool QPieSeries_override_virtual_event(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QPieSeries> slot_handle(slot);
 	MiqtVirtualQPieSeries* self_cast = dynamic_cast<MiqtVirtualQPieSeries*>( (QPieSeries*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__event = slot;
+	self_cast->handle__event = std::move(slot_handle);
 	return true;
 }
 
@@ -540,12 +563,13 @@ bool QPieSeries_virtualbase_event(void* self, QEvent* event) {
 }
 
 bool QPieSeries_override_virtual_eventFilter(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QPieSeries> slot_handle(slot);
 	MiqtVirtualQPieSeries* self_cast = dynamic_cast<MiqtVirtualQPieSeries*>( (QPieSeries*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__eventFilter = slot;
+	self_cast->handle__eventFilter = std::move(slot_handle);
 	return true;
 }
 
@@ -554,12 +578,13 @@ bool QPieSeries_virtualbase_eventFilter(void* self, QObject* watched, QEvent* ev
 }
 
 bool QPieSeries_override_virtual_timerEvent(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QPieSeries> slot_handle(slot);
 	MiqtVirtualQPieSeries* self_cast = dynamic_cast<MiqtVirtualQPieSeries*>( (QPieSeries*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__timerEvent = slot;
+	self_cast->handle__timerEvent = std::move(slot_handle);
 	return true;
 }
 
@@ -568,12 +593,13 @@ void QPieSeries_virtualbase_timerEvent(void* self, QTimerEvent* event) {
 }
 
 bool QPieSeries_override_virtual_childEvent(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QPieSeries> slot_handle(slot);
 	MiqtVirtualQPieSeries* self_cast = dynamic_cast<MiqtVirtualQPieSeries*>( (QPieSeries*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__childEvent = slot;
+	self_cast->handle__childEvent = std::move(slot_handle);
 	return true;
 }
 
@@ -582,12 +608,13 @@ void QPieSeries_virtualbase_childEvent(void* self, QChildEvent* event) {
 }
 
 bool QPieSeries_override_virtual_customEvent(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QPieSeries> slot_handle(slot);
 	MiqtVirtualQPieSeries* self_cast = dynamic_cast<MiqtVirtualQPieSeries*>( (QPieSeries*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__customEvent = slot;
+	self_cast->handle__customEvent = std::move(slot_handle);
 	return true;
 }
 
@@ -596,12 +623,13 @@ void QPieSeries_virtualbase_customEvent(void* self, QEvent* event) {
 }
 
 bool QPieSeries_override_virtual_connectNotify(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QPieSeries> slot_handle(slot);
 	MiqtVirtualQPieSeries* self_cast = dynamic_cast<MiqtVirtualQPieSeries*>( (QPieSeries*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__connectNotify = slot;
+	self_cast->handle__connectNotify = std::move(slot_handle);
 	return true;
 }
 
@@ -610,12 +638,13 @@ void QPieSeries_virtualbase_connectNotify(void* self, QMetaMethod* signal) {
 }
 
 bool QPieSeries_override_virtual_disconnectNotify(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QPieSeries> slot_handle(slot);
 	MiqtVirtualQPieSeries* self_cast = dynamic_cast<MiqtVirtualQPieSeries*>( (QPieSeries*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__disconnectNotify = slot;
+	self_cast->handle__disconnectNotify = std::move(slot_handle);
 	return true;
 }
 

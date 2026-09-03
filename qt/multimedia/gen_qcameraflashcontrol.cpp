@@ -1,3 +1,5 @@
+#include <memory>
+#include <utility>
 #include <QCameraFlashControl>
 #include <QMediaControl>
 #include <QMetaMethod>
@@ -13,6 +15,7 @@
 extern "C" {
 #endif
 
+void miqt_exec_callback_handle_release_QCameraFlashControl(intptr_t);
 void miqt_exec_callback_QCameraFlashControl_flashReady(intptr_t, bool);
 #ifdef __cplusplus
 } /* extern C */
@@ -73,11 +76,13 @@ void QCameraFlashControl_flashReady(QCameraFlashControl* self, bool param1) {
 	self->flashReady(param1);
 }
 
-void QCameraFlashControl_connect_flashReady(QCameraFlashControl* self, intptr_t slot) {
-	QCameraFlashControl::connect(self, static_cast<void (QCameraFlashControl::*)(bool)>(&QCameraFlashControl::flashReady), self, [=](bool param1) {
+void* QCameraFlashControl_connect_flashReady(QCameraFlashControl* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QCameraFlashControl>>(slot);
+	return new QMetaObject::Connection(QCameraFlashControl::connect(self, static_cast<void (QCameraFlashControl::*)(bool)>(&QCameraFlashControl::flashReady), self, [slot_handle](bool param1) {
+		intptr_t slot = slot_handle->value();
 		bool sigval1 = param1;
 		miqt_exec_callback_QCameraFlashControl_flashReady(slot, sigval1);
-	});
+	}));
 }
 
 struct miqt_string QCameraFlashControl_tr2(const char* s, const char* c) {

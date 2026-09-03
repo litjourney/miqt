@@ -1,3 +1,5 @@
+#include <memory>
+#include <utility>
 #include <QDesignerDynamicPropertySheetExtension>
 #include <QString>
 #include <QByteArray>
@@ -10,6 +12,7 @@
 extern "C" {
 #endif
 
+void miqt_exec_callback_handle_release_QDesignerDynamicPropertySheetExtension(intptr_t);
 bool miqt_exec_callback_QDesignerDynamicPropertySheetExtension_dynamicPropertiesAllowed(const QDesignerDynamicPropertySheetExtension*, intptr_t);
 int miqt_exec_callback_QDesignerDynamicPropertySheetExtension_addDynamicProperty(QDesignerDynamicPropertySheetExtension*, intptr_t, struct miqt_string, QVariant*);
 bool miqt_exec_callback_QDesignerDynamicPropertySheetExtension_removeDynamicProperty(QDesignerDynamicPropertySheetExtension*, intptr_t, int);
@@ -27,24 +30,24 @@ public:
 	virtual ~MiqtVirtualQDesignerDynamicPropertySheetExtension() override = default;
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__dynamicPropertiesAllowed = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QDesignerDynamicPropertySheetExtension> handle__dynamicPropertiesAllowed;
 
 	// Subclass to allow providing a Go implementation
 	virtual bool dynamicPropertiesAllowed() const override {
-		if (handle__dynamicPropertiesAllowed == 0) {
+		if (!handle__dynamicPropertiesAllowed) {
 			return false; // Pure virtual, there is no base we can call
 		}
 
-		bool callback_return_value = miqt_exec_callback_QDesignerDynamicPropertySheetExtension_dynamicPropertiesAllowed(this, handle__dynamicPropertiesAllowed);
+		bool callback_return_value = miqt_exec_callback_QDesignerDynamicPropertySheetExtension_dynamicPropertiesAllowed(this, handle__dynamicPropertiesAllowed.value());
 		return callback_return_value;
 	}
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__addDynamicProperty = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QDesignerDynamicPropertySheetExtension> handle__addDynamicProperty;
 
 	// Subclass to allow providing a Go implementation
 	virtual int addDynamicProperty(const QString& propertyName, const QVariant& value) override {
-		if (handle__addDynamicProperty == 0) {
+		if (!handle__addDynamicProperty) {
 			return 0; // Pure virtual, there is no base we can call
 		}
 
@@ -59,44 +62,44 @@ public:
 		const QVariant& value_ret = value;
 		// Cast returned reference into pointer
 		QVariant* sigval2 = const_cast<QVariant*>(&value_ret);
-		int callback_return_value = miqt_exec_callback_QDesignerDynamicPropertySheetExtension_addDynamicProperty(this, handle__addDynamicProperty, sigval1, sigval2);
+		int callback_return_value = miqt_exec_callback_QDesignerDynamicPropertySheetExtension_addDynamicProperty(this, handle__addDynamicProperty.value(), sigval1, sigval2);
 		return static_cast<int>(callback_return_value);
 	}
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__removeDynamicProperty = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QDesignerDynamicPropertySheetExtension> handle__removeDynamicProperty;
 
 	// Subclass to allow providing a Go implementation
 	virtual bool removeDynamicProperty(int index) override {
-		if (handle__removeDynamicProperty == 0) {
+		if (!handle__removeDynamicProperty) {
 			return false; // Pure virtual, there is no base we can call
 		}
 
 		int sigval1 = index;
-		bool callback_return_value = miqt_exec_callback_QDesignerDynamicPropertySheetExtension_removeDynamicProperty(this, handle__removeDynamicProperty, sigval1);
+		bool callback_return_value = miqt_exec_callback_QDesignerDynamicPropertySheetExtension_removeDynamicProperty(this, handle__removeDynamicProperty.value(), sigval1);
 		return callback_return_value;
 	}
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__isDynamicProperty = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QDesignerDynamicPropertySheetExtension> handle__isDynamicProperty;
 
 	// Subclass to allow providing a Go implementation
 	virtual bool isDynamicProperty(int index) const override {
-		if (handle__isDynamicProperty == 0) {
+		if (!handle__isDynamicProperty) {
 			return false; // Pure virtual, there is no base we can call
 		}
 
 		int sigval1 = index;
-		bool callback_return_value = miqt_exec_callback_QDesignerDynamicPropertySheetExtension_isDynamicProperty(this, handle__isDynamicProperty, sigval1);
+		bool callback_return_value = miqt_exec_callback_QDesignerDynamicPropertySheetExtension_isDynamicProperty(this, handle__isDynamicProperty.value(), sigval1);
 		return callback_return_value;
 	}
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__canAddDynamicProperty = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QDesignerDynamicPropertySheetExtension> handle__canAddDynamicProperty;
 
 	// Subclass to allow providing a Go implementation
 	virtual bool canAddDynamicProperty(const QString& propertyName) const override {
-		if (handle__canAddDynamicProperty == 0) {
+		if (!handle__canAddDynamicProperty) {
 			return false; // Pure virtual, there is no base we can call
 		}
 
@@ -108,7 +111,7 @@ public:
 		propertyName_ms.data = static_cast<char*>(malloc(propertyName_ms.len));
 		memcpy(propertyName_ms.data, propertyName_b.data(), propertyName_ms.len);
 		struct miqt_string sigval1 = propertyName_ms;
-		bool callback_return_value = miqt_exec_callback_QDesignerDynamicPropertySheetExtension_canAddDynamicProperty(this, handle__canAddDynamicProperty, sigval1);
+		bool callback_return_value = miqt_exec_callback_QDesignerDynamicPropertySheetExtension_canAddDynamicProperty(this, handle__canAddDynamicProperty.value(), sigval1);
 		return callback_return_value;
 	}
 
@@ -141,52 +144,57 @@ bool QDesignerDynamicPropertySheetExtension_canAddDynamicProperty(const QDesigne
 }
 
 bool QDesignerDynamicPropertySheetExtension_override_virtual_dynamicPropertiesAllowed(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QDesignerDynamicPropertySheetExtension> slot_handle(slot);
 	MiqtVirtualQDesignerDynamicPropertySheetExtension* self_cast = dynamic_cast<MiqtVirtualQDesignerDynamicPropertySheetExtension*>( (QDesignerDynamicPropertySheetExtension*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__dynamicPropertiesAllowed = slot;
+	self_cast->handle__dynamicPropertiesAllowed = std::move(slot_handle);
 	return true;
 }
 
 bool QDesignerDynamicPropertySheetExtension_override_virtual_addDynamicProperty(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QDesignerDynamicPropertySheetExtension> slot_handle(slot);
 	MiqtVirtualQDesignerDynamicPropertySheetExtension* self_cast = dynamic_cast<MiqtVirtualQDesignerDynamicPropertySheetExtension*>( (QDesignerDynamicPropertySheetExtension*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__addDynamicProperty = slot;
+	self_cast->handle__addDynamicProperty = std::move(slot_handle);
 	return true;
 }
 
 bool QDesignerDynamicPropertySheetExtension_override_virtual_removeDynamicProperty(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QDesignerDynamicPropertySheetExtension> slot_handle(slot);
 	MiqtVirtualQDesignerDynamicPropertySheetExtension* self_cast = dynamic_cast<MiqtVirtualQDesignerDynamicPropertySheetExtension*>( (QDesignerDynamicPropertySheetExtension*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__removeDynamicProperty = slot;
+	self_cast->handle__removeDynamicProperty = std::move(slot_handle);
 	return true;
 }
 
 bool QDesignerDynamicPropertySheetExtension_override_virtual_isDynamicProperty(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QDesignerDynamicPropertySheetExtension> slot_handle(slot);
 	MiqtVirtualQDesignerDynamicPropertySheetExtension* self_cast = dynamic_cast<MiqtVirtualQDesignerDynamicPropertySheetExtension*>( (QDesignerDynamicPropertySheetExtension*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__isDynamicProperty = slot;
+	self_cast->handle__isDynamicProperty = std::move(slot_handle);
 	return true;
 }
 
 bool QDesignerDynamicPropertySheetExtension_override_virtual_canAddDynamicProperty(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QDesignerDynamicPropertySheetExtension> slot_handle(slot);
 	MiqtVirtualQDesignerDynamicPropertySheetExtension* self_cast = dynamic_cast<MiqtVirtualQDesignerDynamicPropertySheetExtension*>( (QDesignerDynamicPropertySheetExtension*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__canAddDynamicProperty = slot;
+	self_cast->handle__canAddDynamicProperty = std::move(slot_handle);
 	return true;
 }
 

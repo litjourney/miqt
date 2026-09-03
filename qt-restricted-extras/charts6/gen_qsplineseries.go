@@ -15,6 +15,11 @@ import (
 	"unsafe"
 )
 
+//export miqt_exec_callback_handle_release_QSplineSeries
+func miqt_exec_callback_handle_release_QSplineSeries(cb C.intptr_t) {
+	cgo.Handle(cb).Delete()
+}
+
 type QSplineSeries struct {
 	h *C.QSplineSeries
 	*QLineSeries
@@ -172,7 +177,11 @@ func (this *QSplineSeries) callVirtualBase_Type() QAbstractSeries__SeriesType {
 
 }
 func (this *QSplineSeries) OnType(slot func(super func() QAbstractSeries__SeriesType) QAbstractSeries__SeriesType) {
-	ok := C.QSplineSeries_override_virtual_type(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QSplineSeries_override_virtual_type(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -197,7 +206,11 @@ func (this *QSplineSeries) callVirtualBase_SetPen(pen *qt6.QPen) {
 
 }
 func (this *QSplineSeries) OnSetPen(slot func(super func(pen *qt6.QPen), pen *qt6.QPen)) {
-	ok := C.QSplineSeries_override_virtual_setPen(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QSplineSeries_override_virtual_setPen(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -223,7 +236,11 @@ func (this *QSplineSeries) callVirtualBase_SetBrush(brush *qt6.QBrush) {
 
 }
 func (this *QSplineSeries) OnSetBrush(slot func(super func(brush *qt6.QBrush), brush *qt6.QBrush)) {
-	ok := C.QSplineSeries_override_virtual_setBrush(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QSplineSeries_override_virtual_setBrush(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -249,7 +266,11 @@ func (this *QSplineSeries) callVirtualBase_SetColor(color *qt6.QColor) {
 
 }
 func (this *QSplineSeries) OnSetColor(slot func(super func(color *qt6.QColor), color *qt6.QColor)) {
-	ok := C.QSplineSeries_override_virtual_setColor(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QSplineSeries_override_virtual_setColor(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -277,7 +298,11 @@ func (this *QSplineSeries) callVirtualBase_Color() *qt6.QColor {
 
 }
 func (this *QSplineSeries) OnColor(slot func(super func() *qt6.QColor) *qt6.QColor) {
-	ok := C.QSplineSeries_override_virtual_color(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QSplineSeries_override_virtual_color(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -302,7 +327,11 @@ func (this *QSplineSeries) callVirtualBase_Event(event *qt6.QEvent) bool {
 
 }
 func (this *QSplineSeries) OnEvent(slot func(super func(event *qt6.QEvent) bool, event *qt6.QEvent) bool) {
-	ok := C.QSplineSeries_override_virtual_event(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QSplineSeries_override_virtual_event(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -330,7 +359,11 @@ func (this *QSplineSeries) callVirtualBase_EventFilter(watched *qt6.QObject, eve
 
 }
 func (this *QSplineSeries) OnEventFilter(slot func(super func(watched *qt6.QObject, event *qt6.QEvent) bool, watched *qt6.QObject, event *qt6.QEvent) bool) {
-	ok := C.QSplineSeries_override_virtual_eventFilter(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QSplineSeries_override_virtual_eventFilter(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -360,7 +393,11 @@ func (this *QSplineSeries) callVirtualBase_TimerEvent(event *qt6.QTimerEvent) {
 
 }
 func (this *QSplineSeries) OnTimerEvent(slot func(super func(event *qt6.QTimerEvent), event *qt6.QTimerEvent)) {
-	ok := C.QSplineSeries_override_virtual_timerEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QSplineSeries_override_virtual_timerEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -386,7 +423,11 @@ func (this *QSplineSeries) callVirtualBase_ChildEvent(event *qt6.QChildEvent) {
 
 }
 func (this *QSplineSeries) OnChildEvent(slot func(super func(event *qt6.QChildEvent), event *qt6.QChildEvent)) {
-	ok := C.QSplineSeries_override_virtual_childEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QSplineSeries_override_virtual_childEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -412,7 +453,11 @@ func (this *QSplineSeries) callVirtualBase_CustomEvent(event *qt6.QEvent) {
 
 }
 func (this *QSplineSeries) OnCustomEvent(slot func(super func(event *qt6.QEvent), event *qt6.QEvent)) {
-	ok := C.QSplineSeries_override_virtual_customEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QSplineSeries_override_virtual_customEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -438,7 +483,11 @@ func (this *QSplineSeries) callVirtualBase_ConnectNotify(signal *qt6.QMetaMethod
 
 }
 func (this *QSplineSeries) OnConnectNotify(slot func(super func(signal *qt6.QMetaMethod), signal *qt6.QMetaMethod)) {
-	ok := C.QSplineSeries_override_virtual_connectNotify(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QSplineSeries_override_virtual_connectNotify(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -464,7 +513,11 @@ func (this *QSplineSeries) callVirtualBase_DisconnectNotify(signal *qt6.QMetaMet
 
 }
 func (this *QSplineSeries) OnDisconnectNotify(slot func(super func(signal *qt6.QMetaMethod), signal *qt6.QMetaMethod)) {
-	ok := C.QSplineSeries_override_virtual_disconnectNotify(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QSplineSeries_override_virtual_disconnectNotify(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}

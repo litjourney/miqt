@@ -1,3 +1,5 @@
+#include <memory>
+#include <utility>
 #include <QApplication>
 #include <QChildEvent>
 #include <QCommonStyle>
@@ -30,6 +32,7 @@
 extern "C" {
 #endif
 
+void miqt_exec_callback_handle_release_QProxyStyle(intptr_t);
 void miqt_exec_callback_QProxyStyle_drawPrimitive(const QProxyStyle*, intptr_t, int, QStyleOption*, QPainter*, QWidget*);
 void miqt_exec_callback_QProxyStyle_drawControl(const QProxyStyle*, intptr_t, int, QStyleOption*, QPainter*, QWidget*);
 void miqt_exec_callback_QProxyStyle_drawComplexControl(const QProxyStyle*, intptr_t, int, QStyleOptionComplex*, QPainter*, QWidget*);
@@ -74,11 +77,11 @@ public:
 	virtual ~MiqtVirtualQProxyStyle() override = default;
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__drawPrimitive = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QProxyStyle> handle__drawPrimitive;
 
 	// Subclass to allow providing a Go implementation
 	virtual void drawPrimitive(QStyle::PrimitiveElement element, const QStyleOption* option, QPainter* painter, const QWidget* widget) const override {
-		if (handle__drawPrimitive == 0) {
+		if (!handle__drawPrimitive) {
 			QProxyStyle::drawPrimitive(element, option, painter, widget);
 			return;
 		}
@@ -88,18 +91,18 @@ public:
 		QStyleOption* sigval2 = (QStyleOption*) option;
 		QPainter* sigval3 = painter;
 		QWidget* sigval4 = (QWidget*) widget;
-		miqt_exec_callback_QProxyStyle_drawPrimitive(this, handle__drawPrimitive, sigval1, sigval2, sigval3, sigval4);
+		miqt_exec_callback_QProxyStyle_drawPrimitive(this, handle__drawPrimitive.value(), sigval1, sigval2, sigval3, sigval4);
 
 	}
 
 	friend void QProxyStyle_virtualbase_drawPrimitive(const void* self, int element, QStyleOption* option, QPainter* painter, QWidget* widget);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__drawControl = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QProxyStyle> handle__drawControl;
 
 	// Subclass to allow providing a Go implementation
 	virtual void drawControl(QStyle::ControlElement element, const QStyleOption* option, QPainter* painter, const QWidget* widget) const override {
-		if (handle__drawControl == 0) {
+		if (!handle__drawControl) {
 			QProxyStyle::drawControl(element, option, painter, widget);
 			return;
 		}
@@ -109,18 +112,18 @@ public:
 		QStyleOption* sigval2 = (QStyleOption*) option;
 		QPainter* sigval3 = painter;
 		QWidget* sigval4 = (QWidget*) widget;
-		miqt_exec_callback_QProxyStyle_drawControl(this, handle__drawControl, sigval1, sigval2, sigval3, sigval4);
+		miqt_exec_callback_QProxyStyle_drawControl(this, handle__drawControl.value(), sigval1, sigval2, sigval3, sigval4);
 
 	}
 
 	friend void QProxyStyle_virtualbase_drawControl(const void* self, int element, QStyleOption* option, QPainter* painter, QWidget* widget);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__drawComplexControl = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QProxyStyle> handle__drawComplexControl;
 
 	// Subclass to allow providing a Go implementation
 	virtual void drawComplexControl(QStyle::ComplexControl control, const QStyleOptionComplex* option, QPainter* painter, const QWidget* widget) const override {
-		if (handle__drawComplexControl == 0) {
+		if (!handle__drawComplexControl) {
 			QProxyStyle::drawComplexControl(control, option, painter, widget);
 			return;
 		}
@@ -130,18 +133,18 @@ public:
 		QStyleOptionComplex* sigval2 = (QStyleOptionComplex*) option;
 		QPainter* sigval3 = painter;
 		QWidget* sigval4 = (QWidget*) widget;
-		miqt_exec_callback_QProxyStyle_drawComplexControl(this, handle__drawComplexControl, sigval1, sigval2, sigval3, sigval4);
+		miqt_exec_callback_QProxyStyle_drawComplexControl(this, handle__drawComplexControl.value(), sigval1, sigval2, sigval3, sigval4);
 
 	}
 
 	friend void QProxyStyle_virtualbase_drawComplexControl(const void* self, int control, QStyleOptionComplex* option, QPainter* painter, QWidget* widget);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__drawItemText = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QProxyStyle> handle__drawItemText;
 
 	// Subclass to allow providing a Go implementation
 	virtual void drawItemText(QPainter* painter, const QRect& rect, int flags, const QPalette& pal, bool enabled, const QString& text, QPalette::ColorRole textRole) const override {
-		if (handle__drawItemText == 0) {
+		if (!handle__drawItemText) {
 			QProxyStyle::drawItemText(painter, rect, flags, pal, enabled, text, textRole);
 			return;
 		}
@@ -165,18 +168,18 @@ public:
 		struct miqt_string sigval6 = text_ms;
 		QPalette::ColorRole textRole_ret = textRole;
 		int sigval7 = static_cast<int>(textRole_ret);
-		miqt_exec_callback_QProxyStyle_drawItemText(this, handle__drawItemText, sigval1, sigval2, sigval3, sigval4, sigval5, sigval6, sigval7);
+		miqt_exec_callback_QProxyStyle_drawItemText(this, handle__drawItemText.value(), sigval1, sigval2, sigval3, sigval4, sigval5, sigval6, sigval7);
 
 	}
 
 	friend void QProxyStyle_virtualbase_drawItemText(const void* self, QPainter* painter, QRect* rect, int flags, QPalette* pal, bool enabled, struct miqt_string text, int textRole);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__drawItemPixmap = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QProxyStyle> handle__drawItemPixmap;
 
 	// Subclass to allow providing a Go implementation
 	virtual void drawItemPixmap(QPainter* painter, const QRect& rect, int alignment, const QPixmap& pixmap) const override {
-		if (handle__drawItemPixmap == 0) {
+		if (!handle__drawItemPixmap) {
 			QProxyStyle::drawItemPixmap(painter, rect, alignment, pixmap);
 			return;
 		}
@@ -189,18 +192,18 @@ public:
 		const QPixmap& pixmap_ret = pixmap;
 		// Cast returned reference into pointer
 		QPixmap* sigval4 = const_cast<QPixmap*>(&pixmap_ret);
-		miqt_exec_callback_QProxyStyle_drawItemPixmap(this, handle__drawItemPixmap, sigval1, sigval2, sigval3, sigval4);
+		miqt_exec_callback_QProxyStyle_drawItemPixmap(this, handle__drawItemPixmap.value(), sigval1, sigval2, sigval3, sigval4);
 
 	}
 
 	friend void QProxyStyle_virtualbase_drawItemPixmap(const void* self, QPainter* painter, QRect* rect, int alignment, QPixmap* pixmap);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__sizeFromContents = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QProxyStyle> handle__sizeFromContents;
 
 	// Subclass to allow providing a Go implementation
 	virtual QSize sizeFromContents(QStyle::ContentsType type, const QStyleOption* option, const QSize& size, const QWidget* widget) const override {
-		if (handle__sizeFromContents == 0) {
+		if (!handle__sizeFromContents) {
 			return QProxyStyle::sizeFromContents(type, option, size, widget);
 		}
 
@@ -211,18 +214,18 @@ public:
 		// Cast returned reference into pointer
 		QSize* sigval3 = const_cast<QSize*>(&size_ret);
 		QWidget* sigval4 = (QWidget*) widget;
-		QSize* callback_return_value = miqt_exec_callback_QProxyStyle_sizeFromContents(this, handle__sizeFromContents, sigval1, sigval2, sigval3, sigval4);
+		QSize* callback_return_value = miqt_exec_callback_QProxyStyle_sizeFromContents(this, handle__sizeFromContents.value(), sigval1, sigval2, sigval3, sigval4);
 		return *callback_return_value;
 	}
 
 	friend QSize* QProxyStyle_virtualbase_sizeFromContents(const void* self, int type, QStyleOption* option, QSize* size, QWidget* widget);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__subElementRect = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QProxyStyle> handle__subElementRect;
 
 	// Subclass to allow providing a Go implementation
 	virtual QRect subElementRect(QStyle::SubElement element, const QStyleOption* option, const QWidget* widget) const override {
-		if (handle__subElementRect == 0) {
+		if (!handle__subElementRect) {
 			return QProxyStyle::subElementRect(element, option, widget);
 		}
 
@@ -230,18 +233,18 @@ public:
 		int sigval1 = static_cast<int>(element_ret);
 		QStyleOption* sigval2 = (QStyleOption*) option;
 		QWidget* sigval3 = (QWidget*) widget;
-		QRect* callback_return_value = miqt_exec_callback_QProxyStyle_subElementRect(this, handle__subElementRect, sigval1, sigval2, sigval3);
+		QRect* callback_return_value = miqt_exec_callback_QProxyStyle_subElementRect(this, handle__subElementRect.value(), sigval1, sigval2, sigval3);
 		return *callback_return_value;
 	}
 
 	friend QRect* QProxyStyle_virtualbase_subElementRect(const void* self, int element, QStyleOption* option, QWidget* widget);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__subControlRect = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QProxyStyle> handle__subControlRect;
 
 	// Subclass to allow providing a Go implementation
 	virtual QRect subControlRect(QStyle::ComplexControl cc, const QStyleOptionComplex* opt, QStyle::SubControl sc, const QWidget* widget) const override {
-		if (handle__subControlRect == 0) {
+		if (!handle__subControlRect) {
 			return QProxyStyle::subControlRect(cc, opt, sc, widget);
 		}
 
@@ -251,18 +254,18 @@ public:
 		QStyle::SubControl sc_ret = sc;
 		int sigval3 = static_cast<int>(sc_ret);
 		QWidget* sigval4 = (QWidget*) widget;
-		QRect* callback_return_value = miqt_exec_callback_QProxyStyle_subControlRect(this, handle__subControlRect, sigval1, sigval2, sigval3, sigval4);
+		QRect* callback_return_value = miqt_exec_callback_QProxyStyle_subControlRect(this, handle__subControlRect.value(), sigval1, sigval2, sigval3, sigval4);
 		return *callback_return_value;
 	}
 
 	friend QRect* QProxyStyle_virtualbase_subControlRect(const void* self, int cc, QStyleOptionComplex* opt, int sc, QWidget* widget);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__itemTextRect = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QProxyStyle> handle__itemTextRect;
 
 	// Subclass to allow providing a Go implementation
 	virtual QRect itemTextRect(const QFontMetrics& fm, const QRect& r, int flags, bool enabled, const QString& text) const override {
-		if (handle__itemTextRect == 0) {
+		if (!handle__itemTextRect) {
 			return QProxyStyle::itemTextRect(fm, r, flags, enabled, text);
 		}
 
@@ -282,18 +285,18 @@ public:
 		text_ms.data = static_cast<char*>(malloc(text_ms.len));
 		memcpy(text_ms.data, text_b.data(), text_ms.len);
 		struct miqt_string sigval5 = text_ms;
-		QRect* callback_return_value = miqt_exec_callback_QProxyStyle_itemTextRect(this, handle__itemTextRect, sigval1, sigval2, sigval3, sigval4, sigval5);
+		QRect* callback_return_value = miqt_exec_callback_QProxyStyle_itemTextRect(this, handle__itemTextRect.value(), sigval1, sigval2, sigval3, sigval4, sigval5);
 		return *callback_return_value;
 	}
 
 	friend QRect* QProxyStyle_virtualbase_itemTextRect(const void* self, QFontMetrics* fm, QRect* r, int flags, bool enabled, struct miqt_string text);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__itemPixmapRect = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QProxyStyle> handle__itemPixmapRect;
 
 	// Subclass to allow providing a Go implementation
 	virtual QRect itemPixmapRect(const QRect& r, int flags, const QPixmap& pixmap) const override {
-		if (handle__itemPixmapRect == 0) {
+		if (!handle__itemPixmapRect) {
 			return QProxyStyle::itemPixmapRect(r, flags, pixmap);
 		}
 
@@ -304,18 +307,18 @@ public:
 		const QPixmap& pixmap_ret = pixmap;
 		// Cast returned reference into pointer
 		QPixmap* sigval3 = const_cast<QPixmap*>(&pixmap_ret);
-		QRect* callback_return_value = miqt_exec_callback_QProxyStyle_itemPixmapRect(this, handle__itemPixmapRect, sigval1, sigval2, sigval3);
+		QRect* callback_return_value = miqt_exec_callback_QProxyStyle_itemPixmapRect(this, handle__itemPixmapRect.value(), sigval1, sigval2, sigval3);
 		return *callback_return_value;
 	}
 
 	friend QRect* QProxyStyle_virtualbase_itemPixmapRect(const void* self, QRect* r, int flags, QPixmap* pixmap);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__hitTestComplexControl = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QProxyStyle> handle__hitTestComplexControl;
 
 	// Subclass to allow providing a Go implementation
 	virtual QStyle::SubControl hitTestComplexControl(QStyle::ComplexControl control, const QStyleOptionComplex* option, const QPoint& pos, const QWidget* widget) const override {
-		if (handle__hitTestComplexControl == 0) {
+		if (!handle__hitTestComplexControl) {
 			return QProxyStyle::hitTestComplexControl(control, option, pos, widget);
 		}
 
@@ -326,18 +329,18 @@ public:
 		// Cast returned reference into pointer
 		QPoint* sigval3 = const_cast<QPoint*>(&pos_ret);
 		QWidget* sigval4 = (QWidget*) widget;
-		int callback_return_value = miqt_exec_callback_QProxyStyle_hitTestComplexControl(this, handle__hitTestComplexControl, sigval1, sigval2, sigval3, sigval4);
+		int callback_return_value = miqt_exec_callback_QProxyStyle_hitTestComplexControl(this, handle__hitTestComplexControl.value(), sigval1, sigval2, sigval3, sigval4);
 		return static_cast<QStyle::SubControl>(callback_return_value);
 	}
 
 	friend int QProxyStyle_virtualbase_hitTestComplexControl(const void* self, int control, QStyleOptionComplex* option, QPoint* pos, QWidget* widget);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__styleHint = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QProxyStyle> handle__styleHint;
 
 	// Subclass to allow providing a Go implementation
 	virtual int styleHint(QStyle::StyleHint hint, const QStyleOption* option, const QWidget* widget, QStyleHintReturn* returnData) const override {
-		if (handle__styleHint == 0) {
+		if (!handle__styleHint) {
 			return QProxyStyle::styleHint(hint, option, widget, returnData);
 		}
 
@@ -346,18 +349,18 @@ public:
 		QStyleOption* sigval2 = (QStyleOption*) option;
 		QWidget* sigval3 = (QWidget*) widget;
 		QStyleHintReturn* sigval4 = returnData;
-		int callback_return_value = miqt_exec_callback_QProxyStyle_styleHint(this, handle__styleHint, sigval1, sigval2, sigval3, sigval4);
+		int callback_return_value = miqt_exec_callback_QProxyStyle_styleHint(this, handle__styleHint.value(), sigval1, sigval2, sigval3, sigval4);
 		return static_cast<int>(callback_return_value);
 	}
 
 	friend int QProxyStyle_virtualbase_styleHint(const void* self, int hint, QStyleOption* option, QWidget* widget, QStyleHintReturn* returnData);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__pixelMetric = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QProxyStyle> handle__pixelMetric;
 
 	// Subclass to allow providing a Go implementation
 	virtual int pixelMetric(QStyle::PixelMetric metric, const QStyleOption* option, const QWidget* widget) const override {
-		if (handle__pixelMetric == 0) {
+		if (!handle__pixelMetric) {
 			return QProxyStyle::pixelMetric(metric, option, widget);
 		}
 
@@ -365,18 +368,18 @@ public:
 		int sigval1 = static_cast<int>(metric_ret);
 		QStyleOption* sigval2 = (QStyleOption*) option;
 		QWidget* sigval3 = (QWidget*) widget;
-		int callback_return_value = miqt_exec_callback_QProxyStyle_pixelMetric(this, handle__pixelMetric, sigval1, sigval2, sigval3);
+		int callback_return_value = miqt_exec_callback_QProxyStyle_pixelMetric(this, handle__pixelMetric.value(), sigval1, sigval2, sigval3);
 		return static_cast<int>(callback_return_value);
 	}
 
 	friend int QProxyStyle_virtualbase_pixelMetric(const void* self, int metric, QStyleOption* option, QWidget* widget);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__layoutSpacing = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QProxyStyle> handle__layoutSpacing;
 
 	// Subclass to allow providing a Go implementation
 	virtual int layoutSpacing(QSizePolicy::ControlType control1, QSizePolicy::ControlType control2, Qt::Orientation orientation, const QStyleOption* option, const QWidget* widget) const override {
-		if (handle__layoutSpacing == 0) {
+		if (!handle__layoutSpacing) {
 			return QProxyStyle::layoutSpacing(control1, control2, orientation, option, widget);
 		}
 
@@ -388,18 +391,18 @@ public:
 		int sigval3 = static_cast<int>(orientation_ret);
 		QStyleOption* sigval4 = (QStyleOption*) option;
 		QWidget* sigval5 = (QWidget*) widget;
-		int callback_return_value = miqt_exec_callback_QProxyStyle_layoutSpacing(this, handle__layoutSpacing, sigval1, sigval2, sigval3, sigval4, sigval5);
+		int callback_return_value = miqt_exec_callback_QProxyStyle_layoutSpacing(this, handle__layoutSpacing.value(), sigval1, sigval2, sigval3, sigval4, sigval5);
 		return static_cast<int>(callback_return_value);
 	}
 
 	friend int QProxyStyle_virtualbase_layoutSpacing(const void* self, int control1, int control2, int orientation, QStyleOption* option, QWidget* widget);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__standardIcon = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QProxyStyle> handle__standardIcon;
 
 	// Subclass to allow providing a Go implementation
 	virtual QIcon standardIcon(QStyle::StandardPixmap standardIcon, const QStyleOption* option, const QWidget* widget) const override {
-		if (handle__standardIcon == 0) {
+		if (!handle__standardIcon) {
 			return QProxyStyle::standardIcon(standardIcon, option, widget);
 		}
 
@@ -407,18 +410,18 @@ public:
 		int sigval1 = static_cast<int>(standardIcon_ret);
 		QStyleOption* sigval2 = (QStyleOption*) option;
 		QWidget* sigval3 = (QWidget*) widget;
-		QIcon* callback_return_value = miqt_exec_callback_QProxyStyle_standardIcon(this, handle__standardIcon, sigval1, sigval2, sigval3);
+		QIcon* callback_return_value = miqt_exec_callback_QProxyStyle_standardIcon(this, handle__standardIcon.value(), sigval1, sigval2, sigval3);
 		return *callback_return_value;
 	}
 
 	friend QIcon* QProxyStyle_virtualbase_standardIcon(const void* self, int standardIcon, QStyleOption* option, QWidget* widget);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__standardPixmap = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QProxyStyle> handle__standardPixmap;
 
 	// Subclass to allow providing a Go implementation
 	virtual QPixmap standardPixmap(QStyle::StandardPixmap standardPixmap, const QStyleOption* opt, const QWidget* widget) const override {
-		if (handle__standardPixmap == 0) {
+		if (!handle__standardPixmap) {
 			return QProxyStyle::standardPixmap(standardPixmap, opt, widget);
 		}
 
@@ -426,18 +429,18 @@ public:
 		int sigval1 = static_cast<int>(standardPixmap_ret);
 		QStyleOption* sigval2 = (QStyleOption*) opt;
 		QWidget* sigval3 = (QWidget*) widget;
-		QPixmap* callback_return_value = miqt_exec_callback_QProxyStyle_standardPixmap(this, handle__standardPixmap, sigval1, sigval2, sigval3);
+		QPixmap* callback_return_value = miqt_exec_callback_QProxyStyle_standardPixmap(this, handle__standardPixmap.value(), sigval1, sigval2, sigval3);
 		return *callback_return_value;
 	}
 
 	friend QPixmap* QProxyStyle_virtualbase_standardPixmap(const void* self, int standardPixmap, QStyleOption* opt, QWidget* widget);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__generatedIconPixmap = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QProxyStyle> handle__generatedIconPixmap;
 
 	// Subclass to allow providing a Go implementation
 	virtual QPixmap generatedIconPixmap(QIcon::Mode iconMode, const QPixmap& pixmap, const QStyleOption* opt) const override {
-		if (handle__generatedIconPixmap == 0) {
+		if (!handle__generatedIconPixmap) {
 			return QProxyStyle::generatedIconPixmap(iconMode, pixmap, opt);
 		}
 
@@ -447,50 +450,50 @@ public:
 		// Cast returned reference into pointer
 		QPixmap* sigval2 = const_cast<QPixmap*>(&pixmap_ret);
 		QStyleOption* sigval3 = (QStyleOption*) opt;
-		QPixmap* callback_return_value = miqt_exec_callback_QProxyStyle_generatedIconPixmap(this, handle__generatedIconPixmap, sigval1, sigval2, sigval3);
+		QPixmap* callback_return_value = miqt_exec_callback_QProxyStyle_generatedIconPixmap(this, handle__generatedIconPixmap.value(), sigval1, sigval2, sigval3);
 		return *callback_return_value;
 	}
 
 	friend QPixmap* QProxyStyle_virtualbase_generatedIconPixmap(const void* self, int iconMode, QPixmap* pixmap, QStyleOption* opt);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__standardPalette = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QProxyStyle> handle__standardPalette;
 
 	// Subclass to allow providing a Go implementation
 	virtual QPalette standardPalette() const override {
-		if (handle__standardPalette == 0) {
+		if (!handle__standardPalette) {
 			return QProxyStyle::standardPalette();
 		}
 
-		QPalette* callback_return_value = miqt_exec_callback_QProxyStyle_standardPalette(this, handle__standardPalette);
+		QPalette* callback_return_value = miqt_exec_callback_QProxyStyle_standardPalette(this, handle__standardPalette.value());
 		return *callback_return_value;
 	}
 
 	friend QPalette* QProxyStyle_virtualbase_standardPalette(const void* self);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__polish = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QProxyStyle> handle__polish;
 
 	// Subclass to allow providing a Go implementation
 	virtual void polish(QWidget* widget) override {
-		if (handle__polish == 0) {
+		if (!handle__polish) {
 			QProxyStyle::polish(widget);
 			return;
 		}
 
 		QWidget* sigval1 = widget;
-		miqt_exec_callback_QProxyStyle_polish(this, handle__polish, sigval1);
+		miqt_exec_callback_QProxyStyle_polish(this, handle__polish.value(), sigval1);
 
 	}
 
 	friend void QProxyStyle_virtualbase_polish(void* self, QWidget* widget);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__polishWithPal = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QProxyStyle> handle__polishWithPal;
 
 	// Subclass to allow providing a Go implementation
 	virtual void polish(QPalette& pal) override {
-		if (handle__polishWithPal == 0) {
+		if (!handle__polishWithPal) {
 			QProxyStyle::polish(pal);
 			return;
 		}
@@ -498,153 +501,153 @@ public:
 		QPalette& pal_ret = pal;
 		// Cast returned reference into pointer
 		QPalette* sigval1 = &pal_ret;
-		miqt_exec_callback_QProxyStyle_polishWithPal(this, handle__polishWithPal, sigval1);
+		miqt_exec_callback_QProxyStyle_polishWithPal(this, handle__polishWithPal.value(), sigval1);
 
 	}
 
 	friend void QProxyStyle_virtualbase_polishWithPal(void* self, QPalette* pal);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__polishWithApp = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QProxyStyle> handle__polishWithApp;
 
 	// Subclass to allow providing a Go implementation
 	virtual void polish(QApplication* app) override {
-		if (handle__polishWithApp == 0) {
+		if (!handle__polishWithApp) {
 			QProxyStyle::polish(app);
 			return;
 		}
 
 		QApplication* sigval1 = app;
-		miqt_exec_callback_QProxyStyle_polishWithApp(this, handle__polishWithApp, sigval1);
+		miqt_exec_callback_QProxyStyle_polishWithApp(this, handle__polishWithApp.value(), sigval1);
 
 	}
 
 	friend void QProxyStyle_virtualbase_polishWithApp(void* self, QApplication* app);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__unpolish = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QProxyStyle> handle__unpolish;
 
 	// Subclass to allow providing a Go implementation
 	virtual void unpolish(QWidget* widget) override {
-		if (handle__unpolish == 0) {
+		if (!handle__unpolish) {
 			QProxyStyle::unpolish(widget);
 			return;
 		}
 
 		QWidget* sigval1 = widget;
-		miqt_exec_callback_QProxyStyle_unpolish(this, handle__unpolish, sigval1);
+		miqt_exec_callback_QProxyStyle_unpolish(this, handle__unpolish.value(), sigval1);
 
 	}
 
 	friend void QProxyStyle_virtualbase_unpolish(void* self, QWidget* widget);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__unpolishWithApp = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QProxyStyle> handle__unpolishWithApp;
 
 	// Subclass to allow providing a Go implementation
 	virtual void unpolish(QApplication* app) override {
-		if (handle__unpolishWithApp == 0) {
+		if (!handle__unpolishWithApp) {
 			QProxyStyle::unpolish(app);
 			return;
 		}
 
 		QApplication* sigval1 = app;
-		miqt_exec_callback_QProxyStyle_unpolishWithApp(this, handle__unpolishWithApp, sigval1);
+		miqt_exec_callback_QProxyStyle_unpolishWithApp(this, handle__unpolishWithApp.value(), sigval1);
 
 	}
 
 	friend void QProxyStyle_virtualbase_unpolishWithApp(void* self, QApplication* app);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__event = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QProxyStyle> handle__event;
 
 	// Subclass to allow providing a Go implementation
 	virtual bool event(QEvent* e) override {
-		if (handle__event == 0) {
+		if (!handle__event) {
 			return QProxyStyle::event(e);
 		}
 
 		QEvent* sigval1 = e;
-		bool callback_return_value = miqt_exec_callback_QProxyStyle_event(this, handle__event, sigval1);
+		bool callback_return_value = miqt_exec_callback_QProxyStyle_event(this, handle__event.value(), sigval1);
 		return callback_return_value;
 	}
 
 	friend bool QProxyStyle_virtualbase_event(void* self, QEvent* e);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__eventFilter = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QProxyStyle> handle__eventFilter;
 
 	// Subclass to allow providing a Go implementation
 	virtual bool eventFilter(QObject* watched, QEvent* event) override {
-		if (handle__eventFilter == 0) {
+		if (!handle__eventFilter) {
 			return QProxyStyle::eventFilter(watched, event);
 		}
 
 		QObject* sigval1 = watched;
 		QEvent* sigval2 = event;
-		bool callback_return_value = miqt_exec_callback_QProxyStyle_eventFilter(this, handle__eventFilter, sigval1, sigval2);
+		bool callback_return_value = miqt_exec_callback_QProxyStyle_eventFilter(this, handle__eventFilter.value(), sigval1, sigval2);
 		return callback_return_value;
 	}
 
 	friend bool QProxyStyle_virtualbase_eventFilter(void* self, QObject* watched, QEvent* event);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__timerEvent = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QProxyStyle> handle__timerEvent;
 
 	// Subclass to allow providing a Go implementation
 	virtual void timerEvent(QTimerEvent* event) override {
-		if (handle__timerEvent == 0) {
+		if (!handle__timerEvent) {
 			QProxyStyle::timerEvent(event);
 			return;
 		}
 
 		QTimerEvent* sigval1 = event;
-		miqt_exec_callback_QProxyStyle_timerEvent(this, handle__timerEvent, sigval1);
+		miqt_exec_callback_QProxyStyle_timerEvent(this, handle__timerEvent.value(), sigval1);
 
 	}
 
 	friend void QProxyStyle_virtualbase_timerEvent(void* self, QTimerEvent* event);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__childEvent = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QProxyStyle> handle__childEvent;
 
 	// Subclass to allow providing a Go implementation
 	virtual void childEvent(QChildEvent* event) override {
-		if (handle__childEvent == 0) {
+		if (!handle__childEvent) {
 			QProxyStyle::childEvent(event);
 			return;
 		}
 
 		QChildEvent* sigval1 = event;
-		miqt_exec_callback_QProxyStyle_childEvent(this, handle__childEvent, sigval1);
+		miqt_exec_callback_QProxyStyle_childEvent(this, handle__childEvent.value(), sigval1);
 
 	}
 
 	friend void QProxyStyle_virtualbase_childEvent(void* self, QChildEvent* event);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__customEvent = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QProxyStyle> handle__customEvent;
 
 	// Subclass to allow providing a Go implementation
 	virtual void customEvent(QEvent* event) override {
-		if (handle__customEvent == 0) {
+		if (!handle__customEvent) {
 			QProxyStyle::customEvent(event);
 			return;
 		}
 
 		QEvent* sigval1 = event;
-		miqt_exec_callback_QProxyStyle_customEvent(this, handle__customEvent, sigval1);
+		miqt_exec_callback_QProxyStyle_customEvent(this, handle__customEvent.value(), sigval1);
 
 	}
 
 	friend void QProxyStyle_virtualbase_customEvent(void* self, QEvent* event);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__connectNotify = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QProxyStyle> handle__connectNotify;
 
 	// Subclass to allow providing a Go implementation
 	virtual void connectNotify(const QMetaMethod& signal) override {
-		if (handle__connectNotify == 0) {
+		if (!handle__connectNotify) {
 			QProxyStyle::connectNotify(signal);
 			return;
 		}
@@ -652,18 +655,18 @@ public:
 		const QMetaMethod& signal_ret = signal;
 		// Cast returned reference into pointer
 		QMetaMethod* sigval1 = const_cast<QMetaMethod*>(&signal_ret);
-		miqt_exec_callback_QProxyStyle_connectNotify(this, handle__connectNotify, sigval1);
+		miqt_exec_callback_QProxyStyle_connectNotify(this, handle__connectNotify.value(), sigval1);
 
 	}
 
 	friend void QProxyStyle_virtualbase_connectNotify(void* self, QMetaMethod* signal);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__disconnectNotify = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QProxyStyle> handle__disconnectNotify;
 
 	// Subclass to allow providing a Go implementation
 	virtual void disconnectNotify(const QMetaMethod& signal) override {
-		if (handle__disconnectNotify == 0) {
+		if (!handle__disconnectNotify) {
 			QProxyStyle::disconnectNotify(signal);
 			return;
 		}
@@ -671,7 +674,7 @@ public:
 		const QMetaMethod& signal_ret = signal;
 		// Cast returned reference into pointer
 		QMetaMethod* sigval1 = const_cast<QMetaMethod*>(&signal_ret);
-		miqt_exec_callback_QProxyStyle_disconnectNotify(this, handle__disconnectNotify, sigval1);
+		miqt_exec_callback_QProxyStyle_disconnectNotify(this, handle__disconnectNotify.value(), sigval1);
 
 	}
 
@@ -879,12 +882,13 @@ struct miqt_string QProxyStyle_trUtf83(const char* s, const char* c, int n) {
 }
 
 bool QProxyStyle_override_virtual_drawPrimitive(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QProxyStyle> slot_handle(slot);
 	MiqtVirtualQProxyStyle* self_cast = dynamic_cast<MiqtVirtualQProxyStyle*>( (QProxyStyle*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__drawPrimitive = slot;
+	self_cast->handle__drawPrimitive = std::move(slot_handle);
 	return true;
 }
 
@@ -893,12 +897,13 @@ void QProxyStyle_virtualbase_drawPrimitive(const void* self, int element, QStyle
 }
 
 bool QProxyStyle_override_virtual_drawControl(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QProxyStyle> slot_handle(slot);
 	MiqtVirtualQProxyStyle* self_cast = dynamic_cast<MiqtVirtualQProxyStyle*>( (QProxyStyle*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__drawControl = slot;
+	self_cast->handle__drawControl = std::move(slot_handle);
 	return true;
 }
 
@@ -907,12 +912,13 @@ void QProxyStyle_virtualbase_drawControl(const void* self, int element, QStyleOp
 }
 
 bool QProxyStyle_override_virtual_drawComplexControl(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QProxyStyle> slot_handle(slot);
 	MiqtVirtualQProxyStyle* self_cast = dynamic_cast<MiqtVirtualQProxyStyle*>( (QProxyStyle*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__drawComplexControl = slot;
+	self_cast->handle__drawComplexControl = std::move(slot_handle);
 	return true;
 }
 
@@ -921,12 +927,13 @@ void QProxyStyle_virtualbase_drawComplexControl(const void* self, int control, Q
 }
 
 bool QProxyStyle_override_virtual_drawItemText(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QProxyStyle> slot_handle(slot);
 	MiqtVirtualQProxyStyle* self_cast = dynamic_cast<MiqtVirtualQProxyStyle*>( (QProxyStyle*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__drawItemText = slot;
+	self_cast->handle__drawItemText = std::move(slot_handle);
 	return true;
 }
 
@@ -936,12 +943,13 @@ void QProxyStyle_virtualbase_drawItemText(const void* self, QPainter* painter, Q
 }
 
 bool QProxyStyle_override_virtual_drawItemPixmap(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QProxyStyle> slot_handle(slot);
 	MiqtVirtualQProxyStyle* self_cast = dynamic_cast<MiqtVirtualQProxyStyle*>( (QProxyStyle*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__drawItemPixmap = slot;
+	self_cast->handle__drawItemPixmap = std::move(slot_handle);
 	return true;
 }
 
@@ -950,12 +958,13 @@ void QProxyStyle_virtualbase_drawItemPixmap(const void* self, QPainter* painter,
 }
 
 bool QProxyStyle_override_virtual_sizeFromContents(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QProxyStyle> slot_handle(slot);
 	MiqtVirtualQProxyStyle* self_cast = dynamic_cast<MiqtVirtualQProxyStyle*>( (QProxyStyle*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__sizeFromContents = slot;
+	self_cast->handle__sizeFromContents = std::move(slot_handle);
 	return true;
 }
 
@@ -964,12 +973,13 @@ QSize* QProxyStyle_virtualbase_sizeFromContents(const void* self, int type, QSty
 }
 
 bool QProxyStyle_override_virtual_subElementRect(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QProxyStyle> slot_handle(slot);
 	MiqtVirtualQProxyStyle* self_cast = dynamic_cast<MiqtVirtualQProxyStyle*>( (QProxyStyle*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__subElementRect = slot;
+	self_cast->handle__subElementRect = std::move(slot_handle);
 	return true;
 }
 
@@ -978,12 +988,13 @@ QRect* QProxyStyle_virtualbase_subElementRect(const void* self, int element, QSt
 }
 
 bool QProxyStyle_override_virtual_subControlRect(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QProxyStyle> slot_handle(slot);
 	MiqtVirtualQProxyStyle* self_cast = dynamic_cast<MiqtVirtualQProxyStyle*>( (QProxyStyle*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__subControlRect = slot;
+	self_cast->handle__subControlRect = std::move(slot_handle);
 	return true;
 }
 
@@ -992,12 +1003,13 @@ QRect* QProxyStyle_virtualbase_subControlRect(const void* self, int cc, QStyleOp
 }
 
 bool QProxyStyle_override_virtual_itemTextRect(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QProxyStyle> slot_handle(slot);
 	MiqtVirtualQProxyStyle* self_cast = dynamic_cast<MiqtVirtualQProxyStyle*>( (QProxyStyle*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__itemTextRect = slot;
+	self_cast->handle__itemTextRect = std::move(slot_handle);
 	return true;
 }
 
@@ -1007,12 +1019,13 @@ QRect* QProxyStyle_virtualbase_itemTextRect(const void* self, QFontMetrics* fm, 
 }
 
 bool QProxyStyle_override_virtual_itemPixmapRect(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QProxyStyle> slot_handle(slot);
 	MiqtVirtualQProxyStyle* self_cast = dynamic_cast<MiqtVirtualQProxyStyle*>( (QProxyStyle*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__itemPixmapRect = slot;
+	self_cast->handle__itemPixmapRect = std::move(slot_handle);
 	return true;
 }
 
@@ -1021,12 +1034,13 @@ QRect* QProxyStyle_virtualbase_itemPixmapRect(const void* self, QRect* r, int fl
 }
 
 bool QProxyStyle_override_virtual_hitTestComplexControl(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QProxyStyle> slot_handle(slot);
 	MiqtVirtualQProxyStyle* self_cast = dynamic_cast<MiqtVirtualQProxyStyle*>( (QProxyStyle*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__hitTestComplexControl = slot;
+	self_cast->handle__hitTestComplexControl = std::move(slot_handle);
 	return true;
 }
 
@@ -1036,12 +1050,13 @@ int QProxyStyle_virtualbase_hitTestComplexControl(const void* self, int control,
 }
 
 bool QProxyStyle_override_virtual_styleHint(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QProxyStyle> slot_handle(slot);
 	MiqtVirtualQProxyStyle* self_cast = dynamic_cast<MiqtVirtualQProxyStyle*>( (QProxyStyle*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__styleHint = slot;
+	self_cast->handle__styleHint = std::move(slot_handle);
 	return true;
 }
 
@@ -1050,12 +1065,13 @@ int QProxyStyle_virtualbase_styleHint(const void* self, int hint, QStyleOption* 
 }
 
 bool QProxyStyle_override_virtual_pixelMetric(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QProxyStyle> slot_handle(slot);
 	MiqtVirtualQProxyStyle* self_cast = dynamic_cast<MiqtVirtualQProxyStyle*>( (QProxyStyle*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__pixelMetric = slot;
+	self_cast->handle__pixelMetric = std::move(slot_handle);
 	return true;
 }
 
@@ -1064,12 +1080,13 @@ int QProxyStyle_virtualbase_pixelMetric(const void* self, int metric, QStyleOpti
 }
 
 bool QProxyStyle_override_virtual_layoutSpacing(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QProxyStyle> slot_handle(slot);
 	MiqtVirtualQProxyStyle* self_cast = dynamic_cast<MiqtVirtualQProxyStyle*>( (QProxyStyle*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__layoutSpacing = slot;
+	self_cast->handle__layoutSpacing = std::move(slot_handle);
 	return true;
 }
 
@@ -1078,12 +1095,13 @@ int QProxyStyle_virtualbase_layoutSpacing(const void* self, int control1, int co
 }
 
 bool QProxyStyle_override_virtual_standardIcon(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QProxyStyle> slot_handle(slot);
 	MiqtVirtualQProxyStyle* self_cast = dynamic_cast<MiqtVirtualQProxyStyle*>( (QProxyStyle*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__standardIcon = slot;
+	self_cast->handle__standardIcon = std::move(slot_handle);
 	return true;
 }
 
@@ -1092,12 +1110,13 @@ QIcon* QProxyStyle_virtualbase_standardIcon(const void* self, int standardIcon, 
 }
 
 bool QProxyStyle_override_virtual_standardPixmap(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QProxyStyle> slot_handle(slot);
 	MiqtVirtualQProxyStyle* self_cast = dynamic_cast<MiqtVirtualQProxyStyle*>( (QProxyStyle*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__standardPixmap = slot;
+	self_cast->handle__standardPixmap = std::move(slot_handle);
 	return true;
 }
 
@@ -1106,12 +1125,13 @@ QPixmap* QProxyStyle_virtualbase_standardPixmap(const void* self, int standardPi
 }
 
 bool QProxyStyle_override_virtual_generatedIconPixmap(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QProxyStyle> slot_handle(slot);
 	MiqtVirtualQProxyStyle* self_cast = dynamic_cast<MiqtVirtualQProxyStyle*>( (QProxyStyle*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__generatedIconPixmap = slot;
+	self_cast->handle__generatedIconPixmap = std::move(slot_handle);
 	return true;
 }
 
@@ -1120,12 +1140,13 @@ QPixmap* QProxyStyle_virtualbase_generatedIconPixmap(const void* self, int iconM
 }
 
 bool QProxyStyle_override_virtual_standardPalette(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QProxyStyle> slot_handle(slot);
 	MiqtVirtualQProxyStyle* self_cast = dynamic_cast<MiqtVirtualQProxyStyle*>( (QProxyStyle*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__standardPalette = slot;
+	self_cast->handle__standardPalette = std::move(slot_handle);
 	return true;
 }
 
@@ -1134,12 +1155,13 @@ QPalette* QProxyStyle_virtualbase_standardPalette(const void* self) {
 }
 
 bool QProxyStyle_override_virtual_polish(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QProxyStyle> slot_handle(slot);
 	MiqtVirtualQProxyStyle* self_cast = dynamic_cast<MiqtVirtualQProxyStyle*>( (QProxyStyle*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__polish = slot;
+	self_cast->handle__polish = std::move(slot_handle);
 	return true;
 }
 
@@ -1148,12 +1170,13 @@ void QProxyStyle_virtualbase_polish(void* self, QWidget* widget) {
 }
 
 bool QProxyStyle_override_virtual_polishWithPal(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QProxyStyle> slot_handle(slot);
 	MiqtVirtualQProxyStyle* self_cast = dynamic_cast<MiqtVirtualQProxyStyle*>( (QProxyStyle*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__polishWithPal = slot;
+	self_cast->handle__polishWithPal = std::move(slot_handle);
 	return true;
 }
 
@@ -1162,12 +1185,13 @@ void QProxyStyle_virtualbase_polishWithPal(void* self, QPalette* pal) {
 }
 
 bool QProxyStyle_override_virtual_polishWithApp(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QProxyStyle> slot_handle(slot);
 	MiqtVirtualQProxyStyle* self_cast = dynamic_cast<MiqtVirtualQProxyStyle*>( (QProxyStyle*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__polishWithApp = slot;
+	self_cast->handle__polishWithApp = std::move(slot_handle);
 	return true;
 }
 
@@ -1176,12 +1200,13 @@ void QProxyStyle_virtualbase_polishWithApp(void* self, QApplication* app) {
 }
 
 bool QProxyStyle_override_virtual_unpolish(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QProxyStyle> slot_handle(slot);
 	MiqtVirtualQProxyStyle* self_cast = dynamic_cast<MiqtVirtualQProxyStyle*>( (QProxyStyle*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__unpolish = slot;
+	self_cast->handle__unpolish = std::move(slot_handle);
 	return true;
 }
 
@@ -1190,12 +1215,13 @@ void QProxyStyle_virtualbase_unpolish(void* self, QWidget* widget) {
 }
 
 bool QProxyStyle_override_virtual_unpolishWithApp(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QProxyStyle> slot_handle(slot);
 	MiqtVirtualQProxyStyle* self_cast = dynamic_cast<MiqtVirtualQProxyStyle*>( (QProxyStyle*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__unpolishWithApp = slot;
+	self_cast->handle__unpolishWithApp = std::move(slot_handle);
 	return true;
 }
 
@@ -1204,12 +1230,13 @@ void QProxyStyle_virtualbase_unpolishWithApp(void* self, QApplication* app) {
 }
 
 bool QProxyStyle_override_virtual_event(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QProxyStyle> slot_handle(slot);
 	MiqtVirtualQProxyStyle* self_cast = dynamic_cast<MiqtVirtualQProxyStyle*>( (QProxyStyle*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__event = slot;
+	self_cast->handle__event = std::move(slot_handle);
 	return true;
 }
 
@@ -1218,12 +1245,13 @@ bool QProxyStyle_virtualbase_event(void* self, QEvent* e) {
 }
 
 bool QProxyStyle_override_virtual_eventFilter(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QProxyStyle> slot_handle(slot);
 	MiqtVirtualQProxyStyle* self_cast = dynamic_cast<MiqtVirtualQProxyStyle*>( (QProxyStyle*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__eventFilter = slot;
+	self_cast->handle__eventFilter = std::move(slot_handle);
 	return true;
 }
 
@@ -1232,12 +1260,13 @@ bool QProxyStyle_virtualbase_eventFilter(void* self, QObject* watched, QEvent* e
 }
 
 bool QProxyStyle_override_virtual_timerEvent(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QProxyStyle> slot_handle(slot);
 	MiqtVirtualQProxyStyle* self_cast = dynamic_cast<MiqtVirtualQProxyStyle*>( (QProxyStyle*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__timerEvent = slot;
+	self_cast->handle__timerEvent = std::move(slot_handle);
 	return true;
 }
 
@@ -1246,12 +1275,13 @@ void QProxyStyle_virtualbase_timerEvent(void* self, QTimerEvent* event) {
 }
 
 bool QProxyStyle_override_virtual_childEvent(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QProxyStyle> slot_handle(slot);
 	MiqtVirtualQProxyStyle* self_cast = dynamic_cast<MiqtVirtualQProxyStyle*>( (QProxyStyle*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__childEvent = slot;
+	self_cast->handle__childEvent = std::move(slot_handle);
 	return true;
 }
 
@@ -1260,12 +1290,13 @@ void QProxyStyle_virtualbase_childEvent(void* self, QChildEvent* event) {
 }
 
 bool QProxyStyle_override_virtual_customEvent(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QProxyStyle> slot_handle(slot);
 	MiqtVirtualQProxyStyle* self_cast = dynamic_cast<MiqtVirtualQProxyStyle*>( (QProxyStyle*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__customEvent = slot;
+	self_cast->handle__customEvent = std::move(slot_handle);
 	return true;
 }
 
@@ -1274,12 +1305,13 @@ void QProxyStyle_virtualbase_customEvent(void* self, QEvent* event) {
 }
 
 bool QProxyStyle_override_virtual_connectNotify(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QProxyStyle> slot_handle(slot);
 	MiqtVirtualQProxyStyle* self_cast = dynamic_cast<MiqtVirtualQProxyStyle*>( (QProxyStyle*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__connectNotify = slot;
+	self_cast->handle__connectNotify = std::move(slot_handle);
 	return true;
 }
 
@@ -1288,12 +1320,13 @@ void QProxyStyle_virtualbase_connectNotify(void* self, QMetaMethod* signal) {
 }
 
 bool QProxyStyle_override_virtual_disconnectNotify(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QProxyStyle> slot_handle(slot);
 	MiqtVirtualQProxyStyle* self_cast = dynamic_cast<MiqtVirtualQProxyStyle*>( (QProxyStyle*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__disconnectNotify = slot;
+	self_cast->handle__disconnectNotify = std::move(slot_handle);
 	return true;
 }
 

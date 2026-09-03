@@ -108,7 +108,7 @@ void* QwtScaleWidget_metacast(QwtScaleWidget* self, const char* param1);
 struct miqt_string QwtScaleWidget_tr(const char* s);
 struct miqt_string QwtScaleWidget_trUtf8(const char* s);
 void QwtScaleWidget_scaleDivChanged(QwtScaleWidget* self);
-void QwtScaleWidget_connect_scaleDivChanged(QwtScaleWidget* self, intptr_t slot);
+void* QwtScaleWidget_connect_scaleDivChanged(QwtScaleWidget* self, intptr_t slot);
 void QwtScaleWidget_setTitle(QwtScaleWidget* self, struct miqt_string title);
 void QwtScaleWidget_setTitleWithTitle(QwtScaleWidget* self, QwtText* title);
 QwtText* QwtScaleWidget_title(const QwtScaleWidget* self);

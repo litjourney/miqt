@@ -15,6 +15,11 @@ import (
 	"unsafe"
 )
 
+//export miqt_exec_callback_handle_release_QSvgRenderer
+func miqt_exec_callback_handle_release_QSvgRenderer(cb C.intptr_t) {
+	cgo.Handle(cb).Delete()
+}
+
 type QSvgRenderer struct {
 	h *C.QSvgRenderer
 	*qt.QObject
@@ -291,8 +296,10 @@ func (this *QSvgRenderer) Render3(p *qt.QPainter, elementId string) {
 func (this *QSvgRenderer) RepaintNeeded() {
 	C.QSvgRenderer_repaintNeeded(this.h)
 }
-func (this *QSvgRenderer) OnRepaintNeeded(slot func()) {
-	C.QSvgRenderer_connect_repaintNeeded(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QSvgRenderer) OnRepaintNeeded(slot func()) *qt.SignalConnection {
+	_goptr := qt.UnsafeNewQMetaObject__Connection(C.QSvgRenderer_connect_repaintNeeded(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QSvgRenderer_repaintNeeded
@@ -421,7 +428,11 @@ func (this *QSvgRenderer) callVirtualBase_Event(event *qt.QEvent) bool {
 
 }
 func (this *QSvgRenderer) OnEvent(slot func(super func(event *qt.QEvent) bool, event *qt.QEvent) bool) {
-	ok := C.QSvgRenderer_override_virtual_event(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QSvgRenderer_override_virtual_event(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -449,7 +460,11 @@ func (this *QSvgRenderer) callVirtualBase_EventFilter(watched *qt.QObject, event
 
 }
 func (this *QSvgRenderer) OnEventFilter(slot func(super func(watched *qt.QObject, event *qt.QEvent) bool, watched *qt.QObject, event *qt.QEvent) bool) {
-	ok := C.QSvgRenderer_override_virtual_eventFilter(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QSvgRenderer_override_virtual_eventFilter(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -479,7 +494,11 @@ func (this *QSvgRenderer) callVirtualBase_TimerEvent(event *qt.QTimerEvent) {
 
 }
 func (this *QSvgRenderer) OnTimerEvent(slot func(super func(event *qt.QTimerEvent), event *qt.QTimerEvent)) {
-	ok := C.QSvgRenderer_override_virtual_timerEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QSvgRenderer_override_virtual_timerEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -505,7 +524,11 @@ func (this *QSvgRenderer) callVirtualBase_ChildEvent(event *qt.QChildEvent) {
 
 }
 func (this *QSvgRenderer) OnChildEvent(slot func(super func(event *qt.QChildEvent), event *qt.QChildEvent)) {
-	ok := C.QSvgRenderer_override_virtual_childEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QSvgRenderer_override_virtual_childEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -531,7 +554,11 @@ func (this *QSvgRenderer) callVirtualBase_CustomEvent(event *qt.QEvent) {
 
 }
 func (this *QSvgRenderer) OnCustomEvent(slot func(super func(event *qt.QEvent), event *qt.QEvent)) {
-	ok := C.QSvgRenderer_override_virtual_customEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QSvgRenderer_override_virtual_customEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -557,7 +584,11 @@ func (this *QSvgRenderer) callVirtualBase_ConnectNotify(signal *qt.QMetaMethod) 
 
 }
 func (this *QSvgRenderer) OnConnectNotify(slot func(super func(signal *qt.QMetaMethod), signal *qt.QMetaMethod)) {
-	ok := C.QSvgRenderer_override_virtual_connectNotify(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QSvgRenderer_override_virtual_connectNotify(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -583,7 +614,11 @@ func (this *QSvgRenderer) callVirtualBase_DisconnectNotify(signal *qt.QMetaMetho
 
 }
 func (this *QSvgRenderer) OnDisconnectNotify(slot func(super func(signal *qt.QMetaMethod), signal *qt.QMetaMethod)) {
-	ok := C.QSvgRenderer_override_virtual_disconnectNotify(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QSvgRenderer_override_virtual_disconnectNotify(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}

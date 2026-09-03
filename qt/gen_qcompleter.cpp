@@ -1,3 +1,5 @@
+#include <memory>
+#include <utility>
 #include <QAbstractItemModel>
 #include <QAbstractItemView>
 #include <QChildEvent>
@@ -21,6 +23,7 @@
 extern "C" {
 #endif
 
+void miqt_exec_callback_handle_release_QCompleter(intptr_t);
 void miqt_exec_callback_QCompleter_activated(intptr_t, struct miqt_string);
 void miqt_exec_callback_QCompleter_activatedWithIndex(intptr_t, QModelIndex*);
 void miqt_exec_callback_QCompleter_highlighted(intptr_t, struct miqt_string);
@@ -51,18 +54,18 @@ public:
 	virtual ~MiqtVirtualQCompleter() override = default;
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__pathFromIndex = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QCompleter> handle__pathFromIndex;
 
 	// Subclass to allow providing a Go implementation
 	virtual QString pathFromIndex(const QModelIndex& index) const override {
-		if (handle__pathFromIndex == 0) {
+		if (!handle__pathFromIndex) {
 			return QCompleter::pathFromIndex(index);
 		}
 
 		const QModelIndex& index_ret = index;
 		// Cast returned reference into pointer
 		QModelIndex* sigval1 = const_cast<QModelIndex*>(&index_ret);
-		struct miqt_string callback_return_value = miqt_exec_callback_QCompleter_pathFromIndex(this, handle__pathFromIndex, sigval1);
+		struct miqt_string callback_return_value = miqt_exec_callback_QCompleter_pathFromIndex(this, handle__pathFromIndex.value(), sigval1);
 		QString callback_return_value_QString = QString::fromUtf8(callback_return_value.data, callback_return_value.len);
 		free(callback_return_value.data);
 		return callback_return_value_QString;
@@ -71,11 +74,11 @@ public:
 	friend struct miqt_string QCompleter_virtualbase_pathFromIndex(const void* self, QModelIndex* index);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__splitPath = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QCompleter> handle__splitPath;
 
 	// Subclass to allow providing a Go implementation
 	virtual QStringList splitPath(const QString& path) const override {
-		if (handle__splitPath == 0) {
+		if (!handle__splitPath) {
 			return QCompleter::splitPath(path);
 		}
 
@@ -87,7 +90,7 @@ public:
 		path_ms.data = static_cast<char*>(malloc(path_ms.len));
 		memcpy(path_ms.data, path_b.data(), path_ms.len);
 		struct miqt_string sigval1 = path_ms;
-		struct miqt_array /* of struct miqt_string */  callback_return_value = miqt_exec_callback_QCompleter_splitPath(this, handle__splitPath, sigval1);
+		struct miqt_array /* of struct miqt_string */  callback_return_value = miqt_exec_callback_QCompleter_splitPath(this, handle__splitPath.value(), sigval1);
 		QStringList callback_return_value_QList;
 		callback_return_value_QList.reserve(callback_return_value.len);
 		struct miqt_string* callback_return_value_arr = static_cast<struct miqt_string*>(callback_return_value.data);
@@ -106,95 +109,95 @@ public:
 	friend struct miqt_array /* of struct miqt_string */  QCompleter_virtualbase_splitPath(const void* self, struct miqt_string path);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__eventFilter = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QCompleter> handle__eventFilter;
 
 	// Subclass to allow providing a Go implementation
 	virtual bool eventFilter(QObject* o, QEvent* e) override {
-		if (handle__eventFilter == 0) {
+		if (!handle__eventFilter) {
 			return QCompleter::eventFilter(o, e);
 		}
 
 		QObject* sigval1 = o;
 		QEvent* sigval2 = e;
-		bool callback_return_value = miqt_exec_callback_QCompleter_eventFilter(this, handle__eventFilter, sigval1, sigval2);
+		bool callback_return_value = miqt_exec_callback_QCompleter_eventFilter(this, handle__eventFilter.value(), sigval1, sigval2);
 		return callback_return_value;
 	}
 
 	friend bool QCompleter_virtualbase_eventFilter(void* self, QObject* o, QEvent* e);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__event = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QCompleter> handle__event;
 
 	// Subclass to allow providing a Go implementation
 	virtual bool event(QEvent* param1) override {
-		if (handle__event == 0) {
+		if (!handle__event) {
 			return QCompleter::event(param1);
 		}
 
 		QEvent* sigval1 = param1;
-		bool callback_return_value = miqt_exec_callback_QCompleter_event(this, handle__event, sigval1);
+		bool callback_return_value = miqt_exec_callback_QCompleter_event(this, handle__event.value(), sigval1);
 		return callback_return_value;
 	}
 
 	friend bool QCompleter_virtualbase_event(void* self, QEvent* param1);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__timerEvent = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QCompleter> handle__timerEvent;
 
 	// Subclass to allow providing a Go implementation
 	virtual void timerEvent(QTimerEvent* event) override {
-		if (handle__timerEvent == 0) {
+		if (!handle__timerEvent) {
 			QCompleter::timerEvent(event);
 			return;
 		}
 
 		QTimerEvent* sigval1 = event;
-		miqt_exec_callback_QCompleter_timerEvent(this, handle__timerEvent, sigval1);
+		miqt_exec_callback_QCompleter_timerEvent(this, handle__timerEvent.value(), sigval1);
 
 	}
 
 	friend void QCompleter_virtualbase_timerEvent(void* self, QTimerEvent* event);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__childEvent = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QCompleter> handle__childEvent;
 
 	// Subclass to allow providing a Go implementation
 	virtual void childEvent(QChildEvent* event) override {
-		if (handle__childEvent == 0) {
+		if (!handle__childEvent) {
 			QCompleter::childEvent(event);
 			return;
 		}
 
 		QChildEvent* sigval1 = event;
-		miqt_exec_callback_QCompleter_childEvent(this, handle__childEvent, sigval1);
+		miqt_exec_callback_QCompleter_childEvent(this, handle__childEvent.value(), sigval1);
 
 	}
 
 	friend void QCompleter_virtualbase_childEvent(void* self, QChildEvent* event);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__customEvent = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QCompleter> handle__customEvent;
 
 	// Subclass to allow providing a Go implementation
 	virtual void customEvent(QEvent* event) override {
-		if (handle__customEvent == 0) {
+		if (!handle__customEvent) {
 			QCompleter::customEvent(event);
 			return;
 		}
 
 		QEvent* sigval1 = event;
-		miqt_exec_callback_QCompleter_customEvent(this, handle__customEvent, sigval1);
+		miqt_exec_callback_QCompleter_customEvent(this, handle__customEvent.value(), sigval1);
 
 	}
 
 	friend void QCompleter_virtualbase_customEvent(void* self, QEvent* event);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__connectNotify = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QCompleter> handle__connectNotify;
 
 	// Subclass to allow providing a Go implementation
 	virtual void connectNotify(const QMetaMethod& signal) override {
-		if (handle__connectNotify == 0) {
+		if (!handle__connectNotify) {
 			QCompleter::connectNotify(signal);
 			return;
 		}
@@ -202,18 +205,18 @@ public:
 		const QMetaMethod& signal_ret = signal;
 		// Cast returned reference into pointer
 		QMetaMethod* sigval1 = const_cast<QMetaMethod*>(&signal_ret);
-		miqt_exec_callback_QCompleter_connectNotify(this, handle__connectNotify, sigval1);
+		miqt_exec_callback_QCompleter_connectNotify(this, handle__connectNotify.value(), sigval1);
 
 	}
 
 	friend void QCompleter_virtualbase_connectNotify(void* self, QMetaMethod* signal);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__disconnectNotify = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QCompleter> handle__disconnectNotify;
 
 	// Subclass to allow providing a Go implementation
 	virtual void disconnectNotify(const QMetaMethod& signal) override {
-		if (handle__disconnectNotify == 0) {
+		if (!handle__disconnectNotify) {
 			QCompleter::disconnectNotify(signal);
 			return;
 		}
@@ -221,7 +224,7 @@ public:
 		const QMetaMethod& signal_ret = signal;
 		// Cast returned reference into pointer
 		QMetaMethod* sigval1 = const_cast<QMetaMethod*>(&signal_ret);
-		miqt_exec_callback_QCompleter_disconnectNotify(this, handle__disconnectNotify, sigval1);
+		miqt_exec_callback_QCompleter_disconnectNotify(this, handle__disconnectNotify.value(), sigval1);
 
 	}
 
@@ -486,8 +489,10 @@ void QCompleter_activated(QCompleter* self, struct miqt_string text) {
 	self->activated(text_QString);
 }
 
-void QCompleter_connect_activated(QCompleter* self, intptr_t slot) {
-	QCompleter::connect(self, static_cast<void (QCompleter::*)(const QString&)>(&QCompleter::activated), self, [=](const QString& text) {
+void* QCompleter_connect_activated(QCompleter* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QCompleter>>(slot);
+	return new QMetaObject::Connection(QCompleter::connect(self, static_cast<void (QCompleter::*)(const QString&)>(&QCompleter::activated), self, [slot_handle](const QString& text) {
+		intptr_t slot = slot_handle->value();
 		const QString text_ret = text;
 		// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 		QByteArray text_b = text_ret.toUtf8();
@@ -497,20 +502,22 @@ void QCompleter_connect_activated(QCompleter* self, intptr_t slot) {
 		memcpy(text_ms.data, text_b.data(), text_ms.len);
 		struct miqt_string sigval1 = text_ms;
 		miqt_exec_callback_QCompleter_activated(slot, sigval1);
-	});
+	}));
 }
 
 void QCompleter_activatedWithIndex(QCompleter* self, QModelIndex* index) {
 	self->activated(*index);
 }
 
-void QCompleter_connect_activatedWithIndex(QCompleter* self, intptr_t slot) {
-	QCompleter::connect(self, static_cast<void (QCompleter::*)(const QModelIndex&)>(&QCompleter::activated), self, [=](const QModelIndex& index) {
+void* QCompleter_connect_activatedWithIndex(QCompleter* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QCompleter>>(slot);
+	return new QMetaObject::Connection(QCompleter::connect(self, static_cast<void (QCompleter::*)(const QModelIndex&)>(&QCompleter::activated), self, [slot_handle](const QModelIndex& index) {
+		intptr_t slot = slot_handle->value();
 		const QModelIndex& index_ret = index;
 		// Cast returned reference into pointer
 		QModelIndex* sigval1 = const_cast<QModelIndex*>(&index_ret);
 		miqt_exec_callback_QCompleter_activatedWithIndex(slot, sigval1);
-	});
+	}));
 }
 
 void QCompleter_highlighted(QCompleter* self, struct miqt_string text) {
@@ -518,8 +525,10 @@ void QCompleter_highlighted(QCompleter* self, struct miqt_string text) {
 	self->highlighted(text_QString);
 }
 
-void QCompleter_connect_highlighted(QCompleter* self, intptr_t slot) {
-	QCompleter::connect(self, static_cast<void (QCompleter::*)(const QString&)>(&QCompleter::highlighted), self, [=](const QString& text) {
+void* QCompleter_connect_highlighted(QCompleter* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QCompleter>>(slot);
+	return new QMetaObject::Connection(QCompleter::connect(self, static_cast<void (QCompleter::*)(const QString&)>(&QCompleter::highlighted), self, [slot_handle](const QString& text) {
+		intptr_t slot = slot_handle->value();
 		const QString text_ret = text;
 		// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 		QByteArray text_b = text_ret.toUtf8();
@@ -529,20 +538,22 @@ void QCompleter_connect_highlighted(QCompleter* self, intptr_t slot) {
 		memcpy(text_ms.data, text_b.data(), text_ms.len);
 		struct miqt_string sigval1 = text_ms;
 		miqt_exec_callback_QCompleter_highlighted(slot, sigval1);
-	});
+	}));
 }
 
 void QCompleter_highlightedWithIndex(QCompleter* self, QModelIndex* index) {
 	self->highlighted(*index);
 }
 
-void QCompleter_connect_highlightedWithIndex(QCompleter* self, intptr_t slot) {
-	QCompleter::connect(self, static_cast<void (QCompleter::*)(const QModelIndex&)>(&QCompleter::highlighted), self, [=](const QModelIndex& index) {
+void* QCompleter_connect_highlightedWithIndex(QCompleter* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QCompleter>>(slot);
+	return new QMetaObject::Connection(QCompleter::connect(self, static_cast<void (QCompleter::*)(const QModelIndex&)>(&QCompleter::highlighted), self, [slot_handle](const QModelIndex& index) {
+		intptr_t slot = slot_handle->value();
 		const QModelIndex& index_ret = index;
 		// Cast returned reference into pointer
 		QModelIndex* sigval1 = const_cast<QModelIndex*>(&index_ret);
 		miqt_exec_callback_QCompleter_highlightedWithIndex(slot, sigval1);
-	});
+	}));
 }
 
 struct miqt_string QCompleter_tr2(const char* s, const char* c) {
@@ -594,12 +605,13 @@ void QCompleter_completeWithRect(QCompleter* self, QRect* rect) {
 }
 
 bool QCompleter_override_virtual_pathFromIndex(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QCompleter> slot_handle(slot);
 	MiqtVirtualQCompleter* self_cast = dynamic_cast<MiqtVirtualQCompleter*>( (QCompleter*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__pathFromIndex = slot;
+	self_cast->handle__pathFromIndex = std::move(slot_handle);
 	return true;
 }
 
@@ -615,12 +627,13 @@ struct miqt_string QCompleter_virtualbase_pathFromIndex(const void* self, QModel
 }
 
 bool QCompleter_override_virtual_splitPath(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QCompleter> slot_handle(slot);
 	MiqtVirtualQCompleter* self_cast = dynamic_cast<MiqtVirtualQCompleter*>( (QCompleter*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__splitPath = slot;
+	self_cast->handle__splitPath = std::move(slot_handle);
 	return true;
 }
 
@@ -646,12 +659,13 @@ struct miqt_array /* of struct miqt_string */  QCompleter_virtualbase_splitPath(
 }
 
 bool QCompleter_override_virtual_eventFilter(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QCompleter> slot_handle(slot);
 	MiqtVirtualQCompleter* self_cast = dynamic_cast<MiqtVirtualQCompleter*>( (QCompleter*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__eventFilter = slot;
+	self_cast->handle__eventFilter = std::move(slot_handle);
 	return true;
 }
 
@@ -660,12 +674,13 @@ bool QCompleter_virtualbase_eventFilter(void* self, QObject* o, QEvent* e) {
 }
 
 bool QCompleter_override_virtual_event(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QCompleter> slot_handle(slot);
 	MiqtVirtualQCompleter* self_cast = dynamic_cast<MiqtVirtualQCompleter*>( (QCompleter*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__event = slot;
+	self_cast->handle__event = std::move(slot_handle);
 	return true;
 }
 
@@ -674,12 +689,13 @@ bool QCompleter_virtualbase_event(void* self, QEvent* param1) {
 }
 
 bool QCompleter_override_virtual_timerEvent(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QCompleter> slot_handle(slot);
 	MiqtVirtualQCompleter* self_cast = dynamic_cast<MiqtVirtualQCompleter*>( (QCompleter*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__timerEvent = slot;
+	self_cast->handle__timerEvent = std::move(slot_handle);
 	return true;
 }
 
@@ -688,12 +704,13 @@ void QCompleter_virtualbase_timerEvent(void* self, QTimerEvent* event) {
 }
 
 bool QCompleter_override_virtual_childEvent(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QCompleter> slot_handle(slot);
 	MiqtVirtualQCompleter* self_cast = dynamic_cast<MiqtVirtualQCompleter*>( (QCompleter*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__childEvent = slot;
+	self_cast->handle__childEvent = std::move(slot_handle);
 	return true;
 }
 
@@ -702,12 +719,13 @@ void QCompleter_virtualbase_childEvent(void* self, QChildEvent* event) {
 }
 
 bool QCompleter_override_virtual_customEvent(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QCompleter> slot_handle(slot);
 	MiqtVirtualQCompleter* self_cast = dynamic_cast<MiqtVirtualQCompleter*>( (QCompleter*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__customEvent = slot;
+	self_cast->handle__customEvent = std::move(slot_handle);
 	return true;
 }
 
@@ -716,12 +734,13 @@ void QCompleter_virtualbase_customEvent(void* self, QEvent* event) {
 }
 
 bool QCompleter_override_virtual_connectNotify(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QCompleter> slot_handle(slot);
 	MiqtVirtualQCompleter* self_cast = dynamic_cast<MiqtVirtualQCompleter*>( (QCompleter*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__connectNotify = slot;
+	self_cast->handle__connectNotify = std::move(slot_handle);
 	return true;
 }
 
@@ -730,12 +749,13 @@ void QCompleter_virtualbase_connectNotify(void* self, QMetaMethod* signal) {
 }
 
 bool QCompleter_override_virtual_disconnectNotify(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QCompleter> slot_handle(slot);
 	MiqtVirtualQCompleter* self_cast = dynamic_cast<MiqtVirtualQCompleter*>( (QCompleter*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__disconnectNotify = slot;
+	self_cast->handle__disconnectNotify = std::move(slot_handle);
 	return true;
 }
 

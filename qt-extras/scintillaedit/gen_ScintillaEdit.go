@@ -5518,6 +5518,11 @@ func (this *SCNotification) GoGC() {
 	})
 }
 
+//export miqt_exec_callback_handle_release_ScintillaEditBase
+func miqt_exec_callback_handle_release_ScintillaEditBase(cb C.intptr_t) {
+	cgo.Handle(cb).Delete()
+}
+
 type ScintillaEditBase struct {
 	h *C.ScintillaEditBase
 	*qt.QAbstractScrollArea
@@ -5623,8 +5628,10 @@ func (this *ScintillaEditBase) EventCommand(wParam uintptr, lParam uintptr) {
 func (this *ScintillaEditBase) HorizontalScrolled(value int) {
 	C.ScintillaEditBase_horizontalScrolled(this.h, (C.int)(value))
 }
-func (this *ScintillaEditBase) OnHorizontalScrolled(slot func(value int)) {
-	C.ScintillaEditBase_connect_horizontalScrolled(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *ScintillaEditBase) OnHorizontalScrolled(slot func(value int)) *qt.SignalConnection {
+	_goptr := qt.UnsafeNewQMetaObject__Connection(C.ScintillaEditBase_connect_horizontalScrolled(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_ScintillaEditBase_horizontalScrolled
@@ -5643,8 +5650,10 @@ func miqt_exec_callback_ScintillaEditBase_horizontalScrolled(cb C.intptr_t, valu
 func (this *ScintillaEditBase) VerticalScrolled(value int) {
 	C.ScintillaEditBase_verticalScrolled(this.h, (C.int)(value))
 }
-func (this *ScintillaEditBase) OnVerticalScrolled(slot func(value int)) {
-	C.ScintillaEditBase_connect_verticalScrolled(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *ScintillaEditBase) OnVerticalScrolled(slot func(value int)) *qt.SignalConnection {
+	_goptr := qt.UnsafeNewQMetaObject__Connection(C.ScintillaEditBase_connect_verticalScrolled(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_ScintillaEditBase_verticalScrolled
@@ -5663,8 +5672,10 @@ func miqt_exec_callback_ScintillaEditBase_verticalScrolled(cb C.intptr_t, value 
 func (this *ScintillaEditBase) HorizontalRangeChanged(max int, page int) {
 	C.ScintillaEditBase_horizontalRangeChanged(this.h, (C.int)(max), (C.int)(page))
 }
-func (this *ScintillaEditBase) OnHorizontalRangeChanged(slot func(max int, page int)) {
-	C.ScintillaEditBase_connect_horizontalRangeChanged(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *ScintillaEditBase) OnHorizontalRangeChanged(slot func(max int, page int)) *qt.SignalConnection {
+	_goptr := qt.UnsafeNewQMetaObject__Connection(C.ScintillaEditBase_connect_horizontalRangeChanged(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_ScintillaEditBase_horizontalRangeChanged
@@ -5685,8 +5696,10 @@ func miqt_exec_callback_ScintillaEditBase_horizontalRangeChanged(cb C.intptr_t, 
 func (this *ScintillaEditBase) VerticalRangeChanged(max int, page int) {
 	C.ScintillaEditBase_verticalRangeChanged(this.h, (C.int)(max), (C.int)(page))
 }
-func (this *ScintillaEditBase) OnVerticalRangeChanged(slot func(max int, page int)) {
-	C.ScintillaEditBase_connect_verticalRangeChanged(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *ScintillaEditBase) OnVerticalRangeChanged(slot func(max int, page int)) *qt.SignalConnection {
+	_goptr := qt.UnsafeNewQMetaObject__Connection(C.ScintillaEditBase_connect_verticalRangeChanged(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_ScintillaEditBase_verticalRangeChanged
@@ -5707,8 +5720,10 @@ func miqt_exec_callback_ScintillaEditBase_verticalRangeChanged(cb C.intptr_t, ma
 func (this *ScintillaEditBase) NotifyChange() {
 	C.ScintillaEditBase_notifyChange(this.h)
 }
-func (this *ScintillaEditBase) OnNotifyChange(slot func()) {
-	C.ScintillaEditBase_connect_notifyChange(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *ScintillaEditBase) OnNotifyChange(slot func()) *qt.SignalConnection {
+	_goptr := qt.UnsafeNewQMetaObject__Connection(C.ScintillaEditBase_connect_notifyChange(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_ScintillaEditBase_notifyChange
@@ -5724,8 +5739,10 @@ func miqt_exec_callback_ScintillaEditBase_notifyChange(cb C.intptr_t) {
 func (this *ScintillaEditBase) LinesAdded(linesAdded uintptr) {
 	C.ScintillaEditBase_linesAdded(this.h, (C.intptr_t)(linesAdded))
 }
-func (this *ScintillaEditBase) OnLinesAdded(slot func(linesAdded uintptr)) {
-	C.ScintillaEditBase_connect_linesAdded(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *ScintillaEditBase) OnLinesAdded(slot func(linesAdded uintptr)) *qt.SignalConnection {
+	_goptr := qt.UnsafeNewQMetaObject__Connection(C.ScintillaEditBase_connect_linesAdded(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_ScintillaEditBase_linesAdded
@@ -5744,8 +5761,10 @@ func miqt_exec_callback_ScintillaEditBase_linesAdded(cb C.intptr_t, linesAdded C
 func (this *ScintillaEditBase) AboutToCopy(data *qt.QMimeData) {
 	C.ScintillaEditBase_aboutToCopy(this.h, (*C.QMimeData)(data.UnsafePointer()))
 }
-func (this *ScintillaEditBase) OnAboutToCopy(slot func(data *qt.QMimeData)) {
-	C.ScintillaEditBase_connect_aboutToCopy(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *ScintillaEditBase) OnAboutToCopy(slot func(data *qt.QMimeData)) *qt.SignalConnection {
+	_goptr := qt.UnsafeNewQMetaObject__Connection(C.ScintillaEditBase_connect_aboutToCopy(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_ScintillaEditBase_aboutToCopy
@@ -5764,8 +5783,10 @@ func miqt_exec_callback_ScintillaEditBase_aboutToCopy(cb C.intptr_t, data *C.QMi
 func (this *ScintillaEditBase) StyleNeeded(position uintptr) {
 	C.ScintillaEditBase_styleNeeded(this.h, (C.intptr_t)(position))
 }
-func (this *ScintillaEditBase) OnStyleNeeded(slot func(position uintptr)) {
-	C.ScintillaEditBase_connect_styleNeeded(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *ScintillaEditBase) OnStyleNeeded(slot func(position uintptr)) *qt.SignalConnection {
+	_goptr := qt.UnsafeNewQMetaObject__Connection(C.ScintillaEditBase_connect_styleNeeded(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_ScintillaEditBase_styleNeeded
@@ -5784,8 +5805,10 @@ func miqt_exec_callback_ScintillaEditBase_styleNeeded(cb C.intptr_t, position C.
 func (this *ScintillaEditBase) CharAdded(ch int) {
 	C.ScintillaEditBase_charAdded(this.h, (C.int)(ch))
 }
-func (this *ScintillaEditBase) OnCharAdded(slot func(ch int)) {
-	C.ScintillaEditBase_connect_charAdded(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *ScintillaEditBase) OnCharAdded(slot func(ch int)) *qt.SignalConnection {
+	_goptr := qt.UnsafeNewQMetaObject__Connection(C.ScintillaEditBase_connect_charAdded(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_ScintillaEditBase_charAdded
@@ -5804,8 +5827,10 @@ func miqt_exec_callback_ScintillaEditBase_charAdded(cb C.intptr_t, ch C.int) {
 func (this *ScintillaEditBase) SavePointChanged(dirty bool) {
 	C.ScintillaEditBase_savePointChanged(this.h, (C.bool)(dirty))
 }
-func (this *ScintillaEditBase) OnSavePointChanged(slot func(dirty bool)) {
-	C.ScintillaEditBase_connect_savePointChanged(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *ScintillaEditBase) OnSavePointChanged(slot func(dirty bool)) *qt.SignalConnection {
+	_goptr := qt.UnsafeNewQMetaObject__Connection(C.ScintillaEditBase_connect_savePointChanged(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_ScintillaEditBase_savePointChanged
@@ -5824,8 +5849,10 @@ func miqt_exec_callback_ScintillaEditBase_savePointChanged(cb C.intptr_t, dirty 
 func (this *ScintillaEditBase) ModifyAttemptReadOnly() {
 	C.ScintillaEditBase_modifyAttemptReadOnly(this.h)
 }
-func (this *ScintillaEditBase) OnModifyAttemptReadOnly(slot func()) {
-	C.ScintillaEditBase_connect_modifyAttemptReadOnly(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *ScintillaEditBase) OnModifyAttemptReadOnly(slot func()) *qt.SignalConnection {
+	_goptr := qt.UnsafeNewQMetaObject__Connection(C.ScintillaEditBase_connect_modifyAttemptReadOnly(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_ScintillaEditBase_modifyAttemptReadOnly
@@ -5841,8 +5868,10 @@ func miqt_exec_callback_ScintillaEditBase_modifyAttemptReadOnly(cb C.intptr_t) {
 func (this *ScintillaEditBase) Key(key int) {
 	C.ScintillaEditBase_key(this.h, (C.int)(key))
 }
-func (this *ScintillaEditBase) OnKey(slot func(key int)) {
-	C.ScintillaEditBase_connect_key(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *ScintillaEditBase) OnKey(slot func(key int)) *qt.SignalConnection {
+	_goptr := qt.UnsafeNewQMetaObject__Connection(C.ScintillaEditBase_connect_key(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_ScintillaEditBase_key
@@ -5861,8 +5890,10 @@ func miqt_exec_callback_ScintillaEditBase_key(cb C.intptr_t, key C.int) {
 func (this *ScintillaEditBase) DoubleClick(position uintptr, line uintptr) {
 	C.ScintillaEditBase_doubleClick(this.h, (C.intptr_t)(position), (C.intptr_t)(line))
 }
-func (this *ScintillaEditBase) OnDoubleClick(slot func(position uintptr, line uintptr)) {
-	C.ScintillaEditBase_connect_doubleClick(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *ScintillaEditBase) OnDoubleClick(slot func(position uintptr, line uintptr)) *qt.SignalConnection {
+	_goptr := qt.UnsafeNewQMetaObject__Connection(C.ScintillaEditBase_connect_doubleClick(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_ScintillaEditBase_doubleClick
@@ -5883,8 +5914,10 @@ func miqt_exec_callback_ScintillaEditBase_doubleClick(cb C.intptr_t, position C.
 func (this *ScintillaEditBase) UpdateUi(updated Scintilla__Update) {
 	C.ScintillaEditBase_updateUi(this.h, (C.int)(updated))
 }
-func (this *ScintillaEditBase) OnUpdateUi(slot func(updated Scintilla__Update)) {
-	C.ScintillaEditBase_connect_updateUi(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *ScintillaEditBase) OnUpdateUi(slot func(updated Scintilla__Update)) *qt.SignalConnection {
+	_goptr := qt.UnsafeNewQMetaObject__Connection(C.ScintillaEditBase_connect_updateUi(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_ScintillaEditBase_updateUi
@@ -5910,8 +5943,10 @@ func (this *ScintillaEditBase) Modified(typeVal Scintilla__ModificationFlags, po
 	text_alias.len = C.size_t(len(text))
 	C.ScintillaEditBase_modified(this.h, (C.int)(typeVal), (C.intptr_t)(position), (C.intptr_t)(length), (C.intptr_t)(linesAdded), text_alias, (C.intptr_t)(line), (C.int)(foldNow), (C.int)(foldPrev))
 }
-func (this *ScintillaEditBase) OnModified(slot func(typeVal Scintilla__ModificationFlags, position uintptr, length uintptr, linesAdded uintptr, text []byte, line uintptr, foldNow Scintilla__FoldLevel, foldPrev Scintilla__FoldLevel)) {
-	C.ScintillaEditBase_connect_modified(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *ScintillaEditBase) OnModified(slot func(typeVal Scintilla__ModificationFlags, position uintptr, length uintptr, linesAdded uintptr, text []byte, line uintptr, foldNow Scintilla__FoldLevel, foldPrev Scintilla__FoldLevel)) *qt.SignalConnection {
+	_goptr := qt.UnsafeNewQMetaObject__Connection(C.ScintillaEditBase_connect_modified(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_ScintillaEditBase_modified
@@ -5946,8 +5981,10 @@ func miqt_exec_callback_ScintillaEditBase_modified(cb C.intptr_t, typeVal C.int,
 func (this *ScintillaEditBase) MacroRecord(message Scintilla__Message, wParam uintptr, lParam uintptr) {
 	C.ScintillaEditBase_macroRecord(this.h, (C.int)(message), (C.uintptr_t)(wParam), (C.intptr_t)(lParam))
 }
-func (this *ScintillaEditBase) OnMacroRecord(slot func(message Scintilla__Message, wParam uintptr, lParam uintptr)) {
-	C.ScintillaEditBase_connect_macroRecord(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *ScintillaEditBase) OnMacroRecord(slot func(message Scintilla__Message, wParam uintptr, lParam uintptr)) *qt.SignalConnection {
+	_goptr := qt.UnsafeNewQMetaObject__Connection(C.ScintillaEditBase_connect_macroRecord(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_ScintillaEditBase_macroRecord
@@ -5970,8 +6007,10 @@ func miqt_exec_callback_ScintillaEditBase_macroRecord(cb C.intptr_t, message C.i
 func (this *ScintillaEditBase) MarginClicked(position uintptr, modifiers Scintilla__KeyMod, margin int) {
 	C.ScintillaEditBase_marginClicked(this.h, (C.intptr_t)(position), (C.int)(modifiers), (C.int)(margin))
 }
-func (this *ScintillaEditBase) OnMarginClicked(slot func(position uintptr, modifiers Scintilla__KeyMod, margin int)) {
-	C.ScintillaEditBase_connect_marginClicked(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *ScintillaEditBase) OnMarginClicked(slot func(position uintptr, modifiers Scintilla__KeyMod, margin int)) *qt.SignalConnection {
+	_goptr := qt.UnsafeNewQMetaObject__Connection(C.ScintillaEditBase_connect_marginClicked(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_ScintillaEditBase_marginClicked
@@ -5994,8 +6033,10 @@ func miqt_exec_callback_ScintillaEditBase_marginClicked(cb C.intptr_t, position 
 func (this *ScintillaEditBase) TextAreaClicked(line uintptr, modifiers int) {
 	C.ScintillaEditBase_textAreaClicked(this.h, (C.intptr_t)(line), (C.int)(modifiers))
 }
-func (this *ScintillaEditBase) OnTextAreaClicked(slot func(line uintptr, modifiers int)) {
-	C.ScintillaEditBase_connect_textAreaClicked(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *ScintillaEditBase) OnTextAreaClicked(slot func(line uintptr, modifiers int)) *qt.SignalConnection {
+	_goptr := qt.UnsafeNewQMetaObject__Connection(C.ScintillaEditBase_connect_textAreaClicked(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_ScintillaEditBase_textAreaClicked
@@ -6016,8 +6057,10 @@ func miqt_exec_callback_ScintillaEditBase_textAreaClicked(cb C.intptr_t, line C.
 func (this *ScintillaEditBase) NeedShown(position uintptr, length uintptr) {
 	C.ScintillaEditBase_needShown(this.h, (C.intptr_t)(position), (C.intptr_t)(length))
 }
-func (this *ScintillaEditBase) OnNeedShown(slot func(position uintptr, length uintptr)) {
-	C.ScintillaEditBase_connect_needShown(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *ScintillaEditBase) OnNeedShown(slot func(position uintptr, length uintptr)) *qt.SignalConnection {
+	_goptr := qt.UnsafeNewQMetaObject__Connection(C.ScintillaEditBase_connect_needShown(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_ScintillaEditBase_needShown
@@ -6038,8 +6081,10 @@ func miqt_exec_callback_ScintillaEditBase_needShown(cb C.intptr_t, position C.in
 func (this *ScintillaEditBase) Painted() {
 	C.ScintillaEditBase_painted(this.h)
 }
-func (this *ScintillaEditBase) OnPainted(slot func()) {
-	C.ScintillaEditBase_connect_painted(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *ScintillaEditBase) OnPainted(slot func()) *qt.SignalConnection {
+	_goptr := qt.UnsafeNewQMetaObject__Connection(C.ScintillaEditBase_connect_painted(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_ScintillaEditBase_painted
@@ -6055,8 +6100,10 @@ func miqt_exec_callback_ScintillaEditBase_painted(cb C.intptr_t) {
 func (this *ScintillaEditBase) UserListSelection() {
 	C.ScintillaEditBase_userListSelection(this.h)
 }
-func (this *ScintillaEditBase) OnUserListSelection(slot func()) {
-	C.ScintillaEditBase_connect_userListSelection(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *ScintillaEditBase) OnUserListSelection(slot func()) *qt.SignalConnection {
+	_goptr := qt.UnsafeNewQMetaObject__Connection(C.ScintillaEditBase_connect_userListSelection(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_ScintillaEditBase_userListSelection
@@ -6076,8 +6123,10 @@ func (this *ScintillaEditBase) UriDropped(uri string) {
 	defer C.free(unsafe.Pointer(uri_ms.data))
 	C.ScintillaEditBase_uriDropped(this.h, uri_ms)
 }
-func (this *ScintillaEditBase) OnUriDropped(slot func(uri string)) {
-	C.ScintillaEditBase_connect_uriDropped(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *ScintillaEditBase) OnUriDropped(slot func(uri string)) *qt.SignalConnection {
+	_goptr := qt.UnsafeNewQMetaObject__Connection(C.ScintillaEditBase_connect_uriDropped(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_ScintillaEditBase_uriDropped
@@ -6099,8 +6148,10 @@ func miqt_exec_callback_ScintillaEditBase_uriDropped(cb C.intptr_t, uri C.struct
 func (this *ScintillaEditBase) DwellStart(x int, y int) {
 	C.ScintillaEditBase_dwellStart(this.h, (C.int)(x), (C.int)(y))
 }
-func (this *ScintillaEditBase) OnDwellStart(slot func(x int, y int)) {
-	C.ScintillaEditBase_connect_dwellStart(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *ScintillaEditBase) OnDwellStart(slot func(x int, y int)) *qt.SignalConnection {
+	_goptr := qt.UnsafeNewQMetaObject__Connection(C.ScintillaEditBase_connect_dwellStart(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_ScintillaEditBase_dwellStart
@@ -6121,8 +6172,10 @@ func miqt_exec_callback_ScintillaEditBase_dwellStart(cb C.intptr_t, x C.int, y C
 func (this *ScintillaEditBase) DwellEnd(x int, y int) {
 	C.ScintillaEditBase_dwellEnd(this.h, (C.int)(x), (C.int)(y))
 }
-func (this *ScintillaEditBase) OnDwellEnd(slot func(x int, y int)) {
-	C.ScintillaEditBase_connect_dwellEnd(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *ScintillaEditBase) OnDwellEnd(slot func(x int, y int)) *qt.SignalConnection {
+	_goptr := qt.UnsafeNewQMetaObject__Connection(C.ScintillaEditBase_connect_dwellEnd(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_ScintillaEditBase_dwellEnd
@@ -6143,8 +6196,10 @@ func miqt_exec_callback_ScintillaEditBase_dwellEnd(cb C.intptr_t, x C.int, y C.i
 func (this *ScintillaEditBase) Zoom(zoom int) {
 	C.ScintillaEditBase_zoom(this.h, (C.int)(zoom))
 }
-func (this *ScintillaEditBase) OnZoom(slot func(zoom int)) {
-	C.ScintillaEditBase_connect_zoom(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *ScintillaEditBase) OnZoom(slot func(zoom int)) *qt.SignalConnection {
+	_goptr := qt.UnsafeNewQMetaObject__Connection(C.ScintillaEditBase_connect_zoom(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_ScintillaEditBase_zoom
@@ -6163,8 +6218,10 @@ func miqt_exec_callback_ScintillaEditBase_zoom(cb C.intptr_t, zoom C.int) {
 func (this *ScintillaEditBase) HotSpotClick(position uintptr, modifiers Scintilla__KeyMod) {
 	C.ScintillaEditBase_hotSpotClick(this.h, (C.intptr_t)(position), (C.int)(modifiers))
 }
-func (this *ScintillaEditBase) OnHotSpotClick(slot func(position uintptr, modifiers Scintilla__KeyMod)) {
-	C.ScintillaEditBase_connect_hotSpotClick(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *ScintillaEditBase) OnHotSpotClick(slot func(position uintptr, modifiers Scintilla__KeyMod)) *qt.SignalConnection {
+	_goptr := qt.UnsafeNewQMetaObject__Connection(C.ScintillaEditBase_connect_hotSpotClick(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_ScintillaEditBase_hotSpotClick
@@ -6185,8 +6242,10 @@ func miqt_exec_callback_ScintillaEditBase_hotSpotClick(cb C.intptr_t, position C
 func (this *ScintillaEditBase) HotSpotDoubleClick(position uintptr, modifiers Scintilla__KeyMod) {
 	C.ScintillaEditBase_hotSpotDoubleClick(this.h, (C.intptr_t)(position), (C.int)(modifiers))
 }
-func (this *ScintillaEditBase) OnHotSpotDoubleClick(slot func(position uintptr, modifiers Scintilla__KeyMod)) {
-	C.ScintillaEditBase_connect_hotSpotDoubleClick(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *ScintillaEditBase) OnHotSpotDoubleClick(slot func(position uintptr, modifiers Scintilla__KeyMod)) *qt.SignalConnection {
+	_goptr := qt.UnsafeNewQMetaObject__Connection(C.ScintillaEditBase_connect_hotSpotDoubleClick(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_ScintillaEditBase_hotSpotDoubleClick
@@ -6207,8 +6266,10 @@ func miqt_exec_callback_ScintillaEditBase_hotSpotDoubleClick(cb C.intptr_t, posi
 func (this *ScintillaEditBase) CallTipClick() {
 	C.ScintillaEditBase_callTipClick(this.h)
 }
-func (this *ScintillaEditBase) OnCallTipClick(slot func()) {
-	C.ScintillaEditBase_connect_callTipClick(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *ScintillaEditBase) OnCallTipClick(slot func()) *qt.SignalConnection {
+	_goptr := qt.UnsafeNewQMetaObject__Connection(C.ScintillaEditBase_connect_callTipClick(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_ScintillaEditBase_callTipClick
@@ -6228,8 +6289,10 @@ func (this *ScintillaEditBase) AutoCompleteSelection(position uintptr, text stri
 	defer C.free(unsafe.Pointer(text_ms.data))
 	C.ScintillaEditBase_autoCompleteSelection(this.h, (C.intptr_t)(position), text_ms)
 }
-func (this *ScintillaEditBase) OnAutoCompleteSelection(slot func(position uintptr, text string)) {
-	C.ScintillaEditBase_connect_autoCompleteSelection(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *ScintillaEditBase) OnAutoCompleteSelection(slot func(position uintptr, text string)) *qt.SignalConnection {
+	_goptr := qt.UnsafeNewQMetaObject__Connection(C.ScintillaEditBase_connect_autoCompleteSelection(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_ScintillaEditBase_autoCompleteSelection
@@ -6253,8 +6316,10 @@ func miqt_exec_callback_ScintillaEditBase_autoCompleteSelection(cb C.intptr_t, p
 func (this *ScintillaEditBase) AutoCompleteCancelled() {
 	C.ScintillaEditBase_autoCompleteCancelled(this.h)
 }
-func (this *ScintillaEditBase) OnAutoCompleteCancelled(slot func()) {
-	C.ScintillaEditBase_connect_autoCompleteCancelled(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *ScintillaEditBase) OnAutoCompleteCancelled(slot func()) *qt.SignalConnection {
+	_goptr := qt.UnsafeNewQMetaObject__Connection(C.ScintillaEditBase_connect_autoCompleteCancelled(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_ScintillaEditBase_autoCompleteCancelled
@@ -6270,8 +6335,10 @@ func miqt_exec_callback_ScintillaEditBase_autoCompleteCancelled(cb C.intptr_t) {
 func (this *ScintillaEditBase) FocusChanged(focused bool) {
 	C.ScintillaEditBase_focusChanged(this.h, (C.bool)(focused))
 }
-func (this *ScintillaEditBase) OnFocusChanged(slot func(focused bool)) {
-	C.ScintillaEditBase_connect_focusChanged(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *ScintillaEditBase) OnFocusChanged(slot func(focused bool)) *qt.SignalConnection {
+	_goptr := qt.UnsafeNewQMetaObject__Connection(C.ScintillaEditBase_connect_focusChanged(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_ScintillaEditBase_focusChanged
@@ -6290,8 +6357,10 @@ func miqt_exec_callback_ScintillaEditBase_focusChanged(cb C.intptr_t, focused C.
 func (this *ScintillaEditBase) Notify(pscn *Scintilla__NotificationData) {
 	C.ScintillaEditBase_notify(this.h, pscn.cPointer())
 }
-func (this *ScintillaEditBase) OnNotify(slot func(pscn *Scintilla__NotificationData)) {
-	C.ScintillaEditBase_connect_notify(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *ScintillaEditBase) OnNotify(slot func(pscn *Scintilla__NotificationData)) *qt.SignalConnection {
+	_goptr := qt.UnsafeNewQMetaObject__Connection(C.ScintillaEditBase_connect_notify(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_ScintillaEditBase_notify
@@ -6310,8 +6379,10 @@ func miqt_exec_callback_ScintillaEditBase_notify(cb C.intptr_t, pscn *C.Scintill
 func (this *ScintillaEditBase) Command(wParam uintptr, lParam uintptr) {
 	C.ScintillaEditBase_command(this.h, (C.uintptr_t)(wParam), (C.intptr_t)(lParam))
 }
-func (this *ScintillaEditBase) OnCommand(slot func(wParam uintptr, lParam uintptr)) {
-	C.ScintillaEditBase_connect_command(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *ScintillaEditBase) OnCommand(slot func(wParam uintptr, lParam uintptr)) *qt.SignalConnection {
+	_goptr := qt.UnsafeNewQMetaObject__Connection(C.ScintillaEditBase_connect_command(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_ScintillaEditBase_command
@@ -6332,8 +6403,10 @@ func miqt_exec_callback_ScintillaEditBase_command(cb C.intptr_t, wParam C.uintpt
 func (this *ScintillaEditBase) ButtonPressed(event *qt.QMouseEvent) {
 	C.ScintillaEditBase_buttonPressed(this.h, (*C.QMouseEvent)(event.UnsafePointer()))
 }
-func (this *ScintillaEditBase) OnButtonPressed(slot func(event *qt.QMouseEvent)) {
-	C.ScintillaEditBase_connect_buttonPressed(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *ScintillaEditBase) OnButtonPressed(slot func(event *qt.QMouseEvent)) *qt.SignalConnection {
+	_goptr := qt.UnsafeNewQMetaObject__Connection(C.ScintillaEditBase_connect_buttonPressed(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_ScintillaEditBase_buttonPressed
@@ -6352,8 +6425,10 @@ func miqt_exec_callback_ScintillaEditBase_buttonPressed(cb C.intptr_t, event *C.
 func (this *ScintillaEditBase) ButtonReleased(event *qt.QMouseEvent) {
 	C.ScintillaEditBase_buttonReleased(this.h, (*C.QMouseEvent)(event.UnsafePointer()))
 }
-func (this *ScintillaEditBase) OnButtonReleased(slot func(event *qt.QMouseEvent)) {
-	C.ScintillaEditBase_connect_buttonReleased(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *ScintillaEditBase) OnButtonReleased(slot func(event *qt.QMouseEvent)) *qt.SignalConnection {
+	_goptr := qt.UnsafeNewQMetaObject__Connection(C.ScintillaEditBase_connect_buttonReleased(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_ScintillaEditBase_buttonReleased
@@ -6372,8 +6447,10 @@ func miqt_exec_callback_ScintillaEditBase_buttonReleased(cb C.intptr_t, event *C
 func (this *ScintillaEditBase) KeyPressed(event *qt.QKeyEvent) {
 	C.ScintillaEditBase_keyPressed(this.h, (*C.QKeyEvent)(event.UnsafePointer()))
 }
-func (this *ScintillaEditBase) OnKeyPressed(slot func(event *qt.QKeyEvent)) {
-	C.ScintillaEditBase_connect_keyPressed(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *ScintillaEditBase) OnKeyPressed(slot func(event *qt.QKeyEvent)) *qt.SignalConnection {
+	_goptr := qt.UnsafeNewQMetaObject__Connection(C.ScintillaEditBase_connect_keyPressed(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_ScintillaEditBase_keyPressed
@@ -6392,8 +6469,10 @@ func miqt_exec_callback_ScintillaEditBase_keyPressed(cb C.intptr_t, event *C.QKe
 func (this *ScintillaEditBase) Resized() {
 	C.ScintillaEditBase_resized(this.h)
 }
-func (this *ScintillaEditBase) OnResized(slot func()) {
-	C.ScintillaEditBase_connect_resized(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *ScintillaEditBase) OnResized(slot func()) *qt.SignalConnection {
+	_goptr := qt.UnsafeNewQMetaObject__Connection(C.ScintillaEditBase_connect_resized(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_ScintillaEditBase_resized
@@ -6630,7 +6709,11 @@ func (this *ScintillaEditBase) callVirtualBase_Send(iMessage uint, wParam uintpt
 
 }
 func (this *ScintillaEditBase) OnSend(slot func(super func(iMessage uint, wParam uintptr, lParam uintptr) uintptr, iMessage uint, wParam uintptr, lParam uintptr) uintptr) {
-	ok := C.ScintillaEditBase_override_virtual_send(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.ScintillaEditBase_override_virtual_send(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -6664,7 +6747,11 @@ func (this *ScintillaEditBase) callVirtualBase_Sends(iMessage uint, wParam uintp
 
 }
 func (this *ScintillaEditBase) OnSends(slot func(super func(iMessage uint, wParam uintptr, s string) uintptr, iMessage uint, wParam uintptr, s string) uintptr) {
-	ok := C.ScintillaEditBase_override_virtual_sends(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.ScintillaEditBase_override_virtual_sends(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -6697,7 +6784,11 @@ func (this *ScintillaEditBase) callVirtualBase_Event(event *qt.QEvent) bool {
 
 }
 func (this *ScintillaEditBase) OnEvent(slot func(super func(event *qt.QEvent) bool, event *qt.QEvent) bool) {
-	ok := C.ScintillaEditBase_override_virtual_event(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.ScintillaEditBase_override_virtual_event(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -6725,7 +6816,11 @@ func (this *ScintillaEditBase) callVirtualBase_PaintEvent(event *qt.QPaintEvent)
 
 }
 func (this *ScintillaEditBase) OnPaintEvent(slot func(super func(event *qt.QPaintEvent), event *qt.QPaintEvent)) {
-	ok := C.ScintillaEditBase_override_virtual_paintEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.ScintillaEditBase_override_virtual_paintEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -6751,7 +6846,11 @@ func (this *ScintillaEditBase) callVirtualBase_WheelEvent(event *qt.QWheelEvent)
 
 }
 func (this *ScintillaEditBase) OnWheelEvent(slot func(super func(event *qt.QWheelEvent), event *qt.QWheelEvent)) {
-	ok := C.ScintillaEditBase_override_virtual_wheelEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.ScintillaEditBase_override_virtual_wheelEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -6777,7 +6876,11 @@ func (this *ScintillaEditBase) callVirtualBase_FocusInEvent(event *qt.QFocusEven
 
 }
 func (this *ScintillaEditBase) OnFocusInEvent(slot func(super func(event *qt.QFocusEvent), event *qt.QFocusEvent)) {
-	ok := C.ScintillaEditBase_override_virtual_focusInEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.ScintillaEditBase_override_virtual_focusInEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -6803,7 +6906,11 @@ func (this *ScintillaEditBase) callVirtualBase_FocusOutEvent(event *qt.QFocusEve
 
 }
 func (this *ScintillaEditBase) OnFocusOutEvent(slot func(super func(event *qt.QFocusEvent), event *qt.QFocusEvent)) {
-	ok := C.ScintillaEditBase_override_virtual_focusOutEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.ScintillaEditBase_override_virtual_focusOutEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -6829,7 +6936,11 @@ func (this *ScintillaEditBase) callVirtualBase_ResizeEvent(event *qt.QResizeEven
 
 }
 func (this *ScintillaEditBase) OnResizeEvent(slot func(super func(event *qt.QResizeEvent), event *qt.QResizeEvent)) {
-	ok := C.ScintillaEditBase_override_virtual_resizeEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.ScintillaEditBase_override_virtual_resizeEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -6855,7 +6966,11 @@ func (this *ScintillaEditBase) callVirtualBase_KeyPressEvent(event *qt.QKeyEvent
 
 }
 func (this *ScintillaEditBase) OnKeyPressEvent(slot func(super func(event *qt.QKeyEvent), event *qt.QKeyEvent)) {
-	ok := C.ScintillaEditBase_override_virtual_keyPressEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.ScintillaEditBase_override_virtual_keyPressEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -6881,7 +6996,11 @@ func (this *ScintillaEditBase) callVirtualBase_MousePressEvent(event *qt.QMouseE
 
 }
 func (this *ScintillaEditBase) OnMousePressEvent(slot func(super func(event *qt.QMouseEvent), event *qt.QMouseEvent)) {
-	ok := C.ScintillaEditBase_override_virtual_mousePressEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.ScintillaEditBase_override_virtual_mousePressEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -6907,7 +7026,11 @@ func (this *ScintillaEditBase) callVirtualBase_MouseReleaseEvent(event *qt.QMous
 
 }
 func (this *ScintillaEditBase) OnMouseReleaseEvent(slot func(super func(event *qt.QMouseEvent), event *qt.QMouseEvent)) {
-	ok := C.ScintillaEditBase_override_virtual_mouseReleaseEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.ScintillaEditBase_override_virtual_mouseReleaseEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -6933,7 +7056,11 @@ func (this *ScintillaEditBase) callVirtualBase_MouseDoubleClickEvent(event *qt.Q
 
 }
 func (this *ScintillaEditBase) OnMouseDoubleClickEvent(slot func(super func(event *qt.QMouseEvent), event *qt.QMouseEvent)) {
-	ok := C.ScintillaEditBase_override_virtual_mouseDoubleClickEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.ScintillaEditBase_override_virtual_mouseDoubleClickEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -6959,7 +7086,11 @@ func (this *ScintillaEditBase) callVirtualBase_MouseMoveEvent(event *qt.QMouseEv
 
 }
 func (this *ScintillaEditBase) OnMouseMoveEvent(slot func(super func(event *qt.QMouseEvent), event *qt.QMouseEvent)) {
-	ok := C.ScintillaEditBase_override_virtual_mouseMoveEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.ScintillaEditBase_override_virtual_mouseMoveEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -6985,7 +7116,11 @@ func (this *ScintillaEditBase) callVirtualBase_ContextMenuEvent(event *qt.QConte
 
 }
 func (this *ScintillaEditBase) OnContextMenuEvent(slot func(super func(event *qt.QContextMenuEvent), event *qt.QContextMenuEvent)) {
-	ok := C.ScintillaEditBase_override_virtual_contextMenuEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.ScintillaEditBase_override_virtual_contextMenuEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -7011,7 +7146,11 @@ func (this *ScintillaEditBase) callVirtualBase_DragEnterEvent(event *qt.QDragEnt
 
 }
 func (this *ScintillaEditBase) OnDragEnterEvent(slot func(super func(event *qt.QDragEnterEvent), event *qt.QDragEnterEvent)) {
-	ok := C.ScintillaEditBase_override_virtual_dragEnterEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.ScintillaEditBase_override_virtual_dragEnterEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -7037,7 +7176,11 @@ func (this *ScintillaEditBase) callVirtualBase_DragLeaveEvent(event *qt.QDragLea
 
 }
 func (this *ScintillaEditBase) OnDragLeaveEvent(slot func(super func(event *qt.QDragLeaveEvent), event *qt.QDragLeaveEvent)) {
-	ok := C.ScintillaEditBase_override_virtual_dragLeaveEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.ScintillaEditBase_override_virtual_dragLeaveEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -7063,7 +7206,11 @@ func (this *ScintillaEditBase) callVirtualBase_DragMoveEvent(event *qt.QDragMove
 
 }
 func (this *ScintillaEditBase) OnDragMoveEvent(slot func(super func(event *qt.QDragMoveEvent), event *qt.QDragMoveEvent)) {
-	ok := C.ScintillaEditBase_override_virtual_dragMoveEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.ScintillaEditBase_override_virtual_dragMoveEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -7089,7 +7236,11 @@ func (this *ScintillaEditBase) callVirtualBase_DropEvent(event *qt.QDropEvent) {
 
 }
 func (this *ScintillaEditBase) OnDropEvent(slot func(super func(event *qt.QDropEvent), event *qt.QDropEvent)) {
-	ok := C.ScintillaEditBase_override_virtual_dropEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.ScintillaEditBase_override_virtual_dropEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -7115,7 +7266,11 @@ func (this *ScintillaEditBase) callVirtualBase_InputMethodEvent(event *qt.QInput
 
 }
 func (this *ScintillaEditBase) OnInputMethodEvent(slot func(super func(event *qt.QInputMethodEvent), event *qt.QInputMethodEvent)) {
-	ok := C.ScintillaEditBase_override_virtual_inputMethodEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.ScintillaEditBase_override_virtual_inputMethodEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -7143,7 +7298,11 @@ func (this *ScintillaEditBase) callVirtualBase_InputMethodQuery(query qt.InputMe
 
 }
 func (this *ScintillaEditBase) OnInputMethodQuery(slot func(super func(query qt.InputMethodQuery) *qt.QVariant, query qt.InputMethodQuery) *qt.QVariant) {
-	ok := C.ScintillaEditBase_override_virtual_inputMethodQuery(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.ScintillaEditBase_override_virtual_inputMethodQuery(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -7171,7 +7330,11 @@ func (this *ScintillaEditBase) callVirtualBase_ScrollContentsBy(param1 int, para
 
 }
 func (this *ScintillaEditBase) OnScrollContentsBy(slot func(super func(param1 int, param2 int), param1 int, param2 int)) {
-	ok := C.ScintillaEditBase_override_virtual_scrollContentsBy(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.ScintillaEditBase_override_virtual_scrollContentsBy(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -7201,7 +7364,11 @@ func (this *ScintillaEditBase) callVirtualBase_MinimumSizeHint() *qt.QSize {
 
 }
 func (this *ScintillaEditBase) OnMinimumSizeHint(slot func(super func() *qt.QSize) *qt.QSize) {
-	ok := C.ScintillaEditBase_override_virtual_minimumSizeHint(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.ScintillaEditBase_override_virtual_minimumSizeHint(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -7228,7 +7395,11 @@ func (this *ScintillaEditBase) callVirtualBase_SizeHint() *qt.QSize {
 
 }
 func (this *ScintillaEditBase) OnSizeHint(slot func(super func() *qt.QSize) *qt.QSize) {
-	ok := C.ScintillaEditBase_override_virtual_sizeHint(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.ScintillaEditBase_override_virtual_sizeHint(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -7253,7 +7424,11 @@ func (this *ScintillaEditBase) callVirtualBase_SetupViewport(viewport *qt.QWidge
 
 }
 func (this *ScintillaEditBase) OnSetupViewport(slot func(super func(viewport *qt.QWidget), viewport *qt.QWidget)) {
-	ok := C.ScintillaEditBase_override_virtual_setupViewport(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.ScintillaEditBase_override_virtual_setupViewport(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -7279,7 +7454,11 @@ func (this *ScintillaEditBase) callVirtualBase_EventFilter(param1 *qt.QObject, p
 
 }
 func (this *ScintillaEditBase) OnEventFilter(slot func(super func(param1 *qt.QObject, param2 *qt.QEvent) bool, param1 *qt.QObject, param2 *qt.QEvent) bool) {
-	ok := C.ScintillaEditBase_override_virtual_eventFilter(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.ScintillaEditBase_override_virtual_eventFilter(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -7309,7 +7488,11 @@ func (this *ScintillaEditBase) callVirtualBase_ViewportEvent(param1 *qt.QEvent) 
 
 }
 func (this *ScintillaEditBase) OnViewportEvent(slot func(super func(param1 *qt.QEvent) bool, param1 *qt.QEvent) bool) {
-	ok := C.ScintillaEditBase_override_virtual_viewportEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.ScintillaEditBase_override_virtual_viewportEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -7339,7 +7522,11 @@ func (this *ScintillaEditBase) callVirtualBase_ViewportSizeHint() *qt.QSize {
 
 }
 func (this *ScintillaEditBase) OnViewportSizeHint(slot func(super func() *qt.QSize) *qt.QSize) {
-	ok := C.ScintillaEditBase_override_virtual_viewportSizeHint(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.ScintillaEditBase_override_virtual_viewportSizeHint(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -7364,7 +7551,11 @@ func (this *ScintillaEditBase) callVirtualBase_ChangeEvent(param1 *qt.QEvent) {
 
 }
 func (this *ScintillaEditBase) OnChangeEvent(slot func(super func(param1 *qt.QEvent), param1 *qt.QEvent)) {
-	ok := C.ScintillaEditBase_override_virtual_changeEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.ScintillaEditBase_override_virtual_changeEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -7390,7 +7581,11 @@ func (this *ScintillaEditBase) callVirtualBase_DevType() int {
 
 }
 func (this *ScintillaEditBase) OnDevType(slot func(super func() int) int) {
-	ok := C.ScintillaEditBase_override_virtual_devType(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.ScintillaEditBase_override_virtual_devType(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -7415,7 +7610,11 @@ func (this *ScintillaEditBase) callVirtualBase_SetVisible(visible bool) {
 
 }
 func (this *ScintillaEditBase) OnSetVisible(slot func(super func(visible bool), visible bool)) {
-	ok := C.ScintillaEditBase_override_virtual_setVisible(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.ScintillaEditBase_override_virtual_setVisible(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -7441,7 +7640,11 @@ func (this *ScintillaEditBase) callVirtualBase_HeightForWidth(param1 int) int {
 
 }
 func (this *ScintillaEditBase) OnHeightForWidth(slot func(super func(param1 int) int, param1 int) int) {
-	ok := C.ScintillaEditBase_override_virtual_heightForWidth(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.ScintillaEditBase_override_virtual_heightForWidth(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -7469,7 +7672,11 @@ func (this *ScintillaEditBase) callVirtualBase_HasHeightForWidth() bool {
 
 }
 func (this *ScintillaEditBase) OnHasHeightForWidth(slot func(super func() bool) bool) {
-	ok := C.ScintillaEditBase_override_virtual_hasHeightForWidth(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.ScintillaEditBase_override_virtual_hasHeightForWidth(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -7494,7 +7701,11 @@ func (this *ScintillaEditBase) callVirtualBase_PaintEngine() *qt.QPaintEngine {
 
 }
 func (this *ScintillaEditBase) OnPaintEngine(slot func(super func() *qt.QPaintEngine) *qt.QPaintEngine) {
-	ok := C.ScintillaEditBase_override_virtual_paintEngine(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.ScintillaEditBase_override_virtual_paintEngine(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -7519,7 +7730,11 @@ func (this *ScintillaEditBase) callVirtualBase_KeyReleaseEvent(event *qt.QKeyEve
 
 }
 func (this *ScintillaEditBase) OnKeyReleaseEvent(slot func(super func(event *qt.QKeyEvent), event *qt.QKeyEvent)) {
-	ok := C.ScintillaEditBase_override_virtual_keyReleaseEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.ScintillaEditBase_override_virtual_keyReleaseEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -7545,7 +7760,11 @@ func (this *ScintillaEditBase) callVirtualBase_EnterEvent(event *qt.QEvent) {
 
 }
 func (this *ScintillaEditBase) OnEnterEvent(slot func(super func(event *qt.QEvent), event *qt.QEvent)) {
-	ok := C.ScintillaEditBase_override_virtual_enterEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.ScintillaEditBase_override_virtual_enterEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -7571,7 +7790,11 @@ func (this *ScintillaEditBase) callVirtualBase_LeaveEvent(event *qt.QEvent) {
 
 }
 func (this *ScintillaEditBase) OnLeaveEvent(slot func(super func(event *qt.QEvent), event *qt.QEvent)) {
-	ok := C.ScintillaEditBase_override_virtual_leaveEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.ScintillaEditBase_override_virtual_leaveEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -7597,7 +7820,11 @@ func (this *ScintillaEditBase) callVirtualBase_MoveEvent(event *qt.QMoveEvent) {
 
 }
 func (this *ScintillaEditBase) OnMoveEvent(slot func(super func(event *qt.QMoveEvent), event *qt.QMoveEvent)) {
-	ok := C.ScintillaEditBase_override_virtual_moveEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.ScintillaEditBase_override_virtual_moveEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -7623,7 +7850,11 @@ func (this *ScintillaEditBase) callVirtualBase_CloseEvent(event *qt.QCloseEvent)
 
 }
 func (this *ScintillaEditBase) OnCloseEvent(slot func(super func(event *qt.QCloseEvent), event *qt.QCloseEvent)) {
-	ok := C.ScintillaEditBase_override_virtual_closeEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.ScintillaEditBase_override_virtual_closeEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -7649,7 +7880,11 @@ func (this *ScintillaEditBase) callVirtualBase_TabletEvent(event *qt.QTabletEven
 
 }
 func (this *ScintillaEditBase) OnTabletEvent(slot func(super func(event *qt.QTabletEvent), event *qt.QTabletEvent)) {
-	ok := C.ScintillaEditBase_override_virtual_tabletEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.ScintillaEditBase_override_virtual_tabletEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -7675,7 +7910,11 @@ func (this *ScintillaEditBase) callVirtualBase_ActionEvent(event *qt.QActionEven
 
 }
 func (this *ScintillaEditBase) OnActionEvent(slot func(super func(event *qt.QActionEvent), event *qt.QActionEvent)) {
-	ok := C.ScintillaEditBase_override_virtual_actionEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.ScintillaEditBase_override_virtual_actionEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -7701,7 +7940,11 @@ func (this *ScintillaEditBase) callVirtualBase_ShowEvent(event *qt.QShowEvent) {
 
 }
 func (this *ScintillaEditBase) OnShowEvent(slot func(super func(event *qt.QShowEvent), event *qt.QShowEvent)) {
-	ok := C.ScintillaEditBase_override_virtual_showEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.ScintillaEditBase_override_virtual_showEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -7727,7 +7970,11 @@ func (this *ScintillaEditBase) callVirtualBase_HideEvent(event *qt.QHideEvent) {
 
 }
 func (this *ScintillaEditBase) OnHideEvent(slot func(super func(event *qt.QHideEvent), event *qt.QHideEvent)) {
-	ok := C.ScintillaEditBase_override_virtual_hideEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.ScintillaEditBase_override_virtual_hideEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -7760,7 +8007,11 @@ func (this *ScintillaEditBase) callVirtualBase_NativeEvent(eventType []byte, mes
 
 }
 func (this *ScintillaEditBase) OnNativeEvent(slot func(super func(eventType []byte, message unsafe.Pointer, result *int64) bool, eventType []byte, message unsafe.Pointer, result *int64) bool) {
-	ok := C.ScintillaEditBase_override_virtual_nativeEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.ScintillaEditBase_override_virtual_nativeEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -7794,7 +8045,11 @@ func (this *ScintillaEditBase) callVirtualBase_Metric(param1 qt.QPaintDevice__Pa
 
 }
 func (this *ScintillaEditBase) OnMetric(slot func(super func(param1 qt.QPaintDevice__PaintDeviceMetric) int, param1 qt.QPaintDevice__PaintDeviceMetric) int) {
-	ok := C.ScintillaEditBase_override_virtual_metric(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.ScintillaEditBase_override_virtual_metric(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -7822,7 +8077,11 @@ func (this *ScintillaEditBase) callVirtualBase_InitPainter(painter *qt.QPainter)
 
 }
 func (this *ScintillaEditBase) OnInitPainter(slot func(super func(painter *qt.QPainter), painter *qt.QPainter)) {
-	ok := C.ScintillaEditBase_override_virtual_initPainter(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.ScintillaEditBase_override_virtual_initPainter(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -7848,7 +8107,11 @@ func (this *ScintillaEditBase) callVirtualBase_Redirected(offset *qt.QPoint) *qt
 
 }
 func (this *ScintillaEditBase) OnRedirected(slot func(super func(offset *qt.QPoint) *qt.QPaintDevice, offset *qt.QPoint) *qt.QPaintDevice) {
-	ok := C.ScintillaEditBase_override_virtual_redirected(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.ScintillaEditBase_override_virtual_redirected(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -7876,7 +8139,11 @@ func (this *ScintillaEditBase) callVirtualBase_SharedPainter() *qt.QPainter {
 
 }
 func (this *ScintillaEditBase) OnSharedPainter(slot func(super func() *qt.QPainter) *qt.QPainter) {
-	ok := C.ScintillaEditBase_override_virtual_sharedPainter(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.ScintillaEditBase_override_virtual_sharedPainter(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -7901,7 +8168,11 @@ func (this *ScintillaEditBase) callVirtualBase_FocusNextPrevChild(next bool) boo
 
 }
 func (this *ScintillaEditBase) OnFocusNextPrevChild(slot func(super func(next bool) bool, next bool) bool) {
-	ok := C.ScintillaEditBase_override_virtual_focusNextPrevChild(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.ScintillaEditBase_override_virtual_focusNextPrevChild(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -7929,7 +8200,11 @@ func (this *ScintillaEditBase) callVirtualBase_TimerEvent(event *qt.QTimerEvent)
 
 }
 func (this *ScintillaEditBase) OnTimerEvent(slot func(super func(event *qt.QTimerEvent), event *qt.QTimerEvent)) {
-	ok := C.ScintillaEditBase_override_virtual_timerEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.ScintillaEditBase_override_virtual_timerEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -7955,7 +8230,11 @@ func (this *ScintillaEditBase) callVirtualBase_ChildEvent(event *qt.QChildEvent)
 
 }
 func (this *ScintillaEditBase) OnChildEvent(slot func(super func(event *qt.QChildEvent), event *qt.QChildEvent)) {
-	ok := C.ScintillaEditBase_override_virtual_childEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.ScintillaEditBase_override_virtual_childEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -7981,7 +8260,11 @@ func (this *ScintillaEditBase) callVirtualBase_CustomEvent(event *qt.QEvent) {
 
 }
 func (this *ScintillaEditBase) OnCustomEvent(slot func(super func(event *qt.QEvent), event *qt.QEvent)) {
-	ok := C.ScintillaEditBase_override_virtual_customEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.ScintillaEditBase_override_virtual_customEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -8007,7 +8290,11 @@ func (this *ScintillaEditBase) callVirtualBase_ConnectNotify(signal *qt.QMetaMet
 
 }
 func (this *ScintillaEditBase) OnConnectNotify(slot func(super func(signal *qt.QMetaMethod), signal *qt.QMetaMethod)) {
-	ok := C.ScintillaEditBase_override_virtual_connectNotify(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.ScintillaEditBase_override_virtual_connectNotify(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -8033,7 +8320,11 @@ func (this *ScintillaEditBase) callVirtualBase_DisconnectNotify(signal *qt.QMeta
 
 }
 func (this *ScintillaEditBase) OnDisconnectNotify(slot func(super func(signal *qt.QMetaMethod), signal *qt.QMetaMethod)) {
-	ok := C.ScintillaEditBase_override_virtual_disconnectNotify(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.ScintillaEditBase_override_virtual_disconnectNotify(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -8065,6 +8356,11 @@ func (this *ScintillaEditBase) GoGC() {
 		this.Delete()
 		runtime.KeepAlive(this.h)
 	})
+}
+
+//export miqt_exec_callback_handle_release_ScintillaDocument
+func miqt_exec_callback_handle_release_ScintillaDocument(cb C.intptr_t) {
+	cgo.Handle(cb).Delete()
 }
 
 type ScintillaDocument struct {
@@ -8322,8 +8618,10 @@ func (this *ScintillaDocument) GetCharacter(pos int) int {
 func (this *ScintillaDocument) ModifyAttempt() {
 	C.ScintillaDocument_modifyAttempt(this.h)
 }
-func (this *ScintillaDocument) OnModifyAttempt(slot func()) {
-	C.ScintillaDocument_connect_modifyAttempt(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *ScintillaDocument) OnModifyAttempt(slot func()) *qt.SignalConnection {
+	_goptr := qt.UnsafeNewQMetaObject__Connection(C.ScintillaDocument_connect_modifyAttempt(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_ScintillaDocument_modifyAttempt
@@ -8339,8 +8637,10 @@ func miqt_exec_callback_ScintillaDocument_modifyAttempt(cb C.intptr_t) {
 func (this *ScintillaDocument) SavePoint(atSavePoint bool) {
 	C.ScintillaDocument_savePoint(this.h, (C.bool)(atSavePoint))
 }
-func (this *ScintillaDocument) OnSavePoint(slot func(atSavePoint bool)) {
-	C.ScintillaDocument_connect_savePoint(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *ScintillaDocument) OnSavePoint(slot func(atSavePoint bool)) *qt.SignalConnection {
+	_goptr := qt.UnsafeNewQMetaObject__Connection(C.ScintillaDocument_connect_savePoint(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_ScintillaDocument_savePoint
@@ -8366,8 +8666,10 @@ func (this *ScintillaDocument) Modified(position int, modification_type int, tex
 	text_alias.len = C.size_t(len(text))
 	C.ScintillaDocument_modified(this.h, (C.int)(position), (C.int)(modification_type), text_alias, (C.int)(length), (C.int)(linesAdded), (C.int)(line), (C.int)(foldLevelNow), (C.int)(foldLevelPrev))
 }
-func (this *ScintillaDocument) OnModified(slot func(position int, modification_type int, text []byte, length int, linesAdded int, line int, foldLevelNow int, foldLevelPrev int)) {
-	C.ScintillaDocument_connect_modified(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *ScintillaDocument) OnModified(slot func(position int, modification_type int, text []byte, length int, linesAdded int, line int, foldLevelNow int, foldLevelPrev int)) *qt.SignalConnection {
+	_goptr := qt.UnsafeNewQMetaObject__Connection(C.ScintillaDocument_connect_modified(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_ScintillaDocument_modified
@@ -8402,8 +8704,10 @@ func miqt_exec_callback_ScintillaDocument_modified(cb C.intptr_t, position C.int
 func (this *ScintillaDocument) StyleNeeded(pos int) {
 	C.ScintillaDocument_styleNeeded(this.h, (C.int)(pos))
 }
-func (this *ScintillaDocument) OnStyleNeeded(slot func(pos int)) {
-	C.ScintillaDocument_connect_styleNeeded(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *ScintillaDocument) OnStyleNeeded(slot func(pos int)) *qt.SignalConnection {
+	_goptr := qt.UnsafeNewQMetaObject__Connection(C.ScintillaDocument_connect_styleNeeded(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_ScintillaDocument_styleNeeded
@@ -8422,8 +8726,10 @@ func miqt_exec_callback_ScintillaDocument_styleNeeded(cb C.intptr_t, pos C.int) 
 func (this *ScintillaDocument) ErrorOccurred(status int) {
 	C.ScintillaDocument_errorOccurred(this.h, (C.int)(status))
 }
-func (this *ScintillaDocument) OnErrorOccurred(slot func(status int)) {
-	C.ScintillaDocument_connect_errorOccurred(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *ScintillaDocument) OnErrorOccurred(slot func(status int)) *qt.SignalConnection {
+	_goptr := qt.UnsafeNewQMetaObject__Connection(C.ScintillaDocument_connect_errorOccurred(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_ScintillaDocument_errorOccurred
@@ -8551,7 +8857,11 @@ func (this *ScintillaDocument) callVirtualBase_Event(event *qt.QEvent) bool {
 
 }
 func (this *ScintillaDocument) OnEvent(slot func(super func(event *qt.QEvent) bool, event *qt.QEvent) bool) {
-	ok := C.ScintillaDocument_override_virtual_event(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.ScintillaDocument_override_virtual_event(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -8579,7 +8889,11 @@ func (this *ScintillaDocument) callVirtualBase_EventFilter(watched *qt.QObject, 
 
 }
 func (this *ScintillaDocument) OnEventFilter(slot func(super func(watched *qt.QObject, event *qt.QEvent) bool, watched *qt.QObject, event *qt.QEvent) bool) {
-	ok := C.ScintillaDocument_override_virtual_eventFilter(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.ScintillaDocument_override_virtual_eventFilter(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -8609,7 +8923,11 @@ func (this *ScintillaDocument) callVirtualBase_TimerEvent(event *qt.QTimerEvent)
 
 }
 func (this *ScintillaDocument) OnTimerEvent(slot func(super func(event *qt.QTimerEvent), event *qt.QTimerEvent)) {
-	ok := C.ScintillaDocument_override_virtual_timerEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.ScintillaDocument_override_virtual_timerEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -8635,7 +8953,11 @@ func (this *ScintillaDocument) callVirtualBase_ChildEvent(event *qt.QChildEvent)
 
 }
 func (this *ScintillaDocument) OnChildEvent(slot func(super func(event *qt.QChildEvent), event *qt.QChildEvent)) {
-	ok := C.ScintillaDocument_override_virtual_childEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.ScintillaDocument_override_virtual_childEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -8661,7 +8983,11 @@ func (this *ScintillaDocument) callVirtualBase_CustomEvent(event *qt.QEvent) {
 
 }
 func (this *ScintillaDocument) OnCustomEvent(slot func(super func(event *qt.QEvent), event *qt.QEvent)) {
-	ok := C.ScintillaDocument_override_virtual_customEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.ScintillaDocument_override_virtual_customEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -8687,7 +9013,11 @@ func (this *ScintillaDocument) callVirtualBase_ConnectNotify(signal *qt.QMetaMet
 
 }
 func (this *ScintillaDocument) OnConnectNotify(slot func(super func(signal *qt.QMetaMethod), signal *qt.QMetaMethod)) {
-	ok := C.ScintillaDocument_override_virtual_connectNotify(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.ScintillaDocument_override_virtual_connectNotify(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -8713,7 +9043,11 @@ func (this *ScintillaDocument) callVirtualBase_DisconnectNotify(signal *qt.QMeta
 
 }
 func (this *ScintillaDocument) OnDisconnectNotify(slot func(super func(signal *qt.QMetaMethod), signal *qt.QMetaMethod)) {
-	ok := C.ScintillaDocument_override_virtual_disconnectNotify(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.ScintillaDocument_override_virtual_disconnectNotify(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -8745,6 +9079,11 @@ func (this *ScintillaDocument) GoGC() {
 		this.Delete()
 		runtime.KeepAlive(this.h)
 	})
+}
+
+//export miqt_exec_callback_handle_release_ScintillaEdit
+func miqt_exec_callback_handle_release_ScintillaEdit(cb C.intptr_t) {
+	cgo.Handle(cb).Delete()
 }
 
 type ScintillaEdit struct {
@@ -12544,7 +12883,11 @@ func (this *ScintillaEdit) callVirtualBase_Send(iMessage uint, wParam uintptr, l
 
 }
 func (this *ScintillaEdit) OnSend(slot func(super func(iMessage uint, wParam uintptr, lParam uintptr) uintptr, iMessage uint, wParam uintptr, lParam uintptr) uintptr) {
-	ok := C.ScintillaEdit_override_virtual_send(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.ScintillaEdit_override_virtual_send(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -12578,7 +12921,11 @@ func (this *ScintillaEdit) callVirtualBase_Sends(iMessage uint, wParam uintptr, 
 
 }
 func (this *ScintillaEdit) OnSends(slot func(super func(iMessage uint, wParam uintptr, s string) uintptr, iMessage uint, wParam uintptr, s string) uintptr) {
-	ok := C.ScintillaEdit_override_virtual_sends(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.ScintillaEdit_override_virtual_sends(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -12611,7 +12958,11 @@ func (this *ScintillaEdit) callVirtualBase_Event(event *qt.QEvent) bool {
 
 }
 func (this *ScintillaEdit) OnEvent(slot func(super func(event *qt.QEvent) bool, event *qt.QEvent) bool) {
-	ok := C.ScintillaEdit_override_virtual_event(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.ScintillaEdit_override_virtual_event(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -12639,7 +12990,11 @@ func (this *ScintillaEdit) callVirtualBase_PaintEvent(event *qt.QPaintEvent) {
 
 }
 func (this *ScintillaEdit) OnPaintEvent(slot func(super func(event *qt.QPaintEvent), event *qt.QPaintEvent)) {
-	ok := C.ScintillaEdit_override_virtual_paintEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.ScintillaEdit_override_virtual_paintEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -12665,7 +13020,11 @@ func (this *ScintillaEdit) callVirtualBase_WheelEvent(event *qt.QWheelEvent) {
 
 }
 func (this *ScintillaEdit) OnWheelEvent(slot func(super func(event *qt.QWheelEvent), event *qt.QWheelEvent)) {
-	ok := C.ScintillaEdit_override_virtual_wheelEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.ScintillaEdit_override_virtual_wheelEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -12691,7 +13050,11 @@ func (this *ScintillaEdit) callVirtualBase_FocusInEvent(event *qt.QFocusEvent) {
 
 }
 func (this *ScintillaEdit) OnFocusInEvent(slot func(super func(event *qt.QFocusEvent), event *qt.QFocusEvent)) {
-	ok := C.ScintillaEdit_override_virtual_focusInEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.ScintillaEdit_override_virtual_focusInEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -12717,7 +13080,11 @@ func (this *ScintillaEdit) callVirtualBase_FocusOutEvent(event *qt.QFocusEvent) 
 
 }
 func (this *ScintillaEdit) OnFocusOutEvent(slot func(super func(event *qt.QFocusEvent), event *qt.QFocusEvent)) {
-	ok := C.ScintillaEdit_override_virtual_focusOutEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.ScintillaEdit_override_virtual_focusOutEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -12743,7 +13110,11 @@ func (this *ScintillaEdit) callVirtualBase_ResizeEvent(event *qt.QResizeEvent) {
 
 }
 func (this *ScintillaEdit) OnResizeEvent(slot func(super func(event *qt.QResizeEvent), event *qt.QResizeEvent)) {
-	ok := C.ScintillaEdit_override_virtual_resizeEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.ScintillaEdit_override_virtual_resizeEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -12769,7 +13140,11 @@ func (this *ScintillaEdit) callVirtualBase_KeyPressEvent(event *qt.QKeyEvent) {
 
 }
 func (this *ScintillaEdit) OnKeyPressEvent(slot func(super func(event *qt.QKeyEvent), event *qt.QKeyEvent)) {
-	ok := C.ScintillaEdit_override_virtual_keyPressEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.ScintillaEdit_override_virtual_keyPressEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -12795,7 +13170,11 @@ func (this *ScintillaEdit) callVirtualBase_MousePressEvent(event *qt.QMouseEvent
 
 }
 func (this *ScintillaEdit) OnMousePressEvent(slot func(super func(event *qt.QMouseEvent), event *qt.QMouseEvent)) {
-	ok := C.ScintillaEdit_override_virtual_mousePressEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.ScintillaEdit_override_virtual_mousePressEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -12821,7 +13200,11 @@ func (this *ScintillaEdit) callVirtualBase_MouseReleaseEvent(event *qt.QMouseEve
 
 }
 func (this *ScintillaEdit) OnMouseReleaseEvent(slot func(super func(event *qt.QMouseEvent), event *qt.QMouseEvent)) {
-	ok := C.ScintillaEdit_override_virtual_mouseReleaseEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.ScintillaEdit_override_virtual_mouseReleaseEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -12847,7 +13230,11 @@ func (this *ScintillaEdit) callVirtualBase_MouseDoubleClickEvent(event *qt.QMous
 
 }
 func (this *ScintillaEdit) OnMouseDoubleClickEvent(slot func(super func(event *qt.QMouseEvent), event *qt.QMouseEvent)) {
-	ok := C.ScintillaEdit_override_virtual_mouseDoubleClickEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.ScintillaEdit_override_virtual_mouseDoubleClickEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -12873,7 +13260,11 @@ func (this *ScintillaEdit) callVirtualBase_MouseMoveEvent(event *qt.QMouseEvent)
 
 }
 func (this *ScintillaEdit) OnMouseMoveEvent(slot func(super func(event *qt.QMouseEvent), event *qt.QMouseEvent)) {
-	ok := C.ScintillaEdit_override_virtual_mouseMoveEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.ScintillaEdit_override_virtual_mouseMoveEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -12899,7 +13290,11 @@ func (this *ScintillaEdit) callVirtualBase_ContextMenuEvent(event *qt.QContextMe
 
 }
 func (this *ScintillaEdit) OnContextMenuEvent(slot func(super func(event *qt.QContextMenuEvent), event *qt.QContextMenuEvent)) {
-	ok := C.ScintillaEdit_override_virtual_contextMenuEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.ScintillaEdit_override_virtual_contextMenuEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -12925,7 +13320,11 @@ func (this *ScintillaEdit) callVirtualBase_DragEnterEvent(event *qt.QDragEnterEv
 
 }
 func (this *ScintillaEdit) OnDragEnterEvent(slot func(super func(event *qt.QDragEnterEvent), event *qt.QDragEnterEvent)) {
-	ok := C.ScintillaEdit_override_virtual_dragEnterEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.ScintillaEdit_override_virtual_dragEnterEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -12951,7 +13350,11 @@ func (this *ScintillaEdit) callVirtualBase_DragLeaveEvent(event *qt.QDragLeaveEv
 
 }
 func (this *ScintillaEdit) OnDragLeaveEvent(slot func(super func(event *qt.QDragLeaveEvent), event *qt.QDragLeaveEvent)) {
-	ok := C.ScintillaEdit_override_virtual_dragLeaveEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.ScintillaEdit_override_virtual_dragLeaveEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -12977,7 +13380,11 @@ func (this *ScintillaEdit) callVirtualBase_DragMoveEvent(event *qt.QDragMoveEven
 
 }
 func (this *ScintillaEdit) OnDragMoveEvent(slot func(super func(event *qt.QDragMoveEvent), event *qt.QDragMoveEvent)) {
-	ok := C.ScintillaEdit_override_virtual_dragMoveEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.ScintillaEdit_override_virtual_dragMoveEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -13003,7 +13410,11 @@ func (this *ScintillaEdit) callVirtualBase_DropEvent(event *qt.QDropEvent) {
 
 }
 func (this *ScintillaEdit) OnDropEvent(slot func(super func(event *qt.QDropEvent), event *qt.QDropEvent)) {
-	ok := C.ScintillaEdit_override_virtual_dropEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.ScintillaEdit_override_virtual_dropEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -13029,7 +13440,11 @@ func (this *ScintillaEdit) callVirtualBase_InputMethodEvent(event *qt.QInputMeth
 
 }
 func (this *ScintillaEdit) OnInputMethodEvent(slot func(super func(event *qt.QInputMethodEvent), event *qt.QInputMethodEvent)) {
-	ok := C.ScintillaEdit_override_virtual_inputMethodEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.ScintillaEdit_override_virtual_inputMethodEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -13057,7 +13472,11 @@ func (this *ScintillaEdit) callVirtualBase_InputMethodQuery(query qt.InputMethod
 
 }
 func (this *ScintillaEdit) OnInputMethodQuery(slot func(super func(query qt.InputMethodQuery) *qt.QVariant, query qt.InputMethodQuery) *qt.QVariant) {
-	ok := C.ScintillaEdit_override_virtual_inputMethodQuery(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.ScintillaEdit_override_virtual_inputMethodQuery(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -13085,7 +13504,11 @@ func (this *ScintillaEdit) callVirtualBase_ScrollContentsBy(param1 int, param2 i
 
 }
 func (this *ScintillaEdit) OnScrollContentsBy(slot func(super func(param1 int, param2 int), param1 int, param2 int)) {
-	ok := C.ScintillaEdit_override_virtual_scrollContentsBy(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.ScintillaEdit_override_virtual_scrollContentsBy(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -13115,7 +13538,11 @@ func (this *ScintillaEdit) callVirtualBase_MinimumSizeHint() *qt.QSize {
 
 }
 func (this *ScintillaEdit) OnMinimumSizeHint(slot func(super func() *qt.QSize) *qt.QSize) {
-	ok := C.ScintillaEdit_override_virtual_minimumSizeHint(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.ScintillaEdit_override_virtual_minimumSizeHint(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -13142,7 +13569,11 @@ func (this *ScintillaEdit) callVirtualBase_SizeHint() *qt.QSize {
 
 }
 func (this *ScintillaEdit) OnSizeHint(slot func(super func() *qt.QSize) *qt.QSize) {
-	ok := C.ScintillaEdit_override_virtual_sizeHint(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.ScintillaEdit_override_virtual_sizeHint(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -13167,7 +13598,11 @@ func (this *ScintillaEdit) callVirtualBase_SetupViewport(viewport *qt.QWidget) {
 
 }
 func (this *ScintillaEdit) OnSetupViewport(slot func(super func(viewport *qt.QWidget), viewport *qt.QWidget)) {
-	ok := C.ScintillaEdit_override_virtual_setupViewport(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.ScintillaEdit_override_virtual_setupViewport(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -13193,7 +13628,11 @@ func (this *ScintillaEdit) callVirtualBase_EventFilter(param1 *qt.QObject, param
 
 }
 func (this *ScintillaEdit) OnEventFilter(slot func(super func(param1 *qt.QObject, param2 *qt.QEvent) bool, param1 *qt.QObject, param2 *qt.QEvent) bool) {
-	ok := C.ScintillaEdit_override_virtual_eventFilter(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.ScintillaEdit_override_virtual_eventFilter(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -13223,7 +13662,11 @@ func (this *ScintillaEdit) callVirtualBase_ViewportEvent(param1 *qt.QEvent) bool
 
 }
 func (this *ScintillaEdit) OnViewportEvent(slot func(super func(param1 *qt.QEvent) bool, param1 *qt.QEvent) bool) {
-	ok := C.ScintillaEdit_override_virtual_viewportEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.ScintillaEdit_override_virtual_viewportEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -13253,7 +13696,11 @@ func (this *ScintillaEdit) callVirtualBase_ViewportSizeHint() *qt.QSize {
 
 }
 func (this *ScintillaEdit) OnViewportSizeHint(slot func(super func() *qt.QSize) *qt.QSize) {
-	ok := C.ScintillaEdit_override_virtual_viewportSizeHint(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.ScintillaEdit_override_virtual_viewportSizeHint(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -13278,7 +13725,11 @@ func (this *ScintillaEdit) callVirtualBase_ChangeEvent(param1 *qt.QEvent) {
 
 }
 func (this *ScintillaEdit) OnChangeEvent(slot func(super func(param1 *qt.QEvent), param1 *qt.QEvent)) {
-	ok := C.ScintillaEdit_override_virtual_changeEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.ScintillaEdit_override_virtual_changeEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -13304,7 +13755,11 @@ func (this *ScintillaEdit) callVirtualBase_DevType() int {
 
 }
 func (this *ScintillaEdit) OnDevType(slot func(super func() int) int) {
-	ok := C.ScintillaEdit_override_virtual_devType(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.ScintillaEdit_override_virtual_devType(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -13329,7 +13784,11 @@ func (this *ScintillaEdit) callVirtualBase_SetVisible(visible bool) {
 
 }
 func (this *ScintillaEdit) OnSetVisible(slot func(super func(visible bool), visible bool)) {
-	ok := C.ScintillaEdit_override_virtual_setVisible(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.ScintillaEdit_override_virtual_setVisible(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -13355,7 +13814,11 @@ func (this *ScintillaEdit) callVirtualBase_HeightForWidth(param1 int) int {
 
 }
 func (this *ScintillaEdit) OnHeightForWidth(slot func(super func(param1 int) int, param1 int) int) {
-	ok := C.ScintillaEdit_override_virtual_heightForWidth(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.ScintillaEdit_override_virtual_heightForWidth(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -13383,7 +13846,11 @@ func (this *ScintillaEdit) callVirtualBase_HasHeightForWidth() bool {
 
 }
 func (this *ScintillaEdit) OnHasHeightForWidth(slot func(super func() bool) bool) {
-	ok := C.ScintillaEdit_override_virtual_hasHeightForWidth(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.ScintillaEdit_override_virtual_hasHeightForWidth(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -13408,7 +13875,11 @@ func (this *ScintillaEdit) callVirtualBase_PaintEngine() *qt.QPaintEngine {
 
 }
 func (this *ScintillaEdit) OnPaintEngine(slot func(super func() *qt.QPaintEngine) *qt.QPaintEngine) {
-	ok := C.ScintillaEdit_override_virtual_paintEngine(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.ScintillaEdit_override_virtual_paintEngine(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -13433,7 +13904,11 @@ func (this *ScintillaEdit) callVirtualBase_KeyReleaseEvent(event *qt.QKeyEvent) 
 
 }
 func (this *ScintillaEdit) OnKeyReleaseEvent(slot func(super func(event *qt.QKeyEvent), event *qt.QKeyEvent)) {
-	ok := C.ScintillaEdit_override_virtual_keyReleaseEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.ScintillaEdit_override_virtual_keyReleaseEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -13459,7 +13934,11 @@ func (this *ScintillaEdit) callVirtualBase_EnterEvent(event *qt.QEvent) {
 
 }
 func (this *ScintillaEdit) OnEnterEvent(slot func(super func(event *qt.QEvent), event *qt.QEvent)) {
-	ok := C.ScintillaEdit_override_virtual_enterEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.ScintillaEdit_override_virtual_enterEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -13485,7 +13964,11 @@ func (this *ScintillaEdit) callVirtualBase_LeaveEvent(event *qt.QEvent) {
 
 }
 func (this *ScintillaEdit) OnLeaveEvent(slot func(super func(event *qt.QEvent), event *qt.QEvent)) {
-	ok := C.ScintillaEdit_override_virtual_leaveEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.ScintillaEdit_override_virtual_leaveEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -13511,7 +13994,11 @@ func (this *ScintillaEdit) callVirtualBase_MoveEvent(event *qt.QMoveEvent) {
 
 }
 func (this *ScintillaEdit) OnMoveEvent(slot func(super func(event *qt.QMoveEvent), event *qt.QMoveEvent)) {
-	ok := C.ScintillaEdit_override_virtual_moveEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.ScintillaEdit_override_virtual_moveEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -13537,7 +14024,11 @@ func (this *ScintillaEdit) callVirtualBase_CloseEvent(event *qt.QCloseEvent) {
 
 }
 func (this *ScintillaEdit) OnCloseEvent(slot func(super func(event *qt.QCloseEvent), event *qt.QCloseEvent)) {
-	ok := C.ScintillaEdit_override_virtual_closeEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.ScintillaEdit_override_virtual_closeEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -13563,7 +14054,11 @@ func (this *ScintillaEdit) callVirtualBase_TabletEvent(event *qt.QTabletEvent) {
 
 }
 func (this *ScintillaEdit) OnTabletEvent(slot func(super func(event *qt.QTabletEvent), event *qt.QTabletEvent)) {
-	ok := C.ScintillaEdit_override_virtual_tabletEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.ScintillaEdit_override_virtual_tabletEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -13589,7 +14084,11 @@ func (this *ScintillaEdit) callVirtualBase_ActionEvent(event *qt.QActionEvent) {
 
 }
 func (this *ScintillaEdit) OnActionEvent(slot func(super func(event *qt.QActionEvent), event *qt.QActionEvent)) {
-	ok := C.ScintillaEdit_override_virtual_actionEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.ScintillaEdit_override_virtual_actionEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -13615,7 +14114,11 @@ func (this *ScintillaEdit) callVirtualBase_ShowEvent(event *qt.QShowEvent) {
 
 }
 func (this *ScintillaEdit) OnShowEvent(slot func(super func(event *qt.QShowEvent), event *qt.QShowEvent)) {
-	ok := C.ScintillaEdit_override_virtual_showEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.ScintillaEdit_override_virtual_showEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -13641,7 +14144,11 @@ func (this *ScintillaEdit) callVirtualBase_HideEvent(event *qt.QHideEvent) {
 
 }
 func (this *ScintillaEdit) OnHideEvent(slot func(super func(event *qt.QHideEvent), event *qt.QHideEvent)) {
-	ok := C.ScintillaEdit_override_virtual_hideEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.ScintillaEdit_override_virtual_hideEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -13674,7 +14181,11 @@ func (this *ScintillaEdit) callVirtualBase_NativeEvent(eventType []byte, message
 
 }
 func (this *ScintillaEdit) OnNativeEvent(slot func(super func(eventType []byte, message unsafe.Pointer, result *int64) bool, eventType []byte, message unsafe.Pointer, result *int64) bool) {
-	ok := C.ScintillaEdit_override_virtual_nativeEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.ScintillaEdit_override_virtual_nativeEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -13708,7 +14219,11 @@ func (this *ScintillaEdit) callVirtualBase_Metric(param1 qt.QPaintDevice__PaintD
 
 }
 func (this *ScintillaEdit) OnMetric(slot func(super func(param1 qt.QPaintDevice__PaintDeviceMetric) int, param1 qt.QPaintDevice__PaintDeviceMetric) int) {
-	ok := C.ScintillaEdit_override_virtual_metric(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.ScintillaEdit_override_virtual_metric(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -13736,7 +14251,11 @@ func (this *ScintillaEdit) callVirtualBase_InitPainter(painter *qt.QPainter) {
 
 }
 func (this *ScintillaEdit) OnInitPainter(slot func(super func(painter *qt.QPainter), painter *qt.QPainter)) {
-	ok := C.ScintillaEdit_override_virtual_initPainter(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.ScintillaEdit_override_virtual_initPainter(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -13762,7 +14281,11 @@ func (this *ScintillaEdit) callVirtualBase_Redirected(offset *qt.QPoint) *qt.QPa
 
 }
 func (this *ScintillaEdit) OnRedirected(slot func(super func(offset *qt.QPoint) *qt.QPaintDevice, offset *qt.QPoint) *qt.QPaintDevice) {
-	ok := C.ScintillaEdit_override_virtual_redirected(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.ScintillaEdit_override_virtual_redirected(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -13790,7 +14313,11 @@ func (this *ScintillaEdit) callVirtualBase_SharedPainter() *qt.QPainter {
 
 }
 func (this *ScintillaEdit) OnSharedPainter(slot func(super func() *qt.QPainter) *qt.QPainter) {
-	ok := C.ScintillaEdit_override_virtual_sharedPainter(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.ScintillaEdit_override_virtual_sharedPainter(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -13815,7 +14342,11 @@ func (this *ScintillaEdit) callVirtualBase_FocusNextPrevChild(next bool) bool {
 
 }
 func (this *ScintillaEdit) OnFocusNextPrevChild(slot func(super func(next bool) bool, next bool) bool) {
-	ok := C.ScintillaEdit_override_virtual_focusNextPrevChild(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.ScintillaEdit_override_virtual_focusNextPrevChild(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -13843,7 +14374,11 @@ func (this *ScintillaEdit) callVirtualBase_TimerEvent(event *qt.QTimerEvent) {
 
 }
 func (this *ScintillaEdit) OnTimerEvent(slot func(super func(event *qt.QTimerEvent), event *qt.QTimerEvent)) {
-	ok := C.ScintillaEdit_override_virtual_timerEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.ScintillaEdit_override_virtual_timerEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -13869,7 +14404,11 @@ func (this *ScintillaEdit) callVirtualBase_ChildEvent(event *qt.QChildEvent) {
 
 }
 func (this *ScintillaEdit) OnChildEvent(slot func(super func(event *qt.QChildEvent), event *qt.QChildEvent)) {
-	ok := C.ScintillaEdit_override_virtual_childEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.ScintillaEdit_override_virtual_childEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -13895,7 +14434,11 @@ func (this *ScintillaEdit) callVirtualBase_CustomEvent(event *qt.QEvent) {
 
 }
 func (this *ScintillaEdit) OnCustomEvent(slot func(super func(event *qt.QEvent), event *qt.QEvent)) {
-	ok := C.ScintillaEdit_override_virtual_customEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.ScintillaEdit_override_virtual_customEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -13921,7 +14464,11 @@ func (this *ScintillaEdit) callVirtualBase_ConnectNotify(signal *qt.QMetaMethod)
 
 }
 func (this *ScintillaEdit) OnConnectNotify(slot func(super func(signal *qt.QMetaMethod), signal *qt.QMetaMethod)) {
-	ok := C.ScintillaEdit_override_virtual_connectNotify(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.ScintillaEdit_override_virtual_connectNotify(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -13947,7 +14494,11 @@ func (this *ScintillaEdit) callVirtualBase_DisconnectNotify(signal *qt.QMetaMeth
 
 }
 func (this *ScintillaEdit) OnDisconnectNotify(slot func(super func(signal *qt.QMetaMethod), signal *qt.QMetaMethod)) {
-	ok := C.ScintillaEdit_override_virtual_disconnectNotify(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.ScintillaEdit_override_virtual_disconnectNotify(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}

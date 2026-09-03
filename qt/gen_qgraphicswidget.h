@@ -161,9 +161,9 @@ void QGraphicsWidget_paintWindowFrame(QGraphicsWidget* self, QPainter* painter, 
 QRectF* QGraphicsWidget_boundingRect(const QGraphicsWidget* self);
 QPainterPath* QGraphicsWidget_shape(const QGraphicsWidget* self);
 void QGraphicsWidget_geometryChanged(QGraphicsWidget* self);
-void QGraphicsWidget_connect_geometryChanged(QGraphicsWidget* self, intptr_t slot);
+void* QGraphicsWidget_connect_geometryChanged(QGraphicsWidget* self, intptr_t slot);
 void QGraphicsWidget_layoutChanged(QGraphicsWidget* self);
-void QGraphicsWidget_connect_layoutChanged(QGraphicsWidget* self, intptr_t slot);
+void* QGraphicsWidget_connect_layoutChanged(QGraphicsWidget* self, intptr_t slot);
 bool QGraphicsWidget_close(QGraphicsWidget* self);
 void QGraphicsWidget_initStyleOption(const QGraphicsWidget* self, QStyleOption* option);
 QSizeF* QGraphicsWidget_sizeHint(const QGraphicsWidget* self, int which, QSizeF* constraint);

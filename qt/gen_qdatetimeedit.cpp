@@ -1,3 +1,5 @@
+#include <memory>
+#include <utility>
 #include <QAbstractSpinBox>
 #include <QActionEvent>
 #include <QByteArray>
@@ -51,6 +53,7 @@
 extern "C" {
 #endif
 
+void miqt_exec_callback_handle_release_QDateTimeEdit(intptr_t);
 void miqt_exec_callback_QDateTimeEdit_dateTimeChanged(intptr_t, QDateTime*);
 void miqt_exec_callback_QDateTimeEdit_timeChanged(intptr_t, QTime*);
 void miqt_exec_callback_QDateTimeEdit_dateChanged(intptr_t, QDate*);
@@ -108,6 +111,7 @@ void miqt_exec_callback_QDateTimeEdit_childEvent(QDateTimeEdit*, intptr_t, QChil
 void miqt_exec_callback_QDateTimeEdit_customEvent(QDateTimeEdit*, intptr_t, QEvent*);
 void miqt_exec_callback_QDateTimeEdit_connectNotify(QDateTimeEdit*, intptr_t, QMetaMethod*);
 void miqt_exec_callback_QDateTimeEdit_disconnectNotify(QDateTimeEdit*, intptr_t, QMetaMethod*);
+void miqt_exec_callback_handle_release_QTimeEdit(intptr_t);
 void miqt_exec_callback_QTimeEdit_userTimeChanged(intptr_t, QTime*);
 QSize* miqt_exec_callback_QTimeEdit_sizeHint(const QTimeEdit*, intptr_t);
 void miqt_exec_callback_QTimeEdit_clear(QTimeEdit*, intptr_t);
@@ -163,6 +167,7 @@ void miqt_exec_callback_QTimeEdit_childEvent(QTimeEdit*, intptr_t, QChildEvent*)
 void miqt_exec_callback_QTimeEdit_customEvent(QTimeEdit*, intptr_t, QEvent*);
 void miqt_exec_callback_QTimeEdit_connectNotify(QTimeEdit*, intptr_t, QMetaMethod*);
 void miqt_exec_callback_QTimeEdit_disconnectNotify(QTimeEdit*, intptr_t, QMetaMethod*);
+void miqt_exec_callback_handle_release_QDateEdit(intptr_t);
 void miqt_exec_callback_QDateEdit_userDateChanged(intptr_t, QDate*);
 QSize* miqt_exec_callback_QDateEdit_sizeHint(const QDateEdit*, intptr_t);
 void miqt_exec_callback_QDateEdit_clear(QDateEdit*, intptr_t);
@@ -237,142 +242,142 @@ public:
 	virtual ~MiqtVirtualQDateTimeEdit() override = default;
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__sizeHint = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QDateTimeEdit> handle__sizeHint;
 
 	// Subclass to allow providing a Go implementation
 	virtual QSize sizeHint() const override {
-		if (handle__sizeHint == 0) {
+		if (!handle__sizeHint) {
 			return QDateTimeEdit::sizeHint();
 		}
 
-		QSize* callback_return_value = miqt_exec_callback_QDateTimeEdit_sizeHint(this, handle__sizeHint);
+		QSize* callback_return_value = miqt_exec_callback_QDateTimeEdit_sizeHint(this, handle__sizeHint.value());
 		return *callback_return_value;
 	}
 
 	friend QSize* QDateTimeEdit_virtualbase_sizeHint(const void* self);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__clear = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QDateTimeEdit> handle__clear;
 
 	// Subclass to allow providing a Go implementation
 	virtual void clear() override {
-		if (handle__clear == 0) {
+		if (!handle__clear) {
 			QDateTimeEdit::clear();
 			return;
 		}
 
-		miqt_exec_callback_QDateTimeEdit_clear(this, handle__clear);
+		miqt_exec_callback_QDateTimeEdit_clear(this, handle__clear.value());
 
 	}
 
 	friend void QDateTimeEdit_virtualbase_clear(void* self);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__stepBy = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QDateTimeEdit> handle__stepBy;
 
 	// Subclass to allow providing a Go implementation
 	virtual void stepBy(int steps) override {
-		if (handle__stepBy == 0) {
+		if (!handle__stepBy) {
 			QDateTimeEdit::stepBy(steps);
 			return;
 		}
 
 		int sigval1 = steps;
-		miqt_exec_callback_QDateTimeEdit_stepBy(this, handle__stepBy, sigval1);
+		miqt_exec_callback_QDateTimeEdit_stepBy(this, handle__stepBy.value(), sigval1);
 
 	}
 
 	friend void QDateTimeEdit_virtualbase_stepBy(void* self, int steps);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__event = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QDateTimeEdit> handle__event;
 
 	// Subclass to allow providing a Go implementation
 	virtual bool event(QEvent* event) override {
-		if (handle__event == 0) {
+		if (!handle__event) {
 			return QDateTimeEdit::event(event);
 		}
 
 		QEvent* sigval1 = event;
-		bool callback_return_value = miqt_exec_callback_QDateTimeEdit_event(this, handle__event, sigval1);
+		bool callback_return_value = miqt_exec_callback_QDateTimeEdit_event(this, handle__event.value(), sigval1);
 		return callback_return_value;
 	}
 
 	friend bool QDateTimeEdit_virtualbase_event(void* self, QEvent* event);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__keyPressEvent = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QDateTimeEdit> handle__keyPressEvent;
 
 	// Subclass to allow providing a Go implementation
 	virtual void keyPressEvent(QKeyEvent* event) override {
-		if (handle__keyPressEvent == 0) {
+		if (!handle__keyPressEvent) {
 			QDateTimeEdit::keyPressEvent(event);
 			return;
 		}
 
 		QKeyEvent* sigval1 = event;
-		miqt_exec_callback_QDateTimeEdit_keyPressEvent(this, handle__keyPressEvent, sigval1);
+		miqt_exec_callback_QDateTimeEdit_keyPressEvent(this, handle__keyPressEvent.value(), sigval1);
 
 	}
 
 	friend void QDateTimeEdit_virtualbase_keyPressEvent(void* self, QKeyEvent* event);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__wheelEvent = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QDateTimeEdit> handle__wheelEvent;
 
 	// Subclass to allow providing a Go implementation
 	virtual void wheelEvent(QWheelEvent* event) override {
-		if (handle__wheelEvent == 0) {
+		if (!handle__wheelEvent) {
 			QDateTimeEdit::wheelEvent(event);
 			return;
 		}
 
 		QWheelEvent* sigval1 = event;
-		miqt_exec_callback_QDateTimeEdit_wheelEvent(this, handle__wheelEvent, sigval1);
+		miqt_exec_callback_QDateTimeEdit_wheelEvent(this, handle__wheelEvent.value(), sigval1);
 
 	}
 
 	friend void QDateTimeEdit_virtualbase_wheelEvent(void* self, QWheelEvent* event);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__focusInEvent = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QDateTimeEdit> handle__focusInEvent;
 
 	// Subclass to allow providing a Go implementation
 	virtual void focusInEvent(QFocusEvent* event) override {
-		if (handle__focusInEvent == 0) {
+		if (!handle__focusInEvent) {
 			QDateTimeEdit::focusInEvent(event);
 			return;
 		}
 
 		QFocusEvent* sigval1 = event;
-		miqt_exec_callback_QDateTimeEdit_focusInEvent(this, handle__focusInEvent, sigval1);
+		miqt_exec_callback_QDateTimeEdit_focusInEvent(this, handle__focusInEvent.value(), sigval1);
 
 	}
 
 	friend void QDateTimeEdit_virtualbase_focusInEvent(void* self, QFocusEvent* event);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__focusNextPrevChild = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QDateTimeEdit> handle__focusNextPrevChild;
 
 	// Subclass to allow providing a Go implementation
 	virtual bool focusNextPrevChild(bool next) override {
-		if (handle__focusNextPrevChild == 0) {
+		if (!handle__focusNextPrevChild) {
 			return QDateTimeEdit::focusNextPrevChild(next);
 		}
 
 		bool sigval1 = next;
-		bool callback_return_value = miqt_exec_callback_QDateTimeEdit_focusNextPrevChild(this, handle__focusNextPrevChild, sigval1);
+		bool callback_return_value = miqt_exec_callback_QDateTimeEdit_focusNextPrevChild(this, handle__focusNextPrevChild.value(), sigval1);
 		return callback_return_value;
 	}
 
 	friend bool QDateTimeEdit_virtualbase_focusNextPrevChild(void* self, bool next);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__validate = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QDateTimeEdit> handle__validate;
 
 	// Subclass to allow providing a Go implementation
 	virtual QValidator::State validate(QString& input, int& pos) const override {
-		if (handle__validate == 0) {
+		if (!handle__validate) {
 			return QDateTimeEdit::validate(input, pos);
 		}
 
@@ -385,18 +390,18 @@ public:
 		memcpy(input_ms.data, input_b.data(), input_ms.len);
 		struct miqt_string sigval1 = input_ms;
 		int* sigval2 = &pos;
-		int callback_return_value = miqt_exec_callback_QDateTimeEdit_validate(this, handle__validate, sigval1, sigval2);
+		int callback_return_value = miqt_exec_callback_QDateTimeEdit_validate(this, handle__validate.value(), sigval1, sigval2);
 		return static_cast<QValidator::State>(callback_return_value);
 	}
 
 	friend int QDateTimeEdit_virtualbase_validate(const void* self, struct miqt_string input, int* pos);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__fixup = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QDateTimeEdit> handle__fixup;
 
 	// Subclass to allow providing a Go implementation
 	virtual void fixup(QString& input) const override {
-		if (handle__fixup == 0) {
+		if (!handle__fixup) {
 			QDateTimeEdit::fixup(input);
 			return;
 		}
@@ -409,18 +414,18 @@ public:
 		input_ms.data = static_cast<char*>(malloc(input_ms.len));
 		memcpy(input_ms.data, input_b.data(), input_ms.len);
 		struct miqt_string sigval1 = input_ms;
-		miqt_exec_callback_QDateTimeEdit_fixup(this, handle__fixup, sigval1);
+		miqt_exec_callback_QDateTimeEdit_fixup(this, handle__fixup.value(), sigval1);
 
 	}
 
 	friend void QDateTimeEdit_virtualbase_fixup(const void* self, struct miqt_string input);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__dateTimeFromText = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QDateTimeEdit> handle__dateTimeFromText;
 
 	// Subclass to allow providing a Go implementation
 	virtual QDateTime dateTimeFromText(const QString& text) const override {
-		if (handle__dateTimeFromText == 0) {
+		if (!handle__dateTimeFromText) {
 			return QDateTimeEdit::dateTimeFromText(text);
 		}
 
@@ -432,25 +437,25 @@ public:
 		text_ms.data = static_cast<char*>(malloc(text_ms.len));
 		memcpy(text_ms.data, text_b.data(), text_ms.len);
 		struct miqt_string sigval1 = text_ms;
-		QDateTime* callback_return_value = miqt_exec_callback_QDateTimeEdit_dateTimeFromText(this, handle__dateTimeFromText, sigval1);
+		QDateTime* callback_return_value = miqt_exec_callback_QDateTimeEdit_dateTimeFromText(this, handle__dateTimeFromText.value(), sigval1);
 		return *callback_return_value;
 	}
 
 	friend QDateTime* QDateTimeEdit_virtualbase_dateTimeFromText(const void* self, struct miqt_string text);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__textFromDateTime = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QDateTimeEdit> handle__textFromDateTime;
 
 	// Subclass to allow providing a Go implementation
 	virtual QString textFromDateTime(const QDateTime& dt) const override {
-		if (handle__textFromDateTime == 0) {
+		if (!handle__textFromDateTime) {
 			return QDateTimeEdit::textFromDateTime(dt);
 		}
 
 		const QDateTime& dt_ret = dt;
 		// Cast returned reference into pointer
 		QDateTime* sigval1 = const_cast<QDateTime*>(&dt_ret);
-		struct miqt_string callback_return_value = miqt_exec_callback_QDateTimeEdit_textFromDateTime(this, handle__textFromDateTime, sigval1);
+		struct miqt_string callback_return_value = miqt_exec_callback_QDateTimeEdit_textFromDateTime(this, handle__textFromDateTime.value(), sigval1);
 		QString callback_return_value_QString = QString::fromUtf8(callback_return_value.data, callback_return_value.len);
 		free(callback_return_value.data);
 		return callback_return_value_QString;
@@ -459,527 +464,527 @@ public:
 	friend struct miqt_string QDateTimeEdit_virtualbase_textFromDateTime(const void* self, QDateTime* dt);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__stepEnabled = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QDateTimeEdit> handle__stepEnabled;
 
 	// Subclass to allow providing a Go implementation
 	virtual QAbstractSpinBox::StepEnabled stepEnabled() const override {
-		if (handle__stepEnabled == 0) {
+		if (!handle__stepEnabled) {
 			return QDateTimeEdit::stepEnabled();
 		}
 
-		int callback_return_value = miqt_exec_callback_QDateTimeEdit_stepEnabled(this, handle__stepEnabled);
+		int callback_return_value = miqt_exec_callback_QDateTimeEdit_stepEnabled(this, handle__stepEnabled.value());
 		return static_cast<QAbstractSpinBox::StepEnabled>(callback_return_value);
 	}
 
 	friend int QDateTimeEdit_virtualbase_stepEnabled(const void* self);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__mousePressEvent = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QDateTimeEdit> handle__mousePressEvent;
 
 	// Subclass to allow providing a Go implementation
 	virtual void mousePressEvent(QMouseEvent* event) override {
-		if (handle__mousePressEvent == 0) {
+		if (!handle__mousePressEvent) {
 			QDateTimeEdit::mousePressEvent(event);
 			return;
 		}
 
 		QMouseEvent* sigval1 = event;
-		miqt_exec_callback_QDateTimeEdit_mousePressEvent(this, handle__mousePressEvent, sigval1);
+		miqt_exec_callback_QDateTimeEdit_mousePressEvent(this, handle__mousePressEvent.value(), sigval1);
 
 	}
 
 	friend void QDateTimeEdit_virtualbase_mousePressEvent(void* self, QMouseEvent* event);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__paintEvent = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QDateTimeEdit> handle__paintEvent;
 
 	// Subclass to allow providing a Go implementation
 	virtual void paintEvent(QPaintEvent* event) override {
-		if (handle__paintEvent == 0) {
+		if (!handle__paintEvent) {
 			QDateTimeEdit::paintEvent(event);
 			return;
 		}
 
 		QPaintEvent* sigval1 = event;
-		miqt_exec_callback_QDateTimeEdit_paintEvent(this, handle__paintEvent, sigval1);
+		miqt_exec_callback_QDateTimeEdit_paintEvent(this, handle__paintEvent.value(), sigval1);
 
 	}
 
 	friend void QDateTimeEdit_virtualbase_paintEvent(void* self, QPaintEvent* event);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__minimumSizeHint = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QDateTimeEdit> handle__minimumSizeHint;
 
 	// Subclass to allow providing a Go implementation
 	virtual QSize minimumSizeHint() const override {
-		if (handle__minimumSizeHint == 0) {
+		if (!handle__minimumSizeHint) {
 			return QDateTimeEdit::minimumSizeHint();
 		}
 
-		QSize* callback_return_value = miqt_exec_callback_QDateTimeEdit_minimumSizeHint(this, handle__minimumSizeHint);
+		QSize* callback_return_value = miqt_exec_callback_QDateTimeEdit_minimumSizeHint(this, handle__minimumSizeHint.value());
 		return *callback_return_value;
 	}
 
 	friend QSize* QDateTimeEdit_virtualbase_minimumSizeHint(const void* self);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__inputMethodQuery = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QDateTimeEdit> handle__inputMethodQuery;
 
 	// Subclass to allow providing a Go implementation
 	virtual QVariant inputMethodQuery(Qt::InputMethodQuery param1) const override {
-		if (handle__inputMethodQuery == 0) {
+		if (!handle__inputMethodQuery) {
 			return QDateTimeEdit::inputMethodQuery(param1);
 		}
 
 		Qt::InputMethodQuery param1_ret = param1;
 		int sigval1 = static_cast<int>(param1_ret);
-		QVariant* callback_return_value = miqt_exec_callback_QDateTimeEdit_inputMethodQuery(this, handle__inputMethodQuery, sigval1);
+		QVariant* callback_return_value = miqt_exec_callback_QDateTimeEdit_inputMethodQuery(this, handle__inputMethodQuery.value(), sigval1);
 		return *callback_return_value;
 	}
 
 	friend QVariant* QDateTimeEdit_virtualbase_inputMethodQuery(const void* self, int param1);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__resizeEvent = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QDateTimeEdit> handle__resizeEvent;
 
 	// Subclass to allow providing a Go implementation
 	virtual void resizeEvent(QResizeEvent* event) override {
-		if (handle__resizeEvent == 0) {
+		if (!handle__resizeEvent) {
 			QDateTimeEdit::resizeEvent(event);
 			return;
 		}
 
 		QResizeEvent* sigval1 = event;
-		miqt_exec_callback_QDateTimeEdit_resizeEvent(this, handle__resizeEvent, sigval1);
+		miqt_exec_callback_QDateTimeEdit_resizeEvent(this, handle__resizeEvent.value(), sigval1);
 
 	}
 
 	friend void QDateTimeEdit_virtualbase_resizeEvent(void* self, QResizeEvent* event);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__keyReleaseEvent = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QDateTimeEdit> handle__keyReleaseEvent;
 
 	// Subclass to allow providing a Go implementation
 	virtual void keyReleaseEvent(QKeyEvent* event) override {
-		if (handle__keyReleaseEvent == 0) {
+		if (!handle__keyReleaseEvent) {
 			QDateTimeEdit::keyReleaseEvent(event);
 			return;
 		}
 
 		QKeyEvent* sigval1 = event;
-		miqt_exec_callback_QDateTimeEdit_keyReleaseEvent(this, handle__keyReleaseEvent, sigval1);
+		miqt_exec_callback_QDateTimeEdit_keyReleaseEvent(this, handle__keyReleaseEvent.value(), sigval1);
 
 	}
 
 	friend void QDateTimeEdit_virtualbase_keyReleaseEvent(void* self, QKeyEvent* event);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__focusOutEvent = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QDateTimeEdit> handle__focusOutEvent;
 
 	// Subclass to allow providing a Go implementation
 	virtual void focusOutEvent(QFocusEvent* event) override {
-		if (handle__focusOutEvent == 0) {
+		if (!handle__focusOutEvent) {
 			QDateTimeEdit::focusOutEvent(event);
 			return;
 		}
 
 		QFocusEvent* sigval1 = event;
-		miqt_exec_callback_QDateTimeEdit_focusOutEvent(this, handle__focusOutEvent, sigval1);
+		miqt_exec_callback_QDateTimeEdit_focusOutEvent(this, handle__focusOutEvent.value(), sigval1);
 
 	}
 
 	friend void QDateTimeEdit_virtualbase_focusOutEvent(void* self, QFocusEvent* event);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__contextMenuEvent = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QDateTimeEdit> handle__contextMenuEvent;
 
 	// Subclass to allow providing a Go implementation
 	virtual void contextMenuEvent(QContextMenuEvent* event) override {
-		if (handle__contextMenuEvent == 0) {
+		if (!handle__contextMenuEvent) {
 			QDateTimeEdit::contextMenuEvent(event);
 			return;
 		}
 
 		QContextMenuEvent* sigval1 = event;
-		miqt_exec_callback_QDateTimeEdit_contextMenuEvent(this, handle__contextMenuEvent, sigval1);
+		miqt_exec_callback_QDateTimeEdit_contextMenuEvent(this, handle__contextMenuEvent.value(), sigval1);
 
 	}
 
 	friend void QDateTimeEdit_virtualbase_contextMenuEvent(void* self, QContextMenuEvent* event);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__changeEvent = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QDateTimeEdit> handle__changeEvent;
 
 	// Subclass to allow providing a Go implementation
 	virtual void changeEvent(QEvent* event) override {
-		if (handle__changeEvent == 0) {
+		if (!handle__changeEvent) {
 			QDateTimeEdit::changeEvent(event);
 			return;
 		}
 
 		QEvent* sigval1 = event;
-		miqt_exec_callback_QDateTimeEdit_changeEvent(this, handle__changeEvent, sigval1);
+		miqt_exec_callback_QDateTimeEdit_changeEvent(this, handle__changeEvent.value(), sigval1);
 
 	}
 
 	friend void QDateTimeEdit_virtualbase_changeEvent(void* self, QEvent* event);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__closeEvent = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QDateTimeEdit> handle__closeEvent;
 
 	// Subclass to allow providing a Go implementation
 	virtual void closeEvent(QCloseEvent* event) override {
-		if (handle__closeEvent == 0) {
+		if (!handle__closeEvent) {
 			QDateTimeEdit::closeEvent(event);
 			return;
 		}
 
 		QCloseEvent* sigval1 = event;
-		miqt_exec_callback_QDateTimeEdit_closeEvent(this, handle__closeEvent, sigval1);
+		miqt_exec_callback_QDateTimeEdit_closeEvent(this, handle__closeEvent.value(), sigval1);
 
 	}
 
 	friend void QDateTimeEdit_virtualbase_closeEvent(void* self, QCloseEvent* event);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__hideEvent = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QDateTimeEdit> handle__hideEvent;
 
 	// Subclass to allow providing a Go implementation
 	virtual void hideEvent(QHideEvent* event) override {
-		if (handle__hideEvent == 0) {
+		if (!handle__hideEvent) {
 			QDateTimeEdit::hideEvent(event);
 			return;
 		}
 
 		QHideEvent* sigval1 = event;
-		miqt_exec_callback_QDateTimeEdit_hideEvent(this, handle__hideEvent, sigval1);
+		miqt_exec_callback_QDateTimeEdit_hideEvent(this, handle__hideEvent.value(), sigval1);
 
 	}
 
 	friend void QDateTimeEdit_virtualbase_hideEvent(void* self, QHideEvent* event);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__mouseReleaseEvent = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QDateTimeEdit> handle__mouseReleaseEvent;
 
 	// Subclass to allow providing a Go implementation
 	virtual void mouseReleaseEvent(QMouseEvent* event) override {
-		if (handle__mouseReleaseEvent == 0) {
+		if (!handle__mouseReleaseEvent) {
 			QDateTimeEdit::mouseReleaseEvent(event);
 			return;
 		}
 
 		QMouseEvent* sigval1 = event;
-		miqt_exec_callback_QDateTimeEdit_mouseReleaseEvent(this, handle__mouseReleaseEvent, sigval1);
+		miqt_exec_callback_QDateTimeEdit_mouseReleaseEvent(this, handle__mouseReleaseEvent.value(), sigval1);
 
 	}
 
 	friend void QDateTimeEdit_virtualbase_mouseReleaseEvent(void* self, QMouseEvent* event);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__mouseMoveEvent = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QDateTimeEdit> handle__mouseMoveEvent;
 
 	// Subclass to allow providing a Go implementation
 	virtual void mouseMoveEvent(QMouseEvent* event) override {
-		if (handle__mouseMoveEvent == 0) {
+		if (!handle__mouseMoveEvent) {
 			QDateTimeEdit::mouseMoveEvent(event);
 			return;
 		}
 
 		QMouseEvent* sigval1 = event;
-		miqt_exec_callback_QDateTimeEdit_mouseMoveEvent(this, handle__mouseMoveEvent, sigval1);
+		miqt_exec_callback_QDateTimeEdit_mouseMoveEvent(this, handle__mouseMoveEvent.value(), sigval1);
 
 	}
 
 	friend void QDateTimeEdit_virtualbase_mouseMoveEvent(void* self, QMouseEvent* event);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__timerEvent = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QDateTimeEdit> handle__timerEvent;
 
 	// Subclass to allow providing a Go implementation
 	virtual void timerEvent(QTimerEvent* event) override {
-		if (handle__timerEvent == 0) {
+		if (!handle__timerEvent) {
 			QDateTimeEdit::timerEvent(event);
 			return;
 		}
 
 		QTimerEvent* sigval1 = event;
-		miqt_exec_callback_QDateTimeEdit_timerEvent(this, handle__timerEvent, sigval1);
+		miqt_exec_callback_QDateTimeEdit_timerEvent(this, handle__timerEvent.value(), sigval1);
 
 	}
 
 	friend void QDateTimeEdit_virtualbase_timerEvent(void* self, QTimerEvent* event);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__showEvent = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QDateTimeEdit> handle__showEvent;
 
 	// Subclass to allow providing a Go implementation
 	virtual void showEvent(QShowEvent* event) override {
-		if (handle__showEvent == 0) {
+		if (!handle__showEvent) {
 			QDateTimeEdit::showEvent(event);
 			return;
 		}
 
 		QShowEvent* sigval1 = event;
-		miqt_exec_callback_QDateTimeEdit_showEvent(this, handle__showEvent, sigval1);
+		miqt_exec_callback_QDateTimeEdit_showEvent(this, handle__showEvent.value(), sigval1);
 
 	}
 
 	friend void QDateTimeEdit_virtualbase_showEvent(void* self, QShowEvent* event);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__devType = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QDateTimeEdit> handle__devType;
 
 	// Subclass to allow providing a Go implementation
 	virtual int devType() const override {
-		if (handle__devType == 0) {
+		if (!handle__devType) {
 			return QDateTimeEdit::devType();
 		}
 
-		int callback_return_value = miqt_exec_callback_QDateTimeEdit_devType(this, handle__devType);
+		int callback_return_value = miqt_exec_callback_QDateTimeEdit_devType(this, handle__devType.value());
 		return static_cast<int>(callback_return_value);
 	}
 
 	friend int QDateTimeEdit_virtualbase_devType(const void* self);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__setVisible = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QDateTimeEdit> handle__setVisible;
 
 	// Subclass to allow providing a Go implementation
 	virtual void setVisible(bool visible) override {
-		if (handle__setVisible == 0) {
+		if (!handle__setVisible) {
 			QDateTimeEdit::setVisible(visible);
 			return;
 		}
 
 		bool sigval1 = visible;
-		miqt_exec_callback_QDateTimeEdit_setVisible(this, handle__setVisible, sigval1);
+		miqt_exec_callback_QDateTimeEdit_setVisible(this, handle__setVisible.value(), sigval1);
 
 	}
 
 	friend void QDateTimeEdit_virtualbase_setVisible(void* self, bool visible);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__heightForWidth = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QDateTimeEdit> handle__heightForWidth;
 
 	// Subclass to allow providing a Go implementation
 	virtual int heightForWidth(int param1) const override {
-		if (handle__heightForWidth == 0) {
+		if (!handle__heightForWidth) {
 			return QDateTimeEdit::heightForWidth(param1);
 		}
 
 		int sigval1 = param1;
-		int callback_return_value = miqt_exec_callback_QDateTimeEdit_heightForWidth(this, handle__heightForWidth, sigval1);
+		int callback_return_value = miqt_exec_callback_QDateTimeEdit_heightForWidth(this, handle__heightForWidth.value(), sigval1);
 		return static_cast<int>(callback_return_value);
 	}
 
 	friend int QDateTimeEdit_virtualbase_heightForWidth(const void* self, int param1);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__hasHeightForWidth = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QDateTimeEdit> handle__hasHeightForWidth;
 
 	// Subclass to allow providing a Go implementation
 	virtual bool hasHeightForWidth() const override {
-		if (handle__hasHeightForWidth == 0) {
+		if (!handle__hasHeightForWidth) {
 			return QDateTimeEdit::hasHeightForWidth();
 		}
 
-		bool callback_return_value = miqt_exec_callback_QDateTimeEdit_hasHeightForWidth(this, handle__hasHeightForWidth);
+		bool callback_return_value = miqt_exec_callback_QDateTimeEdit_hasHeightForWidth(this, handle__hasHeightForWidth.value());
 		return callback_return_value;
 	}
 
 	friend bool QDateTimeEdit_virtualbase_hasHeightForWidth(const void* self);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__paintEngine = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QDateTimeEdit> handle__paintEngine;
 
 	// Subclass to allow providing a Go implementation
 	virtual QPaintEngine* paintEngine() const override {
-		if (handle__paintEngine == 0) {
+		if (!handle__paintEngine) {
 			return QDateTimeEdit::paintEngine();
 		}
 
-		QPaintEngine* callback_return_value = miqt_exec_callback_QDateTimeEdit_paintEngine(this, handle__paintEngine);
+		QPaintEngine* callback_return_value = miqt_exec_callback_QDateTimeEdit_paintEngine(this, handle__paintEngine.value());
 		return callback_return_value;
 	}
 
 	friend QPaintEngine* QDateTimeEdit_virtualbase_paintEngine(const void* self);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__mouseDoubleClickEvent = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QDateTimeEdit> handle__mouseDoubleClickEvent;
 
 	// Subclass to allow providing a Go implementation
 	virtual void mouseDoubleClickEvent(QMouseEvent* event) override {
-		if (handle__mouseDoubleClickEvent == 0) {
+		if (!handle__mouseDoubleClickEvent) {
 			QDateTimeEdit::mouseDoubleClickEvent(event);
 			return;
 		}
 
 		QMouseEvent* sigval1 = event;
-		miqt_exec_callback_QDateTimeEdit_mouseDoubleClickEvent(this, handle__mouseDoubleClickEvent, sigval1);
+		miqt_exec_callback_QDateTimeEdit_mouseDoubleClickEvent(this, handle__mouseDoubleClickEvent.value(), sigval1);
 
 	}
 
 	friend void QDateTimeEdit_virtualbase_mouseDoubleClickEvent(void* self, QMouseEvent* event);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__enterEvent = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QDateTimeEdit> handle__enterEvent;
 
 	// Subclass to allow providing a Go implementation
 	virtual void enterEvent(QEvent* event) override {
-		if (handle__enterEvent == 0) {
+		if (!handle__enterEvent) {
 			QDateTimeEdit::enterEvent(event);
 			return;
 		}
 
 		QEvent* sigval1 = event;
-		miqt_exec_callback_QDateTimeEdit_enterEvent(this, handle__enterEvent, sigval1);
+		miqt_exec_callback_QDateTimeEdit_enterEvent(this, handle__enterEvent.value(), sigval1);
 
 	}
 
 	friend void QDateTimeEdit_virtualbase_enterEvent(void* self, QEvent* event);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__leaveEvent = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QDateTimeEdit> handle__leaveEvent;
 
 	// Subclass to allow providing a Go implementation
 	virtual void leaveEvent(QEvent* event) override {
-		if (handle__leaveEvent == 0) {
+		if (!handle__leaveEvent) {
 			QDateTimeEdit::leaveEvent(event);
 			return;
 		}
 
 		QEvent* sigval1 = event;
-		miqt_exec_callback_QDateTimeEdit_leaveEvent(this, handle__leaveEvent, sigval1);
+		miqt_exec_callback_QDateTimeEdit_leaveEvent(this, handle__leaveEvent.value(), sigval1);
 
 	}
 
 	friend void QDateTimeEdit_virtualbase_leaveEvent(void* self, QEvent* event);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__moveEvent = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QDateTimeEdit> handle__moveEvent;
 
 	// Subclass to allow providing a Go implementation
 	virtual void moveEvent(QMoveEvent* event) override {
-		if (handle__moveEvent == 0) {
+		if (!handle__moveEvent) {
 			QDateTimeEdit::moveEvent(event);
 			return;
 		}
 
 		QMoveEvent* sigval1 = event;
-		miqt_exec_callback_QDateTimeEdit_moveEvent(this, handle__moveEvent, sigval1);
+		miqt_exec_callback_QDateTimeEdit_moveEvent(this, handle__moveEvent.value(), sigval1);
 
 	}
 
 	friend void QDateTimeEdit_virtualbase_moveEvent(void* self, QMoveEvent* event);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__tabletEvent = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QDateTimeEdit> handle__tabletEvent;
 
 	// Subclass to allow providing a Go implementation
 	virtual void tabletEvent(QTabletEvent* event) override {
-		if (handle__tabletEvent == 0) {
+		if (!handle__tabletEvent) {
 			QDateTimeEdit::tabletEvent(event);
 			return;
 		}
 
 		QTabletEvent* sigval1 = event;
-		miqt_exec_callback_QDateTimeEdit_tabletEvent(this, handle__tabletEvent, sigval1);
+		miqt_exec_callback_QDateTimeEdit_tabletEvent(this, handle__tabletEvent.value(), sigval1);
 
 	}
 
 	friend void QDateTimeEdit_virtualbase_tabletEvent(void* self, QTabletEvent* event);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__actionEvent = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QDateTimeEdit> handle__actionEvent;
 
 	// Subclass to allow providing a Go implementation
 	virtual void actionEvent(QActionEvent* event) override {
-		if (handle__actionEvent == 0) {
+		if (!handle__actionEvent) {
 			QDateTimeEdit::actionEvent(event);
 			return;
 		}
 
 		QActionEvent* sigval1 = event;
-		miqt_exec_callback_QDateTimeEdit_actionEvent(this, handle__actionEvent, sigval1);
+		miqt_exec_callback_QDateTimeEdit_actionEvent(this, handle__actionEvent.value(), sigval1);
 
 	}
 
 	friend void QDateTimeEdit_virtualbase_actionEvent(void* self, QActionEvent* event);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__dragEnterEvent = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QDateTimeEdit> handle__dragEnterEvent;
 
 	// Subclass to allow providing a Go implementation
 	virtual void dragEnterEvent(QDragEnterEvent* event) override {
-		if (handle__dragEnterEvent == 0) {
+		if (!handle__dragEnterEvent) {
 			QDateTimeEdit::dragEnterEvent(event);
 			return;
 		}
 
 		QDragEnterEvent* sigval1 = event;
-		miqt_exec_callback_QDateTimeEdit_dragEnterEvent(this, handle__dragEnterEvent, sigval1);
+		miqt_exec_callback_QDateTimeEdit_dragEnterEvent(this, handle__dragEnterEvent.value(), sigval1);
 
 	}
 
 	friend void QDateTimeEdit_virtualbase_dragEnterEvent(void* self, QDragEnterEvent* event);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__dragMoveEvent = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QDateTimeEdit> handle__dragMoveEvent;
 
 	// Subclass to allow providing a Go implementation
 	virtual void dragMoveEvent(QDragMoveEvent* event) override {
-		if (handle__dragMoveEvent == 0) {
+		if (!handle__dragMoveEvent) {
 			QDateTimeEdit::dragMoveEvent(event);
 			return;
 		}
 
 		QDragMoveEvent* sigval1 = event;
-		miqt_exec_callback_QDateTimeEdit_dragMoveEvent(this, handle__dragMoveEvent, sigval1);
+		miqt_exec_callback_QDateTimeEdit_dragMoveEvent(this, handle__dragMoveEvent.value(), sigval1);
 
 	}
 
 	friend void QDateTimeEdit_virtualbase_dragMoveEvent(void* self, QDragMoveEvent* event);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__dragLeaveEvent = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QDateTimeEdit> handle__dragLeaveEvent;
 
 	// Subclass to allow providing a Go implementation
 	virtual void dragLeaveEvent(QDragLeaveEvent* event) override {
-		if (handle__dragLeaveEvent == 0) {
+		if (!handle__dragLeaveEvent) {
 			QDateTimeEdit::dragLeaveEvent(event);
 			return;
 		}
 
 		QDragLeaveEvent* sigval1 = event;
-		miqt_exec_callback_QDateTimeEdit_dragLeaveEvent(this, handle__dragLeaveEvent, sigval1);
+		miqt_exec_callback_QDateTimeEdit_dragLeaveEvent(this, handle__dragLeaveEvent.value(), sigval1);
 
 	}
 
 	friend void QDateTimeEdit_virtualbase_dragLeaveEvent(void* self, QDragLeaveEvent* event);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__dropEvent = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QDateTimeEdit> handle__dropEvent;
 
 	// Subclass to allow providing a Go implementation
 	virtual void dropEvent(QDropEvent* event) override {
-		if (handle__dropEvent == 0) {
+		if (!handle__dropEvent) {
 			QDateTimeEdit::dropEvent(event);
 			return;
 		}
 
 		QDropEvent* sigval1 = event;
-		miqt_exec_callback_QDateTimeEdit_dropEvent(this, handle__dropEvent, sigval1);
+		miqt_exec_callback_QDateTimeEdit_dropEvent(this, handle__dropEvent.value(), sigval1);
 
 	}
 
 	friend void QDateTimeEdit_virtualbase_dropEvent(void* self, QDropEvent* event);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__nativeEvent = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QDateTimeEdit> handle__nativeEvent;
 
 	// Subclass to allow providing a Go implementation
 	virtual bool nativeEvent(const QByteArray& eventType, void* message, long* result) override {
-		if (handle__nativeEvent == 0) {
+		if (!handle__nativeEvent) {
 			return QDateTimeEdit::nativeEvent(eventType, message, result);
 		}
 
@@ -991,151 +996,151 @@ public:
 		struct miqt_string sigval1 = eventType_ms;
 		void* sigval2 = message;
 		long* sigval3 = result;
-		bool callback_return_value = miqt_exec_callback_QDateTimeEdit_nativeEvent(this, handle__nativeEvent, sigval1, sigval2, sigval3);
+		bool callback_return_value = miqt_exec_callback_QDateTimeEdit_nativeEvent(this, handle__nativeEvent.value(), sigval1, sigval2, sigval3);
 		return callback_return_value;
 	}
 
 	friend bool QDateTimeEdit_virtualbase_nativeEvent(void* self, struct miqt_string eventType, void* message, long* result);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__metric = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QDateTimeEdit> handle__metric;
 
 	// Subclass to allow providing a Go implementation
 	virtual int metric(QPaintDevice::PaintDeviceMetric param1) const override {
-		if (handle__metric == 0) {
+		if (!handle__metric) {
 			return QDateTimeEdit::metric(param1);
 		}
 
 		QPaintDevice::PaintDeviceMetric param1_ret = param1;
 		int sigval1 = static_cast<int>(param1_ret);
-		int callback_return_value = miqt_exec_callback_QDateTimeEdit_metric(this, handle__metric, sigval1);
+		int callback_return_value = miqt_exec_callback_QDateTimeEdit_metric(this, handle__metric.value(), sigval1);
 		return static_cast<int>(callback_return_value);
 	}
 
 	friend int QDateTimeEdit_virtualbase_metric(const void* self, int param1);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__initPainter = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QDateTimeEdit> handle__initPainter;
 
 	// Subclass to allow providing a Go implementation
 	virtual void initPainter(QPainter* painter) const override {
-		if (handle__initPainter == 0) {
+		if (!handle__initPainter) {
 			QDateTimeEdit::initPainter(painter);
 			return;
 		}
 
 		QPainter* sigval1 = painter;
-		miqt_exec_callback_QDateTimeEdit_initPainter(this, handle__initPainter, sigval1);
+		miqt_exec_callback_QDateTimeEdit_initPainter(this, handle__initPainter.value(), sigval1);
 
 	}
 
 	friend void QDateTimeEdit_virtualbase_initPainter(const void* self, QPainter* painter);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__redirected = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QDateTimeEdit> handle__redirected;
 
 	// Subclass to allow providing a Go implementation
 	virtual QPaintDevice* redirected(QPoint* offset) const override {
-		if (handle__redirected == 0) {
+		if (!handle__redirected) {
 			return QDateTimeEdit::redirected(offset);
 		}
 
 		QPoint* sigval1 = offset;
-		QPaintDevice* callback_return_value = miqt_exec_callback_QDateTimeEdit_redirected(this, handle__redirected, sigval1);
+		QPaintDevice* callback_return_value = miqt_exec_callback_QDateTimeEdit_redirected(this, handle__redirected.value(), sigval1);
 		return callback_return_value;
 	}
 
 	friend QPaintDevice* QDateTimeEdit_virtualbase_redirected(const void* self, QPoint* offset);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__sharedPainter = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QDateTimeEdit> handle__sharedPainter;
 
 	// Subclass to allow providing a Go implementation
 	virtual QPainter* sharedPainter() const override {
-		if (handle__sharedPainter == 0) {
+		if (!handle__sharedPainter) {
 			return QDateTimeEdit::sharedPainter();
 		}
 
-		QPainter* callback_return_value = miqt_exec_callback_QDateTimeEdit_sharedPainter(this, handle__sharedPainter);
+		QPainter* callback_return_value = miqt_exec_callback_QDateTimeEdit_sharedPainter(this, handle__sharedPainter.value());
 		return callback_return_value;
 	}
 
 	friend QPainter* QDateTimeEdit_virtualbase_sharedPainter(const void* self);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__inputMethodEvent = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QDateTimeEdit> handle__inputMethodEvent;
 
 	// Subclass to allow providing a Go implementation
 	virtual void inputMethodEvent(QInputMethodEvent* param1) override {
-		if (handle__inputMethodEvent == 0) {
+		if (!handle__inputMethodEvent) {
 			QDateTimeEdit::inputMethodEvent(param1);
 			return;
 		}
 
 		QInputMethodEvent* sigval1 = param1;
-		miqt_exec_callback_QDateTimeEdit_inputMethodEvent(this, handle__inputMethodEvent, sigval1);
+		miqt_exec_callback_QDateTimeEdit_inputMethodEvent(this, handle__inputMethodEvent.value(), sigval1);
 
 	}
 
 	friend void QDateTimeEdit_virtualbase_inputMethodEvent(void* self, QInputMethodEvent* param1);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__eventFilter = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QDateTimeEdit> handle__eventFilter;
 
 	// Subclass to allow providing a Go implementation
 	virtual bool eventFilter(QObject* watched, QEvent* event) override {
-		if (handle__eventFilter == 0) {
+		if (!handle__eventFilter) {
 			return QDateTimeEdit::eventFilter(watched, event);
 		}
 
 		QObject* sigval1 = watched;
 		QEvent* sigval2 = event;
-		bool callback_return_value = miqt_exec_callback_QDateTimeEdit_eventFilter(this, handle__eventFilter, sigval1, sigval2);
+		bool callback_return_value = miqt_exec_callback_QDateTimeEdit_eventFilter(this, handle__eventFilter.value(), sigval1, sigval2);
 		return callback_return_value;
 	}
 
 	friend bool QDateTimeEdit_virtualbase_eventFilter(void* self, QObject* watched, QEvent* event);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__childEvent = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QDateTimeEdit> handle__childEvent;
 
 	// Subclass to allow providing a Go implementation
 	virtual void childEvent(QChildEvent* event) override {
-		if (handle__childEvent == 0) {
+		if (!handle__childEvent) {
 			QDateTimeEdit::childEvent(event);
 			return;
 		}
 
 		QChildEvent* sigval1 = event;
-		miqt_exec_callback_QDateTimeEdit_childEvent(this, handle__childEvent, sigval1);
+		miqt_exec_callback_QDateTimeEdit_childEvent(this, handle__childEvent.value(), sigval1);
 
 	}
 
 	friend void QDateTimeEdit_virtualbase_childEvent(void* self, QChildEvent* event);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__customEvent = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QDateTimeEdit> handle__customEvent;
 
 	// Subclass to allow providing a Go implementation
 	virtual void customEvent(QEvent* event) override {
-		if (handle__customEvent == 0) {
+		if (!handle__customEvent) {
 			QDateTimeEdit::customEvent(event);
 			return;
 		}
 
 		QEvent* sigval1 = event;
-		miqt_exec_callback_QDateTimeEdit_customEvent(this, handle__customEvent, sigval1);
+		miqt_exec_callback_QDateTimeEdit_customEvent(this, handle__customEvent.value(), sigval1);
 
 	}
 
 	friend void QDateTimeEdit_virtualbase_customEvent(void* self, QEvent* event);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__connectNotify = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QDateTimeEdit> handle__connectNotify;
 
 	// Subclass to allow providing a Go implementation
 	virtual void connectNotify(const QMetaMethod& signal) override {
-		if (handle__connectNotify == 0) {
+		if (!handle__connectNotify) {
 			QDateTimeEdit::connectNotify(signal);
 			return;
 		}
@@ -1143,18 +1148,18 @@ public:
 		const QMetaMethod& signal_ret = signal;
 		// Cast returned reference into pointer
 		QMetaMethod* sigval1 = const_cast<QMetaMethod*>(&signal_ret);
-		miqt_exec_callback_QDateTimeEdit_connectNotify(this, handle__connectNotify, sigval1);
+		miqt_exec_callback_QDateTimeEdit_connectNotify(this, handle__connectNotify.value(), sigval1);
 
 	}
 
 	friend void QDateTimeEdit_virtualbase_connectNotify(void* self, QMetaMethod* signal);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__disconnectNotify = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QDateTimeEdit> handle__disconnectNotify;
 
 	// Subclass to allow providing a Go implementation
 	virtual void disconnectNotify(const QMetaMethod& signal) override {
-		if (handle__disconnectNotify == 0) {
+		if (!handle__disconnectNotify) {
 			QDateTimeEdit::disconnectNotify(signal);
 			return;
 		}
@@ -1162,7 +1167,7 @@ public:
 		const QMetaMethod& signal_ret = signal;
 		// Cast returned reference into pointer
 		QMetaMethod* sigval1 = const_cast<QMetaMethod*>(&signal_ret);
-		miqt_exec_callback_QDateTimeEdit_disconnectNotify(this, handle__disconnectNotify, sigval1);
+		miqt_exec_callback_QDateTimeEdit_disconnectNotify(this, handle__disconnectNotify.value(), sigval1);
 
 	}
 
@@ -1460,39 +1465,45 @@ void QDateTimeEdit_dateTimeChanged(QDateTimeEdit* self, QDateTime* dateTime) {
 	self->dateTimeChanged(*dateTime);
 }
 
-void QDateTimeEdit_connect_dateTimeChanged(QDateTimeEdit* self, intptr_t slot) {
-	QDateTimeEdit::connect(self, static_cast<void (QDateTimeEdit::*)(const QDateTime&)>(&QDateTimeEdit::dateTimeChanged), self, [=](const QDateTime& dateTime) {
+void* QDateTimeEdit_connect_dateTimeChanged(QDateTimeEdit* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QDateTimeEdit>>(slot);
+	return new QMetaObject::Connection(QDateTimeEdit::connect(self, static_cast<void (QDateTimeEdit::*)(const QDateTime&)>(&QDateTimeEdit::dateTimeChanged), self, [slot_handle](const QDateTime& dateTime) {
+		intptr_t slot = slot_handle->value();
 		const QDateTime& dateTime_ret = dateTime;
 		// Cast returned reference into pointer
 		QDateTime* sigval1 = const_cast<QDateTime*>(&dateTime_ret);
 		miqt_exec_callback_QDateTimeEdit_dateTimeChanged(slot, sigval1);
-	});
+	}));
 }
 
 void QDateTimeEdit_timeChanged(QDateTimeEdit* self, QTime* time) {
 	self->timeChanged(*time);
 }
 
-void QDateTimeEdit_connect_timeChanged(QDateTimeEdit* self, intptr_t slot) {
-	QDateTimeEdit::connect(self, static_cast<void (QDateTimeEdit::*)(const QTime&)>(&QDateTimeEdit::timeChanged), self, [=](const QTime& time) {
+void* QDateTimeEdit_connect_timeChanged(QDateTimeEdit* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QDateTimeEdit>>(slot);
+	return new QMetaObject::Connection(QDateTimeEdit::connect(self, static_cast<void (QDateTimeEdit::*)(const QTime&)>(&QDateTimeEdit::timeChanged), self, [slot_handle](const QTime& time) {
+		intptr_t slot = slot_handle->value();
 		const QTime& time_ret = time;
 		// Cast returned reference into pointer
 		QTime* sigval1 = const_cast<QTime*>(&time_ret);
 		miqt_exec_callback_QDateTimeEdit_timeChanged(slot, sigval1);
-	});
+	}));
 }
 
 void QDateTimeEdit_dateChanged(QDateTimeEdit* self, QDate* date) {
 	self->dateChanged(*date);
 }
 
-void QDateTimeEdit_connect_dateChanged(QDateTimeEdit* self, intptr_t slot) {
-	QDateTimeEdit::connect(self, static_cast<void (QDateTimeEdit::*)(const QDate&)>(&QDateTimeEdit::dateChanged), self, [=](const QDate& date) {
+void* QDateTimeEdit_connect_dateChanged(QDateTimeEdit* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QDateTimeEdit>>(slot);
+	return new QMetaObject::Connection(QDateTimeEdit::connect(self, static_cast<void (QDateTimeEdit::*)(const QDate&)>(&QDateTimeEdit::dateChanged), self, [slot_handle](const QDate& date) {
+		intptr_t slot = slot_handle->value();
 		const QDate& date_ret = date;
 		// Cast returned reference into pointer
 		QDate* sigval1 = const_cast<QDate*>(&date_ret);
 		miqt_exec_callback_QDateTimeEdit_dateChanged(slot, sigval1);
-	});
+	}));
 }
 
 void QDateTimeEdit_setDateTime(QDateTimeEdit* self, QDateTime* dateTime) {
@@ -1552,12 +1563,13 @@ struct miqt_string QDateTimeEdit_trUtf83(const char* s, const char* c, int n) {
 }
 
 bool QDateTimeEdit_override_virtual_sizeHint(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QDateTimeEdit> slot_handle(slot);
 	MiqtVirtualQDateTimeEdit* self_cast = dynamic_cast<MiqtVirtualQDateTimeEdit*>( (QDateTimeEdit*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__sizeHint = slot;
+	self_cast->handle__sizeHint = std::move(slot_handle);
 	return true;
 }
 
@@ -1566,12 +1578,13 @@ QSize* QDateTimeEdit_virtualbase_sizeHint(const void* self) {
 }
 
 bool QDateTimeEdit_override_virtual_clear(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QDateTimeEdit> slot_handle(slot);
 	MiqtVirtualQDateTimeEdit* self_cast = dynamic_cast<MiqtVirtualQDateTimeEdit*>( (QDateTimeEdit*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__clear = slot;
+	self_cast->handle__clear = std::move(slot_handle);
 	return true;
 }
 
@@ -1580,12 +1593,13 @@ void QDateTimeEdit_virtualbase_clear(void* self) {
 }
 
 bool QDateTimeEdit_override_virtual_stepBy(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QDateTimeEdit> slot_handle(slot);
 	MiqtVirtualQDateTimeEdit* self_cast = dynamic_cast<MiqtVirtualQDateTimeEdit*>( (QDateTimeEdit*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__stepBy = slot;
+	self_cast->handle__stepBy = std::move(slot_handle);
 	return true;
 }
 
@@ -1594,12 +1608,13 @@ void QDateTimeEdit_virtualbase_stepBy(void* self, int steps) {
 }
 
 bool QDateTimeEdit_override_virtual_event(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QDateTimeEdit> slot_handle(slot);
 	MiqtVirtualQDateTimeEdit* self_cast = dynamic_cast<MiqtVirtualQDateTimeEdit*>( (QDateTimeEdit*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__event = slot;
+	self_cast->handle__event = std::move(slot_handle);
 	return true;
 }
 
@@ -1608,12 +1623,13 @@ bool QDateTimeEdit_virtualbase_event(void* self, QEvent* event) {
 }
 
 bool QDateTimeEdit_override_virtual_keyPressEvent(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QDateTimeEdit> slot_handle(slot);
 	MiqtVirtualQDateTimeEdit* self_cast = dynamic_cast<MiqtVirtualQDateTimeEdit*>( (QDateTimeEdit*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__keyPressEvent = slot;
+	self_cast->handle__keyPressEvent = std::move(slot_handle);
 	return true;
 }
 
@@ -1622,12 +1638,13 @@ void QDateTimeEdit_virtualbase_keyPressEvent(void* self, QKeyEvent* event) {
 }
 
 bool QDateTimeEdit_override_virtual_wheelEvent(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QDateTimeEdit> slot_handle(slot);
 	MiqtVirtualQDateTimeEdit* self_cast = dynamic_cast<MiqtVirtualQDateTimeEdit*>( (QDateTimeEdit*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__wheelEvent = slot;
+	self_cast->handle__wheelEvent = std::move(slot_handle);
 	return true;
 }
 
@@ -1636,12 +1653,13 @@ void QDateTimeEdit_virtualbase_wheelEvent(void* self, QWheelEvent* event) {
 }
 
 bool QDateTimeEdit_override_virtual_focusInEvent(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QDateTimeEdit> slot_handle(slot);
 	MiqtVirtualQDateTimeEdit* self_cast = dynamic_cast<MiqtVirtualQDateTimeEdit*>( (QDateTimeEdit*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__focusInEvent = slot;
+	self_cast->handle__focusInEvent = std::move(slot_handle);
 	return true;
 }
 
@@ -1650,12 +1668,13 @@ void QDateTimeEdit_virtualbase_focusInEvent(void* self, QFocusEvent* event) {
 }
 
 bool QDateTimeEdit_override_virtual_focusNextPrevChild(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QDateTimeEdit> slot_handle(slot);
 	MiqtVirtualQDateTimeEdit* self_cast = dynamic_cast<MiqtVirtualQDateTimeEdit*>( (QDateTimeEdit*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__focusNextPrevChild = slot;
+	self_cast->handle__focusNextPrevChild = std::move(slot_handle);
 	return true;
 }
 
@@ -1664,12 +1683,13 @@ bool QDateTimeEdit_virtualbase_focusNextPrevChild(void* self, bool next) {
 }
 
 bool QDateTimeEdit_override_virtual_validate(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QDateTimeEdit> slot_handle(slot);
 	MiqtVirtualQDateTimeEdit* self_cast = dynamic_cast<MiqtVirtualQDateTimeEdit*>( (QDateTimeEdit*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__validate = slot;
+	self_cast->handle__validate = std::move(slot_handle);
 	return true;
 }
 
@@ -1680,12 +1700,13 @@ int QDateTimeEdit_virtualbase_validate(const void* self, struct miqt_string inpu
 }
 
 bool QDateTimeEdit_override_virtual_fixup(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QDateTimeEdit> slot_handle(slot);
 	MiqtVirtualQDateTimeEdit* self_cast = dynamic_cast<MiqtVirtualQDateTimeEdit*>( (QDateTimeEdit*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__fixup = slot;
+	self_cast->handle__fixup = std::move(slot_handle);
 	return true;
 }
 
@@ -1695,12 +1716,13 @@ void QDateTimeEdit_virtualbase_fixup(const void* self, struct miqt_string input)
 }
 
 bool QDateTimeEdit_override_virtual_dateTimeFromText(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QDateTimeEdit> slot_handle(slot);
 	MiqtVirtualQDateTimeEdit* self_cast = dynamic_cast<MiqtVirtualQDateTimeEdit*>( (QDateTimeEdit*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__dateTimeFromText = slot;
+	self_cast->handle__dateTimeFromText = std::move(slot_handle);
 	return true;
 }
 
@@ -1710,12 +1732,13 @@ QDateTime* QDateTimeEdit_virtualbase_dateTimeFromText(const void* self, struct m
 }
 
 bool QDateTimeEdit_override_virtual_textFromDateTime(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QDateTimeEdit> slot_handle(slot);
 	MiqtVirtualQDateTimeEdit* self_cast = dynamic_cast<MiqtVirtualQDateTimeEdit*>( (QDateTimeEdit*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__textFromDateTime = slot;
+	self_cast->handle__textFromDateTime = std::move(slot_handle);
 	return true;
 }
 
@@ -1731,12 +1754,13 @@ struct miqt_string QDateTimeEdit_virtualbase_textFromDateTime(const void* self, 
 }
 
 bool QDateTimeEdit_override_virtual_stepEnabled(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QDateTimeEdit> slot_handle(slot);
 	MiqtVirtualQDateTimeEdit* self_cast = dynamic_cast<MiqtVirtualQDateTimeEdit*>( (QDateTimeEdit*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__stepEnabled = slot;
+	self_cast->handle__stepEnabled = std::move(slot_handle);
 	return true;
 }
 
@@ -1746,12 +1770,13 @@ int QDateTimeEdit_virtualbase_stepEnabled(const void* self) {
 }
 
 bool QDateTimeEdit_override_virtual_mousePressEvent(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QDateTimeEdit> slot_handle(slot);
 	MiqtVirtualQDateTimeEdit* self_cast = dynamic_cast<MiqtVirtualQDateTimeEdit*>( (QDateTimeEdit*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__mousePressEvent = slot;
+	self_cast->handle__mousePressEvent = std::move(slot_handle);
 	return true;
 }
 
@@ -1760,12 +1785,13 @@ void QDateTimeEdit_virtualbase_mousePressEvent(void* self, QMouseEvent* event) {
 }
 
 bool QDateTimeEdit_override_virtual_paintEvent(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QDateTimeEdit> slot_handle(slot);
 	MiqtVirtualQDateTimeEdit* self_cast = dynamic_cast<MiqtVirtualQDateTimeEdit*>( (QDateTimeEdit*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__paintEvent = slot;
+	self_cast->handle__paintEvent = std::move(slot_handle);
 	return true;
 }
 
@@ -1774,12 +1800,13 @@ void QDateTimeEdit_virtualbase_paintEvent(void* self, QPaintEvent* event) {
 }
 
 bool QDateTimeEdit_override_virtual_minimumSizeHint(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QDateTimeEdit> slot_handle(slot);
 	MiqtVirtualQDateTimeEdit* self_cast = dynamic_cast<MiqtVirtualQDateTimeEdit*>( (QDateTimeEdit*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__minimumSizeHint = slot;
+	self_cast->handle__minimumSizeHint = std::move(slot_handle);
 	return true;
 }
 
@@ -1788,12 +1815,13 @@ QSize* QDateTimeEdit_virtualbase_minimumSizeHint(const void* self) {
 }
 
 bool QDateTimeEdit_override_virtual_inputMethodQuery(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QDateTimeEdit> slot_handle(slot);
 	MiqtVirtualQDateTimeEdit* self_cast = dynamic_cast<MiqtVirtualQDateTimeEdit*>( (QDateTimeEdit*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__inputMethodQuery = slot;
+	self_cast->handle__inputMethodQuery = std::move(slot_handle);
 	return true;
 }
 
@@ -1802,12 +1830,13 @@ QVariant* QDateTimeEdit_virtualbase_inputMethodQuery(const void* self, int param
 }
 
 bool QDateTimeEdit_override_virtual_resizeEvent(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QDateTimeEdit> slot_handle(slot);
 	MiqtVirtualQDateTimeEdit* self_cast = dynamic_cast<MiqtVirtualQDateTimeEdit*>( (QDateTimeEdit*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__resizeEvent = slot;
+	self_cast->handle__resizeEvent = std::move(slot_handle);
 	return true;
 }
 
@@ -1816,12 +1845,13 @@ void QDateTimeEdit_virtualbase_resizeEvent(void* self, QResizeEvent* event) {
 }
 
 bool QDateTimeEdit_override_virtual_keyReleaseEvent(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QDateTimeEdit> slot_handle(slot);
 	MiqtVirtualQDateTimeEdit* self_cast = dynamic_cast<MiqtVirtualQDateTimeEdit*>( (QDateTimeEdit*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__keyReleaseEvent = slot;
+	self_cast->handle__keyReleaseEvent = std::move(slot_handle);
 	return true;
 }
 
@@ -1830,12 +1860,13 @@ void QDateTimeEdit_virtualbase_keyReleaseEvent(void* self, QKeyEvent* event) {
 }
 
 bool QDateTimeEdit_override_virtual_focusOutEvent(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QDateTimeEdit> slot_handle(slot);
 	MiqtVirtualQDateTimeEdit* self_cast = dynamic_cast<MiqtVirtualQDateTimeEdit*>( (QDateTimeEdit*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__focusOutEvent = slot;
+	self_cast->handle__focusOutEvent = std::move(slot_handle);
 	return true;
 }
 
@@ -1844,12 +1875,13 @@ void QDateTimeEdit_virtualbase_focusOutEvent(void* self, QFocusEvent* event) {
 }
 
 bool QDateTimeEdit_override_virtual_contextMenuEvent(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QDateTimeEdit> slot_handle(slot);
 	MiqtVirtualQDateTimeEdit* self_cast = dynamic_cast<MiqtVirtualQDateTimeEdit*>( (QDateTimeEdit*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__contextMenuEvent = slot;
+	self_cast->handle__contextMenuEvent = std::move(slot_handle);
 	return true;
 }
 
@@ -1858,12 +1890,13 @@ void QDateTimeEdit_virtualbase_contextMenuEvent(void* self, QContextMenuEvent* e
 }
 
 bool QDateTimeEdit_override_virtual_changeEvent(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QDateTimeEdit> slot_handle(slot);
 	MiqtVirtualQDateTimeEdit* self_cast = dynamic_cast<MiqtVirtualQDateTimeEdit*>( (QDateTimeEdit*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__changeEvent = slot;
+	self_cast->handle__changeEvent = std::move(slot_handle);
 	return true;
 }
 
@@ -1872,12 +1905,13 @@ void QDateTimeEdit_virtualbase_changeEvent(void* self, QEvent* event) {
 }
 
 bool QDateTimeEdit_override_virtual_closeEvent(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QDateTimeEdit> slot_handle(slot);
 	MiqtVirtualQDateTimeEdit* self_cast = dynamic_cast<MiqtVirtualQDateTimeEdit*>( (QDateTimeEdit*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__closeEvent = slot;
+	self_cast->handle__closeEvent = std::move(slot_handle);
 	return true;
 }
 
@@ -1886,12 +1920,13 @@ void QDateTimeEdit_virtualbase_closeEvent(void* self, QCloseEvent* event) {
 }
 
 bool QDateTimeEdit_override_virtual_hideEvent(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QDateTimeEdit> slot_handle(slot);
 	MiqtVirtualQDateTimeEdit* self_cast = dynamic_cast<MiqtVirtualQDateTimeEdit*>( (QDateTimeEdit*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__hideEvent = slot;
+	self_cast->handle__hideEvent = std::move(slot_handle);
 	return true;
 }
 
@@ -1900,12 +1935,13 @@ void QDateTimeEdit_virtualbase_hideEvent(void* self, QHideEvent* event) {
 }
 
 bool QDateTimeEdit_override_virtual_mouseReleaseEvent(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QDateTimeEdit> slot_handle(slot);
 	MiqtVirtualQDateTimeEdit* self_cast = dynamic_cast<MiqtVirtualQDateTimeEdit*>( (QDateTimeEdit*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__mouseReleaseEvent = slot;
+	self_cast->handle__mouseReleaseEvent = std::move(slot_handle);
 	return true;
 }
 
@@ -1914,12 +1950,13 @@ void QDateTimeEdit_virtualbase_mouseReleaseEvent(void* self, QMouseEvent* event)
 }
 
 bool QDateTimeEdit_override_virtual_mouseMoveEvent(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QDateTimeEdit> slot_handle(slot);
 	MiqtVirtualQDateTimeEdit* self_cast = dynamic_cast<MiqtVirtualQDateTimeEdit*>( (QDateTimeEdit*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__mouseMoveEvent = slot;
+	self_cast->handle__mouseMoveEvent = std::move(slot_handle);
 	return true;
 }
 
@@ -1928,12 +1965,13 @@ void QDateTimeEdit_virtualbase_mouseMoveEvent(void* self, QMouseEvent* event) {
 }
 
 bool QDateTimeEdit_override_virtual_timerEvent(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QDateTimeEdit> slot_handle(slot);
 	MiqtVirtualQDateTimeEdit* self_cast = dynamic_cast<MiqtVirtualQDateTimeEdit*>( (QDateTimeEdit*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__timerEvent = slot;
+	self_cast->handle__timerEvent = std::move(slot_handle);
 	return true;
 }
 
@@ -1942,12 +1980,13 @@ void QDateTimeEdit_virtualbase_timerEvent(void* self, QTimerEvent* event) {
 }
 
 bool QDateTimeEdit_override_virtual_showEvent(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QDateTimeEdit> slot_handle(slot);
 	MiqtVirtualQDateTimeEdit* self_cast = dynamic_cast<MiqtVirtualQDateTimeEdit*>( (QDateTimeEdit*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__showEvent = slot;
+	self_cast->handle__showEvent = std::move(slot_handle);
 	return true;
 }
 
@@ -1956,12 +1995,13 @@ void QDateTimeEdit_virtualbase_showEvent(void* self, QShowEvent* event) {
 }
 
 bool QDateTimeEdit_override_virtual_devType(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QDateTimeEdit> slot_handle(slot);
 	MiqtVirtualQDateTimeEdit* self_cast = dynamic_cast<MiqtVirtualQDateTimeEdit*>( (QDateTimeEdit*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__devType = slot;
+	self_cast->handle__devType = std::move(slot_handle);
 	return true;
 }
 
@@ -1970,12 +2010,13 @@ int QDateTimeEdit_virtualbase_devType(const void* self) {
 }
 
 bool QDateTimeEdit_override_virtual_setVisible(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QDateTimeEdit> slot_handle(slot);
 	MiqtVirtualQDateTimeEdit* self_cast = dynamic_cast<MiqtVirtualQDateTimeEdit*>( (QDateTimeEdit*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__setVisible = slot;
+	self_cast->handle__setVisible = std::move(slot_handle);
 	return true;
 }
 
@@ -1984,12 +2025,13 @@ void QDateTimeEdit_virtualbase_setVisible(void* self, bool visible) {
 }
 
 bool QDateTimeEdit_override_virtual_heightForWidth(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QDateTimeEdit> slot_handle(slot);
 	MiqtVirtualQDateTimeEdit* self_cast = dynamic_cast<MiqtVirtualQDateTimeEdit*>( (QDateTimeEdit*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__heightForWidth = slot;
+	self_cast->handle__heightForWidth = std::move(slot_handle);
 	return true;
 }
 
@@ -1998,12 +2040,13 @@ int QDateTimeEdit_virtualbase_heightForWidth(const void* self, int param1) {
 }
 
 bool QDateTimeEdit_override_virtual_hasHeightForWidth(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QDateTimeEdit> slot_handle(slot);
 	MiqtVirtualQDateTimeEdit* self_cast = dynamic_cast<MiqtVirtualQDateTimeEdit*>( (QDateTimeEdit*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__hasHeightForWidth = slot;
+	self_cast->handle__hasHeightForWidth = std::move(slot_handle);
 	return true;
 }
 
@@ -2012,12 +2055,13 @@ bool QDateTimeEdit_virtualbase_hasHeightForWidth(const void* self) {
 }
 
 bool QDateTimeEdit_override_virtual_paintEngine(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QDateTimeEdit> slot_handle(slot);
 	MiqtVirtualQDateTimeEdit* self_cast = dynamic_cast<MiqtVirtualQDateTimeEdit*>( (QDateTimeEdit*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__paintEngine = slot;
+	self_cast->handle__paintEngine = std::move(slot_handle);
 	return true;
 }
 
@@ -2026,12 +2070,13 @@ QPaintEngine* QDateTimeEdit_virtualbase_paintEngine(const void* self) {
 }
 
 bool QDateTimeEdit_override_virtual_mouseDoubleClickEvent(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QDateTimeEdit> slot_handle(slot);
 	MiqtVirtualQDateTimeEdit* self_cast = dynamic_cast<MiqtVirtualQDateTimeEdit*>( (QDateTimeEdit*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__mouseDoubleClickEvent = slot;
+	self_cast->handle__mouseDoubleClickEvent = std::move(slot_handle);
 	return true;
 }
 
@@ -2040,12 +2085,13 @@ void QDateTimeEdit_virtualbase_mouseDoubleClickEvent(void* self, QMouseEvent* ev
 }
 
 bool QDateTimeEdit_override_virtual_enterEvent(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QDateTimeEdit> slot_handle(slot);
 	MiqtVirtualQDateTimeEdit* self_cast = dynamic_cast<MiqtVirtualQDateTimeEdit*>( (QDateTimeEdit*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__enterEvent = slot;
+	self_cast->handle__enterEvent = std::move(slot_handle);
 	return true;
 }
 
@@ -2054,12 +2100,13 @@ void QDateTimeEdit_virtualbase_enterEvent(void* self, QEvent* event) {
 }
 
 bool QDateTimeEdit_override_virtual_leaveEvent(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QDateTimeEdit> slot_handle(slot);
 	MiqtVirtualQDateTimeEdit* self_cast = dynamic_cast<MiqtVirtualQDateTimeEdit*>( (QDateTimeEdit*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__leaveEvent = slot;
+	self_cast->handle__leaveEvent = std::move(slot_handle);
 	return true;
 }
 
@@ -2068,12 +2115,13 @@ void QDateTimeEdit_virtualbase_leaveEvent(void* self, QEvent* event) {
 }
 
 bool QDateTimeEdit_override_virtual_moveEvent(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QDateTimeEdit> slot_handle(slot);
 	MiqtVirtualQDateTimeEdit* self_cast = dynamic_cast<MiqtVirtualQDateTimeEdit*>( (QDateTimeEdit*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__moveEvent = slot;
+	self_cast->handle__moveEvent = std::move(slot_handle);
 	return true;
 }
 
@@ -2082,12 +2130,13 @@ void QDateTimeEdit_virtualbase_moveEvent(void* self, QMoveEvent* event) {
 }
 
 bool QDateTimeEdit_override_virtual_tabletEvent(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QDateTimeEdit> slot_handle(slot);
 	MiqtVirtualQDateTimeEdit* self_cast = dynamic_cast<MiqtVirtualQDateTimeEdit*>( (QDateTimeEdit*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__tabletEvent = slot;
+	self_cast->handle__tabletEvent = std::move(slot_handle);
 	return true;
 }
 
@@ -2096,12 +2145,13 @@ void QDateTimeEdit_virtualbase_tabletEvent(void* self, QTabletEvent* event) {
 }
 
 bool QDateTimeEdit_override_virtual_actionEvent(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QDateTimeEdit> slot_handle(slot);
 	MiqtVirtualQDateTimeEdit* self_cast = dynamic_cast<MiqtVirtualQDateTimeEdit*>( (QDateTimeEdit*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__actionEvent = slot;
+	self_cast->handle__actionEvent = std::move(slot_handle);
 	return true;
 }
 
@@ -2110,12 +2160,13 @@ void QDateTimeEdit_virtualbase_actionEvent(void* self, QActionEvent* event) {
 }
 
 bool QDateTimeEdit_override_virtual_dragEnterEvent(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QDateTimeEdit> slot_handle(slot);
 	MiqtVirtualQDateTimeEdit* self_cast = dynamic_cast<MiqtVirtualQDateTimeEdit*>( (QDateTimeEdit*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__dragEnterEvent = slot;
+	self_cast->handle__dragEnterEvent = std::move(slot_handle);
 	return true;
 }
 
@@ -2124,12 +2175,13 @@ void QDateTimeEdit_virtualbase_dragEnterEvent(void* self, QDragEnterEvent* event
 }
 
 bool QDateTimeEdit_override_virtual_dragMoveEvent(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QDateTimeEdit> slot_handle(slot);
 	MiqtVirtualQDateTimeEdit* self_cast = dynamic_cast<MiqtVirtualQDateTimeEdit*>( (QDateTimeEdit*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__dragMoveEvent = slot;
+	self_cast->handle__dragMoveEvent = std::move(slot_handle);
 	return true;
 }
 
@@ -2138,12 +2190,13 @@ void QDateTimeEdit_virtualbase_dragMoveEvent(void* self, QDragMoveEvent* event) 
 }
 
 bool QDateTimeEdit_override_virtual_dragLeaveEvent(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QDateTimeEdit> slot_handle(slot);
 	MiqtVirtualQDateTimeEdit* self_cast = dynamic_cast<MiqtVirtualQDateTimeEdit*>( (QDateTimeEdit*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__dragLeaveEvent = slot;
+	self_cast->handle__dragLeaveEvent = std::move(slot_handle);
 	return true;
 }
 
@@ -2152,12 +2205,13 @@ void QDateTimeEdit_virtualbase_dragLeaveEvent(void* self, QDragLeaveEvent* event
 }
 
 bool QDateTimeEdit_override_virtual_dropEvent(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QDateTimeEdit> slot_handle(slot);
 	MiqtVirtualQDateTimeEdit* self_cast = dynamic_cast<MiqtVirtualQDateTimeEdit*>( (QDateTimeEdit*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__dropEvent = slot;
+	self_cast->handle__dropEvent = std::move(slot_handle);
 	return true;
 }
 
@@ -2166,12 +2220,13 @@ void QDateTimeEdit_virtualbase_dropEvent(void* self, QDropEvent* event) {
 }
 
 bool QDateTimeEdit_override_virtual_nativeEvent(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QDateTimeEdit> slot_handle(slot);
 	MiqtVirtualQDateTimeEdit* self_cast = dynamic_cast<MiqtVirtualQDateTimeEdit*>( (QDateTimeEdit*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__nativeEvent = slot;
+	self_cast->handle__nativeEvent = std::move(slot_handle);
 	return true;
 }
 
@@ -2181,12 +2236,13 @@ bool QDateTimeEdit_virtualbase_nativeEvent(void* self, struct miqt_string eventT
 }
 
 bool QDateTimeEdit_override_virtual_metric(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QDateTimeEdit> slot_handle(slot);
 	MiqtVirtualQDateTimeEdit* self_cast = dynamic_cast<MiqtVirtualQDateTimeEdit*>( (QDateTimeEdit*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__metric = slot;
+	self_cast->handle__metric = std::move(slot_handle);
 	return true;
 }
 
@@ -2195,12 +2251,13 @@ int QDateTimeEdit_virtualbase_metric(const void* self, int param1) {
 }
 
 bool QDateTimeEdit_override_virtual_initPainter(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QDateTimeEdit> slot_handle(slot);
 	MiqtVirtualQDateTimeEdit* self_cast = dynamic_cast<MiqtVirtualQDateTimeEdit*>( (QDateTimeEdit*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__initPainter = slot;
+	self_cast->handle__initPainter = std::move(slot_handle);
 	return true;
 }
 
@@ -2209,12 +2266,13 @@ void QDateTimeEdit_virtualbase_initPainter(const void* self, QPainter* painter) 
 }
 
 bool QDateTimeEdit_override_virtual_redirected(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QDateTimeEdit> slot_handle(slot);
 	MiqtVirtualQDateTimeEdit* self_cast = dynamic_cast<MiqtVirtualQDateTimeEdit*>( (QDateTimeEdit*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__redirected = slot;
+	self_cast->handle__redirected = std::move(slot_handle);
 	return true;
 }
 
@@ -2223,12 +2281,13 @@ QPaintDevice* QDateTimeEdit_virtualbase_redirected(const void* self, QPoint* off
 }
 
 bool QDateTimeEdit_override_virtual_sharedPainter(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QDateTimeEdit> slot_handle(slot);
 	MiqtVirtualQDateTimeEdit* self_cast = dynamic_cast<MiqtVirtualQDateTimeEdit*>( (QDateTimeEdit*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__sharedPainter = slot;
+	self_cast->handle__sharedPainter = std::move(slot_handle);
 	return true;
 }
 
@@ -2237,12 +2296,13 @@ QPainter* QDateTimeEdit_virtualbase_sharedPainter(const void* self) {
 }
 
 bool QDateTimeEdit_override_virtual_inputMethodEvent(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QDateTimeEdit> slot_handle(slot);
 	MiqtVirtualQDateTimeEdit* self_cast = dynamic_cast<MiqtVirtualQDateTimeEdit*>( (QDateTimeEdit*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__inputMethodEvent = slot;
+	self_cast->handle__inputMethodEvent = std::move(slot_handle);
 	return true;
 }
 
@@ -2251,12 +2311,13 @@ void QDateTimeEdit_virtualbase_inputMethodEvent(void* self, QInputMethodEvent* p
 }
 
 bool QDateTimeEdit_override_virtual_eventFilter(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QDateTimeEdit> slot_handle(slot);
 	MiqtVirtualQDateTimeEdit* self_cast = dynamic_cast<MiqtVirtualQDateTimeEdit*>( (QDateTimeEdit*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__eventFilter = slot;
+	self_cast->handle__eventFilter = std::move(slot_handle);
 	return true;
 }
 
@@ -2265,12 +2326,13 @@ bool QDateTimeEdit_virtualbase_eventFilter(void* self, QObject* watched, QEvent*
 }
 
 bool QDateTimeEdit_override_virtual_childEvent(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QDateTimeEdit> slot_handle(slot);
 	MiqtVirtualQDateTimeEdit* self_cast = dynamic_cast<MiqtVirtualQDateTimeEdit*>( (QDateTimeEdit*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__childEvent = slot;
+	self_cast->handle__childEvent = std::move(slot_handle);
 	return true;
 }
 
@@ -2279,12 +2341,13 @@ void QDateTimeEdit_virtualbase_childEvent(void* self, QChildEvent* event) {
 }
 
 bool QDateTimeEdit_override_virtual_customEvent(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QDateTimeEdit> slot_handle(slot);
 	MiqtVirtualQDateTimeEdit* self_cast = dynamic_cast<MiqtVirtualQDateTimeEdit*>( (QDateTimeEdit*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__customEvent = slot;
+	self_cast->handle__customEvent = std::move(slot_handle);
 	return true;
 }
 
@@ -2293,12 +2356,13 @@ void QDateTimeEdit_virtualbase_customEvent(void* self, QEvent* event) {
 }
 
 bool QDateTimeEdit_override_virtual_connectNotify(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QDateTimeEdit> slot_handle(slot);
 	MiqtVirtualQDateTimeEdit* self_cast = dynamic_cast<MiqtVirtualQDateTimeEdit*>( (QDateTimeEdit*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__connectNotify = slot;
+	self_cast->handle__connectNotify = std::move(slot_handle);
 	return true;
 }
 
@@ -2307,12 +2371,13 @@ void QDateTimeEdit_virtualbase_connectNotify(void* self, QMetaMethod* signal) {
 }
 
 bool QDateTimeEdit_override_virtual_disconnectNotify(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QDateTimeEdit> slot_handle(slot);
 	MiqtVirtualQDateTimeEdit* self_cast = dynamic_cast<MiqtVirtualQDateTimeEdit*>( (QDateTimeEdit*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__disconnectNotify = slot;
+	self_cast->handle__disconnectNotify = std::move(slot_handle);
 	return true;
 }
 
@@ -2467,142 +2532,142 @@ public:
 	virtual ~MiqtVirtualQTimeEdit() override = default;
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__sizeHint = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QTimeEdit> handle__sizeHint;
 
 	// Subclass to allow providing a Go implementation
 	virtual QSize sizeHint() const override {
-		if (handle__sizeHint == 0) {
+		if (!handle__sizeHint) {
 			return QTimeEdit::sizeHint();
 		}
 
-		QSize* callback_return_value = miqt_exec_callback_QTimeEdit_sizeHint(this, handle__sizeHint);
+		QSize* callback_return_value = miqt_exec_callback_QTimeEdit_sizeHint(this, handle__sizeHint.value());
 		return *callback_return_value;
 	}
 
 	friend QSize* QTimeEdit_virtualbase_sizeHint(const void* self);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__clear = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QTimeEdit> handle__clear;
 
 	// Subclass to allow providing a Go implementation
 	virtual void clear() override {
-		if (handle__clear == 0) {
+		if (!handle__clear) {
 			QTimeEdit::clear();
 			return;
 		}
 
-		miqt_exec_callback_QTimeEdit_clear(this, handle__clear);
+		miqt_exec_callback_QTimeEdit_clear(this, handle__clear.value());
 
 	}
 
 	friend void QTimeEdit_virtualbase_clear(void* self);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__stepBy = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QTimeEdit> handle__stepBy;
 
 	// Subclass to allow providing a Go implementation
 	virtual void stepBy(int steps) override {
-		if (handle__stepBy == 0) {
+		if (!handle__stepBy) {
 			QTimeEdit::stepBy(steps);
 			return;
 		}
 
 		int sigval1 = steps;
-		miqt_exec_callback_QTimeEdit_stepBy(this, handle__stepBy, sigval1);
+		miqt_exec_callback_QTimeEdit_stepBy(this, handle__stepBy.value(), sigval1);
 
 	}
 
 	friend void QTimeEdit_virtualbase_stepBy(void* self, int steps);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__event = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QTimeEdit> handle__event;
 
 	// Subclass to allow providing a Go implementation
 	virtual bool event(QEvent* event) override {
-		if (handle__event == 0) {
+		if (!handle__event) {
 			return QTimeEdit::event(event);
 		}
 
 		QEvent* sigval1 = event;
-		bool callback_return_value = miqt_exec_callback_QTimeEdit_event(this, handle__event, sigval1);
+		bool callback_return_value = miqt_exec_callback_QTimeEdit_event(this, handle__event.value(), sigval1);
 		return callback_return_value;
 	}
 
 	friend bool QTimeEdit_virtualbase_event(void* self, QEvent* event);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__keyPressEvent = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QTimeEdit> handle__keyPressEvent;
 
 	// Subclass to allow providing a Go implementation
 	virtual void keyPressEvent(QKeyEvent* event) override {
-		if (handle__keyPressEvent == 0) {
+		if (!handle__keyPressEvent) {
 			QTimeEdit::keyPressEvent(event);
 			return;
 		}
 
 		QKeyEvent* sigval1 = event;
-		miqt_exec_callback_QTimeEdit_keyPressEvent(this, handle__keyPressEvent, sigval1);
+		miqt_exec_callback_QTimeEdit_keyPressEvent(this, handle__keyPressEvent.value(), sigval1);
 
 	}
 
 	friend void QTimeEdit_virtualbase_keyPressEvent(void* self, QKeyEvent* event);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__wheelEvent = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QTimeEdit> handle__wheelEvent;
 
 	// Subclass to allow providing a Go implementation
 	virtual void wheelEvent(QWheelEvent* event) override {
-		if (handle__wheelEvent == 0) {
+		if (!handle__wheelEvent) {
 			QTimeEdit::wheelEvent(event);
 			return;
 		}
 
 		QWheelEvent* sigval1 = event;
-		miqt_exec_callback_QTimeEdit_wheelEvent(this, handle__wheelEvent, sigval1);
+		miqt_exec_callback_QTimeEdit_wheelEvent(this, handle__wheelEvent.value(), sigval1);
 
 	}
 
 	friend void QTimeEdit_virtualbase_wheelEvent(void* self, QWheelEvent* event);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__focusInEvent = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QTimeEdit> handle__focusInEvent;
 
 	// Subclass to allow providing a Go implementation
 	virtual void focusInEvent(QFocusEvent* event) override {
-		if (handle__focusInEvent == 0) {
+		if (!handle__focusInEvent) {
 			QTimeEdit::focusInEvent(event);
 			return;
 		}
 
 		QFocusEvent* sigval1 = event;
-		miqt_exec_callback_QTimeEdit_focusInEvent(this, handle__focusInEvent, sigval1);
+		miqt_exec_callback_QTimeEdit_focusInEvent(this, handle__focusInEvent.value(), sigval1);
 
 	}
 
 	friend void QTimeEdit_virtualbase_focusInEvent(void* self, QFocusEvent* event);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__focusNextPrevChild = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QTimeEdit> handle__focusNextPrevChild;
 
 	// Subclass to allow providing a Go implementation
 	virtual bool focusNextPrevChild(bool next) override {
-		if (handle__focusNextPrevChild == 0) {
+		if (!handle__focusNextPrevChild) {
 			return QTimeEdit::focusNextPrevChild(next);
 		}
 
 		bool sigval1 = next;
-		bool callback_return_value = miqt_exec_callback_QTimeEdit_focusNextPrevChild(this, handle__focusNextPrevChild, sigval1);
+		bool callback_return_value = miqt_exec_callback_QTimeEdit_focusNextPrevChild(this, handle__focusNextPrevChild.value(), sigval1);
 		return callback_return_value;
 	}
 
 	friend bool QTimeEdit_virtualbase_focusNextPrevChild(void* self, bool next);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__validate = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QTimeEdit> handle__validate;
 
 	// Subclass to allow providing a Go implementation
 	virtual QValidator::State validate(QString& input, int& pos) const override {
-		if (handle__validate == 0) {
+		if (!handle__validate) {
 			return QTimeEdit::validate(input, pos);
 		}
 
@@ -2615,18 +2680,18 @@ public:
 		memcpy(input_ms.data, input_b.data(), input_ms.len);
 		struct miqt_string sigval1 = input_ms;
 		int* sigval2 = &pos;
-		int callback_return_value = miqt_exec_callback_QTimeEdit_validate(this, handle__validate, sigval1, sigval2);
+		int callback_return_value = miqt_exec_callback_QTimeEdit_validate(this, handle__validate.value(), sigval1, sigval2);
 		return static_cast<QValidator::State>(callback_return_value);
 	}
 
 	friend int QTimeEdit_virtualbase_validate(const void* self, struct miqt_string input, int* pos);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__fixup = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QTimeEdit> handle__fixup;
 
 	// Subclass to allow providing a Go implementation
 	virtual void fixup(QString& input) const override {
-		if (handle__fixup == 0) {
+		if (!handle__fixup) {
 			QTimeEdit::fixup(input);
 			return;
 		}
@@ -2639,18 +2704,18 @@ public:
 		input_ms.data = static_cast<char*>(malloc(input_ms.len));
 		memcpy(input_ms.data, input_b.data(), input_ms.len);
 		struct miqt_string sigval1 = input_ms;
-		miqt_exec_callback_QTimeEdit_fixup(this, handle__fixup, sigval1);
+		miqt_exec_callback_QTimeEdit_fixup(this, handle__fixup.value(), sigval1);
 
 	}
 
 	friend void QTimeEdit_virtualbase_fixup(const void* self, struct miqt_string input);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__dateTimeFromText = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QTimeEdit> handle__dateTimeFromText;
 
 	// Subclass to allow providing a Go implementation
 	virtual QDateTime dateTimeFromText(const QString& text) const override {
-		if (handle__dateTimeFromText == 0) {
+		if (!handle__dateTimeFromText) {
 			return QTimeEdit::dateTimeFromText(text);
 		}
 
@@ -2662,25 +2727,25 @@ public:
 		text_ms.data = static_cast<char*>(malloc(text_ms.len));
 		memcpy(text_ms.data, text_b.data(), text_ms.len);
 		struct miqt_string sigval1 = text_ms;
-		QDateTime* callback_return_value = miqt_exec_callback_QTimeEdit_dateTimeFromText(this, handle__dateTimeFromText, sigval1);
+		QDateTime* callback_return_value = miqt_exec_callback_QTimeEdit_dateTimeFromText(this, handle__dateTimeFromText.value(), sigval1);
 		return *callback_return_value;
 	}
 
 	friend QDateTime* QTimeEdit_virtualbase_dateTimeFromText(const void* self, struct miqt_string text);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__textFromDateTime = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QTimeEdit> handle__textFromDateTime;
 
 	// Subclass to allow providing a Go implementation
 	virtual QString textFromDateTime(const QDateTime& dt) const override {
-		if (handle__textFromDateTime == 0) {
+		if (!handle__textFromDateTime) {
 			return QTimeEdit::textFromDateTime(dt);
 		}
 
 		const QDateTime& dt_ret = dt;
 		// Cast returned reference into pointer
 		QDateTime* sigval1 = const_cast<QDateTime*>(&dt_ret);
-		struct miqt_string callback_return_value = miqt_exec_callback_QTimeEdit_textFromDateTime(this, handle__textFromDateTime, sigval1);
+		struct miqt_string callback_return_value = miqt_exec_callback_QTimeEdit_textFromDateTime(this, handle__textFromDateTime.value(), sigval1);
 		QString callback_return_value_QString = QString::fromUtf8(callback_return_value.data, callback_return_value.len);
 		free(callback_return_value.data);
 		return callback_return_value_QString;
@@ -2689,527 +2754,527 @@ public:
 	friend struct miqt_string QTimeEdit_virtualbase_textFromDateTime(const void* self, QDateTime* dt);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__stepEnabled = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QTimeEdit> handle__stepEnabled;
 
 	// Subclass to allow providing a Go implementation
 	virtual QAbstractSpinBox::StepEnabled stepEnabled() const override {
-		if (handle__stepEnabled == 0) {
+		if (!handle__stepEnabled) {
 			return QTimeEdit::stepEnabled();
 		}
 
-		int callback_return_value = miqt_exec_callback_QTimeEdit_stepEnabled(this, handle__stepEnabled);
+		int callback_return_value = miqt_exec_callback_QTimeEdit_stepEnabled(this, handle__stepEnabled.value());
 		return static_cast<QAbstractSpinBox::StepEnabled>(callback_return_value);
 	}
 
 	friend int QTimeEdit_virtualbase_stepEnabled(const void* self);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__mousePressEvent = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QTimeEdit> handle__mousePressEvent;
 
 	// Subclass to allow providing a Go implementation
 	virtual void mousePressEvent(QMouseEvent* event) override {
-		if (handle__mousePressEvent == 0) {
+		if (!handle__mousePressEvent) {
 			QTimeEdit::mousePressEvent(event);
 			return;
 		}
 
 		QMouseEvent* sigval1 = event;
-		miqt_exec_callback_QTimeEdit_mousePressEvent(this, handle__mousePressEvent, sigval1);
+		miqt_exec_callback_QTimeEdit_mousePressEvent(this, handle__mousePressEvent.value(), sigval1);
 
 	}
 
 	friend void QTimeEdit_virtualbase_mousePressEvent(void* self, QMouseEvent* event);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__paintEvent = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QTimeEdit> handle__paintEvent;
 
 	// Subclass to allow providing a Go implementation
 	virtual void paintEvent(QPaintEvent* event) override {
-		if (handle__paintEvent == 0) {
+		if (!handle__paintEvent) {
 			QTimeEdit::paintEvent(event);
 			return;
 		}
 
 		QPaintEvent* sigval1 = event;
-		miqt_exec_callback_QTimeEdit_paintEvent(this, handle__paintEvent, sigval1);
+		miqt_exec_callback_QTimeEdit_paintEvent(this, handle__paintEvent.value(), sigval1);
 
 	}
 
 	friend void QTimeEdit_virtualbase_paintEvent(void* self, QPaintEvent* event);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__minimumSizeHint = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QTimeEdit> handle__minimumSizeHint;
 
 	// Subclass to allow providing a Go implementation
 	virtual QSize minimumSizeHint() const override {
-		if (handle__minimumSizeHint == 0) {
+		if (!handle__minimumSizeHint) {
 			return QTimeEdit::minimumSizeHint();
 		}
 
-		QSize* callback_return_value = miqt_exec_callback_QTimeEdit_minimumSizeHint(this, handle__minimumSizeHint);
+		QSize* callback_return_value = miqt_exec_callback_QTimeEdit_minimumSizeHint(this, handle__minimumSizeHint.value());
 		return *callback_return_value;
 	}
 
 	friend QSize* QTimeEdit_virtualbase_minimumSizeHint(const void* self);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__inputMethodQuery = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QTimeEdit> handle__inputMethodQuery;
 
 	// Subclass to allow providing a Go implementation
 	virtual QVariant inputMethodQuery(Qt::InputMethodQuery param1) const override {
-		if (handle__inputMethodQuery == 0) {
+		if (!handle__inputMethodQuery) {
 			return QTimeEdit::inputMethodQuery(param1);
 		}
 
 		Qt::InputMethodQuery param1_ret = param1;
 		int sigval1 = static_cast<int>(param1_ret);
-		QVariant* callback_return_value = miqt_exec_callback_QTimeEdit_inputMethodQuery(this, handle__inputMethodQuery, sigval1);
+		QVariant* callback_return_value = miqt_exec_callback_QTimeEdit_inputMethodQuery(this, handle__inputMethodQuery.value(), sigval1);
 		return *callback_return_value;
 	}
 
 	friend QVariant* QTimeEdit_virtualbase_inputMethodQuery(const void* self, int param1);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__resizeEvent = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QTimeEdit> handle__resizeEvent;
 
 	// Subclass to allow providing a Go implementation
 	virtual void resizeEvent(QResizeEvent* event) override {
-		if (handle__resizeEvent == 0) {
+		if (!handle__resizeEvent) {
 			QTimeEdit::resizeEvent(event);
 			return;
 		}
 
 		QResizeEvent* sigval1 = event;
-		miqt_exec_callback_QTimeEdit_resizeEvent(this, handle__resizeEvent, sigval1);
+		miqt_exec_callback_QTimeEdit_resizeEvent(this, handle__resizeEvent.value(), sigval1);
 
 	}
 
 	friend void QTimeEdit_virtualbase_resizeEvent(void* self, QResizeEvent* event);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__keyReleaseEvent = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QTimeEdit> handle__keyReleaseEvent;
 
 	// Subclass to allow providing a Go implementation
 	virtual void keyReleaseEvent(QKeyEvent* event) override {
-		if (handle__keyReleaseEvent == 0) {
+		if (!handle__keyReleaseEvent) {
 			QTimeEdit::keyReleaseEvent(event);
 			return;
 		}
 
 		QKeyEvent* sigval1 = event;
-		miqt_exec_callback_QTimeEdit_keyReleaseEvent(this, handle__keyReleaseEvent, sigval1);
+		miqt_exec_callback_QTimeEdit_keyReleaseEvent(this, handle__keyReleaseEvent.value(), sigval1);
 
 	}
 
 	friend void QTimeEdit_virtualbase_keyReleaseEvent(void* self, QKeyEvent* event);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__focusOutEvent = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QTimeEdit> handle__focusOutEvent;
 
 	// Subclass to allow providing a Go implementation
 	virtual void focusOutEvent(QFocusEvent* event) override {
-		if (handle__focusOutEvent == 0) {
+		if (!handle__focusOutEvent) {
 			QTimeEdit::focusOutEvent(event);
 			return;
 		}
 
 		QFocusEvent* sigval1 = event;
-		miqt_exec_callback_QTimeEdit_focusOutEvent(this, handle__focusOutEvent, sigval1);
+		miqt_exec_callback_QTimeEdit_focusOutEvent(this, handle__focusOutEvent.value(), sigval1);
 
 	}
 
 	friend void QTimeEdit_virtualbase_focusOutEvent(void* self, QFocusEvent* event);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__contextMenuEvent = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QTimeEdit> handle__contextMenuEvent;
 
 	// Subclass to allow providing a Go implementation
 	virtual void contextMenuEvent(QContextMenuEvent* event) override {
-		if (handle__contextMenuEvent == 0) {
+		if (!handle__contextMenuEvent) {
 			QTimeEdit::contextMenuEvent(event);
 			return;
 		}
 
 		QContextMenuEvent* sigval1 = event;
-		miqt_exec_callback_QTimeEdit_contextMenuEvent(this, handle__contextMenuEvent, sigval1);
+		miqt_exec_callback_QTimeEdit_contextMenuEvent(this, handle__contextMenuEvent.value(), sigval1);
 
 	}
 
 	friend void QTimeEdit_virtualbase_contextMenuEvent(void* self, QContextMenuEvent* event);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__changeEvent = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QTimeEdit> handle__changeEvent;
 
 	// Subclass to allow providing a Go implementation
 	virtual void changeEvent(QEvent* event) override {
-		if (handle__changeEvent == 0) {
+		if (!handle__changeEvent) {
 			QTimeEdit::changeEvent(event);
 			return;
 		}
 
 		QEvent* sigval1 = event;
-		miqt_exec_callback_QTimeEdit_changeEvent(this, handle__changeEvent, sigval1);
+		miqt_exec_callback_QTimeEdit_changeEvent(this, handle__changeEvent.value(), sigval1);
 
 	}
 
 	friend void QTimeEdit_virtualbase_changeEvent(void* self, QEvent* event);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__closeEvent = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QTimeEdit> handle__closeEvent;
 
 	// Subclass to allow providing a Go implementation
 	virtual void closeEvent(QCloseEvent* event) override {
-		if (handle__closeEvent == 0) {
+		if (!handle__closeEvent) {
 			QTimeEdit::closeEvent(event);
 			return;
 		}
 
 		QCloseEvent* sigval1 = event;
-		miqt_exec_callback_QTimeEdit_closeEvent(this, handle__closeEvent, sigval1);
+		miqt_exec_callback_QTimeEdit_closeEvent(this, handle__closeEvent.value(), sigval1);
 
 	}
 
 	friend void QTimeEdit_virtualbase_closeEvent(void* self, QCloseEvent* event);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__hideEvent = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QTimeEdit> handle__hideEvent;
 
 	// Subclass to allow providing a Go implementation
 	virtual void hideEvent(QHideEvent* event) override {
-		if (handle__hideEvent == 0) {
+		if (!handle__hideEvent) {
 			QTimeEdit::hideEvent(event);
 			return;
 		}
 
 		QHideEvent* sigval1 = event;
-		miqt_exec_callback_QTimeEdit_hideEvent(this, handle__hideEvent, sigval1);
+		miqt_exec_callback_QTimeEdit_hideEvent(this, handle__hideEvent.value(), sigval1);
 
 	}
 
 	friend void QTimeEdit_virtualbase_hideEvent(void* self, QHideEvent* event);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__mouseReleaseEvent = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QTimeEdit> handle__mouseReleaseEvent;
 
 	// Subclass to allow providing a Go implementation
 	virtual void mouseReleaseEvent(QMouseEvent* event) override {
-		if (handle__mouseReleaseEvent == 0) {
+		if (!handle__mouseReleaseEvent) {
 			QTimeEdit::mouseReleaseEvent(event);
 			return;
 		}
 
 		QMouseEvent* sigval1 = event;
-		miqt_exec_callback_QTimeEdit_mouseReleaseEvent(this, handle__mouseReleaseEvent, sigval1);
+		miqt_exec_callback_QTimeEdit_mouseReleaseEvent(this, handle__mouseReleaseEvent.value(), sigval1);
 
 	}
 
 	friend void QTimeEdit_virtualbase_mouseReleaseEvent(void* self, QMouseEvent* event);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__mouseMoveEvent = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QTimeEdit> handle__mouseMoveEvent;
 
 	// Subclass to allow providing a Go implementation
 	virtual void mouseMoveEvent(QMouseEvent* event) override {
-		if (handle__mouseMoveEvent == 0) {
+		if (!handle__mouseMoveEvent) {
 			QTimeEdit::mouseMoveEvent(event);
 			return;
 		}
 
 		QMouseEvent* sigval1 = event;
-		miqt_exec_callback_QTimeEdit_mouseMoveEvent(this, handle__mouseMoveEvent, sigval1);
+		miqt_exec_callback_QTimeEdit_mouseMoveEvent(this, handle__mouseMoveEvent.value(), sigval1);
 
 	}
 
 	friend void QTimeEdit_virtualbase_mouseMoveEvent(void* self, QMouseEvent* event);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__timerEvent = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QTimeEdit> handle__timerEvent;
 
 	// Subclass to allow providing a Go implementation
 	virtual void timerEvent(QTimerEvent* event) override {
-		if (handle__timerEvent == 0) {
+		if (!handle__timerEvent) {
 			QTimeEdit::timerEvent(event);
 			return;
 		}
 
 		QTimerEvent* sigval1 = event;
-		miqt_exec_callback_QTimeEdit_timerEvent(this, handle__timerEvent, sigval1);
+		miqt_exec_callback_QTimeEdit_timerEvent(this, handle__timerEvent.value(), sigval1);
 
 	}
 
 	friend void QTimeEdit_virtualbase_timerEvent(void* self, QTimerEvent* event);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__showEvent = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QTimeEdit> handle__showEvent;
 
 	// Subclass to allow providing a Go implementation
 	virtual void showEvent(QShowEvent* event) override {
-		if (handle__showEvent == 0) {
+		if (!handle__showEvent) {
 			QTimeEdit::showEvent(event);
 			return;
 		}
 
 		QShowEvent* sigval1 = event;
-		miqt_exec_callback_QTimeEdit_showEvent(this, handle__showEvent, sigval1);
+		miqt_exec_callback_QTimeEdit_showEvent(this, handle__showEvent.value(), sigval1);
 
 	}
 
 	friend void QTimeEdit_virtualbase_showEvent(void* self, QShowEvent* event);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__devType = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QTimeEdit> handle__devType;
 
 	// Subclass to allow providing a Go implementation
 	virtual int devType() const override {
-		if (handle__devType == 0) {
+		if (!handle__devType) {
 			return QTimeEdit::devType();
 		}
 
-		int callback_return_value = miqt_exec_callback_QTimeEdit_devType(this, handle__devType);
+		int callback_return_value = miqt_exec_callback_QTimeEdit_devType(this, handle__devType.value());
 		return static_cast<int>(callback_return_value);
 	}
 
 	friend int QTimeEdit_virtualbase_devType(const void* self);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__setVisible = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QTimeEdit> handle__setVisible;
 
 	// Subclass to allow providing a Go implementation
 	virtual void setVisible(bool visible) override {
-		if (handle__setVisible == 0) {
+		if (!handle__setVisible) {
 			QTimeEdit::setVisible(visible);
 			return;
 		}
 
 		bool sigval1 = visible;
-		miqt_exec_callback_QTimeEdit_setVisible(this, handle__setVisible, sigval1);
+		miqt_exec_callback_QTimeEdit_setVisible(this, handle__setVisible.value(), sigval1);
 
 	}
 
 	friend void QTimeEdit_virtualbase_setVisible(void* self, bool visible);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__heightForWidth = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QTimeEdit> handle__heightForWidth;
 
 	// Subclass to allow providing a Go implementation
 	virtual int heightForWidth(int param1) const override {
-		if (handle__heightForWidth == 0) {
+		if (!handle__heightForWidth) {
 			return QTimeEdit::heightForWidth(param1);
 		}
 
 		int sigval1 = param1;
-		int callback_return_value = miqt_exec_callback_QTimeEdit_heightForWidth(this, handle__heightForWidth, sigval1);
+		int callback_return_value = miqt_exec_callback_QTimeEdit_heightForWidth(this, handle__heightForWidth.value(), sigval1);
 		return static_cast<int>(callback_return_value);
 	}
 
 	friend int QTimeEdit_virtualbase_heightForWidth(const void* self, int param1);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__hasHeightForWidth = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QTimeEdit> handle__hasHeightForWidth;
 
 	// Subclass to allow providing a Go implementation
 	virtual bool hasHeightForWidth() const override {
-		if (handle__hasHeightForWidth == 0) {
+		if (!handle__hasHeightForWidth) {
 			return QTimeEdit::hasHeightForWidth();
 		}
 
-		bool callback_return_value = miqt_exec_callback_QTimeEdit_hasHeightForWidth(this, handle__hasHeightForWidth);
+		bool callback_return_value = miqt_exec_callback_QTimeEdit_hasHeightForWidth(this, handle__hasHeightForWidth.value());
 		return callback_return_value;
 	}
 
 	friend bool QTimeEdit_virtualbase_hasHeightForWidth(const void* self);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__paintEngine = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QTimeEdit> handle__paintEngine;
 
 	// Subclass to allow providing a Go implementation
 	virtual QPaintEngine* paintEngine() const override {
-		if (handle__paintEngine == 0) {
+		if (!handle__paintEngine) {
 			return QTimeEdit::paintEngine();
 		}
 
-		QPaintEngine* callback_return_value = miqt_exec_callback_QTimeEdit_paintEngine(this, handle__paintEngine);
+		QPaintEngine* callback_return_value = miqt_exec_callback_QTimeEdit_paintEngine(this, handle__paintEngine.value());
 		return callback_return_value;
 	}
 
 	friend QPaintEngine* QTimeEdit_virtualbase_paintEngine(const void* self);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__mouseDoubleClickEvent = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QTimeEdit> handle__mouseDoubleClickEvent;
 
 	// Subclass to allow providing a Go implementation
 	virtual void mouseDoubleClickEvent(QMouseEvent* event) override {
-		if (handle__mouseDoubleClickEvent == 0) {
+		if (!handle__mouseDoubleClickEvent) {
 			QTimeEdit::mouseDoubleClickEvent(event);
 			return;
 		}
 
 		QMouseEvent* sigval1 = event;
-		miqt_exec_callback_QTimeEdit_mouseDoubleClickEvent(this, handle__mouseDoubleClickEvent, sigval1);
+		miqt_exec_callback_QTimeEdit_mouseDoubleClickEvent(this, handle__mouseDoubleClickEvent.value(), sigval1);
 
 	}
 
 	friend void QTimeEdit_virtualbase_mouseDoubleClickEvent(void* self, QMouseEvent* event);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__enterEvent = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QTimeEdit> handle__enterEvent;
 
 	// Subclass to allow providing a Go implementation
 	virtual void enterEvent(QEvent* event) override {
-		if (handle__enterEvent == 0) {
+		if (!handle__enterEvent) {
 			QTimeEdit::enterEvent(event);
 			return;
 		}
 
 		QEvent* sigval1 = event;
-		miqt_exec_callback_QTimeEdit_enterEvent(this, handle__enterEvent, sigval1);
+		miqt_exec_callback_QTimeEdit_enterEvent(this, handle__enterEvent.value(), sigval1);
 
 	}
 
 	friend void QTimeEdit_virtualbase_enterEvent(void* self, QEvent* event);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__leaveEvent = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QTimeEdit> handle__leaveEvent;
 
 	// Subclass to allow providing a Go implementation
 	virtual void leaveEvent(QEvent* event) override {
-		if (handle__leaveEvent == 0) {
+		if (!handle__leaveEvent) {
 			QTimeEdit::leaveEvent(event);
 			return;
 		}
 
 		QEvent* sigval1 = event;
-		miqt_exec_callback_QTimeEdit_leaveEvent(this, handle__leaveEvent, sigval1);
+		miqt_exec_callback_QTimeEdit_leaveEvent(this, handle__leaveEvent.value(), sigval1);
 
 	}
 
 	friend void QTimeEdit_virtualbase_leaveEvent(void* self, QEvent* event);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__moveEvent = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QTimeEdit> handle__moveEvent;
 
 	// Subclass to allow providing a Go implementation
 	virtual void moveEvent(QMoveEvent* event) override {
-		if (handle__moveEvent == 0) {
+		if (!handle__moveEvent) {
 			QTimeEdit::moveEvent(event);
 			return;
 		}
 
 		QMoveEvent* sigval1 = event;
-		miqt_exec_callback_QTimeEdit_moveEvent(this, handle__moveEvent, sigval1);
+		miqt_exec_callback_QTimeEdit_moveEvent(this, handle__moveEvent.value(), sigval1);
 
 	}
 
 	friend void QTimeEdit_virtualbase_moveEvent(void* self, QMoveEvent* event);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__tabletEvent = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QTimeEdit> handle__tabletEvent;
 
 	// Subclass to allow providing a Go implementation
 	virtual void tabletEvent(QTabletEvent* event) override {
-		if (handle__tabletEvent == 0) {
+		if (!handle__tabletEvent) {
 			QTimeEdit::tabletEvent(event);
 			return;
 		}
 
 		QTabletEvent* sigval1 = event;
-		miqt_exec_callback_QTimeEdit_tabletEvent(this, handle__tabletEvent, sigval1);
+		miqt_exec_callback_QTimeEdit_tabletEvent(this, handle__tabletEvent.value(), sigval1);
 
 	}
 
 	friend void QTimeEdit_virtualbase_tabletEvent(void* self, QTabletEvent* event);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__actionEvent = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QTimeEdit> handle__actionEvent;
 
 	// Subclass to allow providing a Go implementation
 	virtual void actionEvent(QActionEvent* event) override {
-		if (handle__actionEvent == 0) {
+		if (!handle__actionEvent) {
 			QTimeEdit::actionEvent(event);
 			return;
 		}
 
 		QActionEvent* sigval1 = event;
-		miqt_exec_callback_QTimeEdit_actionEvent(this, handle__actionEvent, sigval1);
+		miqt_exec_callback_QTimeEdit_actionEvent(this, handle__actionEvent.value(), sigval1);
 
 	}
 
 	friend void QTimeEdit_virtualbase_actionEvent(void* self, QActionEvent* event);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__dragEnterEvent = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QTimeEdit> handle__dragEnterEvent;
 
 	// Subclass to allow providing a Go implementation
 	virtual void dragEnterEvent(QDragEnterEvent* event) override {
-		if (handle__dragEnterEvent == 0) {
+		if (!handle__dragEnterEvent) {
 			QTimeEdit::dragEnterEvent(event);
 			return;
 		}
 
 		QDragEnterEvent* sigval1 = event;
-		miqt_exec_callback_QTimeEdit_dragEnterEvent(this, handle__dragEnterEvent, sigval1);
+		miqt_exec_callback_QTimeEdit_dragEnterEvent(this, handle__dragEnterEvent.value(), sigval1);
 
 	}
 
 	friend void QTimeEdit_virtualbase_dragEnterEvent(void* self, QDragEnterEvent* event);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__dragMoveEvent = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QTimeEdit> handle__dragMoveEvent;
 
 	// Subclass to allow providing a Go implementation
 	virtual void dragMoveEvent(QDragMoveEvent* event) override {
-		if (handle__dragMoveEvent == 0) {
+		if (!handle__dragMoveEvent) {
 			QTimeEdit::dragMoveEvent(event);
 			return;
 		}
 
 		QDragMoveEvent* sigval1 = event;
-		miqt_exec_callback_QTimeEdit_dragMoveEvent(this, handle__dragMoveEvent, sigval1);
+		miqt_exec_callback_QTimeEdit_dragMoveEvent(this, handle__dragMoveEvent.value(), sigval1);
 
 	}
 
 	friend void QTimeEdit_virtualbase_dragMoveEvent(void* self, QDragMoveEvent* event);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__dragLeaveEvent = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QTimeEdit> handle__dragLeaveEvent;
 
 	// Subclass to allow providing a Go implementation
 	virtual void dragLeaveEvent(QDragLeaveEvent* event) override {
-		if (handle__dragLeaveEvent == 0) {
+		if (!handle__dragLeaveEvent) {
 			QTimeEdit::dragLeaveEvent(event);
 			return;
 		}
 
 		QDragLeaveEvent* sigval1 = event;
-		miqt_exec_callback_QTimeEdit_dragLeaveEvent(this, handle__dragLeaveEvent, sigval1);
+		miqt_exec_callback_QTimeEdit_dragLeaveEvent(this, handle__dragLeaveEvent.value(), sigval1);
 
 	}
 
 	friend void QTimeEdit_virtualbase_dragLeaveEvent(void* self, QDragLeaveEvent* event);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__dropEvent = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QTimeEdit> handle__dropEvent;
 
 	// Subclass to allow providing a Go implementation
 	virtual void dropEvent(QDropEvent* event) override {
-		if (handle__dropEvent == 0) {
+		if (!handle__dropEvent) {
 			QTimeEdit::dropEvent(event);
 			return;
 		}
 
 		QDropEvent* sigval1 = event;
-		miqt_exec_callback_QTimeEdit_dropEvent(this, handle__dropEvent, sigval1);
+		miqt_exec_callback_QTimeEdit_dropEvent(this, handle__dropEvent.value(), sigval1);
 
 	}
 
 	friend void QTimeEdit_virtualbase_dropEvent(void* self, QDropEvent* event);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__nativeEvent = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QTimeEdit> handle__nativeEvent;
 
 	// Subclass to allow providing a Go implementation
 	virtual bool nativeEvent(const QByteArray& eventType, void* message, long* result) override {
-		if (handle__nativeEvent == 0) {
+		if (!handle__nativeEvent) {
 			return QTimeEdit::nativeEvent(eventType, message, result);
 		}
 
@@ -3221,151 +3286,151 @@ public:
 		struct miqt_string sigval1 = eventType_ms;
 		void* sigval2 = message;
 		long* sigval3 = result;
-		bool callback_return_value = miqt_exec_callback_QTimeEdit_nativeEvent(this, handle__nativeEvent, sigval1, sigval2, sigval3);
+		bool callback_return_value = miqt_exec_callback_QTimeEdit_nativeEvent(this, handle__nativeEvent.value(), sigval1, sigval2, sigval3);
 		return callback_return_value;
 	}
 
 	friend bool QTimeEdit_virtualbase_nativeEvent(void* self, struct miqt_string eventType, void* message, long* result);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__metric = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QTimeEdit> handle__metric;
 
 	// Subclass to allow providing a Go implementation
 	virtual int metric(QPaintDevice::PaintDeviceMetric param1) const override {
-		if (handle__metric == 0) {
+		if (!handle__metric) {
 			return QTimeEdit::metric(param1);
 		}
 
 		QPaintDevice::PaintDeviceMetric param1_ret = param1;
 		int sigval1 = static_cast<int>(param1_ret);
-		int callback_return_value = miqt_exec_callback_QTimeEdit_metric(this, handle__metric, sigval1);
+		int callback_return_value = miqt_exec_callback_QTimeEdit_metric(this, handle__metric.value(), sigval1);
 		return static_cast<int>(callback_return_value);
 	}
 
 	friend int QTimeEdit_virtualbase_metric(const void* self, int param1);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__initPainter = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QTimeEdit> handle__initPainter;
 
 	// Subclass to allow providing a Go implementation
 	virtual void initPainter(QPainter* painter) const override {
-		if (handle__initPainter == 0) {
+		if (!handle__initPainter) {
 			QTimeEdit::initPainter(painter);
 			return;
 		}
 
 		QPainter* sigval1 = painter;
-		miqt_exec_callback_QTimeEdit_initPainter(this, handle__initPainter, sigval1);
+		miqt_exec_callback_QTimeEdit_initPainter(this, handle__initPainter.value(), sigval1);
 
 	}
 
 	friend void QTimeEdit_virtualbase_initPainter(const void* self, QPainter* painter);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__redirected = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QTimeEdit> handle__redirected;
 
 	// Subclass to allow providing a Go implementation
 	virtual QPaintDevice* redirected(QPoint* offset) const override {
-		if (handle__redirected == 0) {
+		if (!handle__redirected) {
 			return QTimeEdit::redirected(offset);
 		}
 
 		QPoint* sigval1 = offset;
-		QPaintDevice* callback_return_value = miqt_exec_callback_QTimeEdit_redirected(this, handle__redirected, sigval1);
+		QPaintDevice* callback_return_value = miqt_exec_callback_QTimeEdit_redirected(this, handle__redirected.value(), sigval1);
 		return callback_return_value;
 	}
 
 	friend QPaintDevice* QTimeEdit_virtualbase_redirected(const void* self, QPoint* offset);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__sharedPainter = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QTimeEdit> handle__sharedPainter;
 
 	// Subclass to allow providing a Go implementation
 	virtual QPainter* sharedPainter() const override {
-		if (handle__sharedPainter == 0) {
+		if (!handle__sharedPainter) {
 			return QTimeEdit::sharedPainter();
 		}
 
-		QPainter* callback_return_value = miqt_exec_callback_QTimeEdit_sharedPainter(this, handle__sharedPainter);
+		QPainter* callback_return_value = miqt_exec_callback_QTimeEdit_sharedPainter(this, handle__sharedPainter.value());
 		return callback_return_value;
 	}
 
 	friend QPainter* QTimeEdit_virtualbase_sharedPainter(const void* self);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__inputMethodEvent = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QTimeEdit> handle__inputMethodEvent;
 
 	// Subclass to allow providing a Go implementation
 	virtual void inputMethodEvent(QInputMethodEvent* param1) override {
-		if (handle__inputMethodEvent == 0) {
+		if (!handle__inputMethodEvent) {
 			QTimeEdit::inputMethodEvent(param1);
 			return;
 		}
 
 		QInputMethodEvent* sigval1 = param1;
-		miqt_exec_callback_QTimeEdit_inputMethodEvent(this, handle__inputMethodEvent, sigval1);
+		miqt_exec_callback_QTimeEdit_inputMethodEvent(this, handle__inputMethodEvent.value(), sigval1);
 
 	}
 
 	friend void QTimeEdit_virtualbase_inputMethodEvent(void* self, QInputMethodEvent* param1);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__eventFilter = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QTimeEdit> handle__eventFilter;
 
 	// Subclass to allow providing a Go implementation
 	virtual bool eventFilter(QObject* watched, QEvent* event) override {
-		if (handle__eventFilter == 0) {
+		if (!handle__eventFilter) {
 			return QTimeEdit::eventFilter(watched, event);
 		}
 
 		QObject* sigval1 = watched;
 		QEvent* sigval2 = event;
-		bool callback_return_value = miqt_exec_callback_QTimeEdit_eventFilter(this, handle__eventFilter, sigval1, sigval2);
+		bool callback_return_value = miqt_exec_callback_QTimeEdit_eventFilter(this, handle__eventFilter.value(), sigval1, sigval2);
 		return callback_return_value;
 	}
 
 	friend bool QTimeEdit_virtualbase_eventFilter(void* self, QObject* watched, QEvent* event);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__childEvent = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QTimeEdit> handle__childEvent;
 
 	// Subclass to allow providing a Go implementation
 	virtual void childEvent(QChildEvent* event) override {
-		if (handle__childEvent == 0) {
+		if (!handle__childEvent) {
 			QTimeEdit::childEvent(event);
 			return;
 		}
 
 		QChildEvent* sigval1 = event;
-		miqt_exec_callback_QTimeEdit_childEvent(this, handle__childEvent, sigval1);
+		miqt_exec_callback_QTimeEdit_childEvent(this, handle__childEvent.value(), sigval1);
 
 	}
 
 	friend void QTimeEdit_virtualbase_childEvent(void* self, QChildEvent* event);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__customEvent = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QTimeEdit> handle__customEvent;
 
 	// Subclass to allow providing a Go implementation
 	virtual void customEvent(QEvent* event) override {
-		if (handle__customEvent == 0) {
+		if (!handle__customEvent) {
 			QTimeEdit::customEvent(event);
 			return;
 		}
 
 		QEvent* sigval1 = event;
-		miqt_exec_callback_QTimeEdit_customEvent(this, handle__customEvent, sigval1);
+		miqt_exec_callback_QTimeEdit_customEvent(this, handle__customEvent.value(), sigval1);
 
 	}
 
 	friend void QTimeEdit_virtualbase_customEvent(void* self, QEvent* event);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__connectNotify = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QTimeEdit> handle__connectNotify;
 
 	// Subclass to allow providing a Go implementation
 	virtual void connectNotify(const QMetaMethod& signal) override {
-		if (handle__connectNotify == 0) {
+		if (!handle__connectNotify) {
 			QTimeEdit::connectNotify(signal);
 			return;
 		}
@@ -3373,18 +3438,18 @@ public:
 		const QMetaMethod& signal_ret = signal;
 		// Cast returned reference into pointer
 		QMetaMethod* sigval1 = const_cast<QMetaMethod*>(&signal_ret);
-		miqt_exec_callback_QTimeEdit_connectNotify(this, handle__connectNotify, sigval1);
+		miqt_exec_callback_QTimeEdit_connectNotify(this, handle__connectNotify.value(), sigval1);
 
 	}
 
 	friend void QTimeEdit_virtualbase_connectNotify(void* self, QMetaMethod* signal);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__disconnectNotify = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QTimeEdit> handle__disconnectNotify;
 
 	// Subclass to allow providing a Go implementation
 	virtual void disconnectNotify(const QMetaMethod& signal) override {
-		if (handle__disconnectNotify == 0) {
+		if (!handle__disconnectNotify) {
 			QTimeEdit::disconnectNotify(signal);
 			return;
 		}
@@ -3392,7 +3457,7 @@ public:
 		const QMetaMethod& signal_ret = signal;
 		// Cast returned reference into pointer
 		QMetaMethod* sigval1 = const_cast<QMetaMethod*>(&signal_ret);
-		miqt_exec_callback_QTimeEdit_disconnectNotify(this, handle__disconnectNotify, sigval1);
+		miqt_exec_callback_QTimeEdit_disconnectNotify(this, handle__disconnectNotify.value(), sigval1);
 
 	}
 
@@ -3467,13 +3532,15 @@ void QTimeEdit_userTimeChanged(QTimeEdit* self, QTime* time) {
 	self->userTimeChanged(*time);
 }
 
-void QTimeEdit_connect_userTimeChanged(QTimeEdit* self, intptr_t slot) {
-	QTimeEdit::connect(self, static_cast<void (QTimeEdit::*)(const QTime&)>(&QTimeEdit::userTimeChanged), self, [=](const QTime& time) {
+void* QTimeEdit_connect_userTimeChanged(QTimeEdit* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QTimeEdit>>(slot);
+	return new QMetaObject::Connection(QTimeEdit::connect(self, static_cast<void (QTimeEdit::*)(const QTime&)>(&QTimeEdit::userTimeChanged), self, [slot_handle](const QTime& time) {
+		intptr_t slot = slot_handle->value();
 		const QTime& time_ret = time;
 		// Cast returned reference into pointer
 		QTime* sigval1 = const_cast<QTime*>(&time_ret);
 		miqt_exec_callback_QTimeEdit_userTimeChanged(slot, sigval1);
-	});
+	}));
 }
 
 struct miqt_string QTimeEdit_tr2(const char* s, const char* c) {
@@ -3521,12 +3588,13 @@ struct miqt_string QTimeEdit_trUtf83(const char* s, const char* c, int n) {
 }
 
 bool QTimeEdit_override_virtual_sizeHint(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QTimeEdit> slot_handle(slot);
 	MiqtVirtualQTimeEdit* self_cast = dynamic_cast<MiqtVirtualQTimeEdit*>( (QTimeEdit*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__sizeHint = slot;
+	self_cast->handle__sizeHint = std::move(slot_handle);
 	return true;
 }
 
@@ -3535,12 +3603,13 @@ QSize* QTimeEdit_virtualbase_sizeHint(const void* self) {
 }
 
 bool QTimeEdit_override_virtual_clear(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QTimeEdit> slot_handle(slot);
 	MiqtVirtualQTimeEdit* self_cast = dynamic_cast<MiqtVirtualQTimeEdit*>( (QTimeEdit*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__clear = slot;
+	self_cast->handle__clear = std::move(slot_handle);
 	return true;
 }
 
@@ -3549,12 +3618,13 @@ void QTimeEdit_virtualbase_clear(void* self) {
 }
 
 bool QTimeEdit_override_virtual_stepBy(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QTimeEdit> slot_handle(slot);
 	MiqtVirtualQTimeEdit* self_cast = dynamic_cast<MiqtVirtualQTimeEdit*>( (QTimeEdit*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__stepBy = slot;
+	self_cast->handle__stepBy = std::move(slot_handle);
 	return true;
 }
 
@@ -3563,12 +3633,13 @@ void QTimeEdit_virtualbase_stepBy(void* self, int steps) {
 }
 
 bool QTimeEdit_override_virtual_event(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QTimeEdit> slot_handle(slot);
 	MiqtVirtualQTimeEdit* self_cast = dynamic_cast<MiqtVirtualQTimeEdit*>( (QTimeEdit*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__event = slot;
+	self_cast->handle__event = std::move(slot_handle);
 	return true;
 }
 
@@ -3577,12 +3648,13 @@ bool QTimeEdit_virtualbase_event(void* self, QEvent* event) {
 }
 
 bool QTimeEdit_override_virtual_keyPressEvent(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QTimeEdit> slot_handle(slot);
 	MiqtVirtualQTimeEdit* self_cast = dynamic_cast<MiqtVirtualQTimeEdit*>( (QTimeEdit*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__keyPressEvent = slot;
+	self_cast->handle__keyPressEvent = std::move(slot_handle);
 	return true;
 }
 
@@ -3591,12 +3663,13 @@ void QTimeEdit_virtualbase_keyPressEvent(void* self, QKeyEvent* event) {
 }
 
 bool QTimeEdit_override_virtual_wheelEvent(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QTimeEdit> slot_handle(slot);
 	MiqtVirtualQTimeEdit* self_cast = dynamic_cast<MiqtVirtualQTimeEdit*>( (QTimeEdit*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__wheelEvent = slot;
+	self_cast->handle__wheelEvent = std::move(slot_handle);
 	return true;
 }
 
@@ -3605,12 +3678,13 @@ void QTimeEdit_virtualbase_wheelEvent(void* self, QWheelEvent* event) {
 }
 
 bool QTimeEdit_override_virtual_focusInEvent(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QTimeEdit> slot_handle(slot);
 	MiqtVirtualQTimeEdit* self_cast = dynamic_cast<MiqtVirtualQTimeEdit*>( (QTimeEdit*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__focusInEvent = slot;
+	self_cast->handle__focusInEvent = std::move(slot_handle);
 	return true;
 }
 
@@ -3619,12 +3693,13 @@ void QTimeEdit_virtualbase_focusInEvent(void* self, QFocusEvent* event) {
 }
 
 bool QTimeEdit_override_virtual_focusNextPrevChild(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QTimeEdit> slot_handle(slot);
 	MiqtVirtualQTimeEdit* self_cast = dynamic_cast<MiqtVirtualQTimeEdit*>( (QTimeEdit*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__focusNextPrevChild = slot;
+	self_cast->handle__focusNextPrevChild = std::move(slot_handle);
 	return true;
 }
 
@@ -3633,12 +3708,13 @@ bool QTimeEdit_virtualbase_focusNextPrevChild(void* self, bool next) {
 }
 
 bool QTimeEdit_override_virtual_validate(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QTimeEdit> slot_handle(slot);
 	MiqtVirtualQTimeEdit* self_cast = dynamic_cast<MiqtVirtualQTimeEdit*>( (QTimeEdit*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__validate = slot;
+	self_cast->handle__validate = std::move(slot_handle);
 	return true;
 }
 
@@ -3649,12 +3725,13 @@ int QTimeEdit_virtualbase_validate(const void* self, struct miqt_string input, i
 }
 
 bool QTimeEdit_override_virtual_fixup(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QTimeEdit> slot_handle(slot);
 	MiqtVirtualQTimeEdit* self_cast = dynamic_cast<MiqtVirtualQTimeEdit*>( (QTimeEdit*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__fixup = slot;
+	self_cast->handle__fixup = std::move(slot_handle);
 	return true;
 }
 
@@ -3664,12 +3741,13 @@ void QTimeEdit_virtualbase_fixup(const void* self, struct miqt_string input) {
 }
 
 bool QTimeEdit_override_virtual_dateTimeFromText(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QTimeEdit> slot_handle(slot);
 	MiqtVirtualQTimeEdit* self_cast = dynamic_cast<MiqtVirtualQTimeEdit*>( (QTimeEdit*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__dateTimeFromText = slot;
+	self_cast->handle__dateTimeFromText = std::move(slot_handle);
 	return true;
 }
 
@@ -3679,12 +3757,13 @@ QDateTime* QTimeEdit_virtualbase_dateTimeFromText(const void* self, struct miqt_
 }
 
 bool QTimeEdit_override_virtual_textFromDateTime(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QTimeEdit> slot_handle(slot);
 	MiqtVirtualQTimeEdit* self_cast = dynamic_cast<MiqtVirtualQTimeEdit*>( (QTimeEdit*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__textFromDateTime = slot;
+	self_cast->handle__textFromDateTime = std::move(slot_handle);
 	return true;
 }
 
@@ -3700,12 +3779,13 @@ struct miqt_string QTimeEdit_virtualbase_textFromDateTime(const void* self, QDat
 }
 
 bool QTimeEdit_override_virtual_stepEnabled(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QTimeEdit> slot_handle(slot);
 	MiqtVirtualQTimeEdit* self_cast = dynamic_cast<MiqtVirtualQTimeEdit*>( (QTimeEdit*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__stepEnabled = slot;
+	self_cast->handle__stepEnabled = std::move(slot_handle);
 	return true;
 }
 
@@ -3715,12 +3795,13 @@ int QTimeEdit_virtualbase_stepEnabled(const void* self) {
 }
 
 bool QTimeEdit_override_virtual_mousePressEvent(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QTimeEdit> slot_handle(slot);
 	MiqtVirtualQTimeEdit* self_cast = dynamic_cast<MiqtVirtualQTimeEdit*>( (QTimeEdit*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__mousePressEvent = slot;
+	self_cast->handle__mousePressEvent = std::move(slot_handle);
 	return true;
 }
 
@@ -3729,12 +3810,13 @@ void QTimeEdit_virtualbase_mousePressEvent(void* self, QMouseEvent* event) {
 }
 
 bool QTimeEdit_override_virtual_paintEvent(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QTimeEdit> slot_handle(slot);
 	MiqtVirtualQTimeEdit* self_cast = dynamic_cast<MiqtVirtualQTimeEdit*>( (QTimeEdit*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__paintEvent = slot;
+	self_cast->handle__paintEvent = std::move(slot_handle);
 	return true;
 }
 
@@ -3743,12 +3825,13 @@ void QTimeEdit_virtualbase_paintEvent(void* self, QPaintEvent* event) {
 }
 
 bool QTimeEdit_override_virtual_minimumSizeHint(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QTimeEdit> slot_handle(slot);
 	MiqtVirtualQTimeEdit* self_cast = dynamic_cast<MiqtVirtualQTimeEdit*>( (QTimeEdit*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__minimumSizeHint = slot;
+	self_cast->handle__minimumSizeHint = std::move(slot_handle);
 	return true;
 }
 
@@ -3757,12 +3840,13 @@ QSize* QTimeEdit_virtualbase_minimumSizeHint(const void* self) {
 }
 
 bool QTimeEdit_override_virtual_inputMethodQuery(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QTimeEdit> slot_handle(slot);
 	MiqtVirtualQTimeEdit* self_cast = dynamic_cast<MiqtVirtualQTimeEdit*>( (QTimeEdit*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__inputMethodQuery = slot;
+	self_cast->handle__inputMethodQuery = std::move(slot_handle);
 	return true;
 }
 
@@ -3771,12 +3855,13 @@ QVariant* QTimeEdit_virtualbase_inputMethodQuery(const void* self, int param1) {
 }
 
 bool QTimeEdit_override_virtual_resizeEvent(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QTimeEdit> slot_handle(slot);
 	MiqtVirtualQTimeEdit* self_cast = dynamic_cast<MiqtVirtualQTimeEdit*>( (QTimeEdit*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__resizeEvent = slot;
+	self_cast->handle__resizeEvent = std::move(slot_handle);
 	return true;
 }
 
@@ -3785,12 +3870,13 @@ void QTimeEdit_virtualbase_resizeEvent(void* self, QResizeEvent* event) {
 }
 
 bool QTimeEdit_override_virtual_keyReleaseEvent(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QTimeEdit> slot_handle(slot);
 	MiqtVirtualQTimeEdit* self_cast = dynamic_cast<MiqtVirtualQTimeEdit*>( (QTimeEdit*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__keyReleaseEvent = slot;
+	self_cast->handle__keyReleaseEvent = std::move(slot_handle);
 	return true;
 }
 
@@ -3799,12 +3885,13 @@ void QTimeEdit_virtualbase_keyReleaseEvent(void* self, QKeyEvent* event) {
 }
 
 bool QTimeEdit_override_virtual_focusOutEvent(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QTimeEdit> slot_handle(slot);
 	MiqtVirtualQTimeEdit* self_cast = dynamic_cast<MiqtVirtualQTimeEdit*>( (QTimeEdit*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__focusOutEvent = slot;
+	self_cast->handle__focusOutEvent = std::move(slot_handle);
 	return true;
 }
 
@@ -3813,12 +3900,13 @@ void QTimeEdit_virtualbase_focusOutEvent(void* self, QFocusEvent* event) {
 }
 
 bool QTimeEdit_override_virtual_contextMenuEvent(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QTimeEdit> slot_handle(slot);
 	MiqtVirtualQTimeEdit* self_cast = dynamic_cast<MiqtVirtualQTimeEdit*>( (QTimeEdit*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__contextMenuEvent = slot;
+	self_cast->handle__contextMenuEvent = std::move(slot_handle);
 	return true;
 }
 
@@ -3827,12 +3915,13 @@ void QTimeEdit_virtualbase_contextMenuEvent(void* self, QContextMenuEvent* event
 }
 
 bool QTimeEdit_override_virtual_changeEvent(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QTimeEdit> slot_handle(slot);
 	MiqtVirtualQTimeEdit* self_cast = dynamic_cast<MiqtVirtualQTimeEdit*>( (QTimeEdit*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__changeEvent = slot;
+	self_cast->handle__changeEvent = std::move(slot_handle);
 	return true;
 }
 
@@ -3841,12 +3930,13 @@ void QTimeEdit_virtualbase_changeEvent(void* self, QEvent* event) {
 }
 
 bool QTimeEdit_override_virtual_closeEvent(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QTimeEdit> slot_handle(slot);
 	MiqtVirtualQTimeEdit* self_cast = dynamic_cast<MiqtVirtualQTimeEdit*>( (QTimeEdit*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__closeEvent = slot;
+	self_cast->handle__closeEvent = std::move(slot_handle);
 	return true;
 }
 
@@ -3855,12 +3945,13 @@ void QTimeEdit_virtualbase_closeEvent(void* self, QCloseEvent* event) {
 }
 
 bool QTimeEdit_override_virtual_hideEvent(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QTimeEdit> slot_handle(slot);
 	MiqtVirtualQTimeEdit* self_cast = dynamic_cast<MiqtVirtualQTimeEdit*>( (QTimeEdit*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__hideEvent = slot;
+	self_cast->handle__hideEvent = std::move(slot_handle);
 	return true;
 }
 
@@ -3869,12 +3960,13 @@ void QTimeEdit_virtualbase_hideEvent(void* self, QHideEvent* event) {
 }
 
 bool QTimeEdit_override_virtual_mouseReleaseEvent(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QTimeEdit> slot_handle(slot);
 	MiqtVirtualQTimeEdit* self_cast = dynamic_cast<MiqtVirtualQTimeEdit*>( (QTimeEdit*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__mouseReleaseEvent = slot;
+	self_cast->handle__mouseReleaseEvent = std::move(slot_handle);
 	return true;
 }
 
@@ -3883,12 +3975,13 @@ void QTimeEdit_virtualbase_mouseReleaseEvent(void* self, QMouseEvent* event) {
 }
 
 bool QTimeEdit_override_virtual_mouseMoveEvent(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QTimeEdit> slot_handle(slot);
 	MiqtVirtualQTimeEdit* self_cast = dynamic_cast<MiqtVirtualQTimeEdit*>( (QTimeEdit*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__mouseMoveEvent = slot;
+	self_cast->handle__mouseMoveEvent = std::move(slot_handle);
 	return true;
 }
 
@@ -3897,12 +3990,13 @@ void QTimeEdit_virtualbase_mouseMoveEvent(void* self, QMouseEvent* event) {
 }
 
 bool QTimeEdit_override_virtual_timerEvent(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QTimeEdit> slot_handle(slot);
 	MiqtVirtualQTimeEdit* self_cast = dynamic_cast<MiqtVirtualQTimeEdit*>( (QTimeEdit*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__timerEvent = slot;
+	self_cast->handle__timerEvent = std::move(slot_handle);
 	return true;
 }
 
@@ -3911,12 +4005,13 @@ void QTimeEdit_virtualbase_timerEvent(void* self, QTimerEvent* event) {
 }
 
 bool QTimeEdit_override_virtual_showEvent(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QTimeEdit> slot_handle(slot);
 	MiqtVirtualQTimeEdit* self_cast = dynamic_cast<MiqtVirtualQTimeEdit*>( (QTimeEdit*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__showEvent = slot;
+	self_cast->handle__showEvent = std::move(slot_handle);
 	return true;
 }
 
@@ -3925,12 +4020,13 @@ void QTimeEdit_virtualbase_showEvent(void* self, QShowEvent* event) {
 }
 
 bool QTimeEdit_override_virtual_devType(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QTimeEdit> slot_handle(slot);
 	MiqtVirtualQTimeEdit* self_cast = dynamic_cast<MiqtVirtualQTimeEdit*>( (QTimeEdit*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__devType = slot;
+	self_cast->handle__devType = std::move(slot_handle);
 	return true;
 }
 
@@ -3939,12 +4035,13 @@ int QTimeEdit_virtualbase_devType(const void* self) {
 }
 
 bool QTimeEdit_override_virtual_setVisible(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QTimeEdit> slot_handle(slot);
 	MiqtVirtualQTimeEdit* self_cast = dynamic_cast<MiqtVirtualQTimeEdit*>( (QTimeEdit*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__setVisible = slot;
+	self_cast->handle__setVisible = std::move(slot_handle);
 	return true;
 }
 
@@ -3953,12 +4050,13 @@ void QTimeEdit_virtualbase_setVisible(void* self, bool visible) {
 }
 
 bool QTimeEdit_override_virtual_heightForWidth(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QTimeEdit> slot_handle(slot);
 	MiqtVirtualQTimeEdit* self_cast = dynamic_cast<MiqtVirtualQTimeEdit*>( (QTimeEdit*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__heightForWidth = slot;
+	self_cast->handle__heightForWidth = std::move(slot_handle);
 	return true;
 }
 
@@ -3967,12 +4065,13 @@ int QTimeEdit_virtualbase_heightForWidth(const void* self, int param1) {
 }
 
 bool QTimeEdit_override_virtual_hasHeightForWidth(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QTimeEdit> slot_handle(slot);
 	MiqtVirtualQTimeEdit* self_cast = dynamic_cast<MiqtVirtualQTimeEdit*>( (QTimeEdit*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__hasHeightForWidth = slot;
+	self_cast->handle__hasHeightForWidth = std::move(slot_handle);
 	return true;
 }
 
@@ -3981,12 +4080,13 @@ bool QTimeEdit_virtualbase_hasHeightForWidth(const void* self) {
 }
 
 bool QTimeEdit_override_virtual_paintEngine(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QTimeEdit> slot_handle(slot);
 	MiqtVirtualQTimeEdit* self_cast = dynamic_cast<MiqtVirtualQTimeEdit*>( (QTimeEdit*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__paintEngine = slot;
+	self_cast->handle__paintEngine = std::move(slot_handle);
 	return true;
 }
 
@@ -3995,12 +4095,13 @@ QPaintEngine* QTimeEdit_virtualbase_paintEngine(const void* self) {
 }
 
 bool QTimeEdit_override_virtual_mouseDoubleClickEvent(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QTimeEdit> slot_handle(slot);
 	MiqtVirtualQTimeEdit* self_cast = dynamic_cast<MiqtVirtualQTimeEdit*>( (QTimeEdit*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__mouseDoubleClickEvent = slot;
+	self_cast->handle__mouseDoubleClickEvent = std::move(slot_handle);
 	return true;
 }
 
@@ -4009,12 +4110,13 @@ void QTimeEdit_virtualbase_mouseDoubleClickEvent(void* self, QMouseEvent* event)
 }
 
 bool QTimeEdit_override_virtual_enterEvent(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QTimeEdit> slot_handle(slot);
 	MiqtVirtualQTimeEdit* self_cast = dynamic_cast<MiqtVirtualQTimeEdit*>( (QTimeEdit*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__enterEvent = slot;
+	self_cast->handle__enterEvent = std::move(slot_handle);
 	return true;
 }
 
@@ -4023,12 +4125,13 @@ void QTimeEdit_virtualbase_enterEvent(void* self, QEvent* event) {
 }
 
 bool QTimeEdit_override_virtual_leaveEvent(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QTimeEdit> slot_handle(slot);
 	MiqtVirtualQTimeEdit* self_cast = dynamic_cast<MiqtVirtualQTimeEdit*>( (QTimeEdit*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__leaveEvent = slot;
+	self_cast->handle__leaveEvent = std::move(slot_handle);
 	return true;
 }
 
@@ -4037,12 +4140,13 @@ void QTimeEdit_virtualbase_leaveEvent(void* self, QEvent* event) {
 }
 
 bool QTimeEdit_override_virtual_moveEvent(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QTimeEdit> slot_handle(slot);
 	MiqtVirtualQTimeEdit* self_cast = dynamic_cast<MiqtVirtualQTimeEdit*>( (QTimeEdit*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__moveEvent = slot;
+	self_cast->handle__moveEvent = std::move(slot_handle);
 	return true;
 }
 
@@ -4051,12 +4155,13 @@ void QTimeEdit_virtualbase_moveEvent(void* self, QMoveEvent* event) {
 }
 
 bool QTimeEdit_override_virtual_tabletEvent(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QTimeEdit> slot_handle(slot);
 	MiqtVirtualQTimeEdit* self_cast = dynamic_cast<MiqtVirtualQTimeEdit*>( (QTimeEdit*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__tabletEvent = slot;
+	self_cast->handle__tabletEvent = std::move(slot_handle);
 	return true;
 }
 
@@ -4065,12 +4170,13 @@ void QTimeEdit_virtualbase_tabletEvent(void* self, QTabletEvent* event) {
 }
 
 bool QTimeEdit_override_virtual_actionEvent(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QTimeEdit> slot_handle(slot);
 	MiqtVirtualQTimeEdit* self_cast = dynamic_cast<MiqtVirtualQTimeEdit*>( (QTimeEdit*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__actionEvent = slot;
+	self_cast->handle__actionEvent = std::move(slot_handle);
 	return true;
 }
 
@@ -4079,12 +4185,13 @@ void QTimeEdit_virtualbase_actionEvent(void* self, QActionEvent* event) {
 }
 
 bool QTimeEdit_override_virtual_dragEnterEvent(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QTimeEdit> slot_handle(slot);
 	MiqtVirtualQTimeEdit* self_cast = dynamic_cast<MiqtVirtualQTimeEdit*>( (QTimeEdit*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__dragEnterEvent = slot;
+	self_cast->handle__dragEnterEvent = std::move(slot_handle);
 	return true;
 }
 
@@ -4093,12 +4200,13 @@ void QTimeEdit_virtualbase_dragEnterEvent(void* self, QDragEnterEvent* event) {
 }
 
 bool QTimeEdit_override_virtual_dragMoveEvent(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QTimeEdit> slot_handle(slot);
 	MiqtVirtualQTimeEdit* self_cast = dynamic_cast<MiqtVirtualQTimeEdit*>( (QTimeEdit*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__dragMoveEvent = slot;
+	self_cast->handle__dragMoveEvent = std::move(slot_handle);
 	return true;
 }
 
@@ -4107,12 +4215,13 @@ void QTimeEdit_virtualbase_dragMoveEvent(void* self, QDragMoveEvent* event) {
 }
 
 bool QTimeEdit_override_virtual_dragLeaveEvent(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QTimeEdit> slot_handle(slot);
 	MiqtVirtualQTimeEdit* self_cast = dynamic_cast<MiqtVirtualQTimeEdit*>( (QTimeEdit*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__dragLeaveEvent = slot;
+	self_cast->handle__dragLeaveEvent = std::move(slot_handle);
 	return true;
 }
 
@@ -4121,12 +4230,13 @@ void QTimeEdit_virtualbase_dragLeaveEvent(void* self, QDragLeaveEvent* event) {
 }
 
 bool QTimeEdit_override_virtual_dropEvent(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QTimeEdit> slot_handle(slot);
 	MiqtVirtualQTimeEdit* self_cast = dynamic_cast<MiqtVirtualQTimeEdit*>( (QTimeEdit*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__dropEvent = slot;
+	self_cast->handle__dropEvent = std::move(slot_handle);
 	return true;
 }
 
@@ -4135,12 +4245,13 @@ void QTimeEdit_virtualbase_dropEvent(void* self, QDropEvent* event) {
 }
 
 bool QTimeEdit_override_virtual_nativeEvent(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QTimeEdit> slot_handle(slot);
 	MiqtVirtualQTimeEdit* self_cast = dynamic_cast<MiqtVirtualQTimeEdit*>( (QTimeEdit*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__nativeEvent = slot;
+	self_cast->handle__nativeEvent = std::move(slot_handle);
 	return true;
 }
 
@@ -4150,12 +4261,13 @@ bool QTimeEdit_virtualbase_nativeEvent(void* self, struct miqt_string eventType,
 }
 
 bool QTimeEdit_override_virtual_metric(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QTimeEdit> slot_handle(slot);
 	MiqtVirtualQTimeEdit* self_cast = dynamic_cast<MiqtVirtualQTimeEdit*>( (QTimeEdit*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__metric = slot;
+	self_cast->handle__metric = std::move(slot_handle);
 	return true;
 }
 
@@ -4164,12 +4276,13 @@ int QTimeEdit_virtualbase_metric(const void* self, int param1) {
 }
 
 bool QTimeEdit_override_virtual_initPainter(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QTimeEdit> slot_handle(slot);
 	MiqtVirtualQTimeEdit* self_cast = dynamic_cast<MiqtVirtualQTimeEdit*>( (QTimeEdit*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__initPainter = slot;
+	self_cast->handle__initPainter = std::move(slot_handle);
 	return true;
 }
 
@@ -4178,12 +4291,13 @@ void QTimeEdit_virtualbase_initPainter(const void* self, QPainter* painter) {
 }
 
 bool QTimeEdit_override_virtual_redirected(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QTimeEdit> slot_handle(slot);
 	MiqtVirtualQTimeEdit* self_cast = dynamic_cast<MiqtVirtualQTimeEdit*>( (QTimeEdit*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__redirected = slot;
+	self_cast->handle__redirected = std::move(slot_handle);
 	return true;
 }
 
@@ -4192,12 +4306,13 @@ QPaintDevice* QTimeEdit_virtualbase_redirected(const void* self, QPoint* offset)
 }
 
 bool QTimeEdit_override_virtual_sharedPainter(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QTimeEdit> slot_handle(slot);
 	MiqtVirtualQTimeEdit* self_cast = dynamic_cast<MiqtVirtualQTimeEdit*>( (QTimeEdit*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__sharedPainter = slot;
+	self_cast->handle__sharedPainter = std::move(slot_handle);
 	return true;
 }
 
@@ -4206,12 +4321,13 @@ QPainter* QTimeEdit_virtualbase_sharedPainter(const void* self) {
 }
 
 bool QTimeEdit_override_virtual_inputMethodEvent(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QTimeEdit> slot_handle(slot);
 	MiqtVirtualQTimeEdit* self_cast = dynamic_cast<MiqtVirtualQTimeEdit*>( (QTimeEdit*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__inputMethodEvent = slot;
+	self_cast->handle__inputMethodEvent = std::move(slot_handle);
 	return true;
 }
 
@@ -4220,12 +4336,13 @@ void QTimeEdit_virtualbase_inputMethodEvent(void* self, QInputMethodEvent* param
 }
 
 bool QTimeEdit_override_virtual_eventFilter(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QTimeEdit> slot_handle(slot);
 	MiqtVirtualQTimeEdit* self_cast = dynamic_cast<MiqtVirtualQTimeEdit*>( (QTimeEdit*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__eventFilter = slot;
+	self_cast->handle__eventFilter = std::move(slot_handle);
 	return true;
 }
 
@@ -4234,12 +4351,13 @@ bool QTimeEdit_virtualbase_eventFilter(void* self, QObject* watched, QEvent* eve
 }
 
 bool QTimeEdit_override_virtual_childEvent(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QTimeEdit> slot_handle(slot);
 	MiqtVirtualQTimeEdit* self_cast = dynamic_cast<MiqtVirtualQTimeEdit*>( (QTimeEdit*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__childEvent = slot;
+	self_cast->handle__childEvent = std::move(slot_handle);
 	return true;
 }
 
@@ -4248,12 +4366,13 @@ void QTimeEdit_virtualbase_childEvent(void* self, QChildEvent* event) {
 }
 
 bool QTimeEdit_override_virtual_customEvent(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QTimeEdit> slot_handle(slot);
 	MiqtVirtualQTimeEdit* self_cast = dynamic_cast<MiqtVirtualQTimeEdit*>( (QTimeEdit*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__customEvent = slot;
+	self_cast->handle__customEvent = std::move(slot_handle);
 	return true;
 }
 
@@ -4262,12 +4381,13 @@ void QTimeEdit_virtualbase_customEvent(void* self, QEvent* event) {
 }
 
 bool QTimeEdit_override_virtual_connectNotify(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QTimeEdit> slot_handle(slot);
 	MiqtVirtualQTimeEdit* self_cast = dynamic_cast<MiqtVirtualQTimeEdit*>( (QTimeEdit*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__connectNotify = slot;
+	self_cast->handle__connectNotify = std::move(slot_handle);
 	return true;
 }
 
@@ -4276,12 +4396,13 @@ void QTimeEdit_virtualbase_connectNotify(void* self, QMetaMethod* signal) {
 }
 
 bool QTimeEdit_override_virtual_disconnectNotify(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QTimeEdit> slot_handle(slot);
 	MiqtVirtualQTimeEdit* self_cast = dynamic_cast<MiqtVirtualQTimeEdit*>( (QTimeEdit*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__disconnectNotify = slot;
+	self_cast->handle__disconnectNotify = std::move(slot_handle);
 	return true;
 }
 
@@ -4436,142 +4557,142 @@ public:
 	virtual ~MiqtVirtualQDateEdit() override = default;
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__sizeHint = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QDateEdit> handle__sizeHint;
 
 	// Subclass to allow providing a Go implementation
 	virtual QSize sizeHint() const override {
-		if (handle__sizeHint == 0) {
+		if (!handle__sizeHint) {
 			return QDateEdit::sizeHint();
 		}
 
-		QSize* callback_return_value = miqt_exec_callback_QDateEdit_sizeHint(this, handle__sizeHint);
+		QSize* callback_return_value = miqt_exec_callback_QDateEdit_sizeHint(this, handle__sizeHint.value());
 		return *callback_return_value;
 	}
 
 	friend QSize* QDateEdit_virtualbase_sizeHint(const void* self);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__clear = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QDateEdit> handle__clear;
 
 	// Subclass to allow providing a Go implementation
 	virtual void clear() override {
-		if (handle__clear == 0) {
+		if (!handle__clear) {
 			QDateEdit::clear();
 			return;
 		}
 
-		miqt_exec_callback_QDateEdit_clear(this, handle__clear);
+		miqt_exec_callback_QDateEdit_clear(this, handle__clear.value());
 
 	}
 
 	friend void QDateEdit_virtualbase_clear(void* self);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__stepBy = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QDateEdit> handle__stepBy;
 
 	// Subclass to allow providing a Go implementation
 	virtual void stepBy(int steps) override {
-		if (handle__stepBy == 0) {
+		if (!handle__stepBy) {
 			QDateEdit::stepBy(steps);
 			return;
 		}
 
 		int sigval1 = steps;
-		miqt_exec_callback_QDateEdit_stepBy(this, handle__stepBy, sigval1);
+		miqt_exec_callback_QDateEdit_stepBy(this, handle__stepBy.value(), sigval1);
 
 	}
 
 	friend void QDateEdit_virtualbase_stepBy(void* self, int steps);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__event = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QDateEdit> handle__event;
 
 	// Subclass to allow providing a Go implementation
 	virtual bool event(QEvent* event) override {
-		if (handle__event == 0) {
+		if (!handle__event) {
 			return QDateEdit::event(event);
 		}
 
 		QEvent* sigval1 = event;
-		bool callback_return_value = miqt_exec_callback_QDateEdit_event(this, handle__event, sigval1);
+		bool callback_return_value = miqt_exec_callback_QDateEdit_event(this, handle__event.value(), sigval1);
 		return callback_return_value;
 	}
 
 	friend bool QDateEdit_virtualbase_event(void* self, QEvent* event);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__keyPressEvent = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QDateEdit> handle__keyPressEvent;
 
 	// Subclass to allow providing a Go implementation
 	virtual void keyPressEvent(QKeyEvent* event) override {
-		if (handle__keyPressEvent == 0) {
+		if (!handle__keyPressEvent) {
 			QDateEdit::keyPressEvent(event);
 			return;
 		}
 
 		QKeyEvent* sigval1 = event;
-		miqt_exec_callback_QDateEdit_keyPressEvent(this, handle__keyPressEvent, sigval1);
+		miqt_exec_callback_QDateEdit_keyPressEvent(this, handle__keyPressEvent.value(), sigval1);
 
 	}
 
 	friend void QDateEdit_virtualbase_keyPressEvent(void* self, QKeyEvent* event);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__wheelEvent = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QDateEdit> handle__wheelEvent;
 
 	// Subclass to allow providing a Go implementation
 	virtual void wheelEvent(QWheelEvent* event) override {
-		if (handle__wheelEvent == 0) {
+		if (!handle__wheelEvent) {
 			QDateEdit::wheelEvent(event);
 			return;
 		}
 
 		QWheelEvent* sigval1 = event;
-		miqt_exec_callback_QDateEdit_wheelEvent(this, handle__wheelEvent, sigval1);
+		miqt_exec_callback_QDateEdit_wheelEvent(this, handle__wheelEvent.value(), sigval1);
 
 	}
 
 	friend void QDateEdit_virtualbase_wheelEvent(void* self, QWheelEvent* event);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__focusInEvent = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QDateEdit> handle__focusInEvent;
 
 	// Subclass to allow providing a Go implementation
 	virtual void focusInEvent(QFocusEvent* event) override {
-		if (handle__focusInEvent == 0) {
+		if (!handle__focusInEvent) {
 			QDateEdit::focusInEvent(event);
 			return;
 		}
 
 		QFocusEvent* sigval1 = event;
-		miqt_exec_callback_QDateEdit_focusInEvent(this, handle__focusInEvent, sigval1);
+		miqt_exec_callback_QDateEdit_focusInEvent(this, handle__focusInEvent.value(), sigval1);
 
 	}
 
 	friend void QDateEdit_virtualbase_focusInEvent(void* self, QFocusEvent* event);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__focusNextPrevChild = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QDateEdit> handle__focusNextPrevChild;
 
 	// Subclass to allow providing a Go implementation
 	virtual bool focusNextPrevChild(bool next) override {
-		if (handle__focusNextPrevChild == 0) {
+		if (!handle__focusNextPrevChild) {
 			return QDateEdit::focusNextPrevChild(next);
 		}
 
 		bool sigval1 = next;
-		bool callback_return_value = miqt_exec_callback_QDateEdit_focusNextPrevChild(this, handle__focusNextPrevChild, sigval1);
+		bool callback_return_value = miqt_exec_callback_QDateEdit_focusNextPrevChild(this, handle__focusNextPrevChild.value(), sigval1);
 		return callback_return_value;
 	}
 
 	friend bool QDateEdit_virtualbase_focusNextPrevChild(void* self, bool next);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__validate = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QDateEdit> handle__validate;
 
 	// Subclass to allow providing a Go implementation
 	virtual QValidator::State validate(QString& input, int& pos) const override {
-		if (handle__validate == 0) {
+		if (!handle__validate) {
 			return QDateEdit::validate(input, pos);
 		}
 
@@ -4584,18 +4705,18 @@ public:
 		memcpy(input_ms.data, input_b.data(), input_ms.len);
 		struct miqt_string sigval1 = input_ms;
 		int* sigval2 = &pos;
-		int callback_return_value = miqt_exec_callback_QDateEdit_validate(this, handle__validate, sigval1, sigval2);
+		int callback_return_value = miqt_exec_callback_QDateEdit_validate(this, handle__validate.value(), sigval1, sigval2);
 		return static_cast<QValidator::State>(callback_return_value);
 	}
 
 	friend int QDateEdit_virtualbase_validate(const void* self, struct miqt_string input, int* pos);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__fixup = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QDateEdit> handle__fixup;
 
 	// Subclass to allow providing a Go implementation
 	virtual void fixup(QString& input) const override {
-		if (handle__fixup == 0) {
+		if (!handle__fixup) {
 			QDateEdit::fixup(input);
 			return;
 		}
@@ -4608,18 +4729,18 @@ public:
 		input_ms.data = static_cast<char*>(malloc(input_ms.len));
 		memcpy(input_ms.data, input_b.data(), input_ms.len);
 		struct miqt_string sigval1 = input_ms;
-		miqt_exec_callback_QDateEdit_fixup(this, handle__fixup, sigval1);
+		miqt_exec_callback_QDateEdit_fixup(this, handle__fixup.value(), sigval1);
 
 	}
 
 	friend void QDateEdit_virtualbase_fixup(const void* self, struct miqt_string input);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__dateTimeFromText = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QDateEdit> handle__dateTimeFromText;
 
 	// Subclass to allow providing a Go implementation
 	virtual QDateTime dateTimeFromText(const QString& text) const override {
-		if (handle__dateTimeFromText == 0) {
+		if (!handle__dateTimeFromText) {
 			return QDateEdit::dateTimeFromText(text);
 		}
 
@@ -4631,25 +4752,25 @@ public:
 		text_ms.data = static_cast<char*>(malloc(text_ms.len));
 		memcpy(text_ms.data, text_b.data(), text_ms.len);
 		struct miqt_string sigval1 = text_ms;
-		QDateTime* callback_return_value = miqt_exec_callback_QDateEdit_dateTimeFromText(this, handle__dateTimeFromText, sigval1);
+		QDateTime* callback_return_value = miqt_exec_callback_QDateEdit_dateTimeFromText(this, handle__dateTimeFromText.value(), sigval1);
 		return *callback_return_value;
 	}
 
 	friend QDateTime* QDateEdit_virtualbase_dateTimeFromText(const void* self, struct miqt_string text);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__textFromDateTime = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QDateEdit> handle__textFromDateTime;
 
 	// Subclass to allow providing a Go implementation
 	virtual QString textFromDateTime(const QDateTime& dt) const override {
-		if (handle__textFromDateTime == 0) {
+		if (!handle__textFromDateTime) {
 			return QDateEdit::textFromDateTime(dt);
 		}
 
 		const QDateTime& dt_ret = dt;
 		// Cast returned reference into pointer
 		QDateTime* sigval1 = const_cast<QDateTime*>(&dt_ret);
-		struct miqt_string callback_return_value = miqt_exec_callback_QDateEdit_textFromDateTime(this, handle__textFromDateTime, sigval1);
+		struct miqt_string callback_return_value = miqt_exec_callback_QDateEdit_textFromDateTime(this, handle__textFromDateTime.value(), sigval1);
 		QString callback_return_value_QString = QString::fromUtf8(callback_return_value.data, callback_return_value.len);
 		free(callback_return_value.data);
 		return callback_return_value_QString;
@@ -4658,527 +4779,527 @@ public:
 	friend struct miqt_string QDateEdit_virtualbase_textFromDateTime(const void* self, QDateTime* dt);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__stepEnabled = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QDateEdit> handle__stepEnabled;
 
 	// Subclass to allow providing a Go implementation
 	virtual QAbstractSpinBox::StepEnabled stepEnabled() const override {
-		if (handle__stepEnabled == 0) {
+		if (!handle__stepEnabled) {
 			return QDateEdit::stepEnabled();
 		}
 
-		int callback_return_value = miqt_exec_callback_QDateEdit_stepEnabled(this, handle__stepEnabled);
+		int callback_return_value = miqt_exec_callback_QDateEdit_stepEnabled(this, handle__stepEnabled.value());
 		return static_cast<QAbstractSpinBox::StepEnabled>(callback_return_value);
 	}
 
 	friend int QDateEdit_virtualbase_stepEnabled(const void* self);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__mousePressEvent = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QDateEdit> handle__mousePressEvent;
 
 	// Subclass to allow providing a Go implementation
 	virtual void mousePressEvent(QMouseEvent* event) override {
-		if (handle__mousePressEvent == 0) {
+		if (!handle__mousePressEvent) {
 			QDateEdit::mousePressEvent(event);
 			return;
 		}
 
 		QMouseEvent* sigval1 = event;
-		miqt_exec_callback_QDateEdit_mousePressEvent(this, handle__mousePressEvent, sigval1);
+		miqt_exec_callback_QDateEdit_mousePressEvent(this, handle__mousePressEvent.value(), sigval1);
 
 	}
 
 	friend void QDateEdit_virtualbase_mousePressEvent(void* self, QMouseEvent* event);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__paintEvent = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QDateEdit> handle__paintEvent;
 
 	// Subclass to allow providing a Go implementation
 	virtual void paintEvent(QPaintEvent* event) override {
-		if (handle__paintEvent == 0) {
+		if (!handle__paintEvent) {
 			QDateEdit::paintEvent(event);
 			return;
 		}
 
 		QPaintEvent* sigval1 = event;
-		miqt_exec_callback_QDateEdit_paintEvent(this, handle__paintEvent, sigval1);
+		miqt_exec_callback_QDateEdit_paintEvent(this, handle__paintEvent.value(), sigval1);
 
 	}
 
 	friend void QDateEdit_virtualbase_paintEvent(void* self, QPaintEvent* event);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__minimumSizeHint = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QDateEdit> handle__minimumSizeHint;
 
 	// Subclass to allow providing a Go implementation
 	virtual QSize minimumSizeHint() const override {
-		if (handle__minimumSizeHint == 0) {
+		if (!handle__minimumSizeHint) {
 			return QDateEdit::minimumSizeHint();
 		}
 
-		QSize* callback_return_value = miqt_exec_callback_QDateEdit_minimumSizeHint(this, handle__minimumSizeHint);
+		QSize* callback_return_value = miqt_exec_callback_QDateEdit_minimumSizeHint(this, handle__minimumSizeHint.value());
 		return *callback_return_value;
 	}
 
 	friend QSize* QDateEdit_virtualbase_minimumSizeHint(const void* self);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__inputMethodQuery = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QDateEdit> handle__inputMethodQuery;
 
 	// Subclass to allow providing a Go implementation
 	virtual QVariant inputMethodQuery(Qt::InputMethodQuery param1) const override {
-		if (handle__inputMethodQuery == 0) {
+		if (!handle__inputMethodQuery) {
 			return QDateEdit::inputMethodQuery(param1);
 		}
 
 		Qt::InputMethodQuery param1_ret = param1;
 		int sigval1 = static_cast<int>(param1_ret);
-		QVariant* callback_return_value = miqt_exec_callback_QDateEdit_inputMethodQuery(this, handle__inputMethodQuery, sigval1);
+		QVariant* callback_return_value = miqt_exec_callback_QDateEdit_inputMethodQuery(this, handle__inputMethodQuery.value(), sigval1);
 		return *callback_return_value;
 	}
 
 	friend QVariant* QDateEdit_virtualbase_inputMethodQuery(const void* self, int param1);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__resizeEvent = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QDateEdit> handle__resizeEvent;
 
 	// Subclass to allow providing a Go implementation
 	virtual void resizeEvent(QResizeEvent* event) override {
-		if (handle__resizeEvent == 0) {
+		if (!handle__resizeEvent) {
 			QDateEdit::resizeEvent(event);
 			return;
 		}
 
 		QResizeEvent* sigval1 = event;
-		miqt_exec_callback_QDateEdit_resizeEvent(this, handle__resizeEvent, sigval1);
+		miqt_exec_callback_QDateEdit_resizeEvent(this, handle__resizeEvent.value(), sigval1);
 
 	}
 
 	friend void QDateEdit_virtualbase_resizeEvent(void* self, QResizeEvent* event);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__keyReleaseEvent = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QDateEdit> handle__keyReleaseEvent;
 
 	// Subclass to allow providing a Go implementation
 	virtual void keyReleaseEvent(QKeyEvent* event) override {
-		if (handle__keyReleaseEvent == 0) {
+		if (!handle__keyReleaseEvent) {
 			QDateEdit::keyReleaseEvent(event);
 			return;
 		}
 
 		QKeyEvent* sigval1 = event;
-		miqt_exec_callback_QDateEdit_keyReleaseEvent(this, handle__keyReleaseEvent, sigval1);
+		miqt_exec_callback_QDateEdit_keyReleaseEvent(this, handle__keyReleaseEvent.value(), sigval1);
 
 	}
 
 	friend void QDateEdit_virtualbase_keyReleaseEvent(void* self, QKeyEvent* event);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__focusOutEvent = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QDateEdit> handle__focusOutEvent;
 
 	// Subclass to allow providing a Go implementation
 	virtual void focusOutEvent(QFocusEvent* event) override {
-		if (handle__focusOutEvent == 0) {
+		if (!handle__focusOutEvent) {
 			QDateEdit::focusOutEvent(event);
 			return;
 		}
 
 		QFocusEvent* sigval1 = event;
-		miqt_exec_callback_QDateEdit_focusOutEvent(this, handle__focusOutEvent, sigval1);
+		miqt_exec_callback_QDateEdit_focusOutEvent(this, handle__focusOutEvent.value(), sigval1);
 
 	}
 
 	friend void QDateEdit_virtualbase_focusOutEvent(void* self, QFocusEvent* event);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__contextMenuEvent = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QDateEdit> handle__contextMenuEvent;
 
 	// Subclass to allow providing a Go implementation
 	virtual void contextMenuEvent(QContextMenuEvent* event) override {
-		if (handle__contextMenuEvent == 0) {
+		if (!handle__contextMenuEvent) {
 			QDateEdit::contextMenuEvent(event);
 			return;
 		}
 
 		QContextMenuEvent* sigval1 = event;
-		miqt_exec_callback_QDateEdit_contextMenuEvent(this, handle__contextMenuEvent, sigval1);
+		miqt_exec_callback_QDateEdit_contextMenuEvent(this, handle__contextMenuEvent.value(), sigval1);
 
 	}
 
 	friend void QDateEdit_virtualbase_contextMenuEvent(void* self, QContextMenuEvent* event);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__changeEvent = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QDateEdit> handle__changeEvent;
 
 	// Subclass to allow providing a Go implementation
 	virtual void changeEvent(QEvent* event) override {
-		if (handle__changeEvent == 0) {
+		if (!handle__changeEvent) {
 			QDateEdit::changeEvent(event);
 			return;
 		}
 
 		QEvent* sigval1 = event;
-		miqt_exec_callback_QDateEdit_changeEvent(this, handle__changeEvent, sigval1);
+		miqt_exec_callback_QDateEdit_changeEvent(this, handle__changeEvent.value(), sigval1);
 
 	}
 
 	friend void QDateEdit_virtualbase_changeEvent(void* self, QEvent* event);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__closeEvent = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QDateEdit> handle__closeEvent;
 
 	// Subclass to allow providing a Go implementation
 	virtual void closeEvent(QCloseEvent* event) override {
-		if (handle__closeEvent == 0) {
+		if (!handle__closeEvent) {
 			QDateEdit::closeEvent(event);
 			return;
 		}
 
 		QCloseEvent* sigval1 = event;
-		miqt_exec_callback_QDateEdit_closeEvent(this, handle__closeEvent, sigval1);
+		miqt_exec_callback_QDateEdit_closeEvent(this, handle__closeEvent.value(), sigval1);
 
 	}
 
 	friend void QDateEdit_virtualbase_closeEvent(void* self, QCloseEvent* event);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__hideEvent = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QDateEdit> handle__hideEvent;
 
 	// Subclass to allow providing a Go implementation
 	virtual void hideEvent(QHideEvent* event) override {
-		if (handle__hideEvent == 0) {
+		if (!handle__hideEvent) {
 			QDateEdit::hideEvent(event);
 			return;
 		}
 
 		QHideEvent* sigval1 = event;
-		miqt_exec_callback_QDateEdit_hideEvent(this, handle__hideEvent, sigval1);
+		miqt_exec_callback_QDateEdit_hideEvent(this, handle__hideEvent.value(), sigval1);
 
 	}
 
 	friend void QDateEdit_virtualbase_hideEvent(void* self, QHideEvent* event);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__mouseReleaseEvent = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QDateEdit> handle__mouseReleaseEvent;
 
 	// Subclass to allow providing a Go implementation
 	virtual void mouseReleaseEvent(QMouseEvent* event) override {
-		if (handle__mouseReleaseEvent == 0) {
+		if (!handle__mouseReleaseEvent) {
 			QDateEdit::mouseReleaseEvent(event);
 			return;
 		}
 
 		QMouseEvent* sigval1 = event;
-		miqt_exec_callback_QDateEdit_mouseReleaseEvent(this, handle__mouseReleaseEvent, sigval1);
+		miqt_exec_callback_QDateEdit_mouseReleaseEvent(this, handle__mouseReleaseEvent.value(), sigval1);
 
 	}
 
 	friend void QDateEdit_virtualbase_mouseReleaseEvent(void* self, QMouseEvent* event);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__mouseMoveEvent = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QDateEdit> handle__mouseMoveEvent;
 
 	// Subclass to allow providing a Go implementation
 	virtual void mouseMoveEvent(QMouseEvent* event) override {
-		if (handle__mouseMoveEvent == 0) {
+		if (!handle__mouseMoveEvent) {
 			QDateEdit::mouseMoveEvent(event);
 			return;
 		}
 
 		QMouseEvent* sigval1 = event;
-		miqt_exec_callback_QDateEdit_mouseMoveEvent(this, handle__mouseMoveEvent, sigval1);
+		miqt_exec_callback_QDateEdit_mouseMoveEvent(this, handle__mouseMoveEvent.value(), sigval1);
 
 	}
 
 	friend void QDateEdit_virtualbase_mouseMoveEvent(void* self, QMouseEvent* event);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__timerEvent = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QDateEdit> handle__timerEvent;
 
 	// Subclass to allow providing a Go implementation
 	virtual void timerEvent(QTimerEvent* event) override {
-		if (handle__timerEvent == 0) {
+		if (!handle__timerEvent) {
 			QDateEdit::timerEvent(event);
 			return;
 		}
 
 		QTimerEvent* sigval1 = event;
-		miqt_exec_callback_QDateEdit_timerEvent(this, handle__timerEvent, sigval1);
+		miqt_exec_callback_QDateEdit_timerEvent(this, handle__timerEvent.value(), sigval1);
 
 	}
 
 	friend void QDateEdit_virtualbase_timerEvent(void* self, QTimerEvent* event);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__showEvent = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QDateEdit> handle__showEvent;
 
 	// Subclass to allow providing a Go implementation
 	virtual void showEvent(QShowEvent* event) override {
-		if (handle__showEvent == 0) {
+		if (!handle__showEvent) {
 			QDateEdit::showEvent(event);
 			return;
 		}
 
 		QShowEvent* sigval1 = event;
-		miqt_exec_callback_QDateEdit_showEvent(this, handle__showEvent, sigval1);
+		miqt_exec_callback_QDateEdit_showEvent(this, handle__showEvent.value(), sigval1);
 
 	}
 
 	friend void QDateEdit_virtualbase_showEvent(void* self, QShowEvent* event);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__devType = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QDateEdit> handle__devType;
 
 	// Subclass to allow providing a Go implementation
 	virtual int devType() const override {
-		if (handle__devType == 0) {
+		if (!handle__devType) {
 			return QDateEdit::devType();
 		}
 
-		int callback_return_value = miqt_exec_callback_QDateEdit_devType(this, handle__devType);
+		int callback_return_value = miqt_exec_callback_QDateEdit_devType(this, handle__devType.value());
 		return static_cast<int>(callback_return_value);
 	}
 
 	friend int QDateEdit_virtualbase_devType(const void* self);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__setVisible = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QDateEdit> handle__setVisible;
 
 	// Subclass to allow providing a Go implementation
 	virtual void setVisible(bool visible) override {
-		if (handle__setVisible == 0) {
+		if (!handle__setVisible) {
 			QDateEdit::setVisible(visible);
 			return;
 		}
 
 		bool sigval1 = visible;
-		miqt_exec_callback_QDateEdit_setVisible(this, handle__setVisible, sigval1);
+		miqt_exec_callback_QDateEdit_setVisible(this, handle__setVisible.value(), sigval1);
 
 	}
 
 	friend void QDateEdit_virtualbase_setVisible(void* self, bool visible);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__heightForWidth = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QDateEdit> handle__heightForWidth;
 
 	// Subclass to allow providing a Go implementation
 	virtual int heightForWidth(int param1) const override {
-		if (handle__heightForWidth == 0) {
+		if (!handle__heightForWidth) {
 			return QDateEdit::heightForWidth(param1);
 		}
 
 		int sigval1 = param1;
-		int callback_return_value = miqt_exec_callback_QDateEdit_heightForWidth(this, handle__heightForWidth, sigval1);
+		int callback_return_value = miqt_exec_callback_QDateEdit_heightForWidth(this, handle__heightForWidth.value(), sigval1);
 		return static_cast<int>(callback_return_value);
 	}
 
 	friend int QDateEdit_virtualbase_heightForWidth(const void* self, int param1);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__hasHeightForWidth = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QDateEdit> handle__hasHeightForWidth;
 
 	// Subclass to allow providing a Go implementation
 	virtual bool hasHeightForWidth() const override {
-		if (handle__hasHeightForWidth == 0) {
+		if (!handle__hasHeightForWidth) {
 			return QDateEdit::hasHeightForWidth();
 		}
 
-		bool callback_return_value = miqt_exec_callback_QDateEdit_hasHeightForWidth(this, handle__hasHeightForWidth);
+		bool callback_return_value = miqt_exec_callback_QDateEdit_hasHeightForWidth(this, handle__hasHeightForWidth.value());
 		return callback_return_value;
 	}
 
 	friend bool QDateEdit_virtualbase_hasHeightForWidth(const void* self);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__paintEngine = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QDateEdit> handle__paintEngine;
 
 	// Subclass to allow providing a Go implementation
 	virtual QPaintEngine* paintEngine() const override {
-		if (handle__paintEngine == 0) {
+		if (!handle__paintEngine) {
 			return QDateEdit::paintEngine();
 		}
 
-		QPaintEngine* callback_return_value = miqt_exec_callback_QDateEdit_paintEngine(this, handle__paintEngine);
+		QPaintEngine* callback_return_value = miqt_exec_callback_QDateEdit_paintEngine(this, handle__paintEngine.value());
 		return callback_return_value;
 	}
 
 	friend QPaintEngine* QDateEdit_virtualbase_paintEngine(const void* self);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__mouseDoubleClickEvent = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QDateEdit> handle__mouseDoubleClickEvent;
 
 	// Subclass to allow providing a Go implementation
 	virtual void mouseDoubleClickEvent(QMouseEvent* event) override {
-		if (handle__mouseDoubleClickEvent == 0) {
+		if (!handle__mouseDoubleClickEvent) {
 			QDateEdit::mouseDoubleClickEvent(event);
 			return;
 		}
 
 		QMouseEvent* sigval1 = event;
-		miqt_exec_callback_QDateEdit_mouseDoubleClickEvent(this, handle__mouseDoubleClickEvent, sigval1);
+		miqt_exec_callback_QDateEdit_mouseDoubleClickEvent(this, handle__mouseDoubleClickEvent.value(), sigval1);
 
 	}
 
 	friend void QDateEdit_virtualbase_mouseDoubleClickEvent(void* self, QMouseEvent* event);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__enterEvent = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QDateEdit> handle__enterEvent;
 
 	// Subclass to allow providing a Go implementation
 	virtual void enterEvent(QEvent* event) override {
-		if (handle__enterEvent == 0) {
+		if (!handle__enterEvent) {
 			QDateEdit::enterEvent(event);
 			return;
 		}
 
 		QEvent* sigval1 = event;
-		miqt_exec_callback_QDateEdit_enterEvent(this, handle__enterEvent, sigval1);
+		miqt_exec_callback_QDateEdit_enterEvent(this, handle__enterEvent.value(), sigval1);
 
 	}
 
 	friend void QDateEdit_virtualbase_enterEvent(void* self, QEvent* event);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__leaveEvent = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QDateEdit> handle__leaveEvent;
 
 	// Subclass to allow providing a Go implementation
 	virtual void leaveEvent(QEvent* event) override {
-		if (handle__leaveEvent == 0) {
+		if (!handle__leaveEvent) {
 			QDateEdit::leaveEvent(event);
 			return;
 		}
 
 		QEvent* sigval1 = event;
-		miqt_exec_callback_QDateEdit_leaveEvent(this, handle__leaveEvent, sigval1);
+		miqt_exec_callback_QDateEdit_leaveEvent(this, handle__leaveEvent.value(), sigval1);
 
 	}
 
 	friend void QDateEdit_virtualbase_leaveEvent(void* self, QEvent* event);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__moveEvent = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QDateEdit> handle__moveEvent;
 
 	// Subclass to allow providing a Go implementation
 	virtual void moveEvent(QMoveEvent* event) override {
-		if (handle__moveEvent == 0) {
+		if (!handle__moveEvent) {
 			QDateEdit::moveEvent(event);
 			return;
 		}
 
 		QMoveEvent* sigval1 = event;
-		miqt_exec_callback_QDateEdit_moveEvent(this, handle__moveEvent, sigval1);
+		miqt_exec_callback_QDateEdit_moveEvent(this, handle__moveEvent.value(), sigval1);
 
 	}
 
 	friend void QDateEdit_virtualbase_moveEvent(void* self, QMoveEvent* event);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__tabletEvent = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QDateEdit> handle__tabletEvent;
 
 	// Subclass to allow providing a Go implementation
 	virtual void tabletEvent(QTabletEvent* event) override {
-		if (handle__tabletEvent == 0) {
+		if (!handle__tabletEvent) {
 			QDateEdit::tabletEvent(event);
 			return;
 		}
 
 		QTabletEvent* sigval1 = event;
-		miqt_exec_callback_QDateEdit_tabletEvent(this, handle__tabletEvent, sigval1);
+		miqt_exec_callback_QDateEdit_tabletEvent(this, handle__tabletEvent.value(), sigval1);
 
 	}
 
 	friend void QDateEdit_virtualbase_tabletEvent(void* self, QTabletEvent* event);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__actionEvent = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QDateEdit> handle__actionEvent;
 
 	// Subclass to allow providing a Go implementation
 	virtual void actionEvent(QActionEvent* event) override {
-		if (handle__actionEvent == 0) {
+		if (!handle__actionEvent) {
 			QDateEdit::actionEvent(event);
 			return;
 		}
 
 		QActionEvent* sigval1 = event;
-		miqt_exec_callback_QDateEdit_actionEvent(this, handle__actionEvent, sigval1);
+		miqt_exec_callback_QDateEdit_actionEvent(this, handle__actionEvent.value(), sigval1);
 
 	}
 
 	friend void QDateEdit_virtualbase_actionEvent(void* self, QActionEvent* event);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__dragEnterEvent = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QDateEdit> handle__dragEnterEvent;
 
 	// Subclass to allow providing a Go implementation
 	virtual void dragEnterEvent(QDragEnterEvent* event) override {
-		if (handle__dragEnterEvent == 0) {
+		if (!handle__dragEnterEvent) {
 			QDateEdit::dragEnterEvent(event);
 			return;
 		}
 
 		QDragEnterEvent* sigval1 = event;
-		miqt_exec_callback_QDateEdit_dragEnterEvent(this, handle__dragEnterEvent, sigval1);
+		miqt_exec_callback_QDateEdit_dragEnterEvent(this, handle__dragEnterEvent.value(), sigval1);
 
 	}
 
 	friend void QDateEdit_virtualbase_dragEnterEvent(void* self, QDragEnterEvent* event);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__dragMoveEvent = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QDateEdit> handle__dragMoveEvent;
 
 	// Subclass to allow providing a Go implementation
 	virtual void dragMoveEvent(QDragMoveEvent* event) override {
-		if (handle__dragMoveEvent == 0) {
+		if (!handle__dragMoveEvent) {
 			QDateEdit::dragMoveEvent(event);
 			return;
 		}
 
 		QDragMoveEvent* sigval1 = event;
-		miqt_exec_callback_QDateEdit_dragMoveEvent(this, handle__dragMoveEvent, sigval1);
+		miqt_exec_callback_QDateEdit_dragMoveEvent(this, handle__dragMoveEvent.value(), sigval1);
 
 	}
 
 	friend void QDateEdit_virtualbase_dragMoveEvent(void* self, QDragMoveEvent* event);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__dragLeaveEvent = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QDateEdit> handle__dragLeaveEvent;
 
 	// Subclass to allow providing a Go implementation
 	virtual void dragLeaveEvent(QDragLeaveEvent* event) override {
-		if (handle__dragLeaveEvent == 0) {
+		if (!handle__dragLeaveEvent) {
 			QDateEdit::dragLeaveEvent(event);
 			return;
 		}
 
 		QDragLeaveEvent* sigval1 = event;
-		miqt_exec_callback_QDateEdit_dragLeaveEvent(this, handle__dragLeaveEvent, sigval1);
+		miqt_exec_callback_QDateEdit_dragLeaveEvent(this, handle__dragLeaveEvent.value(), sigval1);
 
 	}
 
 	friend void QDateEdit_virtualbase_dragLeaveEvent(void* self, QDragLeaveEvent* event);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__dropEvent = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QDateEdit> handle__dropEvent;
 
 	// Subclass to allow providing a Go implementation
 	virtual void dropEvent(QDropEvent* event) override {
-		if (handle__dropEvent == 0) {
+		if (!handle__dropEvent) {
 			QDateEdit::dropEvent(event);
 			return;
 		}
 
 		QDropEvent* sigval1 = event;
-		miqt_exec_callback_QDateEdit_dropEvent(this, handle__dropEvent, sigval1);
+		miqt_exec_callback_QDateEdit_dropEvent(this, handle__dropEvent.value(), sigval1);
 
 	}
 
 	friend void QDateEdit_virtualbase_dropEvent(void* self, QDropEvent* event);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__nativeEvent = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QDateEdit> handle__nativeEvent;
 
 	// Subclass to allow providing a Go implementation
 	virtual bool nativeEvent(const QByteArray& eventType, void* message, long* result) override {
-		if (handle__nativeEvent == 0) {
+		if (!handle__nativeEvent) {
 			return QDateEdit::nativeEvent(eventType, message, result);
 		}
 
@@ -5190,151 +5311,151 @@ public:
 		struct miqt_string sigval1 = eventType_ms;
 		void* sigval2 = message;
 		long* sigval3 = result;
-		bool callback_return_value = miqt_exec_callback_QDateEdit_nativeEvent(this, handle__nativeEvent, sigval1, sigval2, sigval3);
+		bool callback_return_value = miqt_exec_callback_QDateEdit_nativeEvent(this, handle__nativeEvent.value(), sigval1, sigval2, sigval3);
 		return callback_return_value;
 	}
 
 	friend bool QDateEdit_virtualbase_nativeEvent(void* self, struct miqt_string eventType, void* message, long* result);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__metric = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QDateEdit> handle__metric;
 
 	// Subclass to allow providing a Go implementation
 	virtual int metric(QPaintDevice::PaintDeviceMetric param1) const override {
-		if (handle__metric == 0) {
+		if (!handle__metric) {
 			return QDateEdit::metric(param1);
 		}
 
 		QPaintDevice::PaintDeviceMetric param1_ret = param1;
 		int sigval1 = static_cast<int>(param1_ret);
-		int callback_return_value = miqt_exec_callback_QDateEdit_metric(this, handle__metric, sigval1);
+		int callback_return_value = miqt_exec_callback_QDateEdit_metric(this, handle__metric.value(), sigval1);
 		return static_cast<int>(callback_return_value);
 	}
 
 	friend int QDateEdit_virtualbase_metric(const void* self, int param1);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__initPainter = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QDateEdit> handle__initPainter;
 
 	// Subclass to allow providing a Go implementation
 	virtual void initPainter(QPainter* painter) const override {
-		if (handle__initPainter == 0) {
+		if (!handle__initPainter) {
 			QDateEdit::initPainter(painter);
 			return;
 		}
 
 		QPainter* sigval1 = painter;
-		miqt_exec_callback_QDateEdit_initPainter(this, handle__initPainter, sigval1);
+		miqt_exec_callback_QDateEdit_initPainter(this, handle__initPainter.value(), sigval1);
 
 	}
 
 	friend void QDateEdit_virtualbase_initPainter(const void* self, QPainter* painter);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__redirected = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QDateEdit> handle__redirected;
 
 	// Subclass to allow providing a Go implementation
 	virtual QPaintDevice* redirected(QPoint* offset) const override {
-		if (handle__redirected == 0) {
+		if (!handle__redirected) {
 			return QDateEdit::redirected(offset);
 		}
 
 		QPoint* sigval1 = offset;
-		QPaintDevice* callback_return_value = miqt_exec_callback_QDateEdit_redirected(this, handle__redirected, sigval1);
+		QPaintDevice* callback_return_value = miqt_exec_callback_QDateEdit_redirected(this, handle__redirected.value(), sigval1);
 		return callback_return_value;
 	}
 
 	friend QPaintDevice* QDateEdit_virtualbase_redirected(const void* self, QPoint* offset);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__sharedPainter = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QDateEdit> handle__sharedPainter;
 
 	// Subclass to allow providing a Go implementation
 	virtual QPainter* sharedPainter() const override {
-		if (handle__sharedPainter == 0) {
+		if (!handle__sharedPainter) {
 			return QDateEdit::sharedPainter();
 		}
 
-		QPainter* callback_return_value = miqt_exec_callback_QDateEdit_sharedPainter(this, handle__sharedPainter);
+		QPainter* callback_return_value = miqt_exec_callback_QDateEdit_sharedPainter(this, handle__sharedPainter.value());
 		return callback_return_value;
 	}
 
 	friend QPainter* QDateEdit_virtualbase_sharedPainter(const void* self);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__inputMethodEvent = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QDateEdit> handle__inputMethodEvent;
 
 	// Subclass to allow providing a Go implementation
 	virtual void inputMethodEvent(QInputMethodEvent* param1) override {
-		if (handle__inputMethodEvent == 0) {
+		if (!handle__inputMethodEvent) {
 			QDateEdit::inputMethodEvent(param1);
 			return;
 		}
 
 		QInputMethodEvent* sigval1 = param1;
-		miqt_exec_callback_QDateEdit_inputMethodEvent(this, handle__inputMethodEvent, sigval1);
+		miqt_exec_callback_QDateEdit_inputMethodEvent(this, handle__inputMethodEvent.value(), sigval1);
 
 	}
 
 	friend void QDateEdit_virtualbase_inputMethodEvent(void* self, QInputMethodEvent* param1);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__eventFilter = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QDateEdit> handle__eventFilter;
 
 	// Subclass to allow providing a Go implementation
 	virtual bool eventFilter(QObject* watched, QEvent* event) override {
-		if (handle__eventFilter == 0) {
+		if (!handle__eventFilter) {
 			return QDateEdit::eventFilter(watched, event);
 		}
 
 		QObject* sigval1 = watched;
 		QEvent* sigval2 = event;
-		bool callback_return_value = miqt_exec_callback_QDateEdit_eventFilter(this, handle__eventFilter, sigval1, sigval2);
+		bool callback_return_value = miqt_exec_callback_QDateEdit_eventFilter(this, handle__eventFilter.value(), sigval1, sigval2);
 		return callback_return_value;
 	}
 
 	friend bool QDateEdit_virtualbase_eventFilter(void* self, QObject* watched, QEvent* event);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__childEvent = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QDateEdit> handle__childEvent;
 
 	// Subclass to allow providing a Go implementation
 	virtual void childEvent(QChildEvent* event) override {
-		if (handle__childEvent == 0) {
+		if (!handle__childEvent) {
 			QDateEdit::childEvent(event);
 			return;
 		}
 
 		QChildEvent* sigval1 = event;
-		miqt_exec_callback_QDateEdit_childEvent(this, handle__childEvent, sigval1);
+		miqt_exec_callback_QDateEdit_childEvent(this, handle__childEvent.value(), sigval1);
 
 	}
 
 	friend void QDateEdit_virtualbase_childEvent(void* self, QChildEvent* event);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__customEvent = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QDateEdit> handle__customEvent;
 
 	// Subclass to allow providing a Go implementation
 	virtual void customEvent(QEvent* event) override {
-		if (handle__customEvent == 0) {
+		if (!handle__customEvent) {
 			QDateEdit::customEvent(event);
 			return;
 		}
 
 		QEvent* sigval1 = event;
-		miqt_exec_callback_QDateEdit_customEvent(this, handle__customEvent, sigval1);
+		miqt_exec_callback_QDateEdit_customEvent(this, handle__customEvent.value(), sigval1);
 
 	}
 
 	friend void QDateEdit_virtualbase_customEvent(void* self, QEvent* event);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__connectNotify = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QDateEdit> handle__connectNotify;
 
 	// Subclass to allow providing a Go implementation
 	virtual void connectNotify(const QMetaMethod& signal) override {
-		if (handle__connectNotify == 0) {
+		if (!handle__connectNotify) {
 			QDateEdit::connectNotify(signal);
 			return;
 		}
@@ -5342,18 +5463,18 @@ public:
 		const QMetaMethod& signal_ret = signal;
 		// Cast returned reference into pointer
 		QMetaMethod* sigval1 = const_cast<QMetaMethod*>(&signal_ret);
-		miqt_exec_callback_QDateEdit_connectNotify(this, handle__connectNotify, sigval1);
+		miqt_exec_callback_QDateEdit_connectNotify(this, handle__connectNotify.value(), sigval1);
 
 	}
 
 	friend void QDateEdit_virtualbase_connectNotify(void* self, QMetaMethod* signal);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__disconnectNotify = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QDateEdit> handle__disconnectNotify;
 
 	// Subclass to allow providing a Go implementation
 	virtual void disconnectNotify(const QMetaMethod& signal) override {
-		if (handle__disconnectNotify == 0) {
+		if (!handle__disconnectNotify) {
 			QDateEdit::disconnectNotify(signal);
 			return;
 		}
@@ -5361,7 +5482,7 @@ public:
 		const QMetaMethod& signal_ret = signal;
 		// Cast returned reference into pointer
 		QMetaMethod* sigval1 = const_cast<QMetaMethod*>(&signal_ret);
-		miqt_exec_callback_QDateEdit_disconnectNotify(this, handle__disconnectNotify, sigval1);
+		miqt_exec_callback_QDateEdit_disconnectNotify(this, handle__disconnectNotify.value(), sigval1);
 
 	}
 
@@ -5436,13 +5557,15 @@ void QDateEdit_userDateChanged(QDateEdit* self, QDate* date) {
 	self->userDateChanged(*date);
 }
 
-void QDateEdit_connect_userDateChanged(QDateEdit* self, intptr_t slot) {
-	QDateEdit::connect(self, static_cast<void (QDateEdit::*)(const QDate&)>(&QDateEdit::userDateChanged), self, [=](const QDate& date) {
+void* QDateEdit_connect_userDateChanged(QDateEdit* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QDateEdit>>(slot);
+	return new QMetaObject::Connection(QDateEdit::connect(self, static_cast<void (QDateEdit::*)(const QDate&)>(&QDateEdit::userDateChanged), self, [slot_handle](const QDate& date) {
+		intptr_t slot = slot_handle->value();
 		const QDate& date_ret = date;
 		// Cast returned reference into pointer
 		QDate* sigval1 = const_cast<QDate*>(&date_ret);
 		miqt_exec_callback_QDateEdit_userDateChanged(slot, sigval1);
-	});
+	}));
 }
 
 struct miqt_string QDateEdit_tr2(const char* s, const char* c) {
@@ -5490,12 +5613,13 @@ struct miqt_string QDateEdit_trUtf83(const char* s, const char* c, int n) {
 }
 
 bool QDateEdit_override_virtual_sizeHint(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QDateEdit> slot_handle(slot);
 	MiqtVirtualQDateEdit* self_cast = dynamic_cast<MiqtVirtualQDateEdit*>( (QDateEdit*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__sizeHint = slot;
+	self_cast->handle__sizeHint = std::move(slot_handle);
 	return true;
 }
 
@@ -5504,12 +5628,13 @@ QSize* QDateEdit_virtualbase_sizeHint(const void* self) {
 }
 
 bool QDateEdit_override_virtual_clear(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QDateEdit> slot_handle(slot);
 	MiqtVirtualQDateEdit* self_cast = dynamic_cast<MiqtVirtualQDateEdit*>( (QDateEdit*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__clear = slot;
+	self_cast->handle__clear = std::move(slot_handle);
 	return true;
 }
 
@@ -5518,12 +5643,13 @@ void QDateEdit_virtualbase_clear(void* self) {
 }
 
 bool QDateEdit_override_virtual_stepBy(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QDateEdit> slot_handle(slot);
 	MiqtVirtualQDateEdit* self_cast = dynamic_cast<MiqtVirtualQDateEdit*>( (QDateEdit*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__stepBy = slot;
+	self_cast->handle__stepBy = std::move(slot_handle);
 	return true;
 }
 
@@ -5532,12 +5658,13 @@ void QDateEdit_virtualbase_stepBy(void* self, int steps) {
 }
 
 bool QDateEdit_override_virtual_event(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QDateEdit> slot_handle(slot);
 	MiqtVirtualQDateEdit* self_cast = dynamic_cast<MiqtVirtualQDateEdit*>( (QDateEdit*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__event = slot;
+	self_cast->handle__event = std::move(slot_handle);
 	return true;
 }
 
@@ -5546,12 +5673,13 @@ bool QDateEdit_virtualbase_event(void* self, QEvent* event) {
 }
 
 bool QDateEdit_override_virtual_keyPressEvent(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QDateEdit> slot_handle(slot);
 	MiqtVirtualQDateEdit* self_cast = dynamic_cast<MiqtVirtualQDateEdit*>( (QDateEdit*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__keyPressEvent = slot;
+	self_cast->handle__keyPressEvent = std::move(slot_handle);
 	return true;
 }
 
@@ -5560,12 +5688,13 @@ void QDateEdit_virtualbase_keyPressEvent(void* self, QKeyEvent* event) {
 }
 
 bool QDateEdit_override_virtual_wheelEvent(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QDateEdit> slot_handle(slot);
 	MiqtVirtualQDateEdit* self_cast = dynamic_cast<MiqtVirtualQDateEdit*>( (QDateEdit*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__wheelEvent = slot;
+	self_cast->handle__wheelEvent = std::move(slot_handle);
 	return true;
 }
 
@@ -5574,12 +5703,13 @@ void QDateEdit_virtualbase_wheelEvent(void* self, QWheelEvent* event) {
 }
 
 bool QDateEdit_override_virtual_focusInEvent(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QDateEdit> slot_handle(slot);
 	MiqtVirtualQDateEdit* self_cast = dynamic_cast<MiqtVirtualQDateEdit*>( (QDateEdit*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__focusInEvent = slot;
+	self_cast->handle__focusInEvent = std::move(slot_handle);
 	return true;
 }
 
@@ -5588,12 +5718,13 @@ void QDateEdit_virtualbase_focusInEvent(void* self, QFocusEvent* event) {
 }
 
 bool QDateEdit_override_virtual_focusNextPrevChild(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QDateEdit> slot_handle(slot);
 	MiqtVirtualQDateEdit* self_cast = dynamic_cast<MiqtVirtualQDateEdit*>( (QDateEdit*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__focusNextPrevChild = slot;
+	self_cast->handle__focusNextPrevChild = std::move(slot_handle);
 	return true;
 }
 
@@ -5602,12 +5733,13 @@ bool QDateEdit_virtualbase_focusNextPrevChild(void* self, bool next) {
 }
 
 bool QDateEdit_override_virtual_validate(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QDateEdit> slot_handle(slot);
 	MiqtVirtualQDateEdit* self_cast = dynamic_cast<MiqtVirtualQDateEdit*>( (QDateEdit*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__validate = slot;
+	self_cast->handle__validate = std::move(slot_handle);
 	return true;
 }
 
@@ -5618,12 +5750,13 @@ int QDateEdit_virtualbase_validate(const void* self, struct miqt_string input, i
 }
 
 bool QDateEdit_override_virtual_fixup(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QDateEdit> slot_handle(slot);
 	MiqtVirtualQDateEdit* self_cast = dynamic_cast<MiqtVirtualQDateEdit*>( (QDateEdit*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__fixup = slot;
+	self_cast->handle__fixup = std::move(slot_handle);
 	return true;
 }
 
@@ -5633,12 +5766,13 @@ void QDateEdit_virtualbase_fixup(const void* self, struct miqt_string input) {
 }
 
 bool QDateEdit_override_virtual_dateTimeFromText(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QDateEdit> slot_handle(slot);
 	MiqtVirtualQDateEdit* self_cast = dynamic_cast<MiqtVirtualQDateEdit*>( (QDateEdit*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__dateTimeFromText = slot;
+	self_cast->handle__dateTimeFromText = std::move(slot_handle);
 	return true;
 }
 
@@ -5648,12 +5782,13 @@ QDateTime* QDateEdit_virtualbase_dateTimeFromText(const void* self, struct miqt_
 }
 
 bool QDateEdit_override_virtual_textFromDateTime(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QDateEdit> slot_handle(slot);
 	MiqtVirtualQDateEdit* self_cast = dynamic_cast<MiqtVirtualQDateEdit*>( (QDateEdit*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__textFromDateTime = slot;
+	self_cast->handle__textFromDateTime = std::move(slot_handle);
 	return true;
 }
 
@@ -5669,12 +5804,13 @@ struct miqt_string QDateEdit_virtualbase_textFromDateTime(const void* self, QDat
 }
 
 bool QDateEdit_override_virtual_stepEnabled(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QDateEdit> slot_handle(slot);
 	MiqtVirtualQDateEdit* self_cast = dynamic_cast<MiqtVirtualQDateEdit*>( (QDateEdit*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__stepEnabled = slot;
+	self_cast->handle__stepEnabled = std::move(slot_handle);
 	return true;
 }
 
@@ -5684,12 +5820,13 @@ int QDateEdit_virtualbase_stepEnabled(const void* self) {
 }
 
 bool QDateEdit_override_virtual_mousePressEvent(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QDateEdit> slot_handle(slot);
 	MiqtVirtualQDateEdit* self_cast = dynamic_cast<MiqtVirtualQDateEdit*>( (QDateEdit*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__mousePressEvent = slot;
+	self_cast->handle__mousePressEvent = std::move(slot_handle);
 	return true;
 }
 
@@ -5698,12 +5835,13 @@ void QDateEdit_virtualbase_mousePressEvent(void* self, QMouseEvent* event) {
 }
 
 bool QDateEdit_override_virtual_paintEvent(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QDateEdit> slot_handle(slot);
 	MiqtVirtualQDateEdit* self_cast = dynamic_cast<MiqtVirtualQDateEdit*>( (QDateEdit*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__paintEvent = slot;
+	self_cast->handle__paintEvent = std::move(slot_handle);
 	return true;
 }
 
@@ -5712,12 +5850,13 @@ void QDateEdit_virtualbase_paintEvent(void* self, QPaintEvent* event) {
 }
 
 bool QDateEdit_override_virtual_minimumSizeHint(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QDateEdit> slot_handle(slot);
 	MiqtVirtualQDateEdit* self_cast = dynamic_cast<MiqtVirtualQDateEdit*>( (QDateEdit*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__minimumSizeHint = slot;
+	self_cast->handle__minimumSizeHint = std::move(slot_handle);
 	return true;
 }
 
@@ -5726,12 +5865,13 @@ QSize* QDateEdit_virtualbase_minimumSizeHint(const void* self) {
 }
 
 bool QDateEdit_override_virtual_inputMethodQuery(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QDateEdit> slot_handle(slot);
 	MiqtVirtualQDateEdit* self_cast = dynamic_cast<MiqtVirtualQDateEdit*>( (QDateEdit*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__inputMethodQuery = slot;
+	self_cast->handle__inputMethodQuery = std::move(slot_handle);
 	return true;
 }
 
@@ -5740,12 +5880,13 @@ QVariant* QDateEdit_virtualbase_inputMethodQuery(const void* self, int param1) {
 }
 
 bool QDateEdit_override_virtual_resizeEvent(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QDateEdit> slot_handle(slot);
 	MiqtVirtualQDateEdit* self_cast = dynamic_cast<MiqtVirtualQDateEdit*>( (QDateEdit*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__resizeEvent = slot;
+	self_cast->handle__resizeEvent = std::move(slot_handle);
 	return true;
 }
 
@@ -5754,12 +5895,13 @@ void QDateEdit_virtualbase_resizeEvent(void* self, QResizeEvent* event) {
 }
 
 bool QDateEdit_override_virtual_keyReleaseEvent(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QDateEdit> slot_handle(slot);
 	MiqtVirtualQDateEdit* self_cast = dynamic_cast<MiqtVirtualQDateEdit*>( (QDateEdit*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__keyReleaseEvent = slot;
+	self_cast->handle__keyReleaseEvent = std::move(slot_handle);
 	return true;
 }
 
@@ -5768,12 +5910,13 @@ void QDateEdit_virtualbase_keyReleaseEvent(void* self, QKeyEvent* event) {
 }
 
 bool QDateEdit_override_virtual_focusOutEvent(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QDateEdit> slot_handle(slot);
 	MiqtVirtualQDateEdit* self_cast = dynamic_cast<MiqtVirtualQDateEdit*>( (QDateEdit*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__focusOutEvent = slot;
+	self_cast->handle__focusOutEvent = std::move(slot_handle);
 	return true;
 }
 
@@ -5782,12 +5925,13 @@ void QDateEdit_virtualbase_focusOutEvent(void* self, QFocusEvent* event) {
 }
 
 bool QDateEdit_override_virtual_contextMenuEvent(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QDateEdit> slot_handle(slot);
 	MiqtVirtualQDateEdit* self_cast = dynamic_cast<MiqtVirtualQDateEdit*>( (QDateEdit*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__contextMenuEvent = slot;
+	self_cast->handle__contextMenuEvent = std::move(slot_handle);
 	return true;
 }
 
@@ -5796,12 +5940,13 @@ void QDateEdit_virtualbase_contextMenuEvent(void* self, QContextMenuEvent* event
 }
 
 bool QDateEdit_override_virtual_changeEvent(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QDateEdit> slot_handle(slot);
 	MiqtVirtualQDateEdit* self_cast = dynamic_cast<MiqtVirtualQDateEdit*>( (QDateEdit*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__changeEvent = slot;
+	self_cast->handle__changeEvent = std::move(slot_handle);
 	return true;
 }
 
@@ -5810,12 +5955,13 @@ void QDateEdit_virtualbase_changeEvent(void* self, QEvent* event) {
 }
 
 bool QDateEdit_override_virtual_closeEvent(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QDateEdit> slot_handle(slot);
 	MiqtVirtualQDateEdit* self_cast = dynamic_cast<MiqtVirtualQDateEdit*>( (QDateEdit*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__closeEvent = slot;
+	self_cast->handle__closeEvent = std::move(slot_handle);
 	return true;
 }
 
@@ -5824,12 +5970,13 @@ void QDateEdit_virtualbase_closeEvent(void* self, QCloseEvent* event) {
 }
 
 bool QDateEdit_override_virtual_hideEvent(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QDateEdit> slot_handle(slot);
 	MiqtVirtualQDateEdit* self_cast = dynamic_cast<MiqtVirtualQDateEdit*>( (QDateEdit*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__hideEvent = slot;
+	self_cast->handle__hideEvent = std::move(slot_handle);
 	return true;
 }
 
@@ -5838,12 +5985,13 @@ void QDateEdit_virtualbase_hideEvent(void* self, QHideEvent* event) {
 }
 
 bool QDateEdit_override_virtual_mouseReleaseEvent(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QDateEdit> slot_handle(slot);
 	MiqtVirtualQDateEdit* self_cast = dynamic_cast<MiqtVirtualQDateEdit*>( (QDateEdit*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__mouseReleaseEvent = slot;
+	self_cast->handle__mouseReleaseEvent = std::move(slot_handle);
 	return true;
 }
 
@@ -5852,12 +6000,13 @@ void QDateEdit_virtualbase_mouseReleaseEvent(void* self, QMouseEvent* event) {
 }
 
 bool QDateEdit_override_virtual_mouseMoveEvent(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QDateEdit> slot_handle(slot);
 	MiqtVirtualQDateEdit* self_cast = dynamic_cast<MiqtVirtualQDateEdit*>( (QDateEdit*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__mouseMoveEvent = slot;
+	self_cast->handle__mouseMoveEvent = std::move(slot_handle);
 	return true;
 }
 
@@ -5866,12 +6015,13 @@ void QDateEdit_virtualbase_mouseMoveEvent(void* self, QMouseEvent* event) {
 }
 
 bool QDateEdit_override_virtual_timerEvent(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QDateEdit> slot_handle(slot);
 	MiqtVirtualQDateEdit* self_cast = dynamic_cast<MiqtVirtualQDateEdit*>( (QDateEdit*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__timerEvent = slot;
+	self_cast->handle__timerEvent = std::move(slot_handle);
 	return true;
 }
 
@@ -5880,12 +6030,13 @@ void QDateEdit_virtualbase_timerEvent(void* self, QTimerEvent* event) {
 }
 
 bool QDateEdit_override_virtual_showEvent(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QDateEdit> slot_handle(slot);
 	MiqtVirtualQDateEdit* self_cast = dynamic_cast<MiqtVirtualQDateEdit*>( (QDateEdit*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__showEvent = slot;
+	self_cast->handle__showEvent = std::move(slot_handle);
 	return true;
 }
 
@@ -5894,12 +6045,13 @@ void QDateEdit_virtualbase_showEvent(void* self, QShowEvent* event) {
 }
 
 bool QDateEdit_override_virtual_devType(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QDateEdit> slot_handle(slot);
 	MiqtVirtualQDateEdit* self_cast = dynamic_cast<MiqtVirtualQDateEdit*>( (QDateEdit*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__devType = slot;
+	self_cast->handle__devType = std::move(slot_handle);
 	return true;
 }
 
@@ -5908,12 +6060,13 @@ int QDateEdit_virtualbase_devType(const void* self) {
 }
 
 bool QDateEdit_override_virtual_setVisible(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QDateEdit> slot_handle(slot);
 	MiqtVirtualQDateEdit* self_cast = dynamic_cast<MiqtVirtualQDateEdit*>( (QDateEdit*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__setVisible = slot;
+	self_cast->handle__setVisible = std::move(slot_handle);
 	return true;
 }
 
@@ -5922,12 +6075,13 @@ void QDateEdit_virtualbase_setVisible(void* self, bool visible) {
 }
 
 bool QDateEdit_override_virtual_heightForWidth(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QDateEdit> slot_handle(slot);
 	MiqtVirtualQDateEdit* self_cast = dynamic_cast<MiqtVirtualQDateEdit*>( (QDateEdit*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__heightForWidth = slot;
+	self_cast->handle__heightForWidth = std::move(slot_handle);
 	return true;
 }
 
@@ -5936,12 +6090,13 @@ int QDateEdit_virtualbase_heightForWidth(const void* self, int param1) {
 }
 
 bool QDateEdit_override_virtual_hasHeightForWidth(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QDateEdit> slot_handle(slot);
 	MiqtVirtualQDateEdit* self_cast = dynamic_cast<MiqtVirtualQDateEdit*>( (QDateEdit*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__hasHeightForWidth = slot;
+	self_cast->handle__hasHeightForWidth = std::move(slot_handle);
 	return true;
 }
 
@@ -5950,12 +6105,13 @@ bool QDateEdit_virtualbase_hasHeightForWidth(const void* self) {
 }
 
 bool QDateEdit_override_virtual_paintEngine(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QDateEdit> slot_handle(slot);
 	MiqtVirtualQDateEdit* self_cast = dynamic_cast<MiqtVirtualQDateEdit*>( (QDateEdit*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__paintEngine = slot;
+	self_cast->handle__paintEngine = std::move(slot_handle);
 	return true;
 }
 
@@ -5964,12 +6120,13 @@ QPaintEngine* QDateEdit_virtualbase_paintEngine(const void* self) {
 }
 
 bool QDateEdit_override_virtual_mouseDoubleClickEvent(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QDateEdit> slot_handle(slot);
 	MiqtVirtualQDateEdit* self_cast = dynamic_cast<MiqtVirtualQDateEdit*>( (QDateEdit*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__mouseDoubleClickEvent = slot;
+	self_cast->handle__mouseDoubleClickEvent = std::move(slot_handle);
 	return true;
 }
 
@@ -5978,12 +6135,13 @@ void QDateEdit_virtualbase_mouseDoubleClickEvent(void* self, QMouseEvent* event)
 }
 
 bool QDateEdit_override_virtual_enterEvent(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QDateEdit> slot_handle(slot);
 	MiqtVirtualQDateEdit* self_cast = dynamic_cast<MiqtVirtualQDateEdit*>( (QDateEdit*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__enterEvent = slot;
+	self_cast->handle__enterEvent = std::move(slot_handle);
 	return true;
 }
 
@@ -5992,12 +6150,13 @@ void QDateEdit_virtualbase_enterEvent(void* self, QEvent* event) {
 }
 
 bool QDateEdit_override_virtual_leaveEvent(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QDateEdit> slot_handle(slot);
 	MiqtVirtualQDateEdit* self_cast = dynamic_cast<MiqtVirtualQDateEdit*>( (QDateEdit*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__leaveEvent = slot;
+	self_cast->handle__leaveEvent = std::move(slot_handle);
 	return true;
 }
 
@@ -6006,12 +6165,13 @@ void QDateEdit_virtualbase_leaveEvent(void* self, QEvent* event) {
 }
 
 bool QDateEdit_override_virtual_moveEvent(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QDateEdit> slot_handle(slot);
 	MiqtVirtualQDateEdit* self_cast = dynamic_cast<MiqtVirtualQDateEdit*>( (QDateEdit*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__moveEvent = slot;
+	self_cast->handle__moveEvent = std::move(slot_handle);
 	return true;
 }
 
@@ -6020,12 +6180,13 @@ void QDateEdit_virtualbase_moveEvent(void* self, QMoveEvent* event) {
 }
 
 bool QDateEdit_override_virtual_tabletEvent(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QDateEdit> slot_handle(slot);
 	MiqtVirtualQDateEdit* self_cast = dynamic_cast<MiqtVirtualQDateEdit*>( (QDateEdit*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__tabletEvent = slot;
+	self_cast->handle__tabletEvent = std::move(slot_handle);
 	return true;
 }
 
@@ -6034,12 +6195,13 @@ void QDateEdit_virtualbase_tabletEvent(void* self, QTabletEvent* event) {
 }
 
 bool QDateEdit_override_virtual_actionEvent(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QDateEdit> slot_handle(slot);
 	MiqtVirtualQDateEdit* self_cast = dynamic_cast<MiqtVirtualQDateEdit*>( (QDateEdit*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__actionEvent = slot;
+	self_cast->handle__actionEvent = std::move(slot_handle);
 	return true;
 }
 
@@ -6048,12 +6210,13 @@ void QDateEdit_virtualbase_actionEvent(void* self, QActionEvent* event) {
 }
 
 bool QDateEdit_override_virtual_dragEnterEvent(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QDateEdit> slot_handle(slot);
 	MiqtVirtualQDateEdit* self_cast = dynamic_cast<MiqtVirtualQDateEdit*>( (QDateEdit*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__dragEnterEvent = slot;
+	self_cast->handle__dragEnterEvent = std::move(slot_handle);
 	return true;
 }
 
@@ -6062,12 +6225,13 @@ void QDateEdit_virtualbase_dragEnterEvent(void* self, QDragEnterEvent* event) {
 }
 
 bool QDateEdit_override_virtual_dragMoveEvent(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QDateEdit> slot_handle(slot);
 	MiqtVirtualQDateEdit* self_cast = dynamic_cast<MiqtVirtualQDateEdit*>( (QDateEdit*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__dragMoveEvent = slot;
+	self_cast->handle__dragMoveEvent = std::move(slot_handle);
 	return true;
 }
 
@@ -6076,12 +6240,13 @@ void QDateEdit_virtualbase_dragMoveEvent(void* self, QDragMoveEvent* event) {
 }
 
 bool QDateEdit_override_virtual_dragLeaveEvent(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QDateEdit> slot_handle(slot);
 	MiqtVirtualQDateEdit* self_cast = dynamic_cast<MiqtVirtualQDateEdit*>( (QDateEdit*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__dragLeaveEvent = slot;
+	self_cast->handle__dragLeaveEvent = std::move(slot_handle);
 	return true;
 }
 
@@ -6090,12 +6255,13 @@ void QDateEdit_virtualbase_dragLeaveEvent(void* self, QDragLeaveEvent* event) {
 }
 
 bool QDateEdit_override_virtual_dropEvent(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QDateEdit> slot_handle(slot);
 	MiqtVirtualQDateEdit* self_cast = dynamic_cast<MiqtVirtualQDateEdit*>( (QDateEdit*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__dropEvent = slot;
+	self_cast->handle__dropEvent = std::move(slot_handle);
 	return true;
 }
 
@@ -6104,12 +6270,13 @@ void QDateEdit_virtualbase_dropEvent(void* self, QDropEvent* event) {
 }
 
 bool QDateEdit_override_virtual_nativeEvent(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QDateEdit> slot_handle(slot);
 	MiqtVirtualQDateEdit* self_cast = dynamic_cast<MiqtVirtualQDateEdit*>( (QDateEdit*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__nativeEvent = slot;
+	self_cast->handle__nativeEvent = std::move(slot_handle);
 	return true;
 }
 
@@ -6119,12 +6286,13 @@ bool QDateEdit_virtualbase_nativeEvent(void* self, struct miqt_string eventType,
 }
 
 bool QDateEdit_override_virtual_metric(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QDateEdit> slot_handle(slot);
 	MiqtVirtualQDateEdit* self_cast = dynamic_cast<MiqtVirtualQDateEdit*>( (QDateEdit*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__metric = slot;
+	self_cast->handle__metric = std::move(slot_handle);
 	return true;
 }
 
@@ -6133,12 +6301,13 @@ int QDateEdit_virtualbase_metric(const void* self, int param1) {
 }
 
 bool QDateEdit_override_virtual_initPainter(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QDateEdit> slot_handle(slot);
 	MiqtVirtualQDateEdit* self_cast = dynamic_cast<MiqtVirtualQDateEdit*>( (QDateEdit*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__initPainter = slot;
+	self_cast->handle__initPainter = std::move(slot_handle);
 	return true;
 }
 
@@ -6147,12 +6316,13 @@ void QDateEdit_virtualbase_initPainter(const void* self, QPainter* painter) {
 }
 
 bool QDateEdit_override_virtual_redirected(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QDateEdit> slot_handle(slot);
 	MiqtVirtualQDateEdit* self_cast = dynamic_cast<MiqtVirtualQDateEdit*>( (QDateEdit*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__redirected = slot;
+	self_cast->handle__redirected = std::move(slot_handle);
 	return true;
 }
 
@@ -6161,12 +6331,13 @@ QPaintDevice* QDateEdit_virtualbase_redirected(const void* self, QPoint* offset)
 }
 
 bool QDateEdit_override_virtual_sharedPainter(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QDateEdit> slot_handle(slot);
 	MiqtVirtualQDateEdit* self_cast = dynamic_cast<MiqtVirtualQDateEdit*>( (QDateEdit*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__sharedPainter = slot;
+	self_cast->handle__sharedPainter = std::move(slot_handle);
 	return true;
 }
 
@@ -6175,12 +6346,13 @@ QPainter* QDateEdit_virtualbase_sharedPainter(const void* self) {
 }
 
 bool QDateEdit_override_virtual_inputMethodEvent(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QDateEdit> slot_handle(slot);
 	MiqtVirtualQDateEdit* self_cast = dynamic_cast<MiqtVirtualQDateEdit*>( (QDateEdit*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__inputMethodEvent = slot;
+	self_cast->handle__inputMethodEvent = std::move(slot_handle);
 	return true;
 }
 
@@ -6189,12 +6361,13 @@ void QDateEdit_virtualbase_inputMethodEvent(void* self, QInputMethodEvent* param
 }
 
 bool QDateEdit_override_virtual_eventFilter(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QDateEdit> slot_handle(slot);
 	MiqtVirtualQDateEdit* self_cast = dynamic_cast<MiqtVirtualQDateEdit*>( (QDateEdit*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__eventFilter = slot;
+	self_cast->handle__eventFilter = std::move(slot_handle);
 	return true;
 }
 
@@ -6203,12 +6376,13 @@ bool QDateEdit_virtualbase_eventFilter(void* self, QObject* watched, QEvent* eve
 }
 
 bool QDateEdit_override_virtual_childEvent(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QDateEdit> slot_handle(slot);
 	MiqtVirtualQDateEdit* self_cast = dynamic_cast<MiqtVirtualQDateEdit*>( (QDateEdit*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__childEvent = slot;
+	self_cast->handle__childEvent = std::move(slot_handle);
 	return true;
 }
 
@@ -6217,12 +6391,13 @@ void QDateEdit_virtualbase_childEvent(void* self, QChildEvent* event) {
 }
 
 bool QDateEdit_override_virtual_customEvent(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QDateEdit> slot_handle(slot);
 	MiqtVirtualQDateEdit* self_cast = dynamic_cast<MiqtVirtualQDateEdit*>( (QDateEdit*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__customEvent = slot;
+	self_cast->handle__customEvent = std::move(slot_handle);
 	return true;
 }
 
@@ -6231,12 +6406,13 @@ void QDateEdit_virtualbase_customEvent(void* self, QEvent* event) {
 }
 
 bool QDateEdit_override_virtual_connectNotify(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QDateEdit> slot_handle(slot);
 	MiqtVirtualQDateEdit* self_cast = dynamic_cast<MiqtVirtualQDateEdit*>( (QDateEdit*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__connectNotify = slot;
+	self_cast->handle__connectNotify = std::move(slot_handle);
 	return true;
 }
 
@@ -6245,12 +6421,13 @@ void QDateEdit_virtualbase_connectNotify(void* self, QMetaMethod* signal) {
 }
 
 bool QDateEdit_override_virtual_disconnectNotify(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QDateEdit> slot_handle(slot);
 	MiqtVirtualQDateEdit* self_cast = dynamic_cast<MiqtVirtualQDateEdit*>( (QDateEdit*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__disconnectNotify = slot;
+	self_cast->handle__disconnectNotify = std::move(slot_handle);
 	return true;
 }
 

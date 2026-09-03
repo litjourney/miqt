@@ -1,3 +1,5 @@
+#include <memory>
+#include <utility>
 #include <QCameraLocksControl>
 #include <QMediaControl>
 #include <QMetaMethod>
@@ -13,6 +15,7 @@
 extern "C" {
 #endif
 
+void miqt_exec_callback_handle_release_QCameraLocksControl(intptr_t);
 void miqt_exec_callback_QCameraLocksControl_lockStatusChanged(intptr_t, int, int, int);
 #ifdef __cplusplus
 } /* extern C */
@@ -74,8 +77,10 @@ void QCameraLocksControl_lockStatusChanged(QCameraLocksControl* self, int type, 
 	self->lockStatusChanged(static_cast<QCamera::LockType>(type), static_cast<QCamera::LockStatus>(status), static_cast<QCamera::LockChangeReason>(reason));
 }
 
-void QCameraLocksControl_connect_lockStatusChanged(QCameraLocksControl* self, intptr_t slot) {
-	QCameraLocksControl::connect(self, static_cast<void (QCameraLocksControl::*)(QCamera::LockType, QCamera::LockStatus, QCamera::LockChangeReason)>(&QCameraLocksControl::lockStatusChanged), self, [=](QCamera::LockType type, QCamera::LockStatus status, QCamera::LockChangeReason reason) {
+void* QCameraLocksControl_connect_lockStatusChanged(QCameraLocksControl* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QCameraLocksControl>>(slot);
+	return new QMetaObject::Connection(QCameraLocksControl::connect(self, static_cast<void (QCameraLocksControl::*)(QCamera::LockType, QCamera::LockStatus, QCamera::LockChangeReason)>(&QCameraLocksControl::lockStatusChanged), self, [slot_handle](QCamera::LockType type, QCamera::LockStatus status, QCamera::LockChangeReason reason) {
+		intptr_t slot = slot_handle->value();
 		QCamera::LockType type_ret = type;
 		int sigval1 = static_cast<int>(type_ret);
 		QCamera::LockStatus status_ret = status;
@@ -83,7 +88,7 @@ void QCameraLocksControl_connect_lockStatusChanged(QCameraLocksControl* self, in
 		QCamera::LockChangeReason reason_ret = reason;
 		int sigval3 = static_cast<int>(reason_ret);
 		miqt_exec_callback_QCameraLocksControl_lockStatusChanged(slot, sigval1, sigval2, sigval3);
-	});
+	}));
 }
 
 struct miqt_string QCameraLocksControl_tr2(const char* s, const char* c) {

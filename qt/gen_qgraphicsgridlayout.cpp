@@ -1,3 +1,5 @@
+#include <memory>
+#include <utility>
 #include <QEvent>
 #include <QGraphicsGridLayout>
 #include <QGraphicsItem>
@@ -12,6 +14,7 @@
 extern "C" {
 #endif
 
+void miqt_exec_callback_handle_release_QGraphicsGridLayout(intptr_t);
 int miqt_exec_callback_QGraphicsGridLayout_count(const QGraphicsGridLayout*, intptr_t);
 QGraphicsLayoutItem* miqt_exec_callback_QGraphicsGridLayout_itemAtWithIndex(const QGraphicsGridLayout*, intptr_t, int);
 void miqt_exec_callback_QGraphicsGridLayout_removeAt(QGraphicsGridLayout*, intptr_t, int);
@@ -34,75 +37,75 @@ public:
 	virtual ~MiqtVirtualQGraphicsGridLayout() override = default;
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__count = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QGraphicsGridLayout> handle__count;
 
 	// Subclass to allow providing a Go implementation
 	virtual int count() const override {
-		if (handle__count == 0) {
+		if (!handle__count) {
 			return QGraphicsGridLayout::count();
 		}
 
-		int callback_return_value = miqt_exec_callback_QGraphicsGridLayout_count(this, handle__count);
+		int callback_return_value = miqt_exec_callback_QGraphicsGridLayout_count(this, handle__count.value());
 		return static_cast<int>(callback_return_value);
 	}
 
 	friend int QGraphicsGridLayout_virtualbase_count(const void* self);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__itemAtWithIndex = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QGraphicsGridLayout> handle__itemAtWithIndex;
 
 	// Subclass to allow providing a Go implementation
 	virtual QGraphicsLayoutItem* itemAt(int index) const override {
-		if (handle__itemAtWithIndex == 0) {
+		if (!handle__itemAtWithIndex) {
 			return QGraphicsGridLayout::itemAt(index);
 		}
 
 		int sigval1 = index;
-		QGraphicsLayoutItem* callback_return_value = miqt_exec_callback_QGraphicsGridLayout_itemAtWithIndex(this, handle__itemAtWithIndex, sigval1);
+		QGraphicsLayoutItem* callback_return_value = miqt_exec_callback_QGraphicsGridLayout_itemAtWithIndex(this, handle__itemAtWithIndex.value(), sigval1);
 		return callback_return_value;
 	}
 
 	friend QGraphicsLayoutItem* QGraphicsGridLayout_virtualbase_itemAtWithIndex(const void* self, int index);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__removeAt = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QGraphicsGridLayout> handle__removeAt;
 
 	// Subclass to allow providing a Go implementation
 	virtual void removeAt(int index) override {
-		if (handle__removeAt == 0) {
+		if (!handle__removeAt) {
 			QGraphicsGridLayout::removeAt(index);
 			return;
 		}
 
 		int sigval1 = index;
-		miqt_exec_callback_QGraphicsGridLayout_removeAt(this, handle__removeAt, sigval1);
+		miqt_exec_callback_QGraphicsGridLayout_removeAt(this, handle__removeAt.value(), sigval1);
 
 	}
 
 	friend void QGraphicsGridLayout_virtualbase_removeAt(void* self, int index);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__invalidate = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QGraphicsGridLayout> handle__invalidate;
 
 	// Subclass to allow providing a Go implementation
 	virtual void invalidate() override {
-		if (handle__invalidate == 0) {
+		if (!handle__invalidate) {
 			QGraphicsGridLayout::invalidate();
 			return;
 		}
 
-		miqt_exec_callback_QGraphicsGridLayout_invalidate(this, handle__invalidate);
+		miqt_exec_callback_QGraphicsGridLayout_invalidate(this, handle__invalidate.value());
 
 	}
 
 	friend void QGraphicsGridLayout_virtualbase_invalidate(void* self);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__setGeometry = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QGraphicsGridLayout> handle__setGeometry;
 
 	// Subclass to allow providing a Go implementation
 	virtual void setGeometry(const QRectF& rect) override {
-		if (handle__setGeometry == 0) {
+		if (!handle__setGeometry) {
 			QGraphicsGridLayout::setGeometry(rect);
 			return;
 		}
@@ -110,18 +113,18 @@ public:
 		const QRectF& rect_ret = rect;
 		// Cast returned reference into pointer
 		QRectF* sigval1 = const_cast<QRectF*>(&rect_ret);
-		miqt_exec_callback_QGraphicsGridLayout_setGeometry(this, handle__setGeometry, sigval1);
+		miqt_exec_callback_QGraphicsGridLayout_setGeometry(this, handle__setGeometry.value(), sigval1);
 
 	}
 
 	friend void QGraphicsGridLayout_virtualbase_setGeometry(void* self, QRectF* rect);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__sizeHint = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QGraphicsGridLayout> handle__sizeHint;
 
 	// Subclass to allow providing a Go implementation
 	virtual QSizeF sizeHint(Qt::SizeHint which, const QSizeF& constraint) const override {
-		if (handle__sizeHint == 0) {
+		if (!handle__sizeHint) {
 			return QGraphicsGridLayout::sizeHint(which, constraint);
 		}
 
@@ -130,18 +133,18 @@ public:
 		const QSizeF& constraint_ret = constraint;
 		// Cast returned reference into pointer
 		QSizeF* sigval2 = const_cast<QSizeF*>(&constraint_ret);
-		QSizeF* callback_return_value = miqt_exec_callback_QGraphicsGridLayout_sizeHint(this, handle__sizeHint, sigval1, sigval2);
+		QSizeF* callback_return_value = miqt_exec_callback_QGraphicsGridLayout_sizeHint(this, handle__sizeHint.value(), sigval1, sigval2);
 		return *callback_return_value;
 	}
 
 	friend QSizeF* QGraphicsGridLayout_virtualbase_sizeHint(const void* self, int which, QSizeF* constraint);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__getContentsMargins = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QGraphicsGridLayout> handle__getContentsMargins;
 
 	// Subclass to allow providing a Go implementation
 	virtual void getContentsMargins(qreal* left, qreal* top, qreal* right, qreal* bottom) const override {
-		if (handle__getContentsMargins == 0) {
+		if (!handle__getContentsMargins) {
 			QGraphicsGridLayout::getContentsMargins(left, top, right, bottom);
 			return;
 		}
@@ -154,40 +157,40 @@ public:
 		double* sigval3 = static_cast<double*>(right_ret);
 		qreal* bottom_ret = bottom;
 		double* sigval4 = static_cast<double*>(bottom_ret);
-		miqt_exec_callback_QGraphicsGridLayout_getContentsMargins(this, handle__getContentsMargins, sigval1, sigval2, sigval3, sigval4);
+		miqt_exec_callback_QGraphicsGridLayout_getContentsMargins(this, handle__getContentsMargins.value(), sigval1, sigval2, sigval3, sigval4);
 
 	}
 
 	friend void QGraphicsGridLayout_virtualbase_getContentsMargins(const void* self, double* left, double* top, double* right, double* bottom);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__updateGeometry = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QGraphicsGridLayout> handle__updateGeometry;
 
 	// Subclass to allow providing a Go implementation
 	virtual void updateGeometry() override {
-		if (handle__updateGeometry == 0) {
+		if (!handle__updateGeometry) {
 			QGraphicsGridLayout::updateGeometry();
 			return;
 		}
 
-		miqt_exec_callback_QGraphicsGridLayout_updateGeometry(this, handle__updateGeometry);
+		miqt_exec_callback_QGraphicsGridLayout_updateGeometry(this, handle__updateGeometry.value());
 
 	}
 
 	friend void QGraphicsGridLayout_virtualbase_updateGeometry(void* self);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__widgetEvent = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QGraphicsGridLayout> handle__widgetEvent;
 
 	// Subclass to allow providing a Go implementation
 	virtual void widgetEvent(QEvent* e) override {
-		if (handle__widgetEvent == 0) {
+		if (!handle__widgetEvent) {
 			QGraphicsGridLayout::widgetEvent(e);
 			return;
 		}
 
 		QEvent* sigval1 = e;
-		miqt_exec_callback_QGraphicsGridLayout_widgetEvent(this, handle__widgetEvent, sigval1);
+		miqt_exec_callback_QGraphicsGridLayout_widgetEvent(this, handle__widgetEvent.value(), sigval1);
 
 	}
 
@@ -413,12 +416,13 @@ void QGraphicsGridLayout_addItem4(QGraphicsGridLayout* self, QGraphicsLayoutItem
 }
 
 bool QGraphicsGridLayout_override_virtual_count(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QGraphicsGridLayout> slot_handle(slot);
 	MiqtVirtualQGraphicsGridLayout* self_cast = dynamic_cast<MiqtVirtualQGraphicsGridLayout*>( (QGraphicsGridLayout*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__count = slot;
+	self_cast->handle__count = std::move(slot_handle);
 	return true;
 }
 
@@ -427,12 +431,13 @@ int QGraphicsGridLayout_virtualbase_count(const void* self) {
 }
 
 bool QGraphicsGridLayout_override_virtual_itemAtWithIndex(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QGraphicsGridLayout> slot_handle(slot);
 	MiqtVirtualQGraphicsGridLayout* self_cast = dynamic_cast<MiqtVirtualQGraphicsGridLayout*>( (QGraphicsGridLayout*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__itemAtWithIndex = slot;
+	self_cast->handle__itemAtWithIndex = std::move(slot_handle);
 	return true;
 }
 
@@ -441,12 +446,13 @@ QGraphicsLayoutItem* QGraphicsGridLayout_virtualbase_itemAtWithIndex(const void*
 }
 
 bool QGraphicsGridLayout_override_virtual_removeAt(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QGraphicsGridLayout> slot_handle(slot);
 	MiqtVirtualQGraphicsGridLayout* self_cast = dynamic_cast<MiqtVirtualQGraphicsGridLayout*>( (QGraphicsGridLayout*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__removeAt = slot;
+	self_cast->handle__removeAt = std::move(slot_handle);
 	return true;
 }
 
@@ -455,12 +461,13 @@ void QGraphicsGridLayout_virtualbase_removeAt(void* self, int index) {
 }
 
 bool QGraphicsGridLayout_override_virtual_invalidate(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QGraphicsGridLayout> slot_handle(slot);
 	MiqtVirtualQGraphicsGridLayout* self_cast = dynamic_cast<MiqtVirtualQGraphicsGridLayout*>( (QGraphicsGridLayout*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__invalidate = slot;
+	self_cast->handle__invalidate = std::move(slot_handle);
 	return true;
 }
 
@@ -469,12 +476,13 @@ void QGraphicsGridLayout_virtualbase_invalidate(void* self) {
 }
 
 bool QGraphicsGridLayout_override_virtual_setGeometry(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QGraphicsGridLayout> slot_handle(slot);
 	MiqtVirtualQGraphicsGridLayout* self_cast = dynamic_cast<MiqtVirtualQGraphicsGridLayout*>( (QGraphicsGridLayout*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__setGeometry = slot;
+	self_cast->handle__setGeometry = std::move(slot_handle);
 	return true;
 }
 
@@ -483,12 +491,13 @@ void QGraphicsGridLayout_virtualbase_setGeometry(void* self, QRectF* rect) {
 }
 
 bool QGraphicsGridLayout_override_virtual_sizeHint(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QGraphicsGridLayout> slot_handle(slot);
 	MiqtVirtualQGraphicsGridLayout* self_cast = dynamic_cast<MiqtVirtualQGraphicsGridLayout*>( (QGraphicsGridLayout*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__sizeHint = slot;
+	self_cast->handle__sizeHint = std::move(slot_handle);
 	return true;
 }
 
@@ -497,12 +506,13 @@ QSizeF* QGraphicsGridLayout_virtualbase_sizeHint(const void* self, int which, QS
 }
 
 bool QGraphicsGridLayout_override_virtual_getContentsMargins(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QGraphicsGridLayout> slot_handle(slot);
 	MiqtVirtualQGraphicsGridLayout* self_cast = dynamic_cast<MiqtVirtualQGraphicsGridLayout*>( (QGraphicsGridLayout*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__getContentsMargins = slot;
+	self_cast->handle__getContentsMargins = std::move(slot_handle);
 	return true;
 }
 
@@ -511,12 +521,13 @@ void QGraphicsGridLayout_virtualbase_getContentsMargins(const void* self, double
 }
 
 bool QGraphicsGridLayout_override_virtual_updateGeometry(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QGraphicsGridLayout> slot_handle(slot);
 	MiqtVirtualQGraphicsGridLayout* self_cast = dynamic_cast<MiqtVirtualQGraphicsGridLayout*>( (QGraphicsGridLayout*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__updateGeometry = slot;
+	self_cast->handle__updateGeometry = std::move(slot_handle);
 	return true;
 }
 
@@ -525,12 +536,13 @@ void QGraphicsGridLayout_virtualbase_updateGeometry(void* self) {
 }
 
 bool QGraphicsGridLayout_override_virtual_widgetEvent(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QGraphicsGridLayout> slot_handle(slot);
 	MiqtVirtualQGraphicsGridLayout* self_cast = dynamic_cast<MiqtVirtualQGraphicsGridLayout*>( (QGraphicsGridLayout*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__widgetEvent = slot;
+	self_cast->handle__widgetEvent = std::move(slot_handle);
 	return true;
 }
 

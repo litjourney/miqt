@@ -1,3 +1,5 @@
+#include <memory>
+#include <utility>
 #include <QAbstractBarSeries>
 #include <QAbstractSeries>
 #include <QBarSet>
@@ -15,6 +17,7 @@
 extern "C" {
 #endif
 
+void miqt_exec_callback_handle_release_QAbstractBarSeries(intptr_t);
 void miqt_exec_callback_QAbstractBarSeries_clicked(intptr_t, int, QBarSet*);
 void miqt_exec_callback_QAbstractBarSeries_hovered(intptr_t, bool, int, QBarSet*);
 void miqt_exec_callback_QAbstractBarSeries_pressed(intptr_t, int, QBarSet*);
@@ -165,81 +168,95 @@ void QAbstractBarSeries_clicked(QAbstractBarSeries* self, int index, QBarSet* ba
 	self->clicked(static_cast<int>(index), barset);
 }
 
-void QAbstractBarSeries_connect_clicked(QAbstractBarSeries* self, intptr_t slot) {
-	QAbstractBarSeries::connect(self, static_cast<void (QAbstractBarSeries::*)(int, QBarSet*)>(&QAbstractBarSeries::clicked), self, [=](int index, QBarSet* barset) {
+void* QAbstractBarSeries_connect_clicked(QAbstractBarSeries* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QAbstractBarSeries>>(slot);
+	return new QMetaObject::Connection(QAbstractBarSeries::connect(self, static_cast<void (QAbstractBarSeries::*)(int, QBarSet*)>(&QAbstractBarSeries::clicked), self, [slot_handle](int index, QBarSet* barset) {
+		intptr_t slot = slot_handle->value();
 		int sigval1 = index;
 		QBarSet* sigval2 = barset;
 		miqt_exec_callback_QAbstractBarSeries_clicked(slot, sigval1, sigval2);
-	});
+	}));
 }
 
 void QAbstractBarSeries_hovered(QAbstractBarSeries* self, bool status, int index, QBarSet* barset) {
 	self->hovered(status, static_cast<int>(index), barset);
 }
 
-void QAbstractBarSeries_connect_hovered(QAbstractBarSeries* self, intptr_t slot) {
-	QAbstractBarSeries::connect(self, static_cast<void (QAbstractBarSeries::*)(bool, int, QBarSet*)>(&QAbstractBarSeries::hovered), self, [=](bool status, int index, QBarSet* barset) {
+void* QAbstractBarSeries_connect_hovered(QAbstractBarSeries* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QAbstractBarSeries>>(slot);
+	return new QMetaObject::Connection(QAbstractBarSeries::connect(self, static_cast<void (QAbstractBarSeries::*)(bool, int, QBarSet*)>(&QAbstractBarSeries::hovered), self, [slot_handle](bool status, int index, QBarSet* barset) {
+		intptr_t slot = slot_handle->value();
 		bool sigval1 = status;
 		int sigval2 = index;
 		QBarSet* sigval3 = barset;
 		miqt_exec_callback_QAbstractBarSeries_hovered(slot, sigval1, sigval2, sigval3);
-	});
+	}));
 }
 
 void QAbstractBarSeries_pressed(QAbstractBarSeries* self, int index, QBarSet* barset) {
 	self->pressed(static_cast<int>(index), barset);
 }
 
-void QAbstractBarSeries_connect_pressed(QAbstractBarSeries* self, intptr_t slot) {
-	QAbstractBarSeries::connect(self, static_cast<void (QAbstractBarSeries::*)(int, QBarSet*)>(&QAbstractBarSeries::pressed), self, [=](int index, QBarSet* barset) {
+void* QAbstractBarSeries_connect_pressed(QAbstractBarSeries* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QAbstractBarSeries>>(slot);
+	return new QMetaObject::Connection(QAbstractBarSeries::connect(self, static_cast<void (QAbstractBarSeries::*)(int, QBarSet*)>(&QAbstractBarSeries::pressed), self, [slot_handle](int index, QBarSet* barset) {
+		intptr_t slot = slot_handle->value();
 		int sigval1 = index;
 		QBarSet* sigval2 = barset;
 		miqt_exec_callback_QAbstractBarSeries_pressed(slot, sigval1, sigval2);
-	});
+	}));
 }
 
 void QAbstractBarSeries_released(QAbstractBarSeries* self, int index, QBarSet* barset) {
 	self->released(static_cast<int>(index), barset);
 }
 
-void QAbstractBarSeries_connect_released(QAbstractBarSeries* self, intptr_t slot) {
-	QAbstractBarSeries::connect(self, static_cast<void (QAbstractBarSeries::*)(int, QBarSet*)>(&QAbstractBarSeries::released), self, [=](int index, QBarSet* barset) {
+void* QAbstractBarSeries_connect_released(QAbstractBarSeries* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QAbstractBarSeries>>(slot);
+	return new QMetaObject::Connection(QAbstractBarSeries::connect(self, static_cast<void (QAbstractBarSeries::*)(int, QBarSet*)>(&QAbstractBarSeries::released), self, [slot_handle](int index, QBarSet* barset) {
+		intptr_t slot = slot_handle->value();
 		int sigval1 = index;
 		QBarSet* sigval2 = barset;
 		miqt_exec_callback_QAbstractBarSeries_released(slot, sigval1, sigval2);
-	});
+	}));
 }
 
 void QAbstractBarSeries_doubleClicked(QAbstractBarSeries* self, int index, QBarSet* barset) {
 	self->doubleClicked(static_cast<int>(index), barset);
 }
 
-void QAbstractBarSeries_connect_doubleClicked(QAbstractBarSeries* self, intptr_t slot) {
-	QAbstractBarSeries::connect(self, static_cast<void (QAbstractBarSeries::*)(int, QBarSet*)>(&QAbstractBarSeries::doubleClicked), self, [=](int index, QBarSet* barset) {
+void* QAbstractBarSeries_connect_doubleClicked(QAbstractBarSeries* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QAbstractBarSeries>>(slot);
+	return new QMetaObject::Connection(QAbstractBarSeries::connect(self, static_cast<void (QAbstractBarSeries::*)(int, QBarSet*)>(&QAbstractBarSeries::doubleClicked), self, [slot_handle](int index, QBarSet* barset) {
+		intptr_t slot = slot_handle->value();
 		int sigval1 = index;
 		QBarSet* sigval2 = barset;
 		miqt_exec_callback_QAbstractBarSeries_doubleClicked(slot, sigval1, sigval2);
-	});
+	}));
 }
 
 void QAbstractBarSeries_countChanged(QAbstractBarSeries* self) {
 	self->countChanged();
 }
 
-void QAbstractBarSeries_connect_countChanged(QAbstractBarSeries* self, intptr_t slot) {
-	QAbstractBarSeries::connect(self, static_cast<void (QAbstractBarSeries::*)()>(&QAbstractBarSeries::countChanged), self, [=]() {
+void* QAbstractBarSeries_connect_countChanged(QAbstractBarSeries* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QAbstractBarSeries>>(slot);
+	return new QMetaObject::Connection(QAbstractBarSeries::connect(self, static_cast<void (QAbstractBarSeries::*)()>(&QAbstractBarSeries::countChanged), self, [slot_handle]() {
+		intptr_t slot = slot_handle->value();
 		miqt_exec_callback_QAbstractBarSeries_countChanged(slot);
-	});
+	}));
 }
 
 void QAbstractBarSeries_labelsVisibleChanged(QAbstractBarSeries* self) {
 	self->labelsVisibleChanged();
 }
 
-void QAbstractBarSeries_connect_labelsVisibleChanged(QAbstractBarSeries* self, intptr_t slot) {
-	QAbstractBarSeries::connect(self, static_cast<void (QAbstractBarSeries::*)()>(&QAbstractBarSeries::labelsVisibleChanged), self, [=]() {
+void* QAbstractBarSeries_connect_labelsVisibleChanged(QAbstractBarSeries* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QAbstractBarSeries>>(slot);
+	return new QMetaObject::Connection(QAbstractBarSeries::connect(self, static_cast<void (QAbstractBarSeries::*)()>(&QAbstractBarSeries::labelsVisibleChanged), self, [slot_handle]() {
+		intptr_t slot = slot_handle->value();
 		miqt_exec_callback_QAbstractBarSeries_labelsVisibleChanged(slot);
-	});
+	}));
 }
 
 void QAbstractBarSeries_labelsFormatChanged(QAbstractBarSeries* self, struct miqt_string format) {
@@ -247,8 +264,10 @@ void QAbstractBarSeries_labelsFormatChanged(QAbstractBarSeries* self, struct miq
 	self->labelsFormatChanged(format_QString);
 }
 
-void QAbstractBarSeries_connect_labelsFormatChanged(QAbstractBarSeries* self, intptr_t slot) {
-	QAbstractBarSeries::connect(self, static_cast<void (QAbstractBarSeries::*)(const QString&)>(&QAbstractBarSeries::labelsFormatChanged), self, [=](const QString& format) {
+void* QAbstractBarSeries_connect_labelsFormatChanged(QAbstractBarSeries* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QAbstractBarSeries>>(slot);
+	return new QMetaObject::Connection(QAbstractBarSeries::connect(self, static_cast<void (QAbstractBarSeries::*)(const QString&)>(&QAbstractBarSeries::labelsFormatChanged), self, [slot_handle](const QString& format) {
+		intptr_t slot = slot_handle->value();
 		const QString format_ret = format;
 		// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 		QByteArray format_b = format_ret.toUtf8();
@@ -258,42 +277,48 @@ void QAbstractBarSeries_connect_labelsFormatChanged(QAbstractBarSeries* self, in
 		memcpy(format_ms.data, format_b.data(), format_ms.len);
 		struct miqt_string sigval1 = format_ms;
 		miqt_exec_callback_QAbstractBarSeries_labelsFormatChanged(slot, sigval1);
-	});
+	}));
 }
 
 void QAbstractBarSeries_labelsPositionChanged(QAbstractBarSeries* self, int position) {
 	self->labelsPositionChanged(static_cast<QAbstractBarSeries::LabelsPosition>(position));
 }
 
-void QAbstractBarSeries_connect_labelsPositionChanged(QAbstractBarSeries* self, intptr_t slot) {
-	QAbstractBarSeries::connect(self, static_cast<void (QAbstractBarSeries::*)(QAbstractBarSeries::LabelsPosition)>(&QAbstractBarSeries::labelsPositionChanged), self, [=](QAbstractBarSeries::LabelsPosition position) {
+void* QAbstractBarSeries_connect_labelsPositionChanged(QAbstractBarSeries* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QAbstractBarSeries>>(slot);
+	return new QMetaObject::Connection(QAbstractBarSeries::connect(self, static_cast<void (QAbstractBarSeries::*)(QAbstractBarSeries::LabelsPosition)>(&QAbstractBarSeries::labelsPositionChanged), self, [slot_handle](QAbstractBarSeries::LabelsPosition position) {
+		intptr_t slot = slot_handle->value();
 		QAbstractBarSeries::LabelsPosition position_ret = position;
 		int sigval1 = static_cast<int>(position_ret);
 		miqt_exec_callback_QAbstractBarSeries_labelsPositionChanged(slot, sigval1);
-	});
+	}));
 }
 
 void QAbstractBarSeries_labelsAngleChanged(QAbstractBarSeries* self, double angle) {
 	self->labelsAngleChanged(static_cast<qreal>(angle));
 }
 
-void QAbstractBarSeries_connect_labelsAngleChanged(QAbstractBarSeries* self, intptr_t slot) {
-	QAbstractBarSeries::connect(self, static_cast<void (QAbstractBarSeries::*)(qreal)>(&QAbstractBarSeries::labelsAngleChanged), self, [=](qreal angle) {
+void* QAbstractBarSeries_connect_labelsAngleChanged(QAbstractBarSeries* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QAbstractBarSeries>>(slot);
+	return new QMetaObject::Connection(QAbstractBarSeries::connect(self, static_cast<void (QAbstractBarSeries::*)(qreal)>(&QAbstractBarSeries::labelsAngleChanged), self, [slot_handle](qreal angle) {
+		intptr_t slot = slot_handle->value();
 		qreal angle_ret = angle;
 		double sigval1 = static_cast<double>(angle_ret);
 		miqt_exec_callback_QAbstractBarSeries_labelsAngleChanged(slot, sigval1);
-	});
+	}));
 }
 
 void QAbstractBarSeries_labelsPrecisionChanged(QAbstractBarSeries* self, int precision) {
 	self->labelsPrecisionChanged(static_cast<int>(precision));
 }
 
-void QAbstractBarSeries_connect_labelsPrecisionChanged(QAbstractBarSeries* self, intptr_t slot) {
-	QAbstractBarSeries::connect(self, static_cast<void (QAbstractBarSeries::*)(int)>(&QAbstractBarSeries::labelsPrecisionChanged), self, [=](int precision) {
+void* QAbstractBarSeries_connect_labelsPrecisionChanged(QAbstractBarSeries* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QAbstractBarSeries>>(slot);
+	return new QMetaObject::Connection(QAbstractBarSeries::connect(self, static_cast<void (QAbstractBarSeries::*)(int)>(&QAbstractBarSeries::labelsPrecisionChanged), self, [slot_handle](int precision) {
+		intptr_t slot = slot_handle->value();
 		int sigval1 = precision;
 		miqt_exec_callback_QAbstractBarSeries_labelsPrecisionChanged(slot, sigval1);
-	});
+	}));
 }
 
 void QAbstractBarSeries_barsetsAdded(QAbstractBarSeries* self, struct miqt_array /* of QBarSet* */  sets) {
@@ -306,8 +331,10 @@ void QAbstractBarSeries_barsetsAdded(QAbstractBarSeries* self, struct miqt_array
 	self->barsetsAdded(sets_QList);
 }
 
-void QAbstractBarSeries_connect_barsetsAdded(QAbstractBarSeries* self, intptr_t slot) {
-	QAbstractBarSeries::connect(self, static_cast<void (QAbstractBarSeries::*)(const QList<QBarSet *>&)>(&QAbstractBarSeries::barsetsAdded), self, [=](const QList<QBarSet *>& sets) {
+void* QAbstractBarSeries_connect_barsetsAdded(QAbstractBarSeries* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QAbstractBarSeries>>(slot);
+	return new QMetaObject::Connection(QAbstractBarSeries::connect(self, static_cast<void (QAbstractBarSeries::*)(const QList<QBarSet *>&)>(&QAbstractBarSeries::barsetsAdded), self, [slot_handle](const QList<QBarSet *>& sets) {
+		intptr_t slot = slot_handle->value();
 		const QList<QBarSet *>& sets_ret = sets;
 		// Convert QList<> from C++ memory to manually-managed C memory
 		QBarSet** sets_arr = static_cast<QBarSet**>(malloc(sizeof(QBarSet*) * sets_ret.length()));
@@ -319,7 +346,7 @@ void QAbstractBarSeries_connect_barsetsAdded(QAbstractBarSeries* self, intptr_t 
 		sets_out.data = static_cast<void*>(sets_arr);
 		struct miqt_array /* of QBarSet* */  sigval1 = sets_out;
 		miqt_exec_callback_QAbstractBarSeries_barsetsAdded(slot, sigval1);
-	});
+	}));
 }
 
 void QAbstractBarSeries_barsetsRemoved(QAbstractBarSeries* self, struct miqt_array /* of QBarSet* */  sets) {
@@ -332,8 +359,10 @@ void QAbstractBarSeries_barsetsRemoved(QAbstractBarSeries* self, struct miqt_arr
 	self->barsetsRemoved(sets_QList);
 }
 
-void QAbstractBarSeries_connect_barsetsRemoved(QAbstractBarSeries* self, intptr_t slot) {
-	QAbstractBarSeries::connect(self, static_cast<void (QAbstractBarSeries::*)(const QList<QBarSet *>&)>(&QAbstractBarSeries::barsetsRemoved), self, [=](const QList<QBarSet *>& sets) {
+void* QAbstractBarSeries_connect_barsetsRemoved(QAbstractBarSeries* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QAbstractBarSeries>>(slot);
+	return new QMetaObject::Connection(QAbstractBarSeries::connect(self, static_cast<void (QAbstractBarSeries::*)(const QList<QBarSet *>&)>(&QAbstractBarSeries::barsetsRemoved), self, [slot_handle](const QList<QBarSet *>& sets) {
+		intptr_t slot = slot_handle->value();
 		const QList<QBarSet *>& sets_ret = sets;
 		// Convert QList<> from C++ memory to manually-managed C memory
 		QBarSet** sets_arr = static_cast<QBarSet**>(malloc(sizeof(QBarSet*) * sets_ret.length()));
@@ -345,7 +374,7 @@ void QAbstractBarSeries_connect_barsetsRemoved(QAbstractBarSeries* self, intptr_
 		sets_out.data = static_cast<void*>(sets_arr);
 		struct miqt_array /* of QBarSet* */  sigval1 = sets_out;
 		miqt_exec_callback_QAbstractBarSeries_barsetsRemoved(slot, sigval1);
-	});
+	}));
 }
 
 struct miqt_string QAbstractBarSeries_tr2(const char* s, const char* c) {

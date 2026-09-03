@@ -192,6 +192,11 @@ const (
 	QEvent__MaxUser                          QEvent__Type = 65535
 )
 
+//export miqt_exec_callback_handle_release_QEvent
+func miqt_exec_callback_handle_release_QEvent(cb C.intptr_t) {
+	cgo.Handle(cb).Delete()
+}
+
 type QEvent struct {
 	h *C.QEvent
 }
@@ -284,7 +289,11 @@ func (this *QEvent) callVirtualBase_SetAccepted(accepted bool) {
 
 }
 func (this *QEvent) OnSetAccepted(slot func(super func(accepted bool), accepted bool)) {
-	ok := C.QEvent_override_virtual_setAccepted(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QEvent_override_virtual_setAccepted(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -310,7 +319,11 @@ func (this *QEvent) callVirtualBase_Clone() *QEvent {
 
 }
 func (this *QEvent) OnClone(slot func(super func() *QEvent) *QEvent) {
-	ok := C.QEvent_override_virtual_clone(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QEvent_override_virtual_clone(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -341,6 +354,11 @@ func (this *QEvent) GoGC() {
 		this.Delete()
 		runtime.KeepAlive(this.h)
 	})
+}
+
+//export miqt_exec_callback_handle_release_QTimerEvent
+func miqt_exec_callback_handle_release_QTimerEvent(cb C.intptr_t) {
+	cgo.Handle(cb).Delete()
 }
 
 type QTimerEvent struct {
@@ -399,7 +417,11 @@ func (this *QTimerEvent) callVirtualBase_Clone() *QTimerEvent {
 
 }
 func (this *QTimerEvent) OnClone(slot func(super func() *QTimerEvent) *QTimerEvent) {
-	ok := C.QTimerEvent_override_virtual_clone(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QTimerEvent_override_virtual_clone(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -424,7 +446,11 @@ func (this *QTimerEvent) callVirtualBase_SetAccepted(accepted bool) {
 
 }
 func (this *QTimerEvent) OnSetAccepted(slot func(super func(accepted bool), accepted bool)) {
-	ok := C.QTimerEvent_override_virtual_setAccepted(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QTimerEvent_override_virtual_setAccepted(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -456,6 +482,11 @@ func (this *QTimerEvent) GoGC() {
 		this.Delete()
 		runtime.KeepAlive(this.h)
 	})
+}
+
+//export miqt_exec_callback_handle_release_QChildEvent
+func miqt_exec_callback_handle_release_QChildEvent(cb C.intptr_t) {
+	cgo.Handle(cb).Delete()
 }
 
 type QChildEvent struct {
@@ -526,7 +557,11 @@ func (this *QChildEvent) callVirtualBase_Clone() *QChildEvent {
 
 }
 func (this *QChildEvent) OnClone(slot func(super func() *QChildEvent) *QChildEvent) {
-	ok := C.QChildEvent_override_virtual_clone(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QChildEvent_override_virtual_clone(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -551,7 +586,11 @@ func (this *QChildEvent) callVirtualBase_SetAccepted(accepted bool) {
 
 }
 func (this *QChildEvent) OnSetAccepted(slot func(super func(accepted bool), accepted bool)) {
-	ok := C.QChildEvent_override_virtual_setAccepted(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QChildEvent_override_virtual_setAccepted(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -583,6 +622,11 @@ func (this *QChildEvent) GoGC() {
 		this.Delete()
 		runtime.KeepAlive(this.h)
 	})
+}
+
+//export miqt_exec_callback_handle_release_QDynamicPropertyChangeEvent
+func miqt_exec_callback_handle_release_QDynamicPropertyChangeEvent(cb C.intptr_t) {
+	cgo.Handle(cb).Delete()
 }
 
 type QDynamicPropertyChangeEvent struct {
@@ -651,7 +695,11 @@ func (this *QDynamicPropertyChangeEvent) callVirtualBase_Clone() *QDynamicProper
 
 }
 func (this *QDynamicPropertyChangeEvent) OnClone(slot func(super func() *QDynamicPropertyChangeEvent) *QDynamicPropertyChangeEvent) {
-	ok := C.QDynamicPropertyChangeEvent_override_virtual_clone(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QDynamicPropertyChangeEvent_override_virtual_clone(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -676,7 +724,11 @@ func (this *QDynamicPropertyChangeEvent) callVirtualBase_SetAccepted(accepted bo
 
 }
 func (this *QDynamicPropertyChangeEvent) OnSetAccepted(slot func(super func(accepted bool), accepted bool)) {
-	ok := C.QDynamicPropertyChangeEvent_override_virtual_setAccepted(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QDynamicPropertyChangeEvent_override_virtual_setAccepted(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}

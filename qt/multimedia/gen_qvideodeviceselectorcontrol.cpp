@@ -1,3 +1,5 @@
+#include <memory>
+#include <utility>
 #include <QMediaControl>
 #include <QMetaMethod>
 #include <QMetaObject>
@@ -13,6 +15,7 @@
 extern "C" {
 #endif
 
+void miqt_exec_callback_handle_release_QVideoDeviceSelectorControl(intptr_t);
 void miqt_exec_callback_QVideoDeviceSelectorControl_selectedDeviceChanged(intptr_t, int);
 void miqt_exec_callback_QVideoDeviceSelectorControl_selectedDeviceChangedWithName(intptr_t, struct miqt_string);
 void miqt_exec_callback_QVideoDeviceSelectorControl_devicesChanged(intptr_t);
@@ -96,11 +99,13 @@ void QVideoDeviceSelectorControl_selectedDeviceChanged(QVideoDeviceSelectorContr
 	self->selectedDeviceChanged(static_cast<int>(index));
 }
 
-void QVideoDeviceSelectorControl_connect_selectedDeviceChanged(QVideoDeviceSelectorControl* self, intptr_t slot) {
-	QVideoDeviceSelectorControl::connect(self, static_cast<void (QVideoDeviceSelectorControl::*)(int)>(&QVideoDeviceSelectorControl::selectedDeviceChanged), self, [=](int index) {
+void* QVideoDeviceSelectorControl_connect_selectedDeviceChanged(QVideoDeviceSelectorControl* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QVideoDeviceSelectorControl>>(slot);
+	return new QMetaObject::Connection(QVideoDeviceSelectorControl::connect(self, static_cast<void (QVideoDeviceSelectorControl::*)(int)>(&QVideoDeviceSelectorControl::selectedDeviceChanged), self, [slot_handle](int index) {
+		intptr_t slot = slot_handle->value();
 		int sigval1 = index;
 		miqt_exec_callback_QVideoDeviceSelectorControl_selectedDeviceChanged(slot, sigval1);
-	});
+	}));
 }
 
 void QVideoDeviceSelectorControl_selectedDeviceChangedWithName(QVideoDeviceSelectorControl* self, struct miqt_string name) {
@@ -108,8 +113,10 @@ void QVideoDeviceSelectorControl_selectedDeviceChangedWithName(QVideoDeviceSelec
 	self->selectedDeviceChanged(name_QString);
 }
 
-void QVideoDeviceSelectorControl_connect_selectedDeviceChangedWithName(QVideoDeviceSelectorControl* self, intptr_t slot) {
-	QVideoDeviceSelectorControl::connect(self, static_cast<void (QVideoDeviceSelectorControl::*)(const QString&)>(&QVideoDeviceSelectorControl::selectedDeviceChanged), self, [=](const QString& name) {
+void* QVideoDeviceSelectorControl_connect_selectedDeviceChangedWithName(QVideoDeviceSelectorControl* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QVideoDeviceSelectorControl>>(slot);
+	return new QMetaObject::Connection(QVideoDeviceSelectorControl::connect(self, static_cast<void (QVideoDeviceSelectorControl::*)(const QString&)>(&QVideoDeviceSelectorControl::selectedDeviceChanged), self, [slot_handle](const QString& name) {
+		intptr_t slot = slot_handle->value();
 		const QString name_ret = name;
 		// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 		QByteArray name_b = name_ret.toUtf8();
@@ -119,17 +126,19 @@ void QVideoDeviceSelectorControl_connect_selectedDeviceChangedWithName(QVideoDev
 		memcpy(name_ms.data, name_b.data(), name_ms.len);
 		struct miqt_string sigval1 = name_ms;
 		miqt_exec_callback_QVideoDeviceSelectorControl_selectedDeviceChangedWithName(slot, sigval1);
-	});
+	}));
 }
 
 void QVideoDeviceSelectorControl_devicesChanged(QVideoDeviceSelectorControl* self) {
 	self->devicesChanged();
 }
 
-void QVideoDeviceSelectorControl_connect_devicesChanged(QVideoDeviceSelectorControl* self, intptr_t slot) {
-	QVideoDeviceSelectorControl::connect(self, static_cast<void (QVideoDeviceSelectorControl::*)()>(&QVideoDeviceSelectorControl::devicesChanged), self, [=]() {
+void* QVideoDeviceSelectorControl_connect_devicesChanged(QVideoDeviceSelectorControl* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QVideoDeviceSelectorControl>>(slot);
+	return new QMetaObject::Connection(QVideoDeviceSelectorControl::connect(self, static_cast<void (QVideoDeviceSelectorControl::*)()>(&QVideoDeviceSelectorControl::devicesChanged), self, [slot_handle]() {
+		intptr_t slot = slot_handle->value();
 		miqt_exec_callback_QVideoDeviceSelectorControl_devicesChanged(slot);
-	});
+	}));
 }
 
 struct miqt_string QVideoDeviceSelectorControl_tr2(const char* s, const char* c) {

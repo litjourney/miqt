@@ -36,9 +36,9 @@ void* QMediaAudioProbeControl_metacast(QMediaAudioProbeControl* self, const char
 struct miqt_string QMediaAudioProbeControl_tr(const char* s);
 struct miqt_string QMediaAudioProbeControl_trUtf8(const char* s);
 void QMediaAudioProbeControl_audioBufferProbed(QMediaAudioProbeControl* self, QAudioBuffer* buffer);
-void QMediaAudioProbeControl_connect_audioBufferProbed(QMediaAudioProbeControl* self, intptr_t slot);
+void* QMediaAudioProbeControl_connect_audioBufferProbed(QMediaAudioProbeControl* self, intptr_t slot);
 void QMediaAudioProbeControl_flush(QMediaAudioProbeControl* self);
-void QMediaAudioProbeControl_connect_flush(QMediaAudioProbeControl* self, intptr_t slot);
+void* QMediaAudioProbeControl_connect_flush(QMediaAudioProbeControl* self, intptr_t slot);
 struct miqt_string QMediaAudioProbeControl_tr2(const char* s, const char* c);
 struct miqt_string QMediaAudioProbeControl_tr3(const char* s, const char* c, int n);
 struct miqt_string QMediaAudioProbeControl_trUtf82(const char* s, const char* c);

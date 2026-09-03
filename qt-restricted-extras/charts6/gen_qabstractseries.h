@@ -50,13 +50,13 @@ struct miqt_array /* of QAbstractAxis* */  QAbstractSeries_attachedAxes(QAbstrac
 void QAbstractSeries_show(QAbstractSeries* self);
 void QAbstractSeries_hide(QAbstractSeries* self);
 void QAbstractSeries_nameChanged(QAbstractSeries* self);
-void QAbstractSeries_connect_nameChanged(QAbstractSeries* self, intptr_t slot);
+void* QAbstractSeries_connect_nameChanged(QAbstractSeries* self, intptr_t slot);
 void QAbstractSeries_visibleChanged(QAbstractSeries* self);
-void QAbstractSeries_connect_visibleChanged(QAbstractSeries* self, intptr_t slot);
+void* QAbstractSeries_connect_visibleChanged(QAbstractSeries* self, intptr_t slot);
 void QAbstractSeries_opacityChanged(QAbstractSeries* self);
-void QAbstractSeries_connect_opacityChanged(QAbstractSeries* self, intptr_t slot);
+void* QAbstractSeries_connect_opacityChanged(QAbstractSeries* self, intptr_t slot);
 void QAbstractSeries_useOpenGLChanged(QAbstractSeries* self);
-void QAbstractSeries_connect_useOpenGLChanged(QAbstractSeries* self, intptr_t slot);
+void* QAbstractSeries_connect_useOpenGLChanged(QAbstractSeries* self, intptr_t slot);
 struct miqt_string QAbstractSeries_tr2(const char* s, const char* c);
 struct miqt_string QAbstractSeries_tr3(const char* s, const char* c, int n);
 void QAbstractSeries_setVisibleWithVisible(QAbstractSeries* self, bool visible);

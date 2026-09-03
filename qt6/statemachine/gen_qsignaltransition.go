@@ -15,6 +15,11 @@ import (
 	"unsafe"
 )
 
+//export miqt_exec_callback_handle_release_QSignalTransition
+func miqt_exec_callback_handle_release_QSignalTransition(cb C.intptr_t) {
+	cgo.Handle(cb).Delete()
+}
+
 type QSignalTransition struct {
 	h *C.QSignalTransition
 	*QAbstractTransition
@@ -210,7 +215,11 @@ func (this *QSignalTransition) callVirtualBase_EventTest(event *qt6.QEvent) bool
 
 }
 func (this *QSignalTransition) OnEventTest(slot func(super func(event *qt6.QEvent) bool, event *qt6.QEvent) bool) {
-	ok := C.QSignalTransition_override_virtual_eventTest(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QSignalTransition_override_virtual_eventTest(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -238,7 +247,11 @@ func (this *QSignalTransition) callVirtualBase_OnTransition(event *qt6.QEvent) {
 
 }
 func (this *QSignalTransition) OnOnTransition(slot func(super func(event *qt6.QEvent), event *qt6.QEvent)) {
-	ok := C.QSignalTransition_override_virtual_onTransition(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QSignalTransition_override_virtual_onTransition(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -264,7 +277,11 @@ func (this *QSignalTransition) callVirtualBase_Event(e *qt6.QEvent) bool {
 
 }
 func (this *QSignalTransition) OnEvent(slot func(super func(e *qt6.QEvent) bool, e *qt6.QEvent) bool) {
-	ok := C.QSignalTransition_override_virtual_event(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QSignalTransition_override_virtual_event(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -292,7 +309,11 @@ func (this *QSignalTransition) callVirtualBase_EventFilter(watched *qt6.QObject,
 
 }
 func (this *QSignalTransition) OnEventFilter(slot func(super func(watched *qt6.QObject, event *qt6.QEvent) bool, watched *qt6.QObject, event *qt6.QEvent) bool) {
-	ok := C.QSignalTransition_override_virtual_eventFilter(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QSignalTransition_override_virtual_eventFilter(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -322,7 +343,11 @@ func (this *QSignalTransition) callVirtualBase_TimerEvent(event *qt6.QTimerEvent
 
 }
 func (this *QSignalTransition) OnTimerEvent(slot func(super func(event *qt6.QTimerEvent), event *qt6.QTimerEvent)) {
-	ok := C.QSignalTransition_override_virtual_timerEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QSignalTransition_override_virtual_timerEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -348,7 +373,11 @@ func (this *QSignalTransition) callVirtualBase_ChildEvent(event *qt6.QChildEvent
 
 }
 func (this *QSignalTransition) OnChildEvent(slot func(super func(event *qt6.QChildEvent), event *qt6.QChildEvent)) {
-	ok := C.QSignalTransition_override_virtual_childEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QSignalTransition_override_virtual_childEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -374,7 +403,11 @@ func (this *QSignalTransition) callVirtualBase_CustomEvent(event *qt6.QEvent) {
 
 }
 func (this *QSignalTransition) OnCustomEvent(slot func(super func(event *qt6.QEvent), event *qt6.QEvent)) {
-	ok := C.QSignalTransition_override_virtual_customEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QSignalTransition_override_virtual_customEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -400,7 +433,11 @@ func (this *QSignalTransition) callVirtualBase_ConnectNotify(signal *qt6.QMetaMe
 
 }
 func (this *QSignalTransition) OnConnectNotify(slot func(super func(signal *qt6.QMetaMethod), signal *qt6.QMetaMethod)) {
-	ok := C.QSignalTransition_override_virtual_connectNotify(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QSignalTransition_override_virtual_connectNotify(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -426,7 +463,11 @@ func (this *QSignalTransition) callVirtualBase_DisconnectNotify(signal *qt6.QMet
 
 }
 func (this *QSignalTransition) OnDisconnectNotify(slot func(super func(signal *qt6.QMetaMethod), signal *qt6.QMetaMethod)) {
-	ok := C.QSignalTransition_override_virtual_disconnectNotify(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QSignalTransition_override_virtual_disconnectNotify(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -445,8 +486,10 @@ func miqt_exec_callback_QSignalTransition_disconnectNotify(self *C.QSignalTransi
 	gofunc((&QSignalTransition{h: self}).callVirtualBase_DisconnectNotify, slotval1)
 
 }
-func (this *QSignalTransition) OnSenderObjectChanged(slot func()) {
-	C.QSignalTransition_connect_senderObjectChanged(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QSignalTransition) OnSenderObjectChanged(slot func()) *qt6.SignalConnection {
+	_goptr := qt6.UnsafeNewQMetaObject__Connection(C.QSignalTransition_connect_senderObjectChanged(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QSignalTransition_senderObjectChanged
@@ -459,8 +502,10 @@ func miqt_exec_callback_QSignalTransition_senderObjectChanged(cb C.intptr_t) {
 	gofunc()
 }
 
-func (this *QSignalTransition) OnSignalChanged(slot func()) {
-	C.QSignalTransition_connect_signalChanged(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QSignalTransition) OnSignalChanged(slot func()) *qt6.SignalConnection {
+	_goptr := qt6.UnsafeNewQMetaObject__Connection(C.QSignalTransition_connect_signalChanged(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QSignalTransition_signalChanged

@@ -39,6 +39,11 @@ const (
 	QScroller__InputRelease QScroller__Input = 3
 )
 
+//export miqt_exec_callback_handle_release_QScroller
+func miqt_exec_callback_handle_release_QScroller(cb C.intptr_t) {
+	cgo.Handle(cb).Delete()
+}
+
 type QScroller struct {
 	h *C.QScroller
 	*QObject
@@ -223,8 +228,10 @@ func (this *QScroller) ResendPrepareEvent() {
 func (this *QScroller) StateChanged(newstate QScroller__State) {
 	C.QScroller_stateChanged(this.h, (C.int)(newstate))
 }
-func (this *QScroller) OnStateChanged(slot func(newstate QScroller__State)) {
-	C.QScroller_connect_stateChanged(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QScroller) OnStateChanged(slot func(newstate QScroller__State)) *SignalConnection {
+	_goptr := UnsafeNewQMetaObject__Connection(C.QScroller_connect_stateChanged(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QScroller_stateChanged
@@ -243,8 +250,10 @@ func miqt_exec_callback_QScroller_stateChanged(cb C.intptr_t, newstate C.int) {
 func (this *QScroller) ScrollerPropertiesChanged(param1 *QScrollerProperties) {
 	C.QScroller_scrollerPropertiesChanged(this.h, param1.cPointer())
 }
-func (this *QScroller) OnScrollerPropertiesChanged(slot func(param1 *QScrollerProperties)) {
-	C.QScroller_connect_scrollerPropertiesChanged(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QScroller) OnScrollerPropertiesChanged(slot func(param1 *QScrollerProperties)) *SignalConnection {
+	_goptr := UnsafeNewQMetaObject__Connection(C.QScroller_connect_scrollerPropertiesChanged(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QScroller_scrollerPropertiesChanged

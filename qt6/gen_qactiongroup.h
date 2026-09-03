@@ -57,9 +57,9 @@ void QActionGroup_setVisible(QActionGroup* self, bool visible);
 void QActionGroup_setExclusive(QActionGroup* self, bool exclusive);
 void QActionGroup_setExclusionPolicy(QActionGroup* self, int policy);
 void QActionGroup_triggered(QActionGroup* self, QAction* param1);
-void QActionGroup_connect_triggered(QActionGroup* self, intptr_t slot);
+void* QActionGroup_connect_triggered(QActionGroup* self, intptr_t slot);
 void QActionGroup_hovered(QActionGroup* self, QAction* param1);
-void QActionGroup_connect_hovered(QActionGroup* self, intptr_t slot);
+void* QActionGroup_connect_hovered(QActionGroup* self, intptr_t slot);
 struct miqt_string QActionGroup_tr2(const char* s, const char* c);
 struct miqt_string QActionGroup_tr3(const char* s, const char* c, int n);
 

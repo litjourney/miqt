@@ -1,3 +1,5 @@
+#include <memory>
+#include <utility>
 #include <QAbstractScrollArea>
 #include <QActionEvent>
 #include <QByteArray>
@@ -53,6 +55,7 @@
 extern "C" {
 #endif
 
+void miqt_exec_callback_handle_release_QsciScintilla(intptr_t);
 void miqt_exec_callback_QsciScintilla_cursorPositionChanged(intptr_t, int, int);
 void miqt_exec_callback_QsciScintilla_copyAvailable(intptr_t, bool);
 void miqt_exec_callback_QsciScintilla_indicatorClicked(intptr_t, int, int, int);
@@ -216,18 +219,18 @@ public:
 	virtual ~MiqtVirtualQsciScintilla() override = default;
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__apiContext = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QsciScintilla> handle__apiContext;
 
 	// Subclass to allow providing a Go implementation
 	virtual QStringList apiContext(int pos, int& context_start, int& last_word_start) override {
-		if (handle__apiContext == 0) {
+		if (!handle__apiContext) {
 			return QsciScintilla::apiContext(pos, context_start, last_word_start);
 		}
 
 		int sigval1 = pos;
 		int* sigval2 = &context_start;
 		int* sigval3 = &last_word_start;
-		struct miqt_array /* of struct miqt_string */  callback_return_value = miqt_exec_callback_QsciScintilla_apiContext(this, handle__apiContext, sigval1, sigval2, sigval3);
+		struct miqt_array /* of struct miqt_string */  callback_return_value = miqt_exec_callback_QsciScintilla_apiContext(this, handle__apiContext.value(), sigval1, sigval2, sigval3);
 		QStringList callback_return_value_QList;
 		callback_return_value_QList.reserve(callback_return_value.len);
 		struct miqt_string* callback_return_value_arr = static_cast<struct miqt_string*>(callback_return_value.data);
@@ -246,11 +249,11 @@ public:
 	friend struct miqt_array /* of struct miqt_string */  QsciScintilla_virtualbase_apiContext(void* self, int pos, int* context_start, int* last_word_start);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__findFirst = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QsciScintilla> handle__findFirst;
 
 	// Subclass to allow providing a Go implementation
 	virtual bool findFirst(const QString& expr, bool re, bool cs, bool wo, bool wrap, bool forward, int line, int index, bool show, bool posix, bool cxx11) override {
-		if (handle__findFirst == 0) {
+		if (!handle__findFirst) {
 			return QsciScintilla::findFirst(expr, re, cs, wo, wrap, forward, line, index, show, posix, cxx11);
 		}
 
@@ -272,18 +275,18 @@ public:
 		bool sigval9 = show;
 		bool sigval10 = posix;
 		bool sigval11 = cxx11;
-		bool callback_return_value = miqt_exec_callback_QsciScintilla_findFirst(this, handle__findFirst, sigval1, sigval2, sigval3, sigval4, sigval5, sigval6, sigval7, sigval8, sigval9, sigval10, sigval11);
+		bool callback_return_value = miqt_exec_callback_QsciScintilla_findFirst(this, handle__findFirst.value(), sigval1, sigval2, sigval3, sigval4, sigval5, sigval6, sigval7, sigval8, sigval9, sigval10, sigval11);
 		return callback_return_value;
 	}
 
 	friend bool QsciScintilla_virtualbase_findFirst(void* self, struct miqt_string expr, bool re, bool cs, bool wo, bool wrap, bool forward, int line, int index, bool show, bool posix, bool cxx11);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__findFirstInSelection = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QsciScintilla> handle__findFirstInSelection;
 
 	// Subclass to allow providing a Go implementation
 	virtual bool findFirstInSelection(const QString& expr, bool re, bool cs, bool wo, bool forward, bool show, bool posix, bool cxx11) override {
-		if (handle__findFirstInSelection == 0) {
+		if (!handle__findFirstInSelection) {
 			return QsciScintilla::findFirstInSelection(expr, re, cs, wo, forward, show, posix, cxx11);
 		}
 
@@ -302,51 +305,51 @@ public:
 		bool sigval6 = show;
 		bool sigval7 = posix;
 		bool sigval8 = cxx11;
-		bool callback_return_value = miqt_exec_callback_QsciScintilla_findFirstInSelection(this, handle__findFirstInSelection, sigval1, sigval2, sigval3, sigval4, sigval5, sigval6, sigval7, sigval8);
+		bool callback_return_value = miqt_exec_callback_QsciScintilla_findFirstInSelection(this, handle__findFirstInSelection.value(), sigval1, sigval2, sigval3, sigval4, sigval5, sigval6, sigval7, sigval8);
 		return callback_return_value;
 	}
 
 	friend bool QsciScintilla_virtualbase_findFirstInSelection(void* self, struct miqt_string expr, bool re, bool cs, bool wo, bool forward, bool show, bool posix, bool cxx11);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__findNext = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QsciScintilla> handle__findNext;
 
 	// Subclass to allow providing a Go implementation
 	virtual bool findNext() override {
-		if (handle__findNext == 0) {
+		if (!handle__findNext) {
 			return QsciScintilla::findNext();
 		}
 
-		bool callback_return_value = miqt_exec_callback_QsciScintilla_findNext(this, handle__findNext);
+		bool callback_return_value = miqt_exec_callback_QsciScintilla_findNext(this, handle__findNext.value());
 		return callback_return_value;
 	}
 
 	friend bool QsciScintilla_virtualbase_findNext(void* self);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__recolor = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QsciScintilla> handle__recolor;
 
 	// Subclass to allow providing a Go implementation
 	virtual void recolor(int start, int end) override {
-		if (handle__recolor == 0) {
+		if (!handle__recolor) {
 			QsciScintilla::recolor(start, end);
 			return;
 		}
 
 		int sigval1 = start;
 		int sigval2 = end;
-		miqt_exec_callback_QsciScintilla_recolor(this, handle__recolor, sigval1, sigval2);
+		miqt_exec_callback_QsciScintilla_recolor(this, handle__recolor.value(), sigval1, sigval2);
 
 	}
 
 	friend void QsciScintilla_virtualbase_recolor(void* self, int start, int end);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__replace = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QsciScintilla> handle__replace;
 
 	// Subclass to allow providing a Go implementation
 	virtual void replace(const QString& replaceStr) override {
-		if (handle__replace == 0) {
+		if (!handle__replace) {
 			QsciScintilla::replace(replaceStr);
 			return;
 		}
@@ -359,18 +362,18 @@ public:
 		replaceStr_ms.data = static_cast<char*>(malloc(replaceStr_ms.len));
 		memcpy(replaceStr_ms.data, replaceStr_b.data(), replaceStr_ms.len);
 		struct miqt_string sigval1 = replaceStr_ms;
-		miqt_exec_callback_QsciScintilla_replace(this, handle__replace, sigval1);
+		miqt_exec_callback_QsciScintilla_replace(this, handle__replace.value(), sigval1);
 
 	}
 
 	friend void QsciScintilla_virtualbase_replace(void* self, struct miqt_string replaceStr);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__append = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QsciScintilla> handle__append;
 
 	// Subclass to allow providing a Go implementation
 	virtual void append(const QString& text) override {
-		if (handle__append == 0) {
+		if (!handle__append) {
 			QsciScintilla::append(text);
 			return;
 		}
@@ -383,214 +386,214 @@ public:
 		text_ms.data = static_cast<char*>(malloc(text_ms.len));
 		memcpy(text_ms.data, text_b.data(), text_ms.len);
 		struct miqt_string sigval1 = text_ms;
-		miqt_exec_callback_QsciScintilla_append(this, handle__append, sigval1);
+		miqt_exec_callback_QsciScintilla_append(this, handle__append.value(), sigval1);
 
 	}
 
 	friend void QsciScintilla_virtualbase_append(void* self, struct miqt_string text);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__autoCompleteFromAll = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QsciScintilla> handle__autoCompleteFromAll;
 
 	// Subclass to allow providing a Go implementation
 	virtual void autoCompleteFromAll() override {
-		if (handle__autoCompleteFromAll == 0) {
+		if (!handle__autoCompleteFromAll) {
 			QsciScintilla::autoCompleteFromAll();
 			return;
 		}
 
-		miqt_exec_callback_QsciScintilla_autoCompleteFromAll(this, handle__autoCompleteFromAll);
+		miqt_exec_callback_QsciScintilla_autoCompleteFromAll(this, handle__autoCompleteFromAll.value());
 
 	}
 
 	friend void QsciScintilla_virtualbase_autoCompleteFromAll(void* self);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__autoCompleteFromAPIs = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QsciScintilla> handle__autoCompleteFromAPIs;
 
 	// Subclass to allow providing a Go implementation
 	virtual void autoCompleteFromAPIs() override {
-		if (handle__autoCompleteFromAPIs == 0) {
+		if (!handle__autoCompleteFromAPIs) {
 			QsciScintilla::autoCompleteFromAPIs();
 			return;
 		}
 
-		miqt_exec_callback_QsciScintilla_autoCompleteFromAPIs(this, handle__autoCompleteFromAPIs);
+		miqt_exec_callback_QsciScintilla_autoCompleteFromAPIs(this, handle__autoCompleteFromAPIs.value());
 
 	}
 
 	friend void QsciScintilla_virtualbase_autoCompleteFromAPIs(void* self);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__autoCompleteFromDocument = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QsciScintilla> handle__autoCompleteFromDocument;
 
 	// Subclass to allow providing a Go implementation
 	virtual void autoCompleteFromDocument() override {
-		if (handle__autoCompleteFromDocument == 0) {
+		if (!handle__autoCompleteFromDocument) {
 			QsciScintilla::autoCompleteFromDocument();
 			return;
 		}
 
-		miqt_exec_callback_QsciScintilla_autoCompleteFromDocument(this, handle__autoCompleteFromDocument);
+		miqt_exec_callback_QsciScintilla_autoCompleteFromDocument(this, handle__autoCompleteFromDocument.value());
 
 	}
 
 	friend void QsciScintilla_virtualbase_autoCompleteFromDocument(void* self);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__callTip = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QsciScintilla> handle__callTip;
 
 	// Subclass to allow providing a Go implementation
 	virtual void callTip() override {
-		if (handle__callTip == 0) {
+		if (!handle__callTip) {
 			QsciScintilla::callTip();
 			return;
 		}
 
-		miqt_exec_callback_QsciScintilla_callTip(this, handle__callTip);
+		miqt_exec_callback_QsciScintilla_callTip(this, handle__callTip.value());
 
 	}
 
 	friend void QsciScintilla_virtualbase_callTip(void* self);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__clear = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QsciScintilla> handle__clear;
 
 	// Subclass to allow providing a Go implementation
 	virtual void clear() override {
-		if (handle__clear == 0) {
+		if (!handle__clear) {
 			QsciScintilla::clear();
 			return;
 		}
 
-		miqt_exec_callback_QsciScintilla_clear(this, handle__clear);
+		miqt_exec_callback_QsciScintilla_clear(this, handle__clear.value());
 
 	}
 
 	friend void QsciScintilla_virtualbase_clear(void* self);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__copy = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QsciScintilla> handle__copy;
 
 	// Subclass to allow providing a Go implementation
 	virtual void copy() override {
-		if (handle__copy == 0) {
+		if (!handle__copy) {
 			QsciScintilla::copy();
 			return;
 		}
 
-		miqt_exec_callback_QsciScintilla_copy(this, handle__copy);
+		miqt_exec_callback_QsciScintilla_copy(this, handle__copy.value());
 
 	}
 
 	friend void QsciScintilla_virtualbase_copy(void* self);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__cut = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QsciScintilla> handle__cut;
 
 	// Subclass to allow providing a Go implementation
 	virtual void cut() override {
-		if (handle__cut == 0) {
+		if (!handle__cut) {
 			QsciScintilla::cut();
 			return;
 		}
 
-		miqt_exec_callback_QsciScintilla_cut(this, handle__cut);
+		miqt_exec_callback_QsciScintilla_cut(this, handle__cut.value());
 
 	}
 
 	friend void QsciScintilla_virtualbase_cut(void* self);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__ensureCursorVisible = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QsciScintilla> handle__ensureCursorVisible;
 
 	// Subclass to allow providing a Go implementation
 	virtual void ensureCursorVisible() override {
-		if (handle__ensureCursorVisible == 0) {
+		if (!handle__ensureCursorVisible) {
 			QsciScintilla::ensureCursorVisible();
 			return;
 		}
 
-		miqt_exec_callback_QsciScintilla_ensureCursorVisible(this, handle__ensureCursorVisible);
+		miqt_exec_callback_QsciScintilla_ensureCursorVisible(this, handle__ensureCursorVisible.value());
 
 	}
 
 	friend void QsciScintilla_virtualbase_ensureCursorVisible(void* self);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__ensureLineVisible = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QsciScintilla> handle__ensureLineVisible;
 
 	// Subclass to allow providing a Go implementation
 	virtual void ensureLineVisible(int line) override {
-		if (handle__ensureLineVisible == 0) {
+		if (!handle__ensureLineVisible) {
 			QsciScintilla::ensureLineVisible(line);
 			return;
 		}
 
 		int sigval1 = line;
-		miqt_exec_callback_QsciScintilla_ensureLineVisible(this, handle__ensureLineVisible, sigval1);
+		miqt_exec_callback_QsciScintilla_ensureLineVisible(this, handle__ensureLineVisible.value(), sigval1);
 
 	}
 
 	friend void QsciScintilla_virtualbase_ensureLineVisible(void* self, int line);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__foldAll = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QsciScintilla> handle__foldAll;
 
 	// Subclass to allow providing a Go implementation
 	virtual void foldAll(bool children) override {
-		if (handle__foldAll == 0) {
+		if (!handle__foldAll) {
 			QsciScintilla::foldAll(children);
 			return;
 		}
 
 		bool sigval1 = children;
-		miqt_exec_callback_QsciScintilla_foldAll(this, handle__foldAll, sigval1);
+		miqt_exec_callback_QsciScintilla_foldAll(this, handle__foldAll.value(), sigval1);
 
 	}
 
 	friend void QsciScintilla_virtualbase_foldAll(void* self, bool children);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__foldLine = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QsciScintilla> handle__foldLine;
 
 	// Subclass to allow providing a Go implementation
 	virtual void foldLine(int line) override {
-		if (handle__foldLine == 0) {
+		if (!handle__foldLine) {
 			QsciScintilla::foldLine(line);
 			return;
 		}
 
 		int sigval1 = line;
-		miqt_exec_callback_QsciScintilla_foldLine(this, handle__foldLine, sigval1);
+		miqt_exec_callback_QsciScintilla_foldLine(this, handle__foldLine.value(), sigval1);
 
 	}
 
 	friend void QsciScintilla_virtualbase_foldLine(void* self, int line);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__indent = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QsciScintilla> handle__indent;
 
 	// Subclass to allow providing a Go implementation
 	virtual void indent(int line) override {
-		if (handle__indent == 0) {
+		if (!handle__indent) {
 			QsciScintilla::indent(line);
 			return;
 		}
 
 		int sigval1 = line;
-		miqt_exec_callback_QsciScintilla_indent(this, handle__indent, sigval1);
+		miqt_exec_callback_QsciScintilla_indent(this, handle__indent.value(), sigval1);
 
 	}
 
 	friend void QsciScintilla_virtualbase_indent(void* self, int line);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__insert = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QsciScintilla> handle__insert;
 
 	// Subclass to allow providing a Go implementation
 	virtual void insert(const QString& text) override {
-		if (handle__insert == 0) {
+		if (!handle__insert) {
 			QsciScintilla::insert(text);
 			return;
 		}
@@ -603,18 +606,18 @@ public:
 		text_ms.data = static_cast<char*>(malloc(text_ms.len));
 		memcpy(text_ms.data, text_b.data(), text_ms.len);
 		struct miqt_string sigval1 = text_ms;
-		miqt_exec_callback_QsciScintilla_insert(this, handle__insert, sigval1);
+		miqt_exec_callback_QsciScintilla_insert(this, handle__insert.value(), sigval1);
 
 	}
 
 	friend void QsciScintilla_virtualbase_insert(void* self, struct miqt_string text);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__insertAt = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QsciScintilla> handle__insertAt;
 
 	// Subclass to allow providing a Go implementation
 	virtual void insertAt(const QString& text, int line, int index) override {
-		if (handle__insertAt == 0) {
+		if (!handle__insertAt) {
 			QsciScintilla::insertAt(text, line, index);
 			return;
 		}
@@ -629,82 +632,82 @@ public:
 		struct miqt_string sigval1 = text_ms;
 		int sigval2 = line;
 		int sigval3 = index;
-		miqt_exec_callback_QsciScintilla_insertAt(this, handle__insertAt, sigval1, sigval2, sigval3);
+		miqt_exec_callback_QsciScintilla_insertAt(this, handle__insertAt.value(), sigval1, sigval2, sigval3);
 
 	}
 
 	friend void QsciScintilla_virtualbase_insertAt(void* self, struct miqt_string text, int line, int index);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__moveToMatchingBrace = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QsciScintilla> handle__moveToMatchingBrace;
 
 	// Subclass to allow providing a Go implementation
 	virtual void moveToMatchingBrace() override {
-		if (handle__moveToMatchingBrace == 0) {
+		if (!handle__moveToMatchingBrace) {
 			QsciScintilla::moveToMatchingBrace();
 			return;
 		}
 
-		miqt_exec_callback_QsciScintilla_moveToMatchingBrace(this, handle__moveToMatchingBrace);
+		miqt_exec_callback_QsciScintilla_moveToMatchingBrace(this, handle__moveToMatchingBrace.value());
 
 	}
 
 	friend void QsciScintilla_virtualbase_moveToMatchingBrace(void* self);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__paste = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QsciScintilla> handle__paste;
 
 	// Subclass to allow providing a Go implementation
 	virtual void paste() override {
-		if (handle__paste == 0) {
+		if (!handle__paste) {
 			QsciScintilla::paste();
 			return;
 		}
 
-		miqt_exec_callback_QsciScintilla_paste(this, handle__paste);
+		miqt_exec_callback_QsciScintilla_paste(this, handle__paste.value());
 
 	}
 
 	friend void QsciScintilla_virtualbase_paste(void* self);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__redo = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QsciScintilla> handle__redo;
 
 	// Subclass to allow providing a Go implementation
 	virtual void redo() override {
-		if (handle__redo == 0) {
+		if (!handle__redo) {
 			QsciScintilla::redo();
 			return;
 		}
 
-		miqt_exec_callback_QsciScintilla_redo(this, handle__redo);
+		miqt_exec_callback_QsciScintilla_redo(this, handle__redo.value());
 
 	}
 
 	friend void QsciScintilla_virtualbase_redo(void* self);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__removeSelectedText = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QsciScintilla> handle__removeSelectedText;
 
 	// Subclass to allow providing a Go implementation
 	virtual void removeSelectedText() override {
-		if (handle__removeSelectedText == 0) {
+		if (!handle__removeSelectedText) {
 			QsciScintilla::removeSelectedText();
 			return;
 		}
 
-		miqt_exec_callback_QsciScintilla_removeSelectedText(this, handle__removeSelectedText);
+		miqt_exec_callback_QsciScintilla_removeSelectedText(this, handle__removeSelectedText.value());
 
 	}
 
 	friend void QsciScintilla_virtualbase_removeSelectedText(void* self);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__replaceSelectedText = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QsciScintilla> handle__replaceSelectedText;
 
 	// Subclass to allow providing a Go implementation
 	virtual void replaceSelectedText(const QString& text) override {
-		if (handle__replaceSelectedText == 0) {
+		if (!handle__replaceSelectedText) {
 			QsciScintilla::replaceSelectedText(text);
 			return;
 		}
@@ -717,239 +720,239 @@ public:
 		text_ms.data = static_cast<char*>(malloc(text_ms.len));
 		memcpy(text_ms.data, text_b.data(), text_ms.len);
 		struct miqt_string sigval1 = text_ms;
-		miqt_exec_callback_QsciScintilla_replaceSelectedText(this, handle__replaceSelectedText, sigval1);
+		miqt_exec_callback_QsciScintilla_replaceSelectedText(this, handle__replaceSelectedText.value(), sigval1);
 
 	}
 
 	friend void QsciScintilla_virtualbase_replaceSelectedText(void* self, struct miqt_string text);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__resetSelectionBackgroundColor = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QsciScintilla> handle__resetSelectionBackgroundColor;
 
 	// Subclass to allow providing a Go implementation
 	virtual void resetSelectionBackgroundColor() override {
-		if (handle__resetSelectionBackgroundColor == 0) {
+		if (!handle__resetSelectionBackgroundColor) {
 			QsciScintilla::resetSelectionBackgroundColor();
 			return;
 		}
 
-		miqt_exec_callback_QsciScintilla_resetSelectionBackgroundColor(this, handle__resetSelectionBackgroundColor);
+		miqt_exec_callback_QsciScintilla_resetSelectionBackgroundColor(this, handle__resetSelectionBackgroundColor.value());
 
 	}
 
 	friend void QsciScintilla_virtualbase_resetSelectionBackgroundColor(void* self);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__resetSelectionForegroundColor = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QsciScintilla> handle__resetSelectionForegroundColor;
 
 	// Subclass to allow providing a Go implementation
 	virtual void resetSelectionForegroundColor() override {
-		if (handle__resetSelectionForegroundColor == 0) {
+		if (!handle__resetSelectionForegroundColor) {
 			QsciScintilla::resetSelectionForegroundColor();
 			return;
 		}
 
-		miqt_exec_callback_QsciScintilla_resetSelectionForegroundColor(this, handle__resetSelectionForegroundColor);
+		miqt_exec_callback_QsciScintilla_resetSelectionForegroundColor(this, handle__resetSelectionForegroundColor.value());
 
 	}
 
 	friend void QsciScintilla_virtualbase_resetSelectionForegroundColor(void* self);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__selectAll = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QsciScintilla> handle__selectAll;
 
 	// Subclass to allow providing a Go implementation
 	virtual void selectAll(bool select) override {
-		if (handle__selectAll == 0) {
+		if (!handle__selectAll) {
 			QsciScintilla::selectAll(select);
 			return;
 		}
 
 		bool sigval1 = select;
-		miqt_exec_callback_QsciScintilla_selectAll(this, handle__selectAll, sigval1);
+		miqt_exec_callback_QsciScintilla_selectAll(this, handle__selectAll.value(), sigval1);
 
 	}
 
 	friend void QsciScintilla_virtualbase_selectAll(void* self, bool select);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__selectToMatchingBrace = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QsciScintilla> handle__selectToMatchingBrace;
 
 	// Subclass to allow providing a Go implementation
 	virtual void selectToMatchingBrace() override {
-		if (handle__selectToMatchingBrace == 0) {
+		if (!handle__selectToMatchingBrace) {
 			QsciScintilla::selectToMatchingBrace();
 			return;
 		}
 
-		miqt_exec_callback_QsciScintilla_selectToMatchingBrace(this, handle__selectToMatchingBrace);
+		miqt_exec_callback_QsciScintilla_selectToMatchingBrace(this, handle__selectToMatchingBrace.value());
 
 	}
 
 	friend void QsciScintilla_virtualbase_selectToMatchingBrace(void* self);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__setAutoCompletionCaseSensitivity = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QsciScintilla> handle__setAutoCompletionCaseSensitivity;
 
 	// Subclass to allow providing a Go implementation
 	virtual void setAutoCompletionCaseSensitivity(bool cs) override {
-		if (handle__setAutoCompletionCaseSensitivity == 0) {
+		if (!handle__setAutoCompletionCaseSensitivity) {
 			QsciScintilla::setAutoCompletionCaseSensitivity(cs);
 			return;
 		}
 
 		bool sigval1 = cs;
-		miqt_exec_callback_QsciScintilla_setAutoCompletionCaseSensitivity(this, handle__setAutoCompletionCaseSensitivity, sigval1);
+		miqt_exec_callback_QsciScintilla_setAutoCompletionCaseSensitivity(this, handle__setAutoCompletionCaseSensitivity.value(), sigval1);
 
 	}
 
 	friend void QsciScintilla_virtualbase_setAutoCompletionCaseSensitivity(void* self, bool cs);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__setAutoCompletionReplaceWord = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QsciScintilla> handle__setAutoCompletionReplaceWord;
 
 	// Subclass to allow providing a Go implementation
 	virtual void setAutoCompletionReplaceWord(bool replace) override {
-		if (handle__setAutoCompletionReplaceWord == 0) {
+		if (!handle__setAutoCompletionReplaceWord) {
 			QsciScintilla::setAutoCompletionReplaceWord(replace);
 			return;
 		}
 
 		bool sigval1 = replace;
-		miqt_exec_callback_QsciScintilla_setAutoCompletionReplaceWord(this, handle__setAutoCompletionReplaceWord, sigval1);
+		miqt_exec_callback_QsciScintilla_setAutoCompletionReplaceWord(this, handle__setAutoCompletionReplaceWord.value(), sigval1);
 
 	}
 
 	friend void QsciScintilla_virtualbase_setAutoCompletionReplaceWord(void* self, bool replace);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__setAutoCompletionShowSingle = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QsciScintilla> handle__setAutoCompletionShowSingle;
 
 	// Subclass to allow providing a Go implementation
 	virtual void setAutoCompletionShowSingle(bool single) override {
-		if (handle__setAutoCompletionShowSingle == 0) {
+		if (!handle__setAutoCompletionShowSingle) {
 			QsciScintilla::setAutoCompletionShowSingle(single);
 			return;
 		}
 
 		bool sigval1 = single;
-		miqt_exec_callback_QsciScintilla_setAutoCompletionShowSingle(this, handle__setAutoCompletionShowSingle, sigval1);
+		miqt_exec_callback_QsciScintilla_setAutoCompletionShowSingle(this, handle__setAutoCompletionShowSingle.value(), sigval1);
 
 	}
 
 	friend void QsciScintilla_virtualbase_setAutoCompletionShowSingle(void* self, bool single);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__setAutoCompletionSource = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QsciScintilla> handle__setAutoCompletionSource;
 
 	// Subclass to allow providing a Go implementation
 	virtual void setAutoCompletionSource(QsciScintilla::AutoCompletionSource source) override {
-		if (handle__setAutoCompletionSource == 0) {
+		if (!handle__setAutoCompletionSource) {
 			QsciScintilla::setAutoCompletionSource(source);
 			return;
 		}
 
 		QsciScintilla::AutoCompletionSource source_ret = source;
 		int sigval1 = static_cast<int>(source_ret);
-		miqt_exec_callback_QsciScintilla_setAutoCompletionSource(this, handle__setAutoCompletionSource, sigval1);
+		miqt_exec_callback_QsciScintilla_setAutoCompletionSource(this, handle__setAutoCompletionSource.value(), sigval1);
 
 	}
 
 	friend void QsciScintilla_virtualbase_setAutoCompletionSource(void* self, int source);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__setAutoCompletionThreshold = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QsciScintilla> handle__setAutoCompletionThreshold;
 
 	// Subclass to allow providing a Go implementation
 	virtual void setAutoCompletionThreshold(int thresh) override {
-		if (handle__setAutoCompletionThreshold == 0) {
+		if (!handle__setAutoCompletionThreshold) {
 			QsciScintilla::setAutoCompletionThreshold(thresh);
 			return;
 		}
 
 		int sigval1 = thresh;
-		miqt_exec_callback_QsciScintilla_setAutoCompletionThreshold(this, handle__setAutoCompletionThreshold, sigval1);
+		miqt_exec_callback_QsciScintilla_setAutoCompletionThreshold(this, handle__setAutoCompletionThreshold.value(), sigval1);
 
 	}
 
 	friend void QsciScintilla_virtualbase_setAutoCompletionThreshold(void* self, int thresh);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__setAutoCompletionUseSingle = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QsciScintilla> handle__setAutoCompletionUseSingle;
 
 	// Subclass to allow providing a Go implementation
 	virtual void setAutoCompletionUseSingle(QsciScintilla::AutoCompletionUseSingle single) override {
-		if (handle__setAutoCompletionUseSingle == 0) {
+		if (!handle__setAutoCompletionUseSingle) {
 			QsciScintilla::setAutoCompletionUseSingle(single);
 			return;
 		}
 
 		QsciScintilla::AutoCompletionUseSingle single_ret = single;
 		int sigval1 = static_cast<int>(single_ret);
-		miqt_exec_callback_QsciScintilla_setAutoCompletionUseSingle(this, handle__setAutoCompletionUseSingle, sigval1);
+		miqt_exec_callback_QsciScintilla_setAutoCompletionUseSingle(this, handle__setAutoCompletionUseSingle.value(), sigval1);
 
 	}
 
 	friend void QsciScintilla_virtualbase_setAutoCompletionUseSingle(void* self, int single);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__setAutoIndent = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QsciScintilla> handle__setAutoIndent;
 
 	// Subclass to allow providing a Go implementation
 	virtual void setAutoIndent(bool autoindent) override {
-		if (handle__setAutoIndent == 0) {
+		if (!handle__setAutoIndent) {
 			QsciScintilla::setAutoIndent(autoindent);
 			return;
 		}
 
 		bool sigval1 = autoindent;
-		miqt_exec_callback_QsciScintilla_setAutoIndent(this, handle__setAutoIndent, sigval1);
+		miqt_exec_callback_QsciScintilla_setAutoIndent(this, handle__setAutoIndent.value(), sigval1);
 
 	}
 
 	friend void QsciScintilla_virtualbase_setAutoIndent(void* self, bool autoindent);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__setBraceMatching = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QsciScintilla> handle__setBraceMatching;
 
 	// Subclass to allow providing a Go implementation
 	virtual void setBraceMatching(QsciScintilla::BraceMatch bm) override {
-		if (handle__setBraceMatching == 0) {
+		if (!handle__setBraceMatching) {
 			QsciScintilla::setBraceMatching(bm);
 			return;
 		}
 
 		QsciScintilla::BraceMatch bm_ret = bm;
 		int sigval1 = static_cast<int>(bm_ret);
-		miqt_exec_callback_QsciScintilla_setBraceMatching(this, handle__setBraceMatching, sigval1);
+		miqt_exec_callback_QsciScintilla_setBraceMatching(this, handle__setBraceMatching.value(), sigval1);
 
 	}
 
 	friend void QsciScintilla_virtualbase_setBraceMatching(void* self, int bm);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__setBackspaceUnindents = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QsciScintilla> handle__setBackspaceUnindents;
 
 	// Subclass to allow providing a Go implementation
 	virtual void setBackspaceUnindents(bool unindent) override {
-		if (handle__setBackspaceUnindents == 0) {
+		if (!handle__setBackspaceUnindents) {
 			QsciScintilla::setBackspaceUnindents(unindent);
 			return;
 		}
 
 		bool sigval1 = unindent;
-		miqt_exec_callback_QsciScintilla_setBackspaceUnindents(this, handle__setBackspaceUnindents, sigval1);
+		miqt_exec_callback_QsciScintilla_setBackspaceUnindents(this, handle__setBackspaceUnindents.value(), sigval1);
 
 	}
 
 	friend void QsciScintilla_virtualbase_setBackspaceUnindents(void* self, bool unindent);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__setCaretForegroundColor = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QsciScintilla> handle__setCaretForegroundColor;
 
 	// Subclass to allow providing a Go implementation
 	virtual void setCaretForegroundColor(const QColor& col) override {
-		if (handle__setCaretForegroundColor == 0) {
+		if (!handle__setCaretForegroundColor) {
 			QsciScintilla::setCaretForegroundColor(col);
 			return;
 		}
@@ -957,18 +960,18 @@ public:
 		const QColor& col_ret = col;
 		// Cast returned reference into pointer
 		QColor* sigval1 = const_cast<QColor*>(&col_ret);
-		miqt_exec_callback_QsciScintilla_setCaretForegroundColor(this, handle__setCaretForegroundColor, sigval1);
+		miqt_exec_callback_QsciScintilla_setCaretForegroundColor(this, handle__setCaretForegroundColor.value(), sigval1);
 
 	}
 
 	friend void QsciScintilla_virtualbase_setCaretForegroundColor(void* self, QColor* col);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__setCaretLineBackgroundColor = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QsciScintilla> handle__setCaretLineBackgroundColor;
 
 	// Subclass to allow providing a Go implementation
 	virtual void setCaretLineBackgroundColor(const QColor& col) override {
-		if (handle__setCaretLineBackgroundColor == 0) {
+		if (!handle__setCaretLineBackgroundColor) {
 			QsciScintilla::setCaretLineBackgroundColor(col);
 			return;
 		}
@@ -976,69 +979,69 @@ public:
 		const QColor& col_ret = col;
 		// Cast returned reference into pointer
 		QColor* sigval1 = const_cast<QColor*>(&col_ret);
-		miqt_exec_callback_QsciScintilla_setCaretLineBackgroundColor(this, handle__setCaretLineBackgroundColor, sigval1);
+		miqt_exec_callback_QsciScintilla_setCaretLineBackgroundColor(this, handle__setCaretLineBackgroundColor.value(), sigval1);
 
 	}
 
 	friend void QsciScintilla_virtualbase_setCaretLineBackgroundColor(void* self, QColor* col);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__setCaretLineFrameWidth = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QsciScintilla> handle__setCaretLineFrameWidth;
 
 	// Subclass to allow providing a Go implementation
 	virtual void setCaretLineFrameWidth(int width) override {
-		if (handle__setCaretLineFrameWidth == 0) {
+		if (!handle__setCaretLineFrameWidth) {
 			QsciScintilla::setCaretLineFrameWidth(width);
 			return;
 		}
 
 		int sigval1 = width;
-		miqt_exec_callback_QsciScintilla_setCaretLineFrameWidth(this, handle__setCaretLineFrameWidth, sigval1);
+		miqt_exec_callback_QsciScintilla_setCaretLineFrameWidth(this, handle__setCaretLineFrameWidth.value(), sigval1);
 
 	}
 
 	friend void QsciScintilla_virtualbase_setCaretLineFrameWidth(void* self, int width);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__setCaretLineVisible = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QsciScintilla> handle__setCaretLineVisible;
 
 	// Subclass to allow providing a Go implementation
 	virtual void setCaretLineVisible(bool enable) override {
-		if (handle__setCaretLineVisible == 0) {
+		if (!handle__setCaretLineVisible) {
 			QsciScintilla::setCaretLineVisible(enable);
 			return;
 		}
 
 		bool sigval1 = enable;
-		miqt_exec_callback_QsciScintilla_setCaretLineVisible(this, handle__setCaretLineVisible, sigval1);
+		miqt_exec_callback_QsciScintilla_setCaretLineVisible(this, handle__setCaretLineVisible.value(), sigval1);
 
 	}
 
 	friend void QsciScintilla_virtualbase_setCaretLineVisible(void* self, bool enable);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__setCaretWidth = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QsciScintilla> handle__setCaretWidth;
 
 	// Subclass to allow providing a Go implementation
 	virtual void setCaretWidth(int width) override {
-		if (handle__setCaretWidth == 0) {
+		if (!handle__setCaretWidth) {
 			QsciScintilla::setCaretWidth(width);
 			return;
 		}
 
 		int sigval1 = width;
-		miqt_exec_callback_QsciScintilla_setCaretWidth(this, handle__setCaretWidth, sigval1);
+		miqt_exec_callback_QsciScintilla_setCaretWidth(this, handle__setCaretWidth.value(), sigval1);
 
 	}
 
 	friend void QsciScintilla_virtualbase_setCaretWidth(void* self, int width);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__setColor = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QsciScintilla> handle__setColor;
 
 	// Subclass to allow providing a Go implementation
 	virtual void setColor(const QColor& c) override {
-		if (handle__setColor == 0) {
+		if (!handle__setColor) {
 			QsciScintilla::setColor(c);
 			return;
 		}
@@ -1046,71 +1049,71 @@ public:
 		const QColor& c_ret = c;
 		// Cast returned reference into pointer
 		QColor* sigval1 = const_cast<QColor*>(&c_ret);
-		miqt_exec_callback_QsciScintilla_setColor(this, handle__setColor, sigval1);
+		miqt_exec_callback_QsciScintilla_setColor(this, handle__setColor.value(), sigval1);
 
 	}
 
 	friend void QsciScintilla_virtualbase_setColor(void* self, QColor* c);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__setCursorPosition = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QsciScintilla> handle__setCursorPosition;
 
 	// Subclass to allow providing a Go implementation
 	virtual void setCursorPosition(int line, int index) override {
-		if (handle__setCursorPosition == 0) {
+		if (!handle__setCursorPosition) {
 			QsciScintilla::setCursorPosition(line, index);
 			return;
 		}
 
 		int sigval1 = line;
 		int sigval2 = index;
-		miqt_exec_callback_QsciScintilla_setCursorPosition(this, handle__setCursorPosition, sigval1, sigval2);
+		miqt_exec_callback_QsciScintilla_setCursorPosition(this, handle__setCursorPosition.value(), sigval1, sigval2);
 
 	}
 
 	friend void QsciScintilla_virtualbase_setCursorPosition(void* self, int line, int index);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__setEolMode = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QsciScintilla> handle__setEolMode;
 
 	// Subclass to allow providing a Go implementation
 	virtual void setEolMode(QsciScintilla::EolMode mode) override {
-		if (handle__setEolMode == 0) {
+		if (!handle__setEolMode) {
 			QsciScintilla::setEolMode(mode);
 			return;
 		}
 
 		QsciScintilla::EolMode mode_ret = mode;
 		int sigval1 = static_cast<int>(mode_ret);
-		miqt_exec_callback_QsciScintilla_setEolMode(this, handle__setEolMode, sigval1);
+		miqt_exec_callback_QsciScintilla_setEolMode(this, handle__setEolMode.value(), sigval1);
 
 	}
 
 	friend void QsciScintilla_virtualbase_setEolMode(void* self, int mode);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__setEolVisibility = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QsciScintilla> handle__setEolVisibility;
 
 	// Subclass to allow providing a Go implementation
 	virtual void setEolVisibility(bool visible) override {
-		if (handle__setEolVisibility == 0) {
+		if (!handle__setEolVisibility) {
 			QsciScintilla::setEolVisibility(visible);
 			return;
 		}
 
 		bool sigval1 = visible;
-		miqt_exec_callback_QsciScintilla_setEolVisibility(this, handle__setEolVisibility, sigval1);
+		miqt_exec_callback_QsciScintilla_setEolVisibility(this, handle__setEolVisibility.value(), sigval1);
 
 	}
 
 	friend void QsciScintilla_virtualbase_setEolVisibility(void* self, bool visible);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__setFolding = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QsciScintilla> handle__setFolding;
 
 	// Subclass to allow providing a Go implementation
 	virtual void setFolding(QsciScintilla::FoldStyle fold, int margin) override {
-		if (handle__setFolding == 0) {
+		if (!handle__setFolding) {
 			QsciScintilla::setFolding(fold, margin);
 			return;
 		}
@@ -1118,53 +1121,53 @@ public:
 		QsciScintilla::FoldStyle fold_ret = fold;
 		int sigval1 = static_cast<int>(fold_ret);
 		int sigval2 = margin;
-		miqt_exec_callback_QsciScintilla_setFolding(this, handle__setFolding, sigval1, sigval2);
+		miqt_exec_callback_QsciScintilla_setFolding(this, handle__setFolding.value(), sigval1, sigval2);
 
 	}
 
 	friend void QsciScintilla_virtualbase_setFolding(void* self, int fold, int margin);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__setIndentation = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QsciScintilla> handle__setIndentation;
 
 	// Subclass to allow providing a Go implementation
 	virtual void setIndentation(int line, int indentation) override {
-		if (handle__setIndentation == 0) {
+		if (!handle__setIndentation) {
 			QsciScintilla::setIndentation(line, indentation);
 			return;
 		}
 
 		int sigval1 = line;
 		int sigval2 = indentation;
-		miqt_exec_callback_QsciScintilla_setIndentation(this, handle__setIndentation, sigval1, sigval2);
+		miqt_exec_callback_QsciScintilla_setIndentation(this, handle__setIndentation.value(), sigval1, sigval2);
 
 	}
 
 	friend void QsciScintilla_virtualbase_setIndentation(void* self, int line, int indentation);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__setIndentationGuides = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QsciScintilla> handle__setIndentationGuides;
 
 	// Subclass to allow providing a Go implementation
 	virtual void setIndentationGuides(bool enable) override {
-		if (handle__setIndentationGuides == 0) {
+		if (!handle__setIndentationGuides) {
 			QsciScintilla::setIndentationGuides(enable);
 			return;
 		}
 
 		bool sigval1 = enable;
-		miqt_exec_callback_QsciScintilla_setIndentationGuides(this, handle__setIndentationGuides, sigval1);
+		miqt_exec_callback_QsciScintilla_setIndentationGuides(this, handle__setIndentationGuides.value(), sigval1);
 
 	}
 
 	friend void QsciScintilla_virtualbase_setIndentationGuides(void* self, bool enable);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__setIndentationGuidesBackgroundColor = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QsciScintilla> handle__setIndentationGuidesBackgroundColor;
 
 	// Subclass to allow providing a Go implementation
 	virtual void setIndentationGuidesBackgroundColor(const QColor& col) override {
-		if (handle__setIndentationGuidesBackgroundColor == 0) {
+		if (!handle__setIndentationGuidesBackgroundColor) {
 			QsciScintilla::setIndentationGuidesBackgroundColor(col);
 			return;
 		}
@@ -1172,18 +1175,18 @@ public:
 		const QColor& col_ret = col;
 		// Cast returned reference into pointer
 		QColor* sigval1 = const_cast<QColor*>(&col_ret);
-		miqt_exec_callback_QsciScintilla_setIndentationGuidesBackgroundColor(this, handle__setIndentationGuidesBackgroundColor, sigval1);
+		miqt_exec_callback_QsciScintilla_setIndentationGuidesBackgroundColor(this, handle__setIndentationGuidesBackgroundColor.value(), sigval1);
 
 	}
 
 	friend void QsciScintilla_virtualbase_setIndentationGuidesBackgroundColor(void* self, QColor* col);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__setIndentationGuidesForegroundColor = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QsciScintilla> handle__setIndentationGuidesForegroundColor;
 
 	// Subclass to allow providing a Go implementation
 	virtual void setIndentationGuidesForegroundColor(const QColor& col) override {
-		if (handle__setIndentationGuidesForegroundColor == 0) {
+		if (!handle__setIndentationGuidesForegroundColor) {
 			QsciScintilla::setIndentationGuidesForegroundColor(col);
 			return;
 		}
@@ -1191,69 +1194,69 @@ public:
 		const QColor& col_ret = col;
 		// Cast returned reference into pointer
 		QColor* sigval1 = const_cast<QColor*>(&col_ret);
-		miqt_exec_callback_QsciScintilla_setIndentationGuidesForegroundColor(this, handle__setIndentationGuidesForegroundColor, sigval1);
+		miqt_exec_callback_QsciScintilla_setIndentationGuidesForegroundColor(this, handle__setIndentationGuidesForegroundColor.value(), sigval1);
 
 	}
 
 	friend void QsciScintilla_virtualbase_setIndentationGuidesForegroundColor(void* self, QColor* col);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__setIndentationsUseTabs = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QsciScintilla> handle__setIndentationsUseTabs;
 
 	// Subclass to allow providing a Go implementation
 	virtual void setIndentationsUseTabs(bool tabs) override {
-		if (handle__setIndentationsUseTabs == 0) {
+		if (!handle__setIndentationsUseTabs) {
 			QsciScintilla::setIndentationsUseTabs(tabs);
 			return;
 		}
 
 		bool sigval1 = tabs;
-		miqt_exec_callback_QsciScintilla_setIndentationsUseTabs(this, handle__setIndentationsUseTabs, sigval1);
+		miqt_exec_callback_QsciScintilla_setIndentationsUseTabs(this, handle__setIndentationsUseTabs.value(), sigval1);
 
 	}
 
 	friend void QsciScintilla_virtualbase_setIndentationsUseTabs(void* self, bool tabs);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__setIndentationWidth = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QsciScintilla> handle__setIndentationWidth;
 
 	// Subclass to allow providing a Go implementation
 	virtual void setIndentationWidth(int width) override {
-		if (handle__setIndentationWidth == 0) {
+		if (!handle__setIndentationWidth) {
 			QsciScintilla::setIndentationWidth(width);
 			return;
 		}
 
 		int sigval1 = width;
-		miqt_exec_callback_QsciScintilla_setIndentationWidth(this, handle__setIndentationWidth, sigval1);
+		miqt_exec_callback_QsciScintilla_setIndentationWidth(this, handle__setIndentationWidth.value(), sigval1);
 
 	}
 
 	friend void QsciScintilla_virtualbase_setIndentationWidth(void* self, int width);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__setLexer = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QsciScintilla> handle__setLexer;
 
 	// Subclass to allow providing a Go implementation
 	virtual void setLexer(QsciLexer* lexer) override {
-		if (handle__setLexer == 0) {
+		if (!handle__setLexer) {
 			QsciScintilla::setLexer(lexer);
 			return;
 		}
 
 		QsciLexer* sigval1 = lexer;
-		miqt_exec_callback_QsciScintilla_setLexer(this, handle__setLexer, sigval1);
+		miqt_exec_callback_QsciScintilla_setLexer(this, handle__setLexer.value(), sigval1);
 
 	}
 
 	friend void QsciScintilla_virtualbase_setLexer(void* self, QsciLexer* lexer);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__setMarginsBackgroundColor = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QsciScintilla> handle__setMarginsBackgroundColor;
 
 	// Subclass to allow providing a Go implementation
 	virtual void setMarginsBackgroundColor(const QColor& col) override {
-		if (handle__setMarginsBackgroundColor == 0) {
+		if (!handle__setMarginsBackgroundColor) {
 			QsciScintilla::setMarginsBackgroundColor(col);
 			return;
 		}
@@ -1261,18 +1264,18 @@ public:
 		const QColor& col_ret = col;
 		// Cast returned reference into pointer
 		QColor* sigval1 = const_cast<QColor*>(&col_ret);
-		miqt_exec_callback_QsciScintilla_setMarginsBackgroundColor(this, handle__setMarginsBackgroundColor, sigval1);
+		miqt_exec_callback_QsciScintilla_setMarginsBackgroundColor(this, handle__setMarginsBackgroundColor.value(), sigval1);
 
 	}
 
 	friend void QsciScintilla_virtualbase_setMarginsBackgroundColor(void* self, QColor* col);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__setMarginsFont = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QsciScintilla> handle__setMarginsFont;
 
 	// Subclass to allow providing a Go implementation
 	virtual void setMarginsFont(const QFont& f) override {
-		if (handle__setMarginsFont == 0) {
+		if (!handle__setMarginsFont) {
 			QsciScintilla::setMarginsFont(f);
 			return;
 		}
@@ -1280,18 +1283,18 @@ public:
 		const QFont& f_ret = f;
 		// Cast returned reference into pointer
 		QFont* sigval1 = const_cast<QFont*>(&f_ret);
-		miqt_exec_callback_QsciScintilla_setMarginsFont(this, handle__setMarginsFont, sigval1);
+		miqt_exec_callback_QsciScintilla_setMarginsFont(this, handle__setMarginsFont.value(), sigval1);
 
 	}
 
 	friend void QsciScintilla_virtualbase_setMarginsFont(void* self, QFont* f);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__setMarginsForegroundColor = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QsciScintilla> handle__setMarginsForegroundColor;
 
 	// Subclass to allow providing a Go implementation
 	virtual void setMarginsForegroundColor(const QColor& col) override {
-		if (handle__setMarginsForegroundColor == 0) {
+		if (!handle__setMarginsForegroundColor) {
 			QsciScintilla::setMarginsForegroundColor(col);
 			return;
 		}
@@ -1299,90 +1302,90 @@ public:
 		const QColor& col_ret = col;
 		// Cast returned reference into pointer
 		QColor* sigval1 = const_cast<QColor*>(&col_ret);
-		miqt_exec_callback_QsciScintilla_setMarginsForegroundColor(this, handle__setMarginsForegroundColor, sigval1);
+		miqt_exec_callback_QsciScintilla_setMarginsForegroundColor(this, handle__setMarginsForegroundColor.value(), sigval1);
 
 	}
 
 	friend void QsciScintilla_virtualbase_setMarginsForegroundColor(void* self, QColor* col);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__setMarginLineNumbers = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QsciScintilla> handle__setMarginLineNumbers;
 
 	// Subclass to allow providing a Go implementation
 	virtual void setMarginLineNumbers(int margin, bool lnrs) override {
-		if (handle__setMarginLineNumbers == 0) {
+		if (!handle__setMarginLineNumbers) {
 			QsciScintilla::setMarginLineNumbers(margin, lnrs);
 			return;
 		}
 
 		int sigval1 = margin;
 		bool sigval2 = lnrs;
-		miqt_exec_callback_QsciScintilla_setMarginLineNumbers(this, handle__setMarginLineNumbers, sigval1, sigval2);
+		miqt_exec_callback_QsciScintilla_setMarginLineNumbers(this, handle__setMarginLineNumbers.value(), sigval1, sigval2);
 
 	}
 
 	friend void QsciScintilla_virtualbase_setMarginLineNumbers(void* self, int margin, bool lnrs);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__setMarginMarkerMask = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QsciScintilla> handle__setMarginMarkerMask;
 
 	// Subclass to allow providing a Go implementation
 	virtual void setMarginMarkerMask(int margin, int mask) override {
-		if (handle__setMarginMarkerMask == 0) {
+		if (!handle__setMarginMarkerMask) {
 			QsciScintilla::setMarginMarkerMask(margin, mask);
 			return;
 		}
 
 		int sigval1 = margin;
 		int sigval2 = mask;
-		miqt_exec_callback_QsciScintilla_setMarginMarkerMask(this, handle__setMarginMarkerMask, sigval1, sigval2);
+		miqt_exec_callback_QsciScintilla_setMarginMarkerMask(this, handle__setMarginMarkerMask.value(), sigval1, sigval2);
 
 	}
 
 	friend void QsciScintilla_virtualbase_setMarginMarkerMask(void* self, int margin, int mask);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__setMarginSensitivity = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QsciScintilla> handle__setMarginSensitivity;
 
 	// Subclass to allow providing a Go implementation
 	virtual void setMarginSensitivity(int margin, bool sens) override {
-		if (handle__setMarginSensitivity == 0) {
+		if (!handle__setMarginSensitivity) {
 			QsciScintilla::setMarginSensitivity(margin, sens);
 			return;
 		}
 
 		int sigval1 = margin;
 		bool sigval2 = sens;
-		miqt_exec_callback_QsciScintilla_setMarginSensitivity(this, handle__setMarginSensitivity, sigval1, sigval2);
+		miqt_exec_callback_QsciScintilla_setMarginSensitivity(this, handle__setMarginSensitivity.value(), sigval1, sigval2);
 
 	}
 
 	friend void QsciScintilla_virtualbase_setMarginSensitivity(void* self, int margin, bool sens);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__setMarginWidth = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QsciScintilla> handle__setMarginWidth;
 
 	// Subclass to allow providing a Go implementation
 	virtual void setMarginWidth(int margin, int width) override {
-		if (handle__setMarginWidth == 0) {
+		if (!handle__setMarginWidth) {
 			QsciScintilla::setMarginWidth(margin, width);
 			return;
 		}
 
 		int sigval1 = margin;
 		int sigval2 = width;
-		miqt_exec_callback_QsciScintilla_setMarginWidth(this, handle__setMarginWidth, sigval1, sigval2);
+		miqt_exec_callback_QsciScintilla_setMarginWidth(this, handle__setMarginWidth.value(), sigval1, sigval2);
 
 	}
 
 	friend void QsciScintilla_virtualbase_setMarginWidth(void* self, int margin, int width);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__setMarginWidth2 = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QsciScintilla> handle__setMarginWidth2;
 
 	// Subclass to allow providing a Go implementation
 	virtual void setMarginWidth(int margin, const QString& s) override {
-		if (handle__setMarginWidth2 == 0) {
+		if (!handle__setMarginWidth2) {
 			QsciScintilla::setMarginWidth(margin, s);
 			return;
 		}
@@ -1396,35 +1399,35 @@ public:
 		s_ms.data = static_cast<char*>(malloc(s_ms.len));
 		memcpy(s_ms.data, s_b.data(), s_ms.len);
 		struct miqt_string sigval2 = s_ms;
-		miqt_exec_callback_QsciScintilla_setMarginWidth2(this, handle__setMarginWidth2, sigval1, sigval2);
+		miqt_exec_callback_QsciScintilla_setMarginWidth2(this, handle__setMarginWidth2.value(), sigval1, sigval2);
 
 	}
 
 	friend void QsciScintilla_virtualbase_setMarginWidth2(void* self, int margin, struct miqt_string s);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__setModified = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QsciScintilla> handle__setModified;
 
 	// Subclass to allow providing a Go implementation
 	virtual void setModified(bool m) override {
-		if (handle__setModified == 0) {
+		if (!handle__setModified) {
 			QsciScintilla::setModified(m);
 			return;
 		}
 
 		bool sigval1 = m;
-		miqt_exec_callback_QsciScintilla_setModified(this, handle__setModified, sigval1);
+		miqt_exec_callback_QsciScintilla_setModified(this, handle__setModified.value(), sigval1);
 
 	}
 
 	friend void QsciScintilla_virtualbase_setModified(void* self, bool m);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__setPaper = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QsciScintilla> handle__setPaper;
 
 	// Subclass to allow providing a Go implementation
 	virtual void setPaper(const QColor& c) override {
-		if (handle__setPaper == 0) {
+		if (!handle__setPaper) {
 			QsciScintilla::setPaper(c);
 			return;
 		}
@@ -1432,35 +1435,35 @@ public:
 		const QColor& c_ret = c;
 		// Cast returned reference into pointer
 		QColor* sigval1 = const_cast<QColor*>(&c_ret);
-		miqt_exec_callback_QsciScintilla_setPaper(this, handle__setPaper, sigval1);
+		miqt_exec_callback_QsciScintilla_setPaper(this, handle__setPaper.value(), sigval1);
 
 	}
 
 	friend void QsciScintilla_virtualbase_setPaper(void* self, QColor* c);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__setReadOnly = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QsciScintilla> handle__setReadOnly;
 
 	// Subclass to allow providing a Go implementation
 	virtual void setReadOnly(bool ro) override {
-		if (handle__setReadOnly == 0) {
+		if (!handle__setReadOnly) {
 			QsciScintilla::setReadOnly(ro);
 			return;
 		}
 
 		bool sigval1 = ro;
-		miqt_exec_callback_QsciScintilla_setReadOnly(this, handle__setReadOnly, sigval1);
+		miqt_exec_callback_QsciScintilla_setReadOnly(this, handle__setReadOnly.value(), sigval1);
 
 	}
 
 	friend void QsciScintilla_virtualbase_setReadOnly(void* self, bool ro);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__setSelection = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QsciScintilla> handle__setSelection;
 
 	// Subclass to allow providing a Go implementation
 	virtual void setSelection(int lineFrom, int indexFrom, int lineTo, int indexTo) override {
-		if (handle__setSelection == 0) {
+		if (!handle__setSelection) {
 			QsciScintilla::setSelection(lineFrom, indexFrom, lineTo, indexTo);
 			return;
 		}
@@ -1469,18 +1472,18 @@ public:
 		int sigval2 = indexFrom;
 		int sigval3 = lineTo;
 		int sigval4 = indexTo;
-		miqt_exec_callback_QsciScintilla_setSelection(this, handle__setSelection, sigval1, sigval2, sigval3, sigval4);
+		miqt_exec_callback_QsciScintilla_setSelection(this, handle__setSelection.value(), sigval1, sigval2, sigval3, sigval4);
 
 	}
 
 	friend void QsciScintilla_virtualbase_setSelection(void* self, int lineFrom, int indexFrom, int lineTo, int indexTo);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__setSelectionBackgroundColor = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QsciScintilla> handle__setSelectionBackgroundColor;
 
 	// Subclass to allow providing a Go implementation
 	virtual void setSelectionBackgroundColor(const QColor& col) override {
-		if (handle__setSelectionBackgroundColor == 0) {
+		if (!handle__setSelectionBackgroundColor) {
 			QsciScintilla::setSelectionBackgroundColor(col);
 			return;
 		}
@@ -1488,18 +1491,18 @@ public:
 		const QColor& col_ret = col;
 		// Cast returned reference into pointer
 		QColor* sigval1 = const_cast<QColor*>(&col_ret);
-		miqt_exec_callback_QsciScintilla_setSelectionBackgroundColor(this, handle__setSelectionBackgroundColor, sigval1);
+		miqt_exec_callback_QsciScintilla_setSelectionBackgroundColor(this, handle__setSelectionBackgroundColor.value(), sigval1);
 
 	}
 
 	friend void QsciScintilla_virtualbase_setSelectionBackgroundColor(void* self, QColor* col);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__setSelectionForegroundColor = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QsciScintilla> handle__setSelectionForegroundColor;
 
 	// Subclass to allow providing a Go implementation
 	virtual void setSelectionForegroundColor(const QColor& col) override {
-		if (handle__setSelectionForegroundColor == 0) {
+		if (!handle__setSelectionForegroundColor) {
 			QsciScintilla::setSelectionForegroundColor(col);
 			return;
 		}
@@ -1507,52 +1510,52 @@ public:
 		const QColor& col_ret = col;
 		// Cast returned reference into pointer
 		QColor* sigval1 = const_cast<QColor*>(&col_ret);
-		miqt_exec_callback_QsciScintilla_setSelectionForegroundColor(this, handle__setSelectionForegroundColor, sigval1);
+		miqt_exec_callback_QsciScintilla_setSelectionForegroundColor(this, handle__setSelectionForegroundColor.value(), sigval1);
 
 	}
 
 	friend void QsciScintilla_virtualbase_setSelectionForegroundColor(void* self, QColor* col);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__setTabIndents = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QsciScintilla> handle__setTabIndents;
 
 	// Subclass to allow providing a Go implementation
 	virtual void setTabIndents(bool indent) override {
-		if (handle__setTabIndents == 0) {
+		if (!handle__setTabIndents) {
 			QsciScintilla::setTabIndents(indent);
 			return;
 		}
 
 		bool sigval1 = indent;
-		miqt_exec_callback_QsciScintilla_setTabIndents(this, handle__setTabIndents, sigval1);
+		miqt_exec_callback_QsciScintilla_setTabIndents(this, handle__setTabIndents.value(), sigval1);
 
 	}
 
 	friend void QsciScintilla_virtualbase_setTabIndents(void* self, bool indent);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__setTabWidth = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QsciScintilla> handle__setTabWidth;
 
 	// Subclass to allow providing a Go implementation
 	virtual void setTabWidth(int width) override {
-		if (handle__setTabWidth == 0) {
+		if (!handle__setTabWidth) {
 			QsciScintilla::setTabWidth(width);
 			return;
 		}
 
 		int sigval1 = width;
-		miqt_exec_callback_QsciScintilla_setTabWidth(this, handle__setTabWidth, sigval1);
+		miqt_exec_callback_QsciScintilla_setTabWidth(this, handle__setTabWidth.value(), sigval1);
 
 	}
 
 	friend void QsciScintilla_virtualbase_setTabWidth(void* self, int width);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__setText = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QsciScintilla> handle__setText;
 
 	// Subclass to allow providing a Go implementation
 	virtual void setText(const QString& text) override {
-		if (handle__setText == 0) {
+		if (!handle__setText) {
 			QsciScintilla::setText(text);
 			return;
 		}
@@ -1565,276 +1568,276 @@ public:
 		text_ms.data = static_cast<char*>(malloc(text_ms.len));
 		memcpy(text_ms.data, text_b.data(), text_ms.len);
 		struct miqt_string sigval1 = text_ms;
-		miqt_exec_callback_QsciScintilla_setText(this, handle__setText, sigval1);
+		miqt_exec_callback_QsciScintilla_setText(this, handle__setText.value(), sigval1);
 
 	}
 
 	friend void QsciScintilla_virtualbase_setText(void* self, struct miqt_string text);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__setUtf8 = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QsciScintilla> handle__setUtf8;
 
 	// Subclass to allow providing a Go implementation
 	virtual void setUtf8(bool cp) override {
-		if (handle__setUtf8 == 0) {
+		if (!handle__setUtf8) {
 			QsciScintilla::setUtf8(cp);
 			return;
 		}
 
 		bool sigval1 = cp;
-		miqt_exec_callback_QsciScintilla_setUtf8(this, handle__setUtf8, sigval1);
+		miqt_exec_callback_QsciScintilla_setUtf8(this, handle__setUtf8.value(), sigval1);
 
 	}
 
 	friend void QsciScintilla_virtualbase_setUtf8(void* self, bool cp);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__setWhitespaceVisibility = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QsciScintilla> handle__setWhitespaceVisibility;
 
 	// Subclass to allow providing a Go implementation
 	virtual void setWhitespaceVisibility(QsciScintilla::WhitespaceVisibility mode) override {
-		if (handle__setWhitespaceVisibility == 0) {
+		if (!handle__setWhitespaceVisibility) {
 			QsciScintilla::setWhitespaceVisibility(mode);
 			return;
 		}
 
 		QsciScintilla::WhitespaceVisibility mode_ret = mode;
 		int sigval1 = static_cast<int>(mode_ret);
-		miqt_exec_callback_QsciScintilla_setWhitespaceVisibility(this, handle__setWhitespaceVisibility, sigval1);
+		miqt_exec_callback_QsciScintilla_setWhitespaceVisibility(this, handle__setWhitespaceVisibility.value(), sigval1);
 
 	}
 
 	friend void QsciScintilla_virtualbase_setWhitespaceVisibility(void* self, int mode);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__setWrapMode = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QsciScintilla> handle__setWrapMode;
 
 	// Subclass to allow providing a Go implementation
 	virtual void setWrapMode(QsciScintilla::WrapMode mode) override {
-		if (handle__setWrapMode == 0) {
+		if (!handle__setWrapMode) {
 			QsciScintilla::setWrapMode(mode);
 			return;
 		}
 
 		QsciScintilla::WrapMode mode_ret = mode;
 		int sigval1 = static_cast<int>(mode_ret);
-		miqt_exec_callback_QsciScintilla_setWrapMode(this, handle__setWrapMode, sigval1);
+		miqt_exec_callback_QsciScintilla_setWrapMode(this, handle__setWrapMode.value(), sigval1);
 
 	}
 
 	friend void QsciScintilla_virtualbase_setWrapMode(void* self, int mode);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__undo = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QsciScintilla> handle__undo;
 
 	// Subclass to allow providing a Go implementation
 	virtual void undo() override {
-		if (handle__undo == 0) {
+		if (!handle__undo) {
 			QsciScintilla::undo();
 			return;
 		}
 
-		miqt_exec_callback_QsciScintilla_undo(this, handle__undo);
+		miqt_exec_callback_QsciScintilla_undo(this, handle__undo.value());
 
 	}
 
 	friend void QsciScintilla_virtualbase_undo(void* self);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__unindent = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QsciScintilla> handle__unindent;
 
 	// Subclass to allow providing a Go implementation
 	virtual void unindent(int line) override {
-		if (handle__unindent == 0) {
+		if (!handle__unindent) {
 			QsciScintilla::unindent(line);
 			return;
 		}
 
 		int sigval1 = line;
-		miqt_exec_callback_QsciScintilla_unindent(this, handle__unindent, sigval1);
+		miqt_exec_callback_QsciScintilla_unindent(this, handle__unindent.value(), sigval1);
 
 	}
 
 	friend void QsciScintilla_virtualbase_unindent(void* self, int line);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__zoomIn = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QsciScintilla> handle__zoomIn;
 
 	// Subclass to allow providing a Go implementation
 	virtual void zoomIn(int range) override {
-		if (handle__zoomIn == 0) {
+		if (!handle__zoomIn) {
 			QsciScintilla::zoomIn(range);
 			return;
 		}
 
 		int sigval1 = range;
-		miqt_exec_callback_QsciScintilla_zoomIn(this, handle__zoomIn, sigval1);
+		miqt_exec_callback_QsciScintilla_zoomIn(this, handle__zoomIn.value(), sigval1);
 
 	}
 
 	friend void QsciScintilla_virtualbase_zoomIn(void* self, int range);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__zoomIn2 = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QsciScintilla> handle__zoomIn2;
 
 	// Subclass to allow providing a Go implementation
 	virtual void zoomIn() override {
-		if (handle__zoomIn2 == 0) {
+		if (!handle__zoomIn2) {
 			QsciScintilla::zoomIn();
 			return;
 		}
 
-		miqt_exec_callback_QsciScintilla_zoomIn2(this, handle__zoomIn2);
+		miqt_exec_callback_QsciScintilla_zoomIn2(this, handle__zoomIn2.value());
 
 	}
 
 	friend void QsciScintilla_virtualbase_zoomIn2(void* self);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__zoomOut = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QsciScintilla> handle__zoomOut;
 
 	// Subclass to allow providing a Go implementation
 	virtual void zoomOut(int range) override {
-		if (handle__zoomOut == 0) {
+		if (!handle__zoomOut) {
 			QsciScintilla::zoomOut(range);
 			return;
 		}
 
 		int sigval1 = range;
-		miqt_exec_callback_QsciScintilla_zoomOut(this, handle__zoomOut, sigval1);
+		miqt_exec_callback_QsciScintilla_zoomOut(this, handle__zoomOut.value(), sigval1);
 
 	}
 
 	friend void QsciScintilla_virtualbase_zoomOut(void* self, int range);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__zoomOut2 = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QsciScintilla> handle__zoomOut2;
 
 	// Subclass to allow providing a Go implementation
 	virtual void zoomOut() override {
-		if (handle__zoomOut2 == 0) {
+		if (!handle__zoomOut2) {
 			QsciScintilla::zoomOut();
 			return;
 		}
 
-		miqt_exec_callback_QsciScintilla_zoomOut2(this, handle__zoomOut2);
+		miqt_exec_callback_QsciScintilla_zoomOut2(this, handle__zoomOut2.value());
 
 	}
 
 	friend void QsciScintilla_virtualbase_zoomOut2(void* self);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__zoomTo = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QsciScintilla> handle__zoomTo;
 
 	// Subclass to allow providing a Go implementation
 	virtual void zoomTo(int size) override {
-		if (handle__zoomTo == 0) {
+		if (!handle__zoomTo) {
 			QsciScintilla::zoomTo(size);
 			return;
 		}
 
 		int sigval1 = size;
-		miqt_exec_callback_QsciScintilla_zoomTo(this, handle__zoomTo, sigval1);
+		miqt_exec_callback_QsciScintilla_zoomTo(this, handle__zoomTo.value(), sigval1);
 
 	}
 
 	friend void QsciScintilla_virtualbase_zoomTo(void* self, int size);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__event = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QsciScintilla> handle__event;
 
 	// Subclass to allow providing a Go implementation
 	virtual bool event(QEvent* e) override {
-		if (handle__event == 0) {
+		if (!handle__event) {
 			return QsciScintilla::event(e);
 		}
 
 		QEvent* sigval1 = e;
-		bool callback_return_value = miqt_exec_callback_QsciScintilla_event(this, handle__event, sigval1);
+		bool callback_return_value = miqt_exec_callback_QsciScintilla_event(this, handle__event.value(), sigval1);
 		return callback_return_value;
 	}
 
 	friend bool QsciScintilla_virtualbase_event(void* self, QEvent* e);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__changeEvent = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QsciScintilla> handle__changeEvent;
 
 	// Subclass to allow providing a Go implementation
 	virtual void changeEvent(QEvent* e) override {
-		if (handle__changeEvent == 0) {
+		if (!handle__changeEvent) {
 			QsciScintilla::changeEvent(e);
 			return;
 		}
 
 		QEvent* sigval1 = e;
-		miqt_exec_callback_QsciScintilla_changeEvent(this, handle__changeEvent, sigval1);
+		miqt_exec_callback_QsciScintilla_changeEvent(this, handle__changeEvent.value(), sigval1);
 
 	}
 
 	friend void QsciScintilla_virtualbase_changeEvent(void* self, QEvent* e);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__contextMenuEvent = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QsciScintilla> handle__contextMenuEvent;
 
 	// Subclass to allow providing a Go implementation
 	virtual void contextMenuEvent(QContextMenuEvent* e) override {
-		if (handle__contextMenuEvent == 0) {
+		if (!handle__contextMenuEvent) {
 			QsciScintilla::contextMenuEvent(e);
 			return;
 		}
 
 		QContextMenuEvent* sigval1 = e;
-		miqt_exec_callback_QsciScintilla_contextMenuEvent(this, handle__contextMenuEvent, sigval1);
+		miqt_exec_callback_QsciScintilla_contextMenuEvent(this, handle__contextMenuEvent.value(), sigval1);
 
 	}
 
 	friend void QsciScintilla_virtualbase_contextMenuEvent(void* self, QContextMenuEvent* e);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__wheelEvent = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QsciScintilla> handle__wheelEvent;
 
 	// Subclass to allow providing a Go implementation
 	virtual void wheelEvent(QWheelEvent* e) override {
-		if (handle__wheelEvent == 0) {
+		if (!handle__wheelEvent) {
 			QsciScintilla::wheelEvent(e);
 			return;
 		}
 
 		QWheelEvent* sigval1 = e;
-		miqt_exec_callback_QsciScintilla_wheelEvent(this, handle__wheelEvent, sigval1);
+		miqt_exec_callback_QsciScintilla_wheelEvent(this, handle__wheelEvent.value(), sigval1);
 
 	}
 
 	friend void QsciScintilla_virtualbase_wheelEvent(void* self, QWheelEvent* e);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__canInsertFromMimeData = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QsciScintilla> handle__canInsertFromMimeData;
 
 	// Subclass to allow providing a Go implementation
 	virtual bool canInsertFromMimeData(const QMimeData* source) const override {
-		if (handle__canInsertFromMimeData == 0) {
+		if (!handle__canInsertFromMimeData) {
 			return QsciScintilla::canInsertFromMimeData(source);
 		}
 
 		QMimeData* sigval1 = (QMimeData*) source;
-		bool callback_return_value = miqt_exec_callback_QsciScintilla_canInsertFromMimeData(this, handle__canInsertFromMimeData, sigval1);
+		bool callback_return_value = miqt_exec_callback_QsciScintilla_canInsertFromMimeData(this, handle__canInsertFromMimeData.value(), sigval1);
 		return callback_return_value;
 	}
 
 	friend bool QsciScintilla_virtualbase_canInsertFromMimeData(const void* self, QMimeData* source);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__fromMimeData = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QsciScintilla> handle__fromMimeData;
 
 	// Subclass to allow providing a Go implementation
 	virtual QByteArray fromMimeData(const QMimeData* source, bool& rectangular) const override {
-		if (handle__fromMimeData == 0) {
+		if (!handle__fromMimeData) {
 			return QsciScintilla::fromMimeData(source, rectangular);
 		}
 
 		QMimeData* sigval1 = (QMimeData*) source;
 		bool* sigval2 = &rectangular;
-		struct miqt_string callback_return_value = miqt_exec_callback_QsciScintilla_fromMimeData(this, handle__fromMimeData, sigval1, sigval2);
+		struct miqt_string callback_return_value = miqt_exec_callback_QsciScintilla_fromMimeData(this, handle__fromMimeData.value(), sigval1, sigval2);
 		QByteArray callback_return_value_QByteArray(callback_return_value.data, callback_return_value.len);
 		free(callback_return_value.data);
 		return callback_return_value_QByteArray;
@@ -1843,11 +1846,11 @@ public:
 	friend struct miqt_string QsciScintilla_virtualbase_fromMimeData(const void* self, QMimeData* source, bool* rectangular);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__toMimeData = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QsciScintilla> handle__toMimeData;
 
 	// Subclass to allow providing a Go implementation
 	virtual QMimeData* toMimeData(const QByteArray& text, bool rectangular) const override {
-		if (handle__toMimeData == 0) {
+		if (!handle__toMimeData) {
 			return QsciScintilla::toMimeData(text, rectangular);
 		}
 
@@ -1858,650 +1861,650 @@ public:
 		memcpy(text_ms.data, text_qb.data(), text_ms.len);
 		struct miqt_string sigval1 = text_ms;
 		bool sigval2 = rectangular;
-		QMimeData* callback_return_value = miqt_exec_callback_QsciScintilla_toMimeData(this, handle__toMimeData, sigval1, sigval2);
+		QMimeData* callback_return_value = miqt_exec_callback_QsciScintilla_toMimeData(this, handle__toMimeData.value(), sigval1, sigval2);
 		return callback_return_value;
 	}
 
 	friend QMimeData* QsciScintilla_virtualbase_toMimeData(const void* self, struct miqt_string text, bool rectangular);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__dragEnterEvent = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QsciScintilla> handle__dragEnterEvent;
 
 	// Subclass to allow providing a Go implementation
 	virtual void dragEnterEvent(QDragEnterEvent* e) override {
-		if (handle__dragEnterEvent == 0) {
+		if (!handle__dragEnterEvent) {
 			QsciScintilla::dragEnterEvent(e);
 			return;
 		}
 
 		QDragEnterEvent* sigval1 = e;
-		miqt_exec_callback_QsciScintilla_dragEnterEvent(this, handle__dragEnterEvent, sigval1);
+		miqt_exec_callback_QsciScintilla_dragEnterEvent(this, handle__dragEnterEvent.value(), sigval1);
 
 	}
 
 	friend void QsciScintilla_virtualbase_dragEnterEvent(void* self, QDragEnterEvent* e);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__dragLeaveEvent = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QsciScintilla> handle__dragLeaveEvent;
 
 	// Subclass to allow providing a Go implementation
 	virtual void dragLeaveEvent(QDragLeaveEvent* e) override {
-		if (handle__dragLeaveEvent == 0) {
+		if (!handle__dragLeaveEvent) {
 			QsciScintilla::dragLeaveEvent(e);
 			return;
 		}
 
 		QDragLeaveEvent* sigval1 = e;
-		miqt_exec_callback_QsciScintilla_dragLeaveEvent(this, handle__dragLeaveEvent, sigval1);
+		miqt_exec_callback_QsciScintilla_dragLeaveEvent(this, handle__dragLeaveEvent.value(), sigval1);
 
 	}
 
 	friend void QsciScintilla_virtualbase_dragLeaveEvent(void* self, QDragLeaveEvent* e);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__dragMoveEvent = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QsciScintilla> handle__dragMoveEvent;
 
 	// Subclass to allow providing a Go implementation
 	virtual void dragMoveEvent(QDragMoveEvent* e) override {
-		if (handle__dragMoveEvent == 0) {
+		if (!handle__dragMoveEvent) {
 			QsciScintilla::dragMoveEvent(e);
 			return;
 		}
 
 		QDragMoveEvent* sigval1 = e;
-		miqt_exec_callback_QsciScintilla_dragMoveEvent(this, handle__dragMoveEvent, sigval1);
+		miqt_exec_callback_QsciScintilla_dragMoveEvent(this, handle__dragMoveEvent.value(), sigval1);
 
 	}
 
 	friend void QsciScintilla_virtualbase_dragMoveEvent(void* self, QDragMoveEvent* e);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__dropEvent = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QsciScintilla> handle__dropEvent;
 
 	// Subclass to allow providing a Go implementation
 	virtual void dropEvent(QDropEvent* e) override {
-		if (handle__dropEvent == 0) {
+		if (!handle__dropEvent) {
 			QsciScintilla::dropEvent(e);
 			return;
 		}
 
 		QDropEvent* sigval1 = e;
-		miqt_exec_callback_QsciScintilla_dropEvent(this, handle__dropEvent, sigval1);
+		miqt_exec_callback_QsciScintilla_dropEvent(this, handle__dropEvent.value(), sigval1);
 
 	}
 
 	friend void QsciScintilla_virtualbase_dropEvent(void* self, QDropEvent* e);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__focusInEvent = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QsciScintilla> handle__focusInEvent;
 
 	// Subclass to allow providing a Go implementation
 	virtual void focusInEvent(QFocusEvent* e) override {
-		if (handle__focusInEvent == 0) {
+		if (!handle__focusInEvent) {
 			QsciScintilla::focusInEvent(e);
 			return;
 		}
 
 		QFocusEvent* sigval1 = e;
-		miqt_exec_callback_QsciScintilla_focusInEvent(this, handle__focusInEvent, sigval1);
+		miqt_exec_callback_QsciScintilla_focusInEvent(this, handle__focusInEvent.value(), sigval1);
 
 	}
 
 	friend void QsciScintilla_virtualbase_focusInEvent(void* self, QFocusEvent* e);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__focusOutEvent = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QsciScintilla> handle__focusOutEvent;
 
 	// Subclass to allow providing a Go implementation
 	virtual void focusOutEvent(QFocusEvent* e) override {
-		if (handle__focusOutEvent == 0) {
+		if (!handle__focusOutEvent) {
 			QsciScintilla::focusOutEvent(e);
 			return;
 		}
 
 		QFocusEvent* sigval1 = e;
-		miqt_exec_callback_QsciScintilla_focusOutEvent(this, handle__focusOutEvent, sigval1);
+		miqt_exec_callback_QsciScintilla_focusOutEvent(this, handle__focusOutEvent.value(), sigval1);
 
 	}
 
 	friend void QsciScintilla_virtualbase_focusOutEvent(void* self, QFocusEvent* e);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__focusNextPrevChild = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QsciScintilla> handle__focusNextPrevChild;
 
 	// Subclass to allow providing a Go implementation
 	virtual bool focusNextPrevChild(bool next) override {
-		if (handle__focusNextPrevChild == 0) {
+		if (!handle__focusNextPrevChild) {
 			return QsciScintilla::focusNextPrevChild(next);
 		}
 
 		bool sigval1 = next;
-		bool callback_return_value = miqt_exec_callback_QsciScintilla_focusNextPrevChild(this, handle__focusNextPrevChild, sigval1);
+		bool callback_return_value = miqt_exec_callback_QsciScintilla_focusNextPrevChild(this, handle__focusNextPrevChild.value(), sigval1);
 		return callback_return_value;
 	}
 
 	friend bool QsciScintilla_virtualbase_focusNextPrevChild(void* self, bool next);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__keyPressEvent = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QsciScintilla> handle__keyPressEvent;
 
 	// Subclass to allow providing a Go implementation
 	virtual void keyPressEvent(QKeyEvent* e) override {
-		if (handle__keyPressEvent == 0) {
+		if (!handle__keyPressEvent) {
 			QsciScintilla::keyPressEvent(e);
 			return;
 		}
 
 		QKeyEvent* sigval1 = e;
-		miqt_exec_callback_QsciScintilla_keyPressEvent(this, handle__keyPressEvent, sigval1);
+		miqt_exec_callback_QsciScintilla_keyPressEvent(this, handle__keyPressEvent.value(), sigval1);
 
 	}
 
 	friend void QsciScintilla_virtualbase_keyPressEvent(void* self, QKeyEvent* e);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__inputMethodEvent = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QsciScintilla> handle__inputMethodEvent;
 
 	// Subclass to allow providing a Go implementation
 	virtual void inputMethodEvent(QInputMethodEvent* event) override {
-		if (handle__inputMethodEvent == 0) {
+		if (!handle__inputMethodEvent) {
 			QsciScintilla::inputMethodEvent(event);
 			return;
 		}
 
 		QInputMethodEvent* sigval1 = event;
-		miqt_exec_callback_QsciScintilla_inputMethodEvent(this, handle__inputMethodEvent, sigval1);
+		miqt_exec_callback_QsciScintilla_inputMethodEvent(this, handle__inputMethodEvent.value(), sigval1);
 
 	}
 
 	friend void QsciScintilla_virtualbase_inputMethodEvent(void* self, QInputMethodEvent* event);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__inputMethodQuery = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QsciScintilla> handle__inputMethodQuery;
 
 	// Subclass to allow providing a Go implementation
 	virtual QVariant inputMethodQuery(Qt::InputMethodQuery query) const override {
-		if (handle__inputMethodQuery == 0) {
+		if (!handle__inputMethodQuery) {
 			return QsciScintilla::inputMethodQuery(query);
 		}
 
 		Qt::InputMethodQuery query_ret = query;
 		int sigval1 = static_cast<int>(query_ret);
-		QVariant* callback_return_value = miqt_exec_callback_QsciScintilla_inputMethodQuery(this, handle__inputMethodQuery, sigval1);
+		QVariant* callback_return_value = miqt_exec_callback_QsciScintilla_inputMethodQuery(this, handle__inputMethodQuery.value(), sigval1);
 		return *callback_return_value;
 	}
 
 	friend QVariant* QsciScintilla_virtualbase_inputMethodQuery(const void* self, int query);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__mouseDoubleClickEvent = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QsciScintilla> handle__mouseDoubleClickEvent;
 
 	// Subclass to allow providing a Go implementation
 	virtual void mouseDoubleClickEvent(QMouseEvent* e) override {
-		if (handle__mouseDoubleClickEvent == 0) {
+		if (!handle__mouseDoubleClickEvent) {
 			QsciScintilla::mouseDoubleClickEvent(e);
 			return;
 		}
 
 		QMouseEvent* sigval1 = e;
-		miqt_exec_callback_QsciScintilla_mouseDoubleClickEvent(this, handle__mouseDoubleClickEvent, sigval1);
+		miqt_exec_callback_QsciScintilla_mouseDoubleClickEvent(this, handle__mouseDoubleClickEvent.value(), sigval1);
 
 	}
 
 	friend void QsciScintilla_virtualbase_mouseDoubleClickEvent(void* self, QMouseEvent* e);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__mouseMoveEvent = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QsciScintilla> handle__mouseMoveEvent;
 
 	// Subclass to allow providing a Go implementation
 	virtual void mouseMoveEvent(QMouseEvent* e) override {
-		if (handle__mouseMoveEvent == 0) {
+		if (!handle__mouseMoveEvent) {
 			QsciScintilla::mouseMoveEvent(e);
 			return;
 		}
 
 		QMouseEvent* sigval1 = e;
-		miqt_exec_callback_QsciScintilla_mouseMoveEvent(this, handle__mouseMoveEvent, sigval1);
+		miqt_exec_callback_QsciScintilla_mouseMoveEvent(this, handle__mouseMoveEvent.value(), sigval1);
 
 	}
 
 	friend void QsciScintilla_virtualbase_mouseMoveEvent(void* self, QMouseEvent* e);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__mousePressEvent = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QsciScintilla> handle__mousePressEvent;
 
 	// Subclass to allow providing a Go implementation
 	virtual void mousePressEvent(QMouseEvent* e) override {
-		if (handle__mousePressEvent == 0) {
+		if (!handle__mousePressEvent) {
 			QsciScintilla::mousePressEvent(e);
 			return;
 		}
 
 		QMouseEvent* sigval1 = e;
-		miqt_exec_callback_QsciScintilla_mousePressEvent(this, handle__mousePressEvent, sigval1);
+		miqt_exec_callback_QsciScintilla_mousePressEvent(this, handle__mousePressEvent.value(), sigval1);
 
 	}
 
 	friend void QsciScintilla_virtualbase_mousePressEvent(void* self, QMouseEvent* e);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__mouseReleaseEvent = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QsciScintilla> handle__mouseReleaseEvent;
 
 	// Subclass to allow providing a Go implementation
 	virtual void mouseReleaseEvent(QMouseEvent* e) override {
-		if (handle__mouseReleaseEvent == 0) {
+		if (!handle__mouseReleaseEvent) {
 			QsciScintilla::mouseReleaseEvent(e);
 			return;
 		}
 
 		QMouseEvent* sigval1 = e;
-		miqt_exec_callback_QsciScintilla_mouseReleaseEvent(this, handle__mouseReleaseEvent, sigval1);
+		miqt_exec_callback_QsciScintilla_mouseReleaseEvent(this, handle__mouseReleaseEvent.value(), sigval1);
 
 	}
 
 	friend void QsciScintilla_virtualbase_mouseReleaseEvent(void* self, QMouseEvent* e);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__paintEvent = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QsciScintilla> handle__paintEvent;
 
 	// Subclass to allow providing a Go implementation
 	virtual void paintEvent(QPaintEvent* e) override {
-		if (handle__paintEvent == 0) {
+		if (!handle__paintEvent) {
 			QsciScintilla::paintEvent(e);
 			return;
 		}
 
 		QPaintEvent* sigval1 = e;
-		miqt_exec_callback_QsciScintilla_paintEvent(this, handle__paintEvent, sigval1);
+		miqt_exec_callback_QsciScintilla_paintEvent(this, handle__paintEvent.value(), sigval1);
 
 	}
 
 	friend void QsciScintilla_virtualbase_paintEvent(void* self, QPaintEvent* e);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__resizeEvent = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QsciScintilla> handle__resizeEvent;
 
 	// Subclass to allow providing a Go implementation
 	virtual void resizeEvent(QResizeEvent* e) override {
-		if (handle__resizeEvent == 0) {
+		if (!handle__resizeEvent) {
 			QsciScintilla::resizeEvent(e);
 			return;
 		}
 
 		QResizeEvent* sigval1 = e;
-		miqt_exec_callback_QsciScintilla_resizeEvent(this, handle__resizeEvent, sigval1);
+		miqt_exec_callback_QsciScintilla_resizeEvent(this, handle__resizeEvent.value(), sigval1);
 
 	}
 
 	friend void QsciScintilla_virtualbase_resizeEvent(void* self, QResizeEvent* e);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__scrollContentsBy = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QsciScintilla> handle__scrollContentsBy;
 
 	// Subclass to allow providing a Go implementation
 	virtual void scrollContentsBy(int dx, int dy) override {
-		if (handle__scrollContentsBy == 0) {
+		if (!handle__scrollContentsBy) {
 			QsciScintilla::scrollContentsBy(dx, dy);
 			return;
 		}
 
 		int sigval1 = dx;
 		int sigval2 = dy;
-		miqt_exec_callback_QsciScintilla_scrollContentsBy(this, handle__scrollContentsBy, sigval1, sigval2);
+		miqt_exec_callback_QsciScintilla_scrollContentsBy(this, handle__scrollContentsBy.value(), sigval1, sigval2);
 
 	}
 
 	friend void QsciScintilla_virtualbase_scrollContentsBy(void* self, int dx, int dy);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__minimumSizeHint = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QsciScintilla> handle__minimumSizeHint;
 
 	// Subclass to allow providing a Go implementation
 	virtual QSize minimumSizeHint() const override {
-		if (handle__minimumSizeHint == 0) {
+		if (!handle__minimumSizeHint) {
 			return QsciScintilla::minimumSizeHint();
 		}
 
-		QSize* callback_return_value = miqt_exec_callback_QsciScintilla_minimumSizeHint(this, handle__minimumSizeHint);
+		QSize* callback_return_value = miqt_exec_callback_QsciScintilla_minimumSizeHint(this, handle__minimumSizeHint.value());
 		return *callback_return_value;
 	}
 
 	friend QSize* QsciScintilla_virtualbase_minimumSizeHint(const void* self);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__sizeHint = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QsciScintilla> handle__sizeHint;
 
 	// Subclass to allow providing a Go implementation
 	virtual QSize sizeHint() const override {
-		if (handle__sizeHint == 0) {
+		if (!handle__sizeHint) {
 			return QsciScintilla::sizeHint();
 		}
 
-		QSize* callback_return_value = miqt_exec_callback_QsciScintilla_sizeHint(this, handle__sizeHint);
+		QSize* callback_return_value = miqt_exec_callback_QsciScintilla_sizeHint(this, handle__sizeHint.value());
 		return *callback_return_value;
 	}
 
 	friend QSize* QsciScintilla_virtualbase_sizeHint(const void* self);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__setupViewport = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QsciScintilla> handle__setupViewport;
 
 	// Subclass to allow providing a Go implementation
 	virtual void setupViewport(QWidget* viewport) override {
-		if (handle__setupViewport == 0) {
+		if (!handle__setupViewport) {
 			QsciScintilla::setupViewport(viewport);
 			return;
 		}
 
 		QWidget* sigval1 = viewport;
-		miqt_exec_callback_QsciScintilla_setupViewport(this, handle__setupViewport, sigval1);
+		miqt_exec_callback_QsciScintilla_setupViewport(this, handle__setupViewport.value(), sigval1);
 
 	}
 
 	friend void QsciScintilla_virtualbase_setupViewport(void* self, QWidget* viewport);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__eventFilter = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QsciScintilla> handle__eventFilter;
 
 	// Subclass to allow providing a Go implementation
 	virtual bool eventFilter(QObject* param1, QEvent* param2) override {
-		if (handle__eventFilter == 0) {
+		if (!handle__eventFilter) {
 			return QsciScintilla::eventFilter(param1, param2);
 		}
 
 		QObject* sigval1 = param1;
 		QEvent* sigval2 = param2;
-		bool callback_return_value = miqt_exec_callback_QsciScintilla_eventFilter(this, handle__eventFilter, sigval1, sigval2);
+		bool callback_return_value = miqt_exec_callback_QsciScintilla_eventFilter(this, handle__eventFilter.value(), sigval1, sigval2);
 		return callback_return_value;
 	}
 
 	friend bool QsciScintilla_virtualbase_eventFilter(void* self, QObject* param1, QEvent* param2);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__viewportEvent = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QsciScintilla> handle__viewportEvent;
 
 	// Subclass to allow providing a Go implementation
 	virtual bool viewportEvent(QEvent* param1) override {
-		if (handle__viewportEvent == 0) {
+		if (!handle__viewportEvent) {
 			return QsciScintilla::viewportEvent(param1);
 		}
 
 		QEvent* sigval1 = param1;
-		bool callback_return_value = miqt_exec_callback_QsciScintilla_viewportEvent(this, handle__viewportEvent, sigval1);
+		bool callback_return_value = miqt_exec_callback_QsciScintilla_viewportEvent(this, handle__viewportEvent.value(), sigval1);
 		return callback_return_value;
 	}
 
 	friend bool QsciScintilla_virtualbase_viewportEvent(void* self, QEvent* param1);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__viewportSizeHint = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QsciScintilla> handle__viewportSizeHint;
 
 	// Subclass to allow providing a Go implementation
 	virtual QSize viewportSizeHint() const override {
-		if (handle__viewportSizeHint == 0) {
+		if (!handle__viewportSizeHint) {
 			return QsciScintilla::viewportSizeHint();
 		}
 
-		QSize* callback_return_value = miqt_exec_callback_QsciScintilla_viewportSizeHint(this, handle__viewportSizeHint);
+		QSize* callback_return_value = miqt_exec_callback_QsciScintilla_viewportSizeHint(this, handle__viewportSizeHint.value());
 		return *callback_return_value;
 	}
 
 	friend QSize* QsciScintilla_virtualbase_viewportSizeHint(const void* self);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__initStyleOption = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QsciScintilla> handle__initStyleOption;
 
 	// Subclass to allow providing a Go implementation
 	virtual void initStyleOption(QStyleOptionFrame* option) const override {
-		if (handle__initStyleOption == 0) {
+		if (!handle__initStyleOption) {
 			QsciScintilla::initStyleOption(option);
 			return;
 		}
 
 		QStyleOptionFrame* sigval1 = option;
-		miqt_exec_callback_QsciScintilla_initStyleOption(this, handle__initStyleOption, sigval1);
+		miqt_exec_callback_QsciScintilla_initStyleOption(this, handle__initStyleOption.value(), sigval1);
 
 	}
 
 	friend void QsciScintilla_virtualbase_initStyleOption(const void* self, QStyleOptionFrame* option);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__devType = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QsciScintilla> handle__devType;
 
 	// Subclass to allow providing a Go implementation
 	virtual int devType() const override {
-		if (handle__devType == 0) {
+		if (!handle__devType) {
 			return QsciScintilla::devType();
 		}
 
-		int callback_return_value = miqt_exec_callback_QsciScintilla_devType(this, handle__devType);
+		int callback_return_value = miqt_exec_callback_QsciScintilla_devType(this, handle__devType.value());
 		return static_cast<int>(callback_return_value);
 	}
 
 	friend int QsciScintilla_virtualbase_devType(const void* self);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__setVisible = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QsciScintilla> handle__setVisible;
 
 	// Subclass to allow providing a Go implementation
 	virtual void setVisible(bool visible) override {
-		if (handle__setVisible == 0) {
+		if (!handle__setVisible) {
 			QsciScintilla::setVisible(visible);
 			return;
 		}
 
 		bool sigval1 = visible;
-		miqt_exec_callback_QsciScintilla_setVisible(this, handle__setVisible, sigval1);
+		miqt_exec_callback_QsciScintilla_setVisible(this, handle__setVisible.value(), sigval1);
 
 	}
 
 	friend void QsciScintilla_virtualbase_setVisible(void* self, bool visible);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__heightForWidth = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QsciScintilla> handle__heightForWidth;
 
 	// Subclass to allow providing a Go implementation
 	virtual int heightForWidth(int param1) const override {
-		if (handle__heightForWidth == 0) {
+		if (!handle__heightForWidth) {
 			return QsciScintilla::heightForWidth(param1);
 		}
 
 		int sigval1 = param1;
-		int callback_return_value = miqt_exec_callback_QsciScintilla_heightForWidth(this, handle__heightForWidth, sigval1);
+		int callback_return_value = miqt_exec_callback_QsciScintilla_heightForWidth(this, handle__heightForWidth.value(), sigval1);
 		return static_cast<int>(callback_return_value);
 	}
 
 	friend int QsciScintilla_virtualbase_heightForWidth(const void* self, int param1);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__hasHeightForWidth = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QsciScintilla> handle__hasHeightForWidth;
 
 	// Subclass to allow providing a Go implementation
 	virtual bool hasHeightForWidth() const override {
-		if (handle__hasHeightForWidth == 0) {
+		if (!handle__hasHeightForWidth) {
 			return QsciScintilla::hasHeightForWidth();
 		}
 
-		bool callback_return_value = miqt_exec_callback_QsciScintilla_hasHeightForWidth(this, handle__hasHeightForWidth);
+		bool callback_return_value = miqt_exec_callback_QsciScintilla_hasHeightForWidth(this, handle__hasHeightForWidth.value());
 		return callback_return_value;
 	}
 
 	friend bool QsciScintilla_virtualbase_hasHeightForWidth(const void* self);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__paintEngine = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QsciScintilla> handle__paintEngine;
 
 	// Subclass to allow providing a Go implementation
 	virtual QPaintEngine* paintEngine() const override {
-		if (handle__paintEngine == 0) {
+		if (!handle__paintEngine) {
 			return QsciScintilla::paintEngine();
 		}
 
-		QPaintEngine* callback_return_value = miqt_exec_callback_QsciScintilla_paintEngine(this, handle__paintEngine);
+		QPaintEngine* callback_return_value = miqt_exec_callback_QsciScintilla_paintEngine(this, handle__paintEngine.value());
 		return callback_return_value;
 	}
 
 	friend QPaintEngine* QsciScintilla_virtualbase_paintEngine(const void* self);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__keyReleaseEvent = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QsciScintilla> handle__keyReleaseEvent;
 
 	// Subclass to allow providing a Go implementation
 	virtual void keyReleaseEvent(QKeyEvent* event) override {
-		if (handle__keyReleaseEvent == 0) {
+		if (!handle__keyReleaseEvent) {
 			QsciScintilla::keyReleaseEvent(event);
 			return;
 		}
 
 		QKeyEvent* sigval1 = event;
-		miqt_exec_callback_QsciScintilla_keyReleaseEvent(this, handle__keyReleaseEvent, sigval1);
+		miqt_exec_callback_QsciScintilla_keyReleaseEvent(this, handle__keyReleaseEvent.value(), sigval1);
 
 	}
 
 	friend void QsciScintilla_virtualbase_keyReleaseEvent(void* self, QKeyEvent* event);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__enterEvent = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QsciScintilla> handle__enterEvent;
 
 	// Subclass to allow providing a Go implementation
 	virtual void enterEvent(QEnterEvent* event) override {
-		if (handle__enterEvent == 0) {
+		if (!handle__enterEvent) {
 			QsciScintilla::enterEvent(event);
 			return;
 		}
 
 		QEnterEvent* sigval1 = event;
-		miqt_exec_callback_QsciScintilla_enterEvent(this, handle__enterEvent, sigval1);
+		miqt_exec_callback_QsciScintilla_enterEvent(this, handle__enterEvent.value(), sigval1);
 
 	}
 
 	friend void QsciScintilla_virtualbase_enterEvent(void* self, QEnterEvent* event);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__leaveEvent = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QsciScintilla> handle__leaveEvent;
 
 	// Subclass to allow providing a Go implementation
 	virtual void leaveEvent(QEvent* event) override {
-		if (handle__leaveEvent == 0) {
+		if (!handle__leaveEvent) {
 			QsciScintilla::leaveEvent(event);
 			return;
 		}
 
 		QEvent* sigval1 = event;
-		miqt_exec_callback_QsciScintilla_leaveEvent(this, handle__leaveEvent, sigval1);
+		miqt_exec_callback_QsciScintilla_leaveEvent(this, handle__leaveEvent.value(), sigval1);
 
 	}
 
 	friend void QsciScintilla_virtualbase_leaveEvent(void* self, QEvent* event);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__moveEvent = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QsciScintilla> handle__moveEvent;
 
 	// Subclass to allow providing a Go implementation
 	virtual void moveEvent(QMoveEvent* event) override {
-		if (handle__moveEvent == 0) {
+		if (!handle__moveEvent) {
 			QsciScintilla::moveEvent(event);
 			return;
 		}
 
 		QMoveEvent* sigval1 = event;
-		miqt_exec_callback_QsciScintilla_moveEvent(this, handle__moveEvent, sigval1);
+		miqt_exec_callback_QsciScintilla_moveEvent(this, handle__moveEvent.value(), sigval1);
 
 	}
 
 	friend void QsciScintilla_virtualbase_moveEvent(void* self, QMoveEvent* event);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__closeEvent = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QsciScintilla> handle__closeEvent;
 
 	// Subclass to allow providing a Go implementation
 	virtual void closeEvent(QCloseEvent* event) override {
-		if (handle__closeEvent == 0) {
+		if (!handle__closeEvent) {
 			QsciScintilla::closeEvent(event);
 			return;
 		}
 
 		QCloseEvent* sigval1 = event;
-		miqt_exec_callback_QsciScintilla_closeEvent(this, handle__closeEvent, sigval1);
+		miqt_exec_callback_QsciScintilla_closeEvent(this, handle__closeEvent.value(), sigval1);
 
 	}
 
 	friend void QsciScintilla_virtualbase_closeEvent(void* self, QCloseEvent* event);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__tabletEvent = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QsciScintilla> handle__tabletEvent;
 
 	// Subclass to allow providing a Go implementation
 	virtual void tabletEvent(QTabletEvent* event) override {
-		if (handle__tabletEvent == 0) {
+		if (!handle__tabletEvent) {
 			QsciScintilla::tabletEvent(event);
 			return;
 		}
 
 		QTabletEvent* sigval1 = event;
-		miqt_exec_callback_QsciScintilla_tabletEvent(this, handle__tabletEvent, sigval1);
+		miqt_exec_callback_QsciScintilla_tabletEvent(this, handle__tabletEvent.value(), sigval1);
 
 	}
 
 	friend void QsciScintilla_virtualbase_tabletEvent(void* self, QTabletEvent* event);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__actionEvent = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QsciScintilla> handle__actionEvent;
 
 	// Subclass to allow providing a Go implementation
 	virtual void actionEvent(QActionEvent* event) override {
-		if (handle__actionEvent == 0) {
+		if (!handle__actionEvent) {
 			QsciScintilla::actionEvent(event);
 			return;
 		}
 
 		QActionEvent* sigval1 = event;
-		miqt_exec_callback_QsciScintilla_actionEvent(this, handle__actionEvent, sigval1);
+		miqt_exec_callback_QsciScintilla_actionEvent(this, handle__actionEvent.value(), sigval1);
 
 	}
 
 	friend void QsciScintilla_virtualbase_actionEvent(void* self, QActionEvent* event);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__showEvent = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QsciScintilla> handle__showEvent;
 
 	// Subclass to allow providing a Go implementation
 	virtual void showEvent(QShowEvent* event) override {
-		if (handle__showEvent == 0) {
+		if (!handle__showEvent) {
 			QsciScintilla::showEvent(event);
 			return;
 		}
 
 		QShowEvent* sigval1 = event;
-		miqt_exec_callback_QsciScintilla_showEvent(this, handle__showEvent, sigval1);
+		miqt_exec_callback_QsciScintilla_showEvent(this, handle__showEvent.value(), sigval1);
 
 	}
 
 	friend void QsciScintilla_virtualbase_showEvent(void* self, QShowEvent* event);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__hideEvent = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QsciScintilla> handle__hideEvent;
 
 	// Subclass to allow providing a Go implementation
 	virtual void hideEvent(QHideEvent* event) override {
-		if (handle__hideEvent == 0) {
+		if (!handle__hideEvent) {
 			QsciScintilla::hideEvent(event);
 			return;
 		}
 
 		QHideEvent* sigval1 = event;
-		miqt_exec_callback_QsciScintilla_hideEvent(this, handle__hideEvent, sigval1);
+		miqt_exec_callback_QsciScintilla_hideEvent(this, handle__hideEvent.value(), sigval1);
 
 	}
 
 	friend void QsciScintilla_virtualbase_hideEvent(void* self, QHideEvent* event);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__nativeEvent = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QsciScintilla> handle__nativeEvent;
 
 	// Subclass to allow providing a Go implementation
 	virtual bool nativeEvent(const QByteArray& eventType, void* message, qintptr* result) override {
-		if (handle__nativeEvent == 0) {
+		if (!handle__nativeEvent) {
 			return QsciScintilla::nativeEvent(eventType, message, result);
 		}
 
@@ -2514,134 +2517,134 @@ public:
 		void* sigval2 = message;
 		qintptr* result_ret = result;
 		intptr_t* sigval3 = (intptr_t*)(result_ret);
-		bool callback_return_value = miqt_exec_callback_QsciScintilla_nativeEvent(this, handle__nativeEvent, sigval1, sigval2, sigval3);
+		bool callback_return_value = miqt_exec_callback_QsciScintilla_nativeEvent(this, handle__nativeEvent.value(), sigval1, sigval2, sigval3);
 		return callback_return_value;
 	}
 
 	friend bool QsciScintilla_virtualbase_nativeEvent(void* self, struct miqt_string eventType, void* message, intptr_t* result);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__metric = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QsciScintilla> handle__metric;
 
 	// Subclass to allow providing a Go implementation
 	virtual int metric(QPaintDevice::PaintDeviceMetric param1) const override {
-		if (handle__metric == 0) {
+		if (!handle__metric) {
 			return QsciScintilla::metric(param1);
 		}
 
 		QPaintDevice::PaintDeviceMetric param1_ret = param1;
 		int sigval1 = static_cast<int>(param1_ret);
-		int callback_return_value = miqt_exec_callback_QsciScintilla_metric(this, handle__metric, sigval1);
+		int callback_return_value = miqt_exec_callback_QsciScintilla_metric(this, handle__metric.value(), sigval1);
 		return static_cast<int>(callback_return_value);
 	}
 
 	friend int QsciScintilla_virtualbase_metric(const void* self, int param1);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__initPainter = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QsciScintilla> handle__initPainter;
 
 	// Subclass to allow providing a Go implementation
 	virtual void initPainter(QPainter* painter) const override {
-		if (handle__initPainter == 0) {
+		if (!handle__initPainter) {
 			QsciScintilla::initPainter(painter);
 			return;
 		}
 
 		QPainter* sigval1 = painter;
-		miqt_exec_callback_QsciScintilla_initPainter(this, handle__initPainter, sigval1);
+		miqt_exec_callback_QsciScintilla_initPainter(this, handle__initPainter.value(), sigval1);
 
 	}
 
 	friend void QsciScintilla_virtualbase_initPainter(const void* self, QPainter* painter);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__redirected = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QsciScintilla> handle__redirected;
 
 	// Subclass to allow providing a Go implementation
 	virtual QPaintDevice* redirected(QPoint* offset) const override {
-		if (handle__redirected == 0) {
+		if (!handle__redirected) {
 			return QsciScintilla::redirected(offset);
 		}
 
 		QPoint* sigval1 = offset;
-		QPaintDevice* callback_return_value = miqt_exec_callback_QsciScintilla_redirected(this, handle__redirected, sigval1);
+		QPaintDevice* callback_return_value = miqt_exec_callback_QsciScintilla_redirected(this, handle__redirected.value(), sigval1);
 		return callback_return_value;
 	}
 
 	friend QPaintDevice* QsciScintilla_virtualbase_redirected(const void* self, QPoint* offset);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__sharedPainter = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QsciScintilla> handle__sharedPainter;
 
 	// Subclass to allow providing a Go implementation
 	virtual QPainter* sharedPainter() const override {
-		if (handle__sharedPainter == 0) {
+		if (!handle__sharedPainter) {
 			return QsciScintilla::sharedPainter();
 		}
 
-		QPainter* callback_return_value = miqt_exec_callback_QsciScintilla_sharedPainter(this, handle__sharedPainter);
+		QPainter* callback_return_value = miqt_exec_callback_QsciScintilla_sharedPainter(this, handle__sharedPainter.value());
 		return callback_return_value;
 	}
 
 	friend QPainter* QsciScintilla_virtualbase_sharedPainter(const void* self);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__timerEvent = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QsciScintilla> handle__timerEvent;
 
 	// Subclass to allow providing a Go implementation
 	virtual void timerEvent(QTimerEvent* event) override {
-		if (handle__timerEvent == 0) {
+		if (!handle__timerEvent) {
 			QsciScintilla::timerEvent(event);
 			return;
 		}
 
 		QTimerEvent* sigval1 = event;
-		miqt_exec_callback_QsciScintilla_timerEvent(this, handle__timerEvent, sigval1);
+		miqt_exec_callback_QsciScintilla_timerEvent(this, handle__timerEvent.value(), sigval1);
 
 	}
 
 	friend void QsciScintilla_virtualbase_timerEvent(void* self, QTimerEvent* event);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__childEvent = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QsciScintilla> handle__childEvent;
 
 	// Subclass to allow providing a Go implementation
 	virtual void childEvent(QChildEvent* event) override {
-		if (handle__childEvent == 0) {
+		if (!handle__childEvent) {
 			QsciScintilla::childEvent(event);
 			return;
 		}
 
 		QChildEvent* sigval1 = event;
-		miqt_exec_callback_QsciScintilla_childEvent(this, handle__childEvent, sigval1);
+		miqt_exec_callback_QsciScintilla_childEvent(this, handle__childEvent.value(), sigval1);
 
 	}
 
 	friend void QsciScintilla_virtualbase_childEvent(void* self, QChildEvent* event);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__customEvent = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QsciScintilla> handle__customEvent;
 
 	// Subclass to allow providing a Go implementation
 	virtual void customEvent(QEvent* event) override {
-		if (handle__customEvent == 0) {
+		if (!handle__customEvent) {
 			QsciScintilla::customEvent(event);
 			return;
 		}
 
 		QEvent* sigval1 = event;
-		miqt_exec_callback_QsciScintilla_customEvent(this, handle__customEvent, sigval1);
+		miqt_exec_callback_QsciScintilla_customEvent(this, handle__customEvent.value(), sigval1);
 
 	}
 
 	friend void QsciScintilla_virtualbase_customEvent(void* self, QEvent* event);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__connectNotify = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QsciScintilla> handle__connectNotify;
 
 	// Subclass to allow providing a Go implementation
 	virtual void connectNotify(const QMetaMethod& signal) override {
-		if (handle__connectNotify == 0) {
+		if (!handle__connectNotify) {
 			QsciScintilla::connectNotify(signal);
 			return;
 		}
@@ -2649,18 +2652,18 @@ public:
 		const QMetaMethod& signal_ret = signal;
 		// Cast returned reference into pointer
 		QMetaMethod* sigval1 = const_cast<QMetaMethod*>(&signal_ret);
-		miqt_exec_callback_QsciScintilla_connectNotify(this, handle__connectNotify, sigval1);
+		miqt_exec_callback_QsciScintilla_connectNotify(this, handle__connectNotify.value(), sigval1);
 
 	}
 
 	friend void QsciScintilla_virtualbase_connectNotify(void* self, QMetaMethod* signal);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__disconnectNotify = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QsciScintilla> handle__disconnectNotify;
 
 	// Subclass to allow providing a Go implementation
 	virtual void disconnectNotify(const QMetaMethod& signal) override {
-		if (handle__disconnectNotify == 0) {
+		if (!handle__disconnectNotify) {
 			QsciScintilla::disconnectNotify(signal);
 			return;
 		}
@@ -2668,7 +2671,7 @@ public:
 		const QMetaMethod& signal_ret = signal;
 		// Cast returned reference into pointer
 		QMetaMethod* sigval1 = const_cast<QMetaMethod*>(&signal_ret);
-		miqt_exec_callback_QsciScintilla_disconnectNotify(this, handle__disconnectNotify, sigval1);
+		miqt_exec_callback_QsciScintilla_disconnectNotify(this, handle__disconnectNotify.value(), sigval1);
 
 	}
 
@@ -3890,130 +3893,152 @@ void QsciScintilla_cursorPositionChanged(QsciScintilla* self, int line, int inde
 	self->cursorPositionChanged(static_cast<int>(line), static_cast<int>(index));
 }
 
-void QsciScintilla_connect_cursorPositionChanged(QsciScintilla* self, intptr_t slot) {
-	QsciScintilla::connect(self, static_cast<void (QsciScintilla::*)(int, int)>(&QsciScintilla::cursorPositionChanged), self, [=](int line, int index) {
+void* QsciScintilla_connect_cursorPositionChanged(QsciScintilla* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QsciScintilla>>(slot);
+	return new QMetaObject::Connection(QsciScintilla::connect(self, static_cast<void (QsciScintilla::*)(int, int)>(&QsciScintilla::cursorPositionChanged), self, [slot_handle](int line, int index) {
+		intptr_t slot = slot_handle->value();
 		int sigval1 = line;
 		int sigval2 = index;
 		miqt_exec_callback_QsciScintilla_cursorPositionChanged(slot, sigval1, sigval2);
-	});
+	}));
 }
 
 void QsciScintilla_copyAvailable(QsciScintilla* self, bool yes) {
 	self->copyAvailable(yes);
 }
 
-void QsciScintilla_connect_copyAvailable(QsciScintilla* self, intptr_t slot) {
-	QsciScintilla::connect(self, static_cast<void (QsciScintilla::*)(bool)>(&QsciScintilla::copyAvailable), self, [=](bool yes) {
+void* QsciScintilla_connect_copyAvailable(QsciScintilla* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QsciScintilla>>(slot);
+	return new QMetaObject::Connection(QsciScintilla::connect(self, static_cast<void (QsciScintilla::*)(bool)>(&QsciScintilla::copyAvailable), self, [slot_handle](bool yes) {
+		intptr_t slot = slot_handle->value();
 		bool sigval1 = yes;
 		miqt_exec_callback_QsciScintilla_copyAvailable(slot, sigval1);
-	});
+	}));
 }
 
 void QsciScintilla_indicatorClicked(QsciScintilla* self, int line, int index, int state) {
 	self->indicatorClicked(static_cast<int>(line), static_cast<int>(index), static_cast<Qt::KeyboardModifiers>(state));
 }
 
-void QsciScintilla_connect_indicatorClicked(QsciScintilla* self, intptr_t slot) {
-	QsciScintilla::connect(self, static_cast<void (QsciScintilla::*)(int, int, Qt::KeyboardModifiers)>(&QsciScintilla::indicatorClicked), self, [=](int line, int index, Qt::KeyboardModifiers state) {
+void* QsciScintilla_connect_indicatorClicked(QsciScintilla* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QsciScintilla>>(slot);
+	return new QMetaObject::Connection(QsciScintilla::connect(self, static_cast<void (QsciScintilla::*)(int, int, Qt::KeyboardModifiers)>(&QsciScintilla::indicatorClicked), self, [slot_handle](int line, int index, Qt::KeyboardModifiers state) {
+		intptr_t slot = slot_handle->value();
 		int sigval1 = line;
 		int sigval2 = index;
 		Qt::KeyboardModifiers state_ret = state;
 		int sigval3 = static_cast<int>(state_ret);
 		miqt_exec_callback_QsciScintilla_indicatorClicked(slot, sigval1, sigval2, sigval3);
-	});
+	}));
 }
 
 void QsciScintilla_indicatorReleased(QsciScintilla* self, int line, int index, int state) {
 	self->indicatorReleased(static_cast<int>(line), static_cast<int>(index), static_cast<Qt::KeyboardModifiers>(state));
 }
 
-void QsciScintilla_connect_indicatorReleased(QsciScintilla* self, intptr_t slot) {
-	QsciScintilla::connect(self, static_cast<void (QsciScintilla::*)(int, int, Qt::KeyboardModifiers)>(&QsciScintilla::indicatorReleased), self, [=](int line, int index, Qt::KeyboardModifiers state) {
+void* QsciScintilla_connect_indicatorReleased(QsciScintilla* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QsciScintilla>>(slot);
+	return new QMetaObject::Connection(QsciScintilla::connect(self, static_cast<void (QsciScintilla::*)(int, int, Qt::KeyboardModifiers)>(&QsciScintilla::indicatorReleased), self, [slot_handle](int line, int index, Qt::KeyboardModifiers state) {
+		intptr_t slot = slot_handle->value();
 		int sigval1 = line;
 		int sigval2 = index;
 		Qt::KeyboardModifiers state_ret = state;
 		int sigval3 = static_cast<int>(state_ret);
 		miqt_exec_callback_QsciScintilla_indicatorReleased(slot, sigval1, sigval2, sigval3);
-	});
+	}));
 }
 
 void QsciScintilla_linesChanged(QsciScintilla* self) {
 	self->linesChanged();
 }
 
-void QsciScintilla_connect_linesChanged(QsciScintilla* self, intptr_t slot) {
-	QsciScintilla::connect(self, static_cast<void (QsciScintilla::*)()>(&QsciScintilla::linesChanged), self, [=]() {
+void* QsciScintilla_connect_linesChanged(QsciScintilla* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QsciScintilla>>(slot);
+	return new QMetaObject::Connection(QsciScintilla::connect(self, static_cast<void (QsciScintilla::*)()>(&QsciScintilla::linesChanged), self, [slot_handle]() {
+		intptr_t slot = slot_handle->value();
 		miqt_exec_callback_QsciScintilla_linesChanged(slot);
-	});
+	}));
 }
 
 void QsciScintilla_marginClicked(QsciScintilla* self, int margin, int line, int state) {
 	self->marginClicked(static_cast<int>(margin), static_cast<int>(line), static_cast<Qt::KeyboardModifiers>(state));
 }
 
-void QsciScintilla_connect_marginClicked(QsciScintilla* self, intptr_t slot) {
-	QsciScintilla::connect(self, static_cast<void (QsciScintilla::*)(int, int, Qt::KeyboardModifiers)>(&QsciScintilla::marginClicked), self, [=](int margin, int line, Qt::KeyboardModifiers state) {
+void* QsciScintilla_connect_marginClicked(QsciScintilla* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QsciScintilla>>(slot);
+	return new QMetaObject::Connection(QsciScintilla::connect(self, static_cast<void (QsciScintilla::*)(int, int, Qt::KeyboardModifiers)>(&QsciScintilla::marginClicked), self, [slot_handle](int margin, int line, Qt::KeyboardModifiers state) {
+		intptr_t slot = slot_handle->value();
 		int sigval1 = margin;
 		int sigval2 = line;
 		Qt::KeyboardModifiers state_ret = state;
 		int sigval3 = static_cast<int>(state_ret);
 		miqt_exec_callback_QsciScintilla_marginClicked(slot, sigval1, sigval2, sigval3);
-	});
+	}));
 }
 
 void QsciScintilla_marginRightClicked(QsciScintilla* self, int margin, int line, int state) {
 	self->marginRightClicked(static_cast<int>(margin), static_cast<int>(line), static_cast<Qt::KeyboardModifiers>(state));
 }
 
-void QsciScintilla_connect_marginRightClicked(QsciScintilla* self, intptr_t slot) {
-	QsciScintilla::connect(self, static_cast<void (QsciScintilla::*)(int, int, Qt::KeyboardModifiers)>(&QsciScintilla::marginRightClicked), self, [=](int margin, int line, Qt::KeyboardModifiers state) {
+void* QsciScintilla_connect_marginRightClicked(QsciScintilla* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QsciScintilla>>(slot);
+	return new QMetaObject::Connection(QsciScintilla::connect(self, static_cast<void (QsciScintilla::*)(int, int, Qt::KeyboardModifiers)>(&QsciScintilla::marginRightClicked), self, [slot_handle](int margin, int line, Qt::KeyboardModifiers state) {
+		intptr_t slot = slot_handle->value();
 		int sigval1 = margin;
 		int sigval2 = line;
 		Qt::KeyboardModifiers state_ret = state;
 		int sigval3 = static_cast<int>(state_ret);
 		miqt_exec_callback_QsciScintilla_marginRightClicked(slot, sigval1, sigval2, sigval3);
-	});
+	}));
 }
 
 void QsciScintilla_modificationAttempted(QsciScintilla* self) {
 	self->modificationAttempted();
 }
 
-void QsciScintilla_connect_modificationAttempted(QsciScintilla* self, intptr_t slot) {
-	QsciScintilla::connect(self, static_cast<void (QsciScintilla::*)()>(&QsciScintilla::modificationAttempted), self, [=]() {
+void* QsciScintilla_connect_modificationAttempted(QsciScintilla* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QsciScintilla>>(slot);
+	return new QMetaObject::Connection(QsciScintilla::connect(self, static_cast<void (QsciScintilla::*)()>(&QsciScintilla::modificationAttempted), self, [slot_handle]() {
+		intptr_t slot = slot_handle->value();
 		miqt_exec_callback_QsciScintilla_modificationAttempted(slot);
-	});
+	}));
 }
 
 void QsciScintilla_modificationChanged(QsciScintilla* self, bool m) {
 	self->modificationChanged(m);
 }
 
-void QsciScintilla_connect_modificationChanged(QsciScintilla* self, intptr_t slot) {
-	QsciScintilla::connect(self, static_cast<void (QsciScintilla::*)(bool)>(&QsciScintilla::modificationChanged), self, [=](bool m) {
+void* QsciScintilla_connect_modificationChanged(QsciScintilla* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QsciScintilla>>(slot);
+	return new QMetaObject::Connection(QsciScintilla::connect(self, static_cast<void (QsciScintilla::*)(bool)>(&QsciScintilla::modificationChanged), self, [slot_handle](bool m) {
+		intptr_t slot = slot_handle->value();
 		bool sigval1 = m;
 		miqt_exec_callback_QsciScintilla_modificationChanged(slot, sigval1);
-	});
+	}));
 }
 
 void QsciScintilla_selectionChanged(QsciScintilla* self) {
 	self->selectionChanged();
 }
 
-void QsciScintilla_connect_selectionChanged(QsciScintilla* self, intptr_t slot) {
-	QsciScintilla::connect(self, static_cast<void (QsciScintilla::*)()>(&QsciScintilla::selectionChanged), self, [=]() {
+void* QsciScintilla_connect_selectionChanged(QsciScintilla* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QsciScintilla>>(slot);
+	return new QMetaObject::Connection(QsciScintilla::connect(self, static_cast<void (QsciScintilla::*)()>(&QsciScintilla::selectionChanged), self, [slot_handle]() {
+		intptr_t slot = slot_handle->value();
 		miqt_exec_callback_QsciScintilla_selectionChanged(slot);
-	});
+	}));
 }
 
 void QsciScintilla_textChanged(QsciScintilla* self) {
 	self->textChanged();
 }
 
-void QsciScintilla_connect_textChanged(QsciScintilla* self, intptr_t slot) {
-	QsciScintilla::connect(self, static_cast<void (QsciScintilla::*)()>(&QsciScintilla::textChanged), self, [=]() {
+void* QsciScintilla_connect_textChanged(QsciScintilla* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QsciScintilla>>(slot);
+	return new QMetaObject::Connection(QsciScintilla::connect(self, static_cast<void (QsciScintilla::*)()>(&QsciScintilla::textChanged), self, [slot_handle]() {
+		intptr_t slot = slot_handle->value();
 		miqt_exec_callback_QsciScintilla_textChanged(slot);
-	});
+	}));
 }
 
 void QsciScintilla_userListActivated(QsciScintilla* self, int id, struct miqt_string string) {
@@ -4021,8 +4046,10 @@ void QsciScintilla_userListActivated(QsciScintilla* self, int id, struct miqt_st
 	self->userListActivated(static_cast<int>(id), string_QString);
 }
 
-void QsciScintilla_connect_userListActivated(QsciScintilla* self, intptr_t slot) {
-	QsciScintilla::connect(self, static_cast<void (QsciScintilla::*)(int, const QString&)>(&QsciScintilla::userListActivated), self, [=](int id, const QString& string) {
+void* QsciScintilla_connect_userListActivated(QsciScintilla* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QsciScintilla>>(slot);
+	return new QMetaObject::Connection(QsciScintilla::connect(self, static_cast<void (QsciScintilla::*)(int, const QString&)>(&QsciScintilla::userListActivated), self, [slot_handle](int id, const QString& string) {
+		intptr_t slot = slot_handle->value();
 		int sigval1 = id;
 		const QString string_ret = string;
 		// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
@@ -4033,7 +4060,7 @@ void QsciScintilla_connect_userListActivated(QsciScintilla* self, intptr_t slot)
 		memcpy(string_ms.data, string_b.data(), string_ms.len);
 		struct miqt_string sigval2 = string_ms;
 		miqt_exec_callback_QsciScintilla_userListActivated(slot, sigval1, sigval2);
-	});
+	}));
 }
 
 struct miqt_string QsciScintilla_tr2(const char* s, const char* c) {
@@ -4131,12 +4158,13 @@ void QsciScintilla_setWrapVisualFlags3(QsciScintilla* self, int endFlag, int sta
 }
 
 bool QsciScintilla_override_virtual_apiContext(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QsciScintilla> slot_handle(slot);
 	MiqtVirtualQsciScintilla* self_cast = dynamic_cast<MiqtVirtualQsciScintilla*>( (QsciScintilla*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__apiContext = slot;
+	self_cast->handle__apiContext = std::move(slot_handle);
 	return true;
 }
 
@@ -4161,12 +4189,13 @@ struct miqt_array /* of struct miqt_string */  QsciScintilla_virtualbase_apiCont
 }
 
 bool QsciScintilla_override_virtual_findFirst(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QsciScintilla> slot_handle(slot);
 	MiqtVirtualQsciScintilla* self_cast = dynamic_cast<MiqtVirtualQsciScintilla*>( (QsciScintilla*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__findFirst = slot;
+	self_cast->handle__findFirst = std::move(slot_handle);
 	return true;
 }
 
@@ -4176,12 +4205,13 @@ bool QsciScintilla_virtualbase_findFirst(void* self, struct miqt_string expr, bo
 }
 
 bool QsciScintilla_override_virtual_findFirstInSelection(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QsciScintilla> slot_handle(slot);
 	MiqtVirtualQsciScintilla* self_cast = dynamic_cast<MiqtVirtualQsciScintilla*>( (QsciScintilla*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__findFirstInSelection = slot;
+	self_cast->handle__findFirstInSelection = std::move(slot_handle);
 	return true;
 }
 
@@ -4191,12 +4221,13 @@ bool QsciScintilla_virtualbase_findFirstInSelection(void* self, struct miqt_stri
 }
 
 bool QsciScintilla_override_virtual_findNext(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QsciScintilla> slot_handle(slot);
 	MiqtVirtualQsciScintilla* self_cast = dynamic_cast<MiqtVirtualQsciScintilla*>( (QsciScintilla*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__findNext = slot;
+	self_cast->handle__findNext = std::move(slot_handle);
 	return true;
 }
 
@@ -4205,12 +4236,13 @@ bool QsciScintilla_virtualbase_findNext(void* self) {
 }
 
 bool QsciScintilla_override_virtual_recolor(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QsciScintilla> slot_handle(slot);
 	MiqtVirtualQsciScintilla* self_cast = dynamic_cast<MiqtVirtualQsciScintilla*>( (QsciScintilla*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__recolor = slot;
+	self_cast->handle__recolor = std::move(slot_handle);
 	return true;
 }
 
@@ -4219,12 +4251,13 @@ void QsciScintilla_virtualbase_recolor(void* self, int start, int end) {
 }
 
 bool QsciScintilla_override_virtual_replace(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QsciScintilla> slot_handle(slot);
 	MiqtVirtualQsciScintilla* self_cast = dynamic_cast<MiqtVirtualQsciScintilla*>( (QsciScintilla*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__replace = slot;
+	self_cast->handle__replace = std::move(slot_handle);
 	return true;
 }
 
@@ -4234,12 +4267,13 @@ void QsciScintilla_virtualbase_replace(void* self, struct miqt_string replaceStr
 }
 
 bool QsciScintilla_override_virtual_append(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QsciScintilla> slot_handle(slot);
 	MiqtVirtualQsciScintilla* self_cast = dynamic_cast<MiqtVirtualQsciScintilla*>( (QsciScintilla*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__append = slot;
+	self_cast->handle__append = std::move(slot_handle);
 	return true;
 }
 
@@ -4249,12 +4283,13 @@ void QsciScintilla_virtualbase_append(void* self, struct miqt_string text) {
 }
 
 bool QsciScintilla_override_virtual_autoCompleteFromAll(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QsciScintilla> slot_handle(slot);
 	MiqtVirtualQsciScintilla* self_cast = dynamic_cast<MiqtVirtualQsciScintilla*>( (QsciScintilla*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__autoCompleteFromAll = slot;
+	self_cast->handle__autoCompleteFromAll = std::move(slot_handle);
 	return true;
 }
 
@@ -4263,12 +4298,13 @@ void QsciScintilla_virtualbase_autoCompleteFromAll(void* self) {
 }
 
 bool QsciScintilla_override_virtual_autoCompleteFromAPIs(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QsciScintilla> slot_handle(slot);
 	MiqtVirtualQsciScintilla* self_cast = dynamic_cast<MiqtVirtualQsciScintilla*>( (QsciScintilla*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__autoCompleteFromAPIs = slot;
+	self_cast->handle__autoCompleteFromAPIs = std::move(slot_handle);
 	return true;
 }
 
@@ -4277,12 +4313,13 @@ void QsciScintilla_virtualbase_autoCompleteFromAPIs(void* self) {
 }
 
 bool QsciScintilla_override_virtual_autoCompleteFromDocument(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QsciScintilla> slot_handle(slot);
 	MiqtVirtualQsciScintilla* self_cast = dynamic_cast<MiqtVirtualQsciScintilla*>( (QsciScintilla*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__autoCompleteFromDocument = slot;
+	self_cast->handle__autoCompleteFromDocument = std::move(slot_handle);
 	return true;
 }
 
@@ -4291,12 +4328,13 @@ void QsciScintilla_virtualbase_autoCompleteFromDocument(void* self) {
 }
 
 bool QsciScintilla_override_virtual_callTip(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QsciScintilla> slot_handle(slot);
 	MiqtVirtualQsciScintilla* self_cast = dynamic_cast<MiqtVirtualQsciScintilla*>( (QsciScintilla*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__callTip = slot;
+	self_cast->handle__callTip = std::move(slot_handle);
 	return true;
 }
 
@@ -4305,12 +4343,13 @@ void QsciScintilla_virtualbase_callTip(void* self) {
 }
 
 bool QsciScintilla_override_virtual_clear(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QsciScintilla> slot_handle(slot);
 	MiqtVirtualQsciScintilla* self_cast = dynamic_cast<MiqtVirtualQsciScintilla*>( (QsciScintilla*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__clear = slot;
+	self_cast->handle__clear = std::move(slot_handle);
 	return true;
 }
 
@@ -4319,12 +4358,13 @@ void QsciScintilla_virtualbase_clear(void* self) {
 }
 
 bool QsciScintilla_override_virtual_copy(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QsciScintilla> slot_handle(slot);
 	MiqtVirtualQsciScintilla* self_cast = dynamic_cast<MiqtVirtualQsciScintilla*>( (QsciScintilla*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__copy = slot;
+	self_cast->handle__copy = std::move(slot_handle);
 	return true;
 }
 
@@ -4333,12 +4373,13 @@ void QsciScintilla_virtualbase_copy(void* self) {
 }
 
 bool QsciScintilla_override_virtual_cut(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QsciScintilla> slot_handle(slot);
 	MiqtVirtualQsciScintilla* self_cast = dynamic_cast<MiqtVirtualQsciScintilla*>( (QsciScintilla*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__cut = slot;
+	self_cast->handle__cut = std::move(slot_handle);
 	return true;
 }
 
@@ -4347,12 +4388,13 @@ void QsciScintilla_virtualbase_cut(void* self) {
 }
 
 bool QsciScintilla_override_virtual_ensureCursorVisible(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QsciScintilla> slot_handle(slot);
 	MiqtVirtualQsciScintilla* self_cast = dynamic_cast<MiqtVirtualQsciScintilla*>( (QsciScintilla*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__ensureCursorVisible = slot;
+	self_cast->handle__ensureCursorVisible = std::move(slot_handle);
 	return true;
 }
 
@@ -4361,12 +4403,13 @@ void QsciScintilla_virtualbase_ensureCursorVisible(void* self) {
 }
 
 bool QsciScintilla_override_virtual_ensureLineVisible(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QsciScintilla> slot_handle(slot);
 	MiqtVirtualQsciScintilla* self_cast = dynamic_cast<MiqtVirtualQsciScintilla*>( (QsciScintilla*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__ensureLineVisible = slot;
+	self_cast->handle__ensureLineVisible = std::move(slot_handle);
 	return true;
 }
 
@@ -4375,12 +4418,13 @@ void QsciScintilla_virtualbase_ensureLineVisible(void* self, int line) {
 }
 
 bool QsciScintilla_override_virtual_foldAll(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QsciScintilla> slot_handle(slot);
 	MiqtVirtualQsciScintilla* self_cast = dynamic_cast<MiqtVirtualQsciScintilla*>( (QsciScintilla*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__foldAll = slot;
+	self_cast->handle__foldAll = std::move(slot_handle);
 	return true;
 }
 
@@ -4389,12 +4433,13 @@ void QsciScintilla_virtualbase_foldAll(void* self, bool children) {
 }
 
 bool QsciScintilla_override_virtual_foldLine(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QsciScintilla> slot_handle(slot);
 	MiqtVirtualQsciScintilla* self_cast = dynamic_cast<MiqtVirtualQsciScintilla*>( (QsciScintilla*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__foldLine = slot;
+	self_cast->handle__foldLine = std::move(slot_handle);
 	return true;
 }
 
@@ -4403,12 +4448,13 @@ void QsciScintilla_virtualbase_foldLine(void* self, int line) {
 }
 
 bool QsciScintilla_override_virtual_indent(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QsciScintilla> slot_handle(slot);
 	MiqtVirtualQsciScintilla* self_cast = dynamic_cast<MiqtVirtualQsciScintilla*>( (QsciScintilla*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__indent = slot;
+	self_cast->handle__indent = std::move(slot_handle);
 	return true;
 }
 
@@ -4417,12 +4463,13 @@ void QsciScintilla_virtualbase_indent(void* self, int line) {
 }
 
 bool QsciScintilla_override_virtual_insert(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QsciScintilla> slot_handle(slot);
 	MiqtVirtualQsciScintilla* self_cast = dynamic_cast<MiqtVirtualQsciScintilla*>( (QsciScintilla*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__insert = slot;
+	self_cast->handle__insert = std::move(slot_handle);
 	return true;
 }
 
@@ -4432,12 +4479,13 @@ void QsciScintilla_virtualbase_insert(void* self, struct miqt_string text) {
 }
 
 bool QsciScintilla_override_virtual_insertAt(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QsciScintilla> slot_handle(slot);
 	MiqtVirtualQsciScintilla* self_cast = dynamic_cast<MiqtVirtualQsciScintilla*>( (QsciScintilla*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__insertAt = slot;
+	self_cast->handle__insertAt = std::move(slot_handle);
 	return true;
 }
 
@@ -4447,12 +4495,13 @@ void QsciScintilla_virtualbase_insertAt(void* self, struct miqt_string text, int
 }
 
 bool QsciScintilla_override_virtual_moveToMatchingBrace(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QsciScintilla> slot_handle(slot);
 	MiqtVirtualQsciScintilla* self_cast = dynamic_cast<MiqtVirtualQsciScintilla*>( (QsciScintilla*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__moveToMatchingBrace = slot;
+	self_cast->handle__moveToMatchingBrace = std::move(slot_handle);
 	return true;
 }
 
@@ -4461,12 +4510,13 @@ void QsciScintilla_virtualbase_moveToMatchingBrace(void* self) {
 }
 
 bool QsciScintilla_override_virtual_paste(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QsciScintilla> slot_handle(slot);
 	MiqtVirtualQsciScintilla* self_cast = dynamic_cast<MiqtVirtualQsciScintilla*>( (QsciScintilla*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__paste = slot;
+	self_cast->handle__paste = std::move(slot_handle);
 	return true;
 }
 
@@ -4475,12 +4525,13 @@ void QsciScintilla_virtualbase_paste(void* self) {
 }
 
 bool QsciScintilla_override_virtual_redo(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QsciScintilla> slot_handle(slot);
 	MiqtVirtualQsciScintilla* self_cast = dynamic_cast<MiqtVirtualQsciScintilla*>( (QsciScintilla*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__redo = slot;
+	self_cast->handle__redo = std::move(slot_handle);
 	return true;
 }
 
@@ -4489,12 +4540,13 @@ void QsciScintilla_virtualbase_redo(void* self) {
 }
 
 bool QsciScintilla_override_virtual_removeSelectedText(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QsciScintilla> slot_handle(slot);
 	MiqtVirtualQsciScintilla* self_cast = dynamic_cast<MiqtVirtualQsciScintilla*>( (QsciScintilla*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__removeSelectedText = slot;
+	self_cast->handle__removeSelectedText = std::move(slot_handle);
 	return true;
 }
 
@@ -4503,12 +4555,13 @@ void QsciScintilla_virtualbase_removeSelectedText(void* self) {
 }
 
 bool QsciScintilla_override_virtual_replaceSelectedText(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QsciScintilla> slot_handle(slot);
 	MiqtVirtualQsciScintilla* self_cast = dynamic_cast<MiqtVirtualQsciScintilla*>( (QsciScintilla*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__replaceSelectedText = slot;
+	self_cast->handle__replaceSelectedText = std::move(slot_handle);
 	return true;
 }
 
@@ -4518,12 +4571,13 @@ void QsciScintilla_virtualbase_replaceSelectedText(void* self, struct miqt_strin
 }
 
 bool QsciScintilla_override_virtual_resetSelectionBackgroundColor(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QsciScintilla> slot_handle(slot);
 	MiqtVirtualQsciScintilla* self_cast = dynamic_cast<MiqtVirtualQsciScintilla*>( (QsciScintilla*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__resetSelectionBackgroundColor = slot;
+	self_cast->handle__resetSelectionBackgroundColor = std::move(slot_handle);
 	return true;
 }
 
@@ -4532,12 +4586,13 @@ void QsciScintilla_virtualbase_resetSelectionBackgroundColor(void* self) {
 }
 
 bool QsciScintilla_override_virtual_resetSelectionForegroundColor(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QsciScintilla> slot_handle(slot);
 	MiqtVirtualQsciScintilla* self_cast = dynamic_cast<MiqtVirtualQsciScintilla*>( (QsciScintilla*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__resetSelectionForegroundColor = slot;
+	self_cast->handle__resetSelectionForegroundColor = std::move(slot_handle);
 	return true;
 }
 
@@ -4546,12 +4601,13 @@ void QsciScintilla_virtualbase_resetSelectionForegroundColor(void* self) {
 }
 
 bool QsciScintilla_override_virtual_selectAll(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QsciScintilla> slot_handle(slot);
 	MiqtVirtualQsciScintilla* self_cast = dynamic_cast<MiqtVirtualQsciScintilla*>( (QsciScintilla*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__selectAll = slot;
+	self_cast->handle__selectAll = std::move(slot_handle);
 	return true;
 }
 
@@ -4560,12 +4616,13 @@ void QsciScintilla_virtualbase_selectAll(void* self, bool select) {
 }
 
 bool QsciScintilla_override_virtual_selectToMatchingBrace(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QsciScintilla> slot_handle(slot);
 	MiqtVirtualQsciScintilla* self_cast = dynamic_cast<MiqtVirtualQsciScintilla*>( (QsciScintilla*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__selectToMatchingBrace = slot;
+	self_cast->handle__selectToMatchingBrace = std::move(slot_handle);
 	return true;
 }
 
@@ -4574,12 +4631,13 @@ void QsciScintilla_virtualbase_selectToMatchingBrace(void* self) {
 }
 
 bool QsciScintilla_override_virtual_setAutoCompletionCaseSensitivity(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QsciScintilla> slot_handle(slot);
 	MiqtVirtualQsciScintilla* self_cast = dynamic_cast<MiqtVirtualQsciScintilla*>( (QsciScintilla*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__setAutoCompletionCaseSensitivity = slot;
+	self_cast->handle__setAutoCompletionCaseSensitivity = std::move(slot_handle);
 	return true;
 }
 
@@ -4588,12 +4646,13 @@ void QsciScintilla_virtualbase_setAutoCompletionCaseSensitivity(void* self, bool
 }
 
 bool QsciScintilla_override_virtual_setAutoCompletionReplaceWord(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QsciScintilla> slot_handle(slot);
 	MiqtVirtualQsciScintilla* self_cast = dynamic_cast<MiqtVirtualQsciScintilla*>( (QsciScintilla*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__setAutoCompletionReplaceWord = slot;
+	self_cast->handle__setAutoCompletionReplaceWord = std::move(slot_handle);
 	return true;
 }
 
@@ -4602,12 +4661,13 @@ void QsciScintilla_virtualbase_setAutoCompletionReplaceWord(void* self, bool rep
 }
 
 bool QsciScintilla_override_virtual_setAutoCompletionShowSingle(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QsciScintilla> slot_handle(slot);
 	MiqtVirtualQsciScintilla* self_cast = dynamic_cast<MiqtVirtualQsciScintilla*>( (QsciScintilla*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__setAutoCompletionShowSingle = slot;
+	self_cast->handle__setAutoCompletionShowSingle = std::move(slot_handle);
 	return true;
 }
 
@@ -4616,12 +4676,13 @@ void QsciScintilla_virtualbase_setAutoCompletionShowSingle(void* self, bool sing
 }
 
 bool QsciScintilla_override_virtual_setAutoCompletionSource(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QsciScintilla> slot_handle(slot);
 	MiqtVirtualQsciScintilla* self_cast = dynamic_cast<MiqtVirtualQsciScintilla*>( (QsciScintilla*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__setAutoCompletionSource = slot;
+	self_cast->handle__setAutoCompletionSource = std::move(slot_handle);
 	return true;
 }
 
@@ -4630,12 +4691,13 @@ void QsciScintilla_virtualbase_setAutoCompletionSource(void* self, int source) {
 }
 
 bool QsciScintilla_override_virtual_setAutoCompletionThreshold(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QsciScintilla> slot_handle(slot);
 	MiqtVirtualQsciScintilla* self_cast = dynamic_cast<MiqtVirtualQsciScintilla*>( (QsciScintilla*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__setAutoCompletionThreshold = slot;
+	self_cast->handle__setAutoCompletionThreshold = std::move(slot_handle);
 	return true;
 }
 
@@ -4644,12 +4706,13 @@ void QsciScintilla_virtualbase_setAutoCompletionThreshold(void* self, int thresh
 }
 
 bool QsciScintilla_override_virtual_setAutoCompletionUseSingle(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QsciScintilla> slot_handle(slot);
 	MiqtVirtualQsciScintilla* self_cast = dynamic_cast<MiqtVirtualQsciScintilla*>( (QsciScintilla*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__setAutoCompletionUseSingle = slot;
+	self_cast->handle__setAutoCompletionUseSingle = std::move(slot_handle);
 	return true;
 }
 
@@ -4658,12 +4721,13 @@ void QsciScintilla_virtualbase_setAutoCompletionUseSingle(void* self, int single
 }
 
 bool QsciScintilla_override_virtual_setAutoIndent(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QsciScintilla> slot_handle(slot);
 	MiqtVirtualQsciScintilla* self_cast = dynamic_cast<MiqtVirtualQsciScintilla*>( (QsciScintilla*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__setAutoIndent = slot;
+	self_cast->handle__setAutoIndent = std::move(slot_handle);
 	return true;
 }
 
@@ -4672,12 +4736,13 @@ void QsciScintilla_virtualbase_setAutoIndent(void* self, bool autoindent) {
 }
 
 bool QsciScintilla_override_virtual_setBraceMatching(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QsciScintilla> slot_handle(slot);
 	MiqtVirtualQsciScintilla* self_cast = dynamic_cast<MiqtVirtualQsciScintilla*>( (QsciScintilla*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__setBraceMatching = slot;
+	self_cast->handle__setBraceMatching = std::move(slot_handle);
 	return true;
 }
 
@@ -4686,12 +4751,13 @@ void QsciScintilla_virtualbase_setBraceMatching(void* self, int bm) {
 }
 
 bool QsciScintilla_override_virtual_setBackspaceUnindents(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QsciScintilla> slot_handle(slot);
 	MiqtVirtualQsciScintilla* self_cast = dynamic_cast<MiqtVirtualQsciScintilla*>( (QsciScintilla*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__setBackspaceUnindents = slot;
+	self_cast->handle__setBackspaceUnindents = std::move(slot_handle);
 	return true;
 }
 
@@ -4700,12 +4766,13 @@ void QsciScintilla_virtualbase_setBackspaceUnindents(void* self, bool unindent) 
 }
 
 bool QsciScintilla_override_virtual_setCaretForegroundColor(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QsciScintilla> slot_handle(slot);
 	MiqtVirtualQsciScintilla* self_cast = dynamic_cast<MiqtVirtualQsciScintilla*>( (QsciScintilla*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__setCaretForegroundColor = slot;
+	self_cast->handle__setCaretForegroundColor = std::move(slot_handle);
 	return true;
 }
 
@@ -4714,12 +4781,13 @@ void QsciScintilla_virtualbase_setCaretForegroundColor(void* self, QColor* col) 
 }
 
 bool QsciScintilla_override_virtual_setCaretLineBackgroundColor(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QsciScintilla> slot_handle(slot);
 	MiqtVirtualQsciScintilla* self_cast = dynamic_cast<MiqtVirtualQsciScintilla*>( (QsciScintilla*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__setCaretLineBackgroundColor = slot;
+	self_cast->handle__setCaretLineBackgroundColor = std::move(slot_handle);
 	return true;
 }
 
@@ -4728,12 +4796,13 @@ void QsciScintilla_virtualbase_setCaretLineBackgroundColor(void* self, QColor* c
 }
 
 bool QsciScintilla_override_virtual_setCaretLineFrameWidth(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QsciScintilla> slot_handle(slot);
 	MiqtVirtualQsciScintilla* self_cast = dynamic_cast<MiqtVirtualQsciScintilla*>( (QsciScintilla*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__setCaretLineFrameWidth = slot;
+	self_cast->handle__setCaretLineFrameWidth = std::move(slot_handle);
 	return true;
 }
 
@@ -4742,12 +4811,13 @@ void QsciScintilla_virtualbase_setCaretLineFrameWidth(void* self, int width) {
 }
 
 bool QsciScintilla_override_virtual_setCaretLineVisible(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QsciScintilla> slot_handle(slot);
 	MiqtVirtualQsciScintilla* self_cast = dynamic_cast<MiqtVirtualQsciScintilla*>( (QsciScintilla*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__setCaretLineVisible = slot;
+	self_cast->handle__setCaretLineVisible = std::move(slot_handle);
 	return true;
 }
 
@@ -4756,12 +4826,13 @@ void QsciScintilla_virtualbase_setCaretLineVisible(void* self, bool enable) {
 }
 
 bool QsciScintilla_override_virtual_setCaretWidth(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QsciScintilla> slot_handle(slot);
 	MiqtVirtualQsciScintilla* self_cast = dynamic_cast<MiqtVirtualQsciScintilla*>( (QsciScintilla*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__setCaretWidth = slot;
+	self_cast->handle__setCaretWidth = std::move(slot_handle);
 	return true;
 }
 
@@ -4770,12 +4841,13 @@ void QsciScintilla_virtualbase_setCaretWidth(void* self, int width) {
 }
 
 bool QsciScintilla_override_virtual_setColor(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QsciScintilla> slot_handle(slot);
 	MiqtVirtualQsciScintilla* self_cast = dynamic_cast<MiqtVirtualQsciScintilla*>( (QsciScintilla*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__setColor = slot;
+	self_cast->handle__setColor = std::move(slot_handle);
 	return true;
 }
 
@@ -4784,12 +4856,13 @@ void QsciScintilla_virtualbase_setColor(void* self, QColor* c) {
 }
 
 bool QsciScintilla_override_virtual_setCursorPosition(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QsciScintilla> slot_handle(slot);
 	MiqtVirtualQsciScintilla* self_cast = dynamic_cast<MiqtVirtualQsciScintilla*>( (QsciScintilla*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__setCursorPosition = slot;
+	self_cast->handle__setCursorPosition = std::move(slot_handle);
 	return true;
 }
 
@@ -4798,12 +4871,13 @@ void QsciScintilla_virtualbase_setCursorPosition(void* self, int line, int index
 }
 
 bool QsciScintilla_override_virtual_setEolMode(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QsciScintilla> slot_handle(slot);
 	MiqtVirtualQsciScintilla* self_cast = dynamic_cast<MiqtVirtualQsciScintilla*>( (QsciScintilla*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__setEolMode = slot;
+	self_cast->handle__setEolMode = std::move(slot_handle);
 	return true;
 }
 
@@ -4812,12 +4886,13 @@ void QsciScintilla_virtualbase_setEolMode(void* self, int mode) {
 }
 
 bool QsciScintilla_override_virtual_setEolVisibility(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QsciScintilla> slot_handle(slot);
 	MiqtVirtualQsciScintilla* self_cast = dynamic_cast<MiqtVirtualQsciScintilla*>( (QsciScintilla*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__setEolVisibility = slot;
+	self_cast->handle__setEolVisibility = std::move(slot_handle);
 	return true;
 }
 
@@ -4826,12 +4901,13 @@ void QsciScintilla_virtualbase_setEolVisibility(void* self, bool visible) {
 }
 
 bool QsciScintilla_override_virtual_setFolding(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QsciScintilla> slot_handle(slot);
 	MiqtVirtualQsciScintilla* self_cast = dynamic_cast<MiqtVirtualQsciScintilla*>( (QsciScintilla*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__setFolding = slot;
+	self_cast->handle__setFolding = std::move(slot_handle);
 	return true;
 }
 
@@ -4840,12 +4916,13 @@ void QsciScintilla_virtualbase_setFolding(void* self, int fold, int margin) {
 }
 
 bool QsciScintilla_override_virtual_setIndentation(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QsciScintilla> slot_handle(slot);
 	MiqtVirtualQsciScintilla* self_cast = dynamic_cast<MiqtVirtualQsciScintilla*>( (QsciScintilla*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__setIndentation = slot;
+	self_cast->handle__setIndentation = std::move(slot_handle);
 	return true;
 }
 
@@ -4854,12 +4931,13 @@ void QsciScintilla_virtualbase_setIndentation(void* self, int line, int indentat
 }
 
 bool QsciScintilla_override_virtual_setIndentationGuides(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QsciScintilla> slot_handle(slot);
 	MiqtVirtualQsciScintilla* self_cast = dynamic_cast<MiqtVirtualQsciScintilla*>( (QsciScintilla*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__setIndentationGuides = slot;
+	self_cast->handle__setIndentationGuides = std::move(slot_handle);
 	return true;
 }
 
@@ -4868,12 +4946,13 @@ void QsciScintilla_virtualbase_setIndentationGuides(void* self, bool enable) {
 }
 
 bool QsciScintilla_override_virtual_setIndentationGuidesBackgroundColor(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QsciScintilla> slot_handle(slot);
 	MiqtVirtualQsciScintilla* self_cast = dynamic_cast<MiqtVirtualQsciScintilla*>( (QsciScintilla*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__setIndentationGuidesBackgroundColor = slot;
+	self_cast->handle__setIndentationGuidesBackgroundColor = std::move(slot_handle);
 	return true;
 }
 
@@ -4882,12 +4961,13 @@ void QsciScintilla_virtualbase_setIndentationGuidesBackgroundColor(void* self, Q
 }
 
 bool QsciScintilla_override_virtual_setIndentationGuidesForegroundColor(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QsciScintilla> slot_handle(slot);
 	MiqtVirtualQsciScintilla* self_cast = dynamic_cast<MiqtVirtualQsciScintilla*>( (QsciScintilla*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__setIndentationGuidesForegroundColor = slot;
+	self_cast->handle__setIndentationGuidesForegroundColor = std::move(slot_handle);
 	return true;
 }
 
@@ -4896,12 +4976,13 @@ void QsciScintilla_virtualbase_setIndentationGuidesForegroundColor(void* self, Q
 }
 
 bool QsciScintilla_override_virtual_setIndentationsUseTabs(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QsciScintilla> slot_handle(slot);
 	MiqtVirtualQsciScintilla* self_cast = dynamic_cast<MiqtVirtualQsciScintilla*>( (QsciScintilla*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__setIndentationsUseTabs = slot;
+	self_cast->handle__setIndentationsUseTabs = std::move(slot_handle);
 	return true;
 }
 
@@ -4910,12 +4991,13 @@ void QsciScintilla_virtualbase_setIndentationsUseTabs(void* self, bool tabs) {
 }
 
 bool QsciScintilla_override_virtual_setIndentationWidth(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QsciScintilla> slot_handle(slot);
 	MiqtVirtualQsciScintilla* self_cast = dynamic_cast<MiqtVirtualQsciScintilla*>( (QsciScintilla*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__setIndentationWidth = slot;
+	self_cast->handle__setIndentationWidth = std::move(slot_handle);
 	return true;
 }
 
@@ -4924,12 +5006,13 @@ void QsciScintilla_virtualbase_setIndentationWidth(void* self, int width) {
 }
 
 bool QsciScintilla_override_virtual_setLexer(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QsciScintilla> slot_handle(slot);
 	MiqtVirtualQsciScintilla* self_cast = dynamic_cast<MiqtVirtualQsciScintilla*>( (QsciScintilla*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__setLexer = slot;
+	self_cast->handle__setLexer = std::move(slot_handle);
 	return true;
 }
 
@@ -4938,12 +5021,13 @@ void QsciScintilla_virtualbase_setLexer(void* self, QsciLexer* lexer) {
 }
 
 bool QsciScintilla_override_virtual_setMarginsBackgroundColor(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QsciScintilla> slot_handle(slot);
 	MiqtVirtualQsciScintilla* self_cast = dynamic_cast<MiqtVirtualQsciScintilla*>( (QsciScintilla*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__setMarginsBackgroundColor = slot;
+	self_cast->handle__setMarginsBackgroundColor = std::move(slot_handle);
 	return true;
 }
 
@@ -4952,12 +5036,13 @@ void QsciScintilla_virtualbase_setMarginsBackgroundColor(void* self, QColor* col
 }
 
 bool QsciScintilla_override_virtual_setMarginsFont(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QsciScintilla> slot_handle(slot);
 	MiqtVirtualQsciScintilla* self_cast = dynamic_cast<MiqtVirtualQsciScintilla*>( (QsciScintilla*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__setMarginsFont = slot;
+	self_cast->handle__setMarginsFont = std::move(slot_handle);
 	return true;
 }
 
@@ -4966,12 +5051,13 @@ void QsciScintilla_virtualbase_setMarginsFont(void* self, QFont* f) {
 }
 
 bool QsciScintilla_override_virtual_setMarginsForegroundColor(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QsciScintilla> slot_handle(slot);
 	MiqtVirtualQsciScintilla* self_cast = dynamic_cast<MiqtVirtualQsciScintilla*>( (QsciScintilla*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__setMarginsForegroundColor = slot;
+	self_cast->handle__setMarginsForegroundColor = std::move(slot_handle);
 	return true;
 }
 
@@ -4980,12 +5066,13 @@ void QsciScintilla_virtualbase_setMarginsForegroundColor(void* self, QColor* col
 }
 
 bool QsciScintilla_override_virtual_setMarginLineNumbers(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QsciScintilla> slot_handle(slot);
 	MiqtVirtualQsciScintilla* self_cast = dynamic_cast<MiqtVirtualQsciScintilla*>( (QsciScintilla*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__setMarginLineNumbers = slot;
+	self_cast->handle__setMarginLineNumbers = std::move(slot_handle);
 	return true;
 }
 
@@ -4994,12 +5081,13 @@ void QsciScintilla_virtualbase_setMarginLineNumbers(void* self, int margin, bool
 }
 
 bool QsciScintilla_override_virtual_setMarginMarkerMask(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QsciScintilla> slot_handle(slot);
 	MiqtVirtualQsciScintilla* self_cast = dynamic_cast<MiqtVirtualQsciScintilla*>( (QsciScintilla*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__setMarginMarkerMask = slot;
+	self_cast->handle__setMarginMarkerMask = std::move(slot_handle);
 	return true;
 }
 
@@ -5008,12 +5096,13 @@ void QsciScintilla_virtualbase_setMarginMarkerMask(void* self, int margin, int m
 }
 
 bool QsciScintilla_override_virtual_setMarginSensitivity(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QsciScintilla> slot_handle(slot);
 	MiqtVirtualQsciScintilla* self_cast = dynamic_cast<MiqtVirtualQsciScintilla*>( (QsciScintilla*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__setMarginSensitivity = slot;
+	self_cast->handle__setMarginSensitivity = std::move(slot_handle);
 	return true;
 }
 
@@ -5022,12 +5111,13 @@ void QsciScintilla_virtualbase_setMarginSensitivity(void* self, int margin, bool
 }
 
 bool QsciScintilla_override_virtual_setMarginWidth(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QsciScintilla> slot_handle(slot);
 	MiqtVirtualQsciScintilla* self_cast = dynamic_cast<MiqtVirtualQsciScintilla*>( (QsciScintilla*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__setMarginWidth = slot;
+	self_cast->handle__setMarginWidth = std::move(slot_handle);
 	return true;
 }
 
@@ -5036,12 +5126,13 @@ void QsciScintilla_virtualbase_setMarginWidth(void* self, int margin, int width)
 }
 
 bool QsciScintilla_override_virtual_setMarginWidth2(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QsciScintilla> slot_handle(slot);
 	MiqtVirtualQsciScintilla* self_cast = dynamic_cast<MiqtVirtualQsciScintilla*>( (QsciScintilla*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__setMarginWidth2 = slot;
+	self_cast->handle__setMarginWidth2 = std::move(slot_handle);
 	return true;
 }
 
@@ -5051,12 +5142,13 @@ void QsciScintilla_virtualbase_setMarginWidth2(void* self, int margin, struct mi
 }
 
 bool QsciScintilla_override_virtual_setModified(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QsciScintilla> slot_handle(slot);
 	MiqtVirtualQsciScintilla* self_cast = dynamic_cast<MiqtVirtualQsciScintilla*>( (QsciScintilla*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__setModified = slot;
+	self_cast->handle__setModified = std::move(slot_handle);
 	return true;
 }
 
@@ -5065,12 +5157,13 @@ void QsciScintilla_virtualbase_setModified(void* self, bool m) {
 }
 
 bool QsciScintilla_override_virtual_setPaper(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QsciScintilla> slot_handle(slot);
 	MiqtVirtualQsciScintilla* self_cast = dynamic_cast<MiqtVirtualQsciScintilla*>( (QsciScintilla*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__setPaper = slot;
+	self_cast->handle__setPaper = std::move(slot_handle);
 	return true;
 }
 
@@ -5079,12 +5172,13 @@ void QsciScintilla_virtualbase_setPaper(void* self, QColor* c) {
 }
 
 bool QsciScintilla_override_virtual_setReadOnly(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QsciScintilla> slot_handle(slot);
 	MiqtVirtualQsciScintilla* self_cast = dynamic_cast<MiqtVirtualQsciScintilla*>( (QsciScintilla*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__setReadOnly = slot;
+	self_cast->handle__setReadOnly = std::move(slot_handle);
 	return true;
 }
 
@@ -5093,12 +5187,13 @@ void QsciScintilla_virtualbase_setReadOnly(void* self, bool ro) {
 }
 
 bool QsciScintilla_override_virtual_setSelection(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QsciScintilla> slot_handle(slot);
 	MiqtVirtualQsciScintilla* self_cast = dynamic_cast<MiqtVirtualQsciScintilla*>( (QsciScintilla*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__setSelection = slot;
+	self_cast->handle__setSelection = std::move(slot_handle);
 	return true;
 }
 
@@ -5107,12 +5202,13 @@ void QsciScintilla_virtualbase_setSelection(void* self, int lineFrom, int indexF
 }
 
 bool QsciScintilla_override_virtual_setSelectionBackgroundColor(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QsciScintilla> slot_handle(slot);
 	MiqtVirtualQsciScintilla* self_cast = dynamic_cast<MiqtVirtualQsciScintilla*>( (QsciScintilla*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__setSelectionBackgroundColor = slot;
+	self_cast->handle__setSelectionBackgroundColor = std::move(slot_handle);
 	return true;
 }
 
@@ -5121,12 +5217,13 @@ void QsciScintilla_virtualbase_setSelectionBackgroundColor(void* self, QColor* c
 }
 
 bool QsciScintilla_override_virtual_setSelectionForegroundColor(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QsciScintilla> slot_handle(slot);
 	MiqtVirtualQsciScintilla* self_cast = dynamic_cast<MiqtVirtualQsciScintilla*>( (QsciScintilla*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__setSelectionForegroundColor = slot;
+	self_cast->handle__setSelectionForegroundColor = std::move(slot_handle);
 	return true;
 }
 
@@ -5135,12 +5232,13 @@ void QsciScintilla_virtualbase_setSelectionForegroundColor(void* self, QColor* c
 }
 
 bool QsciScintilla_override_virtual_setTabIndents(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QsciScintilla> slot_handle(slot);
 	MiqtVirtualQsciScintilla* self_cast = dynamic_cast<MiqtVirtualQsciScintilla*>( (QsciScintilla*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__setTabIndents = slot;
+	self_cast->handle__setTabIndents = std::move(slot_handle);
 	return true;
 }
 
@@ -5149,12 +5247,13 @@ void QsciScintilla_virtualbase_setTabIndents(void* self, bool indent) {
 }
 
 bool QsciScintilla_override_virtual_setTabWidth(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QsciScintilla> slot_handle(slot);
 	MiqtVirtualQsciScintilla* self_cast = dynamic_cast<MiqtVirtualQsciScintilla*>( (QsciScintilla*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__setTabWidth = slot;
+	self_cast->handle__setTabWidth = std::move(slot_handle);
 	return true;
 }
 
@@ -5163,12 +5262,13 @@ void QsciScintilla_virtualbase_setTabWidth(void* self, int width) {
 }
 
 bool QsciScintilla_override_virtual_setText(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QsciScintilla> slot_handle(slot);
 	MiqtVirtualQsciScintilla* self_cast = dynamic_cast<MiqtVirtualQsciScintilla*>( (QsciScintilla*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__setText = slot;
+	self_cast->handle__setText = std::move(slot_handle);
 	return true;
 }
 
@@ -5178,12 +5278,13 @@ void QsciScintilla_virtualbase_setText(void* self, struct miqt_string text) {
 }
 
 bool QsciScintilla_override_virtual_setUtf8(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QsciScintilla> slot_handle(slot);
 	MiqtVirtualQsciScintilla* self_cast = dynamic_cast<MiqtVirtualQsciScintilla*>( (QsciScintilla*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__setUtf8 = slot;
+	self_cast->handle__setUtf8 = std::move(slot_handle);
 	return true;
 }
 
@@ -5192,12 +5293,13 @@ void QsciScintilla_virtualbase_setUtf8(void* self, bool cp) {
 }
 
 bool QsciScintilla_override_virtual_setWhitespaceVisibility(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QsciScintilla> slot_handle(slot);
 	MiqtVirtualQsciScintilla* self_cast = dynamic_cast<MiqtVirtualQsciScintilla*>( (QsciScintilla*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__setWhitespaceVisibility = slot;
+	self_cast->handle__setWhitespaceVisibility = std::move(slot_handle);
 	return true;
 }
 
@@ -5206,12 +5308,13 @@ void QsciScintilla_virtualbase_setWhitespaceVisibility(void* self, int mode) {
 }
 
 bool QsciScintilla_override_virtual_setWrapMode(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QsciScintilla> slot_handle(slot);
 	MiqtVirtualQsciScintilla* self_cast = dynamic_cast<MiqtVirtualQsciScintilla*>( (QsciScintilla*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__setWrapMode = slot;
+	self_cast->handle__setWrapMode = std::move(slot_handle);
 	return true;
 }
 
@@ -5220,12 +5323,13 @@ void QsciScintilla_virtualbase_setWrapMode(void* self, int mode) {
 }
 
 bool QsciScintilla_override_virtual_undo(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QsciScintilla> slot_handle(slot);
 	MiqtVirtualQsciScintilla* self_cast = dynamic_cast<MiqtVirtualQsciScintilla*>( (QsciScintilla*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__undo = slot;
+	self_cast->handle__undo = std::move(slot_handle);
 	return true;
 }
 
@@ -5234,12 +5338,13 @@ void QsciScintilla_virtualbase_undo(void* self) {
 }
 
 bool QsciScintilla_override_virtual_unindent(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QsciScintilla> slot_handle(slot);
 	MiqtVirtualQsciScintilla* self_cast = dynamic_cast<MiqtVirtualQsciScintilla*>( (QsciScintilla*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__unindent = slot;
+	self_cast->handle__unindent = std::move(slot_handle);
 	return true;
 }
 
@@ -5248,12 +5353,13 @@ void QsciScintilla_virtualbase_unindent(void* self, int line) {
 }
 
 bool QsciScintilla_override_virtual_zoomIn(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QsciScintilla> slot_handle(slot);
 	MiqtVirtualQsciScintilla* self_cast = dynamic_cast<MiqtVirtualQsciScintilla*>( (QsciScintilla*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__zoomIn = slot;
+	self_cast->handle__zoomIn = std::move(slot_handle);
 	return true;
 }
 
@@ -5262,12 +5368,13 @@ void QsciScintilla_virtualbase_zoomIn(void* self, int range) {
 }
 
 bool QsciScintilla_override_virtual_zoomIn2(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QsciScintilla> slot_handle(slot);
 	MiqtVirtualQsciScintilla* self_cast = dynamic_cast<MiqtVirtualQsciScintilla*>( (QsciScintilla*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__zoomIn2 = slot;
+	self_cast->handle__zoomIn2 = std::move(slot_handle);
 	return true;
 }
 
@@ -5276,12 +5383,13 @@ void QsciScintilla_virtualbase_zoomIn2(void* self) {
 }
 
 bool QsciScintilla_override_virtual_zoomOut(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QsciScintilla> slot_handle(slot);
 	MiqtVirtualQsciScintilla* self_cast = dynamic_cast<MiqtVirtualQsciScintilla*>( (QsciScintilla*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__zoomOut = slot;
+	self_cast->handle__zoomOut = std::move(slot_handle);
 	return true;
 }
 
@@ -5290,12 +5398,13 @@ void QsciScintilla_virtualbase_zoomOut(void* self, int range) {
 }
 
 bool QsciScintilla_override_virtual_zoomOut2(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QsciScintilla> slot_handle(slot);
 	MiqtVirtualQsciScintilla* self_cast = dynamic_cast<MiqtVirtualQsciScintilla*>( (QsciScintilla*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__zoomOut2 = slot;
+	self_cast->handle__zoomOut2 = std::move(slot_handle);
 	return true;
 }
 
@@ -5304,12 +5413,13 @@ void QsciScintilla_virtualbase_zoomOut2(void* self) {
 }
 
 bool QsciScintilla_override_virtual_zoomTo(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QsciScintilla> slot_handle(slot);
 	MiqtVirtualQsciScintilla* self_cast = dynamic_cast<MiqtVirtualQsciScintilla*>( (QsciScintilla*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__zoomTo = slot;
+	self_cast->handle__zoomTo = std::move(slot_handle);
 	return true;
 }
 
@@ -5318,12 +5428,13 @@ void QsciScintilla_virtualbase_zoomTo(void* self, int size) {
 }
 
 bool QsciScintilla_override_virtual_event(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QsciScintilla> slot_handle(slot);
 	MiqtVirtualQsciScintilla* self_cast = dynamic_cast<MiqtVirtualQsciScintilla*>( (QsciScintilla*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__event = slot;
+	self_cast->handle__event = std::move(slot_handle);
 	return true;
 }
 
@@ -5332,12 +5443,13 @@ bool QsciScintilla_virtualbase_event(void* self, QEvent* e) {
 }
 
 bool QsciScintilla_override_virtual_changeEvent(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QsciScintilla> slot_handle(slot);
 	MiqtVirtualQsciScintilla* self_cast = dynamic_cast<MiqtVirtualQsciScintilla*>( (QsciScintilla*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__changeEvent = slot;
+	self_cast->handle__changeEvent = std::move(slot_handle);
 	return true;
 }
 
@@ -5346,12 +5458,13 @@ void QsciScintilla_virtualbase_changeEvent(void* self, QEvent* e) {
 }
 
 bool QsciScintilla_override_virtual_contextMenuEvent(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QsciScintilla> slot_handle(slot);
 	MiqtVirtualQsciScintilla* self_cast = dynamic_cast<MiqtVirtualQsciScintilla*>( (QsciScintilla*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__contextMenuEvent = slot;
+	self_cast->handle__contextMenuEvent = std::move(slot_handle);
 	return true;
 }
 
@@ -5360,12 +5473,13 @@ void QsciScintilla_virtualbase_contextMenuEvent(void* self, QContextMenuEvent* e
 }
 
 bool QsciScintilla_override_virtual_wheelEvent(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QsciScintilla> slot_handle(slot);
 	MiqtVirtualQsciScintilla* self_cast = dynamic_cast<MiqtVirtualQsciScintilla*>( (QsciScintilla*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__wheelEvent = slot;
+	self_cast->handle__wheelEvent = std::move(slot_handle);
 	return true;
 }
 
@@ -5374,12 +5488,13 @@ void QsciScintilla_virtualbase_wheelEvent(void* self, QWheelEvent* e) {
 }
 
 bool QsciScintilla_override_virtual_canInsertFromMimeData(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QsciScintilla> slot_handle(slot);
 	MiqtVirtualQsciScintilla* self_cast = dynamic_cast<MiqtVirtualQsciScintilla*>( (QsciScintilla*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__canInsertFromMimeData = slot;
+	self_cast->handle__canInsertFromMimeData = std::move(slot_handle);
 	return true;
 }
 
@@ -5388,12 +5503,13 @@ bool QsciScintilla_virtualbase_canInsertFromMimeData(const void* self, QMimeData
 }
 
 bool QsciScintilla_override_virtual_fromMimeData(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QsciScintilla> slot_handle(slot);
 	MiqtVirtualQsciScintilla* self_cast = dynamic_cast<MiqtVirtualQsciScintilla*>( (QsciScintilla*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__fromMimeData = slot;
+	self_cast->handle__fromMimeData = std::move(slot_handle);
 	return true;
 }
 
@@ -5407,12 +5523,13 @@ struct miqt_string QsciScintilla_virtualbase_fromMimeData(const void* self, QMim
 }
 
 bool QsciScintilla_override_virtual_toMimeData(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QsciScintilla> slot_handle(slot);
 	MiqtVirtualQsciScintilla* self_cast = dynamic_cast<MiqtVirtualQsciScintilla*>( (QsciScintilla*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__toMimeData = slot;
+	self_cast->handle__toMimeData = std::move(slot_handle);
 	return true;
 }
 
@@ -5422,12 +5539,13 @@ QMimeData* QsciScintilla_virtualbase_toMimeData(const void* self, struct miqt_st
 }
 
 bool QsciScintilla_override_virtual_dragEnterEvent(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QsciScintilla> slot_handle(slot);
 	MiqtVirtualQsciScintilla* self_cast = dynamic_cast<MiqtVirtualQsciScintilla*>( (QsciScintilla*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__dragEnterEvent = slot;
+	self_cast->handle__dragEnterEvent = std::move(slot_handle);
 	return true;
 }
 
@@ -5436,12 +5554,13 @@ void QsciScintilla_virtualbase_dragEnterEvent(void* self, QDragEnterEvent* e) {
 }
 
 bool QsciScintilla_override_virtual_dragLeaveEvent(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QsciScintilla> slot_handle(slot);
 	MiqtVirtualQsciScintilla* self_cast = dynamic_cast<MiqtVirtualQsciScintilla*>( (QsciScintilla*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__dragLeaveEvent = slot;
+	self_cast->handle__dragLeaveEvent = std::move(slot_handle);
 	return true;
 }
 
@@ -5450,12 +5569,13 @@ void QsciScintilla_virtualbase_dragLeaveEvent(void* self, QDragLeaveEvent* e) {
 }
 
 bool QsciScintilla_override_virtual_dragMoveEvent(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QsciScintilla> slot_handle(slot);
 	MiqtVirtualQsciScintilla* self_cast = dynamic_cast<MiqtVirtualQsciScintilla*>( (QsciScintilla*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__dragMoveEvent = slot;
+	self_cast->handle__dragMoveEvent = std::move(slot_handle);
 	return true;
 }
 
@@ -5464,12 +5584,13 @@ void QsciScintilla_virtualbase_dragMoveEvent(void* self, QDragMoveEvent* e) {
 }
 
 bool QsciScintilla_override_virtual_dropEvent(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QsciScintilla> slot_handle(slot);
 	MiqtVirtualQsciScintilla* self_cast = dynamic_cast<MiqtVirtualQsciScintilla*>( (QsciScintilla*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__dropEvent = slot;
+	self_cast->handle__dropEvent = std::move(slot_handle);
 	return true;
 }
 
@@ -5478,12 +5599,13 @@ void QsciScintilla_virtualbase_dropEvent(void* self, QDropEvent* e) {
 }
 
 bool QsciScintilla_override_virtual_focusInEvent(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QsciScintilla> slot_handle(slot);
 	MiqtVirtualQsciScintilla* self_cast = dynamic_cast<MiqtVirtualQsciScintilla*>( (QsciScintilla*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__focusInEvent = slot;
+	self_cast->handle__focusInEvent = std::move(slot_handle);
 	return true;
 }
 
@@ -5492,12 +5614,13 @@ void QsciScintilla_virtualbase_focusInEvent(void* self, QFocusEvent* e) {
 }
 
 bool QsciScintilla_override_virtual_focusOutEvent(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QsciScintilla> slot_handle(slot);
 	MiqtVirtualQsciScintilla* self_cast = dynamic_cast<MiqtVirtualQsciScintilla*>( (QsciScintilla*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__focusOutEvent = slot;
+	self_cast->handle__focusOutEvent = std::move(slot_handle);
 	return true;
 }
 
@@ -5506,12 +5629,13 @@ void QsciScintilla_virtualbase_focusOutEvent(void* self, QFocusEvent* e) {
 }
 
 bool QsciScintilla_override_virtual_focusNextPrevChild(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QsciScintilla> slot_handle(slot);
 	MiqtVirtualQsciScintilla* self_cast = dynamic_cast<MiqtVirtualQsciScintilla*>( (QsciScintilla*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__focusNextPrevChild = slot;
+	self_cast->handle__focusNextPrevChild = std::move(slot_handle);
 	return true;
 }
 
@@ -5520,12 +5644,13 @@ bool QsciScintilla_virtualbase_focusNextPrevChild(void* self, bool next) {
 }
 
 bool QsciScintilla_override_virtual_keyPressEvent(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QsciScintilla> slot_handle(slot);
 	MiqtVirtualQsciScintilla* self_cast = dynamic_cast<MiqtVirtualQsciScintilla*>( (QsciScintilla*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__keyPressEvent = slot;
+	self_cast->handle__keyPressEvent = std::move(slot_handle);
 	return true;
 }
 
@@ -5534,12 +5659,13 @@ void QsciScintilla_virtualbase_keyPressEvent(void* self, QKeyEvent* e) {
 }
 
 bool QsciScintilla_override_virtual_inputMethodEvent(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QsciScintilla> slot_handle(slot);
 	MiqtVirtualQsciScintilla* self_cast = dynamic_cast<MiqtVirtualQsciScintilla*>( (QsciScintilla*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__inputMethodEvent = slot;
+	self_cast->handle__inputMethodEvent = std::move(slot_handle);
 	return true;
 }
 
@@ -5548,12 +5674,13 @@ void QsciScintilla_virtualbase_inputMethodEvent(void* self, QInputMethodEvent* e
 }
 
 bool QsciScintilla_override_virtual_inputMethodQuery(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QsciScintilla> slot_handle(slot);
 	MiqtVirtualQsciScintilla* self_cast = dynamic_cast<MiqtVirtualQsciScintilla*>( (QsciScintilla*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__inputMethodQuery = slot;
+	self_cast->handle__inputMethodQuery = std::move(slot_handle);
 	return true;
 }
 
@@ -5562,12 +5689,13 @@ QVariant* QsciScintilla_virtualbase_inputMethodQuery(const void* self, int query
 }
 
 bool QsciScintilla_override_virtual_mouseDoubleClickEvent(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QsciScintilla> slot_handle(slot);
 	MiqtVirtualQsciScintilla* self_cast = dynamic_cast<MiqtVirtualQsciScintilla*>( (QsciScintilla*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__mouseDoubleClickEvent = slot;
+	self_cast->handle__mouseDoubleClickEvent = std::move(slot_handle);
 	return true;
 }
 
@@ -5576,12 +5704,13 @@ void QsciScintilla_virtualbase_mouseDoubleClickEvent(void* self, QMouseEvent* e)
 }
 
 bool QsciScintilla_override_virtual_mouseMoveEvent(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QsciScintilla> slot_handle(slot);
 	MiqtVirtualQsciScintilla* self_cast = dynamic_cast<MiqtVirtualQsciScintilla*>( (QsciScintilla*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__mouseMoveEvent = slot;
+	self_cast->handle__mouseMoveEvent = std::move(slot_handle);
 	return true;
 }
 
@@ -5590,12 +5719,13 @@ void QsciScintilla_virtualbase_mouseMoveEvent(void* self, QMouseEvent* e) {
 }
 
 bool QsciScintilla_override_virtual_mousePressEvent(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QsciScintilla> slot_handle(slot);
 	MiqtVirtualQsciScintilla* self_cast = dynamic_cast<MiqtVirtualQsciScintilla*>( (QsciScintilla*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__mousePressEvent = slot;
+	self_cast->handle__mousePressEvent = std::move(slot_handle);
 	return true;
 }
 
@@ -5604,12 +5734,13 @@ void QsciScintilla_virtualbase_mousePressEvent(void* self, QMouseEvent* e) {
 }
 
 bool QsciScintilla_override_virtual_mouseReleaseEvent(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QsciScintilla> slot_handle(slot);
 	MiqtVirtualQsciScintilla* self_cast = dynamic_cast<MiqtVirtualQsciScintilla*>( (QsciScintilla*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__mouseReleaseEvent = slot;
+	self_cast->handle__mouseReleaseEvent = std::move(slot_handle);
 	return true;
 }
 
@@ -5618,12 +5749,13 @@ void QsciScintilla_virtualbase_mouseReleaseEvent(void* self, QMouseEvent* e) {
 }
 
 bool QsciScintilla_override_virtual_paintEvent(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QsciScintilla> slot_handle(slot);
 	MiqtVirtualQsciScintilla* self_cast = dynamic_cast<MiqtVirtualQsciScintilla*>( (QsciScintilla*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__paintEvent = slot;
+	self_cast->handle__paintEvent = std::move(slot_handle);
 	return true;
 }
 
@@ -5632,12 +5764,13 @@ void QsciScintilla_virtualbase_paintEvent(void* self, QPaintEvent* e) {
 }
 
 bool QsciScintilla_override_virtual_resizeEvent(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QsciScintilla> slot_handle(slot);
 	MiqtVirtualQsciScintilla* self_cast = dynamic_cast<MiqtVirtualQsciScintilla*>( (QsciScintilla*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__resizeEvent = slot;
+	self_cast->handle__resizeEvent = std::move(slot_handle);
 	return true;
 }
 
@@ -5646,12 +5779,13 @@ void QsciScintilla_virtualbase_resizeEvent(void* self, QResizeEvent* e) {
 }
 
 bool QsciScintilla_override_virtual_scrollContentsBy(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QsciScintilla> slot_handle(slot);
 	MiqtVirtualQsciScintilla* self_cast = dynamic_cast<MiqtVirtualQsciScintilla*>( (QsciScintilla*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__scrollContentsBy = slot;
+	self_cast->handle__scrollContentsBy = std::move(slot_handle);
 	return true;
 }
 
@@ -5660,12 +5794,13 @@ void QsciScintilla_virtualbase_scrollContentsBy(void* self, int dx, int dy) {
 }
 
 bool QsciScintilla_override_virtual_minimumSizeHint(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QsciScintilla> slot_handle(slot);
 	MiqtVirtualQsciScintilla* self_cast = dynamic_cast<MiqtVirtualQsciScintilla*>( (QsciScintilla*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__minimumSizeHint = slot;
+	self_cast->handle__minimumSizeHint = std::move(slot_handle);
 	return true;
 }
 
@@ -5674,12 +5809,13 @@ QSize* QsciScintilla_virtualbase_minimumSizeHint(const void* self) {
 }
 
 bool QsciScintilla_override_virtual_sizeHint(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QsciScintilla> slot_handle(slot);
 	MiqtVirtualQsciScintilla* self_cast = dynamic_cast<MiqtVirtualQsciScintilla*>( (QsciScintilla*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__sizeHint = slot;
+	self_cast->handle__sizeHint = std::move(slot_handle);
 	return true;
 }
 
@@ -5688,12 +5824,13 @@ QSize* QsciScintilla_virtualbase_sizeHint(const void* self) {
 }
 
 bool QsciScintilla_override_virtual_setupViewport(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QsciScintilla> slot_handle(slot);
 	MiqtVirtualQsciScintilla* self_cast = dynamic_cast<MiqtVirtualQsciScintilla*>( (QsciScintilla*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__setupViewport = slot;
+	self_cast->handle__setupViewport = std::move(slot_handle);
 	return true;
 }
 
@@ -5702,12 +5839,13 @@ void QsciScintilla_virtualbase_setupViewport(void* self, QWidget* viewport) {
 }
 
 bool QsciScintilla_override_virtual_eventFilter(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QsciScintilla> slot_handle(slot);
 	MiqtVirtualQsciScintilla* self_cast = dynamic_cast<MiqtVirtualQsciScintilla*>( (QsciScintilla*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__eventFilter = slot;
+	self_cast->handle__eventFilter = std::move(slot_handle);
 	return true;
 }
 
@@ -5716,12 +5854,13 @@ bool QsciScintilla_virtualbase_eventFilter(void* self, QObject* param1, QEvent* 
 }
 
 bool QsciScintilla_override_virtual_viewportEvent(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QsciScintilla> slot_handle(slot);
 	MiqtVirtualQsciScintilla* self_cast = dynamic_cast<MiqtVirtualQsciScintilla*>( (QsciScintilla*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__viewportEvent = slot;
+	self_cast->handle__viewportEvent = std::move(slot_handle);
 	return true;
 }
 
@@ -5730,12 +5869,13 @@ bool QsciScintilla_virtualbase_viewportEvent(void* self, QEvent* param1) {
 }
 
 bool QsciScintilla_override_virtual_viewportSizeHint(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QsciScintilla> slot_handle(slot);
 	MiqtVirtualQsciScintilla* self_cast = dynamic_cast<MiqtVirtualQsciScintilla*>( (QsciScintilla*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__viewportSizeHint = slot;
+	self_cast->handle__viewportSizeHint = std::move(slot_handle);
 	return true;
 }
 
@@ -5744,12 +5884,13 @@ QSize* QsciScintilla_virtualbase_viewportSizeHint(const void* self) {
 }
 
 bool QsciScintilla_override_virtual_initStyleOption(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QsciScintilla> slot_handle(slot);
 	MiqtVirtualQsciScintilla* self_cast = dynamic_cast<MiqtVirtualQsciScintilla*>( (QsciScintilla*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__initStyleOption = slot;
+	self_cast->handle__initStyleOption = std::move(slot_handle);
 	return true;
 }
 
@@ -5758,12 +5899,13 @@ void QsciScintilla_virtualbase_initStyleOption(const void* self, QStyleOptionFra
 }
 
 bool QsciScintilla_override_virtual_devType(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QsciScintilla> slot_handle(slot);
 	MiqtVirtualQsciScintilla* self_cast = dynamic_cast<MiqtVirtualQsciScintilla*>( (QsciScintilla*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__devType = slot;
+	self_cast->handle__devType = std::move(slot_handle);
 	return true;
 }
 
@@ -5772,12 +5914,13 @@ int QsciScintilla_virtualbase_devType(const void* self) {
 }
 
 bool QsciScintilla_override_virtual_setVisible(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QsciScintilla> slot_handle(slot);
 	MiqtVirtualQsciScintilla* self_cast = dynamic_cast<MiqtVirtualQsciScintilla*>( (QsciScintilla*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__setVisible = slot;
+	self_cast->handle__setVisible = std::move(slot_handle);
 	return true;
 }
 
@@ -5786,12 +5929,13 @@ void QsciScintilla_virtualbase_setVisible(void* self, bool visible) {
 }
 
 bool QsciScintilla_override_virtual_heightForWidth(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QsciScintilla> slot_handle(slot);
 	MiqtVirtualQsciScintilla* self_cast = dynamic_cast<MiqtVirtualQsciScintilla*>( (QsciScintilla*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__heightForWidth = slot;
+	self_cast->handle__heightForWidth = std::move(slot_handle);
 	return true;
 }
 
@@ -5800,12 +5944,13 @@ int QsciScintilla_virtualbase_heightForWidth(const void* self, int param1) {
 }
 
 bool QsciScintilla_override_virtual_hasHeightForWidth(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QsciScintilla> slot_handle(slot);
 	MiqtVirtualQsciScintilla* self_cast = dynamic_cast<MiqtVirtualQsciScintilla*>( (QsciScintilla*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__hasHeightForWidth = slot;
+	self_cast->handle__hasHeightForWidth = std::move(slot_handle);
 	return true;
 }
 
@@ -5814,12 +5959,13 @@ bool QsciScintilla_virtualbase_hasHeightForWidth(const void* self) {
 }
 
 bool QsciScintilla_override_virtual_paintEngine(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QsciScintilla> slot_handle(slot);
 	MiqtVirtualQsciScintilla* self_cast = dynamic_cast<MiqtVirtualQsciScintilla*>( (QsciScintilla*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__paintEngine = slot;
+	self_cast->handle__paintEngine = std::move(slot_handle);
 	return true;
 }
 
@@ -5828,12 +5974,13 @@ QPaintEngine* QsciScintilla_virtualbase_paintEngine(const void* self) {
 }
 
 bool QsciScintilla_override_virtual_keyReleaseEvent(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QsciScintilla> slot_handle(slot);
 	MiqtVirtualQsciScintilla* self_cast = dynamic_cast<MiqtVirtualQsciScintilla*>( (QsciScintilla*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__keyReleaseEvent = slot;
+	self_cast->handle__keyReleaseEvent = std::move(slot_handle);
 	return true;
 }
 
@@ -5842,12 +5989,13 @@ void QsciScintilla_virtualbase_keyReleaseEvent(void* self, QKeyEvent* event) {
 }
 
 bool QsciScintilla_override_virtual_enterEvent(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QsciScintilla> slot_handle(slot);
 	MiqtVirtualQsciScintilla* self_cast = dynamic_cast<MiqtVirtualQsciScintilla*>( (QsciScintilla*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__enterEvent = slot;
+	self_cast->handle__enterEvent = std::move(slot_handle);
 	return true;
 }
 
@@ -5856,12 +6004,13 @@ void QsciScintilla_virtualbase_enterEvent(void* self, QEnterEvent* event) {
 }
 
 bool QsciScintilla_override_virtual_leaveEvent(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QsciScintilla> slot_handle(slot);
 	MiqtVirtualQsciScintilla* self_cast = dynamic_cast<MiqtVirtualQsciScintilla*>( (QsciScintilla*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__leaveEvent = slot;
+	self_cast->handle__leaveEvent = std::move(slot_handle);
 	return true;
 }
 
@@ -5870,12 +6019,13 @@ void QsciScintilla_virtualbase_leaveEvent(void* self, QEvent* event) {
 }
 
 bool QsciScintilla_override_virtual_moveEvent(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QsciScintilla> slot_handle(slot);
 	MiqtVirtualQsciScintilla* self_cast = dynamic_cast<MiqtVirtualQsciScintilla*>( (QsciScintilla*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__moveEvent = slot;
+	self_cast->handle__moveEvent = std::move(slot_handle);
 	return true;
 }
 
@@ -5884,12 +6034,13 @@ void QsciScintilla_virtualbase_moveEvent(void* self, QMoveEvent* event) {
 }
 
 bool QsciScintilla_override_virtual_closeEvent(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QsciScintilla> slot_handle(slot);
 	MiqtVirtualQsciScintilla* self_cast = dynamic_cast<MiqtVirtualQsciScintilla*>( (QsciScintilla*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__closeEvent = slot;
+	self_cast->handle__closeEvent = std::move(slot_handle);
 	return true;
 }
 
@@ -5898,12 +6049,13 @@ void QsciScintilla_virtualbase_closeEvent(void* self, QCloseEvent* event) {
 }
 
 bool QsciScintilla_override_virtual_tabletEvent(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QsciScintilla> slot_handle(slot);
 	MiqtVirtualQsciScintilla* self_cast = dynamic_cast<MiqtVirtualQsciScintilla*>( (QsciScintilla*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__tabletEvent = slot;
+	self_cast->handle__tabletEvent = std::move(slot_handle);
 	return true;
 }
 
@@ -5912,12 +6064,13 @@ void QsciScintilla_virtualbase_tabletEvent(void* self, QTabletEvent* event) {
 }
 
 bool QsciScintilla_override_virtual_actionEvent(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QsciScintilla> slot_handle(slot);
 	MiqtVirtualQsciScintilla* self_cast = dynamic_cast<MiqtVirtualQsciScintilla*>( (QsciScintilla*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__actionEvent = slot;
+	self_cast->handle__actionEvent = std::move(slot_handle);
 	return true;
 }
 
@@ -5926,12 +6079,13 @@ void QsciScintilla_virtualbase_actionEvent(void* self, QActionEvent* event) {
 }
 
 bool QsciScintilla_override_virtual_showEvent(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QsciScintilla> slot_handle(slot);
 	MiqtVirtualQsciScintilla* self_cast = dynamic_cast<MiqtVirtualQsciScintilla*>( (QsciScintilla*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__showEvent = slot;
+	self_cast->handle__showEvent = std::move(slot_handle);
 	return true;
 }
 
@@ -5940,12 +6094,13 @@ void QsciScintilla_virtualbase_showEvent(void* self, QShowEvent* event) {
 }
 
 bool QsciScintilla_override_virtual_hideEvent(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QsciScintilla> slot_handle(slot);
 	MiqtVirtualQsciScintilla* self_cast = dynamic_cast<MiqtVirtualQsciScintilla*>( (QsciScintilla*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__hideEvent = slot;
+	self_cast->handle__hideEvent = std::move(slot_handle);
 	return true;
 }
 
@@ -5954,12 +6109,13 @@ void QsciScintilla_virtualbase_hideEvent(void* self, QHideEvent* event) {
 }
 
 bool QsciScintilla_override_virtual_nativeEvent(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QsciScintilla> slot_handle(slot);
 	MiqtVirtualQsciScintilla* self_cast = dynamic_cast<MiqtVirtualQsciScintilla*>( (QsciScintilla*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__nativeEvent = slot;
+	self_cast->handle__nativeEvent = std::move(slot_handle);
 	return true;
 }
 
@@ -5969,12 +6125,13 @@ bool QsciScintilla_virtualbase_nativeEvent(void* self, struct miqt_string eventT
 }
 
 bool QsciScintilla_override_virtual_metric(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QsciScintilla> slot_handle(slot);
 	MiqtVirtualQsciScintilla* self_cast = dynamic_cast<MiqtVirtualQsciScintilla*>( (QsciScintilla*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__metric = slot;
+	self_cast->handle__metric = std::move(slot_handle);
 	return true;
 }
 
@@ -5983,12 +6140,13 @@ int QsciScintilla_virtualbase_metric(const void* self, int param1) {
 }
 
 bool QsciScintilla_override_virtual_initPainter(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QsciScintilla> slot_handle(slot);
 	MiqtVirtualQsciScintilla* self_cast = dynamic_cast<MiqtVirtualQsciScintilla*>( (QsciScintilla*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__initPainter = slot;
+	self_cast->handle__initPainter = std::move(slot_handle);
 	return true;
 }
 
@@ -5997,12 +6155,13 @@ void QsciScintilla_virtualbase_initPainter(const void* self, QPainter* painter) 
 }
 
 bool QsciScintilla_override_virtual_redirected(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QsciScintilla> slot_handle(slot);
 	MiqtVirtualQsciScintilla* self_cast = dynamic_cast<MiqtVirtualQsciScintilla*>( (QsciScintilla*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__redirected = slot;
+	self_cast->handle__redirected = std::move(slot_handle);
 	return true;
 }
 
@@ -6011,12 +6170,13 @@ QPaintDevice* QsciScintilla_virtualbase_redirected(const void* self, QPoint* off
 }
 
 bool QsciScintilla_override_virtual_sharedPainter(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QsciScintilla> slot_handle(slot);
 	MiqtVirtualQsciScintilla* self_cast = dynamic_cast<MiqtVirtualQsciScintilla*>( (QsciScintilla*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__sharedPainter = slot;
+	self_cast->handle__sharedPainter = std::move(slot_handle);
 	return true;
 }
 
@@ -6025,12 +6185,13 @@ QPainter* QsciScintilla_virtualbase_sharedPainter(const void* self) {
 }
 
 bool QsciScintilla_override_virtual_timerEvent(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QsciScintilla> slot_handle(slot);
 	MiqtVirtualQsciScintilla* self_cast = dynamic_cast<MiqtVirtualQsciScintilla*>( (QsciScintilla*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__timerEvent = slot;
+	self_cast->handle__timerEvent = std::move(slot_handle);
 	return true;
 }
 
@@ -6039,12 +6200,13 @@ void QsciScintilla_virtualbase_timerEvent(void* self, QTimerEvent* event) {
 }
 
 bool QsciScintilla_override_virtual_childEvent(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QsciScintilla> slot_handle(slot);
 	MiqtVirtualQsciScintilla* self_cast = dynamic_cast<MiqtVirtualQsciScintilla*>( (QsciScintilla*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__childEvent = slot;
+	self_cast->handle__childEvent = std::move(slot_handle);
 	return true;
 }
 
@@ -6053,12 +6215,13 @@ void QsciScintilla_virtualbase_childEvent(void* self, QChildEvent* event) {
 }
 
 bool QsciScintilla_override_virtual_customEvent(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QsciScintilla> slot_handle(slot);
 	MiqtVirtualQsciScintilla* self_cast = dynamic_cast<MiqtVirtualQsciScintilla*>( (QsciScintilla*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__customEvent = slot;
+	self_cast->handle__customEvent = std::move(slot_handle);
 	return true;
 }
 
@@ -6067,12 +6230,13 @@ void QsciScintilla_virtualbase_customEvent(void* self, QEvent* event) {
 }
 
 bool QsciScintilla_override_virtual_connectNotify(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QsciScintilla> slot_handle(slot);
 	MiqtVirtualQsciScintilla* self_cast = dynamic_cast<MiqtVirtualQsciScintilla*>( (QsciScintilla*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__connectNotify = slot;
+	self_cast->handle__connectNotify = std::move(slot_handle);
 	return true;
 }
 
@@ -6081,12 +6245,13 @@ void QsciScintilla_virtualbase_connectNotify(void* self, QMetaMethod* signal) {
 }
 
 bool QsciScintilla_override_virtual_disconnectNotify(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QsciScintilla> slot_handle(slot);
 	MiqtVirtualQsciScintilla* self_cast = dynamic_cast<MiqtVirtualQsciScintilla*>( (QsciScintilla*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__disconnectNotify = slot;
+	self_cast->handle__disconnectNotify = std::move(slot_handle);
 	return true;
 }
 

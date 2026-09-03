@@ -15,6 +15,11 @@ import (
 	"unsafe"
 )
 
+//export miqt_exec_callback_handle_release_QMediaAvailabilityControl
+func miqt_exec_callback_handle_release_QMediaAvailabilityControl(cb C.intptr_t) {
+	cgo.Handle(cb).Delete()
+}
+
 type QMediaAvailabilityControl struct {
 	h *C.QMediaAvailabilityControl
 	*QMediaControl
@@ -86,8 +91,10 @@ func (this *QMediaAvailabilityControl) Availability() QMultimedia__AvailabilityS
 func (this *QMediaAvailabilityControl) AvailabilityChanged(availability QMultimedia__AvailabilityStatus) {
 	C.QMediaAvailabilityControl_availabilityChanged(this.h, (C.int)(availability))
 }
-func (this *QMediaAvailabilityControl) OnAvailabilityChanged(slot func(availability QMultimedia__AvailabilityStatus)) {
-	C.QMediaAvailabilityControl_connect_availabilityChanged(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QMediaAvailabilityControl) OnAvailabilityChanged(slot func(availability QMultimedia__AvailabilityStatus)) *qt.SignalConnection {
+	_goptr := qt.UnsafeNewQMetaObject__Connection(C.QMediaAvailabilityControl_connect_availabilityChanged(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QMediaAvailabilityControl_availabilityChanged

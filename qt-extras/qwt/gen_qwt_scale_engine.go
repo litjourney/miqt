@@ -86,6 +86,11 @@ func (this *QwtScaleArithmetic) GoGC() {
 	})
 }
 
+//export miqt_exec_callback_handle_release_QwtScaleEngine
+func miqt_exec_callback_handle_release_QwtScaleEngine(cb C.intptr_t) {
+	cgo.Handle(cb).Delete()
+}
+
 type QwtScaleEngine struct {
 	h *C.QwtScaleEngine
 }
@@ -276,7 +281,11 @@ func (this *QwtScaleEngine) BuildInterval(value float64) QwtInterval {
 
 }
 func (this *QwtScaleEngine) OnAutoScale(slot func(maxNumSteps int, x1 *float64, x2 *float64, stepSize *float64)) {
-	ok := C.QwtScaleEngine_override_virtual_autoScale(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QwtScaleEngine_override_virtual_autoScale(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -302,7 +311,11 @@ func miqt_exec_callback_QwtScaleEngine_autoScale(self *C.QwtScaleEngine, cb C.in
 
 }
 func (this *QwtScaleEngine) OnDivideScale(slot func(x1 float64, x2 float64, maxMajorSteps int, maxMinorSteps int, stepSize float64) *QwtScaleDiv) {
-	ok := C.QwtScaleEngine_override_virtual_divideScale(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QwtScaleEngine_override_virtual_divideScale(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -344,6 +357,11 @@ func (this *QwtScaleEngine) GoGC() {
 		this.Delete()
 		runtime.KeepAlive(this.h)
 	})
+}
+
+//export miqt_exec_callback_handle_release_QwtLinearScaleEngine
+func miqt_exec_callback_handle_release_QwtLinearScaleEngine(cb C.intptr_t) {
+	cgo.Handle(cb).Delete()
 }
 
 type QwtLinearScaleEngine struct {
@@ -574,7 +592,11 @@ func (this *QwtLinearScaleEngine) callVirtualBase_AutoScale(maxNumSteps int, x1 
 
 }
 func (this *QwtLinearScaleEngine) OnAutoScale(slot func(super func(maxNumSteps int, x1 *float64, x2 *float64, stepSize *float64), maxNumSteps int, x1 *float64, x2 *float64, stepSize *float64)) {
-	ok := C.QwtLinearScaleEngine_override_virtual_autoScale(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QwtLinearScaleEngine_override_virtual_autoScale(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -608,7 +630,11 @@ func (this *QwtLinearScaleEngine) callVirtualBase_DivideScale(x1 float64, x2 flo
 
 }
 func (this *QwtLinearScaleEngine) OnDivideScale(slot func(super func(x1 float64, x2 float64, maxMajorSteps int, maxMinorSteps int, stepSize float64) *QwtScaleDiv, x1 float64, x2 float64, maxMajorSteps int, maxMinorSteps int, stepSize float64) *QwtScaleDiv) {
-	ok := C.QwtLinearScaleEngine_override_virtual_divideScale(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QwtLinearScaleEngine_override_virtual_divideScale(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -650,6 +676,11 @@ func (this *QwtLinearScaleEngine) GoGC() {
 		this.Delete()
 		runtime.KeepAlive(this.h)
 	})
+}
+
+//export miqt_exec_callback_handle_release_QwtLogScaleEngine
+func miqt_exec_callback_handle_release_QwtLogScaleEngine(cb C.intptr_t) {
+	cgo.Handle(cb).Delete()
 }
 
 type QwtLogScaleEngine struct {
@@ -880,7 +911,11 @@ func (this *QwtLogScaleEngine) callVirtualBase_AutoScale(maxNumSteps int, x1 *fl
 
 }
 func (this *QwtLogScaleEngine) OnAutoScale(slot func(super func(maxNumSteps int, x1 *float64, x2 *float64, stepSize *float64), maxNumSteps int, x1 *float64, x2 *float64, stepSize *float64)) {
-	ok := C.QwtLogScaleEngine_override_virtual_autoScale(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QwtLogScaleEngine_override_virtual_autoScale(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -914,7 +949,11 @@ func (this *QwtLogScaleEngine) callVirtualBase_DivideScale(x1 float64, x2 float6
 
 }
 func (this *QwtLogScaleEngine) OnDivideScale(slot func(super func(x1 float64, x2 float64, maxMajorSteps int, maxMinorSteps int, stepSize float64) *QwtScaleDiv, x1 float64, x2 float64, maxMajorSteps int, maxMinorSteps int, stepSize float64) *QwtScaleDiv) {
-	ok := C.QwtLogScaleEngine_override_virtual_divideScale(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QwtLogScaleEngine_override_virtual_divideScale(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}

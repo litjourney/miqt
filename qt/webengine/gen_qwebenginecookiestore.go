@@ -16,6 +16,11 @@ import (
 	"unsafe"
 )
 
+//export miqt_exec_callback_handle_release_QWebEngineCookieStore
+func miqt_exec_callback_handle_release_QWebEngineCookieStore(cb C.intptr_t) {
+	cgo.Handle(cb).Delete()
+}
+
 type QWebEngineCookieStore struct {
 	h *C.QWebEngineCookieStore
 	*qt.QObject
@@ -103,8 +108,10 @@ func (this *QWebEngineCookieStore) LoadAllCookies() {
 func (this *QWebEngineCookieStore) CookieAdded(cookie *network.QNetworkCookie) {
 	C.QWebEngineCookieStore_cookieAdded(this.h, (*C.QNetworkCookie)(cookie.UnsafePointer()))
 }
-func (this *QWebEngineCookieStore) OnCookieAdded(slot func(cookie *network.QNetworkCookie)) {
-	C.QWebEngineCookieStore_connect_cookieAdded(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QWebEngineCookieStore) OnCookieAdded(slot func(cookie *network.QNetworkCookie)) *qt.SignalConnection {
+	_goptr := qt.UnsafeNewQMetaObject__Connection(C.QWebEngineCookieStore_connect_cookieAdded(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QWebEngineCookieStore_cookieAdded
@@ -123,8 +130,10 @@ func miqt_exec_callback_QWebEngineCookieStore_cookieAdded(cb C.intptr_t, cookie 
 func (this *QWebEngineCookieStore) CookieRemoved(cookie *network.QNetworkCookie) {
 	C.QWebEngineCookieStore_cookieRemoved(this.h, (*C.QNetworkCookie)(cookie.UnsafePointer()))
 }
-func (this *QWebEngineCookieStore) OnCookieRemoved(slot func(cookie *network.QNetworkCookie)) {
-	C.QWebEngineCookieStore_connect_cookieRemoved(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QWebEngineCookieStore) OnCookieRemoved(slot func(cookie *network.QNetworkCookie)) *qt.SignalConnection {
+	_goptr := qt.UnsafeNewQMetaObject__Connection(C.QWebEngineCookieStore_connect_cookieRemoved(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QWebEngineCookieStore_cookieRemoved

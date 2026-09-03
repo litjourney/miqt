@@ -22,6 +22,11 @@ const (
 	QGraphicsSceneContextMenuEvent__Other    QGraphicsSceneContextMenuEvent__Reason = 2
 )
 
+//export miqt_exec_callback_handle_release_QGraphicsSceneEvent
+func miqt_exec_callback_handle_release_QGraphicsSceneEvent(cb C.intptr_t) {
+	cgo.Handle(cb).Delete()
+}
+
 type QGraphicsSceneEvent struct {
 	h *C.QGraphicsSceneEvent
 	*QEvent
@@ -86,7 +91,11 @@ func (this *QGraphicsSceneEvent) callVirtualBase_SetAccepted(accepted bool) {
 
 }
 func (this *QGraphicsSceneEvent) OnSetAccepted(slot func(super func(accepted bool), accepted bool)) {
-	ok := C.QGraphicsSceneEvent_override_virtual_setAccepted(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QGraphicsSceneEvent_override_virtual_setAccepted(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -112,7 +121,11 @@ func (this *QGraphicsSceneEvent) callVirtualBase_Clone() *QEvent {
 
 }
 func (this *QGraphicsSceneEvent) OnClone(slot func(super func() *QEvent) *QEvent) {
-	ok := C.QGraphicsSceneEvent_override_virtual_clone(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QGraphicsSceneEvent_override_virtual_clone(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -143,6 +156,11 @@ func (this *QGraphicsSceneEvent) GoGC() {
 		this.Delete()
 		runtime.KeepAlive(this.h)
 	})
+}
+
+//export miqt_exec_callback_handle_release_QGraphicsSceneMouseEvent
+func miqt_exec_callback_handle_release_QGraphicsSceneMouseEvent(cb C.intptr_t) {
+	cgo.Handle(cb).Delete()
 }
 
 type QGraphicsSceneMouseEvent struct {
@@ -329,7 +347,11 @@ func (this *QGraphicsSceneMouseEvent) callVirtualBase_SetAccepted(accepted bool)
 
 }
 func (this *QGraphicsSceneMouseEvent) OnSetAccepted(slot func(super func(accepted bool), accepted bool)) {
-	ok := C.QGraphicsSceneMouseEvent_override_virtual_setAccepted(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QGraphicsSceneMouseEvent_override_virtual_setAccepted(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -355,7 +377,11 @@ func (this *QGraphicsSceneMouseEvent) callVirtualBase_Clone() *QEvent {
 
 }
 func (this *QGraphicsSceneMouseEvent) OnClone(slot func(super func() *QEvent) *QEvent) {
-	ok := C.QGraphicsSceneMouseEvent_override_virtual_clone(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QGraphicsSceneMouseEvent_override_virtual_clone(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -386,6 +412,11 @@ func (this *QGraphicsSceneMouseEvent) GoGC() {
 		this.Delete()
 		runtime.KeepAlive(this.h)
 	})
+}
+
+//export miqt_exec_callback_handle_release_QGraphicsSceneWheelEvent
+func miqt_exec_callback_handle_release_QGraphicsSceneWheelEvent(cb C.intptr_t) {
+	cgo.Handle(cb).Delete()
 }
 
 type QGraphicsSceneWheelEvent struct {
@@ -530,7 +561,11 @@ func (this *QGraphicsSceneWheelEvent) callVirtualBase_SetAccepted(accepted bool)
 
 }
 func (this *QGraphicsSceneWheelEvent) OnSetAccepted(slot func(super func(accepted bool), accepted bool)) {
-	ok := C.QGraphicsSceneWheelEvent_override_virtual_setAccepted(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QGraphicsSceneWheelEvent_override_virtual_setAccepted(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -556,7 +591,11 @@ func (this *QGraphicsSceneWheelEvent) callVirtualBase_Clone() *QEvent {
 
 }
 func (this *QGraphicsSceneWheelEvent) OnClone(slot func(super func() *QEvent) *QEvent) {
-	ok := C.QGraphicsSceneWheelEvent_override_virtual_clone(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QGraphicsSceneWheelEvent_override_virtual_clone(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -587,6 +626,11 @@ func (this *QGraphicsSceneWheelEvent) GoGC() {
 		this.Delete()
 		runtime.KeepAlive(this.h)
 	})
+}
+
+//export miqt_exec_callback_handle_release_QGraphicsSceneContextMenuEvent
+func miqt_exec_callback_handle_release_QGraphicsSceneContextMenuEvent(cb C.intptr_t) {
+	cgo.Handle(cb).Delete()
 }
 
 type QGraphicsSceneContextMenuEvent struct {
@@ -689,7 +733,11 @@ func (this *QGraphicsSceneContextMenuEvent) callVirtualBase_SetAccepted(accepted
 
 }
 func (this *QGraphicsSceneContextMenuEvent) OnSetAccepted(slot func(super func(accepted bool), accepted bool)) {
-	ok := C.QGraphicsSceneContextMenuEvent_override_virtual_setAccepted(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QGraphicsSceneContextMenuEvent_override_virtual_setAccepted(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -715,7 +763,11 @@ func (this *QGraphicsSceneContextMenuEvent) callVirtualBase_Clone() *QEvent {
 
 }
 func (this *QGraphicsSceneContextMenuEvent) OnClone(slot func(super func() *QEvent) *QEvent) {
-	ok := C.QGraphicsSceneContextMenuEvent_override_virtual_clone(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QGraphicsSceneContextMenuEvent_override_virtual_clone(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -746,6 +798,11 @@ func (this *QGraphicsSceneContextMenuEvent) GoGC() {
 		this.Delete()
 		runtime.KeepAlive(this.h)
 	})
+}
+
+//export miqt_exec_callback_handle_release_QGraphicsSceneHoverEvent
+func miqt_exec_callback_handle_release_QGraphicsSceneHoverEvent(cb C.intptr_t) {
+	cgo.Handle(cb).Delete()
 }
 
 type QGraphicsSceneHoverEvent struct {
@@ -870,7 +927,11 @@ func (this *QGraphicsSceneHoverEvent) callVirtualBase_SetAccepted(accepted bool)
 
 }
 func (this *QGraphicsSceneHoverEvent) OnSetAccepted(slot func(super func(accepted bool), accepted bool)) {
-	ok := C.QGraphicsSceneHoverEvent_override_virtual_setAccepted(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QGraphicsSceneHoverEvent_override_virtual_setAccepted(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -896,7 +957,11 @@ func (this *QGraphicsSceneHoverEvent) callVirtualBase_Clone() *QEvent {
 
 }
 func (this *QGraphicsSceneHoverEvent) OnClone(slot func(super func() *QEvent) *QEvent) {
-	ok := C.QGraphicsSceneHoverEvent_override_virtual_clone(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QGraphicsSceneHoverEvent_override_virtual_clone(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -927,6 +992,11 @@ func (this *QGraphicsSceneHoverEvent) GoGC() {
 		this.Delete()
 		runtime.KeepAlive(this.h)
 	})
+}
+
+//export miqt_exec_callback_handle_release_QGraphicsSceneHelpEvent
+func miqt_exec_callback_handle_release_QGraphicsSceneHelpEvent(cb C.intptr_t) {
+	cgo.Handle(cb).Delete()
 }
 
 type QGraphicsSceneHelpEvent struct {
@@ -1003,7 +1073,11 @@ func (this *QGraphicsSceneHelpEvent) callVirtualBase_SetAccepted(accepted bool) 
 
 }
 func (this *QGraphicsSceneHelpEvent) OnSetAccepted(slot func(super func(accepted bool), accepted bool)) {
-	ok := C.QGraphicsSceneHelpEvent_override_virtual_setAccepted(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QGraphicsSceneHelpEvent_override_virtual_setAccepted(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1029,7 +1103,11 @@ func (this *QGraphicsSceneHelpEvent) callVirtualBase_Clone() *QEvent {
 
 }
 func (this *QGraphicsSceneHelpEvent) OnClone(slot func(super func() *QEvent) *QEvent) {
-	ok := C.QGraphicsSceneHelpEvent_override_virtual_clone(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QGraphicsSceneHelpEvent_override_virtual_clone(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1060,6 +1138,11 @@ func (this *QGraphicsSceneHelpEvent) GoGC() {
 		this.Delete()
 		runtime.KeepAlive(this.h)
 	})
+}
+
+//export miqt_exec_callback_handle_release_QGraphicsSceneDragDropEvent
+func miqt_exec_callback_handle_release_QGraphicsSceneDragDropEvent(cb C.intptr_t) {
+	cgo.Handle(cb).Delete()
 }
 
 type QGraphicsSceneDragDropEvent struct {
@@ -1206,7 +1289,11 @@ func (this *QGraphicsSceneDragDropEvent) callVirtualBase_SetAccepted(accepted bo
 
 }
 func (this *QGraphicsSceneDragDropEvent) OnSetAccepted(slot func(super func(accepted bool), accepted bool)) {
-	ok := C.QGraphicsSceneDragDropEvent_override_virtual_setAccepted(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QGraphicsSceneDragDropEvent_override_virtual_setAccepted(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1232,7 +1319,11 @@ func (this *QGraphicsSceneDragDropEvent) callVirtualBase_Clone() *QEvent {
 
 }
 func (this *QGraphicsSceneDragDropEvent) OnClone(slot func(super func() *QEvent) *QEvent) {
-	ok := C.QGraphicsSceneDragDropEvent_override_virtual_clone(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QGraphicsSceneDragDropEvent_override_virtual_clone(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1263,6 +1354,11 @@ func (this *QGraphicsSceneDragDropEvent) GoGC() {
 		this.Delete()
 		runtime.KeepAlive(this.h)
 	})
+}
+
+//export miqt_exec_callback_handle_release_QGraphicsSceneResizeEvent
+func miqt_exec_callback_handle_release_QGraphicsSceneResizeEvent(cb C.intptr_t) {
+	cgo.Handle(cb).Delete()
 }
 
 type QGraphicsSceneResizeEvent struct {
@@ -1333,7 +1429,11 @@ func (this *QGraphicsSceneResizeEvent) callVirtualBase_SetAccepted(accepted bool
 
 }
 func (this *QGraphicsSceneResizeEvent) OnSetAccepted(slot func(super func(accepted bool), accepted bool)) {
-	ok := C.QGraphicsSceneResizeEvent_override_virtual_setAccepted(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QGraphicsSceneResizeEvent_override_virtual_setAccepted(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1359,7 +1459,11 @@ func (this *QGraphicsSceneResizeEvent) callVirtualBase_Clone() *QEvent {
 
 }
 func (this *QGraphicsSceneResizeEvent) OnClone(slot func(super func() *QEvent) *QEvent) {
-	ok := C.QGraphicsSceneResizeEvent_override_virtual_clone(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QGraphicsSceneResizeEvent_override_virtual_clone(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1390,6 +1494,11 @@ func (this *QGraphicsSceneResizeEvent) GoGC() {
 		this.Delete()
 		runtime.KeepAlive(this.h)
 	})
+}
+
+//export miqt_exec_callback_handle_release_QGraphicsSceneMoveEvent
+func miqt_exec_callback_handle_release_QGraphicsSceneMoveEvent(cb C.intptr_t) {
+	cgo.Handle(cb).Delete()
 }
 
 type QGraphicsSceneMoveEvent struct {
@@ -1460,7 +1569,11 @@ func (this *QGraphicsSceneMoveEvent) callVirtualBase_SetAccepted(accepted bool) 
 
 }
 func (this *QGraphicsSceneMoveEvent) OnSetAccepted(slot func(super func(accepted bool), accepted bool)) {
-	ok := C.QGraphicsSceneMoveEvent_override_virtual_setAccepted(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QGraphicsSceneMoveEvent_override_virtual_setAccepted(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1486,7 +1599,11 @@ func (this *QGraphicsSceneMoveEvent) callVirtualBase_Clone() *QEvent {
 
 }
 func (this *QGraphicsSceneMoveEvent) OnClone(slot func(super func() *QEvent) *QEvent) {
-	ok := C.QGraphicsSceneMoveEvent_override_virtual_clone(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QGraphicsSceneMoveEvent_override_virtual_clone(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}

@@ -20,6 +20,11 @@ const (
 	QInputMethod__ContextMenu QInputMethod__Action = 1
 )
 
+//export miqt_exec_callback_handle_release_QInputMethod
+func miqt_exec_callback_handle_release_QInputMethod(cb C.intptr_t) {
+	cgo.Handle(cb).Delete()
+}
+
 type QInputMethod struct {
 	h *C.QInputMethod
 	*QObject
@@ -174,8 +179,10 @@ func (this *QInputMethod) InvokeAction(a QInputMethod__Action, cursorPosition in
 func (this *QInputMethod) CursorRectangleChanged() {
 	C.QInputMethod_cursorRectangleChanged(this.h)
 }
-func (this *QInputMethod) OnCursorRectangleChanged(slot func()) {
-	C.QInputMethod_connect_cursorRectangleChanged(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QInputMethod) OnCursorRectangleChanged(slot func()) *SignalConnection {
+	_goptr := UnsafeNewQMetaObject__Connection(C.QInputMethod_connect_cursorRectangleChanged(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QInputMethod_cursorRectangleChanged
@@ -191,8 +198,10 @@ func miqt_exec_callback_QInputMethod_cursorRectangleChanged(cb C.intptr_t) {
 func (this *QInputMethod) AnchorRectangleChanged() {
 	C.QInputMethod_anchorRectangleChanged(this.h)
 }
-func (this *QInputMethod) OnAnchorRectangleChanged(slot func()) {
-	C.QInputMethod_connect_anchorRectangleChanged(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QInputMethod) OnAnchorRectangleChanged(slot func()) *SignalConnection {
+	_goptr := UnsafeNewQMetaObject__Connection(C.QInputMethod_connect_anchorRectangleChanged(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QInputMethod_anchorRectangleChanged
@@ -208,8 +217,10 @@ func miqt_exec_callback_QInputMethod_anchorRectangleChanged(cb C.intptr_t) {
 func (this *QInputMethod) KeyboardRectangleChanged() {
 	C.QInputMethod_keyboardRectangleChanged(this.h)
 }
-func (this *QInputMethod) OnKeyboardRectangleChanged(slot func()) {
-	C.QInputMethod_connect_keyboardRectangleChanged(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QInputMethod) OnKeyboardRectangleChanged(slot func()) *SignalConnection {
+	_goptr := UnsafeNewQMetaObject__Connection(C.QInputMethod_connect_keyboardRectangleChanged(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QInputMethod_keyboardRectangleChanged
@@ -225,8 +236,10 @@ func miqt_exec_callback_QInputMethod_keyboardRectangleChanged(cb C.intptr_t) {
 func (this *QInputMethod) InputItemClipRectangleChanged() {
 	C.QInputMethod_inputItemClipRectangleChanged(this.h)
 }
-func (this *QInputMethod) OnInputItemClipRectangleChanged(slot func()) {
-	C.QInputMethod_connect_inputItemClipRectangleChanged(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QInputMethod) OnInputItemClipRectangleChanged(slot func()) *SignalConnection {
+	_goptr := UnsafeNewQMetaObject__Connection(C.QInputMethod_connect_inputItemClipRectangleChanged(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QInputMethod_inputItemClipRectangleChanged
@@ -242,8 +255,10 @@ func miqt_exec_callback_QInputMethod_inputItemClipRectangleChanged(cb C.intptr_t
 func (this *QInputMethod) VisibleChanged() {
 	C.QInputMethod_visibleChanged(this.h)
 }
-func (this *QInputMethod) OnVisibleChanged(slot func()) {
-	C.QInputMethod_connect_visibleChanged(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QInputMethod) OnVisibleChanged(slot func()) *SignalConnection {
+	_goptr := UnsafeNewQMetaObject__Connection(C.QInputMethod_connect_visibleChanged(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QInputMethod_visibleChanged
@@ -259,8 +274,10 @@ func miqt_exec_callback_QInputMethod_visibleChanged(cb C.intptr_t) {
 func (this *QInputMethod) AnimatingChanged() {
 	C.QInputMethod_animatingChanged(this.h)
 }
-func (this *QInputMethod) OnAnimatingChanged(slot func()) {
-	C.QInputMethod_connect_animatingChanged(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QInputMethod) OnAnimatingChanged(slot func()) *SignalConnection {
+	_goptr := UnsafeNewQMetaObject__Connection(C.QInputMethod_connect_animatingChanged(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QInputMethod_animatingChanged
@@ -276,8 +293,10 @@ func miqt_exec_callback_QInputMethod_animatingChanged(cb C.intptr_t) {
 func (this *QInputMethod) LocaleChanged() {
 	C.QInputMethod_localeChanged(this.h)
 }
-func (this *QInputMethod) OnLocaleChanged(slot func()) {
-	C.QInputMethod_connect_localeChanged(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QInputMethod) OnLocaleChanged(slot func()) *SignalConnection {
+	_goptr := UnsafeNewQMetaObject__Connection(C.QInputMethod_connect_localeChanged(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QInputMethod_localeChanged
@@ -293,8 +312,10 @@ func miqt_exec_callback_QInputMethod_localeChanged(cb C.intptr_t) {
 func (this *QInputMethod) InputDirectionChanged(newDirection LayoutDirection) {
 	C.QInputMethod_inputDirectionChanged(this.h, (C.int)(newDirection))
 }
-func (this *QInputMethod) OnInputDirectionChanged(slot func(newDirection LayoutDirection)) {
-	C.QInputMethod_connect_inputDirectionChanged(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QInputMethod) OnInputDirectionChanged(slot func(newDirection LayoutDirection)) *SignalConnection {
+	_goptr := UnsafeNewQMetaObject__Connection(C.QInputMethod_connect_inputDirectionChanged(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QInputMethod_inputDirectionChanged

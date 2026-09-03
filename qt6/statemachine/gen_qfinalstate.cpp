@@ -1,3 +1,5 @@
+#include <memory>
+#include <utility>
 #include <QAbstractState>
 #include <QChildEvent>
 #include <QEvent>
@@ -17,6 +19,7 @@
 extern "C" {
 #endif
 
+void miqt_exec_callback_handle_release_QFinalState(intptr_t);
 void miqt_exec_callback_QFinalState_onEntry(QFinalState*, intptr_t, QEvent*);
 void miqt_exec_callback_QFinalState_onExit(QFinalState*, intptr_t, QEvent*);
 bool miqt_exec_callback_QFinalState_event(QFinalState*, intptr_t, QEvent*);
@@ -39,129 +42,129 @@ public:
 	virtual ~MiqtVirtualQFinalState() override = default;
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__onEntry = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QFinalState> handle__onEntry;
 
 	// Subclass to allow providing a Go implementation
 	virtual void onEntry(QEvent* event) override {
-		if (handle__onEntry == 0) {
+		if (!handle__onEntry) {
 			QFinalState::onEntry(event);
 			return;
 		}
 
 		QEvent* sigval1 = event;
-		miqt_exec_callback_QFinalState_onEntry(this, handle__onEntry, sigval1);
+		miqt_exec_callback_QFinalState_onEntry(this, handle__onEntry.value(), sigval1);
 
 	}
 
 	friend void QFinalState_virtualbase_onEntry(void* self, QEvent* event);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__onExit = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QFinalState> handle__onExit;
 
 	// Subclass to allow providing a Go implementation
 	virtual void onExit(QEvent* event) override {
-		if (handle__onExit == 0) {
+		if (!handle__onExit) {
 			QFinalState::onExit(event);
 			return;
 		}
 
 		QEvent* sigval1 = event;
-		miqt_exec_callback_QFinalState_onExit(this, handle__onExit, sigval1);
+		miqt_exec_callback_QFinalState_onExit(this, handle__onExit.value(), sigval1);
 
 	}
 
 	friend void QFinalState_virtualbase_onExit(void* self, QEvent* event);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__event = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QFinalState> handle__event;
 
 	// Subclass to allow providing a Go implementation
 	virtual bool event(QEvent* e) override {
-		if (handle__event == 0) {
+		if (!handle__event) {
 			return QFinalState::event(e);
 		}
 
 		QEvent* sigval1 = e;
-		bool callback_return_value = miqt_exec_callback_QFinalState_event(this, handle__event, sigval1);
+		bool callback_return_value = miqt_exec_callback_QFinalState_event(this, handle__event.value(), sigval1);
 		return callback_return_value;
 	}
 
 	friend bool QFinalState_virtualbase_event(void* self, QEvent* e);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__eventFilter = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QFinalState> handle__eventFilter;
 
 	// Subclass to allow providing a Go implementation
 	virtual bool eventFilter(QObject* watched, QEvent* event) override {
-		if (handle__eventFilter == 0) {
+		if (!handle__eventFilter) {
 			return QFinalState::eventFilter(watched, event);
 		}
 
 		QObject* sigval1 = watched;
 		QEvent* sigval2 = event;
-		bool callback_return_value = miqt_exec_callback_QFinalState_eventFilter(this, handle__eventFilter, sigval1, sigval2);
+		bool callback_return_value = miqt_exec_callback_QFinalState_eventFilter(this, handle__eventFilter.value(), sigval1, sigval2);
 		return callback_return_value;
 	}
 
 	friend bool QFinalState_virtualbase_eventFilter(void* self, QObject* watched, QEvent* event);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__timerEvent = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QFinalState> handle__timerEvent;
 
 	// Subclass to allow providing a Go implementation
 	virtual void timerEvent(QTimerEvent* event) override {
-		if (handle__timerEvent == 0) {
+		if (!handle__timerEvent) {
 			QFinalState::timerEvent(event);
 			return;
 		}
 
 		QTimerEvent* sigval1 = event;
-		miqt_exec_callback_QFinalState_timerEvent(this, handle__timerEvent, sigval1);
+		miqt_exec_callback_QFinalState_timerEvent(this, handle__timerEvent.value(), sigval1);
 
 	}
 
 	friend void QFinalState_virtualbase_timerEvent(void* self, QTimerEvent* event);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__childEvent = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QFinalState> handle__childEvent;
 
 	// Subclass to allow providing a Go implementation
 	virtual void childEvent(QChildEvent* event) override {
-		if (handle__childEvent == 0) {
+		if (!handle__childEvent) {
 			QFinalState::childEvent(event);
 			return;
 		}
 
 		QChildEvent* sigval1 = event;
-		miqt_exec_callback_QFinalState_childEvent(this, handle__childEvent, sigval1);
+		miqt_exec_callback_QFinalState_childEvent(this, handle__childEvent.value(), sigval1);
 
 	}
 
 	friend void QFinalState_virtualbase_childEvent(void* self, QChildEvent* event);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__customEvent = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QFinalState> handle__customEvent;
 
 	// Subclass to allow providing a Go implementation
 	virtual void customEvent(QEvent* event) override {
-		if (handle__customEvent == 0) {
+		if (!handle__customEvent) {
 			QFinalState::customEvent(event);
 			return;
 		}
 
 		QEvent* sigval1 = event;
-		miqt_exec_callback_QFinalState_customEvent(this, handle__customEvent, sigval1);
+		miqt_exec_callback_QFinalState_customEvent(this, handle__customEvent.value(), sigval1);
 
 	}
 
 	friend void QFinalState_virtualbase_customEvent(void* self, QEvent* event);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__connectNotify = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QFinalState> handle__connectNotify;
 
 	// Subclass to allow providing a Go implementation
 	virtual void connectNotify(const QMetaMethod& signal) override {
-		if (handle__connectNotify == 0) {
+		if (!handle__connectNotify) {
 			QFinalState::connectNotify(signal);
 			return;
 		}
@@ -169,18 +172,18 @@ public:
 		const QMetaMethod& signal_ret = signal;
 		// Cast returned reference into pointer
 		QMetaMethod* sigval1 = const_cast<QMetaMethod*>(&signal_ret);
-		miqt_exec_callback_QFinalState_connectNotify(this, handle__connectNotify, sigval1);
+		miqt_exec_callback_QFinalState_connectNotify(this, handle__connectNotify.value(), sigval1);
 
 	}
 
 	friend void QFinalState_virtualbase_connectNotify(void* self, QMetaMethod* signal);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__disconnectNotify = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QFinalState> handle__disconnectNotify;
 
 	// Subclass to allow providing a Go implementation
 	virtual void disconnectNotify(const QMetaMethod& signal) override {
-		if (handle__disconnectNotify == 0) {
+		if (!handle__disconnectNotify) {
 			QFinalState::disconnectNotify(signal);
 			return;
 		}
@@ -188,7 +191,7 @@ public:
 		const QMetaMethod& signal_ret = signal;
 		// Cast returned reference into pointer
 		QMetaMethod* sigval1 = const_cast<QMetaMethod*>(&signal_ret);
-		miqt_exec_callback_QFinalState_disconnectNotify(this, handle__disconnectNotify, sigval1);
+		miqt_exec_callback_QFinalState_disconnectNotify(this, handle__disconnectNotify.value(), sigval1);
 
 	}
 
@@ -255,12 +258,13 @@ struct miqt_string QFinalState_tr3(const char* s, const char* c, int n) {
 }
 
 bool QFinalState_override_virtual_onEntry(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QFinalState> slot_handle(slot);
 	MiqtVirtualQFinalState* self_cast = dynamic_cast<MiqtVirtualQFinalState*>( (QFinalState*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__onEntry = slot;
+	self_cast->handle__onEntry = std::move(slot_handle);
 	return true;
 }
 
@@ -269,12 +273,13 @@ void QFinalState_virtualbase_onEntry(void* self, QEvent* event) {
 }
 
 bool QFinalState_override_virtual_onExit(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QFinalState> slot_handle(slot);
 	MiqtVirtualQFinalState* self_cast = dynamic_cast<MiqtVirtualQFinalState*>( (QFinalState*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__onExit = slot;
+	self_cast->handle__onExit = std::move(slot_handle);
 	return true;
 }
 
@@ -283,12 +288,13 @@ void QFinalState_virtualbase_onExit(void* self, QEvent* event) {
 }
 
 bool QFinalState_override_virtual_event(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QFinalState> slot_handle(slot);
 	MiqtVirtualQFinalState* self_cast = dynamic_cast<MiqtVirtualQFinalState*>( (QFinalState*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__event = slot;
+	self_cast->handle__event = std::move(slot_handle);
 	return true;
 }
 
@@ -297,12 +303,13 @@ bool QFinalState_virtualbase_event(void* self, QEvent* e) {
 }
 
 bool QFinalState_override_virtual_eventFilter(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QFinalState> slot_handle(slot);
 	MiqtVirtualQFinalState* self_cast = dynamic_cast<MiqtVirtualQFinalState*>( (QFinalState*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__eventFilter = slot;
+	self_cast->handle__eventFilter = std::move(slot_handle);
 	return true;
 }
 
@@ -311,12 +318,13 @@ bool QFinalState_virtualbase_eventFilter(void* self, QObject* watched, QEvent* e
 }
 
 bool QFinalState_override_virtual_timerEvent(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QFinalState> slot_handle(slot);
 	MiqtVirtualQFinalState* self_cast = dynamic_cast<MiqtVirtualQFinalState*>( (QFinalState*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__timerEvent = slot;
+	self_cast->handle__timerEvent = std::move(slot_handle);
 	return true;
 }
 
@@ -325,12 +333,13 @@ void QFinalState_virtualbase_timerEvent(void* self, QTimerEvent* event) {
 }
 
 bool QFinalState_override_virtual_childEvent(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QFinalState> slot_handle(slot);
 	MiqtVirtualQFinalState* self_cast = dynamic_cast<MiqtVirtualQFinalState*>( (QFinalState*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__childEvent = slot;
+	self_cast->handle__childEvent = std::move(slot_handle);
 	return true;
 }
 
@@ -339,12 +348,13 @@ void QFinalState_virtualbase_childEvent(void* self, QChildEvent* event) {
 }
 
 bool QFinalState_override_virtual_customEvent(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QFinalState> slot_handle(slot);
 	MiqtVirtualQFinalState* self_cast = dynamic_cast<MiqtVirtualQFinalState*>( (QFinalState*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__customEvent = slot;
+	self_cast->handle__customEvent = std::move(slot_handle);
 	return true;
 }
 
@@ -353,12 +363,13 @@ void QFinalState_virtualbase_customEvent(void* self, QEvent* event) {
 }
 
 bool QFinalState_override_virtual_connectNotify(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QFinalState> slot_handle(slot);
 	MiqtVirtualQFinalState* self_cast = dynamic_cast<MiqtVirtualQFinalState*>( (QFinalState*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__connectNotify = slot;
+	self_cast->handle__connectNotify = std::move(slot_handle);
 	return true;
 }
 
@@ -367,12 +378,13 @@ void QFinalState_virtualbase_connectNotify(void* self, QMetaMethod* signal) {
 }
 
 bool QFinalState_override_virtual_disconnectNotify(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QFinalState> slot_handle(slot);
 	MiqtVirtualQFinalState* self_cast = dynamic_cast<MiqtVirtualQFinalState*>( (QFinalState*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__disconnectNotify = slot;
+	self_cast->handle__disconnectNotify = std::move(slot_handle);
 	return true;
 }
 

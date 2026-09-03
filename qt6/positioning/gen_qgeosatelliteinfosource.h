@@ -57,11 +57,11 @@ void QGeoSatelliteInfoSource_startUpdates(QGeoSatelliteInfoSource* self);
 void QGeoSatelliteInfoSource_stopUpdates(QGeoSatelliteInfoSource* self);
 void QGeoSatelliteInfoSource_requestUpdate(QGeoSatelliteInfoSource* self, int timeout);
 void QGeoSatelliteInfoSource_satellitesInViewUpdated(QGeoSatelliteInfoSource* self, struct miqt_array /* of QGeoSatelliteInfo* */  satellites);
-void QGeoSatelliteInfoSource_connect_satellitesInViewUpdated(QGeoSatelliteInfoSource* self, intptr_t slot);
+void* QGeoSatelliteInfoSource_connect_satellitesInViewUpdated(QGeoSatelliteInfoSource* self, intptr_t slot);
 void QGeoSatelliteInfoSource_satellitesInUseUpdated(QGeoSatelliteInfoSource* self, struct miqt_array /* of QGeoSatelliteInfo* */  satellites);
-void QGeoSatelliteInfoSource_connect_satellitesInUseUpdated(QGeoSatelliteInfoSource* self, intptr_t slot);
+void* QGeoSatelliteInfoSource_connect_satellitesInUseUpdated(QGeoSatelliteInfoSource* self, intptr_t slot);
 void QGeoSatelliteInfoSource_errorOccurred(QGeoSatelliteInfoSource* self, int param1);
-void QGeoSatelliteInfoSource_connect_errorOccurred(QGeoSatelliteInfoSource* self, intptr_t slot);
+void* QGeoSatelliteInfoSource_connect_errorOccurred(QGeoSatelliteInfoSource* self, intptr_t slot);
 struct miqt_string QGeoSatelliteInfoSource_tr2(const char* s, const char* c);
 struct miqt_string QGeoSatelliteInfoSource_tr3(const char* s, const char* c, int n);
 

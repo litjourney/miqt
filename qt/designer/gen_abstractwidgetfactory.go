@@ -15,6 +15,11 @@ import (
 	"unsafe"
 )
 
+//export miqt_exec_callback_handle_release_QDesignerWidgetFactoryInterface
+func miqt_exec_callback_handle_release_QDesignerWidgetFactoryInterface(cb C.intptr_t) {
+	cgo.Handle(cb).Delete()
+}
+
 type QDesignerWidgetFactoryInterface struct {
 	h *C.QDesignerWidgetFactoryInterface
 	*qt.QObject
@@ -225,7 +230,11 @@ func (this *QDesignerWidgetFactoryInterface) IsSignalConnected(signal *qt.QMetaM
 
 }
 func (this *QDesignerWidgetFactoryInterface) OnCore(slot func() *QDesignerFormEditorInterface) {
-	ok := C.QDesignerWidgetFactoryInterface_override_virtual_core(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QDesignerWidgetFactoryInterface_override_virtual_core(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -244,7 +253,11 @@ func miqt_exec_callback_QDesignerWidgetFactoryInterface_core(self *C.QDesignerWi
 
 }
 func (this *QDesignerWidgetFactoryInterface) OnContainerOfWidget(slot func(w *qt.QWidget) *qt.QWidget) {
-	ok := C.QDesignerWidgetFactoryInterface_override_virtual_containerOfWidget(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QDesignerWidgetFactoryInterface_override_virtual_containerOfWidget(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -266,7 +279,11 @@ func miqt_exec_callback_QDesignerWidgetFactoryInterface_containerOfWidget(self *
 
 }
 func (this *QDesignerWidgetFactoryInterface) OnWidgetOfContainer(slot func(w *qt.QWidget) *qt.QWidget) {
-	ok := C.QDesignerWidgetFactoryInterface_override_virtual_widgetOfContainer(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QDesignerWidgetFactoryInterface_override_virtual_widgetOfContainer(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -288,7 +305,11 @@ func miqt_exec_callback_QDesignerWidgetFactoryInterface_widgetOfContainer(self *
 
 }
 func (this *QDesignerWidgetFactoryInterface) OnCreateWidget(slot func(name string, parentWidget *qt.QWidget) *qt.QWidget) {
-	ok := C.QDesignerWidgetFactoryInterface_override_virtual_createWidget(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QDesignerWidgetFactoryInterface_override_virtual_createWidget(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -314,7 +335,11 @@ func miqt_exec_callback_QDesignerWidgetFactoryInterface_createWidget(self *C.QDe
 
 }
 func (this *QDesignerWidgetFactoryInterface) OnCreateLayout(slot func(widget *qt.QWidget, layout *qt.QLayout, typeVal int) *qt.QLayout) {
-	ok := C.QDesignerWidgetFactoryInterface_override_virtual_createLayout(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QDesignerWidgetFactoryInterface_override_virtual_createLayout(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -340,7 +365,11 @@ func miqt_exec_callback_QDesignerWidgetFactoryInterface_createLayout(self *C.QDe
 
 }
 func (this *QDesignerWidgetFactoryInterface) OnIsPassiveInteractor(slot func(widget *qt.QWidget) bool) {
-	ok := C.QDesignerWidgetFactoryInterface_override_virtual_isPassiveInteractor(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QDesignerWidgetFactoryInterface_override_virtual_isPassiveInteractor(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -362,7 +391,11 @@ func miqt_exec_callback_QDesignerWidgetFactoryInterface_isPassiveInteractor(self
 
 }
 func (this *QDesignerWidgetFactoryInterface) OnInitialize(slot func(object *qt.QObject)) {
-	ok := C.QDesignerWidgetFactoryInterface_override_virtual_initialize(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QDesignerWidgetFactoryInterface_override_virtual_initialize(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -388,7 +421,11 @@ func (this *QDesignerWidgetFactoryInterface) callVirtualBase_Event(event *qt.QEv
 
 }
 func (this *QDesignerWidgetFactoryInterface) OnEvent(slot func(super func(event *qt.QEvent) bool, event *qt.QEvent) bool) {
-	ok := C.QDesignerWidgetFactoryInterface_override_virtual_event(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QDesignerWidgetFactoryInterface_override_virtual_event(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -416,7 +453,11 @@ func (this *QDesignerWidgetFactoryInterface) callVirtualBase_EventFilter(watched
 
 }
 func (this *QDesignerWidgetFactoryInterface) OnEventFilter(slot func(super func(watched *qt.QObject, event *qt.QEvent) bool, watched *qt.QObject, event *qt.QEvent) bool) {
-	ok := C.QDesignerWidgetFactoryInterface_override_virtual_eventFilter(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QDesignerWidgetFactoryInterface_override_virtual_eventFilter(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -446,7 +487,11 @@ func (this *QDesignerWidgetFactoryInterface) callVirtualBase_TimerEvent(event *q
 
 }
 func (this *QDesignerWidgetFactoryInterface) OnTimerEvent(slot func(super func(event *qt.QTimerEvent), event *qt.QTimerEvent)) {
-	ok := C.QDesignerWidgetFactoryInterface_override_virtual_timerEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QDesignerWidgetFactoryInterface_override_virtual_timerEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -472,7 +517,11 @@ func (this *QDesignerWidgetFactoryInterface) callVirtualBase_ChildEvent(event *q
 
 }
 func (this *QDesignerWidgetFactoryInterface) OnChildEvent(slot func(super func(event *qt.QChildEvent), event *qt.QChildEvent)) {
-	ok := C.QDesignerWidgetFactoryInterface_override_virtual_childEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QDesignerWidgetFactoryInterface_override_virtual_childEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -498,7 +547,11 @@ func (this *QDesignerWidgetFactoryInterface) callVirtualBase_CustomEvent(event *
 
 }
 func (this *QDesignerWidgetFactoryInterface) OnCustomEvent(slot func(super func(event *qt.QEvent), event *qt.QEvent)) {
-	ok := C.QDesignerWidgetFactoryInterface_override_virtual_customEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QDesignerWidgetFactoryInterface_override_virtual_customEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -524,7 +577,11 @@ func (this *QDesignerWidgetFactoryInterface) callVirtualBase_ConnectNotify(signa
 
 }
 func (this *QDesignerWidgetFactoryInterface) OnConnectNotify(slot func(super func(signal *qt.QMetaMethod), signal *qt.QMetaMethod)) {
-	ok := C.QDesignerWidgetFactoryInterface_override_virtual_connectNotify(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QDesignerWidgetFactoryInterface_override_virtual_connectNotify(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -550,7 +607,11 @@ func (this *QDesignerWidgetFactoryInterface) callVirtualBase_DisconnectNotify(si
 
 }
 func (this *QDesignerWidgetFactoryInterface) OnDisconnectNotify(slot func(super func(signal *qt.QMetaMethod), signal *qt.QMetaMethod)) {
-	ok := C.QDesignerWidgetFactoryInterface_override_virtual_disconnectNotify(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QDesignerWidgetFactoryInterface_override_virtual_disconnectNotify(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}

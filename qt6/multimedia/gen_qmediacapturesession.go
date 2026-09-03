@@ -15,6 +15,11 @@ import (
 	"unsafe"
 )
 
+//export miqt_exec_callback_handle_release_QMediaCaptureSession
+func miqt_exec_callback_handle_release_QMediaCaptureSession(cb C.intptr_t) {
+	cgo.Handle(cb).Delete()
+}
+
 type QMediaCaptureSession struct {
 	h *C.QMediaCaptureSession
 	*qt6.QObject
@@ -141,8 +146,10 @@ func (this *QMediaCaptureSession) AudioOutput() *QAudioOutput {
 func (this *QMediaCaptureSession) AudioInputChanged() {
 	C.QMediaCaptureSession_audioInputChanged(this.h)
 }
-func (this *QMediaCaptureSession) OnAudioInputChanged(slot func()) {
-	C.QMediaCaptureSession_connect_audioInputChanged(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QMediaCaptureSession) OnAudioInputChanged(slot func()) *qt6.SignalConnection {
+	_goptr := qt6.UnsafeNewQMetaObject__Connection(C.QMediaCaptureSession_connect_audioInputChanged(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QMediaCaptureSession_audioInputChanged
@@ -158,8 +165,10 @@ func miqt_exec_callback_QMediaCaptureSession_audioInputChanged(cb C.intptr_t) {
 func (this *QMediaCaptureSession) CameraChanged() {
 	C.QMediaCaptureSession_cameraChanged(this.h)
 }
-func (this *QMediaCaptureSession) OnCameraChanged(slot func()) {
-	C.QMediaCaptureSession_connect_cameraChanged(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QMediaCaptureSession) OnCameraChanged(slot func()) *qt6.SignalConnection {
+	_goptr := qt6.UnsafeNewQMetaObject__Connection(C.QMediaCaptureSession_connect_cameraChanged(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QMediaCaptureSession_cameraChanged
@@ -175,8 +184,10 @@ func miqt_exec_callback_QMediaCaptureSession_cameraChanged(cb C.intptr_t) {
 func (this *QMediaCaptureSession) ImageCaptureChanged() {
 	C.QMediaCaptureSession_imageCaptureChanged(this.h)
 }
-func (this *QMediaCaptureSession) OnImageCaptureChanged(slot func()) {
-	C.QMediaCaptureSession_connect_imageCaptureChanged(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QMediaCaptureSession) OnImageCaptureChanged(slot func()) *qt6.SignalConnection {
+	_goptr := qt6.UnsafeNewQMetaObject__Connection(C.QMediaCaptureSession_connect_imageCaptureChanged(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QMediaCaptureSession_imageCaptureChanged
@@ -192,8 +203,10 @@ func miqt_exec_callback_QMediaCaptureSession_imageCaptureChanged(cb C.intptr_t) 
 func (this *QMediaCaptureSession) RecorderChanged() {
 	C.QMediaCaptureSession_recorderChanged(this.h)
 }
-func (this *QMediaCaptureSession) OnRecorderChanged(slot func()) {
-	C.QMediaCaptureSession_connect_recorderChanged(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QMediaCaptureSession) OnRecorderChanged(slot func()) *qt6.SignalConnection {
+	_goptr := qt6.UnsafeNewQMetaObject__Connection(C.QMediaCaptureSession_connect_recorderChanged(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QMediaCaptureSession_recorderChanged
@@ -209,8 +222,10 @@ func miqt_exec_callback_QMediaCaptureSession_recorderChanged(cb C.intptr_t) {
 func (this *QMediaCaptureSession) VideoOutputChanged() {
 	C.QMediaCaptureSession_videoOutputChanged(this.h)
 }
-func (this *QMediaCaptureSession) OnVideoOutputChanged(slot func()) {
-	C.QMediaCaptureSession_connect_videoOutputChanged(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QMediaCaptureSession) OnVideoOutputChanged(slot func()) *qt6.SignalConnection {
+	_goptr := qt6.UnsafeNewQMetaObject__Connection(C.QMediaCaptureSession_connect_videoOutputChanged(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QMediaCaptureSession_videoOutputChanged
@@ -226,8 +241,10 @@ func miqt_exec_callback_QMediaCaptureSession_videoOutputChanged(cb C.intptr_t) {
 func (this *QMediaCaptureSession) AudioOutputChanged() {
 	C.QMediaCaptureSession_audioOutputChanged(this.h)
 }
-func (this *QMediaCaptureSession) OnAudioOutputChanged(slot func()) {
-	C.QMediaCaptureSession_connect_audioOutputChanged(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QMediaCaptureSession) OnAudioOutputChanged(slot func()) *qt6.SignalConnection {
+	_goptr := qt6.UnsafeNewQMetaObject__Connection(C.QMediaCaptureSession_connect_audioOutputChanged(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QMediaCaptureSession_audioOutputChanged
@@ -326,7 +343,11 @@ func (this *QMediaCaptureSession) callVirtualBase_Event(event *qt6.QEvent) bool 
 
 }
 func (this *QMediaCaptureSession) OnEvent(slot func(super func(event *qt6.QEvent) bool, event *qt6.QEvent) bool) {
-	ok := C.QMediaCaptureSession_override_virtual_event(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QMediaCaptureSession_override_virtual_event(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -354,7 +375,11 @@ func (this *QMediaCaptureSession) callVirtualBase_EventFilter(watched *qt6.QObje
 
 }
 func (this *QMediaCaptureSession) OnEventFilter(slot func(super func(watched *qt6.QObject, event *qt6.QEvent) bool, watched *qt6.QObject, event *qt6.QEvent) bool) {
-	ok := C.QMediaCaptureSession_override_virtual_eventFilter(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QMediaCaptureSession_override_virtual_eventFilter(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -384,7 +409,11 @@ func (this *QMediaCaptureSession) callVirtualBase_TimerEvent(event *qt6.QTimerEv
 
 }
 func (this *QMediaCaptureSession) OnTimerEvent(slot func(super func(event *qt6.QTimerEvent), event *qt6.QTimerEvent)) {
-	ok := C.QMediaCaptureSession_override_virtual_timerEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QMediaCaptureSession_override_virtual_timerEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -410,7 +439,11 @@ func (this *QMediaCaptureSession) callVirtualBase_ChildEvent(event *qt6.QChildEv
 
 }
 func (this *QMediaCaptureSession) OnChildEvent(slot func(super func(event *qt6.QChildEvent), event *qt6.QChildEvent)) {
-	ok := C.QMediaCaptureSession_override_virtual_childEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QMediaCaptureSession_override_virtual_childEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -436,7 +469,11 @@ func (this *QMediaCaptureSession) callVirtualBase_CustomEvent(event *qt6.QEvent)
 
 }
 func (this *QMediaCaptureSession) OnCustomEvent(slot func(super func(event *qt6.QEvent), event *qt6.QEvent)) {
-	ok := C.QMediaCaptureSession_override_virtual_customEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QMediaCaptureSession_override_virtual_customEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -462,7 +499,11 @@ func (this *QMediaCaptureSession) callVirtualBase_ConnectNotify(signal *qt6.QMet
 
 }
 func (this *QMediaCaptureSession) OnConnectNotify(slot func(super func(signal *qt6.QMetaMethod), signal *qt6.QMetaMethod)) {
-	ok := C.QMediaCaptureSession_override_virtual_connectNotify(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QMediaCaptureSession_override_virtual_connectNotify(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -488,7 +529,11 @@ func (this *QMediaCaptureSession) callVirtualBase_DisconnectNotify(signal *qt6.Q
 
 }
 func (this *QMediaCaptureSession) OnDisconnectNotify(slot func(super func(signal *qt6.QMetaMethod), signal *qt6.QMetaMethod)) {
-	ok := C.QMediaCaptureSession_override_virtual_disconnectNotify(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QMediaCaptureSession_override_virtual_disconnectNotify(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}

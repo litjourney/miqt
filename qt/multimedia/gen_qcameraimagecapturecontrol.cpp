@@ -1,3 +1,5 @@
+#include <memory>
+#include <utility>
 #include <QCameraImageCaptureControl>
 #include <QImage>
 #include <QMediaControl>
@@ -16,6 +18,7 @@
 extern "C" {
 #endif
 
+void miqt_exec_callback_handle_release_QCameraImageCaptureControl(intptr_t);
 void miqt_exec_callback_QCameraImageCaptureControl_readyForCaptureChanged(intptr_t, bool);
 void miqt_exec_callback_QCameraImageCaptureControl_imageExposed(intptr_t, int);
 void miqt_exec_callback_QCameraImageCaptureControl_imageCaptured(intptr_t, int, QImage*);
@@ -87,36 +90,42 @@ void QCameraImageCaptureControl_readyForCaptureChanged(QCameraImageCaptureContro
 	self->readyForCaptureChanged(ready);
 }
 
-void QCameraImageCaptureControl_connect_readyForCaptureChanged(QCameraImageCaptureControl* self, intptr_t slot) {
-	QCameraImageCaptureControl::connect(self, static_cast<void (QCameraImageCaptureControl::*)(bool)>(&QCameraImageCaptureControl::readyForCaptureChanged), self, [=](bool ready) {
+void* QCameraImageCaptureControl_connect_readyForCaptureChanged(QCameraImageCaptureControl* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QCameraImageCaptureControl>>(slot);
+	return new QMetaObject::Connection(QCameraImageCaptureControl::connect(self, static_cast<void (QCameraImageCaptureControl::*)(bool)>(&QCameraImageCaptureControl::readyForCaptureChanged), self, [slot_handle](bool ready) {
+		intptr_t slot = slot_handle->value();
 		bool sigval1 = ready;
 		miqt_exec_callback_QCameraImageCaptureControl_readyForCaptureChanged(slot, sigval1);
-	});
+	}));
 }
 
 void QCameraImageCaptureControl_imageExposed(QCameraImageCaptureControl* self, int requestId) {
 	self->imageExposed(static_cast<int>(requestId));
 }
 
-void QCameraImageCaptureControl_connect_imageExposed(QCameraImageCaptureControl* self, intptr_t slot) {
-	QCameraImageCaptureControl::connect(self, static_cast<void (QCameraImageCaptureControl::*)(int)>(&QCameraImageCaptureControl::imageExposed), self, [=](int requestId) {
+void* QCameraImageCaptureControl_connect_imageExposed(QCameraImageCaptureControl* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QCameraImageCaptureControl>>(slot);
+	return new QMetaObject::Connection(QCameraImageCaptureControl::connect(self, static_cast<void (QCameraImageCaptureControl::*)(int)>(&QCameraImageCaptureControl::imageExposed), self, [slot_handle](int requestId) {
+		intptr_t slot = slot_handle->value();
 		int sigval1 = requestId;
 		miqt_exec_callback_QCameraImageCaptureControl_imageExposed(slot, sigval1);
-	});
+	}));
 }
 
 void QCameraImageCaptureControl_imageCaptured(QCameraImageCaptureControl* self, int requestId, QImage* preview) {
 	self->imageCaptured(static_cast<int>(requestId), *preview);
 }
 
-void QCameraImageCaptureControl_connect_imageCaptured(QCameraImageCaptureControl* self, intptr_t slot) {
-	QCameraImageCaptureControl::connect(self, static_cast<void (QCameraImageCaptureControl::*)(int, const QImage&)>(&QCameraImageCaptureControl::imageCaptured), self, [=](int requestId, const QImage& preview) {
+void* QCameraImageCaptureControl_connect_imageCaptured(QCameraImageCaptureControl* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QCameraImageCaptureControl>>(slot);
+	return new QMetaObject::Connection(QCameraImageCaptureControl::connect(self, static_cast<void (QCameraImageCaptureControl::*)(int, const QImage&)>(&QCameraImageCaptureControl::imageCaptured), self, [slot_handle](int requestId, const QImage& preview) {
+		intptr_t slot = slot_handle->value();
 		int sigval1 = requestId;
 		const QImage& preview_ret = preview;
 		// Cast returned reference into pointer
 		QImage* sigval2 = const_cast<QImage*>(&preview_ret);
 		miqt_exec_callback_QCameraImageCaptureControl_imageCaptured(slot, sigval1, sigval2);
-	});
+	}));
 }
 
 void QCameraImageCaptureControl_imageMetadataAvailable(QCameraImageCaptureControl* self, int id, struct miqt_string key, QVariant* value) {
@@ -124,8 +133,10 @@ void QCameraImageCaptureControl_imageMetadataAvailable(QCameraImageCaptureContro
 	self->imageMetadataAvailable(static_cast<int>(id), key_QString, *value);
 }
 
-void QCameraImageCaptureControl_connect_imageMetadataAvailable(QCameraImageCaptureControl* self, intptr_t slot) {
-	QCameraImageCaptureControl::connect(self, static_cast<void (QCameraImageCaptureControl::*)(int, const QString&, const QVariant&)>(&QCameraImageCaptureControl::imageMetadataAvailable), self, [=](int id, const QString& key, const QVariant& value) {
+void* QCameraImageCaptureControl_connect_imageMetadataAvailable(QCameraImageCaptureControl* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QCameraImageCaptureControl>>(slot);
+	return new QMetaObject::Connection(QCameraImageCaptureControl::connect(self, static_cast<void (QCameraImageCaptureControl::*)(int, const QString&, const QVariant&)>(&QCameraImageCaptureControl::imageMetadataAvailable), self, [slot_handle](int id, const QString& key, const QVariant& value) {
+		intptr_t slot = slot_handle->value();
 		int sigval1 = id;
 		const QString key_ret = key;
 		// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
@@ -139,21 +150,23 @@ void QCameraImageCaptureControl_connect_imageMetadataAvailable(QCameraImageCaptu
 		// Cast returned reference into pointer
 		QVariant* sigval3 = const_cast<QVariant*>(&value_ret);
 		miqt_exec_callback_QCameraImageCaptureControl_imageMetadataAvailable(slot, sigval1, sigval2, sigval3);
-	});
+	}));
 }
 
 void QCameraImageCaptureControl_imageAvailable(QCameraImageCaptureControl* self, int requestId, QVideoFrame* buffer) {
 	self->imageAvailable(static_cast<int>(requestId), *buffer);
 }
 
-void QCameraImageCaptureControl_connect_imageAvailable(QCameraImageCaptureControl* self, intptr_t slot) {
-	QCameraImageCaptureControl::connect(self, static_cast<void (QCameraImageCaptureControl::*)(int, const QVideoFrame&)>(&QCameraImageCaptureControl::imageAvailable), self, [=](int requestId, const QVideoFrame& buffer) {
+void* QCameraImageCaptureControl_connect_imageAvailable(QCameraImageCaptureControl* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QCameraImageCaptureControl>>(slot);
+	return new QMetaObject::Connection(QCameraImageCaptureControl::connect(self, static_cast<void (QCameraImageCaptureControl::*)(int, const QVideoFrame&)>(&QCameraImageCaptureControl::imageAvailable), self, [slot_handle](int requestId, const QVideoFrame& buffer) {
+		intptr_t slot = slot_handle->value();
 		int sigval1 = requestId;
 		const QVideoFrame& buffer_ret = buffer;
 		// Cast returned reference into pointer
 		QVideoFrame* sigval2 = const_cast<QVideoFrame*>(&buffer_ret);
 		miqt_exec_callback_QCameraImageCaptureControl_imageAvailable(slot, sigval1, sigval2);
-	});
+	}));
 }
 
 void QCameraImageCaptureControl_imageSaved(QCameraImageCaptureControl* self, int requestId, struct miqt_string fileName) {
@@ -161,8 +174,10 @@ void QCameraImageCaptureControl_imageSaved(QCameraImageCaptureControl* self, int
 	self->imageSaved(static_cast<int>(requestId), fileName_QString);
 }
 
-void QCameraImageCaptureControl_connect_imageSaved(QCameraImageCaptureControl* self, intptr_t slot) {
-	QCameraImageCaptureControl::connect(self, static_cast<void (QCameraImageCaptureControl::*)(int, const QString&)>(&QCameraImageCaptureControl::imageSaved), self, [=](int requestId, const QString& fileName) {
+void* QCameraImageCaptureControl_connect_imageSaved(QCameraImageCaptureControl* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QCameraImageCaptureControl>>(slot);
+	return new QMetaObject::Connection(QCameraImageCaptureControl::connect(self, static_cast<void (QCameraImageCaptureControl::*)(int, const QString&)>(&QCameraImageCaptureControl::imageSaved), self, [slot_handle](int requestId, const QString& fileName) {
+		intptr_t slot = slot_handle->value();
 		int sigval1 = requestId;
 		const QString fileName_ret = fileName;
 		// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
@@ -173,7 +188,7 @@ void QCameraImageCaptureControl_connect_imageSaved(QCameraImageCaptureControl* s
 		memcpy(fileName_ms.data, fileName_b.data(), fileName_ms.len);
 		struct miqt_string sigval2 = fileName_ms;
 		miqt_exec_callback_QCameraImageCaptureControl_imageSaved(slot, sigval1, sigval2);
-	});
+	}));
 }
 
 void QCameraImageCaptureControl_error(QCameraImageCaptureControl* self, int id, int error, struct miqt_string errorString) {
@@ -181,8 +196,10 @@ void QCameraImageCaptureControl_error(QCameraImageCaptureControl* self, int id, 
 	self->error(static_cast<int>(id), static_cast<int>(error), errorString_QString);
 }
 
-void QCameraImageCaptureControl_connect_error(QCameraImageCaptureControl* self, intptr_t slot) {
-	QCameraImageCaptureControl::connect(self, static_cast<void (QCameraImageCaptureControl::*)(int, int, const QString&)>(&QCameraImageCaptureControl::error), self, [=](int id, int error, const QString& errorString) {
+void* QCameraImageCaptureControl_connect_error(QCameraImageCaptureControl* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QCameraImageCaptureControl>>(slot);
+	return new QMetaObject::Connection(QCameraImageCaptureControl::connect(self, static_cast<void (QCameraImageCaptureControl::*)(int, int, const QString&)>(&QCameraImageCaptureControl::error), self, [slot_handle](int id, int error, const QString& errorString) {
+		intptr_t slot = slot_handle->value();
 		int sigval1 = id;
 		int sigval2 = error;
 		const QString errorString_ret = errorString;
@@ -194,7 +211,7 @@ void QCameraImageCaptureControl_connect_error(QCameraImageCaptureControl* self, 
 		memcpy(errorString_ms.data, errorString_b.data(), errorString_ms.len);
 		struct miqt_string sigval3 = errorString_ms;
 		miqt_exec_callback_QCameraImageCaptureControl_error(slot, sigval1, sigval2, sigval3);
-	});
+	}));
 }
 
 struct miqt_string QCameraImageCaptureControl_tr2(const char* s, const char* c) {

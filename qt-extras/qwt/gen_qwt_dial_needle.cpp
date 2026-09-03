@@ -1,3 +1,5 @@
+#include <memory>
+#include <utility>
 #include <QBrush>
 #include <QColor>
 #include <QPainter>
@@ -10,18 +12,22 @@
 extern "C" {
 #endif
 
+void miqt_exec_callback_handle_release_QwtDialNeedle(intptr_t);
 void miqt_exec_callback_QwtDialNeedle_setPalette(QwtDialNeedle*, intptr_t, QPalette*);
 void miqt_exec_callback_QwtDialNeedle_draw(const QwtDialNeedle*, intptr_t, QPainter*, QPointF*, double, double, int);
 void miqt_exec_callback_QwtDialNeedle_drawNeedle(const QwtDialNeedle*, intptr_t, QPainter*, double, int);
 void miqt_exec_callback_QwtDialNeedle_drawKnob(const QwtDialNeedle*, intptr_t, QPainter*, double, QBrush*, bool);
+void miqt_exec_callback_handle_release_QwtDialSimpleNeedle(intptr_t);
 void miqt_exec_callback_QwtDialSimpleNeedle_drawNeedle(const QwtDialSimpleNeedle*, intptr_t, QPainter*, double, int);
 void miqt_exec_callback_QwtDialSimpleNeedle_setPalette(QwtDialSimpleNeedle*, intptr_t, QPalette*);
 void miqt_exec_callback_QwtDialSimpleNeedle_draw(const QwtDialSimpleNeedle*, intptr_t, QPainter*, QPointF*, double, double, int);
 void miqt_exec_callback_QwtDialSimpleNeedle_drawKnob(const QwtDialSimpleNeedle*, intptr_t, QPainter*, double, QBrush*, bool);
+void miqt_exec_callback_handle_release_QwtCompassMagnetNeedle(intptr_t);
 void miqt_exec_callback_QwtCompassMagnetNeedle_drawNeedle(const QwtCompassMagnetNeedle*, intptr_t, QPainter*, double, int);
 void miqt_exec_callback_QwtCompassMagnetNeedle_setPalette(QwtCompassMagnetNeedle*, intptr_t, QPalette*);
 void miqt_exec_callback_QwtCompassMagnetNeedle_draw(const QwtCompassMagnetNeedle*, intptr_t, QPainter*, QPointF*, double, double, int);
 void miqt_exec_callback_QwtCompassMagnetNeedle_drawKnob(const QwtCompassMagnetNeedle*, intptr_t, QPainter*, double, QBrush*, bool);
+void miqt_exec_callback_handle_release_QwtCompassWindArrow(intptr_t);
 void miqt_exec_callback_QwtCompassWindArrow_drawNeedle(const QwtCompassWindArrow*, intptr_t, QPainter*, double, int);
 void miqt_exec_callback_QwtCompassWindArrow_setPalette(QwtCompassWindArrow*, intptr_t, QPalette*);
 void miqt_exec_callback_QwtCompassWindArrow_draw(const QwtCompassWindArrow*, intptr_t, QPainter*, QPointF*, double, double, int);
@@ -39,11 +45,11 @@ public:
 	virtual ~MiqtVirtualQwtDialNeedle() override = default;
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__setPalette = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtDialNeedle> handle__setPalette;
 
 	// Subclass to allow providing a Go implementation
 	virtual void setPalette(const QPalette& palette) override {
-		if (handle__setPalette == 0) {
+		if (!handle__setPalette) {
 			QwtDialNeedle::setPalette(palette);
 			return;
 		}
@@ -51,18 +57,18 @@ public:
 		const QPalette& palette_ret = palette;
 		// Cast returned reference into pointer
 		QPalette* sigval1 = const_cast<QPalette*>(&palette_ret);
-		miqt_exec_callback_QwtDialNeedle_setPalette(this, handle__setPalette, sigval1);
+		miqt_exec_callback_QwtDialNeedle_setPalette(this, handle__setPalette.value(), sigval1);
 
 	}
 
 	friend void QwtDialNeedle_virtualbase_setPalette(void* self, QPalette* palette);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__draw = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtDialNeedle> handle__draw;
 
 	// Subclass to allow providing a Go implementation
 	virtual void draw(QPainter* painter, const QPointF& center, double length, double direction, QPalette::ColorGroup param5) const override {
-		if (handle__draw == 0) {
+		if (!handle__draw) {
 			QwtDialNeedle::draw(painter, center, length, direction, param5);
 			return;
 		}
@@ -75,18 +81,18 @@ public:
 		double sigval4 = direction;
 		QPalette::ColorGroup param5_ret = param5;
 		int sigval5 = static_cast<int>(param5_ret);
-		miqt_exec_callback_QwtDialNeedle_draw(this, handle__draw, sigval1, sigval2, sigval3, sigval4, sigval5);
+		miqt_exec_callback_QwtDialNeedle_draw(this, handle__draw.value(), sigval1, sigval2, sigval3, sigval4, sigval5);
 
 	}
 
 	friend void QwtDialNeedle_virtualbase_draw(const void* self, QPainter* painter, QPointF* center, double length, double direction, int param5);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__drawNeedle = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtDialNeedle> handle__drawNeedle;
 
 	// Subclass to allow providing a Go implementation
 	virtual void drawNeedle(QPainter* painter, double length, QPalette::ColorGroup colorGroup) const override {
-		if (handle__drawNeedle == 0) {
+		if (!handle__drawNeedle) {
 			return; // Pure virtual, there is no base we can call
 		}
 
@@ -94,16 +100,16 @@ public:
 		double sigval2 = length;
 		QPalette::ColorGroup colorGroup_ret = colorGroup;
 		int sigval3 = static_cast<int>(colorGroup_ret);
-		miqt_exec_callback_QwtDialNeedle_drawNeedle(this, handle__drawNeedle, sigval1, sigval2, sigval3);
+		miqt_exec_callback_QwtDialNeedle_drawNeedle(this, handle__drawNeedle.value(), sigval1, sigval2, sigval3);
 
 	}
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__drawKnob = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtDialNeedle> handle__drawKnob;
 
 	// Subclass to allow providing a Go implementation
 	virtual void drawKnob(QPainter* param1, double width, const QBrush& param3, bool sunken) const override {
-		if (handle__drawKnob == 0) {
+		if (!handle__drawKnob) {
 			QwtDialNeedle::drawKnob(param1, width, param3, sunken);
 			return;
 		}
@@ -114,7 +120,7 @@ public:
 		// Cast returned reference into pointer
 		QBrush* sigval3 = const_cast<QBrush*>(&param3_ret);
 		bool sigval4 = sunken;
-		miqt_exec_callback_QwtDialNeedle_drawKnob(this, handle__drawKnob, sigval1, sigval2, sigval3, sigval4);
+		miqt_exec_callback_QwtDialNeedle_drawKnob(this, handle__drawKnob.value(), sigval1, sigval2, sigval3, sigval4);
 
 	}
 
@@ -149,12 +155,13 @@ void QwtDialNeedle_operatorAssign(QwtDialNeedle* self, QwtDialNeedle* param1) {
 }
 
 bool QwtDialNeedle_override_virtual_setPalette(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtDialNeedle> slot_handle(slot);
 	MiqtVirtualQwtDialNeedle* self_cast = dynamic_cast<MiqtVirtualQwtDialNeedle*>( (QwtDialNeedle*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__setPalette = slot;
+	self_cast->handle__setPalette = std::move(slot_handle);
 	return true;
 }
 
@@ -163,12 +170,13 @@ void QwtDialNeedle_virtualbase_setPalette(void* self, QPalette* palette) {
 }
 
 bool QwtDialNeedle_override_virtual_draw(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtDialNeedle> slot_handle(slot);
 	MiqtVirtualQwtDialNeedle* self_cast = dynamic_cast<MiqtVirtualQwtDialNeedle*>( (QwtDialNeedle*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__draw = slot;
+	self_cast->handle__draw = std::move(slot_handle);
 	return true;
 }
 
@@ -177,22 +185,24 @@ void QwtDialNeedle_virtualbase_draw(const void* self, QPainter* painter, QPointF
 }
 
 bool QwtDialNeedle_override_virtual_drawNeedle(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtDialNeedle> slot_handle(slot);
 	MiqtVirtualQwtDialNeedle* self_cast = dynamic_cast<MiqtVirtualQwtDialNeedle*>( (QwtDialNeedle*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__drawNeedle = slot;
+	self_cast->handle__drawNeedle = std::move(slot_handle);
 	return true;
 }
 
 bool QwtDialNeedle_override_virtual_drawKnob(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtDialNeedle> slot_handle(slot);
 	MiqtVirtualQwtDialNeedle* self_cast = dynamic_cast<MiqtVirtualQwtDialNeedle*>( (QwtDialNeedle*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__drawKnob = slot;
+	self_cast->handle__drawKnob = std::move(slot_handle);
 	return true;
 }
 
@@ -216,11 +226,11 @@ public:
 	virtual ~MiqtVirtualQwtDialSimpleNeedle() override = default;
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__drawNeedle = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtDialSimpleNeedle> handle__drawNeedle;
 
 	// Subclass to allow providing a Go implementation
 	virtual void drawNeedle(QPainter* param1, double length, QPalette::ColorGroup param3) const override {
-		if (handle__drawNeedle == 0) {
+		if (!handle__drawNeedle) {
 			QwtDialSimpleNeedle::drawNeedle(param1, length, param3);
 			return;
 		}
@@ -229,18 +239,18 @@ public:
 		double sigval2 = length;
 		QPalette::ColorGroup param3_ret = param3;
 		int sigval3 = static_cast<int>(param3_ret);
-		miqt_exec_callback_QwtDialSimpleNeedle_drawNeedle(this, handle__drawNeedle, sigval1, sigval2, sigval3);
+		miqt_exec_callback_QwtDialSimpleNeedle_drawNeedle(this, handle__drawNeedle.value(), sigval1, sigval2, sigval3);
 
 	}
 
 	friend void QwtDialSimpleNeedle_virtualbase_drawNeedle(const void* self, QPainter* param1, double length, int param3);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__setPalette = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtDialSimpleNeedle> handle__setPalette;
 
 	// Subclass to allow providing a Go implementation
 	virtual void setPalette(const QPalette& palette) override {
-		if (handle__setPalette == 0) {
+		if (!handle__setPalette) {
 			QwtDialSimpleNeedle::setPalette(palette);
 			return;
 		}
@@ -248,18 +258,18 @@ public:
 		const QPalette& palette_ret = palette;
 		// Cast returned reference into pointer
 		QPalette* sigval1 = const_cast<QPalette*>(&palette_ret);
-		miqt_exec_callback_QwtDialSimpleNeedle_setPalette(this, handle__setPalette, sigval1);
+		miqt_exec_callback_QwtDialSimpleNeedle_setPalette(this, handle__setPalette.value(), sigval1);
 
 	}
 
 	friend void QwtDialSimpleNeedle_virtualbase_setPalette(void* self, QPalette* palette);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__draw = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtDialSimpleNeedle> handle__draw;
 
 	// Subclass to allow providing a Go implementation
 	virtual void draw(QPainter* painter, const QPointF& center, double length, double direction, QPalette::ColorGroup param5) const override {
-		if (handle__draw == 0) {
+		if (!handle__draw) {
 			QwtDialSimpleNeedle::draw(painter, center, length, direction, param5);
 			return;
 		}
@@ -272,18 +282,18 @@ public:
 		double sigval4 = direction;
 		QPalette::ColorGroup param5_ret = param5;
 		int sigval5 = static_cast<int>(param5_ret);
-		miqt_exec_callback_QwtDialSimpleNeedle_draw(this, handle__draw, sigval1, sigval2, sigval3, sigval4, sigval5);
+		miqt_exec_callback_QwtDialSimpleNeedle_draw(this, handle__draw.value(), sigval1, sigval2, sigval3, sigval4, sigval5);
 
 	}
 
 	friend void QwtDialSimpleNeedle_virtualbase_draw(const void* self, QPainter* painter, QPointF* center, double length, double direction, int param5);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__drawKnob = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtDialSimpleNeedle> handle__drawKnob;
 
 	// Subclass to allow providing a Go implementation
 	virtual void drawKnob(QPainter* param1, double width, const QBrush& param3, bool sunken) const override {
-		if (handle__drawKnob == 0) {
+		if (!handle__drawKnob) {
 			QwtDialSimpleNeedle::drawKnob(param1, width, param3, sunken);
 			return;
 		}
@@ -294,7 +304,7 @@ public:
 		// Cast returned reference into pointer
 		QBrush* sigval3 = const_cast<QBrush*>(&param3_ret);
 		bool sigval4 = sunken;
-		miqt_exec_callback_QwtDialSimpleNeedle_drawKnob(this, handle__drawKnob, sigval1, sigval2, sigval3, sigval4);
+		miqt_exec_callback_QwtDialSimpleNeedle_drawKnob(this, handle__drawKnob.value(), sigval1, sigval2, sigval3, sigval4);
 
 	}
 
@@ -339,12 +349,13 @@ void QwtDialSimpleNeedle_operatorAssign(QwtDialSimpleNeedle* self, QwtDialSimple
 }
 
 bool QwtDialSimpleNeedle_override_virtual_drawNeedle(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtDialSimpleNeedle> slot_handle(slot);
 	MiqtVirtualQwtDialSimpleNeedle* self_cast = dynamic_cast<MiqtVirtualQwtDialSimpleNeedle*>( (QwtDialSimpleNeedle*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__drawNeedle = slot;
+	self_cast->handle__drawNeedle = std::move(slot_handle);
 	return true;
 }
 
@@ -353,12 +364,13 @@ void QwtDialSimpleNeedle_virtualbase_drawNeedle(const void* self, QPainter* para
 }
 
 bool QwtDialSimpleNeedle_override_virtual_setPalette(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtDialSimpleNeedle> slot_handle(slot);
 	MiqtVirtualQwtDialSimpleNeedle* self_cast = dynamic_cast<MiqtVirtualQwtDialSimpleNeedle*>( (QwtDialSimpleNeedle*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__setPalette = slot;
+	self_cast->handle__setPalette = std::move(slot_handle);
 	return true;
 }
 
@@ -367,12 +379,13 @@ void QwtDialSimpleNeedle_virtualbase_setPalette(void* self, QPalette* palette) {
 }
 
 bool QwtDialSimpleNeedle_override_virtual_draw(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtDialSimpleNeedle> slot_handle(slot);
 	MiqtVirtualQwtDialSimpleNeedle* self_cast = dynamic_cast<MiqtVirtualQwtDialSimpleNeedle*>( (QwtDialSimpleNeedle*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__draw = slot;
+	self_cast->handle__draw = std::move(slot_handle);
 	return true;
 }
 
@@ -381,12 +394,13 @@ void QwtDialSimpleNeedle_virtualbase_draw(const void* self, QPainter* painter, Q
 }
 
 bool QwtDialSimpleNeedle_override_virtual_drawKnob(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtDialSimpleNeedle> slot_handle(slot);
 	MiqtVirtualQwtDialSimpleNeedle* self_cast = dynamic_cast<MiqtVirtualQwtDialSimpleNeedle*>( (QwtDialSimpleNeedle*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__drawKnob = slot;
+	self_cast->handle__drawKnob = std::move(slot_handle);
 	return true;
 }
 
@@ -410,11 +424,11 @@ public:
 	virtual ~MiqtVirtualQwtCompassMagnetNeedle() override = default;
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__drawNeedle = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtCompassMagnetNeedle> handle__drawNeedle;
 
 	// Subclass to allow providing a Go implementation
 	virtual void drawNeedle(QPainter* param1, double length, QPalette::ColorGroup param3) const override {
-		if (handle__drawNeedle == 0) {
+		if (!handle__drawNeedle) {
 			QwtCompassMagnetNeedle::drawNeedle(param1, length, param3);
 			return;
 		}
@@ -423,18 +437,18 @@ public:
 		double sigval2 = length;
 		QPalette::ColorGroup param3_ret = param3;
 		int sigval3 = static_cast<int>(param3_ret);
-		miqt_exec_callback_QwtCompassMagnetNeedle_drawNeedle(this, handle__drawNeedle, sigval1, sigval2, sigval3);
+		miqt_exec_callback_QwtCompassMagnetNeedle_drawNeedle(this, handle__drawNeedle.value(), sigval1, sigval2, sigval3);
 
 	}
 
 	friend void QwtCompassMagnetNeedle_virtualbase_drawNeedle(const void* self, QPainter* param1, double length, int param3);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__setPalette = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtCompassMagnetNeedle> handle__setPalette;
 
 	// Subclass to allow providing a Go implementation
 	virtual void setPalette(const QPalette& palette) override {
-		if (handle__setPalette == 0) {
+		if (!handle__setPalette) {
 			QwtCompassMagnetNeedle::setPalette(palette);
 			return;
 		}
@@ -442,18 +456,18 @@ public:
 		const QPalette& palette_ret = palette;
 		// Cast returned reference into pointer
 		QPalette* sigval1 = const_cast<QPalette*>(&palette_ret);
-		miqt_exec_callback_QwtCompassMagnetNeedle_setPalette(this, handle__setPalette, sigval1);
+		miqt_exec_callback_QwtCompassMagnetNeedle_setPalette(this, handle__setPalette.value(), sigval1);
 
 	}
 
 	friend void QwtCompassMagnetNeedle_virtualbase_setPalette(void* self, QPalette* palette);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__draw = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtCompassMagnetNeedle> handle__draw;
 
 	// Subclass to allow providing a Go implementation
 	virtual void draw(QPainter* painter, const QPointF& center, double length, double direction, QPalette::ColorGroup param5) const override {
-		if (handle__draw == 0) {
+		if (!handle__draw) {
 			QwtCompassMagnetNeedle::draw(painter, center, length, direction, param5);
 			return;
 		}
@@ -466,18 +480,18 @@ public:
 		double sigval4 = direction;
 		QPalette::ColorGroup param5_ret = param5;
 		int sigval5 = static_cast<int>(param5_ret);
-		miqt_exec_callback_QwtCompassMagnetNeedle_draw(this, handle__draw, sigval1, sigval2, sigval3, sigval4, sigval5);
+		miqt_exec_callback_QwtCompassMagnetNeedle_draw(this, handle__draw.value(), sigval1, sigval2, sigval3, sigval4, sigval5);
 
 	}
 
 	friend void QwtCompassMagnetNeedle_virtualbase_draw(const void* self, QPainter* painter, QPointF* center, double length, double direction, int param5);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__drawKnob = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtCompassMagnetNeedle> handle__drawKnob;
 
 	// Subclass to allow providing a Go implementation
 	virtual void drawKnob(QPainter* param1, double width, const QBrush& param3, bool sunken) const override {
-		if (handle__drawKnob == 0) {
+		if (!handle__drawKnob) {
 			QwtCompassMagnetNeedle::drawKnob(param1, width, param3, sunken);
 			return;
 		}
@@ -488,7 +502,7 @@ public:
 		// Cast returned reference into pointer
 		QBrush* sigval3 = const_cast<QBrush*>(&param3_ret);
 		bool sigval4 = sunken;
-		miqt_exec_callback_QwtCompassMagnetNeedle_drawKnob(this, handle__drawKnob, sigval1, sigval2, sigval3, sigval4);
+		miqt_exec_callback_QwtCompassMagnetNeedle_drawKnob(this, handle__drawKnob.value(), sigval1, sigval2, sigval3, sigval4);
 
 	}
 
@@ -525,12 +539,13 @@ void QwtCompassMagnetNeedle_operatorAssign(QwtCompassMagnetNeedle* self, QwtComp
 }
 
 bool QwtCompassMagnetNeedle_override_virtual_drawNeedle(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtCompassMagnetNeedle> slot_handle(slot);
 	MiqtVirtualQwtCompassMagnetNeedle* self_cast = dynamic_cast<MiqtVirtualQwtCompassMagnetNeedle*>( (QwtCompassMagnetNeedle*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__drawNeedle = slot;
+	self_cast->handle__drawNeedle = std::move(slot_handle);
 	return true;
 }
 
@@ -539,12 +554,13 @@ void QwtCompassMagnetNeedle_virtualbase_drawNeedle(const void* self, QPainter* p
 }
 
 bool QwtCompassMagnetNeedle_override_virtual_setPalette(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtCompassMagnetNeedle> slot_handle(slot);
 	MiqtVirtualQwtCompassMagnetNeedle* self_cast = dynamic_cast<MiqtVirtualQwtCompassMagnetNeedle*>( (QwtCompassMagnetNeedle*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__setPalette = slot;
+	self_cast->handle__setPalette = std::move(slot_handle);
 	return true;
 }
 
@@ -553,12 +569,13 @@ void QwtCompassMagnetNeedle_virtualbase_setPalette(void* self, QPalette* palette
 }
 
 bool QwtCompassMagnetNeedle_override_virtual_draw(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtCompassMagnetNeedle> slot_handle(slot);
 	MiqtVirtualQwtCompassMagnetNeedle* self_cast = dynamic_cast<MiqtVirtualQwtCompassMagnetNeedle*>( (QwtCompassMagnetNeedle*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__draw = slot;
+	self_cast->handle__draw = std::move(slot_handle);
 	return true;
 }
 
@@ -567,12 +584,13 @@ void QwtCompassMagnetNeedle_virtualbase_draw(const void* self, QPainter* painter
 }
 
 bool QwtCompassMagnetNeedle_override_virtual_drawKnob(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtCompassMagnetNeedle> slot_handle(slot);
 	MiqtVirtualQwtCompassMagnetNeedle* self_cast = dynamic_cast<MiqtVirtualQwtCompassMagnetNeedle*>( (QwtCompassMagnetNeedle*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__drawKnob = slot;
+	self_cast->handle__drawKnob = std::move(slot_handle);
 	return true;
 }
 
@@ -595,11 +613,11 @@ public:
 	virtual ~MiqtVirtualQwtCompassWindArrow() override = default;
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__drawNeedle = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtCompassWindArrow> handle__drawNeedle;
 
 	// Subclass to allow providing a Go implementation
 	virtual void drawNeedle(QPainter* param1, double length, QPalette::ColorGroup param3) const override {
-		if (handle__drawNeedle == 0) {
+		if (!handle__drawNeedle) {
 			QwtCompassWindArrow::drawNeedle(param1, length, param3);
 			return;
 		}
@@ -608,18 +626,18 @@ public:
 		double sigval2 = length;
 		QPalette::ColorGroup param3_ret = param3;
 		int sigval3 = static_cast<int>(param3_ret);
-		miqt_exec_callback_QwtCompassWindArrow_drawNeedle(this, handle__drawNeedle, sigval1, sigval2, sigval3);
+		miqt_exec_callback_QwtCompassWindArrow_drawNeedle(this, handle__drawNeedle.value(), sigval1, sigval2, sigval3);
 
 	}
 
 	friend void QwtCompassWindArrow_virtualbase_drawNeedle(const void* self, QPainter* param1, double length, int param3);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__setPalette = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtCompassWindArrow> handle__setPalette;
 
 	// Subclass to allow providing a Go implementation
 	virtual void setPalette(const QPalette& palette) override {
-		if (handle__setPalette == 0) {
+		if (!handle__setPalette) {
 			QwtCompassWindArrow::setPalette(palette);
 			return;
 		}
@@ -627,18 +645,18 @@ public:
 		const QPalette& palette_ret = palette;
 		// Cast returned reference into pointer
 		QPalette* sigval1 = const_cast<QPalette*>(&palette_ret);
-		miqt_exec_callback_QwtCompassWindArrow_setPalette(this, handle__setPalette, sigval1);
+		miqt_exec_callback_QwtCompassWindArrow_setPalette(this, handle__setPalette.value(), sigval1);
 
 	}
 
 	friend void QwtCompassWindArrow_virtualbase_setPalette(void* self, QPalette* palette);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__draw = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtCompassWindArrow> handle__draw;
 
 	// Subclass to allow providing a Go implementation
 	virtual void draw(QPainter* painter, const QPointF& center, double length, double direction, QPalette::ColorGroup param5) const override {
-		if (handle__draw == 0) {
+		if (!handle__draw) {
 			QwtCompassWindArrow::draw(painter, center, length, direction, param5);
 			return;
 		}
@@ -651,18 +669,18 @@ public:
 		double sigval4 = direction;
 		QPalette::ColorGroup param5_ret = param5;
 		int sigval5 = static_cast<int>(param5_ret);
-		miqt_exec_callback_QwtCompassWindArrow_draw(this, handle__draw, sigval1, sigval2, sigval3, sigval4, sigval5);
+		miqt_exec_callback_QwtCompassWindArrow_draw(this, handle__draw.value(), sigval1, sigval2, sigval3, sigval4, sigval5);
 
 	}
 
 	friend void QwtCompassWindArrow_virtualbase_draw(const void* self, QPainter* painter, QPointF* center, double length, double direction, int param5);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__drawKnob = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtCompassWindArrow> handle__drawKnob;
 
 	// Subclass to allow providing a Go implementation
 	virtual void drawKnob(QPainter* param1, double width, const QBrush& param3, bool sunken) const override {
-		if (handle__drawKnob == 0) {
+		if (!handle__drawKnob) {
 			QwtCompassWindArrow::drawKnob(param1, width, param3, sunken);
 			return;
 		}
@@ -673,7 +691,7 @@ public:
 		// Cast returned reference into pointer
 		QBrush* sigval3 = const_cast<QBrush*>(&param3_ret);
 		bool sigval4 = sunken;
-		miqt_exec_callback_QwtCompassWindArrow_drawKnob(this, handle__drawKnob, sigval1, sigval2, sigval3, sigval4);
+		miqt_exec_callback_QwtCompassWindArrow_drawKnob(this, handle__drawKnob.value(), sigval1, sigval2, sigval3, sigval4);
 
 	}
 
@@ -706,12 +724,13 @@ void QwtCompassWindArrow_operatorAssign(QwtCompassWindArrow* self, QwtCompassWin
 }
 
 bool QwtCompassWindArrow_override_virtual_drawNeedle(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtCompassWindArrow> slot_handle(slot);
 	MiqtVirtualQwtCompassWindArrow* self_cast = dynamic_cast<MiqtVirtualQwtCompassWindArrow*>( (QwtCompassWindArrow*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__drawNeedle = slot;
+	self_cast->handle__drawNeedle = std::move(slot_handle);
 	return true;
 }
 
@@ -720,12 +739,13 @@ void QwtCompassWindArrow_virtualbase_drawNeedle(const void* self, QPainter* para
 }
 
 bool QwtCompassWindArrow_override_virtual_setPalette(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtCompassWindArrow> slot_handle(slot);
 	MiqtVirtualQwtCompassWindArrow* self_cast = dynamic_cast<MiqtVirtualQwtCompassWindArrow*>( (QwtCompassWindArrow*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__setPalette = slot;
+	self_cast->handle__setPalette = std::move(slot_handle);
 	return true;
 }
 
@@ -734,12 +754,13 @@ void QwtCompassWindArrow_virtualbase_setPalette(void* self, QPalette* palette) {
 }
 
 bool QwtCompassWindArrow_override_virtual_draw(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtCompassWindArrow> slot_handle(slot);
 	MiqtVirtualQwtCompassWindArrow* self_cast = dynamic_cast<MiqtVirtualQwtCompassWindArrow*>( (QwtCompassWindArrow*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__draw = slot;
+	self_cast->handle__draw = std::move(slot_handle);
 	return true;
 }
 
@@ -748,12 +769,13 @@ void QwtCompassWindArrow_virtualbase_draw(const void* self, QPainter* painter, Q
 }
 
 bool QwtCompassWindArrow_override_virtual_drawKnob(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtCompassWindArrow> slot_handle(slot);
 	MiqtVirtualQwtCompassWindArrow* self_cast = dynamic_cast<MiqtVirtualQwtCompassWindArrow*>( (QwtCompassWindArrow*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__drawKnob = slot;
+	self_cast->handle__drawKnob = std::move(slot_handle);
 	return true;
 }
 

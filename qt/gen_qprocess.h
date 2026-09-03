@@ -120,13 +120,13 @@ struct miqt_string QProcess_nullDevice();
 void QProcess_terminate(QProcess* self);
 void QProcess_kill(QProcess* self);
 void QProcess_finished(QProcess* self, int exitCode);
-void QProcess_connect_finished(QProcess* self, intptr_t slot);
+void* QProcess_connect_finished(QProcess* self, intptr_t slot);
 void QProcess_finished2(QProcess* self, int exitCode, int exitStatus);
-void QProcess_connect_finished2(QProcess* self, intptr_t slot);
+void* QProcess_connect_finished2(QProcess* self, intptr_t slot);
 void QProcess_errorWithError(QProcess* self, int error);
-void QProcess_connect_errorWithError(QProcess* self, intptr_t slot);
+void* QProcess_connect_errorWithError(QProcess* self, intptr_t slot);
 void QProcess_errorOccurred(QProcess* self, int error);
-void QProcess_connect_errorOccurred(QProcess* self, intptr_t slot);
+void* QProcess_connect_errorOccurred(QProcess* self, intptr_t slot);
 void QProcess_setupChildProcess(QProcess* self);
 long long QProcess_readData(QProcess* self, char* data, long long maxlen);
 long long QProcess_writeData(QProcess* self, const char* data, long long len);
@@ -201,10 +201,10 @@ int QProcess_protectedbase_senderSignalIndex(bool* _dynamic_cast_ok, const void*
 int QProcess_protectedbase_receivers(bool* _dynamic_cast_ok, const void* self, const char* signal);
 bool QProcess_protectedbase_isSignalConnected(bool* _dynamic_cast_ok, const void* self, QMetaMethod* signal);
 
-void QProcess_connect_started(QProcess* self, intptr_t slot);
-void QProcess_connect_stateChanged(QProcess* self, intptr_t slot);
-void QProcess_connect_readyReadStandardOutput(QProcess* self, intptr_t slot);
-void QProcess_connect_readyReadStandardError(QProcess* self, intptr_t slot);
+void* QProcess_connect_started(QProcess* self, intptr_t slot);
+void* QProcess_connect_stateChanged(QProcess* self, intptr_t slot);
+void* QProcess_connect_readyReadStandardOutput(QProcess* self, intptr_t slot);
+void* QProcess_connect_readyReadStandardError(QProcess* self, intptr_t slot);
 
 void QProcess_delete(QProcess* self);
 

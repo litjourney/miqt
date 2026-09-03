@@ -30,6 +30,11 @@ const (
 	QPdfView__FitInView  QPdfView__ZoomMode = 2
 )
 
+//export miqt_exec_callback_handle_release_QPdfView
+func miqt_exec_callback_handle_release_QPdfView(cb C.intptr_t) {
+	cgo.Handle(cb).Delete()
+}
+
 type QPdfView struct {
 	h *C.QPdfView
 	*qt.QAbstractScrollArea
@@ -163,8 +168,10 @@ func (this *QPdfView) SetZoomFactor(factor float64) {
 func (this *QPdfView) DocumentChanged(document *QPdfDocument) {
 	C.QPdfView_documentChanged(this.h, document.cPointer())
 }
-func (this *QPdfView) OnDocumentChanged(slot func(document *QPdfDocument)) {
-	C.QPdfView_connect_documentChanged(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QPdfView) OnDocumentChanged(slot func(document *QPdfDocument)) *qt.SignalConnection {
+	_goptr := qt.UnsafeNewQMetaObject__Connection(C.QPdfView_connect_documentChanged(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QPdfView_documentChanged
@@ -183,8 +190,10 @@ func miqt_exec_callback_QPdfView_documentChanged(cb C.intptr_t, document *C.QPdf
 func (this *QPdfView) PageModeChanged(pageMode QPdfView__PageMode) {
 	C.QPdfView_pageModeChanged(this.h, (C.int)(pageMode))
 }
-func (this *QPdfView) OnPageModeChanged(slot func(pageMode QPdfView__PageMode)) {
-	C.QPdfView_connect_pageModeChanged(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QPdfView) OnPageModeChanged(slot func(pageMode QPdfView__PageMode)) *qt.SignalConnection {
+	_goptr := qt.UnsafeNewQMetaObject__Connection(C.QPdfView_connect_pageModeChanged(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QPdfView_pageModeChanged
@@ -203,8 +212,10 @@ func miqt_exec_callback_QPdfView_pageModeChanged(cb C.intptr_t, pageMode C.int) 
 func (this *QPdfView) ZoomModeChanged(zoomMode QPdfView__ZoomMode) {
 	C.QPdfView_zoomModeChanged(this.h, (C.int)(zoomMode))
 }
-func (this *QPdfView) OnZoomModeChanged(slot func(zoomMode QPdfView__ZoomMode)) {
-	C.QPdfView_connect_zoomModeChanged(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QPdfView) OnZoomModeChanged(slot func(zoomMode QPdfView__ZoomMode)) *qt.SignalConnection {
+	_goptr := qt.UnsafeNewQMetaObject__Connection(C.QPdfView_connect_zoomModeChanged(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QPdfView_zoomModeChanged
@@ -223,8 +234,10 @@ func miqt_exec_callback_QPdfView_zoomModeChanged(cb C.intptr_t, zoomMode C.int) 
 func (this *QPdfView) ZoomFactorChanged(zoomFactor float64) {
 	C.QPdfView_zoomFactorChanged(this.h, (C.double)(zoomFactor))
 }
-func (this *QPdfView) OnZoomFactorChanged(slot func(zoomFactor float64)) {
-	C.QPdfView_connect_zoomFactorChanged(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QPdfView) OnZoomFactorChanged(slot func(zoomFactor float64)) *qt.SignalConnection {
+	_goptr := qt.UnsafeNewQMetaObject__Connection(C.QPdfView_connect_zoomFactorChanged(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QPdfView_zoomFactorChanged
@@ -243,8 +256,10 @@ func miqt_exec_callback_QPdfView_zoomFactorChanged(cb C.intptr_t, zoomFactor C.d
 func (this *QPdfView) PageSpacingChanged(pageSpacing int) {
 	C.QPdfView_pageSpacingChanged(this.h, (C.int)(pageSpacing))
 }
-func (this *QPdfView) OnPageSpacingChanged(slot func(pageSpacing int)) {
-	C.QPdfView_connect_pageSpacingChanged(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QPdfView) OnPageSpacingChanged(slot func(pageSpacing int)) *qt.SignalConnection {
+	_goptr := qt.UnsafeNewQMetaObject__Connection(C.QPdfView_connect_pageSpacingChanged(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QPdfView_pageSpacingChanged
@@ -263,8 +278,10 @@ func miqt_exec_callback_QPdfView_pageSpacingChanged(cb C.intptr_t, pageSpacing C
 func (this *QPdfView) DocumentMarginsChanged(documentMargins qt.QMargins) {
 	C.QPdfView_documentMarginsChanged(this.h, (*C.QMargins)(documentMargins.UnsafePointer()))
 }
-func (this *QPdfView) OnDocumentMarginsChanged(slot func(documentMargins qt.QMargins)) {
-	C.QPdfView_connect_documentMarginsChanged(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QPdfView) OnDocumentMarginsChanged(slot func(documentMargins qt.QMargins)) *qt.SignalConnection {
+	_goptr := qt.UnsafeNewQMetaObject__Connection(C.QPdfView_connect_documentMarginsChanged(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QPdfView_documentMarginsChanged
@@ -506,7 +523,11 @@ func (this *QPdfView) callVirtualBase_PaintEvent(event *qt.QPaintEvent) {
 
 }
 func (this *QPdfView) OnPaintEvent(slot func(super func(event *qt.QPaintEvent), event *qt.QPaintEvent)) {
-	ok := C.QPdfView_override_virtual_paintEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QPdfView_override_virtual_paintEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -532,7 +553,11 @@ func (this *QPdfView) callVirtualBase_ResizeEvent(event *qt.QResizeEvent) {
 
 }
 func (this *QPdfView) OnResizeEvent(slot func(super func(event *qt.QResizeEvent), event *qt.QResizeEvent)) {
-	ok := C.QPdfView_override_virtual_resizeEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QPdfView_override_virtual_resizeEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -558,7 +583,11 @@ func (this *QPdfView) callVirtualBase_ScrollContentsBy(dx int, dy int) {
 
 }
 func (this *QPdfView) OnScrollContentsBy(slot func(super func(dx int, dy int), dx int, dy int)) {
-	ok := C.QPdfView_override_virtual_scrollContentsBy(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QPdfView_override_virtual_scrollContentsBy(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -588,7 +617,11 @@ func (this *QPdfView) callVirtualBase_MinimumSizeHint() *qt.QSize {
 
 }
 func (this *QPdfView) OnMinimumSizeHint(slot func(super func() *qt.QSize) *qt.QSize) {
-	ok := C.QPdfView_override_virtual_minimumSizeHint(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QPdfView_override_virtual_minimumSizeHint(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -615,7 +648,11 @@ func (this *QPdfView) callVirtualBase_SizeHint() *qt.QSize {
 
 }
 func (this *QPdfView) OnSizeHint(slot func(super func() *qt.QSize) *qt.QSize) {
-	ok := C.QPdfView_override_virtual_sizeHint(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QPdfView_override_virtual_sizeHint(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -640,7 +677,11 @@ func (this *QPdfView) callVirtualBase_SetupViewport(viewport *qt.QWidget) {
 
 }
 func (this *QPdfView) OnSetupViewport(slot func(super func(viewport *qt.QWidget), viewport *qt.QWidget)) {
-	ok := C.QPdfView_override_virtual_setupViewport(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QPdfView_override_virtual_setupViewport(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -666,7 +707,11 @@ func (this *QPdfView) callVirtualBase_EventFilter(param1 *qt.QObject, param2 *qt
 
 }
 func (this *QPdfView) OnEventFilter(slot func(super func(param1 *qt.QObject, param2 *qt.QEvent) bool, param1 *qt.QObject, param2 *qt.QEvent) bool) {
-	ok := C.QPdfView_override_virtual_eventFilter(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QPdfView_override_virtual_eventFilter(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -696,7 +741,11 @@ func (this *QPdfView) callVirtualBase_Event(param1 *qt.QEvent) bool {
 
 }
 func (this *QPdfView) OnEvent(slot func(super func(param1 *qt.QEvent) bool, param1 *qt.QEvent) bool) {
-	ok := C.QPdfView_override_virtual_event(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QPdfView_override_virtual_event(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -724,7 +773,11 @@ func (this *QPdfView) callVirtualBase_ViewportEvent(param1 *qt.QEvent) bool {
 
 }
 func (this *QPdfView) OnViewportEvent(slot func(super func(param1 *qt.QEvent) bool, param1 *qt.QEvent) bool) {
-	ok := C.QPdfView_override_virtual_viewportEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QPdfView_override_virtual_viewportEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -752,7 +805,11 @@ func (this *QPdfView) callVirtualBase_MousePressEvent(param1 *qt.QMouseEvent) {
 
 }
 func (this *QPdfView) OnMousePressEvent(slot func(super func(param1 *qt.QMouseEvent), param1 *qt.QMouseEvent)) {
-	ok := C.QPdfView_override_virtual_mousePressEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QPdfView_override_virtual_mousePressEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -778,7 +835,11 @@ func (this *QPdfView) callVirtualBase_MouseReleaseEvent(param1 *qt.QMouseEvent) 
 
 }
 func (this *QPdfView) OnMouseReleaseEvent(slot func(super func(param1 *qt.QMouseEvent), param1 *qt.QMouseEvent)) {
-	ok := C.QPdfView_override_virtual_mouseReleaseEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QPdfView_override_virtual_mouseReleaseEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -804,7 +865,11 @@ func (this *QPdfView) callVirtualBase_MouseDoubleClickEvent(param1 *qt.QMouseEve
 
 }
 func (this *QPdfView) OnMouseDoubleClickEvent(slot func(super func(param1 *qt.QMouseEvent), param1 *qt.QMouseEvent)) {
-	ok := C.QPdfView_override_virtual_mouseDoubleClickEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QPdfView_override_virtual_mouseDoubleClickEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -830,7 +895,11 @@ func (this *QPdfView) callVirtualBase_MouseMoveEvent(param1 *qt.QMouseEvent) {
 
 }
 func (this *QPdfView) OnMouseMoveEvent(slot func(super func(param1 *qt.QMouseEvent), param1 *qt.QMouseEvent)) {
-	ok := C.QPdfView_override_virtual_mouseMoveEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QPdfView_override_virtual_mouseMoveEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -856,7 +925,11 @@ func (this *QPdfView) callVirtualBase_WheelEvent(param1 *qt.QWheelEvent) {
 
 }
 func (this *QPdfView) OnWheelEvent(slot func(super func(param1 *qt.QWheelEvent), param1 *qt.QWheelEvent)) {
-	ok := C.QPdfView_override_virtual_wheelEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QPdfView_override_virtual_wheelEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -882,7 +955,11 @@ func (this *QPdfView) callVirtualBase_ContextMenuEvent(param1 *qt.QContextMenuEv
 
 }
 func (this *QPdfView) OnContextMenuEvent(slot func(super func(param1 *qt.QContextMenuEvent), param1 *qt.QContextMenuEvent)) {
-	ok := C.QPdfView_override_virtual_contextMenuEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QPdfView_override_virtual_contextMenuEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -908,7 +985,11 @@ func (this *QPdfView) callVirtualBase_DragEnterEvent(param1 *qt.QDragEnterEvent)
 
 }
 func (this *QPdfView) OnDragEnterEvent(slot func(super func(param1 *qt.QDragEnterEvent), param1 *qt.QDragEnterEvent)) {
-	ok := C.QPdfView_override_virtual_dragEnterEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QPdfView_override_virtual_dragEnterEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -934,7 +1015,11 @@ func (this *QPdfView) callVirtualBase_DragMoveEvent(param1 *qt.QDragMoveEvent) {
 
 }
 func (this *QPdfView) OnDragMoveEvent(slot func(super func(param1 *qt.QDragMoveEvent), param1 *qt.QDragMoveEvent)) {
-	ok := C.QPdfView_override_virtual_dragMoveEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QPdfView_override_virtual_dragMoveEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -960,7 +1045,11 @@ func (this *QPdfView) callVirtualBase_DragLeaveEvent(param1 *qt.QDragLeaveEvent)
 
 }
 func (this *QPdfView) OnDragLeaveEvent(slot func(super func(param1 *qt.QDragLeaveEvent), param1 *qt.QDragLeaveEvent)) {
-	ok := C.QPdfView_override_virtual_dragLeaveEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QPdfView_override_virtual_dragLeaveEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -986,7 +1075,11 @@ func (this *QPdfView) callVirtualBase_DropEvent(param1 *qt.QDropEvent) {
 
 }
 func (this *QPdfView) OnDropEvent(slot func(super func(param1 *qt.QDropEvent), param1 *qt.QDropEvent)) {
-	ok := C.QPdfView_override_virtual_dropEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QPdfView_override_virtual_dropEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1012,7 +1105,11 @@ func (this *QPdfView) callVirtualBase_KeyPressEvent(param1 *qt.QKeyEvent) {
 
 }
 func (this *QPdfView) OnKeyPressEvent(slot func(super func(param1 *qt.QKeyEvent), param1 *qt.QKeyEvent)) {
-	ok := C.QPdfView_override_virtual_keyPressEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QPdfView_override_virtual_keyPressEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1040,7 +1137,11 @@ func (this *QPdfView) callVirtualBase_ViewportSizeHint() *qt.QSize {
 
 }
 func (this *QPdfView) OnViewportSizeHint(slot func(super func() *qt.QSize) *qt.QSize) {
-	ok := C.QPdfView_override_virtual_viewportSizeHint(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QPdfView_override_virtual_viewportSizeHint(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1065,7 +1166,11 @@ func (this *QPdfView) callVirtualBase_ChangeEvent(param1 *qt.QEvent) {
 
 }
 func (this *QPdfView) OnChangeEvent(slot func(super func(param1 *qt.QEvent), param1 *qt.QEvent)) {
-	ok := C.QPdfView_override_virtual_changeEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QPdfView_override_virtual_changeEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1091,7 +1196,11 @@ func (this *QPdfView) callVirtualBase_DevType() int {
 
 }
 func (this *QPdfView) OnDevType(slot func(super func() int) int) {
-	ok := C.QPdfView_override_virtual_devType(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QPdfView_override_virtual_devType(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1116,7 +1225,11 @@ func (this *QPdfView) callVirtualBase_SetVisible(visible bool) {
 
 }
 func (this *QPdfView) OnSetVisible(slot func(super func(visible bool), visible bool)) {
-	ok := C.QPdfView_override_virtual_setVisible(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QPdfView_override_virtual_setVisible(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1142,7 +1255,11 @@ func (this *QPdfView) callVirtualBase_HeightForWidth(param1 int) int {
 
 }
 func (this *QPdfView) OnHeightForWidth(slot func(super func(param1 int) int, param1 int) int) {
-	ok := C.QPdfView_override_virtual_heightForWidth(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QPdfView_override_virtual_heightForWidth(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1170,7 +1287,11 @@ func (this *QPdfView) callVirtualBase_HasHeightForWidth() bool {
 
 }
 func (this *QPdfView) OnHasHeightForWidth(slot func(super func() bool) bool) {
-	ok := C.QPdfView_override_virtual_hasHeightForWidth(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QPdfView_override_virtual_hasHeightForWidth(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1195,7 +1316,11 @@ func (this *QPdfView) callVirtualBase_PaintEngine() *qt.QPaintEngine {
 
 }
 func (this *QPdfView) OnPaintEngine(slot func(super func() *qt.QPaintEngine) *qt.QPaintEngine) {
-	ok := C.QPdfView_override_virtual_paintEngine(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QPdfView_override_virtual_paintEngine(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1220,7 +1345,11 @@ func (this *QPdfView) callVirtualBase_KeyReleaseEvent(event *qt.QKeyEvent) {
 
 }
 func (this *QPdfView) OnKeyReleaseEvent(slot func(super func(event *qt.QKeyEvent), event *qt.QKeyEvent)) {
-	ok := C.QPdfView_override_virtual_keyReleaseEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QPdfView_override_virtual_keyReleaseEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1246,7 +1375,11 @@ func (this *QPdfView) callVirtualBase_FocusInEvent(event *qt.QFocusEvent) {
 
 }
 func (this *QPdfView) OnFocusInEvent(slot func(super func(event *qt.QFocusEvent), event *qt.QFocusEvent)) {
-	ok := C.QPdfView_override_virtual_focusInEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QPdfView_override_virtual_focusInEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1272,7 +1405,11 @@ func (this *QPdfView) callVirtualBase_FocusOutEvent(event *qt.QFocusEvent) {
 
 }
 func (this *QPdfView) OnFocusOutEvent(slot func(super func(event *qt.QFocusEvent), event *qt.QFocusEvent)) {
-	ok := C.QPdfView_override_virtual_focusOutEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QPdfView_override_virtual_focusOutEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1298,7 +1435,11 @@ func (this *QPdfView) callVirtualBase_EnterEvent(event *qt.QEvent) {
 
 }
 func (this *QPdfView) OnEnterEvent(slot func(super func(event *qt.QEvent), event *qt.QEvent)) {
-	ok := C.QPdfView_override_virtual_enterEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QPdfView_override_virtual_enterEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1324,7 +1465,11 @@ func (this *QPdfView) callVirtualBase_LeaveEvent(event *qt.QEvent) {
 
 }
 func (this *QPdfView) OnLeaveEvent(slot func(super func(event *qt.QEvent), event *qt.QEvent)) {
-	ok := C.QPdfView_override_virtual_leaveEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QPdfView_override_virtual_leaveEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1350,7 +1495,11 @@ func (this *QPdfView) callVirtualBase_MoveEvent(event *qt.QMoveEvent) {
 
 }
 func (this *QPdfView) OnMoveEvent(slot func(super func(event *qt.QMoveEvent), event *qt.QMoveEvent)) {
-	ok := C.QPdfView_override_virtual_moveEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QPdfView_override_virtual_moveEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1376,7 +1525,11 @@ func (this *QPdfView) callVirtualBase_CloseEvent(event *qt.QCloseEvent) {
 
 }
 func (this *QPdfView) OnCloseEvent(slot func(super func(event *qt.QCloseEvent), event *qt.QCloseEvent)) {
-	ok := C.QPdfView_override_virtual_closeEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QPdfView_override_virtual_closeEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1402,7 +1555,11 @@ func (this *QPdfView) callVirtualBase_TabletEvent(event *qt.QTabletEvent) {
 
 }
 func (this *QPdfView) OnTabletEvent(slot func(super func(event *qt.QTabletEvent), event *qt.QTabletEvent)) {
-	ok := C.QPdfView_override_virtual_tabletEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QPdfView_override_virtual_tabletEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1428,7 +1585,11 @@ func (this *QPdfView) callVirtualBase_ActionEvent(event *qt.QActionEvent) {
 
 }
 func (this *QPdfView) OnActionEvent(slot func(super func(event *qt.QActionEvent), event *qt.QActionEvent)) {
-	ok := C.QPdfView_override_virtual_actionEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QPdfView_override_virtual_actionEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1454,7 +1615,11 @@ func (this *QPdfView) callVirtualBase_ShowEvent(event *qt.QShowEvent) {
 
 }
 func (this *QPdfView) OnShowEvent(slot func(super func(event *qt.QShowEvent), event *qt.QShowEvent)) {
-	ok := C.QPdfView_override_virtual_showEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QPdfView_override_virtual_showEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1480,7 +1645,11 @@ func (this *QPdfView) callVirtualBase_HideEvent(event *qt.QHideEvent) {
 
 }
 func (this *QPdfView) OnHideEvent(slot func(super func(event *qt.QHideEvent), event *qt.QHideEvent)) {
-	ok := C.QPdfView_override_virtual_hideEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QPdfView_override_virtual_hideEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1513,7 +1682,11 @@ func (this *QPdfView) callVirtualBase_NativeEvent(eventType []byte, message unsa
 
 }
 func (this *QPdfView) OnNativeEvent(slot func(super func(eventType []byte, message unsafe.Pointer, result *int64) bool, eventType []byte, message unsafe.Pointer, result *int64) bool) {
-	ok := C.QPdfView_override_virtual_nativeEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QPdfView_override_virtual_nativeEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1547,7 +1720,11 @@ func (this *QPdfView) callVirtualBase_Metric(param1 qt.QPaintDevice__PaintDevice
 
 }
 func (this *QPdfView) OnMetric(slot func(super func(param1 qt.QPaintDevice__PaintDeviceMetric) int, param1 qt.QPaintDevice__PaintDeviceMetric) int) {
-	ok := C.QPdfView_override_virtual_metric(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QPdfView_override_virtual_metric(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1575,7 +1752,11 @@ func (this *QPdfView) callVirtualBase_InitPainter(painter *qt.QPainter) {
 
 }
 func (this *QPdfView) OnInitPainter(slot func(super func(painter *qt.QPainter), painter *qt.QPainter)) {
-	ok := C.QPdfView_override_virtual_initPainter(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QPdfView_override_virtual_initPainter(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1601,7 +1782,11 @@ func (this *QPdfView) callVirtualBase_Redirected(offset *qt.QPoint) *qt.QPaintDe
 
 }
 func (this *QPdfView) OnRedirected(slot func(super func(offset *qt.QPoint) *qt.QPaintDevice, offset *qt.QPoint) *qt.QPaintDevice) {
-	ok := C.QPdfView_override_virtual_redirected(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QPdfView_override_virtual_redirected(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1629,7 +1814,11 @@ func (this *QPdfView) callVirtualBase_SharedPainter() *qt.QPainter {
 
 }
 func (this *QPdfView) OnSharedPainter(slot func(super func() *qt.QPainter) *qt.QPainter) {
-	ok := C.QPdfView_override_virtual_sharedPainter(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QPdfView_override_virtual_sharedPainter(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1654,7 +1843,11 @@ func (this *QPdfView) callVirtualBase_InputMethodEvent(param1 *qt.QInputMethodEv
 
 }
 func (this *QPdfView) OnInputMethodEvent(slot func(super func(param1 *qt.QInputMethodEvent), param1 *qt.QInputMethodEvent)) {
-	ok := C.QPdfView_override_virtual_inputMethodEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QPdfView_override_virtual_inputMethodEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1682,7 +1875,11 @@ func (this *QPdfView) callVirtualBase_InputMethodQuery(param1 qt.InputMethodQuer
 
 }
 func (this *QPdfView) OnInputMethodQuery(slot func(super func(param1 qt.InputMethodQuery) *qt.QVariant, param1 qt.InputMethodQuery) *qt.QVariant) {
-	ok := C.QPdfView_override_virtual_inputMethodQuery(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QPdfView_override_virtual_inputMethodQuery(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1710,7 +1907,11 @@ func (this *QPdfView) callVirtualBase_FocusNextPrevChild(next bool) bool {
 
 }
 func (this *QPdfView) OnFocusNextPrevChild(slot func(super func(next bool) bool, next bool) bool) {
-	ok := C.QPdfView_override_virtual_focusNextPrevChild(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QPdfView_override_virtual_focusNextPrevChild(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1738,7 +1939,11 @@ func (this *QPdfView) callVirtualBase_TimerEvent(event *qt.QTimerEvent) {
 
 }
 func (this *QPdfView) OnTimerEvent(slot func(super func(event *qt.QTimerEvent), event *qt.QTimerEvent)) {
-	ok := C.QPdfView_override_virtual_timerEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QPdfView_override_virtual_timerEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1764,7 +1969,11 @@ func (this *QPdfView) callVirtualBase_ChildEvent(event *qt.QChildEvent) {
 
 }
 func (this *QPdfView) OnChildEvent(slot func(super func(event *qt.QChildEvent), event *qt.QChildEvent)) {
-	ok := C.QPdfView_override_virtual_childEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QPdfView_override_virtual_childEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1790,7 +1999,11 @@ func (this *QPdfView) callVirtualBase_CustomEvent(event *qt.QEvent) {
 
 }
 func (this *QPdfView) OnCustomEvent(slot func(super func(event *qt.QEvent), event *qt.QEvent)) {
-	ok := C.QPdfView_override_virtual_customEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QPdfView_override_virtual_customEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1816,7 +2029,11 @@ func (this *QPdfView) callVirtualBase_ConnectNotify(signal *qt.QMetaMethod) {
 
 }
 func (this *QPdfView) OnConnectNotify(slot func(super func(signal *qt.QMetaMethod), signal *qt.QMetaMethod)) {
-	ok := C.QPdfView_override_virtual_connectNotify(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QPdfView_override_virtual_connectNotify(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1842,7 +2059,11 @@ func (this *QPdfView) callVirtualBase_DisconnectNotify(signal *qt.QMetaMethod) {
 
 }
 func (this *QPdfView) OnDisconnectNotify(slot func(super func(signal *qt.QMetaMethod), signal *qt.QMetaMethod)) {
-	ok := C.QPdfView_override_virtual_disconnectNotify(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QPdfView_override_virtual_disconnectNotify(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}

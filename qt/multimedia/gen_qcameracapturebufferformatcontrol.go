@@ -15,6 +15,11 @@ import (
 	"unsafe"
 )
 
+//export miqt_exec_callback_handle_release_QCameraCaptureBufferFormatControl
+func miqt_exec_callback_handle_release_QCameraCaptureBufferFormatControl(cb C.intptr_t) {
+	cgo.Handle(cb).Delete()
+}
+
 type QCameraCaptureBufferFormatControl struct {
 	h *C.QCameraCaptureBufferFormatControl
 	*QMediaControl
@@ -100,8 +105,10 @@ func (this *QCameraCaptureBufferFormatControl) SetBufferFormat(format QVideoFram
 func (this *QCameraCaptureBufferFormatControl) BufferFormatChanged(format QVideoFrame__PixelFormat) {
 	C.QCameraCaptureBufferFormatControl_bufferFormatChanged(this.h, (C.int)(format))
 }
-func (this *QCameraCaptureBufferFormatControl) OnBufferFormatChanged(slot func(format QVideoFrame__PixelFormat)) {
-	C.QCameraCaptureBufferFormatControl_connect_bufferFormatChanged(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QCameraCaptureBufferFormatControl) OnBufferFormatChanged(slot func(format QVideoFrame__PixelFormat)) *qt.SignalConnection {
+	_goptr := qt.UnsafeNewQMetaObject__Connection(C.QCameraCaptureBufferFormatControl_connect_bufferFormatChanged(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QCameraCaptureBufferFormatControl_bufferFormatChanged

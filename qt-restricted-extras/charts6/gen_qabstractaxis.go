@@ -27,6 +27,11 @@ const (
 	QAbstractAxis__AxisTypeColor       QAbstractAxis__AxisType = 32
 )
 
+//export miqt_exec_callback_handle_release_QAbstractAxis
+func miqt_exec_callback_handle_release_QAbstractAxis(cb C.intptr_t) {
+	cgo.Handle(cb).Delete()
+}
+
 type QAbstractAxis struct {
 	h *C.QAbstractAxis
 	*qt6.QObject
@@ -374,8 +379,10 @@ func (this *QAbstractAxis) TruncateLabels() bool {
 func (this *QAbstractAxis) VisibleChanged(visible bool) {
 	C.QAbstractAxis_visibleChanged(this.h, (C.bool)(visible))
 }
-func (this *QAbstractAxis) OnVisibleChanged(slot func(visible bool)) {
-	C.QAbstractAxis_connect_visibleChanged(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QAbstractAxis) OnVisibleChanged(slot func(visible bool)) *qt6.SignalConnection {
+	_goptr := qt6.UnsafeNewQMetaObject__Connection(C.QAbstractAxis_connect_visibleChanged(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QAbstractAxis_visibleChanged
@@ -394,8 +401,10 @@ func miqt_exec_callback_QAbstractAxis_visibleChanged(cb C.intptr_t, visible C.bo
 func (this *QAbstractAxis) LinePenChanged(pen *qt6.QPen) {
 	C.QAbstractAxis_linePenChanged(this.h, (*C.QPen)(pen.UnsafePointer()))
 }
-func (this *QAbstractAxis) OnLinePenChanged(slot func(pen *qt6.QPen)) {
-	C.QAbstractAxis_connect_linePenChanged(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QAbstractAxis) OnLinePenChanged(slot func(pen *qt6.QPen)) *qt6.SignalConnection {
+	_goptr := qt6.UnsafeNewQMetaObject__Connection(C.QAbstractAxis_connect_linePenChanged(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QAbstractAxis_linePenChanged
@@ -414,8 +423,10 @@ func miqt_exec_callback_QAbstractAxis_linePenChanged(cb C.intptr_t, pen *C.QPen)
 func (this *QAbstractAxis) LineVisibleChanged(visible bool) {
 	C.QAbstractAxis_lineVisibleChanged(this.h, (C.bool)(visible))
 }
-func (this *QAbstractAxis) OnLineVisibleChanged(slot func(visible bool)) {
-	C.QAbstractAxis_connect_lineVisibleChanged(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QAbstractAxis) OnLineVisibleChanged(slot func(visible bool)) *qt6.SignalConnection {
+	_goptr := qt6.UnsafeNewQMetaObject__Connection(C.QAbstractAxis_connect_lineVisibleChanged(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QAbstractAxis_lineVisibleChanged
@@ -434,8 +445,10 @@ func miqt_exec_callback_QAbstractAxis_lineVisibleChanged(cb C.intptr_t, visible 
 func (this *QAbstractAxis) LabelsVisibleChanged(visible bool) {
 	C.QAbstractAxis_labelsVisibleChanged(this.h, (C.bool)(visible))
 }
-func (this *QAbstractAxis) OnLabelsVisibleChanged(slot func(visible bool)) {
-	C.QAbstractAxis_connect_labelsVisibleChanged(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QAbstractAxis) OnLabelsVisibleChanged(slot func(visible bool)) *qt6.SignalConnection {
+	_goptr := qt6.UnsafeNewQMetaObject__Connection(C.QAbstractAxis_connect_labelsVisibleChanged(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QAbstractAxis_labelsVisibleChanged
@@ -454,8 +467,10 @@ func miqt_exec_callback_QAbstractAxis_labelsVisibleChanged(cb C.intptr_t, visibl
 func (this *QAbstractAxis) LabelsBrushChanged(brush *qt6.QBrush) {
 	C.QAbstractAxis_labelsBrushChanged(this.h, (*C.QBrush)(brush.UnsafePointer()))
 }
-func (this *QAbstractAxis) OnLabelsBrushChanged(slot func(brush *qt6.QBrush)) {
-	C.QAbstractAxis_connect_labelsBrushChanged(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QAbstractAxis) OnLabelsBrushChanged(slot func(brush *qt6.QBrush)) *qt6.SignalConnection {
+	_goptr := qt6.UnsafeNewQMetaObject__Connection(C.QAbstractAxis_connect_labelsBrushChanged(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QAbstractAxis_labelsBrushChanged
@@ -474,8 +489,10 @@ func miqt_exec_callback_QAbstractAxis_labelsBrushChanged(cb C.intptr_t, brush *C
 func (this *QAbstractAxis) LabelsFontChanged(pen *qt6.QFont) {
 	C.QAbstractAxis_labelsFontChanged(this.h, (*C.QFont)(pen.UnsafePointer()))
 }
-func (this *QAbstractAxis) OnLabelsFontChanged(slot func(pen *qt6.QFont)) {
-	C.QAbstractAxis_connect_labelsFontChanged(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QAbstractAxis) OnLabelsFontChanged(slot func(pen *qt6.QFont)) *qt6.SignalConnection {
+	_goptr := qt6.UnsafeNewQMetaObject__Connection(C.QAbstractAxis_connect_labelsFontChanged(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QAbstractAxis_labelsFontChanged
@@ -494,8 +511,10 @@ func miqt_exec_callback_QAbstractAxis_labelsFontChanged(cb C.intptr_t, pen *C.QF
 func (this *QAbstractAxis) LabelsAngleChanged(angle int) {
 	C.QAbstractAxis_labelsAngleChanged(this.h, (C.int)(angle))
 }
-func (this *QAbstractAxis) OnLabelsAngleChanged(slot func(angle int)) {
-	C.QAbstractAxis_connect_labelsAngleChanged(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QAbstractAxis) OnLabelsAngleChanged(slot func(angle int)) *qt6.SignalConnection {
+	_goptr := qt6.UnsafeNewQMetaObject__Connection(C.QAbstractAxis_connect_labelsAngleChanged(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QAbstractAxis_labelsAngleChanged
@@ -514,8 +533,10 @@ func miqt_exec_callback_QAbstractAxis_labelsAngleChanged(cb C.intptr_t, angle C.
 func (this *QAbstractAxis) GridLinePenChanged(pen *qt6.QPen) {
 	C.QAbstractAxis_gridLinePenChanged(this.h, (*C.QPen)(pen.UnsafePointer()))
 }
-func (this *QAbstractAxis) OnGridLinePenChanged(slot func(pen *qt6.QPen)) {
-	C.QAbstractAxis_connect_gridLinePenChanged(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QAbstractAxis) OnGridLinePenChanged(slot func(pen *qt6.QPen)) *qt6.SignalConnection {
+	_goptr := qt6.UnsafeNewQMetaObject__Connection(C.QAbstractAxis_connect_gridLinePenChanged(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QAbstractAxis_gridLinePenChanged
@@ -534,8 +555,10 @@ func miqt_exec_callback_QAbstractAxis_gridLinePenChanged(cb C.intptr_t, pen *C.Q
 func (this *QAbstractAxis) GridVisibleChanged(visible bool) {
 	C.QAbstractAxis_gridVisibleChanged(this.h, (C.bool)(visible))
 }
-func (this *QAbstractAxis) OnGridVisibleChanged(slot func(visible bool)) {
-	C.QAbstractAxis_connect_gridVisibleChanged(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QAbstractAxis) OnGridVisibleChanged(slot func(visible bool)) *qt6.SignalConnection {
+	_goptr := qt6.UnsafeNewQMetaObject__Connection(C.QAbstractAxis_connect_gridVisibleChanged(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QAbstractAxis_gridVisibleChanged
@@ -554,8 +577,10 @@ func miqt_exec_callback_QAbstractAxis_gridVisibleChanged(cb C.intptr_t, visible 
 func (this *QAbstractAxis) MinorGridVisibleChanged(visible bool) {
 	C.QAbstractAxis_minorGridVisibleChanged(this.h, (C.bool)(visible))
 }
-func (this *QAbstractAxis) OnMinorGridVisibleChanged(slot func(visible bool)) {
-	C.QAbstractAxis_connect_minorGridVisibleChanged(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QAbstractAxis) OnMinorGridVisibleChanged(slot func(visible bool)) *qt6.SignalConnection {
+	_goptr := qt6.UnsafeNewQMetaObject__Connection(C.QAbstractAxis_connect_minorGridVisibleChanged(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QAbstractAxis_minorGridVisibleChanged
@@ -574,8 +599,10 @@ func miqt_exec_callback_QAbstractAxis_minorGridVisibleChanged(cb C.intptr_t, vis
 func (this *QAbstractAxis) MinorGridLinePenChanged(pen *qt6.QPen) {
 	C.QAbstractAxis_minorGridLinePenChanged(this.h, (*C.QPen)(pen.UnsafePointer()))
 }
-func (this *QAbstractAxis) OnMinorGridLinePenChanged(slot func(pen *qt6.QPen)) {
-	C.QAbstractAxis_connect_minorGridLinePenChanged(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QAbstractAxis) OnMinorGridLinePenChanged(slot func(pen *qt6.QPen)) *qt6.SignalConnection {
+	_goptr := qt6.UnsafeNewQMetaObject__Connection(C.QAbstractAxis_connect_minorGridLinePenChanged(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QAbstractAxis_minorGridLinePenChanged
@@ -594,8 +621,10 @@ func miqt_exec_callback_QAbstractAxis_minorGridLinePenChanged(cb C.intptr_t, pen
 func (this *QAbstractAxis) GridLineColorChanged(color *qt6.QColor) {
 	C.QAbstractAxis_gridLineColorChanged(this.h, (*C.QColor)(color.UnsafePointer()))
 }
-func (this *QAbstractAxis) OnGridLineColorChanged(slot func(color *qt6.QColor)) {
-	C.QAbstractAxis_connect_gridLineColorChanged(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QAbstractAxis) OnGridLineColorChanged(slot func(color *qt6.QColor)) *qt6.SignalConnection {
+	_goptr := qt6.UnsafeNewQMetaObject__Connection(C.QAbstractAxis_connect_gridLineColorChanged(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QAbstractAxis_gridLineColorChanged
@@ -614,8 +643,10 @@ func miqt_exec_callback_QAbstractAxis_gridLineColorChanged(cb C.intptr_t, color 
 func (this *QAbstractAxis) MinorGridLineColorChanged(color *qt6.QColor) {
 	C.QAbstractAxis_minorGridLineColorChanged(this.h, (*C.QColor)(color.UnsafePointer()))
 }
-func (this *QAbstractAxis) OnMinorGridLineColorChanged(slot func(color *qt6.QColor)) {
-	C.QAbstractAxis_connect_minorGridLineColorChanged(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QAbstractAxis) OnMinorGridLineColorChanged(slot func(color *qt6.QColor)) *qt6.SignalConnection {
+	_goptr := qt6.UnsafeNewQMetaObject__Connection(C.QAbstractAxis_connect_minorGridLineColorChanged(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QAbstractAxis_minorGridLineColorChanged
@@ -634,8 +665,10 @@ func miqt_exec_callback_QAbstractAxis_minorGridLineColorChanged(cb C.intptr_t, c
 func (this *QAbstractAxis) ColorChanged(color qt6.QColor) {
 	C.QAbstractAxis_colorChanged(this.h, (*C.QColor)(color.UnsafePointer()))
 }
-func (this *QAbstractAxis) OnColorChanged(slot func(color qt6.QColor)) {
-	C.QAbstractAxis_connect_colorChanged(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QAbstractAxis) OnColorChanged(slot func(color qt6.QColor)) *qt6.SignalConnection {
+	_goptr := qt6.UnsafeNewQMetaObject__Connection(C.QAbstractAxis_connect_colorChanged(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QAbstractAxis_colorChanged
@@ -656,8 +689,10 @@ func miqt_exec_callback_QAbstractAxis_colorChanged(cb C.intptr_t, color *C.QColo
 func (this *QAbstractAxis) LabelsColorChanged(color qt6.QColor) {
 	C.QAbstractAxis_labelsColorChanged(this.h, (*C.QColor)(color.UnsafePointer()))
 }
-func (this *QAbstractAxis) OnLabelsColorChanged(slot func(color qt6.QColor)) {
-	C.QAbstractAxis_connect_labelsColorChanged(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QAbstractAxis) OnLabelsColorChanged(slot func(color qt6.QColor)) *qt6.SignalConnection {
+	_goptr := qt6.UnsafeNewQMetaObject__Connection(C.QAbstractAxis_connect_labelsColorChanged(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QAbstractAxis_labelsColorChanged
@@ -682,8 +717,10 @@ func (this *QAbstractAxis) TitleTextChanged(title string) {
 	defer C.free(unsafe.Pointer(title_ms.data))
 	C.QAbstractAxis_titleTextChanged(this.h, title_ms)
 }
-func (this *QAbstractAxis) OnTitleTextChanged(slot func(title string)) {
-	C.QAbstractAxis_connect_titleTextChanged(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QAbstractAxis) OnTitleTextChanged(slot func(title string)) *qt6.SignalConnection {
+	_goptr := qt6.UnsafeNewQMetaObject__Connection(C.QAbstractAxis_connect_titleTextChanged(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QAbstractAxis_titleTextChanged
@@ -705,8 +742,10 @@ func miqt_exec_callback_QAbstractAxis_titleTextChanged(cb C.intptr_t, title C.st
 func (this *QAbstractAxis) TitleBrushChanged(brush *qt6.QBrush) {
 	C.QAbstractAxis_titleBrushChanged(this.h, (*C.QBrush)(brush.UnsafePointer()))
 }
-func (this *QAbstractAxis) OnTitleBrushChanged(slot func(brush *qt6.QBrush)) {
-	C.QAbstractAxis_connect_titleBrushChanged(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QAbstractAxis) OnTitleBrushChanged(slot func(brush *qt6.QBrush)) *qt6.SignalConnection {
+	_goptr := qt6.UnsafeNewQMetaObject__Connection(C.QAbstractAxis_connect_titleBrushChanged(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QAbstractAxis_titleBrushChanged
@@ -725,8 +764,10 @@ func miqt_exec_callback_QAbstractAxis_titleBrushChanged(cb C.intptr_t, brush *C.
 func (this *QAbstractAxis) TitleVisibleChanged(visible bool) {
 	C.QAbstractAxis_titleVisibleChanged(this.h, (C.bool)(visible))
 }
-func (this *QAbstractAxis) OnTitleVisibleChanged(slot func(visible bool)) {
-	C.QAbstractAxis_connect_titleVisibleChanged(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QAbstractAxis) OnTitleVisibleChanged(slot func(visible bool)) *qt6.SignalConnection {
+	_goptr := qt6.UnsafeNewQMetaObject__Connection(C.QAbstractAxis_connect_titleVisibleChanged(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QAbstractAxis_titleVisibleChanged
@@ -745,8 +786,10 @@ func miqt_exec_callback_QAbstractAxis_titleVisibleChanged(cb C.intptr_t, visible
 func (this *QAbstractAxis) TitleFontChanged(font *qt6.QFont) {
 	C.QAbstractAxis_titleFontChanged(this.h, (*C.QFont)(font.UnsafePointer()))
 }
-func (this *QAbstractAxis) OnTitleFontChanged(slot func(font *qt6.QFont)) {
-	C.QAbstractAxis_connect_titleFontChanged(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QAbstractAxis) OnTitleFontChanged(slot func(font *qt6.QFont)) *qt6.SignalConnection {
+	_goptr := qt6.UnsafeNewQMetaObject__Connection(C.QAbstractAxis_connect_titleFontChanged(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QAbstractAxis_titleFontChanged
@@ -765,8 +808,10 @@ func miqt_exec_callback_QAbstractAxis_titleFontChanged(cb C.intptr_t, font *C.QF
 func (this *QAbstractAxis) ShadesVisibleChanged(visible bool) {
 	C.QAbstractAxis_shadesVisibleChanged(this.h, (C.bool)(visible))
 }
-func (this *QAbstractAxis) OnShadesVisibleChanged(slot func(visible bool)) {
-	C.QAbstractAxis_connect_shadesVisibleChanged(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QAbstractAxis) OnShadesVisibleChanged(slot func(visible bool)) *qt6.SignalConnection {
+	_goptr := qt6.UnsafeNewQMetaObject__Connection(C.QAbstractAxis_connect_shadesVisibleChanged(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QAbstractAxis_shadesVisibleChanged
@@ -785,8 +830,10 @@ func miqt_exec_callback_QAbstractAxis_shadesVisibleChanged(cb C.intptr_t, visibl
 func (this *QAbstractAxis) ShadesColorChanged(color qt6.QColor) {
 	C.QAbstractAxis_shadesColorChanged(this.h, (*C.QColor)(color.UnsafePointer()))
 }
-func (this *QAbstractAxis) OnShadesColorChanged(slot func(color qt6.QColor)) {
-	C.QAbstractAxis_connect_shadesColorChanged(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QAbstractAxis) OnShadesColorChanged(slot func(color qt6.QColor)) *qt6.SignalConnection {
+	_goptr := qt6.UnsafeNewQMetaObject__Connection(C.QAbstractAxis_connect_shadesColorChanged(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QAbstractAxis_shadesColorChanged
@@ -807,8 +854,10 @@ func miqt_exec_callback_QAbstractAxis_shadesColorChanged(cb C.intptr_t, color *C
 func (this *QAbstractAxis) ShadesBorderColorChanged(color qt6.QColor) {
 	C.QAbstractAxis_shadesBorderColorChanged(this.h, (*C.QColor)(color.UnsafePointer()))
 }
-func (this *QAbstractAxis) OnShadesBorderColorChanged(slot func(color qt6.QColor)) {
-	C.QAbstractAxis_connect_shadesBorderColorChanged(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QAbstractAxis) OnShadesBorderColorChanged(slot func(color qt6.QColor)) *qt6.SignalConnection {
+	_goptr := qt6.UnsafeNewQMetaObject__Connection(C.QAbstractAxis_connect_shadesBorderColorChanged(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QAbstractAxis_shadesBorderColorChanged
@@ -829,8 +878,10 @@ func miqt_exec_callback_QAbstractAxis_shadesBorderColorChanged(cb C.intptr_t, co
 func (this *QAbstractAxis) ShadesPenChanged(pen *qt6.QPen) {
 	C.QAbstractAxis_shadesPenChanged(this.h, (*C.QPen)(pen.UnsafePointer()))
 }
-func (this *QAbstractAxis) OnShadesPenChanged(slot func(pen *qt6.QPen)) {
-	C.QAbstractAxis_connect_shadesPenChanged(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QAbstractAxis) OnShadesPenChanged(slot func(pen *qt6.QPen)) *qt6.SignalConnection {
+	_goptr := qt6.UnsafeNewQMetaObject__Connection(C.QAbstractAxis_connect_shadesPenChanged(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QAbstractAxis_shadesPenChanged
@@ -849,8 +900,10 @@ func miqt_exec_callback_QAbstractAxis_shadesPenChanged(cb C.intptr_t, pen *C.QPe
 func (this *QAbstractAxis) ShadesBrushChanged(brush *qt6.QBrush) {
 	C.QAbstractAxis_shadesBrushChanged(this.h, (*C.QBrush)(brush.UnsafePointer()))
 }
-func (this *QAbstractAxis) OnShadesBrushChanged(slot func(brush *qt6.QBrush)) {
-	C.QAbstractAxis_connect_shadesBrushChanged(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QAbstractAxis) OnShadesBrushChanged(slot func(brush *qt6.QBrush)) *qt6.SignalConnection {
+	_goptr := qt6.UnsafeNewQMetaObject__Connection(C.QAbstractAxis_connect_shadesBrushChanged(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QAbstractAxis_shadesBrushChanged
@@ -869,8 +922,10 @@ func miqt_exec_callback_QAbstractAxis_shadesBrushChanged(cb C.intptr_t, brush *C
 func (this *QAbstractAxis) ReverseChanged(reverse bool) {
 	C.QAbstractAxis_reverseChanged(this.h, (C.bool)(reverse))
 }
-func (this *QAbstractAxis) OnReverseChanged(slot func(reverse bool)) {
-	C.QAbstractAxis_connect_reverseChanged(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QAbstractAxis) OnReverseChanged(slot func(reverse bool)) *qt6.SignalConnection {
+	_goptr := qt6.UnsafeNewQMetaObject__Connection(C.QAbstractAxis_connect_reverseChanged(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QAbstractAxis_reverseChanged
@@ -889,8 +944,10 @@ func miqt_exec_callback_QAbstractAxis_reverseChanged(cb C.intptr_t, reverse C.bo
 func (this *QAbstractAxis) LabelsEditableChanged(editable bool) {
 	C.QAbstractAxis_labelsEditableChanged(this.h, (C.bool)(editable))
 }
-func (this *QAbstractAxis) OnLabelsEditableChanged(slot func(editable bool)) {
-	C.QAbstractAxis_connect_labelsEditableChanged(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QAbstractAxis) OnLabelsEditableChanged(slot func(editable bool)) *qt6.SignalConnection {
+	_goptr := qt6.UnsafeNewQMetaObject__Connection(C.QAbstractAxis_connect_labelsEditableChanged(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QAbstractAxis_labelsEditableChanged
@@ -909,8 +966,10 @@ func miqt_exec_callback_QAbstractAxis_labelsEditableChanged(cb C.intptr_t, edita
 func (this *QAbstractAxis) LabelsTruncatedChanged(labelsTruncated bool) {
 	C.QAbstractAxis_labelsTruncatedChanged(this.h, (C.bool)(labelsTruncated))
 }
-func (this *QAbstractAxis) OnLabelsTruncatedChanged(slot func(labelsTruncated bool)) {
-	C.QAbstractAxis_connect_labelsTruncatedChanged(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QAbstractAxis) OnLabelsTruncatedChanged(slot func(labelsTruncated bool)) *qt6.SignalConnection {
+	_goptr := qt6.UnsafeNewQMetaObject__Connection(C.QAbstractAxis_connect_labelsTruncatedChanged(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QAbstractAxis_labelsTruncatedChanged
@@ -929,8 +988,10 @@ func miqt_exec_callback_QAbstractAxis_labelsTruncatedChanged(cb C.intptr_t, labe
 func (this *QAbstractAxis) TruncateLabelsChanged(truncateLabels bool) {
 	C.QAbstractAxis_truncateLabelsChanged(this.h, (C.bool)(truncateLabels))
 }
-func (this *QAbstractAxis) OnTruncateLabelsChanged(slot func(truncateLabels bool)) {
-	C.QAbstractAxis_connect_truncateLabelsChanged(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QAbstractAxis) OnTruncateLabelsChanged(slot func(truncateLabels bool)) *qt6.SignalConnection {
+	_goptr := qt6.UnsafeNewQMetaObject__Connection(C.QAbstractAxis_connect_truncateLabelsChanged(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QAbstractAxis_truncateLabelsChanged

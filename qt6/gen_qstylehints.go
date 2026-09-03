@@ -14,6 +14,11 @@ import (
 	"unsafe"
 )
 
+//export miqt_exec_callback_handle_release_QStyleHints
+func miqt_exec_callback_handle_release_QStyleHints(cb C.intptr_t) {
+	cgo.Handle(cb).Delete()
+}
+
 type QStyleHints struct {
 	h *C.QStyleHints
 	*QObject
@@ -210,8 +215,10 @@ func (this *QStyleHints) MouseQuickSelectionThreshold() int {
 func (this *QStyleHints) CursorFlashTimeChanged(cursorFlashTime int) {
 	C.QStyleHints_cursorFlashTimeChanged(this.h, (C.int)(cursorFlashTime))
 }
-func (this *QStyleHints) OnCursorFlashTimeChanged(slot func(cursorFlashTime int)) {
-	C.QStyleHints_connect_cursorFlashTimeChanged(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QStyleHints) OnCursorFlashTimeChanged(slot func(cursorFlashTime int)) *SignalConnection {
+	_goptr := UnsafeNewQMetaObject__Connection(C.QStyleHints_connect_cursorFlashTimeChanged(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QStyleHints_cursorFlashTimeChanged
@@ -230,8 +237,10 @@ func miqt_exec_callback_QStyleHints_cursorFlashTimeChanged(cb C.intptr_t, cursor
 func (this *QStyleHints) KeyboardInputIntervalChanged(keyboardInputInterval int) {
 	C.QStyleHints_keyboardInputIntervalChanged(this.h, (C.int)(keyboardInputInterval))
 }
-func (this *QStyleHints) OnKeyboardInputIntervalChanged(slot func(keyboardInputInterval int)) {
-	C.QStyleHints_connect_keyboardInputIntervalChanged(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QStyleHints) OnKeyboardInputIntervalChanged(slot func(keyboardInputInterval int)) *SignalConnection {
+	_goptr := UnsafeNewQMetaObject__Connection(C.QStyleHints_connect_keyboardInputIntervalChanged(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QStyleHints_keyboardInputIntervalChanged
@@ -250,8 +259,10 @@ func miqt_exec_callback_QStyleHints_keyboardInputIntervalChanged(cb C.intptr_t, 
 func (this *QStyleHints) MouseDoubleClickIntervalChanged(mouseDoubleClickInterval int) {
 	C.QStyleHints_mouseDoubleClickIntervalChanged(this.h, (C.int)(mouseDoubleClickInterval))
 }
-func (this *QStyleHints) OnMouseDoubleClickIntervalChanged(slot func(mouseDoubleClickInterval int)) {
-	C.QStyleHints_connect_mouseDoubleClickIntervalChanged(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QStyleHints) OnMouseDoubleClickIntervalChanged(slot func(mouseDoubleClickInterval int)) *SignalConnection {
+	_goptr := UnsafeNewQMetaObject__Connection(C.QStyleHints_connect_mouseDoubleClickIntervalChanged(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QStyleHints_mouseDoubleClickIntervalChanged
@@ -270,8 +281,10 @@ func miqt_exec_callback_QStyleHints_mouseDoubleClickIntervalChanged(cb C.intptr_
 func (this *QStyleHints) MousePressAndHoldIntervalChanged(mousePressAndHoldInterval int) {
 	C.QStyleHints_mousePressAndHoldIntervalChanged(this.h, (C.int)(mousePressAndHoldInterval))
 }
-func (this *QStyleHints) OnMousePressAndHoldIntervalChanged(slot func(mousePressAndHoldInterval int)) {
-	C.QStyleHints_connect_mousePressAndHoldIntervalChanged(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QStyleHints) OnMousePressAndHoldIntervalChanged(slot func(mousePressAndHoldInterval int)) *SignalConnection {
+	_goptr := UnsafeNewQMetaObject__Connection(C.QStyleHints_connect_mousePressAndHoldIntervalChanged(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QStyleHints_mousePressAndHoldIntervalChanged
@@ -290,8 +303,10 @@ func miqt_exec_callback_QStyleHints_mousePressAndHoldIntervalChanged(cb C.intptr
 func (this *QStyleHints) StartDragDistanceChanged(startDragDistance int) {
 	C.QStyleHints_startDragDistanceChanged(this.h, (C.int)(startDragDistance))
 }
-func (this *QStyleHints) OnStartDragDistanceChanged(slot func(startDragDistance int)) {
-	C.QStyleHints_connect_startDragDistanceChanged(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QStyleHints) OnStartDragDistanceChanged(slot func(startDragDistance int)) *SignalConnection {
+	_goptr := UnsafeNewQMetaObject__Connection(C.QStyleHints_connect_startDragDistanceChanged(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QStyleHints_startDragDistanceChanged
@@ -310,8 +325,10 @@ func miqt_exec_callback_QStyleHints_startDragDistanceChanged(cb C.intptr_t, star
 func (this *QStyleHints) StartDragTimeChanged(startDragTime int) {
 	C.QStyleHints_startDragTimeChanged(this.h, (C.int)(startDragTime))
 }
-func (this *QStyleHints) OnStartDragTimeChanged(slot func(startDragTime int)) {
-	C.QStyleHints_connect_startDragTimeChanged(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QStyleHints) OnStartDragTimeChanged(slot func(startDragTime int)) *SignalConnection {
+	_goptr := UnsafeNewQMetaObject__Connection(C.QStyleHints_connect_startDragTimeChanged(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QStyleHints_startDragTimeChanged
@@ -330,8 +347,10 @@ func miqt_exec_callback_QStyleHints_startDragTimeChanged(cb C.intptr_t, startDra
 func (this *QStyleHints) TabFocusBehaviorChanged(tabFocusBehavior TabFocusBehavior) {
 	C.QStyleHints_tabFocusBehaviorChanged(this.h, (C.int)(tabFocusBehavior))
 }
-func (this *QStyleHints) OnTabFocusBehaviorChanged(slot func(tabFocusBehavior TabFocusBehavior)) {
-	C.QStyleHints_connect_tabFocusBehaviorChanged(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QStyleHints) OnTabFocusBehaviorChanged(slot func(tabFocusBehavior TabFocusBehavior)) *SignalConnection {
+	_goptr := UnsafeNewQMetaObject__Connection(C.QStyleHints_connect_tabFocusBehaviorChanged(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QStyleHints_tabFocusBehaviorChanged
@@ -350,8 +369,10 @@ func miqt_exec_callback_QStyleHints_tabFocusBehaviorChanged(cb C.intptr_t, tabFo
 func (this *QStyleHints) UseHoverEffectsChanged(useHoverEffects bool) {
 	C.QStyleHints_useHoverEffectsChanged(this.h, (C.bool)(useHoverEffects))
 }
-func (this *QStyleHints) OnUseHoverEffectsChanged(slot func(useHoverEffects bool)) {
-	C.QStyleHints_connect_useHoverEffectsChanged(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QStyleHints) OnUseHoverEffectsChanged(slot func(useHoverEffects bool)) *SignalConnection {
+	_goptr := UnsafeNewQMetaObject__Connection(C.QStyleHints_connect_useHoverEffectsChanged(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QStyleHints_useHoverEffectsChanged
@@ -370,8 +391,10 @@ func miqt_exec_callback_QStyleHints_useHoverEffectsChanged(cb C.intptr_t, useHov
 func (this *QStyleHints) ShowShortcutsInContextMenusChanged(param1 bool) {
 	C.QStyleHints_showShortcutsInContextMenusChanged(this.h, (C.bool)(param1))
 }
-func (this *QStyleHints) OnShowShortcutsInContextMenusChanged(slot func(param1 bool)) {
-	C.QStyleHints_connect_showShortcutsInContextMenusChanged(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QStyleHints) OnShowShortcutsInContextMenusChanged(slot func(param1 bool)) *SignalConnection {
+	_goptr := UnsafeNewQMetaObject__Connection(C.QStyleHints_connect_showShortcutsInContextMenusChanged(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QStyleHints_showShortcutsInContextMenusChanged
@@ -390,8 +413,10 @@ func miqt_exec_callback_QStyleHints_showShortcutsInContextMenusChanged(cb C.intp
 func (this *QStyleHints) WheelScrollLinesChanged(scrollLines int) {
 	C.QStyleHints_wheelScrollLinesChanged(this.h, (C.int)(scrollLines))
 }
-func (this *QStyleHints) OnWheelScrollLinesChanged(slot func(scrollLines int)) {
-	C.QStyleHints_connect_wheelScrollLinesChanged(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QStyleHints) OnWheelScrollLinesChanged(slot func(scrollLines int)) *SignalConnection {
+	_goptr := UnsafeNewQMetaObject__Connection(C.QStyleHints_connect_wheelScrollLinesChanged(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QStyleHints_wheelScrollLinesChanged
@@ -410,8 +435,10 @@ func miqt_exec_callback_QStyleHints_wheelScrollLinesChanged(cb C.intptr_t, scrol
 func (this *QStyleHints) MouseQuickSelectionThresholdChanged(threshold int) {
 	C.QStyleHints_mouseQuickSelectionThresholdChanged(this.h, (C.int)(threshold))
 }
-func (this *QStyleHints) OnMouseQuickSelectionThresholdChanged(slot func(threshold int)) {
-	C.QStyleHints_connect_mouseQuickSelectionThresholdChanged(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QStyleHints) OnMouseQuickSelectionThresholdChanged(slot func(threshold int)) *SignalConnection {
+	_goptr := UnsafeNewQMetaObject__Connection(C.QStyleHints_connect_mouseQuickSelectionThresholdChanged(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QStyleHints_mouseQuickSelectionThresholdChanged

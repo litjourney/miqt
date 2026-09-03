@@ -131,6 +131,11 @@ func (this *QSqlRelation) GoGC() {
 	})
 }
 
+//export miqt_exec_callback_handle_release_QSqlRelationalTableModel
+func miqt_exec_callback_handle_release_QSqlRelationalTableModel(cb C.intptr_t) {
+	cgo.Handle(cb).Delete()
+}
+
 type QSqlRelationalTableModel struct {
 	h *C.QSqlRelationalTableModel
 	*QSqlTableModel
@@ -674,7 +679,11 @@ func (this *QSqlRelationalTableModel) callVirtualBase_Data(item *qt6.QModelIndex
 
 }
 func (this *QSqlRelationalTableModel) OnData(slot func(super func(item *qt6.QModelIndex, role int) *qt6.QVariant, item *qt6.QModelIndex, role int) *qt6.QVariant) {
-	ok := C.QSqlRelationalTableModel_override_virtual_data(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QSqlRelationalTableModel_override_virtual_data(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -704,7 +713,11 @@ func (this *QSqlRelationalTableModel) callVirtualBase_SetData(item *qt6.QModelIn
 
 }
 func (this *QSqlRelationalTableModel) OnSetData(slot func(super func(item *qt6.QModelIndex, value *qt6.QVariant, role int) bool, item *qt6.QModelIndex, value *qt6.QVariant, role int) bool) {
-	ok := C.QSqlRelationalTableModel_override_virtual_setData(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QSqlRelationalTableModel_override_virtual_setData(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -736,7 +749,11 @@ func (this *QSqlRelationalTableModel) callVirtualBase_RemoveColumns(column int, 
 
 }
 func (this *QSqlRelationalTableModel) OnRemoveColumns(slot func(super func(column int, count int, parent *qt6.QModelIndex) bool, column int, count int, parent *qt6.QModelIndex) bool) {
-	ok := C.QSqlRelationalTableModel_override_virtual_removeColumns(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QSqlRelationalTableModel_override_virtual_removeColumns(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -768,7 +785,11 @@ func (this *QSqlRelationalTableModel) callVirtualBase_Clear() {
 
 }
 func (this *QSqlRelationalTableModel) OnClear(slot func(super func())) {
-	ok := C.QSqlRelationalTableModel_override_virtual_clear(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QSqlRelationalTableModel_override_virtual_clear(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -791,7 +812,11 @@ func (this *QSqlRelationalTableModel) callVirtualBase_Select() bool {
 
 }
 func (this *QSqlRelationalTableModel) OnSelect(slot func(super func() bool) bool) {
-	ok := C.QSqlRelationalTableModel_override_virtual_select(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QSqlRelationalTableModel_override_virtual_select(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -820,7 +845,11 @@ func (this *QSqlRelationalTableModel) callVirtualBase_SetTable(tableName string)
 
 }
 func (this *QSqlRelationalTableModel) OnSetTable(slot func(super func(tableName string), tableName string)) {
-	ok := C.QSqlRelationalTableModel_override_virtual_setTable(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QSqlRelationalTableModel_override_virtual_setTable(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -849,7 +878,11 @@ func (this *QSqlRelationalTableModel) callVirtualBase_SetRelation(column int, re
 
 }
 func (this *QSqlRelationalTableModel) OnSetRelation(slot func(super func(column int, relation *QSqlRelation), column int, relation *QSqlRelation)) {
-	ok := C.QSqlRelationalTableModel_override_virtual_setRelation(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QSqlRelationalTableModel_override_virtual_setRelation(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -877,7 +910,11 @@ func (this *QSqlRelationalTableModel) callVirtualBase_RelationModel(column int) 
 
 }
 func (this *QSqlRelationalTableModel) OnRelationModel(slot func(super func(column int) *QSqlTableModel, column int) *QSqlTableModel) {
-	ok := C.QSqlRelationalTableModel_override_virtual_relationModel(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QSqlRelationalTableModel_override_virtual_relationModel(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -905,7 +942,11 @@ func (this *QSqlRelationalTableModel) callVirtualBase_RevertRow(row int) {
 
 }
 func (this *QSqlRelationalTableModel) OnRevertRow(slot func(super func(row int), row int)) {
-	ok := C.QSqlRelationalTableModel_override_virtual_revertRow(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QSqlRelationalTableModel_override_virtual_revertRow(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -933,7 +974,11 @@ func (this *QSqlRelationalTableModel) callVirtualBase_SelectStatement() string {
 	return _ret
 }
 func (this *QSqlRelationalTableModel) OnSelectStatement(slot func(super func() string) string) {
-	ok := C.QSqlRelationalTableModel_override_virtual_selectStatement(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QSqlRelationalTableModel_override_virtual_selectStatement(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -961,7 +1006,11 @@ func (this *QSqlRelationalTableModel) callVirtualBase_UpdateRowInTable(row int, 
 
 }
 func (this *QSqlRelationalTableModel) OnUpdateRowInTable(slot func(super func(row int, values *QSqlRecord) bool, row int, values *QSqlRecord) bool) {
-	ok := C.QSqlRelationalTableModel_override_virtual_updateRowInTable(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QSqlRelationalTableModel_override_virtual_updateRowInTable(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -991,7 +1040,11 @@ func (this *QSqlRelationalTableModel) callVirtualBase_InsertRowIntoTable(values 
 
 }
 func (this *QSqlRelationalTableModel) OnInsertRowIntoTable(slot func(super func(values *QSqlRecord) bool, values *QSqlRecord) bool) {
-	ok := C.QSqlRelationalTableModel_override_virtual_insertRowIntoTable(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QSqlRelationalTableModel_override_virtual_insertRowIntoTable(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1021,7 +1074,11 @@ func (this *QSqlRelationalTableModel) callVirtualBase_OrderByClause() string {
 	return _ret
 }
 func (this *QSqlRelationalTableModel) OnOrderByClause(slot func(super func() string) string) {
-	ok := C.QSqlRelationalTableModel_override_virtual_orderByClause(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QSqlRelationalTableModel_override_virtual_orderByClause(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1049,7 +1106,11 @@ func (this *QSqlRelationalTableModel) callVirtualBase_Flags(index *qt6.QModelInd
 
 }
 func (this *QSqlRelationalTableModel) OnFlags(slot func(super func(index *qt6.QModelIndex) qt6.ItemFlag, index *qt6.QModelIndex) qt6.ItemFlag) {
-	ok := C.QSqlRelationalTableModel_override_virtual_flags(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QSqlRelationalTableModel_override_virtual_flags(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1077,7 +1138,11 @@ func (this *QSqlRelationalTableModel) callVirtualBase_ClearItemData(index *qt6.Q
 
 }
 func (this *QSqlRelationalTableModel) OnClearItemData(slot func(super func(index *qt6.QModelIndex) bool, index *qt6.QModelIndex) bool) {
-	ok := C.QSqlRelationalTableModel_override_virtual_clearItemData(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QSqlRelationalTableModel_override_virtual_clearItemData(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1107,7 +1172,11 @@ func (this *QSqlRelationalTableModel) callVirtualBase_HeaderData(section int, or
 
 }
 func (this *QSqlRelationalTableModel) OnHeaderData(slot func(super func(section int, orientation qt6.Orientation, role int) *qt6.QVariant, section int, orientation qt6.Orientation, role int) *qt6.QVariant) {
-	ok := C.QSqlRelationalTableModel_override_virtual_headerData(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QSqlRelationalTableModel_override_virtual_headerData(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1139,7 +1208,11 @@ func (this *QSqlRelationalTableModel) callVirtualBase_SetEditStrategy(strategy Q
 
 }
 func (this *QSqlRelationalTableModel) OnSetEditStrategy(slot func(super func(strategy QSqlTableModel__EditStrategy), strategy QSqlTableModel__EditStrategy)) {
-	ok := C.QSqlRelationalTableModel_override_virtual_setEditStrategy(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QSqlRelationalTableModel_override_virtual_setEditStrategy(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1165,7 +1238,11 @@ func (this *QSqlRelationalTableModel) callVirtualBase_Sort(column int, order qt6
 
 }
 func (this *QSqlRelationalTableModel) OnSort(slot func(super func(column int, order qt6.SortOrder), column int, order qt6.SortOrder)) {
-	ok := C.QSqlRelationalTableModel_override_virtual_sort(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QSqlRelationalTableModel_override_virtual_sort(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1193,7 +1270,11 @@ func (this *QSqlRelationalTableModel) callVirtualBase_SetSort(column int, order 
 
 }
 func (this *QSqlRelationalTableModel) OnSetSort(slot func(super func(column int, order qt6.SortOrder), column int, order qt6.SortOrder)) {
-	ok := C.QSqlRelationalTableModel_override_virtual_setSort(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QSqlRelationalTableModel_override_virtual_setSort(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1225,7 +1306,11 @@ func (this *QSqlRelationalTableModel) callVirtualBase_SetFilter(filter string) {
 
 }
 func (this *QSqlRelationalTableModel) OnSetFilter(slot func(super func(filter string), filter string)) {
-	ok := C.QSqlRelationalTableModel_override_virtual_setFilter(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QSqlRelationalTableModel_override_virtual_setFilter(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1254,7 +1339,11 @@ func (this *QSqlRelationalTableModel) callVirtualBase_RowCount(parent *qt6.QMode
 
 }
 func (this *QSqlRelationalTableModel) OnRowCount(slot func(super func(parent *qt6.QModelIndex) int, parent *qt6.QModelIndex) int) {
-	ok := C.QSqlRelationalTableModel_override_virtual_rowCount(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QSqlRelationalTableModel_override_virtual_rowCount(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1282,7 +1371,11 @@ func (this *QSqlRelationalTableModel) callVirtualBase_RemoveRows(row int, count 
 
 }
 func (this *QSqlRelationalTableModel) OnRemoveRows(slot func(super func(row int, count int, parent *qt6.QModelIndex) bool, row int, count int, parent *qt6.QModelIndex) bool) {
-	ok := C.QSqlRelationalTableModel_override_virtual_removeRows(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QSqlRelationalTableModel_override_virtual_removeRows(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1314,7 +1407,11 @@ func (this *QSqlRelationalTableModel) callVirtualBase_InsertRows(row int, count 
 
 }
 func (this *QSqlRelationalTableModel) OnInsertRows(slot func(super func(row int, count int, parent *qt6.QModelIndex) bool, row int, count int, parent *qt6.QModelIndex) bool) {
-	ok := C.QSqlRelationalTableModel_override_virtual_insertRows(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QSqlRelationalTableModel_override_virtual_insertRows(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1346,7 +1443,11 @@ func (this *QSqlRelationalTableModel) callVirtualBase_SelectRow(row int) bool {
 
 }
 func (this *QSqlRelationalTableModel) OnSelectRow(slot func(super func(row int) bool, row int) bool) {
-	ok := C.QSqlRelationalTableModel_override_virtual_selectRow(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QSqlRelationalTableModel_override_virtual_selectRow(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1374,7 +1475,11 @@ func (this *QSqlRelationalTableModel) callVirtualBase_Submit() bool {
 
 }
 func (this *QSqlRelationalTableModel) OnSubmit(slot func(super func() bool) bool) {
-	ok := C.QSqlRelationalTableModel_override_virtual_submit(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QSqlRelationalTableModel_override_virtual_submit(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1399,7 +1504,11 @@ func (this *QSqlRelationalTableModel) callVirtualBase_Revert() {
 
 }
 func (this *QSqlRelationalTableModel) OnRevert(slot func(super func())) {
-	ok := C.QSqlRelationalTableModel_override_virtual_revert(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QSqlRelationalTableModel_override_virtual_revert(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1422,7 +1531,11 @@ func (this *QSqlRelationalTableModel) callVirtualBase_DeleteRowFromTable(row int
 
 }
 func (this *QSqlRelationalTableModel) OnDeleteRowFromTable(slot func(super func(row int) bool, row int) bool) {
-	ok := C.QSqlRelationalTableModel_override_virtual_deleteRowFromTable(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QSqlRelationalTableModel_override_virtual_deleteRowFromTable(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1452,7 +1565,11 @@ func (this *QSqlRelationalTableModel) callVirtualBase_IndexInQuery(item *qt6.QMo
 
 }
 func (this *QSqlRelationalTableModel) OnIndexInQuery(slot func(super func(item *qt6.QModelIndex) *qt6.QModelIndex, item *qt6.QModelIndex) *qt6.QModelIndex) {
-	ok := C.QSqlRelationalTableModel_override_virtual_indexInQuery(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QSqlRelationalTableModel_override_virtual_indexInQuery(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1480,7 +1597,11 @@ func (this *QSqlRelationalTableModel) callVirtualBase_ColumnCount(parent *qt6.QM
 
 }
 func (this *QSqlRelationalTableModel) OnColumnCount(slot func(super func(parent *qt6.QModelIndex) int, parent *qt6.QModelIndex) int) {
-	ok := C.QSqlRelationalTableModel_override_virtual_columnCount(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QSqlRelationalTableModel_override_virtual_columnCount(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1508,7 +1629,11 @@ func (this *QSqlRelationalTableModel) callVirtualBase_SetHeaderData(section int,
 
 }
 func (this *QSqlRelationalTableModel) OnSetHeaderData(slot func(super func(section int, orientation qt6.Orientation, value *qt6.QVariant, role int) bool, section int, orientation qt6.Orientation, value *qt6.QVariant, role int) bool) {
-	ok := C.QSqlRelationalTableModel_override_virtual_setHeaderData(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QSqlRelationalTableModel_override_virtual_setHeaderData(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1542,7 +1667,11 @@ func (this *QSqlRelationalTableModel) callVirtualBase_InsertColumns(column int, 
 
 }
 func (this *QSqlRelationalTableModel) OnInsertColumns(slot func(super func(column int, count int, parent *qt6.QModelIndex) bool, column int, count int, parent *qt6.QModelIndex) bool) {
-	ok := C.QSqlRelationalTableModel_override_virtual_insertColumns(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QSqlRelationalTableModel_override_virtual_insertColumns(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1574,7 +1703,11 @@ func (this *QSqlRelationalTableModel) callVirtualBase_FetchMore(parent *qt6.QMod
 
 }
 func (this *QSqlRelationalTableModel) OnFetchMore(slot func(super func(parent *qt6.QModelIndex), parent *qt6.QModelIndex)) {
-	ok := C.QSqlRelationalTableModel_override_virtual_fetchMore(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QSqlRelationalTableModel_override_virtual_fetchMore(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1600,7 +1733,11 @@ func (this *QSqlRelationalTableModel) callVirtualBase_CanFetchMore(parent *qt6.Q
 
 }
 func (this *QSqlRelationalTableModel) OnCanFetchMore(slot func(super func(parent *qt6.QModelIndex) bool, parent *qt6.QModelIndex) bool) {
-	ok := C.QSqlRelationalTableModel_override_virtual_canFetchMore(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QSqlRelationalTableModel_override_virtual_canFetchMore(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1641,7 +1778,11 @@ func (this *QSqlRelationalTableModel) callVirtualBase_RoleNames() map[int][]byte
 
 }
 func (this *QSqlRelationalTableModel) OnRoleNames(slot func(super func() map[int][]byte) map[int][]byte) {
-	ok := C.QSqlRelationalTableModel_override_virtual_roleNames(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QSqlRelationalTableModel_override_virtual_roleNames(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1686,7 +1827,11 @@ func (this *QSqlRelationalTableModel) callVirtualBase_QueryChange() {
 
 }
 func (this *QSqlRelationalTableModel) OnQueryChange(slot func(super func())) {
-	ok := C.QSqlRelationalTableModel_override_virtual_queryChange(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QSqlRelationalTableModel_override_virtual_queryChange(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1711,7 +1856,11 @@ func (this *QSqlRelationalTableModel) callVirtualBase_Index(row int, column int,
 
 }
 func (this *QSqlRelationalTableModel) OnIndex(slot func(super func(row int, column int, parent *qt6.QModelIndex) *qt6.QModelIndex, row int, column int, parent *qt6.QModelIndex) *qt6.QModelIndex) {
-	ok := C.QSqlRelationalTableModel_override_virtual_index(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QSqlRelationalTableModel_override_virtual_index(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1745,7 +1894,11 @@ func (this *QSqlRelationalTableModel) callVirtualBase_Sibling(row int, column in
 
 }
 func (this *QSqlRelationalTableModel) OnSibling(slot func(super func(row int, column int, idx *qt6.QModelIndex) *qt6.QModelIndex, row int, column int, idx *qt6.QModelIndex) *qt6.QModelIndex) {
-	ok := C.QSqlRelationalTableModel_override_virtual_sibling(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QSqlRelationalTableModel_override_virtual_sibling(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1777,7 +1930,11 @@ func (this *QSqlRelationalTableModel) callVirtualBase_DropMimeData(data *qt6.QMi
 
 }
 func (this *QSqlRelationalTableModel) OnDropMimeData(slot func(super func(data *qt6.QMimeData, action qt6.DropAction, row int, column int, parent *qt6.QModelIndex) bool, data *qt6.QMimeData, action qt6.DropAction, row int, column int, parent *qt6.QModelIndex) bool) {
-	ok := C.QSqlRelationalTableModel_override_virtual_dropMimeData(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QSqlRelationalTableModel_override_virtual_dropMimeData(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1826,7 +1983,11 @@ func (this *QSqlRelationalTableModel) callVirtualBase_ItemData(index *qt6.QModel
 
 }
 func (this *QSqlRelationalTableModel) OnItemData(slot func(super func(index *qt6.QModelIndex) map[int]qt6.QVariant, index *qt6.QModelIndex) map[int]qt6.QVariant) {
-	ok := C.QSqlRelationalTableModel_override_virtual_itemData(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QSqlRelationalTableModel_override_virtual_itemData(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1882,7 +2043,11 @@ func (this *QSqlRelationalTableModel) callVirtualBase_SetItemData(index *qt6.QMo
 
 }
 func (this *QSqlRelationalTableModel) OnSetItemData(slot func(super func(index *qt6.QModelIndex, roles map[int]qt6.QVariant) bool, index *qt6.QModelIndex, roles map[int]qt6.QVariant) bool) {
-	ok := C.QSqlRelationalTableModel_override_virtual_setItemData(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QSqlRelationalTableModel_override_virtual_setItemData(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1934,7 +2099,11 @@ func (this *QSqlRelationalTableModel) callVirtualBase_MimeTypes() []string {
 
 }
 func (this *QSqlRelationalTableModel) OnMimeTypes(slot func(super func() []string) []string) {
-	ok := C.QSqlRelationalTableModel_override_virtual_mimeTypes(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QSqlRelationalTableModel_override_virtual_mimeTypes(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1973,7 +2142,11 @@ func (this *QSqlRelationalTableModel) callVirtualBase_MimeData(indexes []qt6.QMo
 
 }
 func (this *QSqlRelationalTableModel) OnMimeData(slot func(super func(indexes []qt6.QModelIndex) *qt6.QMimeData, indexes []qt6.QModelIndex) *qt6.QMimeData) {
-	ok := C.QSqlRelationalTableModel_override_virtual_mimeData(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QSqlRelationalTableModel_override_virtual_mimeData(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -2009,7 +2182,11 @@ func (this *QSqlRelationalTableModel) callVirtualBase_CanDropMimeData(data *qt6.
 
 }
 func (this *QSqlRelationalTableModel) OnCanDropMimeData(slot func(super func(data *qt6.QMimeData, action qt6.DropAction, row int, column int, parent *qt6.QModelIndex) bool, data *qt6.QMimeData, action qt6.DropAction, row int, column int, parent *qt6.QModelIndex) bool) {
-	ok := C.QSqlRelationalTableModel_override_virtual_canDropMimeData(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QSqlRelationalTableModel_override_virtual_canDropMimeData(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -2045,7 +2222,11 @@ func (this *QSqlRelationalTableModel) callVirtualBase_SupportedDropActions() qt6
 
 }
 func (this *QSqlRelationalTableModel) OnSupportedDropActions(slot func(super func() qt6.DropAction) qt6.DropAction) {
-	ok := C.QSqlRelationalTableModel_override_virtual_supportedDropActions(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QSqlRelationalTableModel_override_virtual_supportedDropActions(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -2070,7 +2251,11 @@ func (this *QSqlRelationalTableModel) callVirtualBase_SupportedDragActions() qt6
 
 }
 func (this *QSqlRelationalTableModel) OnSupportedDragActions(slot func(super func() qt6.DropAction) qt6.DropAction) {
-	ok := C.QSqlRelationalTableModel_override_virtual_supportedDragActions(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QSqlRelationalTableModel_override_virtual_supportedDragActions(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -2095,7 +2280,11 @@ func (this *QSqlRelationalTableModel) callVirtualBase_MoveRows(sourceParent *qt6
 
 }
 func (this *QSqlRelationalTableModel) OnMoveRows(slot func(super func(sourceParent *qt6.QModelIndex, sourceRow int, count int, destinationParent *qt6.QModelIndex, destinationChild int) bool, sourceParent *qt6.QModelIndex, sourceRow int, count int, destinationParent *qt6.QModelIndex, destinationChild int) bool) {
-	ok := C.QSqlRelationalTableModel_override_virtual_moveRows(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QSqlRelationalTableModel_override_virtual_moveRows(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -2131,7 +2320,11 @@ func (this *QSqlRelationalTableModel) callVirtualBase_MoveColumns(sourceParent *
 
 }
 func (this *QSqlRelationalTableModel) OnMoveColumns(slot func(super func(sourceParent *qt6.QModelIndex, sourceColumn int, count int, destinationParent *qt6.QModelIndex, destinationChild int) bool, sourceParent *qt6.QModelIndex, sourceColumn int, count int, destinationParent *qt6.QModelIndex, destinationChild int) bool) {
-	ok := C.QSqlRelationalTableModel_override_virtual_moveColumns(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QSqlRelationalTableModel_override_virtual_moveColumns(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -2169,7 +2362,11 @@ func (this *QSqlRelationalTableModel) callVirtualBase_Buddy(index *qt6.QModelInd
 
 }
 func (this *QSqlRelationalTableModel) OnBuddy(slot func(super func(index *qt6.QModelIndex) *qt6.QModelIndex, index *qt6.QModelIndex) *qt6.QModelIndex) {
-	ok := C.QSqlRelationalTableModel_override_virtual_buddy(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QSqlRelationalTableModel_override_virtual_buddy(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -2205,7 +2402,11 @@ func (this *QSqlRelationalTableModel) callVirtualBase_Match(start *qt6.QModelInd
 
 }
 func (this *QSqlRelationalTableModel) OnMatch(slot func(super func(start *qt6.QModelIndex, role int, value *qt6.QVariant, hits int, flags qt6.MatchFlag) []qt6.QModelIndex, start *qt6.QModelIndex, role int, value *qt6.QVariant, hits int, flags qt6.MatchFlag) []qt6.QModelIndex) {
-	ok := C.QSqlRelationalTableModel_override_virtual_match(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QSqlRelationalTableModel_override_virtual_match(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -2248,7 +2449,11 @@ func (this *QSqlRelationalTableModel) callVirtualBase_Span(index *qt6.QModelInde
 
 }
 func (this *QSqlRelationalTableModel) OnSpan(slot func(super func(index *qt6.QModelIndex) *qt6.QSize, index *qt6.QModelIndex) *qt6.QSize) {
-	ok := C.QSqlRelationalTableModel_override_virtual_span(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QSqlRelationalTableModel_override_virtual_span(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -2276,7 +2481,11 @@ func (this *QSqlRelationalTableModel) callVirtualBase_MultiData(index *qt6.QMode
 
 }
 func (this *QSqlRelationalTableModel) OnMultiData(slot func(super func(index *qt6.QModelIndex, roleDataSpan qt6.QModelRoleDataSpan), index *qt6.QModelIndex, roleDataSpan qt6.QModelRoleDataSpan)) {
-	ok := C.QSqlRelationalTableModel_override_virtual_multiData(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QSqlRelationalTableModel_override_virtual_multiData(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -2306,7 +2515,11 @@ func (this *QSqlRelationalTableModel) callVirtualBase_ResetInternalData() {
 
 }
 func (this *QSqlRelationalTableModel) OnResetInternalData(slot func(super func())) {
-	ok := C.QSqlRelationalTableModel_override_virtual_resetInternalData(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QSqlRelationalTableModel_override_virtual_resetInternalData(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -2329,7 +2542,11 @@ func (this *QSqlRelationalTableModel) callVirtualBase_Event(event *qt6.QEvent) b
 
 }
 func (this *QSqlRelationalTableModel) OnEvent(slot func(super func(event *qt6.QEvent) bool, event *qt6.QEvent) bool) {
-	ok := C.QSqlRelationalTableModel_override_virtual_event(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QSqlRelationalTableModel_override_virtual_event(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -2357,7 +2574,11 @@ func (this *QSqlRelationalTableModel) callVirtualBase_EventFilter(watched *qt6.Q
 
 }
 func (this *QSqlRelationalTableModel) OnEventFilter(slot func(super func(watched *qt6.QObject, event *qt6.QEvent) bool, watched *qt6.QObject, event *qt6.QEvent) bool) {
-	ok := C.QSqlRelationalTableModel_override_virtual_eventFilter(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QSqlRelationalTableModel_override_virtual_eventFilter(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -2387,7 +2608,11 @@ func (this *QSqlRelationalTableModel) callVirtualBase_TimerEvent(event *qt6.QTim
 
 }
 func (this *QSqlRelationalTableModel) OnTimerEvent(slot func(super func(event *qt6.QTimerEvent), event *qt6.QTimerEvent)) {
-	ok := C.QSqlRelationalTableModel_override_virtual_timerEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QSqlRelationalTableModel_override_virtual_timerEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -2413,7 +2638,11 @@ func (this *QSqlRelationalTableModel) callVirtualBase_ChildEvent(event *qt6.QChi
 
 }
 func (this *QSqlRelationalTableModel) OnChildEvent(slot func(super func(event *qt6.QChildEvent), event *qt6.QChildEvent)) {
-	ok := C.QSqlRelationalTableModel_override_virtual_childEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QSqlRelationalTableModel_override_virtual_childEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -2439,7 +2668,11 @@ func (this *QSqlRelationalTableModel) callVirtualBase_CustomEvent(event *qt6.QEv
 
 }
 func (this *QSqlRelationalTableModel) OnCustomEvent(slot func(super func(event *qt6.QEvent), event *qt6.QEvent)) {
-	ok := C.QSqlRelationalTableModel_override_virtual_customEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QSqlRelationalTableModel_override_virtual_customEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -2465,7 +2698,11 @@ func (this *QSqlRelationalTableModel) callVirtualBase_ConnectNotify(signal *qt6.
 
 }
 func (this *QSqlRelationalTableModel) OnConnectNotify(slot func(super func(signal *qt6.QMetaMethod), signal *qt6.QMetaMethod)) {
-	ok := C.QSqlRelationalTableModel_override_virtual_connectNotify(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QSqlRelationalTableModel_override_virtual_connectNotify(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -2491,7 +2728,11 @@ func (this *QSqlRelationalTableModel) callVirtualBase_DisconnectNotify(signal *q
 
 }
 func (this *QSqlRelationalTableModel) OnDisconnectNotify(slot func(super func(signal *qt6.QMetaMethod), signal *qt6.QMetaMethod)) {
-	ok := C.QSqlRelationalTableModel_override_virtual_disconnectNotify(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QSqlRelationalTableModel_override_virtual_disconnectNotify(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}

@@ -117,7 +117,7 @@ void QProgressBar_setMaximum(QProgressBar* self, int maximum);
 void QProgressBar_setValue(QProgressBar* self, int value);
 void QProgressBar_setOrientation(QProgressBar* self, int orientation);
 void QProgressBar_valueChanged(QProgressBar* self, int value);
-void QProgressBar_connect_valueChanged(QProgressBar* self, intptr_t slot);
+void* QProgressBar_connect_valueChanged(QProgressBar* self, intptr_t slot);
 bool QProgressBar_event(QProgressBar* self, QEvent* e);
 void QProgressBar_paintEvent(QProgressBar* self, QPaintEvent* param1);
 void QProgressBar_initStyleOption(const QProgressBar* self, QStyleOptionProgressBar* option);

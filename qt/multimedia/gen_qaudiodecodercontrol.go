@@ -15,6 +15,11 @@ import (
 	"unsafe"
 )
 
+//export miqt_exec_callback_handle_release_QAudioDecoderControl
+func miqt_exec_callback_handle_release_QAudioDecoderControl(cb C.intptr_t) {
+	cgo.Handle(cb).Delete()
+}
+
 type QAudioDecoderControl struct {
 	h *C.QAudioDecoderControl
 	*QMediaControl
@@ -145,8 +150,10 @@ func (this *QAudioDecoderControl) Duration() int64 {
 func (this *QAudioDecoderControl) StateChanged(newState QAudioDecoder__State) {
 	C.QAudioDecoderControl_stateChanged(this.h, (C.int)(newState))
 }
-func (this *QAudioDecoderControl) OnStateChanged(slot func(newState QAudioDecoder__State)) {
-	C.QAudioDecoderControl_connect_stateChanged(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QAudioDecoderControl) OnStateChanged(slot func(newState QAudioDecoder__State)) *qt.SignalConnection {
+	_goptr := qt.UnsafeNewQMetaObject__Connection(C.QAudioDecoderControl_connect_stateChanged(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QAudioDecoderControl_stateChanged
@@ -165,8 +172,10 @@ func miqt_exec_callback_QAudioDecoderControl_stateChanged(cb C.intptr_t, newStat
 func (this *QAudioDecoderControl) FormatChanged(format *QAudioFormat) {
 	C.QAudioDecoderControl_formatChanged(this.h, format.cPointer())
 }
-func (this *QAudioDecoderControl) OnFormatChanged(slot func(format *QAudioFormat)) {
-	C.QAudioDecoderControl_connect_formatChanged(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QAudioDecoderControl) OnFormatChanged(slot func(format *QAudioFormat)) *qt.SignalConnection {
+	_goptr := qt.UnsafeNewQMetaObject__Connection(C.QAudioDecoderControl_connect_formatChanged(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QAudioDecoderControl_formatChanged
@@ -185,8 +194,10 @@ func miqt_exec_callback_QAudioDecoderControl_formatChanged(cb C.intptr_t, format
 func (this *QAudioDecoderControl) SourceChanged() {
 	C.QAudioDecoderControl_sourceChanged(this.h)
 }
-func (this *QAudioDecoderControl) OnSourceChanged(slot func()) {
-	C.QAudioDecoderControl_connect_sourceChanged(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QAudioDecoderControl) OnSourceChanged(slot func()) *qt.SignalConnection {
+	_goptr := qt.UnsafeNewQMetaObject__Connection(C.QAudioDecoderControl_connect_sourceChanged(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QAudioDecoderControl_sourceChanged
@@ -206,8 +217,10 @@ func (this *QAudioDecoderControl) Error(error int, errorString string) {
 	defer C.free(unsafe.Pointer(errorString_ms.data))
 	C.QAudioDecoderControl_error(this.h, (C.int)(error), errorString_ms)
 }
-func (this *QAudioDecoderControl) OnError(slot func(error int, errorString string)) {
-	C.QAudioDecoderControl_connect_error(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QAudioDecoderControl) OnError(slot func(error int, errorString string)) *qt.SignalConnection {
+	_goptr := qt.UnsafeNewQMetaObject__Connection(C.QAudioDecoderControl_connect_error(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QAudioDecoderControl_error
@@ -231,8 +244,10 @@ func miqt_exec_callback_QAudioDecoderControl_error(cb C.intptr_t, error C.int, e
 func (this *QAudioDecoderControl) BufferReady() {
 	C.QAudioDecoderControl_bufferReady(this.h)
 }
-func (this *QAudioDecoderControl) OnBufferReady(slot func()) {
-	C.QAudioDecoderControl_connect_bufferReady(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QAudioDecoderControl) OnBufferReady(slot func()) *qt.SignalConnection {
+	_goptr := qt.UnsafeNewQMetaObject__Connection(C.QAudioDecoderControl_connect_bufferReady(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QAudioDecoderControl_bufferReady
@@ -248,8 +263,10 @@ func miqt_exec_callback_QAudioDecoderControl_bufferReady(cb C.intptr_t) {
 func (this *QAudioDecoderControl) BufferAvailableChanged(available bool) {
 	C.QAudioDecoderControl_bufferAvailableChanged(this.h, (C.bool)(available))
 }
-func (this *QAudioDecoderControl) OnBufferAvailableChanged(slot func(available bool)) {
-	C.QAudioDecoderControl_connect_bufferAvailableChanged(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QAudioDecoderControl) OnBufferAvailableChanged(slot func(available bool)) *qt.SignalConnection {
+	_goptr := qt.UnsafeNewQMetaObject__Connection(C.QAudioDecoderControl_connect_bufferAvailableChanged(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QAudioDecoderControl_bufferAvailableChanged
@@ -268,8 +285,10 @@ func miqt_exec_callback_QAudioDecoderControl_bufferAvailableChanged(cb C.intptr_
 func (this *QAudioDecoderControl) Finished() {
 	C.QAudioDecoderControl_finished(this.h)
 }
-func (this *QAudioDecoderControl) OnFinished(slot func()) {
-	C.QAudioDecoderControl_connect_finished(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QAudioDecoderControl) OnFinished(slot func()) *qt.SignalConnection {
+	_goptr := qt.UnsafeNewQMetaObject__Connection(C.QAudioDecoderControl_connect_finished(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QAudioDecoderControl_finished
@@ -285,8 +304,10 @@ func miqt_exec_callback_QAudioDecoderControl_finished(cb C.intptr_t) {
 func (this *QAudioDecoderControl) PositionChanged(position int64) {
 	C.QAudioDecoderControl_positionChanged(this.h, (C.longlong)(position))
 }
-func (this *QAudioDecoderControl) OnPositionChanged(slot func(position int64)) {
-	C.QAudioDecoderControl_connect_positionChanged(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QAudioDecoderControl) OnPositionChanged(slot func(position int64)) *qt.SignalConnection {
+	_goptr := qt.UnsafeNewQMetaObject__Connection(C.QAudioDecoderControl_connect_positionChanged(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QAudioDecoderControl_positionChanged
@@ -305,8 +326,10 @@ func miqt_exec_callback_QAudioDecoderControl_positionChanged(cb C.intptr_t, posi
 func (this *QAudioDecoderControl) DurationChanged(duration int64) {
 	C.QAudioDecoderControl_durationChanged(this.h, (C.longlong)(duration))
 }
-func (this *QAudioDecoderControl) OnDurationChanged(slot func(duration int64)) {
-	C.QAudioDecoderControl_connect_durationChanged(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QAudioDecoderControl) OnDurationChanged(slot func(duration int64)) *qt.SignalConnection {
+	_goptr := qt.UnsafeNewQMetaObject__Connection(C.QAudioDecoderControl_connect_durationChanged(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QAudioDecoderControl_durationChanged

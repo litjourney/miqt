@@ -14,6 +14,11 @@ import (
 	"unsafe"
 )
 
+//export miqt_exec_callback_handle_release_QAbstractState
+func miqt_exec_callback_handle_release_QAbstractState(cb C.intptr_t) {
+	cgo.Handle(cb).Delete()
+}
+
 type QAbstractState struct {
 	h *C.QAbstractState
 	*QObject
@@ -93,8 +98,10 @@ func (this *QAbstractState) Active() bool {
 func (this *QAbstractState) ActiveChanged(active bool) {
 	C.QAbstractState_activeChanged(this.h, (C.bool)(active))
 }
-func (this *QAbstractState) OnActiveChanged(slot func(active bool)) {
-	C.QAbstractState_connect_activeChanged(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QAbstractState) OnActiveChanged(slot func(active bool)) *SignalConnection {
+	_goptr := UnsafeNewQMetaObject__Connection(C.QAbstractState_connect_activeChanged(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QAbstractState_activeChanged
@@ -153,8 +160,10 @@ func QAbstractState_TrUtf83(s string, c string, n int) string {
 	C.free(unsafe.Pointer(_ms.data))
 	return _ret
 }
-func (this *QAbstractState) OnEntered(slot func()) {
-	C.QAbstractState_connect_entered(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QAbstractState) OnEntered(slot func()) *SignalConnection {
+	_goptr := UnsafeNewQMetaObject__Connection(C.QAbstractState_connect_entered(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QAbstractState_entered
@@ -167,8 +176,10 @@ func miqt_exec_callback_QAbstractState_entered(cb C.intptr_t) {
 	gofunc()
 }
 
-func (this *QAbstractState) OnExited(slot func()) {
-	C.QAbstractState_connect_exited(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QAbstractState) OnExited(slot func()) *SignalConnection {
+	_goptr := UnsafeNewQMetaObject__Connection(C.QAbstractState_connect_exited(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QAbstractState_exited

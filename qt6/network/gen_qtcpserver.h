@@ -66,9 +66,9 @@ void QTcpServer_setProxy(QTcpServer* self, QNetworkProxy* networkProxy);
 QNetworkProxy* QTcpServer_proxy(const QTcpServer* self);
 void QTcpServer_incomingConnection(QTcpServer* self, intptr_t handle);
 void QTcpServer_newConnection(QTcpServer* self);
-void QTcpServer_connect_newConnection(QTcpServer* self, intptr_t slot);
+void* QTcpServer_connect_newConnection(QTcpServer* self, intptr_t slot);
 void QTcpServer_acceptError(QTcpServer* self, int socketError);
-void QTcpServer_connect_acceptError(QTcpServer* self, intptr_t slot);
+void* QTcpServer_connect_acceptError(QTcpServer* self, intptr_t slot);
 struct miqt_string QTcpServer_tr2(const char* s, const char* c);
 struct miqt_string QTcpServer_tr3(const char* s, const char* c, int n);
 bool QTcpServer_listenWithAddress(QTcpServer* self, QHostAddress* address);
@@ -103,7 +103,7 @@ int QTcpServer_protectedbase_senderSignalIndex(bool* _dynamic_cast_ok, const voi
 int QTcpServer_protectedbase_receivers(bool* _dynamic_cast_ok, const void* self, const char* signal);
 bool QTcpServer_protectedbase_isSignalConnected(bool* _dynamic_cast_ok, const void* self, QMetaMethod* signal);
 
-void QTcpServer_connect_pendingConnectionAvailable(QTcpServer* self, intptr_t slot);
+void* QTcpServer_connect_pendingConnectionAvailable(QTcpServer* self, intptr_t slot);
 
 void QTcpServer_delete(QTcpServer* self);
 

@@ -1,3 +1,5 @@
+#include <memory>
+#include <utility>
 #include <QDesignerFormEditorInterface>
 #include <QDesignerFormWindowCursorInterface>
 #include <QDesignerFormWindowInterface>
@@ -21,6 +23,7 @@
 extern "C" {
 #endif
 
+void miqt_exec_callback_handle_release_QDesignerFormWindowInterface(intptr_t);
 void miqt_exec_callback_QDesignerFormWindowInterface_mainContainerChanged(intptr_t, QWidget*);
 void miqt_exec_callback_QDesignerFormWindowInterface_toolChanged(intptr_t, int);
 void miqt_exec_callback_QDesignerFormWindowInterface_fileNameChanged(intptr_t, struct miqt_string);
@@ -433,22 +436,26 @@ void QDesignerFormWindowInterface_mainContainerChanged(QDesignerFormWindowInterf
 	self->mainContainerChanged(mainContainer);
 }
 
-void QDesignerFormWindowInterface_connect_mainContainerChanged(QDesignerFormWindowInterface* self, intptr_t slot) {
-	QDesignerFormWindowInterface::connect(self, static_cast<void (QDesignerFormWindowInterface::*)(QWidget*)>(&QDesignerFormWindowInterface::mainContainerChanged), self, [=](QWidget* mainContainer) {
+void* QDesignerFormWindowInterface_connect_mainContainerChanged(QDesignerFormWindowInterface* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QDesignerFormWindowInterface>>(slot);
+	return new QMetaObject::Connection(QDesignerFormWindowInterface::connect(self, static_cast<void (QDesignerFormWindowInterface::*)(QWidget*)>(&QDesignerFormWindowInterface::mainContainerChanged), self, [slot_handle](QWidget* mainContainer) {
+		intptr_t slot = slot_handle->value();
 		QWidget* sigval1 = mainContainer;
 		miqt_exec_callback_QDesignerFormWindowInterface_mainContainerChanged(slot, sigval1);
-	});
+	}));
 }
 
 void QDesignerFormWindowInterface_toolChanged(QDesignerFormWindowInterface* self, int toolIndex) {
 	self->toolChanged(static_cast<int>(toolIndex));
 }
 
-void QDesignerFormWindowInterface_connect_toolChanged(QDesignerFormWindowInterface* self, intptr_t slot) {
-	QDesignerFormWindowInterface::connect(self, static_cast<void (QDesignerFormWindowInterface::*)(int)>(&QDesignerFormWindowInterface::toolChanged), self, [=](int toolIndex) {
+void* QDesignerFormWindowInterface_connect_toolChanged(QDesignerFormWindowInterface* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QDesignerFormWindowInterface>>(slot);
+	return new QMetaObject::Connection(QDesignerFormWindowInterface::connect(self, static_cast<void (QDesignerFormWindowInterface::*)(int)>(&QDesignerFormWindowInterface::toolChanged), self, [slot_handle](int toolIndex) {
+		intptr_t slot = slot_handle->value();
 		int sigval1 = toolIndex;
 		miqt_exec_callback_QDesignerFormWindowInterface_toolChanged(slot, sigval1);
-	});
+	}));
 }
 
 void QDesignerFormWindowInterface_fileNameChanged(QDesignerFormWindowInterface* self, struct miqt_string fileName) {
@@ -456,8 +463,10 @@ void QDesignerFormWindowInterface_fileNameChanged(QDesignerFormWindowInterface* 
 	self->fileNameChanged(fileName_QString);
 }
 
-void QDesignerFormWindowInterface_connect_fileNameChanged(QDesignerFormWindowInterface* self, intptr_t slot) {
-	QDesignerFormWindowInterface::connect(self, static_cast<void (QDesignerFormWindowInterface::*)(const QString&)>(&QDesignerFormWindowInterface::fileNameChanged), self, [=](const QString& fileName) {
+void* QDesignerFormWindowInterface_connect_fileNameChanged(QDesignerFormWindowInterface* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QDesignerFormWindowInterface>>(slot);
+	return new QMetaObject::Connection(QDesignerFormWindowInterface::connect(self, static_cast<void (QDesignerFormWindowInterface::*)(const QString&)>(&QDesignerFormWindowInterface::fileNameChanged), self, [slot_handle](const QString& fileName) {
+		intptr_t slot = slot_handle->value();
 		const QString fileName_ret = fileName;
 		// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 		QByteArray fileName_b = fileName_ret.toUtf8();
@@ -467,125 +476,147 @@ void QDesignerFormWindowInterface_connect_fileNameChanged(QDesignerFormWindowInt
 		memcpy(fileName_ms.data, fileName_b.data(), fileName_ms.len);
 		struct miqt_string sigval1 = fileName_ms;
 		miqt_exec_callback_QDesignerFormWindowInterface_fileNameChanged(slot, sigval1);
-	});
+	}));
 }
 
 void QDesignerFormWindowInterface_featureChanged(QDesignerFormWindowInterface* self, int f) {
 	self->featureChanged(static_cast<QDesignerFormWindowInterface::Feature>(f));
 }
 
-void QDesignerFormWindowInterface_connect_featureChanged(QDesignerFormWindowInterface* self, intptr_t slot) {
-	QDesignerFormWindowInterface::connect(self, static_cast<void (QDesignerFormWindowInterface::*)(QDesignerFormWindowInterface::Feature)>(&QDesignerFormWindowInterface::featureChanged), self, [=](QDesignerFormWindowInterface::Feature f) {
+void* QDesignerFormWindowInterface_connect_featureChanged(QDesignerFormWindowInterface* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QDesignerFormWindowInterface>>(slot);
+	return new QMetaObject::Connection(QDesignerFormWindowInterface::connect(self, static_cast<void (QDesignerFormWindowInterface::*)(QDesignerFormWindowInterface::Feature)>(&QDesignerFormWindowInterface::featureChanged), self, [slot_handle](QDesignerFormWindowInterface::Feature f) {
+		intptr_t slot = slot_handle->value();
 		QDesignerFormWindowInterface::Feature f_ret = f;
 		int sigval1 = static_cast<int>(f_ret);
 		miqt_exec_callback_QDesignerFormWindowInterface_featureChanged(slot, sigval1);
-	});
+	}));
 }
 
 void QDesignerFormWindowInterface_selectionChanged(QDesignerFormWindowInterface* self) {
 	self->selectionChanged();
 }
 
-void QDesignerFormWindowInterface_connect_selectionChanged(QDesignerFormWindowInterface* self, intptr_t slot) {
-	QDesignerFormWindowInterface::connect(self, static_cast<void (QDesignerFormWindowInterface::*)()>(&QDesignerFormWindowInterface::selectionChanged), self, [=]() {
+void* QDesignerFormWindowInterface_connect_selectionChanged(QDesignerFormWindowInterface* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QDesignerFormWindowInterface>>(slot);
+	return new QMetaObject::Connection(QDesignerFormWindowInterface::connect(self, static_cast<void (QDesignerFormWindowInterface::*)()>(&QDesignerFormWindowInterface::selectionChanged), self, [slot_handle]() {
+		intptr_t slot = slot_handle->value();
 		miqt_exec_callback_QDesignerFormWindowInterface_selectionChanged(slot);
-	});
+	}));
 }
 
 void QDesignerFormWindowInterface_geometryChanged(QDesignerFormWindowInterface* self) {
 	self->geometryChanged();
 }
 
-void QDesignerFormWindowInterface_connect_geometryChanged(QDesignerFormWindowInterface* self, intptr_t slot) {
-	QDesignerFormWindowInterface::connect(self, static_cast<void (QDesignerFormWindowInterface::*)()>(&QDesignerFormWindowInterface::geometryChanged), self, [=]() {
+void* QDesignerFormWindowInterface_connect_geometryChanged(QDesignerFormWindowInterface* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QDesignerFormWindowInterface>>(slot);
+	return new QMetaObject::Connection(QDesignerFormWindowInterface::connect(self, static_cast<void (QDesignerFormWindowInterface::*)()>(&QDesignerFormWindowInterface::geometryChanged), self, [slot_handle]() {
+		intptr_t slot = slot_handle->value();
 		miqt_exec_callback_QDesignerFormWindowInterface_geometryChanged(slot);
-	});
+	}));
 }
 
 void QDesignerFormWindowInterface_resourceFilesChanged(QDesignerFormWindowInterface* self) {
 	self->resourceFilesChanged();
 }
 
-void QDesignerFormWindowInterface_connect_resourceFilesChanged(QDesignerFormWindowInterface* self, intptr_t slot) {
-	QDesignerFormWindowInterface::connect(self, static_cast<void (QDesignerFormWindowInterface::*)()>(&QDesignerFormWindowInterface::resourceFilesChanged), self, [=]() {
+void* QDesignerFormWindowInterface_connect_resourceFilesChanged(QDesignerFormWindowInterface* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QDesignerFormWindowInterface>>(slot);
+	return new QMetaObject::Connection(QDesignerFormWindowInterface::connect(self, static_cast<void (QDesignerFormWindowInterface::*)()>(&QDesignerFormWindowInterface::resourceFilesChanged), self, [slot_handle]() {
+		intptr_t slot = slot_handle->value();
 		miqt_exec_callback_QDesignerFormWindowInterface_resourceFilesChanged(slot);
-	});
+	}));
 }
 
 void QDesignerFormWindowInterface_widgetManaged(QDesignerFormWindowInterface* self, QWidget* widget) {
 	self->widgetManaged(widget);
 }
 
-void QDesignerFormWindowInterface_connect_widgetManaged(QDesignerFormWindowInterface* self, intptr_t slot) {
-	QDesignerFormWindowInterface::connect(self, static_cast<void (QDesignerFormWindowInterface::*)(QWidget*)>(&QDesignerFormWindowInterface::widgetManaged), self, [=](QWidget* widget) {
+void* QDesignerFormWindowInterface_connect_widgetManaged(QDesignerFormWindowInterface* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QDesignerFormWindowInterface>>(slot);
+	return new QMetaObject::Connection(QDesignerFormWindowInterface::connect(self, static_cast<void (QDesignerFormWindowInterface::*)(QWidget*)>(&QDesignerFormWindowInterface::widgetManaged), self, [slot_handle](QWidget* widget) {
+		intptr_t slot = slot_handle->value();
 		QWidget* sigval1 = widget;
 		miqt_exec_callback_QDesignerFormWindowInterface_widgetManaged(slot, sigval1);
-	});
+	}));
 }
 
 void QDesignerFormWindowInterface_widgetUnmanaged(QDesignerFormWindowInterface* self, QWidget* widget) {
 	self->widgetUnmanaged(widget);
 }
 
-void QDesignerFormWindowInterface_connect_widgetUnmanaged(QDesignerFormWindowInterface* self, intptr_t slot) {
-	QDesignerFormWindowInterface::connect(self, static_cast<void (QDesignerFormWindowInterface::*)(QWidget*)>(&QDesignerFormWindowInterface::widgetUnmanaged), self, [=](QWidget* widget) {
+void* QDesignerFormWindowInterface_connect_widgetUnmanaged(QDesignerFormWindowInterface* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QDesignerFormWindowInterface>>(slot);
+	return new QMetaObject::Connection(QDesignerFormWindowInterface::connect(self, static_cast<void (QDesignerFormWindowInterface::*)(QWidget*)>(&QDesignerFormWindowInterface::widgetUnmanaged), self, [slot_handle](QWidget* widget) {
+		intptr_t slot = slot_handle->value();
 		QWidget* sigval1 = widget;
 		miqt_exec_callback_QDesignerFormWindowInterface_widgetUnmanaged(slot, sigval1);
-	});
+	}));
 }
 
 void QDesignerFormWindowInterface_aboutToUnmanageWidget(QDesignerFormWindowInterface* self, QWidget* widget) {
 	self->aboutToUnmanageWidget(widget);
 }
 
-void QDesignerFormWindowInterface_connect_aboutToUnmanageWidget(QDesignerFormWindowInterface* self, intptr_t slot) {
-	QDesignerFormWindowInterface::connect(self, static_cast<void (QDesignerFormWindowInterface::*)(QWidget*)>(&QDesignerFormWindowInterface::aboutToUnmanageWidget), self, [=](QWidget* widget) {
+void* QDesignerFormWindowInterface_connect_aboutToUnmanageWidget(QDesignerFormWindowInterface* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QDesignerFormWindowInterface>>(slot);
+	return new QMetaObject::Connection(QDesignerFormWindowInterface::connect(self, static_cast<void (QDesignerFormWindowInterface::*)(QWidget*)>(&QDesignerFormWindowInterface::aboutToUnmanageWidget), self, [slot_handle](QWidget* widget) {
+		intptr_t slot = slot_handle->value();
 		QWidget* sigval1 = widget;
 		miqt_exec_callback_QDesignerFormWindowInterface_aboutToUnmanageWidget(slot, sigval1);
-	});
+	}));
 }
 
 void QDesignerFormWindowInterface_activated(QDesignerFormWindowInterface* self, QWidget* widget) {
 	self->activated(widget);
 }
 
-void QDesignerFormWindowInterface_connect_activated(QDesignerFormWindowInterface* self, intptr_t slot) {
-	QDesignerFormWindowInterface::connect(self, static_cast<void (QDesignerFormWindowInterface::*)(QWidget*)>(&QDesignerFormWindowInterface::activated), self, [=](QWidget* widget) {
+void* QDesignerFormWindowInterface_connect_activated(QDesignerFormWindowInterface* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QDesignerFormWindowInterface>>(slot);
+	return new QMetaObject::Connection(QDesignerFormWindowInterface::connect(self, static_cast<void (QDesignerFormWindowInterface::*)(QWidget*)>(&QDesignerFormWindowInterface::activated), self, [slot_handle](QWidget* widget) {
+		intptr_t slot = slot_handle->value();
 		QWidget* sigval1 = widget;
 		miqt_exec_callback_QDesignerFormWindowInterface_activated(slot, sigval1);
-	});
+	}));
 }
 
 void QDesignerFormWindowInterface_changed(QDesignerFormWindowInterface* self) {
 	self->changed();
 }
 
-void QDesignerFormWindowInterface_connect_changed(QDesignerFormWindowInterface* self, intptr_t slot) {
-	QDesignerFormWindowInterface::connect(self, static_cast<void (QDesignerFormWindowInterface::*)()>(&QDesignerFormWindowInterface::changed), self, [=]() {
+void* QDesignerFormWindowInterface_connect_changed(QDesignerFormWindowInterface* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QDesignerFormWindowInterface>>(slot);
+	return new QMetaObject::Connection(QDesignerFormWindowInterface::connect(self, static_cast<void (QDesignerFormWindowInterface::*)()>(&QDesignerFormWindowInterface::changed), self, [slot_handle]() {
+		intptr_t slot = slot_handle->value();
 		miqt_exec_callback_QDesignerFormWindowInterface_changed(slot);
-	});
+	}));
 }
 
 void QDesignerFormWindowInterface_widgetRemoved(QDesignerFormWindowInterface* self, QWidget* w) {
 	self->widgetRemoved(w);
 }
 
-void QDesignerFormWindowInterface_connect_widgetRemoved(QDesignerFormWindowInterface* self, intptr_t slot) {
-	QDesignerFormWindowInterface::connect(self, static_cast<void (QDesignerFormWindowInterface::*)(QWidget*)>(&QDesignerFormWindowInterface::widgetRemoved), self, [=](QWidget* w) {
+void* QDesignerFormWindowInterface_connect_widgetRemoved(QDesignerFormWindowInterface* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QDesignerFormWindowInterface>>(slot);
+	return new QMetaObject::Connection(QDesignerFormWindowInterface::connect(self, static_cast<void (QDesignerFormWindowInterface::*)(QWidget*)>(&QDesignerFormWindowInterface::widgetRemoved), self, [slot_handle](QWidget* w) {
+		intptr_t slot = slot_handle->value();
 		QWidget* sigval1 = w;
 		miqt_exec_callback_QDesignerFormWindowInterface_widgetRemoved(slot, sigval1);
-	});
+	}));
 }
 
 void QDesignerFormWindowInterface_objectRemoved(QDesignerFormWindowInterface* self, QObject* o) {
 	self->objectRemoved(o);
 }
 
-void QDesignerFormWindowInterface_connect_objectRemoved(QDesignerFormWindowInterface* self, intptr_t slot) {
-	QDesignerFormWindowInterface::connect(self, static_cast<void (QDesignerFormWindowInterface::*)(QObject*)>(&QDesignerFormWindowInterface::objectRemoved), self, [=](QObject* o) {
+void* QDesignerFormWindowInterface_connect_objectRemoved(QDesignerFormWindowInterface* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QDesignerFormWindowInterface>>(slot);
+	return new QMetaObject::Connection(QDesignerFormWindowInterface::connect(self, static_cast<void (QDesignerFormWindowInterface::*)(QObject*)>(&QDesignerFormWindowInterface::objectRemoved), self, [slot_handle](QObject* o) {
+		intptr_t slot = slot_handle->value();
 		QObject* sigval1 = o;
 		miqt_exec_callback_QDesignerFormWindowInterface_objectRemoved(slot, sigval1);
-	});
+	}));
 }
 
 struct miqt_string QDesignerFormWindowInterface_tr2(const char* s, const char* c) {

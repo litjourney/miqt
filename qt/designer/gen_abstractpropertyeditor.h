@@ -96,7 +96,7 @@ bool QDesignerPropertyEditorInterface_isReadOnly(const QDesignerPropertyEditorIn
 QObject* QDesignerPropertyEditorInterface_object(const QDesignerPropertyEditorInterface* self);
 struct miqt_string QDesignerPropertyEditorInterface_currentPropertyName(const QDesignerPropertyEditorInterface* self);
 void QDesignerPropertyEditorInterface_propertyChanged(QDesignerPropertyEditorInterface* self, struct miqt_string name, QVariant* value);
-void QDesignerPropertyEditorInterface_connect_propertyChanged(QDesignerPropertyEditorInterface* self, intptr_t slot);
+void* QDesignerPropertyEditorInterface_connect_propertyChanged(QDesignerPropertyEditorInterface* self, intptr_t slot);
 void QDesignerPropertyEditorInterface_setObject(QDesignerPropertyEditorInterface* self, QObject* object);
 void QDesignerPropertyEditorInterface_setPropertyValue(QDesignerPropertyEditorInterface* self, struct miqt_string name, QVariant* value, bool changed);
 void QDesignerPropertyEditorInterface_setReadOnly(QDesignerPropertyEditorInterface* self, bool readOnly);

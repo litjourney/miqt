@@ -38,7 +38,7 @@ int QWebEngineNavigationRequest_navigationType(const QWebEngineNavigationRequest
 void QWebEngineNavigationRequest_accept(QWebEngineNavigationRequest* self);
 void QWebEngineNavigationRequest_reject(QWebEngineNavigationRequest* self);
 void QWebEngineNavigationRequest_actionChanged(QWebEngineNavigationRequest* self);
-void QWebEngineNavigationRequest_connect_actionChanged(QWebEngineNavigationRequest* self, intptr_t slot);
+void* QWebEngineNavigationRequest_connect_actionChanged(QWebEngineNavigationRequest* self, intptr_t slot);
 struct miqt_string QWebEngineNavigationRequest_tr2(const char* s, const char* c);
 struct miqt_string QWebEngineNavigationRequest_tr3(const char* s, const char* c, int n);
 

@@ -6,6 +6,10 @@ on:
   pull_request:
     branches: [ "**" ]
 
+concurrency:
+  group: ci-${{ github.head_ref || github.ref_name }}
+  cancel-in-progress: true
+
 jobs:
   miqt_genbindings:
     runs-on: ubuntu-24.04
@@ -48,6 +52,9 @@ jobs:
       
     - name: Run marshalling test suite
       run: cmd/miqt-docker/miqt-docker genbindings /bin/bash -c 'cd examples/marshalling && env QT_QPA_PLATFORM=offscreen go test -v'
+
+    - name: Run callback lifecycle test suites
+      run: cmd/miqt-docker/miqt-docker genbindings /bin/bash -c 'env QT_QPA_PLATFORM=offscreen go test -v ./qt ./qt/mainthread ./qt6 ./qt6/mainthread'
     
   miqt_linux64_qt5:
     runs-on: ubuntu-24.04

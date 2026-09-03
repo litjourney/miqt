@@ -15,6 +15,11 @@ import (
 	"unsafe"
 )
 
+//export miqt_exec_callback_handle_release_QCameraFocusControl
+func miqt_exec_callback_handle_release_QCameraFocusControl(cb C.intptr_t) {
+	cgo.Handle(cb).Delete()
+}
+
 type QCameraFocusControl struct {
 	h *C.QCameraFocusControl
 	*QMediaControl
@@ -128,8 +133,10 @@ func (this *QCameraFocusControl) FocusZones() []QCameraFocusZone {
 func (this *QCameraFocusControl) FocusModeChanged(mode QCameraFocus__FocusMode) {
 	C.QCameraFocusControl_focusModeChanged(this.h, (C.int)(mode))
 }
-func (this *QCameraFocusControl) OnFocusModeChanged(slot func(mode QCameraFocus__FocusMode)) {
-	C.QCameraFocusControl_connect_focusModeChanged(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QCameraFocusControl) OnFocusModeChanged(slot func(mode QCameraFocus__FocusMode)) *qt.SignalConnection {
+	_goptr := qt.UnsafeNewQMetaObject__Connection(C.QCameraFocusControl_connect_focusModeChanged(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QCameraFocusControl_focusModeChanged
@@ -148,8 +155,10 @@ func miqt_exec_callback_QCameraFocusControl_focusModeChanged(cb C.intptr_t, mode
 func (this *QCameraFocusControl) FocusPointModeChanged(mode QCameraFocus__FocusPointMode) {
 	C.QCameraFocusControl_focusPointModeChanged(this.h, (C.int)(mode))
 }
-func (this *QCameraFocusControl) OnFocusPointModeChanged(slot func(mode QCameraFocus__FocusPointMode)) {
-	C.QCameraFocusControl_connect_focusPointModeChanged(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QCameraFocusControl) OnFocusPointModeChanged(slot func(mode QCameraFocus__FocusPointMode)) *qt.SignalConnection {
+	_goptr := qt.UnsafeNewQMetaObject__Connection(C.QCameraFocusControl_connect_focusPointModeChanged(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QCameraFocusControl_focusPointModeChanged
@@ -168,8 +177,10 @@ func miqt_exec_callback_QCameraFocusControl_focusPointModeChanged(cb C.intptr_t,
 func (this *QCameraFocusControl) CustomFocusPointChanged(point *qt.QPointF) {
 	C.QCameraFocusControl_customFocusPointChanged(this.h, (*C.QPointF)(point.UnsafePointer()))
 }
-func (this *QCameraFocusControl) OnCustomFocusPointChanged(slot func(point *qt.QPointF)) {
-	C.QCameraFocusControl_connect_customFocusPointChanged(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QCameraFocusControl) OnCustomFocusPointChanged(slot func(point *qt.QPointF)) *qt.SignalConnection {
+	_goptr := qt.UnsafeNewQMetaObject__Connection(C.QCameraFocusControl_connect_customFocusPointChanged(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QCameraFocusControl_customFocusPointChanged
@@ -188,8 +199,10 @@ func miqt_exec_callback_QCameraFocusControl_customFocusPointChanged(cb C.intptr_
 func (this *QCameraFocusControl) FocusZonesChanged() {
 	C.QCameraFocusControl_focusZonesChanged(this.h)
 }
-func (this *QCameraFocusControl) OnFocusZonesChanged(slot func()) {
-	C.QCameraFocusControl_connect_focusZonesChanged(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QCameraFocusControl) OnFocusZonesChanged(slot func()) *qt.SignalConnection {
+	_goptr := qt.UnsafeNewQMetaObject__Connection(C.QCameraFocusControl_connect_focusZonesChanged(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QCameraFocusControl_focusZonesChanged

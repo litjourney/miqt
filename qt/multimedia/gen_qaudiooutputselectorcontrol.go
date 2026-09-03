@@ -15,6 +15,11 @@ import (
 	"unsafe"
 )
 
+//export miqt_exec_callback_handle_release_QAudioOutputSelectorControl
+func miqt_exec_callback_handle_release_QAudioOutputSelectorControl(cb C.intptr_t) {
+	cgo.Handle(cb).Delete()
+}
+
 type QAudioOutputSelectorControl struct {
 	h *C.QAudioOutputSelectorControl
 	*QMediaControl
@@ -132,8 +137,10 @@ func (this *QAudioOutputSelectorControl) ActiveOutputChanged(name string) {
 	defer C.free(unsafe.Pointer(name_ms.data))
 	C.QAudioOutputSelectorControl_activeOutputChanged(this.h, name_ms)
 }
-func (this *QAudioOutputSelectorControl) OnActiveOutputChanged(slot func(name string)) {
-	C.QAudioOutputSelectorControl_connect_activeOutputChanged(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QAudioOutputSelectorControl) OnActiveOutputChanged(slot func(name string)) *qt.SignalConnection {
+	_goptr := qt.UnsafeNewQMetaObject__Connection(C.QAudioOutputSelectorControl_connect_activeOutputChanged(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QAudioOutputSelectorControl_activeOutputChanged
@@ -155,8 +162,10 @@ func miqt_exec_callback_QAudioOutputSelectorControl_activeOutputChanged(cb C.int
 func (this *QAudioOutputSelectorControl) AvailableOutputsChanged() {
 	C.QAudioOutputSelectorControl_availableOutputsChanged(this.h)
 }
-func (this *QAudioOutputSelectorControl) OnAvailableOutputsChanged(slot func()) {
-	C.QAudioOutputSelectorControl_connect_availableOutputsChanged(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QAudioOutputSelectorControl) OnAvailableOutputsChanged(slot func()) *qt.SignalConnection {
+	_goptr := qt.UnsafeNewQMetaObject__Connection(C.QAudioOutputSelectorControl_connect_availableOutputsChanged(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QAudioOutputSelectorControl_availableOutputsChanged

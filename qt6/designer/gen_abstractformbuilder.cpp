@@ -1,3 +1,5 @@
+#include <memory>
+#include <utility>
 #include <QAbstractFormBuilder>
 #include <QAction>
 #include <QActionGroup>
@@ -17,6 +19,7 @@
 extern "C" {
 #endif
 
+void miqt_exec_callback_handle_release_QAbstractFormBuilder(intptr_t);
 QWidget* miqt_exec_callback_QAbstractFormBuilder_load(QAbstractFormBuilder*, intptr_t, QIODevice*, QWidget*);
 void miqt_exec_callback_QAbstractFormBuilder_save(QAbstractFormBuilder*, intptr_t, QIODevice*, QWidget*);
 void miqt_exec_callback_QAbstractFormBuilder_addMenuAction(QAbstractFormBuilder*, intptr_t, QAction*);
@@ -37,63 +40,63 @@ public:
 	virtual ~MiqtVirtualQAbstractFormBuilder() override = default;
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__load = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QAbstractFormBuilder> handle__load;
 
 	// Subclass to allow providing a Go implementation
 	virtual QWidget* load(QIODevice* dev, QWidget* parentWidget) override {
-		if (handle__load == 0) {
+		if (!handle__load) {
 			return QAbstractFormBuilder::load(dev, parentWidget);
 		}
 
 		QIODevice* sigval1 = dev;
 		QWidget* sigval2 = parentWidget;
-		QWidget* callback_return_value = miqt_exec_callback_QAbstractFormBuilder_load(this, handle__load, sigval1, sigval2);
+		QWidget* callback_return_value = miqt_exec_callback_QAbstractFormBuilder_load(this, handle__load.value(), sigval1, sigval2);
 		return callback_return_value;
 	}
 
 	friend QWidget* QAbstractFormBuilder_virtualbase_load(void* self, QIODevice* dev, QWidget* parentWidget);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__save = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QAbstractFormBuilder> handle__save;
 
 	// Subclass to allow providing a Go implementation
 	virtual void save(QIODevice* dev, QWidget* widget) override {
-		if (handle__save == 0) {
+		if (!handle__save) {
 			QAbstractFormBuilder::save(dev, widget);
 			return;
 		}
 
 		QIODevice* sigval1 = dev;
 		QWidget* sigval2 = widget;
-		miqt_exec_callback_QAbstractFormBuilder_save(this, handle__save, sigval1, sigval2);
+		miqt_exec_callback_QAbstractFormBuilder_save(this, handle__save.value(), sigval1, sigval2);
 
 	}
 
 	friend void QAbstractFormBuilder_virtualbase_save(void* self, QIODevice* dev, QWidget* widget);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__addMenuAction = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QAbstractFormBuilder> handle__addMenuAction;
 
 	// Subclass to allow providing a Go implementation
 	virtual void addMenuAction(QAction* action) override {
-		if (handle__addMenuAction == 0) {
+		if (!handle__addMenuAction) {
 			QAbstractFormBuilder::addMenuAction(action);
 			return;
 		}
 
 		QAction* sigval1 = action;
-		miqt_exec_callback_QAbstractFormBuilder_addMenuAction(this, handle__addMenuAction, sigval1);
+		miqt_exec_callback_QAbstractFormBuilder_addMenuAction(this, handle__addMenuAction.value(), sigval1);
 
 	}
 
 	friend void QAbstractFormBuilder_virtualbase_addMenuAction(void* self, QAction* action);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__createWidget = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QAbstractFormBuilder> handle__createWidget;
 
 	// Subclass to allow providing a Go implementation
 	virtual QWidget* createWidget(const QString& widgetName, QWidget* parentWidget, const QString& name) override {
-		if (handle__createWidget == 0) {
+		if (!handle__createWidget) {
 			return QAbstractFormBuilder::createWidget(widgetName, parentWidget, name);
 		}
 
@@ -114,18 +117,18 @@ public:
 		name_ms.data = static_cast<char*>(malloc(name_ms.len));
 		memcpy(name_ms.data, name_b.data(), name_ms.len);
 		struct miqt_string sigval3 = name_ms;
-		QWidget* callback_return_value = miqt_exec_callback_QAbstractFormBuilder_createWidget(this, handle__createWidget, sigval1, sigval2, sigval3);
+		QWidget* callback_return_value = miqt_exec_callback_QAbstractFormBuilder_createWidget(this, handle__createWidget.value(), sigval1, sigval2, sigval3);
 		return callback_return_value;
 	}
 
 	friend QWidget* QAbstractFormBuilder_virtualbase_createWidget(void* self, struct miqt_string widgetName, QWidget* parentWidget, struct miqt_string name);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__createLayout = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QAbstractFormBuilder> handle__createLayout;
 
 	// Subclass to allow providing a Go implementation
 	virtual QLayout* createLayout(const QString& layoutName, QObject* parent, const QString& name) override {
-		if (handle__createLayout == 0) {
+		if (!handle__createLayout) {
 			return QAbstractFormBuilder::createLayout(layoutName, parent, name);
 		}
 
@@ -146,18 +149,18 @@ public:
 		name_ms.data = static_cast<char*>(malloc(name_ms.len));
 		memcpy(name_ms.data, name_b.data(), name_ms.len);
 		struct miqt_string sigval3 = name_ms;
-		QLayout* callback_return_value = miqt_exec_callback_QAbstractFormBuilder_createLayout(this, handle__createLayout, sigval1, sigval2, sigval3);
+		QLayout* callback_return_value = miqt_exec_callback_QAbstractFormBuilder_createLayout(this, handle__createLayout.value(), sigval1, sigval2, sigval3);
 		return callback_return_value;
 	}
 
 	friend QLayout* QAbstractFormBuilder_virtualbase_createLayout(void* self, struct miqt_string layoutName, QObject* parent, struct miqt_string name);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__createAction = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QAbstractFormBuilder> handle__createAction;
 
 	// Subclass to allow providing a Go implementation
 	virtual QAction* createAction(QObject* parent, const QString& name) override {
-		if (handle__createAction == 0) {
+		if (!handle__createAction) {
 			return QAbstractFormBuilder::createAction(parent, name);
 		}
 
@@ -170,18 +173,18 @@ public:
 		name_ms.data = static_cast<char*>(malloc(name_ms.len));
 		memcpy(name_ms.data, name_b.data(), name_ms.len);
 		struct miqt_string sigval2 = name_ms;
-		QAction* callback_return_value = miqt_exec_callback_QAbstractFormBuilder_createAction(this, handle__createAction, sigval1, sigval2);
+		QAction* callback_return_value = miqt_exec_callback_QAbstractFormBuilder_createAction(this, handle__createAction.value(), sigval1, sigval2);
 		return callback_return_value;
 	}
 
 	friend QAction* QAbstractFormBuilder_virtualbase_createAction(void* self, QObject* parent, struct miqt_string name);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__createActionGroup = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QAbstractFormBuilder> handle__createActionGroup;
 
 	// Subclass to allow providing a Go implementation
 	virtual QActionGroup* createActionGroup(QObject* parent, const QString& name) override {
-		if (handle__createActionGroup == 0) {
+		if (!handle__createActionGroup) {
 			return QAbstractFormBuilder::createActionGroup(parent, name);
 		}
 
@@ -194,18 +197,18 @@ public:
 		name_ms.data = static_cast<char*>(malloc(name_ms.len));
 		memcpy(name_ms.data, name_b.data(), name_ms.len);
 		struct miqt_string sigval2 = name_ms;
-		QActionGroup* callback_return_value = miqt_exec_callback_QAbstractFormBuilder_createActionGroup(this, handle__createActionGroup, sigval1, sigval2);
+		QActionGroup* callback_return_value = miqt_exec_callback_QAbstractFormBuilder_createActionGroup(this, handle__createActionGroup.value(), sigval1, sigval2);
 		return callback_return_value;
 	}
 
 	friend QActionGroup* QAbstractFormBuilder_virtualbase_createActionGroup(void* self, QObject* parent, struct miqt_string name);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__checkProperty = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QAbstractFormBuilder> handle__checkProperty;
 
 	// Subclass to allow providing a Go implementation
 	virtual bool checkProperty(QObject* obj, const QString& prop) const override {
-		if (handle__checkProperty == 0) {
+		if (!handle__checkProperty) {
 			return QAbstractFormBuilder::checkProperty(obj, prop);
 		}
 
@@ -218,7 +221,7 @@ public:
 		prop_ms.data = static_cast<char*>(malloc(prop_ms.len));
 		memcpy(prop_ms.data, prop_b.data(), prop_ms.len);
 		struct miqt_string sigval2 = prop_ms;
-		bool callback_return_value = miqt_exec_callback_QAbstractFormBuilder_checkProperty(this, handle__checkProperty, sigval1, sigval2);
+		bool callback_return_value = miqt_exec_callback_QAbstractFormBuilder_checkProperty(this, handle__checkProperty.value(), sigval1, sigval2);
 		return callback_return_value;
 	}
 
@@ -261,12 +264,13 @@ struct miqt_string QAbstractFormBuilder_errorString(const QAbstractFormBuilder* 
 }
 
 bool QAbstractFormBuilder_override_virtual_load(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QAbstractFormBuilder> slot_handle(slot);
 	MiqtVirtualQAbstractFormBuilder* self_cast = dynamic_cast<MiqtVirtualQAbstractFormBuilder*>( (QAbstractFormBuilder*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__load = slot;
+	self_cast->handle__load = std::move(slot_handle);
 	return true;
 }
 
@@ -275,12 +279,13 @@ QWidget* QAbstractFormBuilder_virtualbase_load(void* self, QIODevice* dev, QWidg
 }
 
 bool QAbstractFormBuilder_override_virtual_save(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QAbstractFormBuilder> slot_handle(slot);
 	MiqtVirtualQAbstractFormBuilder* self_cast = dynamic_cast<MiqtVirtualQAbstractFormBuilder*>( (QAbstractFormBuilder*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__save = slot;
+	self_cast->handle__save = std::move(slot_handle);
 	return true;
 }
 
@@ -289,12 +294,13 @@ void QAbstractFormBuilder_virtualbase_save(void* self, QIODevice* dev, QWidget* 
 }
 
 bool QAbstractFormBuilder_override_virtual_addMenuAction(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QAbstractFormBuilder> slot_handle(slot);
 	MiqtVirtualQAbstractFormBuilder* self_cast = dynamic_cast<MiqtVirtualQAbstractFormBuilder*>( (QAbstractFormBuilder*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__addMenuAction = slot;
+	self_cast->handle__addMenuAction = std::move(slot_handle);
 	return true;
 }
 
@@ -303,12 +309,13 @@ void QAbstractFormBuilder_virtualbase_addMenuAction(void* self, QAction* action)
 }
 
 bool QAbstractFormBuilder_override_virtual_createWidget(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QAbstractFormBuilder> slot_handle(slot);
 	MiqtVirtualQAbstractFormBuilder* self_cast = dynamic_cast<MiqtVirtualQAbstractFormBuilder*>( (QAbstractFormBuilder*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__createWidget = slot;
+	self_cast->handle__createWidget = std::move(slot_handle);
 	return true;
 }
 
@@ -319,12 +326,13 @@ QWidget* QAbstractFormBuilder_virtualbase_createWidget(void* self, struct miqt_s
 }
 
 bool QAbstractFormBuilder_override_virtual_createLayout(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QAbstractFormBuilder> slot_handle(slot);
 	MiqtVirtualQAbstractFormBuilder* self_cast = dynamic_cast<MiqtVirtualQAbstractFormBuilder*>( (QAbstractFormBuilder*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__createLayout = slot;
+	self_cast->handle__createLayout = std::move(slot_handle);
 	return true;
 }
 
@@ -335,12 +343,13 @@ QLayout* QAbstractFormBuilder_virtualbase_createLayout(void* self, struct miqt_s
 }
 
 bool QAbstractFormBuilder_override_virtual_createAction(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QAbstractFormBuilder> slot_handle(slot);
 	MiqtVirtualQAbstractFormBuilder* self_cast = dynamic_cast<MiqtVirtualQAbstractFormBuilder*>( (QAbstractFormBuilder*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__createAction = slot;
+	self_cast->handle__createAction = std::move(slot_handle);
 	return true;
 }
 
@@ -350,12 +359,13 @@ QAction* QAbstractFormBuilder_virtualbase_createAction(void* self, QObject* pare
 }
 
 bool QAbstractFormBuilder_override_virtual_createActionGroup(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QAbstractFormBuilder> slot_handle(slot);
 	MiqtVirtualQAbstractFormBuilder* self_cast = dynamic_cast<MiqtVirtualQAbstractFormBuilder*>( (QAbstractFormBuilder*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__createActionGroup = slot;
+	self_cast->handle__createActionGroup = std::move(slot_handle);
 	return true;
 }
 
@@ -365,12 +375,13 @@ QActionGroup* QAbstractFormBuilder_virtualbase_createActionGroup(void* self, QOb
 }
 
 bool QAbstractFormBuilder_override_virtual_checkProperty(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QAbstractFormBuilder> slot_handle(slot);
 	MiqtVirtualQAbstractFormBuilder* self_cast = dynamic_cast<MiqtVirtualQAbstractFormBuilder*>( (QAbstractFormBuilder*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__checkProperty = slot;
+	self_cast->handle__checkProperty = std::move(slot_handle);
 	return true;
 }
 

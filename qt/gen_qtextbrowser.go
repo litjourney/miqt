@@ -14,6 +14,11 @@ import (
 	"unsafe"
 )
 
+//export miqt_exec_callback_handle_release_QTextBrowser
+func miqt_exec_callback_handle_release_QTextBrowser(cb C.intptr_t) {
+	cgo.Handle(cb).Delete()
+}
+
 type QTextBrowser struct {
 	h *C.QTextBrowser
 	*QTextEdit
@@ -209,8 +214,10 @@ func (this *QTextBrowser) Reload() {
 func (this *QTextBrowser) BackwardAvailable(param1 bool) {
 	C.QTextBrowser_backwardAvailable(this.h, (C.bool)(param1))
 }
-func (this *QTextBrowser) OnBackwardAvailable(slot func(param1 bool)) {
-	C.QTextBrowser_connect_backwardAvailable(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QTextBrowser) OnBackwardAvailable(slot func(param1 bool)) *SignalConnection {
+	_goptr := UnsafeNewQMetaObject__Connection(C.QTextBrowser_connect_backwardAvailable(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QTextBrowser_backwardAvailable
@@ -229,8 +236,10 @@ func miqt_exec_callback_QTextBrowser_backwardAvailable(cb C.intptr_t, param1 C.b
 func (this *QTextBrowser) ForwardAvailable(param1 bool) {
 	C.QTextBrowser_forwardAvailable(this.h, (C.bool)(param1))
 }
-func (this *QTextBrowser) OnForwardAvailable(slot func(param1 bool)) {
-	C.QTextBrowser_connect_forwardAvailable(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QTextBrowser) OnForwardAvailable(slot func(param1 bool)) *SignalConnection {
+	_goptr := UnsafeNewQMetaObject__Connection(C.QTextBrowser_connect_forwardAvailable(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QTextBrowser_forwardAvailable
@@ -249,8 +258,10 @@ func miqt_exec_callback_QTextBrowser_forwardAvailable(cb C.intptr_t, param1 C.bo
 func (this *QTextBrowser) HistoryChanged() {
 	C.QTextBrowser_historyChanged(this.h)
 }
-func (this *QTextBrowser) OnHistoryChanged(slot func()) {
-	C.QTextBrowser_connect_historyChanged(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QTextBrowser) OnHistoryChanged(slot func()) *SignalConnection {
+	_goptr := UnsafeNewQMetaObject__Connection(C.QTextBrowser_connect_historyChanged(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QTextBrowser_historyChanged
@@ -266,8 +277,10 @@ func miqt_exec_callback_QTextBrowser_historyChanged(cb C.intptr_t) {
 func (this *QTextBrowser) SourceChanged(param1 *QUrl) {
 	C.QTextBrowser_sourceChanged(this.h, param1.cPointer())
 }
-func (this *QTextBrowser) OnSourceChanged(slot func(param1 *QUrl)) {
-	C.QTextBrowser_connect_sourceChanged(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QTextBrowser) OnSourceChanged(slot func(param1 *QUrl)) *SignalConnection {
+	_goptr := UnsafeNewQMetaObject__Connection(C.QTextBrowser_connect_sourceChanged(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QTextBrowser_sourceChanged
@@ -286,8 +299,10 @@ func miqt_exec_callback_QTextBrowser_sourceChanged(cb C.intptr_t, param1 *C.QUrl
 func (this *QTextBrowser) Highlighted(param1 *QUrl) {
 	C.QTextBrowser_highlighted(this.h, param1.cPointer())
 }
-func (this *QTextBrowser) OnHighlighted(slot func(param1 *QUrl)) {
-	C.QTextBrowser_connect_highlighted(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QTextBrowser) OnHighlighted(slot func(param1 *QUrl)) *SignalConnection {
+	_goptr := UnsafeNewQMetaObject__Connection(C.QTextBrowser_connect_highlighted(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QTextBrowser_highlighted
@@ -310,8 +325,10 @@ func (this *QTextBrowser) HighlightedWithQString(param1 string) {
 	defer C.free(unsafe.Pointer(param1_ms.data))
 	C.QTextBrowser_highlightedWithQString(this.h, param1_ms)
 }
-func (this *QTextBrowser) OnHighlightedWithQString(slot func(param1 string)) {
-	C.QTextBrowser_connect_highlightedWithQString(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QTextBrowser) OnHighlightedWithQString(slot func(param1 string)) *SignalConnection {
+	_goptr := UnsafeNewQMetaObject__Connection(C.QTextBrowser_connect_highlightedWithQString(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QTextBrowser_highlightedWithQString
@@ -333,8 +350,10 @@ func miqt_exec_callback_QTextBrowser_highlightedWithQString(cb C.intptr_t, param
 func (this *QTextBrowser) AnchorClicked(param1 *QUrl) {
 	C.QTextBrowser_anchorClicked(this.h, param1.cPointer())
 }
-func (this *QTextBrowser) OnAnchorClicked(slot func(param1 *QUrl)) {
-	C.QTextBrowser_connect_anchorClicked(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QTextBrowser) OnAnchorClicked(slot func(param1 *QUrl)) *SignalConnection {
+	_goptr := UnsafeNewQMetaObject__Connection(C.QTextBrowser_connect_anchorClicked(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QTextBrowser_anchorClicked
@@ -612,7 +631,11 @@ func (this *QTextBrowser) callVirtualBase_LoadResource(typeVal int, name *QUrl) 
 
 }
 func (this *QTextBrowser) OnLoadResource(slot func(super func(typeVal int, name *QUrl) *QVariant, typeVal int, name *QUrl) *QVariant) {
-	ok := C.QTextBrowser_override_virtual_loadResource(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QTextBrowser_override_virtual_loadResource(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -642,7 +665,11 @@ func (this *QTextBrowser) callVirtualBase_SetSource(name *QUrl) {
 
 }
 func (this *QTextBrowser) OnSetSource(slot func(super func(name *QUrl), name *QUrl)) {
-	ok := C.QTextBrowser_override_virtual_setSource(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QTextBrowser_override_virtual_setSource(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -668,7 +695,11 @@ func (this *QTextBrowser) callVirtualBase_Backward() {
 
 }
 func (this *QTextBrowser) OnBackward(slot func(super func())) {
-	ok := C.QTextBrowser_override_virtual_backward(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QTextBrowser_override_virtual_backward(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -691,7 +722,11 @@ func (this *QTextBrowser) callVirtualBase_Forward() {
 
 }
 func (this *QTextBrowser) OnForward(slot func(super func())) {
-	ok := C.QTextBrowser_override_virtual_forward(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QTextBrowser_override_virtual_forward(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -714,7 +749,11 @@ func (this *QTextBrowser) callVirtualBase_Home() {
 
 }
 func (this *QTextBrowser) OnHome(slot func(super func())) {
-	ok := C.QTextBrowser_override_virtual_home(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QTextBrowser_override_virtual_home(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -737,7 +776,11 @@ func (this *QTextBrowser) callVirtualBase_Reload() {
 
 }
 func (this *QTextBrowser) OnReload(slot func(super func())) {
-	ok := C.QTextBrowser_override_virtual_reload(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QTextBrowser_override_virtual_reload(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -760,7 +803,11 @@ func (this *QTextBrowser) callVirtualBase_Event(e *QEvent) bool {
 
 }
 func (this *QTextBrowser) OnEvent(slot func(super func(e *QEvent) bool, e *QEvent) bool) {
-	ok := C.QTextBrowser_override_virtual_event(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QTextBrowser_override_virtual_event(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -788,7 +835,11 @@ func (this *QTextBrowser) callVirtualBase_KeyPressEvent(ev *QKeyEvent) {
 
 }
 func (this *QTextBrowser) OnKeyPressEvent(slot func(super func(ev *QKeyEvent), ev *QKeyEvent)) {
-	ok := C.QTextBrowser_override_virtual_keyPressEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QTextBrowser_override_virtual_keyPressEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -814,7 +865,11 @@ func (this *QTextBrowser) callVirtualBase_MouseMoveEvent(ev *QMouseEvent) {
 
 }
 func (this *QTextBrowser) OnMouseMoveEvent(slot func(super func(ev *QMouseEvent), ev *QMouseEvent)) {
-	ok := C.QTextBrowser_override_virtual_mouseMoveEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QTextBrowser_override_virtual_mouseMoveEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -840,7 +895,11 @@ func (this *QTextBrowser) callVirtualBase_MousePressEvent(ev *QMouseEvent) {
 
 }
 func (this *QTextBrowser) OnMousePressEvent(slot func(super func(ev *QMouseEvent), ev *QMouseEvent)) {
-	ok := C.QTextBrowser_override_virtual_mousePressEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QTextBrowser_override_virtual_mousePressEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -866,7 +925,11 @@ func (this *QTextBrowser) callVirtualBase_MouseReleaseEvent(ev *QMouseEvent) {
 
 }
 func (this *QTextBrowser) OnMouseReleaseEvent(slot func(super func(ev *QMouseEvent), ev *QMouseEvent)) {
-	ok := C.QTextBrowser_override_virtual_mouseReleaseEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QTextBrowser_override_virtual_mouseReleaseEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -892,7 +955,11 @@ func (this *QTextBrowser) callVirtualBase_FocusOutEvent(ev *QFocusEvent) {
 
 }
 func (this *QTextBrowser) OnFocusOutEvent(slot func(super func(ev *QFocusEvent), ev *QFocusEvent)) {
-	ok := C.QTextBrowser_override_virtual_focusOutEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QTextBrowser_override_virtual_focusOutEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -918,7 +985,11 @@ func (this *QTextBrowser) callVirtualBase_FocusNextPrevChild(next bool) bool {
 
 }
 func (this *QTextBrowser) OnFocusNextPrevChild(slot func(super func(next bool) bool, next bool) bool) {
-	ok := C.QTextBrowser_override_virtual_focusNextPrevChild(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QTextBrowser_override_virtual_focusNextPrevChild(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -946,7 +1017,11 @@ func (this *QTextBrowser) callVirtualBase_PaintEvent(e *QPaintEvent) {
 
 }
 func (this *QTextBrowser) OnPaintEvent(slot func(super func(e *QPaintEvent), e *QPaintEvent)) {
-	ok := C.QTextBrowser_override_virtual_paintEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QTextBrowser_override_virtual_paintEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -974,7 +1049,11 @@ func (this *QTextBrowser) callVirtualBase_InputMethodQuery(property InputMethodQ
 
 }
 func (this *QTextBrowser) OnInputMethodQuery(slot func(super func(property InputMethodQuery) *QVariant, property InputMethodQuery) *QVariant) {
-	ok := C.QTextBrowser_override_virtual_inputMethodQuery(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QTextBrowser_override_virtual_inputMethodQuery(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1002,7 +1081,11 @@ func (this *QTextBrowser) callVirtualBase_TimerEvent(e *QTimerEvent) {
 
 }
 func (this *QTextBrowser) OnTimerEvent(slot func(super func(e *QTimerEvent), e *QTimerEvent)) {
-	ok := C.QTextBrowser_override_virtual_timerEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QTextBrowser_override_virtual_timerEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1028,7 +1111,11 @@ func (this *QTextBrowser) callVirtualBase_KeyReleaseEvent(e *QKeyEvent) {
 
 }
 func (this *QTextBrowser) OnKeyReleaseEvent(slot func(super func(e *QKeyEvent), e *QKeyEvent)) {
-	ok := C.QTextBrowser_override_virtual_keyReleaseEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QTextBrowser_override_virtual_keyReleaseEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1054,7 +1141,11 @@ func (this *QTextBrowser) callVirtualBase_ResizeEvent(e *QResizeEvent) {
 
 }
 func (this *QTextBrowser) OnResizeEvent(slot func(super func(e *QResizeEvent), e *QResizeEvent)) {
-	ok := C.QTextBrowser_override_virtual_resizeEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QTextBrowser_override_virtual_resizeEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1080,7 +1171,11 @@ func (this *QTextBrowser) callVirtualBase_MouseDoubleClickEvent(e *QMouseEvent) 
 
 }
 func (this *QTextBrowser) OnMouseDoubleClickEvent(slot func(super func(e *QMouseEvent), e *QMouseEvent)) {
-	ok := C.QTextBrowser_override_virtual_mouseDoubleClickEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QTextBrowser_override_virtual_mouseDoubleClickEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1106,7 +1201,11 @@ func (this *QTextBrowser) callVirtualBase_ContextMenuEvent(e *QContextMenuEvent)
 
 }
 func (this *QTextBrowser) OnContextMenuEvent(slot func(super func(e *QContextMenuEvent), e *QContextMenuEvent)) {
-	ok := C.QTextBrowser_override_virtual_contextMenuEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QTextBrowser_override_virtual_contextMenuEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1132,7 +1231,11 @@ func (this *QTextBrowser) callVirtualBase_DragEnterEvent(e *QDragEnterEvent) {
 
 }
 func (this *QTextBrowser) OnDragEnterEvent(slot func(super func(e *QDragEnterEvent), e *QDragEnterEvent)) {
-	ok := C.QTextBrowser_override_virtual_dragEnterEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QTextBrowser_override_virtual_dragEnterEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1158,7 +1261,11 @@ func (this *QTextBrowser) callVirtualBase_DragLeaveEvent(e *QDragLeaveEvent) {
 
 }
 func (this *QTextBrowser) OnDragLeaveEvent(slot func(super func(e *QDragLeaveEvent), e *QDragLeaveEvent)) {
-	ok := C.QTextBrowser_override_virtual_dragLeaveEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QTextBrowser_override_virtual_dragLeaveEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1184,7 +1291,11 @@ func (this *QTextBrowser) callVirtualBase_DragMoveEvent(e *QDragMoveEvent) {
 
 }
 func (this *QTextBrowser) OnDragMoveEvent(slot func(super func(e *QDragMoveEvent), e *QDragMoveEvent)) {
-	ok := C.QTextBrowser_override_virtual_dragMoveEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QTextBrowser_override_virtual_dragMoveEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1210,7 +1321,11 @@ func (this *QTextBrowser) callVirtualBase_DropEvent(e *QDropEvent) {
 
 }
 func (this *QTextBrowser) OnDropEvent(slot func(super func(e *QDropEvent), e *QDropEvent)) {
-	ok := C.QTextBrowser_override_virtual_dropEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QTextBrowser_override_virtual_dropEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1236,7 +1351,11 @@ func (this *QTextBrowser) callVirtualBase_FocusInEvent(e *QFocusEvent) {
 
 }
 func (this *QTextBrowser) OnFocusInEvent(slot func(super func(e *QFocusEvent), e *QFocusEvent)) {
-	ok := C.QTextBrowser_override_virtual_focusInEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QTextBrowser_override_virtual_focusInEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1262,7 +1381,11 @@ func (this *QTextBrowser) callVirtualBase_ShowEvent(param1 *QShowEvent) {
 
 }
 func (this *QTextBrowser) OnShowEvent(slot func(super func(param1 *QShowEvent), param1 *QShowEvent)) {
-	ok := C.QTextBrowser_override_virtual_showEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QTextBrowser_override_virtual_showEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1288,7 +1411,11 @@ func (this *QTextBrowser) callVirtualBase_ChangeEvent(e *QEvent) {
 
 }
 func (this *QTextBrowser) OnChangeEvent(slot func(super func(e *QEvent), e *QEvent)) {
-	ok := C.QTextBrowser_override_virtual_changeEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QTextBrowser_override_virtual_changeEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1314,7 +1441,11 @@ func (this *QTextBrowser) callVirtualBase_WheelEvent(e *QWheelEvent) {
 
 }
 func (this *QTextBrowser) OnWheelEvent(slot func(super func(e *QWheelEvent), e *QWheelEvent)) {
-	ok := C.QTextBrowser_override_virtual_wheelEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QTextBrowser_override_virtual_wheelEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1340,7 +1471,11 @@ func (this *QTextBrowser) callVirtualBase_CreateMimeDataFromSelection() *QMimeDa
 
 }
 func (this *QTextBrowser) OnCreateMimeDataFromSelection(slot func(super func() *QMimeData) *QMimeData) {
-	ok := C.QTextBrowser_override_virtual_createMimeDataFromSelection(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QTextBrowser_override_virtual_createMimeDataFromSelection(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1365,7 +1500,11 @@ func (this *QTextBrowser) callVirtualBase_CanInsertFromMimeData(source *QMimeDat
 
 }
 func (this *QTextBrowser) OnCanInsertFromMimeData(slot func(super func(source *QMimeData) bool, source *QMimeData) bool) {
-	ok := C.QTextBrowser_override_virtual_canInsertFromMimeData(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QTextBrowser_override_virtual_canInsertFromMimeData(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1393,7 +1532,11 @@ func (this *QTextBrowser) callVirtualBase_InsertFromMimeData(source *QMimeData) 
 
 }
 func (this *QTextBrowser) OnInsertFromMimeData(slot func(super func(source *QMimeData), source *QMimeData)) {
-	ok := C.QTextBrowser_override_virtual_insertFromMimeData(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QTextBrowser_override_virtual_insertFromMimeData(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1419,7 +1562,11 @@ func (this *QTextBrowser) callVirtualBase_InputMethodEvent(param1 *QInputMethodE
 
 }
 func (this *QTextBrowser) OnInputMethodEvent(slot func(super func(param1 *QInputMethodEvent), param1 *QInputMethodEvent)) {
-	ok := C.QTextBrowser_override_virtual_inputMethodEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QTextBrowser_override_virtual_inputMethodEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1445,7 +1592,11 @@ func (this *QTextBrowser) callVirtualBase_ScrollContentsBy(dx int, dy int) {
 
 }
 func (this *QTextBrowser) OnScrollContentsBy(slot func(super func(dx int, dy int), dx int, dy int)) {
-	ok := C.QTextBrowser_override_virtual_scrollContentsBy(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QTextBrowser_override_virtual_scrollContentsBy(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1473,7 +1624,11 @@ func (this *QTextBrowser) callVirtualBase_DoSetTextCursor(cursor *QTextCursor) {
 
 }
 func (this *QTextBrowser) OnDoSetTextCursor(slot func(super func(cursor *QTextCursor), cursor *QTextCursor)) {
-	ok := C.QTextBrowser_override_virtual_doSetTextCursor(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QTextBrowser_override_virtual_doSetTextCursor(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1501,7 +1656,11 @@ func (this *QTextBrowser) callVirtualBase_MinimumSizeHint() *QSize {
 
 }
 func (this *QTextBrowser) OnMinimumSizeHint(slot func(super func() *QSize) *QSize) {
-	ok := C.QTextBrowser_override_virtual_minimumSizeHint(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QTextBrowser_override_virtual_minimumSizeHint(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1528,7 +1687,11 @@ func (this *QTextBrowser) callVirtualBase_SizeHint() *QSize {
 
 }
 func (this *QTextBrowser) OnSizeHint(slot func(super func() *QSize) *QSize) {
-	ok := C.QTextBrowser_override_virtual_sizeHint(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QTextBrowser_override_virtual_sizeHint(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1553,7 +1716,11 @@ func (this *QTextBrowser) callVirtualBase_SetupViewport(viewport *QWidget) {
 
 }
 func (this *QTextBrowser) OnSetupViewport(slot func(super func(viewport *QWidget), viewport *QWidget)) {
-	ok := C.QTextBrowser_override_virtual_setupViewport(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QTextBrowser_override_virtual_setupViewport(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1579,7 +1746,11 @@ func (this *QTextBrowser) callVirtualBase_EventFilter(param1 *QObject, param2 *Q
 
 }
 func (this *QTextBrowser) OnEventFilter(slot func(super func(param1 *QObject, param2 *QEvent) bool, param1 *QObject, param2 *QEvent) bool) {
-	ok := C.QTextBrowser_override_virtual_eventFilter(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QTextBrowser_override_virtual_eventFilter(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1609,7 +1780,11 @@ func (this *QTextBrowser) callVirtualBase_ViewportEvent(param1 *QEvent) bool {
 
 }
 func (this *QTextBrowser) OnViewportEvent(slot func(super func(param1 *QEvent) bool, param1 *QEvent) bool) {
-	ok := C.QTextBrowser_override_virtual_viewportEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QTextBrowser_override_virtual_viewportEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1639,7 +1814,11 @@ func (this *QTextBrowser) callVirtualBase_ViewportSizeHint() *QSize {
 
 }
 func (this *QTextBrowser) OnViewportSizeHint(slot func(super func() *QSize) *QSize) {
-	ok := C.QTextBrowser_override_virtual_viewportSizeHint(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QTextBrowser_override_virtual_viewportSizeHint(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1664,7 +1843,11 @@ func (this *QTextBrowser) callVirtualBase_DevType() int {
 
 }
 func (this *QTextBrowser) OnDevType(slot func(super func() int) int) {
-	ok := C.QTextBrowser_override_virtual_devType(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QTextBrowser_override_virtual_devType(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1689,7 +1872,11 @@ func (this *QTextBrowser) callVirtualBase_SetVisible(visible bool) {
 
 }
 func (this *QTextBrowser) OnSetVisible(slot func(super func(visible bool), visible bool)) {
-	ok := C.QTextBrowser_override_virtual_setVisible(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QTextBrowser_override_virtual_setVisible(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1715,7 +1902,11 @@ func (this *QTextBrowser) callVirtualBase_HeightForWidth(param1 int) int {
 
 }
 func (this *QTextBrowser) OnHeightForWidth(slot func(super func(param1 int) int, param1 int) int) {
-	ok := C.QTextBrowser_override_virtual_heightForWidth(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QTextBrowser_override_virtual_heightForWidth(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1743,7 +1934,11 @@ func (this *QTextBrowser) callVirtualBase_HasHeightForWidth() bool {
 
 }
 func (this *QTextBrowser) OnHasHeightForWidth(slot func(super func() bool) bool) {
-	ok := C.QTextBrowser_override_virtual_hasHeightForWidth(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QTextBrowser_override_virtual_hasHeightForWidth(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1768,7 +1963,11 @@ func (this *QTextBrowser) callVirtualBase_PaintEngine() *QPaintEngine {
 
 }
 func (this *QTextBrowser) OnPaintEngine(slot func(super func() *QPaintEngine) *QPaintEngine) {
-	ok := C.QTextBrowser_override_virtual_paintEngine(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QTextBrowser_override_virtual_paintEngine(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1793,7 +1992,11 @@ func (this *QTextBrowser) callVirtualBase_EnterEvent(event *QEvent) {
 
 }
 func (this *QTextBrowser) OnEnterEvent(slot func(super func(event *QEvent), event *QEvent)) {
-	ok := C.QTextBrowser_override_virtual_enterEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QTextBrowser_override_virtual_enterEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1819,7 +2022,11 @@ func (this *QTextBrowser) callVirtualBase_LeaveEvent(event *QEvent) {
 
 }
 func (this *QTextBrowser) OnLeaveEvent(slot func(super func(event *QEvent), event *QEvent)) {
-	ok := C.QTextBrowser_override_virtual_leaveEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QTextBrowser_override_virtual_leaveEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1845,7 +2052,11 @@ func (this *QTextBrowser) callVirtualBase_MoveEvent(event *QMoveEvent) {
 
 }
 func (this *QTextBrowser) OnMoveEvent(slot func(super func(event *QMoveEvent), event *QMoveEvent)) {
-	ok := C.QTextBrowser_override_virtual_moveEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QTextBrowser_override_virtual_moveEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1871,7 +2082,11 @@ func (this *QTextBrowser) callVirtualBase_CloseEvent(event *QCloseEvent) {
 
 }
 func (this *QTextBrowser) OnCloseEvent(slot func(super func(event *QCloseEvent), event *QCloseEvent)) {
-	ok := C.QTextBrowser_override_virtual_closeEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QTextBrowser_override_virtual_closeEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1897,7 +2112,11 @@ func (this *QTextBrowser) callVirtualBase_TabletEvent(event *QTabletEvent) {
 
 }
 func (this *QTextBrowser) OnTabletEvent(slot func(super func(event *QTabletEvent), event *QTabletEvent)) {
-	ok := C.QTextBrowser_override_virtual_tabletEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QTextBrowser_override_virtual_tabletEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1923,7 +2142,11 @@ func (this *QTextBrowser) callVirtualBase_ActionEvent(event *QActionEvent) {
 
 }
 func (this *QTextBrowser) OnActionEvent(slot func(super func(event *QActionEvent), event *QActionEvent)) {
-	ok := C.QTextBrowser_override_virtual_actionEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QTextBrowser_override_virtual_actionEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1949,7 +2172,11 @@ func (this *QTextBrowser) callVirtualBase_HideEvent(event *QHideEvent) {
 
 }
 func (this *QTextBrowser) OnHideEvent(slot func(super func(event *QHideEvent), event *QHideEvent)) {
-	ok := C.QTextBrowser_override_virtual_hideEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QTextBrowser_override_virtual_hideEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1982,7 +2209,11 @@ func (this *QTextBrowser) callVirtualBase_NativeEvent(eventType []byte, message 
 
 }
 func (this *QTextBrowser) OnNativeEvent(slot func(super func(eventType []byte, message unsafe.Pointer, result *int64) bool, eventType []byte, message unsafe.Pointer, result *int64) bool) {
-	ok := C.QTextBrowser_override_virtual_nativeEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QTextBrowser_override_virtual_nativeEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -2016,7 +2247,11 @@ func (this *QTextBrowser) callVirtualBase_Metric(param1 QPaintDevice__PaintDevic
 
 }
 func (this *QTextBrowser) OnMetric(slot func(super func(param1 QPaintDevice__PaintDeviceMetric) int, param1 QPaintDevice__PaintDeviceMetric) int) {
-	ok := C.QTextBrowser_override_virtual_metric(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QTextBrowser_override_virtual_metric(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -2044,7 +2279,11 @@ func (this *QTextBrowser) callVirtualBase_InitPainter(painter *QPainter) {
 
 }
 func (this *QTextBrowser) OnInitPainter(slot func(super func(painter *QPainter), painter *QPainter)) {
-	ok := C.QTextBrowser_override_virtual_initPainter(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QTextBrowser_override_virtual_initPainter(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -2070,7 +2309,11 @@ func (this *QTextBrowser) callVirtualBase_Redirected(offset *QPoint) *QPaintDevi
 
 }
 func (this *QTextBrowser) OnRedirected(slot func(super func(offset *QPoint) *QPaintDevice, offset *QPoint) *QPaintDevice) {
-	ok := C.QTextBrowser_override_virtual_redirected(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QTextBrowser_override_virtual_redirected(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -2098,7 +2341,11 @@ func (this *QTextBrowser) callVirtualBase_SharedPainter() *QPainter {
 
 }
 func (this *QTextBrowser) OnSharedPainter(slot func(super func() *QPainter) *QPainter) {
-	ok := C.QTextBrowser_override_virtual_sharedPainter(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QTextBrowser_override_virtual_sharedPainter(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -2123,7 +2370,11 @@ func (this *QTextBrowser) callVirtualBase_ChildEvent(event *QChildEvent) {
 
 }
 func (this *QTextBrowser) OnChildEvent(slot func(super func(event *QChildEvent), event *QChildEvent)) {
-	ok := C.QTextBrowser_override_virtual_childEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QTextBrowser_override_virtual_childEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -2149,7 +2400,11 @@ func (this *QTextBrowser) callVirtualBase_CustomEvent(event *QEvent) {
 
 }
 func (this *QTextBrowser) OnCustomEvent(slot func(super func(event *QEvent), event *QEvent)) {
-	ok := C.QTextBrowser_override_virtual_customEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QTextBrowser_override_virtual_customEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -2175,7 +2430,11 @@ func (this *QTextBrowser) callVirtualBase_ConnectNotify(signal *QMetaMethod) {
 
 }
 func (this *QTextBrowser) OnConnectNotify(slot func(super func(signal *QMetaMethod), signal *QMetaMethod)) {
-	ok := C.QTextBrowser_override_virtual_connectNotify(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QTextBrowser_override_virtual_connectNotify(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -2201,7 +2460,11 @@ func (this *QTextBrowser) callVirtualBase_DisconnectNotify(signal *QMetaMethod) 
 
 }
 func (this *QTextBrowser) OnDisconnectNotify(slot func(super func(signal *QMetaMethod), signal *QMetaMethod)) {
-	ok := C.QTextBrowser_override_virtual_disconnectNotify(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QTextBrowser_override_virtual_disconnectNotify(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}

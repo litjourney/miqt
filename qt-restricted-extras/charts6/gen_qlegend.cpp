@@ -1,3 +1,5 @@
+#include <memory>
+#include <utility>
 #include <QAbstractSeries>
 #include <QBrush>
 #include <QColor>
@@ -28,6 +30,7 @@
 extern "C" {
 #endif
 
+void miqt_exec_callback_handle_release_QLegend(intptr_t);
 void miqt_exec_callback_QLegend_backgroundVisibleChanged(intptr_t, bool);
 void miqt_exec_callback_QLegend_colorChanged(intptr_t, QColor*);
 void miqt_exec_callback_QLegend_borderColorChanged(intptr_t, QColor*);
@@ -204,111 +207,131 @@ void QLegend_backgroundVisibleChanged(QLegend* self, bool visible) {
 	self->backgroundVisibleChanged(visible);
 }
 
-void QLegend_connect_backgroundVisibleChanged(QLegend* self, intptr_t slot) {
-	QLegend::connect(self, static_cast<void (QLegend::*)(bool)>(&QLegend::backgroundVisibleChanged), self, [=](bool visible) {
+void* QLegend_connect_backgroundVisibleChanged(QLegend* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QLegend>>(slot);
+	return new QMetaObject::Connection(QLegend::connect(self, static_cast<void (QLegend::*)(bool)>(&QLegend::backgroundVisibleChanged), self, [slot_handle](bool visible) {
+		intptr_t slot = slot_handle->value();
 		bool sigval1 = visible;
 		miqt_exec_callback_QLegend_backgroundVisibleChanged(slot, sigval1);
-	});
+	}));
 }
 
 void QLegend_colorChanged(QLegend* self, QColor* color) {
 	self->colorChanged(*color);
 }
 
-void QLegend_connect_colorChanged(QLegend* self, intptr_t slot) {
-	QLegend::connect(self, static_cast<void (QLegend::*)(QColor)>(&QLegend::colorChanged), self, [=](QColor color) {
+void* QLegend_connect_colorChanged(QLegend* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QLegend>>(slot);
+	return new QMetaObject::Connection(QLegend::connect(self, static_cast<void (QLegend::*)(QColor)>(&QLegend::colorChanged), self, [slot_handle](QColor color) {
+		intptr_t slot = slot_handle->value();
 		QColor* sigval1 = new QColor(color);
 		miqt_exec_callback_QLegend_colorChanged(slot, sigval1);
-	});
+	}));
 }
 
 void QLegend_borderColorChanged(QLegend* self, QColor* color) {
 	self->borderColorChanged(*color);
 }
 
-void QLegend_connect_borderColorChanged(QLegend* self, intptr_t slot) {
-	QLegend::connect(self, static_cast<void (QLegend::*)(QColor)>(&QLegend::borderColorChanged), self, [=](QColor color) {
+void* QLegend_connect_borderColorChanged(QLegend* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QLegend>>(slot);
+	return new QMetaObject::Connection(QLegend::connect(self, static_cast<void (QLegend::*)(QColor)>(&QLegend::borderColorChanged), self, [slot_handle](QColor color) {
+		intptr_t slot = slot_handle->value();
 		QColor* sigval1 = new QColor(color);
 		miqt_exec_callback_QLegend_borderColorChanged(slot, sigval1);
-	});
+	}));
 }
 
 void QLegend_fontChanged(QLegend* self, QFont* font) {
 	self->fontChanged(*font);
 }
 
-void QLegend_connect_fontChanged(QLegend* self, intptr_t slot) {
-	QLegend::connect(self, static_cast<void (QLegend::*)(QFont)>(&QLegend::fontChanged), self, [=](QFont font) {
+void* QLegend_connect_fontChanged(QLegend* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QLegend>>(slot);
+	return new QMetaObject::Connection(QLegend::connect(self, static_cast<void (QLegend::*)(QFont)>(&QLegend::fontChanged), self, [slot_handle](QFont font) {
+		intptr_t slot = slot_handle->value();
 		QFont* sigval1 = new QFont(font);
 		miqt_exec_callback_QLegend_fontChanged(slot, sigval1);
-	});
+	}));
 }
 
 void QLegend_labelColorChanged(QLegend* self, QColor* color) {
 	self->labelColorChanged(*color);
 }
 
-void QLegend_connect_labelColorChanged(QLegend* self, intptr_t slot) {
-	QLegend::connect(self, static_cast<void (QLegend::*)(QColor)>(&QLegend::labelColorChanged), self, [=](QColor color) {
+void* QLegend_connect_labelColorChanged(QLegend* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QLegend>>(slot);
+	return new QMetaObject::Connection(QLegend::connect(self, static_cast<void (QLegend::*)(QColor)>(&QLegend::labelColorChanged), self, [slot_handle](QColor color) {
+		intptr_t slot = slot_handle->value();
 		QColor* sigval1 = new QColor(color);
 		miqt_exec_callback_QLegend_labelColorChanged(slot, sigval1);
-	});
+	}));
 }
 
 void QLegend_reverseMarkersChanged(QLegend* self, bool reverseMarkers) {
 	self->reverseMarkersChanged(reverseMarkers);
 }
 
-void QLegend_connect_reverseMarkersChanged(QLegend* self, intptr_t slot) {
-	QLegend::connect(self, static_cast<void (QLegend::*)(bool)>(&QLegend::reverseMarkersChanged), self, [=](bool reverseMarkers) {
+void* QLegend_connect_reverseMarkersChanged(QLegend* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QLegend>>(slot);
+	return new QMetaObject::Connection(QLegend::connect(self, static_cast<void (QLegend::*)(bool)>(&QLegend::reverseMarkersChanged), self, [slot_handle](bool reverseMarkers) {
+		intptr_t slot = slot_handle->value();
 		bool sigval1 = reverseMarkers;
 		miqt_exec_callback_QLegend_reverseMarkersChanged(slot, sigval1);
-	});
+	}));
 }
 
 void QLegend_showToolTipsChanged(QLegend* self, bool showToolTips) {
 	self->showToolTipsChanged(showToolTips);
 }
 
-void QLegend_connect_showToolTipsChanged(QLegend* self, intptr_t slot) {
-	QLegend::connect(self, static_cast<void (QLegend::*)(bool)>(&QLegend::showToolTipsChanged), self, [=](bool showToolTips) {
+void* QLegend_connect_showToolTipsChanged(QLegend* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QLegend>>(slot);
+	return new QMetaObject::Connection(QLegend::connect(self, static_cast<void (QLegend::*)(bool)>(&QLegend::showToolTipsChanged), self, [slot_handle](bool showToolTips) {
+		intptr_t slot = slot_handle->value();
 		bool sigval1 = showToolTips;
 		miqt_exec_callback_QLegend_showToolTipsChanged(slot, sigval1);
-	});
+	}));
 }
 
 void QLegend_markerShapeChanged(QLegend* self, int shape) {
 	self->markerShapeChanged(static_cast<QLegend::MarkerShape>(shape));
 }
 
-void QLegend_connect_markerShapeChanged(QLegend* self, intptr_t slot) {
-	QLegend::connect(self, static_cast<void (QLegend::*)(QLegend::MarkerShape)>(&QLegend::markerShapeChanged), self, [=](QLegend::MarkerShape shape) {
+void* QLegend_connect_markerShapeChanged(QLegend* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QLegend>>(slot);
+	return new QMetaObject::Connection(QLegend::connect(self, static_cast<void (QLegend::*)(QLegend::MarkerShape)>(&QLegend::markerShapeChanged), self, [slot_handle](QLegend::MarkerShape shape) {
+		intptr_t slot = slot_handle->value();
 		QLegend::MarkerShape shape_ret = shape;
 		int sigval1 = static_cast<int>(shape_ret);
 		miqt_exec_callback_QLegend_markerShapeChanged(slot, sigval1);
-	});
+	}));
 }
 
 void QLegend_attachedToChartChanged(QLegend* self, bool attachedToChart) {
 	self->attachedToChartChanged(attachedToChart);
 }
 
-void QLegend_connect_attachedToChartChanged(QLegend* self, intptr_t slot) {
-	QLegend::connect(self, static_cast<void (QLegend::*)(bool)>(&QLegend::attachedToChartChanged), self, [=](bool attachedToChart) {
+void* QLegend_connect_attachedToChartChanged(QLegend* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QLegend>>(slot);
+	return new QMetaObject::Connection(QLegend::connect(self, static_cast<void (QLegend::*)(bool)>(&QLegend::attachedToChartChanged), self, [slot_handle](bool attachedToChart) {
+		intptr_t slot = slot_handle->value();
 		bool sigval1 = attachedToChart;
 		miqt_exec_callback_QLegend_attachedToChartChanged(slot, sigval1);
-	});
+	}));
 }
 
 void QLegend_interactiveChanged(QLegend* self, bool interactive) {
 	self->interactiveChanged(interactive);
 }
 
-void QLegend_connect_interactiveChanged(QLegend* self, intptr_t slot) {
-	QLegend::connect(self, static_cast<void (QLegend::*)(bool)>(&QLegend::interactiveChanged), self, [=](bool interactive) {
+void* QLegend_connect_interactiveChanged(QLegend* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QLegend>>(slot);
+	return new QMetaObject::Connection(QLegend::connect(self, static_cast<void (QLegend::*)(bool)>(&QLegend::interactiveChanged), self, [slot_handle](bool interactive) {
+		intptr_t slot = slot_handle->value();
 		bool sigval1 = interactive;
 		miqt_exec_callback_QLegend_interactiveChanged(slot, sigval1);
-	});
+	}));
 }
 
 struct miqt_string QLegend_tr2(const char* s, const char* c) {

@@ -1,3 +1,5 @@
+#include <memory>
+#include <utility>
 #include <QMediaControl>
 #include <QMetaMethod>
 #include <QMetaObject>
@@ -15,6 +17,7 @@
 extern "C" {
 #endif
 
+void miqt_exec_callback_handle_release_QVideoWindowControl(intptr_t);
 void miqt_exec_callback_QVideoWindowControl_fullScreenChanged(intptr_t, bool);
 void miqt_exec_callback_QVideoWindowControl_brightnessChanged(intptr_t, int);
 void miqt_exec_callback_QVideoWindowControl_contrastChanged(intptr_t, int);
@@ -137,65 +140,77 @@ void QVideoWindowControl_fullScreenChanged(QVideoWindowControl* self, bool fullS
 	self->fullScreenChanged(fullScreen);
 }
 
-void QVideoWindowControl_connect_fullScreenChanged(QVideoWindowControl* self, intptr_t slot) {
-	QVideoWindowControl::connect(self, static_cast<void (QVideoWindowControl::*)(bool)>(&QVideoWindowControl::fullScreenChanged), self, [=](bool fullScreen) {
+void* QVideoWindowControl_connect_fullScreenChanged(QVideoWindowControl* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QVideoWindowControl>>(slot);
+	return new QMetaObject::Connection(QVideoWindowControl::connect(self, static_cast<void (QVideoWindowControl::*)(bool)>(&QVideoWindowControl::fullScreenChanged), self, [slot_handle](bool fullScreen) {
+		intptr_t slot = slot_handle->value();
 		bool sigval1 = fullScreen;
 		miqt_exec_callback_QVideoWindowControl_fullScreenChanged(slot, sigval1);
-	});
+	}));
 }
 
 void QVideoWindowControl_brightnessChanged(QVideoWindowControl* self, int brightness) {
 	self->brightnessChanged(static_cast<int>(brightness));
 }
 
-void QVideoWindowControl_connect_brightnessChanged(QVideoWindowControl* self, intptr_t slot) {
-	QVideoWindowControl::connect(self, static_cast<void (QVideoWindowControl::*)(int)>(&QVideoWindowControl::brightnessChanged), self, [=](int brightness) {
+void* QVideoWindowControl_connect_brightnessChanged(QVideoWindowControl* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QVideoWindowControl>>(slot);
+	return new QMetaObject::Connection(QVideoWindowControl::connect(self, static_cast<void (QVideoWindowControl::*)(int)>(&QVideoWindowControl::brightnessChanged), self, [slot_handle](int brightness) {
+		intptr_t slot = slot_handle->value();
 		int sigval1 = brightness;
 		miqt_exec_callback_QVideoWindowControl_brightnessChanged(slot, sigval1);
-	});
+	}));
 }
 
 void QVideoWindowControl_contrastChanged(QVideoWindowControl* self, int contrast) {
 	self->contrastChanged(static_cast<int>(contrast));
 }
 
-void QVideoWindowControl_connect_contrastChanged(QVideoWindowControl* self, intptr_t slot) {
-	QVideoWindowControl::connect(self, static_cast<void (QVideoWindowControl::*)(int)>(&QVideoWindowControl::contrastChanged), self, [=](int contrast) {
+void* QVideoWindowControl_connect_contrastChanged(QVideoWindowControl* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QVideoWindowControl>>(slot);
+	return new QMetaObject::Connection(QVideoWindowControl::connect(self, static_cast<void (QVideoWindowControl::*)(int)>(&QVideoWindowControl::contrastChanged), self, [slot_handle](int contrast) {
+		intptr_t slot = slot_handle->value();
 		int sigval1 = contrast;
 		miqt_exec_callback_QVideoWindowControl_contrastChanged(slot, sigval1);
-	});
+	}));
 }
 
 void QVideoWindowControl_hueChanged(QVideoWindowControl* self, int hue) {
 	self->hueChanged(static_cast<int>(hue));
 }
 
-void QVideoWindowControl_connect_hueChanged(QVideoWindowControl* self, intptr_t slot) {
-	QVideoWindowControl::connect(self, static_cast<void (QVideoWindowControl::*)(int)>(&QVideoWindowControl::hueChanged), self, [=](int hue) {
+void* QVideoWindowControl_connect_hueChanged(QVideoWindowControl* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QVideoWindowControl>>(slot);
+	return new QMetaObject::Connection(QVideoWindowControl::connect(self, static_cast<void (QVideoWindowControl::*)(int)>(&QVideoWindowControl::hueChanged), self, [slot_handle](int hue) {
+		intptr_t slot = slot_handle->value();
 		int sigval1 = hue;
 		miqt_exec_callback_QVideoWindowControl_hueChanged(slot, sigval1);
-	});
+	}));
 }
 
 void QVideoWindowControl_saturationChanged(QVideoWindowControl* self, int saturation) {
 	self->saturationChanged(static_cast<int>(saturation));
 }
 
-void QVideoWindowControl_connect_saturationChanged(QVideoWindowControl* self, intptr_t slot) {
-	QVideoWindowControl::connect(self, static_cast<void (QVideoWindowControl::*)(int)>(&QVideoWindowControl::saturationChanged), self, [=](int saturation) {
+void* QVideoWindowControl_connect_saturationChanged(QVideoWindowControl* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QVideoWindowControl>>(slot);
+	return new QMetaObject::Connection(QVideoWindowControl::connect(self, static_cast<void (QVideoWindowControl::*)(int)>(&QVideoWindowControl::saturationChanged), self, [slot_handle](int saturation) {
+		intptr_t slot = slot_handle->value();
 		int sigval1 = saturation;
 		miqt_exec_callback_QVideoWindowControl_saturationChanged(slot, sigval1);
-	});
+	}));
 }
 
 void QVideoWindowControl_nativeSizeChanged(QVideoWindowControl* self) {
 	self->nativeSizeChanged();
 }
 
-void QVideoWindowControl_connect_nativeSizeChanged(QVideoWindowControl* self, intptr_t slot) {
-	QVideoWindowControl::connect(self, static_cast<void (QVideoWindowControl::*)()>(&QVideoWindowControl::nativeSizeChanged), self, [=]() {
+void* QVideoWindowControl_connect_nativeSizeChanged(QVideoWindowControl* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QVideoWindowControl>>(slot);
+	return new QMetaObject::Connection(QVideoWindowControl::connect(self, static_cast<void (QVideoWindowControl::*)()>(&QVideoWindowControl::nativeSizeChanged), self, [slot_handle]() {
+		intptr_t slot = slot_handle->value();
 		miqt_exec_callback_QVideoWindowControl_nativeSizeChanged(slot);
-	});
+	}));
 }
 
 struct miqt_string QVideoWindowControl_tr2(const char* s, const char* c) {

@@ -78,7 +78,7 @@ int QSqlDriver_dbmsType(const QSqlDriver* self);
 int QSqlDriver_maximumIdentifierLength(const QSqlDriver* self, int type);
 bool QSqlDriver_cancelQuery(QSqlDriver* self);
 void QSqlDriver_notification(QSqlDriver* self, struct miqt_string name, int source, QVariant* payload);
-void QSqlDriver_connect_notification(QSqlDriver* self, intptr_t slot);
+void* QSqlDriver_connect_notification(QSqlDriver* self, intptr_t slot);
 void QSqlDriver_setOpen(QSqlDriver* self, bool o);
 void QSqlDriver_setOpenError(QSqlDriver* self, bool e);
 void QSqlDriver_setLastError(QSqlDriver* self, QSqlError* e);

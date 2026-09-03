@@ -1,3 +1,5 @@
+#include <memory>
+#include <utility>
 #include <QAbstractBarSeries>
 #include <QAbstractItemModel>
 #include <QBarModelMapper>
@@ -18,6 +20,7 @@
 extern "C" {
 #endif
 
+void miqt_exec_callback_handle_release_QVBarModelMapper(intptr_t);
 void miqt_exec_callback_QVBarModelMapper_seriesReplaced(intptr_t);
 void miqt_exec_callback_QVBarModelMapper_modelReplaced(intptr_t);
 void miqt_exec_callback_QVBarModelMapper_firstBarSetColumnChanged(intptr_t);
@@ -44,95 +47,95 @@ public:
 	virtual ~MiqtVirtualQVBarModelMapper() override = default;
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__event = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QVBarModelMapper> handle__event;
 
 	// Subclass to allow providing a Go implementation
 	virtual bool event(QEvent* event) override {
-		if (handle__event == 0) {
+		if (!handle__event) {
 			return QVBarModelMapper::event(event);
 		}
 
 		QEvent* sigval1 = event;
-		bool callback_return_value = miqt_exec_callback_QVBarModelMapper_event(this, handle__event, sigval1);
+		bool callback_return_value = miqt_exec_callback_QVBarModelMapper_event(this, handle__event.value(), sigval1);
 		return callback_return_value;
 	}
 
 	friend bool QVBarModelMapper_virtualbase_event(void* self, QEvent* event);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__eventFilter = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QVBarModelMapper> handle__eventFilter;
 
 	// Subclass to allow providing a Go implementation
 	virtual bool eventFilter(QObject* watched, QEvent* event) override {
-		if (handle__eventFilter == 0) {
+		if (!handle__eventFilter) {
 			return QVBarModelMapper::eventFilter(watched, event);
 		}
 
 		QObject* sigval1 = watched;
 		QEvent* sigval2 = event;
-		bool callback_return_value = miqt_exec_callback_QVBarModelMapper_eventFilter(this, handle__eventFilter, sigval1, sigval2);
+		bool callback_return_value = miqt_exec_callback_QVBarModelMapper_eventFilter(this, handle__eventFilter.value(), sigval1, sigval2);
 		return callback_return_value;
 	}
 
 	friend bool QVBarModelMapper_virtualbase_eventFilter(void* self, QObject* watched, QEvent* event);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__timerEvent = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QVBarModelMapper> handle__timerEvent;
 
 	// Subclass to allow providing a Go implementation
 	virtual void timerEvent(QTimerEvent* event) override {
-		if (handle__timerEvent == 0) {
+		if (!handle__timerEvent) {
 			QVBarModelMapper::timerEvent(event);
 			return;
 		}
 
 		QTimerEvent* sigval1 = event;
-		miqt_exec_callback_QVBarModelMapper_timerEvent(this, handle__timerEvent, sigval1);
+		miqt_exec_callback_QVBarModelMapper_timerEvent(this, handle__timerEvent.value(), sigval1);
 
 	}
 
 	friend void QVBarModelMapper_virtualbase_timerEvent(void* self, QTimerEvent* event);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__childEvent = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QVBarModelMapper> handle__childEvent;
 
 	// Subclass to allow providing a Go implementation
 	virtual void childEvent(QChildEvent* event) override {
-		if (handle__childEvent == 0) {
+		if (!handle__childEvent) {
 			QVBarModelMapper::childEvent(event);
 			return;
 		}
 
 		QChildEvent* sigval1 = event;
-		miqt_exec_callback_QVBarModelMapper_childEvent(this, handle__childEvent, sigval1);
+		miqt_exec_callback_QVBarModelMapper_childEvent(this, handle__childEvent.value(), sigval1);
 
 	}
 
 	friend void QVBarModelMapper_virtualbase_childEvent(void* self, QChildEvent* event);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__customEvent = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QVBarModelMapper> handle__customEvent;
 
 	// Subclass to allow providing a Go implementation
 	virtual void customEvent(QEvent* event) override {
-		if (handle__customEvent == 0) {
+		if (!handle__customEvent) {
 			QVBarModelMapper::customEvent(event);
 			return;
 		}
 
 		QEvent* sigval1 = event;
-		miqt_exec_callback_QVBarModelMapper_customEvent(this, handle__customEvent, sigval1);
+		miqt_exec_callback_QVBarModelMapper_customEvent(this, handle__customEvent.value(), sigval1);
 
 	}
 
 	friend void QVBarModelMapper_virtualbase_customEvent(void* self, QEvent* event);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__connectNotify = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QVBarModelMapper> handle__connectNotify;
 
 	// Subclass to allow providing a Go implementation
 	virtual void connectNotify(const QMetaMethod& signal) override {
-		if (handle__connectNotify == 0) {
+		if (!handle__connectNotify) {
 			QVBarModelMapper::connectNotify(signal);
 			return;
 		}
@@ -140,18 +143,18 @@ public:
 		const QMetaMethod& signal_ret = signal;
 		// Cast returned reference into pointer
 		QMetaMethod* sigval1 = const_cast<QMetaMethod*>(&signal_ret);
-		miqt_exec_callback_QVBarModelMapper_connectNotify(this, handle__connectNotify, sigval1);
+		miqt_exec_callback_QVBarModelMapper_connectNotify(this, handle__connectNotify.value(), sigval1);
 
 	}
 
 	friend void QVBarModelMapper_virtualbase_connectNotify(void* self, QMetaMethod* signal);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__disconnectNotify = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QVBarModelMapper> handle__disconnectNotify;
 
 	// Subclass to allow providing a Go implementation
 	virtual void disconnectNotify(const QMetaMethod& signal) override {
-		if (handle__disconnectNotify == 0) {
+		if (!handle__disconnectNotify) {
 			QVBarModelMapper::disconnectNotify(signal);
 			return;
 		}
@@ -159,7 +162,7 @@ public:
 		const QMetaMethod& signal_ret = signal;
 		// Cast returned reference into pointer
 		QMetaMethod* sigval1 = const_cast<QMetaMethod*>(&signal_ret);
-		miqt_exec_callback_QVBarModelMapper_disconnectNotify(this, handle__disconnectNotify, sigval1);
+		miqt_exec_callback_QVBarModelMapper_disconnectNotify(this, handle__disconnectNotify.value(), sigval1);
 
 	}
 
@@ -265,60 +268,72 @@ void QVBarModelMapper_seriesReplaced(QVBarModelMapper* self) {
 	self->seriesReplaced();
 }
 
-void QVBarModelMapper_connect_seriesReplaced(QVBarModelMapper* self, intptr_t slot) {
-	QVBarModelMapper::connect(self, static_cast<void (QVBarModelMapper::*)()>(&QVBarModelMapper::seriesReplaced), self, [=]() {
+void* QVBarModelMapper_connect_seriesReplaced(QVBarModelMapper* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QVBarModelMapper>>(slot);
+	return new QMetaObject::Connection(QVBarModelMapper::connect(self, static_cast<void (QVBarModelMapper::*)()>(&QVBarModelMapper::seriesReplaced), self, [slot_handle]() {
+		intptr_t slot = slot_handle->value();
 		miqt_exec_callback_QVBarModelMapper_seriesReplaced(slot);
-	});
+	}));
 }
 
 void QVBarModelMapper_modelReplaced(QVBarModelMapper* self) {
 	self->modelReplaced();
 }
 
-void QVBarModelMapper_connect_modelReplaced(QVBarModelMapper* self, intptr_t slot) {
-	QVBarModelMapper::connect(self, static_cast<void (QVBarModelMapper::*)()>(&QVBarModelMapper::modelReplaced), self, [=]() {
+void* QVBarModelMapper_connect_modelReplaced(QVBarModelMapper* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QVBarModelMapper>>(slot);
+	return new QMetaObject::Connection(QVBarModelMapper::connect(self, static_cast<void (QVBarModelMapper::*)()>(&QVBarModelMapper::modelReplaced), self, [slot_handle]() {
+		intptr_t slot = slot_handle->value();
 		miqt_exec_callback_QVBarModelMapper_modelReplaced(slot);
-	});
+	}));
 }
 
 void QVBarModelMapper_firstBarSetColumnChanged(QVBarModelMapper* self) {
 	self->firstBarSetColumnChanged();
 }
 
-void QVBarModelMapper_connect_firstBarSetColumnChanged(QVBarModelMapper* self, intptr_t slot) {
-	QVBarModelMapper::connect(self, static_cast<void (QVBarModelMapper::*)()>(&QVBarModelMapper::firstBarSetColumnChanged), self, [=]() {
+void* QVBarModelMapper_connect_firstBarSetColumnChanged(QVBarModelMapper* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QVBarModelMapper>>(slot);
+	return new QMetaObject::Connection(QVBarModelMapper::connect(self, static_cast<void (QVBarModelMapper::*)()>(&QVBarModelMapper::firstBarSetColumnChanged), self, [slot_handle]() {
+		intptr_t slot = slot_handle->value();
 		miqt_exec_callback_QVBarModelMapper_firstBarSetColumnChanged(slot);
-	});
+	}));
 }
 
 void QVBarModelMapper_lastBarSetColumnChanged(QVBarModelMapper* self) {
 	self->lastBarSetColumnChanged();
 }
 
-void QVBarModelMapper_connect_lastBarSetColumnChanged(QVBarModelMapper* self, intptr_t slot) {
-	QVBarModelMapper::connect(self, static_cast<void (QVBarModelMapper::*)()>(&QVBarModelMapper::lastBarSetColumnChanged), self, [=]() {
+void* QVBarModelMapper_connect_lastBarSetColumnChanged(QVBarModelMapper* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QVBarModelMapper>>(slot);
+	return new QMetaObject::Connection(QVBarModelMapper::connect(self, static_cast<void (QVBarModelMapper::*)()>(&QVBarModelMapper::lastBarSetColumnChanged), self, [slot_handle]() {
+		intptr_t slot = slot_handle->value();
 		miqt_exec_callback_QVBarModelMapper_lastBarSetColumnChanged(slot);
-	});
+	}));
 }
 
 void QVBarModelMapper_firstRowChanged(QVBarModelMapper* self) {
 	self->firstRowChanged();
 }
 
-void QVBarModelMapper_connect_firstRowChanged(QVBarModelMapper* self, intptr_t slot) {
-	QVBarModelMapper::connect(self, static_cast<void (QVBarModelMapper::*)()>(&QVBarModelMapper::firstRowChanged), self, [=]() {
+void* QVBarModelMapper_connect_firstRowChanged(QVBarModelMapper* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QVBarModelMapper>>(slot);
+	return new QMetaObject::Connection(QVBarModelMapper::connect(self, static_cast<void (QVBarModelMapper::*)()>(&QVBarModelMapper::firstRowChanged), self, [slot_handle]() {
+		intptr_t slot = slot_handle->value();
 		miqt_exec_callback_QVBarModelMapper_firstRowChanged(slot);
-	});
+	}));
 }
 
 void QVBarModelMapper_rowCountChanged(QVBarModelMapper* self) {
 	self->rowCountChanged();
 }
 
-void QVBarModelMapper_connect_rowCountChanged(QVBarModelMapper* self, intptr_t slot) {
-	QVBarModelMapper::connect(self, static_cast<void (QVBarModelMapper::*)()>(&QVBarModelMapper::rowCountChanged), self, [=]() {
+void* QVBarModelMapper_connect_rowCountChanged(QVBarModelMapper* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QVBarModelMapper>>(slot);
+	return new QMetaObject::Connection(QVBarModelMapper::connect(self, static_cast<void (QVBarModelMapper::*)()>(&QVBarModelMapper::rowCountChanged), self, [slot_handle]() {
+		intptr_t slot = slot_handle->value();
 		miqt_exec_callback_QVBarModelMapper_rowCountChanged(slot);
-	});
+	}));
 }
 
 struct miqt_string QVBarModelMapper_tr2(const char* s, const char* c) {
@@ -344,12 +359,13 @@ struct miqt_string QVBarModelMapper_tr3(const char* s, const char* c, int n) {
 }
 
 bool QVBarModelMapper_override_virtual_event(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QVBarModelMapper> slot_handle(slot);
 	MiqtVirtualQVBarModelMapper* self_cast = dynamic_cast<MiqtVirtualQVBarModelMapper*>( (QVBarModelMapper*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__event = slot;
+	self_cast->handle__event = std::move(slot_handle);
 	return true;
 }
 
@@ -358,12 +374,13 @@ bool QVBarModelMapper_virtualbase_event(void* self, QEvent* event) {
 }
 
 bool QVBarModelMapper_override_virtual_eventFilter(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QVBarModelMapper> slot_handle(slot);
 	MiqtVirtualQVBarModelMapper* self_cast = dynamic_cast<MiqtVirtualQVBarModelMapper*>( (QVBarModelMapper*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__eventFilter = slot;
+	self_cast->handle__eventFilter = std::move(slot_handle);
 	return true;
 }
 
@@ -372,12 +389,13 @@ bool QVBarModelMapper_virtualbase_eventFilter(void* self, QObject* watched, QEve
 }
 
 bool QVBarModelMapper_override_virtual_timerEvent(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QVBarModelMapper> slot_handle(slot);
 	MiqtVirtualQVBarModelMapper* self_cast = dynamic_cast<MiqtVirtualQVBarModelMapper*>( (QVBarModelMapper*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__timerEvent = slot;
+	self_cast->handle__timerEvent = std::move(slot_handle);
 	return true;
 }
 
@@ -386,12 +404,13 @@ void QVBarModelMapper_virtualbase_timerEvent(void* self, QTimerEvent* event) {
 }
 
 bool QVBarModelMapper_override_virtual_childEvent(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QVBarModelMapper> slot_handle(slot);
 	MiqtVirtualQVBarModelMapper* self_cast = dynamic_cast<MiqtVirtualQVBarModelMapper*>( (QVBarModelMapper*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__childEvent = slot;
+	self_cast->handle__childEvent = std::move(slot_handle);
 	return true;
 }
 
@@ -400,12 +419,13 @@ void QVBarModelMapper_virtualbase_childEvent(void* self, QChildEvent* event) {
 }
 
 bool QVBarModelMapper_override_virtual_customEvent(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QVBarModelMapper> slot_handle(slot);
 	MiqtVirtualQVBarModelMapper* self_cast = dynamic_cast<MiqtVirtualQVBarModelMapper*>( (QVBarModelMapper*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__customEvent = slot;
+	self_cast->handle__customEvent = std::move(slot_handle);
 	return true;
 }
 
@@ -414,12 +434,13 @@ void QVBarModelMapper_virtualbase_customEvent(void* self, QEvent* event) {
 }
 
 bool QVBarModelMapper_override_virtual_connectNotify(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QVBarModelMapper> slot_handle(slot);
 	MiqtVirtualQVBarModelMapper* self_cast = dynamic_cast<MiqtVirtualQVBarModelMapper*>( (QVBarModelMapper*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__connectNotify = slot;
+	self_cast->handle__connectNotify = std::move(slot_handle);
 	return true;
 }
 
@@ -428,12 +449,13 @@ void QVBarModelMapper_virtualbase_connectNotify(void* self, QMetaMethod* signal)
 }
 
 bool QVBarModelMapper_override_virtual_disconnectNotify(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QVBarModelMapper> slot_handle(slot);
 	MiqtVirtualQVBarModelMapper* self_cast = dynamic_cast<MiqtVirtualQVBarModelMapper*>( (QVBarModelMapper*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__disconnectNotify = slot;
+	self_cast->handle__disconnectNotify = std::move(slot_handle);
 	return true;
 }
 

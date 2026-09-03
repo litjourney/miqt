@@ -1,3 +1,5 @@
+#include <memory>
+#include <utility>
 #include <QByteArray>
 #include <QItemEditorCreatorBase>
 #include <QItemEditorFactory>
@@ -9,6 +11,7 @@
 extern "C" {
 #endif
 
+void miqt_exec_callback_handle_release_QItemEditorFactory(intptr_t);
 QWidget* miqt_exec_callback_QItemEditorFactory_createEditor(const QItemEditorFactory*, intptr_t, int, QWidget*);
 struct miqt_string miqt_exec_callback_QItemEditorFactory_valuePropertyName(const QItemEditorFactory*, intptr_t, int);
 #ifdef __cplusplus
@@ -45,33 +48,33 @@ public:
 	virtual ~MiqtVirtualQItemEditorFactory() override = default;
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__createEditor = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QItemEditorFactory> handle__createEditor;
 
 	// Subclass to allow providing a Go implementation
 	virtual QWidget* createEditor(int userType, QWidget* parent) const override {
-		if (handle__createEditor == 0) {
+		if (!handle__createEditor) {
 			return QItemEditorFactory::createEditor(userType, parent);
 		}
 
 		int sigval1 = userType;
 		QWidget* sigval2 = parent;
-		QWidget* callback_return_value = miqt_exec_callback_QItemEditorFactory_createEditor(this, handle__createEditor, sigval1, sigval2);
+		QWidget* callback_return_value = miqt_exec_callback_QItemEditorFactory_createEditor(this, handle__createEditor.value(), sigval1, sigval2);
 		return callback_return_value;
 	}
 
 	friend QWidget* QItemEditorFactory_virtualbase_createEditor(const void* self, int userType, QWidget* parent);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__valuePropertyName = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QItemEditorFactory> handle__valuePropertyName;
 
 	// Subclass to allow providing a Go implementation
 	virtual QByteArray valuePropertyName(int userType) const override {
-		if (handle__valuePropertyName == 0) {
+		if (!handle__valuePropertyName) {
 			return QItemEditorFactory::valuePropertyName(userType);
 		}
 
 		int sigval1 = userType;
-		struct miqt_string callback_return_value = miqt_exec_callback_QItemEditorFactory_valuePropertyName(this, handle__valuePropertyName, sigval1);
+		struct miqt_string callback_return_value = miqt_exec_callback_QItemEditorFactory_valuePropertyName(this, handle__valuePropertyName.value(), sigval1);
 		QByteArray callback_return_value_QByteArray(callback_return_value.data, callback_return_value.len);
 		free(callback_return_value.data);
 		return callback_return_value_QByteArray;
@@ -119,12 +122,13 @@ void QItemEditorFactory_operatorAssign(QItemEditorFactory* self, QItemEditorFact
 }
 
 bool QItemEditorFactory_override_virtual_createEditor(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QItemEditorFactory> slot_handle(slot);
 	MiqtVirtualQItemEditorFactory* self_cast = dynamic_cast<MiqtVirtualQItemEditorFactory*>( (QItemEditorFactory*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__createEditor = slot;
+	self_cast->handle__createEditor = std::move(slot_handle);
 	return true;
 }
 
@@ -133,12 +137,13 @@ QWidget* QItemEditorFactory_virtualbase_createEditor(const void* self, int userT
 }
 
 bool QItemEditorFactory_override_virtual_valuePropertyName(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QItemEditorFactory> slot_handle(slot);
 	MiqtVirtualQItemEditorFactory* self_cast = dynamic_cast<MiqtVirtualQItemEditorFactory*>( (QItemEditorFactory*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__valuePropertyName = slot;
+	self_cast->handle__valuePropertyName = std::move(slot_handle);
 	return true;
 }
 

@@ -29,6 +29,11 @@ const (
 	QMovie__CacheAll  QMovie__CacheMode = 1
 )
 
+//export miqt_exec_callback_handle_release_QMovie
+func miqt_exec_callback_handle_release_QMovie(cb C.intptr_t) {
+	cgo.Handle(cb).Delete()
+}
+
 type QMovie struct {
 	h *C.QMovie
 	*QObject
@@ -318,8 +323,10 @@ func (this *QMovie) SetCacheMode(mode QMovie__CacheMode) {
 func (this *QMovie) Started() {
 	C.QMovie_started(this.h)
 }
-func (this *QMovie) OnStarted(slot func()) {
-	C.QMovie_connect_started(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QMovie) OnStarted(slot func()) *SignalConnection {
+	_goptr := UnsafeNewQMetaObject__Connection(C.QMovie_connect_started(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QMovie_started
@@ -335,8 +342,10 @@ func miqt_exec_callback_QMovie_started(cb C.intptr_t) {
 func (this *QMovie) Resized(size *QSize) {
 	C.QMovie_resized(this.h, size.cPointer())
 }
-func (this *QMovie) OnResized(slot func(size *QSize)) {
-	C.QMovie_connect_resized(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QMovie) OnResized(slot func(size *QSize)) *SignalConnection {
+	_goptr := UnsafeNewQMetaObject__Connection(C.QMovie_connect_resized(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QMovie_resized
@@ -355,8 +364,10 @@ func miqt_exec_callback_QMovie_resized(cb C.intptr_t, size *C.QSize) {
 func (this *QMovie) Updated(rect *QRect) {
 	C.QMovie_updated(this.h, rect.cPointer())
 }
-func (this *QMovie) OnUpdated(slot func(rect *QRect)) {
-	C.QMovie_connect_updated(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QMovie) OnUpdated(slot func(rect *QRect)) *SignalConnection {
+	_goptr := UnsafeNewQMetaObject__Connection(C.QMovie_connect_updated(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QMovie_updated
@@ -375,8 +386,10 @@ func miqt_exec_callback_QMovie_updated(cb C.intptr_t, rect *C.QRect) {
 func (this *QMovie) StateChanged(state QMovie__MovieState) {
 	C.QMovie_stateChanged(this.h, (C.int)(state))
 }
-func (this *QMovie) OnStateChanged(slot func(state QMovie__MovieState)) {
-	C.QMovie_connect_stateChanged(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QMovie) OnStateChanged(slot func(state QMovie__MovieState)) *SignalConnection {
+	_goptr := UnsafeNewQMetaObject__Connection(C.QMovie_connect_stateChanged(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QMovie_stateChanged
@@ -395,8 +408,10 @@ func miqt_exec_callback_QMovie_stateChanged(cb C.intptr_t, state C.int) {
 func (this *QMovie) Error(error QImageReader__ImageReaderError) {
 	C.QMovie_error(this.h, (C.int)(error))
 }
-func (this *QMovie) OnError(slot func(error QImageReader__ImageReaderError)) {
-	C.QMovie_connect_error(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QMovie) OnError(slot func(error QImageReader__ImageReaderError)) *SignalConnection {
+	_goptr := UnsafeNewQMetaObject__Connection(C.QMovie_connect_error(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QMovie_error
@@ -415,8 +430,10 @@ func miqt_exec_callback_QMovie_error(cb C.intptr_t, error C.int) {
 func (this *QMovie) Finished() {
 	C.QMovie_finished(this.h)
 }
-func (this *QMovie) OnFinished(slot func()) {
-	C.QMovie_connect_finished(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QMovie) OnFinished(slot func()) *SignalConnection {
+	_goptr := UnsafeNewQMetaObject__Connection(C.QMovie_connect_finished(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QMovie_finished
@@ -432,8 +449,10 @@ func miqt_exec_callback_QMovie_finished(cb C.intptr_t) {
 func (this *QMovie) FrameChanged(frameNumber int) {
 	C.QMovie_frameChanged(this.h, (C.int)(frameNumber))
 }
-func (this *QMovie) OnFrameChanged(slot func(frameNumber int)) {
-	C.QMovie_connect_frameChanged(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QMovie) OnFrameChanged(slot func(frameNumber int)) *SignalConnection {
+	_goptr := UnsafeNewQMetaObject__Connection(C.QMovie_connect_frameChanged(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QMovie_frameChanged
@@ -555,7 +574,11 @@ func (this *QMovie) callVirtualBase_Event(event *QEvent) bool {
 
 }
 func (this *QMovie) OnEvent(slot func(super func(event *QEvent) bool, event *QEvent) bool) {
-	ok := C.QMovie_override_virtual_event(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QMovie_override_virtual_event(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -583,7 +606,11 @@ func (this *QMovie) callVirtualBase_EventFilter(watched *QObject, event *QEvent)
 
 }
 func (this *QMovie) OnEventFilter(slot func(super func(watched *QObject, event *QEvent) bool, watched *QObject, event *QEvent) bool) {
-	ok := C.QMovie_override_virtual_eventFilter(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QMovie_override_virtual_eventFilter(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -613,7 +640,11 @@ func (this *QMovie) callVirtualBase_TimerEvent(event *QTimerEvent) {
 
 }
 func (this *QMovie) OnTimerEvent(slot func(super func(event *QTimerEvent), event *QTimerEvent)) {
-	ok := C.QMovie_override_virtual_timerEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QMovie_override_virtual_timerEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -639,7 +670,11 @@ func (this *QMovie) callVirtualBase_ChildEvent(event *QChildEvent) {
 
 }
 func (this *QMovie) OnChildEvent(slot func(super func(event *QChildEvent), event *QChildEvent)) {
-	ok := C.QMovie_override_virtual_childEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QMovie_override_virtual_childEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -665,7 +700,11 @@ func (this *QMovie) callVirtualBase_CustomEvent(event *QEvent) {
 
 }
 func (this *QMovie) OnCustomEvent(slot func(super func(event *QEvent), event *QEvent)) {
-	ok := C.QMovie_override_virtual_customEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QMovie_override_virtual_customEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -691,7 +730,11 @@ func (this *QMovie) callVirtualBase_ConnectNotify(signal *QMetaMethod) {
 
 }
 func (this *QMovie) OnConnectNotify(slot func(super func(signal *QMetaMethod), signal *QMetaMethod)) {
-	ok := C.QMovie_override_virtual_connectNotify(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QMovie_override_virtual_connectNotify(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -717,7 +760,11 @@ func (this *QMovie) callVirtualBase_DisconnectNotify(signal *QMetaMethod) {
 
 }
 func (this *QMovie) OnDisconnectNotify(slot func(super func(signal *QMetaMethod), signal *QMetaMethod)) {
-	ok := C.QMovie_override_virtual_disconnectNotify(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QMovie_override_virtual_disconnectNotify(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}

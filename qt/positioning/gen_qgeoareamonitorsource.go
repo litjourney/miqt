@@ -31,6 +31,11 @@ const (
 	QGeoAreaMonitorSource__AnyAreaMonitorFeature        QGeoAreaMonitorSource__AreaMonitorFeature = -1
 )
 
+//export miqt_exec_callback_handle_release_QGeoAreaMonitorSource
+func miqt_exec_callback_handle_release_QGeoAreaMonitorSource(cb C.intptr_t) {
+	cgo.Handle(cb).Delete()
+}
+
 type QGeoAreaMonitorSource struct {
 	h *C.QGeoAreaMonitorSource
 	*qt.QObject
@@ -190,8 +195,10 @@ func (this *QGeoAreaMonitorSource) ActiveMonitorsWithLookupArea(lookupArea *QGeo
 func (this *QGeoAreaMonitorSource) AreaEntered(monitor *QGeoAreaMonitorInfo, update *QGeoPositionInfo) {
 	C.QGeoAreaMonitorSource_areaEntered(this.h, monitor.cPointer(), update.cPointer())
 }
-func (this *QGeoAreaMonitorSource) OnAreaEntered(slot func(monitor *QGeoAreaMonitorInfo, update *QGeoPositionInfo)) {
-	C.QGeoAreaMonitorSource_connect_areaEntered(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QGeoAreaMonitorSource) OnAreaEntered(slot func(monitor *QGeoAreaMonitorInfo, update *QGeoPositionInfo)) *qt.SignalConnection {
+	_goptr := qt.UnsafeNewQMetaObject__Connection(C.QGeoAreaMonitorSource_connect_areaEntered(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QGeoAreaMonitorSource_areaEntered
@@ -212,8 +219,10 @@ func miqt_exec_callback_QGeoAreaMonitorSource_areaEntered(cb C.intptr_t, monitor
 func (this *QGeoAreaMonitorSource) AreaExited(monitor *QGeoAreaMonitorInfo, update *QGeoPositionInfo) {
 	C.QGeoAreaMonitorSource_areaExited(this.h, monitor.cPointer(), update.cPointer())
 }
-func (this *QGeoAreaMonitorSource) OnAreaExited(slot func(monitor *QGeoAreaMonitorInfo, update *QGeoPositionInfo)) {
-	C.QGeoAreaMonitorSource_connect_areaExited(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QGeoAreaMonitorSource) OnAreaExited(slot func(monitor *QGeoAreaMonitorInfo, update *QGeoPositionInfo)) *qt.SignalConnection {
+	_goptr := qt.UnsafeNewQMetaObject__Connection(C.QGeoAreaMonitorSource_connect_areaExited(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QGeoAreaMonitorSource_areaExited
@@ -234,8 +243,10 @@ func miqt_exec_callback_QGeoAreaMonitorSource_areaExited(cb C.intptr_t, monitor 
 func (this *QGeoAreaMonitorSource) MonitorExpired(monitor *QGeoAreaMonitorInfo) {
 	C.QGeoAreaMonitorSource_monitorExpired(this.h, monitor.cPointer())
 }
-func (this *QGeoAreaMonitorSource) OnMonitorExpired(slot func(monitor *QGeoAreaMonitorInfo)) {
-	C.QGeoAreaMonitorSource_connect_monitorExpired(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QGeoAreaMonitorSource) OnMonitorExpired(slot func(monitor *QGeoAreaMonitorInfo)) *qt.SignalConnection {
+	_goptr := qt.UnsafeNewQMetaObject__Connection(C.QGeoAreaMonitorSource_connect_monitorExpired(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QGeoAreaMonitorSource_monitorExpired
@@ -254,8 +265,10 @@ func miqt_exec_callback_QGeoAreaMonitorSource_monitorExpired(cb C.intptr_t, moni
 func (this *QGeoAreaMonitorSource) ErrorWithError(error QGeoAreaMonitorSource__Error) {
 	C.QGeoAreaMonitorSource_errorWithError(this.h, (C.int)(error))
 }
-func (this *QGeoAreaMonitorSource) OnErrorWithError(slot func(error QGeoAreaMonitorSource__Error)) {
-	C.QGeoAreaMonitorSource_connect_errorWithError(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QGeoAreaMonitorSource) OnErrorWithError(slot func(error QGeoAreaMonitorSource__Error)) *qt.SignalConnection {
+	_goptr := qt.UnsafeNewQMetaObject__Connection(C.QGeoAreaMonitorSource_connect_errorWithError(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QGeoAreaMonitorSource_errorWithError
@@ -379,7 +392,11 @@ func (this *QGeoAreaMonitorSource) callVirtualBase_SetPositionInfoSource(source 
 
 }
 func (this *QGeoAreaMonitorSource) OnSetPositionInfoSource(slot func(super func(source *QGeoPositionInfoSource), source *QGeoPositionInfoSource)) {
-	ok := C.QGeoAreaMonitorSource_override_virtual_setPositionInfoSource(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QGeoAreaMonitorSource_override_virtual_setPositionInfoSource(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -405,7 +422,11 @@ func (this *QGeoAreaMonitorSource) callVirtualBase_PositionInfoSource() *QGeoPos
 
 }
 func (this *QGeoAreaMonitorSource) OnPositionInfoSource(slot func(super func() *QGeoPositionInfoSource) *QGeoPositionInfoSource) {
-	ok := C.QGeoAreaMonitorSource_override_virtual_positionInfoSource(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QGeoAreaMonitorSource_override_virtual_positionInfoSource(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -424,7 +445,11 @@ func miqt_exec_callback_QGeoAreaMonitorSource_positionInfoSource(self *C.QGeoAre
 
 }
 func (this *QGeoAreaMonitorSource) OnError(slot func() QGeoAreaMonitorSource__Error) {
-	ok := C.QGeoAreaMonitorSource_override_virtual_error(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QGeoAreaMonitorSource_override_virtual_error(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -443,7 +468,11 @@ func miqt_exec_callback_QGeoAreaMonitorSource_error(self *C.QGeoAreaMonitorSourc
 
 }
 func (this *QGeoAreaMonitorSource) OnSupportedAreaMonitorFeatures(slot func() QGeoAreaMonitorSource__AreaMonitorFeature) {
-	ok := C.QGeoAreaMonitorSource_override_virtual_supportedAreaMonitorFeatures(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QGeoAreaMonitorSource_override_virtual_supportedAreaMonitorFeatures(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -462,7 +491,11 @@ func miqt_exec_callback_QGeoAreaMonitorSource_supportedAreaMonitorFeatures(self 
 
 }
 func (this *QGeoAreaMonitorSource) OnStartMonitoring(slot func(monitor *QGeoAreaMonitorInfo) bool) {
-	ok := C.QGeoAreaMonitorSource_override_virtual_startMonitoring(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QGeoAreaMonitorSource_override_virtual_startMonitoring(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -484,7 +517,11 @@ func miqt_exec_callback_QGeoAreaMonitorSource_startMonitoring(self *C.QGeoAreaMo
 
 }
 func (this *QGeoAreaMonitorSource) OnStopMonitoring(slot func(monitor *QGeoAreaMonitorInfo) bool) {
-	ok := C.QGeoAreaMonitorSource_override_virtual_stopMonitoring(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QGeoAreaMonitorSource_override_virtual_stopMonitoring(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -506,7 +543,11 @@ func miqt_exec_callback_QGeoAreaMonitorSource_stopMonitoring(self *C.QGeoAreaMon
 
 }
 func (this *QGeoAreaMonitorSource) OnRequestUpdate(slot func(monitor *QGeoAreaMonitorInfo, signal string) bool) {
-	ok := C.QGeoAreaMonitorSource_override_virtual_requestUpdate(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QGeoAreaMonitorSource_override_virtual_requestUpdate(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -531,7 +572,11 @@ func miqt_exec_callback_QGeoAreaMonitorSource_requestUpdate(self *C.QGeoAreaMoni
 
 }
 func (this *QGeoAreaMonitorSource) OnActiveMonitors(slot func() []QGeoAreaMonitorInfo) {
-	ok := C.QGeoAreaMonitorSource_override_virtual_activeMonitors(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QGeoAreaMonitorSource_override_virtual_activeMonitors(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -555,7 +600,11 @@ func miqt_exec_callback_QGeoAreaMonitorSource_activeMonitors(self *C.QGeoAreaMon
 
 }
 func (this *QGeoAreaMonitorSource) OnActiveMonitorsWithLookupArea(slot func(lookupArea *QGeoShape) []QGeoAreaMonitorInfo) {
-	ok := C.QGeoAreaMonitorSource_override_virtual_activeMonitorsWithLookupArea(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QGeoAreaMonitorSource_override_virtual_activeMonitorsWithLookupArea(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -588,7 +637,11 @@ func (this *QGeoAreaMonitorSource) callVirtualBase_Event(event *qt.QEvent) bool 
 
 }
 func (this *QGeoAreaMonitorSource) OnEvent(slot func(super func(event *qt.QEvent) bool, event *qt.QEvent) bool) {
-	ok := C.QGeoAreaMonitorSource_override_virtual_event(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QGeoAreaMonitorSource_override_virtual_event(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -616,7 +669,11 @@ func (this *QGeoAreaMonitorSource) callVirtualBase_EventFilter(watched *qt.QObje
 
 }
 func (this *QGeoAreaMonitorSource) OnEventFilter(slot func(super func(watched *qt.QObject, event *qt.QEvent) bool, watched *qt.QObject, event *qt.QEvent) bool) {
-	ok := C.QGeoAreaMonitorSource_override_virtual_eventFilter(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QGeoAreaMonitorSource_override_virtual_eventFilter(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -646,7 +703,11 @@ func (this *QGeoAreaMonitorSource) callVirtualBase_TimerEvent(event *qt.QTimerEv
 
 }
 func (this *QGeoAreaMonitorSource) OnTimerEvent(slot func(super func(event *qt.QTimerEvent), event *qt.QTimerEvent)) {
-	ok := C.QGeoAreaMonitorSource_override_virtual_timerEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QGeoAreaMonitorSource_override_virtual_timerEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -672,7 +733,11 @@ func (this *QGeoAreaMonitorSource) callVirtualBase_ChildEvent(event *qt.QChildEv
 
 }
 func (this *QGeoAreaMonitorSource) OnChildEvent(slot func(super func(event *qt.QChildEvent), event *qt.QChildEvent)) {
-	ok := C.QGeoAreaMonitorSource_override_virtual_childEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QGeoAreaMonitorSource_override_virtual_childEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -698,7 +763,11 @@ func (this *QGeoAreaMonitorSource) callVirtualBase_CustomEvent(event *qt.QEvent)
 
 }
 func (this *QGeoAreaMonitorSource) OnCustomEvent(slot func(super func(event *qt.QEvent), event *qt.QEvent)) {
-	ok := C.QGeoAreaMonitorSource_override_virtual_customEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QGeoAreaMonitorSource_override_virtual_customEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -724,7 +793,11 @@ func (this *QGeoAreaMonitorSource) callVirtualBase_ConnectNotify(signal *qt.QMet
 
 }
 func (this *QGeoAreaMonitorSource) OnConnectNotify(slot func(super func(signal *qt.QMetaMethod), signal *qt.QMetaMethod)) {
-	ok := C.QGeoAreaMonitorSource_override_virtual_connectNotify(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QGeoAreaMonitorSource_override_virtual_connectNotify(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -750,7 +823,11 @@ func (this *QGeoAreaMonitorSource) callVirtualBase_DisconnectNotify(signal *qt.Q
 
 }
 func (this *QGeoAreaMonitorSource) OnDisconnectNotify(slot func(super func(signal *qt.QMetaMethod), signal *qt.QMetaMethod)) {
-	ok := C.QGeoAreaMonitorSource_override_virtual_disconnectNotify(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QGeoAreaMonitorSource_override_virtual_disconnectNotify(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}

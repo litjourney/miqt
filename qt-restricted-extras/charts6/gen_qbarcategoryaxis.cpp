@@ -1,3 +1,5 @@
+#include <memory>
+#include <utility>
 #include <QAbstractAxis>
 #include <QBarCategoryAxis>
 #include <QChildEvent>
@@ -17,6 +19,7 @@
 extern "C" {
 #endif
 
+void miqt_exec_callback_handle_release_QBarCategoryAxis(intptr_t);
 void miqt_exec_callback_QBarCategoryAxis_categoriesChanged(intptr_t);
 void miqt_exec_callback_QBarCategoryAxis_minChanged(intptr_t, struct miqt_string);
 void miqt_exec_callback_QBarCategoryAxis_maxChanged(intptr_t, struct miqt_string);
@@ -43,110 +46,110 @@ public:
 	virtual ~MiqtVirtualQBarCategoryAxis() override = default;
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__type = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QBarCategoryAxis> handle__type;
 
 	// Subclass to allow providing a Go implementation
 	virtual QAbstractAxis::AxisType type() const override {
-		if (handle__type == 0) {
+		if (!handle__type) {
 			return QBarCategoryAxis::type();
 		}
 
-		int callback_return_value = miqt_exec_callback_QBarCategoryAxis_type(this, handle__type);
+		int callback_return_value = miqt_exec_callback_QBarCategoryAxis_type(this, handle__type.value());
 		return static_cast<QAbstractAxis::AxisType>(callback_return_value);
 	}
 
 	friend int QBarCategoryAxis_virtualbase_type(const void* self);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__event = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QBarCategoryAxis> handle__event;
 
 	// Subclass to allow providing a Go implementation
 	virtual bool event(QEvent* event) override {
-		if (handle__event == 0) {
+		if (!handle__event) {
 			return QBarCategoryAxis::event(event);
 		}
 
 		QEvent* sigval1 = event;
-		bool callback_return_value = miqt_exec_callback_QBarCategoryAxis_event(this, handle__event, sigval1);
+		bool callback_return_value = miqt_exec_callback_QBarCategoryAxis_event(this, handle__event.value(), sigval1);
 		return callback_return_value;
 	}
 
 	friend bool QBarCategoryAxis_virtualbase_event(void* self, QEvent* event);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__eventFilter = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QBarCategoryAxis> handle__eventFilter;
 
 	// Subclass to allow providing a Go implementation
 	virtual bool eventFilter(QObject* watched, QEvent* event) override {
-		if (handle__eventFilter == 0) {
+		if (!handle__eventFilter) {
 			return QBarCategoryAxis::eventFilter(watched, event);
 		}
 
 		QObject* sigval1 = watched;
 		QEvent* sigval2 = event;
-		bool callback_return_value = miqt_exec_callback_QBarCategoryAxis_eventFilter(this, handle__eventFilter, sigval1, sigval2);
+		bool callback_return_value = miqt_exec_callback_QBarCategoryAxis_eventFilter(this, handle__eventFilter.value(), sigval1, sigval2);
 		return callback_return_value;
 	}
 
 	friend bool QBarCategoryAxis_virtualbase_eventFilter(void* self, QObject* watched, QEvent* event);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__timerEvent = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QBarCategoryAxis> handle__timerEvent;
 
 	// Subclass to allow providing a Go implementation
 	virtual void timerEvent(QTimerEvent* event) override {
-		if (handle__timerEvent == 0) {
+		if (!handle__timerEvent) {
 			QBarCategoryAxis::timerEvent(event);
 			return;
 		}
 
 		QTimerEvent* sigval1 = event;
-		miqt_exec_callback_QBarCategoryAxis_timerEvent(this, handle__timerEvent, sigval1);
+		miqt_exec_callback_QBarCategoryAxis_timerEvent(this, handle__timerEvent.value(), sigval1);
 
 	}
 
 	friend void QBarCategoryAxis_virtualbase_timerEvent(void* self, QTimerEvent* event);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__childEvent = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QBarCategoryAxis> handle__childEvent;
 
 	// Subclass to allow providing a Go implementation
 	virtual void childEvent(QChildEvent* event) override {
-		if (handle__childEvent == 0) {
+		if (!handle__childEvent) {
 			QBarCategoryAxis::childEvent(event);
 			return;
 		}
 
 		QChildEvent* sigval1 = event;
-		miqt_exec_callback_QBarCategoryAxis_childEvent(this, handle__childEvent, sigval1);
+		miqt_exec_callback_QBarCategoryAxis_childEvent(this, handle__childEvent.value(), sigval1);
 
 	}
 
 	friend void QBarCategoryAxis_virtualbase_childEvent(void* self, QChildEvent* event);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__customEvent = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QBarCategoryAxis> handle__customEvent;
 
 	// Subclass to allow providing a Go implementation
 	virtual void customEvent(QEvent* event) override {
-		if (handle__customEvent == 0) {
+		if (!handle__customEvent) {
 			QBarCategoryAxis::customEvent(event);
 			return;
 		}
 
 		QEvent* sigval1 = event;
-		miqt_exec_callback_QBarCategoryAxis_customEvent(this, handle__customEvent, sigval1);
+		miqt_exec_callback_QBarCategoryAxis_customEvent(this, handle__customEvent.value(), sigval1);
 
 	}
 
 	friend void QBarCategoryAxis_virtualbase_customEvent(void* self, QEvent* event);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__connectNotify = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QBarCategoryAxis> handle__connectNotify;
 
 	// Subclass to allow providing a Go implementation
 	virtual void connectNotify(const QMetaMethod& signal) override {
-		if (handle__connectNotify == 0) {
+		if (!handle__connectNotify) {
 			QBarCategoryAxis::connectNotify(signal);
 			return;
 		}
@@ -154,18 +157,18 @@ public:
 		const QMetaMethod& signal_ret = signal;
 		// Cast returned reference into pointer
 		QMetaMethod* sigval1 = const_cast<QMetaMethod*>(&signal_ret);
-		miqt_exec_callback_QBarCategoryAxis_connectNotify(this, handle__connectNotify, sigval1);
+		miqt_exec_callback_QBarCategoryAxis_connectNotify(this, handle__connectNotify.value(), sigval1);
 
 	}
 
 	friend void QBarCategoryAxis_virtualbase_connectNotify(void* self, QMetaMethod* signal);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__disconnectNotify = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QBarCategoryAxis> handle__disconnectNotify;
 
 	// Subclass to allow providing a Go implementation
 	virtual void disconnectNotify(const QMetaMethod& signal) override {
-		if (handle__disconnectNotify == 0) {
+		if (!handle__disconnectNotify) {
 			QBarCategoryAxis::disconnectNotify(signal);
 			return;
 		}
@@ -173,7 +176,7 @@ public:
 		const QMetaMethod& signal_ret = signal;
 		// Cast returned reference into pointer
 		QMetaMethod* sigval1 = const_cast<QMetaMethod*>(&signal_ret);
-		miqt_exec_callback_QBarCategoryAxis_disconnectNotify(this, handle__disconnectNotify, sigval1);
+		miqt_exec_callback_QBarCategoryAxis_disconnectNotify(this, handle__disconnectNotify.value(), sigval1);
 
 	}
 
@@ -346,10 +349,12 @@ void QBarCategoryAxis_categoriesChanged(QBarCategoryAxis* self) {
 	self->categoriesChanged();
 }
 
-void QBarCategoryAxis_connect_categoriesChanged(QBarCategoryAxis* self, intptr_t slot) {
-	QBarCategoryAxis::connect(self, static_cast<void (QBarCategoryAxis::*)()>(&QBarCategoryAxis::categoriesChanged), self, [=]() {
+void* QBarCategoryAxis_connect_categoriesChanged(QBarCategoryAxis* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QBarCategoryAxis>>(slot);
+	return new QMetaObject::Connection(QBarCategoryAxis::connect(self, static_cast<void (QBarCategoryAxis::*)()>(&QBarCategoryAxis::categoriesChanged), self, [slot_handle]() {
+		intptr_t slot = slot_handle->value();
 		miqt_exec_callback_QBarCategoryAxis_categoriesChanged(slot);
-	});
+	}));
 }
 
 void QBarCategoryAxis_minChanged(QBarCategoryAxis* self, struct miqt_string min) {
@@ -357,8 +362,10 @@ void QBarCategoryAxis_minChanged(QBarCategoryAxis* self, struct miqt_string min)
 	self->minChanged(min_QString);
 }
 
-void QBarCategoryAxis_connect_minChanged(QBarCategoryAxis* self, intptr_t slot) {
-	QBarCategoryAxis::connect(self, static_cast<void (QBarCategoryAxis::*)(const QString&)>(&QBarCategoryAxis::minChanged), self, [=](const QString& min) {
+void* QBarCategoryAxis_connect_minChanged(QBarCategoryAxis* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QBarCategoryAxis>>(slot);
+	return new QMetaObject::Connection(QBarCategoryAxis::connect(self, static_cast<void (QBarCategoryAxis::*)(const QString&)>(&QBarCategoryAxis::minChanged), self, [slot_handle](const QString& min) {
+		intptr_t slot = slot_handle->value();
 		const QString min_ret = min;
 		// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 		QByteArray min_b = min_ret.toUtf8();
@@ -368,7 +375,7 @@ void QBarCategoryAxis_connect_minChanged(QBarCategoryAxis* self, intptr_t slot) 
 		memcpy(min_ms.data, min_b.data(), min_ms.len);
 		struct miqt_string sigval1 = min_ms;
 		miqt_exec_callback_QBarCategoryAxis_minChanged(slot, sigval1);
-	});
+	}));
 }
 
 void QBarCategoryAxis_maxChanged(QBarCategoryAxis* self, struct miqt_string max) {
@@ -376,8 +383,10 @@ void QBarCategoryAxis_maxChanged(QBarCategoryAxis* self, struct miqt_string max)
 	self->maxChanged(max_QString);
 }
 
-void QBarCategoryAxis_connect_maxChanged(QBarCategoryAxis* self, intptr_t slot) {
-	QBarCategoryAxis::connect(self, static_cast<void (QBarCategoryAxis::*)(const QString&)>(&QBarCategoryAxis::maxChanged), self, [=](const QString& max) {
+void* QBarCategoryAxis_connect_maxChanged(QBarCategoryAxis* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QBarCategoryAxis>>(slot);
+	return new QMetaObject::Connection(QBarCategoryAxis::connect(self, static_cast<void (QBarCategoryAxis::*)(const QString&)>(&QBarCategoryAxis::maxChanged), self, [slot_handle](const QString& max) {
+		intptr_t slot = slot_handle->value();
 		const QString max_ret = max;
 		// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 		QByteArray max_b = max_ret.toUtf8();
@@ -387,7 +396,7 @@ void QBarCategoryAxis_connect_maxChanged(QBarCategoryAxis* self, intptr_t slot) 
 		memcpy(max_ms.data, max_b.data(), max_ms.len);
 		struct miqt_string sigval1 = max_ms;
 		miqt_exec_callback_QBarCategoryAxis_maxChanged(slot, sigval1);
-	});
+	}));
 }
 
 void QBarCategoryAxis_rangeChanged(QBarCategoryAxis* self, struct miqt_string min, struct miqt_string max) {
@@ -396,8 +405,10 @@ void QBarCategoryAxis_rangeChanged(QBarCategoryAxis* self, struct miqt_string mi
 	self->rangeChanged(min_QString, max_QString);
 }
 
-void QBarCategoryAxis_connect_rangeChanged(QBarCategoryAxis* self, intptr_t slot) {
-	QBarCategoryAxis::connect(self, static_cast<void (QBarCategoryAxis::*)(const QString&, const QString&)>(&QBarCategoryAxis::rangeChanged), self, [=](const QString& min, const QString& max) {
+void* QBarCategoryAxis_connect_rangeChanged(QBarCategoryAxis* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QBarCategoryAxis>>(slot);
+	return new QMetaObject::Connection(QBarCategoryAxis::connect(self, static_cast<void (QBarCategoryAxis::*)(const QString&, const QString&)>(&QBarCategoryAxis::rangeChanged), self, [slot_handle](const QString& min, const QString& max) {
+		intptr_t slot = slot_handle->value();
 		const QString min_ret = min;
 		// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 		QByteArray min_b = min_ret.toUtf8();
@@ -415,17 +426,19 @@ void QBarCategoryAxis_connect_rangeChanged(QBarCategoryAxis* self, intptr_t slot
 		memcpy(max_ms.data, max_b.data(), max_ms.len);
 		struct miqt_string sigval2 = max_ms;
 		miqt_exec_callback_QBarCategoryAxis_rangeChanged(slot, sigval1, sigval2);
-	});
+	}));
 }
 
 void QBarCategoryAxis_countChanged(QBarCategoryAxis* self) {
 	self->countChanged();
 }
 
-void QBarCategoryAxis_connect_countChanged(QBarCategoryAxis* self, intptr_t slot) {
-	QBarCategoryAxis::connect(self, static_cast<void (QBarCategoryAxis::*)()>(&QBarCategoryAxis::countChanged), self, [=]() {
+void* QBarCategoryAxis_connect_countChanged(QBarCategoryAxis* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QBarCategoryAxis>>(slot);
+	return new QMetaObject::Connection(QBarCategoryAxis::connect(self, static_cast<void (QBarCategoryAxis::*)()>(&QBarCategoryAxis::countChanged), self, [slot_handle]() {
+		intptr_t slot = slot_handle->value();
 		miqt_exec_callback_QBarCategoryAxis_countChanged(slot);
-	});
+	}));
 }
 
 struct miqt_string QBarCategoryAxis_tr2(const char* s, const char* c) {
@@ -451,12 +464,13 @@ struct miqt_string QBarCategoryAxis_tr3(const char* s, const char* c, int n) {
 }
 
 bool QBarCategoryAxis_override_virtual_type(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QBarCategoryAxis> slot_handle(slot);
 	MiqtVirtualQBarCategoryAxis* self_cast = dynamic_cast<MiqtVirtualQBarCategoryAxis*>( (QBarCategoryAxis*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__type = slot;
+	self_cast->handle__type = std::move(slot_handle);
 	return true;
 }
 
@@ -466,12 +480,13 @@ int QBarCategoryAxis_virtualbase_type(const void* self) {
 }
 
 bool QBarCategoryAxis_override_virtual_event(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QBarCategoryAxis> slot_handle(slot);
 	MiqtVirtualQBarCategoryAxis* self_cast = dynamic_cast<MiqtVirtualQBarCategoryAxis*>( (QBarCategoryAxis*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__event = slot;
+	self_cast->handle__event = std::move(slot_handle);
 	return true;
 }
 
@@ -480,12 +495,13 @@ bool QBarCategoryAxis_virtualbase_event(void* self, QEvent* event) {
 }
 
 bool QBarCategoryAxis_override_virtual_eventFilter(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QBarCategoryAxis> slot_handle(slot);
 	MiqtVirtualQBarCategoryAxis* self_cast = dynamic_cast<MiqtVirtualQBarCategoryAxis*>( (QBarCategoryAxis*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__eventFilter = slot;
+	self_cast->handle__eventFilter = std::move(slot_handle);
 	return true;
 }
 
@@ -494,12 +510,13 @@ bool QBarCategoryAxis_virtualbase_eventFilter(void* self, QObject* watched, QEve
 }
 
 bool QBarCategoryAxis_override_virtual_timerEvent(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QBarCategoryAxis> slot_handle(slot);
 	MiqtVirtualQBarCategoryAxis* self_cast = dynamic_cast<MiqtVirtualQBarCategoryAxis*>( (QBarCategoryAxis*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__timerEvent = slot;
+	self_cast->handle__timerEvent = std::move(slot_handle);
 	return true;
 }
 
@@ -508,12 +525,13 @@ void QBarCategoryAxis_virtualbase_timerEvent(void* self, QTimerEvent* event) {
 }
 
 bool QBarCategoryAxis_override_virtual_childEvent(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QBarCategoryAxis> slot_handle(slot);
 	MiqtVirtualQBarCategoryAxis* self_cast = dynamic_cast<MiqtVirtualQBarCategoryAxis*>( (QBarCategoryAxis*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__childEvent = slot;
+	self_cast->handle__childEvent = std::move(slot_handle);
 	return true;
 }
 
@@ -522,12 +540,13 @@ void QBarCategoryAxis_virtualbase_childEvent(void* self, QChildEvent* event) {
 }
 
 bool QBarCategoryAxis_override_virtual_customEvent(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QBarCategoryAxis> slot_handle(slot);
 	MiqtVirtualQBarCategoryAxis* self_cast = dynamic_cast<MiqtVirtualQBarCategoryAxis*>( (QBarCategoryAxis*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__customEvent = slot;
+	self_cast->handle__customEvent = std::move(slot_handle);
 	return true;
 }
 
@@ -536,12 +555,13 @@ void QBarCategoryAxis_virtualbase_customEvent(void* self, QEvent* event) {
 }
 
 bool QBarCategoryAxis_override_virtual_connectNotify(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QBarCategoryAxis> slot_handle(slot);
 	MiqtVirtualQBarCategoryAxis* self_cast = dynamic_cast<MiqtVirtualQBarCategoryAxis*>( (QBarCategoryAxis*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__connectNotify = slot;
+	self_cast->handle__connectNotify = std::move(slot_handle);
 	return true;
 }
 
@@ -550,12 +570,13 @@ void QBarCategoryAxis_virtualbase_connectNotify(void* self, QMetaMethod* signal)
 }
 
 bool QBarCategoryAxis_override_virtual_disconnectNotify(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QBarCategoryAxis> slot_handle(slot);
 	MiqtVirtualQBarCategoryAxis* self_cast = dynamic_cast<MiqtVirtualQBarCategoryAxis*>( (QBarCategoryAxis*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__disconnectNotify = slot;
+	self_cast->handle__disconnectNotify = std::move(slot_handle);
 	return true;
 }
 

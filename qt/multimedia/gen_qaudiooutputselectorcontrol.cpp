@@ -1,3 +1,5 @@
+#include <memory>
+#include <utility>
 #include <QAudioOutputSelectorControl>
 #include <QList>
 #include <QMediaControl>
@@ -14,6 +16,7 @@
 extern "C" {
 #endif
 
+void miqt_exec_callback_handle_release_QAudioOutputSelectorControl(intptr_t);
 void miqt_exec_callback_QAudioOutputSelectorControl_activeOutputChanged(intptr_t, struct miqt_string);
 void miqt_exec_callback_QAudioOutputSelectorControl_availableOutputsChanged(intptr_t);
 #ifdef __cplusplus
@@ -118,8 +121,10 @@ void QAudioOutputSelectorControl_activeOutputChanged(QAudioOutputSelectorControl
 	self->activeOutputChanged(name_QString);
 }
 
-void QAudioOutputSelectorControl_connect_activeOutputChanged(QAudioOutputSelectorControl* self, intptr_t slot) {
-	QAudioOutputSelectorControl::connect(self, static_cast<void (QAudioOutputSelectorControl::*)(const QString&)>(&QAudioOutputSelectorControl::activeOutputChanged), self, [=](const QString& name) {
+void* QAudioOutputSelectorControl_connect_activeOutputChanged(QAudioOutputSelectorControl* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QAudioOutputSelectorControl>>(slot);
+	return new QMetaObject::Connection(QAudioOutputSelectorControl::connect(self, static_cast<void (QAudioOutputSelectorControl::*)(const QString&)>(&QAudioOutputSelectorControl::activeOutputChanged), self, [slot_handle](const QString& name) {
+		intptr_t slot = slot_handle->value();
 		const QString name_ret = name;
 		// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 		QByteArray name_b = name_ret.toUtf8();
@@ -129,17 +134,19 @@ void QAudioOutputSelectorControl_connect_activeOutputChanged(QAudioOutputSelecto
 		memcpy(name_ms.data, name_b.data(), name_ms.len);
 		struct miqt_string sigval1 = name_ms;
 		miqt_exec_callback_QAudioOutputSelectorControl_activeOutputChanged(slot, sigval1);
-	});
+	}));
 }
 
 void QAudioOutputSelectorControl_availableOutputsChanged(QAudioOutputSelectorControl* self) {
 	self->availableOutputsChanged();
 }
 
-void QAudioOutputSelectorControl_connect_availableOutputsChanged(QAudioOutputSelectorControl* self, intptr_t slot) {
-	QAudioOutputSelectorControl::connect(self, static_cast<void (QAudioOutputSelectorControl::*)()>(&QAudioOutputSelectorControl::availableOutputsChanged), self, [=]() {
+void* QAudioOutputSelectorControl_connect_availableOutputsChanged(QAudioOutputSelectorControl* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QAudioOutputSelectorControl>>(slot);
+	return new QMetaObject::Connection(QAudioOutputSelectorControl::connect(self, static_cast<void (QAudioOutputSelectorControl::*)()>(&QAudioOutputSelectorControl::availableOutputsChanged), self, [slot_handle]() {
+		intptr_t slot = slot_handle->value();
 		miqt_exec_callback_QAudioOutputSelectorControl_availableOutputsChanged(slot);
-	});
+	}));
 }
 
 struct miqt_string QAudioOutputSelectorControl_tr2(const char* s, const char* c) {

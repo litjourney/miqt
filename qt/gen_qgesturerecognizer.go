@@ -27,6 +27,11 @@ const (
 	QGestureRecognizer__ResultHint_Mask  QGestureRecognizer__ResultFlag = 65280
 )
 
+//export miqt_exec_callback_handle_release_QGestureRecognizer
+func miqt_exec_callback_handle_release_QGestureRecognizer(cb C.intptr_t) {
+	cgo.Handle(cb).Delete()
+}
+
 type QGestureRecognizer struct {
 	h *C.QGestureRecognizer
 }
@@ -95,7 +100,11 @@ func (this *QGestureRecognizer) callVirtualBase_Create(target *QObject) *QGestur
 
 }
 func (this *QGestureRecognizer) OnCreate(slot func(super func(target *QObject) *QGesture, target *QObject) *QGesture) {
-	ok := C.QGestureRecognizer_override_virtual_create(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QGestureRecognizer_override_virtual_create(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -117,7 +126,11 @@ func miqt_exec_callback_QGestureRecognizer_create(self *C.QGestureRecognizer, cb
 
 }
 func (this *QGestureRecognizer) OnRecognize(slot func(state *QGesture, watched *QObject, event *QEvent) QGestureRecognizer__ResultFlag) {
-	ok := C.QGestureRecognizer_override_virtual_recognize(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QGestureRecognizer_override_virtual_recognize(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -149,7 +162,11 @@ func (this *QGestureRecognizer) callVirtualBase_Reset(state *QGesture) {
 
 }
 func (this *QGestureRecognizer) OnReset(slot func(super func(state *QGesture), state *QGesture)) {
-	ok := C.QGestureRecognizer_override_virtual_reset(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QGestureRecognizer_override_virtual_reset(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}

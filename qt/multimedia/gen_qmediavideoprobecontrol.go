@@ -15,6 +15,11 @@ import (
 	"unsafe"
 )
 
+//export miqt_exec_callback_handle_release_QMediaVideoProbeControl
+func miqt_exec_callback_handle_release_QMediaVideoProbeControl(cb C.intptr_t) {
+	cgo.Handle(cb).Delete()
+}
+
 type QMediaVideoProbeControl struct {
 	h *C.QMediaVideoProbeControl
 	*QMediaControl
@@ -82,8 +87,10 @@ func QMediaVideoProbeControl_TrUtf8(s string) string {
 func (this *QMediaVideoProbeControl) VideoFrameProbed(frame *QVideoFrame) {
 	C.QMediaVideoProbeControl_videoFrameProbed(this.h, frame.cPointer())
 }
-func (this *QMediaVideoProbeControl) OnVideoFrameProbed(slot func(frame *QVideoFrame)) {
-	C.QMediaVideoProbeControl_connect_videoFrameProbed(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QMediaVideoProbeControl) OnVideoFrameProbed(slot func(frame *QVideoFrame)) *qt.SignalConnection {
+	_goptr := qt.UnsafeNewQMetaObject__Connection(C.QMediaVideoProbeControl_connect_videoFrameProbed(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QMediaVideoProbeControl_videoFrameProbed
@@ -102,8 +109,10 @@ func miqt_exec_callback_QMediaVideoProbeControl_videoFrameProbed(cb C.intptr_t, 
 func (this *QMediaVideoProbeControl) Flush() {
 	C.QMediaVideoProbeControl_flush(this.h)
 }
-func (this *QMediaVideoProbeControl) OnFlush(slot func()) {
-	C.QMediaVideoProbeControl_connect_flush(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QMediaVideoProbeControl) OnFlush(slot func()) *qt.SignalConnection {
+	_goptr := qt.UnsafeNewQMetaObject__Connection(C.QMediaVideoProbeControl_connect_flush(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QMediaVideoProbeControl_flush

@@ -15,6 +15,11 @@ import (
 	"unsafe"
 )
 
+//export miqt_exec_callback_handle_release_QVideoDeviceSelectorControl
+func miqt_exec_callback_handle_release_QVideoDeviceSelectorControl(cb C.intptr_t) {
+	cgo.Handle(cb).Delete()
+}
+
 type QVideoDeviceSelectorControl struct {
 	h *C.QVideoDeviceSelectorControl
 	*QMediaControl
@@ -112,8 +117,10 @@ func (this *QVideoDeviceSelectorControl) SetSelectedDevice(index int) {
 func (this *QVideoDeviceSelectorControl) SelectedDeviceChanged(index int) {
 	C.QVideoDeviceSelectorControl_selectedDeviceChanged(this.h, (C.int)(index))
 }
-func (this *QVideoDeviceSelectorControl) OnSelectedDeviceChanged(slot func(index int)) {
-	C.QVideoDeviceSelectorControl_connect_selectedDeviceChanged(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QVideoDeviceSelectorControl) OnSelectedDeviceChanged(slot func(index int)) *qt.SignalConnection {
+	_goptr := qt.UnsafeNewQMetaObject__Connection(C.QVideoDeviceSelectorControl_connect_selectedDeviceChanged(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QVideoDeviceSelectorControl_selectedDeviceChanged
@@ -136,8 +143,10 @@ func (this *QVideoDeviceSelectorControl) SelectedDeviceChangedWithName(name stri
 	defer C.free(unsafe.Pointer(name_ms.data))
 	C.QVideoDeviceSelectorControl_selectedDeviceChangedWithName(this.h, name_ms)
 }
-func (this *QVideoDeviceSelectorControl) OnSelectedDeviceChangedWithName(slot func(name string)) {
-	C.QVideoDeviceSelectorControl_connect_selectedDeviceChangedWithName(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QVideoDeviceSelectorControl) OnSelectedDeviceChangedWithName(slot func(name string)) *qt.SignalConnection {
+	_goptr := qt.UnsafeNewQMetaObject__Connection(C.QVideoDeviceSelectorControl_connect_selectedDeviceChangedWithName(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QVideoDeviceSelectorControl_selectedDeviceChangedWithName
@@ -159,8 +168,10 @@ func miqt_exec_callback_QVideoDeviceSelectorControl_selectedDeviceChangedWithNam
 func (this *QVideoDeviceSelectorControl) DevicesChanged() {
 	C.QVideoDeviceSelectorControl_devicesChanged(this.h)
 }
-func (this *QVideoDeviceSelectorControl) OnDevicesChanged(slot func()) {
-	C.QVideoDeviceSelectorControl_connect_devicesChanged(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QVideoDeviceSelectorControl) OnDevicesChanged(slot func()) *qt.SignalConnection {
+	_goptr := qt.UnsafeNewQMetaObject__Connection(C.QVideoDeviceSelectorControl_connect_devicesChanged(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QVideoDeviceSelectorControl_devicesChanged

@@ -1,3 +1,5 @@
+#include <memory>
+#include <utility>
 #include <QAbstractEventDispatcher>
 #include <QAbstractNativeEventFilter>
 #include <QChildEvent>
@@ -19,6 +21,7 @@
 extern "C" {
 #endif
 
+void miqt_exec_callback_handle_release_QCoreApplication(intptr_t);
 void miqt_exec_callback_QCoreApplication_installNativeEventFilter(intptr_t, QAbstractNativeEventFilter*);
 void miqt_exec_callback_QCoreApplication_removeNativeEventFilter(intptr_t, QAbstractNativeEventFilter*);
 void miqt_exec_callback_QCoreApplication_organizationNameChanged(intptr_t);
@@ -47,112 +50,112 @@ public:
 	virtual ~MiqtVirtualQCoreApplication() override = default;
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__notify = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QCoreApplication> handle__notify;
 
 	// Subclass to allow providing a Go implementation
 	virtual bool notify(QObject* param1, QEvent* param2) override {
-		if (handle__notify == 0) {
+		if (!handle__notify) {
 			return QCoreApplication::notify(param1, param2);
 		}
 
 		QObject* sigval1 = param1;
 		QEvent* sigval2 = param2;
-		bool callback_return_value = miqt_exec_callback_QCoreApplication_notify(this, handle__notify, sigval1, sigval2);
+		bool callback_return_value = miqt_exec_callback_QCoreApplication_notify(this, handle__notify.value(), sigval1, sigval2);
 		return callback_return_value;
 	}
 
 	friend bool QCoreApplication_virtualbase_notify(void* self, QObject* param1, QEvent* param2);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__event = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QCoreApplication> handle__event;
 
 	// Subclass to allow providing a Go implementation
 	virtual bool event(QEvent* param1) override {
-		if (handle__event == 0) {
+		if (!handle__event) {
 			return QCoreApplication::event(param1);
 		}
 
 		QEvent* sigval1 = param1;
-		bool callback_return_value = miqt_exec_callback_QCoreApplication_event(this, handle__event, sigval1);
+		bool callback_return_value = miqt_exec_callback_QCoreApplication_event(this, handle__event.value(), sigval1);
 		return callback_return_value;
 	}
 
 	friend bool QCoreApplication_virtualbase_event(void* self, QEvent* param1);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__eventFilter = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QCoreApplication> handle__eventFilter;
 
 	// Subclass to allow providing a Go implementation
 	virtual bool eventFilter(QObject* watched, QEvent* event) override {
-		if (handle__eventFilter == 0) {
+		if (!handle__eventFilter) {
 			return QCoreApplication::eventFilter(watched, event);
 		}
 
 		QObject* sigval1 = watched;
 		QEvent* sigval2 = event;
-		bool callback_return_value = miqt_exec_callback_QCoreApplication_eventFilter(this, handle__eventFilter, sigval1, sigval2);
+		bool callback_return_value = miqt_exec_callback_QCoreApplication_eventFilter(this, handle__eventFilter.value(), sigval1, sigval2);
 		return callback_return_value;
 	}
 
 	friend bool QCoreApplication_virtualbase_eventFilter(void* self, QObject* watched, QEvent* event);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__timerEvent = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QCoreApplication> handle__timerEvent;
 
 	// Subclass to allow providing a Go implementation
 	virtual void timerEvent(QTimerEvent* event) override {
-		if (handle__timerEvent == 0) {
+		if (!handle__timerEvent) {
 			QCoreApplication::timerEvent(event);
 			return;
 		}
 
 		QTimerEvent* sigval1 = event;
-		miqt_exec_callback_QCoreApplication_timerEvent(this, handle__timerEvent, sigval1);
+		miqt_exec_callback_QCoreApplication_timerEvent(this, handle__timerEvent.value(), sigval1);
 
 	}
 
 	friend void QCoreApplication_virtualbase_timerEvent(void* self, QTimerEvent* event);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__childEvent = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QCoreApplication> handle__childEvent;
 
 	// Subclass to allow providing a Go implementation
 	virtual void childEvent(QChildEvent* event) override {
-		if (handle__childEvent == 0) {
+		if (!handle__childEvent) {
 			QCoreApplication::childEvent(event);
 			return;
 		}
 
 		QChildEvent* sigval1 = event;
-		miqt_exec_callback_QCoreApplication_childEvent(this, handle__childEvent, sigval1);
+		miqt_exec_callback_QCoreApplication_childEvent(this, handle__childEvent.value(), sigval1);
 
 	}
 
 	friend void QCoreApplication_virtualbase_childEvent(void* self, QChildEvent* event);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__customEvent = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QCoreApplication> handle__customEvent;
 
 	// Subclass to allow providing a Go implementation
 	virtual void customEvent(QEvent* event) override {
-		if (handle__customEvent == 0) {
+		if (!handle__customEvent) {
 			QCoreApplication::customEvent(event);
 			return;
 		}
 
 		QEvent* sigval1 = event;
-		miqt_exec_callback_QCoreApplication_customEvent(this, handle__customEvent, sigval1);
+		miqt_exec_callback_QCoreApplication_customEvent(this, handle__customEvent.value(), sigval1);
 
 	}
 
 	friend void QCoreApplication_virtualbase_customEvent(void* self, QEvent* event);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__connectNotify = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QCoreApplication> handle__connectNotify;
 
 	// Subclass to allow providing a Go implementation
 	virtual void connectNotify(const QMetaMethod& signal) override {
-		if (handle__connectNotify == 0) {
+		if (!handle__connectNotify) {
 			QCoreApplication::connectNotify(signal);
 			return;
 		}
@@ -160,18 +163,18 @@ public:
 		const QMetaMethod& signal_ret = signal;
 		// Cast returned reference into pointer
 		QMetaMethod* sigval1 = const_cast<QMetaMethod*>(&signal_ret);
-		miqt_exec_callback_QCoreApplication_connectNotify(this, handle__connectNotify, sigval1);
+		miqt_exec_callback_QCoreApplication_connectNotify(this, handle__connectNotify.value(), sigval1);
 
 	}
 
 	friend void QCoreApplication_virtualbase_connectNotify(void* self, QMetaMethod* signal);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__disconnectNotify = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QCoreApplication> handle__disconnectNotify;
 
 	// Subclass to allow providing a Go implementation
 	virtual void disconnectNotify(const QMetaMethod& signal) override {
-		if (handle__disconnectNotify == 0) {
+		if (!handle__disconnectNotify) {
 			QCoreApplication::disconnectNotify(signal);
 			return;
 		}
@@ -179,7 +182,7 @@ public:
 		const QMetaMethod& signal_ret = signal;
 		// Cast returned reference into pointer
 		QMetaMethod* sigval1 = const_cast<QMetaMethod*>(&signal_ret);
-		miqt_exec_callback_QCoreApplication_disconnectNotify(this, handle__disconnectNotify, sigval1);
+		miqt_exec_callback_QCoreApplication_disconnectNotify(this, handle__disconnectNotify.value(), sigval1);
 
 	}
 
@@ -467,22 +470,26 @@ void QCoreApplication_installNativeEventFilter(QCoreApplication* self, QAbstract
 	self->installNativeEventFilter(filterObj);
 }
 
-void QCoreApplication_connect_installNativeEventFilter(QCoreApplication* self, intptr_t slot) {
-	QCoreApplication::connect(self, static_cast<void (QCoreApplication::*)(QAbstractNativeEventFilter*)>(&QCoreApplication::installNativeEventFilter), self, [=](QAbstractNativeEventFilter* filterObj) {
+void* QCoreApplication_connect_installNativeEventFilter(QCoreApplication* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QCoreApplication>>(slot);
+	return new QMetaObject::Connection(QCoreApplication::connect(self, static_cast<void (QCoreApplication::*)(QAbstractNativeEventFilter*)>(&QCoreApplication::installNativeEventFilter), self, [slot_handle](QAbstractNativeEventFilter* filterObj) {
+		intptr_t slot = slot_handle->value();
 		QAbstractNativeEventFilter* sigval1 = filterObj;
 		miqt_exec_callback_QCoreApplication_installNativeEventFilter(slot, sigval1);
-	});
+	}));
 }
 
 void QCoreApplication_removeNativeEventFilter(QCoreApplication* self, QAbstractNativeEventFilter* filterObj) {
 	self->removeNativeEventFilter(filterObj);
 }
 
-void QCoreApplication_connect_removeNativeEventFilter(QCoreApplication* self, intptr_t slot) {
-	QCoreApplication::connect(self, static_cast<void (QCoreApplication::*)(QAbstractNativeEventFilter*)>(&QCoreApplication::removeNativeEventFilter), self, [=](QAbstractNativeEventFilter* filterObj) {
+void* QCoreApplication_connect_removeNativeEventFilter(QCoreApplication* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QCoreApplication>>(slot);
+	return new QMetaObject::Connection(QCoreApplication::connect(self, static_cast<void (QCoreApplication::*)(QAbstractNativeEventFilter*)>(&QCoreApplication::removeNativeEventFilter), self, [slot_handle](QAbstractNativeEventFilter* filterObj) {
+		intptr_t slot = slot_handle->value();
 		QAbstractNativeEventFilter* sigval1 = filterObj;
 		miqt_exec_callback_QCoreApplication_removeNativeEventFilter(slot, sigval1);
-	});
+	}));
 }
 
 bool QCoreApplication_isQuitLockEnabled() {
@@ -505,40 +512,48 @@ void QCoreApplication_organizationNameChanged(QCoreApplication* self) {
 	self->organizationNameChanged();
 }
 
-void QCoreApplication_connect_organizationNameChanged(QCoreApplication* self, intptr_t slot) {
-	QCoreApplication::connect(self, static_cast<void (QCoreApplication::*)()>(&QCoreApplication::organizationNameChanged), self, [=]() {
+void* QCoreApplication_connect_organizationNameChanged(QCoreApplication* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QCoreApplication>>(slot);
+	return new QMetaObject::Connection(QCoreApplication::connect(self, static_cast<void (QCoreApplication::*)()>(&QCoreApplication::organizationNameChanged), self, [slot_handle]() {
+		intptr_t slot = slot_handle->value();
 		miqt_exec_callback_QCoreApplication_organizationNameChanged(slot);
-	});
+	}));
 }
 
 void QCoreApplication_organizationDomainChanged(QCoreApplication* self) {
 	self->organizationDomainChanged();
 }
 
-void QCoreApplication_connect_organizationDomainChanged(QCoreApplication* self, intptr_t slot) {
-	QCoreApplication::connect(self, static_cast<void (QCoreApplication::*)()>(&QCoreApplication::organizationDomainChanged), self, [=]() {
+void* QCoreApplication_connect_organizationDomainChanged(QCoreApplication* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QCoreApplication>>(slot);
+	return new QMetaObject::Connection(QCoreApplication::connect(self, static_cast<void (QCoreApplication::*)()>(&QCoreApplication::organizationDomainChanged), self, [slot_handle]() {
+		intptr_t slot = slot_handle->value();
 		miqt_exec_callback_QCoreApplication_organizationDomainChanged(slot);
-	});
+	}));
 }
 
 void QCoreApplication_applicationNameChanged(QCoreApplication* self) {
 	self->applicationNameChanged();
 }
 
-void QCoreApplication_connect_applicationNameChanged(QCoreApplication* self, intptr_t slot) {
-	QCoreApplication::connect(self, static_cast<void (QCoreApplication::*)()>(&QCoreApplication::applicationNameChanged), self, [=]() {
+void* QCoreApplication_connect_applicationNameChanged(QCoreApplication* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QCoreApplication>>(slot);
+	return new QMetaObject::Connection(QCoreApplication::connect(self, static_cast<void (QCoreApplication::*)()>(&QCoreApplication::applicationNameChanged), self, [slot_handle]() {
+		intptr_t slot = slot_handle->value();
 		miqt_exec_callback_QCoreApplication_applicationNameChanged(slot);
-	});
+	}));
 }
 
 void QCoreApplication_applicationVersionChanged(QCoreApplication* self) {
 	self->applicationVersionChanged();
 }
 
-void QCoreApplication_connect_applicationVersionChanged(QCoreApplication* self, intptr_t slot) {
-	QCoreApplication::connect(self, static_cast<void (QCoreApplication::*)()>(&QCoreApplication::applicationVersionChanged), self, [=]() {
+void* QCoreApplication_connect_applicationVersionChanged(QCoreApplication* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QCoreApplication>>(slot);
+	return new QMetaObject::Connection(QCoreApplication::connect(self, static_cast<void (QCoreApplication::*)()>(&QCoreApplication::applicationVersionChanged), self, [slot_handle]() {
+		intptr_t slot = slot_handle->value();
 		miqt_exec_callback_QCoreApplication_applicationVersionChanged(slot);
-	});
+	}));
 }
 
 struct miqt_string QCoreApplication_tr2(const char* s, const char* c) {
@@ -614,12 +629,13 @@ void QCoreApplication_exitWithRetcode(int retcode) {
 }
 
 bool QCoreApplication_override_virtual_notify(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QCoreApplication> slot_handle(slot);
 	MiqtVirtualQCoreApplication* self_cast = dynamic_cast<MiqtVirtualQCoreApplication*>( (QCoreApplication*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__notify = slot;
+	self_cast->handle__notify = std::move(slot_handle);
 	return true;
 }
 
@@ -628,12 +644,13 @@ bool QCoreApplication_virtualbase_notify(void* self, QObject* param1, QEvent* pa
 }
 
 bool QCoreApplication_override_virtual_event(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QCoreApplication> slot_handle(slot);
 	MiqtVirtualQCoreApplication* self_cast = dynamic_cast<MiqtVirtualQCoreApplication*>( (QCoreApplication*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__event = slot;
+	self_cast->handle__event = std::move(slot_handle);
 	return true;
 }
 
@@ -642,12 +659,13 @@ bool QCoreApplication_virtualbase_event(void* self, QEvent* param1) {
 }
 
 bool QCoreApplication_override_virtual_eventFilter(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QCoreApplication> slot_handle(slot);
 	MiqtVirtualQCoreApplication* self_cast = dynamic_cast<MiqtVirtualQCoreApplication*>( (QCoreApplication*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__eventFilter = slot;
+	self_cast->handle__eventFilter = std::move(slot_handle);
 	return true;
 }
 
@@ -656,12 +674,13 @@ bool QCoreApplication_virtualbase_eventFilter(void* self, QObject* watched, QEve
 }
 
 bool QCoreApplication_override_virtual_timerEvent(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QCoreApplication> slot_handle(slot);
 	MiqtVirtualQCoreApplication* self_cast = dynamic_cast<MiqtVirtualQCoreApplication*>( (QCoreApplication*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__timerEvent = slot;
+	self_cast->handle__timerEvent = std::move(slot_handle);
 	return true;
 }
 
@@ -670,12 +689,13 @@ void QCoreApplication_virtualbase_timerEvent(void* self, QTimerEvent* event) {
 }
 
 bool QCoreApplication_override_virtual_childEvent(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QCoreApplication> slot_handle(slot);
 	MiqtVirtualQCoreApplication* self_cast = dynamic_cast<MiqtVirtualQCoreApplication*>( (QCoreApplication*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__childEvent = slot;
+	self_cast->handle__childEvent = std::move(slot_handle);
 	return true;
 }
 
@@ -684,12 +704,13 @@ void QCoreApplication_virtualbase_childEvent(void* self, QChildEvent* event) {
 }
 
 bool QCoreApplication_override_virtual_customEvent(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QCoreApplication> slot_handle(slot);
 	MiqtVirtualQCoreApplication* self_cast = dynamic_cast<MiqtVirtualQCoreApplication*>( (QCoreApplication*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__customEvent = slot;
+	self_cast->handle__customEvent = std::move(slot_handle);
 	return true;
 }
 
@@ -698,12 +719,13 @@ void QCoreApplication_virtualbase_customEvent(void* self, QEvent* event) {
 }
 
 bool QCoreApplication_override_virtual_connectNotify(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QCoreApplication> slot_handle(slot);
 	MiqtVirtualQCoreApplication* self_cast = dynamic_cast<MiqtVirtualQCoreApplication*>( (QCoreApplication*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__connectNotify = slot;
+	self_cast->handle__connectNotify = std::move(slot_handle);
 	return true;
 }
 
@@ -712,12 +734,13 @@ void QCoreApplication_virtualbase_connectNotify(void* self, QMetaMethod* signal)
 }
 
 bool QCoreApplication_override_virtual_disconnectNotify(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QCoreApplication> slot_handle(slot);
 	MiqtVirtualQCoreApplication* self_cast = dynamic_cast<MiqtVirtualQCoreApplication*>( (QCoreApplication*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__disconnectNotify = slot;
+	self_cast->handle__disconnectNotify = std::move(slot_handle);
 	return true;
 }
 
@@ -780,10 +803,12 @@ bool QCoreApplication_protectedbase_isSignalConnected(bool* _dynamic_cast_ok, co
 	return self_cast->isSignalConnected(*signal);
 }
 
-void QCoreApplication_connect_aboutToQuit(QCoreApplication* self, intptr_t slot) {
-	QCoreApplication::connect(self, &QCoreApplication::aboutToQuit, self, [=]() {
+void* QCoreApplication_connect_aboutToQuit(QCoreApplication* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QCoreApplication>>(slot);
+	return new QMetaObject::Connection(QCoreApplication::connect(self, &QCoreApplication::aboutToQuit, self, [slot_handle]() {
+		intptr_t slot = slot_handle->value();
 		miqt_exec_callback_QCoreApplication_aboutToQuit(slot);
-	});
+	}));
 }
 
 void QCoreApplication_delete(QCoreApplication* self) {

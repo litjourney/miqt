@@ -24,6 +24,11 @@ const (
 	QXYSeries__LabelVisibility QXYSeries__PointConfiguration = 3
 )
 
+//export miqt_exec_callback_handle_release_QXYSeries
+func miqt_exec_callback_handle_release_QXYSeries(cb C.intptr_t) {
+	cgo.Handle(cb).Delete()
+}
+
 type QXYSeries struct {
 	h *C.QXYSeries
 	*QAbstractSeries
@@ -566,8 +571,10 @@ func (this *QXYSeries) ColorBy(sourceData []float64) {
 func (this *QXYSeries) Clicked(point *qt6.QPointF) {
 	C.QXYSeries_clicked(this.h, (*C.QPointF)(point.UnsafePointer()))
 }
-func (this *QXYSeries) OnClicked(slot func(point *qt6.QPointF)) {
-	C.QXYSeries_connect_clicked(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QXYSeries) OnClicked(slot func(point *qt6.QPointF)) *qt6.SignalConnection {
+	_goptr := qt6.UnsafeNewQMetaObject__Connection(C.QXYSeries_connect_clicked(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QXYSeries_clicked
@@ -586,8 +593,10 @@ func miqt_exec_callback_QXYSeries_clicked(cb C.intptr_t, point *C.QPointF) {
 func (this *QXYSeries) Hovered(point *qt6.QPointF, state bool) {
 	C.QXYSeries_hovered(this.h, (*C.QPointF)(point.UnsafePointer()), (C.bool)(state))
 }
-func (this *QXYSeries) OnHovered(slot func(point *qt6.QPointF, state bool)) {
-	C.QXYSeries_connect_hovered(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QXYSeries) OnHovered(slot func(point *qt6.QPointF, state bool)) *qt6.SignalConnection {
+	_goptr := qt6.UnsafeNewQMetaObject__Connection(C.QXYSeries_connect_hovered(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QXYSeries_hovered
@@ -608,8 +617,10 @@ func miqt_exec_callback_QXYSeries_hovered(cb C.intptr_t, point *C.QPointF, state
 func (this *QXYSeries) Pressed(point *qt6.QPointF) {
 	C.QXYSeries_pressed(this.h, (*C.QPointF)(point.UnsafePointer()))
 }
-func (this *QXYSeries) OnPressed(slot func(point *qt6.QPointF)) {
-	C.QXYSeries_connect_pressed(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QXYSeries) OnPressed(slot func(point *qt6.QPointF)) *qt6.SignalConnection {
+	_goptr := qt6.UnsafeNewQMetaObject__Connection(C.QXYSeries_connect_pressed(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QXYSeries_pressed
@@ -628,8 +639,10 @@ func miqt_exec_callback_QXYSeries_pressed(cb C.intptr_t, point *C.QPointF) {
 func (this *QXYSeries) Released(point *qt6.QPointF) {
 	C.QXYSeries_released(this.h, (*C.QPointF)(point.UnsafePointer()))
 }
-func (this *QXYSeries) OnReleased(slot func(point *qt6.QPointF)) {
-	C.QXYSeries_connect_released(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QXYSeries) OnReleased(slot func(point *qt6.QPointF)) *qt6.SignalConnection {
+	_goptr := qt6.UnsafeNewQMetaObject__Connection(C.QXYSeries_connect_released(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QXYSeries_released
@@ -648,8 +661,10 @@ func miqt_exec_callback_QXYSeries_released(cb C.intptr_t, point *C.QPointF) {
 func (this *QXYSeries) DoubleClicked(point *qt6.QPointF) {
 	C.QXYSeries_doubleClicked(this.h, (*C.QPointF)(point.UnsafePointer()))
 }
-func (this *QXYSeries) OnDoubleClicked(slot func(point *qt6.QPointF)) {
-	C.QXYSeries_connect_doubleClicked(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QXYSeries) OnDoubleClicked(slot func(point *qt6.QPointF)) *qt6.SignalConnection {
+	_goptr := qt6.UnsafeNewQMetaObject__Connection(C.QXYSeries_connect_doubleClicked(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QXYSeries_doubleClicked
@@ -668,8 +683,10 @@ func miqt_exec_callback_QXYSeries_doubleClicked(cb C.intptr_t, point *C.QPointF)
 func (this *QXYSeries) PointReplaced(index int) {
 	C.QXYSeries_pointReplaced(this.h, (C.int)(index))
 }
-func (this *QXYSeries) OnPointReplaced(slot func(index int)) {
-	C.QXYSeries_connect_pointReplaced(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QXYSeries) OnPointReplaced(slot func(index int)) *qt6.SignalConnection {
+	_goptr := qt6.UnsafeNewQMetaObject__Connection(C.QXYSeries_connect_pointReplaced(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QXYSeries_pointReplaced
@@ -688,8 +705,10 @@ func miqt_exec_callback_QXYSeries_pointReplaced(cb C.intptr_t, index C.int) {
 func (this *QXYSeries) PointRemoved(index int) {
 	C.QXYSeries_pointRemoved(this.h, (C.int)(index))
 }
-func (this *QXYSeries) OnPointRemoved(slot func(index int)) {
-	C.QXYSeries_connect_pointRemoved(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QXYSeries) OnPointRemoved(slot func(index int)) *qt6.SignalConnection {
+	_goptr := qt6.UnsafeNewQMetaObject__Connection(C.QXYSeries_connect_pointRemoved(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QXYSeries_pointRemoved
@@ -708,8 +727,10 @@ func miqt_exec_callback_QXYSeries_pointRemoved(cb C.intptr_t, index C.int) {
 func (this *QXYSeries) PointAdded(index int) {
 	C.QXYSeries_pointAdded(this.h, (C.int)(index))
 }
-func (this *QXYSeries) OnPointAdded(slot func(index int)) {
-	C.QXYSeries_connect_pointAdded(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QXYSeries) OnPointAdded(slot func(index int)) *qt6.SignalConnection {
+	_goptr := qt6.UnsafeNewQMetaObject__Connection(C.QXYSeries_connect_pointAdded(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QXYSeries_pointAdded
@@ -728,8 +749,10 @@ func miqt_exec_callback_QXYSeries_pointAdded(cb C.intptr_t, index C.int) {
 func (this *QXYSeries) ColorChanged(color qt6.QColor) {
 	C.QXYSeries_colorChanged(this.h, (*C.QColor)(color.UnsafePointer()))
 }
-func (this *QXYSeries) OnColorChanged(slot func(color qt6.QColor)) {
-	C.QXYSeries_connect_colorChanged(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QXYSeries) OnColorChanged(slot func(color qt6.QColor)) *qt6.SignalConnection {
+	_goptr := qt6.UnsafeNewQMetaObject__Connection(C.QXYSeries_connect_colorChanged(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QXYSeries_colorChanged
@@ -750,8 +773,10 @@ func miqt_exec_callback_QXYSeries_colorChanged(cb C.intptr_t, color *C.QColor) {
 func (this *QXYSeries) SelectedColorChanged(color *qt6.QColor) {
 	C.QXYSeries_selectedColorChanged(this.h, (*C.QColor)(color.UnsafePointer()))
 }
-func (this *QXYSeries) OnSelectedColorChanged(slot func(color *qt6.QColor)) {
-	C.QXYSeries_connect_selectedColorChanged(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QXYSeries) OnSelectedColorChanged(slot func(color *qt6.QColor)) *qt6.SignalConnection {
+	_goptr := qt6.UnsafeNewQMetaObject__Connection(C.QXYSeries_connect_selectedColorChanged(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QXYSeries_selectedColorChanged
@@ -770,8 +795,10 @@ func miqt_exec_callback_QXYSeries_selectedColorChanged(cb C.intptr_t, color *C.Q
 func (this *QXYSeries) PointsReplaced() {
 	C.QXYSeries_pointsReplaced(this.h)
 }
-func (this *QXYSeries) OnPointsReplaced(slot func()) {
-	C.QXYSeries_connect_pointsReplaced(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QXYSeries) OnPointsReplaced(slot func()) *qt6.SignalConnection {
+	_goptr := qt6.UnsafeNewQMetaObject__Connection(C.QXYSeries_connect_pointsReplaced(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QXYSeries_pointsReplaced
@@ -791,8 +818,10 @@ func (this *QXYSeries) PointLabelsFormatChanged(format string) {
 	defer C.free(unsafe.Pointer(format_ms.data))
 	C.QXYSeries_pointLabelsFormatChanged(this.h, format_ms)
 }
-func (this *QXYSeries) OnPointLabelsFormatChanged(slot func(format string)) {
-	C.QXYSeries_connect_pointLabelsFormatChanged(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QXYSeries) OnPointLabelsFormatChanged(slot func(format string)) *qt6.SignalConnection {
+	_goptr := qt6.UnsafeNewQMetaObject__Connection(C.QXYSeries_connect_pointLabelsFormatChanged(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QXYSeries_pointLabelsFormatChanged
@@ -814,8 +843,10 @@ func miqt_exec_callback_QXYSeries_pointLabelsFormatChanged(cb C.intptr_t, format
 func (this *QXYSeries) PointLabelsVisibilityChanged(visible bool) {
 	C.QXYSeries_pointLabelsVisibilityChanged(this.h, (C.bool)(visible))
 }
-func (this *QXYSeries) OnPointLabelsVisibilityChanged(slot func(visible bool)) {
-	C.QXYSeries_connect_pointLabelsVisibilityChanged(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QXYSeries) OnPointLabelsVisibilityChanged(slot func(visible bool)) *qt6.SignalConnection {
+	_goptr := qt6.UnsafeNewQMetaObject__Connection(C.QXYSeries_connect_pointLabelsVisibilityChanged(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QXYSeries_pointLabelsVisibilityChanged
@@ -834,8 +865,10 @@ func miqt_exec_callback_QXYSeries_pointLabelsVisibilityChanged(cb C.intptr_t, vi
 func (this *QXYSeries) PointLabelsFontChanged(font *qt6.QFont) {
 	C.QXYSeries_pointLabelsFontChanged(this.h, (*C.QFont)(font.UnsafePointer()))
 }
-func (this *QXYSeries) OnPointLabelsFontChanged(slot func(font *qt6.QFont)) {
-	C.QXYSeries_connect_pointLabelsFontChanged(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QXYSeries) OnPointLabelsFontChanged(slot func(font *qt6.QFont)) *qt6.SignalConnection {
+	_goptr := qt6.UnsafeNewQMetaObject__Connection(C.QXYSeries_connect_pointLabelsFontChanged(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QXYSeries_pointLabelsFontChanged
@@ -854,8 +887,10 @@ func miqt_exec_callback_QXYSeries_pointLabelsFontChanged(cb C.intptr_t, font *C.
 func (this *QXYSeries) PointLabelsColorChanged(color *qt6.QColor) {
 	C.QXYSeries_pointLabelsColorChanged(this.h, (*C.QColor)(color.UnsafePointer()))
 }
-func (this *QXYSeries) OnPointLabelsColorChanged(slot func(color *qt6.QColor)) {
-	C.QXYSeries_connect_pointLabelsColorChanged(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QXYSeries) OnPointLabelsColorChanged(slot func(color *qt6.QColor)) *qt6.SignalConnection {
+	_goptr := qt6.UnsafeNewQMetaObject__Connection(C.QXYSeries_connect_pointLabelsColorChanged(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QXYSeries_pointLabelsColorChanged
@@ -874,8 +909,10 @@ func miqt_exec_callback_QXYSeries_pointLabelsColorChanged(cb C.intptr_t, color *
 func (this *QXYSeries) PointLabelsClippingChanged(clipping bool) {
 	C.QXYSeries_pointLabelsClippingChanged(this.h, (C.bool)(clipping))
 }
-func (this *QXYSeries) OnPointLabelsClippingChanged(slot func(clipping bool)) {
-	C.QXYSeries_connect_pointLabelsClippingChanged(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QXYSeries) OnPointLabelsClippingChanged(slot func(clipping bool)) *qt6.SignalConnection {
+	_goptr := qt6.UnsafeNewQMetaObject__Connection(C.QXYSeries_connect_pointLabelsClippingChanged(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QXYSeries_pointLabelsClippingChanged
@@ -894,8 +931,10 @@ func miqt_exec_callback_QXYSeries_pointLabelsClippingChanged(cb C.intptr_t, clip
 func (this *QXYSeries) PointsRemoved(index int, count int) {
 	C.QXYSeries_pointsRemoved(this.h, (C.int)(index), (C.int)(count))
 }
-func (this *QXYSeries) OnPointsRemoved(slot func(index int, count int)) {
-	C.QXYSeries_connect_pointsRemoved(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QXYSeries) OnPointsRemoved(slot func(index int, count int)) *qt6.SignalConnection {
+	_goptr := qt6.UnsafeNewQMetaObject__Connection(C.QXYSeries_connect_pointsRemoved(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QXYSeries_pointsRemoved
@@ -916,8 +955,10 @@ func miqt_exec_callback_QXYSeries_pointsRemoved(cb C.intptr_t, index C.int, coun
 func (this *QXYSeries) PenChanged(pen *qt6.QPen) {
 	C.QXYSeries_penChanged(this.h, (*C.QPen)(pen.UnsafePointer()))
 }
-func (this *QXYSeries) OnPenChanged(slot func(pen *qt6.QPen)) {
-	C.QXYSeries_connect_penChanged(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QXYSeries) OnPenChanged(slot func(pen *qt6.QPen)) *qt6.SignalConnection {
+	_goptr := qt6.UnsafeNewQMetaObject__Connection(C.QXYSeries_connect_penChanged(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QXYSeries_penChanged
@@ -936,8 +977,10 @@ func miqt_exec_callback_QXYSeries_penChanged(cb C.intptr_t, pen *C.QPen) {
 func (this *QXYSeries) SelectedPointsChanged() {
 	C.QXYSeries_selectedPointsChanged(this.h)
 }
-func (this *QXYSeries) OnSelectedPointsChanged(slot func()) {
-	C.QXYSeries_connect_selectedPointsChanged(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QXYSeries) OnSelectedPointsChanged(slot func()) *qt6.SignalConnection {
+	_goptr := qt6.UnsafeNewQMetaObject__Connection(C.QXYSeries_connect_selectedPointsChanged(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QXYSeries_selectedPointsChanged
@@ -953,8 +996,10 @@ func miqt_exec_callback_QXYSeries_selectedPointsChanged(cb C.intptr_t) {
 func (this *QXYSeries) LightMarkerChanged(lightMarker *qt6.QImage) {
 	C.QXYSeries_lightMarkerChanged(this.h, (*C.QImage)(lightMarker.UnsafePointer()))
 }
-func (this *QXYSeries) OnLightMarkerChanged(slot func(lightMarker *qt6.QImage)) {
-	C.QXYSeries_connect_lightMarkerChanged(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QXYSeries) OnLightMarkerChanged(slot func(lightMarker *qt6.QImage)) *qt6.SignalConnection {
+	_goptr := qt6.UnsafeNewQMetaObject__Connection(C.QXYSeries_connect_lightMarkerChanged(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QXYSeries_lightMarkerChanged
@@ -973,8 +1018,10 @@ func miqt_exec_callback_QXYSeries_lightMarkerChanged(cb C.intptr_t, lightMarker 
 func (this *QXYSeries) SelectedLightMarkerChanged(selectedLightMarker *qt6.QImage) {
 	C.QXYSeries_selectedLightMarkerChanged(this.h, (*C.QImage)(selectedLightMarker.UnsafePointer()))
 }
-func (this *QXYSeries) OnSelectedLightMarkerChanged(slot func(selectedLightMarker *qt6.QImage)) {
-	C.QXYSeries_connect_selectedLightMarkerChanged(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QXYSeries) OnSelectedLightMarkerChanged(slot func(selectedLightMarker *qt6.QImage)) *qt6.SignalConnection {
+	_goptr := qt6.UnsafeNewQMetaObject__Connection(C.QXYSeries_connect_selectedLightMarkerChanged(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QXYSeries_selectedLightMarkerChanged
@@ -993,8 +1040,10 @@ func miqt_exec_callback_QXYSeries_selectedLightMarkerChanged(cb C.intptr_t, sele
 func (this *QXYSeries) BestFitLineVisibilityChanged(visible bool) {
 	C.QXYSeries_bestFitLineVisibilityChanged(this.h, (C.bool)(visible))
 }
-func (this *QXYSeries) OnBestFitLineVisibilityChanged(slot func(visible bool)) {
-	C.QXYSeries_connect_bestFitLineVisibilityChanged(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QXYSeries) OnBestFitLineVisibilityChanged(slot func(visible bool)) *qt6.SignalConnection {
+	_goptr := qt6.UnsafeNewQMetaObject__Connection(C.QXYSeries_connect_bestFitLineVisibilityChanged(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QXYSeries_bestFitLineVisibilityChanged
@@ -1013,8 +1062,10 @@ func miqt_exec_callback_QXYSeries_bestFitLineVisibilityChanged(cb C.intptr_t, vi
 func (this *QXYSeries) BestFitLinePenChanged(pen *qt6.QPen) {
 	C.QXYSeries_bestFitLinePenChanged(this.h, (*C.QPen)(pen.UnsafePointer()))
 }
-func (this *QXYSeries) OnBestFitLinePenChanged(slot func(pen *qt6.QPen)) {
-	C.QXYSeries_connect_bestFitLinePenChanged(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QXYSeries) OnBestFitLinePenChanged(slot func(pen *qt6.QPen)) *qt6.SignalConnection {
+	_goptr := qt6.UnsafeNewQMetaObject__Connection(C.QXYSeries_connect_bestFitLinePenChanged(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QXYSeries_bestFitLinePenChanged
@@ -1033,8 +1084,10 @@ func miqt_exec_callback_QXYSeries_bestFitLinePenChanged(cb C.intptr_t, pen *C.QP
 func (this *QXYSeries) BestFitLineColorChanged(color *qt6.QColor) {
 	C.QXYSeries_bestFitLineColorChanged(this.h, (*C.QColor)(color.UnsafePointer()))
 }
-func (this *QXYSeries) OnBestFitLineColorChanged(slot func(color *qt6.QColor)) {
-	C.QXYSeries_connect_bestFitLineColorChanged(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QXYSeries) OnBestFitLineColorChanged(slot func(color *qt6.QColor)) *qt6.SignalConnection {
+	_goptr := qt6.UnsafeNewQMetaObject__Connection(C.QXYSeries_connect_bestFitLineColorChanged(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QXYSeries_bestFitLineColorChanged
@@ -1083,8 +1136,10 @@ func (this *QXYSeries) PointsConfigurationChanged(configuration map[int]map[QXYS
 	}
 	C.QXYSeries_pointsConfigurationChanged(this.h, configuration_mm)
 }
-func (this *QXYSeries) OnPointsConfigurationChanged(slot func(configuration map[int]map[QXYSeries__PointConfiguration]qt6.QVariant)) {
-	C.QXYSeries_connect_pointsConfigurationChanged(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QXYSeries) OnPointsConfigurationChanged(slot func(configuration map[int]map[QXYSeries__PointConfiguration]qt6.QVariant)) *qt6.SignalConnection {
+	_goptr := qt6.UnsafeNewQMetaObject__Connection(C.QXYSeries_connect_pointsConfigurationChanged(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QXYSeries_pointsConfigurationChanged
@@ -1127,8 +1182,10 @@ func miqt_exec_callback_QXYSeries_pointsConfigurationChanged(cb C.intptr_t, conf
 func (this *QXYSeries) MarkerSizeChanged(size float64) {
 	C.QXYSeries_markerSizeChanged(this.h, (C.double)(size))
 }
-func (this *QXYSeries) OnMarkerSizeChanged(slot func(size float64)) {
-	C.QXYSeries_connect_markerSizeChanged(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QXYSeries) OnMarkerSizeChanged(slot func(size float64)) *qt6.SignalConnection {
+	_goptr := qt6.UnsafeNewQMetaObject__Connection(C.QXYSeries_connect_markerSizeChanged(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QXYSeries_markerSizeChanged

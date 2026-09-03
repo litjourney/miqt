@@ -1,0 +1,36 @@
+name: Callback leak stress
+
+on:
+  push:
+    branches: [ "**" ]
+  pull_request:
+    branches: [ "**" ]
+
+concurrency:
+  group: callback-leak-stress-${{ github.head_ref || github.ref_name }}
+  cancel-in-progress: true
+
+jobs:
+  callback_leak_stress:
+    name: ${{ matrix.qt_version }}
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+        - qt_version: Qt 5
+          package: ./qt
+        - qt_version: Qt 6
+          package: ./qt6
+
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v6
+
+    - name: Build miqt-docker helper
+      run: make cmd/miqt-docker/miqt-docker
+
+    - name: Run callback handle leak stress test
+      run: cmd/miqt-docker/miqt-docker genbindings /bin/bash -c 'env QT_QPA_PLATFORM=offscreen go test -v -count=1 -tags=miqt_callback_stress -run="^TestCallbackHandleStress$" ${{ matrix.package }}'

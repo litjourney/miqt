@@ -15,6 +15,11 @@ import (
 	"unsafe"
 )
 
+//export miqt_exec_callback_handle_release_QMediaPlayerControl
+func miqt_exec_callback_handle_release_QMediaPlayerControl(cb C.intptr_t) {
+	cgo.Handle(cb).Delete()
+}
+
 type QMediaPlayerControl struct {
 	h *C.QMediaPlayerControl
 	*QMediaControl
@@ -174,8 +179,10 @@ func (this *QMediaPlayerControl) Stop() {
 func (this *QMediaPlayerControl) MediaChanged(content *QMediaContent) {
 	C.QMediaPlayerControl_mediaChanged(this.h, content.cPointer())
 }
-func (this *QMediaPlayerControl) OnMediaChanged(slot func(content *QMediaContent)) {
-	C.QMediaPlayerControl_connect_mediaChanged(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QMediaPlayerControl) OnMediaChanged(slot func(content *QMediaContent)) *qt.SignalConnection {
+	_goptr := qt.UnsafeNewQMetaObject__Connection(C.QMediaPlayerControl_connect_mediaChanged(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QMediaPlayerControl_mediaChanged
@@ -194,8 +201,10 @@ func miqt_exec_callback_QMediaPlayerControl_mediaChanged(cb C.intptr_t, content 
 func (this *QMediaPlayerControl) DurationChanged(duration int64) {
 	C.QMediaPlayerControl_durationChanged(this.h, (C.longlong)(duration))
 }
-func (this *QMediaPlayerControl) OnDurationChanged(slot func(duration int64)) {
-	C.QMediaPlayerControl_connect_durationChanged(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QMediaPlayerControl) OnDurationChanged(slot func(duration int64)) *qt.SignalConnection {
+	_goptr := qt.UnsafeNewQMetaObject__Connection(C.QMediaPlayerControl_connect_durationChanged(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QMediaPlayerControl_durationChanged
@@ -214,8 +223,10 @@ func miqt_exec_callback_QMediaPlayerControl_durationChanged(cb C.intptr_t, durat
 func (this *QMediaPlayerControl) PositionChanged(position int64) {
 	C.QMediaPlayerControl_positionChanged(this.h, (C.longlong)(position))
 }
-func (this *QMediaPlayerControl) OnPositionChanged(slot func(position int64)) {
-	C.QMediaPlayerControl_connect_positionChanged(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QMediaPlayerControl) OnPositionChanged(slot func(position int64)) *qt.SignalConnection {
+	_goptr := qt.UnsafeNewQMetaObject__Connection(C.QMediaPlayerControl_connect_positionChanged(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QMediaPlayerControl_positionChanged
@@ -234,8 +245,10 @@ func miqt_exec_callback_QMediaPlayerControl_positionChanged(cb C.intptr_t, posit
 func (this *QMediaPlayerControl) StateChanged(newState QMediaPlayer__State) {
 	C.QMediaPlayerControl_stateChanged(this.h, (C.int)(newState))
 }
-func (this *QMediaPlayerControl) OnStateChanged(slot func(newState QMediaPlayer__State)) {
-	C.QMediaPlayerControl_connect_stateChanged(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QMediaPlayerControl) OnStateChanged(slot func(newState QMediaPlayer__State)) *qt.SignalConnection {
+	_goptr := qt.UnsafeNewQMetaObject__Connection(C.QMediaPlayerControl_connect_stateChanged(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QMediaPlayerControl_stateChanged
@@ -254,8 +267,10 @@ func miqt_exec_callback_QMediaPlayerControl_stateChanged(cb C.intptr_t, newState
 func (this *QMediaPlayerControl) MediaStatusChanged(status QMediaPlayer__MediaStatus) {
 	C.QMediaPlayerControl_mediaStatusChanged(this.h, (C.int)(status))
 }
-func (this *QMediaPlayerControl) OnMediaStatusChanged(slot func(status QMediaPlayer__MediaStatus)) {
-	C.QMediaPlayerControl_connect_mediaStatusChanged(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QMediaPlayerControl) OnMediaStatusChanged(slot func(status QMediaPlayer__MediaStatus)) *qt.SignalConnection {
+	_goptr := qt.UnsafeNewQMetaObject__Connection(C.QMediaPlayerControl_connect_mediaStatusChanged(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QMediaPlayerControl_mediaStatusChanged
@@ -274,8 +289,10 @@ func miqt_exec_callback_QMediaPlayerControl_mediaStatusChanged(cb C.intptr_t, st
 func (this *QMediaPlayerControl) VolumeChanged(volume int) {
 	C.QMediaPlayerControl_volumeChanged(this.h, (C.int)(volume))
 }
-func (this *QMediaPlayerControl) OnVolumeChanged(slot func(volume int)) {
-	C.QMediaPlayerControl_connect_volumeChanged(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QMediaPlayerControl) OnVolumeChanged(slot func(volume int)) *qt.SignalConnection {
+	_goptr := qt.UnsafeNewQMetaObject__Connection(C.QMediaPlayerControl_connect_volumeChanged(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QMediaPlayerControl_volumeChanged
@@ -294,8 +311,10 @@ func miqt_exec_callback_QMediaPlayerControl_volumeChanged(cb C.intptr_t, volume 
 func (this *QMediaPlayerControl) MutedChanged(mute bool) {
 	C.QMediaPlayerControl_mutedChanged(this.h, (C.bool)(mute))
 }
-func (this *QMediaPlayerControl) OnMutedChanged(slot func(mute bool)) {
-	C.QMediaPlayerControl_connect_mutedChanged(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QMediaPlayerControl) OnMutedChanged(slot func(mute bool)) *qt.SignalConnection {
+	_goptr := qt.UnsafeNewQMetaObject__Connection(C.QMediaPlayerControl_connect_mutedChanged(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QMediaPlayerControl_mutedChanged
@@ -314,8 +333,10 @@ func miqt_exec_callback_QMediaPlayerControl_mutedChanged(cb C.intptr_t, mute C.b
 func (this *QMediaPlayerControl) AudioAvailableChanged(audioAvailable bool) {
 	C.QMediaPlayerControl_audioAvailableChanged(this.h, (C.bool)(audioAvailable))
 }
-func (this *QMediaPlayerControl) OnAudioAvailableChanged(slot func(audioAvailable bool)) {
-	C.QMediaPlayerControl_connect_audioAvailableChanged(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QMediaPlayerControl) OnAudioAvailableChanged(slot func(audioAvailable bool)) *qt.SignalConnection {
+	_goptr := qt.UnsafeNewQMetaObject__Connection(C.QMediaPlayerControl_connect_audioAvailableChanged(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QMediaPlayerControl_audioAvailableChanged
@@ -334,8 +355,10 @@ func miqt_exec_callback_QMediaPlayerControl_audioAvailableChanged(cb C.intptr_t,
 func (this *QMediaPlayerControl) VideoAvailableChanged(videoAvailable bool) {
 	C.QMediaPlayerControl_videoAvailableChanged(this.h, (C.bool)(videoAvailable))
 }
-func (this *QMediaPlayerControl) OnVideoAvailableChanged(slot func(videoAvailable bool)) {
-	C.QMediaPlayerControl_connect_videoAvailableChanged(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QMediaPlayerControl) OnVideoAvailableChanged(slot func(videoAvailable bool)) *qt.SignalConnection {
+	_goptr := qt.UnsafeNewQMetaObject__Connection(C.QMediaPlayerControl_connect_videoAvailableChanged(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QMediaPlayerControl_videoAvailableChanged
@@ -354,8 +377,10 @@ func miqt_exec_callback_QMediaPlayerControl_videoAvailableChanged(cb C.intptr_t,
 func (this *QMediaPlayerControl) BufferStatusChanged(percentFilled int) {
 	C.QMediaPlayerControl_bufferStatusChanged(this.h, (C.int)(percentFilled))
 }
-func (this *QMediaPlayerControl) OnBufferStatusChanged(slot func(percentFilled int)) {
-	C.QMediaPlayerControl_connect_bufferStatusChanged(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QMediaPlayerControl) OnBufferStatusChanged(slot func(percentFilled int)) *qt.SignalConnection {
+	_goptr := qt.UnsafeNewQMetaObject__Connection(C.QMediaPlayerControl_connect_bufferStatusChanged(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QMediaPlayerControl_bufferStatusChanged
@@ -374,8 +399,10 @@ func miqt_exec_callback_QMediaPlayerControl_bufferStatusChanged(cb C.intptr_t, p
 func (this *QMediaPlayerControl) SeekableChanged(seekable bool) {
 	C.QMediaPlayerControl_seekableChanged(this.h, (C.bool)(seekable))
 }
-func (this *QMediaPlayerControl) OnSeekableChanged(slot func(seekable bool)) {
-	C.QMediaPlayerControl_connect_seekableChanged(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QMediaPlayerControl) OnSeekableChanged(slot func(seekable bool)) *qt.SignalConnection {
+	_goptr := qt.UnsafeNewQMetaObject__Connection(C.QMediaPlayerControl_connect_seekableChanged(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QMediaPlayerControl_seekableChanged
@@ -394,8 +421,10 @@ func miqt_exec_callback_QMediaPlayerControl_seekableChanged(cb C.intptr_t, seeka
 func (this *QMediaPlayerControl) AvailablePlaybackRangesChanged(ranges *QMediaTimeRange) {
 	C.QMediaPlayerControl_availablePlaybackRangesChanged(this.h, ranges.cPointer())
 }
-func (this *QMediaPlayerControl) OnAvailablePlaybackRangesChanged(slot func(ranges *QMediaTimeRange)) {
-	C.QMediaPlayerControl_connect_availablePlaybackRangesChanged(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QMediaPlayerControl) OnAvailablePlaybackRangesChanged(slot func(ranges *QMediaTimeRange)) *qt.SignalConnection {
+	_goptr := qt.UnsafeNewQMetaObject__Connection(C.QMediaPlayerControl_connect_availablePlaybackRangesChanged(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QMediaPlayerControl_availablePlaybackRangesChanged
@@ -414,8 +443,10 @@ func miqt_exec_callback_QMediaPlayerControl_availablePlaybackRangesChanged(cb C.
 func (this *QMediaPlayerControl) PlaybackRateChanged(rate float64) {
 	C.QMediaPlayerControl_playbackRateChanged(this.h, (C.double)(rate))
 }
-func (this *QMediaPlayerControl) OnPlaybackRateChanged(slot func(rate float64)) {
-	C.QMediaPlayerControl_connect_playbackRateChanged(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QMediaPlayerControl) OnPlaybackRateChanged(slot func(rate float64)) *qt.SignalConnection {
+	_goptr := qt.UnsafeNewQMetaObject__Connection(C.QMediaPlayerControl_connect_playbackRateChanged(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QMediaPlayerControl_playbackRateChanged
@@ -438,8 +469,10 @@ func (this *QMediaPlayerControl) Error(error int, errorString string) {
 	defer C.free(unsafe.Pointer(errorString_ms.data))
 	C.QMediaPlayerControl_error(this.h, (C.int)(error), errorString_ms)
 }
-func (this *QMediaPlayerControl) OnError(slot func(error int, errorString string)) {
-	C.QMediaPlayerControl_connect_error(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QMediaPlayerControl) OnError(slot func(error int, errorString string)) *qt.SignalConnection {
+	_goptr := qt.UnsafeNewQMetaObject__Connection(C.QMediaPlayerControl_connect_error(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QMediaPlayerControl_error

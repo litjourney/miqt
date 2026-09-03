@@ -1,3 +1,5 @@
+#include <memory>
+#include <utility>
 #include <QAbstractSeries>
 #include <QBrush>
 #include <QCandlestickSeries>
@@ -21,6 +23,7 @@
 extern "C" {
 #endif
 
+void miqt_exec_callback_handle_release_QCandlestickSeries(intptr_t);
 void miqt_exec_callback_QCandlestickSeries_clicked(intptr_t, QCandlestickSet*);
 void miqt_exec_callback_QCandlestickSeries_hovered(intptr_t, bool, QCandlestickSet*);
 void miqt_exec_callback_QCandlestickSeries_pressed(intptr_t, QCandlestickSet*);
@@ -60,110 +63,110 @@ public:
 	virtual ~MiqtVirtualQCandlestickSeries() override = default;
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__type = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QCandlestickSeries> handle__type;
 
 	// Subclass to allow providing a Go implementation
 	virtual QAbstractSeries::SeriesType type() const override {
-		if (handle__type == 0) {
+		if (!handle__type) {
 			return QCandlestickSeries::type();
 		}
 
-		int callback_return_value = miqt_exec_callback_QCandlestickSeries_type(this, handle__type);
+		int callback_return_value = miqt_exec_callback_QCandlestickSeries_type(this, handle__type.value());
 		return static_cast<QAbstractSeries::SeriesType>(callback_return_value);
 	}
 
 	friend int QCandlestickSeries_virtualbase_type(const void* self);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__event = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QCandlestickSeries> handle__event;
 
 	// Subclass to allow providing a Go implementation
 	virtual bool event(QEvent* event) override {
-		if (handle__event == 0) {
+		if (!handle__event) {
 			return QCandlestickSeries::event(event);
 		}
 
 		QEvent* sigval1 = event;
-		bool callback_return_value = miqt_exec_callback_QCandlestickSeries_event(this, handle__event, sigval1);
+		bool callback_return_value = miqt_exec_callback_QCandlestickSeries_event(this, handle__event.value(), sigval1);
 		return callback_return_value;
 	}
 
 	friend bool QCandlestickSeries_virtualbase_event(void* self, QEvent* event);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__eventFilter = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QCandlestickSeries> handle__eventFilter;
 
 	// Subclass to allow providing a Go implementation
 	virtual bool eventFilter(QObject* watched, QEvent* event) override {
-		if (handle__eventFilter == 0) {
+		if (!handle__eventFilter) {
 			return QCandlestickSeries::eventFilter(watched, event);
 		}
 
 		QObject* sigval1 = watched;
 		QEvent* sigval2 = event;
-		bool callback_return_value = miqt_exec_callback_QCandlestickSeries_eventFilter(this, handle__eventFilter, sigval1, sigval2);
+		bool callback_return_value = miqt_exec_callback_QCandlestickSeries_eventFilter(this, handle__eventFilter.value(), sigval1, sigval2);
 		return callback_return_value;
 	}
 
 	friend bool QCandlestickSeries_virtualbase_eventFilter(void* self, QObject* watched, QEvent* event);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__timerEvent = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QCandlestickSeries> handle__timerEvent;
 
 	// Subclass to allow providing a Go implementation
 	virtual void timerEvent(QTimerEvent* event) override {
-		if (handle__timerEvent == 0) {
+		if (!handle__timerEvent) {
 			QCandlestickSeries::timerEvent(event);
 			return;
 		}
 
 		QTimerEvent* sigval1 = event;
-		miqt_exec_callback_QCandlestickSeries_timerEvent(this, handle__timerEvent, sigval1);
+		miqt_exec_callback_QCandlestickSeries_timerEvent(this, handle__timerEvent.value(), sigval1);
 
 	}
 
 	friend void QCandlestickSeries_virtualbase_timerEvent(void* self, QTimerEvent* event);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__childEvent = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QCandlestickSeries> handle__childEvent;
 
 	// Subclass to allow providing a Go implementation
 	virtual void childEvent(QChildEvent* event) override {
-		if (handle__childEvent == 0) {
+		if (!handle__childEvent) {
 			QCandlestickSeries::childEvent(event);
 			return;
 		}
 
 		QChildEvent* sigval1 = event;
-		miqt_exec_callback_QCandlestickSeries_childEvent(this, handle__childEvent, sigval1);
+		miqt_exec_callback_QCandlestickSeries_childEvent(this, handle__childEvent.value(), sigval1);
 
 	}
 
 	friend void QCandlestickSeries_virtualbase_childEvent(void* self, QChildEvent* event);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__customEvent = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QCandlestickSeries> handle__customEvent;
 
 	// Subclass to allow providing a Go implementation
 	virtual void customEvent(QEvent* event) override {
-		if (handle__customEvent == 0) {
+		if (!handle__customEvent) {
 			QCandlestickSeries::customEvent(event);
 			return;
 		}
 
 		QEvent* sigval1 = event;
-		miqt_exec_callback_QCandlestickSeries_customEvent(this, handle__customEvent, sigval1);
+		miqt_exec_callback_QCandlestickSeries_customEvent(this, handle__customEvent.value(), sigval1);
 
 	}
 
 	friend void QCandlestickSeries_virtualbase_customEvent(void* self, QEvent* event);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__connectNotify = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QCandlestickSeries> handle__connectNotify;
 
 	// Subclass to allow providing a Go implementation
 	virtual void connectNotify(const QMetaMethod& signal) override {
-		if (handle__connectNotify == 0) {
+		if (!handle__connectNotify) {
 			QCandlestickSeries::connectNotify(signal);
 			return;
 		}
@@ -171,18 +174,18 @@ public:
 		const QMetaMethod& signal_ret = signal;
 		// Cast returned reference into pointer
 		QMetaMethod* sigval1 = const_cast<QMetaMethod*>(&signal_ret);
-		miqt_exec_callback_QCandlestickSeries_connectNotify(this, handle__connectNotify, sigval1);
+		miqt_exec_callback_QCandlestickSeries_connectNotify(this, handle__connectNotify.value(), sigval1);
 
 	}
 
 	friend void QCandlestickSeries_virtualbase_connectNotify(void* self, QMetaMethod* signal);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__disconnectNotify = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QCandlestickSeries> handle__disconnectNotify;
 
 	// Subclass to allow providing a Go implementation
 	virtual void disconnectNotify(const QMetaMethod& signal) override {
-		if (handle__disconnectNotify == 0) {
+		if (!handle__disconnectNotify) {
 			QCandlestickSeries::disconnectNotify(signal);
 			return;
 		}
@@ -190,7 +193,7 @@ public:
 		const QMetaMethod& signal_ret = signal;
 		// Cast returned reference into pointer
 		QMetaMethod* sigval1 = const_cast<QMetaMethod*>(&signal_ret);
-		miqt_exec_callback_QCandlestickSeries_disconnectNotify(this, handle__disconnectNotify, sigval1);
+		miqt_exec_callback_QCandlestickSeries_disconnectNotify(this, handle__disconnectNotify.value(), sigval1);
 
 	}
 
@@ -384,56 +387,66 @@ void QCandlestickSeries_clicked(QCandlestickSeries* self, QCandlestickSet* set) 
 	self->clicked(set);
 }
 
-void QCandlestickSeries_connect_clicked(QCandlestickSeries* self, intptr_t slot) {
-	QCandlestickSeries::connect(self, static_cast<void (QCandlestickSeries::*)(QCandlestickSet*)>(&QCandlestickSeries::clicked), self, [=](QCandlestickSet* set) {
+void* QCandlestickSeries_connect_clicked(QCandlestickSeries* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QCandlestickSeries>>(slot);
+	return new QMetaObject::Connection(QCandlestickSeries::connect(self, static_cast<void (QCandlestickSeries::*)(QCandlestickSet*)>(&QCandlestickSeries::clicked), self, [slot_handle](QCandlestickSet* set) {
+		intptr_t slot = slot_handle->value();
 		QCandlestickSet* sigval1 = set;
 		miqt_exec_callback_QCandlestickSeries_clicked(slot, sigval1);
-	});
+	}));
 }
 
 void QCandlestickSeries_hovered(QCandlestickSeries* self, bool status, QCandlestickSet* set) {
 	self->hovered(status, set);
 }
 
-void QCandlestickSeries_connect_hovered(QCandlestickSeries* self, intptr_t slot) {
-	QCandlestickSeries::connect(self, static_cast<void (QCandlestickSeries::*)(bool, QCandlestickSet*)>(&QCandlestickSeries::hovered), self, [=](bool status, QCandlestickSet* set) {
+void* QCandlestickSeries_connect_hovered(QCandlestickSeries* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QCandlestickSeries>>(slot);
+	return new QMetaObject::Connection(QCandlestickSeries::connect(self, static_cast<void (QCandlestickSeries::*)(bool, QCandlestickSet*)>(&QCandlestickSeries::hovered), self, [slot_handle](bool status, QCandlestickSet* set) {
+		intptr_t slot = slot_handle->value();
 		bool sigval1 = status;
 		QCandlestickSet* sigval2 = set;
 		miqt_exec_callback_QCandlestickSeries_hovered(slot, sigval1, sigval2);
-	});
+	}));
 }
 
 void QCandlestickSeries_pressed(QCandlestickSeries* self, QCandlestickSet* set) {
 	self->pressed(set);
 }
 
-void QCandlestickSeries_connect_pressed(QCandlestickSeries* self, intptr_t slot) {
-	QCandlestickSeries::connect(self, static_cast<void (QCandlestickSeries::*)(QCandlestickSet*)>(&QCandlestickSeries::pressed), self, [=](QCandlestickSet* set) {
+void* QCandlestickSeries_connect_pressed(QCandlestickSeries* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QCandlestickSeries>>(slot);
+	return new QMetaObject::Connection(QCandlestickSeries::connect(self, static_cast<void (QCandlestickSeries::*)(QCandlestickSet*)>(&QCandlestickSeries::pressed), self, [slot_handle](QCandlestickSet* set) {
+		intptr_t slot = slot_handle->value();
 		QCandlestickSet* sigval1 = set;
 		miqt_exec_callback_QCandlestickSeries_pressed(slot, sigval1);
-	});
+	}));
 }
 
 void QCandlestickSeries_released(QCandlestickSeries* self, QCandlestickSet* set) {
 	self->released(set);
 }
 
-void QCandlestickSeries_connect_released(QCandlestickSeries* self, intptr_t slot) {
-	QCandlestickSeries::connect(self, static_cast<void (QCandlestickSeries::*)(QCandlestickSet*)>(&QCandlestickSeries::released), self, [=](QCandlestickSet* set) {
+void* QCandlestickSeries_connect_released(QCandlestickSeries* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QCandlestickSeries>>(slot);
+	return new QMetaObject::Connection(QCandlestickSeries::connect(self, static_cast<void (QCandlestickSeries::*)(QCandlestickSet*)>(&QCandlestickSeries::released), self, [slot_handle](QCandlestickSet* set) {
+		intptr_t slot = slot_handle->value();
 		QCandlestickSet* sigval1 = set;
 		miqt_exec_callback_QCandlestickSeries_released(slot, sigval1);
-	});
+	}));
 }
 
 void QCandlestickSeries_doubleClicked(QCandlestickSeries* self, QCandlestickSet* set) {
 	self->doubleClicked(set);
 }
 
-void QCandlestickSeries_connect_doubleClicked(QCandlestickSeries* self, intptr_t slot) {
-	QCandlestickSeries::connect(self, static_cast<void (QCandlestickSeries::*)(QCandlestickSet*)>(&QCandlestickSeries::doubleClicked), self, [=](QCandlestickSet* set) {
+void* QCandlestickSeries_connect_doubleClicked(QCandlestickSeries* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QCandlestickSeries>>(slot);
+	return new QMetaObject::Connection(QCandlestickSeries::connect(self, static_cast<void (QCandlestickSeries::*)(QCandlestickSet*)>(&QCandlestickSeries::doubleClicked), self, [slot_handle](QCandlestickSet* set) {
+		intptr_t slot = slot_handle->value();
 		QCandlestickSet* sigval1 = set;
 		miqt_exec_callback_QCandlestickSeries_doubleClicked(slot, sigval1);
-	});
+	}));
 }
 
 void QCandlestickSeries_candlestickSetsAdded(QCandlestickSeries* self, struct miqt_array /* of QCandlestickSet* */  sets) {
@@ -446,8 +459,10 @@ void QCandlestickSeries_candlestickSetsAdded(QCandlestickSeries* self, struct mi
 	self->candlestickSetsAdded(sets_QList);
 }
 
-void QCandlestickSeries_connect_candlestickSetsAdded(QCandlestickSeries* self, intptr_t slot) {
-	QCandlestickSeries::connect(self, static_cast<void (QCandlestickSeries::*)(const QList<QCandlestickSet *>&)>(&QCandlestickSeries::candlestickSetsAdded), self, [=](const QList<QCandlestickSet *>& sets) {
+void* QCandlestickSeries_connect_candlestickSetsAdded(QCandlestickSeries* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QCandlestickSeries>>(slot);
+	return new QMetaObject::Connection(QCandlestickSeries::connect(self, static_cast<void (QCandlestickSeries::*)(const QList<QCandlestickSet *>&)>(&QCandlestickSeries::candlestickSetsAdded), self, [slot_handle](const QList<QCandlestickSet *>& sets) {
+		intptr_t slot = slot_handle->value();
 		const QList<QCandlestickSet *>& sets_ret = sets;
 		// Convert QList<> from C++ memory to manually-managed C memory
 		QCandlestickSet** sets_arr = static_cast<QCandlestickSet**>(malloc(sizeof(QCandlestickSet*) * sets_ret.length()));
@@ -459,7 +474,7 @@ void QCandlestickSeries_connect_candlestickSetsAdded(QCandlestickSeries* self, i
 		sets_out.data = static_cast<void*>(sets_arr);
 		struct miqt_array /* of QCandlestickSet* */  sigval1 = sets_out;
 		miqt_exec_callback_QCandlestickSeries_candlestickSetsAdded(slot, sigval1);
-	});
+	}));
 }
 
 void QCandlestickSeries_candlestickSetsRemoved(QCandlestickSeries* self, struct miqt_array /* of QCandlestickSet* */  sets) {
@@ -472,8 +487,10 @@ void QCandlestickSeries_candlestickSetsRemoved(QCandlestickSeries* self, struct 
 	self->candlestickSetsRemoved(sets_QList);
 }
 
-void QCandlestickSeries_connect_candlestickSetsRemoved(QCandlestickSeries* self, intptr_t slot) {
-	QCandlestickSeries::connect(self, static_cast<void (QCandlestickSeries::*)(const QList<QCandlestickSet *>&)>(&QCandlestickSeries::candlestickSetsRemoved), self, [=](const QList<QCandlestickSet *>& sets) {
+void* QCandlestickSeries_connect_candlestickSetsRemoved(QCandlestickSeries* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QCandlestickSeries>>(slot);
+	return new QMetaObject::Connection(QCandlestickSeries::connect(self, static_cast<void (QCandlestickSeries::*)(const QList<QCandlestickSet *>&)>(&QCandlestickSeries::candlestickSetsRemoved), self, [slot_handle](const QList<QCandlestickSet *>& sets) {
+		intptr_t slot = slot_handle->value();
 		const QList<QCandlestickSet *>& sets_ret = sets;
 		// Convert QList<> from C++ memory to manually-managed C memory
 		QCandlestickSet** sets_arr = static_cast<QCandlestickSet**>(malloc(sizeof(QCandlestickSet*) * sets_ret.length()));
@@ -485,117 +502,139 @@ void QCandlestickSeries_connect_candlestickSetsRemoved(QCandlestickSeries* self,
 		sets_out.data = static_cast<void*>(sets_arr);
 		struct miqt_array /* of QCandlestickSet* */  sigval1 = sets_out;
 		miqt_exec_callback_QCandlestickSeries_candlestickSetsRemoved(slot, sigval1);
-	});
+	}));
 }
 
 void QCandlestickSeries_countChanged(QCandlestickSeries* self) {
 	self->countChanged();
 }
 
-void QCandlestickSeries_connect_countChanged(QCandlestickSeries* self, intptr_t slot) {
-	QCandlestickSeries::connect(self, static_cast<void (QCandlestickSeries::*)()>(&QCandlestickSeries::countChanged), self, [=]() {
+void* QCandlestickSeries_connect_countChanged(QCandlestickSeries* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QCandlestickSeries>>(slot);
+	return new QMetaObject::Connection(QCandlestickSeries::connect(self, static_cast<void (QCandlestickSeries::*)()>(&QCandlestickSeries::countChanged), self, [slot_handle]() {
+		intptr_t slot = slot_handle->value();
 		miqt_exec_callback_QCandlestickSeries_countChanged(slot);
-	});
+	}));
 }
 
 void QCandlestickSeries_maximumColumnWidthChanged(QCandlestickSeries* self) {
 	self->maximumColumnWidthChanged();
 }
 
-void QCandlestickSeries_connect_maximumColumnWidthChanged(QCandlestickSeries* self, intptr_t slot) {
-	QCandlestickSeries::connect(self, static_cast<void (QCandlestickSeries::*)()>(&QCandlestickSeries::maximumColumnWidthChanged), self, [=]() {
+void* QCandlestickSeries_connect_maximumColumnWidthChanged(QCandlestickSeries* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QCandlestickSeries>>(slot);
+	return new QMetaObject::Connection(QCandlestickSeries::connect(self, static_cast<void (QCandlestickSeries::*)()>(&QCandlestickSeries::maximumColumnWidthChanged), self, [slot_handle]() {
+		intptr_t slot = slot_handle->value();
 		miqt_exec_callback_QCandlestickSeries_maximumColumnWidthChanged(slot);
-	});
+	}));
 }
 
 void QCandlestickSeries_minimumColumnWidthChanged(QCandlestickSeries* self) {
 	self->minimumColumnWidthChanged();
 }
 
-void QCandlestickSeries_connect_minimumColumnWidthChanged(QCandlestickSeries* self, intptr_t slot) {
-	QCandlestickSeries::connect(self, static_cast<void (QCandlestickSeries::*)()>(&QCandlestickSeries::minimumColumnWidthChanged), self, [=]() {
+void* QCandlestickSeries_connect_minimumColumnWidthChanged(QCandlestickSeries* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QCandlestickSeries>>(slot);
+	return new QMetaObject::Connection(QCandlestickSeries::connect(self, static_cast<void (QCandlestickSeries::*)()>(&QCandlestickSeries::minimumColumnWidthChanged), self, [slot_handle]() {
+		intptr_t slot = slot_handle->value();
 		miqt_exec_callback_QCandlestickSeries_minimumColumnWidthChanged(slot);
-	});
+	}));
 }
 
 void QCandlestickSeries_bodyWidthChanged(QCandlestickSeries* self) {
 	self->bodyWidthChanged();
 }
 
-void QCandlestickSeries_connect_bodyWidthChanged(QCandlestickSeries* self, intptr_t slot) {
-	QCandlestickSeries::connect(self, static_cast<void (QCandlestickSeries::*)()>(&QCandlestickSeries::bodyWidthChanged), self, [=]() {
+void* QCandlestickSeries_connect_bodyWidthChanged(QCandlestickSeries* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QCandlestickSeries>>(slot);
+	return new QMetaObject::Connection(QCandlestickSeries::connect(self, static_cast<void (QCandlestickSeries::*)()>(&QCandlestickSeries::bodyWidthChanged), self, [slot_handle]() {
+		intptr_t slot = slot_handle->value();
 		miqt_exec_callback_QCandlestickSeries_bodyWidthChanged(slot);
-	});
+	}));
 }
 
 void QCandlestickSeries_bodyOutlineVisibilityChanged(QCandlestickSeries* self) {
 	self->bodyOutlineVisibilityChanged();
 }
 
-void QCandlestickSeries_connect_bodyOutlineVisibilityChanged(QCandlestickSeries* self, intptr_t slot) {
-	QCandlestickSeries::connect(self, static_cast<void (QCandlestickSeries::*)()>(&QCandlestickSeries::bodyOutlineVisibilityChanged), self, [=]() {
+void* QCandlestickSeries_connect_bodyOutlineVisibilityChanged(QCandlestickSeries* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QCandlestickSeries>>(slot);
+	return new QMetaObject::Connection(QCandlestickSeries::connect(self, static_cast<void (QCandlestickSeries::*)()>(&QCandlestickSeries::bodyOutlineVisibilityChanged), self, [slot_handle]() {
+		intptr_t slot = slot_handle->value();
 		miqt_exec_callback_QCandlestickSeries_bodyOutlineVisibilityChanged(slot);
-	});
+	}));
 }
 
 void QCandlestickSeries_capsWidthChanged(QCandlestickSeries* self) {
 	self->capsWidthChanged();
 }
 
-void QCandlestickSeries_connect_capsWidthChanged(QCandlestickSeries* self, intptr_t slot) {
-	QCandlestickSeries::connect(self, static_cast<void (QCandlestickSeries::*)()>(&QCandlestickSeries::capsWidthChanged), self, [=]() {
+void* QCandlestickSeries_connect_capsWidthChanged(QCandlestickSeries* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QCandlestickSeries>>(slot);
+	return new QMetaObject::Connection(QCandlestickSeries::connect(self, static_cast<void (QCandlestickSeries::*)()>(&QCandlestickSeries::capsWidthChanged), self, [slot_handle]() {
+		intptr_t slot = slot_handle->value();
 		miqt_exec_callback_QCandlestickSeries_capsWidthChanged(slot);
-	});
+	}));
 }
 
 void QCandlestickSeries_capsVisibilityChanged(QCandlestickSeries* self) {
 	self->capsVisibilityChanged();
 }
 
-void QCandlestickSeries_connect_capsVisibilityChanged(QCandlestickSeries* self, intptr_t slot) {
-	QCandlestickSeries::connect(self, static_cast<void (QCandlestickSeries::*)()>(&QCandlestickSeries::capsVisibilityChanged), self, [=]() {
+void* QCandlestickSeries_connect_capsVisibilityChanged(QCandlestickSeries* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QCandlestickSeries>>(slot);
+	return new QMetaObject::Connection(QCandlestickSeries::connect(self, static_cast<void (QCandlestickSeries::*)()>(&QCandlestickSeries::capsVisibilityChanged), self, [slot_handle]() {
+		intptr_t slot = slot_handle->value();
 		miqt_exec_callback_QCandlestickSeries_capsVisibilityChanged(slot);
-	});
+	}));
 }
 
 void QCandlestickSeries_increasingColorChanged(QCandlestickSeries* self) {
 	self->increasingColorChanged();
 }
 
-void QCandlestickSeries_connect_increasingColorChanged(QCandlestickSeries* self, intptr_t slot) {
-	QCandlestickSeries::connect(self, static_cast<void (QCandlestickSeries::*)()>(&QCandlestickSeries::increasingColorChanged), self, [=]() {
+void* QCandlestickSeries_connect_increasingColorChanged(QCandlestickSeries* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QCandlestickSeries>>(slot);
+	return new QMetaObject::Connection(QCandlestickSeries::connect(self, static_cast<void (QCandlestickSeries::*)()>(&QCandlestickSeries::increasingColorChanged), self, [slot_handle]() {
+		intptr_t slot = slot_handle->value();
 		miqt_exec_callback_QCandlestickSeries_increasingColorChanged(slot);
-	});
+	}));
 }
 
 void QCandlestickSeries_decreasingColorChanged(QCandlestickSeries* self) {
 	self->decreasingColorChanged();
 }
 
-void QCandlestickSeries_connect_decreasingColorChanged(QCandlestickSeries* self, intptr_t slot) {
-	QCandlestickSeries::connect(self, static_cast<void (QCandlestickSeries::*)()>(&QCandlestickSeries::decreasingColorChanged), self, [=]() {
+void* QCandlestickSeries_connect_decreasingColorChanged(QCandlestickSeries* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QCandlestickSeries>>(slot);
+	return new QMetaObject::Connection(QCandlestickSeries::connect(self, static_cast<void (QCandlestickSeries::*)()>(&QCandlestickSeries::decreasingColorChanged), self, [slot_handle]() {
+		intptr_t slot = slot_handle->value();
 		miqt_exec_callback_QCandlestickSeries_decreasingColorChanged(slot);
-	});
+	}));
 }
 
 void QCandlestickSeries_brushChanged(QCandlestickSeries* self) {
 	self->brushChanged();
 }
 
-void QCandlestickSeries_connect_brushChanged(QCandlestickSeries* self, intptr_t slot) {
-	QCandlestickSeries::connect(self, static_cast<void (QCandlestickSeries::*)()>(&QCandlestickSeries::brushChanged), self, [=]() {
+void* QCandlestickSeries_connect_brushChanged(QCandlestickSeries* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QCandlestickSeries>>(slot);
+	return new QMetaObject::Connection(QCandlestickSeries::connect(self, static_cast<void (QCandlestickSeries::*)()>(&QCandlestickSeries::brushChanged), self, [slot_handle]() {
+		intptr_t slot = slot_handle->value();
 		miqt_exec_callback_QCandlestickSeries_brushChanged(slot);
-	});
+	}));
 }
 
 void QCandlestickSeries_penChanged(QCandlestickSeries* self) {
 	self->penChanged();
 }
 
-void QCandlestickSeries_connect_penChanged(QCandlestickSeries* self, intptr_t slot) {
-	QCandlestickSeries::connect(self, static_cast<void (QCandlestickSeries::*)()>(&QCandlestickSeries::penChanged), self, [=]() {
+void* QCandlestickSeries_connect_penChanged(QCandlestickSeries* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QCandlestickSeries>>(slot);
+	return new QMetaObject::Connection(QCandlestickSeries::connect(self, static_cast<void (QCandlestickSeries::*)()>(&QCandlestickSeries::penChanged), self, [slot_handle]() {
+		intptr_t slot = slot_handle->value();
 		miqt_exec_callback_QCandlestickSeries_penChanged(slot);
-	});
+	}));
 }
 
 struct miqt_string QCandlestickSeries_tr2(const char* s, const char* c) {
@@ -621,12 +660,13 @@ struct miqt_string QCandlestickSeries_tr3(const char* s, const char* c, int n) {
 }
 
 bool QCandlestickSeries_override_virtual_type(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QCandlestickSeries> slot_handle(slot);
 	MiqtVirtualQCandlestickSeries* self_cast = dynamic_cast<MiqtVirtualQCandlestickSeries*>( (QCandlestickSeries*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__type = slot;
+	self_cast->handle__type = std::move(slot_handle);
 	return true;
 }
 
@@ -636,12 +676,13 @@ int QCandlestickSeries_virtualbase_type(const void* self) {
 }
 
 bool QCandlestickSeries_override_virtual_event(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QCandlestickSeries> slot_handle(slot);
 	MiqtVirtualQCandlestickSeries* self_cast = dynamic_cast<MiqtVirtualQCandlestickSeries*>( (QCandlestickSeries*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__event = slot;
+	self_cast->handle__event = std::move(slot_handle);
 	return true;
 }
 
@@ -650,12 +691,13 @@ bool QCandlestickSeries_virtualbase_event(void* self, QEvent* event) {
 }
 
 bool QCandlestickSeries_override_virtual_eventFilter(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QCandlestickSeries> slot_handle(slot);
 	MiqtVirtualQCandlestickSeries* self_cast = dynamic_cast<MiqtVirtualQCandlestickSeries*>( (QCandlestickSeries*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__eventFilter = slot;
+	self_cast->handle__eventFilter = std::move(slot_handle);
 	return true;
 }
 
@@ -664,12 +706,13 @@ bool QCandlestickSeries_virtualbase_eventFilter(void* self, QObject* watched, QE
 }
 
 bool QCandlestickSeries_override_virtual_timerEvent(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QCandlestickSeries> slot_handle(slot);
 	MiqtVirtualQCandlestickSeries* self_cast = dynamic_cast<MiqtVirtualQCandlestickSeries*>( (QCandlestickSeries*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__timerEvent = slot;
+	self_cast->handle__timerEvent = std::move(slot_handle);
 	return true;
 }
 
@@ -678,12 +721,13 @@ void QCandlestickSeries_virtualbase_timerEvent(void* self, QTimerEvent* event) {
 }
 
 bool QCandlestickSeries_override_virtual_childEvent(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QCandlestickSeries> slot_handle(slot);
 	MiqtVirtualQCandlestickSeries* self_cast = dynamic_cast<MiqtVirtualQCandlestickSeries*>( (QCandlestickSeries*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__childEvent = slot;
+	self_cast->handle__childEvent = std::move(slot_handle);
 	return true;
 }
 
@@ -692,12 +736,13 @@ void QCandlestickSeries_virtualbase_childEvent(void* self, QChildEvent* event) {
 }
 
 bool QCandlestickSeries_override_virtual_customEvent(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QCandlestickSeries> slot_handle(slot);
 	MiqtVirtualQCandlestickSeries* self_cast = dynamic_cast<MiqtVirtualQCandlestickSeries*>( (QCandlestickSeries*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__customEvent = slot;
+	self_cast->handle__customEvent = std::move(slot_handle);
 	return true;
 }
 
@@ -706,12 +751,13 @@ void QCandlestickSeries_virtualbase_customEvent(void* self, QEvent* event) {
 }
 
 bool QCandlestickSeries_override_virtual_connectNotify(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QCandlestickSeries> slot_handle(slot);
 	MiqtVirtualQCandlestickSeries* self_cast = dynamic_cast<MiqtVirtualQCandlestickSeries*>( (QCandlestickSeries*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__connectNotify = slot;
+	self_cast->handle__connectNotify = std::move(slot_handle);
 	return true;
 }
 
@@ -720,12 +766,13 @@ void QCandlestickSeries_virtualbase_connectNotify(void* self, QMetaMethod* signa
 }
 
 bool QCandlestickSeries_override_virtual_disconnectNotify(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QCandlestickSeries> slot_handle(slot);
 	MiqtVirtualQCandlestickSeries* self_cast = dynamic_cast<MiqtVirtualQCandlestickSeries*>( (QCandlestickSeries*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__disconnectNotify = slot;
+	self_cast->handle__disconnectNotify = std::move(slot_handle);
 	return true;
 }
 

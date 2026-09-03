@@ -31,6 +31,11 @@ const (
 	QCameraExposureControl__ExtendedExposureParameter QCameraExposureControl__ExposureParameter = 1000
 )
 
+//export miqt_exec_callback_handle_release_QCameraExposureControl
+func miqt_exec_callback_handle_release_QCameraExposureControl(cb C.intptr_t) {
+	cgo.Handle(cb).Delete()
+}
+
 type QCameraExposureControl struct {
 	h *C.QCameraExposureControl
 	*QMediaControl
@@ -130,8 +135,10 @@ func (this *QCameraExposureControl) SetValue(parameter QCameraExposureControl__E
 func (this *QCameraExposureControl) RequestedValueChanged(parameter int) {
 	C.QCameraExposureControl_requestedValueChanged(this.h, (C.int)(parameter))
 }
-func (this *QCameraExposureControl) OnRequestedValueChanged(slot func(parameter int)) {
-	C.QCameraExposureControl_connect_requestedValueChanged(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QCameraExposureControl) OnRequestedValueChanged(slot func(parameter int)) *qt.SignalConnection {
+	_goptr := qt.UnsafeNewQMetaObject__Connection(C.QCameraExposureControl_connect_requestedValueChanged(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QCameraExposureControl_requestedValueChanged
@@ -150,8 +157,10 @@ func miqt_exec_callback_QCameraExposureControl_requestedValueChanged(cb C.intptr
 func (this *QCameraExposureControl) ActualValueChanged(parameter int) {
 	C.QCameraExposureControl_actualValueChanged(this.h, (C.int)(parameter))
 }
-func (this *QCameraExposureControl) OnActualValueChanged(slot func(parameter int)) {
-	C.QCameraExposureControl_connect_actualValueChanged(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QCameraExposureControl) OnActualValueChanged(slot func(parameter int)) *qt.SignalConnection {
+	_goptr := qt.UnsafeNewQMetaObject__Connection(C.QCameraExposureControl_connect_actualValueChanged(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QCameraExposureControl_actualValueChanged
@@ -170,8 +179,10 @@ func miqt_exec_callback_QCameraExposureControl_actualValueChanged(cb C.intptr_t,
 func (this *QCameraExposureControl) ParameterRangeChanged(parameter int) {
 	C.QCameraExposureControl_parameterRangeChanged(this.h, (C.int)(parameter))
 }
-func (this *QCameraExposureControl) OnParameterRangeChanged(slot func(parameter int)) {
-	C.QCameraExposureControl_connect_parameterRangeChanged(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QCameraExposureControl) OnParameterRangeChanged(slot func(parameter int)) *qt.SignalConnection {
+	_goptr := qt.UnsafeNewQMetaObject__Connection(C.QCameraExposureControl_connect_parameterRangeChanged(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QCameraExposureControl_parameterRangeChanged

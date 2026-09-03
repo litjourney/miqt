@@ -207,13 +207,13 @@ void QGraphicsScene_drawBackground(QGraphicsScene* self, QPainter* painter, QRec
 void QGraphicsScene_drawForeground(QGraphicsScene* self, QPainter* painter, QRectF* rect);
 bool QGraphicsScene_focusNextPrevChild(QGraphicsScene* self, bool next);
 void QGraphicsScene_changed(QGraphicsScene* self, struct miqt_array /* of QRectF* */  region);
-void QGraphicsScene_connect_changed(QGraphicsScene* self, intptr_t slot);
+void* QGraphicsScene_connect_changed(QGraphicsScene* self, intptr_t slot);
 void QGraphicsScene_sceneRectChanged(QGraphicsScene* self, QRectF* rect);
-void QGraphicsScene_connect_sceneRectChanged(QGraphicsScene* self, intptr_t slot);
+void* QGraphicsScene_connect_sceneRectChanged(QGraphicsScene* self, intptr_t slot);
 void QGraphicsScene_selectionChanged(QGraphicsScene* self);
-void QGraphicsScene_connect_selectionChanged(QGraphicsScene* self, intptr_t slot);
+void* QGraphicsScene_connect_selectionChanged(QGraphicsScene* self, intptr_t slot);
 void QGraphicsScene_focusItemChanged(QGraphicsScene* self, QGraphicsItem* newFocus, QGraphicsItem* oldFocus, int reason);
-void QGraphicsScene_connect_focusItemChanged(QGraphicsScene* self, intptr_t slot);
+void* QGraphicsScene_connect_focusItemChanged(QGraphicsScene* self, intptr_t slot);
 struct miqt_string QGraphicsScene_tr2(const char* s, const char* c);
 struct miqt_string QGraphicsScene_tr3(const char* s, const char* c, int n);
 void QGraphicsScene_render2(QGraphicsScene* self, QPainter* painter, QRectF* target);

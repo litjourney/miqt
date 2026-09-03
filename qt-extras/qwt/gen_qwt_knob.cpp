@@ -1,3 +1,5 @@
+#include <memory>
+#include <utility>
 #include <QActionEvent>
 #include <QByteArray>
 #include <QChildEvent>
@@ -42,6 +44,7 @@
 extern "C" {
 #endif
 
+void miqt_exec_callback_handle_release_QwtKnob(intptr_t);
 QSize* miqt_exec_callback_QwtKnob_sizeHint(const QwtKnob*, intptr_t);
 QSize* miqt_exec_callback_QwtKnob_minimumSizeHint(const QwtKnob*, intptr_t);
 void miqt_exec_callback_QwtKnob_paintEvent(QwtKnob*, intptr_t, QPaintEvent*);
@@ -109,75 +112,75 @@ public:
 	virtual ~MiqtVirtualQwtKnob() override = default;
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__sizeHint = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtKnob> handle__sizeHint;
 
 	// Subclass to allow providing a Go implementation
 	virtual QSize sizeHint() const override {
-		if (handle__sizeHint == 0) {
+		if (!handle__sizeHint) {
 			return QwtKnob::sizeHint();
 		}
 
-		QSize* callback_return_value = miqt_exec_callback_QwtKnob_sizeHint(this, handle__sizeHint);
+		QSize* callback_return_value = miqt_exec_callback_QwtKnob_sizeHint(this, handle__sizeHint.value());
 		return *callback_return_value;
 	}
 
 	friend QSize* QwtKnob_virtualbase_sizeHint(const void* self);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__minimumSizeHint = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtKnob> handle__minimumSizeHint;
 
 	// Subclass to allow providing a Go implementation
 	virtual QSize minimumSizeHint() const override {
-		if (handle__minimumSizeHint == 0) {
+		if (!handle__minimumSizeHint) {
 			return QwtKnob::minimumSizeHint();
 		}
 
-		QSize* callback_return_value = miqt_exec_callback_QwtKnob_minimumSizeHint(this, handle__minimumSizeHint);
+		QSize* callback_return_value = miqt_exec_callback_QwtKnob_minimumSizeHint(this, handle__minimumSizeHint.value());
 		return *callback_return_value;
 	}
 
 	friend QSize* QwtKnob_virtualbase_minimumSizeHint(const void* self);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__paintEvent = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtKnob> handle__paintEvent;
 
 	// Subclass to allow providing a Go implementation
 	virtual void paintEvent(QPaintEvent* param1) override {
-		if (handle__paintEvent == 0) {
+		if (!handle__paintEvent) {
 			QwtKnob::paintEvent(param1);
 			return;
 		}
 
 		QPaintEvent* sigval1 = param1;
-		miqt_exec_callback_QwtKnob_paintEvent(this, handle__paintEvent, sigval1);
+		miqt_exec_callback_QwtKnob_paintEvent(this, handle__paintEvent.value(), sigval1);
 
 	}
 
 	friend void QwtKnob_virtualbase_paintEvent(void* self, QPaintEvent* param1);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__changeEvent = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtKnob> handle__changeEvent;
 
 	// Subclass to allow providing a Go implementation
 	virtual void changeEvent(QEvent* param1) override {
-		if (handle__changeEvent == 0) {
+		if (!handle__changeEvent) {
 			QwtKnob::changeEvent(param1);
 			return;
 		}
 
 		QEvent* sigval1 = param1;
-		miqt_exec_callback_QwtKnob_changeEvent(this, handle__changeEvent, sigval1);
+		miqt_exec_callback_QwtKnob_changeEvent(this, handle__changeEvent.value(), sigval1);
 
 	}
 
 	friend void QwtKnob_virtualbase_changeEvent(void* self, QEvent* param1);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__drawKnob = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtKnob> handle__drawKnob;
 
 	// Subclass to allow providing a Go implementation
 	virtual void drawKnob(QPainter* param1, const QRectF& param2) const override {
-		if (handle__drawKnob == 0) {
+		if (!handle__drawKnob) {
 			QwtKnob::drawKnob(param1, param2);
 			return;
 		}
@@ -186,35 +189,35 @@ public:
 		const QRectF& param2_ret = param2;
 		// Cast returned reference into pointer
 		QRectF* sigval2 = const_cast<QRectF*>(&param2_ret);
-		miqt_exec_callback_QwtKnob_drawKnob(this, handle__drawKnob, sigval1, sigval2);
+		miqt_exec_callback_QwtKnob_drawKnob(this, handle__drawKnob.value(), sigval1, sigval2);
 
 	}
 
 	friend void QwtKnob_virtualbase_drawKnob(const void* self, QPainter* param1, QRectF* param2);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__drawFocusIndicator = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtKnob> handle__drawFocusIndicator;
 
 	// Subclass to allow providing a Go implementation
 	virtual void drawFocusIndicator(QPainter* param1) const override {
-		if (handle__drawFocusIndicator == 0) {
+		if (!handle__drawFocusIndicator) {
 			QwtKnob::drawFocusIndicator(param1);
 			return;
 		}
 
 		QPainter* sigval1 = param1;
-		miqt_exec_callback_QwtKnob_drawFocusIndicator(this, handle__drawFocusIndicator, sigval1);
+		miqt_exec_callback_QwtKnob_drawFocusIndicator(this, handle__drawFocusIndicator.value(), sigval1);
 
 	}
 
 	friend void QwtKnob_virtualbase_drawFocusIndicator(const void* self, QPainter* param1);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__drawMarker = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtKnob> handle__drawMarker;
 
 	// Subclass to allow providing a Go implementation
 	virtual void drawMarker(QPainter* param1, const QRectF& param2, double angle) const override {
-		if (handle__drawMarker == 0) {
+		if (!handle__drawMarker) {
 			QwtKnob::drawMarker(param1, param2, angle);
 			return;
 		}
@@ -224,571 +227,571 @@ public:
 		// Cast returned reference into pointer
 		QRectF* sigval2 = const_cast<QRectF*>(&param2_ret);
 		double sigval3 = angle;
-		miqt_exec_callback_QwtKnob_drawMarker(this, handle__drawMarker, sigval1, sigval2, sigval3);
+		miqt_exec_callback_QwtKnob_drawMarker(this, handle__drawMarker.value(), sigval1, sigval2, sigval3);
 
 	}
 
 	friend void QwtKnob_virtualbase_drawMarker(const void* self, QPainter* param1, QRectF* param2, double angle);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__scrolledTo = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtKnob> handle__scrolledTo;
 
 	// Subclass to allow providing a Go implementation
 	virtual double scrolledTo(const QPoint& param1) const override {
-		if (handle__scrolledTo == 0) {
+		if (!handle__scrolledTo) {
 			return QwtKnob::scrolledTo(param1);
 		}
 
 		const QPoint& param1_ret = param1;
 		// Cast returned reference into pointer
 		QPoint* sigval1 = const_cast<QPoint*>(&param1_ret);
-		double callback_return_value = miqt_exec_callback_QwtKnob_scrolledTo(this, handle__scrolledTo, sigval1);
+		double callback_return_value = miqt_exec_callback_QwtKnob_scrolledTo(this, handle__scrolledTo.value(), sigval1);
 		return static_cast<double>(callback_return_value);
 	}
 
 	friend double QwtKnob_virtualbase_scrolledTo(const void* self, QPoint* param1);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__isScrollPosition = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtKnob> handle__isScrollPosition;
 
 	// Subclass to allow providing a Go implementation
 	virtual bool isScrollPosition(const QPoint& param1) const override {
-		if (handle__isScrollPosition == 0) {
+		if (!handle__isScrollPosition) {
 			return QwtKnob::isScrollPosition(param1);
 		}
 
 		const QPoint& param1_ret = param1;
 		// Cast returned reference into pointer
 		QPoint* sigval1 = const_cast<QPoint*>(&param1_ret);
-		bool callback_return_value = miqt_exec_callback_QwtKnob_isScrollPosition(this, handle__isScrollPosition, sigval1);
+		bool callback_return_value = miqt_exec_callback_QwtKnob_isScrollPosition(this, handle__isScrollPosition.value(), sigval1);
 		return callback_return_value;
 	}
 
 	friend bool QwtKnob_virtualbase_isScrollPosition(const void* self, QPoint* param1);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__mousePressEvent = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtKnob> handle__mousePressEvent;
 
 	// Subclass to allow providing a Go implementation
 	virtual void mousePressEvent(QMouseEvent* param1) override {
-		if (handle__mousePressEvent == 0) {
+		if (!handle__mousePressEvent) {
 			QwtKnob::mousePressEvent(param1);
 			return;
 		}
 
 		QMouseEvent* sigval1 = param1;
-		miqt_exec_callback_QwtKnob_mousePressEvent(this, handle__mousePressEvent, sigval1);
+		miqt_exec_callback_QwtKnob_mousePressEvent(this, handle__mousePressEvent.value(), sigval1);
 
 	}
 
 	friend void QwtKnob_virtualbase_mousePressEvent(void* self, QMouseEvent* param1);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__mouseReleaseEvent = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtKnob> handle__mouseReleaseEvent;
 
 	// Subclass to allow providing a Go implementation
 	virtual void mouseReleaseEvent(QMouseEvent* param1) override {
-		if (handle__mouseReleaseEvent == 0) {
+		if (!handle__mouseReleaseEvent) {
 			QwtKnob::mouseReleaseEvent(param1);
 			return;
 		}
 
 		QMouseEvent* sigval1 = param1;
-		miqt_exec_callback_QwtKnob_mouseReleaseEvent(this, handle__mouseReleaseEvent, sigval1);
+		miqt_exec_callback_QwtKnob_mouseReleaseEvent(this, handle__mouseReleaseEvent.value(), sigval1);
 
 	}
 
 	friend void QwtKnob_virtualbase_mouseReleaseEvent(void* self, QMouseEvent* param1);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__mouseMoveEvent = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtKnob> handle__mouseMoveEvent;
 
 	// Subclass to allow providing a Go implementation
 	virtual void mouseMoveEvent(QMouseEvent* param1) override {
-		if (handle__mouseMoveEvent == 0) {
+		if (!handle__mouseMoveEvent) {
 			QwtKnob::mouseMoveEvent(param1);
 			return;
 		}
 
 		QMouseEvent* sigval1 = param1;
-		miqt_exec_callback_QwtKnob_mouseMoveEvent(this, handle__mouseMoveEvent, sigval1);
+		miqt_exec_callback_QwtKnob_mouseMoveEvent(this, handle__mouseMoveEvent.value(), sigval1);
 
 	}
 
 	friend void QwtKnob_virtualbase_mouseMoveEvent(void* self, QMouseEvent* param1);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__keyPressEvent = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtKnob> handle__keyPressEvent;
 
 	// Subclass to allow providing a Go implementation
 	virtual void keyPressEvent(QKeyEvent* param1) override {
-		if (handle__keyPressEvent == 0) {
+		if (!handle__keyPressEvent) {
 			QwtKnob::keyPressEvent(param1);
 			return;
 		}
 
 		QKeyEvent* sigval1 = param1;
-		miqt_exec_callback_QwtKnob_keyPressEvent(this, handle__keyPressEvent, sigval1);
+		miqt_exec_callback_QwtKnob_keyPressEvent(this, handle__keyPressEvent.value(), sigval1);
 
 	}
 
 	friend void QwtKnob_virtualbase_keyPressEvent(void* self, QKeyEvent* param1);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__wheelEvent = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtKnob> handle__wheelEvent;
 
 	// Subclass to allow providing a Go implementation
 	virtual void wheelEvent(QWheelEvent* param1) override {
-		if (handle__wheelEvent == 0) {
+		if (!handle__wheelEvent) {
 			QwtKnob::wheelEvent(param1);
 			return;
 		}
 
 		QWheelEvent* sigval1 = param1;
-		miqt_exec_callback_QwtKnob_wheelEvent(this, handle__wheelEvent, sigval1);
+		miqt_exec_callback_QwtKnob_wheelEvent(this, handle__wheelEvent.value(), sigval1);
 
 	}
 
 	friend void QwtKnob_virtualbase_wheelEvent(void* self, QWheelEvent* param1);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__scaleChange = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtKnob> handle__scaleChange;
 
 	// Subclass to allow providing a Go implementation
 	virtual void scaleChange() override {
-		if (handle__scaleChange == 0) {
+		if (!handle__scaleChange) {
 			QwtKnob::scaleChange();
 			return;
 		}
 
-		miqt_exec_callback_QwtKnob_scaleChange(this, handle__scaleChange);
+		miqt_exec_callback_QwtKnob_scaleChange(this, handle__scaleChange.value());
 
 	}
 
 	friend void QwtKnob_virtualbase_scaleChange(void* self);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__sliderChange = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtKnob> handle__sliderChange;
 
 	// Subclass to allow providing a Go implementation
 	virtual void sliderChange() override {
-		if (handle__sliderChange == 0) {
+		if (!handle__sliderChange) {
 			QwtKnob::sliderChange();
 			return;
 		}
 
-		miqt_exec_callback_QwtKnob_sliderChange(this, handle__sliderChange);
+		miqt_exec_callback_QwtKnob_sliderChange(this, handle__sliderChange.value());
 
 	}
 
 	friend void QwtKnob_virtualbase_sliderChange(void* self);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__devType = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtKnob> handle__devType;
 
 	// Subclass to allow providing a Go implementation
 	virtual int devType() const override {
-		if (handle__devType == 0) {
+		if (!handle__devType) {
 			return QwtKnob::devType();
 		}
 
-		int callback_return_value = miqt_exec_callback_QwtKnob_devType(this, handle__devType);
+		int callback_return_value = miqt_exec_callback_QwtKnob_devType(this, handle__devType.value());
 		return static_cast<int>(callback_return_value);
 	}
 
 	friend int QwtKnob_virtualbase_devType(const void* self);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__setVisible = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtKnob> handle__setVisible;
 
 	// Subclass to allow providing a Go implementation
 	virtual void setVisible(bool visible) override {
-		if (handle__setVisible == 0) {
+		if (!handle__setVisible) {
 			QwtKnob::setVisible(visible);
 			return;
 		}
 
 		bool sigval1 = visible;
-		miqt_exec_callback_QwtKnob_setVisible(this, handle__setVisible, sigval1);
+		miqt_exec_callback_QwtKnob_setVisible(this, handle__setVisible.value(), sigval1);
 
 	}
 
 	friend void QwtKnob_virtualbase_setVisible(void* self, bool visible);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__heightForWidth = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtKnob> handle__heightForWidth;
 
 	// Subclass to allow providing a Go implementation
 	virtual int heightForWidth(int param1) const override {
-		if (handle__heightForWidth == 0) {
+		if (!handle__heightForWidth) {
 			return QwtKnob::heightForWidth(param1);
 		}
 
 		int sigval1 = param1;
-		int callback_return_value = miqt_exec_callback_QwtKnob_heightForWidth(this, handle__heightForWidth, sigval1);
+		int callback_return_value = miqt_exec_callback_QwtKnob_heightForWidth(this, handle__heightForWidth.value(), sigval1);
 		return static_cast<int>(callback_return_value);
 	}
 
 	friend int QwtKnob_virtualbase_heightForWidth(const void* self, int param1);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__hasHeightForWidth = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtKnob> handle__hasHeightForWidth;
 
 	// Subclass to allow providing a Go implementation
 	virtual bool hasHeightForWidth() const override {
-		if (handle__hasHeightForWidth == 0) {
+		if (!handle__hasHeightForWidth) {
 			return QwtKnob::hasHeightForWidth();
 		}
 
-		bool callback_return_value = miqt_exec_callback_QwtKnob_hasHeightForWidth(this, handle__hasHeightForWidth);
+		bool callback_return_value = miqt_exec_callback_QwtKnob_hasHeightForWidth(this, handle__hasHeightForWidth.value());
 		return callback_return_value;
 	}
 
 	friend bool QwtKnob_virtualbase_hasHeightForWidth(const void* self);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__paintEngine = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtKnob> handle__paintEngine;
 
 	// Subclass to allow providing a Go implementation
 	virtual QPaintEngine* paintEngine() const override {
-		if (handle__paintEngine == 0) {
+		if (!handle__paintEngine) {
 			return QwtKnob::paintEngine();
 		}
 
-		QPaintEngine* callback_return_value = miqt_exec_callback_QwtKnob_paintEngine(this, handle__paintEngine);
+		QPaintEngine* callback_return_value = miqt_exec_callback_QwtKnob_paintEngine(this, handle__paintEngine.value());
 		return callback_return_value;
 	}
 
 	friend QPaintEngine* QwtKnob_virtualbase_paintEngine(const void* self);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__event = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtKnob> handle__event;
 
 	// Subclass to allow providing a Go implementation
 	virtual bool event(QEvent* event) override {
-		if (handle__event == 0) {
+		if (!handle__event) {
 			return QwtKnob::event(event);
 		}
 
 		QEvent* sigval1 = event;
-		bool callback_return_value = miqt_exec_callback_QwtKnob_event(this, handle__event, sigval1);
+		bool callback_return_value = miqt_exec_callback_QwtKnob_event(this, handle__event.value(), sigval1);
 		return callback_return_value;
 	}
 
 	friend bool QwtKnob_virtualbase_event(void* self, QEvent* event);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__mouseDoubleClickEvent = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtKnob> handle__mouseDoubleClickEvent;
 
 	// Subclass to allow providing a Go implementation
 	virtual void mouseDoubleClickEvent(QMouseEvent* event) override {
-		if (handle__mouseDoubleClickEvent == 0) {
+		if (!handle__mouseDoubleClickEvent) {
 			QwtKnob::mouseDoubleClickEvent(event);
 			return;
 		}
 
 		QMouseEvent* sigval1 = event;
-		miqt_exec_callback_QwtKnob_mouseDoubleClickEvent(this, handle__mouseDoubleClickEvent, sigval1);
+		miqt_exec_callback_QwtKnob_mouseDoubleClickEvent(this, handle__mouseDoubleClickEvent.value(), sigval1);
 
 	}
 
 	friend void QwtKnob_virtualbase_mouseDoubleClickEvent(void* self, QMouseEvent* event);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__keyReleaseEvent = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtKnob> handle__keyReleaseEvent;
 
 	// Subclass to allow providing a Go implementation
 	virtual void keyReleaseEvent(QKeyEvent* event) override {
-		if (handle__keyReleaseEvent == 0) {
+		if (!handle__keyReleaseEvent) {
 			QwtKnob::keyReleaseEvent(event);
 			return;
 		}
 
 		QKeyEvent* sigval1 = event;
-		miqt_exec_callback_QwtKnob_keyReleaseEvent(this, handle__keyReleaseEvent, sigval1);
+		miqt_exec_callback_QwtKnob_keyReleaseEvent(this, handle__keyReleaseEvent.value(), sigval1);
 
 	}
 
 	friend void QwtKnob_virtualbase_keyReleaseEvent(void* self, QKeyEvent* event);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__focusInEvent = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtKnob> handle__focusInEvent;
 
 	// Subclass to allow providing a Go implementation
 	virtual void focusInEvent(QFocusEvent* event) override {
-		if (handle__focusInEvent == 0) {
+		if (!handle__focusInEvent) {
 			QwtKnob::focusInEvent(event);
 			return;
 		}
 
 		QFocusEvent* sigval1 = event;
-		miqt_exec_callback_QwtKnob_focusInEvent(this, handle__focusInEvent, sigval1);
+		miqt_exec_callback_QwtKnob_focusInEvent(this, handle__focusInEvent.value(), sigval1);
 
 	}
 
 	friend void QwtKnob_virtualbase_focusInEvent(void* self, QFocusEvent* event);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__focusOutEvent = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtKnob> handle__focusOutEvent;
 
 	// Subclass to allow providing a Go implementation
 	virtual void focusOutEvent(QFocusEvent* event) override {
-		if (handle__focusOutEvent == 0) {
+		if (!handle__focusOutEvent) {
 			QwtKnob::focusOutEvent(event);
 			return;
 		}
 
 		QFocusEvent* sigval1 = event;
-		miqt_exec_callback_QwtKnob_focusOutEvent(this, handle__focusOutEvent, sigval1);
+		miqt_exec_callback_QwtKnob_focusOutEvent(this, handle__focusOutEvent.value(), sigval1);
 
 	}
 
 	friend void QwtKnob_virtualbase_focusOutEvent(void* self, QFocusEvent* event);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__enterEvent = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtKnob> handle__enterEvent;
 
 	// Subclass to allow providing a Go implementation
 	virtual void enterEvent(QEvent* event) override {
-		if (handle__enterEvent == 0) {
+		if (!handle__enterEvent) {
 			QwtKnob::enterEvent(event);
 			return;
 		}
 
 		QEvent* sigval1 = event;
-		miqt_exec_callback_QwtKnob_enterEvent(this, handle__enterEvent, sigval1);
+		miqt_exec_callback_QwtKnob_enterEvent(this, handle__enterEvent.value(), sigval1);
 
 	}
 
 	friend void QwtKnob_virtualbase_enterEvent(void* self, QEvent* event);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__leaveEvent = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtKnob> handle__leaveEvent;
 
 	// Subclass to allow providing a Go implementation
 	virtual void leaveEvent(QEvent* event) override {
-		if (handle__leaveEvent == 0) {
+		if (!handle__leaveEvent) {
 			QwtKnob::leaveEvent(event);
 			return;
 		}
 
 		QEvent* sigval1 = event;
-		miqt_exec_callback_QwtKnob_leaveEvent(this, handle__leaveEvent, sigval1);
+		miqt_exec_callback_QwtKnob_leaveEvent(this, handle__leaveEvent.value(), sigval1);
 
 	}
 
 	friend void QwtKnob_virtualbase_leaveEvent(void* self, QEvent* event);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__moveEvent = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtKnob> handle__moveEvent;
 
 	// Subclass to allow providing a Go implementation
 	virtual void moveEvent(QMoveEvent* event) override {
-		if (handle__moveEvent == 0) {
+		if (!handle__moveEvent) {
 			QwtKnob::moveEvent(event);
 			return;
 		}
 
 		QMoveEvent* sigval1 = event;
-		miqt_exec_callback_QwtKnob_moveEvent(this, handle__moveEvent, sigval1);
+		miqt_exec_callback_QwtKnob_moveEvent(this, handle__moveEvent.value(), sigval1);
 
 	}
 
 	friend void QwtKnob_virtualbase_moveEvent(void* self, QMoveEvent* event);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__resizeEvent = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtKnob> handle__resizeEvent;
 
 	// Subclass to allow providing a Go implementation
 	virtual void resizeEvent(QResizeEvent* event) override {
-		if (handle__resizeEvent == 0) {
+		if (!handle__resizeEvent) {
 			QwtKnob::resizeEvent(event);
 			return;
 		}
 
 		QResizeEvent* sigval1 = event;
-		miqt_exec_callback_QwtKnob_resizeEvent(this, handle__resizeEvent, sigval1);
+		miqt_exec_callback_QwtKnob_resizeEvent(this, handle__resizeEvent.value(), sigval1);
 
 	}
 
 	friend void QwtKnob_virtualbase_resizeEvent(void* self, QResizeEvent* event);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__closeEvent = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtKnob> handle__closeEvent;
 
 	// Subclass to allow providing a Go implementation
 	virtual void closeEvent(QCloseEvent* event) override {
-		if (handle__closeEvent == 0) {
+		if (!handle__closeEvent) {
 			QwtKnob::closeEvent(event);
 			return;
 		}
 
 		QCloseEvent* sigval1 = event;
-		miqt_exec_callback_QwtKnob_closeEvent(this, handle__closeEvent, sigval1);
+		miqt_exec_callback_QwtKnob_closeEvent(this, handle__closeEvent.value(), sigval1);
 
 	}
 
 	friend void QwtKnob_virtualbase_closeEvent(void* self, QCloseEvent* event);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__contextMenuEvent = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtKnob> handle__contextMenuEvent;
 
 	// Subclass to allow providing a Go implementation
 	virtual void contextMenuEvent(QContextMenuEvent* event) override {
-		if (handle__contextMenuEvent == 0) {
+		if (!handle__contextMenuEvent) {
 			QwtKnob::contextMenuEvent(event);
 			return;
 		}
 
 		QContextMenuEvent* sigval1 = event;
-		miqt_exec_callback_QwtKnob_contextMenuEvent(this, handle__contextMenuEvent, sigval1);
+		miqt_exec_callback_QwtKnob_contextMenuEvent(this, handle__contextMenuEvent.value(), sigval1);
 
 	}
 
 	friend void QwtKnob_virtualbase_contextMenuEvent(void* self, QContextMenuEvent* event);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__tabletEvent = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtKnob> handle__tabletEvent;
 
 	// Subclass to allow providing a Go implementation
 	virtual void tabletEvent(QTabletEvent* event) override {
-		if (handle__tabletEvent == 0) {
+		if (!handle__tabletEvent) {
 			QwtKnob::tabletEvent(event);
 			return;
 		}
 
 		QTabletEvent* sigval1 = event;
-		miqt_exec_callback_QwtKnob_tabletEvent(this, handle__tabletEvent, sigval1);
+		miqt_exec_callback_QwtKnob_tabletEvent(this, handle__tabletEvent.value(), sigval1);
 
 	}
 
 	friend void QwtKnob_virtualbase_tabletEvent(void* self, QTabletEvent* event);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__actionEvent = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtKnob> handle__actionEvent;
 
 	// Subclass to allow providing a Go implementation
 	virtual void actionEvent(QActionEvent* event) override {
-		if (handle__actionEvent == 0) {
+		if (!handle__actionEvent) {
 			QwtKnob::actionEvent(event);
 			return;
 		}
 
 		QActionEvent* sigval1 = event;
-		miqt_exec_callback_QwtKnob_actionEvent(this, handle__actionEvent, sigval1);
+		miqt_exec_callback_QwtKnob_actionEvent(this, handle__actionEvent.value(), sigval1);
 
 	}
 
 	friend void QwtKnob_virtualbase_actionEvent(void* self, QActionEvent* event);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__dragEnterEvent = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtKnob> handle__dragEnterEvent;
 
 	// Subclass to allow providing a Go implementation
 	virtual void dragEnterEvent(QDragEnterEvent* event) override {
-		if (handle__dragEnterEvent == 0) {
+		if (!handle__dragEnterEvent) {
 			QwtKnob::dragEnterEvent(event);
 			return;
 		}
 
 		QDragEnterEvent* sigval1 = event;
-		miqt_exec_callback_QwtKnob_dragEnterEvent(this, handle__dragEnterEvent, sigval1);
+		miqt_exec_callback_QwtKnob_dragEnterEvent(this, handle__dragEnterEvent.value(), sigval1);
 
 	}
 
 	friend void QwtKnob_virtualbase_dragEnterEvent(void* self, QDragEnterEvent* event);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__dragMoveEvent = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtKnob> handle__dragMoveEvent;
 
 	// Subclass to allow providing a Go implementation
 	virtual void dragMoveEvent(QDragMoveEvent* event) override {
-		if (handle__dragMoveEvent == 0) {
+		if (!handle__dragMoveEvent) {
 			QwtKnob::dragMoveEvent(event);
 			return;
 		}
 
 		QDragMoveEvent* sigval1 = event;
-		miqt_exec_callback_QwtKnob_dragMoveEvent(this, handle__dragMoveEvent, sigval1);
+		miqt_exec_callback_QwtKnob_dragMoveEvent(this, handle__dragMoveEvent.value(), sigval1);
 
 	}
 
 	friend void QwtKnob_virtualbase_dragMoveEvent(void* self, QDragMoveEvent* event);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__dragLeaveEvent = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtKnob> handle__dragLeaveEvent;
 
 	// Subclass to allow providing a Go implementation
 	virtual void dragLeaveEvent(QDragLeaveEvent* event) override {
-		if (handle__dragLeaveEvent == 0) {
+		if (!handle__dragLeaveEvent) {
 			QwtKnob::dragLeaveEvent(event);
 			return;
 		}
 
 		QDragLeaveEvent* sigval1 = event;
-		miqt_exec_callback_QwtKnob_dragLeaveEvent(this, handle__dragLeaveEvent, sigval1);
+		miqt_exec_callback_QwtKnob_dragLeaveEvent(this, handle__dragLeaveEvent.value(), sigval1);
 
 	}
 
 	friend void QwtKnob_virtualbase_dragLeaveEvent(void* self, QDragLeaveEvent* event);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__dropEvent = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtKnob> handle__dropEvent;
 
 	// Subclass to allow providing a Go implementation
 	virtual void dropEvent(QDropEvent* event) override {
-		if (handle__dropEvent == 0) {
+		if (!handle__dropEvent) {
 			QwtKnob::dropEvent(event);
 			return;
 		}
 
 		QDropEvent* sigval1 = event;
-		miqt_exec_callback_QwtKnob_dropEvent(this, handle__dropEvent, sigval1);
+		miqt_exec_callback_QwtKnob_dropEvent(this, handle__dropEvent.value(), sigval1);
 
 	}
 
 	friend void QwtKnob_virtualbase_dropEvent(void* self, QDropEvent* event);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__showEvent = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtKnob> handle__showEvent;
 
 	// Subclass to allow providing a Go implementation
 	virtual void showEvent(QShowEvent* event) override {
-		if (handle__showEvent == 0) {
+		if (!handle__showEvent) {
 			QwtKnob::showEvent(event);
 			return;
 		}
 
 		QShowEvent* sigval1 = event;
-		miqt_exec_callback_QwtKnob_showEvent(this, handle__showEvent, sigval1);
+		miqt_exec_callback_QwtKnob_showEvent(this, handle__showEvent.value(), sigval1);
 
 	}
 
 	friend void QwtKnob_virtualbase_showEvent(void* self, QShowEvent* event);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__hideEvent = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtKnob> handle__hideEvent;
 
 	// Subclass to allow providing a Go implementation
 	virtual void hideEvent(QHideEvent* event) override {
-		if (handle__hideEvent == 0) {
+		if (!handle__hideEvent) {
 			QwtKnob::hideEvent(event);
 			return;
 		}
 
 		QHideEvent* sigval1 = event;
-		miqt_exec_callback_QwtKnob_hideEvent(this, handle__hideEvent, sigval1);
+		miqt_exec_callback_QwtKnob_hideEvent(this, handle__hideEvent.value(), sigval1);
 
 	}
 
 	friend void QwtKnob_virtualbase_hideEvent(void* self, QHideEvent* event);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__nativeEvent = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtKnob> handle__nativeEvent;
 
 	// Subclass to allow providing a Go implementation
 	virtual bool nativeEvent(const QByteArray& eventType, void* message, long* result) override {
-		if (handle__nativeEvent == 0) {
+		if (!handle__nativeEvent) {
 			return QwtKnob::nativeEvent(eventType, message, result);
 		}
 
@@ -800,201 +803,201 @@ public:
 		struct miqt_string sigval1 = eventType_ms;
 		void* sigval2 = message;
 		long* sigval3 = result;
-		bool callback_return_value = miqt_exec_callback_QwtKnob_nativeEvent(this, handle__nativeEvent, sigval1, sigval2, sigval3);
+		bool callback_return_value = miqt_exec_callback_QwtKnob_nativeEvent(this, handle__nativeEvent.value(), sigval1, sigval2, sigval3);
 		return callback_return_value;
 	}
 
 	friend bool QwtKnob_virtualbase_nativeEvent(void* self, struct miqt_string eventType, void* message, long* result);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__metric = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtKnob> handle__metric;
 
 	// Subclass to allow providing a Go implementation
 	virtual int metric(QPaintDevice::PaintDeviceMetric param1) const override {
-		if (handle__metric == 0) {
+		if (!handle__metric) {
 			return QwtKnob::metric(param1);
 		}
 
 		QPaintDevice::PaintDeviceMetric param1_ret = param1;
 		int sigval1 = static_cast<int>(param1_ret);
-		int callback_return_value = miqt_exec_callback_QwtKnob_metric(this, handle__metric, sigval1);
+		int callback_return_value = miqt_exec_callback_QwtKnob_metric(this, handle__metric.value(), sigval1);
 		return static_cast<int>(callback_return_value);
 	}
 
 	friend int QwtKnob_virtualbase_metric(const void* self, int param1);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__initPainter = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtKnob> handle__initPainter;
 
 	// Subclass to allow providing a Go implementation
 	virtual void initPainter(QPainter* painter) const override {
-		if (handle__initPainter == 0) {
+		if (!handle__initPainter) {
 			QwtKnob::initPainter(painter);
 			return;
 		}
 
 		QPainter* sigval1 = painter;
-		miqt_exec_callback_QwtKnob_initPainter(this, handle__initPainter, sigval1);
+		miqt_exec_callback_QwtKnob_initPainter(this, handle__initPainter.value(), sigval1);
 
 	}
 
 	friend void QwtKnob_virtualbase_initPainter(const void* self, QPainter* painter);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__redirected = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtKnob> handle__redirected;
 
 	// Subclass to allow providing a Go implementation
 	virtual QPaintDevice* redirected(QPoint* offset) const override {
-		if (handle__redirected == 0) {
+		if (!handle__redirected) {
 			return QwtKnob::redirected(offset);
 		}
 
 		QPoint* sigval1 = offset;
-		QPaintDevice* callback_return_value = miqt_exec_callback_QwtKnob_redirected(this, handle__redirected, sigval1);
+		QPaintDevice* callback_return_value = miqt_exec_callback_QwtKnob_redirected(this, handle__redirected.value(), sigval1);
 		return callback_return_value;
 	}
 
 	friend QPaintDevice* QwtKnob_virtualbase_redirected(const void* self, QPoint* offset);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__sharedPainter = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtKnob> handle__sharedPainter;
 
 	// Subclass to allow providing a Go implementation
 	virtual QPainter* sharedPainter() const override {
-		if (handle__sharedPainter == 0) {
+		if (!handle__sharedPainter) {
 			return QwtKnob::sharedPainter();
 		}
 
-		QPainter* callback_return_value = miqt_exec_callback_QwtKnob_sharedPainter(this, handle__sharedPainter);
+		QPainter* callback_return_value = miqt_exec_callback_QwtKnob_sharedPainter(this, handle__sharedPainter.value());
 		return callback_return_value;
 	}
 
 	friend QPainter* QwtKnob_virtualbase_sharedPainter(const void* self);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__inputMethodEvent = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtKnob> handle__inputMethodEvent;
 
 	// Subclass to allow providing a Go implementation
 	virtual void inputMethodEvent(QInputMethodEvent* param1) override {
-		if (handle__inputMethodEvent == 0) {
+		if (!handle__inputMethodEvent) {
 			QwtKnob::inputMethodEvent(param1);
 			return;
 		}
 
 		QInputMethodEvent* sigval1 = param1;
-		miqt_exec_callback_QwtKnob_inputMethodEvent(this, handle__inputMethodEvent, sigval1);
+		miqt_exec_callback_QwtKnob_inputMethodEvent(this, handle__inputMethodEvent.value(), sigval1);
 
 	}
 
 	friend void QwtKnob_virtualbase_inputMethodEvent(void* self, QInputMethodEvent* param1);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__inputMethodQuery = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtKnob> handle__inputMethodQuery;
 
 	// Subclass to allow providing a Go implementation
 	virtual QVariant inputMethodQuery(Qt::InputMethodQuery param1) const override {
-		if (handle__inputMethodQuery == 0) {
+		if (!handle__inputMethodQuery) {
 			return QwtKnob::inputMethodQuery(param1);
 		}
 
 		Qt::InputMethodQuery param1_ret = param1;
 		int sigval1 = static_cast<int>(param1_ret);
-		QVariant* callback_return_value = miqt_exec_callback_QwtKnob_inputMethodQuery(this, handle__inputMethodQuery, sigval1);
+		QVariant* callback_return_value = miqt_exec_callback_QwtKnob_inputMethodQuery(this, handle__inputMethodQuery.value(), sigval1);
 		return *callback_return_value;
 	}
 
 	friend QVariant* QwtKnob_virtualbase_inputMethodQuery(const void* self, int param1);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__focusNextPrevChild = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtKnob> handle__focusNextPrevChild;
 
 	// Subclass to allow providing a Go implementation
 	virtual bool focusNextPrevChild(bool next) override {
-		if (handle__focusNextPrevChild == 0) {
+		if (!handle__focusNextPrevChild) {
 			return QwtKnob::focusNextPrevChild(next);
 		}
 
 		bool sigval1 = next;
-		bool callback_return_value = miqt_exec_callback_QwtKnob_focusNextPrevChild(this, handle__focusNextPrevChild, sigval1);
+		bool callback_return_value = miqt_exec_callback_QwtKnob_focusNextPrevChild(this, handle__focusNextPrevChild.value(), sigval1);
 		return callback_return_value;
 	}
 
 	friend bool QwtKnob_virtualbase_focusNextPrevChild(void* self, bool next);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__eventFilter = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtKnob> handle__eventFilter;
 
 	// Subclass to allow providing a Go implementation
 	virtual bool eventFilter(QObject* watched, QEvent* event) override {
-		if (handle__eventFilter == 0) {
+		if (!handle__eventFilter) {
 			return QwtKnob::eventFilter(watched, event);
 		}
 
 		QObject* sigval1 = watched;
 		QEvent* sigval2 = event;
-		bool callback_return_value = miqt_exec_callback_QwtKnob_eventFilter(this, handle__eventFilter, sigval1, sigval2);
+		bool callback_return_value = miqt_exec_callback_QwtKnob_eventFilter(this, handle__eventFilter.value(), sigval1, sigval2);
 		return callback_return_value;
 	}
 
 	friend bool QwtKnob_virtualbase_eventFilter(void* self, QObject* watched, QEvent* event);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__timerEvent = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtKnob> handle__timerEvent;
 
 	// Subclass to allow providing a Go implementation
 	virtual void timerEvent(QTimerEvent* event) override {
-		if (handle__timerEvent == 0) {
+		if (!handle__timerEvent) {
 			QwtKnob::timerEvent(event);
 			return;
 		}
 
 		QTimerEvent* sigval1 = event;
-		miqt_exec_callback_QwtKnob_timerEvent(this, handle__timerEvent, sigval1);
+		miqt_exec_callback_QwtKnob_timerEvent(this, handle__timerEvent.value(), sigval1);
 
 	}
 
 	friend void QwtKnob_virtualbase_timerEvent(void* self, QTimerEvent* event);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__childEvent = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtKnob> handle__childEvent;
 
 	// Subclass to allow providing a Go implementation
 	virtual void childEvent(QChildEvent* event) override {
-		if (handle__childEvent == 0) {
+		if (!handle__childEvent) {
 			QwtKnob::childEvent(event);
 			return;
 		}
 
 		QChildEvent* sigval1 = event;
-		miqt_exec_callback_QwtKnob_childEvent(this, handle__childEvent, sigval1);
+		miqt_exec_callback_QwtKnob_childEvent(this, handle__childEvent.value(), sigval1);
 
 	}
 
 	friend void QwtKnob_virtualbase_childEvent(void* self, QChildEvent* event);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__customEvent = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtKnob> handle__customEvent;
 
 	// Subclass to allow providing a Go implementation
 	virtual void customEvent(QEvent* event) override {
-		if (handle__customEvent == 0) {
+		if (!handle__customEvent) {
 			QwtKnob::customEvent(event);
 			return;
 		}
 
 		QEvent* sigval1 = event;
-		miqt_exec_callback_QwtKnob_customEvent(this, handle__customEvent, sigval1);
+		miqt_exec_callback_QwtKnob_customEvent(this, handle__customEvent.value(), sigval1);
 
 	}
 
 	friend void QwtKnob_virtualbase_customEvent(void* self, QEvent* event);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__connectNotify = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtKnob> handle__connectNotify;
 
 	// Subclass to allow providing a Go implementation
 	virtual void connectNotify(const QMetaMethod& signal) override {
-		if (handle__connectNotify == 0) {
+		if (!handle__connectNotify) {
 			QwtKnob::connectNotify(signal);
 			return;
 		}
@@ -1002,18 +1005,18 @@ public:
 		const QMetaMethod& signal_ret = signal;
 		// Cast returned reference into pointer
 		QMetaMethod* sigval1 = const_cast<QMetaMethod*>(&signal_ret);
-		miqt_exec_callback_QwtKnob_connectNotify(this, handle__connectNotify, sigval1);
+		miqt_exec_callback_QwtKnob_connectNotify(this, handle__connectNotify.value(), sigval1);
 
 	}
 
 	friend void QwtKnob_virtualbase_connectNotify(void* self, QMetaMethod* signal);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__disconnectNotify = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtKnob> handle__disconnectNotify;
 
 	// Subclass to allow providing a Go implementation
 	virtual void disconnectNotify(const QMetaMethod& signal) override {
-		if (handle__disconnectNotify == 0) {
+		if (!handle__disconnectNotify) {
 			QwtKnob::disconnectNotify(signal);
 			return;
 		}
@@ -1021,7 +1024,7 @@ public:
 		const QMetaMethod& signal_ret = signal;
 		// Cast returned reference into pointer
 		QMetaMethod* sigval1 = const_cast<QMetaMethod*>(&signal_ret);
-		miqt_exec_callback_QwtKnob_disconnectNotify(this, handle__disconnectNotify, sigval1);
+		miqt_exec_callback_QwtKnob_disconnectNotify(this, handle__disconnectNotify.value(), sigval1);
 
 	}
 
@@ -1222,12 +1225,13 @@ struct miqt_string QwtKnob_trUtf83(const char* s, const char* c, int n) {
 }
 
 bool QwtKnob_override_virtual_sizeHint(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtKnob> slot_handle(slot);
 	MiqtVirtualQwtKnob* self_cast = dynamic_cast<MiqtVirtualQwtKnob*>( (QwtKnob*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__sizeHint = slot;
+	self_cast->handle__sizeHint = std::move(slot_handle);
 	return true;
 }
 
@@ -1236,12 +1240,13 @@ QSize* QwtKnob_virtualbase_sizeHint(const void* self) {
 }
 
 bool QwtKnob_override_virtual_minimumSizeHint(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtKnob> slot_handle(slot);
 	MiqtVirtualQwtKnob* self_cast = dynamic_cast<MiqtVirtualQwtKnob*>( (QwtKnob*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__minimumSizeHint = slot;
+	self_cast->handle__minimumSizeHint = std::move(slot_handle);
 	return true;
 }
 
@@ -1250,12 +1255,13 @@ QSize* QwtKnob_virtualbase_minimumSizeHint(const void* self) {
 }
 
 bool QwtKnob_override_virtual_paintEvent(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtKnob> slot_handle(slot);
 	MiqtVirtualQwtKnob* self_cast = dynamic_cast<MiqtVirtualQwtKnob*>( (QwtKnob*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__paintEvent = slot;
+	self_cast->handle__paintEvent = std::move(slot_handle);
 	return true;
 }
 
@@ -1264,12 +1270,13 @@ void QwtKnob_virtualbase_paintEvent(void* self, QPaintEvent* param1) {
 }
 
 bool QwtKnob_override_virtual_changeEvent(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtKnob> slot_handle(slot);
 	MiqtVirtualQwtKnob* self_cast = dynamic_cast<MiqtVirtualQwtKnob*>( (QwtKnob*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__changeEvent = slot;
+	self_cast->handle__changeEvent = std::move(slot_handle);
 	return true;
 }
 
@@ -1278,12 +1285,13 @@ void QwtKnob_virtualbase_changeEvent(void* self, QEvent* param1) {
 }
 
 bool QwtKnob_override_virtual_drawKnob(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtKnob> slot_handle(slot);
 	MiqtVirtualQwtKnob* self_cast = dynamic_cast<MiqtVirtualQwtKnob*>( (QwtKnob*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__drawKnob = slot;
+	self_cast->handle__drawKnob = std::move(slot_handle);
 	return true;
 }
 
@@ -1292,12 +1300,13 @@ void QwtKnob_virtualbase_drawKnob(const void* self, QPainter* param1, QRectF* pa
 }
 
 bool QwtKnob_override_virtual_drawFocusIndicator(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtKnob> slot_handle(slot);
 	MiqtVirtualQwtKnob* self_cast = dynamic_cast<MiqtVirtualQwtKnob*>( (QwtKnob*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__drawFocusIndicator = slot;
+	self_cast->handle__drawFocusIndicator = std::move(slot_handle);
 	return true;
 }
 
@@ -1306,12 +1315,13 @@ void QwtKnob_virtualbase_drawFocusIndicator(const void* self, QPainter* param1) 
 }
 
 bool QwtKnob_override_virtual_drawMarker(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtKnob> slot_handle(slot);
 	MiqtVirtualQwtKnob* self_cast = dynamic_cast<MiqtVirtualQwtKnob*>( (QwtKnob*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__drawMarker = slot;
+	self_cast->handle__drawMarker = std::move(slot_handle);
 	return true;
 }
 
@@ -1320,12 +1330,13 @@ void QwtKnob_virtualbase_drawMarker(const void* self, QPainter* param1, QRectF* 
 }
 
 bool QwtKnob_override_virtual_scrolledTo(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtKnob> slot_handle(slot);
 	MiqtVirtualQwtKnob* self_cast = dynamic_cast<MiqtVirtualQwtKnob*>( (QwtKnob*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__scrolledTo = slot;
+	self_cast->handle__scrolledTo = std::move(slot_handle);
 	return true;
 }
 
@@ -1334,12 +1345,13 @@ double QwtKnob_virtualbase_scrolledTo(const void* self, QPoint* param1) {
 }
 
 bool QwtKnob_override_virtual_isScrollPosition(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtKnob> slot_handle(slot);
 	MiqtVirtualQwtKnob* self_cast = dynamic_cast<MiqtVirtualQwtKnob*>( (QwtKnob*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__isScrollPosition = slot;
+	self_cast->handle__isScrollPosition = std::move(slot_handle);
 	return true;
 }
 
@@ -1348,12 +1360,13 @@ bool QwtKnob_virtualbase_isScrollPosition(const void* self, QPoint* param1) {
 }
 
 bool QwtKnob_override_virtual_mousePressEvent(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtKnob> slot_handle(slot);
 	MiqtVirtualQwtKnob* self_cast = dynamic_cast<MiqtVirtualQwtKnob*>( (QwtKnob*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__mousePressEvent = slot;
+	self_cast->handle__mousePressEvent = std::move(slot_handle);
 	return true;
 }
 
@@ -1362,12 +1375,13 @@ void QwtKnob_virtualbase_mousePressEvent(void* self, QMouseEvent* param1) {
 }
 
 bool QwtKnob_override_virtual_mouseReleaseEvent(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtKnob> slot_handle(slot);
 	MiqtVirtualQwtKnob* self_cast = dynamic_cast<MiqtVirtualQwtKnob*>( (QwtKnob*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__mouseReleaseEvent = slot;
+	self_cast->handle__mouseReleaseEvent = std::move(slot_handle);
 	return true;
 }
 
@@ -1376,12 +1390,13 @@ void QwtKnob_virtualbase_mouseReleaseEvent(void* self, QMouseEvent* param1) {
 }
 
 bool QwtKnob_override_virtual_mouseMoveEvent(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtKnob> slot_handle(slot);
 	MiqtVirtualQwtKnob* self_cast = dynamic_cast<MiqtVirtualQwtKnob*>( (QwtKnob*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__mouseMoveEvent = slot;
+	self_cast->handle__mouseMoveEvent = std::move(slot_handle);
 	return true;
 }
 
@@ -1390,12 +1405,13 @@ void QwtKnob_virtualbase_mouseMoveEvent(void* self, QMouseEvent* param1) {
 }
 
 bool QwtKnob_override_virtual_keyPressEvent(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtKnob> slot_handle(slot);
 	MiqtVirtualQwtKnob* self_cast = dynamic_cast<MiqtVirtualQwtKnob*>( (QwtKnob*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__keyPressEvent = slot;
+	self_cast->handle__keyPressEvent = std::move(slot_handle);
 	return true;
 }
 
@@ -1404,12 +1420,13 @@ void QwtKnob_virtualbase_keyPressEvent(void* self, QKeyEvent* param1) {
 }
 
 bool QwtKnob_override_virtual_wheelEvent(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtKnob> slot_handle(slot);
 	MiqtVirtualQwtKnob* self_cast = dynamic_cast<MiqtVirtualQwtKnob*>( (QwtKnob*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__wheelEvent = slot;
+	self_cast->handle__wheelEvent = std::move(slot_handle);
 	return true;
 }
 
@@ -1418,12 +1435,13 @@ void QwtKnob_virtualbase_wheelEvent(void* self, QWheelEvent* param1) {
 }
 
 bool QwtKnob_override_virtual_scaleChange(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtKnob> slot_handle(slot);
 	MiqtVirtualQwtKnob* self_cast = dynamic_cast<MiqtVirtualQwtKnob*>( (QwtKnob*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__scaleChange = slot;
+	self_cast->handle__scaleChange = std::move(slot_handle);
 	return true;
 }
 
@@ -1432,12 +1450,13 @@ void QwtKnob_virtualbase_scaleChange(void* self) {
 }
 
 bool QwtKnob_override_virtual_sliderChange(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtKnob> slot_handle(slot);
 	MiqtVirtualQwtKnob* self_cast = dynamic_cast<MiqtVirtualQwtKnob*>( (QwtKnob*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__sliderChange = slot;
+	self_cast->handle__sliderChange = std::move(slot_handle);
 	return true;
 }
 
@@ -1446,12 +1465,13 @@ void QwtKnob_virtualbase_sliderChange(void* self) {
 }
 
 bool QwtKnob_override_virtual_devType(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtKnob> slot_handle(slot);
 	MiqtVirtualQwtKnob* self_cast = dynamic_cast<MiqtVirtualQwtKnob*>( (QwtKnob*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__devType = slot;
+	self_cast->handle__devType = std::move(slot_handle);
 	return true;
 }
 
@@ -1460,12 +1480,13 @@ int QwtKnob_virtualbase_devType(const void* self) {
 }
 
 bool QwtKnob_override_virtual_setVisible(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtKnob> slot_handle(slot);
 	MiqtVirtualQwtKnob* self_cast = dynamic_cast<MiqtVirtualQwtKnob*>( (QwtKnob*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__setVisible = slot;
+	self_cast->handle__setVisible = std::move(slot_handle);
 	return true;
 }
 
@@ -1474,12 +1495,13 @@ void QwtKnob_virtualbase_setVisible(void* self, bool visible) {
 }
 
 bool QwtKnob_override_virtual_heightForWidth(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtKnob> slot_handle(slot);
 	MiqtVirtualQwtKnob* self_cast = dynamic_cast<MiqtVirtualQwtKnob*>( (QwtKnob*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__heightForWidth = slot;
+	self_cast->handle__heightForWidth = std::move(slot_handle);
 	return true;
 }
 
@@ -1488,12 +1510,13 @@ int QwtKnob_virtualbase_heightForWidth(const void* self, int param1) {
 }
 
 bool QwtKnob_override_virtual_hasHeightForWidth(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtKnob> slot_handle(slot);
 	MiqtVirtualQwtKnob* self_cast = dynamic_cast<MiqtVirtualQwtKnob*>( (QwtKnob*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__hasHeightForWidth = slot;
+	self_cast->handle__hasHeightForWidth = std::move(slot_handle);
 	return true;
 }
 
@@ -1502,12 +1525,13 @@ bool QwtKnob_virtualbase_hasHeightForWidth(const void* self) {
 }
 
 bool QwtKnob_override_virtual_paintEngine(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtKnob> slot_handle(slot);
 	MiqtVirtualQwtKnob* self_cast = dynamic_cast<MiqtVirtualQwtKnob*>( (QwtKnob*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__paintEngine = slot;
+	self_cast->handle__paintEngine = std::move(slot_handle);
 	return true;
 }
 
@@ -1516,12 +1540,13 @@ QPaintEngine* QwtKnob_virtualbase_paintEngine(const void* self) {
 }
 
 bool QwtKnob_override_virtual_event(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtKnob> slot_handle(slot);
 	MiqtVirtualQwtKnob* self_cast = dynamic_cast<MiqtVirtualQwtKnob*>( (QwtKnob*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__event = slot;
+	self_cast->handle__event = std::move(slot_handle);
 	return true;
 }
 
@@ -1530,12 +1555,13 @@ bool QwtKnob_virtualbase_event(void* self, QEvent* event) {
 }
 
 bool QwtKnob_override_virtual_mouseDoubleClickEvent(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtKnob> slot_handle(slot);
 	MiqtVirtualQwtKnob* self_cast = dynamic_cast<MiqtVirtualQwtKnob*>( (QwtKnob*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__mouseDoubleClickEvent = slot;
+	self_cast->handle__mouseDoubleClickEvent = std::move(slot_handle);
 	return true;
 }
 
@@ -1544,12 +1570,13 @@ void QwtKnob_virtualbase_mouseDoubleClickEvent(void* self, QMouseEvent* event) {
 }
 
 bool QwtKnob_override_virtual_keyReleaseEvent(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtKnob> slot_handle(slot);
 	MiqtVirtualQwtKnob* self_cast = dynamic_cast<MiqtVirtualQwtKnob*>( (QwtKnob*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__keyReleaseEvent = slot;
+	self_cast->handle__keyReleaseEvent = std::move(slot_handle);
 	return true;
 }
 
@@ -1558,12 +1585,13 @@ void QwtKnob_virtualbase_keyReleaseEvent(void* self, QKeyEvent* event) {
 }
 
 bool QwtKnob_override_virtual_focusInEvent(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtKnob> slot_handle(slot);
 	MiqtVirtualQwtKnob* self_cast = dynamic_cast<MiqtVirtualQwtKnob*>( (QwtKnob*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__focusInEvent = slot;
+	self_cast->handle__focusInEvent = std::move(slot_handle);
 	return true;
 }
 
@@ -1572,12 +1600,13 @@ void QwtKnob_virtualbase_focusInEvent(void* self, QFocusEvent* event) {
 }
 
 bool QwtKnob_override_virtual_focusOutEvent(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtKnob> slot_handle(slot);
 	MiqtVirtualQwtKnob* self_cast = dynamic_cast<MiqtVirtualQwtKnob*>( (QwtKnob*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__focusOutEvent = slot;
+	self_cast->handle__focusOutEvent = std::move(slot_handle);
 	return true;
 }
 
@@ -1586,12 +1615,13 @@ void QwtKnob_virtualbase_focusOutEvent(void* self, QFocusEvent* event) {
 }
 
 bool QwtKnob_override_virtual_enterEvent(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtKnob> slot_handle(slot);
 	MiqtVirtualQwtKnob* self_cast = dynamic_cast<MiqtVirtualQwtKnob*>( (QwtKnob*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__enterEvent = slot;
+	self_cast->handle__enterEvent = std::move(slot_handle);
 	return true;
 }
 
@@ -1600,12 +1630,13 @@ void QwtKnob_virtualbase_enterEvent(void* self, QEvent* event) {
 }
 
 bool QwtKnob_override_virtual_leaveEvent(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtKnob> slot_handle(slot);
 	MiqtVirtualQwtKnob* self_cast = dynamic_cast<MiqtVirtualQwtKnob*>( (QwtKnob*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__leaveEvent = slot;
+	self_cast->handle__leaveEvent = std::move(slot_handle);
 	return true;
 }
 
@@ -1614,12 +1645,13 @@ void QwtKnob_virtualbase_leaveEvent(void* self, QEvent* event) {
 }
 
 bool QwtKnob_override_virtual_moveEvent(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtKnob> slot_handle(slot);
 	MiqtVirtualQwtKnob* self_cast = dynamic_cast<MiqtVirtualQwtKnob*>( (QwtKnob*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__moveEvent = slot;
+	self_cast->handle__moveEvent = std::move(slot_handle);
 	return true;
 }
 
@@ -1628,12 +1660,13 @@ void QwtKnob_virtualbase_moveEvent(void* self, QMoveEvent* event) {
 }
 
 bool QwtKnob_override_virtual_resizeEvent(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtKnob> slot_handle(slot);
 	MiqtVirtualQwtKnob* self_cast = dynamic_cast<MiqtVirtualQwtKnob*>( (QwtKnob*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__resizeEvent = slot;
+	self_cast->handle__resizeEvent = std::move(slot_handle);
 	return true;
 }
 
@@ -1642,12 +1675,13 @@ void QwtKnob_virtualbase_resizeEvent(void* self, QResizeEvent* event) {
 }
 
 bool QwtKnob_override_virtual_closeEvent(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtKnob> slot_handle(slot);
 	MiqtVirtualQwtKnob* self_cast = dynamic_cast<MiqtVirtualQwtKnob*>( (QwtKnob*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__closeEvent = slot;
+	self_cast->handle__closeEvent = std::move(slot_handle);
 	return true;
 }
 
@@ -1656,12 +1690,13 @@ void QwtKnob_virtualbase_closeEvent(void* self, QCloseEvent* event) {
 }
 
 bool QwtKnob_override_virtual_contextMenuEvent(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtKnob> slot_handle(slot);
 	MiqtVirtualQwtKnob* self_cast = dynamic_cast<MiqtVirtualQwtKnob*>( (QwtKnob*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__contextMenuEvent = slot;
+	self_cast->handle__contextMenuEvent = std::move(slot_handle);
 	return true;
 }
 
@@ -1670,12 +1705,13 @@ void QwtKnob_virtualbase_contextMenuEvent(void* self, QContextMenuEvent* event) 
 }
 
 bool QwtKnob_override_virtual_tabletEvent(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtKnob> slot_handle(slot);
 	MiqtVirtualQwtKnob* self_cast = dynamic_cast<MiqtVirtualQwtKnob*>( (QwtKnob*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__tabletEvent = slot;
+	self_cast->handle__tabletEvent = std::move(slot_handle);
 	return true;
 }
 
@@ -1684,12 +1720,13 @@ void QwtKnob_virtualbase_tabletEvent(void* self, QTabletEvent* event) {
 }
 
 bool QwtKnob_override_virtual_actionEvent(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtKnob> slot_handle(slot);
 	MiqtVirtualQwtKnob* self_cast = dynamic_cast<MiqtVirtualQwtKnob*>( (QwtKnob*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__actionEvent = slot;
+	self_cast->handle__actionEvent = std::move(slot_handle);
 	return true;
 }
 
@@ -1698,12 +1735,13 @@ void QwtKnob_virtualbase_actionEvent(void* self, QActionEvent* event) {
 }
 
 bool QwtKnob_override_virtual_dragEnterEvent(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtKnob> slot_handle(slot);
 	MiqtVirtualQwtKnob* self_cast = dynamic_cast<MiqtVirtualQwtKnob*>( (QwtKnob*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__dragEnterEvent = slot;
+	self_cast->handle__dragEnterEvent = std::move(slot_handle);
 	return true;
 }
 
@@ -1712,12 +1750,13 @@ void QwtKnob_virtualbase_dragEnterEvent(void* self, QDragEnterEvent* event) {
 }
 
 bool QwtKnob_override_virtual_dragMoveEvent(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtKnob> slot_handle(slot);
 	MiqtVirtualQwtKnob* self_cast = dynamic_cast<MiqtVirtualQwtKnob*>( (QwtKnob*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__dragMoveEvent = slot;
+	self_cast->handle__dragMoveEvent = std::move(slot_handle);
 	return true;
 }
 
@@ -1726,12 +1765,13 @@ void QwtKnob_virtualbase_dragMoveEvent(void* self, QDragMoveEvent* event) {
 }
 
 bool QwtKnob_override_virtual_dragLeaveEvent(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtKnob> slot_handle(slot);
 	MiqtVirtualQwtKnob* self_cast = dynamic_cast<MiqtVirtualQwtKnob*>( (QwtKnob*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__dragLeaveEvent = slot;
+	self_cast->handle__dragLeaveEvent = std::move(slot_handle);
 	return true;
 }
 
@@ -1740,12 +1780,13 @@ void QwtKnob_virtualbase_dragLeaveEvent(void* self, QDragLeaveEvent* event) {
 }
 
 bool QwtKnob_override_virtual_dropEvent(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtKnob> slot_handle(slot);
 	MiqtVirtualQwtKnob* self_cast = dynamic_cast<MiqtVirtualQwtKnob*>( (QwtKnob*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__dropEvent = slot;
+	self_cast->handle__dropEvent = std::move(slot_handle);
 	return true;
 }
 
@@ -1754,12 +1795,13 @@ void QwtKnob_virtualbase_dropEvent(void* self, QDropEvent* event) {
 }
 
 bool QwtKnob_override_virtual_showEvent(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtKnob> slot_handle(slot);
 	MiqtVirtualQwtKnob* self_cast = dynamic_cast<MiqtVirtualQwtKnob*>( (QwtKnob*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__showEvent = slot;
+	self_cast->handle__showEvent = std::move(slot_handle);
 	return true;
 }
 
@@ -1768,12 +1810,13 @@ void QwtKnob_virtualbase_showEvent(void* self, QShowEvent* event) {
 }
 
 bool QwtKnob_override_virtual_hideEvent(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtKnob> slot_handle(slot);
 	MiqtVirtualQwtKnob* self_cast = dynamic_cast<MiqtVirtualQwtKnob*>( (QwtKnob*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__hideEvent = slot;
+	self_cast->handle__hideEvent = std::move(slot_handle);
 	return true;
 }
 
@@ -1782,12 +1825,13 @@ void QwtKnob_virtualbase_hideEvent(void* self, QHideEvent* event) {
 }
 
 bool QwtKnob_override_virtual_nativeEvent(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtKnob> slot_handle(slot);
 	MiqtVirtualQwtKnob* self_cast = dynamic_cast<MiqtVirtualQwtKnob*>( (QwtKnob*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__nativeEvent = slot;
+	self_cast->handle__nativeEvent = std::move(slot_handle);
 	return true;
 }
 
@@ -1797,12 +1841,13 @@ bool QwtKnob_virtualbase_nativeEvent(void* self, struct miqt_string eventType, v
 }
 
 bool QwtKnob_override_virtual_metric(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtKnob> slot_handle(slot);
 	MiqtVirtualQwtKnob* self_cast = dynamic_cast<MiqtVirtualQwtKnob*>( (QwtKnob*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__metric = slot;
+	self_cast->handle__metric = std::move(slot_handle);
 	return true;
 }
 
@@ -1811,12 +1856,13 @@ int QwtKnob_virtualbase_metric(const void* self, int param1) {
 }
 
 bool QwtKnob_override_virtual_initPainter(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtKnob> slot_handle(slot);
 	MiqtVirtualQwtKnob* self_cast = dynamic_cast<MiqtVirtualQwtKnob*>( (QwtKnob*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__initPainter = slot;
+	self_cast->handle__initPainter = std::move(slot_handle);
 	return true;
 }
 
@@ -1825,12 +1871,13 @@ void QwtKnob_virtualbase_initPainter(const void* self, QPainter* painter) {
 }
 
 bool QwtKnob_override_virtual_redirected(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtKnob> slot_handle(slot);
 	MiqtVirtualQwtKnob* self_cast = dynamic_cast<MiqtVirtualQwtKnob*>( (QwtKnob*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__redirected = slot;
+	self_cast->handle__redirected = std::move(slot_handle);
 	return true;
 }
 
@@ -1839,12 +1886,13 @@ QPaintDevice* QwtKnob_virtualbase_redirected(const void* self, QPoint* offset) {
 }
 
 bool QwtKnob_override_virtual_sharedPainter(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtKnob> slot_handle(slot);
 	MiqtVirtualQwtKnob* self_cast = dynamic_cast<MiqtVirtualQwtKnob*>( (QwtKnob*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__sharedPainter = slot;
+	self_cast->handle__sharedPainter = std::move(slot_handle);
 	return true;
 }
 
@@ -1853,12 +1901,13 @@ QPainter* QwtKnob_virtualbase_sharedPainter(const void* self) {
 }
 
 bool QwtKnob_override_virtual_inputMethodEvent(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtKnob> slot_handle(slot);
 	MiqtVirtualQwtKnob* self_cast = dynamic_cast<MiqtVirtualQwtKnob*>( (QwtKnob*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__inputMethodEvent = slot;
+	self_cast->handle__inputMethodEvent = std::move(slot_handle);
 	return true;
 }
 
@@ -1867,12 +1916,13 @@ void QwtKnob_virtualbase_inputMethodEvent(void* self, QInputMethodEvent* param1)
 }
 
 bool QwtKnob_override_virtual_inputMethodQuery(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtKnob> slot_handle(slot);
 	MiqtVirtualQwtKnob* self_cast = dynamic_cast<MiqtVirtualQwtKnob*>( (QwtKnob*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__inputMethodQuery = slot;
+	self_cast->handle__inputMethodQuery = std::move(slot_handle);
 	return true;
 }
 
@@ -1881,12 +1931,13 @@ QVariant* QwtKnob_virtualbase_inputMethodQuery(const void* self, int param1) {
 }
 
 bool QwtKnob_override_virtual_focusNextPrevChild(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtKnob> slot_handle(slot);
 	MiqtVirtualQwtKnob* self_cast = dynamic_cast<MiqtVirtualQwtKnob*>( (QwtKnob*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__focusNextPrevChild = slot;
+	self_cast->handle__focusNextPrevChild = std::move(slot_handle);
 	return true;
 }
 
@@ -1895,12 +1946,13 @@ bool QwtKnob_virtualbase_focusNextPrevChild(void* self, bool next) {
 }
 
 bool QwtKnob_override_virtual_eventFilter(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtKnob> slot_handle(slot);
 	MiqtVirtualQwtKnob* self_cast = dynamic_cast<MiqtVirtualQwtKnob*>( (QwtKnob*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__eventFilter = slot;
+	self_cast->handle__eventFilter = std::move(slot_handle);
 	return true;
 }
 
@@ -1909,12 +1961,13 @@ bool QwtKnob_virtualbase_eventFilter(void* self, QObject* watched, QEvent* event
 }
 
 bool QwtKnob_override_virtual_timerEvent(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtKnob> slot_handle(slot);
 	MiqtVirtualQwtKnob* self_cast = dynamic_cast<MiqtVirtualQwtKnob*>( (QwtKnob*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__timerEvent = slot;
+	self_cast->handle__timerEvent = std::move(slot_handle);
 	return true;
 }
 
@@ -1923,12 +1976,13 @@ void QwtKnob_virtualbase_timerEvent(void* self, QTimerEvent* event) {
 }
 
 bool QwtKnob_override_virtual_childEvent(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtKnob> slot_handle(slot);
 	MiqtVirtualQwtKnob* self_cast = dynamic_cast<MiqtVirtualQwtKnob*>( (QwtKnob*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__childEvent = slot;
+	self_cast->handle__childEvent = std::move(slot_handle);
 	return true;
 }
 
@@ -1937,12 +1991,13 @@ void QwtKnob_virtualbase_childEvent(void* self, QChildEvent* event) {
 }
 
 bool QwtKnob_override_virtual_customEvent(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtKnob> slot_handle(slot);
 	MiqtVirtualQwtKnob* self_cast = dynamic_cast<MiqtVirtualQwtKnob*>( (QwtKnob*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__customEvent = slot;
+	self_cast->handle__customEvent = std::move(slot_handle);
 	return true;
 }
 
@@ -1951,12 +2006,13 @@ void QwtKnob_virtualbase_customEvent(void* self, QEvent* event) {
 }
 
 bool QwtKnob_override_virtual_connectNotify(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtKnob> slot_handle(slot);
 	MiqtVirtualQwtKnob* self_cast = dynamic_cast<MiqtVirtualQwtKnob*>( (QwtKnob*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__connectNotify = slot;
+	self_cast->handle__connectNotify = std::move(slot_handle);
 	return true;
 }
 
@@ -1965,12 +2021,13 @@ void QwtKnob_virtualbase_connectNotify(void* self, QMetaMethod* signal) {
 }
 
 bool QwtKnob_override_virtual_disconnectNotify(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtKnob> slot_handle(slot);
 	MiqtVirtualQwtKnob* self_cast = dynamic_cast<MiqtVirtualQwtKnob*>( (QwtKnob*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__disconnectNotify = slot;
+	self_cast->handle__disconnectNotify = std::move(slot_handle);
 	return true;
 }
 

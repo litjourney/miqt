@@ -282,6 +282,25 @@ type goFileState struct {
 	currentPackageName string
 }
 
+// signalConnectionGoNames returns the public connection type and the existing
+// unsafe constructor from the Qt root package. Signal classes in subpackages
+// still return the root Qt QMetaObject::Connection wrapper, because a
+// connection created in any Qt module has the same C++ type and ownership.
+func (gfs *goFileState) signalConnectionGoNames() (typeName string, constructorName string) {
+	connectionInfo, ok := KnownClassnames["QMetaObject::Connection"]
+	if !ok {
+		panic("QMetaObject::Connection is not registered")
+	}
+
+	prefix := ""
+	if connectionInfo.PackageName != gfs.currentPackageName {
+		prefix = path.Base(connectionInfo.PackageName) + "."
+		gfs.imports[importPathForQtPackage(connectionInfo.PackageName)] = struct{}{}
+	}
+
+	return prefix + "SignalConnection", prefix + "UnsafeNewQMetaObject__Connection"
+}
+
 func (gfs *goFileState) emitParametersGo2CABIForwarding(m CppMethod) (preamble string, forwarding string) {
 	tmp := make([]string, 0, len(m.Parameters)+2)
 
@@ -792,6 +811,17 @@ import "C"
 
 		goClassName := cabiClassName(c.ClassName)
 
+		if classHasCallbacks(&c) {
+			gfs.imports["runtime/cgo"] = struct{}{}
+			ret.WriteString(`
+		//export ` + cabiCallbackReleaseName(c) + `
+		func ` + cabiCallbackReleaseName(c) + `(cb C.intptr_t) {
+			cgo.Handle(cb).Delete()
+		}
+
+		`)
+		}
+
 		// Type definition
 
 		ret.WriteString(`
@@ -962,8 +992,11 @@ import "C"
 
 			// Add Connect() wrappers for signal functions
 			if m.IsSignal {
+				// The C++ connector unconditionally consumes the new cgo.Handle.
+				// Its Qt slot functor releases the handle when the connection dies.
 				gfs.imports["unsafe"] = struct{}{}
 				gfs.imports["runtime/cgo"] = struct{}{}
+				connectionType, connectionConstructor := gfs.signalConnectionGoNames()
 
 				var cgoNamedParams []string
 				var paramNames []string
@@ -981,8 +1014,10 @@ import "C"
 
 				goCbType := `func(` + gfs.emitParametersGo(m.Parameters) + `)`
 				callbackName := cabiCallbackName(c, m)
-				ret.WriteString(`func (this *` + goClassName + `) On` + m.goMethodName() + `(slot ` + goCbType + `) {
-					C.` + cabiConnectName(c, m) + `(this.h, C.intptr_t(cgo.NewHandle(slot)) )
+				ret.WriteString(`func (this *` + goClassName + `) On` + m.goMethodName() + `(slot ` + goCbType + `) *` + connectionType + ` {
+					_goptr := ` + connectionConstructor + `(C.` + cabiConnectName(c, m) + `(this.h, C.intptr_t(cgo.NewHandle(slot)) ))
+					_goptr.GoGC()
+					return _goptr
 				}
 
 				//export ` + callbackName + `
@@ -1102,8 +1137,14 @@ import "C"
 				goCbType += gfs.emitParametersGo(m.Parameters)
 				goCbType += `) ` + m.ReturnType.renderReturnTypeGo(&gfs, true)
 				callbackName := cabiCallbackName(c, m)
+				// The C++ setter consumes slotHandle even when its dynamic_cast
+				// fails. Do not delete the handle again on the Go error path.
 				ret.WriteString(`func (this *` + goClassName + `) On` + m.goMethodName() + `(slot ` + goCbType + `) {
-					ok := C.` + cabiOverrideVirtualName(c, m) + `(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)) )
+					var slotHandle C.intptr_t
+					if slot != nil {
+						slotHandle = C.intptr_t(cgo.NewHandle(slot))
+					}
+					ok := C.` + cabiOverrideVirtualName(c, m) + `(unsafe.Pointer(this.h), slotHandle)
 					if !ok {
 						panic("miqt: can only override virtual methods for directly constructed types")
 					}
@@ -1144,8 +1185,10 @@ import "C"
 		}
 
 		for _, m := range c.PrivateSignals {
+			// As for public signals, ownership transfers to the C++ slot functor.
 			gfs.imports["unsafe"] = struct{}{}
 			gfs.imports["runtime/cgo"] = struct{}{}
+			connectionType, connectionConstructor := gfs.signalConnectionGoNames()
 
 			var cgoNamedParams []string
 			var paramNames []string
@@ -1163,8 +1206,10 @@ import "C"
 
 			goCbType := `func(` + gfs.emitParametersGo(m.Parameters) + `)`
 			callbackName := cabiCallbackName(c, m)
-			ret.WriteString(`func (this *` + goClassName + `) On` + m.goMethodName() + `(slot ` + goCbType + `) {
-					C.` + cabiConnectName(c, m) + `(this.h, C.intptr_t(cgo.NewHandle(slot)) )
+			ret.WriteString(`func (this *` + goClassName + `) On` + m.goMethodName() + `(slot ` + goCbType + `) *` + connectionType + ` {
+					_goptr := ` + connectionConstructor + `(C.` + cabiConnectName(c, m) + `(this.h, C.intptr_t(cgo.NewHandle(slot)) ))
+					_goptr.GoGC()
+					return _goptr
 				}
 
 				//export ` + callbackName + `
