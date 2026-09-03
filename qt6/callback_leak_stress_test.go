@@ -42,7 +42,7 @@ func newStressEventCallback(released *int64) func(func(*QEvent) bool, *QEvent) b
 func stressSignalObjectDestruction(released, calls *int64) {
 	object := NewQObject()
 	connection := object.OnObjectNameChanged(newStressStringCallback(released, calls))
-	object.SetObjectName("connected")
+	setCallbackTestObjectName(object, "connected")
 	object.Delete()
 	runtime.SetFinalizer(connection, nil)
 	connection.Delete()
@@ -52,11 +52,11 @@ func stressSignalObjectDestruction(released, calls *int64) {
 func stressSignalDisconnect(t *testing.T, released, calls *int64) {
 	object := NewQObject()
 	connection := object.OnObjectNameChanged(newStressStringCallback(released, calls))
-	object.SetObjectName("connected")
+	setCallbackTestObjectName(object, "connected")
 	if !connection.Disconnect() {
 		t.Fatal("stress callback connection did not disconnect")
 	}
-	object.SetObjectName("disconnected")
+	setCallbackTestObjectName(object, "disconnected")
 	object.Delete()
 	runtime.SetFinalizer(connection, nil)
 	connection.Delete()

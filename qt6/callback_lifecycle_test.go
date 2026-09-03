@@ -17,6 +17,12 @@ func lockCallbackTestThread(t *testing.T) {
 	t.Cleanup(runtime.UnlockOSThread)
 }
 
+func setCallbackTestObjectName(object *QObject, name string) {
+	nameView := NewQAnyStringView3(name)
+	defer nameView.Delete()
+	object.SetObjectName(*nameView)
+}
+
 func newStringCallbackProbe() (func(string), *int, <-chan struct{}) {
 	calls := new(int)
 	released := make(chan struct{})
@@ -75,7 +81,7 @@ func TestSignalCallbackReleasedOnObjectDestruction(t *testing.T) {
 	default:
 	}
 
-	object.SetObjectName("connected")
+	setCallbackTestObjectName(object, "connected")
 	if *calls != 1 {
 		t.Fatalf("connected callback ran %d times, want 1", *calls)
 	}
@@ -93,7 +99,7 @@ func TestSignalCallbackReleasedOnDisconnect(t *testing.T) {
 	connection := object.OnObjectNameChanged(callback)
 	callback = nil
 
-	object.SetObjectName("connected")
+	setCallbackTestObjectName(object, "connected")
 	if *calls != 1 {
 		t.Fatalf("connected callback ran %d times, want 1", *calls)
 	}
@@ -103,7 +109,7 @@ func TestSignalCallbackReleasedOnDisconnect(t *testing.T) {
 	if connection.Disconnect() {
 		t.Fatal("second Disconnect unexpectedly reported success")
 	}
-	object.SetObjectName("disconnected")
+	setCallbackTestObjectName(object, "disconnected")
 	if *calls != 1 {
 		t.Fatalf("callback ran after Disconnect; got %d calls, want 1", *calls)
 	}
@@ -125,7 +131,7 @@ func TestSignalConnectionTokenDeletionDoesNotDisconnect(t *testing.T) {
 	runtime.SetFinalizer(connection, nil)
 	connection.Delete()
 	connection.h = nil
-	object.SetObjectName("connected")
+	setCallbackTestObjectName(object, "connected")
 	if *calls != 1 {
 		t.Fatalf("deleting the connection token disconnected the callback; got %d calls", *calls)
 	}
