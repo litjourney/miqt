@@ -145,3 +145,50 @@ func TestEmitQt6SignalConnectionFromSubpackage(t *testing.T) {
 		}
 	}
 }
+
+func TestEmitVirtualOnlySubpackageDoesNotImportSignalConnectionPackage(t *testing.T) {
+	tests := []struct {
+		name              string
+		rootPackage       string
+		subpackage        string
+		forbiddenImport   string
+		forbiddenSelector string
+	}{
+		{
+			name:              "Qt 5",
+			rootPackage:       "qt",
+			subpackage:        "qt/network",
+			forbiddenImport:   `"github.com/mappu/miqt/qt"`,
+			forbiddenSelector: "qt.SignalConnection",
+		},
+		{
+			name:              "Qt 6",
+			rootPackage:       "qt6",
+			subpackage:        "qt6/designer",
+			forbiddenImport:   `"github.com/mappu/miqt/qt6"`,
+			forbiddenSelector: "qt6.SignalConnection",
+		},
+	}
+
+	for _, test := range tests {
+		t.Run(test.name, func(t *testing.T) {
+			prepareCallbackTestTypes()
+			connectionInfo := KnownClassnames["QMetaObject::Connection"]
+			connectionInfo.PackageName = test.rootPackage
+			KnownClassnames["QMetaObject::Connection"] = connectionInfo
+
+			src := callbackTestHeader()
+			src.Classes[0].Methods = src.Classes[0].Methods[1:2]
+			goSrc, err := emitGo(&src, src.Filename, test.subpackage)
+			if err != nil {
+				t.Fatal(err)
+			}
+
+			for _, forbidden := range []string{test.forbiddenImport, test.forbiddenSelector} {
+				if strings.Contains(goSrc, forbidden) {
+					t.Errorf("virtual-only subpackage binding unexpectedly contains %q:\n%s", forbidden, goSrc)
+				}
+			}
+		})
+	}
+}
