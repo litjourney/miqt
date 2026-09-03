@@ -1,0 +1,21 @@
+qt6/callback_lifecycle_test.go
+  s_64fea63fed100b::t_827e7c0ec6b1a7 20-25,84,102,112,134
+qt6/callback_leak_stress_test.go
+  s_64fea63fed100b::t_827e7c0ec6b1a7 45,55,59
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.23",
+  "base_commit_sha": "646440b55537dbc06861bc843ad518b444066739",
+  "prompts": {},
+  "sessions": {
+    "s_64fea63fed100b": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a065ca-ada4-7b03-a69b-c6bf4de41004",
+        "model": "gpt-5.6-sol"
+      },
+      "human_author": "doublemine <doublemine@doubleminedeMacBook-Pro.local>"
+    }
+  }
+}
