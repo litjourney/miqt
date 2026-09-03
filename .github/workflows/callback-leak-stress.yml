@@ -6,6 +6,10 @@ on:
   pull_request:
     branches: [ "**" ]
 
+concurrency:
+  group: callback-leak-stress-${{ github.head_ref || github.ref_name }}
+  cancel-in-progress: true
+
 jobs:
   callback_leak_stress:
     name: ${{ matrix.qt_version }}
