@@ -25,5 +25,8 @@ jobs:
     - name: Checkout
       uses: actions/checkout@v6
 
+    - name: Build miqt-docker helper
+      run: make cmd/miqt-docker/miqt-docker
+
     - name: Run callback handle leak stress test
       run: cmd/miqt-docker/miqt-docker genbindings /bin/bash -c 'env QT_QPA_PLATFORM=offscreen go test -v -count=1 -tags=miqt_callback_stress -run="^TestCallbackHandleStress$" ${{ matrix.package }}'
