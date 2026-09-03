@@ -1,3 +1,5 @@
+#include <memory>
+#include <utility>
 #include <QAbstractSeries>
 #include <QBrush>
 #include <QFont>
@@ -16,6 +18,7 @@
 extern "C" {
 #endif
 
+void miqt_exec_callback_handle_release_QLegendMarker(intptr_t);
 void miqt_exec_callback_QLegendMarker_clicked(intptr_t);
 void miqt_exec_callback_QLegendMarker_hovered(intptr_t, bool);
 void miqt_exec_callback_QLegendMarker_labelChanged(intptr_t);
@@ -130,91 +133,109 @@ void QLegendMarker_clicked(QLegendMarker* self) {
 	self->clicked();
 }
 
-void QLegendMarker_connect_clicked(QLegendMarker* self, intptr_t slot) {
-	QLegendMarker::connect(self, static_cast<void (QLegendMarker::*)()>(&QLegendMarker::clicked), self, [=]() {
+void* QLegendMarker_connect_clicked(QLegendMarker* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QLegendMarker>>(slot);
+	return new QMetaObject::Connection(QLegendMarker::connect(self, static_cast<void (QLegendMarker::*)()>(&QLegendMarker::clicked), self, [slot_handle]() {
+		intptr_t slot = slot_handle->value();
 		miqt_exec_callback_QLegendMarker_clicked(slot);
-	});
+	}));
 }
 
 void QLegendMarker_hovered(QLegendMarker* self, bool status) {
 	self->hovered(status);
 }
 
-void QLegendMarker_connect_hovered(QLegendMarker* self, intptr_t slot) {
-	QLegendMarker::connect(self, static_cast<void (QLegendMarker::*)(bool)>(&QLegendMarker::hovered), self, [=](bool status) {
+void* QLegendMarker_connect_hovered(QLegendMarker* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QLegendMarker>>(slot);
+	return new QMetaObject::Connection(QLegendMarker::connect(self, static_cast<void (QLegendMarker::*)(bool)>(&QLegendMarker::hovered), self, [slot_handle](bool status) {
+		intptr_t slot = slot_handle->value();
 		bool sigval1 = status;
 		miqt_exec_callback_QLegendMarker_hovered(slot, sigval1);
-	});
+	}));
 }
 
 void QLegendMarker_labelChanged(QLegendMarker* self) {
 	self->labelChanged();
 }
 
-void QLegendMarker_connect_labelChanged(QLegendMarker* self, intptr_t slot) {
-	QLegendMarker::connect(self, static_cast<void (QLegendMarker::*)()>(&QLegendMarker::labelChanged), self, [=]() {
+void* QLegendMarker_connect_labelChanged(QLegendMarker* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QLegendMarker>>(slot);
+	return new QMetaObject::Connection(QLegendMarker::connect(self, static_cast<void (QLegendMarker::*)()>(&QLegendMarker::labelChanged), self, [slot_handle]() {
+		intptr_t slot = slot_handle->value();
 		miqt_exec_callback_QLegendMarker_labelChanged(slot);
-	});
+	}));
 }
 
 void QLegendMarker_labelBrushChanged(QLegendMarker* self) {
 	self->labelBrushChanged();
 }
 
-void QLegendMarker_connect_labelBrushChanged(QLegendMarker* self, intptr_t slot) {
-	QLegendMarker::connect(self, static_cast<void (QLegendMarker::*)()>(&QLegendMarker::labelBrushChanged), self, [=]() {
+void* QLegendMarker_connect_labelBrushChanged(QLegendMarker* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QLegendMarker>>(slot);
+	return new QMetaObject::Connection(QLegendMarker::connect(self, static_cast<void (QLegendMarker::*)()>(&QLegendMarker::labelBrushChanged), self, [slot_handle]() {
+		intptr_t slot = slot_handle->value();
 		miqt_exec_callback_QLegendMarker_labelBrushChanged(slot);
-	});
+	}));
 }
 
 void QLegendMarker_fontChanged(QLegendMarker* self) {
 	self->fontChanged();
 }
 
-void QLegendMarker_connect_fontChanged(QLegendMarker* self, intptr_t slot) {
-	QLegendMarker::connect(self, static_cast<void (QLegendMarker::*)()>(&QLegendMarker::fontChanged), self, [=]() {
+void* QLegendMarker_connect_fontChanged(QLegendMarker* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QLegendMarker>>(slot);
+	return new QMetaObject::Connection(QLegendMarker::connect(self, static_cast<void (QLegendMarker::*)()>(&QLegendMarker::fontChanged), self, [slot_handle]() {
+		intptr_t slot = slot_handle->value();
 		miqt_exec_callback_QLegendMarker_fontChanged(slot);
-	});
+	}));
 }
 
 void QLegendMarker_penChanged(QLegendMarker* self) {
 	self->penChanged();
 }
 
-void QLegendMarker_connect_penChanged(QLegendMarker* self, intptr_t slot) {
-	QLegendMarker::connect(self, static_cast<void (QLegendMarker::*)()>(&QLegendMarker::penChanged), self, [=]() {
+void* QLegendMarker_connect_penChanged(QLegendMarker* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QLegendMarker>>(slot);
+	return new QMetaObject::Connection(QLegendMarker::connect(self, static_cast<void (QLegendMarker::*)()>(&QLegendMarker::penChanged), self, [slot_handle]() {
+		intptr_t slot = slot_handle->value();
 		miqt_exec_callback_QLegendMarker_penChanged(slot);
-	});
+	}));
 }
 
 void QLegendMarker_brushChanged(QLegendMarker* self) {
 	self->brushChanged();
 }
 
-void QLegendMarker_connect_brushChanged(QLegendMarker* self, intptr_t slot) {
-	QLegendMarker::connect(self, static_cast<void (QLegendMarker::*)()>(&QLegendMarker::brushChanged), self, [=]() {
+void* QLegendMarker_connect_brushChanged(QLegendMarker* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QLegendMarker>>(slot);
+	return new QMetaObject::Connection(QLegendMarker::connect(self, static_cast<void (QLegendMarker::*)()>(&QLegendMarker::brushChanged), self, [slot_handle]() {
+		intptr_t slot = slot_handle->value();
 		miqt_exec_callback_QLegendMarker_brushChanged(slot);
-	});
+	}));
 }
 
 void QLegendMarker_visibleChanged(QLegendMarker* self) {
 	self->visibleChanged();
 }
 
-void QLegendMarker_connect_visibleChanged(QLegendMarker* self, intptr_t slot) {
-	QLegendMarker::connect(self, static_cast<void (QLegendMarker::*)()>(&QLegendMarker::visibleChanged), self, [=]() {
+void* QLegendMarker_connect_visibleChanged(QLegendMarker* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QLegendMarker>>(slot);
+	return new QMetaObject::Connection(QLegendMarker::connect(self, static_cast<void (QLegendMarker::*)()>(&QLegendMarker::visibleChanged), self, [slot_handle]() {
+		intptr_t slot = slot_handle->value();
 		miqt_exec_callback_QLegendMarker_visibleChanged(slot);
-	});
+	}));
 }
 
 void QLegendMarker_shapeChanged(QLegendMarker* self) {
 	self->shapeChanged();
 }
 
-void QLegendMarker_connect_shapeChanged(QLegendMarker* self, intptr_t slot) {
-	QLegendMarker::connect(self, static_cast<void (QLegendMarker::*)()>(&QLegendMarker::shapeChanged), self, [=]() {
+void* QLegendMarker_connect_shapeChanged(QLegendMarker* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QLegendMarker>>(slot);
+	return new QMetaObject::Connection(QLegendMarker::connect(self, static_cast<void (QLegendMarker::*)()>(&QLegendMarker::shapeChanged), self, [slot_handle]() {
+		intptr_t slot = slot_handle->value();
 		miqt_exec_callback_QLegendMarker_shapeChanged(slot);
-	});
+	}));
 }
 
 struct miqt_string QLegendMarker_tr2(const char* s, const char* c) {

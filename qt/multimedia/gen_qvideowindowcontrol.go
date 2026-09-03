@@ -15,6 +15,11 @@ import (
 	"unsafe"
 )
 
+//export miqt_exec_callback_handle_release_QVideoWindowControl
+func miqt_exec_callback_handle_release_QVideoWindowControl(cb C.intptr_t) {
+	cgo.Handle(cb).Delete()
+}
+
 type QVideoWindowControl struct {
 	h *C.QVideoWindowControl
 	*QMediaControl
@@ -158,8 +163,10 @@ func (this *QVideoWindowControl) SetSaturation(saturation int) {
 func (this *QVideoWindowControl) FullScreenChanged(fullScreen bool) {
 	C.QVideoWindowControl_fullScreenChanged(this.h, (C.bool)(fullScreen))
 }
-func (this *QVideoWindowControl) OnFullScreenChanged(slot func(fullScreen bool)) {
-	C.QVideoWindowControl_connect_fullScreenChanged(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QVideoWindowControl) OnFullScreenChanged(slot func(fullScreen bool)) *qt.SignalConnection {
+	_goptr := qt.UnsafeNewQMetaObject__Connection(C.QVideoWindowControl_connect_fullScreenChanged(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QVideoWindowControl_fullScreenChanged
@@ -178,8 +185,10 @@ func miqt_exec_callback_QVideoWindowControl_fullScreenChanged(cb C.intptr_t, ful
 func (this *QVideoWindowControl) BrightnessChanged(brightness int) {
 	C.QVideoWindowControl_brightnessChanged(this.h, (C.int)(brightness))
 }
-func (this *QVideoWindowControl) OnBrightnessChanged(slot func(brightness int)) {
-	C.QVideoWindowControl_connect_brightnessChanged(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QVideoWindowControl) OnBrightnessChanged(slot func(brightness int)) *qt.SignalConnection {
+	_goptr := qt.UnsafeNewQMetaObject__Connection(C.QVideoWindowControl_connect_brightnessChanged(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QVideoWindowControl_brightnessChanged
@@ -198,8 +207,10 @@ func miqt_exec_callback_QVideoWindowControl_brightnessChanged(cb C.intptr_t, bri
 func (this *QVideoWindowControl) ContrastChanged(contrast int) {
 	C.QVideoWindowControl_contrastChanged(this.h, (C.int)(contrast))
 }
-func (this *QVideoWindowControl) OnContrastChanged(slot func(contrast int)) {
-	C.QVideoWindowControl_connect_contrastChanged(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QVideoWindowControl) OnContrastChanged(slot func(contrast int)) *qt.SignalConnection {
+	_goptr := qt.UnsafeNewQMetaObject__Connection(C.QVideoWindowControl_connect_contrastChanged(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QVideoWindowControl_contrastChanged
@@ -218,8 +229,10 @@ func miqt_exec_callback_QVideoWindowControl_contrastChanged(cb C.intptr_t, contr
 func (this *QVideoWindowControl) HueChanged(hue int) {
 	C.QVideoWindowControl_hueChanged(this.h, (C.int)(hue))
 }
-func (this *QVideoWindowControl) OnHueChanged(slot func(hue int)) {
-	C.QVideoWindowControl_connect_hueChanged(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QVideoWindowControl) OnHueChanged(slot func(hue int)) *qt.SignalConnection {
+	_goptr := qt.UnsafeNewQMetaObject__Connection(C.QVideoWindowControl_connect_hueChanged(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QVideoWindowControl_hueChanged
@@ -238,8 +251,10 @@ func miqt_exec_callback_QVideoWindowControl_hueChanged(cb C.intptr_t, hue C.int)
 func (this *QVideoWindowControl) SaturationChanged(saturation int) {
 	C.QVideoWindowControl_saturationChanged(this.h, (C.int)(saturation))
 }
-func (this *QVideoWindowControl) OnSaturationChanged(slot func(saturation int)) {
-	C.QVideoWindowControl_connect_saturationChanged(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QVideoWindowControl) OnSaturationChanged(slot func(saturation int)) *qt.SignalConnection {
+	_goptr := qt.UnsafeNewQMetaObject__Connection(C.QVideoWindowControl_connect_saturationChanged(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QVideoWindowControl_saturationChanged
@@ -258,8 +273,10 @@ func miqt_exec_callback_QVideoWindowControl_saturationChanged(cb C.intptr_t, sat
 func (this *QVideoWindowControl) NativeSizeChanged() {
 	C.QVideoWindowControl_nativeSizeChanged(this.h)
 }
-func (this *QVideoWindowControl) OnNativeSizeChanged(slot func()) {
-	C.QVideoWindowControl_connect_nativeSizeChanged(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QVideoWindowControl) OnNativeSizeChanged(slot func()) *qt.SignalConnection {
+	_goptr := qt.UnsafeNewQMetaObject__Connection(C.QVideoWindowControl_connect_nativeSizeChanged(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QVideoWindowControl_nativeSizeChanged

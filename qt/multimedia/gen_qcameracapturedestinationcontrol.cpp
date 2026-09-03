@@ -1,3 +1,5 @@
+#include <memory>
+#include <utility>
 #include <QCameraCaptureDestinationControl>
 #include <QMediaControl>
 #include <QMetaMethod>
@@ -13,6 +15,7 @@
 extern "C" {
 #endif
 
+void miqt_exec_callback_handle_release_QCameraCaptureDestinationControl(intptr_t);
 void miqt_exec_callback_QCameraCaptureDestinationControl_captureDestinationChanged(intptr_t, int);
 #ifdef __cplusplus
 } /* extern C */
@@ -69,12 +72,14 @@ void QCameraCaptureDestinationControl_captureDestinationChanged(QCameraCaptureDe
 	self->captureDestinationChanged(static_cast<QCameraImageCapture::CaptureDestinations>(destination));
 }
 
-void QCameraCaptureDestinationControl_connect_captureDestinationChanged(QCameraCaptureDestinationControl* self, intptr_t slot) {
-	QCameraCaptureDestinationControl::connect(self, static_cast<void (QCameraCaptureDestinationControl::*)(QCameraImageCapture::CaptureDestinations)>(&QCameraCaptureDestinationControl::captureDestinationChanged), self, [=](QCameraImageCapture::CaptureDestinations destination) {
+void* QCameraCaptureDestinationControl_connect_captureDestinationChanged(QCameraCaptureDestinationControl* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QCameraCaptureDestinationControl>>(slot);
+	return new QMetaObject::Connection(QCameraCaptureDestinationControl::connect(self, static_cast<void (QCameraCaptureDestinationControl::*)(QCameraImageCapture::CaptureDestinations)>(&QCameraCaptureDestinationControl::captureDestinationChanged), self, [slot_handle](QCameraImageCapture::CaptureDestinations destination) {
+		intptr_t slot = slot_handle->value();
 		QCameraImageCapture::CaptureDestinations destination_ret = destination;
 		int sigval1 = static_cast<int>(destination_ret);
 		miqt_exec_callback_QCameraCaptureDestinationControl_captureDestinationChanged(slot, sigval1);
-	});
+	}));
 }
 
 struct miqt_string QCameraCaptureDestinationControl_tr2(const char* s, const char* c) {

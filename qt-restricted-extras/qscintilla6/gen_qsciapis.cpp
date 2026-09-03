@@ -1,3 +1,5 @@
+#include <memory>
+#include <utility>
 #include <QChildEvent>
 #include <QEvent>
 #include <QList>
@@ -15,6 +17,7 @@
 extern "C" {
 #endif
 
+void miqt_exec_callback_handle_release_QsciAPIs(intptr_t);
 void miqt_exec_callback_QsciAPIs_apiPreparationCancelled(intptr_t);
 void miqt_exec_callback_QsciAPIs_apiPreparationStarted(intptr_t);
 void miqt_exec_callback_QsciAPIs_apiPreparationFinished(intptr_t);
@@ -40,11 +43,11 @@ public:
 	virtual ~MiqtVirtualQsciAPIs() override = default;
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__updateAutoCompletionList = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QsciAPIs> handle__updateAutoCompletionList;
 
 	// Subclass to allow providing a Go implementation
 	virtual void updateAutoCompletionList(const QStringList& context, QStringList& list) override {
-		if (handle__updateAutoCompletionList == 0) {
+		if (!handle__updateAutoCompletionList) {
 			QsciAPIs::updateAutoCompletionList(context, list);
 			return;
 		}
@@ -83,18 +86,18 @@ public:
 		list_out.len = list_ret.length();
 		list_out.data = static_cast<void*>(list_arr);
 		struct miqt_array /* of struct miqt_string */  sigval2 = list_out;
-		miqt_exec_callback_QsciAPIs_updateAutoCompletionList(this, handle__updateAutoCompletionList, sigval1, sigval2);
+		miqt_exec_callback_QsciAPIs_updateAutoCompletionList(this, handle__updateAutoCompletionList.value(), sigval1, sigval2);
 
 	}
 
 	friend void QsciAPIs_virtualbase_updateAutoCompletionList(void* self, struct miqt_array /* of struct miqt_string */  context, struct miqt_array /* of struct miqt_string */  list);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__autoCompletionSelected = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QsciAPIs> handle__autoCompletionSelected;
 
 	// Subclass to allow providing a Go implementation
 	virtual void autoCompletionSelected(const QString& sel) override {
-		if (handle__autoCompletionSelected == 0) {
+		if (!handle__autoCompletionSelected) {
 			QsciAPIs::autoCompletionSelected(sel);
 			return;
 		}
@@ -107,18 +110,18 @@ public:
 		sel_ms.data = static_cast<char*>(malloc(sel_ms.len));
 		memcpy(sel_ms.data, sel_b.data(), sel_ms.len);
 		struct miqt_string sigval1 = sel_ms;
-		miqt_exec_callback_QsciAPIs_autoCompletionSelected(this, handle__autoCompletionSelected, sigval1);
+		miqt_exec_callback_QsciAPIs_autoCompletionSelected(this, handle__autoCompletionSelected.value(), sigval1);
 
 	}
 
 	friend void QsciAPIs_virtualbase_autoCompletionSelected(void* self, struct miqt_string sel);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__callTips = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QsciAPIs> handle__callTips;
 
 	// Subclass to allow providing a Go implementation
 	virtual QStringList callTips(const QStringList& context, int commas, QsciScintilla::CallTipsStyle style, QList<int>& shifts) override {
-		if (handle__callTips == 0) {
+		if (!handle__callTips) {
 			return QsciAPIs::callTips(context, commas, style, shifts);
 		}
 
@@ -152,7 +155,7 @@ public:
 		shifts_out.len = shifts_ret.length();
 		shifts_out.data = static_cast<void*>(shifts_arr);
 		struct miqt_array /* of int */  sigval4 = shifts_out;
-		struct miqt_array /* of struct miqt_string */  callback_return_value = miqt_exec_callback_QsciAPIs_callTips(this, handle__callTips, sigval1, sigval2, sigval3, sigval4);
+		struct miqt_array /* of struct miqt_string */  callback_return_value = miqt_exec_callback_QsciAPIs_callTips(this, handle__callTips.value(), sigval1, sigval2, sigval3, sigval4);
 		QStringList callback_return_value_QList;
 		callback_return_value_QList.reserve(callback_return_value.len);
 		struct miqt_string* callback_return_value_arr = static_cast<struct miqt_string*>(callback_return_value.data);
@@ -171,95 +174,95 @@ public:
 	friend struct miqt_array /* of struct miqt_string */  QsciAPIs_virtualbase_callTips(void* self, struct miqt_array /* of struct miqt_string */  context, int commas, int style, struct miqt_array /* of int */  shifts);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__event = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QsciAPIs> handle__event;
 
 	// Subclass to allow providing a Go implementation
 	virtual bool event(QEvent* e) override {
-		if (handle__event == 0) {
+		if (!handle__event) {
 			return QsciAPIs::event(e);
 		}
 
 		QEvent* sigval1 = e;
-		bool callback_return_value = miqt_exec_callback_QsciAPIs_event(this, handle__event, sigval1);
+		bool callback_return_value = miqt_exec_callback_QsciAPIs_event(this, handle__event.value(), sigval1);
 		return callback_return_value;
 	}
 
 	friend bool QsciAPIs_virtualbase_event(void* self, QEvent* e);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__eventFilter = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QsciAPIs> handle__eventFilter;
 
 	// Subclass to allow providing a Go implementation
 	virtual bool eventFilter(QObject* watched, QEvent* event) override {
-		if (handle__eventFilter == 0) {
+		if (!handle__eventFilter) {
 			return QsciAPIs::eventFilter(watched, event);
 		}
 
 		QObject* sigval1 = watched;
 		QEvent* sigval2 = event;
-		bool callback_return_value = miqt_exec_callback_QsciAPIs_eventFilter(this, handle__eventFilter, sigval1, sigval2);
+		bool callback_return_value = miqt_exec_callback_QsciAPIs_eventFilter(this, handle__eventFilter.value(), sigval1, sigval2);
 		return callback_return_value;
 	}
 
 	friend bool QsciAPIs_virtualbase_eventFilter(void* self, QObject* watched, QEvent* event);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__timerEvent = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QsciAPIs> handle__timerEvent;
 
 	// Subclass to allow providing a Go implementation
 	virtual void timerEvent(QTimerEvent* event) override {
-		if (handle__timerEvent == 0) {
+		if (!handle__timerEvent) {
 			QsciAPIs::timerEvent(event);
 			return;
 		}
 
 		QTimerEvent* sigval1 = event;
-		miqt_exec_callback_QsciAPIs_timerEvent(this, handle__timerEvent, sigval1);
+		miqt_exec_callback_QsciAPIs_timerEvent(this, handle__timerEvent.value(), sigval1);
 
 	}
 
 	friend void QsciAPIs_virtualbase_timerEvent(void* self, QTimerEvent* event);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__childEvent = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QsciAPIs> handle__childEvent;
 
 	// Subclass to allow providing a Go implementation
 	virtual void childEvent(QChildEvent* event) override {
-		if (handle__childEvent == 0) {
+		if (!handle__childEvent) {
 			QsciAPIs::childEvent(event);
 			return;
 		}
 
 		QChildEvent* sigval1 = event;
-		miqt_exec_callback_QsciAPIs_childEvent(this, handle__childEvent, sigval1);
+		miqt_exec_callback_QsciAPIs_childEvent(this, handle__childEvent.value(), sigval1);
 
 	}
 
 	friend void QsciAPIs_virtualbase_childEvent(void* self, QChildEvent* event);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__customEvent = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QsciAPIs> handle__customEvent;
 
 	// Subclass to allow providing a Go implementation
 	virtual void customEvent(QEvent* event) override {
-		if (handle__customEvent == 0) {
+		if (!handle__customEvent) {
 			QsciAPIs::customEvent(event);
 			return;
 		}
 
 		QEvent* sigval1 = event;
-		miqt_exec_callback_QsciAPIs_customEvent(this, handle__customEvent, sigval1);
+		miqt_exec_callback_QsciAPIs_customEvent(this, handle__customEvent.value(), sigval1);
 
 	}
 
 	friend void QsciAPIs_virtualbase_customEvent(void* self, QEvent* event);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__connectNotify = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QsciAPIs> handle__connectNotify;
 
 	// Subclass to allow providing a Go implementation
 	virtual void connectNotify(const QMetaMethod& signal) override {
-		if (handle__connectNotify == 0) {
+		if (!handle__connectNotify) {
 			QsciAPIs::connectNotify(signal);
 			return;
 		}
@@ -267,18 +270,18 @@ public:
 		const QMetaMethod& signal_ret = signal;
 		// Cast returned reference into pointer
 		QMetaMethod* sigval1 = const_cast<QMetaMethod*>(&signal_ret);
-		miqt_exec_callback_QsciAPIs_connectNotify(this, handle__connectNotify, sigval1);
+		miqt_exec_callback_QsciAPIs_connectNotify(this, handle__connectNotify.value(), sigval1);
 
 	}
 
 	friend void QsciAPIs_virtualbase_connectNotify(void* self, QMetaMethod* signal);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__disconnectNotify = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QsciAPIs> handle__disconnectNotify;
 
 	// Subclass to allow providing a Go implementation
 	virtual void disconnectNotify(const QMetaMethod& signal) override {
-		if (handle__disconnectNotify == 0) {
+		if (!handle__disconnectNotify) {
 			QsciAPIs::disconnectNotify(signal);
 			return;
 		}
@@ -286,7 +289,7 @@ public:
 		const QMetaMethod& signal_ret = signal;
 		// Cast returned reference into pointer
 		QMetaMethod* sigval1 = const_cast<QMetaMethod*>(&signal_ret);
-		miqt_exec_callback_QsciAPIs_disconnectNotify(this, handle__disconnectNotify, sigval1);
+		miqt_exec_callback_QsciAPIs_disconnectNotify(this, handle__disconnectNotify.value(), sigval1);
 
 	}
 
@@ -460,30 +463,36 @@ void QsciAPIs_apiPreparationCancelled(QsciAPIs* self) {
 	self->apiPreparationCancelled();
 }
 
-void QsciAPIs_connect_apiPreparationCancelled(QsciAPIs* self, intptr_t slot) {
-	QsciAPIs::connect(self, static_cast<void (QsciAPIs::*)()>(&QsciAPIs::apiPreparationCancelled), self, [=]() {
+void* QsciAPIs_connect_apiPreparationCancelled(QsciAPIs* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QsciAPIs>>(slot);
+	return new QMetaObject::Connection(QsciAPIs::connect(self, static_cast<void (QsciAPIs::*)()>(&QsciAPIs::apiPreparationCancelled), self, [slot_handle]() {
+		intptr_t slot = slot_handle->value();
 		miqt_exec_callback_QsciAPIs_apiPreparationCancelled(slot);
-	});
+	}));
 }
 
 void QsciAPIs_apiPreparationStarted(QsciAPIs* self) {
 	self->apiPreparationStarted();
 }
 
-void QsciAPIs_connect_apiPreparationStarted(QsciAPIs* self, intptr_t slot) {
-	QsciAPIs::connect(self, static_cast<void (QsciAPIs::*)()>(&QsciAPIs::apiPreparationStarted), self, [=]() {
+void* QsciAPIs_connect_apiPreparationStarted(QsciAPIs* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QsciAPIs>>(slot);
+	return new QMetaObject::Connection(QsciAPIs::connect(self, static_cast<void (QsciAPIs::*)()>(&QsciAPIs::apiPreparationStarted), self, [slot_handle]() {
+		intptr_t slot = slot_handle->value();
 		miqt_exec_callback_QsciAPIs_apiPreparationStarted(slot);
-	});
+	}));
 }
 
 void QsciAPIs_apiPreparationFinished(QsciAPIs* self) {
 	self->apiPreparationFinished();
 }
 
-void QsciAPIs_connect_apiPreparationFinished(QsciAPIs* self, intptr_t slot) {
-	QsciAPIs::connect(self, static_cast<void (QsciAPIs::*)()>(&QsciAPIs::apiPreparationFinished), self, [=]() {
+void* QsciAPIs_connect_apiPreparationFinished(QsciAPIs* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QsciAPIs>>(slot);
+	return new QMetaObject::Connection(QsciAPIs::connect(self, static_cast<void (QsciAPIs::*)()>(&QsciAPIs::apiPreparationFinished), self, [slot_handle]() {
+		intptr_t slot = slot_handle->value();
 		miqt_exec_callback_QsciAPIs_apiPreparationFinished(slot);
-	});
+	}));
 }
 
 struct miqt_string QsciAPIs_tr2(const char* s, const char* c) {
@@ -524,12 +533,13 @@ bool QsciAPIs_savePreparedWithFilename(const QsciAPIs* self, struct miqt_string 
 }
 
 bool QsciAPIs_override_virtual_updateAutoCompletionList(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QsciAPIs> slot_handle(slot);
 	MiqtVirtualQsciAPIs* self_cast = dynamic_cast<MiqtVirtualQsciAPIs*>( (QsciAPIs*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__updateAutoCompletionList = slot;
+	self_cast->handle__updateAutoCompletionList = std::move(slot_handle);
 	return true;
 }
 
@@ -552,12 +562,13 @@ void QsciAPIs_virtualbase_updateAutoCompletionList(void* self, struct miqt_array
 }
 
 bool QsciAPIs_override_virtual_autoCompletionSelected(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QsciAPIs> slot_handle(slot);
 	MiqtVirtualQsciAPIs* self_cast = dynamic_cast<MiqtVirtualQsciAPIs*>( (QsciAPIs*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__autoCompletionSelected = slot;
+	self_cast->handle__autoCompletionSelected = std::move(slot_handle);
 	return true;
 }
 
@@ -567,12 +578,13 @@ void QsciAPIs_virtualbase_autoCompletionSelected(void* self, struct miqt_string 
 }
 
 bool QsciAPIs_override_virtual_callTips(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QsciAPIs> slot_handle(slot);
 	MiqtVirtualQsciAPIs* self_cast = dynamic_cast<MiqtVirtualQsciAPIs*>( (QsciAPIs*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__callTips = slot;
+	self_cast->handle__callTips = std::move(slot_handle);
 	return true;
 }
 
@@ -610,12 +622,13 @@ struct miqt_array /* of struct miqt_string */  QsciAPIs_virtualbase_callTips(voi
 }
 
 bool QsciAPIs_override_virtual_event(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QsciAPIs> slot_handle(slot);
 	MiqtVirtualQsciAPIs* self_cast = dynamic_cast<MiqtVirtualQsciAPIs*>( (QsciAPIs*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__event = slot;
+	self_cast->handle__event = std::move(slot_handle);
 	return true;
 }
 
@@ -624,12 +637,13 @@ bool QsciAPIs_virtualbase_event(void* self, QEvent* e) {
 }
 
 bool QsciAPIs_override_virtual_eventFilter(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QsciAPIs> slot_handle(slot);
 	MiqtVirtualQsciAPIs* self_cast = dynamic_cast<MiqtVirtualQsciAPIs*>( (QsciAPIs*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__eventFilter = slot;
+	self_cast->handle__eventFilter = std::move(slot_handle);
 	return true;
 }
 
@@ -638,12 +652,13 @@ bool QsciAPIs_virtualbase_eventFilter(void* self, QObject* watched, QEvent* even
 }
 
 bool QsciAPIs_override_virtual_timerEvent(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QsciAPIs> slot_handle(slot);
 	MiqtVirtualQsciAPIs* self_cast = dynamic_cast<MiqtVirtualQsciAPIs*>( (QsciAPIs*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__timerEvent = slot;
+	self_cast->handle__timerEvent = std::move(slot_handle);
 	return true;
 }
 
@@ -652,12 +667,13 @@ void QsciAPIs_virtualbase_timerEvent(void* self, QTimerEvent* event) {
 }
 
 bool QsciAPIs_override_virtual_childEvent(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QsciAPIs> slot_handle(slot);
 	MiqtVirtualQsciAPIs* self_cast = dynamic_cast<MiqtVirtualQsciAPIs*>( (QsciAPIs*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__childEvent = slot;
+	self_cast->handle__childEvent = std::move(slot_handle);
 	return true;
 }
 
@@ -666,12 +682,13 @@ void QsciAPIs_virtualbase_childEvent(void* self, QChildEvent* event) {
 }
 
 bool QsciAPIs_override_virtual_customEvent(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QsciAPIs> slot_handle(slot);
 	MiqtVirtualQsciAPIs* self_cast = dynamic_cast<MiqtVirtualQsciAPIs*>( (QsciAPIs*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__customEvent = slot;
+	self_cast->handle__customEvent = std::move(slot_handle);
 	return true;
 }
 
@@ -680,12 +697,13 @@ void QsciAPIs_virtualbase_customEvent(void* self, QEvent* event) {
 }
 
 bool QsciAPIs_override_virtual_connectNotify(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QsciAPIs> slot_handle(slot);
 	MiqtVirtualQsciAPIs* self_cast = dynamic_cast<MiqtVirtualQsciAPIs*>( (QsciAPIs*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__connectNotify = slot;
+	self_cast->handle__connectNotify = std::move(slot_handle);
 	return true;
 }
 
@@ -694,12 +712,13 @@ void QsciAPIs_virtualbase_connectNotify(void* self, QMetaMethod* signal) {
 }
 
 bool QsciAPIs_override_virtual_disconnectNotify(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QsciAPIs> slot_handle(slot);
 	MiqtVirtualQsciAPIs* self_cast = dynamic_cast<MiqtVirtualQsciAPIs*>( (QsciAPIs*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__disconnectNotify = slot;
+	self_cast->handle__disconnectNotify = std::move(slot_handle);
 	return true;
 }
 

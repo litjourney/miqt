@@ -1,3 +1,5 @@
+#include <memory>
+#include <utility>
 #include <QCameraExposureControl>
 #include <QList>
 #include <QMediaControl>
@@ -15,6 +17,7 @@
 extern "C" {
 #endif
 
+void miqt_exec_callback_handle_release_QCameraExposureControl(intptr_t);
 void miqt_exec_callback_QCameraExposureControl_requestedValueChanged(intptr_t, int);
 void miqt_exec_callback_QCameraExposureControl_actualValueChanged(intptr_t, int);
 void miqt_exec_callback_QCameraExposureControl_parameterRangeChanged(intptr_t, int);
@@ -89,33 +92,39 @@ void QCameraExposureControl_requestedValueChanged(QCameraExposureControl* self, 
 	self->requestedValueChanged(static_cast<int>(parameter));
 }
 
-void QCameraExposureControl_connect_requestedValueChanged(QCameraExposureControl* self, intptr_t slot) {
-	QCameraExposureControl::connect(self, static_cast<void (QCameraExposureControl::*)(int)>(&QCameraExposureControl::requestedValueChanged), self, [=](int parameter) {
+void* QCameraExposureControl_connect_requestedValueChanged(QCameraExposureControl* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QCameraExposureControl>>(slot);
+	return new QMetaObject::Connection(QCameraExposureControl::connect(self, static_cast<void (QCameraExposureControl::*)(int)>(&QCameraExposureControl::requestedValueChanged), self, [slot_handle](int parameter) {
+		intptr_t slot = slot_handle->value();
 		int sigval1 = parameter;
 		miqt_exec_callback_QCameraExposureControl_requestedValueChanged(slot, sigval1);
-	});
+	}));
 }
 
 void QCameraExposureControl_actualValueChanged(QCameraExposureControl* self, int parameter) {
 	self->actualValueChanged(static_cast<int>(parameter));
 }
 
-void QCameraExposureControl_connect_actualValueChanged(QCameraExposureControl* self, intptr_t slot) {
-	QCameraExposureControl::connect(self, static_cast<void (QCameraExposureControl::*)(int)>(&QCameraExposureControl::actualValueChanged), self, [=](int parameter) {
+void* QCameraExposureControl_connect_actualValueChanged(QCameraExposureControl* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QCameraExposureControl>>(slot);
+	return new QMetaObject::Connection(QCameraExposureControl::connect(self, static_cast<void (QCameraExposureControl::*)(int)>(&QCameraExposureControl::actualValueChanged), self, [slot_handle](int parameter) {
+		intptr_t slot = slot_handle->value();
 		int sigval1 = parameter;
 		miqt_exec_callback_QCameraExposureControl_actualValueChanged(slot, sigval1);
-	});
+	}));
 }
 
 void QCameraExposureControl_parameterRangeChanged(QCameraExposureControl* self, int parameter) {
 	self->parameterRangeChanged(static_cast<int>(parameter));
 }
 
-void QCameraExposureControl_connect_parameterRangeChanged(QCameraExposureControl* self, intptr_t slot) {
-	QCameraExposureControl::connect(self, static_cast<void (QCameraExposureControl::*)(int)>(&QCameraExposureControl::parameterRangeChanged), self, [=](int parameter) {
+void* QCameraExposureControl_connect_parameterRangeChanged(QCameraExposureControl* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QCameraExposureControl>>(slot);
+	return new QMetaObject::Connection(QCameraExposureControl::connect(self, static_cast<void (QCameraExposureControl::*)(int)>(&QCameraExposureControl::parameterRangeChanged), self, [slot_handle](int parameter) {
+		intptr_t slot = slot_handle->value();
 		int sigval1 = parameter;
 		miqt_exec_callback_QCameraExposureControl_parameterRangeChanged(slot, sigval1);
-	});
+	}));
 }
 
 struct miqt_string QCameraExposureControl_tr2(const char* s, const char* c) {

@@ -1,3 +1,5 @@
+#include <memory>
+#include <utility>
 #include <QChildEvent>
 #include <QEvent>
 #include <QFactoryInterface>
@@ -20,6 +22,7 @@
 extern "C" {
 #endif
 
+void miqt_exec_callback_handle_release_QScriptExtensionPlugin(intptr_t);
 struct miqt_array /* of struct miqt_string */  miqt_exec_callback_QScriptExtensionPlugin_keys(const QScriptExtensionPlugin*, intptr_t);
 void miqt_exec_callback_QScriptExtensionPlugin_initialize(QScriptExtensionPlugin*, intptr_t, struct miqt_string, QScriptEngine*);
 bool miqt_exec_callback_QScriptExtensionPlugin_event(QScriptExtensionPlugin*, intptr_t, QEvent*);
@@ -42,15 +45,15 @@ public:
 	virtual ~MiqtVirtualQScriptExtensionPlugin() override = default;
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__keys = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QScriptExtensionPlugin> handle__keys;
 
 	// Subclass to allow providing a Go implementation
 	virtual QStringList keys() const override {
-		if (handle__keys == 0) {
+		if (!handle__keys) {
 			return QStringList(); // Pure virtual, there is no base we can call
 		}
 
-		struct miqt_array /* of struct miqt_string */  callback_return_value = miqt_exec_callback_QScriptExtensionPlugin_keys(this, handle__keys);
+		struct miqt_array /* of struct miqt_string */  callback_return_value = miqt_exec_callback_QScriptExtensionPlugin_keys(this, handle__keys.value());
 		QStringList callback_return_value_QList;
 		callback_return_value_QList.reserve(callback_return_value.len);
 		struct miqt_string* callback_return_value_arr = static_cast<struct miqt_string*>(callback_return_value.data);
@@ -67,11 +70,11 @@ public:
 	}
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__initialize = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QScriptExtensionPlugin> handle__initialize;
 
 	// Subclass to allow providing a Go implementation
 	virtual void initialize(const QString& key, QScriptEngine* engine) override {
-		if (handle__initialize == 0) {
+		if (!handle__initialize) {
 			return; // Pure virtual, there is no base we can call
 		}
 
@@ -84,100 +87,100 @@ public:
 		memcpy(key_ms.data, key_b.data(), key_ms.len);
 		struct miqt_string sigval1 = key_ms;
 		QScriptEngine* sigval2 = engine;
-		miqt_exec_callback_QScriptExtensionPlugin_initialize(this, handle__initialize, sigval1, sigval2);
+		miqt_exec_callback_QScriptExtensionPlugin_initialize(this, handle__initialize.value(), sigval1, sigval2);
 
 	}
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__event = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QScriptExtensionPlugin> handle__event;
 
 	// Subclass to allow providing a Go implementation
 	virtual bool event(QEvent* event) override {
-		if (handle__event == 0) {
+		if (!handle__event) {
 			return QScriptExtensionPlugin::event(event);
 		}
 
 		QEvent* sigval1 = event;
-		bool callback_return_value = miqt_exec_callback_QScriptExtensionPlugin_event(this, handle__event, sigval1);
+		bool callback_return_value = miqt_exec_callback_QScriptExtensionPlugin_event(this, handle__event.value(), sigval1);
 		return callback_return_value;
 	}
 
 	friend bool QScriptExtensionPlugin_virtualbase_event(void* self, QEvent* event);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__eventFilter = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QScriptExtensionPlugin> handle__eventFilter;
 
 	// Subclass to allow providing a Go implementation
 	virtual bool eventFilter(QObject* watched, QEvent* event) override {
-		if (handle__eventFilter == 0) {
+		if (!handle__eventFilter) {
 			return QScriptExtensionPlugin::eventFilter(watched, event);
 		}
 
 		QObject* sigval1 = watched;
 		QEvent* sigval2 = event;
-		bool callback_return_value = miqt_exec_callback_QScriptExtensionPlugin_eventFilter(this, handle__eventFilter, sigval1, sigval2);
+		bool callback_return_value = miqt_exec_callback_QScriptExtensionPlugin_eventFilter(this, handle__eventFilter.value(), sigval1, sigval2);
 		return callback_return_value;
 	}
 
 	friend bool QScriptExtensionPlugin_virtualbase_eventFilter(void* self, QObject* watched, QEvent* event);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__timerEvent = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QScriptExtensionPlugin> handle__timerEvent;
 
 	// Subclass to allow providing a Go implementation
 	virtual void timerEvent(QTimerEvent* event) override {
-		if (handle__timerEvent == 0) {
+		if (!handle__timerEvent) {
 			QScriptExtensionPlugin::timerEvent(event);
 			return;
 		}
 
 		QTimerEvent* sigval1 = event;
-		miqt_exec_callback_QScriptExtensionPlugin_timerEvent(this, handle__timerEvent, sigval1);
+		miqt_exec_callback_QScriptExtensionPlugin_timerEvent(this, handle__timerEvent.value(), sigval1);
 
 	}
 
 	friend void QScriptExtensionPlugin_virtualbase_timerEvent(void* self, QTimerEvent* event);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__childEvent = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QScriptExtensionPlugin> handle__childEvent;
 
 	// Subclass to allow providing a Go implementation
 	virtual void childEvent(QChildEvent* event) override {
-		if (handle__childEvent == 0) {
+		if (!handle__childEvent) {
 			QScriptExtensionPlugin::childEvent(event);
 			return;
 		}
 
 		QChildEvent* sigval1 = event;
-		miqt_exec_callback_QScriptExtensionPlugin_childEvent(this, handle__childEvent, sigval1);
+		miqt_exec_callback_QScriptExtensionPlugin_childEvent(this, handle__childEvent.value(), sigval1);
 
 	}
 
 	friend void QScriptExtensionPlugin_virtualbase_childEvent(void* self, QChildEvent* event);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__customEvent = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QScriptExtensionPlugin> handle__customEvent;
 
 	// Subclass to allow providing a Go implementation
 	virtual void customEvent(QEvent* event) override {
-		if (handle__customEvent == 0) {
+		if (!handle__customEvent) {
 			QScriptExtensionPlugin::customEvent(event);
 			return;
 		}
 
 		QEvent* sigval1 = event;
-		miqt_exec_callback_QScriptExtensionPlugin_customEvent(this, handle__customEvent, sigval1);
+		miqt_exec_callback_QScriptExtensionPlugin_customEvent(this, handle__customEvent.value(), sigval1);
 
 	}
 
 	friend void QScriptExtensionPlugin_virtualbase_customEvent(void* self, QEvent* event);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__connectNotify = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QScriptExtensionPlugin> handle__connectNotify;
 
 	// Subclass to allow providing a Go implementation
 	virtual void connectNotify(const QMetaMethod& signal) override {
-		if (handle__connectNotify == 0) {
+		if (!handle__connectNotify) {
 			QScriptExtensionPlugin::connectNotify(signal);
 			return;
 		}
@@ -185,18 +188,18 @@ public:
 		const QMetaMethod& signal_ret = signal;
 		// Cast returned reference into pointer
 		QMetaMethod* sigval1 = const_cast<QMetaMethod*>(&signal_ret);
-		miqt_exec_callback_QScriptExtensionPlugin_connectNotify(this, handle__connectNotify, sigval1);
+		miqt_exec_callback_QScriptExtensionPlugin_connectNotify(this, handle__connectNotify.value(), sigval1);
 
 	}
 
 	friend void QScriptExtensionPlugin_virtualbase_connectNotify(void* self, QMetaMethod* signal);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__disconnectNotify = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QScriptExtensionPlugin> handle__disconnectNotify;
 
 	// Subclass to allow providing a Go implementation
 	virtual void disconnectNotify(const QMetaMethod& signal) override {
-		if (handle__disconnectNotify == 0) {
+		if (!handle__disconnectNotify) {
 			QScriptExtensionPlugin::disconnectNotify(signal);
 			return;
 		}
@@ -204,7 +207,7 @@ public:
 		const QMetaMethod& signal_ret = signal;
 		// Cast returned reference into pointer
 		QMetaMethod* sigval1 = const_cast<QMetaMethod*>(&signal_ret);
-		miqt_exec_callback_QScriptExtensionPlugin_disconnectNotify(this, handle__disconnectNotify, sigval1);
+		miqt_exec_callback_QScriptExtensionPlugin_disconnectNotify(this, handle__disconnectNotify.value(), sigval1);
 
 	}
 
@@ -335,32 +338,35 @@ struct miqt_string QScriptExtensionPlugin_trUtf83(const char* s, const char* c, 
 }
 
 bool QScriptExtensionPlugin_override_virtual_keys(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QScriptExtensionPlugin> slot_handle(slot);
 	MiqtVirtualQScriptExtensionPlugin* self_cast = dynamic_cast<MiqtVirtualQScriptExtensionPlugin*>( (QScriptExtensionPlugin*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__keys = slot;
+	self_cast->handle__keys = std::move(slot_handle);
 	return true;
 }
 
 bool QScriptExtensionPlugin_override_virtual_initialize(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QScriptExtensionPlugin> slot_handle(slot);
 	MiqtVirtualQScriptExtensionPlugin* self_cast = dynamic_cast<MiqtVirtualQScriptExtensionPlugin*>( (QScriptExtensionPlugin*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__initialize = slot;
+	self_cast->handle__initialize = std::move(slot_handle);
 	return true;
 }
 
 bool QScriptExtensionPlugin_override_virtual_event(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QScriptExtensionPlugin> slot_handle(slot);
 	MiqtVirtualQScriptExtensionPlugin* self_cast = dynamic_cast<MiqtVirtualQScriptExtensionPlugin*>( (QScriptExtensionPlugin*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__event = slot;
+	self_cast->handle__event = std::move(slot_handle);
 	return true;
 }
 
@@ -369,12 +375,13 @@ bool QScriptExtensionPlugin_virtualbase_event(void* self, QEvent* event) {
 }
 
 bool QScriptExtensionPlugin_override_virtual_eventFilter(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QScriptExtensionPlugin> slot_handle(slot);
 	MiqtVirtualQScriptExtensionPlugin* self_cast = dynamic_cast<MiqtVirtualQScriptExtensionPlugin*>( (QScriptExtensionPlugin*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__eventFilter = slot;
+	self_cast->handle__eventFilter = std::move(slot_handle);
 	return true;
 }
 
@@ -383,12 +390,13 @@ bool QScriptExtensionPlugin_virtualbase_eventFilter(void* self, QObject* watched
 }
 
 bool QScriptExtensionPlugin_override_virtual_timerEvent(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QScriptExtensionPlugin> slot_handle(slot);
 	MiqtVirtualQScriptExtensionPlugin* self_cast = dynamic_cast<MiqtVirtualQScriptExtensionPlugin*>( (QScriptExtensionPlugin*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__timerEvent = slot;
+	self_cast->handle__timerEvent = std::move(slot_handle);
 	return true;
 }
 
@@ -397,12 +405,13 @@ void QScriptExtensionPlugin_virtualbase_timerEvent(void* self, QTimerEvent* even
 }
 
 bool QScriptExtensionPlugin_override_virtual_childEvent(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QScriptExtensionPlugin> slot_handle(slot);
 	MiqtVirtualQScriptExtensionPlugin* self_cast = dynamic_cast<MiqtVirtualQScriptExtensionPlugin*>( (QScriptExtensionPlugin*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__childEvent = slot;
+	self_cast->handle__childEvent = std::move(slot_handle);
 	return true;
 }
 
@@ -411,12 +420,13 @@ void QScriptExtensionPlugin_virtualbase_childEvent(void* self, QChildEvent* even
 }
 
 bool QScriptExtensionPlugin_override_virtual_customEvent(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QScriptExtensionPlugin> slot_handle(slot);
 	MiqtVirtualQScriptExtensionPlugin* self_cast = dynamic_cast<MiqtVirtualQScriptExtensionPlugin*>( (QScriptExtensionPlugin*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__customEvent = slot;
+	self_cast->handle__customEvent = std::move(slot_handle);
 	return true;
 }
 
@@ -425,12 +435,13 @@ void QScriptExtensionPlugin_virtualbase_customEvent(void* self, QEvent* event) {
 }
 
 bool QScriptExtensionPlugin_override_virtual_connectNotify(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QScriptExtensionPlugin> slot_handle(slot);
 	MiqtVirtualQScriptExtensionPlugin* self_cast = dynamic_cast<MiqtVirtualQScriptExtensionPlugin*>( (QScriptExtensionPlugin*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__connectNotify = slot;
+	self_cast->handle__connectNotify = std::move(slot_handle);
 	return true;
 }
 
@@ -439,12 +450,13 @@ void QScriptExtensionPlugin_virtualbase_connectNotify(void* self, QMetaMethod* s
 }
 
 bool QScriptExtensionPlugin_override_virtual_disconnectNotify(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QScriptExtensionPlugin> slot_handle(slot);
 	MiqtVirtualQScriptExtensionPlugin* self_cast = dynamic_cast<MiqtVirtualQScriptExtensionPlugin*>( (QScriptExtensionPlugin*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__disconnectNotify = slot;
+	self_cast->handle__disconnectNotify = std::move(slot_handle);
 	return true;
 }
 

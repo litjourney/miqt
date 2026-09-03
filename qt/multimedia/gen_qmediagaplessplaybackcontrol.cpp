@@ -1,3 +1,5 @@
+#include <memory>
+#include <utility>
 #include <QMediaContent>
 #include <QMediaControl>
 #include <QMediaGaplessPlaybackControl>
@@ -14,6 +16,7 @@
 extern "C" {
 #endif
 
+void miqt_exec_callback_handle_release_QMediaGaplessPlaybackControl(intptr_t);
 void miqt_exec_callback_QMediaGaplessPlaybackControl_crossfadeTimeChanged(intptr_t, double);
 void miqt_exec_callback_QMediaGaplessPlaybackControl_nextMediaChanged(intptr_t, QMediaContent*);
 void miqt_exec_callback_QMediaGaplessPlaybackControl_advancedToNextMedia(intptr_t);
@@ -80,35 +83,41 @@ void QMediaGaplessPlaybackControl_crossfadeTimeChanged(QMediaGaplessPlaybackCont
 	self->crossfadeTimeChanged(static_cast<qreal>(crossfadeTime));
 }
 
-void QMediaGaplessPlaybackControl_connect_crossfadeTimeChanged(QMediaGaplessPlaybackControl* self, intptr_t slot) {
-	QMediaGaplessPlaybackControl::connect(self, static_cast<void (QMediaGaplessPlaybackControl::*)(qreal)>(&QMediaGaplessPlaybackControl::crossfadeTimeChanged), self, [=](qreal crossfadeTime) {
+void* QMediaGaplessPlaybackControl_connect_crossfadeTimeChanged(QMediaGaplessPlaybackControl* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QMediaGaplessPlaybackControl>>(slot);
+	return new QMetaObject::Connection(QMediaGaplessPlaybackControl::connect(self, static_cast<void (QMediaGaplessPlaybackControl::*)(qreal)>(&QMediaGaplessPlaybackControl::crossfadeTimeChanged), self, [slot_handle](qreal crossfadeTime) {
+		intptr_t slot = slot_handle->value();
 		qreal crossfadeTime_ret = crossfadeTime;
 		double sigval1 = static_cast<double>(crossfadeTime_ret);
 		miqt_exec_callback_QMediaGaplessPlaybackControl_crossfadeTimeChanged(slot, sigval1);
-	});
+	}));
 }
 
 void QMediaGaplessPlaybackControl_nextMediaChanged(QMediaGaplessPlaybackControl* self, QMediaContent* media) {
 	self->nextMediaChanged(*media);
 }
 
-void QMediaGaplessPlaybackControl_connect_nextMediaChanged(QMediaGaplessPlaybackControl* self, intptr_t slot) {
-	QMediaGaplessPlaybackControl::connect(self, static_cast<void (QMediaGaplessPlaybackControl::*)(const QMediaContent&)>(&QMediaGaplessPlaybackControl::nextMediaChanged), self, [=](const QMediaContent& media) {
+void* QMediaGaplessPlaybackControl_connect_nextMediaChanged(QMediaGaplessPlaybackControl* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QMediaGaplessPlaybackControl>>(slot);
+	return new QMetaObject::Connection(QMediaGaplessPlaybackControl::connect(self, static_cast<void (QMediaGaplessPlaybackControl::*)(const QMediaContent&)>(&QMediaGaplessPlaybackControl::nextMediaChanged), self, [slot_handle](const QMediaContent& media) {
+		intptr_t slot = slot_handle->value();
 		const QMediaContent& media_ret = media;
 		// Cast returned reference into pointer
 		QMediaContent* sigval1 = const_cast<QMediaContent*>(&media_ret);
 		miqt_exec_callback_QMediaGaplessPlaybackControl_nextMediaChanged(slot, sigval1);
-	});
+	}));
 }
 
 void QMediaGaplessPlaybackControl_advancedToNextMedia(QMediaGaplessPlaybackControl* self) {
 	self->advancedToNextMedia();
 }
 
-void QMediaGaplessPlaybackControl_connect_advancedToNextMedia(QMediaGaplessPlaybackControl* self, intptr_t slot) {
-	QMediaGaplessPlaybackControl::connect(self, static_cast<void (QMediaGaplessPlaybackControl::*)()>(&QMediaGaplessPlaybackControl::advancedToNextMedia), self, [=]() {
+void* QMediaGaplessPlaybackControl_connect_advancedToNextMedia(QMediaGaplessPlaybackControl* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QMediaGaplessPlaybackControl>>(slot);
+	return new QMetaObject::Connection(QMediaGaplessPlaybackControl::connect(self, static_cast<void (QMediaGaplessPlaybackControl::*)()>(&QMediaGaplessPlaybackControl::advancedToNextMedia), self, [slot_handle]() {
+		intptr_t slot = slot_handle->value();
 		miqt_exec_callback_QMediaGaplessPlaybackControl_advancedToNextMedia(slot);
-	});
+	}));
 }
 
 struct miqt_string QMediaGaplessPlaybackControl_tr2(const char* s, const char* c) {

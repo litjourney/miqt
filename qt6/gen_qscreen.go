@@ -14,6 +14,11 @@ import (
 	"unsafe"
 )
 
+//export miqt_exec_callback_handle_release_QScreen
+func miqt_exec_callback_handle_release_QScreen(cb C.intptr_t) {
+	cgo.Handle(cb).Delete()
+}
+
 type QScreen struct {
 	h *C.QScreen
 	*QObject
@@ -246,8 +251,10 @@ func (this *QScreen) RefreshRate() float64 {
 func (this *QScreen) GeometryChanged(geometry *QRect) {
 	C.QScreen_geometryChanged(this.h, geometry.cPointer())
 }
-func (this *QScreen) OnGeometryChanged(slot func(geometry *QRect)) {
-	C.QScreen_connect_geometryChanged(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QScreen) OnGeometryChanged(slot func(geometry *QRect)) *SignalConnection {
+	_goptr := UnsafeNewQMetaObject__Connection(C.QScreen_connect_geometryChanged(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QScreen_geometryChanged
@@ -266,8 +273,10 @@ func miqt_exec_callback_QScreen_geometryChanged(cb C.intptr_t, geometry *C.QRect
 func (this *QScreen) AvailableGeometryChanged(geometry *QRect) {
 	C.QScreen_availableGeometryChanged(this.h, geometry.cPointer())
 }
-func (this *QScreen) OnAvailableGeometryChanged(slot func(geometry *QRect)) {
-	C.QScreen_connect_availableGeometryChanged(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QScreen) OnAvailableGeometryChanged(slot func(geometry *QRect)) *SignalConnection {
+	_goptr := UnsafeNewQMetaObject__Connection(C.QScreen_connect_availableGeometryChanged(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QScreen_availableGeometryChanged
@@ -286,8 +295,10 @@ func miqt_exec_callback_QScreen_availableGeometryChanged(cb C.intptr_t, geometry
 func (this *QScreen) PhysicalSizeChanged(size *QSizeF) {
 	C.QScreen_physicalSizeChanged(this.h, size.cPointer())
 }
-func (this *QScreen) OnPhysicalSizeChanged(slot func(size *QSizeF)) {
-	C.QScreen_connect_physicalSizeChanged(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QScreen) OnPhysicalSizeChanged(slot func(size *QSizeF)) *SignalConnection {
+	_goptr := UnsafeNewQMetaObject__Connection(C.QScreen_connect_physicalSizeChanged(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QScreen_physicalSizeChanged
@@ -306,8 +317,10 @@ func miqt_exec_callback_QScreen_physicalSizeChanged(cb C.intptr_t, size *C.QSize
 func (this *QScreen) PhysicalDotsPerInchChanged(dpi float64) {
 	C.QScreen_physicalDotsPerInchChanged(this.h, (C.double)(dpi))
 }
-func (this *QScreen) OnPhysicalDotsPerInchChanged(slot func(dpi float64)) {
-	C.QScreen_connect_physicalDotsPerInchChanged(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QScreen) OnPhysicalDotsPerInchChanged(slot func(dpi float64)) *SignalConnection {
+	_goptr := UnsafeNewQMetaObject__Connection(C.QScreen_connect_physicalDotsPerInchChanged(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QScreen_physicalDotsPerInchChanged
@@ -326,8 +339,10 @@ func miqt_exec_callback_QScreen_physicalDotsPerInchChanged(cb C.intptr_t, dpi C.
 func (this *QScreen) LogicalDotsPerInchChanged(dpi float64) {
 	C.QScreen_logicalDotsPerInchChanged(this.h, (C.double)(dpi))
 }
-func (this *QScreen) OnLogicalDotsPerInchChanged(slot func(dpi float64)) {
-	C.QScreen_connect_logicalDotsPerInchChanged(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QScreen) OnLogicalDotsPerInchChanged(slot func(dpi float64)) *SignalConnection {
+	_goptr := UnsafeNewQMetaObject__Connection(C.QScreen_connect_logicalDotsPerInchChanged(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QScreen_logicalDotsPerInchChanged
@@ -346,8 +361,10 @@ func miqt_exec_callback_QScreen_logicalDotsPerInchChanged(cb C.intptr_t, dpi C.d
 func (this *QScreen) VirtualGeometryChanged(rect *QRect) {
 	C.QScreen_virtualGeometryChanged(this.h, rect.cPointer())
 }
-func (this *QScreen) OnVirtualGeometryChanged(slot func(rect *QRect)) {
-	C.QScreen_connect_virtualGeometryChanged(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QScreen) OnVirtualGeometryChanged(slot func(rect *QRect)) *SignalConnection {
+	_goptr := UnsafeNewQMetaObject__Connection(C.QScreen_connect_virtualGeometryChanged(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QScreen_virtualGeometryChanged
@@ -366,8 +383,10 @@ func miqt_exec_callback_QScreen_virtualGeometryChanged(cb C.intptr_t, rect *C.QR
 func (this *QScreen) PrimaryOrientationChanged(orientation ScreenOrientation) {
 	C.QScreen_primaryOrientationChanged(this.h, (C.int)(orientation))
 }
-func (this *QScreen) OnPrimaryOrientationChanged(slot func(orientation ScreenOrientation)) {
-	C.QScreen_connect_primaryOrientationChanged(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QScreen) OnPrimaryOrientationChanged(slot func(orientation ScreenOrientation)) *SignalConnection {
+	_goptr := UnsafeNewQMetaObject__Connection(C.QScreen_connect_primaryOrientationChanged(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QScreen_primaryOrientationChanged
@@ -386,8 +405,10 @@ func miqt_exec_callback_QScreen_primaryOrientationChanged(cb C.intptr_t, orienta
 func (this *QScreen) OrientationChanged(orientation ScreenOrientation) {
 	C.QScreen_orientationChanged(this.h, (C.int)(orientation))
 }
-func (this *QScreen) OnOrientationChanged(slot func(orientation ScreenOrientation)) {
-	C.QScreen_connect_orientationChanged(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QScreen) OnOrientationChanged(slot func(orientation ScreenOrientation)) *SignalConnection {
+	_goptr := UnsafeNewQMetaObject__Connection(C.QScreen_connect_orientationChanged(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QScreen_orientationChanged
@@ -406,8 +427,10 @@ func miqt_exec_callback_QScreen_orientationChanged(cb C.intptr_t, orientation C.
 func (this *QScreen) RefreshRateChanged(refreshRate float64) {
 	C.QScreen_refreshRateChanged(this.h, (C.double)(refreshRate))
 }
-func (this *QScreen) OnRefreshRateChanged(slot func(refreshRate float64)) {
-	C.QScreen_connect_refreshRateChanged(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QScreen) OnRefreshRateChanged(slot func(refreshRate float64)) *SignalConnection {
+	_goptr := UnsafeNewQMetaObject__Connection(C.QScreen_connect_refreshRateChanged(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QScreen_refreshRateChanged

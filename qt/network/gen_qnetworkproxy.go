@@ -634,6 +634,11 @@ func (this *QNetworkProxy) GoGC() {
 	})
 }
 
+//export miqt_exec_callback_handle_release_QNetworkProxyFactory
+func miqt_exec_callback_handle_release_QNetworkProxyFactory(cb C.intptr_t) {
+	cgo.Handle(cb).Delete()
+}
+
 type QNetworkProxyFactory struct {
 	h *C.QNetworkProxyFactory
 }
@@ -736,7 +741,11 @@ func QNetworkProxyFactory_SystemProxyForQueryWithQuery(query *QNetworkProxyQuery
 	return _ret
 }
 func (this *QNetworkProxyFactory) OnQueryProxy(slot func(query *QNetworkProxyQuery) []QNetworkProxy) {
-	ok := C.QNetworkProxyFactory_override_virtual_queryProxy(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QNetworkProxyFactory_override_virtual_queryProxy(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}

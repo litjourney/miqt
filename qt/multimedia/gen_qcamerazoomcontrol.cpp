@@ -1,3 +1,5 @@
+#include <memory>
+#include <utility>
 #include <QCameraZoomControl>
 #include <QMediaControl>
 #include <QMetaMethod>
@@ -13,6 +15,7 @@
 extern "C" {
 #endif
 
+void miqt_exec_callback_handle_release_QCameraZoomControl(intptr_t);
 void miqt_exec_callback_QCameraZoomControl_maximumOpticalZoomChanged(intptr_t, double);
 void miqt_exec_callback_QCameraZoomControl_maximumDigitalZoomChanged(intptr_t, double);
 void miqt_exec_callback_QCameraZoomControl_requestedOpticalZoomChanged(intptr_t, double);
@@ -95,72 +98,84 @@ void QCameraZoomControl_maximumOpticalZoomChanged(QCameraZoomControl* self, doub
 	self->maximumOpticalZoomChanged(static_cast<qreal>(param1));
 }
 
-void QCameraZoomControl_connect_maximumOpticalZoomChanged(QCameraZoomControl* self, intptr_t slot) {
-	QCameraZoomControl::connect(self, static_cast<void (QCameraZoomControl::*)(qreal)>(&QCameraZoomControl::maximumOpticalZoomChanged), self, [=](qreal param1) {
+void* QCameraZoomControl_connect_maximumOpticalZoomChanged(QCameraZoomControl* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QCameraZoomControl>>(slot);
+	return new QMetaObject::Connection(QCameraZoomControl::connect(self, static_cast<void (QCameraZoomControl::*)(qreal)>(&QCameraZoomControl::maximumOpticalZoomChanged), self, [slot_handle](qreal param1) {
+		intptr_t slot = slot_handle->value();
 		qreal param1_ret = param1;
 		double sigval1 = static_cast<double>(param1_ret);
 		miqt_exec_callback_QCameraZoomControl_maximumOpticalZoomChanged(slot, sigval1);
-	});
+	}));
 }
 
 void QCameraZoomControl_maximumDigitalZoomChanged(QCameraZoomControl* self, double param1) {
 	self->maximumDigitalZoomChanged(static_cast<qreal>(param1));
 }
 
-void QCameraZoomControl_connect_maximumDigitalZoomChanged(QCameraZoomControl* self, intptr_t slot) {
-	QCameraZoomControl::connect(self, static_cast<void (QCameraZoomControl::*)(qreal)>(&QCameraZoomControl::maximumDigitalZoomChanged), self, [=](qreal param1) {
+void* QCameraZoomControl_connect_maximumDigitalZoomChanged(QCameraZoomControl* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QCameraZoomControl>>(slot);
+	return new QMetaObject::Connection(QCameraZoomControl::connect(self, static_cast<void (QCameraZoomControl::*)(qreal)>(&QCameraZoomControl::maximumDigitalZoomChanged), self, [slot_handle](qreal param1) {
+		intptr_t slot = slot_handle->value();
 		qreal param1_ret = param1;
 		double sigval1 = static_cast<double>(param1_ret);
 		miqt_exec_callback_QCameraZoomControl_maximumDigitalZoomChanged(slot, sigval1);
-	});
+	}));
 }
 
 void QCameraZoomControl_requestedOpticalZoomChanged(QCameraZoomControl* self, double opticalZoom) {
 	self->requestedOpticalZoomChanged(static_cast<qreal>(opticalZoom));
 }
 
-void QCameraZoomControl_connect_requestedOpticalZoomChanged(QCameraZoomControl* self, intptr_t slot) {
-	QCameraZoomControl::connect(self, static_cast<void (QCameraZoomControl::*)(qreal)>(&QCameraZoomControl::requestedOpticalZoomChanged), self, [=](qreal opticalZoom) {
+void* QCameraZoomControl_connect_requestedOpticalZoomChanged(QCameraZoomControl* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QCameraZoomControl>>(slot);
+	return new QMetaObject::Connection(QCameraZoomControl::connect(self, static_cast<void (QCameraZoomControl::*)(qreal)>(&QCameraZoomControl::requestedOpticalZoomChanged), self, [slot_handle](qreal opticalZoom) {
+		intptr_t slot = slot_handle->value();
 		qreal opticalZoom_ret = opticalZoom;
 		double sigval1 = static_cast<double>(opticalZoom_ret);
 		miqt_exec_callback_QCameraZoomControl_requestedOpticalZoomChanged(slot, sigval1);
-	});
+	}));
 }
 
 void QCameraZoomControl_requestedDigitalZoomChanged(QCameraZoomControl* self, double digitalZoom) {
 	self->requestedDigitalZoomChanged(static_cast<qreal>(digitalZoom));
 }
 
-void QCameraZoomControl_connect_requestedDigitalZoomChanged(QCameraZoomControl* self, intptr_t slot) {
-	QCameraZoomControl::connect(self, static_cast<void (QCameraZoomControl::*)(qreal)>(&QCameraZoomControl::requestedDigitalZoomChanged), self, [=](qreal digitalZoom) {
+void* QCameraZoomControl_connect_requestedDigitalZoomChanged(QCameraZoomControl* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QCameraZoomControl>>(slot);
+	return new QMetaObject::Connection(QCameraZoomControl::connect(self, static_cast<void (QCameraZoomControl::*)(qreal)>(&QCameraZoomControl::requestedDigitalZoomChanged), self, [slot_handle](qreal digitalZoom) {
+		intptr_t slot = slot_handle->value();
 		qreal digitalZoom_ret = digitalZoom;
 		double sigval1 = static_cast<double>(digitalZoom_ret);
 		miqt_exec_callback_QCameraZoomControl_requestedDigitalZoomChanged(slot, sigval1);
-	});
+	}));
 }
 
 void QCameraZoomControl_currentOpticalZoomChanged(QCameraZoomControl* self, double opticalZoom) {
 	self->currentOpticalZoomChanged(static_cast<qreal>(opticalZoom));
 }
 
-void QCameraZoomControl_connect_currentOpticalZoomChanged(QCameraZoomControl* self, intptr_t slot) {
-	QCameraZoomControl::connect(self, static_cast<void (QCameraZoomControl::*)(qreal)>(&QCameraZoomControl::currentOpticalZoomChanged), self, [=](qreal opticalZoom) {
+void* QCameraZoomControl_connect_currentOpticalZoomChanged(QCameraZoomControl* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QCameraZoomControl>>(slot);
+	return new QMetaObject::Connection(QCameraZoomControl::connect(self, static_cast<void (QCameraZoomControl::*)(qreal)>(&QCameraZoomControl::currentOpticalZoomChanged), self, [slot_handle](qreal opticalZoom) {
+		intptr_t slot = slot_handle->value();
 		qreal opticalZoom_ret = opticalZoom;
 		double sigval1 = static_cast<double>(opticalZoom_ret);
 		miqt_exec_callback_QCameraZoomControl_currentOpticalZoomChanged(slot, sigval1);
-	});
+	}));
 }
 
 void QCameraZoomControl_currentDigitalZoomChanged(QCameraZoomControl* self, double digitalZoom) {
 	self->currentDigitalZoomChanged(static_cast<qreal>(digitalZoom));
 }
 
-void QCameraZoomControl_connect_currentDigitalZoomChanged(QCameraZoomControl* self, intptr_t slot) {
-	QCameraZoomControl::connect(self, static_cast<void (QCameraZoomControl::*)(qreal)>(&QCameraZoomControl::currentDigitalZoomChanged), self, [=](qreal digitalZoom) {
+void* QCameraZoomControl_connect_currentDigitalZoomChanged(QCameraZoomControl* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QCameraZoomControl>>(slot);
+	return new QMetaObject::Connection(QCameraZoomControl::connect(self, static_cast<void (QCameraZoomControl::*)(qreal)>(&QCameraZoomControl::currentDigitalZoomChanged), self, [slot_handle](qreal digitalZoom) {
+		intptr_t slot = slot_handle->value();
 		qreal digitalZoom_ret = digitalZoom;
 		double sigval1 = static_cast<double>(digitalZoom_ret);
 		miqt_exec_callback_QCameraZoomControl_currentDigitalZoomChanged(slot, sigval1);
-	});
+	}));
 }
 
 struct miqt_string QCameraZoomControl_tr2(const char* s, const char* c) {

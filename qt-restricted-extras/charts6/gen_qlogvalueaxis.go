@@ -15,6 +15,11 @@ import (
 	"unsafe"
 )
 
+//export miqt_exec_callback_handle_release_QLogValueAxis
+func miqt_exec_callback_handle_release_QLogValueAxis(cb C.intptr_t) {
+	cgo.Handle(cb).Delete()
+}
+
 type QLogValueAxis struct {
 	h *C.QLogValueAxis
 	*QAbstractAxis
@@ -144,8 +149,10 @@ func (this *QLogValueAxis) MinorTickCount() int {
 func (this *QLogValueAxis) MinChanged(min float64) {
 	C.QLogValueAxis_minChanged(this.h, (C.double)(min))
 }
-func (this *QLogValueAxis) OnMinChanged(slot func(min float64)) {
-	C.QLogValueAxis_connect_minChanged(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QLogValueAxis) OnMinChanged(slot func(min float64)) *qt6.SignalConnection {
+	_goptr := qt6.UnsafeNewQMetaObject__Connection(C.QLogValueAxis_connect_minChanged(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QLogValueAxis_minChanged
@@ -164,8 +171,10 @@ func miqt_exec_callback_QLogValueAxis_minChanged(cb C.intptr_t, min C.double) {
 func (this *QLogValueAxis) MaxChanged(max float64) {
 	C.QLogValueAxis_maxChanged(this.h, (C.double)(max))
 }
-func (this *QLogValueAxis) OnMaxChanged(slot func(max float64)) {
-	C.QLogValueAxis_connect_maxChanged(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QLogValueAxis) OnMaxChanged(slot func(max float64)) *qt6.SignalConnection {
+	_goptr := qt6.UnsafeNewQMetaObject__Connection(C.QLogValueAxis_connect_maxChanged(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QLogValueAxis_maxChanged
@@ -184,8 +193,10 @@ func miqt_exec_callback_QLogValueAxis_maxChanged(cb C.intptr_t, max C.double) {
 func (this *QLogValueAxis) RangeChanged(min float64, max float64) {
 	C.QLogValueAxis_rangeChanged(this.h, (C.double)(min), (C.double)(max))
 }
-func (this *QLogValueAxis) OnRangeChanged(slot func(min float64, max float64)) {
-	C.QLogValueAxis_connect_rangeChanged(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QLogValueAxis) OnRangeChanged(slot func(min float64, max float64)) *qt6.SignalConnection {
+	_goptr := qt6.UnsafeNewQMetaObject__Connection(C.QLogValueAxis_connect_rangeChanged(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QLogValueAxis_rangeChanged
@@ -210,8 +221,10 @@ func (this *QLogValueAxis) LabelFormatChanged(format string) {
 	defer C.free(unsafe.Pointer(format_ms.data))
 	C.QLogValueAxis_labelFormatChanged(this.h, format_ms)
 }
-func (this *QLogValueAxis) OnLabelFormatChanged(slot func(format string)) {
-	C.QLogValueAxis_connect_labelFormatChanged(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QLogValueAxis) OnLabelFormatChanged(slot func(format string)) *qt6.SignalConnection {
+	_goptr := qt6.UnsafeNewQMetaObject__Connection(C.QLogValueAxis_connect_labelFormatChanged(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QLogValueAxis_labelFormatChanged
@@ -233,8 +246,10 @@ func miqt_exec_callback_QLogValueAxis_labelFormatChanged(cb C.intptr_t, format C
 func (this *QLogValueAxis) BaseChanged(base float64) {
 	C.QLogValueAxis_baseChanged(this.h, (C.double)(base))
 }
-func (this *QLogValueAxis) OnBaseChanged(slot func(base float64)) {
-	C.QLogValueAxis_connect_baseChanged(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QLogValueAxis) OnBaseChanged(slot func(base float64)) *qt6.SignalConnection {
+	_goptr := qt6.UnsafeNewQMetaObject__Connection(C.QLogValueAxis_connect_baseChanged(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QLogValueAxis_baseChanged
@@ -253,8 +268,10 @@ func miqt_exec_callback_QLogValueAxis_baseChanged(cb C.intptr_t, base C.double) 
 func (this *QLogValueAxis) TickCountChanged(tickCount int) {
 	C.QLogValueAxis_tickCountChanged(this.h, (C.int)(tickCount))
 }
-func (this *QLogValueAxis) OnTickCountChanged(slot func(tickCount int)) {
-	C.QLogValueAxis_connect_tickCountChanged(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QLogValueAxis) OnTickCountChanged(slot func(tickCount int)) *qt6.SignalConnection {
+	_goptr := qt6.UnsafeNewQMetaObject__Connection(C.QLogValueAxis_connect_tickCountChanged(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QLogValueAxis_tickCountChanged
@@ -273,8 +290,10 @@ func miqt_exec_callback_QLogValueAxis_tickCountChanged(cb C.intptr_t, tickCount 
 func (this *QLogValueAxis) MinorTickCountChanged(minorTickCount int) {
 	C.QLogValueAxis_minorTickCountChanged(this.h, (C.int)(minorTickCount))
 }
-func (this *QLogValueAxis) OnMinorTickCountChanged(slot func(minorTickCount int)) {
-	C.QLogValueAxis_connect_minorTickCountChanged(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QLogValueAxis) OnMinorTickCountChanged(slot func(minorTickCount int)) *qt6.SignalConnection {
+	_goptr := qt6.UnsafeNewQMetaObject__Connection(C.QLogValueAxis_connect_minorTickCountChanged(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QLogValueAxis_minorTickCountChanged
@@ -376,7 +395,11 @@ func (this *QLogValueAxis) callVirtualBase_Type() QAbstractAxis__AxisType {
 
 }
 func (this *QLogValueAxis) OnType(slot func(super func() QAbstractAxis__AxisType) QAbstractAxis__AxisType) {
-	ok := C.QLogValueAxis_override_virtual_type(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QLogValueAxis_override_virtual_type(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -401,7 +424,11 @@ func (this *QLogValueAxis) callVirtualBase_Event(event *qt6.QEvent) bool {
 
 }
 func (this *QLogValueAxis) OnEvent(slot func(super func(event *qt6.QEvent) bool, event *qt6.QEvent) bool) {
-	ok := C.QLogValueAxis_override_virtual_event(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QLogValueAxis_override_virtual_event(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -429,7 +456,11 @@ func (this *QLogValueAxis) callVirtualBase_EventFilter(watched *qt6.QObject, eve
 
 }
 func (this *QLogValueAxis) OnEventFilter(slot func(super func(watched *qt6.QObject, event *qt6.QEvent) bool, watched *qt6.QObject, event *qt6.QEvent) bool) {
-	ok := C.QLogValueAxis_override_virtual_eventFilter(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QLogValueAxis_override_virtual_eventFilter(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -459,7 +490,11 @@ func (this *QLogValueAxis) callVirtualBase_TimerEvent(event *qt6.QTimerEvent) {
 
 }
 func (this *QLogValueAxis) OnTimerEvent(slot func(super func(event *qt6.QTimerEvent), event *qt6.QTimerEvent)) {
-	ok := C.QLogValueAxis_override_virtual_timerEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QLogValueAxis_override_virtual_timerEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -485,7 +520,11 @@ func (this *QLogValueAxis) callVirtualBase_ChildEvent(event *qt6.QChildEvent) {
 
 }
 func (this *QLogValueAxis) OnChildEvent(slot func(super func(event *qt6.QChildEvent), event *qt6.QChildEvent)) {
-	ok := C.QLogValueAxis_override_virtual_childEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QLogValueAxis_override_virtual_childEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -511,7 +550,11 @@ func (this *QLogValueAxis) callVirtualBase_CustomEvent(event *qt6.QEvent) {
 
 }
 func (this *QLogValueAxis) OnCustomEvent(slot func(super func(event *qt6.QEvent), event *qt6.QEvent)) {
-	ok := C.QLogValueAxis_override_virtual_customEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QLogValueAxis_override_virtual_customEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -537,7 +580,11 @@ func (this *QLogValueAxis) callVirtualBase_ConnectNotify(signal *qt6.QMetaMethod
 
 }
 func (this *QLogValueAxis) OnConnectNotify(slot func(super func(signal *qt6.QMetaMethod), signal *qt6.QMetaMethod)) {
-	ok := C.QLogValueAxis_override_virtual_connectNotify(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QLogValueAxis_override_virtual_connectNotify(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -563,7 +610,11 @@ func (this *QLogValueAxis) callVirtualBase_DisconnectNotify(signal *qt6.QMetaMet
 
 }
 func (this *QLogValueAxis) OnDisconnectNotify(slot func(super func(signal *qt6.QMetaMethod), signal *qt6.QMetaMethod)) {
-	ok := C.QLogValueAxis_override_virtual_disconnectNotify(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QLogValueAxis_override_virtual_disconnectNotify(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}

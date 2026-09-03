@@ -1,3 +1,5 @@
+#include <memory>
+#include <utility>
 #include <QColor>
 #include <QFont>
 #include <QList>
@@ -25,8 +27,10 @@
 extern "C" {
 #endif
 
+void miqt_exec_callback_handle_release_QWebSelectMethod(intptr_t);
 void miqt_exec_callback_QWebSelectMethod_selectItem(intptr_t, int, bool, bool);
 void miqt_exec_callback_QWebSelectMethod_didHide(intptr_t);
+void miqt_exec_callback_handle_release_QWebNotificationPresenter(intptr_t);
 void miqt_exec_callback_QWebNotificationPresenter_notificationClosed(intptr_t);
 void miqt_exec_callback_QWebNotificationPresenter_notificationClicked(intptr_t);
 #ifdef __cplusplus
@@ -154,23 +158,27 @@ void QWebSelectMethod_selectItem(QWebSelectMethod* self, int index, bool allowMu
 	self->selectItem(static_cast<int>(index), allowMultiplySelections, shift);
 }
 
-void QWebSelectMethod_connect_selectItem(QWebSelectMethod* self, intptr_t slot) {
-	QWebSelectMethod::connect(self, static_cast<void (QWebSelectMethod::*)(int, bool, bool)>(&QWebSelectMethod::selectItem), self, [=](int index, bool allowMultiplySelections, bool shift) {
+void* QWebSelectMethod_connect_selectItem(QWebSelectMethod* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QWebSelectMethod>>(slot);
+	return new QMetaObject::Connection(QWebSelectMethod::connect(self, static_cast<void (QWebSelectMethod::*)(int, bool, bool)>(&QWebSelectMethod::selectItem), self, [slot_handle](int index, bool allowMultiplySelections, bool shift) {
+		intptr_t slot = slot_handle->value();
 		int sigval1 = index;
 		bool sigval2 = allowMultiplySelections;
 		bool sigval3 = shift;
 		miqt_exec_callback_QWebSelectMethod_selectItem(slot, sigval1, sigval2, sigval3);
-	});
+	}));
 }
 
 void QWebSelectMethod_didHide(QWebSelectMethod* self) {
 	self->didHide();
 }
 
-void QWebSelectMethod_connect_didHide(QWebSelectMethod* self, intptr_t slot) {
-	QWebSelectMethod::connect(self, static_cast<void (QWebSelectMethod::*)()>(&QWebSelectMethod::didHide), self, [=]() {
+void* QWebSelectMethod_connect_didHide(QWebSelectMethod* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QWebSelectMethod>>(slot);
+	return new QMetaObject::Connection(QWebSelectMethod::connect(self, static_cast<void (QWebSelectMethod::*)()>(&QWebSelectMethod::didHide), self, [slot_handle]() {
+		intptr_t slot = slot_handle->value();
 		miqt_exec_callback_QWebSelectMethod_didHide(slot);
-	});
+	}));
 }
 
 struct miqt_string QWebSelectMethod_tr2(const char* s, const char* c) {
@@ -301,20 +309,24 @@ void QWebNotificationPresenter_notificationClosed(QWebNotificationPresenter* sel
 	self->notificationClosed();
 }
 
-void QWebNotificationPresenter_connect_notificationClosed(QWebNotificationPresenter* self, intptr_t slot) {
-	QWebNotificationPresenter::connect(self, static_cast<void (QWebNotificationPresenter::*)()>(&QWebNotificationPresenter::notificationClosed), self, [=]() {
+void* QWebNotificationPresenter_connect_notificationClosed(QWebNotificationPresenter* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QWebNotificationPresenter>>(slot);
+	return new QMetaObject::Connection(QWebNotificationPresenter::connect(self, static_cast<void (QWebNotificationPresenter::*)()>(&QWebNotificationPresenter::notificationClosed), self, [slot_handle]() {
+		intptr_t slot = slot_handle->value();
 		miqt_exec_callback_QWebNotificationPresenter_notificationClosed(slot);
-	});
+	}));
 }
 
 void QWebNotificationPresenter_notificationClicked(QWebNotificationPresenter* self) {
 	self->notificationClicked();
 }
 
-void QWebNotificationPresenter_connect_notificationClicked(QWebNotificationPresenter* self, intptr_t slot) {
-	QWebNotificationPresenter::connect(self, static_cast<void (QWebNotificationPresenter::*)()>(&QWebNotificationPresenter::notificationClicked), self, [=]() {
+void* QWebNotificationPresenter_connect_notificationClicked(QWebNotificationPresenter* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QWebNotificationPresenter>>(slot);
+	return new QMetaObject::Connection(QWebNotificationPresenter::connect(self, static_cast<void (QWebNotificationPresenter::*)()>(&QWebNotificationPresenter::notificationClicked), self, [slot_handle]() {
+		intptr_t slot = slot_handle->value();
 		miqt_exec_callback_QWebNotificationPresenter_notificationClicked(slot);
-	});
+	}));
 }
 
 struct miqt_string QWebNotificationPresenter_tr2(const char* s, const char* c) {

@@ -14,6 +14,11 @@ import (
 	"unsafe"
 )
 
+//export miqt_exec_callback_handle_release_QAbstractNativeEventFilter
+func miqt_exec_callback_handle_release_QAbstractNativeEventFilter(cb C.intptr_t) {
+	cgo.Handle(cb).Delete()
+}
+
 type QAbstractNativeEventFilter struct {
 	h *C.QAbstractNativeEventFilter
 }
@@ -63,7 +68,11 @@ func (this *QAbstractNativeEventFilter) NativeEventFilter(eventType []byte, mess
 	return (bool)(C.QAbstractNativeEventFilter_nativeEventFilter(this.h, eventType_alias, message, (*C.long)(unsafe.Pointer(result))))
 }
 func (this *QAbstractNativeEventFilter) OnNativeEventFilter(slot func(eventType []byte, message unsafe.Pointer, result *int64) bool) {
-	ok := C.QAbstractNativeEventFilter_override_virtual_nativeEventFilter(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QAbstractNativeEventFilter_override_virtual_nativeEventFilter(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}

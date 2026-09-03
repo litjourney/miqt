@@ -1,3 +1,5 @@
+#include <memory>
+#include <utility>
 #include <QChildEvent>
 #include <QEvent>
 #include <QInputDevice>
@@ -17,6 +19,7 @@
 extern "C" {
 #endif
 
+void miqt_exec_callback_handle_release_QInputDevice(intptr_t);
 void miqt_exec_callback_QInputDevice_availableVirtualGeometryChanged(intptr_t, QRect*);
 bool miqt_exec_callback_QInputDevice_event(QInputDevice*, intptr_t, QEvent*);
 bool miqt_exec_callback_QInputDevice_eventFilter(QInputDevice*, intptr_t, QObject*, QEvent*);
@@ -41,95 +44,95 @@ public:
 	virtual ~MiqtVirtualQInputDevice() override = default;
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__event = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QInputDevice> handle__event;
 
 	// Subclass to allow providing a Go implementation
 	virtual bool event(QEvent* event) override {
-		if (handle__event == 0) {
+		if (!handle__event) {
 			return QInputDevice::event(event);
 		}
 
 		QEvent* sigval1 = event;
-		bool callback_return_value = miqt_exec_callback_QInputDevice_event(this, handle__event, sigval1);
+		bool callback_return_value = miqt_exec_callback_QInputDevice_event(this, handle__event.value(), sigval1);
 		return callback_return_value;
 	}
 
 	friend bool QInputDevice_virtualbase_event(void* self, QEvent* event);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__eventFilter = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QInputDevice> handle__eventFilter;
 
 	// Subclass to allow providing a Go implementation
 	virtual bool eventFilter(QObject* watched, QEvent* event) override {
-		if (handle__eventFilter == 0) {
+		if (!handle__eventFilter) {
 			return QInputDevice::eventFilter(watched, event);
 		}
 
 		QObject* sigval1 = watched;
 		QEvent* sigval2 = event;
-		bool callback_return_value = miqt_exec_callback_QInputDevice_eventFilter(this, handle__eventFilter, sigval1, sigval2);
+		bool callback_return_value = miqt_exec_callback_QInputDevice_eventFilter(this, handle__eventFilter.value(), sigval1, sigval2);
 		return callback_return_value;
 	}
 
 	friend bool QInputDevice_virtualbase_eventFilter(void* self, QObject* watched, QEvent* event);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__timerEvent = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QInputDevice> handle__timerEvent;
 
 	// Subclass to allow providing a Go implementation
 	virtual void timerEvent(QTimerEvent* event) override {
-		if (handle__timerEvent == 0) {
+		if (!handle__timerEvent) {
 			QInputDevice::timerEvent(event);
 			return;
 		}
 
 		QTimerEvent* sigval1 = event;
-		miqt_exec_callback_QInputDevice_timerEvent(this, handle__timerEvent, sigval1);
+		miqt_exec_callback_QInputDevice_timerEvent(this, handle__timerEvent.value(), sigval1);
 
 	}
 
 	friend void QInputDevice_virtualbase_timerEvent(void* self, QTimerEvent* event);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__childEvent = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QInputDevice> handle__childEvent;
 
 	// Subclass to allow providing a Go implementation
 	virtual void childEvent(QChildEvent* event) override {
-		if (handle__childEvent == 0) {
+		if (!handle__childEvent) {
 			QInputDevice::childEvent(event);
 			return;
 		}
 
 		QChildEvent* sigval1 = event;
-		miqt_exec_callback_QInputDevice_childEvent(this, handle__childEvent, sigval1);
+		miqt_exec_callback_QInputDevice_childEvent(this, handle__childEvent.value(), sigval1);
 
 	}
 
 	friend void QInputDevice_virtualbase_childEvent(void* self, QChildEvent* event);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__customEvent = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QInputDevice> handle__customEvent;
 
 	// Subclass to allow providing a Go implementation
 	virtual void customEvent(QEvent* event) override {
-		if (handle__customEvent == 0) {
+		if (!handle__customEvent) {
 			QInputDevice::customEvent(event);
 			return;
 		}
 
 		QEvent* sigval1 = event;
-		miqt_exec_callback_QInputDevice_customEvent(this, handle__customEvent, sigval1);
+		miqt_exec_callback_QInputDevice_customEvent(this, handle__customEvent.value(), sigval1);
 
 	}
 
 	friend void QInputDevice_virtualbase_customEvent(void* self, QEvent* event);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__connectNotify = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QInputDevice> handle__connectNotify;
 
 	// Subclass to allow providing a Go implementation
 	virtual void connectNotify(const QMetaMethod& signal) override {
-		if (handle__connectNotify == 0) {
+		if (!handle__connectNotify) {
 			QInputDevice::connectNotify(signal);
 			return;
 		}
@@ -137,18 +140,18 @@ public:
 		const QMetaMethod& signal_ret = signal;
 		// Cast returned reference into pointer
 		QMetaMethod* sigval1 = const_cast<QMetaMethod*>(&signal_ret);
-		miqt_exec_callback_QInputDevice_connectNotify(this, handle__connectNotify, sigval1);
+		miqt_exec_callback_QInputDevice_connectNotify(this, handle__connectNotify.value(), sigval1);
 
 	}
 
 	friend void QInputDevice_virtualbase_connectNotify(void* self, QMetaMethod* signal);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__disconnectNotify = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QInputDevice> handle__disconnectNotify;
 
 	// Subclass to allow providing a Go implementation
 	virtual void disconnectNotify(const QMetaMethod& signal) override {
-		if (handle__disconnectNotify == 0) {
+		if (!handle__disconnectNotify) {
 			QInputDevice::disconnectNotify(signal);
 			return;
 		}
@@ -156,7 +159,7 @@ public:
 		const QMetaMethod& signal_ret = signal;
 		// Cast returned reference into pointer
 		QMetaMethod* sigval1 = const_cast<QMetaMethod*>(&signal_ret);
-		miqt_exec_callback_QInputDevice_disconnectNotify(this, handle__disconnectNotify, sigval1);
+		miqt_exec_callback_QInputDevice_disconnectNotify(this, handle__disconnectNotify.value(), sigval1);
 
 	}
 
@@ -307,11 +310,13 @@ void QInputDevice_availableVirtualGeometryChanged(QInputDevice* self, QRect* are
 	self->availableVirtualGeometryChanged(*area);
 }
 
-void QInputDevice_connect_availableVirtualGeometryChanged(QInputDevice* self, intptr_t slot) {
-	QInputDevice::connect(self, static_cast<void (QInputDevice::*)(QRect)>(&QInputDevice::availableVirtualGeometryChanged), self, [=](QRect area) {
+void* QInputDevice_connect_availableVirtualGeometryChanged(QInputDevice* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QInputDevice>>(slot);
+	return new QMetaObject::Connection(QInputDevice::connect(self, static_cast<void (QInputDevice::*)(QRect)>(&QInputDevice::availableVirtualGeometryChanged), self, [slot_handle](QRect area) {
+		intptr_t slot = slot_handle->value();
 		QRect* sigval1 = new QRect(area);
 		miqt_exec_callback_QInputDevice_availableVirtualGeometryChanged(slot, sigval1);
-	});
+	}));
 }
 
 struct miqt_string QInputDevice_tr2(const char* s, const char* c) {
@@ -342,12 +347,13 @@ QInputDevice* QInputDevice_primaryKeyboardWithSeatName(struct miqt_string seatNa
 }
 
 bool QInputDevice_override_virtual_event(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QInputDevice> slot_handle(slot);
 	MiqtVirtualQInputDevice* self_cast = dynamic_cast<MiqtVirtualQInputDevice*>( (QInputDevice*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__event = slot;
+	self_cast->handle__event = std::move(slot_handle);
 	return true;
 }
 
@@ -356,12 +362,13 @@ bool QInputDevice_virtualbase_event(void* self, QEvent* event) {
 }
 
 bool QInputDevice_override_virtual_eventFilter(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QInputDevice> slot_handle(slot);
 	MiqtVirtualQInputDevice* self_cast = dynamic_cast<MiqtVirtualQInputDevice*>( (QInputDevice*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__eventFilter = slot;
+	self_cast->handle__eventFilter = std::move(slot_handle);
 	return true;
 }
 
@@ -370,12 +377,13 @@ bool QInputDevice_virtualbase_eventFilter(void* self, QObject* watched, QEvent* 
 }
 
 bool QInputDevice_override_virtual_timerEvent(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QInputDevice> slot_handle(slot);
 	MiqtVirtualQInputDevice* self_cast = dynamic_cast<MiqtVirtualQInputDevice*>( (QInputDevice*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__timerEvent = slot;
+	self_cast->handle__timerEvent = std::move(slot_handle);
 	return true;
 }
 
@@ -384,12 +392,13 @@ void QInputDevice_virtualbase_timerEvent(void* self, QTimerEvent* event) {
 }
 
 bool QInputDevice_override_virtual_childEvent(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QInputDevice> slot_handle(slot);
 	MiqtVirtualQInputDevice* self_cast = dynamic_cast<MiqtVirtualQInputDevice*>( (QInputDevice*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__childEvent = slot;
+	self_cast->handle__childEvent = std::move(slot_handle);
 	return true;
 }
 
@@ -398,12 +407,13 @@ void QInputDevice_virtualbase_childEvent(void* self, QChildEvent* event) {
 }
 
 bool QInputDevice_override_virtual_customEvent(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QInputDevice> slot_handle(slot);
 	MiqtVirtualQInputDevice* self_cast = dynamic_cast<MiqtVirtualQInputDevice*>( (QInputDevice*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__customEvent = slot;
+	self_cast->handle__customEvent = std::move(slot_handle);
 	return true;
 }
 
@@ -412,12 +422,13 @@ void QInputDevice_virtualbase_customEvent(void* self, QEvent* event) {
 }
 
 bool QInputDevice_override_virtual_connectNotify(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QInputDevice> slot_handle(slot);
 	MiqtVirtualQInputDevice* self_cast = dynamic_cast<MiqtVirtualQInputDevice*>( (QInputDevice*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__connectNotify = slot;
+	self_cast->handle__connectNotify = std::move(slot_handle);
 	return true;
 }
 
@@ -426,12 +437,13 @@ void QInputDevice_virtualbase_connectNotify(void* self, QMetaMethod* signal) {
 }
 
 bool QInputDevice_override_virtual_disconnectNotify(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QInputDevice> slot_handle(slot);
 	MiqtVirtualQInputDevice* self_cast = dynamic_cast<MiqtVirtualQInputDevice*>( (QInputDevice*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__disconnectNotify = slot;
+	self_cast->handle__disconnectNotify = std::move(slot_handle);
 	return true;
 }
 

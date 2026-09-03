@@ -15,6 +15,11 @@ import (
 	"unsafe"
 )
 
+//export miqt_exec_callback_handle_release_QCandlestickSeries
+func miqt_exec_callback_handle_release_QCandlestickSeries(cb C.intptr_t) {
+	cgo.Handle(cb).Delete()
+}
+
 type QCandlestickSeries struct {
 	h *C.QCandlestickSeries
 	*QAbstractSeries
@@ -231,8 +236,10 @@ func (this *QCandlestickSeries) Pen() *qt6.QPen {
 func (this *QCandlestickSeries) Clicked(set *QCandlestickSet) {
 	C.QCandlestickSeries_clicked(this.h, set.cPointer())
 }
-func (this *QCandlestickSeries) OnClicked(slot func(set *QCandlestickSet)) {
-	C.QCandlestickSeries_connect_clicked(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QCandlestickSeries) OnClicked(slot func(set *QCandlestickSet)) *qt6.SignalConnection {
+	_goptr := qt6.UnsafeNewQMetaObject__Connection(C.QCandlestickSeries_connect_clicked(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QCandlestickSeries_clicked
@@ -251,8 +258,10 @@ func miqt_exec_callback_QCandlestickSeries_clicked(cb C.intptr_t, set *C.QCandle
 func (this *QCandlestickSeries) Hovered(status bool, set *QCandlestickSet) {
 	C.QCandlestickSeries_hovered(this.h, (C.bool)(status), set.cPointer())
 }
-func (this *QCandlestickSeries) OnHovered(slot func(status bool, set *QCandlestickSet)) {
-	C.QCandlestickSeries_connect_hovered(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QCandlestickSeries) OnHovered(slot func(status bool, set *QCandlestickSet)) *qt6.SignalConnection {
+	_goptr := qt6.UnsafeNewQMetaObject__Connection(C.QCandlestickSeries_connect_hovered(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QCandlestickSeries_hovered
@@ -273,8 +282,10 @@ func miqt_exec_callback_QCandlestickSeries_hovered(cb C.intptr_t, status C.bool,
 func (this *QCandlestickSeries) Pressed(set *QCandlestickSet) {
 	C.QCandlestickSeries_pressed(this.h, set.cPointer())
 }
-func (this *QCandlestickSeries) OnPressed(slot func(set *QCandlestickSet)) {
-	C.QCandlestickSeries_connect_pressed(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QCandlestickSeries) OnPressed(slot func(set *QCandlestickSet)) *qt6.SignalConnection {
+	_goptr := qt6.UnsafeNewQMetaObject__Connection(C.QCandlestickSeries_connect_pressed(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QCandlestickSeries_pressed
@@ -293,8 +304,10 @@ func miqt_exec_callback_QCandlestickSeries_pressed(cb C.intptr_t, set *C.QCandle
 func (this *QCandlestickSeries) Released(set *QCandlestickSet) {
 	C.QCandlestickSeries_released(this.h, set.cPointer())
 }
-func (this *QCandlestickSeries) OnReleased(slot func(set *QCandlestickSet)) {
-	C.QCandlestickSeries_connect_released(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QCandlestickSeries) OnReleased(slot func(set *QCandlestickSet)) *qt6.SignalConnection {
+	_goptr := qt6.UnsafeNewQMetaObject__Connection(C.QCandlestickSeries_connect_released(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QCandlestickSeries_released
@@ -313,8 +326,10 @@ func miqt_exec_callback_QCandlestickSeries_released(cb C.intptr_t, set *C.QCandl
 func (this *QCandlestickSeries) DoubleClicked(set *QCandlestickSet) {
 	C.QCandlestickSeries_doubleClicked(this.h, set.cPointer())
 }
-func (this *QCandlestickSeries) OnDoubleClicked(slot func(set *QCandlestickSet)) {
-	C.QCandlestickSeries_connect_doubleClicked(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QCandlestickSeries) OnDoubleClicked(slot func(set *QCandlestickSet)) *qt6.SignalConnection {
+	_goptr := qt6.UnsafeNewQMetaObject__Connection(C.QCandlestickSeries_connect_doubleClicked(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QCandlestickSeries_doubleClicked
@@ -339,8 +354,10 @@ func (this *QCandlestickSeries) CandlestickSetsAdded(sets []*QCandlestickSet) {
 	sets_ma := C.struct_miqt_array{len: C.size_t(len(sets)), data: unsafe.Pointer(sets_CArray)}
 	C.QCandlestickSeries_candlestickSetsAdded(this.h, sets_ma)
 }
-func (this *QCandlestickSeries) OnCandlestickSetsAdded(slot func(sets []*QCandlestickSet)) {
-	C.QCandlestickSeries_connect_candlestickSetsAdded(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QCandlestickSeries) OnCandlestickSetsAdded(slot func(sets []*QCandlestickSet)) *qt6.SignalConnection {
+	_goptr := qt6.UnsafeNewQMetaObject__Connection(C.QCandlestickSeries_connect_candlestickSetsAdded(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QCandlestickSeries_candlestickSetsAdded
@@ -371,8 +388,10 @@ func (this *QCandlestickSeries) CandlestickSetsRemoved(sets []*QCandlestickSet) 
 	sets_ma := C.struct_miqt_array{len: C.size_t(len(sets)), data: unsafe.Pointer(sets_CArray)}
 	C.QCandlestickSeries_candlestickSetsRemoved(this.h, sets_ma)
 }
-func (this *QCandlestickSeries) OnCandlestickSetsRemoved(slot func(sets []*QCandlestickSet)) {
-	C.QCandlestickSeries_connect_candlestickSetsRemoved(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QCandlestickSeries) OnCandlestickSetsRemoved(slot func(sets []*QCandlestickSet)) *qt6.SignalConnection {
+	_goptr := qt6.UnsafeNewQMetaObject__Connection(C.QCandlestickSeries_connect_candlestickSetsRemoved(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QCandlestickSeries_candlestickSetsRemoved
@@ -397,8 +416,10 @@ func miqt_exec_callback_QCandlestickSeries_candlestickSetsRemoved(cb C.intptr_t,
 func (this *QCandlestickSeries) CountChanged() {
 	C.QCandlestickSeries_countChanged(this.h)
 }
-func (this *QCandlestickSeries) OnCountChanged(slot func()) {
-	C.QCandlestickSeries_connect_countChanged(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QCandlestickSeries) OnCountChanged(slot func()) *qt6.SignalConnection {
+	_goptr := qt6.UnsafeNewQMetaObject__Connection(C.QCandlestickSeries_connect_countChanged(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QCandlestickSeries_countChanged
@@ -414,8 +435,10 @@ func miqt_exec_callback_QCandlestickSeries_countChanged(cb C.intptr_t) {
 func (this *QCandlestickSeries) MaximumColumnWidthChanged() {
 	C.QCandlestickSeries_maximumColumnWidthChanged(this.h)
 }
-func (this *QCandlestickSeries) OnMaximumColumnWidthChanged(slot func()) {
-	C.QCandlestickSeries_connect_maximumColumnWidthChanged(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QCandlestickSeries) OnMaximumColumnWidthChanged(slot func()) *qt6.SignalConnection {
+	_goptr := qt6.UnsafeNewQMetaObject__Connection(C.QCandlestickSeries_connect_maximumColumnWidthChanged(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QCandlestickSeries_maximumColumnWidthChanged
@@ -431,8 +454,10 @@ func miqt_exec_callback_QCandlestickSeries_maximumColumnWidthChanged(cb C.intptr
 func (this *QCandlestickSeries) MinimumColumnWidthChanged() {
 	C.QCandlestickSeries_minimumColumnWidthChanged(this.h)
 }
-func (this *QCandlestickSeries) OnMinimumColumnWidthChanged(slot func()) {
-	C.QCandlestickSeries_connect_minimumColumnWidthChanged(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QCandlestickSeries) OnMinimumColumnWidthChanged(slot func()) *qt6.SignalConnection {
+	_goptr := qt6.UnsafeNewQMetaObject__Connection(C.QCandlestickSeries_connect_minimumColumnWidthChanged(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QCandlestickSeries_minimumColumnWidthChanged
@@ -448,8 +473,10 @@ func miqt_exec_callback_QCandlestickSeries_minimumColumnWidthChanged(cb C.intptr
 func (this *QCandlestickSeries) BodyWidthChanged() {
 	C.QCandlestickSeries_bodyWidthChanged(this.h)
 }
-func (this *QCandlestickSeries) OnBodyWidthChanged(slot func()) {
-	C.QCandlestickSeries_connect_bodyWidthChanged(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QCandlestickSeries) OnBodyWidthChanged(slot func()) *qt6.SignalConnection {
+	_goptr := qt6.UnsafeNewQMetaObject__Connection(C.QCandlestickSeries_connect_bodyWidthChanged(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QCandlestickSeries_bodyWidthChanged
@@ -465,8 +492,10 @@ func miqt_exec_callback_QCandlestickSeries_bodyWidthChanged(cb C.intptr_t) {
 func (this *QCandlestickSeries) BodyOutlineVisibilityChanged() {
 	C.QCandlestickSeries_bodyOutlineVisibilityChanged(this.h)
 }
-func (this *QCandlestickSeries) OnBodyOutlineVisibilityChanged(slot func()) {
-	C.QCandlestickSeries_connect_bodyOutlineVisibilityChanged(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QCandlestickSeries) OnBodyOutlineVisibilityChanged(slot func()) *qt6.SignalConnection {
+	_goptr := qt6.UnsafeNewQMetaObject__Connection(C.QCandlestickSeries_connect_bodyOutlineVisibilityChanged(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QCandlestickSeries_bodyOutlineVisibilityChanged
@@ -482,8 +511,10 @@ func miqt_exec_callback_QCandlestickSeries_bodyOutlineVisibilityChanged(cb C.int
 func (this *QCandlestickSeries) CapsWidthChanged() {
 	C.QCandlestickSeries_capsWidthChanged(this.h)
 }
-func (this *QCandlestickSeries) OnCapsWidthChanged(slot func()) {
-	C.QCandlestickSeries_connect_capsWidthChanged(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QCandlestickSeries) OnCapsWidthChanged(slot func()) *qt6.SignalConnection {
+	_goptr := qt6.UnsafeNewQMetaObject__Connection(C.QCandlestickSeries_connect_capsWidthChanged(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QCandlestickSeries_capsWidthChanged
@@ -499,8 +530,10 @@ func miqt_exec_callback_QCandlestickSeries_capsWidthChanged(cb C.intptr_t) {
 func (this *QCandlestickSeries) CapsVisibilityChanged() {
 	C.QCandlestickSeries_capsVisibilityChanged(this.h)
 }
-func (this *QCandlestickSeries) OnCapsVisibilityChanged(slot func()) {
-	C.QCandlestickSeries_connect_capsVisibilityChanged(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QCandlestickSeries) OnCapsVisibilityChanged(slot func()) *qt6.SignalConnection {
+	_goptr := qt6.UnsafeNewQMetaObject__Connection(C.QCandlestickSeries_connect_capsVisibilityChanged(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QCandlestickSeries_capsVisibilityChanged
@@ -516,8 +549,10 @@ func miqt_exec_callback_QCandlestickSeries_capsVisibilityChanged(cb C.intptr_t) 
 func (this *QCandlestickSeries) IncreasingColorChanged() {
 	C.QCandlestickSeries_increasingColorChanged(this.h)
 }
-func (this *QCandlestickSeries) OnIncreasingColorChanged(slot func()) {
-	C.QCandlestickSeries_connect_increasingColorChanged(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QCandlestickSeries) OnIncreasingColorChanged(slot func()) *qt6.SignalConnection {
+	_goptr := qt6.UnsafeNewQMetaObject__Connection(C.QCandlestickSeries_connect_increasingColorChanged(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QCandlestickSeries_increasingColorChanged
@@ -533,8 +568,10 @@ func miqt_exec_callback_QCandlestickSeries_increasingColorChanged(cb C.intptr_t)
 func (this *QCandlestickSeries) DecreasingColorChanged() {
 	C.QCandlestickSeries_decreasingColorChanged(this.h)
 }
-func (this *QCandlestickSeries) OnDecreasingColorChanged(slot func()) {
-	C.QCandlestickSeries_connect_decreasingColorChanged(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QCandlestickSeries) OnDecreasingColorChanged(slot func()) *qt6.SignalConnection {
+	_goptr := qt6.UnsafeNewQMetaObject__Connection(C.QCandlestickSeries_connect_decreasingColorChanged(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QCandlestickSeries_decreasingColorChanged
@@ -550,8 +587,10 @@ func miqt_exec_callback_QCandlestickSeries_decreasingColorChanged(cb C.intptr_t)
 func (this *QCandlestickSeries) BrushChanged() {
 	C.QCandlestickSeries_brushChanged(this.h)
 }
-func (this *QCandlestickSeries) OnBrushChanged(slot func()) {
-	C.QCandlestickSeries_connect_brushChanged(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QCandlestickSeries) OnBrushChanged(slot func()) *qt6.SignalConnection {
+	_goptr := qt6.UnsafeNewQMetaObject__Connection(C.QCandlestickSeries_connect_brushChanged(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QCandlestickSeries_brushChanged
@@ -567,8 +606,10 @@ func miqt_exec_callback_QCandlestickSeries_brushChanged(cb C.intptr_t) {
 func (this *QCandlestickSeries) PenChanged() {
 	C.QCandlestickSeries_penChanged(this.h)
 }
-func (this *QCandlestickSeries) OnPenChanged(slot func()) {
-	C.QCandlestickSeries_connect_penChanged(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QCandlestickSeries) OnPenChanged(slot func()) *qt6.SignalConnection {
+	_goptr := qt6.UnsafeNewQMetaObject__Connection(C.QCandlestickSeries_connect_penChanged(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QCandlestickSeries_penChanged
@@ -667,7 +708,11 @@ func (this *QCandlestickSeries) callVirtualBase_Type() QAbstractSeries__SeriesTy
 
 }
 func (this *QCandlestickSeries) OnType(slot func(super func() QAbstractSeries__SeriesType) QAbstractSeries__SeriesType) {
-	ok := C.QCandlestickSeries_override_virtual_type(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QCandlestickSeries_override_virtual_type(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -692,7 +737,11 @@ func (this *QCandlestickSeries) callVirtualBase_Event(event *qt6.QEvent) bool {
 
 }
 func (this *QCandlestickSeries) OnEvent(slot func(super func(event *qt6.QEvent) bool, event *qt6.QEvent) bool) {
-	ok := C.QCandlestickSeries_override_virtual_event(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QCandlestickSeries_override_virtual_event(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -720,7 +769,11 @@ func (this *QCandlestickSeries) callVirtualBase_EventFilter(watched *qt6.QObject
 
 }
 func (this *QCandlestickSeries) OnEventFilter(slot func(super func(watched *qt6.QObject, event *qt6.QEvent) bool, watched *qt6.QObject, event *qt6.QEvent) bool) {
-	ok := C.QCandlestickSeries_override_virtual_eventFilter(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QCandlestickSeries_override_virtual_eventFilter(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -750,7 +803,11 @@ func (this *QCandlestickSeries) callVirtualBase_TimerEvent(event *qt6.QTimerEven
 
 }
 func (this *QCandlestickSeries) OnTimerEvent(slot func(super func(event *qt6.QTimerEvent), event *qt6.QTimerEvent)) {
-	ok := C.QCandlestickSeries_override_virtual_timerEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QCandlestickSeries_override_virtual_timerEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -776,7 +833,11 @@ func (this *QCandlestickSeries) callVirtualBase_ChildEvent(event *qt6.QChildEven
 
 }
 func (this *QCandlestickSeries) OnChildEvent(slot func(super func(event *qt6.QChildEvent), event *qt6.QChildEvent)) {
-	ok := C.QCandlestickSeries_override_virtual_childEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QCandlestickSeries_override_virtual_childEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -802,7 +863,11 @@ func (this *QCandlestickSeries) callVirtualBase_CustomEvent(event *qt6.QEvent) {
 
 }
 func (this *QCandlestickSeries) OnCustomEvent(slot func(super func(event *qt6.QEvent), event *qt6.QEvent)) {
-	ok := C.QCandlestickSeries_override_virtual_customEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QCandlestickSeries_override_virtual_customEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -828,7 +893,11 @@ func (this *QCandlestickSeries) callVirtualBase_ConnectNotify(signal *qt6.QMetaM
 
 }
 func (this *QCandlestickSeries) OnConnectNotify(slot func(super func(signal *qt6.QMetaMethod), signal *qt6.QMetaMethod)) {
-	ok := C.QCandlestickSeries_override_virtual_connectNotify(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QCandlestickSeries_override_virtual_connectNotify(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -854,7 +923,11 @@ func (this *QCandlestickSeries) callVirtualBase_DisconnectNotify(signal *qt6.QMe
 
 }
 func (this *QCandlestickSeries) OnDisconnectNotify(slot func(super func(signal *qt6.QMetaMethod), signal *qt6.QMetaMethod)) {
-	ok := C.QCandlestickSeries_override_virtual_disconnectNotify(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QCandlestickSeries_override_virtual_disconnectNotify(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}

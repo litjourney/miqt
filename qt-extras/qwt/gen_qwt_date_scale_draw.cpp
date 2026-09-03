@@ -1,3 +1,5 @@
+#include <memory>
+#include <utility>
 #include <QDateTime>
 #include <QFont>
 #include <QPainter>
@@ -15,6 +17,7 @@
 extern "C" {
 #endif
 
+void miqt_exec_callback_handle_release_QwtDateScaleDraw(intptr_t);
 QwtText* miqt_exec_callback_QwtDateScaleDraw_label(const QwtDateScaleDraw*, intptr_t, double);
 int miqt_exec_callback_QwtDateScaleDraw_intervalType(const QwtDateScaleDraw*, intptr_t, QwtScaleDiv*);
 struct miqt_string miqt_exec_callback_QwtDateScaleDraw_dateFormatOfDate(const QwtDateScaleDraw*, intptr_t, QDateTime*, int);
@@ -36,45 +39,45 @@ public:
 	virtual ~MiqtVirtualQwtDateScaleDraw() override = default;
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__label = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtDateScaleDraw> handle__label;
 
 	// Subclass to allow providing a Go implementation
 	virtual QwtText label(double param1) const override {
-		if (handle__label == 0) {
+		if (!handle__label) {
 			return QwtDateScaleDraw::label(param1);
 		}
 
 		double sigval1 = param1;
-		QwtText* callback_return_value = miqt_exec_callback_QwtDateScaleDraw_label(this, handle__label, sigval1);
+		QwtText* callback_return_value = miqt_exec_callback_QwtDateScaleDraw_label(this, handle__label.value(), sigval1);
 		return *callback_return_value;
 	}
 
 	friend QwtText* QwtDateScaleDraw_virtualbase_label(const void* self, double param1);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__intervalType = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtDateScaleDraw> handle__intervalType;
 
 	// Subclass to allow providing a Go implementation
 	virtual QwtDate::IntervalType intervalType(const QwtScaleDiv& param1) const override {
-		if (handle__intervalType == 0) {
+		if (!handle__intervalType) {
 			return QwtDateScaleDraw::intervalType(param1);
 		}
 
 		const QwtScaleDiv& param1_ret = param1;
 		// Cast returned reference into pointer
 		QwtScaleDiv* sigval1 = const_cast<QwtScaleDiv*>(&param1_ret);
-		int callback_return_value = miqt_exec_callback_QwtDateScaleDraw_intervalType(this, handle__intervalType, sigval1);
+		int callback_return_value = miqt_exec_callback_QwtDateScaleDraw_intervalType(this, handle__intervalType.value(), sigval1);
 		return static_cast<QwtDate::IntervalType>(callback_return_value);
 	}
 
 	friend int QwtDateScaleDraw_virtualbase_intervalType(const void* self, QwtScaleDiv* param1);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__dateFormatOfDate = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtDateScaleDraw> handle__dateFormatOfDate;
 
 	// Subclass to allow providing a Go implementation
 	virtual QString dateFormatOfDate(const QDateTime& param1, QwtDate::IntervalType param2) const override {
-		if (handle__dateFormatOfDate == 0) {
+		if (!handle__dateFormatOfDate) {
 			return QwtDateScaleDraw::dateFormatOfDate(param1, param2);
 		}
 
@@ -83,7 +86,7 @@ public:
 		QDateTime* sigval1 = const_cast<QDateTime*>(&param1_ret);
 		QwtDate::IntervalType param2_ret = param2;
 		int sigval2 = static_cast<int>(param2_ret);
-		struct miqt_string callback_return_value = miqt_exec_callback_QwtDateScaleDraw_dateFormatOfDate(this, handle__dateFormatOfDate, sigval1, sigval2);
+		struct miqt_string callback_return_value = miqt_exec_callback_QwtDateScaleDraw_dateFormatOfDate(this, handle__dateFormatOfDate.value(), sigval1, sigval2);
 		QString callback_return_value_QString = QString::fromUtf8(callback_return_value.data, callback_return_value.len);
 		free(callback_return_value.data);
 		return callback_return_value_QString;
@@ -92,29 +95,29 @@ public:
 	friend struct miqt_string QwtDateScaleDraw_virtualbase_dateFormatOfDate(const void* self, QDateTime* param1, int param2);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__extent = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtDateScaleDraw> handle__extent;
 
 	// Subclass to allow providing a Go implementation
 	virtual double extent(const QFont& param1) const override {
-		if (handle__extent == 0) {
+		if (!handle__extent) {
 			return QwtDateScaleDraw::extent(param1);
 		}
 
 		const QFont& param1_ret = param1;
 		// Cast returned reference into pointer
 		QFont* sigval1 = const_cast<QFont*>(&param1_ret);
-		double callback_return_value = miqt_exec_callback_QwtDateScaleDraw_extent(this, handle__extent, sigval1);
+		double callback_return_value = miqt_exec_callback_QwtDateScaleDraw_extent(this, handle__extent.value(), sigval1);
 		return static_cast<double>(callback_return_value);
 	}
 
 	friend double QwtDateScaleDraw_virtualbase_extent(const void* self, QFont* param1);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__drawTick = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtDateScaleDraw> handle__drawTick;
 
 	// Subclass to allow providing a Go implementation
 	virtual void drawTick(QPainter* param1, double value, double len) const override {
-		if (handle__drawTick == 0) {
+		if (!handle__drawTick) {
 			QwtDateScaleDraw::drawTick(param1, value, len);
 			return;
 		}
@@ -122,53 +125,53 @@ public:
 		QPainter* sigval1 = param1;
 		double sigval2 = value;
 		double sigval3 = len;
-		miqt_exec_callback_QwtDateScaleDraw_drawTick(this, handle__drawTick, sigval1, sigval2, sigval3);
+		miqt_exec_callback_QwtDateScaleDraw_drawTick(this, handle__drawTick.value(), sigval1, sigval2, sigval3);
 
 	}
 
 	friend void QwtDateScaleDraw_virtualbase_drawTick(const void* self, QPainter* param1, double value, double len);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__drawBackbone = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtDateScaleDraw> handle__drawBackbone;
 
 	// Subclass to allow providing a Go implementation
 	virtual void drawBackbone(QPainter* param1) const override {
-		if (handle__drawBackbone == 0) {
+		if (!handle__drawBackbone) {
 			QwtDateScaleDraw::drawBackbone(param1);
 			return;
 		}
 
 		QPainter* sigval1 = param1;
-		miqt_exec_callback_QwtDateScaleDraw_drawBackbone(this, handle__drawBackbone, sigval1);
+		miqt_exec_callback_QwtDateScaleDraw_drawBackbone(this, handle__drawBackbone.value(), sigval1);
 
 	}
 
 	friend void QwtDateScaleDraw_virtualbase_drawBackbone(const void* self, QPainter* param1);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__drawLabel = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtDateScaleDraw> handle__drawLabel;
 
 	// Subclass to allow providing a Go implementation
 	virtual void drawLabel(QPainter* param1, double value) const override {
-		if (handle__drawLabel == 0) {
+		if (!handle__drawLabel) {
 			QwtDateScaleDraw::drawLabel(param1, value);
 			return;
 		}
 
 		QPainter* sigval1 = param1;
 		double sigval2 = value;
-		miqt_exec_callback_QwtDateScaleDraw_drawLabel(this, handle__drawLabel, sigval1, sigval2);
+		miqt_exec_callback_QwtDateScaleDraw_drawLabel(this, handle__drawLabel.value(), sigval1, sigval2);
 
 	}
 
 	friend void QwtDateScaleDraw_virtualbase_drawLabel(const void* self, QPainter* param1, double value);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__draw = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtDateScaleDraw> handle__draw;
 
 	// Subclass to allow providing a Go implementation
 	virtual void draw(QPainter* param1, const QPalette& param2) const override {
-		if (handle__draw == 0) {
+		if (!handle__draw) {
 			QwtDateScaleDraw::draw(param1, param2);
 			return;
 		}
@@ -177,7 +180,7 @@ public:
 		const QPalette& param2_ret = param2;
 		// Cast returned reference into pointer
 		QPalette* sigval2 = const_cast<QPalette*>(&param2_ret);
-		miqt_exec_callback_QwtDateScaleDraw_draw(this, handle__draw, sigval1, sigval2);
+		miqt_exec_callback_QwtDateScaleDraw_draw(this, handle__draw.value(), sigval1, sigval2);
 
 	}
 
@@ -252,12 +255,13 @@ QDateTime* QwtDateScaleDraw_toDateTime(const QwtDateScaleDraw* self, double para
 }
 
 bool QwtDateScaleDraw_override_virtual_label(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtDateScaleDraw> slot_handle(slot);
 	MiqtVirtualQwtDateScaleDraw* self_cast = dynamic_cast<MiqtVirtualQwtDateScaleDraw*>( (QwtDateScaleDraw*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__label = slot;
+	self_cast->handle__label = std::move(slot_handle);
 	return true;
 }
 
@@ -266,12 +270,13 @@ QwtText* QwtDateScaleDraw_virtualbase_label(const void* self, double param1) {
 }
 
 bool QwtDateScaleDraw_override_virtual_intervalType(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtDateScaleDraw> slot_handle(slot);
 	MiqtVirtualQwtDateScaleDraw* self_cast = dynamic_cast<MiqtVirtualQwtDateScaleDraw*>( (QwtDateScaleDraw*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__intervalType = slot;
+	self_cast->handle__intervalType = std::move(slot_handle);
 	return true;
 }
 
@@ -281,12 +286,13 @@ int QwtDateScaleDraw_virtualbase_intervalType(const void* self, QwtScaleDiv* par
 }
 
 bool QwtDateScaleDraw_override_virtual_dateFormatOfDate(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtDateScaleDraw> slot_handle(slot);
 	MiqtVirtualQwtDateScaleDraw* self_cast = dynamic_cast<MiqtVirtualQwtDateScaleDraw*>( (QwtDateScaleDraw*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__dateFormatOfDate = slot;
+	self_cast->handle__dateFormatOfDate = std::move(slot_handle);
 	return true;
 }
 
@@ -302,12 +308,13 @@ struct miqt_string QwtDateScaleDraw_virtualbase_dateFormatOfDate(const void* sel
 }
 
 bool QwtDateScaleDraw_override_virtual_extent(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtDateScaleDraw> slot_handle(slot);
 	MiqtVirtualQwtDateScaleDraw* self_cast = dynamic_cast<MiqtVirtualQwtDateScaleDraw*>( (QwtDateScaleDraw*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__extent = slot;
+	self_cast->handle__extent = std::move(slot_handle);
 	return true;
 }
 
@@ -316,12 +323,13 @@ double QwtDateScaleDraw_virtualbase_extent(const void* self, QFont* param1) {
 }
 
 bool QwtDateScaleDraw_override_virtual_drawTick(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtDateScaleDraw> slot_handle(slot);
 	MiqtVirtualQwtDateScaleDraw* self_cast = dynamic_cast<MiqtVirtualQwtDateScaleDraw*>( (QwtDateScaleDraw*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__drawTick = slot;
+	self_cast->handle__drawTick = std::move(slot_handle);
 	return true;
 }
 
@@ -330,12 +338,13 @@ void QwtDateScaleDraw_virtualbase_drawTick(const void* self, QPainter* param1, d
 }
 
 bool QwtDateScaleDraw_override_virtual_drawBackbone(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtDateScaleDraw> slot_handle(slot);
 	MiqtVirtualQwtDateScaleDraw* self_cast = dynamic_cast<MiqtVirtualQwtDateScaleDraw*>( (QwtDateScaleDraw*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__drawBackbone = slot;
+	self_cast->handle__drawBackbone = std::move(slot_handle);
 	return true;
 }
 
@@ -344,12 +353,13 @@ void QwtDateScaleDraw_virtualbase_drawBackbone(const void* self, QPainter* param
 }
 
 bool QwtDateScaleDraw_override_virtual_drawLabel(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtDateScaleDraw> slot_handle(slot);
 	MiqtVirtualQwtDateScaleDraw* self_cast = dynamic_cast<MiqtVirtualQwtDateScaleDraw*>( (QwtDateScaleDraw*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__drawLabel = slot;
+	self_cast->handle__drawLabel = std::move(slot_handle);
 	return true;
 }
 
@@ -358,12 +368,13 @@ void QwtDateScaleDraw_virtualbase_drawLabel(const void* self, QPainter* param1, 
 }
 
 bool QwtDateScaleDraw_override_virtual_draw(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtDateScaleDraw> slot_handle(slot);
 	MiqtVirtualQwtDateScaleDraw* self_cast = dynamic_cast<MiqtVirtualQwtDateScaleDraw*>( (QwtDateScaleDraw*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__draw = slot;
+	self_cast->handle__draw = std::move(slot_handle);
 	return true;
 }
 

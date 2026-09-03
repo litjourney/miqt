@@ -1,3 +1,5 @@
+#include <memory>
+#include <utility>
 #include <QChildEvent>
 #include <QEvent>
 #include <QImage>
@@ -21,6 +23,7 @@
 extern "C" {
 #endif
 
+void miqt_exec_callback_handle_release_QImageCapture(intptr_t);
 void miqt_exec_callback_QImageCapture_errorChanged(intptr_t);
 void miqt_exec_callback_QImageCapture_errorOccurred(intptr_t, int, int, struct miqt_string);
 void miqt_exec_callback_QImageCapture_readyForCaptureChanged(intptr_t, bool);
@@ -53,95 +56,95 @@ public:
 	virtual ~MiqtVirtualQImageCapture() override = default;
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__event = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QImageCapture> handle__event;
 
 	// Subclass to allow providing a Go implementation
 	virtual bool event(QEvent* event) override {
-		if (handle__event == 0) {
+		if (!handle__event) {
 			return QImageCapture::event(event);
 		}
 
 		QEvent* sigval1 = event;
-		bool callback_return_value = miqt_exec_callback_QImageCapture_event(this, handle__event, sigval1);
+		bool callback_return_value = miqt_exec_callback_QImageCapture_event(this, handle__event.value(), sigval1);
 		return callback_return_value;
 	}
 
 	friend bool QImageCapture_virtualbase_event(void* self, QEvent* event);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__eventFilter = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QImageCapture> handle__eventFilter;
 
 	// Subclass to allow providing a Go implementation
 	virtual bool eventFilter(QObject* watched, QEvent* event) override {
-		if (handle__eventFilter == 0) {
+		if (!handle__eventFilter) {
 			return QImageCapture::eventFilter(watched, event);
 		}
 
 		QObject* sigval1 = watched;
 		QEvent* sigval2 = event;
-		bool callback_return_value = miqt_exec_callback_QImageCapture_eventFilter(this, handle__eventFilter, sigval1, sigval2);
+		bool callback_return_value = miqt_exec_callback_QImageCapture_eventFilter(this, handle__eventFilter.value(), sigval1, sigval2);
 		return callback_return_value;
 	}
 
 	friend bool QImageCapture_virtualbase_eventFilter(void* self, QObject* watched, QEvent* event);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__timerEvent = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QImageCapture> handle__timerEvent;
 
 	// Subclass to allow providing a Go implementation
 	virtual void timerEvent(QTimerEvent* event) override {
-		if (handle__timerEvent == 0) {
+		if (!handle__timerEvent) {
 			QImageCapture::timerEvent(event);
 			return;
 		}
 
 		QTimerEvent* sigval1 = event;
-		miqt_exec_callback_QImageCapture_timerEvent(this, handle__timerEvent, sigval1);
+		miqt_exec_callback_QImageCapture_timerEvent(this, handle__timerEvent.value(), sigval1);
 
 	}
 
 	friend void QImageCapture_virtualbase_timerEvent(void* self, QTimerEvent* event);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__childEvent = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QImageCapture> handle__childEvent;
 
 	// Subclass to allow providing a Go implementation
 	virtual void childEvent(QChildEvent* event) override {
-		if (handle__childEvent == 0) {
+		if (!handle__childEvent) {
 			QImageCapture::childEvent(event);
 			return;
 		}
 
 		QChildEvent* sigval1 = event;
-		miqt_exec_callback_QImageCapture_childEvent(this, handle__childEvent, sigval1);
+		miqt_exec_callback_QImageCapture_childEvent(this, handle__childEvent.value(), sigval1);
 
 	}
 
 	friend void QImageCapture_virtualbase_childEvent(void* self, QChildEvent* event);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__customEvent = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QImageCapture> handle__customEvent;
 
 	// Subclass to allow providing a Go implementation
 	virtual void customEvent(QEvent* event) override {
-		if (handle__customEvent == 0) {
+		if (!handle__customEvent) {
 			QImageCapture::customEvent(event);
 			return;
 		}
 
 		QEvent* sigval1 = event;
-		miqt_exec_callback_QImageCapture_customEvent(this, handle__customEvent, sigval1);
+		miqt_exec_callback_QImageCapture_customEvent(this, handle__customEvent.value(), sigval1);
 
 	}
 
 	friend void QImageCapture_virtualbase_customEvent(void* self, QEvent* event);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__connectNotify = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QImageCapture> handle__connectNotify;
 
 	// Subclass to allow providing a Go implementation
 	virtual void connectNotify(const QMetaMethod& signal) override {
-		if (handle__connectNotify == 0) {
+		if (!handle__connectNotify) {
 			QImageCapture::connectNotify(signal);
 			return;
 		}
@@ -149,18 +152,18 @@ public:
 		const QMetaMethod& signal_ret = signal;
 		// Cast returned reference into pointer
 		QMetaMethod* sigval1 = const_cast<QMetaMethod*>(&signal_ret);
-		miqt_exec_callback_QImageCapture_connectNotify(this, handle__connectNotify, sigval1);
+		miqt_exec_callback_QImageCapture_connectNotify(this, handle__connectNotify.value(), sigval1);
 
 	}
 
 	friend void QImageCapture_virtualbase_connectNotify(void* self, QMetaMethod* signal);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__disconnectNotify = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QImageCapture> handle__disconnectNotify;
 
 	// Subclass to allow providing a Go implementation
 	virtual void disconnectNotify(const QMetaMethod& signal) override {
-		if (handle__disconnectNotify == 0) {
+		if (!handle__disconnectNotify) {
 			QImageCapture::disconnectNotify(signal);
 			return;
 		}
@@ -168,7 +171,7 @@ public:
 		const QMetaMethod& signal_ret = signal;
 		// Cast returned reference into pointer
 		QMetaMethod* sigval1 = const_cast<QMetaMethod*>(&signal_ret);
-		miqt_exec_callback_QImageCapture_disconnectNotify(this, handle__disconnectNotify, sigval1);
+		miqt_exec_callback_QImageCapture_disconnectNotify(this, handle__disconnectNotify.value(), sigval1);
 
 	}
 
@@ -330,10 +333,12 @@ void QImageCapture_errorChanged(QImageCapture* self) {
 	self->errorChanged();
 }
 
-void QImageCapture_connect_errorChanged(QImageCapture* self, intptr_t slot) {
-	QImageCapture::connect(self, static_cast<void (QImageCapture::*)()>(&QImageCapture::errorChanged), self, [=]() {
+void* QImageCapture_connect_errorChanged(QImageCapture* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QImageCapture>>(slot);
+	return new QMetaObject::Connection(QImageCapture::connect(self, static_cast<void (QImageCapture::*)()>(&QImageCapture::errorChanged), self, [slot_handle]() {
+		intptr_t slot = slot_handle->value();
 		miqt_exec_callback_QImageCapture_errorChanged(slot);
-	});
+	}));
 }
 
 void QImageCapture_errorOccurred(QImageCapture* self, int id, int error, struct miqt_string errorString) {
@@ -341,8 +346,10 @@ void QImageCapture_errorOccurred(QImageCapture* self, int id, int error, struct 
 	self->errorOccurred(static_cast<int>(id), static_cast<QImageCapture::Error>(error), errorString_QString);
 }
 
-void QImageCapture_connect_errorOccurred(QImageCapture* self, intptr_t slot) {
-	QImageCapture::connect(self, static_cast<void (QImageCapture::*)(int, QImageCapture::Error, const QString&)>(&QImageCapture::errorOccurred), self, [=](int id, QImageCapture::Error error, const QString& errorString) {
+void* QImageCapture_connect_errorOccurred(QImageCapture* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QImageCapture>>(slot);
+	return new QMetaObject::Connection(QImageCapture::connect(self, static_cast<void (QImageCapture::*)(int, QImageCapture::Error, const QString&)>(&QImageCapture::errorOccurred), self, [slot_handle](int id, QImageCapture::Error error, const QString& errorString) {
+		intptr_t slot = slot_handle->value();
 		int sigval1 = id;
 		QImageCapture::Error error_ret = error;
 		int sigval2 = static_cast<int>(error_ret);
@@ -355,111 +362,129 @@ void QImageCapture_connect_errorOccurred(QImageCapture* self, intptr_t slot) {
 		memcpy(errorString_ms.data, errorString_b.data(), errorString_ms.len);
 		struct miqt_string sigval3 = errorString_ms;
 		miqt_exec_callback_QImageCapture_errorOccurred(slot, sigval1, sigval2, sigval3);
-	});
+	}));
 }
 
 void QImageCapture_readyForCaptureChanged(QImageCapture* self, bool ready) {
 	self->readyForCaptureChanged(ready);
 }
 
-void QImageCapture_connect_readyForCaptureChanged(QImageCapture* self, intptr_t slot) {
-	QImageCapture::connect(self, static_cast<void (QImageCapture::*)(bool)>(&QImageCapture::readyForCaptureChanged), self, [=](bool ready) {
+void* QImageCapture_connect_readyForCaptureChanged(QImageCapture* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QImageCapture>>(slot);
+	return new QMetaObject::Connection(QImageCapture::connect(self, static_cast<void (QImageCapture::*)(bool)>(&QImageCapture::readyForCaptureChanged), self, [slot_handle](bool ready) {
+		intptr_t slot = slot_handle->value();
 		bool sigval1 = ready;
 		miqt_exec_callback_QImageCapture_readyForCaptureChanged(slot, sigval1);
-	});
+	}));
 }
 
 void QImageCapture_metaDataChanged(QImageCapture* self) {
 	self->metaDataChanged();
 }
 
-void QImageCapture_connect_metaDataChanged(QImageCapture* self, intptr_t slot) {
-	QImageCapture::connect(self, static_cast<void (QImageCapture::*)()>(&QImageCapture::metaDataChanged), self, [=]() {
+void* QImageCapture_connect_metaDataChanged(QImageCapture* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QImageCapture>>(slot);
+	return new QMetaObject::Connection(QImageCapture::connect(self, static_cast<void (QImageCapture::*)()>(&QImageCapture::metaDataChanged), self, [slot_handle]() {
+		intptr_t slot = slot_handle->value();
 		miqt_exec_callback_QImageCapture_metaDataChanged(slot);
-	});
+	}));
 }
 
 void QImageCapture_fileFormatChanged(QImageCapture* self) {
 	self->fileFormatChanged();
 }
 
-void QImageCapture_connect_fileFormatChanged(QImageCapture* self, intptr_t slot) {
-	QImageCapture::connect(self, static_cast<void (QImageCapture::*)()>(&QImageCapture::fileFormatChanged), self, [=]() {
+void* QImageCapture_connect_fileFormatChanged(QImageCapture* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QImageCapture>>(slot);
+	return new QMetaObject::Connection(QImageCapture::connect(self, static_cast<void (QImageCapture::*)()>(&QImageCapture::fileFormatChanged), self, [slot_handle]() {
+		intptr_t slot = slot_handle->value();
 		miqt_exec_callback_QImageCapture_fileFormatChanged(slot);
-	});
+	}));
 }
 
 void QImageCapture_qualityChanged(QImageCapture* self) {
 	self->qualityChanged();
 }
 
-void QImageCapture_connect_qualityChanged(QImageCapture* self, intptr_t slot) {
-	QImageCapture::connect(self, static_cast<void (QImageCapture::*)()>(&QImageCapture::qualityChanged), self, [=]() {
+void* QImageCapture_connect_qualityChanged(QImageCapture* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QImageCapture>>(slot);
+	return new QMetaObject::Connection(QImageCapture::connect(self, static_cast<void (QImageCapture::*)()>(&QImageCapture::qualityChanged), self, [slot_handle]() {
+		intptr_t slot = slot_handle->value();
 		miqt_exec_callback_QImageCapture_qualityChanged(slot);
-	});
+	}));
 }
 
 void QImageCapture_resolutionChanged(QImageCapture* self) {
 	self->resolutionChanged();
 }
 
-void QImageCapture_connect_resolutionChanged(QImageCapture* self, intptr_t slot) {
-	QImageCapture::connect(self, static_cast<void (QImageCapture::*)()>(&QImageCapture::resolutionChanged), self, [=]() {
+void* QImageCapture_connect_resolutionChanged(QImageCapture* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QImageCapture>>(slot);
+	return new QMetaObject::Connection(QImageCapture::connect(self, static_cast<void (QImageCapture::*)()>(&QImageCapture::resolutionChanged), self, [slot_handle]() {
+		intptr_t slot = slot_handle->value();
 		miqt_exec_callback_QImageCapture_resolutionChanged(slot);
-	});
+	}));
 }
 
 void QImageCapture_imageExposed(QImageCapture* self, int id) {
 	self->imageExposed(static_cast<int>(id));
 }
 
-void QImageCapture_connect_imageExposed(QImageCapture* self, intptr_t slot) {
-	QImageCapture::connect(self, static_cast<void (QImageCapture::*)(int)>(&QImageCapture::imageExposed), self, [=](int id) {
+void* QImageCapture_connect_imageExposed(QImageCapture* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QImageCapture>>(slot);
+	return new QMetaObject::Connection(QImageCapture::connect(self, static_cast<void (QImageCapture::*)(int)>(&QImageCapture::imageExposed), self, [slot_handle](int id) {
+		intptr_t slot = slot_handle->value();
 		int sigval1 = id;
 		miqt_exec_callback_QImageCapture_imageExposed(slot, sigval1);
-	});
+	}));
 }
 
 void QImageCapture_imageCaptured(QImageCapture* self, int id, QImage* preview) {
 	self->imageCaptured(static_cast<int>(id), *preview);
 }
 
-void QImageCapture_connect_imageCaptured(QImageCapture* self, intptr_t slot) {
-	QImageCapture::connect(self, static_cast<void (QImageCapture::*)(int, const QImage&)>(&QImageCapture::imageCaptured), self, [=](int id, const QImage& preview) {
+void* QImageCapture_connect_imageCaptured(QImageCapture* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QImageCapture>>(slot);
+	return new QMetaObject::Connection(QImageCapture::connect(self, static_cast<void (QImageCapture::*)(int, const QImage&)>(&QImageCapture::imageCaptured), self, [slot_handle](int id, const QImage& preview) {
+		intptr_t slot = slot_handle->value();
 		int sigval1 = id;
 		const QImage& preview_ret = preview;
 		// Cast returned reference into pointer
 		QImage* sigval2 = const_cast<QImage*>(&preview_ret);
 		miqt_exec_callback_QImageCapture_imageCaptured(slot, sigval1, sigval2);
-	});
+	}));
 }
 
 void QImageCapture_imageMetadataAvailable(QImageCapture* self, int id, QMediaMetaData* metaData) {
 	self->imageMetadataAvailable(static_cast<int>(id), *metaData);
 }
 
-void QImageCapture_connect_imageMetadataAvailable(QImageCapture* self, intptr_t slot) {
-	QImageCapture::connect(self, static_cast<void (QImageCapture::*)(int, const QMediaMetaData&)>(&QImageCapture::imageMetadataAvailable), self, [=](int id, const QMediaMetaData& metaData) {
+void* QImageCapture_connect_imageMetadataAvailable(QImageCapture* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QImageCapture>>(slot);
+	return new QMetaObject::Connection(QImageCapture::connect(self, static_cast<void (QImageCapture::*)(int, const QMediaMetaData&)>(&QImageCapture::imageMetadataAvailable), self, [slot_handle](int id, const QMediaMetaData& metaData) {
+		intptr_t slot = slot_handle->value();
 		int sigval1 = id;
 		const QMediaMetaData& metaData_ret = metaData;
 		// Cast returned reference into pointer
 		QMediaMetaData* sigval2 = const_cast<QMediaMetaData*>(&metaData_ret);
 		miqt_exec_callback_QImageCapture_imageMetadataAvailable(slot, sigval1, sigval2);
-	});
+	}));
 }
 
 void QImageCapture_imageAvailable(QImageCapture* self, int id, QVideoFrame* frame) {
 	self->imageAvailable(static_cast<int>(id), *frame);
 }
 
-void QImageCapture_connect_imageAvailable(QImageCapture* self, intptr_t slot) {
-	QImageCapture::connect(self, static_cast<void (QImageCapture::*)(int, const QVideoFrame&)>(&QImageCapture::imageAvailable), self, [=](int id, const QVideoFrame& frame) {
+void* QImageCapture_connect_imageAvailable(QImageCapture* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QImageCapture>>(slot);
+	return new QMetaObject::Connection(QImageCapture::connect(self, static_cast<void (QImageCapture::*)(int, const QVideoFrame&)>(&QImageCapture::imageAvailable), self, [slot_handle](int id, const QVideoFrame& frame) {
+		intptr_t slot = slot_handle->value();
 		int sigval1 = id;
 		const QVideoFrame& frame_ret = frame;
 		// Cast returned reference into pointer
 		QVideoFrame* sigval2 = const_cast<QVideoFrame*>(&frame_ret);
 		miqt_exec_callback_QImageCapture_imageAvailable(slot, sigval1, sigval2);
-	});
+	}));
 }
 
 void QImageCapture_imageSaved(QImageCapture* self, int id, struct miqt_string fileName) {
@@ -467,8 +492,10 @@ void QImageCapture_imageSaved(QImageCapture* self, int id, struct miqt_string fi
 	self->imageSaved(static_cast<int>(id), fileName_QString);
 }
 
-void QImageCapture_connect_imageSaved(QImageCapture* self, intptr_t slot) {
-	QImageCapture::connect(self, static_cast<void (QImageCapture::*)(int, const QString&)>(&QImageCapture::imageSaved), self, [=](int id, const QString& fileName) {
+void* QImageCapture_connect_imageSaved(QImageCapture* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QImageCapture>>(slot);
+	return new QMetaObject::Connection(QImageCapture::connect(self, static_cast<void (QImageCapture::*)(int, const QString&)>(&QImageCapture::imageSaved), self, [slot_handle](int id, const QString& fileName) {
+		intptr_t slot = slot_handle->value();
 		int sigval1 = id;
 		const QString fileName_ret = fileName;
 		// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
@@ -479,7 +506,7 @@ void QImageCapture_connect_imageSaved(QImageCapture* self, intptr_t slot) {
 		memcpy(fileName_ms.data, fileName_b.data(), fileName_ms.len);
 		struct miqt_string sigval2 = fileName_ms;
 		miqt_exec_callback_QImageCapture_imageSaved(slot, sigval1, sigval2);
-	});
+	}));
 }
 
 struct miqt_string QImageCapture_tr2(const char* s, const char* c) {
@@ -510,12 +537,13 @@ int QImageCapture_captureToFileWithLocation(QImageCapture* self, struct miqt_str
 }
 
 bool QImageCapture_override_virtual_event(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QImageCapture> slot_handle(slot);
 	MiqtVirtualQImageCapture* self_cast = dynamic_cast<MiqtVirtualQImageCapture*>( (QImageCapture*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__event = slot;
+	self_cast->handle__event = std::move(slot_handle);
 	return true;
 }
 
@@ -524,12 +552,13 @@ bool QImageCapture_virtualbase_event(void* self, QEvent* event) {
 }
 
 bool QImageCapture_override_virtual_eventFilter(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QImageCapture> slot_handle(slot);
 	MiqtVirtualQImageCapture* self_cast = dynamic_cast<MiqtVirtualQImageCapture*>( (QImageCapture*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__eventFilter = slot;
+	self_cast->handle__eventFilter = std::move(slot_handle);
 	return true;
 }
 
@@ -538,12 +567,13 @@ bool QImageCapture_virtualbase_eventFilter(void* self, QObject* watched, QEvent*
 }
 
 bool QImageCapture_override_virtual_timerEvent(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QImageCapture> slot_handle(slot);
 	MiqtVirtualQImageCapture* self_cast = dynamic_cast<MiqtVirtualQImageCapture*>( (QImageCapture*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__timerEvent = slot;
+	self_cast->handle__timerEvent = std::move(slot_handle);
 	return true;
 }
 
@@ -552,12 +582,13 @@ void QImageCapture_virtualbase_timerEvent(void* self, QTimerEvent* event) {
 }
 
 bool QImageCapture_override_virtual_childEvent(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QImageCapture> slot_handle(slot);
 	MiqtVirtualQImageCapture* self_cast = dynamic_cast<MiqtVirtualQImageCapture*>( (QImageCapture*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__childEvent = slot;
+	self_cast->handle__childEvent = std::move(slot_handle);
 	return true;
 }
 
@@ -566,12 +597,13 @@ void QImageCapture_virtualbase_childEvent(void* self, QChildEvent* event) {
 }
 
 bool QImageCapture_override_virtual_customEvent(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QImageCapture> slot_handle(slot);
 	MiqtVirtualQImageCapture* self_cast = dynamic_cast<MiqtVirtualQImageCapture*>( (QImageCapture*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__customEvent = slot;
+	self_cast->handle__customEvent = std::move(slot_handle);
 	return true;
 }
 
@@ -580,12 +612,13 @@ void QImageCapture_virtualbase_customEvent(void* self, QEvent* event) {
 }
 
 bool QImageCapture_override_virtual_connectNotify(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QImageCapture> slot_handle(slot);
 	MiqtVirtualQImageCapture* self_cast = dynamic_cast<MiqtVirtualQImageCapture*>( (QImageCapture*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__connectNotify = slot;
+	self_cast->handle__connectNotify = std::move(slot_handle);
 	return true;
 }
 
@@ -594,12 +627,13 @@ void QImageCapture_virtualbase_connectNotify(void* self, QMetaMethod* signal) {
 }
 
 bool QImageCapture_override_virtual_disconnectNotify(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QImageCapture> slot_handle(slot);
 	MiqtVirtualQImageCapture* self_cast = dynamic_cast<MiqtVirtualQImageCapture*>( (QImageCapture*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__disconnectNotify = slot;
+	self_cast->handle__disconnectNotify = std::move(slot_handle);
 	return true;
 }
 

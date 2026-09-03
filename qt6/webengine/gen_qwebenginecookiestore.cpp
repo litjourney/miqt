@@ -1,3 +1,5 @@
+#include <memory>
+#include <utility>
 #include <QMetaMethod>
 #include <QMetaObject>
 #include <QNetworkCookie>
@@ -15,6 +17,7 @@
 extern "C" {
 #endif
 
+void miqt_exec_callback_handle_release_QWebEngineCookieStore(intptr_t);
 void miqt_exec_callback_QWebEngineCookieStore_cookieAdded(intptr_t, QNetworkCookie*);
 void miqt_exec_callback_QWebEngineCookieStore_cookieRemoved(intptr_t, QNetworkCookie*);
 #ifdef __cplusplus
@@ -68,26 +71,30 @@ void QWebEngineCookieStore_cookieAdded(QWebEngineCookieStore* self, QNetworkCook
 	self->cookieAdded(*cookie);
 }
 
-void QWebEngineCookieStore_connect_cookieAdded(QWebEngineCookieStore* self, intptr_t slot) {
-	QWebEngineCookieStore::connect(self, static_cast<void (QWebEngineCookieStore::*)(const QNetworkCookie&)>(&QWebEngineCookieStore::cookieAdded), self, [=](const QNetworkCookie& cookie) {
+void* QWebEngineCookieStore_connect_cookieAdded(QWebEngineCookieStore* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QWebEngineCookieStore>>(slot);
+	return new QMetaObject::Connection(QWebEngineCookieStore::connect(self, static_cast<void (QWebEngineCookieStore::*)(const QNetworkCookie&)>(&QWebEngineCookieStore::cookieAdded), self, [slot_handle](const QNetworkCookie& cookie) {
+		intptr_t slot = slot_handle->value();
 		const QNetworkCookie& cookie_ret = cookie;
 		// Cast returned reference into pointer
 		QNetworkCookie* sigval1 = const_cast<QNetworkCookie*>(&cookie_ret);
 		miqt_exec_callback_QWebEngineCookieStore_cookieAdded(slot, sigval1);
-	});
+	}));
 }
 
 void QWebEngineCookieStore_cookieRemoved(QWebEngineCookieStore* self, QNetworkCookie* cookie) {
 	self->cookieRemoved(*cookie);
 }
 
-void QWebEngineCookieStore_connect_cookieRemoved(QWebEngineCookieStore* self, intptr_t slot) {
-	QWebEngineCookieStore::connect(self, static_cast<void (QWebEngineCookieStore::*)(const QNetworkCookie&)>(&QWebEngineCookieStore::cookieRemoved), self, [=](const QNetworkCookie& cookie) {
+void* QWebEngineCookieStore_connect_cookieRemoved(QWebEngineCookieStore* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QWebEngineCookieStore>>(slot);
+	return new QMetaObject::Connection(QWebEngineCookieStore::connect(self, static_cast<void (QWebEngineCookieStore::*)(const QNetworkCookie&)>(&QWebEngineCookieStore::cookieRemoved), self, [slot_handle](const QNetworkCookie& cookie) {
+		intptr_t slot = slot_handle->value();
 		const QNetworkCookie& cookie_ret = cookie;
 		// Cast returned reference into pointer
 		QNetworkCookie* sigval1 = const_cast<QNetworkCookie*>(&cookie_ret);
 		miqt_exec_callback_QWebEngineCookieStore_cookieRemoved(slot, sigval1);
-	});
+	}));
 }
 
 struct miqt_string QWebEngineCookieStore_tr2(const char* s, const char* c) {

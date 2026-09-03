@@ -1,3 +1,5 @@
+#include <memory>
+#include <utility>
 #include <QScriptClass>
 #include <QScriptClassPropertyIterator>
 #include <QScriptEngine>
@@ -14,6 +16,7 @@
 extern "C" {
 #endif
 
+void miqt_exec_callback_handle_release_QScriptClass(intptr_t);
 int miqt_exec_callback_QScriptClass_queryProperty(QScriptClass*, intptr_t, QScriptValue*, QScriptString*, int, unsigned int*);
 QScriptValue* miqt_exec_callback_QScriptClass_property(QScriptClass*, intptr_t, QScriptValue*, QScriptString*, unsigned int);
 void miqt_exec_callback_QScriptClass_setProperty(QScriptClass*, intptr_t, QScriptValue*, QScriptString*, unsigned int, QScriptValue*);
@@ -35,11 +38,11 @@ public:
 	virtual ~MiqtVirtualQScriptClass() override = default;
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__queryProperty = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QScriptClass> handle__queryProperty;
 
 	// Subclass to allow providing a Go implementation
 	virtual QScriptClass::QueryFlags queryProperty(const QScriptValue& object, const QScriptString& name, QScriptClass::QueryFlags flags, uint* id) override {
-		if (handle__queryProperty == 0) {
+		if (!handle__queryProperty) {
 			return QScriptClass::queryProperty(object, name, flags, id);
 		}
 
@@ -53,18 +56,18 @@ public:
 		int sigval3 = static_cast<int>(flags_ret);
 		uint* id_ret = id;
 		unsigned int* sigval4 = static_cast<unsigned int*>(id_ret);
-		int callback_return_value = miqt_exec_callback_QScriptClass_queryProperty(this, handle__queryProperty, sigval1, sigval2, sigval3, sigval4);
+		int callback_return_value = miqt_exec_callback_QScriptClass_queryProperty(this, handle__queryProperty.value(), sigval1, sigval2, sigval3, sigval4);
 		return static_cast<QScriptClass::QueryFlags>(callback_return_value);
 	}
 
 	friend int QScriptClass_virtualbase_queryProperty(void* self, QScriptValue* object, QScriptString* name, int flags, unsigned int* id);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__property = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QScriptClass> handle__property;
 
 	// Subclass to allow providing a Go implementation
 	virtual QScriptValue property(const QScriptValue& object, const QScriptString& name, uint id) override {
-		if (handle__property == 0) {
+		if (!handle__property) {
 			return QScriptClass::property(object, name, id);
 		}
 
@@ -76,18 +79,18 @@ public:
 		QScriptString* sigval2 = const_cast<QScriptString*>(&name_ret);
 		uint id_ret = id;
 		unsigned int sigval3 = static_cast<unsigned int>(id_ret);
-		QScriptValue* callback_return_value = miqt_exec_callback_QScriptClass_property(this, handle__property, sigval1, sigval2, sigval3);
+		QScriptValue* callback_return_value = miqt_exec_callback_QScriptClass_property(this, handle__property.value(), sigval1, sigval2, sigval3);
 		return *callback_return_value;
 	}
 
 	friend QScriptValue* QScriptClass_virtualbase_property(void* self, QScriptValue* object, QScriptString* name, unsigned int id);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__setProperty = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QScriptClass> handle__setProperty;
 
 	// Subclass to allow providing a Go implementation
 	virtual void setProperty(QScriptValue& object, const QScriptString& name, uint id, const QScriptValue& value) override {
-		if (handle__setProperty == 0) {
+		if (!handle__setProperty) {
 			QScriptClass::setProperty(object, name, id, value);
 			return;
 		}
@@ -103,18 +106,18 @@ public:
 		const QScriptValue& value_ret = value;
 		// Cast returned reference into pointer
 		QScriptValue* sigval4 = const_cast<QScriptValue*>(&value_ret);
-		miqt_exec_callback_QScriptClass_setProperty(this, handle__setProperty, sigval1, sigval2, sigval3, sigval4);
+		miqt_exec_callback_QScriptClass_setProperty(this, handle__setProperty.value(), sigval1, sigval2, sigval3, sigval4);
 
 	}
 
 	friend void QScriptClass_virtualbase_setProperty(void* self, QScriptValue* object, QScriptString* name, unsigned int id, QScriptValue* value);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__propertyFlags = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QScriptClass> handle__propertyFlags;
 
 	// Subclass to allow providing a Go implementation
 	virtual QScriptValue::PropertyFlags propertyFlags(const QScriptValue& object, const QScriptString& name, uint id) override {
-		if (handle__propertyFlags == 0) {
+		if (!handle__propertyFlags) {
 			return QScriptClass::propertyFlags(object, name, id);
 		}
 
@@ -126,55 +129,55 @@ public:
 		QScriptString* sigval2 = const_cast<QScriptString*>(&name_ret);
 		uint id_ret = id;
 		unsigned int sigval3 = static_cast<unsigned int>(id_ret);
-		int callback_return_value = miqt_exec_callback_QScriptClass_propertyFlags(this, handle__propertyFlags, sigval1, sigval2, sigval3);
+		int callback_return_value = miqt_exec_callback_QScriptClass_propertyFlags(this, handle__propertyFlags.value(), sigval1, sigval2, sigval3);
 		return static_cast<QScriptValue::PropertyFlags>(callback_return_value);
 	}
 
 	friend int QScriptClass_virtualbase_propertyFlags(void* self, QScriptValue* object, QScriptString* name, unsigned int id);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__newIterator = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QScriptClass> handle__newIterator;
 
 	// Subclass to allow providing a Go implementation
 	virtual QScriptClassPropertyIterator* newIterator(const QScriptValue& object) override {
-		if (handle__newIterator == 0) {
+		if (!handle__newIterator) {
 			return QScriptClass::newIterator(object);
 		}
 
 		const QScriptValue& object_ret = object;
 		// Cast returned reference into pointer
 		QScriptValue* sigval1 = const_cast<QScriptValue*>(&object_ret);
-		QScriptClassPropertyIterator* callback_return_value = miqt_exec_callback_QScriptClass_newIterator(this, handle__newIterator, sigval1);
+		QScriptClassPropertyIterator* callback_return_value = miqt_exec_callback_QScriptClass_newIterator(this, handle__newIterator.value(), sigval1);
 		return callback_return_value;
 	}
 
 	friend QScriptClassPropertyIterator* QScriptClass_virtualbase_newIterator(void* self, QScriptValue* object);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__prototype = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QScriptClass> handle__prototype;
 
 	// Subclass to allow providing a Go implementation
 	virtual QScriptValue prototype() const override {
-		if (handle__prototype == 0) {
+		if (!handle__prototype) {
 			return QScriptClass::prototype();
 		}
 
-		QScriptValue* callback_return_value = miqt_exec_callback_QScriptClass_prototype(this, handle__prototype);
+		QScriptValue* callback_return_value = miqt_exec_callback_QScriptClass_prototype(this, handle__prototype.value());
 		return *callback_return_value;
 	}
 
 	friend QScriptValue* QScriptClass_virtualbase_prototype(const void* self);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__name = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QScriptClass> handle__name;
 
 	// Subclass to allow providing a Go implementation
 	virtual QString name() const override {
-		if (handle__name == 0) {
+		if (!handle__name) {
 			return QScriptClass::name();
 		}
 
-		struct miqt_string callback_return_value = miqt_exec_callback_QScriptClass_name(this, handle__name);
+		struct miqt_string callback_return_value = miqt_exec_callback_QScriptClass_name(this, handle__name.value());
 		QString callback_return_value_QString = QString::fromUtf8(callback_return_value.data, callback_return_value.len);
 		free(callback_return_value.data);
 		return callback_return_value_QString;
@@ -183,28 +186,28 @@ public:
 	friend struct miqt_string QScriptClass_virtualbase_name(const void* self);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__supportsExtension = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QScriptClass> handle__supportsExtension;
 
 	// Subclass to allow providing a Go implementation
 	virtual bool supportsExtension(QScriptClass::Extension extension) const override {
-		if (handle__supportsExtension == 0) {
+		if (!handle__supportsExtension) {
 			return QScriptClass::supportsExtension(extension);
 		}
 
 		QScriptClass::Extension extension_ret = extension;
 		int sigval1 = static_cast<int>(extension_ret);
-		bool callback_return_value = miqt_exec_callback_QScriptClass_supportsExtension(this, handle__supportsExtension, sigval1);
+		bool callback_return_value = miqt_exec_callback_QScriptClass_supportsExtension(this, handle__supportsExtension.value(), sigval1);
 		return callback_return_value;
 	}
 
 	friend bool QScriptClass_virtualbase_supportsExtension(const void* self, int extension);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__extension = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QScriptClass> handle__extension;
 
 	// Subclass to allow providing a Go implementation
 	virtual QVariant extension(QScriptClass::Extension extension, const QVariant& argument) override {
-		if (handle__extension == 0) {
+		if (!handle__extension) {
 			return QScriptClass::extension(extension, argument);
 		}
 
@@ -213,7 +216,7 @@ public:
 		const QVariant& argument_ret = argument;
 		// Cast returned reference into pointer
 		QVariant* sigval2 = const_cast<QVariant*>(&argument_ret);
-		QVariant* callback_return_value = miqt_exec_callback_QScriptClass_extension(this, handle__extension, sigval1, sigval2);
+		QVariant* callback_return_value = miqt_exec_callback_QScriptClass_extension(this, handle__extension.value(), sigval1, sigval2);
 		return *callback_return_value;
 	}
 
@@ -275,12 +278,13 @@ QVariant* QScriptClass_extension(QScriptClass* self, int extension, QVariant* ar
 }
 
 bool QScriptClass_override_virtual_queryProperty(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QScriptClass> slot_handle(slot);
 	MiqtVirtualQScriptClass* self_cast = dynamic_cast<MiqtVirtualQScriptClass*>( (QScriptClass*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__queryProperty = slot;
+	self_cast->handle__queryProperty = std::move(slot_handle);
 	return true;
 }
 
@@ -290,12 +294,13 @@ int QScriptClass_virtualbase_queryProperty(void* self, QScriptValue* object, QSc
 }
 
 bool QScriptClass_override_virtual_property(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QScriptClass> slot_handle(slot);
 	MiqtVirtualQScriptClass* self_cast = dynamic_cast<MiqtVirtualQScriptClass*>( (QScriptClass*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__property = slot;
+	self_cast->handle__property = std::move(slot_handle);
 	return true;
 }
 
@@ -304,12 +309,13 @@ QScriptValue* QScriptClass_virtualbase_property(void* self, QScriptValue* object
 }
 
 bool QScriptClass_override_virtual_setProperty(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QScriptClass> slot_handle(slot);
 	MiqtVirtualQScriptClass* self_cast = dynamic_cast<MiqtVirtualQScriptClass*>( (QScriptClass*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__setProperty = slot;
+	self_cast->handle__setProperty = std::move(slot_handle);
 	return true;
 }
 
@@ -318,12 +324,13 @@ void QScriptClass_virtualbase_setProperty(void* self, QScriptValue* object, QScr
 }
 
 bool QScriptClass_override_virtual_propertyFlags(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QScriptClass> slot_handle(slot);
 	MiqtVirtualQScriptClass* self_cast = dynamic_cast<MiqtVirtualQScriptClass*>( (QScriptClass*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__propertyFlags = slot;
+	self_cast->handle__propertyFlags = std::move(slot_handle);
 	return true;
 }
 
@@ -333,12 +340,13 @@ int QScriptClass_virtualbase_propertyFlags(void* self, QScriptValue* object, QSc
 }
 
 bool QScriptClass_override_virtual_newIterator(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QScriptClass> slot_handle(slot);
 	MiqtVirtualQScriptClass* self_cast = dynamic_cast<MiqtVirtualQScriptClass*>( (QScriptClass*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__newIterator = slot;
+	self_cast->handle__newIterator = std::move(slot_handle);
 	return true;
 }
 
@@ -347,12 +355,13 @@ QScriptClassPropertyIterator* QScriptClass_virtualbase_newIterator(void* self, Q
 }
 
 bool QScriptClass_override_virtual_prototype(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QScriptClass> slot_handle(slot);
 	MiqtVirtualQScriptClass* self_cast = dynamic_cast<MiqtVirtualQScriptClass*>( (QScriptClass*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__prototype = slot;
+	self_cast->handle__prototype = std::move(slot_handle);
 	return true;
 }
 
@@ -361,12 +370,13 @@ QScriptValue* QScriptClass_virtualbase_prototype(const void* self) {
 }
 
 bool QScriptClass_override_virtual_name(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QScriptClass> slot_handle(slot);
 	MiqtVirtualQScriptClass* self_cast = dynamic_cast<MiqtVirtualQScriptClass*>( (QScriptClass*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__name = slot;
+	self_cast->handle__name = std::move(slot_handle);
 	return true;
 }
 
@@ -382,12 +392,13 @@ struct miqt_string QScriptClass_virtualbase_name(const void* self) {
 }
 
 bool QScriptClass_override_virtual_supportsExtension(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QScriptClass> slot_handle(slot);
 	MiqtVirtualQScriptClass* self_cast = dynamic_cast<MiqtVirtualQScriptClass*>( (QScriptClass*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__supportsExtension = slot;
+	self_cast->handle__supportsExtension = std::move(slot_handle);
 	return true;
 }
 
@@ -396,12 +407,13 @@ bool QScriptClass_virtualbase_supportsExtension(const void* self, int extension)
 }
 
 bool QScriptClass_override_virtual_extension(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QScriptClass> slot_handle(slot);
 	MiqtVirtualQScriptClass* self_cast = dynamic_cast<MiqtVirtualQScriptClass*>( (QScriptClass*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__extension = slot;
+	self_cast->handle__extension = std::move(slot_handle);
 	return true;
 }
 

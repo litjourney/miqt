@@ -20,6 +20,11 @@ const (
 	QObjectData__CheckForParentChildLoopsWarnDepth QObjectData__ = 4096
 )
 
+//export miqt_exec_callback_handle_release_QObject
+func miqt_exec_callback_handle_release_QObject(cb C.intptr_t) {
+	cgo.Handle(cb).Delete()
+}
+
 type QObject struct {
 	h *C.QObject
 }
@@ -255,8 +260,10 @@ func (this *QObject) UserData(id uint) *QObjectUserData {
 func (this *QObject) Destroyed() {
 	C.QObject_destroyed(this.h)
 }
-func (this *QObject) OnDestroyed(slot func()) {
-	C.QObject_connect_destroyed(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QObject) OnDestroyed(slot func()) *SignalConnection {
+	_goptr := UnsafeNewQMetaObject__Connection(C.QObject_connect_destroyed(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QObject_destroyed
@@ -354,8 +361,10 @@ func (this *QObject) Connect4(sender *QObject, signal string, member string, typ
 func (this *QObject) DestroyedWithQObject(param1 *QObject) {
 	C.QObject_destroyedWithQObject(this.h, param1.cPointer())
 }
-func (this *QObject) OnDestroyedWithQObject(slot func(param1 *QObject)) {
-	C.QObject_connect_destroyedWithQObject(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QObject) OnDestroyedWithQObject(slot func(param1 *QObject)) *SignalConnection {
+	_goptr := UnsafeNewQMetaObject__Connection(C.QObject_connect_destroyedWithQObject(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QObject_destroyedWithQObject
@@ -435,7 +444,11 @@ func (this *QObject) callVirtualBase_Event(event *QEvent) bool {
 
 }
 func (this *QObject) OnEvent(slot func(super func(event *QEvent) bool, event *QEvent) bool) {
-	ok := C.QObject_override_virtual_event(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QObject_override_virtual_event(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -463,7 +476,11 @@ func (this *QObject) callVirtualBase_EventFilter(watched *QObject, event *QEvent
 
 }
 func (this *QObject) OnEventFilter(slot func(super func(watched *QObject, event *QEvent) bool, watched *QObject, event *QEvent) bool) {
-	ok := C.QObject_override_virtual_eventFilter(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QObject_override_virtual_eventFilter(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -493,7 +510,11 @@ func (this *QObject) callVirtualBase_TimerEvent(event *QTimerEvent) {
 
 }
 func (this *QObject) OnTimerEvent(slot func(super func(event *QTimerEvent), event *QTimerEvent)) {
-	ok := C.QObject_override_virtual_timerEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QObject_override_virtual_timerEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -519,7 +540,11 @@ func (this *QObject) callVirtualBase_ChildEvent(event *QChildEvent) {
 
 }
 func (this *QObject) OnChildEvent(slot func(super func(event *QChildEvent), event *QChildEvent)) {
-	ok := C.QObject_override_virtual_childEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QObject_override_virtual_childEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -545,7 +570,11 @@ func (this *QObject) callVirtualBase_CustomEvent(event *QEvent) {
 
 }
 func (this *QObject) OnCustomEvent(slot func(super func(event *QEvent), event *QEvent)) {
-	ok := C.QObject_override_virtual_customEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QObject_override_virtual_customEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -571,7 +600,11 @@ func (this *QObject) callVirtualBase_ConnectNotify(signal *QMetaMethod) {
 
 }
 func (this *QObject) OnConnectNotify(slot func(super func(signal *QMetaMethod), signal *QMetaMethod)) {
-	ok := C.QObject_override_virtual_connectNotify(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QObject_override_virtual_connectNotify(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -597,7 +630,11 @@ func (this *QObject) callVirtualBase_DisconnectNotify(signal *QMetaMethod) {
 
 }
 func (this *QObject) OnDisconnectNotify(slot func(super func(signal *QMetaMethod), signal *QMetaMethod)) {
-	ok := C.QObject_override_virtual_disconnectNotify(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QObject_override_virtual_disconnectNotify(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -616,8 +653,10 @@ func miqt_exec_callback_QObject_disconnectNotify(self *C.QObject, cb C.intptr_t,
 	gofunc((&QObject{h: self}).callVirtualBase_DisconnectNotify, slotval1)
 
 }
-func (this *QObject) OnObjectNameChanged(slot func(objectName string)) {
-	C.QObject_connect_objectNameChanged(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QObject) OnObjectNameChanged(slot func(objectName string)) *SignalConnection {
+	_goptr := UnsafeNewQMetaObject__Connection(C.QObject_connect_objectNameChanged(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QObject_objectNameChanged

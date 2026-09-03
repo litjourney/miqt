@@ -23,6 +23,11 @@ const (
 	QWebSocketServer__NonSecureMode QWebSocketServer__SslMode = 1
 )
 
+//export miqt_exec_callback_handle_release_QWebSocketServer
+func miqt_exec_callback_handle_release_QWebSocketServer(cb C.intptr_t) {
+	cgo.Handle(cb).Delete()
+}
+
 type QWebSocketServer struct {
 	h *C.QWebSocketServer
 	*qt.QObject
@@ -258,8 +263,10 @@ func (this *QWebSocketServer) HandleConnection(socket *network.QTcpSocket) {
 func (this *QWebSocketServer) AcceptError(socketError network.QAbstractSocket__SocketError) {
 	C.QWebSocketServer_acceptError(this.h, (C.int)(socketError))
 }
-func (this *QWebSocketServer) OnAcceptError(slot func(socketError network.QAbstractSocket__SocketError)) {
-	C.QWebSocketServer_connect_acceptError(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QWebSocketServer) OnAcceptError(slot func(socketError network.QAbstractSocket__SocketError)) *qt.SignalConnection {
+	_goptr := qt.UnsafeNewQMetaObject__Connection(C.QWebSocketServer_connect_acceptError(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QWebSocketServer_acceptError
@@ -278,8 +285,10 @@ func miqt_exec_callback_QWebSocketServer_acceptError(cb C.intptr_t, socketError 
 func (this *QWebSocketServer) ServerError(closeCode QWebSocketProtocol__CloseCode) {
 	C.QWebSocketServer_serverError(this.h, (C.int)(closeCode))
 }
-func (this *QWebSocketServer) OnServerError(slot func(closeCode QWebSocketProtocol__CloseCode)) {
-	C.QWebSocketServer_connect_serverError(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QWebSocketServer) OnServerError(slot func(closeCode QWebSocketProtocol__CloseCode)) *qt.SignalConnection {
+	_goptr := qt.UnsafeNewQMetaObject__Connection(C.QWebSocketServer_connect_serverError(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QWebSocketServer_serverError
@@ -298,8 +307,10 @@ func miqt_exec_callback_QWebSocketServer_serverError(cb C.intptr_t, closeCode C.
 func (this *QWebSocketServer) OriginAuthenticationRequired(pAuthenticator *QWebSocketCorsAuthenticator) {
 	C.QWebSocketServer_originAuthenticationRequired(this.h, pAuthenticator.cPointer())
 }
-func (this *QWebSocketServer) OnOriginAuthenticationRequired(slot func(pAuthenticator *QWebSocketCorsAuthenticator)) {
-	C.QWebSocketServer_connect_originAuthenticationRequired(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QWebSocketServer) OnOriginAuthenticationRequired(slot func(pAuthenticator *QWebSocketCorsAuthenticator)) *qt.SignalConnection {
+	_goptr := qt.UnsafeNewQMetaObject__Connection(C.QWebSocketServer_connect_originAuthenticationRequired(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QWebSocketServer_originAuthenticationRequired
@@ -318,8 +329,10 @@ func miqt_exec_callback_QWebSocketServer_originAuthenticationRequired(cb C.intpt
 func (this *QWebSocketServer) NewConnection() {
 	C.QWebSocketServer_newConnection(this.h)
 }
-func (this *QWebSocketServer) OnNewConnection(slot func()) {
-	C.QWebSocketServer_connect_newConnection(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QWebSocketServer) OnNewConnection(slot func()) *qt.SignalConnection {
+	_goptr := qt.UnsafeNewQMetaObject__Connection(C.QWebSocketServer_connect_newConnection(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QWebSocketServer_newConnection
@@ -335,8 +348,10 @@ func miqt_exec_callback_QWebSocketServer_newConnection(cb C.intptr_t) {
 func (this *QWebSocketServer) PeerVerifyError(error *network.QSslError) {
 	C.QWebSocketServer_peerVerifyError(this.h, (*C.QSslError)(error.UnsafePointer()))
 }
-func (this *QWebSocketServer) OnPeerVerifyError(slot func(error *network.QSslError)) {
-	C.QWebSocketServer_connect_peerVerifyError(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QWebSocketServer) OnPeerVerifyError(slot func(error *network.QSslError)) *qt.SignalConnection {
+	_goptr := qt.UnsafeNewQMetaObject__Connection(C.QWebSocketServer_connect_peerVerifyError(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QWebSocketServer_peerVerifyError
@@ -361,8 +376,10 @@ func (this *QWebSocketServer) SslErrors(errors []network.QSslError) {
 	errors_ma := C.struct_miqt_array{len: C.size_t(len(errors)), data: unsafe.Pointer(errors_CArray)}
 	C.QWebSocketServer_sslErrors(this.h, errors_ma)
 }
-func (this *QWebSocketServer) OnSslErrors(slot func(errors []network.QSslError)) {
-	C.QWebSocketServer_connect_sslErrors(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QWebSocketServer) OnSslErrors(slot func(errors []network.QSslError)) *qt.SignalConnection {
+	_goptr := qt.UnsafeNewQMetaObject__Connection(C.QWebSocketServer_connect_sslErrors(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QWebSocketServer_sslErrors
@@ -389,8 +406,10 @@ func miqt_exec_callback_QWebSocketServer_sslErrors(cb C.intptr_t, errors C.struc
 func (this *QWebSocketServer) PreSharedKeyAuthenticationRequired(authenticator *network.QSslPreSharedKeyAuthenticator) {
 	C.QWebSocketServer_preSharedKeyAuthenticationRequired(this.h, (*C.QSslPreSharedKeyAuthenticator)(authenticator.UnsafePointer()))
 }
-func (this *QWebSocketServer) OnPreSharedKeyAuthenticationRequired(slot func(authenticator *network.QSslPreSharedKeyAuthenticator)) {
-	C.QWebSocketServer_connect_preSharedKeyAuthenticationRequired(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QWebSocketServer) OnPreSharedKeyAuthenticationRequired(slot func(authenticator *network.QSslPreSharedKeyAuthenticator)) *qt.SignalConnection {
+	_goptr := qt.UnsafeNewQMetaObject__Connection(C.QWebSocketServer_connect_preSharedKeyAuthenticationRequired(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QWebSocketServer_preSharedKeyAuthenticationRequired
@@ -409,8 +428,10 @@ func miqt_exec_callback_QWebSocketServer_preSharedKeyAuthenticationRequired(cb C
 func (this *QWebSocketServer) Closed() {
 	C.QWebSocketServer_closed(this.h)
 }
-func (this *QWebSocketServer) OnClosed(slot func()) {
-	C.QWebSocketServer_connect_closed(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QWebSocketServer) OnClosed(slot func()) *qt.SignalConnection {
+	_goptr := qt.UnsafeNewQMetaObject__Connection(C.QWebSocketServer_connect_closed(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QWebSocketServer_closed
@@ -539,7 +560,11 @@ func (this *QWebSocketServer) callVirtualBase_NextPendingConnection() *QWebSocke
 
 }
 func (this *QWebSocketServer) OnNextPendingConnection(slot func(super func() *QWebSocket) *QWebSocket) {
-	ok := C.QWebSocketServer_override_virtual_nextPendingConnection(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QWebSocketServer_override_virtual_nextPendingConnection(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -564,7 +589,11 @@ func (this *QWebSocketServer) callVirtualBase_Event(event *qt.QEvent) bool {
 
 }
 func (this *QWebSocketServer) OnEvent(slot func(super func(event *qt.QEvent) bool, event *qt.QEvent) bool) {
-	ok := C.QWebSocketServer_override_virtual_event(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QWebSocketServer_override_virtual_event(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -592,7 +621,11 @@ func (this *QWebSocketServer) callVirtualBase_EventFilter(watched *qt.QObject, e
 
 }
 func (this *QWebSocketServer) OnEventFilter(slot func(super func(watched *qt.QObject, event *qt.QEvent) bool, watched *qt.QObject, event *qt.QEvent) bool) {
-	ok := C.QWebSocketServer_override_virtual_eventFilter(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QWebSocketServer_override_virtual_eventFilter(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -622,7 +655,11 @@ func (this *QWebSocketServer) callVirtualBase_TimerEvent(event *qt.QTimerEvent) 
 
 }
 func (this *QWebSocketServer) OnTimerEvent(slot func(super func(event *qt.QTimerEvent), event *qt.QTimerEvent)) {
-	ok := C.QWebSocketServer_override_virtual_timerEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QWebSocketServer_override_virtual_timerEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -648,7 +685,11 @@ func (this *QWebSocketServer) callVirtualBase_ChildEvent(event *qt.QChildEvent) 
 
 }
 func (this *QWebSocketServer) OnChildEvent(slot func(super func(event *qt.QChildEvent), event *qt.QChildEvent)) {
-	ok := C.QWebSocketServer_override_virtual_childEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QWebSocketServer_override_virtual_childEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -674,7 +715,11 @@ func (this *QWebSocketServer) callVirtualBase_CustomEvent(event *qt.QEvent) {
 
 }
 func (this *QWebSocketServer) OnCustomEvent(slot func(super func(event *qt.QEvent), event *qt.QEvent)) {
-	ok := C.QWebSocketServer_override_virtual_customEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QWebSocketServer_override_virtual_customEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -700,7 +745,11 @@ func (this *QWebSocketServer) callVirtualBase_ConnectNotify(signal *qt.QMetaMeth
 
 }
 func (this *QWebSocketServer) OnConnectNotify(slot func(super func(signal *qt.QMetaMethod), signal *qt.QMetaMethod)) {
-	ok := C.QWebSocketServer_override_virtual_connectNotify(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QWebSocketServer_override_virtual_connectNotify(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -726,7 +775,11 @@ func (this *QWebSocketServer) callVirtualBase_DisconnectNotify(signal *qt.QMetaM
 
 }
 func (this *QWebSocketServer) OnDisconnectNotify(slot func(super func(signal *qt.QMetaMethod), signal *qt.QMetaMethod)) {
-	ok := C.QWebSocketServer_override_virtual_disconnectNotify(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QWebSocketServer_override_virtual_disconnectNotify(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}

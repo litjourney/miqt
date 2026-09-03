@@ -114,6 +114,11 @@ func (this *QAbstractUndoItem) GoGC() {
 	})
 }
 
+//export miqt_exec_callback_handle_release_QTextDocument
+func miqt_exec_callback_handle_release_QTextDocument(cb C.intptr_t) {
+	cgo.Handle(cb).Delete()
+}
+
 type QTextDocument struct {
 	h *C.QTextDocument
 	*QObject
@@ -619,8 +624,10 @@ func (this *QTextDocument) SetDefaultCursorMoveStyle(style CursorMoveStyle) {
 func (this *QTextDocument) ContentsChange(from int, charsRemoved int, charsAdded int) {
 	C.QTextDocument_contentsChange(this.h, (C.int)(from), (C.int)(charsRemoved), (C.int)(charsAdded))
 }
-func (this *QTextDocument) OnContentsChange(slot func(from int, charsRemoved int, charsAdded int)) {
-	C.QTextDocument_connect_contentsChange(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QTextDocument) OnContentsChange(slot func(from int, charsRemoved int, charsAdded int)) *SignalConnection {
+	_goptr := UnsafeNewQMetaObject__Connection(C.QTextDocument_connect_contentsChange(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QTextDocument_contentsChange
@@ -643,8 +650,10 @@ func miqt_exec_callback_QTextDocument_contentsChange(cb C.intptr_t, from C.int, 
 func (this *QTextDocument) ContentsChanged() {
 	C.QTextDocument_contentsChanged(this.h)
 }
-func (this *QTextDocument) OnContentsChanged(slot func()) {
-	C.QTextDocument_connect_contentsChanged(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QTextDocument) OnContentsChanged(slot func()) *SignalConnection {
+	_goptr := UnsafeNewQMetaObject__Connection(C.QTextDocument_connect_contentsChanged(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QTextDocument_contentsChanged
@@ -660,8 +669,10 @@ func miqt_exec_callback_QTextDocument_contentsChanged(cb C.intptr_t) {
 func (this *QTextDocument) UndoAvailable(param1 bool) {
 	C.QTextDocument_undoAvailable(this.h, (C.bool)(param1))
 }
-func (this *QTextDocument) OnUndoAvailable(slot func(param1 bool)) {
-	C.QTextDocument_connect_undoAvailable(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QTextDocument) OnUndoAvailable(slot func(param1 bool)) *SignalConnection {
+	_goptr := UnsafeNewQMetaObject__Connection(C.QTextDocument_connect_undoAvailable(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QTextDocument_undoAvailable
@@ -680,8 +691,10 @@ func miqt_exec_callback_QTextDocument_undoAvailable(cb C.intptr_t, param1 C.bool
 func (this *QTextDocument) RedoAvailable(param1 bool) {
 	C.QTextDocument_redoAvailable(this.h, (C.bool)(param1))
 }
-func (this *QTextDocument) OnRedoAvailable(slot func(param1 bool)) {
-	C.QTextDocument_connect_redoAvailable(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QTextDocument) OnRedoAvailable(slot func(param1 bool)) *SignalConnection {
+	_goptr := UnsafeNewQMetaObject__Connection(C.QTextDocument_connect_redoAvailable(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QTextDocument_redoAvailable
@@ -700,8 +713,10 @@ func miqt_exec_callback_QTextDocument_redoAvailable(cb C.intptr_t, param1 C.bool
 func (this *QTextDocument) UndoCommandAdded() {
 	C.QTextDocument_undoCommandAdded(this.h)
 }
-func (this *QTextDocument) OnUndoCommandAdded(slot func()) {
-	C.QTextDocument_connect_undoCommandAdded(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QTextDocument) OnUndoCommandAdded(slot func()) *SignalConnection {
+	_goptr := UnsafeNewQMetaObject__Connection(C.QTextDocument_connect_undoCommandAdded(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QTextDocument_undoCommandAdded
@@ -717,8 +732,10 @@ func miqt_exec_callback_QTextDocument_undoCommandAdded(cb C.intptr_t) {
 func (this *QTextDocument) ModificationChanged(m bool) {
 	C.QTextDocument_modificationChanged(this.h, (C.bool)(m))
 }
-func (this *QTextDocument) OnModificationChanged(slot func(m bool)) {
-	C.QTextDocument_connect_modificationChanged(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QTextDocument) OnModificationChanged(slot func(m bool)) *SignalConnection {
+	_goptr := UnsafeNewQMetaObject__Connection(C.QTextDocument_connect_modificationChanged(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QTextDocument_modificationChanged
@@ -737,8 +754,10 @@ func miqt_exec_callback_QTextDocument_modificationChanged(cb C.intptr_t, m C.boo
 func (this *QTextDocument) CursorPositionChanged(cursor *QTextCursor) {
 	C.QTextDocument_cursorPositionChanged(this.h, cursor.cPointer())
 }
-func (this *QTextDocument) OnCursorPositionChanged(slot func(cursor *QTextCursor)) {
-	C.QTextDocument_connect_cursorPositionChanged(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QTextDocument) OnCursorPositionChanged(slot func(cursor *QTextCursor)) *SignalConnection {
+	_goptr := UnsafeNewQMetaObject__Connection(C.QTextDocument_connect_cursorPositionChanged(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QTextDocument_cursorPositionChanged
@@ -757,8 +776,10 @@ func miqt_exec_callback_QTextDocument_cursorPositionChanged(cb C.intptr_t, curso
 func (this *QTextDocument) BlockCountChanged(newBlockCount int) {
 	C.QTextDocument_blockCountChanged(this.h, (C.int)(newBlockCount))
 }
-func (this *QTextDocument) OnBlockCountChanged(slot func(newBlockCount int)) {
-	C.QTextDocument_connect_blockCountChanged(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QTextDocument) OnBlockCountChanged(slot func(newBlockCount int)) *SignalConnection {
+	_goptr := UnsafeNewQMetaObject__Connection(C.QTextDocument_connect_blockCountChanged(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QTextDocument_blockCountChanged
@@ -777,8 +798,10 @@ func miqt_exec_callback_QTextDocument_blockCountChanged(cb C.intptr_t, newBlockC
 func (this *QTextDocument) BaseUrlChanged(url *QUrl) {
 	C.QTextDocument_baseUrlChanged(this.h, url.cPointer())
 }
-func (this *QTextDocument) OnBaseUrlChanged(slot func(url *QUrl)) {
-	C.QTextDocument_connect_baseUrlChanged(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QTextDocument) OnBaseUrlChanged(slot func(url *QUrl)) *SignalConnection {
+	_goptr := UnsafeNewQMetaObject__Connection(C.QTextDocument_connect_baseUrlChanged(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QTextDocument_baseUrlChanged
@@ -797,8 +820,10 @@ func miqt_exec_callback_QTextDocument_baseUrlChanged(cb C.intptr_t, url *C.QUrl)
 func (this *QTextDocument) DocumentLayoutChanged() {
 	C.QTextDocument_documentLayoutChanged(this.h)
 }
-func (this *QTextDocument) OnDocumentLayoutChanged(slot func()) {
-	C.QTextDocument_connect_documentLayoutChanged(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QTextDocument) OnDocumentLayoutChanged(slot func()) *SignalConnection {
+	_goptr := UnsafeNewQMetaObject__Connection(C.QTextDocument_connect_documentLayoutChanged(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QTextDocument_documentLayoutChanged
@@ -1046,7 +1071,11 @@ func (this *QTextDocument) callVirtualBase_Clear() {
 
 }
 func (this *QTextDocument) OnClear(slot func(super func())) {
-	ok := C.QTextDocument_override_virtual_clear(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QTextDocument_override_virtual_clear(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1069,7 +1098,11 @@ func (this *QTextDocument) callVirtualBase_CreateObject(f *QTextFormat) *QTextOb
 
 }
 func (this *QTextDocument) OnCreateObject(slot func(super func(f *QTextFormat) *QTextObject, f *QTextFormat) *QTextObject) {
-	ok := C.QTextDocument_override_virtual_createObject(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QTextDocument_override_virtual_createObject(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1099,7 +1132,11 @@ func (this *QTextDocument) callVirtualBase_LoadResource(typeVal int, name *QUrl)
 
 }
 func (this *QTextDocument) OnLoadResource(slot func(super func(typeVal int, name *QUrl) *QVariant, typeVal int, name *QUrl) *QVariant) {
-	ok := C.QTextDocument_override_virtual_loadResource(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QTextDocument_override_virtual_loadResource(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1129,7 +1166,11 @@ func (this *QTextDocument) callVirtualBase_Event(event *QEvent) bool {
 
 }
 func (this *QTextDocument) OnEvent(slot func(super func(event *QEvent) bool, event *QEvent) bool) {
-	ok := C.QTextDocument_override_virtual_event(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QTextDocument_override_virtual_event(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1157,7 +1198,11 @@ func (this *QTextDocument) callVirtualBase_EventFilter(watched *QObject, event *
 
 }
 func (this *QTextDocument) OnEventFilter(slot func(super func(watched *QObject, event *QEvent) bool, watched *QObject, event *QEvent) bool) {
-	ok := C.QTextDocument_override_virtual_eventFilter(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QTextDocument_override_virtual_eventFilter(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1187,7 +1232,11 @@ func (this *QTextDocument) callVirtualBase_TimerEvent(event *QTimerEvent) {
 
 }
 func (this *QTextDocument) OnTimerEvent(slot func(super func(event *QTimerEvent), event *QTimerEvent)) {
-	ok := C.QTextDocument_override_virtual_timerEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QTextDocument_override_virtual_timerEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1213,7 +1262,11 @@ func (this *QTextDocument) callVirtualBase_ChildEvent(event *QChildEvent) {
 
 }
 func (this *QTextDocument) OnChildEvent(slot func(super func(event *QChildEvent), event *QChildEvent)) {
-	ok := C.QTextDocument_override_virtual_childEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QTextDocument_override_virtual_childEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1239,7 +1292,11 @@ func (this *QTextDocument) callVirtualBase_CustomEvent(event *QEvent) {
 
 }
 func (this *QTextDocument) OnCustomEvent(slot func(super func(event *QEvent), event *QEvent)) {
-	ok := C.QTextDocument_override_virtual_customEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QTextDocument_override_virtual_customEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1265,7 +1322,11 @@ func (this *QTextDocument) callVirtualBase_ConnectNotify(signal *QMetaMethod) {
 
 }
 func (this *QTextDocument) OnConnectNotify(slot func(super func(signal *QMetaMethod), signal *QMetaMethod)) {
-	ok := C.QTextDocument_override_virtual_connectNotify(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QTextDocument_override_virtual_connectNotify(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1291,7 +1352,11 @@ func (this *QTextDocument) callVirtualBase_DisconnectNotify(signal *QMetaMethod)
 
 }
 func (this *QTextDocument) OnDisconnectNotify(slot func(super func(signal *QMetaMethod), signal *QMetaMethod)) {
-	ok := C.QTextDocument_override_virtual_disconnectNotify(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QTextDocument_override_virtual_disconnectNotify(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}

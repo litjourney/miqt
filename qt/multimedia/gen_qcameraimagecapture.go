@@ -39,6 +39,11 @@ const (
 	QCameraImageCapture__CaptureToBuffer QCameraImageCapture__CaptureDestination = 2
 )
 
+//export miqt_exec_callback_handle_release_QCameraImageCapture
+func miqt_exec_callback_handle_release_QCameraImageCapture(cb C.intptr_t) {
+	cgo.Handle(cb).Delete()
+}
+
 type QCameraImageCapture struct {
 	h *C.QCameraImageCapture
 	*qt.QObject
@@ -236,8 +241,10 @@ func (this *QCameraImageCapture) Error2(id int, error QCameraImageCapture__Error
 	defer C.free(unsafe.Pointer(errorString_ms.data))
 	C.QCameraImageCapture_error2(this.h, (C.int)(id), (C.int)(error), errorString_ms)
 }
-func (this *QCameraImageCapture) OnError2(slot func(id int, error QCameraImageCapture__Error, errorString string)) {
-	C.QCameraImageCapture_connect_error2(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QCameraImageCapture) OnError2(slot func(id int, error QCameraImageCapture__Error, errorString string)) *qt.SignalConnection {
+	_goptr := qt.UnsafeNewQMetaObject__Connection(C.QCameraImageCapture_connect_error2(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QCameraImageCapture_error2
@@ -263,8 +270,10 @@ func miqt_exec_callback_QCameraImageCapture_error2(cb C.intptr_t, id C.int, erro
 func (this *QCameraImageCapture) ReadyForCaptureChanged(ready bool) {
 	C.QCameraImageCapture_readyForCaptureChanged(this.h, (C.bool)(ready))
 }
-func (this *QCameraImageCapture) OnReadyForCaptureChanged(slot func(ready bool)) {
-	C.QCameraImageCapture_connect_readyForCaptureChanged(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QCameraImageCapture) OnReadyForCaptureChanged(slot func(ready bool)) *qt.SignalConnection {
+	_goptr := qt.UnsafeNewQMetaObject__Connection(C.QCameraImageCapture_connect_readyForCaptureChanged(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QCameraImageCapture_readyForCaptureChanged
@@ -283,8 +292,10 @@ func miqt_exec_callback_QCameraImageCapture_readyForCaptureChanged(cb C.intptr_t
 func (this *QCameraImageCapture) BufferFormatChanged(format QVideoFrame__PixelFormat) {
 	C.QCameraImageCapture_bufferFormatChanged(this.h, (C.int)(format))
 }
-func (this *QCameraImageCapture) OnBufferFormatChanged(slot func(format QVideoFrame__PixelFormat)) {
-	C.QCameraImageCapture_connect_bufferFormatChanged(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QCameraImageCapture) OnBufferFormatChanged(slot func(format QVideoFrame__PixelFormat)) *qt.SignalConnection {
+	_goptr := qt.UnsafeNewQMetaObject__Connection(C.QCameraImageCapture_connect_bufferFormatChanged(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QCameraImageCapture_bufferFormatChanged
@@ -303,8 +314,10 @@ func miqt_exec_callback_QCameraImageCapture_bufferFormatChanged(cb C.intptr_t, f
 func (this *QCameraImageCapture) CaptureDestinationChanged(destination QCameraImageCapture__CaptureDestination) {
 	C.QCameraImageCapture_captureDestinationChanged(this.h, (C.int)(destination))
 }
-func (this *QCameraImageCapture) OnCaptureDestinationChanged(slot func(destination QCameraImageCapture__CaptureDestination)) {
-	C.QCameraImageCapture_connect_captureDestinationChanged(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QCameraImageCapture) OnCaptureDestinationChanged(slot func(destination QCameraImageCapture__CaptureDestination)) *qt.SignalConnection {
+	_goptr := qt.UnsafeNewQMetaObject__Connection(C.QCameraImageCapture_connect_captureDestinationChanged(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QCameraImageCapture_captureDestinationChanged
@@ -323,8 +336,10 @@ func miqt_exec_callback_QCameraImageCapture_captureDestinationChanged(cb C.intpt
 func (this *QCameraImageCapture) ImageExposed(id int) {
 	C.QCameraImageCapture_imageExposed(this.h, (C.int)(id))
 }
-func (this *QCameraImageCapture) OnImageExposed(slot func(id int)) {
-	C.QCameraImageCapture_connect_imageExposed(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QCameraImageCapture) OnImageExposed(slot func(id int)) *qt.SignalConnection {
+	_goptr := qt.UnsafeNewQMetaObject__Connection(C.QCameraImageCapture_connect_imageExposed(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QCameraImageCapture_imageExposed
@@ -343,8 +358,10 @@ func miqt_exec_callback_QCameraImageCapture_imageExposed(cb C.intptr_t, id C.int
 func (this *QCameraImageCapture) ImageCaptured(id int, preview *qt.QImage) {
 	C.QCameraImageCapture_imageCaptured(this.h, (C.int)(id), (*C.QImage)(preview.UnsafePointer()))
 }
-func (this *QCameraImageCapture) OnImageCaptured(slot func(id int, preview *qt.QImage)) {
-	C.QCameraImageCapture_connect_imageCaptured(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QCameraImageCapture) OnImageCaptured(slot func(id int, preview *qt.QImage)) *qt.SignalConnection {
+	_goptr := qt.UnsafeNewQMetaObject__Connection(C.QCameraImageCapture_connect_imageCaptured(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QCameraImageCapture_imageCaptured
@@ -369,8 +386,10 @@ func (this *QCameraImageCapture) ImageMetadataAvailable(id int, key string, valu
 	defer C.free(unsafe.Pointer(key_ms.data))
 	C.QCameraImageCapture_imageMetadataAvailable(this.h, (C.int)(id), key_ms, (*C.QVariant)(value.UnsafePointer()))
 }
-func (this *QCameraImageCapture) OnImageMetadataAvailable(slot func(id int, key string, value *qt.QVariant)) {
-	C.QCameraImageCapture_connect_imageMetadataAvailable(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QCameraImageCapture) OnImageMetadataAvailable(slot func(id int, key string, value *qt.QVariant)) *qt.SignalConnection {
+	_goptr := qt.UnsafeNewQMetaObject__Connection(C.QCameraImageCapture_connect_imageMetadataAvailable(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QCameraImageCapture_imageMetadataAvailable
@@ -395,8 +414,10 @@ func miqt_exec_callback_QCameraImageCapture_imageMetadataAvailable(cb C.intptr_t
 func (this *QCameraImageCapture) ImageAvailable(id int, frame *QVideoFrame) {
 	C.QCameraImageCapture_imageAvailable(this.h, (C.int)(id), frame.cPointer())
 }
-func (this *QCameraImageCapture) OnImageAvailable(slot func(id int, frame *QVideoFrame)) {
-	C.QCameraImageCapture_connect_imageAvailable(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QCameraImageCapture) OnImageAvailable(slot func(id int, frame *QVideoFrame)) *qt.SignalConnection {
+	_goptr := qt.UnsafeNewQMetaObject__Connection(C.QCameraImageCapture_connect_imageAvailable(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QCameraImageCapture_imageAvailable
@@ -421,8 +442,10 @@ func (this *QCameraImageCapture) ImageSaved(id int, fileName string) {
 	defer C.free(unsafe.Pointer(fileName_ms.data))
 	C.QCameraImageCapture_imageSaved(this.h, (C.int)(id), fileName_ms)
 }
-func (this *QCameraImageCapture) OnImageSaved(slot func(id int, fileName string)) {
-	C.QCameraImageCapture_connect_imageSaved(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QCameraImageCapture) OnImageSaved(slot func(id int, fileName string)) *qt.SignalConnection {
+	_goptr := qt.UnsafeNewQMetaObject__Connection(C.QCameraImageCapture_connect_imageSaved(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QCameraImageCapture_imageSaved
@@ -583,7 +606,11 @@ func (this *QCameraImageCapture) callVirtualBase_MediaObject() *QMediaObject {
 
 }
 func (this *QCameraImageCapture) OnMediaObject(slot func(super func() *QMediaObject) *QMediaObject) {
-	ok := C.QCameraImageCapture_override_virtual_mediaObject(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QCameraImageCapture_override_virtual_mediaObject(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -608,7 +635,11 @@ func (this *QCameraImageCapture) callVirtualBase_SetMediaObject(mediaObject *QMe
 
 }
 func (this *QCameraImageCapture) OnSetMediaObject(slot func(super func(mediaObject *QMediaObject) bool, mediaObject *QMediaObject) bool) {
-	ok := C.QCameraImageCapture_override_virtual_setMediaObject(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QCameraImageCapture_override_virtual_setMediaObject(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -636,7 +667,11 @@ func (this *QCameraImageCapture) callVirtualBase_Event(event *qt.QEvent) bool {
 
 }
 func (this *QCameraImageCapture) OnEvent(slot func(super func(event *qt.QEvent) bool, event *qt.QEvent) bool) {
-	ok := C.QCameraImageCapture_override_virtual_event(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QCameraImageCapture_override_virtual_event(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -664,7 +699,11 @@ func (this *QCameraImageCapture) callVirtualBase_EventFilter(watched *qt.QObject
 
 }
 func (this *QCameraImageCapture) OnEventFilter(slot func(super func(watched *qt.QObject, event *qt.QEvent) bool, watched *qt.QObject, event *qt.QEvent) bool) {
-	ok := C.QCameraImageCapture_override_virtual_eventFilter(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QCameraImageCapture_override_virtual_eventFilter(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -694,7 +733,11 @@ func (this *QCameraImageCapture) callVirtualBase_TimerEvent(event *qt.QTimerEven
 
 }
 func (this *QCameraImageCapture) OnTimerEvent(slot func(super func(event *qt.QTimerEvent), event *qt.QTimerEvent)) {
-	ok := C.QCameraImageCapture_override_virtual_timerEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QCameraImageCapture_override_virtual_timerEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -720,7 +763,11 @@ func (this *QCameraImageCapture) callVirtualBase_ChildEvent(event *qt.QChildEven
 
 }
 func (this *QCameraImageCapture) OnChildEvent(slot func(super func(event *qt.QChildEvent), event *qt.QChildEvent)) {
-	ok := C.QCameraImageCapture_override_virtual_childEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QCameraImageCapture_override_virtual_childEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -746,7 +793,11 @@ func (this *QCameraImageCapture) callVirtualBase_CustomEvent(event *qt.QEvent) {
 
 }
 func (this *QCameraImageCapture) OnCustomEvent(slot func(super func(event *qt.QEvent), event *qt.QEvent)) {
-	ok := C.QCameraImageCapture_override_virtual_customEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QCameraImageCapture_override_virtual_customEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -772,7 +823,11 @@ func (this *QCameraImageCapture) callVirtualBase_ConnectNotify(signal *qt.QMetaM
 
 }
 func (this *QCameraImageCapture) OnConnectNotify(slot func(super func(signal *qt.QMetaMethod), signal *qt.QMetaMethod)) {
-	ok := C.QCameraImageCapture_override_virtual_connectNotify(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QCameraImageCapture_override_virtual_connectNotify(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -798,7 +853,11 @@ func (this *QCameraImageCapture) callVirtualBase_DisconnectNotify(signal *qt.QMe
 
 }
 func (this *QCameraImageCapture) OnDisconnectNotify(slot func(super func(signal *qt.QMetaMethod), signal *qt.QMetaMethod)) {
-	ok := C.QCameraImageCapture_override_virtual_disconnectNotify(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QCameraImageCapture_override_virtual_disconnectNotify(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}

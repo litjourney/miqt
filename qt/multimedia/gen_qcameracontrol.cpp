@@ -1,3 +1,5 @@
+#include <memory>
+#include <utility>
 #include <QCameraControl>
 #include <QMediaControl>
 #include <QMetaMethod>
@@ -13,6 +15,7 @@
 extern "C" {
 #endif
 
+void miqt_exec_callback_handle_release_QCameraControl(intptr_t);
 void miqt_exec_callback_QCameraControl_stateChanged(intptr_t, int);
 void miqt_exec_callback_QCameraControl_statusChanged(intptr_t, int);
 void miqt_exec_callback_QCameraControl_error(intptr_t, int, struct miqt_string);
@@ -90,24 +93,28 @@ void QCameraControl_stateChanged(QCameraControl* self, int param1) {
 	self->stateChanged(static_cast<QCamera::State>(param1));
 }
 
-void QCameraControl_connect_stateChanged(QCameraControl* self, intptr_t slot) {
-	QCameraControl::connect(self, static_cast<void (QCameraControl::*)(QCamera::State)>(&QCameraControl::stateChanged), self, [=](QCamera::State param1) {
+void* QCameraControl_connect_stateChanged(QCameraControl* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QCameraControl>>(slot);
+	return new QMetaObject::Connection(QCameraControl::connect(self, static_cast<void (QCameraControl::*)(QCamera::State)>(&QCameraControl::stateChanged), self, [slot_handle](QCamera::State param1) {
+		intptr_t slot = slot_handle->value();
 		QCamera::State param1_ret = param1;
 		int sigval1 = static_cast<int>(param1_ret);
 		miqt_exec_callback_QCameraControl_stateChanged(slot, sigval1);
-	});
+	}));
 }
 
 void QCameraControl_statusChanged(QCameraControl* self, int param1) {
 	self->statusChanged(static_cast<QCamera::Status>(param1));
 }
 
-void QCameraControl_connect_statusChanged(QCameraControl* self, intptr_t slot) {
-	QCameraControl::connect(self, static_cast<void (QCameraControl::*)(QCamera::Status)>(&QCameraControl::statusChanged), self, [=](QCamera::Status param1) {
+void* QCameraControl_connect_statusChanged(QCameraControl* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QCameraControl>>(slot);
+	return new QMetaObject::Connection(QCameraControl::connect(self, static_cast<void (QCameraControl::*)(QCamera::Status)>(&QCameraControl::statusChanged), self, [slot_handle](QCamera::Status param1) {
+		intptr_t slot = slot_handle->value();
 		QCamera::Status param1_ret = param1;
 		int sigval1 = static_cast<int>(param1_ret);
 		miqt_exec_callback_QCameraControl_statusChanged(slot, sigval1);
-	});
+	}));
 }
 
 void QCameraControl_error(QCameraControl* self, int error, struct miqt_string errorString) {
@@ -115,8 +122,10 @@ void QCameraControl_error(QCameraControl* self, int error, struct miqt_string er
 	self->error(static_cast<int>(error), errorString_QString);
 }
 
-void QCameraControl_connect_error(QCameraControl* self, intptr_t slot) {
-	QCameraControl::connect(self, static_cast<void (QCameraControl::*)(int, const QString&)>(&QCameraControl::error), self, [=](int error, const QString& errorString) {
+void* QCameraControl_connect_error(QCameraControl* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QCameraControl>>(slot);
+	return new QMetaObject::Connection(QCameraControl::connect(self, static_cast<void (QCameraControl::*)(int, const QString&)>(&QCameraControl::error), self, [slot_handle](int error, const QString& errorString) {
+		intptr_t slot = slot_handle->value();
 		int sigval1 = error;
 		const QString errorString_ret = errorString;
 		// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
@@ -127,19 +136,21 @@ void QCameraControl_connect_error(QCameraControl* self, intptr_t slot) {
 		memcpy(errorString_ms.data, errorString_b.data(), errorString_ms.len);
 		struct miqt_string sigval2 = errorString_ms;
 		miqt_exec_callback_QCameraControl_error(slot, sigval1, sigval2);
-	});
+	}));
 }
 
 void QCameraControl_captureModeChanged(QCameraControl* self, int mode) {
 	self->captureModeChanged(static_cast<QCamera::CaptureModes>(mode));
 }
 
-void QCameraControl_connect_captureModeChanged(QCameraControl* self, intptr_t slot) {
-	QCameraControl::connect(self, static_cast<void (QCameraControl::*)(QCamera::CaptureModes)>(&QCameraControl::captureModeChanged), self, [=](QCamera::CaptureModes mode) {
+void* QCameraControl_connect_captureModeChanged(QCameraControl* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QCameraControl>>(slot);
+	return new QMetaObject::Connection(QCameraControl::connect(self, static_cast<void (QCameraControl::*)(QCamera::CaptureModes)>(&QCameraControl::captureModeChanged), self, [slot_handle](QCamera::CaptureModes mode) {
+		intptr_t slot = slot_handle->value();
 		QCamera::CaptureModes mode_ret = mode;
 		int sigval1 = static_cast<int>(mode_ret);
 		miqt_exec_callback_QCameraControl_captureModeChanged(slot, sigval1);
-	});
+	}));
 }
 
 struct miqt_string QCameraControl_tr2(const char* s, const char* c) {

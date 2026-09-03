@@ -1,3 +1,5 @@
+#include <memory>
+#include <utility>
 #include <QMetaMethod>
 #include <QMetaObject>
 #include <QObject>
@@ -14,6 +16,7 @@
 extern "C" {
 #endif
 
+void miqt_exec_callback_handle_release_QWebEngineDownloadRequest(intptr_t);
 void miqt_exec_callback_QWebEngineDownloadRequest_stateChanged(intptr_t, int);
 void miqt_exec_callback_QWebEngineDownloadRequest_savePageFormatChanged(intptr_t);
 void miqt_exec_callback_QWebEngineDownloadRequest_receivedBytesChanged(intptr_t);
@@ -189,92 +192,110 @@ void QWebEngineDownloadRequest_stateChanged(QWebEngineDownloadRequest* self, int
 	self->stateChanged(static_cast<QWebEngineDownloadRequest::DownloadState>(state));
 }
 
-void QWebEngineDownloadRequest_connect_stateChanged(QWebEngineDownloadRequest* self, intptr_t slot) {
-	QWebEngineDownloadRequest::connect(self, static_cast<void (QWebEngineDownloadRequest::*)(QWebEngineDownloadRequest::DownloadState)>(&QWebEngineDownloadRequest::stateChanged), self, [=](QWebEngineDownloadRequest::DownloadState state) {
+void* QWebEngineDownloadRequest_connect_stateChanged(QWebEngineDownloadRequest* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QWebEngineDownloadRequest>>(slot);
+	return new QMetaObject::Connection(QWebEngineDownloadRequest::connect(self, static_cast<void (QWebEngineDownloadRequest::*)(QWebEngineDownloadRequest::DownloadState)>(&QWebEngineDownloadRequest::stateChanged), self, [slot_handle](QWebEngineDownloadRequest::DownloadState state) {
+		intptr_t slot = slot_handle->value();
 		QWebEngineDownloadRequest::DownloadState state_ret = state;
 		int sigval1 = static_cast<int>(state_ret);
 		miqt_exec_callback_QWebEngineDownloadRequest_stateChanged(slot, sigval1);
-	});
+	}));
 }
 
 void QWebEngineDownloadRequest_savePageFormatChanged(QWebEngineDownloadRequest* self) {
 	self->savePageFormatChanged();
 }
 
-void QWebEngineDownloadRequest_connect_savePageFormatChanged(QWebEngineDownloadRequest* self, intptr_t slot) {
-	QWebEngineDownloadRequest::connect(self, static_cast<void (QWebEngineDownloadRequest::*)()>(&QWebEngineDownloadRequest::savePageFormatChanged), self, [=]() {
+void* QWebEngineDownloadRequest_connect_savePageFormatChanged(QWebEngineDownloadRequest* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QWebEngineDownloadRequest>>(slot);
+	return new QMetaObject::Connection(QWebEngineDownloadRequest::connect(self, static_cast<void (QWebEngineDownloadRequest::*)()>(&QWebEngineDownloadRequest::savePageFormatChanged), self, [slot_handle]() {
+		intptr_t slot = slot_handle->value();
 		miqt_exec_callback_QWebEngineDownloadRequest_savePageFormatChanged(slot);
-	});
+	}));
 }
 
 void QWebEngineDownloadRequest_receivedBytesChanged(QWebEngineDownloadRequest* self) {
 	self->receivedBytesChanged();
 }
 
-void QWebEngineDownloadRequest_connect_receivedBytesChanged(QWebEngineDownloadRequest* self, intptr_t slot) {
-	QWebEngineDownloadRequest::connect(self, static_cast<void (QWebEngineDownloadRequest::*)()>(&QWebEngineDownloadRequest::receivedBytesChanged), self, [=]() {
+void* QWebEngineDownloadRequest_connect_receivedBytesChanged(QWebEngineDownloadRequest* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QWebEngineDownloadRequest>>(slot);
+	return new QMetaObject::Connection(QWebEngineDownloadRequest::connect(self, static_cast<void (QWebEngineDownloadRequest::*)()>(&QWebEngineDownloadRequest::receivedBytesChanged), self, [slot_handle]() {
+		intptr_t slot = slot_handle->value();
 		miqt_exec_callback_QWebEngineDownloadRequest_receivedBytesChanged(slot);
-	});
+	}));
 }
 
 void QWebEngineDownloadRequest_totalBytesChanged(QWebEngineDownloadRequest* self) {
 	self->totalBytesChanged();
 }
 
-void QWebEngineDownloadRequest_connect_totalBytesChanged(QWebEngineDownloadRequest* self, intptr_t slot) {
-	QWebEngineDownloadRequest::connect(self, static_cast<void (QWebEngineDownloadRequest::*)()>(&QWebEngineDownloadRequest::totalBytesChanged), self, [=]() {
+void* QWebEngineDownloadRequest_connect_totalBytesChanged(QWebEngineDownloadRequest* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QWebEngineDownloadRequest>>(slot);
+	return new QMetaObject::Connection(QWebEngineDownloadRequest::connect(self, static_cast<void (QWebEngineDownloadRequest::*)()>(&QWebEngineDownloadRequest::totalBytesChanged), self, [slot_handle]() {
+		intptr_t slot = slot_handle->value();
 		miqt_exec_callback_QWebEngineDownloadRequest_totalBytesChanged(slot);
-	});
+	}));
 }
 
 void QWebEngineDownloadRequest_interruptReasonChanged(QWebEngineDownloadRequest* self) {
 	self->interruptReasonChanged();
 }
 
-void QWebEngineDownloadRequest_connect_interruptReasonChanged(QWebEngineDownloadRequest* self, intptr_t slot) {
-	QWebEngineDownloadRequest::connect(self, static_cast<void (QWebEngineDownloadRequest::*)()>(&QWebEngineDownloadRequest::interruptReasonChanged), self, [=]() {
+void* QWebEngineDownloadRequest_connect_interruptReasonChanged(QWebEngineDownloadRequest* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QWebEngineDownloadRequest>>(slot);
+	return new QMetaObject::Connection(QWebEngineDownloadRequest::connect(self, static_cast<void (QWebEngineDownloadRequest::*)()>(&QWebEngineDownloadRequest::interruptReasonChanged), self, [slot_handle]() {
+		intptr_t slot = slot_handle->value();
 		miqt_exec_callback_QWebEngineDownloadRequest_interruptReasonChanged(slot);
-	});
+	}));
 }
 
 void QWebEngineDownloadRequest_isFinishedChanged(QWebEngineDownloadRequest* self) {
 	self->isFinishedChanged();
 }
 
-void QWebEngineDownloadRequest_connect_isFinishedChanged(QWebEngineDownloadRequest* self, intptr_t slot) {
-	QWebEngineDownloadRequest::connect(self, static_cast<void (QWebEngineDownloadRequest::*)()>(&QWebEngineDownloadRequest::isFinishedChanged), self, [=]() {
+void* QWebEngineDownloadRequest_connect_isFinishedChanged(QWebEngineDownloadRequest* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QWebEngineDownloadRequest>>(slot);
+	return new QMetaObject::Connection(QWebEngineDownloadRequest::connect(self, static_cast<void (QWebEngineDownloadRequest::*)()>(&QWebEngineDownloadRequest::isFinishedChanged), self, [slot_handle]() {
+		intptr_t slot = slot_handle->value();
 		miqt_exec_callback_QWebEngineDownloadRequest_isFinishedChanged(slot);
-	});
+	}));
 }
 
 void QWebEngineDownloadRequest_isPausedChanged(QWebEngineDownloadRequest* self) {
 	self->isPausedChanged();
 }
 
-void QWebEngineDownloadRequest_connect_isPausedChanged(QWebEngineDownloadRequest* self, intptr_t slot) {
-	QWebEngineDownloadRequest::connect(self, static_cast<void (QWebEngineDownloadRequest::*)()>(&QWebEngineDownloadRequest::isPausedChanged), self, [=]() {
+void* QWebEngineDownloadRequest_connect_isPausedChanged(QWebEngineDownloadRequest* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QWebEngineDownloadRequest>>(slot);
+	return new QMetaObject::Connection(QWebEngineDownloadRequest::connect(self, static_cast<void (QWebEngineDownloadRequest::*)()>(&QWebEngineDownloadRequest::isPausedChanged), self, [slot_handle]() {
+		intptr_t slot = slot_handle->value();
 		miqt_exec_callback_QWebEngineDownloadRequest_isPausedChanged(slot);
-	});
+	}));
 }
 
 void QWebEngineDownloadRequest_downloadDirectoryChanged(QWebEngineDownloadRequest* self) {
 	self->downloadDirectoryChanged();
 }
 
-void QWebEngineDownloadRequest_connect_downloadDirectoryChanged(QWebEngineDownloadRequest* self, intptr_t slot) {
-	QWebEngineDownloadRequest::connect(self, static_cast<void (QWebEngineDownloadRequest::*)()>(&QWebEngineDownloadRequest::downloadDirectoryChanged), self, [=]() {
+void* QWebEngineDownloadRequest_connect_downloadDirectoryChanged(QWebEngineDownloadRequest* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QWebEngineDownloadRequest>>(slot);
+	return new QMetaObject::Connection(QWebEngineDownloadRequest::connect(self, static_cast<void (QWebEngineDownloadRequest::*)()>(&QWebEngineDownloadRequest::downloadDirectoryChanged), self, [slot_handle]() {
+		intptr_t slot = slot_handle->value();
 		miqt_exec_callback_QWebEngineDownloadRequest_downloadDirectoryChanged(slot);
-	});
+	}));
 }
 
 void QWebEngineDownloadRequest_downloadFileNameChanged(QWebEngineDownloadRequest* self) {
 	self->downloadFileNameChanged();
 }
 
-void QWebEngineDownloadRequest_connect_downloadFileNameChanged(QWebEngineDownloadRequest* self, intptr_t slot) {
-	QWebEngineDownloadRequest::connect(self, static_cast<void (QWebEngineDownloadRequest::*)()>(&QWebEngineDownloadRequest::downloadFileNameChanged), self, [=]() {
+void* QWebEngineDownloadRequest_connect_downloadFileNameChanged(QWebEngineDownloadRequest* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QWebEngineDownloadRequest>>(slot);
+	return new QMetaObject::Connection(QWebEngineDownloadRequest::connect(self, static_cast<void (QWebEngineDownloadRequest::*)()>(&QWebEngineDownloadRequest::downloadFileNameChanged), self, [slot_handle]() {
+		intptr_t slot = slot_handle->value();
 		miqt_exec_callback_QWebEngineDownloadRequest_downloadFileNameChanged(slot);
-	});
+	}));
 }
 
 struct miqt_string QWebEngineDownloadRequest_tr2(const char* s, const char* c) {

@@ -49,11 +49,11 @@ void QAudioInput_setDevice(QAudioInput* self, QAudioDevice* device);
 void QAudioInput_setVolume(QAudioInput* self, float volume);
 void QAudioInput_setMuted(QAudioInput* self, bool muted);
 void QAudioInput_deviceChanged(QAudioInput* self);
-void QAudioInput_connect_deviceChanged(QAudioInput* self, intptr_t slot);
+void* QAudioInput_connect_deviceChanged(QAudioInput* self, intptr_t slot);
 void QAudioInput_volumeChanged(QAudioInput* self, float volume);
-void QAudioInput_connect_volumeChanged(QAudioInput* self, intptr_t slot);
+void* QAudioInput_connect_volumeChanged(QAudioInput* self, intptr_t slot);
 void QAudioInput_mutedChanged(QAudioInput* self, bool muted);
-void QAudioInput_connect_mutedChanged(QAudioInput* self, intptr_t slot);
+void* QAudioInput_connect_mutedChanged(QAudioInput* self, intptr_t slot);
 struct miqt_string QAudioInput_tr2(const char* s, const char* c);
 struct miqt_string QAudioInput_tr3(const char* s, const char* c, int n);
 

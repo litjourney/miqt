@@ -1,3 +1,5 @@
+#include <memory>
+#include <utility>
 #include <QInputMethod>
 #include <QLocale>
 #include <QMetaMethod>
@@ -16,6 +18,7 @@
 extern "C" {
 #endif
 
+void miqt_exec_callback_handle_release_QInputMethod(intptr_t);
 void miqt_exec_callback_QInputMethod_cursorRectangleChanged(intptr_t);
 void miqt_exec_callback_QInputMethod_anchorRectangleChanged(intptr_t);
 void miqt_exec_callback_QInputMethod_keyboardRectangleChanged(intptr_t);
@@ -136,82 +139,98 @@ void QInputMethod_cursorRectangleChanged(QInputMethod* self) {
 	self->cursorRectangleChanged();
 }
 
-void QInputMethod_connect_cursorRectangleChanged(QInputMethod* self, intptr_t slot) {
-	QInputMethod::connect(self, static_cast<void (QInputMethod::*)()>(&QInputMethod::cursorRectangleChanged), self, [=]() {
+void* QInputMethod_connect_cursorRectangleChanged(QInputMethod* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QInputMethod>>(slot);
+	return new QMetaObject::Connection(QInputMethod::connect(self, static_cast<void (QInputMethod::*)()>(&QInputMethod::cursorRectangleChanged), self, [slot_handle]() {
+		intptr_t slot = slot_handle->value();
 		miqt_exec_callback_QInputMethod_cursorRectangleChanged(slot);
-	});
+	}));
 }
 
 void QInputMethod_anchorRectangleChanged(QInputMethod* self) {
 	self->anchorRectangleChanged();
 }
 
-void QInputMethod_connect_anchorRectangleChanged(QInputMethod* self, intptr_t slot) {
-	QInputMethod::connect(self, static_cast<void (QInputMethod::*)()>(&QInputMethod::anchorRectangleChanged), self, [=]() {
+void* QInputMethod_connect_anchorRectangleChanged(QInputMethod* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QInputMethod>>(slot);
+	return new QMetaObject::Connection(QInputMethod::connect(self, static_cast<void (QInputMethod::*)()>(&QInputMethod::anchorRectangleChanged), self, [slot_handle]() {
+		intptr_t slot = slot_handle->value();
 		miqt_exec_callback_QInputMethod_anchorRectangleChanged(slot);
-	});
+	}));
 }
 
 void QInputMethod_keyboardRectangleChanged(QInputMethod* self) {
 	self->keyboardRectangleChanged();
 }
 
-void QInputMethod_connect_keyboardRectangleChanged(QInputMethod* self, intptr_t slot) {
-	QInputMethod::connect(self, static_cast<void (QInputMethod::*)()>(&QInputMethod::keyboardRectangleChanged), self, [=]() {
+void* QInputMethod_connect_keyboardRectangleChanged(QInputMethod* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QInputMethod>>(slot);
+	return new QMetaObject::Connection(QInputMethod::connect(self, static_cast<void (QInputMethod::*)()>(&QInputMethod::keyboardRectangleChanged), self, [slot_handle]() {
+		intptr_t slot = slot_handle->value();
 		miqt_exec_callback_QInputMethod_keyboardRectangleChanged(slot);
-	});
+	}));
 }
 
 void QInputMethod_inputItemClipRectangleChanged(QInputMethod* self) {
 	self->inputItemClipRectangleChanged();
 }
 
-void QInputMethod_connect_inputItemClipRectangleChanged(QInputMethod* self, intptr_t slot) {
-	QInputMethod::connect(self, static_cast<void (QInputMethod::*)()>(&QInputMethod::inputItemClipRectangleChanged), self, [=]() {
+void* QInputMethod_connect_inputItemClipRectangleChanged(QInputMethod* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QInputMethod>>(slot);
+	return new QMetaObject::Connection(QInputMethod::connect(self, static_cast<void (QInputMethod::*)()>(&QInputMethod::inputItemClipRectangleChanged), self, [slot_handle]() {
+		intptr_t slot = slot_handle->value();
 		miqt_exec_callback_QInputMethod_inputItemClipRectangleChanged(slot);
-	});
+	}));
 }
 
 void QInputMethod_visibleChanged(QInputMethod* self) {
 	self->visibleChanged();
 }
 
-void QInputMethod_connect_visibleChanged(QInputMethod* self, intptr_t slot) {
-	QInputMethod::connect(self, static_cast<void (QInputMethod::*)()>(&QInputMethod::visibleChanged), self, [=]() {
+void* QInputMethod_connect_visibleChanged(QInputMethod* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QInputMethod>>(slot);
+	return new QMetaObject::Connection(QInputMethod::connect(self, static_cast<void (QInputMethod::*)()>(&QInputMethod::visibleChanged), self, [slot_handle]() {
+		intptr_t slot = slot_handle->value();
 		miqt_exec_callback_QInputMethod_visibleChanged(slot);
-	});
+	}));
 }
 
 void QInputMethod_animatingChanged(QInputMethod* self) {
 	self->animatingChanged();
 }
 
-void QInputMethod_connect_animatingChanged(QInputMethod* self, intptr_t slot) {
-	QInputMethod::connect(self, static_cast<void (QInputMethod::*)()>(&QInputMethod::animatingChanged), self, [=]() {
+void* QInputMethod_connect_animatingChanged(QInputMethod* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QInputMethod>>(slot);
+	return new QMetaObject::Connection(QInputMethod::connect(self, static_cast<void (QInputMethod::*)()>(&QInputMethod::animatingChanged), self, [slot_handle]() {
+		intptr_t slot = slot_handle->value();
 		miqt_exec_callback_QInputMethod_animatingChanged(slot);
-	});
+	}));
 }
 
 void QInputMethod_localeChanged(QInputMethod* self) {
 	self->localeChanged();
 }
 
-void QInputMethod_connect_localeChanged(QInputMethod* self, intptr_t slot) {
-	QInputMethod::connect(self, static_cast<void (QInputMethod::*)()>(&QInputMethod::localeChanged), self, [=]() {
+void* QInputMethod_connect_localeChanged(QInputMethod* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QInputMethod>>(slot);
+	return new QMetaObject::Connection(QInputMethod::connect(self, static_cast<void (QInputMethod::*)()>(&QInputMethod::localeChanged), self, [slot_handle]() {
+		intptr_t slot = slot_handle->value();
 		miqt_exec_callback_QInputMethod_localeChanged(slot);
-	});
+	}));
 }
 
 void QInputMethod_inputDirectionChanged(QInputMethod* self, int newDirection) {
 	self->inputDirectionChanged(static_cast<Qt::LayoutDirection>(newDirection));
 }
 
-void QInputMethod_connect_inputDirectionChanged(QInputMethod* self, intptr_t slot) {
-	QInputMethod::connect(self, static_cast<void (QInputMethod::*)(Qt::LayoutDirection)>(&QInputMethod::inputDirectionChanged), self, [=](Qt::LayoutDirection newDirection) {
+void* QInputMethod_connect_inputDirectionChanged(QInputMethod* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QInputMethod>>(slot);
+	return new QMetaObject::Connection(QInputMethod::connect(self, static_cast<void (QInputMethod::*)(Qt::LayoutDirection)>(&QInputMethod::inputDirectionChanged), self, [slot_handle](Qt::LayoutDirection newDirection) {
+		intptr_t slot = slot_handle->value();
 		Qt::LayoutDirection newDirection_ret = newDirection;
 		int sigval1 = static_cast<int>(newDirection_ret);
 		miqt_exec_callback_QInputMethod_inputDirectionChanged(slot, sigval1);
-	});
+	}));
 }
 
 struct miqt_string QInputMethod_tr2(const char* s, const char* c) {

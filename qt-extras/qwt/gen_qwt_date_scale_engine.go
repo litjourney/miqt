@@ -15,6 +15,11 @@ import (
 	"unsafe"
 )
 
+//export miqt_exec_callback_handle_release_QwtDateScaleEngine
+func miqt_exec_callback_handle_release_QwtDateScaleEngine(cb C.intptr_t) {
+	cgo.Handle(cb).Delete()
+}
+
 type QwtDateScaleEngine struct {
 	h *C.QwtDateScaleEngine
 	*QwtLinearScaleEngine
@@ -285,7 +290,11 @@ func (this *QwtDateScaleEngine) callVirtualBase_AutoScale(maxNumSteps int, x1 *f
 
 }
 func (this *QwtDateScaleEngine) OnAutoScale(slot func(super func(maxNumSteps int, x1 *float64, x2 *float64, stepSize *float64), maxNumSteps int, x1 *float64, x2 *float64, stepSize *float64)) {
-	ok := C.QwtDateScaleEngine_override_virtual_autoScale(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QwtDateScaleEngine_override_virtual_autoScale(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -319,7 +328,11 @@ func (this *QwtDateScaleEngine) callVirtualBase_DivideScale(x1 float64, x2 float
 
 }
 func (this *QwtDateScaleEngine) OnDivideScale(slot func(super func(x1 float64, x2 float64, maxMajorSteps int, maxMinorSteps int, stepSize float64) *QwtScaleDiv, x1 float64, x2 float64, maxMajorSteps int, maxMinorSteps int, stepSize float64) *QwtScaleDiv) {
-	ok := C.QwtDateScaleEngine_override_virtual_divideScale(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QwtDateScaleEngine_override_virtual_divideScale(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -355,7 +368,11 @@ func (this *QwtDateScaleEngine) callVirtualBase_IntervalType(param1 *qt.QDateTim
 
 }
 func (this *QwtDateScaleEngine) OnIntervalType(slot func(super func(param1 *qt.QDateTime, param2 *qt.QDateTime, maxSteps int) QwtDate__IntervalType, param1 *qt.QDateTime, param2 *qt.QDateTime, maxSteps int) QwtDate__IntervalType) {
-	ok := C.QwtDateScaleEngine_override_virtual_intervalType(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QwtDateScaleEngine_override_virtual_intervalType(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -389,7 +406,11 @@ func (this *QwtDateScaleEngine) callVirtualBase_AlignDate(param1 *qt.QDateTime, 
 
 }
 func (this *QwtDateScaleEngine) OnAlignDate(slot func(super func(param1 *qt.QDateTime, stepSize float64, param3 QwtDate__IntervalType, up bool) *qt.QDateTime, param1 *qt.QDateTime, stepSize float64, param3 QwtDate__IntervalType, up bool) *qt.QDateTime) {
-	ok := C.QwtDateScaleEngine_override_virtual_alignDate(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QwtDateScaleEngine_override_virtual_alignDate(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}

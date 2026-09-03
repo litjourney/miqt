@@ -1,3 +1,5 @@
+#include <memory>
+#include <utility>
 #include <QByteArray>
 #include <QList>
 #include <QMediaObject>
@@ -16,6 +18,7 @@
 extern "C" {
 #endif
 
+void miqt_exec_callback_handle_release_QMediaObject(intptr_t);
 void miqt_exec_callback_QMediaObject_notifyIntervalChanged(intptr_t, int);
 void miqt_exec_callback_QMediaObject_metaDataAvailableChanged(intptr_t, bool);
 void miqt_exec_callback_QMediaObject_metaDataChanged(intptr_t);
@@ -122,32 +125,38 @@ void QMediaObject_notifyIntervalChanged(QMediaObject* self, int milliSeconds) {
 	self->notifyIntervalChanged(static_cast<int>(milliSeconds));
 }
 
-void QMediaObject_connect_notifyIntervalChanged(QMediaObject* self, intptr_t slot) {
-	QMediaObject::connect(self, static_cast<void (QMediaObject::*)(int)>(&QMediaObject::notifyIntervalChanged), self, [=](int milliSeconds) {
+void* QMediaObject_connect_notifyIntervalChanged(QMediaObject* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QMediaObject>>(slot);
+	return new QMetaObject::Connection(QMediaObject::connect(self, static_cast<void (QMediaObject::*)(int)>(&QMediaObject::notifyIntervalChanged), self, [slot_handle](int milliSeconds) {
+		intptr_t slot = slot_handle->value();
 		int sigval1 = milliSeconds;
 		miqt_exec_callback_QMediaObject_notifyIntervalChanged(slot, sigval1);
-	});
+	}));
 }
 
 void QMediaObject_metaDataAvailableChanged(QMediaObject* self, bool available) {
 	self->metaDataAvailableChanged(available);
 }
 
-void QMediaObject_connect_metaDataAvailableChanged(QMediaObject* self, intptr_t slot) {
-	QMediaObject::connect(self, static_cast<void (QMediaObject::*)(bool)>(&QMediaObject::metaDataAvailableChanged), self, [=](bool available) {
+void* QMediaObject_connect_metaDataAvailableChanged(QMediaObject* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QMediaObject>>(slot);
+	return new QMetaObject::Connection(QMediaObject::connect(self, static_cast<void (QMediaObject::*)(bool)>(&QMediaObject::metaDataAvailableChanged), self, [slot_handle](bool available) {
+		intptr_t slot = slot_handle->value();
 		bool sigval1 = available;
 		miqt_exec_callback_QMediaObject_metaDataAvailableChanged(slot, sigval1);
-	});
+	}));
 }
 
 void QMediaObject_metaDataChanged(QMediaObject* self) {
 	self->metaDataChanged();
 }
 
-void QMediaObject_connect_metaDataChanged(QMediaObject* self, intptr_t slot) {
-	QMediaObject::connect(self, static_cast<void (QMediaObject::*)()>(&QMediaObject::metaDataChanged), self, [=]() {
+void* QMediaObject_connect_metaDataChanged(QMediaObject* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QMediaObject>>(slot);
+	return new QMetaObject::Connection(QMediaObject::connect(self, static_cast<void (QMediaObject::*)()>(&QMediaObject::metaDataChanged), self, [slot_handle]() {
+		intptr_t slot = slot_handle->value();
 		miqt_exec_callback_QMediaObject_metaDataChanged(slot);
-	});
+	}));
 }
 
 void QMediaObject_metaDataChanged2(QMediaObject* self, struct miqt_string key, QVariant* value) {
@@ -155,8 +164,10 @@ void QMediaObject_metaDataChanged2(QMediaObject* self, struct miqt_string key, Q
 	self->metaDataChanged(key_QString, *value);
 }
 
-void QMediaObject_connect_metaDataChanged2(QMediaObject* self, intptr_t slot) {
-	QMediaObject::connect(self, static_cast<void (QMediaObject::*)(const QString&, const QVariant&)>(&QMediaObject::metaDataChanged), self, [=](const QString& key, const QVariant& value) {
+void* QMediaObject_connect_metaDataChanged2(QMediaObject* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QMediaObject>>(slot);
+	return new QMetaObject::Connection(QMediaObject::connect(self, static_cast<void (QMediaObject::*)(const QString&, const QVariant&)>(&QMediaObject::metaDataChanged), self, [slot_handle](const QString& key, const QVariant& value) {
+		intptr_t slot = slot_handle->value();
 		const QString key_ret = key;
 		// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 		QByteArray key_b = key_ret.toUtf8();
@@ -169,30 +180,34 @@ void QMediaObject_connect_metaDataChanged2(QMediaObject* self, intptr_t slot) {
 		// Cast returned reference into pointer
 		QVariant* sigval2 = const_cast<QVariant*>(&value_ret);
 		miqt_exec_callback_QMediaObject_metaDataChanged2(slot, sigval1, sigval2);
-	});
+	}));
 }
 
 void QMediaObject_availabilityChanged(QMediaObject* self, bool available) {
 	self->availabilityChanged(available);
 }
 
-void QMediaObject_connect_availabilityChanged(QMediaObject* self, intptr_t slot) {
-	QMediaObject::connect(self, static_cast<void (QMediaObject::*)(bool)>(&QMediaObject::availabilityChanged), self, [=](bool available) {
+void* QMediaObject_connect_availabilityChanged(QMediaObject* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QMediaObject>>(slot);
+	return new QMetaObject::Connection(QMediaObject::connect(self, static_cast<void (QMediaObject::*)(bool)>(&QMediaObject::availabilityChanged), self, [slot_handle](bool available) {
+		intptr_t slot = slot_handle->value();
 		bool sigval1 = available;
 		miqt_exec_callback_QMediaObject_availabilityChanged(slot, sigval1);
-	});
+	}));
 }
 
 void QMediaObject_availabilityChangedWithAvailability(QMediaObject* self, int availability) {
 	self->availabilityChanged(static_cast<QMultimedia::AvailabilityStatus>(availability));
 }
 
-void QMediaObject_connect_availabilityChangedWithAvailability(QMediaObject* self, intptr_t slot) {
-	QMediaObject::connect(self, static_cast<void (QMediaObject::*)(QMultimedia::AvailabilityStatus)>(&QMediaObject::availabilityChanged), self, [=](QMultimedia::AvailabilityStatus availability) {
+void* QMediaObject_connect_availabilityChangedWithAvailability(QMediaObject* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QMediaObject>>(slot);
+	return new QMetaObject::Connection(QMediaObject::connect(self, static_cast<void (QMediaObject::*)(QMultimedia::AvailabilityStatus)>(&QMediaObject::availabilityChanged), self, [slot_handle](QMultimedia::AvailabilityStatus availability) {
+		intptr_t slot = slot_handle->value();
 		QMultimedia::AvailabilityStatus availability_ret = availability;
 		int sigval1 = static_cast<int>(availability_ret);
 		miqt_exec_callback_QMediaObject_availabilityChangedWithAvailability(slot, sigval1);
-	});
+	}));
 }
 
 struct miqt_string QMediaObject_tr2(const char* s, const char* c) {

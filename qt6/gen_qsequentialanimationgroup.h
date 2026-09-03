@@ -49,7 +49,7 @@ QPauseAnimation* QSequentialAnimationGroup_insertPause(QSequentialAnimationGroup
 QAbstractAnimation* QSequentialAnimationGroup_currentAnimation(const QSequentialAnimationGroup* self);
 int QSequentialAnimationGroup_duration(const QSequentialAnimationGroup* self);
 void QSequentialAnimationGroup_currentAnimationChanged(QSequentialAnimationGroup* self, QAbstractAnimation* current);
-void QSequentialAnimationGroup_connect_currentAnimationChanged(QSequentialAnimationGroup* self, intptr_t slot);
+void* QSequentialAnimationGroup_connect_currentAnimationChanged(QSequentialAnimationGroup* self, intptr_t slot);
 bool QSequentialAnimationGroup_event(QSequentialAnimationGroup* self, QEvent* event);
 void QSequentialAnimationGroup_updateCurrentTime(QSequentialAnimationGroup* self, int param1);
 void QSequentialAnimationGroup_updateState(QSequentialAnimationGroup* self, int newState, int oldState);

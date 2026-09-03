@@ -163,7 +163,7 @@ void QMessageBox_setWindowTitle(QMessageBox* self, struct miqt_string title);
 void QMessageBox_setWindowModality(QMessageBox* self, int windowModality);
 QPixmap* QMessageBox_standardIcon(int icon);
 void QMessageBox_buttonClicked(QMessageBox* self, QAbstractButton* button);
-void QMessageBox_connect_buttonClicked(QMessageBox* self, intptr_t slot);
+void* QMessageBox_connect_buttonClicked(QMessageBox* self, intptr_t slot);
 bool QMessageBox_event(QMessageBox* self, QEvent* e);
 void QMessageBox_resizeEvent(QMessageBox* self, QResizeEvent* event);
 void QMessageBox_showEvent(QMessageBox* self, QShowEvent* event);

@@ -32,6 +32,11 @@ const (
 	QQmlIncubator__Error   QQmlIncubator__Status = 3
 )
 
+//export miqt_exec_callback_handle_release_QQmlIncubator
+func miqt_exec_callback_handle_release_QQmlIncubator(cb C.intptr_t) {
+	cgo.Handle(cb).Delete()
+}
+
 type QQmlIncubator struct {
 	h *C.QQmlIncubator
 }
@@ -153,7 +158,11 @@ func (this *QQmlIncubator) callVirtualBase_StatusChanged(param1 QQmlIncubator__S
 
 }
 func (this *QQmlIncubator) OnStatusChanged(slot func(super func(param1 QQmlIncubator__Status), param1 QQmlIncubator__Status)) {
-	ok := C.QQmlIncubator_override_virtual_statusChanged(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QQmlIncubator_override_virtual_statusChanged(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -179,7 +188,11 @@ func (this *QQmlIncubator) callVirtualBase_SetInitialState(initialState *qt6.QOb
 
 }
 func (this *QQmlIncubator) OnSetInitialState(slot func(super func(initialState *qt6.QObject), initialState *qt6.QObject)) {
-	ok := C.QQmlIncubator_override_virtual_setInitialState(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QQmlIncubator_override_virtual_setInitialState(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -211,6 +224,11 @@ func (this *QQmlIncubator) GoGC() {
 		this.Delete()
 		runtime.KeepAlive(this.h)
 	})
+}
+
+//export miqt_exec_callback_handle_release_QQmlIncubationController
+func miqt_exec_callback_handle_release_QQmlIncubationController(cb C.intptr_t) {
+	cgo.Handle(cb).Delete()
 }
 
 type QQmlIncubationController struct {
@@ -269,7 +287,11 @@ func (this *QQmlIncubationController) callVirtualBase_IncubatingObjectCountChang
 
 }
 func (this *QQmlIncubationController) OnIncubatingObjectCountChanged(slot func(super func(param1 int), param1 int)) {
-	ok := C.QQmlIncubationController_override_virtual_incubatingObjectCountChanged(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QQmlIncubationController_override_virtual_incubatingObjectCountChanged(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}

@@ -24,6 +24,11 @@ const (
 	QPieSlice__LabelInsideNormal     QPieSlice__LabelPosition = 3
 )
 
+//export miqt_exec_callback_handle_release_QPieSlice
+func miqt_exec_callback_handle_release_QPieSlice(cb C.intptr_t) {
+	cgo.Handle(cb).Delete()
+}
+
 type QPieSlice struct {
 	h *C.QPieSlice
 	*qt6.QObject
@@ -271,8 +276,10 @@ func (this *QPieSlice) Series() *QPieSeries {
 func (this *QPieSlice) Clicked() {
 	C.QPieSlice_clicked(this.h)
 }
-func (this *QPieSlice) OnClicked(slot func()) {
-	C.QPieSlice_connect_clicked(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QPieSlice) OnClicked(slot func()) *qt6.SignalConnection {
+	_goptr := qt6.UnsafeNewQMetaObject__Connection(C.QPieSlice_connect_clicked(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QPieSlice_clicked
@@ -288,8 +295,10 @@ func miqt_exec_callback_QPieSlice_clicked(cb C.intptr_t) {
 func (this *QPieSlice) Hovered(state bool) {
 	C.QPieSlice_hovered(this.h, (C.bool)(state))
 }
-func (this *QPieSlice) OnHovered(slot func(state bool)) {
-	C.QPieSlice_connect_hovered(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QPieSlice) OnHovered(slot func(state bool)) *qt6.SignalConnection {
+	_goptr := qt6.UnsafeNewQMetaObject__Connection(C.QPieSlice_connect_hovered(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QPieSlice_hovered
@@ -308,8 +317,10 @@ func miqt_exec_callback_QPieSlice_hovered(cb C.intptr_t, state C.bool) {
 func (this *QPieSlice) Pressed() {
 	C.QPieSlice_pressed(this.h)
 }
-func (this *QPieSlice) OnPressed(slot func()) {
-	C.QPieSlice_connect_pressed(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QPieSlice) OnPressed(slot func()) *qt6.SignalConnection {
+	_goptr := qt6.UnsafeNewQMetaObject__Connection(C.QPieSlice_connect_pressed(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QPieSlice_pressed
@@ -325,8 +336,10 @@ func miqt_exec_callback_QPieSlice_pressed(cb C.intptr_t) {
 func (this *QPieSlice) Released() {
 	C.QPieSlice_released(this.h)
 }
-func (this *QPieSlice) OnReleased(slot func()) {
-	C.QPieSlice_connect_released(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QPieSlice) OnReleased(slot func()) *qt6.SignalConnection {
+	_goptr := qt6.UnsafeNewQMetaObject__Connection(C.QPieSlice_connect_released(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QPieSlice_released
@@ -342,8 +355,10 @@ func miqt_exec_callback_QPieSlice_released(cb C.intptr_t) {
 func (this *QPieSlice) DoubleClicked() {
 	C.QPieSlice_doubleClicked(this.h)
 }
-func (this *QPieSlice) OnDoubleClicked(slot func()) {
-	C.QPieSlice_connect_doubleClicked(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QPieSlice) OnDoubleClicked(slot func()) *qt6.SignalConnection {
+	_goptr := qt6.UnsafeNewQMetaObject__Connection(C.QPieSlice_connect_doubleClicked(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QPieSlice_doubleClicked
@@ -359,8 +374,10 @@ func miqt_exec_callback_QPieSlice_doubleClicked(cb C.intptr_t) {
 func (this *QPieSlice) LabelChanged() {
 	C.QPieSlice_labelChanged(this.h)
 }
-func (this *QPieSlice) OnLabelChanged(slot func()) {
-	C.QPieSlice_connect_labelChanged(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QPieSlice) OnLabelChanged(slot func()) *qt6.SignalConnection {
+	_goptr := qt6.UnsafeNewQMetaObject__Connection(C.QPieSlice_connect_labelChanged(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QPieSlice_labelChanged
@@ -376,8 +393,10 @@ func miqt_exec_callback_QPieSlice_labelChanged(cb C.intptr_t) {
 func (this *QPieSlice) ValueChanged() {
 	C.QPieSlice_valueChanged(this.h)
 }
-func (this *QPieSlice) OnValueChanged(slot func()) {
-	C.QPieSlice_connect_valueChanged(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QPieSlice) OnValueChanged(slot func()) *qt6.SignalConnection {
+	_goptr := qt6.UnsafeNewQMetaObject__Connection(C.QPieSlice_connect_valueChanged(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QPieSlice_valueChanged
@@ -393,8 +412,10 @@ func miqt_exec_callback_QPieSlice_valueChanged(cb C.intptr_t) {
 func (this *QPieSlice) LabelVisibleChanged() {
 	C.QPieSlice_labelVisibleChanged(this.h)
 }
-func (this *QPieSlice) OnLabelVisibleChanged(slot func()) {
-	C.QPieSlice_connect_labelVisibleChanged(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QPieSlice) OnLabelVisibleChanged(slot func()) *qt6.SignalConnection {
+	_goptr := qt6.UnsafeNewQMetaObject__Connection(C.QPieSlice_connect_labelVisibleChanged(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QPieSlice_labelVisibleChanged
@@ -410,8 +431,10 @@ func miqt_exec_callback_QPieSlice_labelVisibleChanged(cb C.intptr_t) {
 func (this *QPieSlice) PenChanged() {
 	C.QPieSlice_penChanged(this.h)
 }
-func (this *QPieSlice) OnPenChanged(slot func()) {
-	C.QPieSlice_connect_penChanged(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QPieSlice) OnPenChanged(slot func()) *qt6.SignalConnection {
+	_goptr := qt6.UnsafeNewQMetaObject__Connection(C.QPieSlice_connect_penChanged(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QPieSlice_penChanged
@@ -427,8 +450,10 @@ func miqt_exec_callback_QPieSlice_penChanged(cb C.intptr_t) {
 func (this *QPieSlice) BrushChanged() {
 	C.QPieSlice_brushChanged(this.h)
 }
-func (this *QPieSlice) OnBrushChanged(slot func()) {
-	C.QPieSlice_connect_brushChanged(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QPieSlice) OnBrushChanged(slot func()) *qt6.SignalConnection {
+	_goptr := qt6.UnsafeNewQMetaObject__Connection(C.QPieSlice_connect_brushChanged(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QPieSlice_brushChanged
@@ -444,8 +469,10 @@ func miqt_exec_callback_QPieSlice_brushChanged(cb C.intptr_t) {
 func (this *QPieSlice) LabelBrushChanged() {
 	C.QPieSlice_labelBrushChanged(this.h)
 }
-func (this *QPieSlice) OnLabelBrushChanged(slot func()) {
-	C.QPieSlice_connect_labelBrushChanged(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QPieSlice) OnLabelBrushChanged(slot func()) *qt6.SignalConnection {
+	_goptr := qt6.UnsafeNewQMetaObject__Connection(C.QPieSlice_connect_labelBrushChanged(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QPieSlice_labelBrushChanged
@@ -461,8 +488,10 @@ func miqt_exec_callback_QPieSlice_labelBrushChanged(cb C.intptr_t) {
 func (this *QPieSlice) LabelFontChanged() {
 	C.QPieSlice_labelFontChanged(this.h)
 }
-func (this *QPieSlice) OnLabelFontChanged(slot func()) {
-	C.QPieSlice_connect_labelFontChanged(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QPieSlice) OnLabelFontChanged(slot func()) *qt6.SignalConnection {
+	_goptr := qt6.UnsafeNewQMetaObject__Connection(C.QPieSlice_connect_labelFontChanged(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QPieSlice_labelFontChanged
@@ -478,8 +507,10 @@ func miqt_exec_callback_QPieSlice_labelFontChanged(cb C.intptr_t) {
 func (this *QPieSlice) PercentageChanged() {
 	C.QPieSlice_percentageChanged(this.h)
 }
-func (this *QPieSlice) OnPercentageChanged(slot func()) {
-	C.QPieSlice_connect_percentageChanged(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QPieSlice) OnPercentageChanged(slot func()) *qt6.SignalConnection {
+	_goptr := qt6.UnsafeNewQMetaObject__Connection(C.QPieSlice_connect_percentageChanged(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QPieSlice_percentageChanged
@@ -495,8 +526,10 @@ func miqt_exec_callback_QPieSlice_percentageChanged(cb C.intptr_t) {
 func (this *QPieSlice) StartAngleChanged() {
 	C.QPieSlice_startAngleChanged(this.h)
 }
-func (this *QPieSlice) OnStartAngleChanged(slot func()) {
-	C.QPieSlice_connect_startAngleChanged(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QPieSlice) OnStartAngleChanged(slot func()) *qt6.SignalConnection {
+	_goptr := qt6.UnsafeNewQMetaObject__Connection(C.QPieSlice_connect_startAngleChanged(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QPieSlice_startAngleChanged
@@ -512,8 +545,10 @@ func miqt_exec_callback_QPieSlice_startAngleChanged(cb C.intptr_t) {
 func (this *QPieSlice) AngleSpanChanged() {
 	C.QPieSlice_angleSpanChanged(this.h)
 }
-func (this *QPieSlice) OnAngleSpanChanged(slot func()) {
-	C.QPieSlice_connect_angleSpanChanged(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QPieSlice) OnAngleSpanChanged(slot func()) *qt6.SignalConnection {
+	_goptr := qt6.UnsafeNewQMetaObject__Connection(C.QPieSlice_connect_angleSpanChanged(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QPieSlice_angleSpanChanged
@@ -529,8 +564,10 @@ func miqt_exec_callback_QPieSlice_angleSpanChanged(cb C.intptr_t) {
 func (this *QPieSlice) ColorChanged() {
 	C.QPieSlice_colorChanged(this.h)
 }
-func (this *QPieSlice) OnColorChanged(slot func()) {
-	C.QPieSlice_connect_colorChanged(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QPieSlice) OnColorChanged(slot func()) *qt6.SignalConnection {
+	_goptr := qt6.UnsafeNewQMetaObject__Connection(C.QPieSlice_connect_colorChanged(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QPieSlice_colorChanged
@@ -546,8 +583,10 @@ func miqt_exec_callback_QPieSlice_colorChanged(cb C.intptr_t) {
 func (this *QPieSlice) BorderColorChanged() {
 	C.QPieSlice_borderColorChanged(this.h)
 }
-func (this *QPieSlice) OnBorderColorChanged(slot func()) {
-	C.QPieSlice_connect_borderColorChanged(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QPieSlice) OnBorderColorChanged(slot func()) *qt6.SignalConnection {
+	_goptr := qt6.UnsafeNewQMetaObject__Connection(C.QPieSlice_connect_borderColorChanged(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QPieSlice_borderColorChanged
@@ -563,8 +602,10 @@ func miqt_exec_callback_QPieSlice_borderColorChanged(cb C.intptr_t) {
 func (this *QPieSlice) BorderWidthChanged() {
 	C.QPieSlice_borderWidthChanged(this.h)
 }
-func (this *QPieSlice) OnBorderWidthChanged(slot func()) {
-	C.QPieSlice_connect_borderWidthChanged(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QPieSlice) OnBorderWidthChanged(slot func()) *qt6.SignalConnection {
+	_goptr := qt6.UnsafeNewQMetaObject__Connection(C.QPieSlice_connect_borderWidthChanged(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QPieSlice_borderWidthChanged
@@ -580,8 +621,10 @@ func miqt_exec_callback_QPieSlice_borderWidthChanged(cb C.intptr_t) {
 func (this *QPieSlice) LabelColorChanged() {
 	C.QPieSlice_labelColorChanged(this.h)
 }
-func (this *QPieSlice) OnLabelColorChanged(slot func()) {
-	C.QPieSlice_connect_labelColorChanged(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QPieSlice) OnLabelColorChanged(slot func()) *qt6.SignalConnection {
+	_goptr := qt6.UnsafeNewQMetaObject__Connection(C.QPieSlice_connect_labelColorChanged(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QPieSlice_labelColorChanged
@@ -688,7 +731,11 @@ func (this *QPieSlice) callVirtualBase_Event(event *qt6.QEvent) bool {
 
 }
 func (this *QPieSlice) OnEvent(slot func(super func(event *qt6.QEvent) bool, event *qt6.QEvent) bool) {
-	ok := C.QPieSlice_override_virtual_event(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QPieSlice_override_virtual_event(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -716,7 +763,11 @@ func (this *QPieSlice) callVirtualBase_EventFilter(watched *qt6.QObject, event *
 
 }
 func (this *QPieSlice) OnEventFilter(slot func(super func(watched *qt6.QObject, event *qt6.QEvent) bool, watched *qt6.QObject, event *qt6.QEvent) bool) {
-	ok := C.QPieSlice_override_virtual_eventFilter(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QPieSlice_override_virtual_eventFilter(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -746,7 +797,11 @@ func (this *QPieSlice) callVirtualBase_TimerEvent(event *qt6.QTimerEvent) {
 
 }
 func (this *QPieSlice) OnTimerEvent(slot func(super func(event *qt6.QTimerEvent), event *qt6.QTimerEvent)) {
-	ok := C.QPieSlice_override_virtual_timerEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QPieSlice_override_virtual_timerEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -772,7 +827,11 @@ func (this *QPieSlice) callVirtualBase_ChildEvent(event *qt6.QChildEvent) {
 
 }
 func (this *QPieSlice) OnChildEvent(slot func(super func(event *qt6.QChildEvent), event *qt6.QChildEvent)) {
-	ok := C.QPieSlice_override_virtual_childEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QPieSlice_override_virtual_childEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -798,7 +857,11 @@ func (this *QPieSlice) callVirtualBase_CustomEvent(event *qt6.QEvent) {
 
 }
 func (this *QPieSlice) OnCustomEvent(slot func(super func(event *qt6.QEvent), event *qt6.QEvent)) {
-	ok := C.QPieSlice_override_virtual_customEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QPieSlice_override_virtual_customEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -824,7 +887,11 @@ func (this *QPieSlice) callVirtualBase_ConnectNotify(signal *qt6.QMetaMethod) {
 
 }
 func (this *QPieSlice) OnConnectNotify(slot func(super func(signal *qt6.QMetaMethod), signal *qt6.QMetaMethod)) {
-	ok := C.QPieSlice_override_virtual_connectNotify(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QPieSlice_override_virtual_connectNotify(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -850,7 +917,11 @@ func (this *QPieSlice) callVirtualBase_DisconnectNotify(signal *qt6.QMetaMethod)
 
 }
 func (this *QPieSlice) OnDisconnectNotify(slot func(super func(signal *qt6.QMetaMethod), signal *qt6.QMetaMethod)) {
-	ok := C.QPieSlice_override_virtual_disconnectNotify(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QPieSlice_override_virtual_disconnectNotify(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}

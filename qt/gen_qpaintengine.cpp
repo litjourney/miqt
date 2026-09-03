@@ -1,3 +1,5 @@
+#include <memory>
+#include <utility>
 #include <QBrush>
 #include <QFont>
 #include <QImage>
@@ -28,6 +30,7 @@
 extern "C" {
 #endif
 
+void miqt_exec_callback_handle_release_QPaintEngine(intptr_t);
 bool miqt_exec_callback_QPaintEngine_begin(QPaintEngine*, intptr_t, QPaintDevice*);
 bool miqt_exec_callback_QPaintEngine_end(QPaintEngine*, intptr_t);
 void miqt_exec_callback_QPaintEngine_updateState(QPaintEngine*, intptr_t, QPaintEngineState*);
@@ -100,126 +103,126 @@ public:
 	virtual ~MiqtVirtualQPaintEngine() override = default;
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__begin = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QPaintEngine> handle__begin;
 
 	// Subclass to allow providing a Go implementation
 	virtual bool begin(QPaintDevice* pdev) override {
-		if (handle__begin == 0) {
+		if (!handle__begin) {
 			return false; // Pure virtual, there is no base we can call
 		}
 
 		QPaintDevice* sigval1 = pdev;
-		bool callback_return_value = miqt_exec_callback_QPaintEngine_begin(this, handle__begin, sigval1);
+		bool callback_return_value = miqt_exec_callback_QPaintEngine_begin(this, handle__begin.value(), sigval1);
 		return callback_return_value;
 	}
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__end = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QPaintEngine> handle__end;
 
 	// Subclass to allow providing a Go implementation
 	virtual bool end() override {
-		if (handle__end == 0) {
+		if (!handle__end) {
 			return false; // Pure virtual, there is no base we can call
 		}
 
-		bool callback_return_value = miqt_exec_callback_QPaintEngine_end(this, handle__end);
+		bool callback_return_value = miqt_exec_callback_QPaintEngine_end(this, handle__end.value());
 		return callback_return_value;
 	}
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__updateState = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QPaintEngine> handle__updateState;
 
 	// Subclass to allow providing a Go implementation
 	virtual void updateState(const QPaintEngineState& state) override {
-		if (handle__updateState == 0) {
+		if (!handle__updateState) {
 			return; // Pure virtual, there is no base we can call
 		}
 
 		const QPaintEngineState& state_ret = state;
 		// Cast returned reference into pointer
 		QPaintEngineState* sigval1 = const_cast<QPaintEngineState*>(&state_ret);
-		miqt_exec_callback_QPaintEngine_updateState(this, handle__updateState, sigval1);
+		miqt_exec_callback_QPaintEngine_updateState(this, handle__updateState.value(), sigval1);
 
 	}
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__drawRects = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QPaintEngine> handle__drawRects;
 
 	// Subclass to allow providing a Go implementation
 	virtual void drawRects(const QRect* rects, int rectCount) override {
-		if (handle__drawRects == 0) {
+		if (!handle__drawRects) {
 			QPaintEngine::drawRects(rects, rectCount);
 			return;
 		}
 
 		QRect* sigval1 = (QRect*) rects;
 		int sigval2 = rectCount;
-		miqt_exec_callback_QPaintEngine_drawRects(this, handle__drawRects, sigval1, sigval2);
+		miqt_exec_callback_QPaintEngine_drawRects(this, handle__drawRects.value(), sigval1, sigval2);
 
 	}
 
 	friend void QPaintEngine_virtualbase_drawRects(void* self, QRect* rects, int rectCount);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__drawRects2 = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QPaintEngine> handle__drawRects2;
 
 	// Subclass to allow providing a Go implementation
 	virtual void drawRects(const QRectF* rects, int rectCount) override {
-		if (handle__drawRects2 == 0) {
+		if (!handle__drawRects2) {
 			QPaintEngine::drawRects(rects, rectCount);
 			return;
 		}
 
 		QRectF* sigval1 = (QRectF*) rects;
 		int sigval2 = rectCount;
-		miqt_exec_callback_QPaintEngine_drawRects2(this, handle__drawRects2, sigval1, sigval2);
+		miqt_exec_callback_QPaintEngine_drawRects2(this, handle__drawRects2.value(), sigval1, sigval2);
 
 	}
 
 	friend void QPaintEngine_virtualbase_drawRects2(void* self, QRectF* rects, int rectCount);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__drawLines = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QPaintEngine> handle__drawLines;
 
 	// Subclass to allow providing a Go implementation
 	virtual void drawLines(const QLine* lines, int lineCount) override {
-		if (handle__drawLines == 0) {
+		if (!handle__drawLines) {
 			QPaintEngine::drawLines(lines, lineCount);
 			return;
 		}
 
 		QLine* sigval1 = (QLine*) lines;
 		int sigval2 = lineCount;
-		miqt_exec_callback_QPaintEngine_drawLines(this, handle__drawLines, sigval1, sigval2);
+		miqt_exec_callback_QPaintEngine_drawLines(this, handle__drawLines.value(), sigval1, sigval2);
 
 	}
 
 	friend void QPaintEngine_virtualbase_drawLines(void* self, QLine* lines, int lineCount);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__drawLines2 = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QPaintEngine> handle__drawLines2;
 
 	// Subclass to allow providing a Go implementation
 	virtual void drawLines(const QLineF* lines, int lineCount) override {
-		if (handle__drawLines2 == 0) {
+		if (!handle__drawLines2) {
 			QPaintEngine::drawLines(lines, lineCount);
 			return;
 		}
 
 		QLineF* sigval1 = (QLineF*) lines;
 		int sigval2 = lineCount;
-		miqt_exec_callback_QPaintEngine_drawLines2(this, handle__drawLines2, sigval1, sigval2);
+		miqt_exec_callback_QPaintEngine_drawLines2(this, handle__drawLines2.value(), sigval1, sigval2);
 
 	}
 
 	friend void QPaintEngine_virtualbase_drawLines2(void* self, QLineF* lines, int lineCount);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__drawEllipse = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QPaintEngine> handle__drawEllipse;
 
 	// Subclass to allow providing a Go implementation
 	virtual void drawEllipse(const QRectF& r) override {
-		if (handle__drawEllipse == 0) {
+		if (!handle__drawEllipse) {
 			QPaintEngine::drawEllipse(r);
 			return;
 		}
@@ -227,18 +230,18 @@ public:
 		const QRectF& r_ret = r;
 		// Cast returned reference into pointer
 		QRectF* sigval1 = const_cast<QRectF*>(&r_ret);
-		miqt_exec_callback_QPaintEngine_drawEllipse(this, handle__drawEllipse, sigval1);
+		miqt_exec_callback_QPaintEngine_drawEllipse(this, handle__drawEllipse.value(), sigval1);
 
 	}
 
 	friend void QPaintEngine_virtualbase_drawEllipse(void* self, QRectF* r);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__drawEllipseWithQRect = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QPaintEngine> handle__drawEllipseWithQRect;
 
 	// Subclass to allow providing a Go implementation
 	virtual void drawEllipse(const QRect& r) override {
-		if (handle__drawEllipseWithQRect == 0) {
+		if (!handle__drawEllipseWithQRect) {
 			QPaintEngine::drawEllipse(r);
 			return;
 		}
@@ -246,18 +249,18 @@ public:
 		const QRect& r_ret = r;
 		// Cast returned reference into pointer
 		QRect* sigval1 = const_cast<QRect*>(&r_ret);
-		miqt_exec_callback_QPaintEngine_drawEllipseWithQRect(this, handle__drawEllipseWithQRect, sigval1);
+		miqt_exec_callback_QPaintEngine_drawEllipseWithQRect(this, handle__drawEllipseWithQRect.value(), sigval1);
 
 	}
 
 	friend void QPaintEngine_virtualbase_drawEllipseWithQRect(void* self, QRect* r);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__drawPath = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QPaintEngine> handle__drawPath;
 
 	// Subclass to allow providing a Go implementation
 	virtual void drawPath(const QPainterPath& path) override {
-		if (handle__drawPath == 0) {
+		if (!handle__drawPath) {
 			QPaintEngine::drawPath(path);
 			return;
 		}
@@ -265,54 +268,54 @@ public:
 		const QPainterPath& path_ret = path;
 		// Cast returned reference into pointer
 		QPainterPath* sigval1 = const_cast<QPainterPath*>(&path_ret);
-		miqt_exec_callback_QPaintEngine_drawPath(this, handle__drawPath, sigval1);
+		miqt_exec_callback_QPaintEngine_drawPath(this, handle__drawPath.value(), sigval1);
 
 	}
 
 	friend void QPaintEngine_virtualbase_drawPath(void* self, QPainterPath* path);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__drawPoints = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QPaintEngine> handle__drawPoints;
 
 	// Subclass to allow providing a Go implementation
 	virtual void drawPoints(const QPointF* points, int pointCount) override {
-		if (handle__drawPoints == 0) {
+		if (!handle__drawPoints) {
 			QPaintEngine::drawPoints(points, pointCount);
 			return;
 		}
 
 		QPointF* sigval1 = (QPointF*) points;
 		int sigval2 = pointCount;
-		miqt_exec_callback_QPaintEngine_drawPoints(this, handle__drawPoints, sigval1, sigval2);
+		miqt_exec_callback_QPaintEngine_drawPoints(this, handle__drawPoints.value(), sigval1, sigval2);
 
 	}
 
 	friend void QPaintEngine_virtualbase_drawPoints(void* self, QPointF* points, int pointCount);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__drawPoints2 = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QPaintEngine> handle__drawPoints2;
 
 	// Subclass to allow providing a Go implementation
 	virtual void drawPoints(const QPoint* points, int pointCount) override {
-		if (handle__drawPoints2 == 0) {
+		if (!handle__drawPoints2) {
 			QPaintEngine::drawPoints(points, pointCount);
 			return;
 		}
 
 		QPoint* sigval1 = (QPoint*) points;
 		int sigval2 = pointCount;
-		miqt_exec_callback_QPaintEngine_drawPoints2(this, handle__drawPoints2, sigval1, sigval2);
+		miqt_exec_callback_QPaintEngine_drawPoints2(this, handle__drawPoints2.value(), sigval1, sigval2);
 
 	}
 
 	friend void QPaintEngine_virtualbase_drawPoints2(void* self, QPoint* points, int pointCount);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__drawPolygon = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QPaintEngine> handle__drawPolygon;
 
 	// Subclass to allow providing a Go implementation
 	virtual void drawPolygon(const QPointF* points, int pointCount, QPaintEngine::PolygonDrawMode mode) override {
-		if (handle__drawPolygon == 0) {
+		if (!handle__drawPolygon) {
 			QPaintEngine::drawPolygon(points, pointCount, mode);
 			return;
 		}
@@ -321,18 +324,18 @@ public:
 		int sigval2 = pointCount;
 		QPaintEngine::PolygonDrawMode mode_ret = mode;
 		int sigval3 = static_cast<int>(mode_ret);
-		miqt_exec_callback_QPaintEngine_drawPolygon(this, handle__drawPolygon, sigval1, sigval2, sigval3);
+		miqt_exec_callback_QPaintEngine_drawPolygon(this, handle__drawPolygon.value(), sigval1, sigval2, sigval3);
 
 	}
 
 	friend void QPaintEngine_virtualbase_drawPolygon(void* self, QPointF* points, int pointCount, int mode);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__drawPolygon2 = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QPaintEngine> handle__drawPolygon2;
 
 	// Subclass to allow providing a Go implementation
 	virtual void drawPolygon(const QPoint* points, int pointCount, QPaintEngine::PolygonDrawMode mode) override {
-		if (handle__drawPolygon2 == 0) {
+		if (!handle__drawPolygon2) {
 			QPaintEngine::drawPolygon(points, pointCount, mode);
 			return;
 		}
@@ -341,18 +344,18 @@ public:
 		int sigval2 = pointCount;
 		QPaintEngine::PolygonDrawMode mode_ret = mode;
 		int sigval3 = static_cast<int>(mode_ret);
-		miqt_exec_callback_QPaintEngine_drawPolygon2(this, handle__drawPolygon2, sigval1, sigval2, sigval3);
+		miqt_exec_callback_QPaintEngine_drawPolygon2(this, handle__drawPolygon2.value(), sigval1, sigval2, sigval3);
 
 	}
 
 	friend void QPaintEngine_virtualbase_drawPolygon2(void* self, QPoint* points, int pointCount, int mode);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__drawPixmap = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QPaintEngine> handle__drawPixmap;
 
 	// Subclass to allow providing a Go implementation
 	virtual void drawPixmap(const QRectF& r, const QPixmap& pm, const QRectF& sr) override {
-		if (handle__drawPixmap == 0) {
+		if (!handle__drawPixmap) {
 			return; // Pure virtual, there is no base we can call
 		}
 
@@ -365,16 +368,16 @@ public:
 		const QRectF& sr_ret = sr;
 		// Cast returned reference into pointer
 		QRectF* sigval3 = const_cast<QRectF*>(&sr_ret);
-		miqt_exec_callback_QPaintEngine_drawPixmap(this, handle__drawPixmap, sigval1, sigval2, sigval3);
+		miqt_exec_callback_QPaintEngine_drawPixmap(this, handle__drawPixmap.value(), sigval1, sigval2, sigval3);
 
 	}
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__drawTextItem = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QPaintEngine> handle__drawTextItem;
 
 	// Subclass to allow providing a Go implementation
 	virtual void drawTextItem(const QPointF& p, const QTextItem& textItem) override {
-		if (handle__drawTextItem == 0) {
+		if (!handle__drawTextItem) {
 			QPaintEngine::drawTextItem(p, textItem);
 			return;
 		}
@@ -385,18 +388,18 @@ public:
 		const QTextItem& textItem_ret = textItem;
 		// Cast returned reference into pointer
 		QTextItem* sigval2 = const_cast<QTextItem*>(&textItem_ret);
-		miqt_exec_callback_QPaintEngine_drawTextItem(this, handle__drawTextItem, sigval1, sigval2);
+		miqt_exec_callback_QPaintEngine_drawTextItem(this, handle__drawTextItem.value(), sigval1, sigval2);
 
 	}
 
 	friend void QPaintEngine_virtualbase_drawTextItem(void* self, QPointF* p, QTextItem* textItem);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__drawTiledPixmap = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QPaintEngine> handle__drawTiledPixmap;
 
 	// Subclass to allow providing a Go implementation
 	virtual void drawTiledPixmap(const QRectF& r, const QPixmap& pixmap, const QPointF& s) override {
-		if (handle__drawTiledPixmap == 0) {
+		if (!handle__drawTiledPixmap) {
 			QPaintEngine::drawTiledPixmap(r, pixmap, s);
 			return;
 		}
@@ -410,18 +413,18 @@ public:
 		const QPointF& s_ret = s;
 		// Cast returned reference into pointer
 		QPointF* sigval3 = const_cast<QPointF*>(&s_ret);
-		miqt_exec_callback_QPaintEngine_drawTiledPixmap(this, handle__drawTiledPixmap, sigval1, sigval2, sigval3);
+		miqt_exec_callback_QPaintEngine_drawTiledPixmap(this, handle__drawTiledPixmap.value(), sigval1, sigval2, sigval3);
 
 	}
 
 	friend void QPaintEngine_virtualbase_drawTiledPixmap(void* self, QRectF* r, QPixmap* pixmap, QPointF* s);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__drawImage = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QPaintEngine> handle__drawImage;
 
 	// Subclass to allow providing a Go implementation
 	virtual void drawImage(const QRectF& r, const QImage& pm, const QRectF& sr, Qt::ImageConversionFlags flags) override {
-		if (handle__drawImage == 0) {
+		if (!handle__drawImage) {
 			QPaintEngine::drawImage(r, pm, sr, flags);
 			return;
 		}
@@ -437,37 +440,37 @@ public:
 		QRectF* sigval3 = const_cast<QRectF*>(&sr_ret);
 		Qt::ImageConversionFlags flags_ret = flags;
 		int sigval4 = static_cast<int>(flags_ret);
-		miqt_exec_callback_QPaintEngine_drawImage(this, handle__drawImage, sigval1, sigval2, sigval3, sigval4);
+		miqt_exec_callback_QPaintEngine_drawImage(this, handle__drawImage.value(), sigval1, sigval2, sigval3, sigval4);
 
 	}
 
 	friend void QPaintEngine_virtualbase_drawImage(void* self, QRectF* r, QImage* pm, QRectF* sr, int flags);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__coordinateOffset = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QPaintEngine> handle__coordinateOffset;
 
 	// Subclass to allow providing a Go implementation
 	virtual QPoint coordinateOffset() const override {
-		if (handle__coordinateOffset == 0) {
+		if (!handle__coordinateOffset) {
 			return QPaintEngine::coordinateOffset();
 		}
 
-		QPoint* callback_return_value = miqt_exec_callback_QPaintEngine_coordinateOffset(this, handle__coordinateOffset);
+		QPoint* callback_return_value = miqt_exec_callback_QPaintEngine_coordinateOffset(this, handle__coordinateOffset.value());
 		return *callback_return_value;
 	}
 
 	friend QPoint* QPaintEngine_virtualbase_coordinateOffset(const void* self);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__type = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QPaintEngine> handle__type;
 
 	// Subclass to allow providing a Go implementation
 	virtual QPaintEngine::Type type() const override {
-		if (handle__type == 0) {
+		if (!handle__type) {
 			return (QPaintEngine::Type)(0); // Pure virtual, there is no base we can call
 		}
 
-		int callback_return_value = miqt_exec_callback_QPaintEngine_type(this, handle__type);
+		int callback_return_value = miqt_exec_callback_QPaintEngine_type(this, handle__type.value());
 		return static_cast<QPaintEngine::Type>(callback_return_value);
 	}
 
@@ -627,42 +630,46 @@ bool QPaintEngine_isExtended(const QPaintEngine* self) {
 }
 
 bool QPaintEngine_override_virtual_begin(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QPaintEngine> slot_handle(slot);
 	MiqtVirtualQPaintEngine* self_cast = dynamic_cast<MiqtVirtualQPaintEngine*>( (QPaintEngine*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__begin = slot;
+	self_cast->handle__begin = std::move(slot_handle);
 	return true;
 }
 
 bool QPaintEngine_override_virtual_end(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QPaintEngine> slot_handle(slot);
 	MiqtVirtualQPaintEngine* self_cast = dynamic_cast<MiqtVirtualQPaintEngine*>( (QPaintEngine*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__end = slot;
+	self_cast->handle__end = std::move(slot_handle);
 	return true;
 }
 
 bool QPaintEngine_override_virtual_updateState(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QPaintEngine> slot_handle(slot);
 	MiqtVirtualQPaintEngine* self_cast = dynamic_cast<MiqtVirtualQPaintEngine*>( (QPaintEngine*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__updateState = slot;
+	self_cast->handle__updateState = std::move(slot_handle);
 	return true;
 }
 
 bool QPaintEngine_override_virtual_drawRects(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QPaintEngine> slot_handle(slot);
 	MiqtVirtualQPaintEngine* self_cast = dynamic_cast<MiqtVirtualQPaintEngine*>( (QPaintEngine*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__drawRects = slot;
+	self_cast->handle__drawRects = std::move(slot_handle);
 	return true;
 }
 
@@ -671,12 +678,13 @@ void QPaintEngine_virtualbase_drawRects(void* self, QRect* rects, int rectCount)
 }
 
 bool QPaintEngine_override_virtual_drawRects2(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QPaintEngine> slot_handle(slot);
 	MiqtVirtualQPaintEngine* self_cast = dynamic_cast<MiqtVirtualQPaintEngine*>( (QPaintEngine*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__drawRects2 = slot;
+	self_cast->handle__drawRects2 = std::move(slot_handle);
 	return true;
 }
 
@@ -685,12 +693,13 @@ void QPaintEngine_virtualbase_drawRects2(void* self, QRectF* rects, int rectCoun
 }
 
 bool QPaintEngine_override_virtual_drawLines(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QPaintEngine> slot_handle(slot);
 	MiqtVirtualQPaintEngine* self_cast = dynamic_cast<MiqtVirtualQPaintEngine*>( (QPaintEngine*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__drawLines = slot;
+	self_cast->handle__drawLines = std::move(slot_handle);
 	return true;
 }
 
@@ -699,12 +708,13 @@ void QPaintEngine_virtualbase_drawLines(void* self, QLine* lines, int lineCount)
 }
 
 bool QPaintEngine_override_virtual_drawLines2(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QPaintEngine> slot_handle(slot);
 	MiqtVirtualQPaintEngine* self_cast = dynamic_cast<MiqtVirtualQPaintEngine*>( (QPaintEngine*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__drawLines2 = slot;
+	self_cast->handle__drawLines2 = std::move(slot_handle);
 	return true;
 }
 
@@ -713,12 +723,13 @@ void QPaintEngine_virtualbase_drawLines2(void* self, QLineF* lines, int lineCoun
 }
 
 bool QPaintEngine_override_virtual_drawEllipse(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QPaintEngine> slot_handle(slot);
 	MiqtVirtualQPaintEngine* self_cast = dynamic_cast<MiqtVirtualQPaintEngine*>( (QPaintEngine*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__drawEllipse = slot;
+	self_cast->handle__drawEllipse = std::move(slot_handle);
 	return true;
 }
 
@@ -727,12 +738,13 @@ void QPaintEngine_virtualbase_drawEllipse(void* self, QRectF* r) {
 }
 
 bool QPaintEngine_override_virtual_drawEllipseWithQRect(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QPaintEngine> slot_handle(slot);
 	MiqtVirtualQPaintEngine* self_cast = dynamic_cast<MiqtVirtualQPaintEngine*>( (QPaintEngine*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__drawEllipseWithQRect = slot;
+	self_cast->handle__drawEllipseWithQRect = std::move(slot_handle);
 	return true;
 }
 
@@ -741,12 +753,13 @@ void QPaintEngine_virtualbase_drawEllipseWithQRect(void* self, QRect* r) {
 }
 
 bool QPaintEngine_override_virtual_drawPath(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QPaintEngine> slot_handle(slot);
 	MiqtVirtualQPaintEngine* self_cast = dynamic_cast<MiqtVirtualQPaintEngine*>( (QPaintEngine*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__drawPath = slot;
+	self_cast->handle__drawPath = std::move(slot_handle);
 	return true;
 }
 
@@ -755,12 +768,13 @@ void QPaintEngine_virtualbase_drawPath(void* self, QPainterPath* path) {
 }
 
 bool QPaintEngine_override_virtual_drawPoints(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QPaintEngine> slot_handle(slot);
 	MiqtVirtualQPaintEngine* self_cast = dynamic_cast<MiqtVirtualQPaintEngine*>( (QPaintEngine*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__drawPoints = slot;
+	self_cast->handle__drawPoints = std::move(slot_handle);
 	return true;
 }
 
@@ -769,12 +783,13 @@ void QPaintEngine_virtualbase_drawPoints(void* self, QPointF* points, int pointC
 }
 
 bool QPaintEngine_override_virtual_drawPoints2(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QPaintEngine> slot_handle(slot);
 	MiqtVirtualQPaintEngine* self_cast = dynamic_cast<MiqtVirtualQPaintEngine*>( (QPaintEngine*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__drawPoints2 = slot;
+	self_cast->handle__drawPoints2 = std::move(slot_handle);
 	return true;
 }
 
@@ -783,12 +798,13 @@ void QPaintEngine_virtualbase_drawPoints2(void* self, QPoint* points, int pointC
 }
 
 bool QPaintEngine_override_virtual_drawPolygon(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QPaintEngine> slot_handle(slot);
 	MiqtVirtualQPaintEngine* self_cast = dynamic_cast<MiqtVirtualQPaintEngine*>( (QPaintEngine*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__drawPolygon = slot;
+	self_cast->handle__drawPolygon = std::move(slot_handle);
 	return true;
 }
 
@@ -797,12 +813,13 @@ void QPaintEngine_virtualbase_drawPolygon(void* self, QPointF* points, int point
 }
 
 bool QPaintEngine_override_virtual_drawPolygon2(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QPaintEngine> slot_handle(slot);
 	MiqtVirtualQPaintEngine* self_cast = dynamic_cast<MiqtVirtualQPaintEngine*>( (QPaintEngine*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__drawPolygon2 = slot;
+	self_cast->handle__drawPolygon2 = std::move(slot_handle);
 	return true;
 }
 
@@ -811,22 +828,24 @@ void QPaintEngine_virtualbase_drawPolygon2(void* self, QPoint* points, int point
 }
 
 bool QPaintEngine_override_virtual_drawPixmap(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QPaintEngine> slot_handle(slot);
 	MiqtVirtualQPaintEngine* self_cast = dynamic_cast<MiqtVirtualQPaintEngine*>( (QPaintEngine*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__drawPixmap = slot;
+	self_cast->handle__drawPixmap = std::move(slot_handle);
 	return true;
 }
 
 bool QPaintEngine_override_virtual_drawTextItem(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QPaintEngine> slot_handle(slot);
 	MiqtVirtualQPaintEngine* self_cast = dynamic_cast<MiqtVirtualQPaintEngine*>( (QPaintEngine*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__drawTextItem = slot;
+	self_cast->handle__drawTextItem = std::move(slot_handle);
 	return true;
 }
 
@@ -835,12 +854,13 @@ void QPaintEngine_virtualbase_drawTextItem(void* self, QPointF* p, QTextItem* te
 }
 
 bool QPaintEngine_override_virtual_drawTiledPixmap(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QPaintEngine> slot_handle(slot);
 	MiqtVirtualQPaintEngine* self_cast = dynamic_cast<MiqtVirtualQPaintEngine*>( (QPaintEngine*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__drawTiledPixmap = slot;
+	self_cast->handle__drawTiledPixmap = std::move(slot_handle);
 	return true;
 }
 
@@ -849,12 +869,13 @@ void QPaintEngine_virtualbase_drawTiledPixmap(void* self, QRectF* r, QPixmap* pi
 }
 
 bool QPaintEngine_override_virtual_drawImage(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QPaintEngine> slot_handle(slot);
 	MiqtVirtualQPaintEngine* self_cast = dynamic_cast<MiqtVirtualQPaintEngine*>( (QPaintEngine*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__drawImage = slot;
+	self_cast->handle__drawImage = std::move(slot_handle);
 	return true;
 }
 
@@ -863,12 +884,13 @@ void QPaintEngine_virtualbase_drawImage(void* self, QRectF* r, QImage* pm, QRect
 }
 
 bool QPaintEngine_override_virtual_coordinateOffset(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QPaintEngine> slot_handle(slot);
 	MiqtVirtualQPaintEngine* self_cast = dynamic_cast<MiqtVirtualQPaintEngine*>( (QPaintEngine*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__coordinateOffset = slot;
+	self_cast->handle__coordinateOffset = std::move(slot_handle);
 	return true;
 }
 
@@ -877,12 +899,13 @@ QPoint* QPaintEngine_virtualbase_coordinateOffset(const void* self) {
 }
 
 bool QPaintEngine_override_virtual_type(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QPaintEngine> slot_handle(slot);
 	MiqtVirtualQPaintEngine* self_cast = dynamic_cast<MiqtVirtualQPaintEngine*>( (QPaintEngine*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__type = slot;
+	self_cast->handle__type = std::move(slot_handle);
 	return true;
 }
 

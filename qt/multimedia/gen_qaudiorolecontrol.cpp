@@ -1,3 +1,5 @@
+#include <memory>
+#include <utility>
 #include <QAudioRoleControl>
 #include <QList>
 #include <QMediaControl>
@@ -14,6 +16,7 @@
 extern "C" {
 #endif
 
+void miqt_exec_callback_handle_release_QAudioRoleControl(intptr_t);
 void miqt_exec_callback_QAudioRoleControl_audioRoleChanged(intptr_t, int);
 #ifdef __cplusplus
 } /* extern C */
@@ -80,12 +83,14 @@ void QAudioRoleControl_audioRoleChanged(QAudioRoleControl* self, int role) {
 	self->audioRoleChanged(static_cast<QAudio::Role>(role));
 }
 
-void QAudioRoleControl_connect_audioRoleChanged(QAudioRoleControl* self, intptr_t slot) {
-	QAudioRoleControl::connect(self, static_cast<void (QAudioRoleControl::*)(QAudio::Role)>(&QAudioRoleControl::audioRoleChanged), self, [=](QAudio::Role role) {
+void* QAudioRoleControl_connect_audioRoleChanged(QAudioRoleControl* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QAudioRoleControl>>(slot);
+	return new QMetaObject::Connection(QAudioRoleControl::connect(self, static_cast<void (QAudioRoleControl::*)(QAudio::Role)>(&QAudioRoleControl::audioRoleChanged), self, [slot_handle](QAudio::Role role) {
+		intptr_t slot = slot_handle->value();
 		QAudio::Role role_ret = role;
 		int sigval1 = static_cast<int>(role_ret);
 		miqt_exec_callback_QAudioRoleControl_audioRoleChanged(slot, sigval1);
-	});
+	}));
 }
 
 struct miqt_string QAudioRoleControl_tr2(const char* s, const char* c) {

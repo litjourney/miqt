@@ -15,6 +15,11 @@ import (
 	"unsafe"
 )
 
+//export miqt_exec_callback_handle_release_QBarCategoryAxis
+func miqt_exec_callback_handle_release_QBarCategoryAxis(cb C.intptr_t) {
+	cgo.Handle(cb).Delete()
+}
+
 type QBarCategoryAxis struct {
 	h *C.QBarCategoryAxis
 	*QAbstractAxis
@@ -223,8 +228,10 @@ func (this *QBarCategoryAxis) SetRange(minCategory string, maxCategory string) {
 func (this *QBarCategoryAxis) CategoriesChanged() {
 	C.QBarCategoryAxis_categoriesChanged(this.h)
 }
-func (this *QBarCategoryAxis) OnCategoriesChanged(slot func()) {
-	C.QBarCategoryAxis_connect_categoriesChanged(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QBarCategoryAxis) OnCategoriesChanged(slot func()) *qt6.SignalConnection {
+	_goptr := qt6.UnsafeNewQMetaObject__Connection(C.QBarCategoryAxis_connect_categoriesChanged(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QBarCategoryAxis_categoriesChanged
@@ -244,8 +251,10 @@ func (this *QBarCategoryAxis) MinChanged(min string) {
 	defer C.free(unsafe.Pointer(min_ms.data))
 	C.QBarCategoryAxis_minChanged(this.h, min_ms)
 }
-func (this *QBarCategoryAxis) OnMinChanged(slot func(min string)) {
-	C.QBarCategoryAxis_connect_minChanged(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QBarCategoryAxis) OnMinChanged(slot func(min string)) *qt6.SignalConnection {
+	_goptr := qt6.UnsafeNewQMetaObject__Connection(C.QBarCategoryAxis_connect_minChanged(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QBarCategoryAxis_minChanged
@@ -271,8 +280,10 @@ func (this *QBarCategoryAxis) MaxChanged(max string) {
 	defer C.free(unsafe.Pointer(max_ms.data))
 	C.QBarCategoryAxis_maxChanged(this.h, max_ms)
 }
-func (this *QBarCategoryAxis) OnMaxChanged(slot func(max string)) {
-	C.QBarCategoryAxis_connect_maxChanged(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QBarCategoryAxis) OnMaxChanged(slot func(max string)) *qt6.SignalConnection {
+	_goptr := qt6.UnsafeNewQMetaObject__Connection(C.QBarCategoryAxis_connect_maxChanged(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QBarCategoryAxis_maxChanged
@@ -302,8 +313,10 @@ func (this *QBarCategoryAxis) RangeChanged(min string, max string) {
 	defer C.free(unsafe.Pointer(max_ms.data))
 	C.QBarCategoryAxis_rangeChanged(this.h, min_ms, max_ms)
 }
-func (this *QBarCategoryAxis) OnRangeChanged(slot func(min string, max string)) {
-	C.QBarCategoryAxis_connect_rangeChanged(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QBarCategoryAxis) OnRangeChanged(slot func(min string, max string)) *qt6.SignalConnection {
+	_goptr := qt6.UnsafeNewQMetaObject__Connection(C.QBarCategoryAxis_connect_rangeChanged(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QBarCategoryAxis_rangeChanged
@@ -329,8 +342,10 @@ func miqt_exec_callback_QBarCategoryAxis_rangeChanged(cb C.intptr_t, min C.struc
 func (this *QBarCategoryAxis) CountChanged() {
 	C.QBarCategoryAxis_countChanged(this.h)
 }
-func (this *QBarCategoryAxis) OnCountChanged(slot func()) {
-	C.QBarCategoryAxis_connect_countChanged(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QBarCategoryAxis) OnCountChanged(slot func()) *qt6.SignalConnection {
+	_goptr := qt6.UnsafeNewQMetaObject__Connection(C.QBarCategoryAxis_connect_countChanged(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QBarCategoryAxis_countChanged
@@ -429,7 +444,11 @@ func (this *QBarCategoryAxis) callVirtualBase_Type() QAbstractAxis__AxisType {
 
 }
 func (this *QBarCategoryAxis) OnType(slot func(super func() QAbstractAxis__AxisType) QAbstractAxis__AxisType) {
-	ok := C.QBarCategoryAxis_override_virtual_type(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QBarCategoryAxis_override_virtual_type(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -454,7 +473,11 @@ func (this *QBarCategoryAxis) callVirtualBase_Event(event *qt6.QEvent) bool {
 
 }
 func (this *QBarCategoryAxis) OnEvent(slot func(super func(event *qt6.QEvent) bool, event *qt6.QEvent) bool) {
-	ok := C.QBarCategoryAxis_override_virtual_event(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QBarCategoryAxis_override_virtual_event(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -482,7 +505,11 @@ func (this *QBarCategoryAxis) callVirtualBase_EventFilter(watched *qt6.QObject, 
 
 }
 func (this *QBarCategoryAxis) OnEventFilter(slot func(super func(watched *qt6.QObject, event *qt6.QEvent) bool, watched *qt6.QObject, event *qt6.QEvent) bool) {
-	ok := C.QBarCategoryAxis_override_virtual_eventFilter(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QBarCategoryAxis_override_virtual_eventFilter(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -512,7 +539,11 @@ func (this *QBarCategoryAxis) callVirtualBase_TimerEvent(event *qt6.QTimerEvent)
 
 }
 func (this *QBarCategoryAxis) OnTimerEvent(slot func(super func(event *qt6.QTimerEvent), event *qt6.QTimerEvent)) {
-	ok := C.QBarCategoryAxis_override_virtual_timerEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QBarCategoryAxis_override_virtual_timerEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -538,7 +569,11 @@ func (this *QBarCategoryAxis) callVirtualBase_ChildEvent(event *qt6.QChildEvent)
 
 }
 func (this *QBarCategoryAxis) OnChildEvent(slot func(super func(event *qt6.QChildEvent), event *qt6.QChildEvent)) {
-	ok := C.QBarCategoryAxis_override_virtual_childEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QBarCategoryAxis_override_virtual_childEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -564,7 +599,11 @@ func (this *QBarCategoryAxis) callVirtualBase_CustomEvent(event *qt6.QEvent) {
 
 }
 func (this *QBarCategoryAxis) OnCustomEvent(slot func(super func(event *qt6.QEvent), event *qt6.QEvent)) {
-	ok := C.QBarCategoryAxis_override_virtual_customEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QBarCategoryAxis_override_virtual_customEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -590,7 +629,11 @@ func (this *QBarCategoryAxis) callVirtualBase_ConnectNotify(signal *qt6.QMetaMet
 
 }
 func (this *QBarCategoryAxis) OnConnectNotify(slot func(super func(signal *qt6.QMetaMethod), signal *qt6.QMetaMethod)) {
-	ok := C.QBarCategoryAxis_override_virtual_connectNotify(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QBarCategoryAxis_override_virtual_connectNotify(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -616,7 +659,11 @@ func (this *QBarCategoryAxis) callVirtualBase_DisconnectNotify(signal *qt6.QMeta
 
 }
 func (this *QBarCategoryAxis) OnDisconnectNotify(slot func(super func(signal *qt6.QMetaMethod), signal *qt6.QMetaMethod)) {
-	ok := C.QBarCategoryAxis_override_virtual_disconnectNotify(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QBarCategoryAxis_override_virtual_disconnectNotify(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}

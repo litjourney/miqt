@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## Unreleased
+
+- Fix leaked `runtime/cgo.Handle` values for generated signal callbacks and virtual overrides by tying them to their C++ owners.
+- Return `SignalConnection` from generated `OnSignal` methods and add `Disconnect()` for explicit callback teardown.
+- Fix callback handle leaks in `qt/mainthread` and `qt6/mainthread` when queued calls execute or are discarded.
+
 ## 2026-06-01 v0.14.0
 
 - **BREAKING:** Remove some minor/uncommon internal Qt classes (#307, #322 by @rcalixte)

@@ -1,3 +1,5 @@
+#include <memory>
+#include <utility>
 #include <QAbstractNativeEventFilter>
 #include <QByteArray>
 #include <qabstractnativeeventfilter.h>
@@ -7,6 +9,7 @@
 extern "C" {
 #endif
 
+void miqt_exec_callback_handle_release_QAbstractNativeEventFilter(intptr_t);
 bool miqt_exec_callback_QAbstractNativeEventFilter_nativeEventFilter(QAbstractNativeEventFilter*, intptr_t, struct miqt_string, void*, intptr_t*);
 #ifdef __cplusplus
 } /* extern C */
@@ -20,11 +23,11 @@ public:
 	virtual ~MiqtVirtualQAbstractNativeEventFilter() override = default;
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__nativeEventFilter = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QAbstractNativeEventFilter> handle__nativeEventFilter;
 
 	// Subclass to allow providing a Go implementation
 	virtual bool nativeEventFilter(const QByteArray& eventType, void* message, qintptr* result) override {
-		if (handle__nativeEventFilter == 0) {
+		if (!handle__nativeEventFilter) {
 			return false; // Pure virtual, there is no base we can call
 		}
 
@@ -37,7 +40,7 @@ public:
 		void* sigval2 = message;
 		qintptr* result_ret = result;
 		intptr_t* sigval3 = (intptr_t*)(result_ret);
-		bool callback_return_value = miqt_exec_callback_QAbstractNativeEventFilter_nativeEventFilter(this, handle__nativeEventFilter, sigval1, sigval2, sigval3);
+		bool callback_return_value = miqt_exec_callback_QAbstractNativeEventFilter_nativeEventFilter(this, handle__nativeEventFilter.value(), sigval1, sigval2, sigval3);
 		return callback_return_value;
 	}
 
@@ -53,12 +56,13 @@ bool QAbstractNativeEventFilter_nativeEventFilter(QAbstractNativeEventFilter* se
 }
 
 bool QAbstractNativeEventFilter_override_virtual_nativeEventFilter(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QAbstractNativeEventFilter> slot_handle(slot);
 	MiqtVirtualQAbstractNativeEventFilter* self_cast = dynamic_cast<MiqtVirtualQAbstractNativeEventFilter*>( (QAbstractNativeEventFilter*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__nativeEventFilter = slot;
+	self_cast->handle__nativeEventFilter = std::move(slot_handle);
 	return true;
 }
 

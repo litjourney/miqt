@@ -1,3 +1,5 @@
+#include <memory>
+#include <utility>
 #include <QScriptEngine>
 #include <QScriptEngineAgent>
 #include <QScriptValue>
@@ -12,6 +14,7 @@
 extern "C" {
 #endif
 
+void miqt_exec_callback_handle_release_QScriptEngineAgent(intptr_t);
 void miqt_exec_callback_QScriptEngineAgent_scriptLoad(QScriptEngineAgent*, intptr_t, long long, struct miqt_string, struct miqt_string, int);
 void miqt_exec_callback_QScriptEngineAgent_scriptUnload(QScriptEngineAgent*, intptr_t, long long);
 void miqt_exec_callback_QScriptEngineAgent_contextPush(QScriptEngineAgent*, intptr_t);
@@ -35,11 +38,11 @@ public:
 	virtual ~MiqtVirtualQScriptEngineAgent() override = default;
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__scriptLoad = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QScriptEngineAgent> handle__scriptLoad;
 
 	// Subclass to allow providing a Go implementation
 	virtual void scriptLoad(qint64 id, const QString& program, const QString& fileName, int baseLineNumber) override {
-		if (handle__scriptLoad == 0) {
+		if (!handle__scriptLoad) {
 			QScriptEngineAgent::scriptLoad(id, program, fileName, baseLineNumber);
 			return;
 		}
@@ -63,86 +66,86 @@ public:
 		memcpy(fileName_ms.data, fileName_b.data(), fileName_ms.len);
 		struct miqt_string sigval3 = fileName_ms;
 		int sigval4 = baseLineNumber;
-		miqt_exec_callback_QScriptEngineAgent_scriptLoad(this, handle__scriptLoad, sigval1, sigval2, sigval3, sigval4);
+		miqt_exec_callback_QScriptEngineAgent_scriptLoad(this, handle__scriptLoad.value(), sigval1, sigval2, sigval3, sigval4);
 
 	}
 
 	friend void QScriptEngineAgent_virtualbase_scriptLoad(void* self, long long id, struct miqt_string program, struct miqt_string fileName, int baseLineNumber);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__scriptUnload = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QScriptEngineAgent> handle__scriptUnload;
 
 	// Subclass to allow providing a Go implementation
 	virtual void scriptUnload(qint64 id) override {
-		if (handle__scriptUnload == 0) {
+		if (!handle__scriptUnload) {
 			QScriptEngineAgent::scriptUnload(id);
 			return;
 		}
 
 		qint64 id_ret = id;
 		long long sigval1 = static_cast<long long>(id_ret);
-		miqt_exec_callback_QScriptEngineAgent_scriptUnload(this, handle__scriptUnload, sigval1);
+		miqt_exec_callback_QScriptEngineAgent_scriptUnload(this, handle__scriptUnload.value(), sigval1);
 
 	}
 
 	friend void QScriptEngineAgent_virtualbase_scriptUnload(void* self, long long id);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__contextPush = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QScriptEngineAgent> handle__contextPush;
 
 	// Subclass to allow providing a Go implementation
 	virtual void contextPush() override {
-		if (handle__contextPush == 0) {
+		if (!handle__contextPush) {
 			QScriptEngineAgent::contextPush();
 			return;
 		}
 
-		miqt_exec_callback_QScriptEngineAgent_contextPush(this, handle__contextPush);
+		miqt_exec_callback_QScriptEngineAgent_contextPush(this, handle__contextPush.value());
 
 	}
 
 	friend void QScriptEngineAgent_virtualbase_contextPush(void* self);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__contextPop = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QScriptEngineAgent> handle__contextPop;
 
 	// Subclass to allow providing a Go implementation
 	virtual void contextPop() override {
-		if (handle__contextPop == 0) {
+		if (!handle__contextPop) {
 			QScriptEngineAgent::contextPop();
 			return;
 		}
 
-		miqt_exec_callback_QScriptEngineAgent_contextPop(this, handle__contextPop);
+		miqt_exec_callback_QScriptEngineAgent_contextPop(this, handle__contextPop.value());
 
 	}
 
 	friend void QScriptEngineAgent_virtualbase_contextPop(void* self);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__functionEntry = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QScriptEngineAgent> handle__functionEntry;
 
 	// Subclass to allow providing a Go implementation
 	virtual void functionEntry(qint64 scriptId) override {
-		if (handle__functionEntry == 0) {
+		if (!handle__functionEntry) {
 			QScriptEngineAgent::functionEntry(scriptId);
 			return;
 		}
 
 		qint64 scriptId_ret = scriptId;
 		long long sigval1 = static_cast<long long>(scriptId_ret);
-		miqt_exec_callback_QScriptEngineAgent_functionEntry(this, handle__functionEntry, sigval1);
+		miqt_exec_callback_QScriptEngineAgent_functionEntry(this, handle__functionEntry.value(), sigval1);
 
 	}
 
 	friend void QScriptEngineAgent_virtualbase_functionEntry(void* self, long long scriptId);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__functionExit = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QScriptEngineAgent> handle__functionExit;
 
 	// Subclass to allow providing a Go implementation
 	virtual void functionExit(qint64 scriptId, const QScriptValue& returnValue) override {
-		if (handle__functionExit == 0) {
+		if (!handle__functionExit) {
 			QScriptEngineAgent::functionExit(scriptId, returnValue);
 			return;
 		}
@@ -152,18 +155,18 @@ public:
 		const QScriptValue& returnValue_ret = returnValue;
 		// Cast returned reference into pointer
 		QScriptValue* sigval2 = const_cast<QScriptValue*>(&returnValue_ret);
-		miqt_exec_callback_QScriptEngineAgent_functionExit(this, handle__functionExit, sigval1, sigval2);
+		miqt_exec_callback_QScriptEngineAgent_functionExit(this, handle__functionExit.value(), sigval1, sigval2);
 
 	}
 
 	friend void QScriptEngineAgent_virtualbase_functionExit(void* self, long long scriptId, QScriptValue* returnValue);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__positionChange = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QScriptEngineAgent> handle__positionChange;
 
 	// Subclass to allow providing a Go implementation
 	virtual void positionChange(qint64 scriptId, int lineNumber, int columnNumber) override {
-		if (handle__positionChange == 0) {
+		if (!handle__positionChange) {
 			QScriptEngineAgent::positionChange(scriptId, lineNumber, columnNumber);
 			return;
 		}
@@ -172,18 +175,18 @@ public:
 		long long sigval1 = static_cast<long long>(scriptId_ret);
 		int sigval2 = lineNumber;
 		int sigval3 = columnNumber;
-		miqt_exec_callback_QScriptEngineAgent_positionChange(this, handle__positionChange, sigval1, sigval2, sigval3);
+		miqt_exec_callback_QScriptEngineAgent_positionChange(this, handle__positionChange.value(), sigval1, sigval2, sigval3);
 
 	}
 
 	friend void QScriptEngineAgent_virtualbase_positionChange(void* self, long long scriptId, int lineNumber, int columnNumber);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__exceptionThrow = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QScriptEngineAgent> handle__exceptionThrow;
 
 	// Subclass to allow providing a Go implementation
 	virtual void exceptionThrow(qint64 scriptId, const QScriptValue& exception, bool hasHandler) override {
-		if (handle__exceptionThrow == 0) {
+		if (!handle__exceptionThrow) {
 			QScriptEngineAgent::exceptionThrow(scriptId, exception, hasHandler);
 			return;
 		}
@@ -194,18 +197,18 @@ public:
 		// Cast returned reference into pointer
 		QScriptValue* sigval2 = const_cast<QScriptValue*>(&exception_ret);
 		bool sigval3 = hasHandler;
-		miqt_exec_callback_QScriptEngineAgent_exceptionThrow(this, handle__exceptionThrow, sigval1, sigval2, sigval3);
+		miqt_exec_callback_QScriptEngineAgent_exceptionThrow(this, handle__exceptionThrow.value(), sigval1, sigval2, sigval3);
 
 	}
 
 	friend void QScriptEngineAgent_virtualbase_exceptionThrow(void* self, long long scriptId, QScriptValue* exception, bool hasHandler);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__exceptionCatch = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QScriptEngineAgent> handle__exceptionCatch;
 
 	// Subclass to allow providing a Go implementation
 	virtual void exceptionCatch(qint64 scriptId, const QScriptValue& exception) override {
-		if (handle__exceptionCatch == 0) {
+		if (!handle__exceptionCatch) {
 			QScriptEngineAgent::exceptionCatch(scriptId, exception);
 			return;
 		}
@@ -215,35 +218,35 @@ public:
 		const QScriptValue& exception_ret = exception;
 		// Cast returned reference into pointer
 		QScriptValue* sigval2 = const_cast<QScriptValue*>(&exception_ret);
-		miqt_exec_callback_QScriptEngineAgent_exceptionCatch(this, handle__exceptionCatch, sigval1, sigval2);
+		miqt_exec_callback_QScriptEngineAgent_exceptionCatch(this, handle__exceptionCatch.value(), sigval1, sigval2);
 
 	}
 
 	friend void QScriptEngineAgent_virtualbase_exceptionCatch(void* self, long long scriptId, QScriptValue* exception);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__supportsExtension = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QScriptEngineAgent> handle__supportsExtension;
 
 	// Subclass to allow providing a Go implementation
 	virtual bool supportsExtension(QScriptEngineAgent::Extension extension) const override {
-		if (handle__supportsExtension == 0) {
+		if (!handle__supportsExtension) {
 			return QScriptEngineAgent::supportsExtension(extension);
 		}
 
 		QScriptEngineAgent::Extension extension_ret = extension;
 		int sigval1 = static_cast<int>(extension_ret);
-		bool callback_return_value = miqt_exec_callback_QScriptEngineAgent_supportsExtension(this, handle__supportsExtension, sigval1);
+		bool callback_return_value = miqt_exec_callback_QScriptEngineAgent_supportsExtension(this, handle__supportsExtension.value(), sigval1);
 		return callback_return_value;
 	}
 
 	friend bool QScriptEngineAgent_virtualbase_supportsExtension(const void* self, int extension);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__extension = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QScriptEngineAgent> handle__extension;
 
 	// Subclass to allow providing a Go implementation
 	virtual QVariant extension(QScriptEngineAgent::Extension extension, const QVariant& argument) override {
-		if (handle__extension == 0) {
+		if (!handle__extension) {
 			return QScriptEngineAgent::extension(extension, argument);
 		}
 
@@ -252,7 +255,7 @@ public:
 		const QVariant& argument_ret = argument;
 		// Cast returned reference into pointer
 		QVariant* sigval2 = const_cast<QVariant*>(&argument_ret);
-		QVariant* callback_return_value = miqt_exec_callback_QScriptEngineAgent_extension(this, handle__extension, sigval1, sigval2);
+		QVariant* callback_return_value = miqt_exec_callback_QScriptEngineAgent_extension(this, handle__extension.value(), sigval1, sigval2);
 		return *callback_return_value;
 	}
 
@@ -315,12 +318,13 @@ QScriptEngine* QScriptEngineAgent_engine(const QScriptEngineAgent* self) {
 }
 
 bool QScriptEngineAgent_override_virtual_scriptLoad(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QScriptEngineAgent> slot_handle(slot);
 	MiqtVirtualQScriptEngineAgent* self_cast = dynamic_cast<MiqtVirtualQScriptEngineAgent*>( (QScriptEngineAgent*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__scriptLoad = slot;
+	self_cast->handle__scriptLoad = std::move(slot_handle);
 	return true;
 }
 
@@ -331,12 +335,13 @@ void QScriptEngineAgent_virtualbase_scriptLoad(void* self, long long id, struct 
 }
 
 bool QScriptEngineAgent_override_virtual_scriptUnload(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QScriptEngineAgent> slot_handle(slot);
 	MiqtVirtualQScriptEngineAgent* self_cast = dynamic_cast<MiqtVirtualQScriptEngineAgent*>( (QScriptEngineAgent*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__scriptUnload = slot;
+	self_cast->handle__scriptUnload = std::move(slot_handle);
 	return true;
 }
 
@@ -345,12 +350,13 @@ void QScriptEngineAgent_virtualbase_scriptUnload(void* self, long long id) {
 }
 
 bool QScriptEngineAgent_override_virtual_contextPush(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QScriptEngineAgent> slot_handle(slot);
 	MiqtVirtualQScriptEngineAgent* self_cast = dynamic_cast<MiqtVirtualQScriptEngineAgent*>( (QScriptEngineAgent*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__contextPush = slot;
+	self_cast->handle__contextPush = std::move(slot_handle);
 	return true;
 }
 
@@ -359,12 +365,13 @@ void QScriptEngineAgent_virtualbase_contextPush(void* self) {
 }
 
 bool QScriptEngineAgent_override_virtual_contextPop(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QScriptEngineAgent> slot_handle(slot);
 	MiqtVirtualQScriptEngineAgent* self_cast = dynamic_cast<MiqtVirtualQScriptEngineAgent*>( (QScriptEngineAgent*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__contextPop = slot;
+	self_cast->handle__contextPop = std::move(slot_handle);
 	return true;
 }
 
@@ -373,12 +380,13 @@ void QScriptEngineAgent_virtualbase_contextPop(void* self) {
 }
 
 bool QScriptEngineAgent_override_virtual_functionEntry(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QScriptEngineAgent> slot_handle(slot);
 	MiqtVirtualQScriptEngineAgent* self_cast = dynamic_cast<MiqtVirtualQScriptEngineAgent*>( (QScriptEngineAgent*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__functionEntry = slot;
+	self_cast->handle__functionEntry = std::move(slot_handle);
 	return true;
 }
 
@@ -387,12 +395,13 @@ void QScriptEngineAgent_virtualbase_functionEntry(void* self, long long scriptId
 }
 
 bool QScriptEngineAgent_override_virtual_functionExit(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QScriptEngineAgent> slot_handle(slot);
 	MiqtVirtualQScriptEngineAgent* self_cast = dynamic_cast<MiqtVirtualQScriptEngineAgent*>( (QScriptEngineAgent*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__functionExit = slot;
+	self_cast->handle__functionExit = std::move(slot_handle);
 	return true;
 }
 
@@ -401,12 +410,13 @@ void QScriptEngineAgent_virtualbase_functionExit(void* self, long long scriptId,
 }
 
 bool QScriptEngineAgent_override_virtual_positionChange(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QScriptEngineAgent> slot_handle(slot);
 	MiqtVirtualQScriptEngineAgent* self_cast = dynamic_cast<MiqtVirtualQScriptEngineAgent*>( (QScriptEngineAgent*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__positionChange = slot;
+	self_cast->handle__positionChange = std::move(slot_handle);
 	return true;
 }
 
@@ -415,12 +425,13 @@ void QScriptEngineAgent_virtualbase_positionChange(void* self, long long scriptI
 }
 
 bool QScriptEngineAgent_override_virtual_exceptionThrow(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QScriptEngineAgent> slot_handle(slot);
 	MiqtVirtualQScriptEngineAgent* self_cast = dynamic_cast<MiqtVirtualQScriptEngineAgent*>( (QScriptEngineAgent*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__exceptionThrow = slot;
+	self_cast->handle__exceptionThrow = std::move(slot_handle);
 	return true;
 }
 
@@ -429,12 +440,13 @@ void QScriptEngineAgent_virtualbase_exceptionThrow(void* self, long long scriptI
 }
 
 bool QScriptEngineAgent_override_virtual_exceptionCatch(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QScriptEngineAgent> slot_handle(slot);
 	MiqtVirtualQScriptEngineAgent* self_cast = dynamic_cast<MiqtVirtualQScriptEngineAgent*>( (QScriptEngineAgent*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__exceptionCatch = slot;
+	self_cast->handle__exceptionCatch = std::move(slot_handle);
 	return true;
 }
 
@@ -443,12 +455,13 @@ void QScriptEngineAgent_virtualbase_exceptionCatch(void* self, long long scriptI
 }
 
 bool QScriptEngineAgent_override_virtual_supportsExtension(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QScriptEngineAgent> slot_handle(slot);
 	MiqtVirtualQScriptEngineAgent* self_cast = dynamic_cast<MiqtVirtualQScriptEngineAgent*>( (QScriptEngineAgent*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__supportsExtension = slot;
+	self_cast->handle__supportsExtension = std::move(slot_handle);
 	return true;
 }
 
@@ -457,12 +470,13 @@ bool QScriptEngineAgent_virtualbase_supportsExtension(const void* self, int exte
 }
 
 bool QScriptEngineAgent_override_virtual_extension(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QScriptEngineAgent> slot_handle(slot);
 	MiqtVirtualQScriptEngineAgent* self_cast = dynamic_cast<MiqtVirtualQScriptEngineAgent*>( (QScriptEngineAgent*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__extension = slot;
+	self_cast->handle__extension = std::move(slot_handle);
 	return true;
 }
 

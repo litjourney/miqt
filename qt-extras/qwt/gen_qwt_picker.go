@@ -43,6 +43,11 @@ const (
 	QwtPicker__KeepSize QwtPicker__ResizeMode = 1
 )
 
+//export miqt_exec_callback_handle_release_QwtPicker
+func miqt_exec_callback_handle_release_QwtPicker(cb C.intptr_t) {
+	cgo.Handle(cb).Delete()
+}
+
 type QwtPicker struct {
 	h *C.QwtPicker
 	*qt.QObject
@@ -253,8 +258,10 @@ func (this *QwtPicker) SetEnabled(enabled bool) {
 func (this *QwtPicker) Activated(on bool) {
 	C.QwtPicker_activated(this.h, (C.bool)(on))
 }
-func (this *QwtPicker) OnActivated(slot func(on bool)) {
-	C.QwtPicker_connect_activated(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QwtPicker) OnActivated(slot func(on bool)) *qt.SignalConnection {
+	_goptr := qt.UnsafeNewQMetaObject__Connection(C.QwtPicker_connect_activated(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QwtPicker_activated
@@ -273,8 +280,10 @@ func miqt_exec_callback_QwtPicker_activated(cb C.intptr_t, on C.bool) {
 func (this *QwtPicker) Appended(pos *qt.QPoint) {
 	C.QwtPicker_appended(this.h, (*C.QPoint)(pos.UnsafePointer()))
 }
-func (this *QwtPicker) OnAppended(slot func(pos *qt.QPoint)) {
-	C.QwtPicker_connect_appended(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QwtPicker) OnAppended(slot func(pos *qt.QPoint)) *qt.SignalConnection {
+	_goptr := qt.UnsafeNewQMetaObject__Connection(C.QwtPicker_connect_appended(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QwtPicker_appended
@@ -293,8 +302,10 @@ func miqt_exec_callback_QwtPicker_appended(cb C.intptr_t, pos *C.QPoint) {
 func (this *QwtPicker) Moved(pos *qt.QPoint) {
 	C.QwtPicker_moved(this.h, (*C.QPoint)(pos.UnsafePointer()))
 }
-func (this *QwtPicker) OnMoved(slot func(pos *qt.QPoint)) {
-	C.QwtPicker_connect_moved(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QwtPicker) OnMoved(slot func(pos *qt.QPoint)) *qt.SignalConnection {
+	_goptr := qt.UnsafeNewQMetaObject__Connection(C.QwtPicker_connect_moved(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QwtPicker_moved
@@ -313,8 +324,10 @@ func miqt_exec_callback_QwtPicker_moved(cb C.intptr_t, pos *C.QPoint) {
 func (this *QwtPicker) Removed(pos *qt.QPoint) {
 	C.QwtPicker_removed(this.h, (*C.QPoint)(pos.UnsafePointer()))
 }
-func (this *QwtPicker) OnRemoved(slot func(pos *qt.QPoint)) {
-	C.QwtPicker_connect_removed(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QwtPicker) OnRemoved(slot func(pos *qt.QPoint)) *qt.SignalConnection {
+	_goptr := qt.UnsafeNewQMetaObject__Connection(C.QwtPicker_connect_removed(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QwtPicker_removed
@@ -466,7 +479,11 @@ func (this *QwtPicker) callVirtualBase_EventFilter(param1 *qt.QObject, param2 *q
 
 }
 func (this *QwtPicker) OnEventFilter(slot func(super func(param1 *qt.QObject, param2 *qt.QEvent) bool, param1 *qt.QObject, param2 *qt.QEvent) bool) {
-	ok := C.QwtPicker_override_virtual_eventFilter(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QwtPicker_override_virtual_eventFilter(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -498,7 +515,11 @@ func (this *QwtPicker) callVirtualBase_PickArea() *qt.QPainterPath {
 
 }
 func (this *QwtPicker) OnPickArea(slot func(super func() *qt.QPainterPath) *qt.QPainterPath) {
-	ok := C.QwtPicker_override_virtual_pickArea(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QwtPicker_override_virtual_pickArea(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -523,7 +544,11 @@ func (this *QwtPicker) callVirtualBase_DrawRubberBand(param1 *qt.QPainter) {
 
 }
 func (this *QwtPicker) OnDrawRubberBand(slot func(super func(param1 *qt.QPainter), param1 *qt.QPainter)) {
-	ok := C.QwtPicker_override_virtual_drawRubberBand(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QwtPicker_override_virtual_drawRubberBand(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -549,7 +574,11 @@ func (this *QwtPicker) callVirtualBase_DrawTracker(param1 *qt.QPainter) {
 
 }
 func (this *QwtPicker) OnDrawTracker(slot func(super func(param1 *qt.QPainter), param1 *qt.QPainter)) {
-	ok := C.QwtPicker_override_virtual_drawTracker(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QwtPicker_override_virtual_drawTracker(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -577,7 +606,11 @@ func (this *QwtPicker) callVirtualBase_RubberBandMask() *qt.QRegion {
 
 }
 func (this *QwtPicker) OnRubberBandMask(slot func(super func() *qt.QRegion) *qt.QRegion) {
-	ok := C.QwtPicker_override_virtual_rubberBandMask(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QwtPicker_override_virtual_rubberBandMask(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -604,7 +637,11 @@ func (this *QwtPicker) callVirtualBase_TrackerText(pos *qt.QPoint) *QwtText {
 
 }
 func (this *QwtPicker) OnTrackerText(slot func(super func(pos *qt.QPoint) *QwtText, pos *qt.QPoint) *QwtText) {
-	ok := C.QwtPicker_override_virtual_trackerText(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QwtPicker_override_virtual_trackerText(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -634,7 +671,11 @@ func (this *QwtPicker) callVirtualBase_TrackerRect(param1 *qt.QFont) *qt.QRect {
 
 }
 func (this *QwtPicker) OnTrackerRect(slot func(super func(param1 *qt.QFont) *qt.QRect, param1 *qt.QFont) *qt.QRect) {
-	ok := C.QwtPicker_override_virtual_trackerRect(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QwtPicker_override_virtual_trackerRect(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -662,7 +703,11 @@ func (this *QwtPicker) callVirtualBase_Transition(param1 *qt.QEvent) {
 
 }
 func (this *QwtPicker) OnTransition(slot func(super func(param1 *qt.QEvent), param1 *qt.QEvent)) {
-	ok := C.QwtPicker_override_virtual_transition(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QwtPicker_override_virtual_transition(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -688,7 +733,11 @@ func (this *QwtPicker) callVirtualBase_Begin() {
 
 }
 func (this *QwtPicker) OnBegin(slot func(super func())) {
-	ok := C.QwtPicker_override_virtual_begin(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QwtPicker_override_virtual_begin(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -711,7 +760,11 @@ func (this *QwtPicker) callVirtualBase_Append(param1 *qt.QPoint) {
 
 }
 func (this *QwtPicker) OnAppend(slot func(super func(param1 *qt.QPoint), param1 *qt.QPoint)) {
-	ok := C.QwtPicker_override_virtual_append(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QwtPicker_override_virtual_append(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -737,7 +790,11 @@ func (this *QwtPicker) callVirtualBase_Move(param1 *qt.QPoint) {
 
 }
 func (this *QwtPicker) OnMove(slot func(super func(param1 *qt.QPoint), param1 *qt.QPoint)) {
-	ok := C.QwtPicker_override_virtual_move(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QwtPicker_override_virtual_move(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -763,7 +820,11 @@ func (this *QwtPicker) callVirtualBase_Remove() {
 
 }
 func (this *QwtPicker) OnRemove(slot func(super func())) {
-	ok := C.QwtPicker_override_virtual_remove(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QwtPicker_override_virtual_remove(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -786,7 +847,11 @@ func (this *QwtPicker) callVirtualBase_End(ok bool) bool {
 
 }
 func (this *QwtPicker) OnEnd(slot func(super func(ok bool) bool, ok bool) bool) {
-	ok := C.QwtPicker_override_virtual_end(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QwtPicker_override_virtual_end(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -814,7 +879,11 @@ func (this *QwtPicker) callVirtualBase_Reset() {
 
 }
 func (this *QwtPicker) OnReset(slot func(super func())) {
-	ok := C.QwtPicker_override_virtual_reset(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QwtPicker_override_virtual_reset(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -837,7 +906,11 @@ func (this *QwtPicker) callVirtualBase_WidgetMousePressEvent(param1 *qt.QMouseEv
 
 }
 func (this *QwtPicker) OnWidgetMousePressEvent(slot func(super func(param1 *qt.QMouseEvent), param1 *qt.QMouseEvent)) {
-	ok := C.QwtPicker_override_virtual_widgetMousePressEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QwtPicker_override_virtual_widgetMousePressEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -863,7 +936,11 @@ func (this *QwtPicker) callVirtualBase_WidgetMouseReleaseEvent(param1 *qt.QMouse
 
 }
 func (this *QwtPicker) OnWidgetMouseReleaseEvent(slot func(super func(param1 *qt.QMouseEvent), param1 *qt.QMouseEvent)) {
-	ok := C.QwtPicker_override_virtual_widgetMouseReleaseEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QwtPicker_override_virtual_widgetMouseReleaseEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -889,7 +966,11 @@ func (this *QwtPicker) callVirtualBase_WidgetMouseDoubleClickEvent(param1 *qt.QM
 
 }
 func (this *QwtPicker) OnWidgetMouseDoubleClickEvent(slot func(super func(param1 *qt.QMouseEvent), param1 *qt.QMouseEvent)) {
-	ok := C.QwtPicker_override_virtual_widgetMouseDoubleClickEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QwtPicker_override_virtual_widgetMouseDoubleClickEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -915,7 +996,11 @@ func (this *QwtPicker) callVirtualBase_WidgetMouseMoveEvent(param1 *qt.QMouseEve
 
 }
 func (this *QwtPicker) OnWidgetMouseMoveEvent(slot func(super func(param1 *qt.QMouseEvent), param1 *qt.QMouseEvent)) {
-	ok := C.QwtPicker_override_virtual_widgetMouseMoveEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QwtPicker_override_virtual_widgetMouseMoveEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -941,7 +1026,11 @@ func (this *QwtPicker) callVirtualBase_WidgetWheelEvent(param1 *qt.QWheelEvent) 
 
 }
 func (this *QwtPicker) OnWidgetWheelEvent(slot func(super func(param1 *qt.QWheelEvent), param1 *qt.QWheelEvent)) {
-	ok := C.QwtPicker_override_virtual_widgetWheelEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QwtPicker_override_virtual_widgetWheelEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -967,7 +1056,11 @@ func (this *QwtPicker) callVirtualBase_WidgetKeyPressEvent(param1 *qt.QKeyEvent)
 
 }
 func (this *QwtPicker) OnWidgetKeyPressEvent(slot func(super func(param1 *qt.QKeyEvent), param1 *qt.QKeyEvent)) {
-	ok := C.QwtPicker_override_virtual_widgetKeyPressEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QwtPicker_override_virtual_widgetKeyPressEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -993,7 +1086,11 @@ func (this *QwtPicker) callVirtualBase_WidgetKeyReleaseEvent(param1 *qt.QKeyEven
 
 }
 func (this *QwtPicker) OnWidgetKeyReleaseEvent(slot func(super func(param1 *qt.QKeyEvent), param1 *qt.QKeyEvent)) {
-	ok := C.QwtPicker_override_virtual_widgetKeyReleaseEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QwtPicker_override_virtual_widgetKeyReleaseEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1019,7 +1116,11 @@ func (this *QwtPicker) callVirtualBase_WidgetEnterEvent(param1 *qt.QEvent) {
 
 }
 func (this *QwtPicker) OnWidgetEnterEvent(slot func(super func(param1 *qt.QEvent), param1 *qt.QEvent)) {
-	ok := C.QwtPicker_override_virtual_widgetEnterEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QwtPicker_override_virtual_widgetEnterEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1045,7 +1146,11 @@ func (this *QwtPicker) callVirtualBase_WidgetLeaveEvent(param1 *qt.QEvent) {
 
 }
 func (this *QwtPicker) OnWidgetLeaveEvent(slot func(super func(param1 *qt.QEvent), param1 *qt.QEvent)) {
-	ok := C.QwtPicker_override_virtual_widgetLeaveEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QwtPicker_override_virtual_widgetLeaveEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1071,7 +1176,11 @@ func (this *QwtPicker) callVirtualBase_StretchSelection(oldSize *qt.QSize, newSi
 
 }
 func (this *QwtPicker) OnStretchSelection(slot func(super func(oldSize *qt.QSize, newSize *qt.QSize), oldSize *qt.QSize, newSize *qt.QSize)) {
-	ok := C.QwtPicker_override_virtual_stretchSelection(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QwtPicker_override_virtual_stretchSelection(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1099,7 +1208,11 @@ func (this *QwtPicker) callVirtualBase_UpdateDisplay() {
 
 }
 func (this *QwtPicker) OnUpdateDisplay(slot func(super func())) {
-	ok := C.QwtPicker_override_virtual_updateDisplay(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QwtPicker_override_virtual_updateDisplay(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1122,7 +1235,11 @@ func (this *QwtPicker) callVirtualBase_Event(event *qt.QEvent) bool {
 
 }
 func (this *QwtPicker) OnEvent(slot func(super func(event *qt.QEvent) bool, event *qt.QEvent) bool) {
-	ok := C.QwtPicker_override_virtual_event(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QwtPicker_override_virtual_event(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1150,7 +1267,11 @@ func (this *QwtPicker) callVirtualBase_TimerEvent(event *qt.QTimerEvent) {
 
 }
 func (this *QwtPicker) OnTimerEvent(slot func(super func(event *qt.QTimerEvent), event *qt.QTimerEvent)) {
-	ok := C.QwtPicker_override_virtual_timerEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QwtPicker_override_virtual_timerEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1176,7 +1297,11 @@ func (this *QwtPicker) callVirtualBase_ChildEvent(event *qt.QChildEvent) {
 
 }
 func (this *QwtPicker) OnChildEvent(slot func(super func(event *qt.QChildEvent), event *qt.QChildEvent)) {
-	ok := C.QwtPicker_override_virtual_childEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QwtPicker_override_virtual_childEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1202,7 +1327,11 @@ func (this *QwtPicker) callVirtualBase_CustomEvent(event *qt.QEvent) {
 
 }
 func (this *QwtPicker) OnCustomEvent(slot func(super func(event *qt.QEvent), event *qt.QEvent)) {
-	ok := C.QwtPicker_override_virtual_customEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QwtPicker_override_virtual_customEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1228,7 +1357,11 @@ func (this *QwtPicker) callVirtualBase_ConnectNotify(signal *qt.QMetaMethod) {
 
 }
 func (this *QwtPicker) OnConnectNotify(slot func(super func(signal *qt.QMetaMethod), signal *qt.QMetaMethod)) {
-	ok := C.QwtPicker_override_virtual_connectNotify(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QwtPicker_override_virtual_connectNotify(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1254,7 +1387,11 @@ func (this *QwtPicker) callVirtualBase_DisconnectNotify(signal *qt.QMetaMethod) 
 
 }
 func (this *QwtPicker) OnDisconnectNotify(slot func(super func(signal *qt.QMetaMethod), signal *qt.QMetaMethod)) {
-	ok := C.QwtPicker_override_virtual_disconnectNotify(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QwtPicker_override_virtual_disconnectNotify(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1280,7 +1417,11 @@ func (this *QwtPicker) callVirtualBase_MouseMatch2(param1 *QwtEventPattern__Mous
 
 }
 func (this *QwtPicker) OnMouseMatch2(slot func(super func(param1 *QwtEventPattern__MousePattern, param2 *qt.QMouseEvent) bool, param1 *QwtEventPattern__MousePattern, param2 *qt.QMouseEvent) bool) {
-	ok := C.QwtPicker_override_virtual_mouseMatch2(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QwtPicker_override_virtual_mouseMatch2(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1310,7 +1451,11 @@ func (this *QwtPicker) callVirtualBase_KeyMatch2(param1 *QwtEventPattern__KeyPat
 
 }
 func (this *QwtPicker) OnKeyMatch2(slot func(super func(param1 *QwtEventPattern__KeyPattern, param2 *qt.QKeyEvent) bool, param1 *QwtEventPattern__KeyPattern, param2 *qt.QKeyEvent) bool) {
-	ok := C.QwtPicker_override_virtual_keyMatch2(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QwtPicker_override_virtual_keyMatch2(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}

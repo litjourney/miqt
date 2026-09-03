@@ -15,6 +15,11 @@ import (
 	"unsafe"
 )
 
+//export miqt_exec_callback_handle_release_QRadioTunerControl
+func miqt_exec_callback_handle_release_QRadioTunerControl(cb C.intptr_t) {
+	cgo.Handle(cb).Delete()
+}
+
 type QRadioTunerControl struct {
 	h *C.QRadioTunerControl
 	*QMediaControl
@@ -202,8 +207,10 @@ func (this *QRadioTunerControl) ErrorString() string {
 func (this *QRadioTunerControl) StateChanged(state QRadioTuner__State) {
 	C.QRadioTunerControl_stateChanged(this.h, (C.int)(state))
 }
-func (this *QRadioTunerControl) OnStateChanged(slot func(state QRadioTuner__State)) {
-	C.QRadioTunerControl_connect_stateChanged(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QRadioTunerControl) OnStateChanged(slot func(state QRadioTuner__State)) *qt.SignalConnection {
+	_goptr := qt.UnsafeNewQMetaObject__Connection(C.QRadioTunerControl_connect_stateChanged(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QRadioTunerControl_stateChanged
@@ -222,8 +229,10 @@ func miqt_exec_callback_QRadioTunerControl_stateChanged(cb C.intptr_t, state C.i
 func (this *QRadioTunerControl) BandChanged(band QRadioTuner__Band) {
 	C.QRadioTunerControl_bandChanged(this.h, (C.int)(band))
 }
-func (this *QRadioTunerControl) OnBandChanged(slot func(band QRadioTuner__Band)) {
-	C.QRadioTunerControl_connect_bandChanged(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QRadioTunerControl) OnBandChanged(slot func(band QRadioTuner__Band)) *qt.SignalConnection {
+	_goptr := qt.UnsafeNewQMetaObject__Connection(C.QRadioTunerControl_connect_bandChanged(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QRadioTunerControl_bandChanged
@@ -242,8 +251,10 @@ func miqt_exec_callback_QRadioTunerControl_bandChanged(cb C.intptr_t, band C.int
 func (this *QRadioTunerControl) FrequencyChanged(frequency int) {
 	C.QRadioTunerControl_frequencyChanged(this.h, (C.int)(frequency))
 }
-func (this *QRadioTunerControl) OnFrequencyChanged(slot func(frequency int)) {
-	C.QRadioTunerControl_connect_frequencyChanged(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QRadioTunerControl) OnFrequencyChanged(slot func(frequency int)) *qt.SignalConnection {
+	_goptr := qt.UnsafeNewQMetaObject__Connection(C.QRadioTunerControl_connect_frequencyChanged(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QRadioTunerControl_frequencyChanged
@@ -262,8 +273,10 @@ func miqt_exec_callback_QRadioTunerControl_frequencyChanged(cb C.intptr_t, frequ
 func (this *QRadioTunerControl) StereoStatusChanged(stereo bool) {
 	C.QRadioTunerControl_stereoStatusChanged(this.h, (C.bool)(stereo))
 }
-func (this *QRadioTunerControl) OnStereoStatusChanged(slot func(stereo bool)) {
-	C.QRadioTunerControl_connect_stereoStatusChanged(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QRadioTunerControl) OnStereoStatusChanged(slot func(stereo bool)) *qt.SignalConnection {
+	_goptr := qt.UnsafeNewQMetaObject__Connection(C.QRadioTunerControl_connect_stereoStatusChanged(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QRadioTunerControl_stereoStatusChanged
@@ -282,8 +295,10 @@ func miqt_exec_callback_QRadioTunerControl_stereoStatusChanged(cb C.intptr_t, st
 func (this *QRadioTunerControl) SearchingChanged(searching bool) {
 	C.QRadioTunerControl_searchingChanged(this.h, (C.bool)(searching))
 }
-func (this *QRadioTunerControl) OnSearchingChanged(slot func(searching bool)) {
-	C.QRadioTunerControl_connect_searchingChanged(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QRadioTunerControl) OnSearchingChanged(slot func(searching bool)) *qt.SignalConnection {
+	_goptr := qt.UnsafeNewQMetaObject__Connection(C.QRadioTunerControl_connect_searchingChanged(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QRadioTunerControl_searchingChanged
@@ -302,8 +317,10 @@ func miqt_exec_callback_QRadioTunerControl_searchingChanged(cb C.intptr_t, searc
 func (this *QRadioTunerControl) SignalStrengthChanged(signalStrength int) {
 	C.QRadioTunerControl_signalStrengthChanged(this.h, (C.int)(signalStrength))
 }
-func (this *QRadioTunerControl) OnSignalStrengthChanged(slot func(signalStrength int)) {
-	C.QRadioTunerControl_connect_signalStrengthChanged(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QRadioTunerControl) OnSignalStrengthChanged(slot func(signalStrength int)) *qt.SignalConnection {
+	_goptr := qt.UnsafeNewQMetaObject__Connection(C.QRadioTunerControl_connect_signalStrengthChanged(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QRadioTunerControl_signalStrengthChanged
@@ -322,8 +339,10 @@ func miqt_exec_callback_QRadioTunerControl_signalStrengthChanged(cb C.intptr_t, 
 func (this *QRadioTunerControl) VolumeChanged(volume int) {
 	C.QRadioTunerControl_volumeChanged(this.h, (C.int)(volume))
 }
-func (this *QRadioTunerControl) OnVolumeChanged(slot func(volume int)) {
-	C.QRadioTunerControl_connect_volumeChanged(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QRadioTunerControl) OnVolumeChanged(slot func(volume int)) *qt.SignalConnection {
+	_goptr := qt.UnsafeNewQMetaObject__Connection(C.QRadioTunerControl_connect_volumeChanged(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QRadioTunerControl_volumeChanged
@@ -342,8 +361,10 @@ func miqt_exec_callback_QRadioTunerControl_volumeChanged(cb C.intptr_t, volume C
 func (this *QRadioTunerControl) MutedChanged(muted bool) {
 	C.QRadioTunerControl_mutedChanged(this.h, (C.bool)(muted))
 }
-func (this *QRadioTunerControl) OnMutedChanged(slot func(muted bool)) {
-	C.QRadioTunerControl_connect_mutedChanged(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QRadioTunerControl) OnMutedChanged(slot func(muted bool)) *qt.SignalConnection {
+	_goptr := qt.UnsafeNewQMetaObject__Connection(C.QRadioTunerControl_connect_mutedChanged(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QRadioTunerControl_mutedChanged
@@ -362,8 +383,10 @@ func miqt_exec_callback_QRadioTunerControl_mutedChanged(cb C.intptr_t, muted C.b
 func (this *QRadioTunerControl) ErrorWithErr(err QRadioTuner__Error) {
 	C.QRadioTunerControl_errorWithErr(this.h, (C.int)(err))
 }
-func (this *QRadioTunerControl) OnErrorWithErr(slot func(err QRadioTuner__Error)) {
-	C.QRadioTunerControl_connect_errorWithErr(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QRadioTunerControl) OnErrorWithErr(slot func(err QRadioTuner__Error)) *qt.SignalConnection {
+	_goptr := qt.UnsafeNewQMetaObject__Connection(C.QRadioTunerControl_connect_errorWithErr(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QRadioTunerControl_errorWithErr
@@ -386,8 +409,10 @@ func (this *QRadioTunerControl) StationFound(frequency int, stationId string) {
 	defer C.free(unsafe.Pointer(stationId_ms.data))
 	C.QRadioTunerControl_stationFound(this.h, (C.int)(frequency), stationId_ms)
 }
-func (this *QRadioTunerControl) OnStationFound(slot func(frequency int, stationId string)) {
-	C.QRadioTunerControl_connect_stationFound(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QRadioTunerControl) OnStationFound(slot func(frequency int, stationId string)) *qt.SignalConnection {
+	_goptr := qt.UnsafeNewQMetaObject__Connection(C.QRadioTunerControl_connect_stationFound(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QRadioTunerControl_stationFound
@@ -411,8 +436,10 @@ func miqt_exec_callback_QRadioTunerControl_stationFound(cb C.intptr_t, frequency
 func (this *QRadioTunerControl) AntennaConnectedChanged(connectionStatus bool) {
 	C.QRadioTunerControl_antennaConnectedChanged(this.h, (C.bool)(connectionStatus))
 }
-func (this *QRadioTunerControl) OnAntennaConnectedChanged(slot func(connectionStatus bool)) {
-	C.QRadioTunerControl_connect_antennaConnectedChanged(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QRadioTunerControl) OnAntennaConnectedChanged(slot func(connectionStatus bool)) *qt.SignalConnection {
+	_goptr := qt.UnsafeNewQMetaObject__Connection(C.QRadioTunerControl_connect_antennaConnectedChanged(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QRadioTunerControl_antennaConnectedChanged

@@ -15,6 +15,11 @@ import (
 	"unsafe"
 )
 
+//export miqt_exec_callback_handle_release_QDesignerTaskMenuExtension
+func miqt_exec_callback_handle_release_QDesignerTaskMenuExtension(cb C.intptr_t) {
+	cgo.Handle(cb).Delete()
+}
+
 type QDesignerTaskMenuExtension struct {
 	h *C.QDesignerTaskMenuExtension
 }
@@ -73,7 +78,11 @@ func (this *QDesignerTaskMenuExtension) callVirtualBase_PreferredEditAction() *q
 
 }
 func (this *QDesignerTaskMenuExtension) OnPreferredEditAction(slot func(super func() *qt6.QAction) *qt6.QAction) {
-	ok := C.QDesignerTaskMenuExtension_override_virtual_preferredEditAction(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QDesignerTaskMenuExtension_override_virtual_preferredEditAction(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -92,7 +101,11 @@ func miqt_exec_callback_QDesignerTaskMenuExtension_preferredEditAction(self *C.Q
 
 }
 func (this *QDesignerTaskMenuExtension) OnTaskActions(slot func() []*qt6.QAction) {
-	ok := C.QDesignerTaskMenuExtension_override_virtual_taskActions(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QDesignerTaskMenuExtension_override_virtual_taskActions(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}

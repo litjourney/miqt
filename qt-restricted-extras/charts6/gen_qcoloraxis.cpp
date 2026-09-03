@@ -1,3 +1,5 @@
+#include <memory>
+#include <utility>
 #include <QAbstractAxis>
 #include <QChildEvent>
 #include <QColorAxis>
@@ -17,6 +19,7 @@
 extern "C" {
 #endif
 
+void miqt_exec_callback_handle_release_QColorAxis(intptr_t);
 void miqt_exec_callback_QColorAxis_minChanged(intptr_t, double);
 void miqt_exec_callback_QColorAxis_maxChanged(intptr_t, double);
 void miqt_exec_callback_QColorAxis_rangeChanged(intptr_t, double, double);
@@ -45,110 +48,110 @@ public:
 	virtual ~MiqtVirtualQColorAxis() override = default;
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__type = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QColorAxis> handle__type;
 
 	// Subclass to allow providing a Go implementation
 	virtual QAbstractAxis::AxisType type() const override {
-		if (handle__type == 0) {
+		if (!handle__type) {
 			return QColorAxis::type();
 		}
 
-		int callback_return_value = miqt_exec_callback_QColorAxis_type(this, handle__type);
+		int callback_return_value = miqt_exec_callback_QColorAxis_type(this, handle__type.value());
 		return static_cast<QAbstractAxis::AxisType>(callback_return_value);
 	}
 
 	friend int QColorAxis_virtualbase_type(const void* self);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__event = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QColorAxis> handle__event;
 
 	// Subclass to allow providing a Go implementation
 	virtual bool event(QEvent* event) override {
-		if (handle__event == 0) {
+		if (!handle__event) {
 			return QColorAxis::event(event);
 		}
 
 		QEvent* sigval1 = event;
-		bool callback_return_value = miqt_exec_callback_QColorAxis_event(this, handle__event, sigval1);
+		bool callback_return_value = miqt_exec_callback_QColorAxis_event(this, handle__event.value(), sigval1);
 		return callback_return_value;
 	}
 
 	friend bool QColorAxis_virtualbase_event(void* self, QEvent* event);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__eventFilter = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QColorAxis> handle__eventFilter;
 
 	// Subclass to allow providing a Go implementation
 	virtual bool eventFilter(QObject* watched, QEvent* event) override {
-		if (handle__eventFilter == 0) {
+		if (!handle__eventFilter) {
 			return QColorAxis::eventFilter(watched, event);
 		}
 
 		QObject* sigval1 = watched;
 		QEvent* sigval2 = event;
-		bool callback_return_value = miqt_exec_callback_QColorAxis_eventFilter(this, handle__eventFilter, sigval1, sigval2);
+		bool callback_return_value = miqt_exec_callback_QColorAxis_eventFilter(this, handle__eventFilter.value(), sigval1, sigval2);
 		return callback_return_value;
 	}
 
 	friend bool QColorAxis_virtualbase_eventFilter(void* self, QObject* watched, QEvent* event);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__timerEvent = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QColorAxis> handle__timerEvent;
 
 	// Subclass to allow providing a Go implementation
 	virtual void timerEvent(QTimerEvent* event) override {
-		if (handle__timerEvent == 0) {
+		if (!handle__timerEvent) {
 			QColorAxis::timerEvent(event);
 			return;
 		}
 
 		QTimerEvent* sigval1 = event;
-		miqt_exec_callback_QColorAxis_timerEvent(this, handle__timerEvent, sigval1);
+		miqt_exec_callback_QColorAxis_timerEvent(this, handle__timerEvent.value(), sigval1);
 
 	}
 
 	friend void QColorAxis_virtualbase_timerEvent(void* self, QTimerEvent* event);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__childEvent = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QColorAxis> handle__childEvent;
 
 	// Subclass to allow providing a Go implementation
 	virtual void childEvent(QChildEvent* event) override {
-		if (handle__childEvent == 0) {
+		if (!handle__childEvent) {
 			QColorAxis::childEvent(event);
 			return;
 		}
 
 		QChildEvent* sigval1 = event;
-		miqt_exec_callback_QColorAxis_childEvent(this, handle__childEvent, sigval1);
+		miqt_exec_callback_QColorAxis_childEvent(this, handle__childEvent.value(), sigval1);
 
 	}
 
 	friend void QColorAxis_virtualbase_childEvent(void* self, QChildEvent* event);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__customEvent = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QColorAxis> handle__customEvent;
 
 	// Subclass to allow providing a Go implementation
 	virtual void customEvent(QEvent* event) override {
-		if (handle__customEvent == 0) {
+		if (!handle__customEvent) {
 			QColorAxis::customEvent(event);
 			return;
 		}
 
 		QEvent* sigval1 = event;
-		miqt_exec_callback_QColorAxis_customEvent(this, handle__customEvent, sigval1);
+		miqt_exec_callback_QColorAxis_customEvent(this, handle__customEvent.value(), sigval1);
 
 	}
 
 	friend void QColorAxis_virtualbase_customEvent(void* self, QEvent* event);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__connectNotify = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QColorAxis> handle__connectNotify;
 
 	// Subclass to allow providing a Go implementation
 	virtual void connectNotify(const QMetaMethod& signal) override {
-		if (handle__connectNotify == 0) {
+		if (!handle__connectNotify) {
 			QColorAxis::connectNotify(signal);
 			return;
 		}
@@ -156,18 +159,18 @@ public:
 		const QMetaMethod& signal_ret = signal;
 		// Cast returned reference into pointer
 		QMetaMethod* sigval1 = const_cast<QMetaMethod*>(&signal_ret);
-		miqt_exec_callback_QColorAxis_connectNotify(this, handle__connectNotify, sigval1);
+		miqt_exec_callback_QColorAxis_connectNotify(this, handle__connectNotify.value(), sigval1);
 
 	}
 
 	friend void QColorAxis_virtualbase_connectNotify(void* self, QMetaMethod* signal);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__disconnectNotify = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QColorAxis> handle__disconnectNotify;
 
 	// Subclass to allow providing a Go implementation
 	virtual void disconnectNotify(const QMetaMethod& signal) override {
-		if (handle__disconnectNotify == 0) {
+		if (!handle__disconnectNotify) {
 			QColorAxis::disconnectNotify(signal);
 			return;
 		}
@@ -175,7 +178,7 @@ public:
 		const QMetaMethod& signal_ret = signal;
 		// Cast returned reference into pointer
 		QMetaMethod* sigval1 = const_cast<QMetaMethod*>(&signal_ret);
-		miqt_exec_callback_QColorAxis_disconnectNotify(this, handle__disconnectNotify, sigval1);
+		miqt_exec_callback_QColorAxis_disconnectNotify(this, handle__disconnectNotify.value(), sigval1);
 
 	}
 
@@ -283,85 +286,99 @@ void QColorAxis_minChanged(QColorAxis* self, double min) {
 	self->minChanged(static_cast<qreal>(min));
 }
 
-void QColorAxis_connect_minChanged(QColorAxis* self, intptr_t slot) {
-	QColorAxis::connect(self, static_cast<void (QColorAxis::*)(qreal)>(&QColorAxis::minChanged), self, [=](qreal min) {
+void* QColorAxis_connect_minChanged(QColorAxis* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QColorAxis>>(slot);
+	return new QMetaObject::Connection(QColorAxis::connect(self, static_cast<void (QColorAxis::*)(qreal)>(&QColorAxis::minChanged), self, [slot_handle](qreal min) {
+		intptr_t slot = slot_handle->value();
 		qreal min_ret = min;
 		double sigval1 = static_cast<double>(min_ret);
 		miqt_exec_callback_QColorAxis_minChanged(slot, sigval1);
-	});
+	}));
 }
 
 void QColorAxis_maxChanged(QColorAxis* self, double max) {
 	self->maxChanged(static_cast<qreal>(max));
 }
 
-void QColorAxis_connect_maxChanged(QColorAxis* self, intptr_t slot) {
-	QColorAxis::connect(self, static_cast<void (QColorAxis::*)(qreal)>(&QColorAxis::maxChanged), self, [=](qreal max) {
+void* QColorAxis_connect_maxChanged(QColorAxis* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QColorAxis>>(slot);
+	return new QMetaObject::Connection(QColorAxis::connect(self, static_cast<void (QColorAxis::*)(qreal)>(&QColorAxis::maxChanged), self, [slot_handle](qreal max) {
+		intptr_t slot = slot_handle->value();
 		qreal max_ret = max;
 		double sigval1 = static_cast<double>(max_ret);
 		miqt_exec_callback_QColorAxis_maxChanged(slot, sigval1);
-	});
+	}));
 }
 
 void QColorAxis_rangeChanged(QColorAxis* self, double min, double max) {
 	self->rangeChanged(static_cast<qreal>(min), static_cast<qreal>(max));
 }
 
-void QColorAxis_connect_rangeChanged(QColorAxis* self, intptr_t slot) {
-	QColorAxis::connect(self, static_cast<void (QColorAxis::*)(qreal, qreal)>(&QColorAxis::rangeChanged), self, [=](qreal min, qreal max) {
+void* QColorAxis_connect_rangeChanged(QColorAxis* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QColorAxis>>(slot);
+	return new QMetaObject::Connection(QColorAxis::connect(self, static_cast<void (QColorAxis::*)(qreal, qreal)>(&QColorAxis::rangeChanged), self, [slot_handle](qreal min, qreal max) {
+		intptr_t slot = slot_handle->value();
 		qreal min_ret = min;
 		double sigval1 = static_cast<double>(min_ret);
 		qreal max_ret = max;
 		double sigval2 = static_cast<double>(max_ret);
 		miqt_exec_callback_QColorAxis_rangeChanged(slot, sigval1, sigval2);
-	});
+	}));
 }
 
 void QColorAxis_tickCountChanged(QColorAxis* self, int tickCount) {
 	self->tickCountChanged(static_cast<int>(tickCount));
 }
 
-void QColorAxis_connect_tickCountChanged(QColorAxis* self, intptr_t slot) {
-	QColorAxis::connect(self, static_cast<void (QColorAxis::*)(int)>(&QColorAxis::tickCountChanged), self, [=](int tickCount) {
+void* QColorAxis_connect_tickCountChanged(QColorAxis* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QColorAxis>>(slot);
+	return new QMetaObject::Connection(QColorAxis::connect(self, static_cast<void (QColorAxis::*)(int)>(&QColorAxis::tickCountChanged), self, [slot_handle](int tickCount) {
+		intptr_t slot = slot_handle->value();
 		int sigval1 = tickCount;
 		miqt_exec_callback_QColorAxis_tickCountChanged(slot, sigval1);
-	});
+	}));
 }
 
 void QColorAxis_gradientChanged(QColorAxis* self, QLinearGradient* gradient) {
 	self->gradientChanged(*gradient);
 }
 
-void QColorAxis_connect_gradientChanged(QColorAxis* self, intptr_t slot) {
-	QColorAxis::connect(self, static_cast<void (QColorAxis::*)(const QLinearGradient&)>(&QColorAxis::gradientChanged), self, [=](const QLinearGradient& gradient) {
+void* QColorAxis_connect_gradientChanged(QColorAxis* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QColorAxis>>(slot);
+	return new QMetaObject::Connection(QColorAxis::connect(self, static_cast<void (QColorAxis::*)(const QLinearGradient&)>(&QColorAxis::gradientChanged), self, [slot_handle](const QLinearGradient& gradient) {
+		intptr_t slot = slot_handle->value();
 		const QLinearGradient& gradient_ret = gradient;
 		// Cast returned reference into pointer
 		QLinearGradient* sigval1 = const_cast<QLinearGradient*>(&gradient_ret);
 		miqt_exec_callback_QColorAxis_gradientChanged(slot, sigval1);
-	});
+	}));
 }
 
 void QColorAxis_sizeChanged(QColorAxis* self, const double size) {
 	self->sizeChanged(static_cast<const qreal>(size));
 }
 
-void QColorAxis_connect_sizeChanged(QColorAxis* self, intptr_t slot) {
-	QColorAxis::connect(self, static_cast<void (QColorAxis::*)(const qreal)>(&QColorAxis::sizeChanged), self, [=](const qreal size) {
+void* QColorAxis_connect_sizeChanged(QColorAxis* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QColorAxis>>(slot);
+	return new QMetaObject::Connection(QColorAxis::connect(self, static_cast<void (QColorAxis::*)(const qreal)>(&QColorAxis::sizeChanged), self, [slot_handle](const qreal size) {
+		intptr_t slot = slot_handle->value();
 		const qreal size_ret = size;
 		const double sigval1 = static_cast<const double>(size_ret);
 		miqt_exec_callback_QColorAxis_sizeChanged(slot, sigval1);
-	});
+	}));
 }
 
 void QColorAxis_autoRangeChanged(QColorAxis* self, bool autoRange) {
 	self->autoRangeChanged(autoRange);
 }
 
-void QColorAxis_connect_autoRangeChanged(QColorAxis* self, intptr_t slot) {
-	QColorAxis::connect(self, static_cast<void (QColorAxis::*)(bool)>(&QColorAxis::autoRangeChanged), self, [=](bool autoRange) {
+void* QColorAxis_connect_autoRangeChanged(QColorAxis* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QColorAxis>>(slot);
+	return new QMetaObject::Connection(QColorAxis::connect(self, static_cast<void (QColorAxis::*)(bool)>(&QColorAxis::autoRangeChanged), self, [slot_handle](bool autoRange) {
+		intptr_t slot = slot_handle->value();
 		bool sigval1 = autoRange;
 		miqt_exec_callback_QColorAxis_autoRangeChanged(slot, sigval1);
-	});
+	}));
 }
 
 struct miqt_string QColorAxis_tr2(const char* s, const char* c) {
@@ -387,12 +404,13 @@ struct miqt_string QColorAxis_tr3(const char* s, const char* c, int n) {
 }
 
 bool QColorAxis_override_virtual_type(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QColorAxis> slot_handle(slot);
 	MiqtVirtualQColorAxis* self_cast = dynamic_cast<MiqtVirtualQColorAxis*>( (QColorAxis*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__type = slot;
+	self_cast->handle__type = std::move(slot_handle);
 	return true;
 }
 
@@ -402,12 +420,13 @@ int QColorAxis_virtualbase_type(const void* self) {
 }
 
 bool QColorAxis_override_virtual_event(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QColorAxis> slot_handle(slot);
 	MiqtVirtualQColorAxis* self_cast = dynamic_cast<MiqtVirtualQColorAxis*>( (QColorAxis*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__event = slot;
+	self_cast->handle__event = std::move(slot_handle);
 	return true;
 }
 
@@ -416,12 +435,13 @@ bool QColorAxis_virtualbase_event(void* self, QEvent* event) {
 }
 
 bool QColorAxis_override_virtual_eventFilter(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QColorAxis> slot_handle(slot);
 	MiqtVirtualQColorAxis* self_cast = dynamic_cast<MiqtVirtualQColorAxis*>( (QColorAxis*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__eventFilter = slot;
+	self_cast->handle__eventFilter = std::move(slot_handle);
 	return true;
 }
 
@@ -430,12 +450,13 @@ bool QColorAxis_virtualbase_eventFilter(void* self, QObject* watched, QEvent* ev
 }
 
 bool QColorAxis_override_virtual_timerEvent(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QColorAxis> slot_handle(slot);
 	MiqtVirtualQColorAxis* self_cast = dynamic_cast<MiqtVirtualQColorAxis*>( (QColorAxis*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__timerEvent = slot;
+	self_cast->handle__timerEvent = std::move(slot_handle);
 	return true;
 }
 
@@ -444,12 +465,13 @@ void QColorAxis_virtualbase_timerEvent(void* self, QTimerEvent* event) {
 }
 
 bool QColorAxis_override_virtual_childEvent(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QColorAxis> slot_handle(slot);
 	MiqtVirtualQColorAxis* self_cast = dynamic_cast<MiqtVirtualQColorAxis*>( (QColorAxis*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__childEvent = slot;
+	self_cast->handle__childEvent = std::move(slot_handle);
 	return true;
 }
 
@@ -458,12 +480,13 @@ void QColorAxis_virtualbase_childEvent(void* self, QChildEvent* event) {
 }
 
 bool QColorAxis_override_virtual_customEvent(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QColorAxis> slot_handle(slot);
 	MiqtVirtualQColorAxis* self_cast = dynamic_cast<MiqtVirtualQColorAxis*>( (QColorAxis*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__customEvent = slot;
+	self_cast->handle__customEvent = std::move(slot_handle);
 	return true;
 }
 
@@ -472,12 +495,13 @@ void QColorAxis_virtualbase_customEvent(void* self, QEvent* event) {
 }
 
 bool QColorAxis_override_virtual_connectNotify(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QColorAxis> slot_handle(slot);
 	MiqtVirtualQColorAxis* self_cast = dynamic_cast<MiqtVirtualQColorAxis*>( (QColorAxis*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__connectNotify = slot;
+	self_cast->handle__connectNotify = std::move(slot_handle);
 	return true;
 }
 
@@ -486,12 +510,13 @@ void QColorAxis_virtualbase_connectNotify(void* self, QMetaMethod* signal) {
 }
 
 bool QColorAxis_override_virtual_disconnectNotify(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QColorAxis> slot_handle(slot);
 	MiqtVirtualQColorAxis* self_cast = dynamic_cast<MiqtVirtualQColorAxis*>( (QColorAxis*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__disconnectNotify = slot;
+	self_cast->handle__disconnectNotify = std::move(slot_handle);
 	return true;
 }
 

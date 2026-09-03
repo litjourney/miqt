@@ -16,6 +16,11 @@ import (
 	"unsafe"
 )
 
+//export miqt_exec_callback_handle_release_QMediaNetworkAccessControl
+func miqt_exec_callback_handle_release_QMediaNetworkAccessControl(cb C.intptr_t) {
+	cgo.Handle(cb).Delete()
+}
+
 type QMediaNetworkAccessControl struct {
 	h *C.QMediaNetworkAccessControl
 	*QMediaControl
@@ -99,8 +104,10 @@ func (this *QMediaNetworkAccessControl) CurrentConfiguration() *network.QNetwork
 func (this *QMediaNetworkAccessControl) ConfigurationChanged(configuration *network.QNetworkConfiguration) {
 	C.QMediaNetworkAccessControl_configurationChanged(this.h, (*C.QNetworkConfiguration)(configuration.UnsafePointer()))
 }
-func (this *QMediaNetworkAccessControl) OnConfigurationChanged(slot func(configuration *network.QNetworkConfiguration)) {
-	C.QMediaNetworkAccessControl_connect_configurationChanged(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QMediaNetworkAccessControl) OnConfigurationChanged(slot func(configuration *network.QNetworkConfiguration)) *qt.SignalConnection {
+	_goptr := qt.UnsafeNewQMetaObject__Connection(C.QMediaNetworkAccessControl_connect_configurationChanged(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QMediaNetworkAccessControl_configurationChanged

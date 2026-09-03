@@ -61,7 +61,7 @@ void QDesignerMetaDataBaseInterface_remove(QDesignerMetaDataBaseInterface* self,
 struct miqt_array /* of QObject* */  QDesignerMetaDataBaseInterface_objects(const QDesignerMetaDataBaseInterface* self);
 QDesignerFormEditorInterface* QDesignerMetaDataBaseInterface_core(const QDesignerMetaDataBaseInterface* self);
 void QDesignerMetaDataBaseInterface_changed(QDesignerMetaDataBaseInterface* self);
-void QDesignerMetaDataBaseInterface_connect_changed(QDesignerMetaDataBaseInterface* self, intptr_t slot);
+void* QDesignerMetaDataBaseInterface_connect_changed(QDesignerMetaDataBaseInterface* self, intptr_t slot);
 struct miqt_string QDesignerMetaDataBaseInterface_tr2(const char* s, const char* c);
 struct miqt_string QDesignerMetaDataBaseInterface_tr3(const char* s, const char* c, int n);
 struct miqt_string QDesignerMetaDataBaseInterface_trUtf82(const char* s, const char* c);

@@ -1,3 +1,5 @@
+#include <memory>
+#include <utility>
 #include <QChildEvent>
 #include <QEvent>
 #include <QFont>
@@ -30,6 +32,7 @@
 extern "C" {
 #endif
 
+void miqt_exec_callback_handle_release_QwtPlotPicker(intptr_t);
 void miqt_exec_callback_QwtPlotPicker_selected(intptr_t, QPointF*);
 void miqt_exec_callback_QwtPlotPicker_selectedWithRect(intptr_t, QRectF*);
 void miqt_exec_callback_QwtPlotPicker_selectedWithPa(intptr_t, struct miqt_array /* of QPointF* */ );
@@ -84,65 +87,65 @@ public:
 	virtual ~MiqtVirtualQwtPlotPicker() override = default;
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__setAxis = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtPlotPicker> handle__setAxis;
 
 	// Subclass to allow providing a Go implementation
 	virtual void setAxis(int xAxis, int yAxis) override {
-		if (handle__setAxis == 0) {
+		if (!handle__setAxis) {
 			QwtPlotPicker::setAxis(xAxis, yAxis);
 			return;
 		}
 
 		int sigval1 = xAxis;
 		int sigval2 = yAxis;
-		miqt_exec_callback_QwtPlotPicker_setAxis(this, handle__setAxis, sigval1, sigval2);
+		miqt_exec_callback_QwtPlotPicker_setAxis(this, handle__setAxis.value(), sigval1, sigval2);
 
 	}
 
 	friend void QwtPlotPicker_virtualbase_setAxis(void* self, int xAxis, int yAxis);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__trackerText = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtPlotPicker> handle__trackerText;
 
 	// Subclass to allow providing a Go implementation
 	virtual QwtText trackerText(const QPoint& param1) const override {
-		if (handle__trackerText == 0) {
+		if (!handle__trackerText) {
 			return QwtPlotPicker::trackerText(param1);
 		}
 
 		const QPoint& param1_ret = param1;
 		// Cast returned reference into pointer
 		QPoint* sigval1 = const_cast<QPoint*>(&param1_ret);
-		QwtText* callback_return_value = miqt_exec_callback_QwtPlotPicker_trackerText(this, handle__trackerText, sigval1);
+		QwtText* callback_return_value = miqt_exec_callback_QwtPlotPicker_trackerText(this, handle__trackerText.value(), sigval1);
 		return *callback_return_value;
 	}
 
 	friend QwtText* QwtPlotPicker_virtualbase_trackerText(const void* self, QPoint* param1);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__trackerTextF = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtPlotPicker> handle__trackerTextF;
 
 	// Subclass to allow providing a Go implementation
 	virtual QwtText trackerTextF(const QPointF& param1) const override {
-		if (handle__trackerTextF == 0) {
+		if (!handle__trackerTextF) {
 			return QwtPlotPicker::trackerTextF(param1);
 		}
 
 		const QPointF& param1_ret = param1;
 		// Cast returned reference into pointer
 		QPointF* sigval1 = const_cast<QPointF*>(&param1_ret);
-		QwtText* callback_return_value = miqt_exec_callback_QwtPlotPicker_trackerTextF(this, handle__trackerTextF, sigval1);
+		QwtText* callback_return_value = miqt_exec_callback_QwtPlotPicker_trackerTextF(this, handle__trackerTextF.value(), sigval1);
 		return *callback_return_value;
 	}
 
 	friend QwtText* QwtPlotPicker_virtualbase_trackerTextF(const void* self, QPointF* param1);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__move = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtPlotPicker> handle__move;
 
 	// Subclass to allow providing a Go implementation
 	virtual void move(const QPoint& param1) override {
-		if (handle__move == 0) {
+		if (!handle__move) {
 			QwtPlotPicker::move(param1);
 			return;
 		}
@@ -150,18 +153,18 @@ public:
 		const QPoint& param1_ret = param1;
 		// Cast returned reference into pointer
 		QPoint* sigval1 = const_cast<QPoint*>(&param1_ret);
-		miqt_exec_callback_QwtPlotPicker_move(this, handle__move, sigval1);
+		miqt_exec_callback_QwtPlotPicker_move(this, handle__move.value(), sigval1);
 
 	}
 
 	friend void QwtPlotPicker_virtualbase_move(void* self, QPoint* param1);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__append = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtPlotPicker> handle__append;
 
 	// Subclass to allow providing a Go implementation
 	virtual void append(const QPoint& param1) override {
-		if (handle__append == 0) {
+		if (!handle__append) {
 			QwtPlotPicker::append(param1);
 			return;
 		}
@@ -169,351 +172,351 @@ public:
 		const QPoint& param1_ret = param1;
 		// Cast returned reference into pointer
 		QPoint* sigval1 = const_cast<QPoint*>(&param1_ret);
-		miqt_exec_callback_QwtPlotPicker_append(this, handle__append, sigval1);
+		miqt_exec_callback_QwtPlotPicker_append(this, handle__append.value(), sigval1);
 
 	}
 
 	friend void QwtPlotPicker_virtualbase_append(void* self, QPoint* param1);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__end = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtPlotPicker> handle__end;
 
 	// Subclass to allow providing a Go implementation
 	virtual bool end(bool ok) override {
-		if (handle__end == 0) {
+		if (!handle__end) {
 			return QwtPlotPicker::end(ok);
 		}
 
 		bool sigval1 = ok;
-		bool callback_return_value = miqt_exec_callback_QwtPlotPicker_end(this, handle__end, sigval1);
+		bool callback_return_value = miqt_exec_callback_QwtPlotPicker_end(this, handle__end.value(), sigval1);
 		return callback_return_value;
 	}
 
 	friend bool QwtPlotPicker_virtualbase_end(void* self, bool ok);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__eventFilter = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtPlotPicker> handle__eventFilter;
 
 	// Subclass to allow providing a Go implementation
 	virtual bool eventFilter(QObject* param1, QEvent* param2) override {
-		if (handle__eventFilter == 0) {
+		if (!handle__eventFilter) {
 			return QwtPlotPicker::eventFilter(param1, param2);
 		}
 
 		QObject* sigval1 = param1;
 		QEvent* sigval2 = param2;
-		bool callback_return_value = miqt_exec_callback_QwtPlotPicker_eventFilter(this, handle__eventFilter, sigval1, sigval2);
+		bool callback_return_value = miqt_exec_callback_QwtPlotPicker_eventFilter(this, handle__eventFilter.value(), sigval1, sigval2);
 		return callback_return_value;
 	}
 
 	friend bool QwtPlotPicker_virtualbase_eventFilter(void* self, QObject* param1, QEvent* param2);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__pickArea = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtPlotPicker> handle__pickArea;
 
 	// Subclass to allow providing a Go implementation
 	virtual QPainterPath pickArea() const override {
-		if (handle__pickArea == 0) {
+		if (!handle__pickArea) {
 			return QwtPlotPicker::pickArea();
 		}
 
-		QPainterPath* callback_return_value = miqt_exec_callback_QwtPlotPicker_pickArea(this, handle__pickArea);
+		QPainterPath* callback_return_value = miqt_exec_callback_QwtPlotPicker_pickArea(this, handle__pickArea.value());
 		return *callback_return_value;
 	}
 
 	friend QPainterPath* QwtPlotPicker_virtualbase_pickArea(const void* self);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__drawRubberBand = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtPlotPicker> handle__drawRubberBand;
 
 	// Subclass to allow providing a Go implementation
 	virtual void drawRubberBand(QPainter* param1) const override {
-		if (handle__drawRubberBand == 0) {
+		if (!handle__drawRubberBand) {
 			QwtPlotPicker::drawRubberBand(param1);
 			return;
 		}
 
 		QPainter* sigval1 = param1;
-		miqt_exec_callback_QwtPlotPicker_drawRubberBand(this, handle__drawRubberBand, sigval1);
+		miqt_exec_callback_QwtPlotPicker_drawRubberBand(this, handle__drawRubberBand.value(), sigval1);
 
 	}
 
 	friend void QwtPlotPicker_virtualbase_drawRubberBand(const void* self, QPainter* param1);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__drawTracker = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtPlotPicker> handle__drawTracker;
 
 	// Subclass to allow providing a Go implementation
 	virtual void drawTracker(QPainter* param1) const override {
-		if (handle__drawTracker == 0) {
+		if (!handle__drawTracker) {
 			QwtPlotPicker::drawTracker(param1);
 			return;
 		}
 
 		QPainter* sigval1 = param1;
-		miqt_exec_callback_QwtPlotPicker_drawTracker(this, handle__drawTracker, sigval1);
+		miqt_exec_callback_QwtPlotPicker_drawTracker(this, handle__drawTracker.value(), sigval1);
 
 	}
 
 	friend void QwtPlotPicker_virtualbase_drawTracker(const void* self, QPainter* param1);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__rubberBandMask = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtPlotPicker> handle__rubberBandMask;
 
 	// Subclass to allow providing a Go implementation
 	virtual QRegion rubberBandMask() const override {
-		if (handle__rubberBandMask == 0) {
+		if (!handle__rubberBandMask) {
 			return QwtPlotPicker::rubberBandMask();
 		}
 
-		QRegion* callback_return_value = miqt_exec_callback_QwtPlotPicker_rubberBandMask(this, handle__rubberBandMask);
+		QRegion* callback_return_value = miqt_exec_callback_QwtPlotPicker_rubberBandMask(this, handle__rubberBandMask.value());
 		return *callback_return_value;
 	}
 
 	friend QRegion* QwtPlotPicker_virtualbase_rubberBandMask(const void* self);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__trackerRect = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtPlotPicker> handle__trackerRect;
 
 	// Subclass to allow providing a Go implementation
 	virtual QRect trackerRect(const QFont& param1) const override {
-		if (handle__trackerRect == 0) {
+		if (!handle__trackerRect) {
 			return QwtPlotPicker::trackerRect(param1);
 		}
 
 		const QFont& param1_ret = param1;
 		// Cast returned reference into pointer
 		QFont* sigval1 = const_cast<QFont*>(&param1_ret);
-		QRect* callback_return_value = miqt_exec_callback_QwtPlotPicker_trackerRect(this, handle__trackerRect, sigval1);
+		QRect* callback_return_value = miqt_exec_callback_QwtPlotPicker_trackerRect(this, handle__trackerRect.value(), sigval1);
 		return *callback_return_value;
 	}
 
 	friend QRect* QwtPlotPicker_virtualbase_trackerRect(const void* self, QFont* param1);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__transition = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtPlotPicker> handle__transition;
 
 	// Subclass to allow providing a Go implementation
 	virtual void transition(const QEvent* param1) override {
-		if (handle__transition == 0) {
+		if (!handle__transition) {
 			QwtPlotPicker::transition(param1);
 			return;
 		}
 
 		QEvent* sigval1 = (QEvent*) param1;
-		miqt_exec_callback_QwtPlotPicker_transition(this, handle__transition, sigval1);
+		miqt_exec_callback_QwtPlotPicker_transition(this, handle__transition.value(), sigval1);
 
 	}
 
 	friend void QwtPlotPicker_virtualbase_transition(void* self, QEvent* param1);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__begin = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtPlotPicker> handle__begin;
 
 	// Subclass to allow providing a Go implementation
 	virtual void begin() override {
-		if (handle__begin == 0) {
+		if (!handle__begin) {
 			QwtPlotPicker::begin();
 			return;
 		}
 
-		miqt_exec_callback_QwtPlotPicker_begin(this, handle__begin);
+		miqt_exec_callback_QwtPlotPicker_begin(this, handle__begin.value());
 
 	}
 
 	friend void QwtPlotPicker_virtualbase_begin(void* self);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__remove = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtPlotPicker> handle__remove;
 
 	// Subclass to allow providing a Go implementation
 	virtual void remove() override {
-		if (handle__remove == 0) {
+		if (!handle__remove) {
 			QwtPlotPicker::remove();
 			return;
 		}
 
-		miqt_exec_callback_QwtPlotPicker_remove(this, handle__remove);
+		miqt_exec_callback_QwtPlotPicker_remove(this, handle__remove.value());
 
 	}
 
 	friend void QwtPlotPicker_virtualbase_remove(void* self);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__reset = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtPlotPicker> handle__reset;
 
 	// Subclass to allow providing a Go implementation
 	virtual void reset() override {
-		if (handle__reset == 0) {
+		if (!handle__reset) {
 			QwtPlotPicker::reset();
 			return;
 		}
 
-		miqt_exec_callback_QwtPlotPicker_reset(this, handle__reset);
+		miqt_exec_callback_QwtPlotPicker_reset(this, handle__reset.value());
 
 	}
 
 	friend void QwtPlotPicker_virtualbase_reset(void* self);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__widgetMousePressEvent = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtPlotPicker> handle__widgetMousePressEvent;
 
 	// Subclass to allow providing a Go implementation
 	virtual void widgetMousePressEvent(QMouseEvent* param1) override {
-		if (handle__widgetMousePressEvent == 0) {
+		if (!handle__widgetMousePressEvent) {
 			QwtPlotPicker::widgetMousePressEvent(param1);
 			return;
 		}
 
 		QMouseEvent* sigval1 = param1;
-		miqt_exec_callback_QwtPlotPicker_widgetMousePressEvent(this, handle__widgetMousePressEvent, sigval1);
+		miqt_exec_callback_QwtPlotPicker_widgetMousePressEvent(this, handle__widgetMousePressEvent.value(), sigval1);
 
 	}
 
 	friend void QwtPlotPicker_virtualbase_widgetMousePressEvent(void* self, QMouseEvent* param1);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__widgetMouseReleaseEvent = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtPlotPicker> handle__widgetMouseReleaseEvent;
 
 	// Subclass to allow providing a Go implementation
 	virtual void widgetMouseReleaseEvent(QMouseEvent* param1) override {
-		if (handle__widgetMouseReleaseEvent == 0) {
+		if (!handle__widgetMouseReleaseEvent) {
 			QwtPlotPicker::widgetMouseReleaseEvent(param1);
 			return;
 		}
 
 		QMouseEvent* sigval1 = param1;
-		miqt_exec_callback_QwtPlotPicker_widgetMouseReleaseEvent(this, handle__widgetMouseReleaseEvent, sigval1);
+		miqt_exec_callback_QwtPlotPicker_widgetMouseReleaseEvent(this, handle__widgetMouseReleaseEvent.value(), sigval1);
 
 	}
 
 	friend void QwtPlotPicker_virtualbase_widgetMouseReleaseEvent(void* self, QMouseEvent* param1);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__widgetMouseDoubleClickEvent = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtPlotPicker> handle__widgetMouseDoubleClickEvent;
 
 	// Subclass to allow providing a Go implementation
 	virtual void widgetMouseDoubleClickEvent(QMouseEvent* param1) override {
-		if (handle__widgetMouseDoubleClickEvent == 0) {
+		if (!handle__widgetMouseDoubleClickEvent) {
 			QwtPlotPicker::widgetMouseDoubleClickEvent(param1);
 			return;
 		}
 
 		QMouseEvent* sigval1 = param1;
-		miqt_exec_callback_QwtPlotPicker_widgetMouseDoubleClickEvent(this, handle__widgetMouseDoubleClickEvent, sigval1);
+		miqt_exec_callback_QwtPlotPicker_widgetMouseDoubleClickEvent(this, handle__widgetMouseDoubleClickEvent.value(), sigval1);
 
 	}
 
 	friend void QwtPlotPicker_virtualbase_widgetMouseDoubleClickEvent(void* self, QMouseEvent* param1);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__widgetMouseMoveEvent = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtPlotPicker> handle__widgetMouseMoveEvent;
 
 	// Subclass to allow providing a Go implementation
 	virtual void widgetMouseMoveEvent(QMouseEvent* param1) override {
-		if (handle__widgetMouseMoveEvent == 0) {
+		if (!handle__widgetMouseMoveEvent) {
 			QwtPlotPicker::widgetMouseMoveEvent(param1);
 			return;
 		}
 
 		QMouseEvent* sigval1 = param1;
-		miqt_exec_callback_QwtPlotPicker_widgetMouseMoveEvent(this, handle__widgetMouseMoveEvent, sigval1);
+		miqt_exec_callback_QwtPlotPicker_widgetMouseMoveEvent(this, handle__widgetMouseMoveEvent.value(), sigval1);
 
 	}
 
 	friend void QwtPlotPicker_virtualbase_widgetMouseMoveEvent(void* self, QMouseEvent* param1);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__widgetWheelEvent = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtPlotPicker> handle__widgetWheelEvent;
 
 	// Subclass to allow providing a Go implementation
 	virtual void widgetWheelEvent(QWheelEvent* param1) override {
-		if (handle__widgetWheelEvent == 0) {
+		if (!handle__widgetWheelEvent) {
 			QwtPlotPicker::widgetWheelEvent(param1);
 			return;
 		}
 
 		QWheelEvent* sigval1 = param1;
-		miqt_exec_callback_QwtPlotPicker_widgetWheelEvent(this, handle__widgetWheelEvent, sigval1);
+		miqt_exec_callback_QwtPlotPicker_widgetWheelEvent(this, handle__widgetWheelEvent.value(), sigval1);
 
 	}
 
 	friend void QwtPlotPicker_virtualbase_widgetWheelEvent(void* self, QWheelEvent* param1);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__widgetKeyPressEvent = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtPlotPicker> handle__widgetKeyPressEvent;
 
 	// Subclass to allow providing a Go implementation
 	virtual void widgetKeyPressEvent(QKeyEvent* param1) override {
-		if (handle__widgetKeyPressEvent == 0) {
+		if (!handle__widgetKeyPressEvent) {
 			QwtPlotPicker::widgetKeyPressEvent(param1);
 			return;
 		}
 
 		QKeyEvent* sigval1 = param1;
-		miqt_exec_callback_QwtPlotPicker_widgetKeyPressEvent(this, handle__widgetKeyPressEvent, sigval1);
+		miqt_exec_callback_QwtPlotPicker_widgetKeyPressEvent(this, handle__widgetKeyPressEvent.value(), sigval1);
 
 	}
 
 	friend void QwtPlotPicker_virtualbase_widgetKeyPressEvent(void* self, QKeyEvent* param1);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__widgetKeyReleaseEvent = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtPlotPicker> handle__widgetKeyReleaseEvent;
 
 	// Subclass to allow providing a Go implementation
 	virtual void widgetKeyReleaseEvent(QKeyEvent* param1) override {
-		if (handle__widgetKeyReleaseEvent == 0) {
+		if (!handle__widgetKeyReleaseEvent) {
 			QwtPlotPicker::widgetKeyReleaseEvent(param1);
 			return;
 		}
 
 		QKeyEvent* sigval1 = param1;
-		miqt_exec_callback_QwtPlotPicker_widgetKeyReleaseEvent(this, handle__widgetKeyReleaseEvent, sigval1);
+		miqt_exec_callback_QwtPlotPicker_widgetKeyReleaseEvent(this, handle__widgetKeyReleaseEvent.value(), sigval1);
 
 	}
 
 	friend void QwtPlotPicker_virtualbase_widgetKeyReleaseEvent(void* self, QKeyEvent* param1);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__widgetEnterEvent = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtPlotPicker> handle__widgetEnterEvent;
 
 	// Subclass to allow providing a Go implementation
 	virtual void widgetEnterEvent(QEvent* param1) override {
-		if (handle__widgetEnterEvent == 0) {
+		if (!handle__widgetEnterEvent) {
 			QwtPlotPicker::widgetEnterEvent(param1);
 			return;
 		}
 
 		QEvent* sigval1 = param1;
-		miqt_exec_callback_QwtPlotPicker_widgetEnterEvent(this, handle__widgetEnterEvent, sigval1);
+		miqt_exec_callback_QwtPlotPicker_widgetEnterEvent(this, handle__widgetEnterEvent.value(), sigval1);
 
 	}
 
 	friend void QwtPlotPicker_virtualbase_widgetEnterEvent(void* self, QEvent* param1);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__widgetLeaveEvent = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtPlotPicker> handle__widgetLeaveEvent;
 
 	// Subclass to allow providing a Go implementation
 	virtual void widgetLeaveEvent(QEvent* param1) override {
-		if (handle__widgetLeaveEvent == 0) {
+		if (!handle__widgetLeaveEvent) {
 			QwtPlotPicker::widgetLeaveEvent(param1);
 			return;
 		}
 
 		QEvent* sigval1 = param1;
-		miqt_exec_callback_QwtPlotPicker_widgetLeaveEvent(this, handle__widgetLeaveEvent, sigval1);
+		miqt_exec_callback_QwtPlotPicker_widgetLeaveEvent(this, handle__widgetLeaveEvent.value(), sigval1);
 
 	}
 
 	friend void QwtPlotPicker_virtualbase_widgetLeaveEvent(void* self, QEvent* param1);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__stretchSelection = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtPlotPicker> handle__stretchSelection;
 
 	// Subclass to allow providing a Go implementation
 	virtual void stretchSelection(const QSize& oldSize, const QSize& newSize) override {
-		if (handle__stretchSelection == 0) {
+		if (!handle__stretchSelection) {
 			QwtPlotPicker::stretchSelection(oldSize, newSize);
 			return;
 		}
@@ -524,101 +527,101 @@ public:
 		const QSize& newSize_ret = newSize;
 		// Cast returned reference into pointer
 		QSize* sigval2 = const_cast<QSize*>(&newSize_ret);
-		miqt_exec_callback_QwtPlotPicker_stretchSelection(this, handle__stretchSelection, sigval1, sigval2);
+		miqt_exec_callback_QwtPlotPicker_stretchSelection(this, handle__stretchSelection.value(), sigval1, sigval2);
 
 	}
 
 	friend void QwtPlotPicker_virtualbase_stretchSelection(void* self, QSize* oldSize, QSize* newSize);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__updateDisplay = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtPlotPicker> handle__updateDisplay;
 
 	// Subclass to allow providing a Go implementation
 	virtual void updateDisplay() override {
-		if (handle__updateDisplay == 0) {
+		if (!handle__updateDisplay) {
 			QwtPlotPicker::updateDisplay();
 			return;
 		}
 
-		miqt_exec_callback_QwtPlotPicker_updateDisplay(this, handle__updateDisplay);
+		miqt_exec_callback_QwtPlotPicker_updateDisplay(this, handle__updateDisplay.value());
 
 	}
 
 	friend void QwtPlotPicker_virtualbase_updateDisplay(void* self);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__event = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtPlotPicker> handle__event;
 
 	// Subclass to allow providing a Go implementation
 	virtual bool event(QEvent* event) override {
-		if (handle__event == 0) {
+		if (!handle__event) {
 			return QwtPlotPicker::event(event);
 		}
 
 		QEvent* sigval1 = event;
-		bool callback_return_value = miqt_exec_callback_QwtPlotPicker_event(this, handle__event, sigval1);
+		bool callback_return_value = miqt_exec_callback_QwtPlotPicker_event(this, handle__event.value(), sigval1);
 		return callback_return_value;
 	}
 
 	friend bool QwtPlotPicker_virtualbase_event(void* self, QEvent* event);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__timerEvent = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtPlotPicker> handle__timerEvent;
 
 	// Subclass to allow providing a Go implementation
 	virtual void timerEvent(QTimerEvent* event) override {
-		if (handle__timerEvent == 0) {
+		if (!handle__timerEvent) {
 			QwtPlotPicker::timerEvent(event);
 			return;
 		}
 
 		QTimerEvent* sigval1 = event;
-		miqt_exec_callback_QwtPlotPicker_timerEvent(this, handle__timerEvent, sigval1);
+		miqt_exec_callback_QwtPlotPicker_timerEvent(this, handle__timerEvent.value(), sigval1);
 
 	}
 
 	friend void QwtPlotPicker_virtualbase_timerEvent(void* self, QTimerEvent* event);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__childEvent = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtPlotPicker> handle__childEvent;
 
 	// Subclass to allow providing a Go implementation
 	virtual void childEvent(QChildEvent* event) override {
-		if (handle__childEvent == 0) {
+		if (!handle__childEvent) {
 			QwtPlotPicker::childEvent(event);
 			return;
 		}
 
 		QChildEvent* sigval1 = event;
-		miqt_exec_callback_QwtPlotPicker_childEvent(this, handle__childEvent, sigval1);
+		miqt_exec_callback_QwtPlotPicker_childEvent(this, handle__childEvent.value(), sigval1);
 
 	}
 
 	friend void QwtPlotPicker_virtualbase_childEvent(void* self, QChildEvent* event);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__customEvent = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtPlotPicker> handle__customEvent;
 
 	// Subclass to allow providing a Go implementation
 	virtual void customEvent(QEvent* event) override {
-		if (handle__customEvent == 0) {
+		if (!handle__customEvent) {
 			QwtPlotPicker::customEvent(event);
 			return;
 		}
 
 		QEvent* sigval1 = event;
-		miqt_exec_callback_QwtPlotPicker_customEvent(this, handle__customEvent, sigval1);
+		miqt_exec_callback_QwtPlotPicker_customEvent(this, handle__customEvent.value(), sigval1);
 
 	}
 
 	friend void QwtPlotPicker_virtualbase_customEvent(void* self, QEvent* event);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__connectNotify = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtPlotPicker> handle__connectNotify;
 
 	// Subclass to allow providing a Go implementation
 	virtual void connectNotify(const QMetaMethod& signal) override {
-		if (handle__connectNotify == 0) {
+		if (!handle__connectNotify) {
 			QwtPlotPicker::connectNotify(signal);
 			return;
 		}
@@ -626,18 +629,18 @@ public:
 		const QMetaMethod& signal_ret = signal;
 		// Cast returned reference into pointer
 		QMetaMethod* sigval1 = const_cast<QMetaMethod*>(&signal_ret);
-		miqt_exec_callback_QwtPlotPicker_connectNotify(this, handle__connectNotify, sigval1);
+		miqt_exec_callback_QwtPlotPicker_connectNotify(this, handle__connectNotify.value(), sigval1);
 
 	}
 
 	friend void QwtPlotPicker_virtualbase_connectNotify(void* self, QMetaMethod* signal);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__disconnectNotify = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtPlotPicker> handle__disconnectNotify;
 
 	// Subclass to allow providing a Go implementation
 	virtual void disconnectNotify(const QMetaMethod& signal) override {
-		if (handle__disconnectNotify == 0) {
+		if (!handle__disconnectNotify) {
 			QwtPlotPicker::disconnectNotify(signal);
 			return;
 		}
@@ -645,18 +648,18 @@ public:
 		const QMetaMethod& signal_ret = signal;
 		// Cast returned reference into pointer
 		QMetaMethod* sigval1 = const_cast<QMetaMethod*>(&signal_ret);
-		miqt_exec_callback_QwtPlotPicker_disconnectNotify(this, handle__disconnectNotify, sigval1);
+		miqt_exec_callback_QwtPlotPicker_disconnectNotify(this, handle__disconnectNotify.value(), sigval1);
 
 	}
 
 	friend void QwtPlotPicker_virtualbase_disconnectNotify(void* self, QMetaMethod* signal);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__mouseMatch2 = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtPlotPicker> handle__mouseMatch2;
 
 	// Subclass to allow providing a Go implementation
 	virtual bool mouseMatch(const QwtEventPattern::MousePattern& param1, const QMouseEvent* param2) const override {
-		if (handle__mouseMatch2 == 0) {
+		if (!handle__mouseMatch2) {
 			return QwtPlotPicker::mouseMatch(param1, param2);
 		}
 
@@ -664,18 +667,18 @@ public:
 		// Cast returned reference into pointer
 		QwtEventPattern__MousePattern* sigval1 = const_cast<QwtEventPattern::MousePattern*>(&param1_ret);
 		QMouseEvent* sigval2 = (QMouseEvent*) param2;
-		bool callback_return_value = miqt_exec_callback_QwtPlotPicker_mouseMatch2(this, handle__mouseMatch2, sigval1, sigval2);
+		bool callback_return_value = miqt_exec_callback_QwtPlotPicker_mouseMatch2(this, handle__mouseMatch2.value(), sigval1, sigval2);
 		return callback_return_value;
 	}
 
 	friend bool QwtPlotPicker_virtualbase_mouseMatch2(const void* self, QwtEventPattern__MousePattern* param1, QMouseEvent* param2);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__keyMatch2 = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtPlotPicker> handle__keyMatch2;
 
 	// Subclass to allow providing a Go implementation
 	virtual bool keyMatch(const QwtEventPattern::KeyPattern& param1, const QKeyEvent* param2) const override {
-		if (handle__keyMatch2 == 0) {
+		if (!handle__keyMatch2) {
 			return QwtPlotPicker::keyMatch(param1, param2);
 		}
 
@@ -683,7 +686,7 @@ public:
 		// Cast returned reference into pointer
 		QwtEventPattern__KeyPattern* sigval1 = const_cast<QwtEventPattern::KeyPattern*>(&param1_ret);
 		QKeyEvent* sigval2 = (QKeyEvent*) param2;
-		bool callback_return_value = miqt_exec_callback_QwtPlotPicker_keyMatch2(this, handle__keyMatch2, sigval1, sigval2);
+		bool callback_return_value = miqt_exec_callback_QwtPlotPicker_keyMatch2(this, handle__keyMatch2.value(), sigval1, sigval2);
 		return callback_return_value;
 	}
 
@@ -781,26 +784,30 @@ void QwtPlotPicker_selected(QwtPlotPicker* self, QPointF* pos) {
 	self->selected(*pos);
 }
 
-void QwtPlotPicker_connect_selected(QwtPlotPicker* self, intptr_t slot) {
-	QwtPlotPicker::connect(self, static_cast<void (QwtPlotPicker::*)(const QPointF&)>(&QwtPlotPicker::selected), self, [=](const QPointF& pos) {
+void* QwtPlotPicker_connect_selected(QwtPlotPicker* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QwtPlotPicker>>(slot);
+	return new QMetaObject::Connection(QwtPlotPicker::connect(self, static_cast<void (QwtPlotPicker::*)(const QPointF&)>(&QwtPlotPicker::selected), self, [slot_handle](const QPointF& pos) {
+		intptr_t slot = slot_handle->value();
 		const QPointF& pos_ret = pos;
 		// Cast returned reference into pointer
 		QPointF* sigval1 = const_cast<QPointF*>(&pos_ret);
 		miqt_exec_callback_QwtPlotPicker_selected(slot, sigval1);
-	});
+	}));
 }
 
 void QwtPlotPicker_selectedWithRect(QwtPlotPicker* self, QRectF* rect) {
 	self->selected(*rect);
 }
 
-void QwtPlotPicker_connect_selectedWithRect(QwtPlotPicker* self, intptr_t slot) {
-	QwtPlotPicker::connect(self, static_cast<void (QwtPlotPicker::*)(const QRectF&)>(&QwtPlotPicker::selected), self, [=](const QRectF& rect) {
+void* QwtPlotPicker_connect_selectedWithRect(QwtPlotPicker* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QwtPlotPicker>>(slot);
+	return new QMetaObject::Connection(QwtPlotPicker::connect(self, static_cast<void (QwtPlotPicker::*)(const QRectF&)>(&QwtPlotPicker::selected), self, [slot_handle](const QRectF& rect) {
+		intptr_t slot = slot_handle->value();
 		const QRectF& rect_ret = rect;
 		// Cast returned reference into pointer
 		QRectF* sigval1 = const_cast<QRectF*>(&rect_ret);
 		miqt_exec_callback_QwtPlotPicker_selectedWithRect(slot, sigval1);
-	});
+	}));
 }
 
 void QwtPlotPicker_selectedWithPa(QwtPlotPicker* self, struct miqt_array /* of QPointF* */  pa) {
@@ -813,8 +820,10 @@ void QwtPlotPicker_selectedWithPa(QwtPlotPicker* self, struct miqt_array /* of Q
 	self->selected(pa_QList);
 }
 
-void QwtPlotPicker_connect_selectedWithPa(QwtPlotPicker* self, intptr_t slot) {
-	QwtPlotPicker::connect(self, static_cast<void (QwtPlotPicker::*)(const QVector<QPointF>&)>(&QwtPlotPicker::selected), self, [=](const QVector<QPointF>& pa) {
+void* QwtPlotPicker_connect_selectedWithPa(QwtPlotPicker* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QwtPlotPicker>>(slot);
+	return new QMetaObject::Connection(QwtPlotPicker::connect(self, static_cast<void (QwtPlotPicker::*)(const QVector<QPointF>&)>(&QwtPlotPicker::selected), self, [slot_handle](const QVector<QPointF>& pa) {
+		intptr_t slot = slot_handle->value();
 		const QVector<QPointF>& pa_ret = pa;
 		// Convert QList<> from C++ memory to manually-managed C memory
 		QPointF** pa_arr = static_cast<QPointF**>(malloc(sizeof(QPointF*) * pa_ret.length()));
@@ -826,33 +835,37 @@ void QwtPlotPicker_connect_selectedWithPa(QwtPlotPicker* self, intptr_t slot) {
 		pa_out.data = static_cast<void*>(pa_arr);
 		struct miqt_array /* of QPointF* */  sigval1 = pa_out;
 		miqt_exec_callback_QwtPlotPicker_selectedWithPa(slot, sigval1);
-	});
+	}));
 }
 
 void QwtPlotPicker_appended(QwtPlotPicker* self, QPointF* pos) {
 	self->appended(*pos);
 }
 
-void QwtPlotPicker_connect_appended(QwtPlotPicker* self, intptr_t slot) {
-	QwtPlotPicker::connect(self, static_cast<void (QwtPlotPicker::*)(const QPointF&)>(&QwtPlotPicker::appended), self, [=](const QPointF& pos) {
+void* QwtPlotPicker_connect_appended(QwtPlotPicker* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QwtPlotPicker>>(slot);
+	return new QMetaObject::Connection(QwtPlotPicker::connect(self, static_cast<void (QwtPlotPicker::*)(const QPointF&)>(&QwtPlotPicker::appended), self, [slot_handle](const QPointF& pos) {
+		intptr_t slot = slot_handle->value();
 		const QPointF& pos_ret = pos;
 		// Cast returned reference into pointer
 		QPointF* sigval1 = const_cast<QPointF*>(&pos_ret);
 		miqt_exec_callback_QwtPlotPicker_appended(slot, sigval1);
-	});
+	}));
 }
 
 void QwtPlotPicker_moved(QwtPlotPicker* self, QPointF* pos) {
 	self->moved(*pos);
 }
 
-void QwtPlotPicker_connect_moved(QwtPlotPicker* self, intptr_t slot) {
-	QwtPlotPicker::connect(self, static_cast<void (QwtPlotPicker::*)(const QPointF&)>(&QwtPlotPicker::moved), self, [=](const QPointF& pos) {
+void* QwtPlotPicker_connect_moved(QwtPlotPicker* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QwtPlotPicker>>(slot);
+	return new QMetaObject::Connection(QwtPlotPicker::connect(self, static_cast<void (QwtPlotPicker::*)(const QPointF&)>(&QwtPlotPicker::moved), self, [slot_handle](const QPointF& pos) {
+		intptr_t slot = slot_handle->value();
 		const QPointF& pos_ret = pos;
 		// Cast returned reference into pointer
 		QPointF* sigval1 = const_cast<QPointF*>(&pos_ret);
 		miqt_exec_callback_QwtPlotPicker_moved(slot, sigval1);
-	});
+	}));
 }
 
 struct miqt_string QwtPlotPicker_tr2(const char* s, const char* c) {
@@ -900,12 +913,13 @@ struct miqt_string QwtPlotPicker_trUtf83(const char* s, const char* c, int n) {
 }
 
 bool QwtPlotPicker_override_virtual_setAxis(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtPlotPicker> slot_handle(slot);
 	MiqtVirtualQwtPlotPicker* self_cast = dynamic_cast<MiqtVirtualQwtPlotPicker*>( (QwtPlotPicker*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__setAxis = slot;
+	self_cast->handle__setAxis = std::move(slot_handle);
 	return true;
 }
 
@@ -914,12 +928,13 @@ void QwtPlotPicker_virtualbase_setAxis(void* self, int xAxis, int yAxis) {
 }
 
 bool QwtPlotPicker_override_virtual_trackerText(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtPlotPicker> slot_handle(slot);
 	MiqtVirtualQwtPlotPicker* self_cast = dynamic_cast<MiqtVirtualQwtPlotPicker*>( (QwtPlotPicker*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__trackerText = slot;
+	self_cast->handle__trackerText = std::move(slot_handle);
 	return true;
 }
 
@@ -928,12 +943,13 @@ QwtText* QwtPlotPicker_virtualbase_trackerText(const void* self, QPoint* param1)
 }
 
 bool QwtPlotPicker_override_virtual_trackerTextF(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtPlotPicker> slot_handle(slot);
 	MiqtVirtualQwtPlotPicker* self_cast = dynamic_cast<MiqtVirtualQwtPlotPicker*>( (QwtPlotPicker*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__trackerTextF = slot;
+	self_cast->handle__trackerTextF = std::move(slot_handle);
 	return true;
 }
 
@@ -942,12 +958,13 @@ QwtText* QwtPlotPicker_virtualbase_trackerTextF(const void* self, QPointF* param
 }
 
 bool QwtPlotPicker_override_virtual_move(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtPlotPicker> slot_handle(slot);
 	MiqtVirtualQwtPlotPicker* self_cast = dynamic_cast<MiqtVirtualQwtPlotPicker*>( (QwtPlotPicker*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__move = slot;
+	self_cast->handle__move = std::move(slot_handle);
 	return true;
 }
 
@@ -956,12 +973,13 @@ void QwtPlotPicker_virtualbase_move(void* self, QPoint* param1) {
 }
 
 bool QwtPlotPicker_override_virtual_append(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtPlotPicker> slot_handle(slot);
 	MiqtVirtualQwtPlotPicker* self_cast = dynamic_cast<MiqtVirtualQwtPlotPicker*>( (QwtPlotPicker*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__append = slot;
+	self_cast->handle__append = std::move(slot_handle);
 	return true;
 }
 
@@ -970,12 +988,13 @@ void QwtPlotPicker_virtualbase_append(void* self, QPoint* param1) {
 }
 
 bool QwtPlotPicker_override_virtual_end(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtPlotPicker> slot_handle(slot);
 	MiqtVirtualQwtPlotPicker* self_cast = dynamic_cast<MiqtVirtualQwtPlotPicker*>( (QwtPlotPicker*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__end = slot;
+	self_cast->handle__end = std::move(slot_handle);
 	return true;
 }
 
@@ -984,12 +1003,13 @@ bool QwtPlotPicker_virtualbase_end(void* self, bool ok) {
 }
 
 bool QwtPlotPicker_override_virtual_eventFilter(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtPlotPicker> slot_handle(slot);
 	MiqtVirtualQwtPlotPicker* self_cast = dynamic_cast<MiqtVirtualQwtPlotPicker*>( (QwtPlotPicker*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__eventFilter = slot;
+	self_cast->handle__eventFilter = std::move(slot_handle);
 	return true;
 }
 
@@ -998,12 +1018,13 @@ bool QwtPlotPicker_virtualbase_eventFilter(void* self, QObject* param1, QEvent* 
 }
 
 bool QwtPlotPicker_override_virtual_pickArea(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtPlotPicker> slot_handle(slot);
 	MiqtVirtualQwtPlotPicker* self_cast = dynamic_cast<MiqtVirtualQwtPlotPicker*>( (QwtPlotPicker*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__pickArea = slot;
+	self_cast->handle__pickArea = std::move(slot_handle);
 	return true;
 }
 
@@ -1012,12 +1033,13 @@ QPainterPath* QwtPlotPicker_virtualbase_pickArea(const void* self) {
 }
 
 bool QwtPlotPicker_override_virtual_drawRubberBand(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtPlotPicker> slot_handle(slot);
 	MiqtVirtualQwtPlotPicker* self_cast = dynamic_cast<MiqtVirtualQwtPlotPicker*>( (QwtPlotPicker*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__drawRubberBand = slot;
+	self_cast->handle__drawRubberBand = std::move(slot_handle);
 	return true;
 }
 
@@ -1026,12 +1048,13 @@ void QwtPlotPicker_virtualbase_drawRubberBand(const void* self, QPainter* param1
 }
 
 bool QwtPlotPicker_override_virtual_drawTracker(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtPlotPicker> slot_handle(slot);
 	MiqtVirtualQwtPlotPicker* self_cast = dynamic_cast<MiqtVirtualQwtPlotPicker*>( (QwtPlotPicker*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__drawTracker = slot;
+	self_cast->handle__drawTracker = std::move(slot_handle);
 	return true;
 }
 
@@ -1040,12 +1063,13 @@ void QwtPlotPicker_virtualbase_drawTracker(const void* self, QPainter* param1) {
 }
 
 bool QwtPlotPicker_override_virtual_rubberBandMask(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtPlotPicker> slot_handle(slot);
 	MiqtVirtualQwtPlotPicker* self_cast = dynamic_cast<MiqtVirtualQwtPlotPicker*>( (QwtPlotPicker*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__rubberBandMask = slot;
+	self_cast->handle__rubberBandMask = std::move(slot_handle);
 	return true;
 }
 
@@ -1054,12 +1078,13 @@ QRegion* QwtPlotPicker_virtualbase_rubberBandMask(const void* self) {
 }
 
 bool QwtPlotPicker_override_virtual_trackerRect(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtPlotPicker> slot_handle(slot);
 	MiqtVirtualQwtPlotPicker* self_cast = dynamic_cast<MiqtVirtualQwtPlotPicker*>( (QwtPlotPicker*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__trackerRect = slot;
+	self_cast->handle__trackerRect = std::move(slot_handle);
 	return true;
 }
 
@@ -1068,12 +1093,13 @@ QRect* QwtPlotPicker_virtualbase_trackerRect(const void* self, QFont* param1) {
 }
 
 bool QwtPlotPicker_override_virtual_transition(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtPlotPicker> slot_handle(slot);
 	MiqtVirtualQwtPlotPicker* self_cast = dynamic_cast<MiqtVirtualQwtPlotPicker*>( (QwtPlotPicker*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__transition = slot;
+	self_cast->handle__transition = std::move(slot_handle);
 	return true;
 }
 
@@ -1082,12 +1108,13 @@ void QwtPlotPicker_virtualbase_transition(void* self, QEvent* param1) {
 }
 
 bool QwtPlotPicker_override_virtual_begin(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtPlotPicker> slot_handle(slot);
 	MiqtVirtualQwtPlotPicker* self_cast = dynamic_cast<MiqtVirtualQwtPlotPicker*>( (QwtPlotPicker*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__begin = slot;
+	self_cast->handle__begin = std::move(slot_handle);
 	return true;
 }
 
@@ -1096,12 +1123,13 @@ void QwtPlotPicker_virtualbase_begin(void* self) {
 }
 
 bool QwtPlotPicker_override_virtual_remove(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtPlotPicker> slot_handle(slot);
 	MiqtVirtualQwtPlotPicker* self_cast = dynamic_cast<MiqtVirtualQwtPlotPicker*>( (QwtPlotPicker*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__remove = slot;
+	self_cast->handle__remove = std::move(slot_handle);
 	return true;
 }
 
@@ -1110,12 +1138,13 @@ void QwtPlotPicker_virtualbase_remove(void* self) {
 }
 
 bool QwtPlotPicker_override_virtual_reset(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtPlotPicker> slot_handle(slot);
 	MiqtVirtualQwtPlotPicker* self_cast = dynamic_cast<MiqtVirtualQwtPlotPicker*>( (QwtPlotPicker*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__reset = slot;
+	self_cast->handle__reset = std::move(slot_handle);
 	return true;
 }
 
@@ -1124,12 +1153,13 @@ void QwtPlotPicker_virtualbase_reset(void* self) {
 }
 
 bool QwtPlotPicker_override_virtual_widgetMousePressEvent(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtPlotPicker> slot_handle(slot);
 	MiqtVirtualQwtPlotPicker* self_cast = dynamic_cast<MiqtVirtualQwtPlotPicker*>( (QwtPlotPicker*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__widgetMousePressEvent = slot;
+	self_cast->handle__widgetMousePressEvent = std::move(slot_handle);
 	return true;
 }
 
@@ -1138,12 +1168,13 @@ void QwtPlotPicker_virtualbase_widgetMousePressEvent(void* self, QMouseEvent* pa
 }
 
 bool QwtPlotPicker_override_virtual_widgetMouseReleaseEvent(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtPlotPicker> slot_handle(slot);
 	MiqtVirtualQwtPlotPicker* self_cast = dynamic_cast<MiqtVirtualQwtPlotPicker*>( (QwtPlotPicker*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__widgetMouseReleaseEvent = slot;
+	self_cast->handle__widgetMouseReleaseEvent = std::move(slot_handle);
 	return true;
 }
 
@@ -1152,12 +1183,13 @@ void QwtPlotPicker_virtualbase_widgetMouseReleaseEvent(void* self, QMouseEvent* 
 }
 
 bool QwtPlotPicker_override_virtual_widgetMouseDoubleClickEvent(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtPlotPicker> slot_handle(slot);
 	MiqtVirtualQwtPlotPicker* self_cast = dynamic_cast<MiqtVirtualQwtPlotPicker*>( (QwtPlotPicker*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__widgetMouseDoubleClickEvent = slot;
+	self_cast->handle__widgetMouseDoubleClickEvent = std::move(slot_handle);
 	return true;
 }
 
@@ -1166,12 +1198,13 @@ void QwtPlotPicker_virtualbase_widgetMouseDoubleClickEvent(void* self, QMouseEve
 }
 
 bool QwtPlotPicker_override_virtual_widgetMouseMoveEvent(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtPlotPicker> slot_handle(slot);
 	MiqtVirtualQwtPlotPicker* self_cast = dynamic_cast<MiqtVirtualQwtPlotPicker*>( (QwtPlotPicker*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__widgetMouseMoveEvent = slot;
+	self_cast->handle__widgetMouseMoveEvent = std::move(slot_handle);
 	return true;
 }
 
@@ -1180,12 +1213,13 @@ void QwtPlotPicker_virtualbase_widgetMouseMoveEvent(void* self, QMouseEvent* par
 }
 
 bool QwtPlotPicker_override_virtual_widgetWheelEvent(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtPlotPicker> slot_handle(slot);
 	MiqtVirtualQwtPlotPicker* self_cast = dynamic_cast<MiqtVirtualQwtPlotPicker*>( (QwtPlotPicker*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__widgetWheelEvent = slot;
+	self_cast->handle__widgetWheelEvent = std::move(slot_handle);
 	return true;
 }
 
@@ -1194,12 +1228,13 @@ void QwtPlotPicker_virtualbase_widgetWheelEvent(void* self, QWheelEvent* param1)
 }
 
 bool QwtPlotPicker_override_virtual_widgetKeyPressEvent(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtPlotPicker> slot_handle(slot);
 	MiqtVirtualQwtPlotPicker* self_cast = dynamic_cast<MiqtVirtualQwtPlotPicker*>( (QwtPlotPicker*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__widgetKeyPressEvent = slot;
+	self_cast->handle__widgetKeyPressEvent = std::move(slot_handle);
 	return true;
 }
 
@@ -1208,12 +1243,13 @@ void QwtPlotPicker_virtualbase_widgetKeyPressEvent(void* self, QKeyEvent* param1
 }
 
 bool QwtPlotPicker_override_virtual_widgetKeyReleaseEvent(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtPlotPicker> slot_handle(slot);
 	MiqtVirtualQwtPlotPicker* self_cast = dynamic_cast<MiqtVirtualQwtPlotPicker*>( (QwtPlotPicker*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__widgetKeyReleaseEvent = slot;
+	self_cast->handle__widgetKeyReleaseEvent = std::move(slot_handle);
 	return true;
 }
 
@@ -1222,12 +1258,13 @@ void QwtPlotPicker_virtualbase_widgetKeyReleaseEvent(void* self, QKeyEvent* para
 }
 
 bool QwtPlotPicker_override_virtual_widgetEnterEvent(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtPlotPicker> slot_handle(slot);
 	MiqtVirtualQwtPlotPicker* self_cast = dynamic_cast<MiqtVirtualQwtPlotPicker*>( (QwtPlotPicker*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__widgetEnterEvent = slot;
+	self_cast->handle__widgetEnterEvent = std::move(slot_handle);
 	return true;
 }
 
@@ -1236,12 +1273,13 @@ void QwtPlotPicker_virtualbase_widgetEnterEvent(void* self, QEvent* param1) {
 }
 
 bool QwtPlotPicker_override_virtual_widgetLeaveEvent(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtPlotPicker> slot_handle(slot);
 	MiqtVirtualQwtPlotPicker* self_cast = dynamic_cast<MiqtVirtualQwtPlotPicker*>( (QwtPlotPicker*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__widgetLeaveEvent = slot;
+	self_cast->handle__widgetLeaveEvent = std::move(slot_handle);
 	return true;
 }
 
@@ -1250,12 +1288,13 @@ void QwtPlotPicker_virtualbase_widgetLeaveEvent(void* self, QEvent* param1) {
 }
 
 bool QwtPlotPicker_override_virtual_stretchSelection(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtPlotPicker> slot_handle(slot);
 	MiqtVirtualQwtPlotPicker* self_cast = dynamic_cast<MiqtVirtualQwtPlotPicker*>( (QwtPlotPicker*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__stretchSelection = slot;
+	self_cast->handle__stretchSelection = std::move(slot_handle);
 	return true;
 }
 
@@ -1264,12 +1303,13 @@ void QwtPlotPicker_virtualbase_stretchSelection(void* self, QSize* oldSize, QSiz
 }
 
 bool QwtPlotPicker_override_virtual_updateDisplay(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtPlotPicker> slot_handle(slot);
 	MiqtVirtualQwtPlotPicker* self_cast = dynamic_cast<MiqtVirtualQwtPlotPicker*>( (QwtPlotPicker*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__updateDisplay = slot;
+	self_cast->handle__updateDisplay = std::move(slot_handle);
 	return true;
 }
 
@@ -1278,12 +1318,13 @@ void QwtPlotPicker_virtualbase_updateDisplay(void* self) {
 }
 
 bool QwtPlotPicker_override_virtual_event(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtPlotPicker> slot_handle(slot);
 	MiqtVirtualQwtPlotPicker* self_cast = dynamic_cast<MiqtVirtualQwtPlotPicker*>( (QwtPlotPicker*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__event = slot;
+	self_cast->handle__event = std::move(slot_handle);
 	return true;
 }
 
@@ -1292,12 +1333,13 @@ bool QwtPlotPicker_virtualbase_event(void* self, QEvent* event) {
 }
 
 bool QwtPlotPicker_override_virtual_timerEvent(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtPlotPicker> slot_handle(slot);
 	MiqtVirtualQwtPlotPicker* self_cast = dynamic_cast<MiqtVirtualQwtPlotPicker*>( (QwtPlotPicker*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__timerEvent = slot;
+	self_cast->handle__timerEvent = std::move(slot_handle);
 	return true;
 }
 
@@ -1306,12 +1348,13 @@ void QwtPlotPicker_virtualbase_timerEvent(void* self, QTimerEvent* event) {
 }
 
 bool QwtPlotPicker_override_virtual_childEvent(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtPlotPicker> slot_handle(slot);
 	MiqtVirtualQwtPlotPicker* self_cast = dynamic_cast<MiqtVirtualQwtPlotPicker*>( (QwtPlotPicker*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__childEvent = slot;
+	self_cast->handle__childEvent = std::move(slot_handle);
 	return true;
 }
 
@@ -1320,12 +1363,13 @@ void QwtPlotPicker_virtualbase_childEvent(void* self, QChildEvent* event) {
 }
 
 bool QwtPlotPicker_override_virtual_customEvent(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtPlotPicker> slot_handle(slot);
 	MiqtVirtualQwtPlotPicker* self_cast = dynamic_cast<MiqtVirtualQwtPlotPicker*>( (QwtPlotPicker*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__customEvent = slot;
+	self_cast->handle__customEvent = std::move(slot_handle);
 	return true;
 }
 
@@ -1334,12 +1378,13 @@ void QwtPlotPicker_virtualbase_customEvent(void* self, QEvent* event) {
 }
 
 bool QwtPlotPicker_override_virtual_connectNotify(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtPlotPicker> slot_handle(slot);
 	MiqtVirtualQwtPlotPicker* self_cast = dynamic_cast<MiqtVirtualQwtPlotPicker*>( (QwtPlotPicker*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__connectNotify = slot;
+	self_cast->handle__connectNotify = std::move(slot_handle);
 	return true;
 }
 
@@ -1348,12 +1393,13 @@ void QwtPlotPicker_virtualbase_connectNotify(void* self, QMetaMethod* signal) {
 }
 
 bool QwtPlotPicker_override_virtual_disconnectNotify(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtPlotPicker> slot_handle(slot);
 	MiqtVirtualQwtPlotPicker* self_cast = dynamic_cast<MiqtVirtualQwtPlotPicker*>( (QwtPlotPicker*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__disconnectNotify = slot;
+	self_cast->handle__disconnectNotify = std::move(slot_handle);
 	return true;
 }
 
@@ -1362,12 +1408,13 @@ void QwtPlotPicker_virtualbase_disconnectNotify(void* self, QMetaMethod* signal)
 }
 
 bool QwtPlotPicker_override_virtual_mouseMatch2(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtPlotPicker> slot_handle(slot);
 	MiqtVirtualQwtPlotPicker* self_cast = dynamic_cast<MiqtVirtualQwtPlotPicker*>( (QwtPlotPicker*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__mouseMatch2 = slot;
+	self_cast->handle__mouseMatch2 = std::move(slot_handle);
 	return true;
 }
 
@@ -1376,12 +1423,13 @@ bool QwtPlotPicker_virtualbase_mouseMatch2(const void* self, QwtEventPattern__Mo
 }
 
 bool QwtPlotPicker_override_virtual_keyMatch2(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtPlotPicker> slot_handle(slot);
 	MiqtVirtualQwtPlotPicker* self_cast = dynamic_cast<MiqtVirtualQwtPlotPicker*>( (QwtPlotPicker*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__keyMatch2 = slot;
+	self_cast->handle__keyMatch2 = std::move(slot_handle);
 	return true;
 }
 

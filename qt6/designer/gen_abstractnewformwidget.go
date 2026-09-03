@@ -15,6 +15,11 @@ import (
 	"unsafe"
 )
 
+//export miqt_exec_callback_handle_release_QDesignerNewFormWidgetInterface
+func miqt_exec_callback_handle_release_QDesignerNewFormWidgetInterface(cb C.intptr_t) {
+	cgo.Handle(cb).Delete()
+}
+
 type QDesignerNewFormWidgetInterface struct {
 	h *C.QDesignerNewFormWidgetInterface
 	*qt6.QWidget
@@ -81,8 +86,10 @@ func QDesignerNewFormWidgetInterface_CreateNewFormWidget(core *QDesignerFormEdit
 func (this *QDesignerNewFormWidgetInterface) TemplateActivated() {
 	C.QDesignerNewFormWidgetInterface_templateActivated(this.h)
 }
-func (this *QDesignerNewFormWidgetInterface) OnTemplateActivated(slot func()) {
-	C.QDesignerNewFormWidgetInterface_connect_templateActivated(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QDesignerNewFormWidgetInterface) OnTemplateActivated(slot func()) *qt6.SignalConnection {
+	_goptr := qt6.UnsafeNewQMetaObject__Connection(C.QDesignerNewFormWidgetInterface_connect_templateActivated(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QDesignerNewFormWidgetInterface_templateActivated
@@ -98,8 +105,10 @@ func miqt_exec_callback_QDesignerNewFormWidgetInterface_templateActivated(cb C.i
 func (this *QDesignerNewFormWidgetInterface) CurrentTemplateChanged(templateSelected bool) {
 	C.QDesignerNewFormWidgetInterface_currentTemplateChanged(this.h, (C.bool)(templateSelected))
 }
-func (this *QDesignerNewFormWidgetInterface) OnCurrentTemplateChanged(slot func(templateSelected bool)) {
-	C.QDesignerNewFormWidgetInterface_connect_currentTemplateChanged(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QDesignerNewFormWidgetInterface) OnCurrentTemplateChanged(slot func(templateSelected bool)) *qt6.SignalConnection {
+	_goptr := qt6.UnsafeNewQMetaObject__Connection(C.QDesignerNewFormWidgetInterface_connect_currentTemplateChanged(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QDesignerNewFormWidgetInterface_currentTemplateChanged

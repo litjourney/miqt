@@ -83,7 +83,7 @@ void QStateMachine_start(QStateMachine* self);
 void QStateMachine_stop(QStateMachine* self);
 void QStateMachine_setRunning(QStateMachine* self, bool running);
 void QStateMachine_runningChanged(QStateMachine* self, bool running);
-void QStateMachine_connect_runningChanged(QStateMachine* self, intptr_t slot);
+void* QStateMachine_connect_runningChanged(QStateMachine* self, intptr_t slot);
 void QStateMachine_onEntry(QStateMachine* self, QEvent* event);
 void QStateMachine_onExit(QStateMachine* self, QEvent* event);
 void QStateMachine_beginSelectTransitions(QStateMachine* self, QEvent* event);
@@ -127,8 +127,8 @@ int QStateMachine_protectedbase_senderSignalIndex(bool* _dynamic_cast_ok, const 
 int QStateMachine_protectedbase_receivers(bool* _dynamic_cast_ok, const void* self, const char* signal);
 bool QStateMachine_protectedbase_isSignalConnected(bool* _dynamic_cast_ok, const void* self, QMetaMethod* signal);
 
-void QStateMachine_connect_started(QStateMachine* self, intptr_t slot);
-void QStateMachine_connect_stopped(QStateMachine* self, intptr_t slot);
+void* QStateMachine_connect_started(QStateMachine* self, intptr_t slot);
+void* QStateMachine_connect_stopped(QStateMachine* self, intptr_t slot);
 
 void QStateMachine_delete(QStateMachine* self);
 

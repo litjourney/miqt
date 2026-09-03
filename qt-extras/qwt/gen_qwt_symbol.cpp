@@ -1,3 +1,5 @@
+#include <memory>
+#include <utility>
 #include <QBrush>
 #include <QByteArray>
 #include <QColor>
@@ -16,6 +18,7 @@
 extern "C" {
 #endif
 
+void miqt_exec_callback_handle_release_QwtSymbol(intptr_t);
 void miqt_exec_callback_QwtSymbol_setColor(QwtSymbol*, intptr_t, QColor*);
 QRect* miqt_exec_callback_QwtSymbol_boundingRect(const QwtSymbol*, intptr_t);
 void miqt_exec_callback_QwtSymbol_renderSymbols(const QwtSymbol*, intptr_t, QPainter*, QPointF*, int);
@@ -34,11 +37,11 @@ public:
 	virtual ~MiqtVirtualQwtSymbol() override = default;
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__setColor = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtSymbol> handle__setColor;
 
 	// Subclass to allow providing a Go implementation
 	virtual void setColor(const QColor& color) override {
-		if (handle__setColor == 0) {
+		if (!handle__setColor) {
 			QwtSymbol::setColor(color);
 			return;
 		}
@@ -46,33 +49,33 @@ public:
 		const QColor& color_ret = color;
 		// Cast returned reference into pointer
 		QColor* sigval1 = const_cast<QColor*>(&color_ret);
-		miqt_exec_callback_QwtSymbol_setColor(this, handle__setColor, sigval1);
+		miqt_exec_callback_QwtSymbol_setColor(this, handle__setColor.value(), sigval1);
 
 	}
 
 	friend void QwtSymbol_virtualbase_setColor(void* self, QColor* color);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__boundingRect = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtSymbol> handle__boundingRect;
 
 	// Subclass to allow providing a Go implementation
 	virtual QRect boundingRect() const override {
-		if (handle__boundingRect == 0) {
+		if (!handle__boundingRect) {
 			return QwtSymbol::boundingRect();
 		}
 
-		QRect* callback_return_value = miqt_exec_callback_QwtSymbol_boundingRect(this, handle__boundingRect);
+		QRect* callback_return_value = miqt_exec_callback_QwtSymbol_boundingRect(this, handle__boundingRect.value());
 		return *callback_return_value;
 	}
 
 	friend QRect* QwtSymbol_virtualbase_boundingRect(const void* self);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__renderSymbols = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtSymbol> handle__renderSymbols;
 
 	// Subclass to allow providing a Go implementation
 	virtual void renderSymbols(QPainter* param1, const QPointF* param2, int numPoints) const override {
-		if (handle__renderSymbols == 0) {
+		if (!handle__renderSymbols) {
 			QwtSymbol::renderSymbols(param1, param2, numPoints);
 			return;
 		}
@@ -80,7 +83,7 @@ public:
 		QPainter* sigval1 = param1;
 		QPointF* sigval2 = (QPointF*) param2;
 		int sigval3 = numPoints;
-		miqt_exec_callback_QwtSymbol_renderSymbols(this, handle__renderSymbols, sigval1, sigval2, sigval3);
+		miqt_exec_callback_QwtSymbol_renderSymbols(this, handle__renderSymbols.value(), sigval1, sigval2, sigval3);
 
 	}
 
@@ -252,12 +255,13 @@ void QwtSymbol_setPen3(QwtSymbol* self, QColor* param1, double width, int param3
 }
 
 bool QwtSymbol_override_virtual_setColor(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtSymbol> slot_handle(slot);
 	MiqtVirtualQwtSymbol* self_cast = dynamic_cast<MiqtVirtualQwtSymbol*>( (QwtSymbol*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__setColor = slot;
+	self_cast->handle__setColor = std::move(slot_handle);
 	return true;
 }
 
@@ -266,12 +270,13 @@ void QwtSymbol_virtualbase_setColor(void* self, QColor* color) {
 }
 
 bool QwtSymbol_override_virtual_boundingRect(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtSymbol> slot_handle(slot);
 	MiqtVirtualQwtSymbol* self_cast = dynamic_cast<MiqtVirtualQwtSymbol*>( (QwtSymbol*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__boundingRect = slot;
+	self_cast->handle__boundingRect = std::move(slot_handle);
 	return true;
 }
 
@@ -280,12 +285,13 @@ QRect* QwtSymbol_virtualbase_boundingRect(const void* self) {
 }
 
 bool QwtSymbol_override_virtual_renderSymbols(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtSymbol> slot_handle(slot);
 	MiqtVirtualQwtSymbol* self_cast = dynamic_cast<MiqtVirtualQwtSymbol*>( (QwtSymbol*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__renderSymbols = slot;
+	self_cast->handle__renderSymbols = std::move(slot_handle);
 	return true;
 }
 

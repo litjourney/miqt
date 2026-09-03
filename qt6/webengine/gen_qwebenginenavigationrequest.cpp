@@ -1,3 +1,5 @@
+#include <memory>
+#include <utility>
 #include <QMetaMethod>
 #include <QMetaObject>
 #include <QObject>
@@ -13,6 +15,7 @@
 extern "C" {
 #endif
 
+void miqt_exec_callback_handle_release_QWebEngineNavigationRequest(intptr_t);
 void miqt_exec_callback_QWebEngineNavigationRequest_actionChanged(intptr_t);
 #ifdef __cplusplus
 } /* extern C */
@@ -66,10 +69,12 @@ void QWebEngineNavigationRequest_actionChanged(QWebEngineNavigationRequest* self
 	self->actionChanged();
 }
 
-void QWebEngineNavigationRequest_connect_actionChanged(QWebEngineNavigationRequest* self, intptr_t slot) {
-	QWebEngineNavigationRequest::connect(self, static_cast<void (QWebEngineNavigationRequest::*)()>(&QWebEngineNavigationRequest::actionChanged), self, [=]() {
+void* QWebEngineNavigationRequest_connect_actionChanged(QWebEngineNavigationRequest* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QWebEngineNavigationRequest>>(slot);
+	return new QMetaObject::Connection(QWebEngineNavigationRequest::connect(self, static_cast<void (QWebEngineNavigationRequest::*)()>(&QWebEngineNavigationRequest::actionChanged), self, [slot_handle]() {
+		intptr_t slot = slot_handle->value();
 		miqt_exec_callback_QWebEngineNavigationRequest_actionChanged(slot);
-	});
+	}));
 }
 
 struct miqt_string QWebEngineNavigationRequest_tr2(const char* s, const char* c) {

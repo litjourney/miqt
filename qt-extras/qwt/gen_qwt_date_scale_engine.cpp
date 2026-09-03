@@ -1,3 +1,5 @@
+#include <memory>
+#include <utility>
 #include <QDateTime>
 #include <QList>
 #include <qwt_date_scale_engine.h>
@@ -7,6 +9,7 @@
 extern "C" {
 #endif
 
+void miqt_exec_callback_handle_release_QwtDateScaleEngine(intptr_t);
 void miqt_exec_callback_QwtDateScaleEngine_autoScale(const QwtDateScaleEngine*, intptr_t, int, double*, double*, double*);
 QwtScaleDiv* miqt_exec_callback_QwtDateScaleEngine_divideScale(const QwtDateScaleEngine*, intptr_t, double, double, int, int, double);
 int miqt_exec_callback_QwtDateScaleEngine_intervalType(const QwtDateScaleEngine*, intptr_t, QDateTime*, QDateTime*, int);
@@ -25,11 +28,11 @@ public:
 	virtual ~MiqtVirtualQwtDateScaleEngine() override = default;
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__autoScale = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtDateScaleEngine> handle__autoScale;
 
 	// Subclass to allow providing a Go implementation
 	virtual void autoScale(int maxNumSteps, double& x1, double& x2, double& stepSize) const override {
-		if (handle__autoScale == 0) {
+		if (!handle__autoScale) {
 			QwtDateScaleEngine::autoScale(maxNumSteps, x1, x2, stepSize);
 			return;
 		}
@@ -38,18 +41,18 @@ public:
 		double* sigval2 = &x1;
 		double* sigval3 = &x2;
 		double* sigval4 = &stepSize;
-		miqt_exec_callback_QwtDateScaleEngine_autoScale(this, handle__autoScale, sigval1, sigval2, sigval3, sigval4);
+		miqt_exec_callback_QwtDateScaleEngine_autoScale(this, handle__autoScale.value(), sigval1, sigval2, sigval3, sigval4);
 
 	}
 
 	friend void QwtDateScaleEngine_virtualbase_autoScale(const void* self, int maxNumSteps, double* x1, double* x2, double* stepSize);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__divideScale = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtDateScaleEngine> handle__divideScale;
 
 	// Subclass to allow providing a Go implementation
 	virtual QwtScaleDiv divideScale(double x1, double x2, int maxMajorSteps, int maxMinorSteps, double stepSize) const override {
-		if (handle__divideScale == 0) {
+		if (!handle__divideScale) {
 			return QwtDateScaleEngine::divideScale(x1, x2, maxMajorSteps, maxMinorSteps, stepSize);
 		}
 
@@ -58,18 +61,18 @@ public:
 		int sigval3 = maxMajorSteps;
 		int sigval4 = maxMinorSteps;
 		double sigval5 = stepSize;
-		QwtScaleDiv* callback_return_value = miqt_exec_callback_QwtDateScaleEngine_divideScale(this, handle__divideScale, sigval1, sigval2, sigval3, sigval4, sigval5);
+		QwtScaleDiv* callback_return_value = miqt_exec_callback_QwtDateScaleEngine_divideScale(this, handle__divideScale.value(), sigval1, sigval2, sigval3, sigval4, sigval5);
 		return *callback_return_value;
 	}
 
 	friend QwtScaleDiv* QwtDateScaleEngine_virtualbase_divideScale(const void* self, double x1, double x2, int maxMajorSteps, int maxMinorSteps, double stepSize);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__intervalType = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtDateScaleEngine> handle__intervalType;
 
 	// Subclass to allow providing a Go implementation
 	virtual QwtDate::IntervalType intervalType(const QDateTime& param1, const QDateTime& param2, int maxSteps) const override {
-		if (handle__intervalType == 0) {
+		if (!handle__intervalType) {
 			return QwtDateScaleEngine::intervalType(param1, param2, maxSteps);
 		}
 
@@ -80,18 +83,18 @@ public:
 		// Cast returned reference into pointer
 		QDateTime* sigval2 = const_cast<QDateTime*>(&param2_ret);
 		int sigval3 = maxSteps;
-		int callback_return_value = miqt_exec_callback_QwtDateScaleEngine_intervalType(this, handle__intervalType, sigval1, sigval2, sigval3);
+		int callback_return_value = miqt_exec_callback_QwtDateScaleEngine_intervalType(this, handle__intervalType.value(), sigval1, sigval2, sigval3);
 		return static_cast<QwtDate::IntervalType>(callback_return_value);
 	}
 
 	friend int QwtDateScaleEngine_virtualbase_intervalType(const void* self, QDateTime* param1, QDateTime* param2, int maxSteps);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__alignDate = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtDateScaleEngine> handle__alignDate;
 
 	// Subclass to allow providing a Go implementation
 	virtual QDateTime alignDate(const QDateTime& param1, double stepSize, QwtDate::IntervalType param3, bool up) const override {
-		if (handle__alignDate == 0) {
+		if (!handle__alignDate) {
 			return QwtDateScaleEngine::alignDate(param1, stepSize, param3, up);
 		}
 
@@ -102,7 +105,7 @@ public:
 		QwtDate::IntervalType param3_ret = param3;
 		int sigval3 = static_cast<int>(param3_ret);
 		bool sigval4 = up;
-		QDateTime* callback_return_value = miqt_exec_callback_QwtDateScaleEngine_alignDate(this, handle__alignDate, sigval1, sigval2, sigval3, sigval4);
+		QDateTime* callback_return_value = miqt_exec_callback_QwtDateScaleEngine_alignDate(this, handle__alignDate.value(), sigval1, sigval2, sigval3, sigval4);
 		return *callback_return_value;
 	}
 
@@ -191,12 +194,13 @@ void QwtDateScaleEngine_operatorAssign(QwtDateScaleEngine* self, QwtDateScaleEng
 }
 
 bool QwtDateScaleEngine_override_virtual_autoScale(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtDateScaleEngine> slot_handle(slot);
 	MiqtVirtualQwtDateScaleEngine* self_cast = dynamic_cast<MiqtVirtualQwtDateScaleEngine*>( (QwtDateScaleEngine*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__autoScale = slot;
+	self_cast->handle__autoScale = std::move(slot_handle);
 	return true;
 }
 
@@ -205,12 +209,13 @@ void QwtDateScaleEngine_virtualbase_autoScale(const void* self, int maxNumSteps,
 }
 
 bool QwtDateScaleEngine_override_virtual_divideScale(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtDateScaleEngine> slot_handle(slot);
 	MiqtVirtualQwtDateScaleEngine* self_cast = dynamic_cast<MiqtVirtualQwtDateScaleEngine*>( (QwtDateScaleEngine*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__divideScale = slot;
+	self_cast->handle__divideScale = std::move(slot_handle);
 	return true;
 }
 
@@ -219,12 +224,13 @@ QwtScaleDiv* QwtDateScaleEngine_virtualbase_divideScale(const void* self, double
 }
 
 bool QwtDateScaleEngine_override_virtual_intervalType(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtDateScaleEngine> slot_handle(slot);
 	MiqtVirtualQwtDateScaleEngine* self_cast = dynamic_cast<MiqtVirtualQwtDateScaleEngine*>( (QwtDateScaleEngine*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__intervalType = slot;
+	self_cast->handle__intervalType = std::move(slot_handle);
 	return true;
 }
 
@@ -234,12 +240,13 @@ int QwtDateScaleEngine_virtualbase_intervalType(const void* self, QDateTime* par
 }
 
 bool QwtDateScaleEngine_override_virtual_alignDate(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtDateScaleEngine> slot_handle(slot);
 	MiqtVirtualQwtDateScaleEngine* self_cast = dynamic_cast<MiqtVirtualQwtDateScaleEngine*>( (QwtDateScaleEngine*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__alignDate = slot;
+	self_cast->handle__alignDate = std::move(slot_handle);
 	return true;
 }
 

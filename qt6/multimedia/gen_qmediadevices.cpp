@@ -1,3 +1,5 @@
+#include <memory>
+#include <utility>
 #include <QAudioDevice>
 #include <QCameraDevice>
 #include <QChildEvent>
@@ -18,6 +20,7 @@
 extern "C" {
 #endif
 
+void miqt_exec_callback_handle_release_QMediaDevices(intptr_t);
 void miqt_exec_callback_QMediaDevices_audioInputsChanged(intptr_t);
 void miqt_exec_callback_QMediaDevices_audioOutputsChanged(intptr_t);
 void miqt_exec_callback_QMediaDevices_videoInputsChanged(intptr_t);
@@ -41,95 +44,95 @@ public:
 	virtual ~MiqtVirtualQMediaDevices() override = default;
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__event = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QMediaDevices> handle__event;
 
 	// Subclass to allow providing a Go implementation
 	virtual bool event(QEvent* event) override {
-		if (handle__event == 0) {
+		if (!handle__event) {
 			return QMediaDevices::event(event);
 		}
 
 		QEvent* sigval1 = event;
-		bool callback_return_value = miqt_exec_callback_QMediaDevices_event(this, handle__event, sigval1);
+		bool callback_return_value = miqt_exec_callback_QMediaDevices_event(this, handle__event.value(), sigval1);
 		return callback_return_value;
 	}
 
 	friend bool QMediaDevices_virtualbase_event(void* self, QEvent* event);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__eventFilter = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QMediaDevices> handle__eventFilter;
 
 	// Subclass to allow providing a Go implementation
 	virtual bool eventFilter(QObject* watched, QEvent* event) override {
-		if (handle__eventFilter == 0) {
+		if (!handle__eventFilter) {
 			return QMediaDevices::eventFilter(watched, event);
 		}
 
 		QObject* sigval1 = watched;
 		QEvent* sigval2 = event;
-		bool callback_return_value = miqt_exec_callback_QMediaDevices_eventFilter(this, handle__eventFilter, sigval1, sigval2);
+		bool callback_return_value = miqt_exec_callback_QMediaDevices_eventFilter(this, handle__eventFilter.value(), sigval1, sigval2);
 		return callback_return_value;
 	}
 
 	friend bool QMediaDevices_virtualbase_eventFilter(void* self, QObject* watched, QEvent* event);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__timerEvent = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QMediaDevices> handle__timerEvent;
 
 	// Subclass to allow providing a Go implementation
 	virtual void timerEvent(QTimerEvent* event) override {
-		if (handle__timerEvent == 0) {
+		if (!handle__timerEvent) {
 			QMediaDevices::timerEvent(event);
 			return;
 		}
 
 		QTimerEvent* sigval1 = event;
-		miqt_exec_callback_QMediaDevices_timerEvent(this, handle__timerEvent, sigval1);
+		miqt_exec_callback_QMediaDevices_timerEvent(this, handle__timerEvent.value(), sigval1);
 
 	}
 
 	friend void QMediaDevices_virtualbase_timerEvent(void* self, QTimerEvent* event);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__childEvent = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QMediaDevices> handle__childEvent;
 
 	// Subclass to allow providing a Go implementation
 	virtual void childEvent(QChildEvent* event) override {
-		if (handle__childEvent == 0) {
+		if (!handle__childEvent) {
 			QMediaDevices::childEvent(event);
 			return;
 		}
 
 		QChildEvent* sigval1 = event;
-		miqt_exec_callback_QMediaDevices_childEvent(this, handle__childEvent, sigval1);
+		miqt_exec_callback_QMediaDevices_childEvent(this, handle__childEvent.value(), sigval1);
 
 	}
 
 	friend void QMediaDevices_virtualbase_childEvent(void* self, QChildEvent* event);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__customEvent = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QMediaDevices> handle__customEvent;
 
 	// Subclass to allow providing a Go implementation
 	virtual void customEvent(QEvent* event) override {
-		if (handle__customEvent == 0) {
+		if (!handle__customEvent) {
 			QMediaDevices::customEvent(event);
 			return;
 		}
 
 		QEvent* sigval1 = event;
-		miqt_exec_callback_QMediaDevices_customEvent(this, handle__customEvent, sigval1);
+		miqt_exec_callback_QMediaDevices_customEvent(this, handle__customEvent.value(), sigval1);
 
 	}
 
 	friend void QMediaDevices_virtualbase_customEvent(void* self, QEvent* event);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__connectNotify = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QMediaDevices> handle__connectNotify;
 
 	// Subclass to allow providing a Go implementation
 	virtual void connectNotify(const QMetaMethod& signal) override {
-		if (handle__connectNotify == 0) {
+		if (!handle__connectNotify) {
 			QMediaDevices::connectNotify(signal);
 			return;
 		}
@@ -137,18 +140,18 @@ public:
 		const QMetaMethod& signal_ret = signal;
 		// Cast returned reference into pointer
 		QMetaMethod* sigval1 = const_cast<QMetaMethod*>(&signal_ret);
-		miqt_exec_callback_QMediaDevices_connectNotify(this, handle__connectNotify, sigval1);
+		miqt_exec_callback_QMediaDevices_connectNotify(this, handle__connectNotify.value(), sigval1);
 
 	}
 
 	friend void QMediaDevices_virtualbase_connectNotify(void* self, QMetaMethod* signal);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__disconnectNotify = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QMediaDevices> handle__disconnectNotify;
 
 	// Subclass to allow providing a Go implementation
 	virtual void disconnectNotify(const QMetaMethod& signal) override {
-		if (handle__disconnectNotify == 0) {
+		if (!handle__disconnectNotify) {
 			QMediaDevices::disconnectNotify(signal);
 			return;
 		}
@@ -156,7 +159,7 @@ public:
 		const QMetaMethod& signal_ret = signal;
 		// Cast returned reference into pointer
 		QMetaMethod* sigval1 = const_cast<QMetaMethod*>(&signal_ret);
-		miqt_exec_callback_QMediaDevices_disconnectNotify(this, handle__disconnectNotify, sigval1);
+		miqt_exec_callback_QMediaDevices_disconnectNotify(this, handle__disconnectNotify.value(), sigval1);
 
 	}
 
@@ -255,30 +258,36 @@ void QMediaDevices_audioInputsChanged(QMediaDevices* self) {
 	self->audioInputsChanged();
 }
 
-void QMediaDevices_connect_audioInputsChanged(QMediaDevices* self, intptr_t slot) {
-	QMediaDevices::connect(self, static_cast<void (QMediaDevices::*)()>(&QMediaDevices::audioInputsChanged), self, [=]() {
+void* QMediaDevices_connect_audioInputsChanged(QMediaDevices* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QMediaDevices>>(slot);
+	return new QMetaObject::Connection(QMediaDevices::connect(self, static_cast<void (QMediaDevices::*)()>(&QMediaDevices::audioInputsChanged), self, [slot_handle]() {
+		intptr_t slot = slot_handle->value();
 		miqt_exec_callback_QMediaDevices_audioInputsChanged(slot);
-	});
+	}));
 }
 
 void QMediaDevices_audioOutputsChanged(QMediaDevices* self) {
 	self->audioOutputsChanged();
 }
 
-void QMediaDevices_connect_audioOutputsChanged(QMediaDevices* self, intptr_t slot) {
-	QMediaDevices::connect(self, static_cast<void (QMediaDevices::*)()>(&QMediaDevices::audioOutputsChanged), self, [=]() {
+void* QMediaDevices_connect_audioOutputsChanged(QMediaDevices* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QMediaDevices>>(slot);
+	return new QMetaObject::Connection(QMediaDevices::connect(self, static_cast<void (QMediaDevices::*)()>(&QMediaDevices::audioOutputsChanged), self, [slot_handle]() {
+		intptr_t slot = slot_handle->value();
 		miqt_exec_callback_QMediaDevices_audioOutputsChanged(slot);
-	});
+	}));
 }
 
 void QMediaDevices_videoInputsChanged(QMediaDevices* self) {
 	self->videoInputsChanged();
 }
 
-void QMediaDevices_connect_videoInputsChanged(QMediaDevices* self, intptr_t slot) {
-	QMediaDevices::connect(self, static_cast<void (QMediaDevices::*)()>(&QMediaDevices::videoInputsChanged), self, [=]() {
+void* QMediaDevices_connect_videoInputsChanged(QMediaDevices* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QMediaDevices>>(slot);
+	return new QMetaObject::Connection(QMediaDevices::connect(self, static_cast<void (QMediaDevices::*)()>(&QMediaDevices::videoInputsChanged), self, [slot_handle]() {
+		intptr_t slot = slot_handle->value();
 		miqt_exec_callback_QMediaDevices_videoInputsChanged(slot);
-	});
+	}));
 }
 
 struct miqt_string QMediaDevices_tr2(const char* s, const char* c) {
@@ -304,12 +313,13 @@ struct miqt_string QMediaDevices_tr3(const char* s, const char* c, int n) {
 }
 
 bool QMediaDevices_override_virtual_event(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QMediaDevices> slot_handle(slot);
 	MiqtVirtualQMediaDevices* self_cast = dynamic_cast<MiqtVirtualQMediaDevices*>( (QMediaDevices*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__event = slot;
+	self_cast->handle__event = std::move(slot_handle);
 	return true;
 }
 
@@ -318,12 +328,13 @@ bool QMediaDevices_virtualbase_event(void* self, QEvent* event) {
 }
 
 bool QMediaDevices_override_virtual_eventFilter(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QMediaDevices> slot_handle(slot);
 	MiqtVirtualQMediaDevices* self_cast = dynamic_cast<MiqtVirtualQMediaDevices*>( (QMediaDevices*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__eventFilter = slot;
+	self_cast->handle__eventFilter = std::move(slot_handle);
 	return true;
 }
 
@@ -332,12 +343,13 @@ bool QMediaDevices_virtualbase_eventFilter(void* self, QObject* watched, QEvent*
 }
 
 bool QMediaDevices_override_virtual_timerEvent(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QMediaDevices> slot_handle(slot);
 	MiqtVirtualQMediaDevices* self_cast = dynamic_cast<MiqtVirtualQMediaDevices*>( (QMediaDevices*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__timerEvent = slot;
+	self_cast->handle__timerEvent = std::move(slot_handle);
 	return true;
 }
 
@@ -346,12 +358,13 @@ void QMediaDevices_virtualbase_timerEvent(void* self, QTimerEvent* event) {
 }
 
 bool QMediaDevices_override_virtual_childEvent(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QMediaDevices> slot_handle(slot);
 	MiqtVirtualQMediaDevices* self_cast = dynamic_cast<MiqtVirtualQMediaDevices*>( (QMediaDevices*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__childEvent = slot;
+	self_cast->handle__childEvent = std::move(slot_handle);
 	return true;
 }
 
@@ -360,12 +373,13 @@ void QMediaDevices_virtualbase_childEvent(void* self, QChildEvent* event) {
 }
 
 bool QMediaDevices_override_virtual_customEvent(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QMediaDevices> slot_handle(slot);
 	MiqtVirtualQMediaDevices* self_cast = dynamic_cast<MiqtVirtualQMediaDevices*>( (QMediaDevices*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__customEvent = slot;
+	self_cast->handle__customEvent = std::move(slot_handle);
 	return true;
 }
 
@@ -374,12 +388,13 @@ void QMediaDevices_virtualbase_customEvent(void* self, QEvent* event) {
 }
 
 bool QMediaDevices_override_virtual_connectNotify(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QMediaDevices> slot_handle(slot);
 	MiqtVirtualQMediaDevices* self_cast = dynamic_cast<MiqtVirtualQMediaDevices*>( (QMediaDevices*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__connectNotify = slot;
+	self_cast->handle__connectNotify = std::move(slot_handle);
 	return true;
 }
 
@@ -388,12 +403,13 @@ void QMediaDevices_virtualbase_connectNotify(void* self, QMetaMethod* signal) {
 }
 
 bool QMediaDevices_override_virtual_disconnectNotify(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QMediaDevices> slot_handle(slot);
 	MiqtVirtualQMediaDevices* self_cast = dynamic_cast<MiqtVirtualQMediaDevices*>( (QMediaDevices*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__disconnectNotify = slot;
+	self_cast->handle__disconnectNotify = std::move(slot_handle);
 	return true;
 }
 

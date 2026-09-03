@@ -15,6 +15,11 @@ import (
 	"unsafe"
 )
 
+//export miqt_exec_callback_handle_release_QExtensionManager
+func miqt_exec_callback_handle_release_QExtensionManager(cb C.intptr_t) {
+	cgo.Handle(cb).Delete()
+}
+
 type QExtensionManager struct {
 	h *C.QExtensionManager
 	*qt6.QObject
@@ -199,7 +204,11 @@ func (this *QExtensionManager) callVirtualBase_RegisterExtensions(factory *QAbst
 
 }
 func (this *QExtensionManager) OnRegisterExtensions(slot func(super func(factory *QAbstractExtensionFactory, iid string), factory *QAbstractExtensionFactory, iid string)) {
-	ok := C.QExtensionManager_override_virtual_registerExtensions(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QExtensionManager_override_virtual_registerExtensions(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -234,7 +243,11 @@ func (this *QExtensionManager) callVirtualBase_UnregisterExtensions(factory *QAb
 
 }
 func (this *QExtensionManager) OnUnregisterExtensions(slot func(super func(factory *QAbstractExtensionFactory, iid string), factory *QAbstractExtensionFactory, iid string)) {
-	ok := C.QExtensionManager_override_virtual_unregisterExtensions(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QExtensionManager_override_virtual_unregisterExtensions(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -269,7 +282,11 @@ func (this *QExtensionManager) callVirtualBase_Extension(object *qt6.QObject, ii
 
 }
 func (this *QExtensionManager) OnExtension(slot func(super func(object *qt6.QObject, iid string) *qt6.QObject, object *qt6.QObject, iid string) *qt6.QObject) {
-	ok := C.QExtensionManager_override_virtual_extension(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QExtensionManager_override_virtual_extension(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -302,7 +319,11 @@ func (this *QExtensionManager) callVirtualBase_Event(event *qt6.QEvent) bool {
 
 }
 func (this *QExtensionManager) OnEvent(slot func(super func(event *qt6.QEvent) bool, event *qt6.QEvent) bool) {
-	ok := C.QExtensionManager_override_virtual_event(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QExtensionManager_override_virtual_event(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -330,7 +351,11 @@ func (this *QExtensionManager) callVirtualBase_EventFilter(watched *qt6.QObject,
 
 }
 func (this *QExtensionManager) OnEventFilter(slot func(super func(watched *qt6.QObject, event *qt6.QEvent) bool, watched *qt6.QObject, event *qt6.QEvent) bool) {
-	ok := C.QExtensionManager_override_virtual_eventFilter(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QExtensionManager_override_virtual_eventFilter(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -360,7 +385,11 @@ func (this *QExtensionManager) callVirtualBase_TimerEvent(event *qt6.QTimerEvent
 
 }
 func (this *QExtensionManager) OnTimerEvent(slot func(super func(event *qt6.QTimerEvent), event *qt6.QTimerEvent)) {
-	ok := C.QExtensionManager_override_virtual_timerEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QExtensionManager_override_virtual_timerEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -386,7 +415,11 @@ func (this *QExtensionManager) callVirtualBase_ChildEvent(event *qt6.QChildEvent
 
 }
 func (this *QExtensionManager) OnChildEvent(slot func(super func(event *qt6.QChildEvent), event *qt6.QChildEvent)) {
-	ok := C.QExtensionManager_override_virtual_childEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QExtensionManager_override_virtual_childEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -412,7 +445,11 @@ func (this *QExtensionManager) callVirtualBase_CustomEvent(event *qt6.QEvent) {
 
 }
 func (this *QExtensionManager) OnCustomEvent(slot func(super func(event *qt6.QEvent), event *qt6.QEvent)) {
-	ok := C.QExtensionManager_override_virtual_customEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QExtensionManager_override_virtual_customEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -438,7 +475,11 @@ func (this *QExtensionManager) callVirtualBase_ConnectNotify(signal *qt6.QMetaMe
 
 }
 func (this *QExtensionManager) OnConnectNotify(slot func(super func(signal *qt6.QMetaMethod), signal *qt6.QMetaMethod)) {
-	ok := C.QExtensionManager_override_virtual_connectNotify(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QExtensionManager_override_virtual_connectNotify(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -464,7 +505,11 @@ func (this *QExtensionManager) callVirtualBase_DisconnectNotify(signal *qt6.QMet
 
 }
 func (this *QExtensionManager) OnDisconnectNotify(slot func(super func(signal *qt6.QMetaMethod), signal *qt6.QMetaMethod)) {
-	ok := C.QExtensionManager_override_virtual_disconnectNotify(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QExtensionManager_override_virtual_disconnectNotify(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}

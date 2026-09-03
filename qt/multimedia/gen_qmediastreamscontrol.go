@@ -25,6 +25,11 @@ const (
 	QMediaStreamsControl__DataStream       QMediaStreamsControl__StreamType = 4
 )
 
+//export miqt_exec_callback_handle_release_QMediaStreamsControl
+func miqt_exec_callback_handle_release_QMediaStreamsControl(cb C.intptr_t) {
+	cgo.Handle(cb).Delete()
+}
+
 type QMediaStreamsControl struct {
 	h *C.QMediaStreamsControl
 	*QMediaControl
@@ -118,8 +123,10 @@ func (this *QMediaStreamsControl) SetActive(streamNumber int, state bool) {
 func (this *QMediaStreamsControl) StreamsChanged() {
 	C.QMediaStreamsControl_streamsChanged(this.h)
 }
-func (this *QMediaStreamsControl) OnStreamsChanged(slot func()) {
-	C.QMediaStreamsControl_connect_streamsChanged(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QMediaStreamsControl) OnStreamsChanged(slot func()) *qt.SignalConnection {
+	_goptr := qt.UnsafeNewQMetaObject__Connection(C.QMediaStreamsControl_connect_streamsChanged(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QMediaStreamsControl_streamsChanged
@@ -135,8 +142,10 @@ func miqt_exec_callback_QMediaStreamsControl_streamsChanged(cb C.intptr_t) {
 func (this *QMediaStreamsControl) ActiveStreamsChanged() {
 	C.QMediaStreamsControl_activeStreamsChanged(this.h)
 }
-func (this *QMediaStreamsControl) OnActiveStreamsChanged(slot func()) {
-	C.QMediaStreamsControl_connect_activeStreamsChanged(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QMediaStreamsControl) OnActiveStreamsChanged(slot func()) *qt.SignalConnection {
+	_goptr := qt.UnsafeNewQMetaObject__Connection(C.QMediaStreamsControl_connect_activeStreamsChanged(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QMediaStreamsControl_activeStreamsChanged

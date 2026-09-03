@@ -148,13 +148,13 @@ void QCalendarWidget_showPreviousYear(QCalendarWidget* self);
 void QCalendarWidget_showSelectedDate(QCalendarWidget* self);
 void QCalendarWidget_showToday(QCalendarWidget* self);
 void QCalendarWidget_selectionChanged(QCalendarWidget* self);
-void QCalendarWidget_connect_selectionChanged(QCalendarWidget* self, intptr_t slot);
+void* QCalendarWidget_connect_selectionChanged(QCalendarWidget* self, intptr_t slot);
 void QCalendarWidget_clicked(QCalendarWidget* self, QDate* date);
-void QCalendarWidget_connect_clicked(QCalendarWidget* self, intptr_t slot);
+void* QCalendarWidget_connect_clicked(QCalendarWidget* self, intptr_t slot);
 void QCalendarWidget_activated(QCalendarWidget* self, QDate* date);
-void QCalendarWidget_connect_activated(QCalendarWidget* self, intptr_t slot);
+void* QCalendarWidget_connect_activated(QCalendarWidget* self, intptr_t slot);
 void QCalendarWidget_currentPageChanged(QCalendarWidget* self, int year, int month);
-void QCalendarWidget_connect_currentPageChanged(QCalendarWidget* self, intptr_t slot);
+void* QCalendarWidget_connect_currentPageChanged(QCalendarWidget* self, intptr_t slot);
 struct miqt_string QCalendarWidget_tr2(const char* s, const char* c);
 struct miqt_string QCalendarWidget_tr3(const char* s, const char* c, int n);
 

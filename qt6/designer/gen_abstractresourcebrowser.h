@@ -93,9 +93,9 @@ struct miqt_string QDesignerResourceBrowserInterface_tr(const char* s);
 void QDesignerResourceBrowserInterface_setCurrentPath(QDesignerResourceBrowserInterface* self, struct miqt_string filePath);
 struct miqt_string QDesignerResourceBrowserInterface_currentPath(const QDesignerResourceBrowserInterface* self);
 void QDesignerResourceBrowserInterface_currentPathChanged(QDesignerResourceBrowserInterface* self, struct miqt_string filePath);
-void QDesignerResourceBrowserInterface_connect_currentPathChanged(QDesignerResourceBrowserInterface* self, intptr_t slot);
+void* QDesignerResourceBrowserInterface_connect_currentPathChanged(QDesignerResourceBrowserInterface* self, intptr_t slot);
 void QDesignerResourceBrowserInterface_pathActivated(QDesignerResourceBrowserInterface* self, struct miqt_string filePath);
-void QDesignerResourceBrowserInterface_connect_pathActivated(QDesignerResourceBrowserInterface* self, intptr_t slot);
+void* QDesignerResourceBrowserInterface_connect_pathActivated(QDesignerResourceBrowserInterface* self, intptr_t slot);
 struct miqt_string QDesignerResourceBrowserInterface_tr2(const char* s, const char* c);
 struct miqt_string QDesignerResourceBrowserInterface_tr3(const char* s, const char* c, int n);
 

@@ -1,3 +1,5 @@
+#include <memory>
+#include <utility>
 #include <QAction>
 #include <QByteArray>
 #include <QChildEvent>
@@ -47,6 +49,7 @@
 extern "C" {
 #endif
 
+void miqt_exec_callback_handle_release_QWebPage(intptr_t);
 void miqt_exec_callback_QWebPage_loadStarted(intptr_t);
 void miqt_exec_callback_QWebPage_loadProgress(intptr_t, int);
 void miqt_exec_callback_QWebPage_loadFinished(intptr_t, bool);
@@ -110,11 +113,11 @@ public:
 	virtual ~MiqtVirtualQWebPage() override = default;
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__triggerAction = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QWebPage> handle__triggerAction;
 
 	// Subclass to allow providing a Go implementation
 	virtual void triggerAction(QWebPage::WebAction action, bool checked) override {
-		if (handle__triggerAction == 0) {
+		if (!handle__triggerAction) {
 			QWebPage::triggerAction(action, checked);
 			return;
 		}
@@ -122,34 +125,34 @@ public:
 		QWebPage::WebAction action_ret = action;
 		int sigval1 = static_cast<int>(action_ret);
 		bool sigval2 = checked;
-		miqt_exec_callback_QWebPage_triggerAction(this, handle__triggerAction, sigval1, sigval2);
+		miqt_exec_callback_QWebPage_triggerAction(this, handle__triggerAction.value(), sigval1, sigval2);
 
 	}
 
 	friend void QWebPage_virtualbase_triggerAction(void* self, int action, bool checked);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__event = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QWebPage> handle__event;
 
 	// Subclass to allow providing a Go implementation
 	virtual bool event(QEvent* param1) override {
-		if (handle__event == 0) {
+		if (!handle__event) {
 			return QWebPage::event(param1);
 		}
 
 		QEvent* sigval1 = param1;
-		bool callback_return_value = miqt_exec_callback_QWebPage_event(this, handle__event, sigval1);
+		bool callback_return_value = miqt_exec_callback_QWebPage_event(this, handle__event.value(), sigval1);
 		return callback_return_value;
 	}
 
 	friend bool QWebPage_virtualbase_event(void* self, QEvent* param1);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__extension = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QWebPage> handle__extension;
 
 	// Subclass to allow providing a Go implementation
 	virtual bool extension(QWebPage::Extension extension, const QWebPage::ExtensionOption* option, QWebPage::ExtensionReturn* output) override {
-		if (handle__extension == 0) {
+		if (!handle__extension) {
 			return QWebPage::extension(extension, option, output);
 		}
 
@@ -157,67 +160,67 @@ public:
 		int sigval1 = static_cast<int>(extension_ret);
 		QWebPage__ExtensionOption* sigval2 = (QWebPage__ExtensionOption*) option;
 		QWebPage__ExtensionReturn* sigval3 = output;
-		bool callback_return_value = miqt_exec_callback_QWebPage_extension(this, handle__extension, sigval1, sigval2, sigval3);
+		bool callback_return_value = miqt_exec_callback_QWebPage_extension(this, handle__extension.value(), sigval1, sigval2, sigval3);
 		return callback_return_value;
 	}
 
 	friend bool QWebPage_virtualbase_extension(void* self, int extension, QWebPage__ExtensionOption* option, QWebPage__ExtensionReturn* output);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__supportsExtension = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QWebPage> handle__supportsExtension;
 
 	// Subclass to allow providing a Go implementation
 	virtual bool supportsExtension(QWebPage::Extension extension) const override {
-		if (handle__supportsExtension == 0) {
+		if (!handle__supportsExtension) {
 			return QWebPage::supportsExtension(extension);
 		}
 
 		QWebPage::Extension extension_ret = extension;
 		int sigval1 = static_cast<int>(extension_ret);
-		bool callback_return_value = miqt_exec_callback_QWebPage_supportsExtension(this, handle__supportsExtension, sigval1);
+		bool callback_return_value = miqt_exec_callback_QWebPage_supportsExtension(this, handle__supportsExtension.value(), sigval1);
 		return callback_return_value;
 	}
 
 	friend bool QWebPage_virtualbase_supportsExtension(const void* self, int extension);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__shouldInterruptJavaScript = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QWebPage> handle__shouldInterruptJavaScript;
 
 	// Subclass to allow providing a Go implementation
 	virtual bool shouldInterruptJavaScript() override {
-		if (handle__shouldInterruptJavaScript == 0) {
+		if (!handle__shouldInterruptJavaScript) {
 			return QWebPage::shouldInterruptJavaScript();
 		}
 
-		bool callback_return_value = miqt_exec_callback_QWebPage_shouldInterruptJavaScript(this, handle__shouldInterruptJavaScript);
+		bool callback_return_value = miqt_exec_callback_QWebPage_shouldInterruptJavaScript(this, handle__shouldInterruptJavaScript.value());
 		return callback_return_value;
 	}
 
 	friend bool QWebPage_virtualbase_shouldInterruptJavaScript(void* self);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__createWindow = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QWebPage> handle__createWindow;
 
 	// Subclass to allow providing a Go implementation
 	virtual QWebPage* createWindow(QWebPage::WebWindowType type) override {
-		if (handle__createWindow == 0) {
+		if (!handle__createWindow) {
 			return QWebPage::createWindow(type);
 		}
 
 		QWebPage::WebWindowType type_ret = type;
 		int sigval1 = static_cast<int>(type_ret);
-		QWebPage* callback_return_value = miqt_exec_callback_QWebPage_createWindow(this, handle__createWindow, sigval1);
+		QWebPage* callback_return_value = miqt_exec_callback_QWebPage_createWindow(this, handle__createWindow.value(), sigval1);
 		return callback_return_value;
 	}
 
 	friend QWebPage* QWebPage_virtualbase_createWindow(void* self, int type);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__createPlugin = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QWebPage> handle__createPlugin;
 
 	// Subclass to allow providing a Go implementation
 	virtual QObject* createPlugin(const QString& classid, const QUrl& url, const QStringList& paramNames, const QStringList& paramValues) override {
-		if (handle__createPlugin == 0) {
+		if (!handle__createPlugin) {
 			return QWebPage::createPlugin(classid, url, paramNames, paramValues);
 		}
 
@@ -266,18 +269,18 @@ public:
 		paramValues_out.len = paramValues_ret.length();
 		paramValues_out.data = static_cast<void*>(paramValues_arr);
 		struct miqt_array /* of struct miqt_string */  sigval4 = paramValues_out;
-		QObject* callback_return_value = miqt_exec_callback_QWebPage_createPlugin(this, handle__createPlugin, sigval1, sigval2, sigval3, sigval4);
+		QObject* callback_return_value = miqt_exec_callback_QWebPage_createPlugin(this, handle__createPlugin.value(), sigval1, sigval2, sigval3, sigval4);
 		return callback_return_value;
 	}
 
 	friend QObject* QWebPage_virtualbase_createPlugin(void* self, struct miqt_string classid, QUrl* url, struct miqt_array /* of struct miqt_string */  paramNames, struct miqt_array /* of struct miqt_string */  paramValues);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__acceptNavigationRequest = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QWebPage> handle__acceptNavigationRequest;
 
 	// Subclass to allow providing a Go implementation
 	virtual bool acceptNavigationRequest(QWebFrame* frame, const QNetworkRequest& request, QWebPage::NavigationType type) override {
-		if (handle__acceptNavigationRequest == 0) {
+		if (!handle__acceptNavigationRequest) {
 			return QWebPage::acceptNavigationRequest(frame, request, type);
 		}
 
@@ -287,18 +290,18 @@ public:
 		QNetworkRequest* sigval2 = const_cast<QNetworkRequest*>(&request_ret);
 		QWebPage::NavigationType type_ret = type;
 		int sigval3 = static_cast<int>(type_ret);
-		bool callback_return_value = miqt_exec_callback_QWebPage_acceptNavigationRequest(this, handle__acceptNavigationRequest, sigval1, sigval2, sigval3);
+		bool callback_return_value = miqt_exec_callback_QWebPage_acceptNavigationRequest(this, handle__acceptNavigationRequest.value(), sigval1, sigval2, sigval3);
 		return callback_return_value;
 	}
 
 	friend bool QWebPage_virtualbase_acceptNavigationRequest(void* self, QWebFrame* frame, QNetworkRequest* request, int type);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__chooseFile = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QWebPage> handle__chooseFile;
 
 	// Subclass to allow providing a Go implementation
 	virtual QString chooseFile(QWebFrame* originatingFrame, const QString& oldFile) override {
-		if (handle__chooseFile == 0) {
+		if (!handle__chooseFile) {
 			return QWebPage::chooseFile(originatingFrame, oldFile);
 		}
 
@@ -311,7 +314,7 @@ public:
 		oldFile_ms.data = static_cast<char*>(malloc(oldFile_ms.len));
 		memcpy(oldFile_ms.data, oldFile_b.data(), oldFile_ms.len);
 		struct miqt_string sigval2 = oldFile_ms;
-		struct miqt_string callback_return_value = miqt_exec_callback_QWebPage_chooseFile(this, handle__chooseFile, sigval1, sigval2);
+		struct miqt_string callback_return_value = miqt_exec_callback_QWebPage_chooseFile(this, handle__chooseFile.value(), sigval1, sigval2);
 		QString callback_return_value_QString = QString::fromUtf8(callback_return_value.data, callback_return_value.len);
 		free(callback_return_value.data);
 		return callback_return_value_QString;
@@ -320,11 +323,11 @@ public:
 	friend struct miqt_string QWebPage_virtualbase_chooseFile(void* self, QWebFrame* originatingFrame, struct miqt_string oldFile);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__javaScriptAlert = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QWebPage> handle__javaScriptAlert;
 
 	// Subclass to allow providing a Go implementation
 	virtual void javaScriptAlert(QWebFrame* originatingFrame, const QString& msg) override {
-		if (handle__javaScriptAlert == 0) {
+		if (!handle__javaScriptAlert) {
 			QWebPage::javaScriptAlert(originatingFrame, msg);
 			return;
 		}
@@ -338,18 +341,18 @@ public:
 		msg_ms.data = static_cast<char*>(malloc(msg_ms.len));
 		memcpy(msg_ms.data, msg_b.data(), msg_ms.len);
 		struct miqt_string sigval2 = msg_ms;
-		miqt_exec_callback_QWebPage_javaScriptAlert(this, handle__javaScriptAlert, sigval1, sigval2);
+		miqt_exec_callback_QWebPage_javaScriptAlert(this, handle__javaScriptAlert.value(), sigval1, sigval2);
 
 	}
 
 	friend void QWebPage_virtualbase_javaScriptAlert(void* self, QWebFrame* originatingFrame, struct miqt_string msg);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__javaScriptConfirm = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QWebPage> handle__javaScriptConfirm;
 
 	// Subclass to allow providing a Go implementation
 	virtual bool javaScriptConfirm(QWebFrame* originatingFrame, const QString& msg) override {
-		if (handle__javaScriptConfirm == 0) {
+		if (!handle__javaScriptConfirm) {
 			return QWebPage::javaScriptConfirm(originatingFrame, msg);
 		}
 
@@ -362,18 +365,18 @@ public:
 		msg_ms.data = static_cast<char*>(malloc(msg_ms.len));
 		memcpy(msg_ms.data, msg_b.data(), msg_ms.len);
 		struct miqt_string sigval2 = msg_ms;
-		bool callback_return_value = miqt_exec_callback_QWebPage_javaScriptConfirm(this, handle__javaScriptConfirm, sigval1, sigval2);
+		bool callback_return_value = miqt_exec_callback_QWebPage_javaScriptConfirm(this, handle__javaScriptConfirm.value(), sigval1, sigval2);
 		return callback_return_value;
 	}
 
 	friend bool QWebPage_virtualbase_javaScriptConfirm(void* self, QWebFrame* originatingFrame, struct miqt_string msg);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__javaScriptConsoleMessage = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QWebPage> handle__javaScriptConsoleMessage;
 
 	// Subclass to allow providing a Go implementation
 	virtual void javaScriptConsoleMessage(const QString& message, int lineNumber, const QString& sourceID) override {
-		if (handle__javaScriptConsoleMessage == 0) {
+		if (!handle__javaScriptConsoleMessage) {
 			QWebPage::javaScriptConsoleMessage(message, lineNumber, sourceID);
 			return;
 		}
@@ -395,25 +398,25 @@ public:
 		sourceID_ms.data = static_cast<char*>(malloc(sourceID_ms.len));
 		memcpy(sourceID_ms.data, sourceID_b.data(), sourceID_ms.len);
 		struct miqt_string sigval3 = sourceID_ms;
-		miqt_exec_callback_QWebPage_javaScriptConsoleMessage(this, handle__javaScriptConsoleMessage, sigval1, sigval2, sigval3);
+		miqt_exec_callback_QWebPage_javaScriptConsoleMessage(this, handle__javaScriptConsoleMessage.value(), sigval1, sigval2, sigval3);
 
 	}
 
 	friend void QWebPage_virtualbase_javaScriptConsoleMessage(void* self, struct miqt_string message, int lineNumber, struct miqt_string sourceID);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__userAgentForUrl = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QWebPage> handle__userAgentForUrl;
 
 	// Subclass to allow providing a Go implementation
 	virtual QString userAgentForUrl(const QUrl& url) const override {
-		if (handle__userAgentForUrl == 0) {
+		if (!handle__userAgentForUrl) {
 			return QWebPage::userAgentForUrl(url);
 		}
 
 		const QUrl& url_ret = url;
 		// Cast returned reference into pointer
 		QUrl* sigval1 = const_cast<QUrl*>(&url_ret);
-		struct miqt_string callback_return_value = miqt_exec_callback_QWebPage_userAgentForUrl(this, handle__userAgentForUrl, sigval1);
+		struct miqt_string callback_return_value = miqt_exec_callback_QWebPage_userAgentForUrl(this, handle__userAgentForUrl.value(), sigval1);
 		QString callback_return_value_QString = QString::fromUtf8(callback_return_value.data, callback_return_value.len);
 		free(callback_return_value.data);
 		return callback_return_value_QString;
@@ -422,79 +425,79 @@ public:
 	friend struct miqt_string QWebPage_virtualbase_userAgentForUrl(const void* self, QUrl* url);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__eventFilter = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QWebPage> handle__eventFilter;
 
 	// Subclass to allow providing a Go implementation
 	virtual bool eventFilter(QObject* watched, QEvent* event) override {
-		if (handle__eventFilter == 0) {
+		if (!handle__eventFilter) {
 			return QWebPage::eventFilter(watched, event);
 		}
 
 		QObject* sigval1 = watched;
 		QEvent* sigval2 = event;
-		bool callback_return_value = miqt_exec_callback_QWebPage_eventFilter(this, handle__eventFilter, sigval1, sigval2);
+		bool callback_return_value = miqt_exec_callback_QWebPage_eventFilter(this, handle__eventFilter.value(), sigval1, sigval2);
 		return callback_return_value;
 	}
 
 	friend bool QWebPage_virtualbase_eventFilter(void* self, QObject* watched, QEvent* event);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__timerEvent = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QWebPage> handle__timerEvent;
 
 	// Subclass to allow providing a Go implementation
 	virtual void timerEvent(QTimerEvent* event) override {
-		if (handle__timerEvent == 0) {
+		if (!handle__timerEvent) {
 			QWebPage::timerEvent(event);
 			return;
 		}
 
 		QTimerEvent* sigval1 = event;
-		miqt_exec_callback_QWebPage_timerEvent(this, handle__timerEvent, sigval1);
+		miqt_exec_callback_QWebPage_timerEvent(this, handle__timerEvent.value(), sigval1);
 
 	}
 
 	friend void QWebPage_virtualbase_timerEvent(void* self, QTimerEvent* event);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__childEvent = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QWebPage> handle__childEvent;
 
 	// Subclass to allow providing a Go implementation
 	virtual void childEvent(QChildEvent* event) override {
-		if (handle__childEvent == 0) {
+		if (!handle__childEvent) {
 			QWebPage::childEvent(event);
 			return;
 		}
 
 		QChildEvent* sigval1 = event;
-		miqt_exec_callback_QWebPage_childEvent(this, handle__childEvent, sigval1);
+		miqt_exec_callback_QWebPage_childEvent(this, handle__childEvent.value(), sigval1);
 
 	}
 
 	friend void QWebPage_virtualbase_childEvent(void* self, QChildEvent* event);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__customEvent = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QWebPage> handle__customEvent;
 
 	// Subclass to allow providing a Go implementation
 	virtual void customEvent(QEvent* event) override {
-		if (handle__customEvent == 0) {
+		if (!handle__customEvent) {
 			QWebPage::customEvent(event);
 			return;
 		}
 
 		QEvent* sigval1 = event;
-		miqt_exec_callback_QWebPage_customEvent(this, handle__customEvent, sigval1);
+		miqt_exec_callback_QWebPage_customEvent(this, handle__customEvent.value(), sigval1);
 
 	}
 
 	friend void QWebPage_virtualbase_customEvent(void* self, QEvent* event);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__connectNotify = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QWebPage> handle__connectNotify;
 
 	// Subclass to allow providing a Go implementation
 	virtual void connectNotify(const QMetaMethod& signal) override {
-		if (handle__connectNotify == 0) {
+		if (!handle__connectNotify) {
 			QWebPage::connectNotify(signal);
 			return;
 		}
@@ -502,18 +505,18 @@ public:
 		const QMetaMethod& signal_ret = signal;
 		// Cast returned reference into pointer
 		QMetaMethod* sigval1 = const_cast<QMetaMethod*>(&signal_ret);
-		miqt_exec_callback_QWebPage_connectNotify(this, handle__connectNotify, sigval1);
+		miqt_exec_callback_QWebPage_connectNotify(this, handle__connectNotify.value(), sigval1);
 
 	}
 
 	friend void QWebPage_virtualbase_connectNotify(void* self, QMetaMethod* signal);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__disconnectNotify = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QWebPage> handle__disconnectNotify;
 
 	// Subclass to allow providing a Go implementation
 	virtual void disconnectNotify(const QMetaMethod& signal) override {
-		if (handle__disconnectNotify == 0) {
+		if (!handle__disconnectNotify) {
 			QWebPage::disconnectNotify(signal);
 			return;
 		}
@@ -521,7 +524,7 @@ public:
 		const QMetaMethod& signal_ret = signal;
 		// Cast returned reference into pointer
 		QMetaMethod* sigval1 = const_cast<QMetaMethod*>(&signal_ret);
-		miqt_exec_callback_QWebPage_disconnectNotify(this, handle__disconnectNotify, sigval1);
+		miqt_exec_callback_QWebPage_disconnectNotify(this, handle__disconnectNotify.value(), sigval1);
 
 	}
 
@@ -833,32 +836,38 @@ void QWebPage_loadStarted(QWebPage* self) {
 	self->loadStarted();
 }
 
-void QWebPage_connect_loadStarted(QWebPage* self, intptr_t slot) {
-	QWebPage::connect(self, static_cast<void (QWebPage::*)()>(&QWebPage::loadStarted), self, [=]() {
+void* QWebPage_connect_loadStarted(QWebPage* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QWebPage>>(slot);
+	return new QMetaObject::Connection(QWebPage::connect(self, static_cast<void (QWebPage::*)()>(&QWebPage::loadStarted), self, [slot_handle]() {
+		intptr_t slot = slot_handle->value();
 		miqt_exec_callback_QWebPage_loadStarted(slot);
-	});
+	}));
 }
 
 void QWebPage_loadProgress(QWebPage* self, int progress) {
 	self->loadProgress(static_cast<int>(progress));
 }
 
-void QWebPage_connect_loadProgress(QWebPage* self, intptr_t slot) {
-	QWebPage::connect(self, static_cast<void (QWebPage::*)(int)>(&QWebPage::loadProgress), self, [=](int progress) {
+void* QWebPage_connect_loadProgress(QWebPage* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QWebPage>>(slot);
+	return new QMetaObject::Connection(QWebPage::connect(self, static_cast<void (QWebPage::*)(int)>(&QWebPage::loadProgress), self, [slot_handle](int progress) {
+		intptr_t slot = slot_handle->value();
 		int sigval1 = progress;
 		miqt_exec_callback_QWebPage_loadProgress(slot, sigval1);
-	});
+	}));
 }
 
 void QWebPage_loadFinished(QWebPage* self, bool ok) {
 	self->loadFinished(ok);
 }
 
-void QWebPage_connect_loadFinished(QWebPage* self, intptr_t slot) {
-	QWebPage::connect(self, static_cast<void (QWebPage::*)(bool)>(&QWebPage::loadFinished), self, [=](bool ok) {
+void* QWebPage_connect_loadFinished(QWebPage* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QWebPage>>(slot);
+	return new QMetaObject::Connection(QWebPage::connect(self, static_cast<void (QWebPage::*)(bool)>(&QWebPage::loadFinished), self, [slot_handle](bool ok) {
+		intptr_t slot = slot_handle->value();
 		bool sigval1 = ok;
 		miqt_exec_callback_QWebPage_loadFinished(slot, sigval1);
-	});
+	}));
 }
 
 void QWebPage_linkHovered(QWebPage* self, struct miqt_string link, struct miqt_string title, struct miqt_string textContent) {
@@ -868,8 +877,10 @@ void QWebPage_linkHovered(QWebPage* self, struct miqt_string link, struct miqt_s
 	self->linkHovered(link_QString, title_QString, textContent_QString);
 }
 
-void QWebPage_connect_linkHovered(QWebPage* self, intptr_t slot) {
-	QWebPage::connect(self, static_cast<void (QWebPage::*)(const QString&, const QString&, const QString&)>(&QWebPage::linkHovered), self, [=](const QString& link, const QString& title, const QString& textContent) {
+void* QWebPage_connect_linkHovered(QWebPage* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QWebPage>>(slot);
+	return new QMetaObject::Connection(QWebPage::connect(self, static_cast<void (QWebPage::*)(const QString&, const QString&, const QString&)>(&QWebPage::linkHovered), self, [slot_handle](const QString& link, const QString& title, const QString& textContent) {
+		intptr_t slot = slot_handle->value();
 		const QString link_ret = link;
 		// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 		QByteArray link_b = link_ret.toUtf8();
@@ -895,7 +906,7 @@ void QWebPage_connect_linkHovered(QWebPage* self, intptr_t slot) {
 		memcpy(textContent_ms.data, textContent_b.data(), textContent_ms.len);
 		struct miqt_string sigval3 = textContent_ms;
 		miqt_exec_callback_QWebPage_linkHovered(slot, sigval1, sigval2, sigval3);
-	});
+	}));
 }
 
 void QWebPage_statusBarMessage(QWebPage* self, struct miqt_string text) {
@@ -903,8 +914,10 @@ void QWebPage_statusBarMessage(QWebPage* self, struct miqt_string text) {
 	self->statusBarMessage(text_QString);
 }
 
-void QWebPage_connect_statusBarMessage(QWebPage* self, intptr_t slot) {
-	QWebPage::connect(self, static_cast<void (QWebPage::*)(const QString&)>(&QWebPage::statusBarMessage), self, [=](const QString& text) {
+void* QWebPage_connect_statusBarMessage(QWebPage* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QWebPage>>(slot);
+	return new QMetaObject::Connection(QWebPage::connect(self, static_cast<void (QWebPage::*)(const QString&)>(&QWebPage::statusBarMessage), self, [slot_handle](const QString& text) {
+		intptr_t slot = slot_handle->value();
 		const QString text_ret = text;
 		// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 		QByteArray text_b = text_ret.toUtf8();
@@ -914,193 +927,225 @@ void QWebPage_connect_statusBarMessage(QWebPage* self, intptr_t slot) {
 		memcpy(text_ms.data, text_b.data(), text_ms.len);
 		struct miqt_string sigval1 = text_ms;
 		miqt_exec_callback_QWebPage_statusBarMessage(slot, sigval1);
-	});
+	}));
 }
 
 void QWebPage_selectionChanged(QWebPage* self) {
 	self->selectionChanged();
 }
 
-void QWebPage_connect_selectionChanged(QWebPage* self, intptr_t slot) {
-	QWebPage::connect(self, static_cast<void (QWebPage::*)()>(&QWebPage::selectionChanged), self, [=]() {
+void* QWebPage_connect_selectionChanged(QWebPage* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QWebPage>>(slot);
+	return new QMetaObject::Connection(QWebPage::connect(self, static_cast<void (QWebPage::*)()>(&QWebPage::selectionChanged), self, [slot_handle]() {
+		intptr_t slot = slot_handle->value();
 		miqt_exec_callback_QWebPage_selectionChanged(slot);
-	});
+	}));
 }
 
 void QWebPage_frameCreated(QWebPage* self, QWebFrame* frame) {
 	self->frameCreated(frame);
 }
 
-void QWebPage_connect_frameCreated(QWebPage* self, intptr_t slot) {
-	QWebPage::connect(self, static_cast<void (QWebPage::*)(QWebFrame*)>(&QWebPage::frameCreated), self, [=](QWebFrame* frame) {
+void* QWebPage_connect_frameCreated(QWebPage* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QWebPage>>(slot);
+	return new QMetaObject::Connection(QWebPage::connect(self, static_cast<void (QWebPage::*)(QWebFrame*)>(&QWebPage::frameCreated), self, [slot_handle](QWebFrame* frame) {
+		intptr_t slot = slot_handle->value();
 		QWebFrame* sigval1 = frame;
 		miqt_exec_callback_QWebPage_frameCreated(slot, sigval1);
-	});
+	}));
 }
 
 void QWebPage_geometryChangeRequested(QWebPage* self, QRect* geom) {
 	self->geometryChangeRequested(*geom);
 }
 
-void QWebPage_connect_geometryChangeRequested(QWebPage* self, intptr_t slot) {
-	QWebPage::connect(self, static_cast<void (QWebPage::*)(const QRect&)>(&QWebPage::geometryChangeRequested), self, [=](const QRect& geom) {
+void* QWebPage_connect_geometryChangeRequested(QWebPage* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QWebPage>>(slot);
+	return new QMetaObject::Connection(QWebPage::connect(self, static_cast<void (QWebPage::*)(const QRect&)>(&QWebPage::geometryChangeRequested), self, [slot_handle](const QRect& geom) {
+		intptr_t slot = slot_handle->value();
 		const QRect& geom_ret = geom;
 		// Cast returned reference into pointer
 		QRect* sigval1 = const_cast<QRect*>(&geom_ret);
 		miqt_exec_callback_QWebPage_geometryChangeRequested(slot, sigval1);
-	});
+	}));
 }
 
 void QWebPage_repaintRequested(QWebPage* self, QRect* dirtyRect) {
 	self->repaintRequested(*dirtyRect);
 }
 
-void QWebPage_connect_repaintRequested(QWebPage* self, intptr_t slot) {
-	QWebPage::connect(self, static_cast<void (QWebPage::*)(const QRect&)>(&QWebPage::repaintRequested), self, [=](const QRect& dirtyRect) {
+void* QWebPage_connect_repaintRequested(QWebPage* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QWebPage>>(slot);
+	return new QMetaObject::Connection(QWebPage::connect(self, static_cast<void (QWebPage::*)(const QRect&)>(&QWebPage::repaintRequested), self, [slot_handle](const QRect& dirtyRect) {
+		intptr_t slot = slot_handle->value();
 		const QRect& dirtyRect_ret = dirtyRect;
 		// Cast returned reference into pointer
 		QRect* sigval1 = const_cast<QRect*>(&dirtyRect_ret);
 		miqt_exec_callback_QWebPage_repaintRequested(slot, sigval1);
-	});
+	}));
 }
 
 void QWebPage_scrollRequested(QWebPage* self, int dx, int dy, QRect* scrollViewRect) {
 	self->scrollRequested(static_cast<int>(dx), static_cast<int>(dy), *scrollViewRect);
 }
 
-void QWebPage_connect_scrollRequested(QWebPage* self, intptr_t slot) {
-	QWebPage::connect(self, static_cast<void (QWebPage::*)(int, int, const QRect&)>(&QWebPage::scrollRequested), self, [=](int dx, int dy, const QRect& scrollViewRect) {
+void* QWebPage_connect_scrollRequested(QWebPage* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QWebPage>>(slot);
+	return new QMetaObject::Connection(QWebPage::connect(self, static_cast<void (QWebPage::*)(int, int, const QRect&)>(&QWebPage::scrollRequested), self, [slot_handle](int dx, int dy, const QRect& scrollViewRect) {
+		intptr_t slot = slot_handle->value();
 		int sigval1 = dx;
 		int sigval2 = dy;
 		const QRect& scrollViewRect_ret = scrollViewRect;
 		// Cast returned reference into pointer
 		QRect* sigval3 = const_cast<QRect*>(&scrollViewRect_ret);
 		miqt_exec_callback_QWebPage_scrollRequested(slot, sigval1, sigval2, sigval3);
-	});
+	}));
 }
 
 void QWebPage_windowCloseRequested(QWebPage* self) {
 	self->windowCloseRequested();
 }
 
-void QWebPage_connect_windowCloseRequested(QWebPage* self, intptr_t slot) {
-	QWebPage::connect(self, static_cast<void (QWebPage::*)()>(&QWebPage::windowCloseRequested), self, [=]() {
+void* QWebPage_connect_windowCloseRequested(QWebPage* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QWebPage>>(slot);
+	return new QMetaObject::Connection(QWebPage::connect(self, static_cast<void (QWebPage::*)()>(&QWebPage::windowCloseRequested), self, [slot_handle]() {
+		intptr_t slot = slot_handle->value();
 		miqt_exec_callback_QWebPage_windowCloseRequested(slot);
-	});
+	}));
 }
 
 void QWebPage_printRequested(QWebPage* self, QWebFrame* frame) {
 	self->printRequested(frame);
 }
 
-void QWebPage_connect_printRequested(QWebPage* self, intptr_t slot) {
-	QWebPage::connect(self, static_cast<void (QWebPage::*)(QWebFrame*)>(&QWebPage::printRequested), self, [=](QWebFrame* frame) {
+void* QWebPage_connect_printRequested(QWebPage* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QWebPage>>(slot);
+	return new QMetaObject::Connection(QWebPage::connect(self, static_cast<void (QWebPage::*)(QWebFrame*)>(&QWebPage::printRequested), self, [slot_handle](QWebFrame* frame) {
+		intptr_t slot = slot_handle->value();
 		QWebFrame* sigval1 = frame;
 		miqt_exec_callback_QWebPage_printRequested(slot, sigval1);
-	});
+	}));
 }
 
 void QWebPage_linkClicked(QWebPage* self, QUrl* url) {
 	self->linkClicked(*url);
 }
 
-void QWebPage_connect_linkClicked(QWebPage* self, intptr_t slot) {
-	QWebPage::connect(self, static_cast<void (QWebPage::*)(const QUrl&)>(&QWebPage::linkClicked), self, [=](const QUrl& url) {
+void* QWebPage_connect_linkClicked(QWebPage* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QWebPage>>(slot);
+	return new QMetaObject::Connection(QWebPage::connect(self, static_cast<void (QWebPage::*)(const QUrl&)>(&QWebPage::linkClicked), self, [slot_handle](const QUrl& url) {
+		intptr_t slot = slot_handle->value();
 		const QUrl& url_ret = url;
 		// Cast returned reference into pointer
 		QUrl* sigval1 = const_cast<QUrl*>(&url_ret);
 		miqt_exec_callback_QWebPage_linkClicked(slot, sigval1);
-	});
+	}));
 }
 
 void QWebPage_toolBarVisibilityChangeRequested(QWebPage* self, bool visible) {
 	self->toolBarVisibilityChangeRequested(visible);
 }
 
-void QWebPage_connect_toolBarVisibilityChangeRequested(QWebPage* self, intptr_t slot) {
-	QWebPage::connect(self, static_cast<void (QWebPage::*)(bool)>(&QWebPage::toolBarVisibilityChangeRequested), self, [=](bool visible) {
+void* QWebPage_connect_toolBarVisibilityChangeRequested(QWebPage* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QWebPage>>(slot);
+	return new QMetaObject::Connection(QWebPage::connect(self, static_cast<void (QWebPage::*)(bool)>(&QWebPage::toolBarVisibilityChangeRequested), self, [slot_handle](bool visible) {
+		intptr_t slot = slot_handle->value();
 		bool sigval1 = visible;
 		miqt_exec_callback_QWebPage_toolBarVisibilityChangeRequested(slot, sigval1);
-	});
+	}));
 }
 
 void QWebPage_statusBarVisibilityChangeRequested(QWebPage* self, bool visible) {
 	self->statusBarVisibilityChangeRequested(visible);
 }
 
-void QWebPage_connect_statusBarVisibilityChangeRequested(QWebPage* self, intptr_t slot) {
-	QWebPage::connect(self, static_cast<void (QWebPage::*)(bool)>(&QWebPage::statusBarVisibilityChangeRequested), self, [=](bool visible) {
+void* QWebPage_connect_statusBarVisibilityChangeRequested(QWebPage* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QWebPage>>(slot);
+	return new QMetaObject::Connection(QWebPage::connect(self, static_cast<void (QWebPage::*)(bool)>(&QWebPage::statusBarVisibilityChangeRequested), self, [slot_handle](bool visible) {
+		intptr_t slot = slot_handle->value();
 		bool sigval1 = visible;
 		miqt_exec_callback_QWebPage_statusBarVisibilityChangeRequested(slot, sigval1);
-	});
+	}));
 }
 
 void QWebPage_menuBarVisibilityChangeRequested(QWebPage* self, bool visible) {
 	self->menuBarVisibilityChangeRequested(visible);
 }
 
-void QWebPage_connect_menuBarVisibilityChangeRequested(QWebPage* self, intptr_t slot) {
-	QWebPage::connect(self, static_cast<void (QWebPage::*)(bool)>(&QWebPage::menuBarVisibilityChangeRequested), self, [=](bool visible) {
+void* QWebPage_connect_menuBarVisibilityChangeRequested(QWebPage* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QWebPage>>(slot);
+	return new QMetaObject::Connection(QWebPage::connect(self, static_cast<void (QWebPage::*)(bool)>(&QWebPage::menuBarVisibilityChangeRequested), self, [slot_handle](bool visible) {
+		intptr_t slot = slot_handle->value();
 		bool sigval1 = visible;
 		miqt_exec_callback_QWebPage_menuBarVisibilityChangeRequested(slot, sigval1);
-	});
+	}));
 }
 
 void QWebPage_unsupportedContent(QWebPage* self, QNetworkReply* reply) {
 	self->unsupportedContent(reply);
 }
 
-void QWebPage_connect_unsupportedContent(QWebPage* self, intptr_t slot) {
-	QWebPage::connect(self, static_cast<void (QWebPage::*)(QNetworkReply*)>(&QWebPage::unsupportedContent), self, [=](QNetworkReply* reply) {
+void* QWebPage_connect_unsupportedContent(QWebPage* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QWebPage>>(slot);
+	return new QMetaObject::Connection(QWebPage::connect(self, static_cast<void (QWebPage::*)(QNetworkReply*)>(&QWebPage::unsupportedContent), self, [slot_handle](QNetworkReply* reply) {
+		intptr_t slot = slot_handle->value();
 		QNetworkReply* sigval1 = reply;
 		miqt_exec_callback_QWebPage_unsupportedContent(slot, sigval1);
-	});
+	}));
 }
 
 void QWebPage_downloadRequested(QWebPage* self, QNetworkRequest* request) {
 	self->downloadRequested(*request);
 }
 
-void QWebPage_connect_downloadRequested(QWebPage* self, intptr_t slot) {
-	QWebPage::connect(self, static_cast<void (QWebPage::*)(const QNetworkRequest&)>(&QWebPage::downloadRequested), self, [=](const QNetworkRequest& request) {
+void* QWebPage_connect_downloadRequested(QWebPage* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QWebPage>>(slot);
+	return new QMetaObject::Connection(QWebPage::connect(self, static_cast<void (QWebPage::*)(const QNetworkRequest&)>(&QWebPage::downloadRequested), self, [slot_handle](const QNetworkRequest& request) {
+		intptr_t slot = slot_handle->value();
 		const QNetworkRequest& request_ret = request;
 		// Cast returned reference into pointer
 		QNetworkRequest* sigval1 = const_cast<QNetworkRequest*>(&request_ret);
 		miqt_exec_callback_QWebPage_downloadRequested(slot, sigval1);
-	});
+	}));
 }
 
 void QWebPage_focusedElementChanged(QWebPage* self, QWebElement* element) {
 	self->focusedElementChanged(*element);
 }
 
-void QWebPage_connect_focusedElementChanged(QWebPage* self, intptr_t slot) {
-	QWebPage::connect(self, static_cast<void (QWebPage::*)(const QWebElement&)>(&QWebPage::focusedElementChanged), self, [=](const QWebElement& element) {
+void* QWebPage_connect_focusedElementChanged(QWebPage* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QWebPage>>(slot);
+	return new QMetaObject::Connection(QWebPage::connect(self, static_cast<void (QWebPage::*)(const QWebElement&)>(&QWebPage::focusedElementChanged), self, [slot_handle](const QWebElement& element) {
+		intptr_t slot = slot_handle->value();
 		const QWebElement& element_ret = element;
 		// Cast returned reference into pointer
 		QWebElement* sigval1 = const_cast<QWebElement*>(&element_ret);
 		miqt_exec_callback_QWebPage_focusedElementChanged(slot, sigval1);
-	});
+	}));
 }
 
 void QWebPage_microFocusChanged(QWebPage* self) {
 	self->microFocusChanged();
 }
 
-void QWebPage_connect_microFocusChanged(QWebPage* self, intptr_t slot) {
-	QWebPage::connect(self, static_cast<void (QWebPage::*)()>(&QWebPage::microFocusChanged), self, [=]() {
+void* QWebPage_connect_microFocusChanged(QWebPage* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QWebPage>>(slot);
+	return new QMetaObject::Connection(QWebPage::connect(self, static_cast<void (QWebPage::*)()>(&QWebPage::microFocusChanged), self, [slot_handle]() {
+		intptr_t slot = slot_handle->value();
 		miqt_exec_callback_QWebPage_microFocusChanged(slot);
-	});
+	}));
 }
 
 void QWebPage_contentsChanged(QWebPage* self) {
 	self->contentsChanged();
 }
 
-void QWebPage_connect_contentsChanged(QWebPage* self, intptr_t slot) {
-	QWebPage::connect(self, static_cast<void (QWebPage::*)()>(&QWebPage::contentsChanged), self, [=]() {
+void* QWebPage_connect_contentsChanged(QWebPage* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QWebPage>>(slot);
+	return new QMetaObject::Connection(QWebPage::connect(self, static_cast<void (QWebPage::*)()>(&QWebPage::contentsChanged), self, [slot_handle]() {
+		intptr_t slot = slot_handle->value();
 		miqt_exec_callback_QWebPage_contentsChanged(slot);
-	});
+	}));
 }
 
 void QWebPage_databaseQuotaExceeded(QWebPage* self, QWebFrame* frame, struct miqt_string databaseName) {
@@ -1108,8 +1153,10 @@ void QWebPage_databaseQuotaExceeded(QWebPage* self, QWebFrame* frame, struct miq
 	self->databaseQuotaExceeded(frame, databaseName_QString);
 }
 
-void QWebPage_connect_databaseQuotaExceeded(QWebPage* self, intptr_t slot) {
-	QWebPage::connect(self, static_cast<void (QWebPage::*)(QWebFrame*, QString)>(&QWebPage::databaseQuotaExceeded), self, [=](QWebFrame* frame, QString databaseName) {
+void* QWebPage_connect_databaseQuotaExceeded(QWebPage* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QWebPage>>(slot);
+	return new QMetaObject::Connection(QWebPage::connect(self, static_cast<void (QWebPage::*)(QWebFrame*, QString)>(&QWebPage::databaseQuotaExceeded), self, [slot_handle](QWebFrame* frame, QString databaseName) {
+		intptr_t slot = slot_handle->value();
 		QWebFrame* sigval1 = frame;
 		QString databaseName_ret = databaseName;
 		// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
@@ -1120,92 +1167,106 @@ void QWebPage_connect_databaseQuotaExceeded(QWebPage* self, intptr_t slot) {
 		memcpy(databaseName_ms.data, databaseName_b.data(), databaseName_ms.len);
 		struct miqt_string sigval2 = databaseName_ms;
 		miqt_exec_callback_QWebPage_databaseQuotaExceeded(slot, sigval1, sigval2);
-	});
+	}));
 }
 
 void QWebPage_applicationCacheQuotaExceeded(QWebPage* self, QWebSecurityOrigin* origin, unsigned long long defaultOriginQuota, unsigned long long totalSpaceNeeded) {
 	self->applicationCacheQuotaExceeded(origin, static_cast<quint64>(defaultOriginQuota), static_cast<quint64>(totalSpaceNeeded));
 }
 
-void QWebPage_connect_applicationCacheQuotaExceeded(QWebPage* self, intptr_t slot) {
-	QWebPage::connect(self, static_cast<void (QWebPage::*)(QWebSecurityOrigin*, quint64, quint64)>(&QWebPage::applicationCacheQuotaExceeded), self, [=](QWebSecurityOrigin* origin, quint64 defaultOriginQuota, quint64 totalSpaceNeeded) {
+void* QWebPage_connect_applicationCacheQuotaExceeded(QWebPage* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QWebPage>>(slot);
+	return new QMetaObject::Connection(QWebPage::connect(self, static_cast<void (QWebPage::*)(QWebSecurityOrigin*, quint64, quint64)>(&QWebPage::applicationCacheQuotaExceeded), self, [slot_handle](QWebSecurityOrigin* origin, quint64 defaultOriginQuota, quint64 totalSpaceNeeded) {
+		intptr_t slot = slot_handle->value();
 		QWebSecurityOrigin* sigval1 = origin;
 		quint64 defaultOriginQuota_ret = defaultOriginQuota;
 		unsigned long long sigval2 = static_cast<unsigned long long>(defaultOriginQuota_ret);
 		quint64 totalSpaceNeeded_ret = totalSpaceNeeded;
 		unsigned long long sigval3 = static_cast<unsigned long long>(totalSpaceNeeded_ret);
 		miqt_exec_callback_QWebPage_applicationCacheQuotaExceeded(slot, sigval1, sigval2, sigval3);
-	});
+	}));
 }
 
 void QWebPage_saveFrameStateRequested(QWebPage* self, QWebFrame* frame, QWebHistoryItem* item) {
 	self->saveFrameStateRequested(frame, item);
 }
 
-void QWebPage_connect_saveFrameStateRequested(QWebPage* self, intptr_t slot) {
-	QWebPage::connect(self, static_cast<void (QWebPage::*)(QWebFrame*, QWebHistoryItem*)>(&QWebPage::saveFrameStateRequested), self, [=](QWebFrame* frame, QWebHistoryItem* item) {
+void* QWebPage_connect_saveFrameStateRequested(QWebPage* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QWebPage>>(slot);
+	return new QMetaObject::Connection(QWebPage::connect(self, static_cast<void (QWebPage::*)(QWebFrame*, QWebHistoryItem*)>(&QWebPage::saveFrameStateRequested), self, [slot_handle](QWebFrame* frame, QWebHistoryItem* item) {
+		intptr_t slot = slot_handle->value();
 		QWebFrame* sigval1 = frame;
 		QWebHistoryItem* sigval2 = item;
 		miqt_exec_callback_QWebPage_saveFrameStateRequested(slot, sigval1, sigval2);
-	});
+	}));
 }
 
 void QWebPage_restoreFrameStateRequested(QWebPage* self, QWebFrame* frame) {
 	self->restoreFrameStateRequested(frame);
 }
 
-void QWebPage_connect_restoreFrameStateRequested(QWebPage* self, intptr_t slot) {
-	QWebPage::connect(self, static_cast<void (QWebPage::*)(QWebFrame*)>(&QWebPage::restoreFrameStateRequested), self, [=](QWebFrame* frame) {
+void* QWebPage_connect_restoreFrameStateRequested(QWebPage* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QWebPage>>(slot);
+	return new QMetaObject::Connection(QWebPage::connect(self, static_cast<void (QWebPage::*)(QWebFrame*)>(&QWebPage::restoreFrameStateRequested), self, [slot_handle](QWebFrame* frame) {
+		intptr_t slot = slot_handle->value();
 		QWebFrame* sigval1 = frame;
 		miqt_exec_callback_QWebPage_restoreFrameStateRequested(slot, sigval1);
-	});
+	}));
 }
 
 void QWebPage_viewportChangeRequested(QWebPage* self) {
 	self->viewportChangeRequested();
 }
 
-void QWebPage_connect_viewportChangeRequested(QWebPage* self, intptr_t slot) {
-	QWebPage::connect(self, static_cast<void (QWebPage::*)()>(&QWebPage::viewportChangeRequested), self, [=]() {
+void* QWebPage_connect_viewportChangeRequested(QWebPage* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QWebPage>>(slot);
+	return new QMetaObject::Connection(QWebPage::connect(self, static_cast<void (QWebPage::*)()>(&QWebPage::viewportChangeRequested), self, [slot_handle]() {
+		intptr_t slot = slot_handle->value();
 		miqt_exec_callback_QWebPage_viewportChangeRequested(slot);
-	});
+	}));
 }
 
 void QWebPage_featurePermissionRequested(QWebPage* self, QWebFrame* frame, int feature) {
 	self->featurePermissionRequested(frame, static_cast<QWebPage::Feature>(feature));
 }
 
-void QWebPage_connect_featurePermissionRequested(QWebPage* self, intptr_t slot) {
-	QWebPage::connect(self, static_cast<void (QWebPage::*)(QWebFrame*, QWebPage::Feature)>(&QWebPage::featurePermissionRequested), self, [=](QWebFrame* frame, QWebPage::Feature feature) {
+void* QWebPage_connect_featurePermissionRequested(QWebPage* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QWebPage>>(slot);
+	return new QMetaObject::Connection(QWebPage::connect(self, static_cast<void (QWebPage::*)(QWebFrame*, QWebPage::Feature)>(&QWebPage::featurePermissionRequested), self, [slot_handle](QWebFrame* frame, QWebPage::Feature feature) {
+		intptr_t slot = slot_handle->value();
 		QWebFrame* sigval1 = frame;
 		QWebPage::Feature feature_ret = feature;
 		int sigval2 = static_cast<int>(feature_ret);
 		miqt_exec_callback_QWebPage_featurePermissionRequested(slot, sigval1, sigval2);
-	});
+	}));
 }
 
 void QWebPage_featurePermissionRequestCanceled(QWebPage* self, QWebFrame* frame, int feature) {
 	self->featurePermissionRequestCanceled(frame, static_cast<QWebPage::Feature>(feature));
 }
 
-void QWebPage_connect_featurePermissionRequestCanceled(QWebPage* self, intptr_t slot) {
-	QWebPage::connect(self, static_cast<void (QWebPage::*)(QWebFrame*, QWebPage::Feature)>(&QWebPage::featurePermissionRequestCanceled), self, [=](QWebFrame* frame, QWebPage::Feature feature) {
+void* QWebPage_connect_featurePermissionRequestCanceled(QWebPage* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QWebPage>>(slot);
+	return new QMetaObject::Connection(QWebPage::connect(self, static_cast<void (QWebPage::*)(QWebFrame*, QWebPage::Feature)>(&QWebPage::featurePermissionRequestCanceled), self, [slot_handle](QWebFrame* frame, QWebPage::Feature feature) {
+		intptr_t slot = slot_handle->value();
 		QWebFrame* sigval1 = frame;
 		QWebPage::Feature feature_ret = feature;
 		int sigval2 = static_cast<int>(feature_ret);
 		miqt_exec_callback_QWebPage_featurePermissionRequestCanceled(slot, sigval1, sigval2);
-	});
+	}));
 }
 
 void QWebPage_fullScreenRequested(QWebPage* self, QWebFullScreenRequest* fullScreenRequest) {
 	self->fullScreenRequested(*fullScreenRequest);
 }
 
-void QWebPage_connect_fullScreenRequested(QWebPage* self, intptr_t slot) {
-	QWebPage::connect(self, static_cast<void (QWebPage::*)(QWebFullScreenRequest)>(&QWebPage::fullScreenRequested), self, [=](QWebFullScreenRequest fullScreenRequest) {
+void* QWebPage_connect_fullScreenRequested(QWebPage* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QWebPage>>(slot);
+	return new QMetaObject::Connection(QWebPage::connect(self, static_cast<void (QWebPage::*)(QWebFullScreenRequest)>(&QWebPage::fullScreenRequested), self, [slot_handle](QWebFullScreenRequest fullScreenRequest) {
+		intptr_t slot = slot_handle->value();
 		QWebFullScreenRequest* sigval1 = new QWebFullScreenRequest(fullScreenRequest);
 		miqt_exec_callback_QWebPage_fullScreenRequested(slot, sigval1);
-	});
+	}));
 }
 
 void QWebPage_consoleMessageReceived(QWebPage* self, int source, int level, struct miqt_string message, int lineNumber, struct miqt_string sourceID) {
@@ -1214,8 +1275,10 @@ void QWebPage_consoleMessageReceived(QWebPage* self, int source, int level, stru
 	self->consoleMessageReceived(static_cast<QWebPage::MessageSource>(source), static_cast<QWebPage::MessageLevel>(level), message_QString, static_cast<int>(lineNumber), sourceID_QString);
 }
 
-void QWebPage_connect_consoleMessageReceived(QWebPage* self, intptr_t slot) {
-	QWebPage::connect(self, static_cast<void (QWebPage::*)(QWebPage::MessageSource, QWebPage::MessageLevel, const QString&, int, const QString&)>(&QWebPage::consoleMessageReceived), self, [=](QWebPage::MessageSource source, QWebPage::MessageLevel level, const QString& message, int lineNumber, const QString& sourceID) {
+void* QWebPage_connect_consoleMessageReceived(QWebPage* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QWebPage>>(slot);
+	return new QMetaObject::Connection(QWebPage::connect(self, static_cast<void (QWebPage::*)(QWebPage::MessageSource, QWebPage::MessageLevel, const QString&, int, const QString&)>(&QWebPage::consoleMessageReceived), self, [slot_handle](QWebPage::MessageSource source, QWebPage::MessageLevel level, const QString& message, int lineNumber, const QString& sourceID) {
+		intptr_t slot = slot_handle->value();
 		QWebPage::MessageSource source_ret = source;
 		int sigval1 = static_cast<int>(source_ret);
 		QWebPage::MessageLevel level_ret = level;
@@ -1238,18 +1301,20 @@ void QWebPage_connect_consoleMessageReceived(QWebPage* self, intptr_t slot) {
 		memcpy(sourceID_ms.data, sourceID_b.data(), sourceID_ms.len);
 		struct miqt_string sigval5 = sourceID_ms;
 		miqt_exec_callback_QWebPage_consoleMessageReceived(slot, sigval1, sigval2, sigval3, sigval4, sigval5);
-	});
+	}));
 }
 
 void QWebPage_recentlyAudibleChanged(QWebPage* self, bool recentlyAudible) {
 	self->recentlyAudibleChanged(recentlyAudible);
 }
 
-void QWebPage_connect_recentlyAudibleChanged(QWebPage* self, intptr_t slot) {
-	QWebPage::connect(self, static_cast<void (QWebPage::*)(bool)>(&QWebPage::recentlyAudibleChanged), self, [=](bool recentlyAudible) {
+void* QWebPage_connect_recentlyAudibleChanged(QWebPage* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QWebPage>>(slot);
+	return new QMetaObject::Connection(QWebPage::connect(self, static_cast<void (QWebPage::*)(bool)>(&QWebPage::recentlyAudibleChanged), self, [slot_handle](bool recentlyAudible) {
+		intptr_t slot = slot_handle->value();
 		bool sigval1 = recentlyAudible;
 		miqt_exec_callback_QWebPage_recentlyAudibleChanged(slot, sigval1);
-	});
+	}));
 }
 
 struct miqt_string QWebPage_tr2(const char* s, const char* c) {
@@ -1302,12 +1367,13 @@ bool QWebPage_findText2(QWebPage* self, struct miqt_string subString, int option
 }
 
 bool QWebPage_override_virtual_triggerAction(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QWebPage> slot_handle(slot);
 	MiqtVirtualQWebPage* self_cast = dynamic_cast<MiqtVirtualQWebPage*>( (QWebPage*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__triggerAction = slot;
+	self_cast->handle__triggerAction = std::move(slot_handle);
 	return true;
 }
 
@@ -1316,12 +1382,13 @@ void QWebPage_virtualbase_triggerAction(void* self, int action, bool checked) {
 }
 
 bool QWebPage_override_virtual_event(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QWebPage> slot_handle(slot);
 	MiqtVirtualQWebPage* self_cast = dynamic_cast<MiqtVirtualQWebPage*>( (QWebPage*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__event = slot;
+	self_cast->handle__event = std::move(slot_handle);
 	return true;
 }
 
@@ -1330,12 +1397,13 @@ bool QWebPage_virtualbase_event(void* self, QEvent* param1) {
 }
 
 bool QWebPage_override_virtual_extension(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QWebPage> slot_handle(slot);
 	MiqtVirtualQWebPage* self_cast = dynamic_cast<MiqtVirtualQWebPage*>( (QWebPage*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__extension = slot;
+	self_cast->handle__extension = std::move(slot_handle);
 	return true;
 }
 
@@ -1344,12 +1412,13 @@ bool QWebPage_virtualbase_extension(void* self, int extension, QWebPage__Extensi
 }
 
 bool QWebPage_override_virtual_supportsExtension(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QWebPage> slot_handle(slot);
 	MiqtVirtualQWebPage* self_cast = dynamic_cast<MiqtVirtualQWebPage*>( (QWebPage*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__supportsExtension = slot;
+	self_cast->handle__supportsExtension = std::move(slot_handle);
 	return true;
 }
 
@@ -1358,12 +1427,13 @@ bool QWebPage_virtualbase_supportsExtension(const void* self, int extension) {
 }
 
 bool QWebPage_override_virtual_shouldInterruptJavaScript(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QWebPage> slot_handle(slot);
 	MiqtVirtualQWebPage* self_cast = dynamic_cast<MiqtVirtualQWebPage*>( (QWebPage*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__shouldInterruptJavaScript = slot;
+	self_cast->handle__shouldInterruptJavaScript = std::move(slot_handle);
 	return true;
 }
 
@@ -1372,12 +1442,13 @@ bool QWebPage_virtualbase_shouldInterruptJavaScript(void* self) {
 }
 
 bool QWebPage_override_virtual_createWindow(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QWebPage> slot_handle(slot);
 	MiqtVirtualQWebPage* self_cast = dynamic_cast<MiqtVirtualQWebPage*>( (QWebPage*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__createWindow = slot;
+	self_cast->handle__createWindow = std::move(slot_handle);
 	return true;
 }
 
@@ -1386,12 +1457,13 @@ QWebPage* QWebPage_virtualbase_createWindow(void* self, int type) {
 }
 
 bool QWebPage_override_virtual_createPlugin(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QWebPage> slot_handle(slot);
 	MiqtVirtualQWebPage* self_cast = dynamic_cast<MiqtVirtualQWebPage*>( (QWebPage*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__createPlugin = slot;
+	self_cast->handle__createPlugin = std::move(slot_handle);
 	return true;
 }
 
@@ -1415,12 +1487,13 @@ QObject* QWebPage_virtualbase_createPlugin(void* self, struct miqt_string classi
 }
 
 bool QWebPage_override_virtual_acceptNavigationRequest(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QWebPage> slot_handle(slot);
 	MiqtVirtualQWebPage* self_cast = dynamic_cast<MiqtVirtualQWebPage*>( (QWebPage*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__acceptNavigationRequest = slot;
+	self_cast->handle__acceptNavigationRequest = std::move(slot_handle);
 	return true;
 }
 
@@ -1429,12 +1502,13 @@ bool QWebPage_virtualbase_acceptNavigationRequest(void* self, QWebFrame* frame, 
 }
 
 bool QWebPage_override_virtual_chooseFile(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QWebPage> slot_handle(slot);
 	MiqtVirtualQWebPage* self_cast = dynamic_cast<MiqtVirtualQWebPage*>( (QWebPage*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__chooseFile = slot;
+	self_cast->handle__chooseFile = std::move(slot_handle);
 	return true;
 }
 
@@ -1451,12 +1525,13 @@ struct miqt_string QWebPage_virtualbase_chooseFile(void* self, QWebFrame* origin
 }
 
 bool QWebPage_override_virtual_javaScriptAlert(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QWebPage> slot_handle(slot);
 	MiqtVirtualQWebPage* self_cast = dynamic_cast<MiqtVirtualQWebPage*>( (QWebPage*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__javaScriptAlert = slot;
+	self_cast->handle__javaScriptAlert = std::move(slot_handle);
 	return true;
 }
 
@@ -1466,12 +1541,13 @@ void QWebPage_virtualbase_javaScriptAlert(void* self, QWebFrame* originatingFram
 }
 
 bool QWebPage_override_virtual_javaScriptConfirm(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QWebPage> slot_handle(slot);
 	MiqtVirtualQWebPage* self_cast = dynamic_cast<MiqtVirtualQWebPage*>( (QWebPage*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__javaScriptConfirm = slot;
+	self_cast->handle__javaScriptConfirm = std::move(slot_handle);
 	return true;
 }
 
@@ -1481,12 +1557,13 @@ bool QWebPage_virtualbase_javaScriptConfirm(void* self, QWebFrame* originatingFr
 }
 
 bool QWebPage_override_virtual_javaScriptConsoleMessage(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QWebPage> slot_handle(slot);
 	MiqtVirtualQWebPage* self_cast = dynamic_cast<MiqtVirtualQWebPage*>( (QWebPage*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__javaScriptConsoleMessage = slot;
+	self_cast->handle__javaScriptConsoleMessage = std::move(slot_handle);
 	return true;
 }
 
@@ -1497,12 +1574,13 @@ void QWebPage_virtualbase_javaScriptConsoleMessage(void* self, struct miqt_strin
 }
 
 bool QWebPage_override_virtual_userAgentForUrl(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QWebPage> slot_handle(slot);
 	MiqtVirtualQWebPage* self_cast = dynamic_cast<MiqtVirtualQWebPage*>( (QWebPage*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__userAgentForUrl = slot;
+	self_cast->handle__userAgentForUrl = std::move(slot_handle);
 	return true;
 }
 
@@ -1518,12 +1596,13 @@ struct miqt_string QWebPage_virtualbase_userAgentForUrl(const void* self, QUrl* 
 }
 
 bool QWebPage_override_virtual_eventFilter(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QWebPage> slot_handle(slot);
 	MiqtVirtualQWebPage* self_cast = dynamic_cast<MiqtVirtualQWebPage*>( (QWebPage*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__eventFilter = slot;
+	self_cast->handle__eventFilter = std::move(slot_handle);
 	return true;
 }
 
@@ -1532,12 +1611,13 @@ bool QWebPage_virtualbase_eventFilter(void* self, QObject* watched, QEvent* even
 }
 
 bool QWebPage_override_virtual_timerEvent(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QWebPage> slot_handle(slot);
 	MiqtVirtualQWebPage* self_cast = dynamic_cast<MiqtVirtualQWebPage*>( (QWebPage*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__timerEvent = slot;
+	self_cast->handle__timerEvent = std::move(slot_handle);
 	return true;
 }
 
@@ -1546,12 +1626,13 @@ void QWebPage_virtualbase_timerEvent(void* self, QTimerEvent* event) {
 }
 
 bool QWebPage_override_virtual_childEvent(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QWebPage> slot_handle(slot);
 	MiqtVirtualQWebPage* self_cast = dynamic_cast<MiqtVirtualQWebPage*>( (QWebPage*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__childEvent = slot;
+	self_cast->handle__childEvent = std::move(slot_handle);
 	return true;
 }
 
@@ -1560,12 +1641,13 @@ void QWebPage_virtualbase_childEvent(void* self, QChildEvent* event) {
 }
 
 bool QWebPage_override_virtual_customEvent(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QWebPage> slot_handle(slot);
 	MiqtVirtualQWebPage* self_cast = dynamic_cast<MiqtVirtualQWebPage*>( (QWebPage*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__customEvent = slot;
+	self_cast->handle__customEvent = std::move(slot_handle);
 	return true;
 }
 
@@ -1574,12 +1656,13 @@ void QWebPage_virtualbase_customEvent(void* self, QEvent* event) {
 }
 
 bool QWebPage_override_virtual_connectNotify(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QWebPage> slot_handle(slot);
 	MiqtVirtualQWebPage* self_cast = dynamic_cast<MiqtVirtualQWebPage*>( (QWebPage*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__connectNotify = slot;
+	self_cast->handle__connectNotify = std::move(slot_handle);
 	return true;
 }
 
@@ -1588,12 +1671,13 @@ void QWebPage_virtualbase_connectNotify(void* self, QMetaMethod* signal) {
 }
 
 bool QWebPage_override_virtual_disconnectNotify(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QWebPage> slot_handle(slot);
 	MiqtVirtualQWebPage* self_cast = dynamic_cast<MiqtVirtualQWebPage*>( (QWebPage*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__disconnectNotify = slot;
+	self_cast->handle__disconnectNotify = std::move(slot_handle);
 	return true;
 }
 

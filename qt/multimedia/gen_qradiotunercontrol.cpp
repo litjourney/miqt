@@ -1,3 +1,5 @@
+#include <memory>
+#include <utility>
 #include <QMediaControl>
 #include <QMetaMethod>
 #include <QMetaObject>
@@ -14,6 +16,7 @@
 extern "C" {
 #endif
 
+void miqt_exec_callback_handle_release_QRadioTunerControl(intptr_t);
 void miqt_exec_callback_QRadioTunerControl_stateChanged(intptr_t, int);
 void miqt_exec_callback_QRadioTunerControl_bandChanged(intptr_t, int);
 void miqt_exec_callback_QRadioTunerControl_frequencyChanged(intptr_t, int);
@@ -192,102 +195,120 @@ void QRadioTunerControl_stateChanged(QRadioTunerControl* self, int state) {
 	self->stateChanged(static_cast<QRadioTuner::State>(state));
 }
 
-void QRadioTunerControl_connect_stateChanged(QRadioTunerControl* self, intptr_t slot) {
-	QRadioTunerControl::connect(self, static_cast<void (QRadioTunerControl::*)(QRadioTuner::State)>(&QRadioTunerControl::stateChanged), self, [=](QRadioTuner::State state) {
+void* QRadioTunerControl_connect_stateChanged(QRadioTunerControl* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QRadioTunerControl>>(slot);
+	return new QMetaObject::Connection(QRadioTunerControl::connect(self, static_cast<void (QRadioTunerControl::*)(QRadioTuner::State)>(&QRadioTunerControl::stateChanged), self, [slot_handle](QRadioTuner::State state) {
+		intptr_t slot = slot_handle->value();
 		QRadioTuner::State state_ret = state;
 		int sigval1 = static_cast<int>(state_ret);
 		miqt_exec_callback_QRadioTunerControl_stateChanged(slot, sigval1);
-	});
+	}));
 }
 
 void QRadioTunerControl_bandChanged(QRadioTunerControl* self, int band) {
 	self->bandChanged(static_cast<QRadioTuner::Band>(band));
 }
 
-void QRadioTunerControl_connect_bandChanged(QRadioTunerControl* self, intptr_t slot) {
-	QRadioTunerControl::connect(self, static_cast<void (QRadioTunerControl::*)(QRadioTuner::Band)>(&QRadioTunerControl::bandChanged), self, [=](QRadioTuner::Band band) {
+void* QRadioTunerControl_connect_bandChanged(QRadioTunerControl* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QRadioTunerControl>>(slot);
+	return new QMetaObject::Connection(QRadioTunerControl::connect(self, static_cast<void (QRadioTunerControl::*)(QRadioTuner::Band)>(&QRadioTunerControl::bandChanged), self, [slot_handle](QRadioTuner::Band band) {
+		intptr_t slot = slot_handle->value();
 		QRadioTuner::Band band_ret = band;
 		int sigval1 = static_cast<int>(band_ret);
 		miqt_exec_callback_QRadioTunerControl_bandChanged(slot, sigval1);
-	});
+	}));
 }
 
 void QRadioTunerControl_frequencyChanged(QRadioTunerControl* self, int frequency) {
 	self->frequencyChanged(static_cast<int>(frequency));
 }
 
-void QRadioTunerControl_connect_frequencyChanged(QRadioTunerControl* self, intptr_t slot) {
-	QRadioTunerControl::connect(self, static_cast<void (QRadioTunerControl::*)(int)>(&QRadioTunerControl::frequencyChanged), self, [=](int frequency) {
+void* QRadioTunerControl_connect_frequencyChanged(QRadioTunerControl* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QRadioTunerControl>>(slot);
+	return new QMetaObject::Connection(QRadioTunerControl::connect(self, static_cast<void (QRadioTunerControl::*)(int)>(&QRadioTunerControl::frequencyChanged), self, [slot_handle](int frequency) {
+		intptr_t slot = slot_handle->value();
 		int sigval1 = frequency;
 		miqt_exec_callback_QRadioTunerControl_frequencyChanged(slot, sigval1);
-	});
+	}));
 }
 
 void QRadioTunerControl_stereoStatusChanged(QRadioTunerControl* self, bool stereo) {
 	self->stereoStatusChanged(stereo);
 }
 
-void QRadioTunerControl_connect_stereoStatusChanged(QRadioTunerControl* self, intptr_t slot) {
-	QRadioTunerControl::connect(self, static_cast<void (QRadioTunerControl::*)(bool)>(&QRadioTunerControl::stereoStatusChanged), self, [=](bool stereo) {
+void* QRadioTunerControl_connect_stereoStatusChanged(QRadioTunerControl* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QRadioTunerControl>>(slot);
+	return new QMetaObject::Connection(QRadioTunerControl::connect(self, static_cast<void (QRadioTunerControl::*)(bool)>(&QRadioTunerControl::stereoStatusChanged), self, [slot_handle](bool stereo) {
+		intptr_t slot = slot_handle->value();
 		bool sigval1 = stereo;
 		miqt_exec_callback_QRadioTunerControl_stereoStatusChanged(slot, sigval1);
-	});
+	}));
 }
 
 void QRadioTunerControl_searchingChanged(QRadioTunerControl* self, bool searching) {
 	self->searchingChanged(searching);
 }
 
-void QRadioTunerControl_connect_searchingChanged(QRadioTunerControl* self, intptr_t slot) {
-	QRadioTunerControl::connect(self, static_cast<void (QRadioTunerControl::*)(bool)>(&QRadioTunerControl::searchingChanged), self, [=](bool searching) {
+void* QRadioTunerControl_connect_searchingChanged(QRadioTunerControl* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QRadioTunerControl>>(slot);
+	return new QMetaObject::Connection(QRadioTunerControl::connect(self, static_cast<void (QRadioTunerControl::*)(bool)>(&QRadioTunerControl::searchingChanged), self, [slot_handle](bool searching) {
+		intptr_t slot = slot_handle->value();
 		bool sigval1 = searching;
 		miqt_exec_callback_QRadioTunerControl_searchingChanged(slot, sigval1);
-	});
+	}));
 }
 
 void QRadioTunerControl_signalStrengthChanged(QRadioTunerControl* self, int signalStrength) {
 	self->signalStrengthChanged(static_cast<int>(signalStrength));
 }
 
-void QRadioTunerControl_connect_signalStrengthChanged(QRadioTunerControl* self, intptr_t slot) {
-	QRadioTunerControl::connect(self, static_cast<void (QRadioTunerControl::*)(int)>(&QRadioTunerControl::signalStrengthChanged), self, [=](int signalStrength) {
+void* QRadioTunerControl_connect_signalStrengthChanged(QRadioTunerControl* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QRadioTunerControl>>(slot);
+	return new QMetaObject::Connection(QRadioTunerControl::connect(self, static_cast<void (QRadioTunerControl::*)(int)>(&QRadioTunerControl::signalStrengthChanged), self, [slot_handle](int signalStrength) {
+		intptr_t slot = slot_handle->value();
 		int sigval1 = signalStrength;
 		miqt_exec_callback_QRadioTunerControl_signalStrengthChanged(slot, sigval1);
-	});
+	}));
 }
 
 void QRadioTunerControl_volumeChanged(QRadioTunerControl* self, int volume) {
 	self->volumeChanged(static_cast<int>(volume));
 }
 
-void QRadioTunerControl_connect_volumeChanged(QRadioTunerControl* self, intptr_t slot) {
-	QRadioTunerControl::connect(self, static_cast<void (QRadioTunerControl::*)(int)>(&QRadioTunerControl::volumeChanged), self, [=](int volume) {
+void* QRadioTunerControl_connect_volumeChanged(QRadioTunerControl* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QRadioTunerControl>>(slot);
+	return new QMetaObject::Connection(QRadioTunerControl::connect(self, static_cast<void (QRadioTunerControl::*)(int)>(&QRadioTunerControl::volumeChanged), self, [slot_handle](int volume) {
+		intptr_t slot = slot_handle->value();
 		int sigval1 = volume;
 		miqt_exec_callback_QRadioTunerControl_volumeChanged(slot, sigval1);
-	});
+	}));
 }
 
 void QRadioTunerControl_mutedChanged(QRadioTunerControl* self, bool muted) {
 	self->mutedChanged(muted);
 }
 
-void QRadioTunerControl_connect_mutedChanged(QRadioTunerControl* self, intptr_t slot) {
-	QRadioTunerControl::connect(self, static_cast<void (QRadioTunerControl::*)(bool)>(&QRadioTunerControl::mutedChanged), self, [=](bool muted) {
+void* QRadioTunerControl_connect_mutedChanged(QRadioTunerControl* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QRadioTunerControl>>(slot);
+	return new QMetaObject::Connection(QRadioTunerControl::connect(self, static_cast<void (QRadioTunerControl::*)(bool)>(&QRadioTunerControl::mutedChanged), self, [slot_handle](bool muted) {
+		intptr_t slot = slot_handle->value();
 		bool sigval1 = muted;
 		miqt_exec_callback_QRadioTunerControl_mutedChanged(slot, sigval1);
-	});
+	}));
 }
 
 void QRadioTunerControl_errorWithErr(QRadioTunerControl* self, int err) {
 	self->error(static_cast<QRadioTuner::Error>(err));
 }
 
-void QRadioTunerControl_connect_errorWithErr(QRadioTunerControl* self, intptr_t slot) {
-	QRadioTunerControl::connect(self, static_cast<void (QRadioTunerControl::*)(QRadioTuner::Error)>(&QRadioTunerControl::error), self, [=](QRadioTuner::Error err) {
+void* QRadioTunerControl_connect_errorWithErr(QRadioTunerControl* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QRadioTunerControl>>(slot);
+	return new QMetaObject::Connection(QRadioTunerControl::connect(self, static_cast<void (QRadioTunerControl::*)(QRadioTuner::Error)>(&QRadioTunerControl::error), self, [slot_handle](QRadioTuner::Error err) {
+		intptr_t slot = slot_handle->value();
 		QRadioTuner::Error err_ret = err;
 		int sigval1 = static_cast<int>(err_ret);
 		miqt_exec_callback_QRadioTunerControl_errorWithErr(slot, sigval1);
-	});
+	}));
 }
 
 void QRadioTunerControl_stationFound(QRadioTunerControl* self, int frequency, struct miqt_string stationId) {
@@ -295,8 +316,10 @@ void QRadioTunerControl_stationFound(QRadioTunerControl* self, int frequency, st
 	self->stationFound(static_cast<int>(frequency), stationId_QString);
 }
 
-void QRadioTunerControl_connect_stationFound(QRadioTunerControl* self, intptr_t slot) {
-	QRadioTunerControl::connect(self, static_cast<void (QRadioTunerControl::*)(int, QString)>(&QRadioTunerControl::stationFound), self, [=](int frequency, QString stationId) {
+void* QRadioTunerControl_connect_stationFound(QRadioTunerControl* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QRadioTunerControl>>(slot);
+	return new QMetaObject::Connection(QRadioTunerControl::connect(self, static_cast<void (QRadioTunerControl::*)(int, QString)>(&QRadioTunerControl::stationFound), self, [slot_handle](int frequency, QString stationId) {
+		intptr_t slot = slot_handle->value();
 		int sigval1 = frequency;
 		QString stationId_ret = stationId;
 		// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
@@ -307,18 +330,20 @@ void QRadioTunerControl_connect_stationFound(QRadioTunerControl* self, intptr_t 
 		memcpy(stationId_ms.data, stationId_b.data(), stationId_ms.len);
 		struct miqt_string sigval2 = stationId_ms;
 		miqt_exec_callback_QRadioTunerControl_stationFound(slot, sigval1, sigval2);
-	});
+	}));
 }
 
 void QRadioTunerControl_antennaConnectedChanged(QRadioTunerControl* self, bool connectionStatus) {
 	self->antennaConnectedChanged(connectionStatus);
 }
 
-void QRadioTunerControl_connect_antennaConnectedChanged(QRadioTunerControl* self, intptr_t slot) {
-	QRadioTunerControl::connect(self, static_cast<void (QRadioTunerControl::*)(bool)>(&QRadioTunerControl::antennaConnectedChanged), self, [=](bool connectionStatus) {
+void* QRadioTunerControl_connect_antennaConnectedChanged(QRadioTunerControl* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QRadioTunerControl>>(slot);
+	return new QMetaObject::Connection(QRadioTunerControl::connect(self, static_cast<void (QRadioTunerControl::*)(bool)>(&QRadioTunerControl::antennaConnectedChanged), self, [slot_handle](bool connectionStatus) {
+		intptr_t slot = slot_handle->value();
 		bool sigval1 = connectionStatus;
 		miqt_exec_callback_QRadioTunerControl_antennaConnectedChanged(slot, sigval1);
-	});
+	}));
 }
 
 struct miqt_string QRadioTunerControl_tr2(const char* s, const char* c) {

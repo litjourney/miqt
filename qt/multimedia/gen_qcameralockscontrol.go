@@ -15,6 +15,11 @@ import (
 	"unsafe"
 )
 
+//export miqt_exec_callback_handle_release_QCameraLocksControl
+func miqt_exec_callback_handle_release_QCameraLocksControl(cb C.intptr_t) {
+	cgo.Handle(cb).Delete()
+}
+
 type QCameraLocksControl struct {
 	h *C.QCameraLocksControl
 	*QMediaControl
@@ -98,8 +103,10 @@ func (this *QCameraLocksControl) Unlock(locks QCamera__LockType) {
 func (this *QCameraLocksControl) LockStatusChanged(typeVal QCamera__LockType, status QCamera__LockStatus, reason QCamera__LockChangeReason) {
 	C.QCameraLocksControl_lockStatusChanged(this.h, (C.int)(typeVal), (C.int)(status), (C.int)(reason))
 }
-func (this *QCameraLocksControl) OnLockStatusChanged(slot func(typeVal QCamera__LockType, status QCamera__LockStatus, reason QCamera__LockChangeReason)) {
-	C.QCameraLocksControl_connect_lockStatusChanged(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QCameraLocksControl) OnLockStatusChanged(slot func(typeVal QCamera__LockType, status QCamera__LockStatus, reason QCamera__LockChangeReason)) *qt.SignalConnection {
+	_goptr := qt.UnsafeNewQMetaObject__Connection(C.QCameraLocksControl_connect_lockStatusChanged(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QCameraLocksControl_lockStatusChanged

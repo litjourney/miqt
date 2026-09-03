@@ -1,3 +1,5 @@
+#include <memory>
+#include <utility>
 #include <QAmbientSound>
 #include <QAudioEngine>
 #include <QChildEvent>
@@ -17,6 +19,7 @@
 extern "C" {
 #endif
 
+void miqt_exec_callback_handle_release_QAmbientSound(intptr_t);
 void miqt_exec_callback_QAmbientSound_sourceChanged(intptr_t);
 void miqt_exec_callback_QAmbientSound_loopsChanged(intptr_t);
 void miqt_exec_callback_QAmbientSound_autoPlayChanged(intptr_t);
@@ -40,95 +43,95 @@ public:
 	virtual ~MiqtVirtualQAmbientSound() override = default;
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__event = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QAmbientSound> handle__event;
 
 	// Subclass to allow providing a Go implementation
 	virtual bool event(QEvent* event) override {
-		if (handle__event == 0) {
+		if (!handle__event) {
 			return QAmbientSound::event(event);
 		}
 
 		QEvent* sigval1 = event;
-		bool callback_return_value = miqt_exec_callback_QAmbientSound_event(this, handle__event, sigval1);
+		bool callback_return_value = miqt_exec_callback_QAmbientSound_event(this, handle__event.value(), sigval1);
 		return callback_return_value;
 	}
 
 	friend bool QAmbientSound_virtualbase_event(void* self, QEvent* event);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__eventFilter = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QAmbientSound> handle__eventFilter;
 
 	// Subclass to allow providing a Go implementation
 	virtual bool eventFilter(QObject* watched, QEvent* event) override {
-		if (handle__eventFilter == 0) {
+		if (!handle__eventFilter) {
 			return QAmbientSound::eventFilter(watched, event);
 		}
 
 		QObject* sigval1 = watched;
 		QEvent* sigval2 = event;
-		bool callback_return_value = miqt_exec_callback_QAmbientSound_eventFilter(this, handle__eventFilter, sigval1, sigval2);
+		bool callback_return_value = miqt_exec_callback_QAmbientSound_eventFilter(this, handle__eventFilter.value(), sigval1, sigval2);
 		return callback_return_value;
 	}
 
 	friend bool QAmbientSound_virtualbase_eventFilter(void* self, QObject* watched, QEvent* event);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__timerEvent = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QAmbientSound> handle__timerEvent;
 
 	// Subclass to allow providing a Go implementation
 	virtual void timerEvent(QTimerEvent* event) override {
-		if (handle__timerEvent == 0) {
+		if (!handle__timerEvent) {
 			QAmbientSound::timerEvent(event);
 			return;
 		}
 
 		QTimerEvent* sigval1 = event;
-		miqt_exec_callback_QAmbientSound_timerEvent(this, handle__timerEvent, sigval1);
+		miqt_exec_callback_QAmbientSound_timerEvent(this, handle__timerEvent.value(), sigval1);
 
 	}
 
 	friend void QAmbientSound_virtualbase_timerEvent(void* self, QTimerEvent* event);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__childEvent = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QAmbientSound> handle__childEvent;
 
 	// Subclass to allow providing a Go implementation
 	virtual void childEvent(QChildEvent* event) override {
-		if (handle__childEvent == 0) {
+		if (!handle__childEvent) {
 			QAmbientSound::childEvent(event);
 			return;
 		}
 
 		QChildEvent* sigval1 = event;
-		miqt_exec_callback_QAmbientSound_childEvent(this, handle__childEvent, sigval1);
+		miqt_exec_callback_QAmbientSound_childEvent(this, handle__childEvent.value(), sigval1);
 
 	}
 
 	friend void QAmbientSound_virtualbase_childEvent(void* self, QChildEvent* event);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__customEvent = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QAmbientSound> handle__customEvent;
 
 	// Subclass to allow providing a Go implementation
 	virtual void customEvent(QEvent* event) override {
-		if (handle__customEvent == 0) {
+		if (!handle__customEvent) {
 			QAmbientSound::customEvent(event);
 			return;
 		}
 
 		QEvent* sigval1 = event;
-		miqt_exec_callback_QAmbientSound_customEvent(this, handle__customEvent, sigval1);
+		miqt_exec_callback_QAmbientSound_customEvent(this, handle__customEvent.value(), sigval1);
 
 	}
 
 	friend void QAmbientSound_virtualbase_customEvent(void* self, QEvent* event);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__connectNotify = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QAmbientSound> handle__connectNotify;
 
 	// Subclass to allow providing a Go implementation
 	virtual void connectNotify(const QMetaMethod& signal) override {
-		if (handle__connectNotify == 0) {
+		if (!handle__connectNotify) {
 			QAmbientSound::connectNotify(signal);
 			return;
 		}
@@ -136,18 +139,18 @@ public:
 		const QMetaMethod& signal_ret = signal;
 		// Cast returned reference into pointer
 		QMetaMethod* sigval1 = const_cast<QMetaMethod*>(&signal_ret);
-		miqt_exec_callback_QAmbientSound_connectNotify(this, handle__connectNotify, sigval1);
+		miqt_exec_callback_QAmbientSound_connectNotify(this, handle__connectNotify.value(), sigval1);
 
 	}
 
 	friend void QAmbientSound_virtualbase_connectNotify(void* self, QMetaMethod* signal);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__disconnectNotify = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QAmbientSound> handle__disconnectNotify;
 
 	// Subclass to allow providing a Go implementation
 	virtual void disconnectNotify(const QMetaMethod& signal) override {
-		if (handle__disconnectNotify == 0) {
+		if (!handle__disconnectNotify) {
 			QAmbientSound::disconnectNotify(signal);
 			return;
 		}
@@ -155,7 +158,7 @@ public:
 		const QMetaMethod& signal_ret = signal;
 		// Cast returned reference into pointer
 		QMetaMethod* sigval1 = const_cast<QMetaMethod*>(&signal_ret);
-		miqt_exec_callback_QAmbientSound_disconnectNotify(this, handle__disconnectNotify, sigval1);
+		miqt_exec_callback_QAmbientSound_disconnectNotify(this, handle__disconnectNotify.value(), sigval1);
 
 	}
 
@@ -235,40 +238,48 @@ void QAmbientSound_sourceChanged(QAmbientSound* self) {
 	self->sourceChanged();
 }
 
-void QAmbientSound_connect_sourceChanged(QAmbientSound* self, intptr_t slot) {
-	QAmbientSound::connect(self, static_cast<void (QAmbientSound::*)()>(&QAmbientSound::sourceChanged), self, [=]() {
+void* QAmbientSound_connect_sourceChanged(QAmbientSound* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QAmbientSound>>(slot);
+	return new QMetaObject::Connection(QAmbientSound::connect(self, static_cast<void (QAmbientSound::*)()>(&QAmbientSound::sourceChanged), self, [slot_handle]() {
+		intptr_t slot = slot_handle->value();
 		miqt_exec_callback_QAmbientSound_sourceChanged(slot);
-	});
+	}));
 }
 
 void QAmbientSound_loopsChanged(QAmbientSound* self) {
 	self->loopsChanged();
 }
 
-void QAmbientSound_connect_loopsChanged(QAmbientSound* self, intptr_t slot) {
-	QAmbientSound::connect(self, static_cast<void (QAmbientSound::*)()>(&QAmbientSound::loopsChanged), self, [=]() {
+void* QAmbientSound_connect_loopsChanged(QAmbientSound* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QAmbientSound>>(slot);
+	return new QMetaObject::Connection(QAmbientSound::connect(self, static_cast<void (QAmbientSound::*)()>(&QAmbientSound::loopsChanged), self, [slot_handle]() {
+		intptr_t slot = slot_handle->value();
 		miqt_exec_callback_QAmbientSound_loopsChanged(slot);
-	});
+	}));
 }
 
 void QAmbientSound_autoPlayChanged(QAmbientSound* self) {
 	self->autoPlayChanged();
 }
 
-void QAmbientSound_connect_autoPlayChanged(QAmbientSound* self, intptr_t slot) {
-	QAmbientSound::connect(self, static_cast<void (QAmbientSound::*)()>(&QAmbientSound::autoPlayChanged), self, [=]() {
+void* QAmbientSound_connect_autoPlayChanged(QAmbientSound* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QAmbientSound>>(slot);
+	return new QMetaObject::Connection(QAmbientSound::connect(self, static_cast<void (QAmbientSound::*)()>(&QAmbientSound::autoPlayChanged), self, [slot_handle]() {
+		intptr_t slot = slot_handle->value();
 		miqt_exec_callback_QAmbientSound_autoPlayChanged(slot);
-	});
+	}));
 }
 
 void QAmbientSound_volumeChanged(QAmbientSound* self) {
 	self->volumeChanged();
 }
 
-void QAmbientSound_connect_volumeChanged(QAmbientSound* self, intptr_t slot) {
-	QAmbientSound::connect(self, static_cast<void (QAmbientSound::*)()>(&QAmbientSound::volumeChanged), self, [=]() {
+void* QAmbientSound_connect_volumeChanged(QAmbientSound* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QAmbientSound>>(slot);
+	return new QMetaObject::Connection(QAmbientSound::connect(self, static_cast<void (QAmbientSound::*)()>(&QAmbientSound::volumeChanged), self, [slot_handle]() {
+		intptr_t slot = slot_handle->value();
 		miqt_exec_callback_QAmbientSound_volumeChanged(slot);
-	});
+	}));
 }
 
 void QAmbientSound_play(QAmbientSound* self) {
@@ -306,12 +317,13 @@ struct miqt_string QAmbientSound_tr3(const char* s, const char* c, int n) {
 }
 
 bool QAmbientSound_override_virtual_event(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QAmbientSound> slot_handle(slot);
 	MiqtVirtualQAmbientSound* self_cast = dynamic_cast<MiqtVirtualQAmbientSound*>( (QAmbientSound*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__event = slot;
+	self_cast->handle__event = std::move(slot_handle);
 	return true;
 }
 
@@ -320,12 +332,13 @@ bool QAmbientSound_virtualbase_event(void* self, QEvent* event) {
 }
 
 bool QAmbientSound_override_virtual_eventFilter(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QAmbientSound> slot_handle(slot);
 	MiqtVirtualQAmbientSound* self_cast = dynamic_cast<MiqtVirtualQAmbientSound*>( (QAmbientSound*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__eventFilter = slot;
+	self_cast->handle__eventFilter = std::move(slot_handle);
 	return true;
 }
 
@@ -334,12 +347,13 @@ bool QAmbientSound_virtualbase_eventFilter(void* self, QObject* watched, QEvent*
 }
 
 bool QAmbientSound_override_virtual_timerEvent(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QAmbientSound> slot_handle(slot);
 	MiqtVirtualQAmbientSound* self_cast = dynamic_cast<MiqtVirtualQAmbientSound*>( (QAmbientSound*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__timerEvent = slot;
+	self_cast->handle__timerEvent = std::move(slot_handle);
 	return true;
 }
 
@@ -348,12 +362,13 @@ void QAmbientSound_virtualbase_timerEvent(void* self, QTimerEvent* event) {
 }
 
 bool QAmbientSound_override_virtual_childEvent(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QAmbientSound> slot_handle(slot);
 	MiqtVirtualQAmbientSound* self_cast = dynamic_cast<MiqtVirtualQAmbientSound*>( (QAmbientSound*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__childEvent = slot;
+	self_cast->handle__childEvent = std::move(slot_handle);
 	return true;
 }
 
@@ -362,12 +377,13 @@ void QAmbientSound_virtualbase_childEvent(void* self, QChildEvent* event) {
 }
 
 bool QAmbientSound_override_virtual_customEvent(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QAmbientSound> slot_handle(slot);
 	MiqtVirtualQAmbientSound* self_cast = dynamic_cast<MiqtVirtualQAmbientSound*>( (QAmbientSound*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__customEvent = slot;
+	self_cast->handle__customEvent = std::move(slot_handle);
 	return true;
 }
 
@@ -376,12 +392,13 @@ void QAmbientSound_virtualbase_customEvent(void* self, QEvent* event) {
 }
 
 bool QAmbientSound_override_virtual_connectNotify(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QAmbientSound> slot_handle(slot);
 	MiqtVirtualQAmbientSound* self_cast = dynamic_cast<MiqtVirtualQAmbientSound*>( (QAmbientSound*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__connectNotify = slot;
+	self_cast->handle__connectNotify = std::move(slot_handle);
 	return true;
 }
 
@@ -390,12 +407,13 @@ void QAmbientSound_virtualbase_connectNotify(void* self, QMetaMethod* signal) {
 }
 
 bool QAmbientSound_override_virtual_disconnectNotify(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QAmbientSound> slot_handle(slot);
 	MiqtVirtualQAmbientSound* self_cast = dynamic_cast<MiqtVirtualQAmbientSound*>( (QAmbientSound*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__disconnectNotify = slot;
+	self_cast->handle__disconnectNotify = std::move(slot_handle);
 	return true;
 }
 

@@ -1,3 +1,5 @@
+#include <memory>
+#include <utility>
 #include <QAudioInput>
 #include <QAudioOutput>
 #include <QCamera>
@@ -21,6 +23,7 @@
 extern "C" {
 #endif
 
+void miqt_exec_callback_handle_release_QMediaCaptureSession(intptr_t);
 void miqt_exec_callback_QMediaCaptureSession_audioInputChanged(intptr_t);
 void miqt_exec_callback_QMediaCaptureSession_cameraChanged(intptr_t);
 void miqt_exec_callback_QMediaCaptureSession_imageCaptureChanged(intptr_t);
@@ -47,95 +50,95 @@ public:
 	virtual ~MiqtVirtualQMediaCaptureSession() override = default;
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__event = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QMediaCaptureSession> handle__event;
 
 	// Subclass to allow providing a Go implementation
 	virtual bool event(QEvent* event) override {
-		if (handle__event == 0) {
+		if (!handle__event) {
 			return QMediaCaptureSession::event(event);
 		}
 
 		QEvent* sigval1 = event;
-		bool callback_return_value = miqt_exec_callback_QMediaCaptureSession_event(this, handle__event, sigval1);
+		bool callback_return_value = miqt_exec_callback_QMediaCaptureSession_event(this, handle__event.value(), sigval1);
 		return callback_return_value;
 	}
 
 	friend bool QMediaCaptureSession_virtualbase_event(void* self, QEvent* event);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__eventFilter = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QMediaCaptureSession> handle__eventFilter;
 
 	// Subclass to allow providing a Go implementation
 	virtual bool eventFilter(QObject* watched, QEvent* event) override {
-		if (handle__eventFilter == 0) {
+		if (!handle__eventFilter) {
 			return QMediaCaptureSession::eventFilter(watched, event);
 		}
 
 		QObject* sigval1 = watched;
 		QEvent* sigval2 = event;
-		bool callback_return_value = miqt_exec_callback_QMediaCaptureSession_eventFilter(this, handle__eventFilter, sigval1, sigval2);
+		bool callback_return_value = miqt_exec_callback_QMediaCaptureSession_eventFilter(this, handle__eventFilter.value(), sigval1, sigval2);
 		return callback_return_value;
 	}
 
 	friend bool QMediaCaptureSession_virtualbase_eventFilter(void* self, QObject* watched, QEvent* event);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__timerEvent = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QMediaCaptureSession> handle__timerEvent;
 
 	// Subclass to allow providing a Go implementation
 	virtual void timerEvent(QTimerEvent* event) override {
-		if (handle__timerEvent == 0) {
+		if (!handle__timerEvent) {
 			QMediaCaptureSession::timerEvent(event);
 			return;
 		}
 
 		QTimerEvent* sigval1 = event;
-		miqt_exec_callback_QMediaCaptureSession_timerEvent(this, handle__timerEvent, sigval1);
+		miqt_exec_callback_QMediaCaptureSession_timerEvent(this, handle__timerEvent.value(), sigval1);
 
 	}
 
 	friend void QMediaCaptureSession_virtualbase_timerEvent(void* self, QTimerEvent* event);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__childEvent = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QMediaCaptureSession> handle__childEvent;
 
 	// Subclass to allow providing a Go implementation
 	virtual void childEvent(QChildEvent* event) override {
-		if (handle__childEvent == 0) {
+		if (!handle__childEvent) {
 			QMediaCaptureSession::childEvent(event);
 			return;
 		}
 
 		QChildEvent* sigval1 = event;
-		miqt_exec_callback_QMediaCaptureSession_childEvent(this, handle__childEvent, sigval1);
+		miqt_exec_callback_QMediaCaptureSession_childEvent(this, handle__childEvent.value(), sigval1);
 
 	}
 
 	friend void QMediaCaptureSession_virtualbase_childEvent(void* self, QChildEvent* event);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__customEvent = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QMediaCaptureSession> handle__customEvent;
 
 	// Subclass to allow providing a Go implementation
 	virtual void customEvent(QEvent* event) override {
-		if (handle__customEvent == 0) {
+		if (!handle__customEvent) {
 			QMediaCaptureSession::customEvent(event);
 			return;
 		}
 
 		QEvent* sigval1 = event;
-		miqt_exec_callback_QMediaCaptureSession_customEvent(this, handle__customEvent, sigval1);
+		miqt_exec_callback_QMediaCaptureSession_customEvent(this, handle__customEvent.value(), sigval1);
 
 	}
 
 	friend void QMediaCaptureSession_virtualbase_customEvent(void* self, QEvent* event);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__connectNotify = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QMediaCaptureSession> handle__connectNotify;
 
 	// Subclass to allow providing a Go implementation
 	virtual void connectNotify(const QMetaMethod& signal) override {
-		if (handle__connectNotify == 0) {
+		if (!handle__connectNotify) {
 			QMediaCaptureSession::connectNotify(signal);
 			return;
 		}
@@ -143,18 +146,18 @@ public:
 		const QMetaMethod& signal_ret = signal;
 		// Cast returned reference into pointer
 		QMetaMethod* sigval1 = const_cast<QMetaMethod*>(&signal_ret);
-		miqt_exec_callback_QMediaCaptureSession_connectNotify(this, handle__connectNotify, sigval1);
+		miqt_exec_callback_QMediaCaptureSession_connectNotify(this, handle__connectNotify.value(), sigval1);
 
 	}
 
 	friend void QMediaCaptureSession_virtualbase_connectNotify(void* self, QMetaMethod* signal);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__disconnectNotify = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QMediaCaptureSession> handle__disconnectNotify;
 
 	// Subclass to allow providing a Go implementation
 	virtual void disconnectNotify(const QMetaMethod& signal) override {
-		if (handle__disconnectNotify == 0) {
+		if (!handle__disconnectNotify) {
 			QMediaCaptureSession::disconnectNotify(signal);
 			return;
 		}
@@ -162,7 +165,7 @@ public:
 		const QMetaMethod& signal_ret = signal;
 		// Cast returned reference into pointer
 		QMetaMethod* sigval1 = const_cast<QMetaMethod*>(&signal_ret);
-		miqt_exec_callback_QMediaCaptureSession_disconnectNotify(this, handle__disconnectNotify, sigval1);
+		miqt_exec_callback_QMediaCaptureSession_disconnectNotify(this, handle__disconnectNotify.value(), sigval1);
 
 	}
 
@@ -266,60 +269,72 @@ void QMediaCaptureSession_audioInputChanged(QMediaCaptureSession* self) {
 	self->audioInputChanged();
 }
 
-void QMediaCaptureSession_connect_audioInputChanged(QMediaCaptureSession* self, intptr_t slot) {
-	QMediaCaptureSession::connect(self, static_cast<void (QMediaCaptureSession::*)()>(&QMediaCaptureSession::audioInputChanged), self, [=]() {
+void* QMediaCaptureSession_connect_audioInputChanged(QMediaCaptureSession* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QMediaCaptureSession>>(slot);
+	return new QMetaObject::Connection(QMediaCaptureSession::connect(self, static_cast<void (QMediaCaptureSession::*)()>(&QMediaCaptureSession::audioInputChanged), self, [slot_handle]() {
+		intptr_t slot = slot_handle->value();
 		miqt_exec_callback_QMediaCaptureSession_audioInputChanged(slot);
-	});
+	}));
 }
 
 void QMediaCaptureSession_cameraChanged(QMediaCaptureSession* self) {
 	self->cameraChanged();
 }
 
-void QMediaCaptureSession_connect_cameraChanged(QMediaCaptureSession* self, intptr_t slot) {
-	QMediaCaptureSession::connect(self, static_cast<void (QMediaCaptureSession::*)()>(&QMediaCaptureSession::cameraChanged), self, [=]() {
+void* QMediaCaptureSession_connect_cameraChanged(QMediaCaptureSession* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QMediaCaptureSession>>(slot);
+	return new QMetaObject::Connection(QMediaCaptureSession::connect(self, static_cast<void (QMediaCaptureSession::*)()>(&QMediaCaptureSession::cameraChanged), self, [slot_handle]() {
+		intptr_t slot = slot_handle->value();
 		miqt_exec_callback_QMediaCaptureSession_cameraChanged(slot);
-	});
+	}));
 }
 
 void QMediaCaptureSession_imageCaptureChanged(QMediaCaptureSession* self) {
 	self->imageCaptureChanged();
 }
 
-void QMediaCaptureSession_connect_imageCaptureChanged(QMediaCaptureSession* self, intptr_t slot) {
-	QMediaCaptureSession::connect(self, static_cast<void (QMediaCaptureSession::*)()>(&QMediaCaptureSession::imageCaptureChanged), self, [=]() {
+void* QMediaCaptureSession_connect_imageCaptureChanged(QMediaCaptureSession* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QMediaCaptureSession>>(slot);
+	return new QMetaObject::Connection(QMediaCaptureSession::connect(self, static_cast<void (QMediaCaptureSession::*)()>(&QMediaCaptureSession::imageCaptureChanged), self, [slot_handle]() {
+		intptr_t slot = slot_handle->value();
 		miqt_exec_callback_QMediaCaptureSession_imageCaptureChanged(slot);
-	});
+	}));
 }
 
 void QMediaCaptureSession_recorderChanged(QMediaCaptureSession* self) {
 	self->recorderChanged();
 }
 
-void QMediaCaptureSession_connect_recorderChanged(QMediaCaptureSession* self, intptr_t slot) {
-	QMediaCaptureSession::connect(self, static_cast<void (QMediaCaptureSession::*)()>(&QMediaCaptureSession::recorderChanged), self, [=]() {
+void* QMediaCaptureSession_connect_recorderChanged(QMediaCaptureSession* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QMediaCaptureSession>>(slot);
+	return new QMetaObject::Connection(QMediaCaptureSession::connect(self, static_cast<void (QMediaCaptureSession::*)()>(&QMediaCaptureSession::recorderChanged), self, [slot_handle]() {
+		intptr_t slot = slot_handle->value();
 		miqt_exec_callback_QMediaCaptureSession_recorderChanged(slot);
-	});
+	}));
 }
 
 void QMediaCaptureSession_videoOutputChanged(QMediaCaptureSession* self) {
 	self->videoOutputChanged();
 }
 
-void QMediaCaptureSession_connect_videoOutputChanged(QMediaCaptureSession* self, intptr_t slot) {
-	QMediaCaptureSession::connect(self, static_cast<void (QMediaCaptureSession::*)()>(&QMediaCaptureSession::videoOutputChanged), self, [=]() {
+void* QMediaCaptureSession_connect_videoOutputChanged(QMediaCaptureSession* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QMediaCaptureSession>>(slot);
+	return new QMetaObject::Connection(QMediaCaptureSession::connect(self, static_cast<void (QMediaCaptureSession::*)()>(&QMediaCaptureSession::videoOutputChanged), self, [slot_handle]() {
+		intptr_t slot = slot_handle->value();
 		miqt_exec_callback_QMediaCaptureSession_videoOutputChanged(slot);
-	});
+	}));
 }
 
 void QMediaCaptureSession_audioOutputChanged(QMediaCaptureSession* self) {
 	self->audioOutputChanged();
 }
 
-void QMediaCaptureSession_connect_audioOutputChanged(QMediaCaptureSession* self, intptr_t slot) {
-	QMediaCaptureSession::connect(self, static_cast<void (QMediaCaptureSession::*)()>(&QMediaCaptureSession::audioOutputChanged), self, [=]() {
+void* QMediaCaptureSession_connect_audioOutputChanged(QMediaCaptureSession* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QMediaCaptureSession>>(slot);
+	return new QMetaObject::Connection(QMediaCaptureSession::connect(self, static_cast<void (QMediaCaptureSession::*)()>(&QMediaCaptureSession::audioOutputChanged), self, [slot_handle]() {
+		intptr_t slot = slot_handle->value();
 		miqt_exec_callback_QMediaCaptureSession_audioOutputChanged(slot);
-	});
+	}));
 }
 
 struct miqt_string QMediaCaptureSession_tr2(const char* s, const char* c) {
@@ -345,12 +360,13 @@ struct miqt_string QMediaCaptureSession_tr3(const char* s, const char* c, int n)
 }
 
 bool QMediaCaptureSession_override_virtual_event(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QMediaCaptureSession> slot_handle(slot);
 	MiqtVirtualQMediaCaptureSession* self_cast = dynamic_cast<MiqtVirtualQMediaCaptureSession*>( (QMediaCaptureSession*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__event = slot;
+	self_cast->handle__event = std::move(slot_handle);
 	return true;
 }
 
@@ -359,12 +375,13 @@ bool QMediaCaptureSession_virtualbase_event(void* self, QEvent* event) {
 }
 
 bool QMediaCaptureSession_override_virtual_eventFilter(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QMediaCaptureSession> slot_handle(slot);
 	MiqtVirtualQMediaCaptureSession* self_cast = dynamic_cast<MiqtVirtualQMediaCaptureSession*>( (QMediaCaptureSession*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__eventFilter = slot;
+	self_cast->handle__eventFilter = std::move(slot_handle);
 	return true;
 }
 
@@ -373,12 +390,13 @@ bool QMediaCaptureSession_virtualbase_eventFilter(void* self, QObject* watched, 
 }
 
 bool QMediaCaptureSession_override_virtual_timerEvent(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QMediaCaptureSession> slot_handle(slot);
 	MiqtVirtualQMediaCaptureSession* self_cast = dynamic_cast<MiqtVirtualQMediaCaptureSession*>( (QMediaCaptureSession*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__timerEvent = slot;
+	self_cast->handle__timerEvent = std::move(slot_handle);
 	return true;
 }
 
@@ -387,12 +405,13 @@ void QMediaCaptureSession_virtualbase_timerEvent(void* self, QTimerEvent* event)
 }
 
 bool QMediaCaptureSession_override_virtual_childEvent(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QMediaCaptureSession> slot_handle(slot);
 	MiqtVirtualQMediaCaptureSession* self_cast = dynamic_cast<MiqtVirtualQMediaCaptureSession*>( (QMediaCaptureSession*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__childEvent = slot;
+	self_cast->handle__childEvent = std::move(slot_handle);
 	return true;
 }
 
@@ -401,12 +420,13 @@ void QMediaCaptureSession_virtualbase_childEvent(void* self, QChildEvent* event)
 }
 
 bool QMediaCaptureSession_override_virtual_customEvent(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QMediaCaptureSession> slot_handle(slot);
 	MiqtVirtualQMediaCaptureSession* self_cast = dynamic_cast<MiqtVirtualQMediaCaptureSession*>( (QMediaCaptureSession*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__customEvent = slot;
+	self_cast->handle__customEvent = std::move(slot_handle);
 	return true;
 }
 
@@ -415,12 +435,13 @@ void QMediaCaptureSession_virtualbase_customEvent(void* self, QEvent* event) {
 }
 
 bool QMediaCaptureSession_override_virtual_connectNotify(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QMediaCaptureSession> slot_handle(slot);
 	MiqtVirtualQMediaCaptureSession* self_cast = dynamic_cast<MiqtVirtualQMediaCaptureSession*>( (QMediaCaptureSession*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__connectNotify = slot;
+	self_cast->handle__connectNotify = std::move(slot_handle);
 	return true;
 }
 
@@ -429,12 +450,13 @@ void QMediaCaptureSession_virtualbase_connectNotify(void* self, QMetaMethod* sig
 }
 
 bool QMediaCaptureSession_override_virtual_disconnectNotify(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QMediaCaptureSession> slot_handle(slot);
 	MiqtVirtualQMediaCaptureSession* self_cast = dynamic_cast<MiqtVirtualQMediaCaptureSession*>( (QMediaCaptureSession*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__disconnectNotify = slot;
+	self_cast->handle__disconnectNotify = std::move(slot_handle);
 	return true;
 }
 

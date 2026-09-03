@@ -33,6 +33,11 @@ const (
 	QSystemTrayIcon__Critical    QSystemTrayIcon__MessageIcon = 3
 )
 
+//export miqt_exec_callback_handle_release_QSystemTrayIcon
+func miqt_exec_callback_handle_release_QSystemTrayIcon(cb C.intptr_t) {
+	cgo.Handle(cb).Delete()
+}
+
 type QSystemTrayIcon struct {
 	h *C.QSystemTrayIcon
 	*QObject
@@ -211,8 +216,10 @@ func (this *QSystemTrayIcon) ShowMessage2(title string, msg string) {
 func (this *QSystemTrayIcon) Activated(reason QSystemTrayIcon__ActivationReason) {
 	C.QSystemTrayIcon_activated(this.h, (C.int)(reason))
 }
-func (this *QSystemTrayIcon) OnActivated(slot func(reason QSystemTrayIcon__ActivationReason)) {
-	C.QSystemTrayIcon_connect_activated(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QSystemTrayIcon) OnActivated(slot func(reason QSystemTrayIcon__ActivationReason)) *SignalConnection {
+	_goptr := UnsafeNewQMetaObject__Connection(C.QSystemTrayIcon_connect_activated(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QSystemTrayIcon_activated
@@ -231,8 +238,10 @@ func miqt_exec_callback_QSystemTrayIcon_activated(cb C.intptr_t, reason C.int) {
 func (this *QSystemTrayIcon) MessageClicked() {
 	C.QSystemTrayIcon_messageClicked(this.h)
 }
-func (this *QSystemTrayIcon) OnMessageClicked(slot func()) {
-	C.QSystemTrayIcon_connect_messageClicked(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QSystemTrayIcon) OnMessageClicked(slot func()) *SignalConnection {
+	_goptr := UnsafeNewQMetaObject__Connection(C.QSystemTrayIcon_connect_messageClicked(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QSystemTrayIcon_messageClicked
@@ -389,7 +398,11 @@ func (this *QSystemTrayIcon) callVirtualBase_Event(event *QEvent) bool {
 
 }
 func (this *QSystemTrayIcon) OnEvent(slot func(super func(event *QEvent) bool, event *QEvent) bool) {
-	ok := C.QSystemTrayIcon_override_virtual_event(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QSystemTrayIcon_override_virtual_event(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -417,7 +430,11 @@ func (this *QSystemTrayIcon) callVirtualBase_EventFilter(watched *QObject, event
 
 }
 func (this *QSystemTrayIcon) OnEventFilter(slot func(super func(watched *QObject, event *QEvent) bool, watched *QObject, event *QEvent) bool) {
-	ok := C.QSystemTrayIcon_override_virtual_eventFilter(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QSystemTrayIcon_override_virtual_eventFilter(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -447,7 +464,11 @@ func (this *QSystemTrayIcon) callVirtualBase_TimerEvent(event *QTimerEvent) {
 
 }
 func (this *QSystemTrayIcon) OnTimerEvent(slot func(super func(event *QTimerEvent), event *QTimerEvent)) {
-	ok := C.QSystemTrayIcon_override_virtual_timerEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QSystemTrayIcon_override_virtual_timerEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -473,7 +494,11 @@ func (this *QSystemTrayIcon) callVirtualBase_ChildEvent(event *QChildEvent) {
 
 }
 func (this *QSystemTrayIcon) OnChildEvent(slot func(super func(event *QChildEvent), event *QChildEvent)) {
-	ok := C.QSystemTrayIcon_override_virtual_childEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QSystemTrayIcon_override_virtual_childEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -499,7 +524,11 @@ func (this *QSystemTrayIcon) callVirtualBase_CustomEvent(event *QEvent) {
 
 }
 func (this *QSystemTrayIcon) OnCustomEvent(slot func(super func(event *QEvent), event *QEvent)) {
-	ok := C.QSystemTrayIcon_override_virtual_customEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QSystemTrayIcon_override_virtual_customEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -525,7 +554,11 @@ func (this *QSystemTrayIcon) callVirtualBase_ConnectNotify(signal *QMetaMethod) 
 
 }
 func (this *QSystemTrayIcon) OnConnectNotify(slot func(super func(signal *QMetaMethod), signal *QMetaMethod)) {
-	ok := C.QSystemTrayIcon_override_virtual_connectNotify(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QSystemTrayIcon_override_virtual_connectNotify(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -551,7 +584,11 @@ func (this *QSystemTrayIcon) callVirtualBase_DisconnectNotify(signal *QMetaMetho
 
 }
 func (this *QSystemTrayIcon) OnDisconnectNotify(slot func(super func(signal *QMetaMethod), signal *QMetaMethod)) {
-	ok := C.QSystemTrayIcon_override_virtual_disconnectNotify(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QSystemTrayIcon_override_virtual_disconnectNotify(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}

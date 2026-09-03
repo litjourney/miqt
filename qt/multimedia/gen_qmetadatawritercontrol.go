@@ -15,6 +15,11 @@ import (
 	"unsafe"
 )
 
+//export miqt_exec_callback_handle_release_QMetaDataWriterControl
+func miqt_exec_callback_handle_release_QMetaDataWriterControl(cb C.intptr_t) {
+	cgo.Handle(cb).Delete()
+}
+
 type QMetaDataWriterControl struct {
 	h *C.QMetaDataWriterControl
 	*QMediaControl
@@ -121,8 +126,10 @@ func (this *QMetaDataWriterControl) AvailableMetaData() []string {
 func (this *QMetaDataWriterControl) MetaDataChanged() {
 	C.QMetaDataWriterControl_metaDataChanged(this.h)
 }
-func (this *QMetaDataWriterControl) OnMetaDataChanged(slot func()) {
-	C.QMetaDataWriterControl_connect_metaDataChanged(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QMetaDataWriterControl) OnMetaDataChanged(slot func()) *qt.SignalConnection {
+	_goptr := qt.UnsafeNewQMetaObject__Connection(C.QMetaDataWriterControl_connect_metaDataChanged(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QMetaDataWriterControl_metaDataChanged
@@ -142,8 +149,10 @@ func (this *QMetaDataWriterControl) MetaDataChanged2(key string, value *qt.QVari
 	defer C.free(unsafe.Pointer(key_ms.data))
 	C.QMetaDataWriterControl_metaDataChanged2(this.h, key_ms, (*C.QVariant)(value.UnsafePointer()))
 }
-func (this *QMetaDataWriterControl) OnMetaDataChanged2(slot func(key string, value *qt.QVariant)) {
-	C.QMetaDataWriterControl_connect_metaDataChanged2(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QMetaDataWriterControl) OnMetaDataChanged2(slot func(key string, value *qt.QVariant)) *qt.SignalConnection {
+	_goptr := qt.UnsafeNewQMetaObject__Connection(C.QMetaDataWriterControl_connect_metaDataChanged2(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QMetaDataWriterControl_metaDataChanged2
@@ -166,8 +175,10 @@ func miqt_exec_callback_QMetaDataWriterControl_metaDataChanged2(cb C.intptr_t, k
 func (this *QMetaDataWriterControl) WritableChanged(writable bool) {
 	C.QMetaDataWriterControl_writableChanged(this.h, (C.bool)(writable))
 }
-func (this *QMetaDataWriterControl) OnWritableChanged(slot func(writable bool)) {
-	C.QMetaDataWriterControl_connect_writableChanged(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QMetaDataWriterControl) OnWritableChanged(slot func(writable bool)) *qt.SignalConnection {
+	_goptr := qt.UnsafeNewQMetaObject__Connection(C.QMetaDataWriterControl_connect_writableChanged(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QMetaDataWriterControl_writableChanged
@@ -186,8 +197,10 @@ func miqt_exec_callback_QMetaDataWriterControl_writableChanged(cb C.intptr_t, wr
 func (this *QMetaDataWriterControl) MetaDataAvailableChanged(available bool) {
 	C.QMetaDataWriterControl_metaDataAvailableChanged(this.h, (C.bool)(available))
 }
-func (this *QMetaDataWriterControl) OnMetaDataAvailableChanged(slot func(available bool)) {
-	C.QMetaDataWriterControl_connect_metaDataAvailableChanged(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QMetaDataWriterControl) OnMetaDataAvailableChanged(slot func(available bool)) *qt.SignalConnection {
+	_goptr := qt.UnsafeNewQMetaObject__Connection(C.QMetaDataWriterControl_connect_metaDataAvailableChanged(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QMetaDataWriterControl_metaDataAvailableChanged

@@ -15,6 +15,11 @@ import (
 	"unsafe"
 )
 
+//export miqt_exec_callback_handle_release_QCameraImageCaptureControl
+func miqt_exec_callback_handle_release_QCameraImageCaptureControl(cb C.intptr_t) {
+	cgo.Handle(cb).Delete()
+}
+
 type QCameraImageCaptureControl struct {
 	h *C.QCameraImageCaptureControl
 	*QMediaControl
@@ -106,8 +111,10 @@ func (this *QCameraImageCaptureControl) CancelCapture() {
 func (this *QCameraImageCaptureControl) ReadyForCaptureChanged(ready bool) {
 	C.QCameraImageCaptureControl_readyForCaptureChanged(this.h, (C.bool)(ready))
 }
-func (this *QCameraImageCaptureControl) OnReadyForCaptureChanged(slot func(ready bool)) {
-	C.QCameraImageCaptureControl_connect_readyForCaptureChanged(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QCameraImageCaptureControl) OnReadyForCaptureChanged(slot func(ready bool)) *qt.SignalConnection {
+	_goptr := qt.UnsafeNewQMetaObject__Connection(C.QCameraImageCaptureControl_connect_readyForCaptureChanged(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QCameraImageCaptureControl_readyForCaptureChanged
@@ -126,8 +133,10 @@ func miqt_exec_callback_QCameraImageCaptureControl_readyForCaptureChanged(cb C.i
 func (this *QCameraImageCaptureControl) ImageExposed(requestId int) {
 	C.QCameraImageCaptureControl_imageExposed(this.h, (C.int)(requestId))
 }
-func (this *QCameraImageCaptureControl) OnImageExposed(slot func(requestId int)) {
-	C.QCameraImageCaptureControl_connect_imageExposed(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QCameraImageCaptureControl) OnImageExposed(slot func(requestId int)) *qt.SignalConnection {
+	_goptr := qt.UnsafeNewQMetaObject__Connection(C.QCameraImageCaptureControl_connect_imageExposed(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QCameraImageCaptureControl_imageExposed
@@ -146,8 +155,10 @@ func miqt_exec_callback_QCameraImageCaptureControl_imageExposed(cb C.intptr_t, r
 func (this *QCameraImageCaptureControl) ImageCaptured(requestId int, preview *qt.QImage) {
 	C.QCameraImageCaptureControl_imageCaptured(this.h, (C.int)(requestId), (*C.QImage)(preview.UnsafePointer()))
 }
-func (this *QCameraImageCaptureControl) OnImageCaptured(slot func(requestId int, preview *qt.QImage)) {
-	C.QCameraImageCaptureControl_connect_imageCaptured(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QCameraImageCaptureControl) OnImageCaptured(slot func(requestId int, preview *qt.QImage)) *qt.SignalConnection {
+	_goptr := qt.UnsafeNewQMetaObject__Connection(C.QCameraImageCaptureControl_connect_imageCaptured(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QCameraImageCaptureControl_imageCaptured
@@ -172,8 +183,10 @@ func (this *QCameraImageCaptureControl) ImageMetadataAvailable(id int, key strin
 	defer C.free(unsafe.Pointer(key_ms.data))
 	C.QCameraImageCaptureControl_imageMetadataAvailable(this.h, (C.int)(id), key_ms, (*C.QVariant)(value.UnsafePointer()))
 }
-func (this *QCameraImageCaptureControl) OnImageMetadataAvailable(slot func(id int, key string, value *qt.QVariant)) {
-	C.QCameraImageCaptureControl_connect_imageMetadataAvailable(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QCameraImageCaptureControl) OnImageMetadataAvailable(slot func(id int, key string, value *qt.QVariant)) *qt.SignalConnection {
+	_goptr := qt.UnsafeNewQMetaObject__Connection(C.QCameraImageCaptureControl_connect_imageMetadataAvailable(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QCameraImageCaptureControl_imageMetadataAvailable
@@ -198,8 +211,10 @@ func miqt_exec_callback_QCameraImageCaptureControl_imageMetadataAvailable(cb C.i
 func (this *QCameraImageCaptureControl) ImageAvailable(requestId int, buffer *QVideoFrame) {
 	C.QCameraImageCaptureControl_imageAvailable(this.h, (C.int)(requestId), buffer.cPointer())
 }
-func (this *QCameraImageCaptureControl) OnImageAvailable(slot func(requestId int, buffer *QVideoFrame)) {
-	C.QCameraImageCaptureControl_connect_imageAvailable(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QCameraImageCaptureControl) OnImageAvailable(slot func(requestId int, buffer *QVideoFrame)) *qt.SignalConnection {
+	_goptr := qt.UnsafeNewQMetaObject__Connection(C.QCameraImageCaptureControl_connect_imageAvailable(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QCameraImageCaptureControl_imageAvailable
@@ -224,8 +239,10 @@ func (this *QCameraImageCaptureControl) ImageSaved(requestId int, fileName strin
 	defer C.free(unsafe.Pointer(fileName_ms.data))
 	C.QCameraImageCaptureControl_imageSaved(this.h, (C.int)(requestId), fileName_ms)
 }
-func (this *QCameraImageCaptureControl) OnImageSaved(slot func(requestId int, fileName string)) {
-	C.QCameraImageCaptureControl_connect_imageSaved(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QCameraImageCaptureControl) OnImageSaved(slot func(requestId int, fileName string)) *qt.SignalConnection {
+	_goptr := qt.UnsafeNewQMetaObject__Connection(C.QCameraImageCaptureControl_connect_imageSaved(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QCameraImageCaptureControl_imageSaved
@@ -253,8 +270,10 @@ func (this *QCameraImageCaptureControl) Error(id int, error int, errorString str
 	defer C.free(unsafe.Pointer(errorString_ms.data))
 	C.QCameraImageCaptureControl_error(this.h, (C.int)(id), (C.int)(error), errorString_ms)
 }
-func (this *QCameraImageCaptureControl) OnError(slot func(id int, error int, errorString string)) {
-	C.QCameraImageCaptureControl_connect_error(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QCameraImageCaptureControl) OnError(slot func(id int, error int, errorString string)) *qt.SignalConnection {
+	_goptr := qt.UnsafeNewQMetaObject__Connection(C.QCameraImageCaptureControl_connect_error(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QCameraImageCaptureControl_error

@@ -15,6 +15,11 @@ import (
 	"unsafe"
 )
 
+//export miqt_exec_callback_handle_release_QwtRoundScaleDraw
+func miqt_exec_callback_handle_release_QwtRoundScaleDraw(cb C.intptr_t) {
+	cgo.Handle(cb).Delete()
+}
+
 type QwtRoundScaleDraw struct {
 	h *C.QwtRoundScaleDraw
 	*QwtAbstractScaleDraw
@@ -119,7 +124,11 @@ func (this *QwtRoundScaleDraw) callVirtualBase_Extent(param1 *qt.QFont) float64 
 
 }
 func (this *QwtRoundScaleDraw) OnExtent(slot func(super func(param1 *qt.QFont) float64, param1 *qt.QFont) float64) {
-	ok := C.QwtRoundScaleDraw_override_virtual_extent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QwtRoundScaleDraw_override_virtual_extent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -147,7 +156,11 @@ func (this *QwtRoundScaleDraw) callVirtualBase_DrawTick(param1 *qt.QPainter, val
 
 }
 func (this *QwtRoundScaleDraw) OnDrawTick(slot func(super func(param1 *qt.QPainter, value float64, lenVal float64), param1 *qt.QPainter, value float64, lenVal float64)) {
-	ok := C.QwtRoundScaleDraw_override_virtual_drawTick(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QwtRoundScaleDraw_override_virtual_drawTick(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -177,7 +190,11 @@ func (this *QwtRoundScaleDraw) callVirtualBase_DrawBackbone(param1 *qt.QPainter)
 
 }
 func (this *QwtRoundScaleDraw) OnDrawBackbone(slot func(super func(param1 *qt.QPainter), param1 *qt.QPainter)) {
-	ok := C.QwtRoundScaleDraw_override_virtual_drawBackbone(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QwtRoundScaleDraw_override_virtual_drawBackbone(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -203,7 +220,11 @@ func (this *QwtRoundScaleDraw) callVirtualBase_DrawLabel(param1 *qt.QPainter, va
 
 }
 func (this *QwtRoundScaleDraw) OnDrawLabel(slot func(super func(param1 *qt.QPainter, val float64), param1 *qt.QPainter, val float64)) {
-	ok := C.QwtRoundScaleDraw_override_virtual_drawLabel(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QwtRoundScaleDraw_override_virtual_drawLabel(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -231,7 +252,11 @@ func (this *QwtRoundScaleDraw) callVirtualBase_Draw(param1 *qt.QPainter, param2 
 
 }
 func (this *QwtRoundScaleDraw) OnDraw(slot func(super func(param1 *qt.QPainter, param2 *qt.QPalette), param1 *qt.QPainter, param2 *qt.QPalette)) {
-	ok := C.QwtRoundScaleDraw_override_virtual_draw(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QwtRoundScaleDraw_override_virtual_draw(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -261,7 +286,11 @@ func (this *QwtRoundScaleDraw) callVirtualBase_Label(param1 float64) *QwtText {
 
 }
 func (this *QwtRoundScaleDraw) OnLabel(slot func(super func(param1 float64) *QwtText, param1 float64) *QwtText) {
-	ok := C.QwtRoundScaleDraw_override_virtual_label(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QwtRoundScaleDraw_override_virtual_label(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}

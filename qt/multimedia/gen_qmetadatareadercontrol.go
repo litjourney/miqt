@@ -15,6 +15,11 @@ import (
 	"unsafe"
 )
 
+//export miqt_exec_callback_handle_release_QMetaDataReaderControl
+func miqt_exec_callback_handle_release_QMetaDataReaderControl(cb C.intptr_t) {
+	cgo.Handle(cb).Delete()
+}
+
 type QMetaDataReaderControl struct {
 	h *C.QMetaDataReaderControl
 	*QMediaControl
@@ -109,8 +114,10 @@ func (this *QMetaDataReaderControl) AvailableMetaData() []string {
 func (this *QMetaDataReaderControl) MetaDataChanged() {
 	C.QMetaDataReaderControl_metaDataChanged(this.h)
 }
-func (this *QMetaDataReaderControl) OnMetaDataChanged(slot func()) {
-	C.QMetaDataReaderControl_connect_metaDataChanged(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QMetaDataReaderControl) OnMetaDataChanged(slot func()) *qt.SignalConnection {
+	_goptr := qt.UnsafeNewQMetaObject__Connection(C.QMetaDataReaderControl_connect_metaDataChanged(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QMetaDataReaderControl_metaDataChanged
@@ -130,8 +137,10 @@ func (this *QMetaDataReaderControl) MetaDataChanged2(key string, value *qt.QVari
 	defer C.free(unsafe.Pointer(key_ms.data))
 	C.QMetaDataReaderControl_metaDataChanged2(this.h, key_ms, (*C.QVariant)(value.UnsafePointer()))
 }
-func (this *QMetaDataReaderControl) OnMetaDataChanged2(slot func(key string, value *qt.QVariant)) {
-	C.QMetaDataReaderControl_connect_metaDataChanged2(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QMetaDataReaderControl) OnMetaDataChanged2(slot func(key string, value *qt.QVariant)) *qt.SignalConnection {
+	_goptr := qt.UnsafeNewQMetaObject__Connection(C.QMetaDataReaderControl_connect_metaDataChanged2(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QMetaDataReaderControl_metaDataChanged2
@@ -154,8 +163,10 @@ func miqt_exec_callback_QMetaDataReaderControl_metaDataChanged2(cb C.intptr_t, k
 func (this *QMetaDataReaderControl) MetaDataAvailableChanged(available bool) {
 	C.QMetaDataReaderControl_metaDataAvailableChanged(this.h, (C.bool)(available))
 }
-func (this *QMetaDataReaderControl) OnMetaDataAvailableChanged(slot func(available bool)) {
-	C.QMetaDataReaderControl_connect_metaDataAvailableChanged(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QMetaDataReaderControl) OnMetaDataAvailableChanged(slot func(available bool)) *qt.SignalConnection {
+	_goptr := qt.UnsafeNewQMetaObject__Connection(C.QMetaDataReaderControl_connect_metaDataAvailableChanged(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QMetaDataReaderControl_metaDataAvailableChanged

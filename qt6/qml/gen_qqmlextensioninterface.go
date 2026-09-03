@@ -9,10 +9,16 @@ package qml
 import "C"
 
 import (
+	"github.com/mappu/miqt/qt6"
 	"runtime"
 	"runtime/cgo"
 	"unsafe"
 )
+
+//export miqt_exec_callback_handle_release_QQmlTypesExtensionInterface
+func miqt_exec_callback_handle_release_QQmlTypesExtensionInterface(cb C.intptr_t) {
+	cgo.Handle(cb).Delete()
+}
 
 type QQmlTypesExtensionInterface struct {
 	h *C.QQmlTypesExtensionInterface
@@ -62,7 +68,11 @@ func (this *QQmlTypesExtensionInterface) OperatorAssign(param1 *QQmlTypesExtensi
 	C.QQmlTypesExtensionInterface_operatorAssign(this.h, param1.cPointer())
 }
 func (this *QQmlTypesExtensionInterface) OnRegisterTypes(slot func(uri string)) {
-	ok := C.QQmlTypesExtensionInterface_override_virtual_registerTypes(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QQmlTypesExtensionInterface_override_virtual_registerTypes(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -95,6 +105,11 @@ func (this *QQmlTypesExtensionInterface) GoGC() {
 		this.Delete()
 		runtime.KeepAlive(this.h)
 	})
+}
+
+//export miqt_exec_callback_handle_release_QQmlExtensionInterface
+func miqt_exec_callback_handle_release_QQmlExtensionInterface(cb C.intptr_t) {
+	cgo.Handle(cb).Delete()
 }
 
 type QQmlExtensionInterface struct {
@@ -149,7 +164,11 @@ func (this *QQmlExtensionInterface) OperatorAssign(param1 *QQmlExtensionInterfac
 	C.QQmlExtensionInterface_operatorAssign(this.h, param1.cPointer())
 }
 func (this *QQmlExtensionInterface) OnInitializeEngine(slot func(engine *QQmlEngine, uri string)) {
-	ok := C.QQmlExtensionInterface_override_virtual_initializeEngine(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QQmlExtensionInterface_override_virtual_initializeEngine(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -172,7 +191,11 @@ func miqt_exec_callback_QQmlExtensionInterface_initializeEngine(self *C.QQmlExte
 
 }
 func (this *QQmlExtensionInterface) OnRegisterTypes(slot func(uri string)) {
-	ok := C.QQmlExtensionInterface_override_virtual_registerTypes(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QQmlExtensionInterface_override_virtual_registerTypes(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}

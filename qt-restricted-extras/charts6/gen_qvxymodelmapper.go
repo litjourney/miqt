@@ -15,6 +15,11 @@ import (
 	"unsafe"
 )
 
+//export miqt_exec_callback_handle_release_QVXYModelMapper
+func miqt_exec_callback_handle_release_QVXYModelMapper(cb C.intptr_t) {
+	cgo.Handle(cb).Delete()
+}
+
 type QVXYModelMapper struct {
 	h *C.QVXYModelMapper
 	*QXYModelMapper
@@ -133,8 +138,10 @@ func (this *QVXYModelMapper) SetRowCount(rowCount int) {
 func (this *QVXYModelMapper) SeriesReplaced() {
 	C.QVXYModelMapper_seriesReplaced(this.h)
 }
-func (this *QVXYModelMapper) OnSeriesReplaced(slot func()) {
-	C.QVXYModelMapper_connect_seriesReplaced(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QVXYModelMapper) OnSeriesReplaced(slot func()) *qt6.SignalConnection {
+	_goptr := qt6.UnsafeNewQMetaObject__Connection(C.QVXYModelMapper_connect_seriesReplaced(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QVXYModelMapper_seriesReplaced
@@ -150,8 +157,10 @@ func miqt_exec_callback_QVXYModelMapper_seriesReplaced(cb C.intptr_t) {
 func (this *QVXYModelMapper) ModelReplaced() {
 	C.QVXYModelMapper_modelReplaced(this.h)
 }
-func (this *QVXYModelMapper) OnModelReplaced(slot func()) {
-	C.QVXYModelMapper_connect_modelReplaced(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QVXYModelMapper) OnModelReplaced(slot func()) *qt6.SignalConnection {
+	_goptr := qt6.UnsafeNewQMetaObject__Connection(C.QVXYModelMapper_connect_modelReplaced(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QVXYModelMapper_modelReplaced
@@ -167,8 +176,10 @@ func miqt_exec_callback_QVXYModelMapper_modelReplaced(cb C.intptr_t) {
 func (this *QVXYModelMapper) XColumnChanged() {
 	C.QVXYModelMapper_xColumnChanged(this.h)
 }
-func (this *QVXYModelMapper) OnXColumnChanged(slot func()) {
-	C.QVXYModelMapper_connect_xColumnChanged(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QVXYModelMapper) OnXColumnChanged(slot func()) *qt6.SignalConnection {
+	_goptr := qt6.UnsafeNewQMetaObject__Connection(C.QVXYModelMapper_connect_xColumnChanged(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QVXYModelMapper_xColumnChanged
@@ -184,8 +195,10 @@ func miqt_exec_callback_QVXYModelMapper_xColumnChanged(cb C.intptr_t) {
 func (this *QVXYModelMapper) YColumnChanged() {
 	C.QVXYModelMapper_yColumnChanged(this.h)
 }
-func (this *QVXYModelMapper) OnYColumnChanged(slot func()) {
-	C.QVXYModelMapper_connect_yColumnChanged(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QVXYModelMapper) OnYColumnChanged(slot func()) *qt6.SignalConnection {
+	_goptr := qt6.UnsafeNewQMetaObject__Connection(C.QVXYModelMapper_connect_yColumnChanged(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QVXYModelMapper_yColumnChanged
@@ -201,8 +214,10 @@ func miqt_exec_callback_QVXYModelMapper_yColumnChanged(cb C.intptr_t) {
 func (this *QVXYModelMapper) FirstRowChanged() {
 	C.QVXYModelMapper_firstRowChanged(this.h)
 }
-func (this *QVXYModelMapper) OnFirstRowChanged(slot func()) {
-	C.QVXYModelMapper_connect_firstRowChanged(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QVXYModelMapper) OnFirstRowChanged(slot func()) *qt6.SignalConnection {
+	_goptr := qt6.UnsafeNewQMetaObject__Connection(C.QVXYModelMapper_connect_firstRowChanged(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QVXYModelMapper_firstRowChanged
@@ -218,8 +233,10 @@ func miqt_exec_callback_QVXYModelMapper_firstRowChanged(cb C.intptr_t) {
 func (this *QVXYModelMapper) RowCountChanged() {
 	C.QVXYModelMapper_rowCountChanged(this.h)
 }
-func (this *QVXYModelMapper) OnRowCountChanged(slot func()) {
-	C.QVXYModelMapper_connect_rowCountChanged(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QVXYModelMapper) OnRowCountChanged(slot func()) *qt6.SignalConnection {
+	_goptr := qt6.UnsafeNewQMetaObject__Connection(C.QVXYModelMapper_connect_rowCountChanged(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QVXYModelMapper_rowCountChanged
@@ -448,7 +465,11 @@ func (this *QVXYModelMapper) callVirtualBase_Event(event *qt6.QEvent) bool {
 
 }
 func (this *QVXYModelMapper) OnEvent(slot func(super func(event *qt6.QEvent) bool, event *qt6.QEvent) bool) {
-	ok := C.QVXYModelMapper_override_virtual_event(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QVXYModelMapper_override_virtual_event(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -476,7 +497,11 @@ func (this *QVXYModelMapper) callVirtualBase_EventFilter(watched *qt6.QObject, e
 
 }
 func (this *QVXYModelMapper) OnEventFilter(slot func(super func(watched *qt6.QObject, event *qt6.QEvent) bool, watched *qt6.QObject, event *qt6.QEvent) bool) {
-	ok := C.QVXYModelMapper_override_virtual_eventFilter(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QVXYModelMapper_override_virtual_eventFilter(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -506,7 +531,11 @@ func (this *QVXYModelMapper) callVirtualBase_TimerEvent(event *qt6.QTimerEvent) 
 
 }
 func (this *QVXYModelMapper) OnTimerEvent(slot func(super func(event *qt6.QTimerEvent), event *qt6.QTimerEvent)) {
-	ok := C.QVXYModelMapper_override_virtual_timerEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QVXYModelMapper_override_virtual_timerEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -532,7 +561,11 @@ func (this *QVXYModelMapper) callVirtualBase_ChildEvent(event *qt6.QChildEvent) 
 
 }
 func (this *QVXYModelMapper) OnChildEvent(slot func(super func(event *qt6.QChildEvent), event *qt6.QChildEvent)) {
-	ok := C.QVXYModelMapper_override_virtual_childEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QVXYModelMapper_override_virtual_childEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -558,7 +591,11 @@ func (this *QVXYModelMapper) callVirtualBase_CustomEvent(event *qt6.QEvent) {
 
 }
 func (this *QVXYModelMapper) OnCustomEvent(slot func(super func(event *qt6.QEvent), event *qt6.QEvent)) {
-	ok := C.QVXYModelMapper_override_virtual_customEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QVXYModelMapper_override_virtual_customEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -584,7 +621,11 @@ func (this *QVXYModelMapper) callVirtualBase_ConnectNotify(signal *qt6.QMetaMeth
 
 }
 func (this *QVXYModelMapper) OnConnectNotify(slot func(super func(signal *qt6.QMetaMethod), signal *qt6.QMetaMethod)) {
-	ok := C.QVXYModelMapper_override_virtual_connectNotify(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QVXYModelMapper_override_virtual_connectNotify(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -610,7 +651,11 @@ func (this *QVXYModelMapper) callVirtualBase_DisconnectNotify(signal *qt6.QMetaM
 
 }
 func (this *QVXYModelMapper) OnDisconnectNotify(slot func(super func(signal *qt6.QMetaMethod), signal *qt6.QMetaMethod)) {
-	ok := C.QVXYModelMapper_override_virtual_disconnectNotify(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QVXYModelMapper_override_virtual_disconnectNotify(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}

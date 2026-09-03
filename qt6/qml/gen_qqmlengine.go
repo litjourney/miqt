@@ -130,6 +130,11 @@ func (this *QQmlImageProviderBase) GoGC() {
 	})
 }
 
+//export miqt_exec_callback_handle_release_QQmlEngine
+func miqt_exec_callback_handle_release_QQmlEngine(cb C.intptr_t) {
+	cgo.Handle(cb).Delete()
+}
+
 type QQmlEngine struct {
 	h *C.QQmlEngine
 	*QJSEngine
@@ -448,8 +453,10 @@ func QQmlEngine_SetContextForObject(param1 *qt6.QObject, param2 *QQmlContext) {
 func (this *QQmlEngine) Quit() {
 	C.QQmlEngine_quit(this.h)
 }
-func (this *QQmlEngine) OnQuit(slot func()) {
-	C.QQmlEngine_connect_quit(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QQmlEngine) OnQuit(slot func()) *qt6.SignalConnection {
+	_goptr := qt6.UnsafeNewQMetaObject__Connection(C.QQmlEngine_connect_quit(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QQmlEngine_quit
@@ -465,8 +472,10 @@ func miqt_exec_callback_QQmlEngine_quit(cb C.intptr_t) {
 func (this *QQmlEngine) Exit(retCode int) {
 	C.QQmlEngine_exit(this.h, (C.int)(retCode))
 }
-func (this *QQmlEngine) OnExit(slot func(retCode int)) {
-	C.QQmlEngine_connect_exit(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QQmlEngine) OnExit(slot func(retCode int)) *qt6.SignalConnection {
+	_goptr := qt6.UnsafeNewQMetaObject__Connection(C.QQmlEngine_connect_exit(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QQmlEngine_exit
@@ -491,8 +500,10 @@ func (this *QQmlEngine) Warnings(warnings []QQmlError) {
 	warnings_ma := C.struct_miqt_array{len: C.size_t(len(warnings)), data: unsafe.Pointer(warnings_CArray)}
 	C.QQmlEngine_warnings(this.h, warnings_ma)
 }
-func (this *QQmlEngine) OnWarnings(slot func(warnings []QQmlError)) {
-	C.QQmlEngine_connect_warnings(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QQmlEngine) OnWarnings(slot func(warnings []QQmlError)) *qt6.SignalConnection {
+	_goptr := qt6.UnsafeNewQMetaObject__Connection(C.QQmlEngine_connect_warnings(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QQmlEngine_warnings
@@ -602,7 +613,11 @@ func (this *QQmlEngine) callVirtualBase_Event(param1 *qt6.QEvent) bool {
 
 }
 func (this *QQmlEngine) OnEvent(slot func(super func(param1 *qt6.QEvent) bool, param1 *qt6.QEvent) bool) {
-	ok := C.QQmlEngine_override_virtual_event(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QQmlEngine_override_virtual_event(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -630,7 +645,11 @@ func (this *QQmlEngine) callVirtualBase_EventFilter(watched *qt6.QObject, event 
 
 }
 func (this *QQmlEngine) OnEventFilter(slot func(super func(watched *qt6.QObject, event *qt6.QEvent) bool, watched *qt6.QObject, event *qt6.QEvent) bool) {
-	ok := C.QQmlEngine_override_virtual_eventFilter(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QQmlEngine_override_virtual_eventFilter(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -660,7 +679,11 @@ func (this *QQmlEngine) callVirtualBase_TimerEvent(event *qt6.QTimerEvent) {
 
 }
 func (this *QQmlEngine) OnTimerEvent(slot func(super func(event *qt6.QTimerEvent), event *qt6.QTimerEvent)) {
-	ok := C.QQmlEngine_override_virtual_timerEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QQmlEngine_override_virtual_timerEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -686,7 +709,11 @@ func (this *QQmlEngine) callVirtualBase_ChildEvent(event *qt6.QChildEvent) {
 
 }
 func (this *QQmlEngine) OnChildEvent(slot func(super func(event *qt6.QChildEvent), event *qt6.QChildEvent)) {
-	ok := C.QQmlEngine_override_virtual_childEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QQmlEngine_override_virtual_childEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -712,7 +739,11 @@ func (this *QQmlEngine) callVirtualBase_CustomEvent(event *qt6.QEvent) {
 
 }
 func (this *QQmlEngine) OnCustomEvent(slot func(super func(event *qt6.QEvent), event *qt6.QEvent)) {
-	ok := C.QQmlEngine_override_virtual_customEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QQmlEngine_override_virtual_customEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -738,7 +769,11 @@ func (this *QQmlEngine) callVirtualBase_ConnectNotify(signal *qt6.QMetaMethod) {
 
 }
 func (this *QQmlEngine) OnConnectNotify(slot func(super func(signal *qt6.QMetaMethod), signal *qt6.QMetaMethod)) {
-	ok := C.QQmlEngine_override_virtual_connectNotify(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QQmlEngine_override_virtual_connectNotify(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -764,7 +799,11 @@ func (this *QQmlEngine) callVirtualBase_DisconnectNotify(signal *qt6.QMetaMethod
 
 }
 func (this *QQmlEngine) OnDisconnectNotify(slot func(super func(signal *qt6.QMetaMethod), signal *qt6.QMetaMethod)) {
-	ok := C.QQmlEngine_override_virtual_disconnectNotify(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QQmlEngine_override_virtual_disconnectNotify(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}

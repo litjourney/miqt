@@ -1,3 +1,5 @@
+#include <memory>
+#include <utility>
 #include <QChildEvent>
 #include <QEvent>
 #include <QMetaMethod>
@@ -18,6 +20,7 @@
 extern "C" {
 #endif
 
+void miqt_exec_callback_handle_release_QNetworkSession(intptr_t);
 void miqt_exec_callback_QNetworkSession_stateChanged(intptr_t, int);
 void miqt_exec_callback_QNetworkSession_opened(intptr_t);
 void miqt_exec_callback_QNetworkSession_closed(intptr_t);
@@ -45,11 +48,11 @@ public:
 	virtual ~MiqtVirtualQNetworkSession() override = default;
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__connectNotify = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QNetworkSession> handle__connectNotify;
 
 	// Subclass to allow providing a Go implementation
 	virtual void connectNotify(const QMetaMethod& signal) override {
-		if (handle__connectNotify == 0) {
+		if (!handle__connectNotify) {
 			QNetworkSession::connectNotify(signal);
 			return;
 		}
@@ -57,18 +60,18 @@ public:
 		const QMetaMethod& signal_ret = signal;
 		// Cast returned reference into pointer
 		QMetaMethod* sigval1 = const_cast<QMetaMethod*>(&signal_ret);
-		miqt_exec_callback_QNetworkSession_connectNotify(this, handle__connectNotify, sigval1);
+		miqt_exec_callback_QNetworkSession_connectNotify(this, handle__connectNotify.value(), sigval1);
 
 	}
 
 	friend void QNetworkSession_virtualbase_connectNotify(void* self, QMetaMethod* signal);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__disconnectNotify = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QNetworkSession> handle__disconnectNotify;
 
 	// Subclass to allow providing a Go implementation
 	virtual void disconnectNotify(const QMetaMethod& signal) override {
-		if (handle__disconnectNotify == 0) {
+		if (!handle__disconnectNotify) {
 			QNetworkSession::disconnectNotify(signal);
 			return;
 		}
@@ -76,91 +79,91 @@ public:
 		const QMetaMethod& signal_ret = signal;
 		// Cast returned reference into pointer
 		QMetaMethod* sigval1 = const_cast<QMetaMethod*>(&signal_ret);
-		miqt_exec_callback_QNetworkSession_disconnectNotify(this, handle__disconnectNotify, sigval1);
+		miqt_exec_callback_QNetworkSession_disconnectNotify(this, handle__disconnectNotify.value(), sigval1);
 
 	}
 
 	friend void QNetworkSession_virtualbase_disconnectNotify(void* self, QMetaMethod* signal);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__event = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QNetworkSession> handle__event;
 
 	// Subclass to allow providing a Go implementation
 	virtual bool event(QEvent* event) override {
-		if (handle__event == 0) {
+		if (!handle__event) {
 			return QNetworkSession::event(event);
 		}
 
 		QEvent* sigval1 = event;
-		bool callback_return_value = miqt_exec_callback_QNetworkSession_event(this, handle__event, sigval1);
+		bool callback_return_value = miqt_exec_callback_QNetworkSession_event(this, handle__event.value(), sigval1);
 		return callback_return_value;
 	}
 
 	friend bool QNetworkSession_virtualbase_event(void* self, QEvent* event);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__eventFilter = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QNetworkSession> handle__eventFilter;
 
 	// Subclass to allow providing a Go implementation
 	virtual bool eventFilter(QObject* watched, QEvent* event) override {
-		if (handle__eventFilter == 0) {
+		if (!handle__eventFilter) {
 			return QNetworkSession::eventFilter(watched, event);
 		}
 
 		QObject* sigval1 = watched;
 		QEvent* sigval2 = event;
-		bool callback_return_value = miqt_exec_callback_QNetworkSession_eventFilter(this, handle__eventFilter, sigval1, sigval2);
+		bool callback_return_value = miqt_exec_callback_QNetworkSession_eventFilter(this, handle__eventFilter.value(), sigval1, sigval2);
 		return callback_return_value;
 	}
 
 	friend bool QNetworkSession_virtualbase_eventFilter(void* self, QObject* watched, QEvent* event);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__timerEvent = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QNetworkSession> handle__timerEvent;
 
 	// Subclass to allow providing a Go implementation
 	virtual void timerEvent(QTimerEvent* event) override {
-		if (handle__timerEvent == 0) {
+		if (!handle__timerEvent) {
 			QNetworkSession::timerEvent(event);
 			return;
 		}
 
 		QTimerEvent* sigval1 = event;
-		miqt_exec_callback_QNetworkSession_timerEvent(this, handle__timerEvent, sigval1);
+		miqt_exec_callback_QNetworkSession_timerEvent(this, handle__timerEvent.value(), sigval1);
 
 	}
 
 	friend void QNetworkSession_virtualbase_timerEvent(void* self, QTimerEvent* event);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__childEvent = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QNetworkSession> handle__childEvent;
 
 	// Subclass to allow providing a Go implementation
 	virtual void childEvent(QChildEvent* event) override {
-		if (handle__childEvent == 0) {
+		if (!handle__childEvent) {
 			QNetworkSession::childEvent(event);
 			return;
 		}
 
 		QChildEvent* sigval1 = event;
-		miqt_exec_callback_QNetworkSession_childEvent(this, handle__childEvent, sigval1);
+		miqt_exec_callback_QNetworkSession_childEvent(this, handle__childEvent.value(), sigval1);
 
 	}
 
 	friend void QNetworkSession_virtualbase_childEvent(void* self, QChildEvent* event);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__customEvent = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QNetworkSession> handle__customEvent;
 
 	// Subclass to allow providing a Go implementation
 	virtual void customEvent(QEvent* event) override {
-		if (handle__customEvent == 0) {
+		if (!handle__customEvent) {
 			QNetworkSession::customEvent(event);
 			return;
 		}
 
 		QEvent* sigval1 = event;
-		miqt_exec_callback_QNetworkSession_customEvent(this, handle__customEvent, sigval1);
+		miqt_exec_callback_QNetworkSession_customEvent(this, handle__customEvent.value(), sigval1);
 
 	}
 
@@ -314,80 +317,94 @@ void QNetworkSession_stateChanged(QNetworkSession* self, int param1) {
 	self->stateChanged(static_cast<QNetworkSession::State>(param1));
 }
 
-void QNetworkSession_connect_stateChanged(QNetworkSession* self, intptr_t slot) {
-	QNetworkSession::connect(self, static_cast<void (QNetworkSession::*)(QNetworkSession::State)>(&QNetworkSession::stateChanged), self, [=](QNetworkSession::State param1) {
+void* QNetworkSession_connect_stateChanged(QNetworkSession* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QNetworkSession>>(slot);
+	return new QMetaObject::Connection(QNetworkSession::connect(self, static_cast<void (QNetworkSession::*)(QNetworkSession::State)>(&QNetworkSession::stateChanged), self, [slot_handle](QNetworkSession::State param1) {
+		intptr_t slot = slot_handle->value();
 		QNetworkSession::State param1_ret = param1;
 		int sigval1 = static_cast<int>(param1_ret);
 		miqt_exec_callback_QNetworkSession_stateChanged(slot, sigval1);
-	});
+	}));
 }
 
 void QNetworkSession_opened(QNetworkSession* self) {
 	self->opened();
 }
 
-void QNetworkSession_connect_opened(QNetworkSession* self, intptr_t slot) {
-	QNetworkSession::connect(self, static_cast<void (QNetworkSession::*)()>(&QNetworkSession::opened), self, [=]() {
+void* QNetworkSession_connect_opened(QNetworkSession* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QNetworkSession>>(slot);
+	return new QMetaObject::Connection(QNetworkSession::connect(self, static_cast<void (QNetworkSession::*)()>(&QNetworkSession::opened), self, [slot_handle]() {
+		intptr_t slot = slot_handle->value();
 		miqt_exec_callback_QNetworkSession_opened(slot);
-	});
+	}));
 }
 
 void QNetworkSession_closed(QNetworkSession* self) {
 	self->closed();
 }
 
-void QNetworkSession_connect_closed(QNetworkSession* self, intptr_t slot) {
-	QNetworkSession::connect(self, static_cast<void (QNetworkSession::*)()>(&QNetworkSession::closed), self, [=]() {
+void* QNetworkSession_connect_closed(QNetworkSession* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QNetworkSession>>(slot);
+	return new QMetaObject::Connection(QNetworkSession::connect(self, static_cast<void (QNetworkSession::*)()>(&QNetworkSession::closed), self, [slot_handle]() {
+		intptr_t slot = slot_handle->value();
 		miqt_exec_callback_QNetworkSession_closed(slot);
-	});
+	}));
 }
 
 void QNetworkSession_errorWithQNetworkSessionSessionError(QNetworkSession* self, int param1) {
 	self->error(static_cast<QNetworkSession::SessionError>(param1));
 }
 
-void QNetworkSession_connect_errorWithQNetworkSessionSessionError(QNetworkSession* self, intptr_t slot) {
-	QNetworkSession::connect(self, static_cast<void (QNetworkSession::*)(QNetworkSession::SessionError)>(&QNetworkSession::error), self, [=](QNetworkSession::SessionError param1) {
+void* QNetworkSession_connect_errorWithQNetworkSessionSessionError(QNetworkSession* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QNetworkSession>>(slot);
+	return new QMetaObject::Connection(QNetworkSession::connect(self, static_cast<void (QNetworkSession::*)(QNetworkSession::SessionError)>(&QNetworkSession::error), self, [slot_handle](QNetworkSession::SessionError param1) {
+		intptr_t slot = slot_handle->value();
 		QNetworkSession::SessionError param1_ret = param1;
 		int sigval1 = static_cast<int>(param1_ret);
 		miqt_exec_callback_QNetworkSession_errorWithQNetworkSessionSessionError(slot, sigval1);
-	});
+	}));
 }
 
 void QNetworkSession_preferredConfigurationChanged(QNetworkSession* self, QNetworkConfiguration* config, bool isSeamless) {
 	self->preferredConfigurationChanged(*config, isSeamless);
 }
 
-void QNetworkSession_connect_preferredConfigurationChanged(QNetworkSession* self, intptr_t slot) {
-	QNetworkSession::connect(self, static_cast<void (QNetworkSession::*)(const QNetworkConfiguration&, bool)>(&QNetworkSession::preferredConfigurationChanged), self, [=](const QNetworkConfiguration& config, bool isSeamless) {
+void* QNetworkSession_connect_preferredConfigurationChanged(QNetworkSession* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QNetworkSession>>(slot);
+	return new QMetaObject::Connection(QNetworkSession::connect(self, static_cast<void (QNetworkSession::*)(const QNetworkConfiguration&, bool)>(&QNetworkSession::preferredConfigurationChanged), self, [slot_handle](const QNetworkConfiguration& config, bool isSeamless) {
+		intptr_t slot = slot_handle->value();
 		const QNetworkConfiguration& config_ret = config;
 		// Cast returned reference into pointer
 		QNetworkConfiguration* sigval1 = const_cast<QNetworkConfiguration*>(&config_ret);
 		bool sigval2 = isSeamless;
 		miqt_exec_callback_QNetworkSession_preferredConfigurationChanged(slot, sigval1, sigval2);
-	});
+	}));
 }
 
 void QNetworkSession_newConfigurationActivated(QNetworkSession* self) {
 	self->newConfigurationActivated();
 }
 
-void QNetworkSession_connect_newConfigurationActivated(QNetworkSession* self, intptr_t slot) {
-	QNetworkSession::connect(self, static_cast<void (QNetworkSession::*)()>(&QNetworkSession::newConfigurationActivated), self, [=]() {
+void* QNetworkSession_connect_newConfigurationActivated(QNetworkSession* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QNetworkSession>>(slot);
+	return new QMetaObject::Connection(QNetworkSession::connect(self, static_cast<void (QNetworkSession::*)()>(&QNetworkSession::newConfigurationActivated), self, [slot_handle]() {
+		intptr_t slot = slot_handle->value();
 		miqt_exec_callback_QNetworkSession_newConfigurationActivated(slot);
-	});
+	}));
 }
 
 void QNetworkSession_usagePoliciesChanged(QNetworkSession* self, int usagePolicies) {
 	self->usagePoliciesChanged(static_cast<QNetworkSession::UsagePolicies>(usagePolicies));
 }
 
-void QNetworkSession_connect_usagePoliciesChanged(QNetworkSession* self, intptr_t slot) {
-	QNetworkSession::connect(self, static_cast<void (QNetworkSession::*)(QNetworkSession::UsagePolicies)>(&QNetworkSession::usagePoliciesChanged), self, [=](QNetworkSession::UsagePolicies usagePolicies) {
+void* QNetworkSession_connect_usagePoliciesChanged(QNetworkSession* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QNetworkSession>>(slot);
+	return new QMetaObject::Connection(QNetworkSession::connect(self, static_cast<void (QNetworkSession::*)(QNetworkSession::UsagePolicies)>(&QNetworkSession::usagePoliciesChanged), self, [slot_handle](QNetworkSession::UsagePolicies usagePolicies) {
+		intptr_t slot = slot_handle->value();
 		QNetworkSession::UsagePolicies usagePolicies_ret = usagePolicies;
 		int sigval1 = static_cast<int>(usagePolicies_ret);
 		miqt_exec_callback_QNetworkSession_usagePoliciesChanged(slot, sigval1);
-	});
+	}));
 }
 
 struct miqt_string QNetworkSession_tr2(const char* s, const char* c) {
@@ -439,12 +456,13 @@ bool QNetworkSession_waitForOpenedWithMsecs(QNetworkSession* self, int msecs) {
 }
 
 bool QNetworkSession_override_virtual_connectNotify(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QNetworkSession> slot_handle(slot);
 	MiqtVirtualQNetworkSession* self_cast = dynamic_cast<MiqtVirtualQNetworkSession*>( (QNetworkSession*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__connectNotify = slot;
+	self_cast->handle__connectNotify = std::move(slot_handle);
 	return true;
 }
 
@@ -453,12 +471,13 @@ void QNetworkSession_virtualbase_connectNotify(void* self, QMetaMethod* signal) 
 }
 
 bool QNetworkSession_override_virtual_disconnectNotify(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QNetworkSession> slot_handle(slot);
 	MiqtVirtualQNetworkSession* self_cast = dynamic_cast<MiqtVirtualQNetworkSession*>( (QNetworkSession*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__disconnectNotify = slot;
+	self_cast->handle__disconnectNotify = std::move(slot_handle);
 	return true;
 }
 
@@ -467,12 +486,13 @@ void QNetworkSession_virtualbase_disconnectNotify(void* self, QMetaMethod* signa
 }
 
 bool QNetworkSession_override_virtual_event(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QNetworkSession> slot_handle(slot);
 	MiqtVirtualQNetworkSession* self_cast = dynamic_cast<MiqtVirtualQNetworkSession*>( (QNetworkSession*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__event = slot;
+	self_cast->handle__event = std::move(slot_handle);
 	return true;
 }
 
@@ -481,12 +501,13 @@ bool QNetworkSession_virtualbase_event(void* self, QEvent* event) {
 }
 
 bool QNetworkSession_override_virtual_eventFilter(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QNetworkSession> slot_handle(slot);
 	MiqtVirtualQNetworkSession* self_cast = dynamic_cast<MiqtVirtualQNetworkSession*>( (QNetworkSession*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__eventFilter = slot;
+	self_cast->handle__eventFilter = std::move(slot_handle);
 	return true;
 }
 
@@ -495,12 +516,13 @@ bool QNetworkSession_virtualbase_eventFilter(void* self, QObject* watched, QEven
 }
 
 bool QNetworkSession_override_virtual_timerEvent(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QNetworkSession> slot_handle(slot);
 	MiqtVirtualQNetworkSession* self_cast = dynamic_cast<MiqtVirtualQNetworkSession*>( (QNetworkSession*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__timerEvent = slot;
+	self_cast->handle__timerEvent = std::move(slot_handle);
 	return true;
 }
 
@@ -509,12 +531,13 @@ void QNetworkSession_virtualbase_timerEvent(void* self, QTimerEvent* event) {
 }
 
 bool QNetworkSession_override_virtual_childEvent(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QNetworkSession> slot_handle(slot);
 	MiqtVirtualQNetworkSession* self_cast = dynamic_cast<MiqtVirtualQNetworkSession*>( (QNetworkSession*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__childEvent = slot;
+	self_cast->handle__childEvent = std::move(slot_handle);
 	return true;
 }
 
@@ -523,12 +546,13 @@ void QNetworkSession_virtualbase_childEvent(void* self, QChildEvent* event) {
 }
 
 bool QNetworkSession_override_virtual_customEvent(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QNetworkSession> slot_handle(slot);
 	MiqtVirtualQNetworkSession* self_cast = dynamic_cast<MiqtVirtualQNetworkSession*>( (QNetworkSession*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__customEvent = slot;
+	self_cast->handle__customEvent = std::move(slot_handle);
 	return true;
 }
 

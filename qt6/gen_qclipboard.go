@@ -22,6 +22,11 @@ const (
 	QClipboard__LastMode   QClipboard__Mode = 2
 )
 
+//export miqt_exec_callback_handle_release_QClipboard
+func miqt_exec_callback_handle_release_QClipboard(cb C.intptr_t) {
+	cgo.Handle(cb).Delete()
+}
+
 type QClipboard struct {
 	h *C.QClipboard
 	*QObject
@@ -158,8 +163,10 @@ func (this *QClipboard) SetPixmap(param1 *QPixmap) {
 func (this *QClipboard) Changed(mode QClipboard__Mode) {
 	C.QClipboard_changed(this.h, (C.int)(mode))
 }
-func (this *QClipboard) OnChanged(slot func(mode QClipboard__Mode)) {
-	C.QClipboard_connect_changed(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QClipboard) OnChanged(slot func(mode QClipboard__Mode)) *SignalConnection {
+	_goptr := UnsafeNewQMetaObject__Connection(C.QClipboard_connect_changed(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QClipboard_changed
@@ -178,8 +185,10 @@ func miqt_exec_callback_QClipboard_changed(cb C.intptr_t, mode C.int) {
 func (this *QClipboard) SelectionChanged() {
 	C.QClipboard_selectionChanged(this.h)
 }
-func (this *QClipboard) OnSelectionChanged(slot func()) {
-	C.QClipboard_connect_selectionChanged(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QClipboard) OnSelectionChanged(slot func()) *SignalConnection {
+	_goptr := UnsafeNewQMetaObject__Connection(C.QClipboard_connect_selectionChanged(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QClipboard_selectionChanged
@@ -195,8 +204,10 @@ func miqt_exec_callback_QClipboard_selectionChanged(cb C.intptr_t) {
 func (this *QClipboard) FindBufferChanged() {
 	C.QClipboard_findBufferChanged(this.h)
 }
-func (this *QClipboard) OnFindBufferChanged(slot func()) {
-	C.QClipboard_connect_findBufferChanged(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QClipboard) OnFindBufferChanged(slot func()) *SignalConnection {
+	_goptr := UnsafeNewQMetaObject__Connection(C.QClipboard_connect_findBufferChanged(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QClipboard_findBufferChanged
@@ -212,8 +223,10 @@ func miqt_exec_callback_QClipboard_findBufferChanged(cb C.intptr_t) {
 func (this *QClipboard) DataChanged() {
 	C.QClipboard_dataChanged(this.h)
 }
-func (this *QClipboard) OnDataChanged(slot func()) {
-	C.QClipboard_connect_dataChanged(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QClipboard) OnDataChanged(slot func()) *SignalConnection {
+	_goptr := UnsafeNewQMetaObject__Connection(C.QClipboard_connect_dataChanged(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QClipboard_dataChanged

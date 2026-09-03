@@ -1,3 +1,5 @@
+#include <memory>
+#include <utility>
 #include <QAction>
 #include <QDesignerFormEditorInterface>
 #include <QDesignerFormEditorPluginInterface>
@@ -8,6 +10,7 @@
 extern "C" {
 #endif
 
+void miqt_exec_callback_handle_release_QDesignerFormEditorPluginInterface(intptr_t);
 bool miqt_exec_callback_QDesignerFormEditorPluginInterface_isInitialized(const QDesignerFormEditorPluginInterface*, intptr_t);
 void miqt_exec_callback_QDesignerFormEditorPluginInterface_initialize(QDesignerFormEditorPluginInterface*, intptr_t, QDesignerFormEditorInterface*);
 QAction* miqt_exec_callback_QDesignerFormEditorPluginInterface_action(const QDesignerFormEditorPluginInterface*, intptr_t);
@@ -24,55 +27,55 @@ public:
 	virtual ~MiqtVirtualQDesignerFormEditorPluginInterface() override = default;
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__isInitialized = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QDesignerFormEditorPluginInterface> handle__isInitialized;
 
 	// Subclass to allow providing a Go implementation
 	virtual bool isInitialized() const override {
-		if (handle__isInitialized == 0) {
+		if (!handle__isInitialized) {
 			return false; // Pure virtual, there is no base we can call
 		}
 
-		bool callback_return_value = miqt_exec_callback_QDesignerFormEditorPluginInterface_isInitialized(this, handle__isInitialized);
+		bool callback_return_value = miqt_exec_callback_QDesignerFormEditorPluginInterface_isInitialized(this, handle__isInitialized.value());
 		return callback_return_value;
 	}
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__initialize = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QDesignerFormEditorPluginInterface> handle__initialize;
 
 	// Subclass to allow providing a Go implementation
 	virtual void initialize(QDesignerFormEditorInterface* core) override {
-		if (handle__initialize == 0) {
+		if (!handle__initialize) {
 			return; // Pure virtual, there is no base we can call
 		}
 
 		QDesignerFormEditorInterface* sigval1 = core;
-		miqt_exec_callback_QDesignerFormEditorPluginInterface_initialize(this, handle__initialize, sigval1);
+		miqt_exec_callback_QDesignerFormEditorPluginInterface_initialize(this, handle__initialize.value(), sigval1);
 
 	}
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__action = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QDesignerFormEditorPluginInterface> handle__action;
 
 	// Subclass to allow providing a Go implementation
 	virtual QAction* action() const override {
-		if (handle__action == 0) {
+		if (!handle__action) {
 			return nullptr; // Pure virtual, there is no base we can call
 		}
 
-		QAction* callback_return_value = miqt_exec_callback_QDesignerFormEditorPluginInterface_action(this, handle__action);
+		QAction* callback_return_value = miqt_exec_callback_QDesignerFormEditorPluginInterface_action(this, handle__action.value());
 		return callback_return_value;
 	}
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__core = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QDesignerFormEditorPluginInterface> handle__core;
 
 	// Subclass to allow providing a Go implementation
 	virtual QDesignerFormEditorInterface* core() const override {
-		if (handle__core == 0) {
+		if (!handle__core) {
 			return nullptr; // Pure virtual, there is no base we can call
 		}
 
-		QDesignerFormEditorInterface* callback_return_value = miqt_exec_callback_QDesignerFormEditorPluginInterface_core(this, handle__core);
+		QDesignerFormEditorInterface* callback_return_value = miqt_exec_callback_QDesignerFormEditorPluginInterface_core(this, handle__core.value());
 		return callback_return_value;
 	}
 
@@ -99,42 +102,46 @@ QDesignerFormEditorInterface* QDesignerFormEditorPluginInterface_core(const QDes
 }
 
 bool QDesignerFormEditorPluginInterface_override_virtual_isInitialized(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QDesignerFormEditorPluginInterface> slot_handle(slot);
 	MiqtVirtualQDesignerFormEditorPluginInterface* self_cast = dynamic_cast<MiqtVirtualQDesignerFormEditorPluginInterface*>( (QDesignerFormEditorPluginInterface*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__isInitialized = slot;
+	self_cast->handle__isInitialized = std::move(slot_handle);
 	return true;
 }
 
 bool QDesignerFormEditorPluginInterface_override_virtual_initialize(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QDesignerFormEditorPluginInterface> slot_handle(slot);
 	MiqtVirtualQDesignerFormEditorPluginInterface* self_cast = dynamic_cast<MiqtVirtualQDesignerFormEditorPluginInterface*>( (QDesignerFormEditorPluginInterface*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__initialize = slot;
+	self_cast->handle__initialize = std::move(slot_handle);
 	return true;
 }
 
 bool QDesignerFormEditorPluginInterface_override_virtual_action(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QDesignerFormEditorPluginInterface> slot_handle(slot);
 	MiqtVirtualQDesignerFormEditorPluginInterface* self_cast = dynamic_cast<MiqtVirtualQDesignerFormEditorPluginInterface*>( (QDesignerFormEditorPluginInterface*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__action = slot;
+	self_cast->handle__action = std::move(slot_handle);
 	return true;
 }
 
 bool QDesignerFormEditorPluginInterface_override_virtual_core(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QDesignerFormEditorPluginInterface> slot_handle(slot);
 	MiqtVirtualQDesignerFormEditorPluginInterface* self_cast = dynamic_cast<MiqtVirtualQDesignerFormEditorPluginInterface*>( (QDesignerFormEditorPluginInterface*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__core = slot;
+	self_cast->handle__core = std::move(slot_handle);
 	return true;
 }
 

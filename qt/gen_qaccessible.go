@@ -1366,6 +1366,11 @@ func (this *QAccessibleImageInterface) GoGC() {
 	})
 }
 
+//export miqt_exec_callback_handle_release_QAccessibleEvent
+func miqt_exec_callback_handle_release_QAccessibleEvent(cb C.intptr_t) {
+	cgo.Handle(cb).Delete()
+}
+
 type QAccessibleEvent struct {
 	h *C.QAccessibleEvent
 }
@@ -1440,7 +1445,11 @@ func (this *QAccessibleEvent) callVirtualBase_AccessibleInterface() *QAccessible
 
 }
 func (this *QAccessibleEvent) OnAccessibleInterface(slot func(super func() *QAccessibleInterface) *QAccessibleInterface) {
-	ok := C.QAccessibleEvent_override_virtual_accessibleInterface(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QAccessibleEvent_override_virtual_accessibleInterface(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1471,6 +1480,11 @@ func (this *QAccessibleEvent) GoGC() {
 		this.Delete()
 		runtime.KeepAlive(this.h)
 	})
+}
+
+//export miqt_exec_callback_handle_release_QAccessibleStateChangeEvent
+func miqt_exec_callback_handle_release_QAccessibleStateChangeEvent(cb C.intptr_t) {
+	cgo.Handle(cb).Delete()
 }
 
 type QAccessibleStateChangeEvent struct {
@@ -1533,7 +1547,11 @@ func (this *QAccessibleStateChangeEvent) callVirtualBase_AccessibleInterface() *
 
 }
 func (this *QAccessibleStateChangeEvent) OnAccessibleInterface(slot func(super func() *QAccessibleInterface) *QAccessibleInterface) {
-	ok := C.QAccessibleStateChangeEvent_override_virtual_accessibleInterface(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QAccessibleStateChangeEvent_override_virtual_accessibleInterface(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1564,6 +1582,11 @@ func (this *QAccessibleStateChangeEvent) GoGC() {
 		this.Delete()
 		runtime.KeepAlive(this.h)
 	})
+}
+
+//export miqt_exec_callback_handle_release_QAccessibleTextCursorEvent
+func miqt_exec_callback_handle_release_QAccessibleTextCursorEvent(cb C.intptr_t) {
+	cgo.Handle(cb).Delete()
 }
 
 type QAccessibleTextCursorEvent struct {
@@ -1628,7 +1651,11 @@ func (this *QAccessibleTextCursorEvent) callVirtualBase_AccessibleInterface() *Q
 
 }
 func (this *QAccessibleTextCursorEvent) OnAccessibleInterface(slot func(super func() *QAccessibleInterface) *QAccessibleInterface) {
-	ok := C.QAccessibleTextCursorEvent_override_virtual_accessibleInterface(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QAccessibleTextCursorEvent_override_virtual_accessibleInterface(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1659,6 +1686,11 @@ func (this *QAccessibleTextCursorEvent) GoGC() {
 		this.Delete()
 		runtime.KeepAlive(this.h)
 	})
+}
+
+//export miqt_exec_callback_handle_release_QAccessibleTextSelectionEvent
+func miqt_exec_callback_handle_release_QAccessibleTextSelectionEvent(cb C.intptr_t) {
+	cgo.Handle(cb).Delete()
 }
 
 type QAccessibleTextSelectionEvent struct {
@@ -1727,7 +1759,11 @@ func (this *QAccessibleTextSelectionEvent) callVirtualBase_AccessibleInterface()
 
 }
 func (this *QAccessibleTextSelectionEvent) OnAccessibleInterface(slot func(super func() *QAccessibleInterface) *QAccessibleInterface) {
-	ok := C.QAccessibleTextSelectionEvent_override_virtual_accessibleInterface(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QAccessibleTextSelectionEvent_override_virtual_accessibleInterface(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1758,6 +1794,11 @@ func (this *QAccessibleTextSelectionEvent) GoGC() {
 		this.Delete()
 		runtime.KeepAlive(this.h)
 	})
+}
+
+//export miqt_exec_callback_handle_release_QAccessibleTextInsertEvent
+func miqt_exec_callback_handle_release_QAccessibleTextInsertEvent(cb C.intptr_t) {
+	cgo.Handle(cb).Delete()
 }
 
 type QAccessibleTextInsertEvent struct {
@@ -1833,7 +1874,11 @@ func (this *QAccessibleTextInsertEvent) callVirtualBase_AccessibleInterface() *Q
 
 }
 func (this *QAccessibleTextInsertEvent) OnAccessibleInterface(slot func(super func() *QAccessibleInterface) *QAccessibleInterface) {
-	ok := C.QAccessibleTextInsertEvent_override_virtual_accessibleInterface(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QAccessibleTextInsertEvent_override_virtual_accessibleInterface(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1864,6 +1909,11 @@ func (this *QAccessibleTextInsertEvent) GoGC() {
 		this.Delete()
 		runtime.KeepAlive(this.h)
 	})
+}
+
+//export miqt_exec_callback_handle_release_QAccessibleTextRemoveEvent
+func miqt_exec_callback_handle_release_QAccessibleTextRemoveEvent(cb C.intptr_t) {
+	cgo.Handle(cb).Delete()
 }
 
 type QAccessibleTextRemoveEvent struct {
@@ -1939,7 +1989,11 @@ func (this *QAccessibleTextRemoveEvent) callVirtualBase_AccessibleInterface() *Q
 
 }
 func (this *QAccessibleTextRemoveEvent) OnAccessibleInterface(slot func(super func() *QAccessibleInterface) *QAccessibleInterface) {
-	ok := C.QAccessibleTextRemoveEvent_override_virtual_accessibleInterface(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QAccessibleTextRemoveEvent_override_virtual_accessibleInterface(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1970,6 +2024,11 @@ func (this *QAccessibleTextRemoveEvent) GoGC() {
 		this.Delete()
 		runtime.KeepAlive(this.h)
 	})
+}
+
+//export miqt_exec_callback_handle_release_QAccessibleTextUpdateEvent
+func miqt_exec_callback_handle_release_QAccessibleTextUpdateEvent(cb C.intptr_t) {
+	cgo.Handle(cb).Delete()
 }
 
 type QAccessibleTextUpdateEvent struct {
@@ -2060,7 +2119,11 @@ func (this *QAccessibleTextUpdateEvent) callVirtualBase_AccessibleInterface() *Q
 
 }
 func (this *QAccessibleTextUpdateEvent) OnAccessibleInterface(slot func(super func() *QAccessibleInterface) *QAccessibleInterface) {
-	ok := C.QAccessibleTextUpdateEvent_override_virtual_accessibleInterface(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QAccessibleTextUpdateEvent_override_virtual_accessibleInterface(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -2091,6 +2154,11 @@ func (this *QAccessibleTextUpdateEvent) GoGC() {
 		this.Delete()
 		runtime.KeepAlive(this.h)
 	})
+}
+
+//export miqt_exec_callback_handle_release_QAccessibleValueChangeEvent
+func miqt_exec_callback_handle_release_QAccessibleValueChangeEvent(cb C.intptr_t) {
+	cgo.Handle(cb).Delete()
 }
 
 type QAccessibleValueChangeEvent struct {
@@ -2157,7 +2225,11 @@ func (this *QAccessibleValueChangeEvent) callVirtualBase_AccessibleInterface() *
 
 }
 func (this *QAccessibleValueChangeEvent) OnAccessibleInterface(slot func(super func() *QAccessibleInterface) *QAccessibleInterface) {
-	ok := C.QAccessibleValueChangeEvent_override_virtual_accessibleInterface(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QAccessibleValueChangeEvent_override_virtual_accessibleInterface(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -2188,6 +2260,11 @@ func (this *QAccessibleValueChangeEvent) GoGC() {
 		this.Delete()
 		runtime.KeepAlive(this.h)
 	})
+}
+
+//export miqt_exec_callback_handle_release_QAccessibleTableModelChangeEvent
+func miqt_exec_callback_handle_release_QAccessibleTableModelChangeEvent(cb C.intptr_t) {
+	cgo.Handle(cb).Delete()
 }
 
 type QAccessibleTableModelChangeEvent struct {
@@ -2284,7 +2361,11 @@ func (this *QAccessibleTableModelChangeEvent) callVirtualBase_AccessibleInterfac
 
 }
 func (this *QAccessibleTableModelChangeEvent) OnAccessibleInterface(slot func(super func() *QAccessibleInterface) *QAccessibleInterface) {
-	ok := C.QAccessibleTableModelChangeEvent_override_virtual_accessibleInterface(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QAccessibleTableModelChangeEvent_override_virtual_accessibleInterface(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}

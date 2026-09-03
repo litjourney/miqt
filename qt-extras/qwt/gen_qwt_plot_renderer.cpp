@@ -1,3 +1,5 @@
+#include <memory>
+#include <utility>
 #include <QChildEvent>
 #include <QEvent>
 #include <QMetaMethod>
@@ -20,6 +22,7 @@
 extern "C" {
 #endif
 
+void miqt_exec_callback_handle_release_QwtPlotRenderer(intptr_t);
 void miqt_exec_callback_QwtPlotRenderer_render(const QwtPlotRenderer*, intptr_t, QwtPlot*, QPainter*, QRectF*);
 void miqt_exec_callback_QwtPlotRenderer_renderTitle(const QwtPlotRenderer*, intptr_t, QwtPlot*, QPainter*, QRectF*);
 void miqt_exec_callback_QwtPlotRenderer_renderFooter(const QwtPlotRenderer*, intptr_t, QwtPlot*, QPainter*, QRectF*);
@@ -45,11 +48,11 @@ public:
 	virtual ~MiqtVirtualQwtPlotRenderer() override = default;
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__render = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtPlotRenderer> handle__render;
 
 	// Subclass to allow providing a Go implementation
 	virtual void render(QwtPlot* param1, QPainter* param2, const QRectF& plotRect) const override {
-		if (handle__render == 0) {
+		if (!handle__render) {
 			QwtPlotRenderer::render(param1, param2, plotRect);
 			return;
 		}
@@ -59,18 +62,18 @@ public:
 		const QRectF& plotRect_ret = plotRect;
 		// Cast returned reference into pointer
 		QRectF* sigval3 = const_cast<QRectF*>(&plotRect_ret);
-		miqt_exec_callback_QwtPlotRenderer_render(this, handle__render, sigval1, sigval2, sigval3);
+		miqt_exec_callback_QwtPlotRenderer_render(this, handle__render.value(), sigval1, sigval2, sigval3);
 
 	}
 
 	friend void QwtPlotRenderer_virtualbase_render(const void* self, QwtPlot* param1, QPainter* param2, QRectF* plotRect);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__renderTitle = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtPlotRenderer> handle__renderTitle;
 
 	// Subclass to allow providing a Go implementation
 	virtual void renderTitle(const QwtPlot* param1, QPainter* param2, const QRectF& titleRect) const override {
-		if (handle__renderTitle == 0) {
+		if (!handle__renderTitle) {
 			QwtPlotRenderer::renderTitle(param1, param2, titleRect);
 			return;
 		}
@@ -80,18 +83,18 @@ public:
 		const QRectF& titleRect_ret = titleRect;
 		// Cast returned reference into pointer
 		QRectF* sigval3 = const_cast<QRectF*>(&titleRect_ret);
-		miqt_exec_callback_QwtPlotRenderer_renderTitle(this, handle__renderTitle, sigval1, sigval2, sigval3);
+		miqt_exec_callback_QwtPlotRenderer_renderTitle(this, handle__renderTitle.value(), sigval1, sigval2, sigval3);
 
 	}
 
 	friend void QwtPlotRenderer_virtualbase_renderTitle(const void* self, QwtPlot* param1, QPainter* param2, QRectF* titleRect);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__renderFooter = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtPlotRenderer> handle__renderFooter;
 
 	// Subclass to allow providing a Go implementation
 	virtual void renderFooter(const QwtPlot* param1, QPainter* param2, const QRectF& footerRect) const override {
-		if (handle__renderFooter == 0) {
+		if (!handle__renderFooter) {
 			QwtPlotRenderer::renderFooter(param1, param2, footerRect);
 			return;
 		}
@@ -101,18 +104,18 @@ public:
 		const QRectF& footerRect_ret = footerRect;
 		// Cast returned reference into pointer
 		QRectF* sigval3 = const_cast<QRectF*>(&footerRect_ret);
-		miqt_exec_callback_QwtPlotRenderer_renderFooter(this, handle__renderFooter, sigval1, sigval2, sigval3);
+		miqt_exec_callback_QwtPlotRenderer_renderFooter(this, handle__renderFooter.value(), sigval1, sigval2, sigval3);
 
 	}
 
 	friend void QwtPlotRenderer_virtualbase_renderFooter(const void* self, QwtPlot* param1, QPainter* param2, QRectF* footerRect);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__renderScale = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtPlotRenderer> handle__renderScale;
 
 	// Subclass to allow providing a Go implementation
 	virtual void renderScale(const QwtPlot* param1, QPainter* param2, int axisId, int startDist, int endDist, int baseDist, const QRectF& scaleRect) const override {
-		if (handle__renderScale == 0) {
+		if (!handle__renderScale) {
 			QwtPlotRenderer::renderScale(param1, param2, axisId, startDist, endDist, baseDist, scaleRect);
 			return;
 		}
@@ -126,18 +129,18 @@ public:
 		const QRectF& scaleRect_ret = scaleRect;
 		// Cast returned reference into pointer
 		QRectF* sigval7 = const_cast<QRectF*>(&scaleRect_ret);
-		miqt_exec_callback_QwtPlotRenderer_renderScale(this, handle__renderScale, sigval1, sigval2, sigval3, sigval4, sigval5, sigval6, sigval7);
+		miqt_exec_callback_QwtPlotRenderer_renderScale(this, handle__renderScale.value(), sigval1, sigval2, sigval3, sigval4, sigval5, sigval6, sigval7);
 
 	}
 
 	friend void QwtPlotRenderer_virtualbase_renderScale(const void* self, QwtPlot* param1, QPainter* param2, int axisId, int startDist, int endDist, int baseDist, QRectF* scaleRect);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__renderLegend = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtPlotRenderer> handle__renderLegend;
 
 	// Subclass to allow providing a Go implementation
 	virtual void renderLegend(const QwtPlot* param1, QPainter* param2, const QRectF& legendRect) const override {
-		if (handle__renderLegend == 0) {
+		if (!handle__renderLegend) {
 			QwtPlotRenderer::renderLegend(param1, param2, legendRect);
 			return;
 		}
@@ -147,102 +150,102 @@ public:
 		const QRectF& legendRect_ret = legendRect;
 		// Cast returned reference into pointer
 		QRectF* sigval3 = const_cast<QRectF*>(&legendRect_ret);
-		miqt_exec_callback_QwtPlotRenderer_renderLegend(this, handle__renderLegend, sigval1, sigval2, sigval3);
+		miqt_exec_callback_QwtPlotRenderer_renderLegend(this, handle__renderLegend.value(), sigval1, sigval2, sigval3);
 
 	}
 
 	friend void QwtPlotRenderer_virtualbase_renderLegend(const void* self, QwtPlot* param1, QPainter* param2, QRectF* legendRect);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__event = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtPlotRenderer> handle__event;
 
 	// Subclass to allow providing a Go implementation
 	virtual bool event(QEvent* event) override {
-		if (handle__event == 0) {
+		if (!handle__event) {
 			return QwtPlotRenderer::event(event);
 		}
 
 		QEvent* sigval1 = event;
-		bool callback_return_value = miqt_exec_callback_QwtPlotRenderer_event(this, handle__event, sigval1);
+		bool callback_return_value = miqt_exec_callback_QwtPlotRenderer_event(this, handle__event.value(), sigval1);
 		return callback_return_value;
 	}
 
 	friend bool QwtPlotRenderer_virtualbase_event(void* self, QEvent* event);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__eventFilter = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtPlotRenderer> handle__eventFilter;
 
 	// Subclass to allow providing a Go implementation
 	virtual bool eventFilter(QObject* watched, QEvent* event) override {
-		if (handle__eventFilter == 0) {
+		if (!handle__eventFilter) {
 			return QwtPlotRenderer::eventFilter(watched, event);
 		}
 
 		QObject* sigval1 = watched;
 		QEvent* sigval2 = event;
-		bool callback_return_value = miqt_exec_callback_QwtPlotRenderer_eventFilter(this, handle__eventFilter, sigval1, sigval2);
+		bool callback_return_value = miqt_exec_callback_QwtPlotRenderer_eventFilter(this, handle__eventFilter.value(), sigval1, sigval2);
 		return callback_return_value;
 	}
 
 	friend bool QwtPlotRenderer_virtualbase_eventFilter(void* self, QObject* watched, QEvent* event);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__timerEvent = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtPlotRenderer> handle__timerEvent;
 
 	// Subclass to allow providing a Go implementation
 	virtual void timerEvent(QTimerEvent* event) override {
-		if (handle__timerEvent == 0) {
+		if (!handle__timerEvent) {
 			QwtPlotRenderer::timerEvent(event);
 			return;
 		}
 
 		QTimerEvent* sigval1 = event;
-		miqt_exec_callback_QwtPlotRenderer_timerEvent(this, handle__timerEvent, sigval1);
+		miqt_exec_callback_QwtPlotRenderer_timerEvent(this, handle__timerEvent.value(), sigval1);
 
 	}
 
 	friend void QwtPlotRenderer_virtualbase_timerEvent(void* self, QTimerEvent* event);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__childEvent = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtPlotRenderer> handle__childEvent;
 
 	// Subclass to allow providing a Go implementation
 	virtual void childEvent(QChildEvent* event) override {
-		if (handle__childEvent == 0) {
+		if (!handle__childEvent) {
 			QwtPlotRenderer::childEvent(event);
 			return;
 		}
 
 		QChildEvent* sigval1 = event;
-		miqt_exec_callback_QwtPlotRenderer_childEvent(this, handle__childEvent, sigval1);
+		miqt_exec_callback_QwtPlotRenderer_childEvent(this, handle__childEvent.value(), sigval1);
 
 	}
 
 	friend void QwtPlotRenderer_virtualbase_childEvent(void* self, QChildEvent* event);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__customEvent = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtPlotRenderer> handle__customEvent;
 
 	// Subclass to allow providing a Go implementation
 	virtual void customEvent(QEvent* event) override {
-		if (handle__customEvent == 0) {
+		if (!handle__customEvent) {
 			QwtPlotRenderer::customEvent(event);
 			return;
 		}
 
 		QEvent* sigval1 = event;
-		miqt_exec_callback_QwtPlotRenderer_customEvent(this, handle__customEvent, sigval1);
+		miqt_exec_callback_QwtPlotRenderer_customEvent(this, handle__customEvent.value(), sigval1);
 
 	}
 
 	friend void QwtPlotRenderer_virtualbase_customEvent(void* self, QEvent* event);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__connectNotify = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtPlotRenderer> handle__connectNotify;
 
 	// Subclass to allow providing a Go implementation
 	virtual void connectNotify(const QMetaMethod& signal) override {
-		if (handle__connectNotify == 0) {
+		if (!handle__connectNotify) {
 			QwtPlotRenderer::connectNotify(signal);
 			return;
 		}
@@ -250,18 +253,18 @@ public:
 		const QMetaMethod& signal_ret = signal;
 		// Cast returned reference into pointer
 		QMetaMethod* sigval1 = const_cast<QMetaMethod*>(&signal_ret);
-		miqt_exec_callback_QwtPlotRenderer_connectNotify(this, handle__connectNotify, sigval1);
+		miqt_exec_callback_QwtPlotRenderer_connectNotify(this, handle__connectNotify.value(), sigval1);
 
 	}
 
 	friend void QwtPlotRenderer_virtualbase_connectNotify(void* self, QMetaMethod* signal);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__disconnectNotify = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtPlotRenderer> handle__disconnectNotify;
 
 	// Subclass to allow providing a Go implementation
 	virtual void disconnectNotify(const QMetaMethod& signal) override {
-		if (handle__disconnectNotify == 0) {
+		if (!handle__disconnectNotify) {
 			QwtPlotRenderer::disconnectNotify(signal);
 			return;
 		}
@@ -269,7 +272,7 @@ public:
 		const QMetaMethod& signal_ret = signal;
 		// Cast returned reference into pointer
 		QMetaMethod* sigval1 = const_cast<QMetaMethod*>(&signal_ret);
-		miqt_exec_callback_QwtPlotRenderer_disconnectNotify(this, handle__disconnectNotify, sigval1);
+		miqt_exec_callback_QwtPlotRenderer_disconnectNotify(this, handle__disconnectNotify.value(), sigval1);
 
 	}
 
@@ -480,12 +483,13 @@ bool QwtPlotRenderer_exportTo3(QwtPlotRenderer* self, QwtPlot* param1, struct mi
 }
 
 bool QwtPlotRenderer_override_virtual_render(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtPlotRenderer> slot_handle(slot);
 	MiqtVirtualQwtPlotRenderer* self_cast = dynamic_cast<MiqtVirtualQwtPlotRenderer*>( (QwtPlotRenderer*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__render = slot;
+	self_cast->handle__render = std::move(slot_handle);
 	return true;
 }
 
@@ -494,12 +498,13 @@ void QwtPlotRenderer_virtualbase_render(const void* self, QwtPlot* param1, QPain
 }
 
 bool QwtPlotRenderer_override_virtual_renderTitle(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtPlotRenderer> slot_handle(slot);
 	MiqtVirtualQwtPlotRenderer* self_cast = dynamic_cast<MiqtVirtualQwtPlotRenderer*>( (QwtPlotRenderer*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__renderTitle = slot;
+	self_cast->handle__renderTitle = std::move(slot_handle);
 	return true;
 }
 
@@ -508,12 +513,13 @@ void QwtPlotRenderer_virtualbase_renderTitle(const void* self, QwtPlot* param1, 
 }
 
 bool QwtPlotRenderer_override_virtual_renderFooter(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtPlotRenderer> slot_handle(slot);
 	MiqtVirtualQwtPlotRenderer* self_cast = dynamic_cast<MiqtVirtualQwtPlotRenderer*>( (QwtPlotRenderer*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__renderFooter = slot;
+	self_cast->handle__renderFooter = std::move(slot_handle);
 	return true;
 }
 
@@ -522,12 +528,13 @@ void QwtPlotRenderer_virtualbase_renderFooter(const void* self, QwtPlot* param1,
 }
 
 bool QwtPlotRenderer_override_virtual_renderScale(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtPlotRenderer> slot_handle(slot);
 	MiqtVirtualQwtPlotRenderer* self_cast = dynamic_cast<MiqtVirtualQwtPlotRenderer*>( (QwtPlotRenderer*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__renderScale = slot;
+	self_cast->handle__renderScale = std::move(slot_handle);
 	return true;
 }
 
@@ -536,12 +543,13 @@ void QwtPlotRenderer_virtualbase_renderScale(const void* self, QwtPlot* param1, 
 }
 
 bool QwtPlotRenderer_override_virtual_renderLegend(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtPlotRenderer> slot_handle(slot);
 	MiqtVirtualQwtPlotRenderer* self_cast = dynamic_cast<MiqtVirtualQwtPlotRenderer*>( (QwtPlotRenderer*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__renderLegend = slot;
+	self_cast->handle__renderLegend = std::move(slot_handle);
 	return true;
 }
 
@@ -550,12 +558,13 @@ void QwtPlotRenderer_virtualbase_renderLegend(const void* self, QwtPlot* param1,
 }
 
 bool QwtPlotRenderer_override_virtual_event(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtPlotRenderer> slot_handle(slot);
 	MiqtVirtualQwtPlotRenderer* self_cast = dynamic_cast<MiqtVirtualQwtPlotRenderer*>( (QwtPlotRenderer*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__event = slot;
+	self_cast->handle__event = std::move(slot_handle);
 	return true;
 }
 
@@ -564,12 +573,13 @@ bool QwtPlotRenderer_virtualbase_event(void* self, QEvent* event) {
 }
 
 bool QwtPlotRenderer_override_virtual_eventFilter(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtPlotRenderer> slot_handle(slot);
 	MiqtVirtualQwtPlotRenderer* self_cast = dynamic_cast<MiqtVirtualQwtPlotRenderer*>( (QwtPlotRenderer*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__eventFilter = slot;
+	self_cast->handle__eventFilter = std::move(slot_handle);
 	return true;
 }
 
@@ -578,12 +588,13 @@ bool QwtPlotRenderer_virtualbase_eventFilter(void* self, QObject* watched, QEven
 }
 
 bool QwtPlotRenderer_override_virtual_timerEvent(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtPlotRenderer> slot_handle(slot);
 	MiqtVirtualQwtPlotRenderer* self_cast = dynamic_cast<MiqtVirtualQwtPlotRenderer*>( (QwtPlotRenderer*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__timerEvent = slot;
+	self_cast->handle__timerEvent = std::move(slot_handle);
 	return true;
 }
 
@@ -592,12 +603,13 @@ void QwtPlotRenderer_virtualbase_timerEvent(void* self, QTimerEvent* event) {
 }
 
 bool QwtPlotRenderer_override_virtual_childEvent(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtPlotRenderer> slot_handle(slot);
 	MiqtVirtualQwtPlotRenderer* self_cast = dynamic_cast<MiqtVirtualQwtPlotRenderer*>( (QwtPlotRenderer*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__childEvent = slot;
+	self_cast->handle__childEvent = std::move(slot_handle);
 	return true;
 }
 
@@ -606,12 +618,13 @@ void QwtPlotRenderer_virtualbase_childEvent(void* self, QChildEvent* event) {
 }
 
 bool QwtPlotRenderer_override_virtual_customEvent(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtPlotRenderer> slot_handle(slot);
 	MiqtVirtualQwtPlotRenderer* self_cast = dynamic_cast<MiqtVirtualQwtPlotRenderer*>( (QwtPlotRenderer*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__customEvent = slot;
+	self_cast->handle__customEvent = std::move(slot_handle);
 	return true;
 }
 
@@ -620,12 +633,13 @@ void QwtPlotRenderer_virtualbase_customEvent(void* self, QEvent* event) {
 }
 
 bool QwtPlotRenderer_override_virtual_connectNotify(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtPlotRenderer> slot_handle(slot);
 	MiqtVirtualQwtPlotRenderer* self_cast = dynamic_cast<MiqtVirtualQwtPlotRenderer*>( (QwtPlotRenderer*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__connectNotify = slot;
+	self_cast->handle__connectNotify = std::move(slot_handle);
 	return true;
 }
 
@@ -634,12 +648,13 @@ void QwtPlotRenderer_virtualbase_connectNotify(void* self, QMetaMethod* signal) 
 }
 
 bool QwtPlotRenderer_override_virtual_disconnectNotify(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtPlotRenderer> slot_handle(slot);
 	MiqtVirtualQwtPlotRenderer* self_cast = dynamic_cast<MiqtVirtualQwtPlotRenderer*>( (QwtPlotRenderer*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__disconnectNotify = slot;
+	self_cast->handle__disconnectNotify = std::move(slot_handle);
 	return true;
 }
 

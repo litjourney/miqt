@@ -1,3 +1,5 @@
+#include <memory>
+#include <utility>
 #include <QChildEvent>
 #include <QEvent>
 #include <QMetaMethod>
@@ -17,6 +19,7 @@
 extern "C" {
 #endif
 
+void miqt_exec_callback_handle_release_QVideoSink(intptr_t);
 void miqt_exec_callback_QVideoSink_videoFrameChanged(intptr_t, QVideoFrame*);
 void miqt_exec_callback_QVideoSink_subtitleTextChanged(intptr_t, struct miqt_string);
 void miqt_exec_callback_QVideoSink_videoSizeChanged(intptr_t);
@@ -40,95 +43,95 @@ public:
 	virtual ~MiqtVirtualQVideoSink() override = default;
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__event = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QVideoSink> handle__event;
 
 	// Subclass to allow providing a Go implementation
 	virtual bool event(QEvent* event) override {
-		if (handle__event == 0) {
+		if (!handle__event) {
 			return QVideoSink::event(event);
 		}
 
 		QEvent* sigval1 = event;
-		bool callback_return_value = miqt_exec_callback_QVideoSink_event(this, handle__event, sigval1);
+		bool callback_return_value = miqt_exec_callback_QVideoSink_event(this, handle__event.value(), sigval1);
 		return callback_return_value;
 	}
 
 	friend bool QVideoSink_virtualbase_event(void* self, QEvent* event);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__eventFilter = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QVideoSink> handle__eventFilter;
 
 	// Subclass to allow providing a Go implementation
 	virtual bool eventFilter(QObject* watched, QEvent* event) override {
-		if (handle__eventFilter == 0) {
+		if (!handle__eventFilter) {
 			return QVideoSink::eventFilter(watched, event);
 		}
 
 		QObject* sigval1 = watched;
 		QEvent* sigval2 = event;
-		bool callback_return_value = miqt_exec_callback_QVideoSink_eventFilter(this, handle__eventFilter, sigval1, sigval2);
+		bool callback_return_value = miqt_exec_callback_QVideoSink_eventFilter(this, handle__eventFilter.value(), sigval1, sigval2);
 		return callback_return_value;
 	}
 
 	friend bool QVideoSink_virtualbase_eventFilter(void* self, QObject* watched, QEvent* event);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__timerEvent = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QVideoSink> handle__timerEvent;
 
 	// Subclass to allow providing a Go implementation
 	virtual void timerEvent(QTimerEvent* event) override {
-		if (handle__timerEvent == 0) {
+		if (!handle__timerEvent) {
 			QVideoSink::timerEvent(event);
 			return;
 		}
 
 		QTimerEvent* sigval1 = event;
-		miqt_exec_callback_QVideoSink_timerEvent(this, handle__timerEvent, sigval1);
+		miqt_exec_callback_QVideoSink_timerEvent(this, handle__timerEvent.value(), sigval1);
 
 	}
 
 	friend void QVideoSink_virtualbase_timerEvent(void* self, QTimerEvent* event);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__childEvent = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QVideoSink> handle__childEvent;
 
 	// Subclass to allow providing a Go implementation
 	virtual void childEvent(QChildEvent* event) override {
-		if (handle__childEvent == 0) {
+		if (!handle__childEvent) {
 			QVideoSink::childEvent(event);
 			return;
 		}
 
 		QChildEvent* sigval1 = event;
-		miqt_exec_callback_QVideoSink_childEvent(this, handle__childEvent, sigval1);
+		miqt_exec_callback_QVideoSink_childEvent(this, handle__childEvent.value(), sigval1);
 
 	}
 
 	friend void QVideoSink_virtualbase_childEvent(void* self, QChildEvent* event);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__customEvent = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QVideoSink> handle__customEvent;
 
 	// Subclass to allow providing a Go implementation
 	virtual void customEvent(QEvent* event) override {
-		if (handle__customEvent == 0) {
+		if (!handle__customEvent) {
 			QVideoSink::customEvent(event);
 			return;
 		}
 
 		QEvent* sigval1 = event;
-		miqt_exec_callback_QVideoSink_customEvent(this, handle__customEvent, sigval1);
+		miqt_exec_callback_QVideoSink_customEvent(this, handle__customEvent.value(), sigval1);
 
 	}
 
 	friend void QVideoSink_virtualbase_customEvent(void* self, QEvent* event);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__connectNotify = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QVideoSink> handle__connectNotify;
 
 	// Subclass to allow providing a Go implementation
 	virtual void connectNotify(const QMetaMethod& signal) override {
-		if (handle__connectNotify == 0) {
+		if (!handle__connectNotify) {
 			QVideoSink::connectNotify(signal);
 			return;
 		}
@@ -136,18 +139,18 @@ public:
 		const QMetaMethod& signal_ret = signal;
 		// Cast returned reference into pointer
 		QMetaMethod* sigval1 = const_cast<QMetaMethod*>(&signal_ret);
-		miqt_exec_callback_QVideoSink_connectNotify(this, handle__connectNotify, sigval1);
+		miqt_exec_callback_QVideoSink_connectNotify(this, handle__connectNotify.value(), sigval1);
 
 	}
 
 	friend void QVideoSink_virtualbase_connectNotify(void* self, QMetaMethod* signal);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__disconnectNotify = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QVideoSink> handle__disconnectNotify;
 
 	// Subclass to allow providing a Go implementation
 	virtual void disconnectNotify(const QMetaMethod& signal) override {
-		if (handle__disconnectNotify == 0) {
+		if (!handle__disconnectNotify) {
 			QVideoSink::disconnectNotify(signal);
 			return;
 		}
@@ -155,7 +158,7 @@ public:
 		const QMetaMethod& signal_ret = signal;
 		// Cast returned reference into pointer
 		QMetaMethod* sigval1 = const_cast<QMetaMethod*>(&signal_ret);
-		miqt_exec_callback_QVideoSink_disconnectNotify(this, handle__disconnectNotify, sigval1);
+		miqt_exec_callback_QVideoSink_disconnectNotify(this, handle__disconnectNotify.value(), sigval1);
 
 	}
 
@@ -231,13 +234,15 @@ void QVideoSink_videoFrameChanged(const QVideoSink* self, QVideoFrame* frame) {
 	self->videoFrameChanged(*frame);
 }
 
-void QVideoSink_connect_videoFrameChanged(QVideoSink* self, intptr_t slot) {
-	QVideoSink::connect(self, static_cast<void (QVideoSink::*)(const QVideoFrame&) const>(&QVideoSink::videoFrameChanged), self, [=](const QVideoFrame& frame) {
+void* QVideoSink_connect_videoFrameChanged(QVideoSink* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QVideoSink>>(slot);
+	return new QMetaObject::Connection(QVideoSink::connect(self, static_cast<void (QVideoSink::*)(const QVideoFrame&) const>(&QVideoSink::videoFrameChanged), self, [slot_handle](const QVideoFrame& frame) {
+		intptr_t slot = slot_handle->value();
 		const QVideoFrame& frame_ret = frame;
 		// Cast returned reference into pointer
 		QVideoFrame* sigval1 = const_cast<QVideoFrame*>(&frame_ret);
 		miqt_exec_callback_QVideoSink_videoFrameChanged(slot, sigval1);
-	});
+	}));
 }
 
 void QVideoSink_subtitleTextChanged(const QVideoSink* self, struct miqt_string subtitleText) {
@@ -245,8 +250,10 @@ void QVideoSink_subtitleTextChanged(const QVideoSink* self, struct miqt_string s
 	self->subtitleTextChanged(subtitleText_QString);
 }
 
-void QVideoSink_connect_subtitleTextChanged(QVideoSink* self, intptr_t slot) {
-	QVideoSink::connect(self, static_cast<void (QVideoSink::*)(const QString&) const>(&QVideoSink::subtitleTextChanged), self, [=](const QString& subtitleText) {
+void* QVideoSink_connect_subtitleTextChanged(QVideoSink* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QVideoSink>>(slot);
+	return new QMetaObject::Connection(QVideoSink::connect(self, static_cast<void (QVideoSink::*)(const QString&) const>(&QVideoSink::subtitleTextChanged), self, [slot_handle](const QString& subtitleText) {
+		intptr_t slot = slot_handle->value();
 		const QString subtitleText_ret = subtitleText;
 		// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 		QByteArray subtitleText_b = subtitleText_ret.toUtf8();
@@ -256,17 +263,19 @@ void QVideoSink_connect_subtitleTextChanged(QVideoSink* self, intptr_t slot) {
 		memcpy(subtitleText_ms.data, subtitleText_b.data(), subtitleText_ms.len);
 		struct miqt_string sigval1 = subtitleText_ms;
 		miqt_exec_callback_QVideoSink_subtitleTextChanged(slot, sigval1);
-	});
+	}));
 }
 
 void QVideoSink_videoSizeChanged(QVideoSink* self) {
 	self->videoSizeChanged();
 }
 
-void QVideoSink_connect_videoSizeChanged(QVideoSink* self, intptr_t slot) {
-	QVideoSink::connect(self, static_cast<void (QVideoSink::*)()>(&QVideoSink::videoSizeChanged), self, [=]() {
+void* QVideoSink_connect_videoSizeChanged(QVideoSink* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QVideoSink>>(slot);
+	return new QMetaObject::Connection(QVideoSink::connect(self, static_cast<void (QVideoSink::*)()>(&QVideoSink::videoSizeChanged), self, [slot_handle]() {
+		intptr_t slot = slot_handle->value();
 		miqt_exec_callback_QVideoSink_videoSizeChanged(slot);
-	});
+	}));
 }
 
 struct miqt_string QVideoSink_tr2(const char* s, const char* c) {
@@ -292,12 +301,13 @@ struct miqt_string QVideoSink_tr3(const char* s, const char* c, int n) {
 }
 
 bool QVideoSink_override_virtual_event(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QVideoSink> slot_handle(slot);
 	MiqtVirtualQVideoSink* self_cast = dynamic_cast<MiqtVirtualQVideoSink*>( (QVideoSink*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__event = slot;
+	self_cast->handle__event = std::move(slot_handle);
 	return true;
 }
 
@@ -306,12 +316,13 @@ bool QVideoSink_virtualbase_event(void* self, QEvent* event) {
 }
 
 bool QVideoSink_override_virtual_eventFilter(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QVideoSink> slot_handle(slot);
 	MiqtVirtualQVideoSink* self_cast = dynamic_cast<MiqtVirtualQVideoSink*>( (QVideoSink*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__eventFilter = slot;
+	self_cast->handle__eventFilter = std::move(slot_handle);
 	return true;
 }
 
@@ -320,12 +331,13 @@ bool QVideoSink_virtualbase_eventFilter(void* self, QObject* watched, QEvent* ev
 }
 
 bool QVideoSink_override_virtual_timerEvent(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QVideoSink> slot_handle(slot);
 	MiqtVirtualQVideoSink* self_cast = dynamic_cast<MiqtVirtualQVideoSink*>( (QVideoSink*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__timerEvent = slot;
+	self_cast->handle__timerEvent = std::move(slot_handle);
 	return true;
 }
 
@@ -334,12 +346,13 @@ void QVideoSink_virtualbase_timerEvent(void* self, QTimerEvent* event) {
 }
 
 bool QVideoSink_override_virtual_childEvent(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QVideoSink> slot_handle(slot);
 	MiqtVirtualQVideoSink* self_cast = dynamic_cast<MiqtVirtualQVideoSink*>( (QVideoSink*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__childEvent = slot;
+	self_cast->handle__childEvent = std::move(slot_handle);
 	return true;
 }
 
@@ -348,12 +361,13 @@ void QVideoSink_virtualbase_childEvent(void* self, QChildEvent* event) {
 }
 
 bool QVideoSink_override_virtual_customEvent(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QVideoSink> slot_handle(slot);
 	MiqtVirtualQVideoSink* self_cast = dynamic_cast<MiqtVirtualQVideoSink*>( (QVideoSink*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__customEvent = slot;
+	self_cast->handle__customEvent = std::move(slot_handle);
 	return true;
 }
 
@@ -362,12 +376,13 @@ void QVideoSink_virtualbase_customEvent(void* self, QEvent* event) {
 }
 
 bool QVideoSink_override_virtual_connectNotify(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QVideoSink> slot_handle(slot);
 	MiqtVirtualQVideoSink* self_cast = dynamic_cast<MiqtVirtualQVideoSink*>( (QVideoSink*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__connectNotify = slot;
+	self_cast->handle__connectNotify = std::move(slot_handle);
 	return true;
 }
 
@@ -376,12 +391,13 @@ void QVideoSink_virtualbase_connectNotify(void* self, QMetaMethod* signal) {
 }
 
 bool QVideoSink_override_virtual_disconnectNotify(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QVideoSink> slot_handle(slot);
 	MiqtVirtualQVideoSink* self_cast = dynamic_cast<MiqtVirtualQVideoSink*>( (QVideoSink*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__disconnectNotify = slot;
+	self_cast->handle__disconnectNotify = std::move(slot_handle);
 	return true;
 }
 

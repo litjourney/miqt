@@ -15,6 +15,11 @@ import (
 	"unsafe"
 )
 
+//export miqt_exec_callback_handle_release_QAreaSeries
+func miqt_exec_callback_handle_release_QAreaSeries(cb C.intptr_t) {
+	cgo.Handle(cb).Delete()
+}
+
 type QAreaSeries struct {
 	h *C.QAreaSeries
 	*QAbstractSeries
@@ -216,8 +221,10 @@ func (this *QAreaSeries) PointLabelsClipping() bool {
 func (this *QAreaSeries) Clicked(point *qt6.QPointF) {
 	C.QAreaSeries_clicked(this.h, (*C.QPointF)(point.UnsafePointer()))
 }
-func (this *QAreaSeries) OnClicked(slot func(point *qt6.QPointF)) {
-	C.QAreaSeries_connect_clicked(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QAreaSeries) OnClicked(slot func(point *qt6.QPointF)) *qt6.SignalConnection {
+	_goptr := qt6.UnsafeNewQMetaObject__Connection(C.QAreaSeries_connect_clicked(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QAreaSeries_clicked
@@ -236,8 +243,10 @@ func miqt_exec_callback_QAreaSeries_clicked(cb C.intptr_t, point *C.QPointF) {
 func (this *QAreaSeries) Hovered(point *qt6.QPointF, state bool) {
 	C.QAreaSeries_hovered(this.h, (*C.QPointF)(point.UnsafePointer()), (C.bool)(state))
 }
-func (this *QAreaSeries) OnHovered(slot func(point *qt6.QPointF, state bool)) {
-	C.QAreaSeries_connect_hovered(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QAreaSeries) OnHovered(slot func(point *qt6.QPointF, state bool)) *qt6.SignalConnection {
+	_goptr := qt6.UnsafeNewQMetaObject__Connection(C.QAreaSeries_connect_hovered(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QAreaSeries_hovered
@@ -258,8 +267,10 @@ func miqt_exec_callback_QAreaSeries_hovered(cb C.intptr_t, point *C.QPointF, sta
 func (this *QAreaSeries) Pressed(point *qt6.QPointF) {
 	C.QAreaSeries_pressed(this.h, (*C.QPointF)(point.UnsafePointer()))
 }
-func (this *QAreaSeries) OnPressed(slot func(point *qt6.QPointF)) {
-	C.QAreaSeries_connect_pressed(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QAreaSeries) OnPressed(slot func(point *qt6.QPointF)) *qt6.SignalConnection {
+	_goptr := qt6.UnsafeNewQMetaObject__Connection(C.QAreaSeries_connect_pressed(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QAreaSeries_pressed
@@ -278,8 +289,10 @@ func miqt_exec_callback_QAreaSeries_pressed(cb C.intptr_t, point *C.QPointF) {
 func (this *QAreaSeries) Released(point *qt6.QPointF) {
 	C.QAreaSeries_released(this.h, (*C.QPointF)(point.UnsafePointer()))
 }
-func (this *QAreaSeries) OnReleased(slot func(point *qt6.QPointF)) {
-	C.QAreaSeries_connect_released(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QAreaSeries) OnReleased(slot func(point *qt6.QPointF)) *qt6.SignalConnection {
+	_goptr := qt6.UnsafeNewQMetaObject__Connection(C.QAreaSeries_connect_released(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QAreaSeries_released
@@ -298,8 +311,10 @@ func miqt_exec_callback_QAreaSeries_released(cb C.intptr_t, point *C.QPointF) {
 func (this *QAreaSeries) DoubleClicked(point *qt6.QPointF) {
 	C.QAreaSeries_doubleClicked(this.h, (*C.QPointF)(point.UnsafePointer()))
 }
-func (this *QAreaSeries) OnDoubleClicked(slot func(point *qt6.QPointF)) {
-	C.QAreaSeries_connect_doubleClicked(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QAreaSeries) OnDoubleClicked(slot func(point *qt6.QPointF)) *qt6.SignalConnection {
+	_goptr := qt6.UnsafeNewQMetaObject__Connection(C.QAreaSeries_connect_doubleClicked(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QAreaSeries_doubleClicked
@@ -318,8 +333,10 @@ func miqt_exec_callback_QAreaSeries_doubleClicked(cb C.intptr_t, point *C.QPoint
 func (this *QAreaSeries) Selected() {
 	C.QAreaSeries_selected(this.h)
 }
-func (this *QAreaSeries) OnSelected(slot func()) {
-	C.QAreaSeries_connect_selected(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QAreaSeries) OnSelected(slot func()) *qt6.SignalConnection {
+	_goptr := qt6.UnsafeNewQMetaObject__Connection(C.QAreaSeries_connect_selected(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QAreaSeries_selected
@@ -335,8 +352,10 @@ func miqt_exec_callback_QAreaSeries_selected(cb C.intptr_t) {
 func (this *QAreaSeries) ColorChanged(color qt6.QColor) {
 	C.QAreaSeries_colorChanged(this.h, (*C.QColor)(color.UnsafePointer()))
 }
-func (this *QAreaSeries) OnColorChanged(slot func(color qt6.QColor)) {
-	C.QAreaSeries_connect_colorChanged(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QAreaSeries) OnColorChanged(slot func(color qt6.QColor)) *qt6.SignalConnection {
+	_goptr := qt6.UnsafeNewQMetaObject__Connection(C.QAreaSeries_connect_colorChanged(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QAreaSeries_colorChanged
@@ -357,8 +376,10 @@ func miqt_exec_callback_QAreaSeries_colorChanged(cb C.intptr_t, color *C.QColor)
 func (this *QAreaSeries) BorderColorChanged(color qt6.QColor) {
 	C.QAreaSeries_borderColorChanged(this.h, (*C.QColor)(color.UnsafePointer()))
 }
-func (this *QAreaSeries) OnBorderColorChanged(slot func(color qt6.QColor)) {
-	C.QAreaSeries_connect_borderColorChanged(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QAreaSeries) OnBorderColorChanged(slot func(color qt6.QColor)) *qt6.SignalConnection {
+	_goptr := qt6.UnsafeNewQMetaObject__Connection(C.QAreaSeries_connect_borderColorChanged(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QAreaSeries_borderColorChanged
@@ -383,8 +404,10 @@ func (this *QAreaSeries) PointLabelsFormatChanged(format string) {
 	defer C.free(unsafe.Pointer(format_ms.data))
 	C.QAreaSeries_pointLabelsFormatChanged(this.h, format_ms)
 }
-func (this *QAreaSeries) OnPointLabelsFormatChanged(slot func(format string)) {
-	C.QAreaSeries_connect_pointLabelsFormatChanged(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QAreaSeries) OnPointLabelsFormatChanged(slot func(format string)) *qt6.SignalConnection {
+	_goptr := qt6.UnsafeNewQMetaObject__Connection(C.QAreaSeries_connect_pointLabelsFormatChanged(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QAreaSeries_pointLabelsFormatChanged
@@ -406,8 +429,10 @@ func miqt_exec_callback_QAreaSeries_pointLabelsFormatChanged(cb C.intptr_t, form
 func (this *QAreaSeries) PointLabelsVisibilityChanged(visible bool) {
 	C.QAreaSeries_pointLabelsVisibilityChanged(this.h, (C.bool)(visible))
 }
-func (this *QAreaSeries) OnPointLabelsVisibilityChanged(slot func(visible bool)) {
-	C.QAreaSeries_connect_pointLabelsVisibilityChanged(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QAreaSeries) OnPointLabelsVisibilityChanged(slot func(visible bool)) *qt6.SignalConnection {
+	_goptr := qt6.UnsafeNewQMetaObject__Connection(C.QAreaSeries_connect_pointLabelsVisibilityChanged(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QAreaSeries_pointLabelsVisibilityChanged
@@ -426,8 +451,10 @@ func miqt_exec_callback_QAreaSeries_pointLabelsVisibilityChanged(cb C.intptr_t, 
 func (this *QAreaSeries) PointLabelsFontChanged(font *qt6.QFont) {
 	C.QAreaSeries_pointLabelsFontChanged(this.h, (*C.QFont)(font.UnsafePointer()))
 }
-func (this *QAreaSeries) OnPointLabelsFontChanged(slot func(font *qt6.QFont)) {
-	C.QAreaSeries_connect_pointLabelsFontChanged(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QAreaSeries) OnPointLabelsFontChanged(slot func(font *qt6.QFont)) *qt6.SignalConnection {
+	_goptr := qt6.UnsafeNewQMetaObject__Connection(C.QAreaSeries_connect_pointLabelsFontChanged(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QAreaSeries_pointLabelsFontChanged
@@ -446,8 +473,10 @@ func miqt_exec_callback_QAreaSeries_pointLabelsFontChanged(cb C.intptr_t, font *
 func (this *QAreaSeries) PointLabelsColorChanged(color *qt6.QColor) {
 	C.QAreaSeries_pointLabelsColorChanged(this.h, (*C.QColor)(color.UnsafePointer()))
 }
-func (this *QAreaSeries) OnPointLabelsColorChanged(slot func(color *qt6.QColor)) {
-	C.QAreaSeries_connect_pointLabelsColorChanged(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QAreaSeries) OnPointLabelsColorChanged(slot func(color *qt6.QColor)) *qt6.SignalConnection {
+	_goptr := qt6.UnsafeNewQMetaObject__Connection(C.QAreaSeries_connect_pointLabelsColorChanged(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QAreaSeries_pointLabelsColorChanged
@@ -466,8 +495,10 @@ func miqt_exec_callback_QAreaSeries_pointLabelsColorChanged(cb C.intptr_t, color
 func (this *QAreaSeries) PointLabelsClippingChanged(clipping bool) {
 	C.QAreaSeries_pointLabelsClippingChanged(this.h, (C.bool)(clipping))
 }
-func (this *QAreaSeries) OnPointLabelsClippingChanged(slot func(clipping bool)) {
-	C.QAreaSeries_connect_pointLabelsClippingChanged(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QAreaSeries) OnPointLabelsClippingChanged(slot func(clipping bool)) *qt6.SignalConnection {
+	_goptr := qt6.UnsafeNewQMetaObject__Connection(C.QAreaSeries_connect_pointLabelsClippingChanged(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QAreaSeries_pointLabelsClippingChanged
@@ -581,7 +612,11 @@ func (this *QAreaSeries) callVirtualBase_Type() QAbstractSeries__SeriesType {
 
 }
 func (this *QAreaSeries) OnType(slot func(super func() QAbstractSeries__SeriesType) QAbstractSeries__SeriesType) {
-	ok := C.QAreaSeries_override_virtual_type(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QAreaSeries_override_virtual_type(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -606,7 +641,11 @@ func (this *QAreaSeries) callVirtualBase_Event(event *qt6.QEvent) bool {
 
 }
 func (this *QAreaSeries) OnEvent(slot func(super func(event *qt6.QEvent) bool, event *qt6.QEvent) bool) {
-	ok := C.QAreaSeries_override_virtual_event(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QAreaSeries_override_virtual_event(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -634,7 +673,11 @@ func (this *QAreaSeries) callVirtualBase_EventFilter(watched *qt6.QObject, event
 
 }
 func (this *QAreaSeries) OnEventFilter(slot func(super func(watched *qt6.QObject, event *qt6.QEvent) bool, watched *qt6.QObject, event *qt6.QEvent) bool) {
-	ok := C.QAreaSeries_override_virtual_eventFilter(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QAreaSeries_override_virtual_eventFilter(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -664,7 +707,11 @@ func (this *QAreaSeries) callVirtualBase_TimerEvent(event *qt6.QTimerEvent) {
 
 }
 func (this *QAreaSeries) OnTimerEvent(slot func(super func(event *qt6.QTimerEvent), event *qt6.QTimerEvent)) {
-	ok := C.QAreaSeries_override_virtual_timerEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QAreaSeries_override_virtual_timerEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -690,7 +737,11 @@ func (this *QAreaSeries) callVirtualBase_ChildEvent(event *qt6.QChildEvent) {
 
 }
 func (this *QAreaSeries) OnChildEvent(slot func(super func(event *qt6.QChildEvent), event *qt6.QChildEvent)) {
-	ok := C.QAreaSeries_override_virtual_childEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QAreaSeries_override_virtual_childEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -716,7 +767,11 @@ func (this *QAreaSeries) callVirtualBase_CustomEvent(event *qt6.QEvent) {
 
 }
 func (this *QAreaSeries) OnCustomEvent(slot func(super func(event *qt6.QEvent), event *qt6.QEvent)) {
-	ok := C.QAreaSeries_override_virtual_customEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QAreaSeries_override_virtual_customEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -742,7 +797,11 @@ func (this *QAreaSeries) callVirtualBase_ConnectNotify(signal *qt6.QMetaMethod) 
 
 }
 func (this *QAreaSeries) OnConnectNotify(slot func(super func(signal *qt6.QMetaMethod), signal *qt6.QMetaMethod)) {
-	ok := C.QAreaSeries_override_virtual_connectNotify(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QAreaSeries_override_virtual_connectNotify(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -768,7 +827,11 @@ func (this *QAreaSeries) callVirtualBase_DisconnectNotify(signal *qt6.QMetaMetho
 
 }
 func (this *QAreaSeries) OnDisconnectNotify(slot func(super func(signal *qt6.QMetaMethod), signal *qt6.QMetaMethod)) {
-	ok := C.QAreaSeries_override_virtual_disconnectNotify(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QAreaSeries_override_virtual_disconnectNotify(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}

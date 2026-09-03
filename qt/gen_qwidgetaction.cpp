@@ -1,3 +1,5 @@
+#include <memory>
+#include <utility>
 #include <QAction>
 #include <QChildEvent>
 #include <QEvent>
@@ -18,6 +20,7 @@
 extern "C" {
 #endif
 
+void miqt_exec_callback_handle_release_QWidgetAction(intptr_t);
 bool miqt_exec_callback_QWidgetAction_event(QWidgetAction*, intptr_t, QEvent*);
 bool miqt_exec_callback_QWidgetAction_eventFilter(QWidgetAction*, intptr_t, QObject*, QEvent*);
 QWidget* miqt_exec_callback_QWidgetAction_createWidget(QWidgetAction*, intptr_t, QWidget*);
@@ -39,128 +42,128 @@ public:
 	virtual ~MiqtVirtualQWidgetAction() override = default;
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__event = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QWidgetAction> handle__event;
 
 	// Subclass to allow providing a Go implementation
 	virtual bool event(QEvent* param1) override {
-		if (handle__event == 0) {
+		if (!handle__event) {
 			return QWidgetAction::event(param1);
 		}
 
 		QEvent* sigval1 = param1;
-		bool callback_return_value = miqt_exec_callback_QWidgetAction_event(this, handle__event, sigval1);
+		bool callback_return_value = miqt_exec_callback_QWidgetAction_event(this, handle__event.value(), sigval1);
 		return callback_return_value;
 	}
 
 	friend bool QWidgetAction_virtualbase_event(void* self, QEvent* param1);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__eventFilter = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QWidgetAction> handle__eventFilter;
 
 	// Subclass to allow providing a Go implementation
 	virtual bool eventFilter(QObject* param1, QEvent* param2) override {
-		if (handle__eventFilter == 0) {
+		if (!handle__eventFilter) {
 			return QWidgetAction::eventFilter(param1, param2);
 		}
 
 		QObject* sigval1 = param1;
 		QEvent* sigval2 = param2;
-		bool callback_return_value = miqt_exec_callback_QWidgetAction_eventFilter(this, handle__eventFilter, sigval1, sigval2);
+		bool callback_return_value = miqt_exec_callback_QWidgetAction_eventFilter(this, handle__eventFilter.value(), sigval1, sigval2);
 		return callback_return_value;
 	}
 
 	friend bool QWidgetAction_virtualbase_eventFilter(void* self, QObject* param1, QEvent* param2);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__createWidget = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QWidgetAction> handle__createWidget;
 
 	// Subclass to allow providing a Go implementation
 	virtual QWidget* createWidget(QWidget* parent) override {
-		if (handle__createWidget == 0) {
+		if (!handle__createWidget) {
 			return QWidgetAction::createWidget(parent);
 		}
 
 		QWidget* sigval1 = parent;
-		QWidget* callback_return_value = miqt_exec_callback_QWidgetAction_createWidget(this, handle__createWidget, sigval1);
+		QWidget* callback_return_value = miqt_exec_callback_QWidgetAction_createWidget(this, handle__createWidget.value(), sigval1);
 		return callback_return_value;
 	}
 
 	friend QWidget* QWidgetAction_virtualbase_createWidget(void* self, QWidget* parent);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__deleteWidget = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QWidgetAction> handle__deleteWidget;
 
 	// Subclass to allow providing a Go implementation
 	virtual void deleteWidget(QWidget* widget) override {
-		if (handle__deleteWidget == 0) {
+		if (!handle__deleteWidget) {
 			QWidgetAction::deleteWidget(widget);
 			return;
 		}
 
 		QWidget* sigval1 = widget;
-		miqt_exec_callback_QWidgetAction_deleteWidget(this, handle__deleteWidget, sigval1);
+		miqt_exec_callback_QWidgetAction_deleteWidget(this, handle__deleteWidget.value(), sigval1);
 
 	}
 
 	friend void QWidgetAction_virtualbase_deleteWidget(void* self, QWidget* widget);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__timerEvent = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QWidgetAction> handle__timerEvent;
 
 	// Subclass to allow providing a Go implementation
 	virtual void timerEvent(QTimerEvent* event) override {
-		if (handle__timerEvent == 0) {
+		if (!handle__timerEvent) {
 			QWidgetAction::timerEvent(event);
 			return;
 		}
 
 		QTimerEvent* sigval1 = event;
-		miqt_exec_callback_QWidgetAction_timerEvent(this, handle__timerEvent, sigval1);
+		miqt_exec_callback_QWidgetAction_timerEvent(this, handle__timerEvent.value(), sigval1);
 
 	}
 
 	friend void QWidgetAction_virtualbase_timerEvent(void* self, QTimerEvent* event);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__childEvent = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QWidgetAction> handle__childEvent;
 
 	// Subclass to allow providing a Go implementation
 	virtual void childEvent(QChildEvent* event) override {
-		if (handle__childEvent == 0) {
+		if (!handle__childEvent) {
 			QWidgetAction::childEvent(event);
 			return;
 		}
 
 		QChildEvent* sigval1 = event;
-		miqt_exec_callback_QWidgetAction_childEvent(this, handle__childEvent, sigval1);
+		miqt_exec_callback_QWidgetAction_childEvent(this, handle__childEvent.value(), sigval1);
 
 	}
 
 	friend void QWidgetAction_virtualbase_childEvent(void* self, QChildEvent* event);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__customEvent = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QWidgetAction> handle__customEvent;
 
 	// Subclass to allow providing a Go implementation
 	virtual void customEvent(QEvent* event) override {
-		if (handle__customEvent == 0) {
+		if (!handle__customEvent) {
 			QWidgetAction::customEvent(event);
 			return;
 		}
 
 		QEvent* sigval1 = event;
-		miqt_exec_callback_QWidgetAction_customEvent(this, handle__customEvent, sigval1);
+		miqt_exec_callback_QWidgetAction_customEvent(this, handle__customEvent.value(), sigval1);
 
 	}
 
 	friend void QWidgetAction_virtualbase_customEvent(void* self, QEvent* event);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__connectNotify = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QWidgetAction> handle__connectNotify;
 
 	// Subclass to allow providing a Go implementation
 	virtual void connectNotify(const QMetaMethod& signal) override {
-		if (handle__connectNotify == 0) {
+		if (!handle__connectNotify) {
 			QWidgetAction::connectNotify(signal);
 			return;
 		}
@@ -168,18 +171,18 @@ public:
 		const QMetaMethod& signal_ret = signal;
 		// Cast returned reference into pointer
 		QMetaMethod* sigval1 = const_cast<QMetaMethod*>(&signal_ret);
-		miqt_exec_callback_QWidgetAction_connectNotify(this, handle__connectNotify, sigval1);
+		miqt_exec_callback_QWidgetAction_connectNotify(this, handle__connectNotify.value(), sigval1);
 
 	}
 
 	friend void QWidgetAction_virtualbase_connectNotify(void* self, QMetaMethod* signal);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__disconnectNotify = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QWidgetAction> handle__disconnectNotify;
 
 	// Subclass to allow providing a Go implementation
 	virtual void disconnectNotify(const QMetaMethod& signal) override {
-		if (handle__disconnectNotify == 0) {
+		if (!handle__disconnectNotify) {
 			QWidgetAction::disconnectNotify(signal);
 			return;
 		}
@@ -187,7 +190,7 @@ public:
 		const QMetaMethod& signal_ret = signal;
 		// Cast returned reference into pointer
 		QMetaMethod* sigval1 = const_cast<QMetaMethod*>(&signal_ret);
-		miqt_exec_callback_QWidgetAction_disconnectNotify(this, handle__disconnectNotify, sigval1);
+		miqt_exec_callback_QWidgetAction_disconnectNotify(this, handle__disconnectNotify.value(), sigval1);
 
 	}
 
@@ -300,12 +303,13 @@ struct miqt_string QWidgetAction_trUtf83(const char* s, const char* c, int n) {
 }
 
 bool QWidgetAction_override_virtual_event(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QWidgetAction> slot_handle(slot);
 	MiqtVirtualQWidgetAction* self_cast = dynamic_cast<MiqtVirtualQWidgetAction*>( (QWidgetAction*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__event = slot;
+	self_cast->handle__event = std::move(slot_handle);
 	return true;
 }
 
@@ -314,12 +318,13 @@ bool QWidgetAction_virtualbase_event(void* self, QEvent* param1) {
 }
 
 bool QWidgetAction_override_virtual_eventFilter(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QWidgetAction> slot_handle(slot);
 	MiqtVirtualQWidgetAction* self_cast = dynamic_cast<MiqtVirtualQWidgetAction*>( (QWidgetAction*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__eventFilter = slot;
+	self_cast->handle__eventFilter = std::move(slot_handle);
 	return true;
 }
 
@@ -328,12 +333,13 @@ bool QWidgetAction_virtualbase_eventFilter(void* self, QObject* param1, QEvent* 
 }
 
 bool QWidgetAction_override_virtual_createWidget(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QWidgetAction> slot_handle(slot);
 	MiqtVirtualQWidgetAction* self_cast = dynamic_cast<MiqtVirtualQWidgetAction*>( (QWidgetAction*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__createWidget = slot;
+	self_cast->handle__createWidget = std::move(slot_handle);
 	return true;
 }
 
@@ -342,12 +348,13 @@ QWidget* QWidgetAction_virtualbase_createWidget(void* self, QWidget* parent) {
 }
 
 bool QWidgetAction_override_virtual_deleteWidget(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QWidgetAction> slot_handle(slot);
 	MiqtVirtualQWidgetAction* self_cast = dynamic_cast<MiqtVirtualQWidgetAction*>( (QWidgetAction*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__deleteWidget = slot;
+	self_cast->handle__deleteWidget = std::move(slot_handle);
 	return true;
 }
 
@@ -356,12 +363,13 @@ void QWidgetAction_virtualbase_deleteWidget(void* self, QWidget* widget) {
 }
 
 bool QWidgetAction_override_virtual_timerEvent(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QWidgetAction> slot_handle(slot);
 	MiqtVirtualQWidgetAction* self_cast = dynamic_cast<MiqtVirtualQWidgetAction*>( (QWidgetAction*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__timerEvent = slot;
+	self_cast->handle__timerEvent = std::move(slot_handle);
 	return true;
 }
 
@@ -370,12 +378,13 @@ void QWidgetAction_virtualbase_timerEvent(void* self, QTimerEvent* event) {
 }
 
 bool QWidgetAction_override_virtual_childEvent(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QWidgetAction> slot_handle(slot);
 	MiqtVirtualQWidgetAction* self_cast = dynamic_cast<MiqtVirtualQWidgetAction*>( (QWidgetAction*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__childEvent = slot;
+	self_cast->handle__childEvent = std::move(slot_handle);
 	return true;
 }
 
@@ -384,12 +393,13 @@ void QWidgetAction_virtualbase_childEvent(void* self, QChildEvent* event) {
 }
 
 bool QWidgetAction_override_virtual_customEvent(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QWidgetAction> slot_handle(slot);
 	MiqtVirtualQWidgetAction* self_cast = dynamic_cast<MiqtVirtualQWidgetAction*>( (QWidgetAction*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__customEvent = slot;
+	self_cast->handle__customEvent = std::move(slot_handle);
 	return true;
 }
 
@@ -398,12 +408,13 @@ void QWidgetAction_virtualbase_customEvent(void* self, QEvent* event) {
 }
 
 bool QWidgetAction_override_virtual_connectNotify(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QWidgetAction> slot_handle(slot);
 	MiqtVirtualQWidgetAction* self_cast = dynamic_cast<MiqtVirtualQWidgetAction*>( (QWidgetAction*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__connectNotify = slot;
+	self_cast->handle__connectNotify = std::move(slot_handle);
 	return true;
 }
 
@@ -412,12 +423,13 @@ void QWidgetAction_virtualbase_connectNotify(void* self, QMetaMethod* signal) {
 }
 
 bool QWidgetAction_override_virtual_disconnectNotify(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QWidgetAction> slot_handle(slot);
 	MiqtVirtualQWidgetAction* self_cast = dynamic_cast<MiqtVirtualQWidgetAction*>( (QWidgetAction*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__disconnectNotify = slot;
+	self_cast->handle__disconnectNotify = std::move(slot_handle);
 	return true;
 }
 

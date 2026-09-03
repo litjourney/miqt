@@ -1,3 +1,5 @@
+#include <memory>
+#include <utility>
 #include <QFont>
 #include <QPainter>
 #include <QPalette>
@@ -8,6 +10,7 @@
 extern "C" {
 #endif
 
+void miqt_exec_callback_handle_release_QwtAbstractScaleDraw(intptr_t);
 void miqt_exec_callback_QwtAbstractScaleDraw_draw(const QwtAbstractScaleDraw*, intptr_t, QPainter*, QPalette*);
 QwtText* miqt_exec_callback_QwtAbstractScaleDraw_label(const QwtAbstractScaleDraw*, intptr_t, double);
 double miqt_exec_callback_QwtAbstractScaleDraw_extent(const QwtAbstractScaleDraw*, intptr_t, QFont*);
@@ -26,11 +29,11 @@ public:
 	virtual ~MiqtVirtualQwtAbstractScaleDraw() override = default;
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__draw = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtAbstractScaleDraw> handle__draw;
 
 	// Subclass to allow providing a Go implementation
 	virtual void draw(QPainter* param1, const QPalette& param2) const override {
-		if (handle__draw == 0) {
+		if (!handle__draw) {
 			QwtAbstractScaleDraw::draw(param1, param2);
 			return;
 		}
@@ -39,86 +42,86 @@ public:
 		const QPalette& param2_ret = param2;
 		// Cast returned reference into pointer
 		QPalette* sigval2 = const_cast<QPalette*>(&param2_ret);
-		miqt_exec_callback_QwtAbstractScaleDraw_draw(this, handle__draw, sigval1, sigval2);
+		miqt_exec_callback_QwtAbstractScaleDraw_draw(this, handle__draw.value(), sigval1, sigval2);
 
 	}
 
 	friend void QwtAbstractScaleDraw_virtualbase_draw(const void* self, QPainter* param1, QPalette* param2);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__label = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtAbstractScaleDraw> handle__label;
 
 	// Subclass to allow providing a Go implementation
 	virtual QwtText label(double param1) const override {
-		if (handle__label == 0) {
+		if (!handle__label) {
 			return QwtAbstractScaleDraw::label(param1);
 		}
 
 		double sigval1 = param1;
-		QwtText* callback_return_value = miqt_exec_callback_QwtAbstractScaleDraw_label(this, handle__label, sigval1);
+		QwtText* callback_return_value = miqt_exec_callback_QwtAbstractScaleDraw_label(this, handle__label.value(), sigval1);
 		return *callback_return_value;
 	}
 
 	friend QwtText* QwtAbstractScaleDraw_virtualbase_label(const void* self, double param1);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__extent = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtAbstractScaleDraw> handle__extent;
 
 	// Subclass to allow providing a Go implementation
 	virtual double extent(const QFont& font) const override {
-		if (handle__extent == 0) {
+		if (!handle__extent) {
 			return 0; // Pure virtual, there is no base we can call
 		}
 
 		const QFont& font_ret = font;
 		// Cast returned reference into pointer
 		QFont* sigval1 = const_cast<QFont*>(&font_ret);
-		double callback_return_value = miqt_exec_callback_QwtAbstractScaleDraw_extent(this, handle__extent, sigval1);
+		double callback_return_value = miqt_exec_callback_QwtAbstractScaleDraw_extent(this, handle__extent.value(), sigval1);
 		return static_cast<double>(callback_return_value);
 	}
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__drawTick = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtAbstractScaleDraw> handle__drawTick;
 
 	// Subclass to allow providing a Go implementation
 	virtual void drawTick(QPainter* painter, double value, double len) const override {
-		if (handle__drawTick == 0) {
+		if (!handle__drawTick) {
 			return; // Pure virtual, there is no base we can call
 		}
 
 		QPainter* sigval1 = painter;
 		double sigval2 = value;
 		double sigval3 = len;
-		miqt_exec_callback_QwtAbstractScaleDraw_drawTick(this, handle__drawTick, sigval1, sigval2, sigval3);
+		miqt_exec_callback_QwtAbstractScaleDraw_drawTick(this, handle__drawTick.value(), sigval1, sigval2, sigval3);
 
 	}
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__drawBackbone = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtAbstractScaleDraw> handle__drawBackbone;
 
 	// Subclass to allow providing a Go implementation
 	virtual void drawBackbone(QPainter* painter) const override {
-		if (handle__drawBackbone == 0) {
+		if (!handle__drawBackbone) {
 			return; // Pure virtual, there is no base we can call
 		}
 
 		QPainter* sigval1 = painter;
-		miqt_exec_callback_QwtAbstractScaleDraw_drawBackbone(this, handle__drawBackbone, sigval1);
+		miqt_exec_callback_QwtAbstractScaleDraw_drawBackbone(this, handle__drawBackbone.value(), sigval1);
 
 	}
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__drawLabel = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtAbstractScaleDraw> handle__drawLabel;
 
 	// Subclass to allow providing a Go implementation
 	virtual void drawLabel(QPainter* painter, double value) const override {
-		if (handle__drawLabel == 0) {
+		if (!handle__drawLabel) {
 			return; // Pure virtual, there is no base we can call
 		}
 
 		QPainter* sigval1 = painter;
 		double sigval2 = value;
-		miqt_exec_callback_QwtAbstractScaleDraw_drawLabel(this, handle__drawLabel, sigval1, sigval2);
+		miqt_exec_callback_QwtAbstractScaleDraw_drawLabel(this, handle__drawLabel.value(), sigval1, sigval2);
 
 	}
 
@@ -206,12 +209,13 @@ void QwtAbstractScaleDraw_enableComponent2(QwtAbstractScaleDraw* self, int param
 }
 
 bool QwtAbstractScaleDraw_override_virtual_draw(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtAbstractScaleDraw> slot_handle(slot);
 	MiqtVirtualQwtAbstractScaleDraw* self_cast = dynamic_cast<MiqtVirtualQwtAbstractScaleDraw*>( (QwtAbstractScaleDraw*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__draw = slot;
+	self_cast->handle__draw = std::move(slot_handle);
 	return true;
 }
 
@@ -220,12 +224,13 @@ void QwtAbstractScaleDraw_virtualbase_draw(const void* self, QPainter* param1, Q
 }
 
 bool QwtAbstractScaleDraw_override_virtual_label(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtAbstractScaleDraw> slot_handle(slot);
 	MiqtVirtualQwtAbstractScaleDraw* self_cast = dynamic_cast<MiqtVirtualQwtAbstractScaleDraw*>( (QwtAbstractScaleDraw*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__label = slot;
+	self_cast->handle__label = std::move(slot_handle);
 	return true;
 }
 
@@ -234,42 +239,46 @@ QwtText* QwtAbstractScaleDraw_virtualbase_label(const void* self, double param1)
 }
 
 bool QwtAbstractScaleDraw_override_virtual_extent(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtAbstractScaleDraw> slot_handle(slot);
 	MiqtVirtualQwtAbstractScaleDraw* self_cast = dynamic_cast<MiqtVirtualQwtAbstractScaleDraw*>( (QwtAbstractScaleDraw*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__extent = slot;
+	self_cast->handle__extent = std::move(slot_handle);
 	return true;
 }
 
 bool QwtAbstractScaleDraw_override_virtual_drawTick(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtAbstractScaleDraw> slot_handle(slot);
 	MiqtVirtualQwtAbstractScaleDraw* self_cast = dynamic_cast<MiqtVirtualQwtAbstractScaleDraw*>( (QwtAbstractScaleDraw*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__drawTick = slot;
+	self_cast->handle__drawTick = std::move(slot_handle);
 	return true;
 }
 
 bool QwtAbstractScaleDraw_override_virtual_drawBackbone(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtAbstractScaleDraw> slot_handle(slot);
 	MiqtVirtualQwtAbstractScaleDraw* self_cast = dynamic_cast<MiqtVirtualQwtAbstractScaleDraw*>( (QwtAbstractScaleDraw*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__drawBackbone = slot;
+	self_cast->handle__drawBackbone = std::move(slot_handle);
 	return true;
 }
 
 bool QwtAbstractScaleDraw_override_virtual_drawLabel(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtAbstractScaleDraw> slot_handle(slot);
 	MiqtVirtualQwtAbstractScaleDraw* self_cast = dynamic_cast<MiqtVirtualQwtAbstractScaleDraw*>( (QwtAbstractScaleDraw*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__drawLabel = slot;
+	self_cast->handle__drawLabel = std::move(slot_handle);
 	return true;
 }
 

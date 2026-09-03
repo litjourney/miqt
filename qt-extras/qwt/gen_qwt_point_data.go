@@ -15,6 +15,11 @@ import (
 	"unsafe"
 )
 
+//export miqt_exec_callback_handle_release_QwtPointArrayData
+func miqt_exec_callback_handle_release_QwtPointArrayData(cb C.intptr_t) {
+	cgo.Handle(cb).Delete()
+}
+
 type QwtPointArrayData struct {
 	h *C.QwtPointArrayData
 }
@@ -121,7 +126,11 @@ func (this *QwtPointArrayData) callVirtualBase_BoundingRect() *qt.QRectF {
 
 }
 func (this *QwtPointArrayData) OnBoundingRect(slot func(super func() *qt.QRectF) *qt.QRectF) {
-	ok := C.QwtPointArrayData_override_virtual_boundingRect(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QwtPointArrayData_override_virtual_boundingRect(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -146,7 +155,11 @@ func (this *QwtPointArrayData) callVirtualBase_Size() uint64 {
 
 }
 func (this *QwtPointArrayData) OnSize(slot func(super func() uint64) uint64) {
-	ok := C.QwtPointArrayData_override_virtual_size(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QwtPointArrayData_override_virtual_size(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -173,7 +186,11 @@ func (this *QwtPointArrayData) callVirtualBase_Sample(index uint64) *qt.QPointF 
 
 }
 func (this *QwtPointArrayData) OnSample(slot func(super func(index uint64) *qt.QPointF, index uint64) *qt.QPointF) {
-	ok := C.QwtPointArrayData_override_virtual_sample(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QwtPointArrayData_override_virtual_sample(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -207,6 +224,11 @@ func (this *QwtPointArrayData) GoGC() {
 		this.Delete()
 		runtime.KeepAlive(this.h)
 	})
+}
+
+//export miqt_exec_callback_handle_release_QwtCPointerData
+func miqt_exec_callback_handle_release_QwtCPointerData(cb C.intptr_t) {
+	cgo.Handle(cb).Delete()
 }
 
 type QwtCPointerData struct {
@@ -285,7 +307,11 @@ func (this *QwtCPointerData) callVirtualBase_BoundingRect() *qt.QRectF {
 
 }
 func (this *QwtCPointerData) OnBoundingRect(slot func(super func() *qt.QRectF) *qt.QRectF) {
-	ok := C.QwtCPointerData_override_virtual_boundingRect(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QwtCPointerData_override_virtual_boundingRect(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -310,7 +336,11 @@ func (this *QwtCPointerData) callVirtualBase_Size() uint64 {
 
 }
 func (this *QwtCPointerData) OnSize(slot func(super func() uint64) uint64) {
-	ok := C.QwtCPointerData_override_virtual_size(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QwtCPointerData_override_virtual_size(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -337,7 +367,11 @@ func (this *QwtCPointerData) callVirtualBase_Sample(index uint64) *qt.QPointF {
 
 }
 func (this *QwtCPointerData) OnSample(slot func(super func(index uint64) *qt.QPointF, index uint64) *qt.QPointF) {
-	ok := C.QwtCPointerData_override_virtual_sample(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QwtCPointerData_override_virtual_sample(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -371,6 +405,11 @@ func (this *QwtCPointerData) GoGC() {
 		this.Delete()
 		runtime.KeepAlive(this.h)
 	})
+}
+
+//export miqt_exec_callback_handle_release_QwtSyntheticPointData
+func miqt_exec_callback_handle_release_QwtSyntheticPointData(cb C.intptr_t) {
+	cgo.Handle(cb).Delete()
 }
 
 type QwtSyntheticPointData struct {
@@ -477,7 +516,11 @@ func (this *QwtSyntheticPointData) callVirtualBase_Size() uint64 {
 
 }
 func (this *QwtSyntheticPointData) OnSize(slot func(super func() uint64) uint64) {
-	ok := C.QwtSyntheticPointData_override_virtual_size(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QwtSyntheticPointData_override_virtual_size(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -504,7 +547,11 @@ func (this *QwtSyntheticPointData) callVirtualBase_BoundingRect() *qt.QRectF {
 
 }
 func (this *QwtSyntheticPointData) OnBoundingRect(slot func(super func() *qt.QRectF) *qt.QRectF) {
-	ok := C.QwtSyntheticPointData_override_virtual_boundingRect(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QwtSyntheticPointData_override_virtual_boundingRect(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -531,7 +578,11 @@ func (this *QwtSyntheticPointData) callVirtualBase_Sample(index uint64) *qt.QPoi
 
 }
 func (this *QwtSyntheticPointData) OnSample(slot func(super func(index uint64) *qt.QPointF, index uint64) *qt.QPointF) {
-	ok := C.QwtSyntheticPointData_override_virtual_sample(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QwtSyntheticPointData_override_virtual_sample(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -553,7 +604,11 @@ func miqt_exec_callback_QwtSyntheticPointData_sample(self *C.QwtSyntheticPointDa
 
 }
 func (this *QwtSyntheticPointData) OnY(slot func(x float64) float64) {
-	ok := C.QwtSyntheticPointData_override_virtual_y(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QwtSyntheticPointData_override_virtual_y(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -581,7 +636,11 @@ func (this *QwtSyntheticPointData) callVirtualBase_X(index uint) float64 {
 
 }
 func (this *QwtSyntheticPointData) OnX(slot func(super func(index uint) float64, index uint) float64) {
-	ok := C.QwtSyntheticPointData_override_virtual_x(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QwtSyntheticPointData_override_virtual_x(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -609,7 +668,11 @@ func (this *QwtSyntheticPointData) callVirtualBase_SetRectOfInterest(rectOfInter
 
 }
 func (this *QwtSyntheticPointData) OnSetRectOfInterest(slot func(super func(rectOfInterest *qt.QRectF), rectOfInterest *qt.QRectF)) {
-	ok := C.QwtSyntheticPointData_override_virtual_setRectOfInterest(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QwtSyntheticPointData_override_virtual_setRectOfInterest(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}

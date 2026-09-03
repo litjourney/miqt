@@ -82,7 +82,7 @@ unsigned int QObject_registerUserData();
 void QObject_setUserData(QObject* self, unsigned int id, QObjectUserData* data);
 QObjectUserData* QObject_userData(const QObject* self, unsigned int id);
 void QObject_destroyed(QObject* self);
-void QObject_connect_destroyed(QObject* self, intptr_t slot);
+void* QObject_connect_destroyed(QObject* self, intptr_t slot);
 QObject* QObject_parent(const QObject* self);
 bool QObject_inherits(const QObject* self, const char* classname);
 void QObject_deleteLater(QObject* self);
@@ -100,7 +100,7 @@ int QObject_startTimer3(QObject* self, int64_t time, int timerType);
 QMetaObject__Connection* QObject_connect3(QObject* sender, QMetaMethod* signal, QObject* receiver, QMetaMethod* method, int type);
 QMetaObject__Connection* QObject_connect4(const QObject* self, QObject* sender, const char* signal, const char* member, int type);
 void QObject_destroyedWithQObject(QObject* self, QObject* param1);
-void QObject_connect_destroyedWithQObject(QObject* self, intptr_t slot);
+void* QObject_connect_destroyedWithQObject(QObject* self, intptr_t slot);
 
 bool QObject_override_virtual_event(void* self, intptr_t slot);
 bool QObject_virtualbase_event(void* self, QEvent* event);
@@ -122,7 +122,7 @@ int QObject_protectedbase_senderSignalIndex(bool* _dynamic_cast_ok, const void* 
 int QObject_protectedbase_receivers(bool* _dynamic_cast_ok, const void* self, const char* signal);
 bool QObject_protectedbase_isSignalConnected(bool* _dynamic_cast_ok, const void* self, QMetaMethod* signal);
 
-void QObject_connect_objectNameChanged(QObject* self, intptr_t slot);
+void* QObject_connect_objectNameChanged(QObject* self, intptr_t slot);
 
 void QObject_delete(QObject* self);
 

@@ -1,3 +1,5 @@
+#include <memory>
+#include <utility>
 #include <QChildEvent>
 #include <QDesignerFormEditorInterface>
 #include <QDesignerMetaDataBaseInterface>
@@ -19,12 +21,14 @@
 extern "C" {
 #endif
 
+void miqt_exec_callback_handle_release_QDesignerMetaDataBaseItemInterface(intptr_t);
 struct miqt_string miqt_exec_callback_QDesignerMetaDataBaseItemInterface_name(const QDesignerMetaDataBaseItemInterface*, intptr_t);
 void miqt_exec_callback_QDesignerMetaDataBaseItemInterface_setName(QDesignerMetaDataBaseItemInterface*, intptr_t, struct miqt_string);
 struct miqt_array /* of QWidget* */  miqt_exec_callback_QDesignerMetaDataBaseItemInterface_tabOrder(const QDesignerMetaDataBaseItemInterface*, intptr_t);
 void miqt_exec_callback_QDesignerMetaDataBaseItemInterface_setTabOrder(QDesignerMetaDataBaseItemInterface*, intptr_t, struct miqt_array /* of QWidget* */ );
 bool miqt_exec_callback_QDesignerMetaDataBaseItemInterface_enabled(const QDesignerMetaDataBaseItemInterface*, intptr_t);
 void miqt_exec_callback_QDesignerMetaDataBaseItemInterface_setEnabled(QDesignerMetaDataBaseItemInterface*, intptr_t, bool);
+void miqt_exec_callback_handle_release_QDesignerMetaDataBaseInterface(intptr_t);
 void miqt_exec_callback_QDesignerMetaDataBaseInterface_changed(intptr_t);
 QDesignerMetaDataBaseItemInterface* miqt_exec_callback_QDesignerMetaDataBaseInterface_item(const QDesignerMetaDataBaseInterface*, intptr_t, QObject*);
 void miqt_exec_callback_QDesignerMetaDataBaseInterface_add(QDesignerMetaDataBaseInterface*, intptr_t, QObject*);
@@ -50,26 +54,26 @@ public:
 	virtual ~MiqtVirtualQDesignerMetaDataBaseItemInterface() override = default;
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__name = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QDesignerMetaDataBaseItemInterface> handle__name;
 
 	// Subclass to allow providing a Go implementation
 	virtual QString name() const override {
-		if (handle__name == 0) {
+		if (!handle__name) {
 			return QString(); // Pure virtual, there is no base we can call
 		}
 
-		struct miqt_string callback_return_value = miqt_exec_callback_QDesignerMetaDataBaseItemInterface_name(this, handle__name);
+		struct miqt_string callback_return_value = miqt_exec_callback_QDesignerMetaDataBaseItemInterface_name(this, handle__name.value());
 		QString callback_return_value_QString = QString::fromUtf8(callback_return_value.data, callback_return_value.len);
 		free(callback_return_value.data);
 		return callback_return_value_QString;
 	}
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__setName = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QDesignerMetaDataBaseItemInterface> handle__setName;
 
 	// Subclass to allow providing a Go implementation
 	virtual void setName(const QString& name) override {
-		if (handle__setName == 0) {
+		if (!handle__setName) {
 			return; // Pure virtual, there is no base we can call
 		}
 
@@ -81,20 +85,20 @@ public:
 		name_ms.data = static_cast<char*>(malloc(name_ms.len));
 		memcpy(name_ms.data, name_b.data(), name_ms.len);
 		struct miqt_string sigval1 = name_ms;
-		miqt_exec_callback_QDesignerMetaDataBaseItemInterface_setName(this, handle__setName, sigval1);
+		miqt_exec_callback_QDesignerMetaDataBaseItemInterface_setName(this, handle__setName.value(), sigval1);
 
 	}
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__tabOrder = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QDesignerMetaDataBaseItemInterface> handle__tabOrder;
 
 	// Subclass to allow providing a Go implementation
 	virtual QList<QWidget *> tabOrder() const override {
-		if (handle__tabOrder == 0) {
+		if (!handle__tabOrder) {
 			return QList<QWidget *>(); // Pure virtual, there is no base we can call
 		}
 
-		struct miqt_array /* of QWidget* */  callback_return_value = miqt_exec_callback_QDesignerMetaDataBaseItemInterface_tabOrder(this, handle__tabOrder);
+		struct miqt_array /* of QWidget* */  callback_return_value = miqt_exec_callback_QDesignerMetaDataBaseItemInterface_tabOrder(this, handle__tabOrder.value());
 		QList<QWidget *> callback_return_value_QList;
 		callback_return_value_QList.reserve(callback_return_value.len);
 		QWidget** callback_return_value_arr = static_cast<QWidget**>(callback_return_value.data);
@@ -106,11 +110,11 @@ public:
 	}
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__setTabOrder = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QDesignerMetaDataBaseItemInterface> handle__setTabOrder;
 
 	// Subclass to allow providing a Go implementation
 	virtual void setTabOrder(const QList<QWidget *>& tabOrder) override {
-		if (handle__setTabOrder == 0) {
+		if (!handle__setTabOrder) {
 			return; // Pure virtual, there is no base we can call
 		}
 
@@ -124,34 +128,34 @@ public:
 		tabOrder_out.len = tabOrder_ret.length();
 		tabOrder_out.data = static_cast<void*>(tabOrder_arr);
 		struct miqt_array /* of QWidget* */  sigval1 = tabOrder_out;
-		miqt_exec_callback_QDesignerMetaDataBaseItemInterface_setTabOrder(this, handle__setTabOrder, sigval1);
+		miqt_exec_callback_QDesignerMetaDataBaseItemInterface_setTabOrder(this, handle__setTabOrder.value(), sigval1);
 
 	}
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__enabled = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QDesignerMetaDataBaseItemInterface> handle__enabled;
 
 	// Subclass to allow providing a Go implementation
 	virtual bool enabled() const override {
-		if (handle__enabled == 0) {
+		if (!handle__enabled) {
 			return false; // Pure virtual, there is no base we can call
 		}
 
-		bool callback_return_value = miqt_exec_callback_QDesignerMetaDataBaseItemInterface_enabled(this, handle__enabled);
+		bool callback_return_value = miqt_exec_callback_QDesignerMetaDataBaseItemInterface_enabled(this, handle__enabled.value());
 		return callback_return_value;
 	}
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__setEnabled = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QDesignerMetaDataBaseItemInterface> handle__setEnabled;
 
 	// Subclass to allow providing a Go implementation
 	virtual void setEnabled(bool b) override {
-		if (handle__setEnabled == 0) {
+		if (!handle__setEnabled) {
 			return; // Pure virtual, there is no base we can call
 		}
 
 		bool sigval1 = b;
-		miqt_exec_callback_QDesignerMetaDataBaseItemInterface_setEnabled(this, handle__setEnabled, sigval1);
+		miqt_exec_callback_QDesignerMetaDataBaseItemInterface_setEnabled(this, handle__setEnabled.value(), sigval1);
 
 	}
 
@@ -209,62 +213,68 @@ void QDesignerMetaDataBaseItemInterface_setEnabled(QDesignerMetaDataBaseItemInte
 }
 
 bool QDesignerMetaDataBaseItemInterface_override_virtual_name(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QDesignerMetaDataBaseItemInterface> slot_handle(slot);
 	MiqtVirtualQDesignerMetaDataBaseItemInterface* self_cast = dynamic_cast<MiqtVirtualQDesignerMetaDataBaseItemInterface*>( (QDesignerMetaDataBaseItemInterface*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__name = slot;
+	self_cast->handle__name = std::move(slot_handle);
 	return true;
 }
 
 bool QDesignerMetaDataBaseItemInterface_override_virtual_setName(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QDesignerMetaDataBaseItemInterface> slot_handle(slot);
 	MiqtVirtualQDesignerMetaDataBaseItemInterface* self_cast = dynamic_cast<MiqtVirtualQDesignerMetaDataBaseItemInterface*>( (QDesignerMetaDataBaseItemInterface*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__setName = slot;
+	self_cast->handle__setName = std::move(slot_handle);
 	return true;
 }
 
 bool QDesignerMetaDataBaseItemInterface_override_virtual_tabOrder(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QDesignerMetaDataBaseItemInterface> slot_handle(slot);
 	MiqtVirtualQDesignerMetaDataBaseItemInterface* self_cast = dynamic_cast<MiqtVirtualQDesignerMetaDataBaseItemInterface*>( (QDesignerMetaDataBaseItemInterface*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__tabOrder = slot;
+	self_cast->handle__tabOrder = std::move(slot_handle);
 	return true;
 }
 
 bool QDesignerMetaDataBaseItemInterface_override_virtual_setTabOrder(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QDesignerMetaDataBaseItemInterface> slot_handle(slot);
 	MiqtVirtualQDesignerMetaDataBaseItemInterface* self_cast = dynamic_cast<MiqtVirtualQDesignerMetaDataBaseItemInterface*>( (QDesignerMetaDataBaseItemInterface*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__setTabOrder = slot;
+	self_cast->handle__setTabOrder = std::move(slot_handle);
 	return true;
 }
 
 bool QDesignerMetaDataBaseItemInterface_override_virtual_enabled(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QDesignerMetaDataBaseItemInterface> slot_handle(slot);
 	MiqtVirtualQDesignerMetaDataBaseItemInterface* self_cast = dynamic_cast<MiqtVirtualQDesignerMetaDataBaseItemInterface*>( (QDesignerMetaDataBaseItemInterface*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__enabled = slot;
+	self_cast->handle__enabled = std::move(slot_handle);
 	return true;
 }
 
 bool QDesignerMetaDataBaseItemInterface_override_virtual_setEnabled(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QDesignerMetaDataBaseItemInterface> slot_handle(slot);
 	MiqtVirtualQDesignerMetaDataBaseItemInterface* self_cast = dynamic_cast<MiqtVirtualQDesignerMetaDataBaseItemInterface*>( (QDesignerMetaDataBaseItemInterface*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__setEnabled = slot;
+	self_cast->handle__setEnabled = std::move(slot_handle);
 	return true;
 }
 
@@ -281,57 +291,57 @@ public:
 	virtual ~MiqtVirtualQDesignerMetaDataBaseInterface() override = default;
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__item = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QDesignerMetaDataBaseInterface> handle__item;
 
 	// Subclass to allow providing a Go implementation
 	virtual QDesignerMetaDataBaseItemInterface* item(QObject* object) const override {
-		if (handle__item == 0) {
+		if (!handle__item) {
 			return nullptr; // Pure virtual, there is no base we can call
 		}
 
 		QObject* sigval1 = object;
-		QDesignerMetaDataBaseItemInterface* callback_return_value = miqt_exec_callback_QDesignerMetaDataBaseInterface_item(this, handle__item, sigval1);
+		QDesignerMetaDataBaseItemInterface* callback_return_value = miqt_exec_callback_QDesignerMetaDataBaseInterface_item(this, handle__item.value(), sigval1);
 		return callback_return_value;
 	}
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__add = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QDesignerMetaDataBaseInterface> handle__add;
 
 	// Subclass to allow providing a Go implementation
 	virtual void add(QObject* object) override {
-		if (handle__add == 0) {
+		if (!handle__add) {
 			return; // Pure virtual, there is no base we can call
 		}
 
 		QObject* sigval1 = object;
-		miqt_exec_callback_QDesignerMetaDataBaseInterface_add(this, handle__add, sigval1);
+		miqt_exec_callback_QDesignerMetaDataBaseInterface_add(this, handle__add.value(), sigval1);
 
 	}
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__remove = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QDesignerMetaDataBaseInterface> handle__remove;
 
 	// Subclass to allow providing a Go implementation
 	virtual void remove(QObject* object) override {
-		if (handle__remove == 0) {
+		if (!handle__remove) {
 			return; // Pure virtual, there is no base we can call
 		}
 
 		QObject* sigval1 = object;
-		miqt_exec_callback_QDesignerMetaDataBaseInterface_remove(this, handle__remove, sigval1);
+		miqt_exec_callback_QDesignerMetaDataBaseInterface_remove(this, handle__remove.value(), sigval1);
 
 	}
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__objects = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QDesignerMetaDataBaseInterface> handle__objects;
 
 	// Subclass to allow providing a Go implementation
 	virtual QList<QObject *> objects() const override {
-		if (handle__objects == 0) {
+		if (!handle__objects) {
 			return QList<QObject *>(); // Pure virtual, there is no base we can call
 		}
 
-		struct miqt_array /* of QObject* */  callback_return_value = miqt_exec_callback_QDesignerMetaDataBaseInterface_objects(this, handle__objects);
+		struct miqt_array /* of QObject* */  callback_return_value = miqt_exec_callback_QDesignerMetaDataBaseInterface_objects(this, handle__objects.value());
 		QList<QObject *> callback_return_value_QList;
 		callback_return_value_QList.reserve(callback_return_value.len);
 		QObject** callback_return_value_arr = static_cast<QObject**>(callback_return_value.data);
@@ -343,108 +353,108 @@ public:
 	}
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__core = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QDesignerMetaDataBaseInterface> handle__core;
 
 	// Subclass to allow providing a Go implementation
 	virtual QDesignerFormEditorInterface* core() const override {
-		if (handle__core == 0) {
+		if (!handle__core) {
 			return nullptr; // Pure virtual, there is no base we can call
 		}
 
-		QDesignerFormEditorInterface* callback_return_value = miqt_exec_callback_QDesignerMetaDataBaseInterface_core(this, handle__core);
+		QDesignerFormEditorInterface* callback_return_value = miqt_exec_callback_QDesignerMetaDataBaseInterface_core(this, handle__core.value());
 		return callback_return_value;
 	}
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__event = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QDesignerMetaDataBaseInterface> handle__event;
 
 	// Subclass to allow providing a Go implementation
 	virtual bool event(QEvent* event) override {
-		if (handle__event == 0) {
+		if (!handle__event) {
 			return QDesignerMetaDataBaseInterface::event(event);
 		}
 
 		QEvent* sigval1 = event;
-		bool callback_return_value = miqt_exec_callback_QDesignerMetaDataBaseInterface_event(this, handle__event, sigval1);
+		bool callback_return_value = miqt_exec_callback_QDesignerMetaDataBaseInterface_event(this, handle__event.value(), sigval1);
 		return callback_return_value;
 	}
 
 	friend bool QDesignerMetaDataBaseInterface_virtualbase_event(void* self, QEvent* event);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__eventFilter = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QDesignerMetaDataBaseInterface> handle__eventFilter;
 
 	// Subclass to allow providing a Go implementation
 	virtual bool eventFilter(QObject* watched, QEvent* event) override {
-		if (handle__eventFilter == 0) {
+		if (!handle__eventFilter) {
 			return QDesignerMetaDataBaseInterface::eventFilter(watched, event);
 		}
 
 		QObject* sigval1 = watched;
 		QEvent* sigval2 = event;
-		bool callback_return_value = miqt_exec_callback_QDesignerMetaDataBaseInterface_eventFilter(this, handle__eventFilter, sigval1, sigval2);
+		bool callback_return_value = miqt_exec_callback_QDesignerMetaDataBaseInterface_eventFilter(this, handle__eventFilter.value(), sigval1, sigval2);
 		return callback_return_value;
 	}
 
 	friend bool QDesignerMetaDataBaseInterface_virtualbase_eventFilter(void* self, QObject* watched, QEvent* event);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__timerEvent = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QDesignerMetaDataBaseInterface> handle__timerEvent;
 
 	// Subclass to allow providing a Go implementation
 	virtual void timerEvent(QTimerEvent* event) override {
-		if (handle__timerEvent == 0) {
+		if (!handle__timerEvent) {
 			QDesignerMetaDataBaseInterface::timerEvent(event);
 			return;
 		}
 
 		QTimerEvent* sigval1 = event;
-		miqt_exec_callback_QDesignerMetaDataBaseInterface_timerEvent(this, handle__timerEvent, sigval1);
+		miqt_exec_callback_QDesignerMetaDataBaseInterface_timerEvent(this, handle__timerEvent.value(), sigval1);
 
 	}
 
 	friend void QDesignerMetaDataBaseInterface_virtualbase_timerEvent(void* self, QTimerEvent* event);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__childEvent = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QDesignerMetaDataBaseInterface> handle__childEvent;
 
 	// Subclass to allow providing a Go implementation
 	virtual void childEvent(QChildEvent* event) override {
-		if (handle__childEvent == 0) {
+		if (!handle__childEvent) {
 			QDesignerMetaDataBaseInterface::childEvent(event);
 			return;
 		}
 
 		QChildEvent* sigval1 = event;
-		miqt_exec_callback_QDesignerMetaDataBaseInterface_childEvent(this, handle__childEvent, sigval1);
+		miqt_exec_callback_QDesignerMetaDataBaseInterface_childEvent(this, handle__childEvent.value(), sigval1);
 
 	}
 
 	friend void QDesignerMetaDataBaseInterface_virtualbase_childEvent(void* self, QChildEvent* event);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__customEvent = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QDesignerMetaDataBaseInterface> handle__customEvent;
 
 	// Subclass to allow providing a Go implementation
 	virtual void customEvent(QEvent* event) override {
-		if (handle__customEvent == 0) {
+		if (!handle__customEvent) {
 			QDesignerMetaDataBaseInterface::customEvent(event);
 			return;
 		}
 
 		QEvent* sigval1 = event;
-		miqt_exec_callback_QDesignerMetaDataBaseInterface_customEvent(this, handle__customEvent, sigval1);
+		miqt_exec_callback_QDesignerMetaDataBaseInterface_customEvent(this, handle__customEvent.value(), sigval1);
 
 	}
 
 	friend void QDesignerMetaDataBaseInterface_virtualbase_customEvent(void* self, QEvent* event);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__connectNotify = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QDesignerMetaDataBaseInterface> handle__connectNotify;
 
 	// Subclass to allow providing a Go implementation
 	virtual void connectNotify(const QMetaMethod& signal) override {
-		if (handle__connectNotify == 0) {
+		if (!handle__connectNotify) {
 			QDesignerMetaDataBaseInterface::connectNotify(signal);
 			return;
 		}
@@ -452,18 +462,18 @@ public:
 		const QMetaMethod& signal_ret = signal;
 		// Cast returned reference into pointer
 		QMetaMethod* sigval1 = const_cast<QMetaMethod*>(&signal_ret);
-		miqt_exec_callback_QDesignerMetaDataBaseInterface_connectNotify(this, handle__connectNotify, sigval1);
+		miqt_exec_callback_QDesignerMetaDataBaseInterface_connectNotify(this, handle__connectNotify.value(), sigval1);
 
 	}
 
 	friend void QDesignerMetaDataBaseInterface_virtualbase_connectNotify(void* self, QMetaMethod* signal);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__disconnectNotify = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QDesignerMetaDataBaseInterface> handle__disconnectNotify;
 
 	// Subclass to allow providing a Go implementation
 	virtual void disconnectNotify(const QMetaMethod& signal) override {
-		if (handle__disconnectNotify == 0) {
+		if (!handle__disconnectNotify) {
 			QDesignerMetaDataBaseInterface::disconnectNotify(signal);
 			return;
 		}
@@ -471,7 +481,7 @@ public:
 		const QMetaMethod& signal_ret = signal;
 		// Cast returned reference into pointer
 		QMetaMethod* sigval1 = const_cast<QMetaMethod*>(&signal_ret);
-		miqt_exec_callback_QDesignerMetaDataBaseInterface_disconnectNotify(this, handle__disconnectNotify, sigval1);
+		miqt_exec_callback_QDesignerMetaDataBaseInterface_disconnectNotify(this, handle__disconnectNotify.value(), sigval1);
 
 	}
 
@@ -548,10 +558,12 @@ void QDesignerMetaDataBaseInterface_changed(QDesignerMetaDataBaseInterface* self
 	self->changed();
 }
 
-void QDesignerMetaDataBaseInterface_connect_changed(QDesignerMetaDataBaseInterface* self, intptr_t slot) {
-	QDesignerMetaDataBaseInterface::connect(self, static_cast<void (QDesignerMetaDataBaseInterface::*)()>(&QDesignerMetaDataBaseInterface::changed), self, [=]() {
+void* QDesignerMetaDataBaseInterface_connect_changed(QDesignerMetaDataBaseInterface* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QDesignerMetaDataBaseInterface>>(slot);
+	return new QMetaObject::Connection(QDesignerMetaDataBaseInterface::connect(self, static_cast<void (QDesignerMetaDataBaseInterface::*)()>(&QDesignerMetaDataBaseInterface::changed), self, [slot_handle]() {
+		intptr_t slot = slot_handle->value();
 		miqt_exec_callback_QDesignerMetaDataBaseInterface_changed(slot);
-	});
+	}));
 }
 
 struct miqt_string QDesignerMetaDataBaseInterface_tr2(const char* s, const char* c) {
@@ -577,62 +589,68 @@ struct miqt_string QDesignerMetaDataBaseInterface_tr3(const char* s, const char*
 }
 
 bool QDesignerMetaDataBaseInterface_override_virtual_item(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QDesignerMetaDataBaseInterface> slot_handle(slot);
 	MiqtVirtualQDesignerMetaDataBaseInterface* self_cast = dynamic_cast<MiqtVirtualQDesignerMetaDataBaseInterface*>( (QDesignerMetaDataBaseInterface*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__item = slot;
+	self_cast->handle__item = std::move(slot_handle);
 	return true;
 }
 
 bool QDesignerMetaDataBaseInterface_override_virtual_add(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QDesignerMetaDataBaseInterface> slot_handle(slot);
 	MiqtVirtualQDesignerMetaDataBaseInterface* self_cast = dynamic_cast<MiqtVirtualQDesignerMetaDataBaseInterface*>( (QDesignerMetaDataBaseInterface*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__add = slot;
+	self_cast->handle__add = std::move(slot_handle);
 	return true;
 }
 
 bool QDesignerMetaDataBaseInterface_override_virtual_remove(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QDesignerMetaDataBaseInterface> slot_handle(slot);
 	MiqtVirtualQDesignerMetaDataBaseInterface* self_cast = dynamic_cast<MiqtVirtualQDesignerMetaDataBaseInterface*>( (QDesignerMetaDataBaseInterface*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__remove = slot;
+	self_cast->handle__remove = std::move(slot_handle);
 	return true;
 }
 
 bool QDesignerMetaDataBaseInterface_override_virtual_objects(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QDesignerMetaDataBaseInterface> slot_handle(slot);
 	MiqtVirtualQDesignerMetaDataBaseInterface* self_cast = dynamic_cast<MiqtVirtualQDesignerMetaDataBaseInterface*>( (QDesignerMetaDataBaseInterface*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__objects = slot;
+	self_cast->handle__objects = std::move(slot_handle);
 	return true;
 }
 
 bool QDesignerMetaDataBaseInterface_override_virtual_core(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QDesignerMetaDataBaseInterface> slot_handle(slot);
 	MiqtVirtualQDesignerMetaDataBaseInterface* self_cast = dynamic_cast<MiqtVirtualQDesignerMetaDataBaseInterface*>( (QDesignerMetaDataBaseInterface*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__core = slot;
+	self_cast->handle__core = std::move(slot_handle);
 	return true;
 }
 
 bool QDesignerMetaDataBaseInterface_override_virtual_event(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QDesignerMetaDataBaseInterface> slot_handle(slot);
 	MiqtVirtualQDesignerMetaDataBaseInterface* self_cast = dynamic_cast<MiqtVirtualQDesignerMetaDataBaseInterface*>( (QDesignerMetaDataBaseInterface*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__event = slot;
+	self_cast->handle__event = std::move(slot_handle);
 	return true;
 }
 
@@ -641,12 +659,13 @@ bool QDesignerMetaDataBaseInterface_virtualbase_event(void* self, QEvent* event)
 }
 
 bool QDesignerMetaDataBaseInterface_override_virtual_eventFilter(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QDesignerMetaDataBaseInterface> slot_handle(slot);
 	MiqtVirtualQDesignerMetaDataBaseInterface* self_cast = dynamic_cast<MiqtVirtualQDesignerMetaDataBaseInterface*>( (QDesignerMetaDataBaseInterface*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__eventFilter = slot;
+	self_cast->handle__eventFilter = std::move(slot_handle);
 	return true;
 }
 
@@ -655,12 +674,13 @@ bool QDesignerMetaDataBaseInterface_virtualbase_eventFilter(void* self, QObject*
 }
 
 bool QDesignerMetaDataBaseInterface_override_virtual_timerEvent(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QDesignerMetaDataBaseInterface> slot_handle(slot);
 	MiqtVirtualQDesignerMetaDataBaseInterface* self_cast = dynamic_cast<MiqtVirtualQDesignerMetaDataBaseInterface*>( (QDesignerMetaDataBaseInterface*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__timerEvent = slot;
+	self_cast->handle__timerEvent = std::move(slot_handle);
 	return true;
 }
 
@@ -669,12 +689,13 @@ void QDesignerMetaDataBaseInterface_virtualbase_timerEvent(void* self, QTimerEve
 }
 
 bool QDesignerMetaDataBaseInterface_override_virtual_childEvent(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QDesignerMetaDataBaseInterface> slot_handle(slot);
 	MiqtVirtualQDesignerMetaDataBaseInterface* self_cast = dynamic_cast<MiqtVirtualQDesignerMetaDataBaseInterface*>( (QDesignerMetaDataBaseInterface*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__childEvent = slot;
+	self_cast->handle__childEvent = std::move(slot_handle);
 	return true;
 }
 
@@ -683,12 +704,13 @@ void QDesignerMetaDataBaseInterface_virtualbase_childEvent(void* self, QChildEve
 }
 
 bool QDesignerMetaDataBaseInterface_override_virtual_customEvent(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QDesignerMetaDataBaseInterface> slot_handle(slot);
 	MiqtVirtualQDesignerMetaDataBaseInterface* self_cast = dynamic_cast<MiqtVirtualQDesignerMetaDataBaseInterface*>( (QDesignerMetaDataBaseInterface*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__customEvent = slot;
+	self_cast->handle__customEvent = std::move(slot_handle);
 	return true;
 }
 
@@ -697,12 +719,13 @@ void QDesignerMetaDataBaseInterface_virtualbase_customEvent(void* self, QEvent* 
 }
 
 bool QDesignerMetaDataBaseInterface_override_virtual_connectNotify(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QDesignerMetaDataBaseInterface> slot_handle(slot);
 	MiqtVirtualQDesignerMetaDataBaseInterface* self_cast = dynamic_cast<MiqtVirtualQDesignerMetaDataBaseInterface*>( (QDesignerMetaDataBaseInterface*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__connectNotify = slot;
+	self_cast->handle__connectNotify = std::move(slot_handle);
 	return true;
 }
 
@@ -711,12 +734,13 @@ void QDesignerMetaDataBaseInterface_virtualbase_connectNotify(void* self, QMetaM
 }
 
 bool QDesignerMetaDataBaseInterface_override_virtual_disconnectNotify(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QDesignerMetaDataBaseInterface> slot_handle(slot);
 	MiqtVirtualQDesignerMetaDataBaseInterface* self_cast = dynamic_cast<MiqtVirtualQDesignerMetaDataBaseInterface*>( (QDesignerMetaDataBaseInterface*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__disconnectNotify = slot;
+	self_cast->handle__disconnectNotify = std::move(slot_handle);
 	return true;
 }
 

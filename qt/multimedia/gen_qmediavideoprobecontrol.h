@@ -36,9 +36,9 @@ void* QMediaVideoProbeControl_metacast(QMediaVideoProbeControl* self, const char
 struct miqt_string QMediaVideoProbeControl_tr(const char* s);
 struct miqt_string QMediaVideoProbeControl_trUtf8(const char* s);
 void QMediaVideoProbeControl_videoFrameProbed(QMediaVideoProbeControl* self, QVideoFrame* frame);
-void QMediaVideoProbeControl_connect_videoFrameProbed(QMediaVideoProbeControl* self, intptr_t slot);
+void* QMediaVideoProbeControl_connect_videoFrameProbed(QMediaVideoProbeControl* self, intptr_t slot);
 void QMediaVideoProbeControl_flush(QMediaVideoProbeControl* self);
-void QMediaVideoProbeControl_connect_flush(QMediaVideoProbeControl* self, intptr_t slot);
+void* QMediaVideoProbeControl_connect_flush(QMediaVideoProbeControl* self, intptr_t slot);
 struct miqt_string QMediaVideoProbeControl_tr2(const char* s, const char* c);
 struct miqt_string QMediaVideoProbeControl_tr3(const char* s, const char* c, int n);
 struct miqt_string QMediaVideoProbeControl_trUtf82(const char* s, const char* c);

@@ -57,17 +57,17 @@ void QHBoxPlotModelMapper_setFirstColumn(QHBoxPlotModelMapper* self, int firstCo
 int QHBoxPlotModelMapper_columnCount(const QHBoxPlotModelMapper* self);
 void QHBoxPlotModelMapper_setColumnCount(QHBoxPlotModelMapper* self, int rowCount);
 void QHBoxPlotModelMapper_seriesReplaced(QHBoxPlotModelMapper* self);
-void QHBoxPlotModelMapper_connect_seriesReplaced(QHBoxPlotModelMapper* self, intptr_t slot);
+void* QHBoxPlotModelMapper_connect_seriesReplaced(QHBoxPlotModelMapper* self, intptr_t slot);
 void QHBoxPlotModelMapper_modelReplaced(QHBoxPlotModelMapper* self);
-void QHBoxPlotModelMapper_connect_modelReplaced(QHBoxPlotModelMapper* self, intptr_t slot);
+void* QHBoxPlotModelMapper_connect_modelReplaced(QHBoxPlotModelMapper* self, intptr_t slot);
 void QHBoxPlotModelMapper_firstBoxSetRowChanged(QHBoxPlotModelMapper* self);
-void QHBoxPlotModelMapper_connect_firstBoxSetRowChanged(QHBoxPlotModelMapper* self, intptr_t slot);
+void* QHBoxPlotModelMapper_connect_firstBoxSetRowChanged(QHBoxPlotModelMapper* self, intptr_t slot);
 void QHBoxPlotModelMapper_lastBoxSetRowChanged(QHBoxPlotModelMapper* self);
-void QHBoxPlotModelMapper_connect_lastBoxSetRowChanged(QHBoxPlotModelMapper* self, intptr_t slot);
+void* QHBoxPlotModelMapper_connect_lastBoxSetRowChanged(QHBoxPlotModelMapper* self, intptr_t slot);
 void QHBoxPlotModelMapper_firstColumnChanged(QHBoxPlotModelMapper* self);
-void QHBoxPlotModelMapper_connect_firstColumnChanged(QHBoxPlotModelMapper* self, intptr_t slot);
+void* QHBoxPlotModelMapper_connect_firstColumnChanged(QHBoxPlotModelMapper* self, intptr_t slot);
 void QHBoxPlotModelMapper_columnCountChanged(QHBoxPlotModelMapper* self);
-void QHBoxPlotModelMapper_connect_columnCountChanged(QHBoxPlotModelMapper* self, intptr_t slot);
+void* QHBoxPlotModelMapper_connect_columnCountChanged(QHBoxPlotModelMapper* self, intptr_t slot);
 struct miqt_string QHBoxPlotModelMapper_tr2(const char* s, const char* c);
 struct miqt_string QHBoxPlotModelMapper_tr3(const char* s, const char* c, int n);
 

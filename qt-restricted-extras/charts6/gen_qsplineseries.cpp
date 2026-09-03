@@ -1,3 +1,5 @@
+#include <memory>
+#include <utility>
 #include <QAbstractSeries>
 #include <QBrush>
 #include <QChildEvent>
@@ -21,6 +23,7 @@
 extern "C" {
 #endif
 
+void miqt_exec_callback_handle_release_QSplineSeries(intptr_t);
 int miqt_exec_callback_QSplineSeries_type(const QSplineSeries*, intptr_t);
 void miqt_exec_callback_QSplineSeries_setPen(QSplineSeries*, intptr_t, QPen*);
 void miqt_exec_callback_QSplineSeries_setBrush(QSplineSeries*, intptr_t, QBrush*);
@@ -46,26 +49,26 @@ public:
 	virtual ~MiqtVirtualQSplineSeries() override = default;
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__type = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QSplineSeries> handle__type;
 
 	// Subclass to allow providing a Go implementation
 	virtual QAbstractSeries::SeriesType type() const override {
-		if (handle__type == 0) {
+		if (!handle__type) {
 			return QSplineSeries::type();
 		}
 
-		int callback_return_value = miqt_exec_callback_QSplineSeries_type(this, handle__type);
+		int callback_return_value = miqt_exec_callback_QSplineSeries_type(this, handle__type.value());
 		return static_cast<QAbstractSeries::SeriesType>(callback_return_value);
 	}
 
 	friend int QSplineSeries_virtualbase_type(const void* self);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__setPen = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QSplineSeries> handle__setPen;
 
 	// Subclass to allow providing a Go implementation
 	virtual void setPen(const QPen& pen) override {
-		if (handle__setPen == 0) {
+		if (!handle__setPen) {
 			QSplineSeries::setPen(pen);
 			return;
 		}
@@ -73,18 +76,18 @@ public:
 		const QPen& pen_ret = pen;
 		// Cast returned reference into pointer
 		QPen* sigval1 = const_cast<QPen*>(&pen_ret);
-		miqt_exec_callback_QSplineSeries_setPen(this, handle__setPen, sigval1);
+		miqt_exec_callback_QSplineSeries_setPen(this, handle__setPen.value(), sigval1);
 
 	}
 
 	friend void QSplineSeries_virtualbase_setPen(void* self, QPen* pen);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__setBrush = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QSplineSeries> handle__setBrush;
 
 	// Subclass to allow providing a Go implementation
 	virtual void setBrush(const QBrush& brush) override {
-		if (handle__setBrush == 0) {
+		if (!handle__setBrush) {
 			QSplineSeries::setBrush(brush);
 			return;
 		}
@@ -92,18 +95,18 @@ public:
 		const QBrush& brush_ret = brush;
 		// Cast returned reference into pointer
 		QBrush* sigval1 = const_cast<QBrush*>(&brush_ret);
-		miqt_exec_callback_QSplineSeries_setBrush(this, handle__setBrush, sigval1);
+		miqt_exec_callback_QSplineSeries_setBrush(this, handle__setBrush.value(), sigval1);
 
 	}
 
 	friend void QSplineSeries_virtualbase_setBrush(void* self, QBrush* brush);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__setColor = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QSplineSeries> handle__setColor;
 
 	// Subclass to allow providing a Go implementation
 	virtual void setColor(const QColor& color) override {
-		if (handle__setColor == 0) {
+		if (!handle__setColor) {
 			QSplineSeries::setColor(color);
 			return;
 		}
@@ -111,117 +114,117 @@ public:
 		const QColor& color_ret = color;
 		// Cast returned reference into pointer
 		QColor* sigval1 = const_cast<QColor*>(&color_ret);
-		miqt_exec_callback_QSplineSeries_setColor(this, handle__setColor, sigval1);
+		miqt_exec_callback_QSplineSeries_setColor(this, handle__setColor.value(), sigval1);
 
 	}
 
 	friend void QSplineSeries_virtualbase_setColor(void* self, QColor* color);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__color = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QSplineSeries> handle__color;
 
 	// Subclass to allow providing a Go implementation
 	virtual QColor color() const override {
-		if (handle__color == 0) {
+		if (!handle__color) {
 			return QSplineSeries::color();
 		}
 
-		QColor* callback_return_value = miqt_exec_callback_QSplineSeries_color(this, handle__color);
+		QColor* callback_return_value = miqt_exec_callback_QSplineSeries_color(this, handle__color.value());
 		return *callback_return_value;
 	}
 
 	friend QColor* QSplineSeries_virtualbase_color(const void* self);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__event = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QSplineSeries> handle__event;
 
 	// Subclass to allow providing a Go implementation
 	virtual bool event(QEvent* event) override {
-		if (handle__event == 0) {
+		if (!handle__event) {
 			return QSplineSeries::event(event);
 		}
 
 		QEvent* sigval1 = event;
-		bool callback_return_value = miqt_exec_callback_QSplineSeries_event(this, handle__event, sigval1);
+		bool callback_return_value = miqt_exec_callback_QSplineSeries_event(this, handle__event.value(), sigval1);
 		return callback_return_value;
 	}
 
 	friend bool QSplineSeries_virtualbase_event(void* self, QEvent* event);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__eventFilter = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QSplineSeries> handle__eventFilter;
 
 	// Subclass to allow providing a Go implementation
 	virtual bool eventFilter(QObject* watched, QEvent* event) override {
-		if (handle__eventFilter == 0) {
+		if (!handle__eventFilter) {
 			return QSplineSeries::eventFilter(watched, event);
 		}
 
 		QObject* sigval1 = watched;
 		QEvent* sigval2 = event;
-		bool callback_return_value = miqt_exec_callback_QSplineSeries_eventFilter(this, handle__eventFilter, sigval1, sigval2);
+		bool callback_return_value = miqt_exec_callback_QSplineSeries_eventFilter(this, handle__eventFilter.value(), sigval1, sigval2);
 		return callback_return_value;
 	}
 
 	friend bool QSplineSeries_virtualbase_eventFilter(void* self, QObject* watched, QEvent* event);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__timerEvent = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QSplineSeries> handle__timerEvent;
 
 	// Subclass to allow providing a Go implementation
 	virtual void timerEvent(QTimerEvent* event) override {
-		if (handle__timerEvent == 0) {
+		if (!handle__timerEvent) {
 			QSplineSeries::timerEvent(event);
 			return;
 		}
 
 		QTimerEvent* sigval1 = event;
-		miqt_exec_callback_QSplineSeries_timerEvent(this, handle__timerEvent, sigval1);
+		miqt_exec_callback_QSplineSeries_timerEvent(this, handle__timerEvent.value(), sigval1);
 
 	}
 
 	friend void QSplineSeries_virtualbase_timerEvent(void* self, QTimerEvent* event);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__childEvent = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QSplineSeries> handle__childEvent;
 
 	// Subclass to allow providing a Go implementation
 	virtual void childEvent(QChildEvent* event) override {
-		if (handle__childEvent == 0) {
+		if (!handle__childEvent) {
 			QSplineSeries::childEvent(event);
 			return;
 		}
 
 		QChildEvent* sigval1 = event;
-		miqt_exec_callback_QSplineSeries_childEvent(this, handle__childEvent, sigval1);
+		miqt_exec_callback_QSplineSeries_childEvent(this, handle__childEvent.value(), sigval1);
 
 	}
 
 	friend void QSplineSeries_virtualbase_childEvent(void* self, QChildEvent* event);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__customEvent = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QSplineSeries> handle__customEvent;
 
 	// Subclass to allow providing a Go implementation
 	virtual void customEvent(QEvent* event) override {
-		if (handle__customEvent == 0) {
+		if (!handle__customEvent) {
 			QSplineSeries::customEvent(event);
 			return;
 		}
 
 		QEvent* sigval1 = event;
-		miqt_exec_callback_QSplineSeries_customEvent(this, handle__customEvent, sigval1);
+		miqt_exec_callback_QSplineSeries_customEvent(this, handle__customEvent.value(), sigval1);
 
 	}
 
 	friend void QSplineSeries_virtualbase_customEvent(void* self, QEvent* event);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__connectNotify = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QSplineSeries> handle__connectNotify;
 
 	// Subclass to allow providing a Go implementation
 	virtual void connectNotify(const QMetaMethod& signal) override {
-		if (handle__connectNotify == 0) {
+		if (!handle__connectNotify) {
 			QSplineSeries::connectNotify(signal);
 			return;
 		}
@@ -229,18 +232,18 @@ public:
 		const QMetaMethod& signal_ret = signal;
 		// Cast returned reference into pointer
 		QMetaMethod* sigval1 = const_cast<QMetaMethod*>(&signal_ret);
-		miqt_exec_callback_QSplineSeries_connectNotify(this, handle__connectNotify, sigval1);
+		miqt_exec_callback_QSplineSeries_connectNotify(this, handle__connectNotify.value(), sigval1);
 
 	}
 
 	friend void QSplineSeries_virtualbase_connectNotify(void* self, QMetaMethod* signal);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__disconnectNotify = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QSplineSeries> handle__disconnectNotify;
 
 	// Subclass to allow providing a Go implementation
 	virtual void disconnectNotify(const QMetaMethod& signal) override {
-		if (handle__disconnectNotify == 0) {
+		if (!handle__disconnectNotify) {
 			QSplineSeries::disconnectNotify(signal);
 			return;
 		}
@@ -248,7 +251,7 @@ public:
 		const QMetaMethod& signal_ret = signal;
 		// Cast returned reference into pointer
 		QMetaMethod* sigval1 = const_cast<QMetaMethod*>(&signal_ret);
-		miqt_exec_callback_QSplineSeries_disconnectNotify(this, handle__disconnectNotify, sigval1);
+		miqt_exec_callback_QSplineSeries_disconnectNotify(this, handle__disconnectNotify.value(), sigval1);
 
 	}
 
@@ -320,12 +323,13 @@ struct miqt_string QSplineSeries_tr3(const char* s, const char* c, int n) {
 }
 
 bool QSplineSeries_override_virtual_type(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QSplineSeries> slot_handle(slot);
 	MiqtVirtualQSplineSeries* self_cast = dynamic_cast<MiqtVirtualQSplineSeries*>( (QSplineSeries*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__type = slot;
+	self_cast->handle__type = std::move(slot_handle);
 	return true;
 }
 
@@ -335,12 +339,13 @@ int QSplineSeries_virtualbase_type(const void* self) {
 }
 
 bool QSplineSeries_override_virtual_setPen(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QSplineSeries> slot_handle(slot);
 	MiqtVirtualQSplineSeries* self_cast = dynamic_cast<MiqtVirtualQSplineSeries*>( (QSplineSeries*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__setPen = slot;
+	self_cast->handle__setPen = std::move(slot_handle);
 	return true;
 }
 
@@ -349,12 +354,13 @@ void QSplineSeries_virtualbase_setPen(void* self, QPen* pen) {
 }
 
 bool QSplineSeries_override_virtual_setBrush(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QSplineSeries> slot_handle(slot);
 	MiqtVirtualQSplineSeries* self_cast = dynamic_cast<MiqtVirtualQSplineSeries*>( (QSplineSeries*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__setBrush = slot;
+	self_cast->handle__setBrush = std::move(slot_handle);
 	return true;
 }
 
@@ -363,12 +369,13 @@ void QSplineSeries_virtualbase_setBrush(void* self, QBrush* brush) {
 }
 
 bool QSplineSeries_override_virtual_setColor(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QSplineSeries> slot_handle(slot);
 	MiqtVirtualQSplineSeries* self_cast = dynamic_cast<MiqtVirtualQSplineSeries*>( (QSplineSeries*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__setColor = slot;
+	self_cast->handle__setColor = std::move(slot_handle);
 	return true;
 }
 
@@ -377,12 +384,13 @@ void QSplineSeries_virtualbase_setColor(void* self, QColor* color) {
 }
 
 bool QSplineSeries_override_virtual_color(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QSplineSeries> slot_handle(slot);
 	MiqtVirtualQSplineSeries* self_cast = dynamic_cast<MiqtVirtualQSplineSeries*>( (QSplineSeries*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__color = slot;
+	self_cast->handle__color = std::move(slot_handle);
 	return true;
 }
 
@@ -391,12 +399,13 @@ QColor* QSplineSeries_virtualbase_color(const void* self) {
 }
 
 bool QSplineSeries_override_virtual_event(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QSplineSeries> slot_handle(slot);
 	MiqtVirtualQSplineSeries* self_cast = dynamic_cast<MiqtVirtualQSplineSeries*>( (QSplineSeries*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__event = slot;
+	self_cast->handle__event = std::move(slot_handle);
 	return true;
 }
 
@@ -405,12 +414,13 @@ bool QSplineSeries_virtualbase_event(void* self, QEvent* event) {
 }
 
 bool QSplineSeries_override_virtual_eventFilter(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QSplineSeries> slot_handle(slot);
 	MiqtVirtualQSplineSeries* self_cast = dynamic_cast<MiqtVirtualQSplineSeries*>( (QSplineSeries*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__eventFilter = slot;
+	self_cast->handle__eventFilter = std::move(slot_handle);
 	return true;
 }
 
@@ -419,12 +429,13 @@ bool QSplineSeries_virtualbase_eventFilter(void* self, QObject* watched, QEvent*
 }
 
 bool QSplineSeries_override_virtual_timerEvent(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QSplineSeries> slot_handle(slot);
 	MiqtVirtualQSplineSeries* self_cast = dynamic_cast<MiqtVirtualQSplineSeries*>( (QSplineSeries*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__timerEvent = slot;
+	self_cast->handle__timerEvent = std::move(slot_handle);
 	return true;
 }
 
@@ -433,12 +444,13 @@ void QSplineSeries_virtualbase_timerEvent(void* self, QTimerEvent* event) {
 }
 
 bool QSplineSeries_override_virtual_childEvent(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QSplineSeries> slot_handle(slot);
 	MiqtVirtualQSplineSeries* self_cast = dynamic_cast<MiqtVirtualQSplineSeries*>( (QSplineSeries*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__childEvent = slot;
+	self_cast->handle__childEvent = std::move(slot_handle);
 	return true;
 }
 
@@ -447,12 +459,13 @@ void QSplineSeries_virtualbase_childEvent(void* self, QChildEvent* event) {
 }
 
 bool QSplineSeries_override_virtual_customEvent(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QSplineSeries> slot_handle(slot);
 	MiqtVirtualQSplineSeries* self_cast = dynamic_cast<MiqtVirtualQSplineSeries*>( (QSplineSeries*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__customEvent = slot;
+	self_cast->handle__customEvent = std::move(slot_handle);
 	return true;
 }
 
@@ -461,12 +474,13 @@ void QSplineSeries_virtualbase_customEvent(void* self, QEvent* event) {
 }
 
 bool QSplineSeries_override_virtual_connectNotify(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QSplineSeries> slot_handle(slot);
 	MiqtVirtualQSplineSeries* self_cast = dynamic_cast<MiqtVirtualQSplineSeries*>( (QSplineSeries*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__connectNotify = slot;
+	self_cast->handle__connectNotify = std::move(slot_handle);
 	return true;
 }
 
@@ -475,12 +489,13 @@ void QSplineSeries_virtualbase_connectNotify(void* self, QMetaMethod* signal) {
 }
 
 bool QSplineSeries_override_virtual_disconnectNotify(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QSplineSeries> slot_handle(slot);
 	MiqtVirtualQSplineSeries* self_cast = dynamic_cast<MiqtVirtualQSplineSeries*>( (QSplineSeries*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__disconnectNotify = slot;
+	self_cast->handle__disconnectNotify = std::move(slot_handle);
 	return true;
 }
 

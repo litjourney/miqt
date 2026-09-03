@@ -14,6 +14,11 @@ import (
 	"unsafe"
 )
 
+//export miqt_exec_callback_handle_release_QSignalMapper
+func miqt_exec_callback_handle_release_QSignalMapper(cb C.intptr_t) {
+	cgo.Handle(cb).Delete()
+}
+
 type QSignalMapper struct {
 	h *C.QSignalMapper
 	*QObject
@@ -137,8 +142,10 @@ func (this *QSignalMapper) MappingWithObject(object *QObject) *QObject {
 func (this *QSignalMapper) Mapped(param1 int) {
 	C.QSignalMapper_mapped(this.h, (C.int)(param1))
 }
-func (this *QSignalMapper) OnMapped(slot func(param1 int)) {
-	C.QSignalMapper_connect_mapped(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QSignalMapper) OnMapped(slot func(param1 int)) *SignalConnection {
+	_goptr := UnsafeNewQMetaObject__Connection(C.QSignalMapper_connect_mapped(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QSignalMapper_mapped
@@ -161,8 +168,10 @@ func (this *QSignalMapper) MappedWithQString(param1 string) {
 	defer C.free(unsafe.Pointer(param1_ms.data))
 	C.QSignalMapper_mappedWithQString(this.h, param1_ms)
 }
-func (this *QSignalMapper) OnMappedWithQString(slot func(param1 string)) {
-	C.QSignalMapper_connect_mappedWithQString(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QSignalMapper) OnMappedWithQString(slot func(param1 string)) *SignalConnection {
+	_goptr := UnsafeNewQMetaObject__Connection(C.QSignalMapper_connect_mappedWithQString(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QSignalMapper_mappedWithQString
@@ -184,8 +193,10 @@ func miqt_exec_callback_QSignalMapper_mappedWithQString(cb C.intptr_t, param1 C.
 func (this *QSignalMapper) MappedWithQWidget(param1 *QWidget) {
 	C.QSignalMapper_mappedWithQWidget(this.h, param1.cPointer())
 }
-func (this *QSignalMapper) OnMappedWithQWidget(slot func(param1 *QWidget)) {
-	C.QSignalMapper_connect_mappedWithQWidget(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QSignalMapper) OnMappedWithQWidget(slot func(param1 *QWidget)) *SignalConnection {
+	_goptr := UnsafeNewQMetaObject__Connection(C.QSignalMapper_connect_mappedWithQWidget(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QSignalMapper_mappedWithQWidget
@@ -204,8 +215,10 @@ func miqt_exec_callback_QSignalMapper_mappedWithQWidget(cb C.intptr_t, param1 *C
 func (this *QSignalMapper) MappedWithQObject(param1 *QObject) {
 	C.QSignalMapper_mappedWithQObject(this.h, param1.cPointer())
 }
-func (this *QSignalMapper) OnMappedWithQObject(slot func(param1 *QObject)) {
-	C.QSignalMapper_connect_mappedWithQObject(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QSignalMapper) OnMappedWithQObject(slot func(param1 *QObject)) *SignalConnection {
+	_goptr := UnsafeNewQMetaObject__Connection(C.QSignalMapper_connect_mappedWithQObject(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QSignalMapper_mappedWithQObject
@@ -224,8 +237,10 @@ func miqt_exec_callback_QSignalMapper_mappedWithQObject(cb C.intptr_t, param1 *C
 func (this *QSignalMapper) MappedInt(param1 int) {
 	C.QSignalMapper_mappedInt(this.h, (C.int)(param1))
 }
-func (this *QSignalMapper) OnMappedInt(slot func(param1 int)) {
-	C.QSignalMapper_connect_mappedInt(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QSignalMapper) OnMappedInt(slot func(param1 int)) *SignalConnection {
+	_goptr := UnsafeNewQMetaObject__Connection(C.QSignalMapper_connect_mappedInt(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QSignalMapper_mappedInt
@@ -248,8 +263,10 @@ func (this *QSignalMapper) MappedString(param1 string) {
 	defer C.free(unsafe.Pointer(param1_ms.data))
 	C.QSignalMapper_mappedString(this.h, param1_ms)
 }
-func (this *QSignalMapper) OnMappedString(slot func(param1 string)) {
-	C.QSignalMapper_connect_mappedString(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QSignalMapper) OnMappedString(slot func(param1 string)) *SignalConnection {
+	_goptr := UnsafeNewQMetaObject__Connection(C.QSignalMapper_connect_mappedString(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QSignalMapper_mappedString
@@ -271,8 +288,10 @@ func miqt_exec_callback_QSignalMapper_mappedString(cb C.intptr_t, param1 C.struc
 func (this *QSignalMapper) MappedWidget(param1 *QWidget) {
 	C.QSignalMapper_mappedWidget(this.h, param1.cPointer())
 }
-func (this *QSignalMapper) OnMappedWidget(slot func(param1 *QWidget)) {
-	C.QSignalMapper_connect_mappedWidget(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QSignalMapper) OnMappedWidget(slot func(param1 *QWidget)) *SignalConnection {
+	_goptr := UnsafeNewQMetaObject__Connection(C.QSignalMapper_connect_mappedWidget(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QSignalMapper_mappedWidget
@@ -291,8 +310,10 @@ func miqt_exec_callback_QSignalMapper_mappedWidget(cb C.intptr_t, param1 *C.QWid
 func (this *QSignalMapper) MappedObject(param1 *QObject) {
 	C.QSignalMapper_mappedObject(this.h, param1.cPointer())
 }
-func (this *QSignalMapper) OnMappedObject(slot func(param1 *QObject)) {
-	C.QSignalMapper_connect_mappedObject(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QSignalMapper) OnMappedObject(slot func(param1 *QObject)) *SignalConnection {
+	_goptr := UnsafeNewQMetaObject__Connection(C.QSignalMapper_connect_mappedObject(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QSignalMapper_mappedObject
@@ -424,7 +445,11 @@ func (this *QSignalMapper) callVirtualBase_Event(event *QEvent) bool {
 
 }
 func (this *QSignalMapper) OnEvent(slot func(super func(event *QEvent) bool, event *QEvent) bool) {
-	ok := C.QSignalMapper_override_virtual_event(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QSignalMapper_override_virtual_event(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -452,7 +477,11 @@ func (this *QSignalMapper) callVirtualBase_EventFilter(watched *QObject, event *
 
 }
 func (this *QSignalMapper) OnEventFilter(slot func(super func(watched *QObject, event *QEvent) bool, watched *QObject, event *QEvent) bool) {
-	ok := C.QSignalMapper_override_virtual_eventFilter(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QSignalMapper_override_virtual_eventFilter(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -482,7 +511,11 @@ func (this *QSignalMapper) callVirtualBase_TimerEvent(event *QTimerEvent) {
 
 }
 func (this *QSignalMapper) OnTimerEvent(slot func(super func(event *QTimerEvent), event *QTimerEvent)) {
-	ok := C.QSignalMapper_override_virtual_timerEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QSignalMapper_override_virtual_timerEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -508,7 +541,11 @@ func (this *QSignalMapper) callVirtualBase_ChildEvent(event *QChildEvent) {
 
 }
 func (this *QSignalMapper) OnChildEvent(slot func(super func(event *QChildEvent), event *QChildEvent)) {
-	ok := C.QSignalMapper_override_virtual_childEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QSignalMapper_override_virtual_childEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -534,7 +571,11 @@ func (this *QSignalMapper) callVirtualBase_CustomEvent(event *QEvent) {
 
 }
 func (this *QSignalMapper) OnCustomEvent(slot func(super func(event *QEvent), event *QEvent)) {
-	ok := C.QSignalMapper_override_virtual_customEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QSignalMapper_override_virtual_customEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -560,7 +601,11 @@ func (this *QSignalMapper) callVirtualBase_ConnectNotify(signal *QMetaMethod) {
 
 }
 func (this *QSignalMapper) OnConnectNotify(slot func(super func(signal *QMetaMethod), signal *QMetaMethod)) {
-	ok := C.QSignalMapper_override_virtual_connectNotify(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QSignalMapper_override_virtual_connectNotify(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -586,7 +631,11 @@ func (this *QSignalMapper) callVirtualBase_DisconnectNotify(signal *QMetaMethod)
 
 }
 func (this *QSignalMapper) OnDisconnectNotify(slot func(super func(signal *QMetaMethod), signal *QMetaMethod)) {
-	ok := C.QSignalMapper_override_virtual_disconnectNotify(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QSignalMapper_override_virtual_disconnectNotify(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}

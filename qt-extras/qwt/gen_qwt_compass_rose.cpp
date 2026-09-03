@@ -1,3 +1,5 @@
+#include <memory>
+#include <utility>
 #include <QPainter>
 #include <QPalette>
 #include <QPointF>
@@ -8,8 +10,10 @@
 extern "C" {
 #endif
 
+void miqt_exec_callback_handle_release_QwtCompassRose(intptr_t);
 void miqt_exec_callback_QwtCompassRose_setPalette(QwtCompassRose*, intptr_t, QPalette*);
 void miqt_exec_callback_QwtCompassRose_draw(const QwtCompassRose*, intptr_t, QPainter*, QPointF*, double, double, int);
+void miqt_exec_callback_handle_release_QwtSimpleCompassRose(intptr_t);
 void miqt_exec_callback_QwtSimpleCompassRose_draw(const QwtSimpleCompassRose*, intptr_t, QPainter*, QPointF*, double, double, int);
 void miqt_exec_callback_QwtSimpleCompassRose_setPalette(QwtSimpleCompassRose*, intptr_t, QPalette*);
 #ifdef __cplusplus
@@ -24,11 +28,11 @@ public:
 	virtual ~MiqtVirtualQwtCompassRose() override = default;
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__setPalette = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtCompassRose> handle__setPalette;
 
 	// Subclass to allow providing a Go implementation
 	virtual void setPalette(const QPalette& p) override {
-		if (handle__setPalette == 0) {
+		if (!handle__setPalette) {
 			QwtCompassRose::setPalette(p);
 			return;
 		}
@@ -36,18 +40,18 @@ public:
 		const QPalette& p_ret = p;
 		// Cast returned reference into pointer
 		QPalette* sigval1 = const_cast<QPalette*>(&p_ret);
-		miqt_exec_callback_QwtCompassRose_setPalette(this, handle__setPalette, sigval1);
+		miqt_exec_callback_QwtCompassRose_setPalette(this, handle__setPalette.value(), sigval1);
 
 	}
 
 	friend void QwtCompassRose_virtualbase_setPalette(void* self, QPalette* p);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__draw = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtCompassRose> handle__draw;
 
 	// Subclass to allow providing a Go implementation
 	virtual void draw(QPainter* painter, const QPointF& center, double radius, double north, QPalette::ColorGroup colorGroup) const override {
-		if (handle__draw == 0) {
+		if (!handle__draw) {
 			return; // Pure virtual, there is no base we can call
 		}
 
@@ -59,7 +63,7 @@ public:
 		double sigval4 = north;
 		QPalette::ColorGroup colorGroup_ret = colorGroup;
 		int sigval5 = static_cast<int>(colorGroup_ret);
-		miqt_exec_callback_QwtCompassRose_draw(this, handle__draw, sigval1, sigval2, sigval3, sigval4, sigval5);
+		miqt_exec_callback_QwtCompassRose_draw(this, handle__draw.value(), sigval1, sigval2, sigval3, sigval4, sigval5);
 
 	}
 
@@ -88,12 +92,13 @@ void QwtCompassRose_operatorAssign(QwtCompassRose* self, QwtCompassRose* param1)
 }
 
 bool QwtCompassRose_override_virtual_setPalette(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtCompassRose> slot_handle(slot);
 	MiqtVirtualQwtCompassRose* self_cast = dynamic_cast<MiqtVirtualQwtCompassRose*>( (QwtCompassRose*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__setPalette = slot;
+	self_cast->handle__setPalette = std::move(slot_handle);
 	return true;
 }
 
@@ -102,12 +107,13 @@ void QwtCompassRose_virtualbase_setPalette(void* self, QPalette* p) {
 }
 
 bool QwtCompassRose_override_virtual_draw(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtCompassRose> slot_handle(slot);
 	MiqtVirtualQwtCompassRose* self_cast = dynamic_cast<MiqtVirtualQwtCompassRose*>( (QwtCompassRose*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__draw = slot;
+	self_cast->handle__draw = std::move(slot_handle);
 	return true;
 }
 
@@ -126,11 +132,11 @@ public:
 	virtual ~MiqtVirtualQwtSimpleCompassRose() override = default;
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__draw = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtSimpleCompassRose> handle__draw;
 
 	// Subclass to allow providing a Go implementation
 	virtual void draw(QPainter* param1, const QPointF& center, double radius, double north, QPalette::ColorGroup param5) const override {
-		if (handle__draw == 0) {
+		if (!handle__draw) {
 			QwtSimpleCompassRose::draw(param1, center, radius, north, param5);
 			return;
 		}
@@ -143,18 +149,18 @@ public:
 		double sigval4 = north;
 		QPalette::ColorGroup param5_ret = param5;
 		int sigval5 = static_cast<int>(param5_ret);
-		miqt_exec_callback_QwtSimpleCompassRose_draw(this, handle__draw, sigval1, sigval2, sigval3, sigval4, sigval5);
+		miqt_exec_callback_QwtSimpleCompassRose_draw(this, handle__draw.value(), sigval1, sigval2, sigval3, sigval4, sigval5);
 
 	}
 
 	friend void QwtSimpleCompassRose_virtualbase_draw(const void* self, QPainter* param1, QPointF* center, double radius, double north, int param5);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__setPalette = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtSimpleCompassRose> handle__setPalette;
 
 	// Subclass to allow providing a Go implementation
 	virtual void setPalette(const QPalette& p) override {
-		if (handle__setPalette == 0) {
+		if (!handle__setPalette) {
 			QwtSimpleCompassRose::setPalette(p);
 			return;
 		}
@@ -162,7 +168,7 @@ public:
 		const QPalette& p_ret = p;
 		// Cast returned reference into pointer
 		QPalette* sigval1 = const_cast<QPalette*>(&p_ret);
-		miqt_exec_callback_QwtSimpleCompassRose_setPalette(this, handle__setPalette, sigval1);
+		miqt_exec_callback_QwtSimpleCompassRose_setPalette(this, handle__setPalette.value(), sigval1);
 
 	}
 
@@ -235,12 +241,13 @@ void QwtSimpleCompassRose_operatorAssign(QwtSimpleCompassRose* self, QwtSimpleCo
 }
 
 bool QwtSimpleCompassRose_override_virtual_draw(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtSimpleCompassRose> slot_handle(slot);
 	MiqtVirtualQwtSimpleCompassRose* self_cast = dynamic_cast<MiqtVirtualQwtSimpleCompassRose*>( (QwtSimpleCompassRose*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__draw = slot;
+	self_cast->handle__draw = std::move(slot_handle);
 	return true;
 }
 
@@ -249,12 +256,13 @@ void QwtSimpleCompassRose_virtualbase_draw(const void* self, QPainter* param1, Q
 }
 
 bool QwtSimpleCompassRose_override_virtual_setPalette(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtSimpleCompassRose> slot_handle(slot);
 	MiqtVirtualQwtSimpleCompassRose* self_cast = dynamic_cast<MiqtVirtualQwtSimpleCompassRose*>( (QwtSimpleCompassRose*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__setPalette = slot;
+	self_cast->handle__setPalette = std::move(slot_handle);
 	return true;
 }
 

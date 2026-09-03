@@ -15,6 +15,11 @@ import (
 	"unsafe"
 )
 
+//export miqt_exec_callback_handle_release_QDesignerFormEditorPluginInterface
+func miqt_exec_callback_handle_release_QDesignerFormEditorPluginInterface(cb C.intptr_t) {
+	cgo.Handle(cb).Delete()
+}
+
 type QDesignerFormEditorPluginInterface struct {
 	h *C.QDesignerFormEditorPluginInterface
 }
@@ -69,7 +74,11 @@ func (this *QDesignerFormEditorPluginInterface) Core() *QDesignerFormEditorInter
 	return newQDesignerFormEditorInterface(C.QDesignerFormEditorPluginInterface_core(this.h))
 }
 func (this *QDesignerFormEditorPluginInterface) OnIsInitialized(slot func() bool) {
-	ok := C.QDesignerFormEditorPluginInterface_override_virtual_isInitialized(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QDesignerFormEditorPluginInterface_override_virtual_isInitialized(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -88,7 +97,11 @@ func miqt_exec_callback_QDesignerFormEditorPluginInterface_isInitialized(self *C
 
 }
 func (this *QDesignerFormEditorPluginInterface) OnInitialize(slot func(core *QDesignerFormEditorInterface)) {
-	ok := C.QDesignerFormEditorPluginInterface_override_virtual_initialize(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QDesignerFormEditorPluginInterface_override_virtual_initialize(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -108,7 +121,11 @@ func miqt_exec_callback_QDesignerFormEditorPluginInterface_initialize(self *C.QD
 
 }
 func (this *QDesignerFormEditorPluginInterface) OnAction(slot func() *qt6.QAction) {
-	ok := C.QDesignerFormEditorPluginInterface_override_virtual_action(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QDesignerFormEditorPluginInterface_override_virtual_action(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -127,7 +144,11 @@ func miqt_exec_callback_QDesignerFormEditorPluginInterface_action(self *C.QDesig
 
 }
 func (this *QDesignerFormEditorPluginInterface) OnCore(slot func() *QDesignerFormEditorInterface) {
-	ok := C.QDesignerFormEditorPluginInterface_override_virtual_core(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QDesignerFormEditorPluginInterface_override_virtual_core(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}

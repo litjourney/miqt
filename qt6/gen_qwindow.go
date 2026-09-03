@@ -32,6 +32,11 @@ const (
 	QWindow__IncludeTransients QWindow__AncestorMode = 1
 )
 
+//export miqt_exec_callback_handle_release_QWindow
+func miqt_exec_callback_handle_release_QWindow(cb C.intptr_t) {
+	cgo.Handle(cb).Delete()
+}
+
 type QWindow struct {
 	h *C.QWindow
 	*QObject
@@ -599,8 +604,10 @@ func (this *QWindow) RequestUpdate() {
 func (this *QWindow) ScreenChanged(screen *QScreen) {
 	C.QWindow_screenChanged(this.h, screen.cPointer())
 }
-func (this *QWindow) OnScreenChanged(slot func(screen *QScreen)) {
-	C.QWindow_connect_screenChanged(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QWindow) OnScreenChanged(slot func(screen *QScreen)) *SignalConnection {
+	_goptr := UnsafeNewQMetaObject__Connection(C.QWindow_connect_screenChanged(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QWindow_screenChanged
@@ -619,8 +626,10 @@ func miqt_exec_callback_QWindow_screenChanged(cb C.intptr_t, screen *C.QScreen) 
 func (this *QWindow) ModalityChanged(modality WindowModality) {
 	C.QWindow_modalityChanged(this.h, (C.int)(modality))
 }
-func (this *QWindow) OnModalityChanged(slot func(modality WindowModality)) {
-	C.QWindow_connect_modalityChanged(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QWindow) OnModalityChanged(slot func(modality WindowModality)) *SignalConnection {
+	_goptr := UnsafeNewQMetaObject__Connection(C.QWindow_connect_modalityChanged(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QWindow_modalityChanged
@@ -639,8 +648,10 @@ func miqt_exec_callback_QWindow_modalityChanged(cb C.intptr_t, modality C.int) {
 func (this *QWindow) WindowStateChanged(windowState WindowState) {
 	C.QWindow_windowStateChanged(this.h, (C.int)(windowState))
 }
-func (this *QWindow) OnWindowStateChanged(slot func(windowState WindowState)) {
-	C.QWindow_connect_windowStateChanged(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QWindow) OnWindowStateChanged(slot func(windowState WindowState)) *SignalConnection {
+	_goptr := UnsafeNewQMetaObject__Connection(C.QWindow_connect_windowStateChanged(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QWindow_windowStateChanged
@@ -663,8 +674,10 @@ func (this *QWindow) WindowTitleChanged(title string) {
 	defer C.free(unsafe.Pointer(title_ms.data))
 	C.QWindow_windowTitleChanged(this.h, title_ms)
 }
-func (this *QWindow) OnWindowTitleChanged(slot func(title string)) {
-	C.QWindow_connect_windowTitleChanged(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QWindow) OnWindowTitleChanged(slot func(title string)) *SignalConnection {
+	_goptr := UnsafeNewQMetaObject__Connection(C.QWindow_connect_windowTitleChanged(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QWindow_windowTitleChanged
@@ -686,8 +699,10 @@ func miqt_exec_callback_QWindow_windowTitleChanged(cb C.intptr_t, title C.struct
 func (this *QWindow) XChanged(arg int) {
 	C.QWindow_xChanged(this.h, (C.int)(arg))
 }
-func (this *QWindow) OnXChanged(slot func(arg int)) {
-	C.QWindow_connect_xChanged(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QWindow) OnXChanged(slot func(arg int)) *SignalConnection {
+	_goptr := UnsafeNewQMetaObject__Connection(C.QWindow_connect_xChanged(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QWindow_xChanged
@@ -706,8 +721,10 @@ func miqt_exec_callback_QWindow_xChanged(cb C.intptr_t, arg C.int) {
 func (this *QWindow) YChanged(arg int) {
 	C.QWindow_yChanged(this.h, (C.int)(arg))
 }
-func (this *QWindow) OnYChanged(slot func(arg int)) {
-	C.QWindow_connect_yChanged(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QWindow) OnYChanged(slot func(arg int)) *SignalConnection {
+	_goptr := UnsafeNewQMetaObject__Connection(C.QWindow_connect_yChanged(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QWindow_yChanged
@@ -726,8 +743,10 @@ func miqt_exec_callback_QWindow_yChanged(cb C.intptr_t, arg C.int) {
 func (this *QWindow) WidthChanged(arg int) {
 	C.QWindow_widthChanged(this.h, (C.int)(arg))
 }
-func (this *QWindow) OnWidthChanged(slot func(arg int)) {
-	C.QWindow_connect_widthChanged(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QWindow) OnWidthChanged(slot func(arg int)) *SignalConnection {
+	_goptr := UnsafeNewQMetaObject__Connection(C.QWindow_connect_widthChanged(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QWindow_widthChanged
@@ -746,8 +765,10 @@ func miqt_exec_callback_QWindow_widthChanged(cb C.intptr_t, arg C.int) {
 func (this *QWindow) HeightChanged(arg int) {
 	C.QWindow_heightChanged(this.h, (C.int)(arg))
 }
-func (this *QWindow) OnHeightChanged(slot func(arg int)) {
-	C.QWindow_connect_heightChanged(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QWindow) OnHeightChanged(slot func(arg int)) *SignalConnection {
+	_goptr := UnsafeNewQMetaObject__Connection(C.QWindow_connect_heightChanged(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QWindow_heightChanged
@@ -766,8 +787,10 @@ func miqt_exec_callback_QWindow_heightChanged(cb C.intptr_t, arg C.int) {
 func (this *QWindow) MinimumWidthChanged(arg int) {
 	C.QWindow_minimumWidthChanged(this.h, (C.int)(arg))
 }
-func (this *QWindow) OnMinimumWidthChanged(slot func(arg int)) {
-	C.QWindow_connect_minimumWidthChanged(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QWindow) OnMinimumWidthChanged(slot func(arg int)) *SignalConnection {
+	_goptr := UnsafeNewQMetaObject__Connection(C.QWindow_connect_minimumWidthChanged(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QWindow_minimumWidthChanged
@@ -786,8 +809,10 @@ func miqt_exec_callback_QWindow_minimumWidthChanged(cb C.intptr_t, arg C.int) {
 func (this *QWindow) MinimumHeightChanged(arg int) {
 	C.QWindow_minimumHeightChanged(this.h, (C.int)(arg))
 }
-func (this *QWindow) OnMinimumHeightChanged(slot func(arg int)) {
-	C.QWindow_connect_minimumHeightChanged(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QWindow) OnMinimumHeightChanged(slot func(arg int)) *SignalConnection {
+	_goptr := UnsafeNewQMetaObject__Connection(C.QWindow_connect_minimumHeightChanged(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QWindow_minimumHeightChanged
@@ -806,8 +831,10 @@ func miqt_exec_callback_QWindow_minimumHeightChanged(cb C.intptr_t, arg C.int) {
 func (this *QWindow) MaximumWidthChanged(arg int) {
 	C.QWindow_maximumWidthChanged(this.h, (C.int)(arg))
 }
-func (this *QWindow) OnMaximumWidthChanged(slot func(arg int)) {
-	C.QWindow_connect_maximumWidthChanged(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QWindow) OnMaximumWidthChanged(slot func(arg int)) *SignalConnection {
+	_goptr := UnsafeNewQMetaObject__Connection(C.QWindow_connect_maximumWidthChanged(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QWindow_maximumWidthChanged
@@ -826,8 +853,10 @@ func miqt_exec_callback_QWindow_maximumWidthChanged(cb C.intptr_t, arg C.int) {
 func (this *QWindow) MaximumHeightChanged(arg int) {
 	C.QWindow_maximumHeightChanged(this.h, (C.int)(arg))
 }
-func (this *QWindow) OnMaximumHeightChanged(slot func(arg int)) {
-	C.QWindow_connect_maximumHeightChanged(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QWindow) OnMaximumHeightChanged(slot func(arg int)) *SignalConnection {
+	_goptr := UnsafeNewQMetaObject__Connection(C.QWindow_connect_maximumHeightChanged(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QWindow_maximumHeightChanged
@@ -846,8 +875,10 @@ func miqt_exec_callback_QWindow_maximumHeightChanged(cb C.intptr_t, arg C.int) {
 func (this *QWindow) VisibleChanged(arg bool) {
 	C.QWindow_visibleChanged(this.h, (C.bool)(arg))
 }
-func (this *QWindow) OnVisibleChanged(slot func(arg bool)) {
-	C.QWindow_connect_visibleChanged(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QWindow) OnVisibleChanged(slot func(arg bool)) *SignalConnection {
+	_goptr := UnsafeNewQMetaObject__Connection(C.QWindow_connect_visibleChanged(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QWindow_visibleChanged
@@ -866,8 +897,10 @@ func miqt_exec_callback_QWindow_visibleChanged(cb C.intptr_t, arg C.bool) {
 func (this *QWindow) VisibilityChanged(visibility QWindow__Visibility) {
 	C.QWindow_visibilityChanged(this.h, (C.int)(visibility))
 }
-func (this *QWindow) OnVisibilityChanged(slot func(visibility QWindow__Visibility)) {
-	C.QWindow_connect_visibilityChanged(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QWindow) OnVisibilityChanged(slot func(visibility QWindow__Visibility)) *SignalConnection {
+	_goptr := UnsafeNewQMetaObject__Connection(C.QWindow_connect_visibilityChanged(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QWindow_visibilityChanged
@@ -886,8 +919,10 @@ func miqt_exec_callback_QWindow_visibilityChanged(cb C.intptr_t, visibility C.in
 func (this *QWindow) ActiveChanged() {
 	C.QWindow_activeChanged(this.h)
 }
-func (this *QWindow) OnActiveChanged(slot func()) {
-	C.QWindow_connect_activeChanged(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QWindow) OnActiveChanged(slot func()) *SignalConnection {
+	_goptr := UnsafeNewQMetaObject__Connection(C.QWindow_connect_activeChanged(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QWindow_activeChanged
@@ -903,8 +938,10 @@ func miqt_exec_callback_QWindow_activeChanged(cb C.intptr_t) {
 func (this *QWindow) ContentOrientationChanged(orientation ScreenOrientation) {
 	C.QWindow_contentOrientationChanged(this.h, (C.int)(orientation))
 }
-func (this *QWindow) OnContentOrientationChanged(slot func(orientation ScreenOrientation)) {
-	C.QWindow_connect_contentOrientationChanged(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QWindow) OnContentOrientationChanged(slot func(orientation ScreenOrientation)) *SignalConnection {
+	_goptr := UnsafeNewQMetaObject__Connection(C.QWindow_connect_contentOrientationChanged(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QWindow_contentOrientationChanged
@@ -923,8 +960,10 @@ func miqt_exec_callback_QWindow_contentOrientationChanged(cb C.intptr_t, orienta
 func (this *QWindow) FocusObjectChanged(object *QObject) {
 	C.QWindow_focusObjectChanged(this.h, object.cPointer())
 }
-func (this *QWindow) OnFocusObjectChanged(slot func(object *QObject)) {
-	C.QWindow_connect_focusObjectChanged(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QWindow) OnFocusObjectChanged(slot func(object *QObject)) *SignalConnection {
+	_goptr := UnsafeNewQMetaObject__Connection(C.QWindow_connect_focusObjectChanged(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QWindow_focusObjectChanged
@@ -943,8 +982,10 @@ func miqt_exec_callback_QWindow_focusObjectChanged(cb C.intptr_t, object *C.QObj
 func (this *QWindow) OpacityChanged(opacity float64) {
 	C.QWindow_opacityChanged(this.h, (C.double)(opacity))
 }
-func (this *QWindow) OnOpacityChanged(slot func(opacity float64)) {
-	C.QWindow_connect_opacityChanged(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QWindow) OnOpacityChanged(slot func(opacity float64)) *SignalConnection {
+	_goptr := UnsafeNewQMetaObject__Connection(C.QWindow_connect_opacityChanged(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QWindow_opacityChanged
@@ -963,8 +1004,10 @@ func miqt_exec_callback_QWindow_opacityChanged(cb C.intptr_t, opacity C.double) 
 func (this *QWindow) TransientParentChanged(transientParent *QWindow) {
 	C.QWindow_transientParentChanged(this.h, transientParent.cPointer())
 }
-func (this *QWindow) OnTransientParentChanged(slot func(transientParent *QWindow)) {
-	C.QWindow_connect_transientParentChanged(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QWindow) OnTransientParentChanged(slot func(transientParent *QWindow)) *SignalConnection {
+	_goptr := UnsafeNewQMetaObject__Connection(C.QWindow_connect_transientParentChanged(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QWindow_transientParentChanged
@@ -1094,7 +1137,11 @@ func (this *QWindow) callVirtualBase_SurfaceType() QSurface__SurfaceType {
 
 }
 func (this *QWindow) OnSurfaceType(slot func(super func() QSurface__SurfaceType) QSurface__SurfaceType) {
-	ok := C.QWindow_override_virtual_surfaceType(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QWindow_override_virtual_surfaceType(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1121,7 +1168,11 @@ func (this *QWindow) callVirtualBase_Format() *QSurfaceFormat {
 
 }
 func (this *QWindow) OnFormat(slot func(super func() *QSurfaceFormat) *QSurfaceFormat) {
-	ok := C.QWindow_override_virtual_format(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QWindow_override_virtual_format(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1148,7 +1199,11 @@ func (this *QWindow) callVirtualBase_Size() *QSize {
 
 }
 func (this *QWindow) OnSize(slot func(super func() *QSize) *QSize) {
-	ok := C.QWindow_override_virtual_size(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QWindow_override_virtual_size(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1173,7 +1228,11 @@ func (this *QWindow) callVirtualBase_AccessibleRoot() *QAccessibleInterface {
 
 }
 func (this *QWindow) OnAccessibleRoot(slot func(super func() *QAccessibleInterface) *QAccessibleInterface) {
-	ok := C.QWindow_override_virtual_accessibleRoot(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QWindow_override_virtual_accessibleRoot(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1198,7 +1257,11 @@ func (this *QWindow) callVirtualBase_FocusObject() *QObject {
 
 }
 func (this *QWindow) OnFocusObject(slot func(super func() *QObject) *QObject) {
-	ok := C.QWindow_override_virtual_focusObject(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QWindow_override_virtual_focusObject(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1223,7 +1286,11 @@ func (this *QWindow) callVirtualBase_ExposeEvent(param1 *QExposeEvent) {
 
 }
 func (this *QWindow) OnExposeEvent(slot func(super func(param1 *QExposeEvent), param1 *QExposeEvent)) {
-	ok := C.QWindow_override_virtual_exposeEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QWindow_override_virtual_exposeEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1249,7 +1316,11 @@ func (this *QWindow) callVirtualBase_ResizeEvent(param1 *QResizeEvent) {
 
 }
 func (this *QWindow) OnResizeEvent(slot func(super func(param1 *QResizeEvent), param1 *QResizeEvent)) {
-	ok := C.QWindow_override_virtual_resizeEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QWindow_override_virtual_resizeEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1275,7 +1346,11 @@ func (this *QWindow) callVirtualBase_PaintEvent(param1 *QPaintEvent) {
 
 }
 func (this *QWindow) OnPaintEvent(slot func(super func(param1 *QPaintEvent), param1 *QPaintEvent)) {
-	ok := C.QWindow_override_virtual_paintEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QWindow_override_virtual_paintEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1301,7 +1376,11 @@ func (this *QWindow) callVirtualBase_MoveEvent(param1 *QMoveEvent) {
 
 }
 func (this *QWindow) OnMoveEvent(slot func(super func(param1 *QMoveEvent), param1 *QMoveEvent)) {
-	ok := C.QWindow_override_virtual_moveEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QWindow_override_virtual_moveEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1327,7 +1406,11 @@ func (this *QWindow) callVirtualBase_FocusInEvent(param1 *QFocusEvent) {
 
 }
 func (this *QWindow) OnFocusInEvent(slot func(super func(param1 *QFocusEvent), param1 *QFocusEvent)) {
-	ok := C.QWindow_override_virtual_focusInEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QWindow_override_virtual_focusInEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1353,7 +1436,11 @@ func (this *QWindow) callVirtualBase_FocusOutEvent(param1 *QFocusEvent) {
 
 }
 func (this *QWindow) OnFocusOutEvent(slot func(super func(param1 *QFocusEvent), param1 *QFocusEvent)) {
-	ok := C.QWindow_override_virtual_focusOutEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QWindow_override_virtual_focusOutEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1379,7 +1466,11 @@ func (this *QWindow) callVirtualBase_ShowEvent(param1 *QShowEvent) {
 
 }
 func (this *QWindow) OnShowEvent(slot func(super func(param1 *QShowEvent), param1 *QShowEvent)) {
-	ok := C.QWindow_override_virtual_showEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QWindow_override_virtual_showEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1405,7 +1496,11 @@ func (this *QWindow) callVirtualBase_HideEvent(param1 *QHideEvent) {
 
 }
 func (this *QWindow) OnHideEvent(slot func(super func(param1 *QHideEvent), param1 *QHideEvent)) {
-	ok := C.QWindow_override_virtual_hideEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QWindow_override_virtual_hideEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1431,7 +1526,11 @@ func (this *QWindow) callVirtualBase_CloseEvent(param1 *QCloseEvent) {
 
 }
 func (this *QWindow) OnCloseEvent(slot func(super func(param1 *QCloseEvent), param1 *QCloseEvent)) {
-	ok := C.QWindow_override_virtual_closeEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QWindow_override_virtual_closeEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1457,7 +1556,11 @@ func (this *QWindow) callVirtualBase_Event(param1 *QEvent) bool {
 
 }
 func (this *QWindow) OnEvent(slot func(super func(param1 *QEvent) bool, param1 *QEvent) bool) {
-	ok := C.QWindow_override_virtual_event(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QWindow_override_virtual_event(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1485,7 +1588,11 @@ func (this *QWindow) callVirtualBase_KeyPressEvent(param1 *QKeyEvent) {
 
 }
 func (this *QWindow) OnKeyPressEvent(slot func(super func(param1 *QKeyEvent), param1 *QKeyEvent)) {
-	ok := C.QWindow_override_virtual_keyPressEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QWindow_override_virtual_keyPressEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1511,7 +1618,11 @@ func (this *QWindow) callVirtualBase_KeyReleaseEvent(param1 *QKeyEvent) {
 
 }
 func (this *QWindow) OnKeyReleaseEvent(slot func(super func(param1 *QKeyEvent), param1 *QKeyEvent)) {
-	ok := C.QWindow_override_virtual_keyReleaseEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QWindow_override_virtual_keyReleaseEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1537,7 +1648,11 @@ func (this *QWindow) callVirtualBase_MousePressEvent(param1 *QMouseEvent) {
 
 }
 func (this *QWindow) OnMousePressEvent(slot func(super func(param1 *QMouseEvent), param1 *QMouseEvent)) {
-	ok := C.QWindow_override_virtual_mousePressEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QWindow_override_virtual_mousePressEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1563,7 +1678,11 @@ func (this *QWindow) callVirtualBase_MouseReleaseEvent(param1 *QMouseEvent) {
 
 }
 func (this *QWindow) OnMouseReleaseEvent(slot func(super func(param1 *QMouseEvent), param1 *QMouseEvent)) {
-	ok := C.QWindow_override_virtual_mouseReleaseEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QWindow_override_virtual_mouseReleaseEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1589,7 +1708,11 @@ func (this *QWindow) callVirtualBase_MouseDoubleClickEvent(param1 *QMouseEvent) 
 
 }
 func (this *QWindow) OnMouseDoubleClickEvent(slot func(super func(param1 *QMouseEvent), param1 *QMouseEvent)) {
-	ok := C.QWindow_override_virtual_mouseDoubleClickEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QWindow_override_virtual_mouseDoubleClickEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1615,7 +1738,11 @@ func (this *QWindow) callVirtualBase_MouseMoveEvent(param1 *QMouseEvent) {
 
 }
 func (this *QWindow) OnMouseMoveEvent(slot func(super func(param1 *QMouseEvent), param1 *QMouseEvent)) {
-	ok := C.QWindow_override_virtual_mouseMoveEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QWindow_override_virtual_mouseMoveEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1641,7 +1768,11 @@ func (this *QWindow) callVirtualBase_WheelEvent(param1 *QWheelEvent) {
 
 }
 func (this *QWindow) OnWheelEvent(slot func(super func(param1 *QWheelEvent), param1 *QWheelEvent)) {
-	ok := C.QWindow_override_virtual_wheelEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QWindow_override_virtual_wheelEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1667,7 +1798,11 @@ func (this *QWindow) callVirtualBase_TouchEvent(param1 *QTouchEvent) {
 
 }
 func (this *QWindow) OnTouchEvent(slot func(super func(param1 *QTouchEvent), param1 *QTouchEvent)) {
-	ok := C.QWindow_override_virtual_touchEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QWindow_override_virtual_touchEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1693,7 +1828,11 @@ func (this *QWindow) callVirtualBase_TabletEvent(param1 *QTabletEvent) {
 
 }
 func (this *QWindow) OnTabletEvent(slot func(super func(param1 *QTabletEvent), param1 *QTabletEvent)) {
-	ok := C.QWindow_override_virtual_tabletEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QWindow_override_virtual_tabletEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1726,7 +1865,11 @@ func (this *QWindow) callVirtualBase_NativeEvent(eventType []byte, message unsaf
 
 }
 func (this *QWindow) OnNativeEvent(slot func(super func(eventType []byte, message unsafe.Pointer, result *uintptr) bool, eventType []byte, message unsafe.Pointer, result *uintptr) bool) {
-	ok := C.QWindow_override_virtual_nativeEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QWindow_override_virtual_nativeEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1760,7 +1903,11 @@ func (this *QWindow) callVirtualBase_EventFilter(watched *QObject, event *QEvent
 
 }
 func (this *QWindow) OnEventFilter(slot func(super func(watched *QObject, event *QEvent) bool, watched *QObject, event *QEvent) bool) {
-	ok := C.QWindow_override_virtual_eventFilter(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QWindow_override_virtual_eventFilter(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1790,7 +1937,11 @@ func (this *QWindow) callVirtualBase_TimerEvent(event *QTimerEvent) {
 
 }
 func (this *QWindow) OnTimerEvent(slot func(super func(event *QTimerEvent), event *QTimerEvent)) {
-	ok := C.QWindow_override_virtual_timerEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QWindow_override_virtual_timerEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1816,7 +1967,11 @@ func (this *QWindow) callVirtualBase_ChildEvent(event *QChildEvent) {
 
 }
 func (this *QWindow) OnChildEvent(slot func(super func(event *QChildEvent), event *QChildEvent)) {
-	ok := C.QWindow_override_virtual_childEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QWindow_override_virtual_childEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1842,7 +1997,11 @@ func (this *QWindow) callVirtualBase_CustomEvent(event *QEvent) {
 
 }
 func (this *QWindow) OnCustomEvent(slot func(super func(event *QEvent), event *QEvent)) {
-	ok := C.QWindow_override_virtual_customEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QWindow_override_virtual_customEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1868,7 +2027,11 @@ func (this *QWindow) callVirtualBase_ConnectNotify(signal *QMetaMethod) {
 
 }
 func (this *QWindow) OnConnectNotify(slot func(super func(signal *QMetaMethod), signal *QMetaMethod)) {
-	ok := C.QWindow_override_virtual_connectNotify(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QWindow_override_virtual_connectNotify(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1894,7 +2057,11 @@ func (this *QWindow) callVirtualBase_DisconnectNotify(signal *QMetaMethod) {
 
 }
 func (this *QWindow) OnDisconnectNotify(slot func(super func(signal *QMetaMethod), signal *QMetaMethod)) {
-	ok := C.QWindow_override_virtual_disconnectNotify(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QWindow_override_virtual_disconnectNotify(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}

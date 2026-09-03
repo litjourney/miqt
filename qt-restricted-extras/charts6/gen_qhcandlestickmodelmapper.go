@@ -15,6 +15,11 @@ import (
 	"unsafe"
 )
 
+//export miqt_exec_callback_handle_release_QHCandlestickModelMapper
+func miqt_exec_callback_handle_release_QHCandlestickModelMapper(cb C.intptr_t) {
+	cgo.Handle(cb).Delete()
+}
+
 type QHCandlestickModelMapper struct {
 	h *C.QHCandlestickModelMapper
 	*QCandlestickModelMapper
@@ -145,8 +150,10 @@ func (this *QHCandlestickModelMapper) LastSetRow() int {
 func (this *QHCandlestickModelMapper) TimestampColumnChanged() {
 	C.QHCandlestickModelMapper_timestampColumnChanged(this.h)
 }
-func (this *QHCandlestickModelMapper) OnTimestampColumnChanged(slot func()) {
-	C.QHCandlestickModelMapper_connect_timestampColumnChanged(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QHCandlestickModelMapper) OnTimestampColumnChanged(slot func()) *qt6.SignalConnection {
+	_goptr := qt6.UnsafeNewQMetaObject__Connection(C.QHCandlestickModelMapper_connect_timestampColumnChanged(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QHCandlestickModelMapper_timestampColumnChanged
@@ -162,8 +169,10 @@ func miqt_exec_callback_QHCandlestickModelMapper_timestampColumnChanged(cb C.int
 func (this *QHCandlestickModelMapper) OpenColumnChanged() {
 	C.QHCandlestickModelMapper_openColumnChanged(this.h)
 }
-func (this *QHCandlestickModelMapper) OnOpenColumnChanged(slot func()) {
-	C.QHCandlestickModelMapper_connect_openColumnChanged(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QHCandlestickModelMapper) OnOpenColumnChanged(slot func()) *qt6.SignalConnection {
+	_goptr := qt6.UnsafeNewQMetaObject__Connection(C.QHCandlestickModelMapper_connect_openColumnChanged(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QHCandlestickModelMapper_openColumnChanged
@@ -179,8 +188,10 @@ func miqt_exec_callback_QHCandlestickModelMapper_openColumnChanged(cb C.intptr_t
 func (this *QHCandlestickModelMapper) HighColumnChanged() {
 	C.QHCandlestickModelMapper_highColumnChanged(this.h)
 }
-func (this *QHCandlestickModelMapper) OnHighColumnChanged(slot func()) {
-	C.QHCandlestickModelMapper_connect_highColumnChanged(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QHCandlestickModelMapper) OnHighColumnChanged(slot func()) *qt6.SignalConnection {
+	_goptr := qt6.UnsafeNewQMetaObject__Connection(C.QHCandlestickModelMapper_connect_highColumnChanged(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QHCandlestickModelMapper_highColumnChanged
@@ -196,8 +207,10 @@ func miqt_exec_callback_QHCandlestickModelMapper_highColumnChanged(cb C.intptr_t
 func (this *QHCandlestickModelMapper) LowColumnChanged() {
 	C.QHCandlestickModelMapper_lowColumnChanged(this.h)
 }
-func (this *QHCandlestickModelMapper) OnLowColumnChanged(slot func()) {
-	C.QHCandlestickModelMapper_connect_lowColumnChanged(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QHCandlestickModelMapper) OnLowColumnChanged(slot func()) *qt6.SignalConnection {
+	_goptr := qt6.UnsafeNewQMetaObject__Connection(C.QHCandlestickModelMapper_connect_lowColumnChanged(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QHCandlestickModelMapper_lowColumnChanged
@@ -213,8 +226,10 @@ func miqt_exec_callback_QHCandlestickModelMapper_lowColumnChanged(cb C.intptr_t)
 func (this *QHCandlestickModelMapper) CloseColumnChanged() {
 	C.QHCandlestickModelMapper_closeColumnChanged(this.h)
 }
-func (this *QHCandlestickModelMapper) OnCloseColumnChanged(slot func()) {
-	C.QHCandlestickModelMapper_connect_closeColumnChanged(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QHCandlestickModelMapper) OnCloseColumnChanged(slot func()) *qt6.SignalConnection {
+	_goptr := qt6.UnsafeNewQMetaObject__Connection(C.QHCandlestickModelMapper_connect_closeColumnChanged(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QHCandlestickModelMapper_closeColumnChanged
@@ -230,8 +245,10 @@ func miqt_exec_callback_QHCandlestickModelMapper_closeColumnChanged(cb C.intptr_
 func (this *QHCandlestickModelMapper) FirstSetRowChanged() {
 	C.QHCandlestickModelMapper_firstSetRowChanged(this.h)
 }
-func (this *QHCandlestickModelMapper) OnFirstSetRowChanged(slot func()) {
-	C.QHCandlestickModelMapper_connect_firstSetRowChanged(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QHCandlestickModelMapper) OnFirstSetRowChanged(slot func()) *qt6.SignalConnection {
+	_goptr := qt6.UnsafeNewQMetaObject__Connection(C.QHCandlestickModelMapper_connect_firstSetRowChanged(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QHCandlestickModelMapper_firstSetRowChanged
@@ -247,8 +264,10 @@ func miqt_exec_callback_QHCandlestickModelMapper_firstSetRowChanged(cb C.intptr_
 func (this *QHCandlestickModelMapper) LastSetRowChanged() {
 	C.QHCandlestickModelMapper_lastSetRowChanged(this.h)
 }
-func (this *QHCandlestickModelMapper) OnLastSetRowChanged(slot func()) {
-	C.QHCandlestickModelMapper_connect_lastSetRowChanged(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QHCandlestickModelMapper) OnLastSetRowChanged(slot func()) *qt6.SignalConnection {
+	_goptr := qt6.UnsafeNewQMetaObject__Connection(C.QHCandlestickModelMapper_connect_lastSetRowChanged(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QHCandlestickModelMapper_lastSetRowChanged
@@ -529,7 +548,11 @@ func (this *QHCandlestickModelMapper) callVirtualBase_Orientation() qt6.Orientat
 
 }
 func (this *QHCandlestickModelMapper) OnOrientation(slot func(super func() qt6.Orientation) qt6.Orientation) {
-	ok := C.QHCandlestickModelMapper_override_virtual_orientation(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QHCandlestickModelMapper_override_virtual_orientation(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -554,7 +577,11 @@ func (this *QHCandlestickModelMapper) callVirtualBase_Event(event *qt6.QEvent) b
 
 }
 func (this *QHCandlestickModelMapper) OnEvent(slot func(super func(event *qt6.QEvent) bool, event *qt6.QEvent) bool) {
-	ok := C.QHCandlestickModelMapper_override_virtual_event(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QHCandlestickModelMapper_override_virtual_event(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -582,7 +609,11 @@ func (this *QHCandlestickModelMapper) callVirtualBase_EventFilter(watched *qt6.Q
 
 }
 func (this *QHCandlestickModelMapper) OnEventFilter(slot func(super func(watched *qt6.QObject, event *qt6.QEvent) bool, watched *qt6.QObject, event *qt6.QEvent) bool) {
-	ok := C.QHCandlestickModelMapper_override_virtual_eventFilter(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QHCandlestickModelMapper_override_virtual_eventFilter(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -612,7 +643,11 @@ func (this *QHCandlestickModelMapper) callVirtualBase_TimerEvent(event *qt6.QTim
 
 }
 func (this *QHCandlestickModelMapper) OnTimerEvent(slot func(super func(event *qt6.QTimerEvent), event *qt6.QTimerEvent)) {
-	ok := C.QHCandlestickModelMapper_override_virtual_timerEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QHCandlestickModelMapper_override_virtual_timerEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -638,7 +673,11 @@ func (this *QHCandlestickModelMapper) callVirtualBase_ChildEvent(event *qt6.QChi
 
 }
 func (this *QHCandlestickModelMapper) OnChildEvent(slot func(super func(event *qt6.QChildEvent), event *qt6.QChildEvent)) {
-	ok := C.QHCandlestickModelMapper_override_virtual_childEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QHCandlestickModelMapper_override_virtual_childEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -664,7 +703,11 @@ func (this *QHCandlestickModelMapper) callVirtualBase_CustomEvent(event *qt6.QEv
 
 }
 func (this *QHCandlestickModelMapper) OnCustomEvent(slot func(super func(event *qt6.QEvent), event *qt6.QEvent)) {
-	ok := C.QHCandlestickModelMapper_override_virtual_customEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QHCandlestickModelMapper_override_virtual_customEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -690,7 +733,11 @@ func (this *QHCandlestickModelMapper) callVirtualBase_ConnectNotify(signal *qt6.
 
 }
 func (this *QHCandlestickModelMapper) OnConnectNotify(slot func(super func(signal *qt6.QMetaMethod), signal *qt6.QMetaMethod)) {
-	ok := C.QHCandlestickModelMapper_override_virtual_connectNotify(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QHCandlestickModelMapper_override_virtual_connectNotify(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -716,7 +763,11 @@ func (this *QHCandlestickModelMapper) callVirtualBase_DisconnectNotify(signal *q
 
 }
 func (this *QHCandlestickModelMapper) OnDisconnectNotify(slot func(super func(signal *qt6.QMetaMethod), signal *qt6.QMetaMethod)) {
-	ok := C.QHCandlestickModelMapper_override_virtual_disconnectNotify(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QHCandlestickModelMapper_override_virtual_disconnectNotify(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}

@@ -1,3 +1,5 @@
+#include <memory>
+#include <utility>
 #include <QColor>
 #include <QVector>
 #include <qwt_color_map.h>
@@ -7,12 +9,15 @@
 extern "C" {
 #endif
 
+void miqt_exec_callback_handle_release_QwtColorMap(intptr_t);
 unsigned int miqt_exec_callback_QwtColorMap_rgb(const QwtColorMap*, intptr_t, QwtInterval*, double);
 unsigned char miqt_exec_callback_QwtColorMap_colorIndex(const QwtColorMap*, intptr_t, QwtInterval*, double);
 struct miqt_array /* of unsigned int */  miqt_exec_callback_QwtColorMap_colorTable(const QwtColorMap*, intptr_t, QwtInterval*);
+void miqt_exec_callback_handle_release_QwtLinearColorMap(intptr_t);
 unsigned int miqt_exec_callback_QwtLinearColorMap_rgb(const QwtLinearColorMap*, intptr_t, QwtInterval*, double);
 unsigned char miqt_exec_callback_QwtLinearColorMap_colorIndex(const QwtLinearColorMap*, intptr_t, QwtInterval*, double);
 struct miqt_array /* of unsigned int */  miqt_exec_callback_QwtLinearColorMap_colorTable(const QwtLinearColorMap*, intptr_t, QwtInterval*);
+void miqt_exec_callback_handle_release_QwtAlphaColorMap(intptr_t);
 unsigned int miqt_exec_callback_QwtAlphaColorMap_rgb(const QwtAlphaColorMap*, intptr_t, QwtInterval*, double);
 struct miqt_array /* of unsigned int */  miqt_exec_callback_QwtAlphaColorMap_colorTable(const QwtAlphaColorMap*, intptr_t, QwtInterval*);
 #ifdef __cplusplus
@@ -28,11 +33,11 @@ public:
 	virtual ~MiqtVirtualQwtColorMap() override = default;
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__rgb = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtColorMap> handle__rgb;
 
 	// Subclass to allow providing a Go implementation
 	virtual QRgb rgb(const QwtInterval& interval, double value) const override {
-		if (handle__rgb == 0) {
+		if (!handle__rgb) {
 			return 0; // Pure virtual, there is no base we can call
 		}
 
@@ -40,16 +45,16 @@ public:
 		// Cast returned reference into pointer
 		QwtInterval* sigval1 = const_cast<QwtInterval*>(&interval_ret);
 		double sigval2 = value;
-		unsigned int callback_return_value = miqt_exec_callback_QwtColorMap_rgb(this, handle__rgb, sigval1, sigval2);
+		unsigned int callback_return_value = miqt_exec_callback_QwtColorMap_rgb(this, handle__rgb.value(), sigval1, sigval2);
 		return static_cast<QRgb>(callback_return_value);
 	}
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__colorIndex = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtColorMap> handle__colorIndex;
 
 	// Subclass to allow providing a Go implementation
 	virtual unsigned char colorIndex(const QwtInterval& interval, double value) const override {
-		if (handle__colorIndex == 0) {
+		if (!handle__colorIndex) {
 			return 0; // Pure virtual, there is no base we can call
 		}
 
@@ -57,23 +62,23 @@ public:
 		// Cast returned reference into pointer
 		QwtInterval* sigval1 = const_cast<QwtInterval*>(&interval_ret);
 		double sigval2 = value;
-		unsigned char callback_return_value = miqt_exec_callback_QwtColorMap_colorIndex(this, handle__colorIndex, sigval1, sigval2);
+		unsigned char callback_return_value = miqt_exec_callback_QwtColorMap_colorIndex(this, handle__colorIndex.value(), sigval1, sigval2);
 		return static_cast<unsigned char>(callback_return_value);
 	}
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__colorTable = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtColorMap> handle__colorTable;
 
 	// Subclass to allow providing a Go implementation
 	virtual QVector<QRgb> colorTable(const QwtInterval& param1) const override {
-		if (handle__colorTable == 0) {
+		if (!handle__colorTable) {
 			return QwtColorMap::colorTable(param1);
 		}
 
 		const QwtInterval& param1_ret = param1;
 		// Cast returned reference into pointer
 		QwtInterval* sigval1 = const_cast<QwtInterval*>(&param1_ret);
-		struct miqt_array /* of unsigned int */  callback_return_value = miqt_exec_callback_QwtColorMap_colorTable(this, handle__colorTable, sigval1);
+		struct miqt_array /* of unsigned int */  callback_return_value = miqt_exec_callback_QwtColorMap_colorTable(this, handle__colorTable.value(), sigval1);
 		QVector<QRgb> callback_return_value_QList;
 		callback_return_value_QList.reserve(callback_return_value.len);
 		unsigned int* callback_return_value_arr = static_cast<unsigned int*>(callback_return_value.data);
@@ -132,32 +137,35 @@ void QwtColorMap_operatorAssign(QwtColorMap* self, QwtColorMap* param1) {
 }
 
 bool QwtColorMap_override_virtual_rgb(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtColorMap> slot_handle(slot);
 	MiqtVirtualQwtColorMap* self_cast = dynamic_cast<MiqtVirtualQwtColorMap*>( (QwtColorMap*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__rgb = slot;
+	self_cast->handle__rgb = std::move(slot_handle);
 	return true;
 }
 
 bool QwtColorMap_override_virtual_colorIndex(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtColorMap> slot_handle(slot);
 	MiqtVirtualQwtColorMap* self_cast = dynamic_cast<MiqtVirtualQwtColorMap*>( (QwtColorMap*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__colorIndex = slot;
+	self_cast->handle__colorIndex = std::move(slot_handle);
 	return true;
 }
 
 bool QwtColorMap_override_virtual_colorTable(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtColorMap> slot_handle(slot);
 	MiqtVirtualQwtColorMap* self_cast = dynamic_cast<MiqtVirtualQwtColorMap*>( (QwtColorMap*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__colorTable = slot;
+	self_cast->handle__colorTable = std::move(slot_handle);
 	return true;
 }
 
@@ -189,11 +197,11 @@ public:
 	virtual ~MiqtVirtualQwtLinearColorMap() override = default;
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__rgb = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtLinearColorMap> handle__rgb;
 
 	// Subclass to allow providing a Go implementation
 	virtual QRgb rgb(const QwtInterval& param1, double value) const override {
-		if (handle__rgb == 0) {
+		if (!handle__rgb) {
 			return QwtLinearColorMap::rgb(param1, value);
 		}
 
@@ -201,18 +209,18 @@ public:
 		// Cast returned reference into pointer
 		QwtInterval* sigval1 = const_cast<QwtInterval*>(&param1_ret);
 		double sigval2 = value;
-		unsigned int callback_return_value = miqt_exec_callback_QwtLinearColorMap_rgb(this, handle__rgb, sigval1, sigval2);
+		unsigned int callback_return_value = miqt_exec_callback_QwtLinearColorMap_rgb(this, handle__rgb.value(), sigval1, sigval2);
 		return static_cast<QRgb>(callback_return_value);
 	}
 
 	friend unsigned int QwtLinearColorMap_virtualbase_rgb(const void* self, QwtInterval* param1, double value);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__colorIndex = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtLinearColorMap> handle__colorIndex;
 
 	// Subclass to allow providing a Go implementation
 	virtual unsigned char colorIndex(const QwtInterval& param1, double value) const override {
-		if (handle__colorIndex == 0) {
+		if (!handle__colorIndex) {
 			return QwtLinearColorMap::colorIndex(param1, value);
 		}
 
@@ -220,25 +228,25 @@ public:
 		// Cast returned reference into pointer
 		QwtInterval* sigval1 = const_cast<QwtInterval*>(&param1_ret);
 		double sigval2 = value;
-		unsigned char callback_return_value = miqt_exec_callback_QwtLinearColorMap_colorIndex(this, handle__colorIndex, sigval1, sigval2);
+		unsigned char callback_return_value = miqt_exec_callback_QwtLinearColorMap_colorIndex(this, handle__colorIndex.value(), sigval1, sigval2);
 		return static_cast<unsigned char>(callback_return_value);
 	}
 
 	friend unsigned char QwtLinearColorMap_virtualbase_colorIndex(const void* self, QwtInterval* param1, double value);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__colorTable = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtLinearColorMap> handle__colorTable;
 
 	// Subclass to allow providing a Go implementation
 	virtual QVector<QRgb> colorTable(const QwtInterval& param1) const override {
-		if (handle__colorTable == 0) {
+		if (!handle__colorTable) {
 			return QwtLinearColorMap::colorTable(param1);
 		}
 
 		const QwtInterval& param1_ret = param1;
 		// Cast returned reference into pointer
 		QwtInterval* sigval1 = const_cast<QwtInterval*>(&param1_ret);
-		struct miqt_array /* of unsigned int */  callback_return_value = miqt_exec_callback_QwtLinearColorMap_colorTable(this, handle__colorTable, sigval1);
+		struct miqt_array /* of unsigned int */  callback_return_value = miqt_exec_callback_QwtLinearColorMap_colorTable(this, handle__colorTable.value(), sigval1);
 		QVector<QRgb> callback_return_value_QList;
 		callback_return_value_QList.reserve(callback_return_value.len);
 		unsigned int* callback_return_value_arr = static_cast<unsigned int*>(callback_return_value.data);
@@ -321,12 +329,13 @@ unsigned char QwtLinearColorMap_colorIndex(const QwtLinearColorMap* self, QwtInt
 }
 
 bool QwtLinearColorMap_override_virtual_rgb(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtLinearColorMap> slot_handle(slot);
 	MiqtVirtualQwtLinearColorMap* self_cast = dynamic_cast<MiqtVirtualQwtLinearColorMap*>( (QwtLinearColorMap*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__rgb = slot;
+	self_cast->handle__rgb = std::move(slot_handle);
 	return true;
 }
 
@@ -336,12 +345,13 @@ unsigned int QwtLinearColorMap_virtualbase_rgb(const void* self, QwtInterval* pa
 }
 
 bool QwtLinearColorMap_override_virtual_colorIndex(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtLinearColorMap> slot_handle(slot);
 	MiqtVirtualQwtLinearColorMap* self_cast = dynamic_cast<MiqtVirtualQwtLinearColorMap*>( (QwtLinearColorMap*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__colorIndex = slot;
+	self_cast->handle__colorIndex = std::move(slot_handle);
 	return true;
 }
 
@@ -350,12 +360,13 @@ unsigned char QwtLinearColorMap_virtualbase_colorIndex(const void* self, QwtInte
 }
 
 bool QwtLinearColorMap_override_virtual_colorTable(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtLinearColorMap> slot_handle(slot);
 	MiqtVirtualQwtLinearColorMap* self_cast = dynamic_cast<MiqtVirtualQwtLinearColorMap*>( (QwtLinearColorMap*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__colorTable = slot;
+	self_cast->handle__colorTable = std::move(slot_handle);
 	return true;
 }
 
@@ -385,11 +396,11 @@ public:
 	virtual ~MiqtVirtualQwtAlphaColorMap() override = default;
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__rgb = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtAlphaColorMap> handle__rgb;
 
 	// Subclass to allow providing a Go implementation
 	virtual QRgb rgb(const QwtInterval& param1, double value) const override {
-		if (handle__rgb == 0) {
+		if (!handle__rgb) {
 			return QwtAlphaColorMap::rgb(param1, value);
 		}
 
@@ -397,25 +408,25 @@ public:
 		// Cast returned reference into pointer
 		QwtInterval* sigval1 = const_cast<QwtInterval*>(&param1_ret);
 		double sigval2 = value;
-		unsigned int callback_return_value = miqt_exec_callback_QwtAlphaColorMap_rgb(this, handle__rgb, sigval1, sigval2);
+		unsigned int callback_return_value = miqt_exec_callback_QwtAlphaColorMap_rgb(this, handle__rgb.value(), sigval1, sigval2);
 		return static_cast<QRgb>(callback_return_value);
 	}
 
 	friend unsigned int QwtAlphaColorMap_virtualbase_rgb(const void* self, QwtInterval* param1, double value);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__colorTable = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtAlphaColorMap> handle__colorTable;
 
 	// Subclass to allow providing a Go implementation
 	virtual QVector<QRgb> colorTable(const QwtInterval& param1) const override {
-		if (handle__colorTable == 0) {
+		if (!handle__colorTable) {
 			return QwtAlphaColorMap::colorTable(param1);
 		}
 
 		const QwtInterval& param1_ret = param1;
 		// Cast returned reference into pointer
 		QwtInterval* sigval1 = const_cast<QwtInterval*>(&param1_ret);
-		struct miqt_array /* of unsigned int */  callback_return_value = miqt_exec_callback_QwtAlphaColorMap_colorTable(this, handle__colorTable, sigval1);
+		struct miqt_array /* of unsigned int */  callback_return_value = miqt_exec_callback_QwtAlphaColorMap_colorTable(this, handle__colorTable.value(), sigval1);
 		QVector<QRgb> callback_return_value_QList;
 		callback_return_value_QList.reserve(callback_return_value.len);
 		unsigned int* callback_return_value_arr = static_cast<unsigned int*>(callback_return_value.data);
@@ -456,12 +467,13 @@ unsigned int QwtAlphaColorMap_rgb(const QwtAlphaColorMap* self, QwtInterval* par
 }
 
 bool QwtAlphaColorMap_override_virtual_rgb(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtAlphaColorMap> slot_handle(slot);
 	MiqtVirtualQwtAlphaColorMap* self_cast = dynamic_cast<MiqtVirtualQwtAlphaColorMap*>( (QwtAlphaColorMap*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__rgb = slot;
+	self_cast->handle__rgb = std::move(slot_handle);
 	return true;
 }
 
@@ -471,12 +483,13 @@ unsigned int QwtAlphaColorMap_virtualbase_rgb(const void* self, QwtInterval* par
 }
 
 bool QwtAlphaColorMap_override_virtual_colorTable(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtAlphaColorMap> slot_handle(slot);
 	MiqtVirtualQwtAlphaColorMap* self_cast = dynamic_cast<MiqtVirtualQwtAlphaColorMap*>( (QwtAlphaColorMap*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__colorTable = slot;
+	self_cast->handle__colorTable = std::move(slot_handle);
 	return true;
 }
 

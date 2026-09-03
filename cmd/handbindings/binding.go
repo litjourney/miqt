@@ -39,6 +39,11 @@ func miqt_exec_callback(cb C.intptr_t, argc C.int, args *C.void) {
 	cfunc(argc, args)
 }
 
+//export miqt_handbindings_release_handle
+func miqt_handbindings_release_handle(cb C.intptr_t) {
+	cgo.Handle(cb).Delete()
+}
+
 //
 
 type QApplication struct {
@@ -105,5 +110,4 @@ func (this *QPushButton) OnPressed(cb func()) {
 	}
 
 	C.QPushButton_connect_pressed(this.h, C.intptr_t(cgo.NewHandle(cbWrapper)))
-	// TODO allow disconnect'ing, or tie lifespan for handle.Delete(), ...
 }

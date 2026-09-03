@@ -1,3 +1,5 @@
+#include <memory>
+#include <utility>
 #include <QImage>
 #include <QMetaMethod>
 #include <QMetaObject>
@@ -14,6 +16,7 @@
 extern "C" {
 #endif
 
+void miqt_exec_callback_handle_release_QWebEngineNotification(intptr_t);
 void miqt_exec_callback_QWebEngineNotification_closed(intptr_t);
 #ifdef __cplusplus
 } /* extern C */
@@ -130,10 +133,12 @@ void QWebEngineNotification_closed(QWebEngineNotification* self) {
 	self->closed();
 }
 
-void QWebEngineNotification_connect_closed(QWebEngineNotification* self, intptr_t slot) {
-	QWebEngineNotification::connect(self, static_cast<void (QWebEngineNotification::*)()>(&QWebEngineNotification::closed), self, [=]() {
+void* QWebEngineNotification_connect_closed(QWebEngineNotification* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QWebEngineNotification>>(slot);
+	return new QMetaObject::Connection(QWebEngineNotification::connect(self, static_cast<void (QWebEngineNotification::*)()>(&QWebEngineNotification::closed), self, [slot_handle]() {
+		intptr_t slot = slot_handle->value();
 		miqt_exec_callback_QWebEngineNotification_closed(slot);
-	});
+	}));
 }
 
 struct miqt_string QWebEngineNotification_tr2(const char* s, const char* c) {

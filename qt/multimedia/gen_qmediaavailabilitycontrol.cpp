@@ -1,3 +1,5 @@
+#include <memory>
+#include <utility>
 #include <QMediaAvailabilityControl>
 #include <QMediaControl>
 #include <QMetaMethod>
@@ -13,6 +15,7 @@
 extern "C" {
 #endif
 
+void miqt_exec_callback_handle_release_QMediaAvailabilityControl(intptr_t);
 void miqt_exec_callback_QMediaAvailabilityControl_availabilityChanged(intptr_t, int);
 #ifdef __cplusplus
 } /* extern C */
@@ -61,12 +64,14 @@ void QMediaAvailabilityControl_availabilityChanged(QMediaAvailabilityControl* se
 	self->availabilityChanged(static_cast<QMultimedia::AvailabilityStatus>(availability));
 }
 
-void QMediaAvailabilityControl_connect_availabilityChanged(QMediaAvailabilityControl* self, intptr_t slot) {
-	QMediaAvailabilityControl::connect(self, static_cast<void (QMediaAvailabilityControl::*)(QMultimedia::AvailabilityStatus)>(&QMediaAvailabilityControl::availabilityChanged), self, [=](QMultimedia::AvailabilityStatus availability) {
+void* QMediaAvailabilityControl_connect_availabilityChanged(QMediaAvailabilityControl* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QMediaAvailabilityControl>>(slot);
+	return new QMetaObject::Connection(QMediaAvailabilityControl::connect(self, static_cast<void (QMediaAvailabilityControl::*)(QMultimedia::AvailabilityStatus)>(&QMediaAvailabilityControl::availabilityChanged), self, [slot_handle](QMultimedia::AvailabilityStatus availability) {
+		intptr_t slot = slot_handle->value();
 		QMultimedia::AvailabilityStatus availability_ret = availability;
 		int sigval1 = static_cast<int>(availability_ret);
 		miqt_exec_callback_QMediaAvailabilityControl_availabilityChanged(slot, sigval1);
-	});
+	}));
 }
 
 struct miqt_string QMediaAvailabilityControl_tr2(const char* s, const char* c) {

@@ -43,6 +43,11 @@ const (
 	QNetworkInformation__Feature__Metered         QNetworkInformation__Feature = 8
 )
 
+//export miqt_exec_callback_handle_release_QNetworkInformation
+func miqt_exec_callback_handle_release_QNetworkInformation(cb C.intptr_t) {
+	cgo.Handle(cb).Delete()
+}
+
 type QNetworkInformation struct {
 	h *C.QNetworkInformation
 	*qt6.QObject
@@ -161,8 +166,10 @@ func QNetworkInformation_Instance() *QNetworkInformation {
 func (this *QNetworkInformation) ReachabilityChanged(newReachability QNetworkInformation__Reachability) {
 	C.QNetworkInformation_reachabilityChanged(this.h, (C.int)(newReachability))
 }
-func (this *QNetworkInformation) OnReachabilityChanged(slot func(newReachability QNetworkInformation__Reachability)) {
-	C.QNetworkInformation_connect_reachabilityChanged(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QNetworkInformation) OnReachabilityChanged(slot func(newReachability QNetworkInformation__Reachability)) *qt6.SignalConnection {
+	_goptr := qt6.UnsafeNewQMetaObject__Connection(C.QNetworkInformation_connect_reachabilityChanged(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QNetworkInformation_reachabilityChanged
@@ -181,8 +188,10 @@ func miqt_exec_callback_QNetworkInformation_reachabilityChanged(cb C.intptr_t, n
 func (this *QNetworkInformation) IsBehindCaptivePortalChanged(state bool) {
 	C.QNetworkInformation_isBehindCaptivePortalChanged(this.h, (C.bool)(state))
 }
-func (this *QNetworkInformation) OnIsBehindCaptivePortalChanged(slot func(state bool)) {
-	C.QNetworkInformation_connect_isBehindCaptivePortalChanged(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QNetworkInformation) OnIsBehindCaptivePortalChanged(slot func(state bool)) *qt6.SignalConnection {
+	_goptr := qt6.UnsafeNewQMetaObject__Connection(C.QNetworkInformation_connect_isBehindCaptivePortalChanged(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QNetworkInformation_isBehindCaptivePortalChanged
@@ -201,8 +210,10 @@ func miqt_exec_callback_QNetworkInformation_isBehindCaptivePortalChanged(cb C.in
 func (this *QNetworkInformation) TransportMediumChanged(current QNetworkInformation__TransportMedium) {
 	C.QNetworkInformation_transportMediumChanged(this.h, (C.int)(current))
 }
-func (this *QNetworkInformation) OnTransportMediumChanged(slot func(current QNetworkInformation__TransportMedium)) {
-	C.QNetworkInformation_connect_transportMediumChanged(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QNetworkInformation) OnTransportMediumChanged(slot func(current QNetworkInformation__TransportMedium)) *qt6.SignalConnection {
+	_goptr := qt6.UnsafeNewQMetaObject__Connection(C.QNetworkInformation_connect_transportMediumChanged(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QNetworkInformation_transportMediumChanged
@@ -221,8 +232,10 @@ func miqt_exec_callback_QNetworkInformation_transportMediumChanged(cb C.intptr_t
 func (this *QNetworkInformation) IsMeteredChanged(isMetered bool) {
 	C.QNetworkInformation_isMeteredChanged(this.h, (C.bool)(isMetered))
 }
-func (this *QNetworkInformation) OnIsMeteredChanged(slot func(isMetered bool)) {
-	C.QNetworkInformation_connect_isMeteredChanged(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QNetworkInformation) OnIsMeteredChanged(slot func(isMetered bool)) *qt6.SignalConnection {
+	_goptr := qt6.UnsafeNewQMetaObject__Connection(C.QNetworkInformation_connect_isMeteredChanged(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QNetworkInformation_isMeteredChanged

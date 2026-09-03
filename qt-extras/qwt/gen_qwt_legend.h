@@ -120,9 +120,9 @@ void QwtLegend_renderItem(const QwtLegend* self, QPainter* param1, QWidget* para
 bool QwtLegend_isEmpty(const QwtLegend* self);
 int QwtLegend_scrollExtent(const QwtLegend* self, int param1);
 void QwtLegend_clicked(QwtLegend* self, QVariant* itemInfo, int index);
-void QwtLegend_connect_clicked(QwtLegend* self, intptr_t slot);
+void* QwtLegend_connect_clicked(QwtLegend* self, intptr_t slot);
 void QwtLegend_checked(QwtLegend* self, QVariant* itemInfo, bool on, int index);
-void QwtLegend_connect_checked(QwtLegend* self, intptr_t slot);
+void* QwtLegend_connect_checked(QwtLegend* self, intptr_t slot);
 void QwtLegend_updateLegend(QwtLegend* self, QVariant* param1, struct miqt_array /* of QwtLegendData* */  param2);
 QWidget* QwtLegend_createWidget(const QwtLegend* self, QwtLegendData* param1);
 void QwtLegend_updateWidget(QwtLegend* self, QWidget* widget, QwtLegendData* param2);

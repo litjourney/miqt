@@ -61,11 +61,11 @@ void QGeoPositionInfoSource_startUpdates(QGeoPositionInfoSource* self);
 void QGeoPositionInfoSource_stopUpdates(QGeoPositionInfoSource* self);
 void QGeoPositionInfoSource_requestUpdate(QGeoPositionInfoSource* self, int timeout);
 void QGeoPositionInfoSource_positionUpdated(QGeoPositionInfoSource* self, QGeoPositionInfo* update);
-void QGeoPositionInfoSource_connect_positionUpdated(QGeoPositionInfoSource* self, intptr_t slot);
+void* QGeoPositionInfoSource_connect_positionUpdated(QGeoPositionInfoSource* self, intptr_t slot);
 void QGeoPositionInfoSource_errorOccurred(QGeoPositionInfoSource* self, int param1);
-void QGeoPositionInfoSource_connect_errorOccurred(QGeoPositionInfoSource* self, intptr_t slot);
+void* QGeoPositionInfoSource_connect_errorOccurred(QGeoPositionInfoSource* self, intptr_t slot);
 void QGeoPositionInfoSource_supportedPositioningMethodsChanged(QGeoPositionInfoSource* self);
-void QGeoPositionInfoSource_connect_supportedPositioningMethodsChanged(QGeoPositionInfoSource* self, intptr_t slot);
+void* QGeoPositionInfoSource_connect_supportedPositioningMethodsChanged(QGeoPositionInfoSource* self, intptr_t slot);
 struct miqt_string QGeoPositionInfoSource_tr2(const char* s, const char* c);
 struct miqt_string QGeoPositionInfoSource_tr3(const char* s, const char* c, int n);
 

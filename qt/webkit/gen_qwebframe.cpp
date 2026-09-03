@@ -1,3 +1,5 @@
+#include <memory>
+#include <utility>
 #include <QByteArray>
 #include <QEvent>
 #include <QIcon>
@@ -31,6 +33,7 @@
 extern "C" {
 #endif
 
+void miqt_exec_callback_handle_release_QWebFrame(intptr_t);
 void miqt_exec_callback_QWebFrame_javaScriptWindowObjectCleared(intptr_t);
 void miqt_exec_callback_QWebFrame_provisionalLoad(intptr_t);
 void miqt_exec_callback_QWebFrame_titleChanged(intptr_t, struct miqt_string);
@@ -442,20 +445,24 @@ void QWebFrame_javaScriptWindowObjectCleared(QWebFrame* self) {
 	self->javaScriptWindowObjectCleared();
 }
 
-void QWebFrame_connect_javaScriptWindowObjectCleared(QWebFrame* self, intptr_t slot) {
-	QWebFrame::connect(self, static_cast<void (QWebFrame::*)()>(&QWebFrame::javaScriptWindowObjectCleared), self, [=]() {
+void* QWebFrame_connect_javaScriptWindowObjectCleared(QWebFrame* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QWebFrame>>(slot);
+	return new QMetaObject::Connection(QWebFrame::connect(self, static_cast<void (QWebFrame::*)()>(&QWebFrame::javaScriptWindowObjectCleared), self, [slot_handle]() {
+		intptr_t slot = slot_handle->value();
 		miqt_exec_callback_QWebFrame_javaScriptWindowObjectCleared(slot);
-	});
+	}));
 }
 
 void QWebFrame_provisionalLoad(QWebFrame* self) {
 	self->provisionalLoad();
 }
 
-void QWebFrame_connect_provisionalLoad(QWebFrame* self, intptr_t slot) {
-	QWebFrame::connect(self, static_cast<void (QWebFrame::*)()>(&QWebFrame::provisionalLoad), self, [=]() {
+void* QWebFrame_connect_provisionalLoad(QWebFrame* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QWebFrame>>(slot);
+	return new QMetaObject::Connection(QWebFrame::connect(self, static_cast<void (QWebFrame::*)()>(&QWebFrame::provisionalLoad), self, [slot_handle]() {
+		intptr_t slot = slot_handle->value();
 		miqt_exec_callback_QWebFrame_provisionalLoad(slot);
-	});
+	}));
 }
 
 void QWebFrame_titleChanged(QWebFrame* self, struct miqt_string title) {
@@ -463,8 +470,10 @@ void QWebFrame_titleChanged(QWebFrame* self, struct miqt_string title) {
 	self->titleChanged(title_QString);
 }
 
-void QWebFrame_connect_titleChanged(QWebFrame* self, intptr_t slot) {
-	QWebFrame::connect(self, static_cast<void (QWebFrame::*)(const QString&)>(&QWebFrame::titleChanged), self, [=](const QString& title) {
+void* QWebFrame_connect_titleChanged(QWebFrame* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QWebFrame>>(slot);
+	return new QMetaObject::Connection(QWebFrame::connect(self, static_cast<void (QWebFrame::*)(const QString&)>(&QWebFrame::titleChanged), self, [slot_handle](const QString& title) {
+		intptr_t slot = slot_handle->value();
 		const QString title_ret = title;
 		// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 		QByteArray title_b = title_ret.toUtf8();
@@ -474,84 +483,98 @@ void QWebFrame_connect_titleChanged(QWebFrame* self, intptr_t slot) {
 		memcpy(title_ms.data, title_b.data(), title_ms.len);
 		struct miqt_string sigval1 = title_ms;
 		miqt_exec_callback_QWebFrame_titleChanged(slot, sigval1);
-	});
+	}));
 }
 
 void QWebFrame_urlChanged(QWebFrame* self, QUrl* url) {
 	self->urlChanged(*url);
 }
 
-void QWebFrame_connect_urlChanged(QWebFrame* self, intptr_t slot) {
-	QWebFrame::connect(self, static_cast<void (QWebFrame::*)(const QUrl&)>(&QWebFrame::urlChanged), self, [=](const QUrl& url) {
+void* QWebFrame_connect_urlChanged(QWebFrame* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QWebFrame>>(slot);
+	return new QMetaObject::Connection(QWebFrame::connect(self, static_cast<void (QWebFrame::*)(const QUrl&)>(&QWebFrame::urlChanged), self, [slot_handle](const QUrl& url) {
+		intptr_t slot = slot_handle->value();
 		const QUrl& url_ret = url;
 		// Cast returned reference into pointer
 		QUrl* sigval1 = const_cast<QUrl*>(&url_ret);
 		miqt_exec_callback_QWebFrame_urlChanged(slot, sigval1);
-	});
+	}));
 }
 
 void QWebFrame_initialLayoutCompleted(QWebFrame* self) {
 	self->initialLayoutCompleted();
 }
 
-void QWebFrame_connect_initialLayoutCompleted(QWebFrame* self, intptr_t slot) {
-	QWebFrame::connect(self, static_cast<void (QWebFrame::*)()>(&QWebFrame::initialLayoutCompleted), self, [=]() {
+void* QWebFrame_connect_initialLayoutCompleted(QWebFrame* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QWebFrame>>(slot);
+	return new QMetaObject::Connection(QWebFrame::connect(self, static_cast<void (QWebFrame::*)()>(&QWebFrame::initialLayoutCompleted), self, [slot_handle]() {
+		intptr_t slot = slot_handle->value();
 		miqt_exec_callback_QWebFrame_initialLayoutCompleted(slot);
-	});
+	}));
 }
 
 void QWebFrame_iconChanged(QWebFrame* self) {
 	self->iconChanged();
 }
 
-void QWebFrame_connect_iconChanged(QWebFrame* self, intptr_t slot) {
-	QWebFrame::connect(self, static_cast<void (QWebFrame::*)()>(&QWebFrame::iconChanged), self, [=]() {
+void* QWebFrame_connect_iconChanged(QWebFrame* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QWebFrame>>(slot);
+	return new QMetaObject::Connection(QWebFrame::connect(self, static_cast<void (QWebFrame::*)()>(&QWebFrame::iconChanged), self, [slot_handle]() {
+		intptr_t slot = slot_handle->value();
 		miqt_exec_callback_QWebFrame_iconChanged(slot);
-	});
+	}));
 }
 
 void QWebFrame_contentsSizeChanged(QWebFrame* self, QSize* size) {
 	self->contentsSizeChanged(*size);
 }
 
-void QWebFrame_connect_contentsSizeChanged(QWebFrame* self, intptr_t slot) {
-	QWebFrame::connect(self, static_cast<void (QWebFrame::*)(const QSize&)>(&QWebFrame::contentsSizeChanged), self, [=](const QSize& size) {
+void* QWebFrame_connect_contentsSizeChanged(QWebFrame* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QWebFrame>>(slot);
+	return new QMetaObject::Connection(QWebFrame::connect(self, static_cast<void (QWebFrame::*)(const QSize&)>(&QWebFrame::contentsSizeChanged), self, [slot_handle](const QSize& size) {
+		intptr_t slot = slot_handle->value();
 		const QSize& size_ret = size;
 		// Cast returned reference into pointer
 		QSize* sigval1 = const_cast<QSize*>(&size_ret);
 		miqt_exec_callback_QWebFrame_contentsSizeChanged(slot, sigval1);
-	});
+	}));
 }
 
 void QWebFrame_loadStarted(QWebFrame* self) {
 	self->loadStarted();
 }
 
-void QWebFrame_connect_loadStarted(QWebFrame* self, intptr_t slot) {
-	QWebFrame::connect(self, static_cast<void (QWebFrame::*)()>(&QWebFrame::loadStarted), self, [=]() {
+void* QWebFrame_connect_loadStarted(QWebFrame* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QWebFrame>>(slot);
+	return new QMetaObject::Connection(QWebFrame::connect(self, static_cast<void (QWebFrame::*)()>(&QWebFrame::loadStarted), self, [slot_handle]() {
+		intptr_t slot = slot_handle->value();
 		miqt_exec_callback_QWebFrame_loadStarted(slot);
-	});
+	}));
 }
 
 void QWebFrame_loadFinished(QWebFrame* self, bool ok) {
 	self->loadFinished(ok);
 }
 
-void QWebFrame_connect_loadFinished(QWebFrame* self, intptr_t slot) {
-	QWebFrame::connect(self, static_cast<void (QWebFrame::*)(bool)>(&QWebFrame::loadFinished), self, [=](bool ok) {
+void* QWebFrame_connect_loadFinished(QWebFrame* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QWebFrame>>(slot);
+	return new QMetaObject::Connection(QWebFrame::connect(self, static_cast<void (QWebFrame::*)(bool)>(&QWebFrame::loadFinished), self, [slot_handle](bool ok) {
+		intptr_t slot = slot_handle->value();
 		bool sigval1 = ok;
 		miqt_exec_callback_QWebFrame_loadFinished(slot, sigval1);
-	});
+	}));
 }
 
 void QWebFrame_pageChanged(QWebFrame* self) {
 	self->pageChanged();
 }
 
-void QWebFrame_connect_pageChanged(QWebFrame* self, intptr_t slot) {
-	QWebFrame::connect(self, static_cast<void (QWebFrame::*)()>(&QWebFrame::pageChanged), self, [=]() {
+void* QWebFrame_connect_pageChanged(QWebFrame* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QWebFrame>>(slot);
+	return new QMetaObject::Connection(QWebFrame::connect(self, static_cast<void (QWebFrame::*)()>(&QWebFrame::pageChanged), self, [slot_handle]() {
+		intptr_t slot = slot_handle->value();
 		miqt_exec_callback_QWebFrame_pageChanged(slot);
-	});
+	}));
 }
 
 struct miqt_string QWebFrame_tr2(const char* s, const char* c) {

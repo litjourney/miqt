@@ -1,3 +1,5 @@
+#include <memory>
+#include <utility>
 #include <QAccessible>
 #define WORKAROUND_INNER_CLASS_DEFINITION_QAccessible__ActivationObserver
 #define WORKAROUND_INNER_CLASS_DEFINITION_QAccessible__State
@@ -39,14 +41,23 @@
 extern "C" {
 #endif
 
+void miqt_exec_callback_handle_release_QAccessibleEvent(intptr_t);
 QAccessibleInterface* miqt_exec_callback_QAccessibleEvent_accessibleInterface(const QAccessibleEvent*, intptr_t);
+void miqt_exec_callback_handle_release_QAccessibleStateChangeEvent(intptr_t);
 QAccessibleInterface* miqt_exec_callback_QAccessibleStateChangeEvent_accessibleInterface(const QAccessibleStateChangeEvent*, intptr_t);
+void miqt_exec_callback_handle_release_QAccessibleTextCursorEvent(intptr_t);
 QAccessibleInterface* miqt_exec_callback_QAccessibleTextCursorEvent_accessibleInterface(const QAccessibleTextCursorEvent*, intptr_t);
+void miqt_exec_callback_handle_release_QAccessibleTextSelectionEvent(intptr_t);
 QAccessibleInterface* miqt_exec_callback_QAccessibleTextSelectionEvent_accessibleInterface(const QAccessibleTextSelectionEvent*, intptr_t);
+void miqt_exec_callback_handle_release_QAccessibleTextInsertEvent(intptr_t);
 QAccessibleInterface* miqt_exec_callback_QAccessibleTextInsertEvent_accessibleInterface(const QAccessibleTextInsertEvent*, intptr_t);
+void miqt_exec_callback_handle_release_QAccessibleTextRemoveEvent(intptr_t);
 QAccessibleInterface* miqt_exec_callback_QAccessibleTextRemoveEvent_accessibleInterface(const QAccessibleTextRemoveEvent*, intptr_t);
+void miqt_exec_callback_handle_release_QAccessibleTextUpdateEvent(intptr_t);
 QAccessibleInterface* miqt_exec_callback_QAccessibleTextUpdateEvent_accessibleInterface(const QAccessibleTextUpdateEvent*, intptr_t);
+void miqt_exec_callback_handle_release_QAccessibleValueChangeEvent(intptr_t);
 QAccessibleInterface* miqt_exec_callback_QAccessibleValueChangeEvent_accessibleInterface(const QAccessibleValueChangeEvent*, intptr_t);
+void miqt_exec_callback_handle_release_QAccessibleTableModelChangeEvent(intptr_t);
 QAccessibleInterface* miqt_exec_callback_QAccessibleTableModelChangeEvent_accessibleInterface(const QAccessibleTableModelChangeEvent*, intptr_t);
 #ifdef __cplusplus
 } /* extern C */
@@ -913,15 +924,15 @@ public:
 	virtual ~MiqtVirtualQAccessibleEvent() override = default;
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__accessibleInterface = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QAccessibleEvent> handle__accessibleInterface;
 
 	// Subclass to allow providing a Go implementation
 	virtual QAccessibleInterface* accessibleInterface() const override {
-		if (handle__accessibleInterface == 0) {
+		if (!handle__accessibleInterface) {
 			return QAccessibleEvent::accessibleInterface();
 		}
 
-		QAccessibleInterface* callback_return_value = miqt_exec_callback_QAccessibleEvent_accessibleInterface(this, handle__accessibleInterface);
+		QAccessibleInterface* callback_return_value = miqt_exec_callback_QAccessibleEvent_accessibleInterface(this, handle__accessibleInterface.value());
 		return callback_return_value;
 	}
 
@@ -964,12 +975,13 @@ QAccessibleInterface* QAccessibleEvent_accessibleInterface(const QAccessibleEven
 }
 
 bool QAccessibleEvent_override_virtual_accessibleInterface(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QAccessibleEvent> slot_handle(slot);
 	MiqtVirtualQAccessibleEvent* self_cast = dynamic_cast<MiqtVirtualQAccessibleEvent*>( (QAccessibleEvent*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__accessibleInterface = slot;
+	self_cast->handle__accessibleInterface = std::move(slot_handle);
 	return true;
 }
 
@@ -990,15 +1002,15 @@ public:
 	virtual ~MiqtVirtualQAccessibleStateChangeEvent() override = default;
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__accessibleInterface = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QAccessibleStateChangeEvent> handle__accessibleInterface;
 
 	// Subclass to allow providing a Go implementation
 	virtual QAccessibleInterface* accessibleInterface() const override {
-		if (handle__accessibleInterface == 0) {
+		if (!handle__accessibleInterface) {
 			return QAccessibleStateChangeEvent::accessibleInterface();
 		}
 
-		QAccessibleInterface* callback_return_value = miqt_exec_callback_QAccessibleStateChangeEvent_accessibleInterface(this, handle__accessibleInterface);
+		QAccessibleInterface* callback_return_value = miqt_exec_callback_QAccessibleStateChangeEvent_accessibleInterface(this, handle__accessibleInterface.value());
 		return callback_return_value;
 	}
 
@@ -1023,12 +1035,13 @@ QAccessible__State* QAccessibleStateChangeEvent_changedStates(const QAccessibleS
 }
 
 bool QAccessibleStateChangeEvent_override_virtual_accessibleInterface(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QAccessibleStateChangeEvent> slot_handle(slot);
 	MiqtVirtualQAccessibleStateChangeEvent* self_cast = dynamic_cast<MiqtVirtualQAccessibleStateChangeEvent*>( (QAccessibleStateChangeEvent*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__accessibleInterface = slot;
+	self_cast->handle__accessibleInterface = std::move(slot_handle);
 	return true;
 }
 
@@ -1049,15 +1062,15 @@ public:
 	virtual ~MiqtVirtualQAccessibleTextCursorEvent() override = default;
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__accessibleInterface = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QAccessibleTextCursorEvent> handle__accessibleInterface;
 
 	// Subclass to allow providing a Go implementation
 	virtual QAccessibleInterface* accessibleInterface() const override {
-		if (handle__accessibleInterface == 0) {
+		if (!handle__accessibleInterface) {
 			return QAccessibleTextCursorEvent::accessibleInterface();
 		}
 
-		QAccessibleInterface* callback_return_value = miqt_exec_callback_QAccessibleTextCursorEvent_accessibleInterface(this, handle__accessibleInterface);
+		QAccessibleInterface* callback_return_value = miqt_exec_callback_QAccessibleTextCursorEvent_accessibleInterface(this, handle__accessibleInterface.value());
 		return callback_return_value;
 	}
 
@@ -1086,12 +1099,13 @@ int QAccessibleTextCursorEvent_cursorPosition(const QAccessibleTextCursorEvent* 
 }
 
 bool QAccessibleTextCursorEvent_override_virtual_accessibleInterface(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QAccessibleTextCursorEvent> slot_handle(slot);
 	MiqtVirtualQAccessibleTextCursorEvent* self_cast = dynamic_cast<MiqtVirtualQAccessibleTextCursorEvent*>( (QAccessibleTextCursorEvent*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__accessibleInterface = slot;
+	self_cast->handle__accessibleInterface = std::move(slot_handle);
 	return true;
 }
 
@@ -1112,15 +1126,15 @@ public:
 	virtual ~MiqtVirtualQAccessibleTextSelectionEvent() override = default;
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__accessibleInterface = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QAccessibleTextSelectionEvent> handle__accessibleInterface;
 
 	// Subclass to allow providing a Go implementation
 	virtual QAccessibleInterface* accessibleInterface() const override {
-		if (handle__accessibleInterface == 0) {
+		if (!handle__accessibleInterface) {
 			return QAccessibleTextSelectionEvent::accessibleInterface();
 		}
 
-		QAccessibleInterface* callback_return_value = miqt_exec_callback_QAccessibleTextSelectionEvent_accessibleInterface(this, handle__accessibleInterface);
+		QAccessibleInterface* callback_return_value = miqt_exec_callback_QAccessibleTextSelectionEvent_accessibleInterface(this, handle__accessibleInterface.value());
 		return callback_return_value;
 	}
 
@@ -1153,12 +1167,13 @@ int QAccessibleTextSelectionEvent_selectionEnd(const QAccessibleTextSelectionEve
 }
 
 bool QAccessibleTextSelectionEvent_override_virtual_accessibleInterface(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QAccessibleTextSelectionEvent> slot_handle(slot);
 	MiqtVirtualQAccessibleTextSelectionEvent* self_cast = dynamic_cast<MiqtVirtualQAccessibleTextSelectionEvent*>( (QAccessibleTextSelectionEvent*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__accessibleInterface = slot;
+	self_cast->handle__accessibleInterface = std::move(slot_handle);
 	return true;
 }
 
@@ -1179,15 +1194,15 @@ public:
 	virtual ~MiqtVirtualQAccessibleTextInsertEvent() override = default;
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__accessibleInterface = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QAccessibleTextInsertEvent> handle__accessibleInterface;
 
 	// Subclass to allow providing a Go implementation
 	virtual QAccessibleInterface* accessibleInterface() const override {
-		if (handle__accessibleInterface == 0) {
+		if (!handle__accessibleInterface) {
 			return QAccessibleTextInsertEvent::accessibleInterface();
 		}
 
-		QAccessibleInterface* callback_return_value = miqt_exec_callback_QAccessibleTextInsertEvent_accessibleInterface(this, handle__accessibleInterface);
+		QAccessibleInterface* callback_return_value = miqt_exec_callback_QAccessibleTextInsertEvent_accessibleInterface(this, handle__accessibleInterface.value());
 		return callback_return_value;
 	}
 
@@ -1225,12 +1240,13 @@ int QAccessibleTextInsertEvent_changePosition(const QAccessibleTextInsertEvent* 
 }
 
 bool QAccessibleTextInsertEvent_override_virtual_accessibleInterface(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QAccessibleTextInsertEvent> slot_handle(slot);
 	MiqtVirtualQAccessibleTextInsertEvent* self_cast = dynamic_cast<MiqtVirtualQAccessibleTextInsertEvent*>( (QAccessibleTextInsertEvent*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__accessibleInterface = slot;
+	self_cast->handle__accessibleInterface = std::move(slot_handle);
 	return true;
 }
 
@@ -1251,15 +1267,15 @@ public:
 	virtual ~MiqtVirtualQAccessibleTextRemoveEvent() override = default;
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__accessibleInterface = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QAccessibleTextRemoveEvent> handle__accessibleInterface;
 
 	// Subclass to allow providing a Go implementation
 	virtual QAccessibleInterface* accessibleInterface() const override {
-		if (handle__accessibleInterface == 0) {
+		if (!handle__accessibleInterface) {
 			return QAccessibleTextRemoveEvent::accessibleInterface();
 		}
 
-		QAccessibleInterface* callback_return_value = miqt_exec_callback_QAccessibleTextRemoveEvent_accessibleInterface(this, handle__accessibleInterface);
+		QAccessibleInterface* callback_return_value = miqt_exec_callback_QAccessibleTextRemoveEvent_accessibleInterface(this, handle__accessibleInterface.value());
 		return callback_return_value;
 	}
 
@@ -1297,12 +1313,13 @@ int QAccessibleTextRemoveEvent_changePosition(const QAccessibleTextRemoveEvent* 
 }
 
 bool QAccessibleTextRemoveEvent_override_virtual_accessibleInterface(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QAccessibleTextRemoveEvent> slot_handle(slot);
 	MiqtVirtualQAccessibleTextRemoveEvent* self_cast = dynamic_cast<MiqtVirtualQAccessibleTextRemoveEvent*>( (QAccessibleTextRemoveEvent*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__accessibleInterface = slot;
+	self_cast->handle__accessibleInterface = std::move(slot_handle);
 	return true;
 }
 
@@ -1323,15 +1340,15 @@ public:
 	virtual ~MiqtVirtualQAccessibleTextUpdateEvent() override = default;
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__accessibleInterface = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QAccessibleTextUpdateEvent> handle__accessibleInterface;
 
 	// Subclass to allow providing a Go implementation
 	virtual QAccessibleInterface* accessibleInterface() const override {
-		if (handle__accessibleInterface == 0) {
+		if (!handle__accessibleInterface) {
 			return QAccessibleTextUpdateEvent::accessibleInterface();
 		}
 
-		QAccessibleInterface* callback_return_value = miqt_exec_callback_QAccessibleTextUpdateEvent_accessibleInterface(this, handle__accessibleInterface);
+		QAccessibleInterface* callback_return_value = miqt_exec_callback_QAccessibleTextUpdateEvent_accessibleInterface(this, handle__accessibleInterface.value());
 		return callback_return_value;
 	}
 
@@ -1382,12 +1399,13 @@ int QAccessibleTextUpdateEvent_changePosition(const QAccessibleTextUpdateEvent* 
 }
 
 bool QAccessibleTextUpdateEvent_override_virtual_accessibleInterface(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QAccessibleTextUpdateEvent> slot_handle(slot);
 	MiqtVirtualQAccessibleTextUpdateEvent* self_cast = dynamic_cast<MiqtVirtualQAccessibleTextUpdateEvent*>( (QAccessibleTextUpdateEvent*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__accessibleInterface = slot;
+	self_cast->handle__accessibleInterface = std::move(slot_handle);
 	return true;
 }
 
@@ -1408,15 +1426,15 @@ public:
 	virtual ~MiqtVirtualQAccessibleValueChangeEvent() override = default;
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__accessibleInterface = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QAccessibleValueChangeEvent> handle__accessibleInterface;
 
 	// Subclass to allow providing a Go implementation
 	virtual QAccessibleInterface* accessibleInterface() const override {
-		if (handle__accessibleInterface == 0) {
+		if (!handle__accessibleInterface) {
 			return QAccessibleValueChangeEvent::accessibleInterface();
 		}
 
-		QAccessibleInterface* callback_return_value = miqt_exec_callback_QAccessibleValueChangeEvent_accessibleInterface(this, handle__accessibleInterface);
+		QAccessibleInterface* callback_return_value = miqt_exec_callback_QAccessibleValueChangeEvent_accessibleInterface(this, handle__accessibleInterface.value());
 		return callback_return_value;
 	}
 
@@ -1445,12 +1463,13 @@ QVariant* QAccessibleValueChangeEvent_value(const QAccessibleValueChangeEvent* s
 }
 
 bool QAccessibleValueChangeEvent_override_virtual_accessibleInterface(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QAccessibleValueChangeEvent> slot_handle(slot);
 	MiqtVirtualQAccessibleValueChangeEvent* self_cast = dynamic_cast<MiqtVirtualQAccessibleValueChangeEvent*>( (QAccessibleValueChangeEvent*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__accessibleInterface = slot;
+	self_cast->handle__accessibleInterface = std::move(slot_handle);
 	return true;
 }
 
@@ -1471,15 +1490,15 @@ public:
 	virtual ~MiqtVirtualQAccessibleTableModelChangeEvent() override = default;
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__accessibleInterface = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QAccessibleTableModelChangeEvent> handle__accessibleInterface;
 
 	// Subclass to allow providing a Go implementation
 	virtual QAccessibleInterface* accessibleInterface() const override {
-		if (handle__accessibleInterface == 0) {
+		if (!handle__accessibleInterface) {
 			return QAccessibleTableModelChangeEvent::accessibleInterface();
 		}
 
-		QAccessibleInterface* callback_return_value = miqt_exec_callback_QAccessibleTableModelChangeEvent_accessibleInterface(this, handle__accessibleInterface);
+		QAccessibleInterface* callback_return_value = miqt_exec_callback_QAccessibleTableModelChangeEvent_accessibleInterface(this, handle__accessibleInterface.value());
 		return callback_return_value;
 	}
 
@@ -1541,12 +1560,13 @@ int QAccessibleTableModelChangeEvent_lastColumn(const QAccessibleTableModelChang
 }
 
 bool QAccessibleTableModelChangeEvent_override_virtual_accessibleInterface(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QAccessibleTableModelChangeEvent> slot_handle(slot);
 	MiqtVirtualQAccessibleTableModelChangeEvent* self_cast = dynamic_cast<MiqtVirtualQAccessibleTableModelChangeEvent*>( (QAccessibleTableModelChangeEvent*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__accessibleInterface = slot;
+	self_cast->handle__accessibleInterface = std::move(slot_handle);
 	return true;
 }
 

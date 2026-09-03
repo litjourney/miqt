@@ -167,6 +167,11 @@ func (this *QWebSelectData) GoGC() {
 	})
 }
 
+//export miqt_exec_callback_handle_release_QWebSelectMethod
+func miqt_exec_callback_handle_release_QWebSelectMethod(cb C.intptr_t) {
+	cgo.Handle(cb).Delete()
+}
+
 type QWebSelectMethod struct {
 	h *C.QWebSelectMethod
 	*qt.QObject
@@ -250,8 +255,10 @@ func (this *QWebSelectMethod) SetFont(font *qt.QFont) {
 func (this *QWebSelectMethod) SelectItem(index int, allowMultiplySelections bool, shift bool) {
 	C.QWebSelectMethod_selectItem(this.h, (C.int)(index), (C.bool)(allowMultiplySelections), (C.bool)(shift))
 }
-func (this *QWebSelectMethod) OnSelectItem(slot func(index int, allowMultiplySelections bool, shift bool)) {
-	C.QWebSelectMethod_connect_selectItem(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QWebSelectMethod) OnSelectItem(slot func(index int, allowMultiplySelections bool, shift bool)) *qt.SignalConnection {
+	_goptr := qt.UnsafeNewQMetaObject__Connection(C.QWebSelectMethod_connect_selectItem(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QWebSelectMethod_selectItem
@@ -274,8 +281,10 @@ func miqt_exec_callback_QWebSelectMethod_selectItem(cb C.intptr_t, index C.int, 
 func (this *QWebSelectMethod) DidHide() {
 	C.QWebSelectMethod_didHide(this.h)
 }
-func (this *QWebSelectMethod) OnDidHide(slot func()) {
-	C.QWebSelectMethod_connect_didHide(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QWebSelectMethod) OnDidHide(slot func()) *qt.SignalConnection {
+	_goptr := qt.UnsafeNewQMetaObject__Connection(C.QWebSelectMethod_connect_didHide(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QWebSelectMethod_didHide
@@ -422,6 +431,11 @@ func (this *QWebNotificationData) GoGC() {
 	})
 }
 
+//export miqt_exec_callback_handle_release_QWebNotificationPresenter
+func miqt_exec_callback_handle_release_QWebNotificationPresenter(cb C.intptr_t) {
+	cgo.Handle(cb).Delete()
+}
+
 type QWebNotificationPresenter struct {
 	h *C.QWebNotificationPresenter
 	*qt.QObject
@@ -493,8 +507,10 @@ func (this *QWebNotificationPresenter) ShowNotification(param1 *QWebNotification
 func (this *QWebNotificationPresenter) NotificationClosed() {
 	C.QWebNotificationPresenter_notificationClosed(this.h)
 }
-func (this *QWebNotificationPresenter) OnNotificationClosed(slot func()) {
-	C.QWebNotificationPresenter_connect_notificationClosed(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QWebNotificationPresenter) OnNotificationClosed(slot func()) *qt.SignalConnection {
+	_goptr := qt.UnsafeNewQMetaObject__Connection(C.QWebNotificationPresenter_connect_notificationClosed(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QWebNotificationPresenter_notificationClosed
@@ -510,8 +526,10 @@ func miqt_exec_callback_QWebNotificationPresenter_notificationClosed(cb C.intptr
 func (this *QWebNotificationPresenter) NotificationClicked() {
 	C.QWebNotificationPresenter_notificationClicked(this.h)
 }
-func (this *QWebNotificationPresenter) OnNotificationClicked(slot func()) {
-	C.QWebNotificationPresenter_connect_notificationClicked(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QWebNotificationPresenter) OnNotificationClicked(slot func()) *qt.SignalConnection {
+	_goptr := qt.UnsafeNewQMetaObject__Connection(C.QWebNotificationPresenter_connect_notificationClicked(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QWebNotificationPresenter_notificationClicked

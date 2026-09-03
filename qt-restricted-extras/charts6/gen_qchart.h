@@ -171,7 +171,7 @@ QPointF* QChart_mapToValue(QChart* self, QPointF* position);
 QPointF* QChart_mapToPosition(QChart* self, QPointF* value);
 int QChart_chartType(const QChart* self);
 void QChart_plotAreaChanged(QChart* self, QRectF* plotArea);
-void QChart_connect_plotAreaChanged(QChart* self, intptr_t slot);
+void* QChart_connect_plotAreaChanged(QChart* self, intptr_t slot);
 struct miqt_string QChart_tr2(const char* s, const char* c);
 struct miqt_string QChart_tr3(const char* s, const char* c, int n);
 void QChart_setAxisX2(QChart* self, QAbstractAxis* axis, QAbstractSeries* series);

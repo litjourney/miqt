@@ -15,6 +15,11 @@ import (
 	"unsafe"
 )
 
+//export miqt_exec_callback_handle_release_QPdfPageNavigation
+func miqt_exec_callback_handle_release_QPdfPageNavigation(cb C.intptr_t) {
+	cgo.Handle(cb).Delete()
+}
+
 type QPdfPageNavigation struct {
 	h *C.QPdfPageNavigation
 	*qt.QObject
@@ -130,8 +135,10 @@ func (this *QPdfPageNavigation) GoToNextPage() {
 func (this *QPdfPageNavigation) DocumentChanged(document *QPdfDocument) {
 	C.QPdfPageNavigation_documentChanged(this.h, document.cPointer())
 }
-func (this *QPdfPageNavigation) OnDocumentChanged(slot func(document *QPdfDocument)) {
-	C.QPdfPageNavigation_connect_documentChanged(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QPdfPageNavigation) OnDocumentChanged(slot func(document *QPdfDocument)) *qt.SignalConnection {
+	_goptr := qt.UnsafeNewQMetaObject__Connection(C.QPdfPageNavigation_connect_documentChanged(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QPdfPageNavigation_documentChanged
@@ -150,8 +157,10 @@ func miqt_exec_callback_QPdfPageNavigation_documentChanged(cb C.intptr_t, docume
 func (this *QPdfPageNavigation) CurrentPageChanged(currentPage int) {
 	C.QPdfPageNavigation_currentPageChanged(this.h, (C.int)(currentPage))
 }
-func (this *QPdfPageNavigation) OnCurrentPageChanged(slot func(currentPage int)) {
-	C.QPdfPageNavigation_connect_currentPageChanged(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QPdfPageNavigation) OnCurrentPageChanged(slot func(currentPage int)) *qt.SignalConnection {
+	_goptr := qt.UnsafeNewQMetaObject__Connection(C.QPdfPageNavigation_connect_currentPageChanged(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QPdfPageNavigation_currentPageChanged
@@ -170,8 +179,10 @@ func miqt_exec_callback_QPdfPageNavigation_currentPageChanged(cb C.intptr_t, cur
 func (this *QPdfPageNavigation) PageCountChanged(pageCount int) {
 	C.QPdfPageNavigation_pageCountChanged(this.h, (C.int)(pageCount))
 }
-func (this *QPdfPageNavigation) OnPageCountChanged(slot func(pageCount int)) {
-	C.QPdfPageNavigation_connect_pageCountChanged(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QPdfPageNavigation) OnPageCountChanged(slot func(pageCount int)) *qt.SignalConnection {
+	_goptr := qt.UnsafeNewQMetaObject__Connection(C.QPdfPageNavigation_connect_pageCountChanged(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QPdfPageNavigation_pageCountChanged
@@ -190,8 +201,10 @@ func miqt_exec_callback_QPdfPageNavigation_pageCountChanged(cb C.intptr_t, pageC
 func (this *QPdfPageNavigation) CanGoToPreviousPageChanged(canGo bool) {
 	C.QPdfPageNavigation_canGoToPreviousPageChanged(this.h, (C.bool)(canGo))
 }
-func (this *QPdfPageNavigation) OnCanGoToPreviousPageChanged(slot func(canGo bool)) {
-	C.QPdfPageNavigation_connect_canGoToPreviousPageChanged(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QPdfPageNavigation) OnCanGoToPreviousPageChanged(slot func(canGo bool)) *qt.SignalConnection {
+	_goptr := qt.UnsafeNewQMetaObject__Connection(C.QPdfPageNavigation_connect_canGoToPreviousPageChanged(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QPdfPageNavigation_canGoToPreviousPageChanged
@@ -210,8 +223,10 @@ func miqt_exec_callback_QPdfPageNavigation_canGoToPreviousPageChanged(cb C.intpt
 func (this *QPdfPageNavigation) CanGoToNextPageChanged(canGo bool) {
 	C.QPdfPageNavigation_canGoToNextPageChanged(this.h, (C.bool)(canGo))
 }
-func (this *QPdfPageNavigation) OnCanGoToNextPageChanged(slot func(canGo bool)) {
-	C.QPdfPageNavigation_connect_canGoToNextPageChanged(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QPdfPageNavigation) OnCanGoToNextPageChanged(slot func(canGo bool)) *qt.SignalConnection {
+	_goptr := qt.UnsafeNewQMetaObject__Connection(C.QPdfPageNavigation_connect_canGoToNextPageChanged(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QPdfPageNavigation_canGoToNextPageChanged
@@ -335,7 +350,11 @@ func (this *QPdfPageNavigation) callVirtualBase_Event(event *qt.QEvent) bool {
 
 }
 func (this *QPdfPageNavigation) OnEvent(slot func(super func(event *qt.QEvent) bool, event *qt.QEvent) bool) {
-	ok := C.QPdfPageNavigation_override_virtual_event(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QPdfPageNavigation_override_virtual_event(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -363,7 +382,11 @@ func (this *QPdfPageNavigation) callVirtualBase_EventFilter(watched *qt.QObject,
 
 }
 func (this *QPdfPageNavigation) OnEventFilter(slot func(super func(watched *qt.QObject, event *qt.QEvent) bool, watched *qt.QObject, event *qt.QEvent) bool) {
-	ok := C.QPdfPageNavigation_override_virtual_eventFilter(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QPdfPageNavigation_override_virtual_eventFilter(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -393,7 +416,11 @@ func (this *QPdfPageNavigation) callVirtualBase_TimerEvent(event *qt.QTimerEvent
 
 }
 func (this *QPdfPageNavigation) OnTimerEvent(slot func(super func(event *qt.QTimerEvent), event *qt.QTimerEvent)) {
-	ok := C.QPdfPageNavigation_override_virtual_timerEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QPdfPageNavigation_override_virtual_timerEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -419,7 +446,11 @@ func (this *QPdfPageNavigation) callVirtualBase_ChildEvent(event *qt.QChildEvent
 
 }
 func (this *QPdfPageNavigation) OnChildEvent(slot func(super func(event *qt.QChildEvent), event *qt.QChildEvent)) {
-	ok := C.QPdfPageNavigation_override_virtual_childEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QPdfPageNavigation_override_virtual_childEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -445,7 +476,11 @@ func (this *QPdfPageNavigation) callVirtualBase_CustomEvent(event *qt.QEvent) {
 
 }
 func (this *QPdfPageNavigation) OnCustomEvent(slot func(super func(event *qt.QEvent), event *qt.QEvent)) {
-	ok := C.QPdfPageNavigation_override_virtual_customEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QPdfPageNavigation_override_virtual_customEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -471,7 +506,11 @@ func (this *QPdfPageNavigation) callVirtualBase_ConnectNotify(signal *qt.QMetaMe
 
 }
 func (this *QPdfPageNavigation) OnConnectNotify(slot func(super func(signal *qt.QMetaMethod), signal *qt.QMetaMethod)) {
-	ok := C.QPdfPageNavigation_override_virtual_connectNotify(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QPdfPageNavigation_override_virtual_connectNotify(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -497,7 +536,11 @@ func (this *QPdfPageNavigation) callVirtualBase_DisconnectNotify(signal *qt.QMet
 
 }
 func (this *QPdfPageNavigation) OnDisconnectNotify(slot func(super func(signal *qt.QMetaMethod), signal *qt.QMetaMethod)) {
-	ok := C.QPdfPageNavigation_override_virtual_disconnectNotify(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QPdfPageNavigation_override_virtual_disconnectNotify(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}

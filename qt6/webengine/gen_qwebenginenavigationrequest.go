@@ -34,6 +34,11 @@ const (
 	QWebEngineNavigationRequest__IgnoreRequest QWebEngineNavigationRequest__NavigationRequestAction = 255
 )
 
+//export miqt_exec_callback_handle_release_QWebEngineNavigationRequest
+func miqt_exec_callback_handle_release_QWebEngineNavigationRequest(cb C.intptr_t) {
+	cgo.Handle(cb).Delete()
+}
+
 type QWebEngineNavigationRequest struct {
 	h *C.QWebEngineNavigationRequest
 	*qt6.QObject
@@ -114,8 +119,10 @@ func (this *QWebEngineNavigationRequest) Reject() {
 func (this *QWebEngineNavigationRequest) ActionChanged() {
 	C.QWebEngineNavigationRequest_actionChanged(this.h)
 }
-func (this *QWebEngineNavigationRequest) OnActionChanged(slot func()) {
-	C.QWebEngineNavigationRequest_connect_actionChanged(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QWebEngineNavigationRequest) OnActionChanged(slot func()) *qt6.SignalConnection {
+	_goptr := qt6.UnsafeNewQMetaObject__Connection(C.QWebEngineNavigationRequest_connect_actionChanged(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QWebEngineNavigationRequest_actionChanged

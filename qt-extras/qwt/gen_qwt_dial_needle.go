@@ -36,6 +36,11 @@ const (
 	QwtCompassWindArrow__Style2 QwtCompassWindArrow__Style = 1
 )
 
+//export miqt_exec_callback_handle_release_QwtDialNeedle
+func miqt_exec_callback_handle_release_QwtDialNeedle(cb C.intptr_t) {
+	cgo.Handle(cb).Delete()
+}
+
 type QwtDialNeedle struct {
 	h *C.QwtDialNeedle
 }
@@ -102,7 +107,11 @@ func (this *QwtDialNeedle) callVirtualBase_SetPalette(palette *qt.QPalette) {
 
 }
 func (this *QwtDialNeedle) OnSetPalette(slot func(super func(palette *qt.QPalette), palette *qt.QPalette)) {
-	ok := C.QwtDialNeedle_override_virtual_setPalette(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QwtDialNeedle_override_virtual_setPalette(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -128,7 +137,11 @@ func (this *QwtDialNeedle) callVirtualBase_Draw(painter *qt.QPainter, center *qt
 
 }
 func (this *QwtDialNeedle) OnDraw(slot func(super func(painter *qt.QPainter, center *qt.QPointF, length float64, direction float64, param5 qt.QPalette__ColorGroup), painter *qt.QPainter, center *qt.QPointF, length float64, direction float64, param5 qt.QPalette__ColorGroup)) {
-	ok := C.QwtDialNeedle_override_virtual_draw(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QwtDialNeedle_override_virtual_draw(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -156,7 +169,11 @@ func miqt_exec_callback_QwtDialNeedle_draw(self *C.QwtDialNeedle, cb C.intptr_t,
 
 }
 func (this *QwtDialNeedle) OnDrawNeedle(slot func(painter *qt.QPainter, length float64, colorGroup qt.QPalette__ColorGroup)) {
-	ok := C.QwtDialNeedle_override_virtual_drawNeedle(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QwtDialNeedle_override_virtual_drawNeedle(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -186,7 +203,11 @@ func (this *QwtDialNeedle) callVirtualBase_DrawKnob(param1 *qt.QPainter, width f
 
 }
 func (this *QwtDialNeedle) OnDrawKnob(slot func(super func(param1 *qt.QPainter, width float64, param3 *qt.QBrush, sunken bool), param1 *qt.QPainter, width float64, param3 *qt.QBrush, sunken bool)) {
-	ok := C.QwtDialNeedle_override_virtual_drawKnob(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QwtDialNeedle_override_virtual_drawKnob(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -224,6 +245,11 @@ func (this *QwtDialNeedle) GoGC() {
 		this.Delete()
 		runtime.KeepAlive(this.h)
 	})
+}
+
+//export miqt_exec_callback_handle_release_QwtDialSimpleNeedle
+func miqt_exec_callback_handle_release_QwtDialSimpleNeedle(cb C.intptr_t) {
+	cgo.Handle(cb).Delete()
 }
 
 type QwtDialSimpleNeedle struct {
@@ -310,7 +336,11 @@ func (this *QwtDialSimpleNeedle) callVirtualBase_DrawNeedle(param1 *qt.QPainter,
 
 }
 func (this *QwtDialSimpleNeedle) OnDrawNeedle(slot func(super func(param1 *qt.QPainter, length float64, param3 qt.QPalette__ColorGroup), param1 *qt.QPainter, length float64, param3 qt.QPalette__ColorGroup)) {
-	ok := C.QwtDialSimpleNeedle_override_virtual_drawNeedle(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QwtDialSimpleNeedle_override_virtual_drawNeedle(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -340,7 +370,11 @@ func (this *QwtDialSimpleNeedle) callVirtualBase_SetPalette(palette *qt.QPalette
 
 }
 func (this *QwtDialSimpleNeedle) OnSetPalette(slot func(super func(palette *qt.QPalette), palette *qt.QPalette)) {
-	ok := C.QwtDialSimpleNeedle_override_virtual_setPalette(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QwtDialSimpleNeedle_override_virtual_setPalette(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -366,7 +400,11 @@ func (this *QwtDialSimpleNeedle) callVirtualBase_Draw(painter *qt.QPainter, cent
 
 }
 func (this *QwtDialSimpleNeedle) OnDraw(slot func(super func(painter *qt.QPainter, center *qt.QPointF, length float64, direction float64, param5 qt.QPalette__ColorGroup), painter *qt.QPainter, center *qt.QPointF, length float64, direction float64, param5 qt.QPalette__ColorGroup)) {
-	ok := C.QwtDialSimpleNeedle_override_virtual_draw(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QwtDialSimpleNeedle_override_virtual_draw(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -400,7 +438,11 @@ func (this *QwtDialSimpleNeedle) callVirtualBase_DrawKnob(param1 *qt.QPainter, w
 
 }
 func (this *QwtDialSimpleNeedle) OnDrawKnob(slot func(super func(param1 *qt.QPainter, width float64, param3 *qt.QBrush, sunken bool), param1 *qt.QPainter, width float64, param3 *qt.QBrush, sunken bool)) {
-	ok := C.QwtDialSimpleNeedle_override_virtual_drawKnob(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QwtDialSimpleNeedle_override_virtual_drawKnob(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -438,6 +480,11 @@ func (this *QwtDialSimpleNeedle) GoGC() {
 		this.Delete()
 		runtime.KeepAlive(this.h)
 	})
+}
+
+//export miqt_exec_callback_handle_release_QwtCompassMagnetNeedle
+func miqt_exec_callback_handle_release_QwtCompassMagnetNeedle(cb C.intptr_t) {
+	cgo.Handle(cb).Delete()
 }
 
 type QwtCompassMagnetNeedle struct {
@@ -516,7 +563,11 @@ func (this *QwtCompassMagnetNeedle) callVirtualBase_DrawNeedle(param1 *qt.QPaint
 
 }
 func (this *QwtCompassMagnetNeedle) OnDrawNeedle(slot func(super func(param1 *qt.QPainter, length float64, param3 qt.QPalette__ColorGroup), param1 *qt.QPainter, length float64, param3 qt.QPalette__ColorGroup)) {
-	ok := C.QwtCompassMagnetNeedle_override_virtual_drawNeedle(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QwtCompassMagnetNeedle_override_virtual_drawNeedle(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -546,7 +597,11 @@ func (this *QwtCompassMagnetNeedle) callVirtualBase_SetPalette(palette *qt.QPale
 
 }
 func (this *QwtCompassMagnetNeedle) OnSetPalette(slot func(super func(palette *qt.QPalette), palette *qt.QPalette)) {
-	ok := C.QwtCompassMagnetNeedle_override_virtual_setPalette(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QwtCompassMagnetNeedle_override_virtual_setPalette(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -572,7 +627,11 @@ func (this *QwtCompassMagnetNeedle) callVirtualBase_Draw(painter *qt.QPainter, c
 
 }
 func (this *QwtCompassMagnetNeedle) OnDraw(slot func(super func(painter *qt.QPainter, center *qt.QPointF, length float64, direction float64, param5 qt.QPalette__ColorGroup), painter *qt.QPainter, center *qt.QPointF, length float64, direction float64, param5 qt.QPalette__ColorGroup)) {
-	ok := C.QwtCompassMagnetNeedle_override_virtual_draw(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QwtCompassMagnetNeedle_override_virtual_draw(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -606,7 +665,11 @@ func (this *QwtCompassMagnetNeedle) callVirtualBase_DrawKnob(param1 *qt.QPainter
 
 }
 func (this *QwtCompassMagnetNeedle) OnDrawKnob(slot func(super func(param1 *qt.QPainter, width float64, param3 *qt.QBrush, sunken bool), param1 *qt.QPainter, width float64, param3 *qt.QBrush, sunken bool)) {
-	ok := C.QwtCompassMagnetNeedle_override_virtual_drawKnob(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QwtCompassMagnetNeedle_override_virtual_drawKnob(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -644,6 +707,11 @@ func (this *QwtCompassMagnetNeedle) GoGC() {
 		this.Delete()
 		runtime.KeepAlive(this.h)
 	})
+}
+
+//export miqt_exec_callback_handle_release_QwtCompassWindArrow
+func miqt_exec_callback_handle_release_QwtCompassWindArrow(cb C.intptr_t) {
+	cgo.Handle(cb).Delete()
 }
 
 type QwtCompassWindArrow struct {
@@ -716,7 +784,11 @@ func (this *QwtCompassWindArrow) callVirtualBase_DrawNeedle(param1 *qt.QPainter,
 
 }
 func (this *QwtCompassWindArrow) OnDrawNeedle(slot func(super func(param1 *qt.QPainter, length float64, param3 qt.QPalette__ColorGroup), param1 *qt.QPainter, length float64, param3 qt.QPalette__ColorGroup)) {
-	ok := C.QwtCompassWindArrow_override_virtual_drawNeedle(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QwtCompassWindArrow_override_virtual_drawNeedle(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -746,7 +818,11 @@ func (this *QwtCompassWindArrow) callVirtualBase_SetPalette(palette *qt.QPalette
 
 }
 func (this *QwtCompassWindArrow) OnSetPalette(slot func(super func(palette *qt.QPalette), palette *qt.QPalette)) {
-	ok := C.QwtCompassWindArrow_override_virtual_setPalette(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QwtCompassWindArrow_override_virtual_setPalette(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -772,7 +848,11 @@ func (this *QwtCompassWindArrow) callVirtualBase_Draw(painter *qt.QPainter, cent
 
 }
 func (this *QwtCompassWindArrow) OnDraw(slot func(super func(painter *qt.QPainter, center *qt.QPointF, length float64, direction float64, param5 qt.QPalette__ColorGroup), painter *qt.QPainter, center *qt.QPointF, length float64, direction float64, param5 qt.QPalette__ColorGroup)) {
-	ok := C.QwtCompassWindArrow_override_virtual_draw(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QwtCompassWindArrow_override_virtual_draw(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -806,7 +886,11 @@ func (this *QwtCompassWindArrow) callVirtualBase_DrawKnob(param1 *qt.QPainter, w
 
 }
 func (this *QwtCompassWindArrow) OnDrawKnob(slot func(super func(param1 *qt.QPainter, width float64, param3 *qt.QBrush, sunken bool), param1 *qt.QPainter, width float64, param3 *qt.QBrush, sunken bool)) {
-	ok := C.QwtCompassWindArrow_override_virtual_drawKnob(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QwtCompassWindArrow_override_virtual_drawKnob(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}

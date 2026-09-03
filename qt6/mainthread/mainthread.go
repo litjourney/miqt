@@ -1,8 +1,8 @@
 package mainthread
 
 import (
-	"sync"
 	"runtime/cgo"
+	"sync"
 )
 
 /*
@@ -71,7 +71,7 @@ func Wait3[T any](gofunc func() (T, error)) (ret T, err error) {
 }
 
 //export mainthread_exec_handle
-func mainthread_exec_handle(u uintptr) {
+func mainthread_exec_handle(u C.intptr_t) {
 	h := cgo.Handle(u)
 
 	gofunc, ok := h.Value().(func())
@@ -80,7 +80,9 @@ func mainthread_exec_handle(u uintptr) {
 	}
 
 	gofunc()
+}
 
-	// Free handle after use
-	h.Delete()
+//export mainthread_release_handle
+func mainthread_release_handle(u C.intptr_t) {
+	cgo.Handle(u).Delete()
 }

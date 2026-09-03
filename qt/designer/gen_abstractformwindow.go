@@ -32,6 +32,11 @@ const (
 	QDesignerFormWindowInterface__DontSaveResourceFiles     QDesignerFormWindowInterface__ResourceFileSaveMode = 2
 )
 
+//export miqt_exec_callback_handle_release_QDesignerFormWindowInterface
+func miqt_exec_callback_handle_release_QDesignerFormWindowInterface(cb C.intptr_t) {
+	cgo.Handle(cb).Delete()
+}
+
 type QDesignerFormWindowInterface struct {
 	h *C.QDesignerFormWindowInterface
 	*qt.QWidget
@@ -455,8 +460,10 @@ func (this *QDesignerFormWindowInterface) ActivateResourceFilePaths(paths []stri
 func (this *QDesignerFormWindowInterface) MainContainerChanged(mainContainer *qt.QWidget) {
 	C.QDesignerFormWindowInterface_mainContainerChanged(this.h, (*C.QWidget)(mainContainer.UnsafePointer()))
 }
-func (this *QDesignerFormWindowInterface) OnMainContainerChanged(slot func(mainContainer *qt.QWidget)) {
-	C.QDesignerFormWindowInterface_connect_mainContainerChanged(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QDesignerFormWindowInterface) OnMainContainerChanged(slot func(mainContainer *qt.QWidget)) *qt.SignalConnection {
+	_goptr := qt.UnsafeNewQMetaObject__Connection(C.QDesignerFormWindowInterface_connect_mainContainerChanged(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QDesignerFormWindowInterface_mainContainerChanged
@@ -475,8 +482,10 @@ func miqt_exec_callback_QDesignerFormWindowInterface_mainContainerChanged(cb C.i
 func (this *QDesignerFormWindowInterface) ToolChanged(toolIndex int) {
 	C.QDesignerFormWindowInterface_toolChanged(this.h, (C.int)(toolIndex))
 }
-func (this *QDesignerFormWindowInterface) OnToolChanged(slot func(toolIndex int)) {
-	C.QDesignerFormWindowInterface_connect_toolChanged(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QDesignerFormWindowInterface) OnToolChanged(slot func(toolIndex int)) *qt.SignalConnection {
+	_goptr := qt.UnsafeNewQMetaObject__Connection(C.QDesignerFormWindowInterface_connect_toolChanged(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QDesignerFormWindowInterface_toolChanged
@@ -499,8 +508,10 @@ func (this *QDesignerFormWindowInterface) FileNameChanged(fileName string) {
 	defer C.free(unsafe.Pointer(fileName_ms.data))
 	C.QDesignerFormWindowInterface_fileNameChanged(this.h, fileName_ms)
 }
-func (this *QDesignerFormWindowInterface) OnFileNameChanged(slot func(fileName string)) {
-	C.QDesignerFormWindowInterface_connect_fileNameChanged(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QDesignerFormWindowInterface) OnFileNameChanged(slot func(fileName string)) *qt.SignalConnection {
+	_goptr := qt.UnsafeNewQMetaObject__Connection(C.QDesignerFormWindowInterface_connect_fileNameChanged(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QDesignerFormWindowInterface_fileNameChanged
@@ -522,8 +533,10 @@ func miqt_exec_callback_QDesignerFormWindowInterface_fileNameChanged(cb C.intptr
 func (this *QDesignerFormWindowInterface) FeatureChanged(f QDesignerFormWindowInterface__FeatureFlag) {
 	C.QDesignerFormWindowInterface_featureChanged(this.h, (C.int)(f))
 }
-func (this *QDesignerFormWindowInterface) OnFeatureChanged(slot func(f QDesignerFormWindowInterface__FeatureFlag)) {
-	C.QDesignerFormWindowInterface_connect_featureChanged(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QDesignerFormWindowInterface) OnFeatureChanged(slot func(f QDesignerFormWindowInterface__FeatureFlag)) *qt.SignalConnection {
+	_goptr := qt.UnsafeNewQMetaObject__Connection(C.QDesignerFormWindowInterface_connect_featureChanged(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QDesignerFormWindowInterface_featureChanged
@@ -542,8 +555,10 @@ func miqt_exec_callback_QDesignerFormWindowInterface_featureChanged(cb C.intptr_
 func (this *QDesignerFormWindowInterface) SelectionChanged() {
 	C.QDesignerFormWindowInterface_selectionChanged(this.h)
 }
-func (this *QDesignerFormWindowInterface) OnSelectionChanged(slot func()) {
-	C.QDesignerFormWindowInterface_connect_selectionChanged(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QDesignerFormWindowInterface) OnSelectionChanged(slot func()) *qt.SignalConnection {
+	_goptr := qt.UnsafeNewQMetaObject__Connection(C.QDesignerFormWindowInterface_connect_selectionChanged(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QDesignerFormWindowInterface_selectionChanged
@@ -559,8 +574,10 @@ func miqt_exec_callback_QDesignerFormWindowInterface_selectionChanged(cb C.intpt
 func (this *QDesignerFormWindowInterface) GeometryChanged() {
 	C.QDesignerFormWindowInterface_geometryChanged(this.h)
 }
-func (this *QDesignerFormWindowInterface) OnGeometryChanged(slot func()) {
-	C.QDesignerFormWindowInterface_connect_geometryChanged(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QDesignerFormWindowInterface) OnGeometryChanged(slot func()) *qt.SignalConnection {
+	_goptr := qt.UnsafeNewQMetaObject__Connection(C.QDesignerFormWindowInterface_connect_geometryChanged(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QDesignerFormWindowInterface_geometryChanged
@@ -576,8 +593,10 @@ func miqt_exec_callback_QDesignerFormWindowInterface_geometryChanged(cb C.intptr
 func (this *QDesignerFormWindowInterface) ResourceFilesChanged() {
 	C.QDesignerFormWindowInterface_resourceFilesChanged(this.h)
 }
-func (this *QDesignerFormWindowInterface) OnResourceFilesChanged(slot func()) {
-	C.QDesignerFormWindowInterface_connect_resourceFilesChanged(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QDesignerFormWindowInterface) OnResourceFilesChanged(slot func()) *qt.SignalConnection {
+	_goptr := qt.UnsafeNewQMetaObject__Connection(C.QDesignerFormWindowInterface_connect_resourceFilesChanged(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QDesignerFormWindowInterface_resourceFilesChanged
@@ -593,8 +612,10 @@ func miqt_exec_callback_QDesignerFormWindowInterface_resourceFilesChanged(cb C.i
 func (this *QDesignerFormWindowInterface) WidgetManaged(widget *qt.QWidget) {
 	C.QDesignerFormWindowInterface_widgetManaged(this.h, (*C.QWidget)(widget.UnsafePointer()))
 }
-func (this *QDesignerFormWindowInterface) OnWidgetManaged(slot func(widget *qt.QWidget)) {
-	C.QDesignerFormWindowInterface_connect_widgetManaged(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QDesignerFormWindowInterface) OnWidgetManaged(slot func(widget *qt.QWidget)) *qt.SignalConnection {
+	_goptr := qt.UnsafeNewQMetaObject__Connection(C.QDesignerFormWindowInterface_connect_widgetManaged(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QDesignerFormWindowInterface_widgetManaged
@@ -613,8 +634,10 @@ func miqt_exec_callback_QDesignerFormWindowInterface_widgetManaged(cb C.intptr_t
 func (this *QDesignerFormWindowInterface) WidgetUnmanaged(widget *qt.QWidget) {
 	C.QDesignerFormWindowInterface_widgetUnmanaged(this.h, (*C.QWidget)(widget.UnsafePointer()))
 }
-func (this *QDesignerFormWindowInterface) OnWidgetUnmanaged(slot func(widget *qt.QWidget)) {
-	C.QDesignerFormWindowInterface_connect_widgetUnmanaged(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QDesignerFormWindowInterface) OnWidgetUnmanaged(slot func(widget *qt.QWidget)) *qt.SignalConnection {
+	_goptr := qt.UnsafeNewQMetaObject__Connection(C.QDesignerFormWindowInterface_connect_widgetUnmanaged(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QDesignerFormWindowInterface_widgetUnmanaged
@@ -633,8 +656,10 @@ func miqt_exec_callback_QDesignerFormWindowInterface_widgetUnmanaged(cb C.intptr
 func (this *QDesignerFormWindowInterface) AboutToUnmanageWidget(widget *qt.QWidget) {
 	C.QDesignerFormWindowInterface_aboutToUnmanageWidget(this.h, (*C.QWidget)(widget.UnsafePointer()))
 }
-func (this *QDesignerFormWindowInterface) OnAboutToUnmanageWidget(slot func(widget *qt.QWidget)) {
-	C.QDesignerFormWindowInterface_connect_aboutToUnmanageWidget(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QDesignerFormWindowInterface) OnAboutToUnmanageWidget(slot func(widget *qt.QWidget)) *qt.SignalConnection {
+	_goptr := qt.UnsafeNewQMetaObject__Connection(C.QDesignerFormWindowInterface_connect_aboutToUnmanageWidget(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QDesignerFormWindowInterface_aboutToUnmanageWidget
@@ -653,8 +678,10 @@ func miqt_exec_callback_QDesignerFormWindowInterface_aboutToUnmanageWidget(cb C.
 func (this *QDesignerFormWindowInterface) Activated(widget *qt.QWidget) {
 	C.QDesignerFormWindowInterface_activated(this.h, (*C.QWidget)(widget.UnsafePointer()))
 }
-func (this *QDesignerFormWindowInterface) OnActivated(slot func(widget *qt.QWidget)) {
-	C.QDesignerFormWindowInterface_connect_activated(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QDesignerFormWindowInterface) OnActivated(slot func(widget *qt.QWidget)) *qt.SignalConnection {
+	_goptr := qt.UnsafeNewQMetaObject__Connection(C.QDesignerFormWindowInterface_connect_activated(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QDesignerFormWindowInterface_activated
@@ -673,8 +700,10 @@ func miqt_exec_callback_QDesignerFormWindowInterface_activated(cb C.intptr_t, wi
 func (this *QDesignerFormWindowInterface) Changed() {
 	C.QDesignerFormWindowInterface_changed(this.h)
 }
-func (this *QDesignerFormWindowInterface) OnChanged(slot func()) {
-	C.QDesignerFormWindowInterface_connect_changed(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QDesignerFormWindowInterface) OnChanged(slot func()) *qt.SignalConnection {
+	_goptr := qt.UnsafeNewQMetaObject__Connection(C.QDesignerFormWindowInterface_connect_changed(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QDesignerFormWindowInterface_changed
@@ -690,8 +719,10 @@ func miqt_exec_callback_QDesignerFormWindowInterface_changed(cb C.intptr_t) {
 func (this *QDesignerFormWindowInterface) WidgetRemoved(w *qt.QWidget) {
 	C.QDesignerFormWindowInterface_widgetRemoved(this.h, (*C.QWidget)(w.UnsafePointer()))
 }
-func (this *QDesignerFormWindowInterface) OnWidgetRemoved(slot func(w *qt.QWidget)) {
-	C.QDesignerFormWindowInterface_connect_widgetRemoved(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QDesignerFormWindowInterface) OnWidgetRemoved(slot func(w *qt.QWidget)) *qt.SignalConnection {
+	_goptr := qt.UnsafeNewQMetaObject__Connection(C.QDesignerFormWindowInterface_connect_widgetRemoved(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QDesignerFormWindowInterface_widgetRemoved
@@ -710,8 +741,10 @@ func miqt_exec_callback_QDesignerFormWindowInterface_widgetRemoved(cb C.intptr_t
 func (this *QDesignerFormWindowInterface) ObjectRemoved(o *qt.QObject) {
 	C.QDesignerFormWindowInterface_objectRemoved(this.h, (*C.QObject)(o.UnsafePointer()))
 }
-func (this *QDesignerFormWindowInterface) OnObjectRemoved(slot func(o *qt.QObject)) {
-	C.QDesignerFormWindowInterface_connect_objectRemoved(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QDesignerFormWindowInterface) OnObjectRemoved(slot func(o *qt.QObject)) *qt.SignalConnection {
+	_goptr := qt.UnsafeNewQMetaObject__Connection(C.QDesignerFormWindowInterface_connect_objectRemoved(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QDesignerFormWindowInterface_objectRemoved

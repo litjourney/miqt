@@ -114,13 +114,13 @@ void QwtAbstractSlider_setInvertedControls(QwtAbstractSlider* self, bool inverte
 bool QwtAbstractSlider_invertedControls(const QwtAbstractSlider* self);
 void QwtAbstractSlider_setValue(QwtAbstractSlider* self, double value);
 void QwtAbstractSlider_valueChanged(QwtAbstractSlider* self, double value);
-void QwtAbstractSlider_connect_valueChanged(QwtAbstractSlider* self, intptr_t slot);
+void* QwtAbstractSlider_connect_valueChanged(QwtAbstractSlider* self, intptr_t slot);
 void QwtAbstractSlider_sliderPressed(QwtAbstractSlider* self);
-void QwtAbstractSlider_connect_sliderPressed(QwtAbstractSlider* self, intptr_t slot);
+void* QwtAbstractSlider_connect_sliderPressed(QwtAbstractSlider* self, intptr_t slot);
 void QwtAbstractSlider_sliderReleased(QwtAbstractSlider* self);
-void QwtAbstractSlider_connect_sliderReleased(QwtAbstractSlider* self, intptr_t slot);
+void* QwtAbstractSlider_connect_sliderReleased(QwtAbstractSlider* self, intptr_t slot);
 void QwtAbstractSlider_sliderMoved(QwtAbstractSlider* self, double value);
-void QwtAbstractSlider_connect_sliderMoved(QwtAbstractSlider* self, intptr_t slot);
+void* QwtAbstractSlider_connect_sliderMoved(QwtAbstractSlider* self, intptr_t slot);
 void QwtAbstractSlider_mousePressEvent(QwtAbstractSlider* self, QMouseEvent* param1);
 void QwtAbstractSlider_mouseReleaseEvent(QwtAbstractSlider* self, QMouseEvent* param1);
 void QwtAbstractSlider_mouseMoveEvent(QwtAbstractSlider* self, QMouseEvent* param1);

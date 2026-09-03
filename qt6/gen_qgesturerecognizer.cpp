@@ -1,3 +1,5 @@
+#include <memory>
+#include <utility>
 #include <QEvent>
 #include <QGesture>
 #include <QGestureRecognizer>
@@ -9,6 +11,7 @@
 extern "C" {
 #endif
 
+void miqt_exec_callback_handle_release_QGestureRecognizer(intptr_t);
 QGesture* miqt_exec_callback_QGestureRecognizer_create(QGestureRecognizer*, intptr_t, QObject*);
 int miqt_exec_callback_QGestureRecognizer_recognize(QGestureRecognizer*, intptr_t, QGesture*, QObject*, QEvent*);
 void miqt_exec_callback_QGestureRecognizer_reset(QGestureRecognizer*, intptr_t, QGesture*);
@@ -24,49 +27,49 @@ public:
 	virtual ~MiqtVirtualQGestureRecognizer() override = default;
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__create = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QGestureRecognizer> handle__create;
 
 	// Subclass to allow providing a Go implementation
 	virtual QGesture* create(QObject* target) override {
-		if (handle__create == 0) {
+		if (!handle__create) {
 			return QGestureRecognizer::create(target);
 		}
 
 		QObject* sigval1 = target;
-		QGesture* callback_return_value = miqt_exec_callback_QGestureRecognizer_create(this, handle__create, sigval1);
+		QGesture* callback_return_value = miqt_exec_callback_QGestureRecognizer_create(this, handle__create.value(), sigval1);
 		return callback_return_value;
 	}
 
 	friend QGesture* QGestureRecognizer_virtualbase_create(void* self, QObject* target);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__recognize = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QGestureRecognizer> handle__recognize;
 
 	// Subclass to allow providing a Go implementation
 	virtual QGestureRecognizer::Result recognize(QGesture* state, QObject* watched, QEvent* event) override {
-		if (handle__recognize == 0) {
+		if (!handle__recognize) {
 			return QGestureRecognizer::Result(); // Pure virtual, there is no base we can call
 		}
 
 		QGesture* sigval1 = state;
 		QObject* sigval2 = watched;
 		QEvent* sigval3 = event;
-		int callback_return_value = miqt_exec_callback_QGestureRecognizer_recognize(this, handle__recognize, sigval1, sigval2, sigval3);
+		int callback_return_value = miqt_exec_callback_QGestureRecognizer_recognize(this, handle__recognize.value(), sigval1, sigval2, sigval3);
 		return static_cast<QGestureRecognizer::Result>(callback_return_value);
 	}
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__reset = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QGestureRecognizer> handle__reset;
 
 	// Subclass to allow providing a Go implementation
 	virtual void reset(QGesture* state) override {
-		if (handle__reset == 0) {
+		if (!handle__reset) {
 			QGestureRecognizer::reset(state);
 			return;
 		}
 
 		QGesture* sigval1 = state;
-		miqt_exec_callback_QGestureRecognizer_reset(this, handle__reset, sigval1);
+		miqt_exec_callback_QGestureRecognizer_reset(this, handle__reset.value(), sigval1);
 
 	}
 
@@ -105,12 +108,13 @@ void QGestureRecognizer_operatorAssign(QGestureRecognizer* self, QGestureRecogni
 }
 
 bool QGestureRecognizer_override_virtual_create(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QGestureRecognizer> slot_handle(slot);
 	MiqtVirtualQGestureRecognizer* self_cast = dynamic_cast<MiqtVirtualQGestureRecognizer*>( (QGestureRecognizer*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__create = slot;
+	self_cast->handle__create = std::move(slot_handle);
 	return true;
 }
 
@@ -119,22 +123,24 @@ QGesture* QGestureRecognizer_virtualbase_create(void* self, QObject* target) {
 }
 
 bool QGestureRecognizer_override_virtual_recognize(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QGestureRecognizer> slot_handle(slot);
 	MiqtVirtualQGestureRecognizer* self_cast = dynamic_cast<MiqtVirtualQGestureRecognizer*>( (QGestureRecognizer*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__recognize = slot;
+	self_cast->handle__recognize = std::move(slot_handle);
 	return true;
 }
 
 bool QGestureRecognizer_override_virtual_reset(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QGestureRecognizer> slot_handle(slot);
 	MiqtVirtualQGestureRecognizer* self_cast = dynamic_cast<MiqtVirtualQGestureRecognizer*>( (QGestureRecognizer*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__reset = slot;
+	self_cast->handle__reset = std::move(slot_handle);
 	return true;
 }
 

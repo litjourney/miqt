@@ -1,3 +1,5 @@
+#include <memory>
+#include <utility>
 #include <QFont>
 #include <QPainter>
 #include <QRectF>
@@ -12,16 +14,19 @@
 extern "C" {
 #endif
 
+void miqt_exec_callback_handle_release_QwtTextEngine(intptr_t);
 double miqt_exec_callback_QwtTextEngine_heightForWidth(const QwtTextEngine*, intptr_t, QFont*, int, struct miqt_string, double);
 QSizeF* miqt_exec_callback_QwtTextEngine_textSize(const QwtTextEngine*, intptr_t, QFont*, int, struct miqt_string);
 bool miqt_exec_callback_QwtTextEngine_mightRender(const QwtTextEngine*, intptr_t, struct miqt_string);
 void miqt_exec_callback_QwtTextEngine_textMargins(const QwtTextEngine*, intptr_t, QFont*, struct miqt_string, double*, double*, double*, double*);
 void miqt_exec_callback_QwtTextEngine_draw(const QwtTextEngine*, intptr_t, QPainter*, QRectF*, int, struct miqt_string);
+void miqt_exec_callback_handle_release_QwtPlainTextEngine(intptr_t);
 double miqt_exec_callback_QwtPlainTextEngine_heightForWidth(const QwtPlainTextEngine*, intptr_t, QFont*, int, struct miqt_string, double);
 QSizeF* miqt_exec_callback_QwtPlainTextEngine_textSize(const QwtPlainTextEngine*, intptr_t, QFont*, int, struct miqt_string);
 void miqt_exec_callback_QwtPlainTextEngine_draw(const QwtPlainTextEngine*, intptr_t, QPainter*, QRectF*, int, struct miqt_string);
 bool miqt_exec_callback_QwtPlainTextEngine_mightRender(const QwtPlainTextEngine*, intptr_t, struct miqt_string);
 void miqt_exec_callback_QwtPlainTextEngine_textMargins(const QwtPlainTextEngine*, intptr_t, QFont*, struct miqt_string, double*, double*, double*, double*);
+void miqt_exec_callback_handle_release_QwtRichTextEngine(intptr_t);
 double miqt_exec_callback_QwtRichTextEngine_heightForWidth(const QwtRichTextEngine*, intptr_t, QFont*, int, struct miqt_string, double);
 QSizeF* miqt_exec_callback_QwtRichTextEngine_textSize(const QwtRichTextEngine*, intptr_t, QFont*, int, struct miqt_string);
 void miqt_exec_callback_QwtRichTextEngine_draw(const QwtRichTextEngine*, intptr_t, QPainter*, QRectF*, int, struct miqt_string);
@@ -39,11 +44,11 @@ public:
 	virtual ~MiqtVirtualQwtTextEngine() override = default;
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__heightForWidth = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtTextEngine> handle__heightForWidth;
 
 	// Subclass to allow providing a Go implementation
 	virtual double heightForWidth(const QFont& font, int flags, const QString& text, double width) const override {
-		if (handle__heightForWidth == 0) {
+		if (!handle__heightForWidth) {
 			return 0; // Pure virtual, there is no base we can call
 		}
 
@@ -60,16 +65,16 @@ public:
 		memcpy(text_ms.data, text_b.data(), text_ms.len);
 		struct miqt_string sigval3 = text_ms;
 		double sigval4 = width;
-		double callback_return_value = miqt_exec_callback_QwtTextEngine_heightForWidth(this, handle__heightForWidth, sigval1, sigval2, sigval3, sigval4);
+		double callback_return_value = miqt_exec_callback_QwtTextEngine_heightForWidth(this, handle__heightForWidth.value(), sigval1, sigval2, sigval3, sigval4);
 		return static_cast<double>(callback_return_value);
 	}
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__textSize = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtTextEngine> handle__textSize;
 
 	// Subclass to allow providing a Go implementation
 	virtual QSizeF textSize(const QFont& font, int flags, const QString& text) const override {
-		if (handle__textSize == 0) {
+		if (!handle__textSize) {
 			return QSizeF(); // Pure virtual, there is no base we can call
 		}
 
@@ -85,16 +90,16 @@ public:
 		text_ms.data = static_cast<char*>(malloc(text_ms.len));
 		memcpy(text_ms.data, text_b.data(), text_ms.len);
 		struct miqt_string sigval3 = text_ms;
-		QSizeF* callback_return_value = miqt_exec_callback_QwtTextEngine_textSize(this, handle__textSize, sigval1, sigval2, sigval3);
+		QSizeF* callback_return_value = miqt_exec_callback_QwtTextEngine_textSize(this, handle__textSize.value(), sigval1, sigval2, sigval3);
 		return *callback_return_value;
 	}
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__mightRender = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtTextEngine> handle__mightRender;
 
 	// Subclass to allow providing a Go implementation
 	virtual bool mightRender(const QString& text) const override {
-		if (handle__mightRender == 0) {
+		if (!handle__mightRender) {
 			return false; // Pure virtual, there is no base we can call
 		}
 
@@ -106,16 +111,16 @@ public:
 		text_ms.data = static_cast<char*>(malloc(text_ms.len));
 		memcpy(text_ms.data, text_b.data(), text_ms.len);
 		struct miqt_string sigval1 = text_ms;
-		bool callback_return_value = miqt_exec_callback_QwtTextEngine_mightRender(this, handle__mightRender, sigval1);
+		bool callback_return_value = miqt_exec_callback_QwtTextEngine_mightRender(this, handle__mightRender.value(), sigval1);
 		return callback_return_value;
 	}
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__textMargins = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtTextEngine> handle__textMargins;
 
 	// Subclass to allow providing a Go implementation
 	virtual void textMargins(const QFont& font, const QString& text, double& left, double& right, double& top, double& bottom) const override {
-		if (handle__textMargins == 0) {
+		if (!handle__textMargins) {
 			return; // Pure virtual, there is no base we can call
 		}
 
@@ -134,16 +139,16 @@ public:
 		double* sigval4 = &right;
 		double* sigval5 = &top;
 		double* sigval6 = &bottom;
-		miqt_exec_callback_QwtTextEngine_textMargins(this, handle__textMargins, sigval1, sigval2, sigval3, sigval4, sigval5, sigval6);
+		miqt_exec_callback_QwtTextEngine_textMargins(this, handle__textMargins.value(), sigval1, sigval2, sigval3, sigval4, sigval5, sigval6);
 
 	}
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__draw = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtTextEngine> handle__draw;
 
 	// Subclass to allow providing a Go implementation
 	virtual void draw(QPainter* painter, const QRectF& rect, int flags, const QString& text) const override {
-		if (handle__draw == 0) {
+		if (!handle__draw) {
 			return; // Pure virtual, there is no base we can call
 		}
 
@@ -160,7 +165,7 @@ public:
 		text_ms.data = static_cast<char*>(malloc(text_ms.len));
 		memcpy(text_ms.data, text_b.data(), text_ms.len);
 		struct miqt_string sigval4 = text_ms;
-		miqt_exec_callback_QwtTextEngine_draw(this, handle__draw, sigval1, sigval2, sigval3, sigval4);
+		miqt_exec_callback_QwtTextEngine_draw(this, handle__draw.value(), sigval1, sigval2, sigval3, sigval4);
 
 	}
 
@@ -200,52 +205,57 @@ void QwtTextEngine_operatorAssign(QwtTextEngine* self, QwtTextEngine* param1) {
 }
 
 bool QwtTextEngine_override_virtual_heightForWidth(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtTextEngine> slot_handle(slot);
 	MiqtVirtualQwtTextEngine* self_cast = dynamic_cast<MiqtVirtualQwtTextEngine*>( (QwtTextEngine*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__heightForWidth = slot;
+	self_cast->handle__heightForWidth = std::move(slot_handle);
 	return true;
 }
 
 bool QwtTextEngine_override_virtual_textSize(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtTextEngine> slot_handle(slot);
 	MiqtVirtualQwtTextEngine* self_cast = dynamic_cast<MiqtVirtualQwtTextEngine*>( (QwtTextEngine*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__textSize = slot;
+	self_cast->handle__textSize = std::move(slot_handle);
 	return true;
 }
 
 bool QwtTextEngine_override_virtual_mightRender(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtTextEngine> slot_handle(slot);
 	MiqtVirtualQwtTextEngine* self_cast = dynamic_cast<MiqtVirtualQwtTextEngine*>( (QwtTextEngine*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__mightRender = slot;
+	self_cast->handle__mightRender = std::move(slot_handle);
 	return true;
 }
 
 bool QwtTextEngine_override_virtual_textMargins(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtTextEngine> slot_handle(slot);
 	MiqtVirtualQwtTextEngine* self_cast = dynamic_cast<MiqtVirtualQwtTextEngine*>( (QwtTextEngine*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__textMargins = slot;
+	self_cast->handle__textMargins = std::move(slot_handle);
 	return true;
 }
 
 bool QwtTextEngine_override_virtual_draw(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtTextEngine> slot_handle(slot);
 	MiqtVirtualQwtTextEngine* self_cast = dynamic_cast<MiqtVirtualQwtTextEngine*>( (QwtTextEngine*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__draw = slot;
+	self_cast->handle__draw = std::move(slot_handle);
 	return true;
 }
 
@@ -262,11 +272,11 @@ public:
 	virtual ~MiqtVirtualQwtPlainTextEngine() override = default;
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__heightForWidth = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtPlainTextEngine> handle__heightForWidth;
 
 	// Subclass to allow providing a Go implementation
 	virtual double heightForWidth(const QFont& font, int flags, const QString& text, double width) const override {
-		if (handle__heightForWidth == 0) {
+		if (!handle__heightForWidth) {
 			return QwtPlainTextEngine::heightForWidth(font, flags, text, width);
 		}
 
@@ -283,18 +293,18 @@ public:
 		memcpy(text_ms.data, text_b.data(), text_ms.len);
 		struct miqt_string sigval3 = text_ms;
 		double sigval4 = width;
-		double callback_return_value = miqt_exec_callback_QwtPlainTextEngine_heightForWidth(this, handle__heightForWidth, sigval1, sigval2, sigval3, sigval4);
+		double callback_return_value = miqt_exec_callback_QwtPlainTextEngine_heightForWidth(this, handle__heightForWidth.value(), sigval1, sigval2, sigval3, sigval4);
 		return static_cast<double>(callback_return_value);
 	}
 
 	friend double QwtPlainTextEngine_virtualbase_heightForWidth(const void* self, QFont* font, int flags, struct miqt_string text, double width);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__textSize = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtPlainTextEngine> handle__textSize;
 
 	// Subclass to allow providing a Go implementation
 	virtual QSizeF textSize(const QFont& font, int flags, const QString& text) const override {
-		if (handle__textSize == 0) {
+		if (!handle__textSize) {
 			return QwtPlainTextEngine::textSize(font, flags, text);
 		}
 
@@ -310,18 +320,18 @@ public:
 		text_ms.data = static_cast<char*>(malloc(text_ms.len));
 		memcpy(text_ms.data, text_b.data(), text_ms.len);
 		struct miqt_string sigval3 = text_ms;
-		QSizeF* callback_return_value = miqt_exec_callback_QwtPlainTextEngine_textSize(this, handle__textSize, sigval1, sigval2, sigval3);
+		QSizeF* callback_return_value = miqt_exec_callback_QwtPlainTextEngine_textSize(this, handle__textSize.value(), sigval1, sigval2, sigval3);
 		return *callback_return_value;
 	}
 
 	friend QSizeF* QwtPlainTextEngine_virtualbase_textSize(const void* self, QFont* font, int flags, struct miqt_string text);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__draw = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtPlainTextEngine> handle__draw;
 
 	// Subclass to allow providing a Go implementation
 	virtual void draw(QPainter* painter, const QRectF& rect, int flags, const QString& text) const override {
-		if (handle__draw == 0) {
+		if (!handle__draw) {
 			QwtPlainTextEngine::draw(painter, rect, flags, text);
 			return;
 		}
@@ -339,18 +349,18 @@ public:
 		text_ms.data = static_cast<char*>(malloc(text_ms.len));
 		memcpy(text_ms.data, text_b.data(), text_ms.len);
 		struct miqt_string sigval4 = text_ms;
-		miqt_exec_callback_QwtPlainTextEngine_draw(this, handle__draw, sigval1, sigval2, sigval3, sigval4);
+		miqt_exec_callback_QwtPlainTextEngine_draw(this, handle__draw.value(), sigval1, sigval2, sigval3, sigval4);
 
 	}
 
 	friend void QwtPlainTextEngine_virtualbase_draw(const void* self, QPainter* painter, QRectF* rect, int flags, struct miqt_string text);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__mightRender = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtPlainTextEngine> handle__mightRender;
 
 	// Subclass to allow providing a Go implementation
 	virtual bool mightRender(const QString& param1) const override {
-		if (handle__mightRender == 0) {
+		if (!handle__mightRender) {
 			return QwtPlainTextEngine::mightRender(param1);
 		}
 
@@ -362,18 +372,18 @@ public:
 		param1_ms.data = static_cast<char*>(malloc(param1_ms.len));
 		memcpy(param1_ms.data, param1_b.data(), param1_ms.len);
 		struct miqt_string sigval1 = param1_ms;
-		bool callback_return_value = miqt_exec_callback_QwtPlainTextEngine_mightRender(this, handle__mightRender, sigval1);
+		bool callback_return_value = miqt_exec_callback_QwtPlainTextEngine_mightRender(this, handle__mightRender.value(), sigval1);
 		return callback_return_value;
 	}
 
 	friend bool QwtPlainTextEngine_virtualbase_mightRender(const void* self, struct miqt_string param1);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__textMargins = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtPlainTextEngine> handle__textMargins;
 
 	// Subclass to allow providing a Go implementation
 	virtual void textMargins(const QFont& param1, const QString& param2, double& left, double& right, double& top, double& bottom) const override {
-		if (handle__textMargins == 0) {
+		if (!handle__textMargins) {
 			QwtPlainTextEngine::textMargins(param1, param2, left, right, top, bottom);
 			return;
 		}
@@ -393,7 +403,7 @@ public:
 		double* sigval4 = &right;
 		double* sigval5 = &top;
 		double* sigval6 = &bottom;
-		miqt_exec_callback_QwtPlainTextEngine_textMargins(this, handle__textMargins, sigval1, sigval2, sigval3, sigval4, sigval5, sigval6);
+		miqt_exec_callback_QwtPlainTextEngine_textMargins(this, handle__textMargins.value(), sigval1, sigval2, sigval3, sigval4, sigval5, sigval6);
 
 	}
 
@@ -443,12 +453,13 @@ void QwtPlainTextEngine_operatorAssign(QwtPlainTextEngine* self, QwtPlainTextEng
 }
 
 bool QwtPlainTextEngine_override_virtual_heightForWidth(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtPlainTextEngine> slot_handle(slot);
 	MiqtVirtualQwtPlainTextEngine* self_cast = dynamic_cast<MiqtVirtualQwtPlainTextEngine*>( (QwtPlainTextEngine*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__heightForWidth = slot;
+	self_cast->handle__heightForWidth = std::move(slot_handle);
 	return true;
 }
 
@@ -458,12 +469,13 @@ double QwtPlainTextEngine_virtualbase_heightForWidth(const void* self, QFont* fo
 }
 
 bool QwtPlainTextEngine_override_virtual_textSize(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtPlainTextEngine> slot_handle(slot);
 	MiqtVirtualQwtPlainTextEngine* self_cast = dynamic_cast<MiqtVirtualQwtPlainTextEngine*>( (QwtPlainTextEngine*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__textSize = slot;
+	self_cast->handle__textSize = std::move(slot_handle);
 	return true;
 }
 
@@ -473,12 +485,13 @@ QSizeF* QwtPlainTextEngine_virtualbase_textSize(const void* self, QFont* font, i
 }
 
 bool QwtPlainTextEngine_override_virtual_draw(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtPlainTextEngine> slot_handle(slot);
 	MiqtVirtualQwtPlainTextEngine* self_cast = dynamic_cast<MiqtVirtualQwtPlainTextEngine*>( (QwtPlainTextEngine*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__draw = slot;
+	self_cast->handle__draw = std::move(slot_handle);
 	return true;
 }
 
@@ -488,12 +501,13 @@ void QwtPlainTextEngine_virtualbase_draw(const void* self, QPainter* painter, QR
 }
 
 bool QwtPlainTextEngine_override_virtual_mightRender(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtPlainTextEngine> slot_handle(slot);
 	MiqtVirtualQwtPlainTextEngine* self_cast = dynamic_cast<MiqtVirtualQwtPlainTextEngine*>( (QwtPlainTextEngine*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__mightRender = slot;
+	self_cast->handle__mightRender = std::move(slot_handle);
 	return true;
 }
 
@@ -503,12 +517,13 @@ bool QwtPlainTextEngine_virtualbase_mightRender(const void* self, struct miqt_st
 }
 
 bool QwtPlainTextEngine_override_virtual_textMargins(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtPlainTextEngine> slot_handle(slot);
 	MiqtVirtualQwtPlainTextEngine* self_cast = dynamic_cast<MiqtVirtualQwtPlainTextEngine*>( (QwtPlainTextEngine*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__textMargins = slot;
+	self_cast->handle__textMargins = std::move(slot_handle);
 	return true;
 }
 
@@ -530,11 +545,11 @@ public:
 	virtual ~MiqtVirtualQwtRichTextEngine() override = default;
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__heightForWidth = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtRichTextEngine> handle__heightForWidth;
 
 	// Subclass to allow providing a Go implementation
 	virtual double heightForWidth(const QFont& font, int flags, const QString& text, double width) const override {
-		if (handle__heightForWidth == 0) {
+		if (!handle__heightForWidth) {
 			return QwtRichTextEngine::heightForWidth(font, flags, text, width);
 		}
 
@@ -551,18 +566,18 @@ public:
 		memcpy(text_ms.data, text_b.data(), text_ms.len);
 		struct miqt_string sigval3 = text_ms;
 		double sigval4 = width;
-		double callback_return_value = miqt_exec_callback_QwtRichTextEngine_heightForWidth(this, handle__heightForWidth, sigval1, sigval2, sigval3, sigval4);
+		double callback_return_value = miqt_exec_callback_QwtRichTextEngine_heightForWidth(this, handle__heightForWidth.value(), sigval1, sigval2, sigval3, sigval4);
 		return static_cast<double>(callback_return_value);
 	}
 
 	friend double QwtRichTextEngine_virtualbase_heightForWidth(const void* self, QFont* font, int flags, struct miqt_string text, double width);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__textSize = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtRichTextEngine> handle__textSize;
 
 	// Subclass to allow providing a Go implementation
 	virtual QSizeF textSize(const QFont& font, int flags, const QString& text) const override {
-		if (handle__textSize == 0) {
+		if (!handle__textSize) {
 			return QwtRichTextEngine::textSize(font, flags, text);
 		}
 
@@ -578,18 +593,18 @@ public:
 		text_ms.data = static_cast<char*>(malloc(text_ms.len));
 		memcpy(text_ms.data, text_b.data(), text_ms.len);
 		struct miqt_string sigval3 = text_ms;
-		QSizeF* callback_return_value = miqt_exec_callback_QwtRichTextEngine_textSize(this, handle__textSize, sigval1, sigval2, sigval3);
+		QSizeF* callback_return_value = miqt_exec_callback_QwtRichTextEngine_textSize(this, handle__textSize.value(), sigval1, sigval2, sigval3);
 		return *callback_return_value;
 	}
 
 	friend QSizeF* QwtRichTextEngine_virtualbase_textSize(const void* self, QFont* font, int flags, struct miqt_string text);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__draw = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtRichTextEngine> handle__draw;
 
 	// Subclass to allow providing a Go implementation
 	virtual void draw(QPainter* painter, const QRectF& rect, int flags, const QString& text) const override {
-		if (handle__draw == 0) {
+		if (!handle__draw) {
 			QwtRichTextEngine::draw(painter, rect, flags, text);
 			return;
 		}
@@ -607,18 +622,18 @@ public:
 		text_ms.data = static_cast<char*>(malloc(text_ms.len));
 		memcpy(text_ms.data, text_b.data(), text_ms.len);
 		struct miqt_string sigval4 = text_ms;
-		miqt_exec_callback_QwtRichTextEngine_draw(this, handle__draw, sigval1, sigval2, sigval3, sigval4);
+		miqt_exec_callback_QwtRichTextEngine_draw(this, handle__draw.value(), sigval1, sigval2, sigval3, sigval4);
 
 	}
 
 	friend void QwtRichTextEngine_virtualbase_draw(const void* self, QPainter* painter, QRectF* rect, int flags, struct miqt_string text);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__mightRender = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtRichTextEngine> handle__mightRender;
 
 	// Subclass to allow providing a Go implementation
 	virtual bool mightRender(const QString& param1) const override {
-		if (handle__mightRender == 0) {
+		if (!handle__mightRender) {
 			return QwtRichTextEngine::mightRender(param1);
 		}
 
@@ -630,18 +645,18 @@ public:
 		param1_ms.data = static_cast<char*>(malloc(param1_ms.len));
 		memcpy(param1_ms.data, param1_b.data(), param1_ms.len);
 		struct miqt_string sigval1 = param1_ms;
-		bool callback_return_value = miqt_exec_callback_QwtRichTextEngine_mightRender(this, handle__mightRender, sigval1);
+		bool callback_return_value = miqt_exec_callback_QwtRichTextEngine_mightRender(this, handle__mightRender.value(), sigval1);
 		return callback_return_value;
 	}
 
 	friend bool QwtRichTextEngine_virtualbase_mightRender(const void* self, struct miqt_string param1);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__textMargins = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtRichTextEngine> handle__textMargins;
 
 	// Subclass to allow providing a Go implementation
 	virtual void textMargins(const QFont& param1, const QString& param2, double& left, double& right, double& top, double& bottom) const override {
-		if (handle__textMargins == 0) {
+		if (!handle__textMargins) {
 			QwtRichTextEngine::textMargins(param1, param2, left, right, top, bottom);
 			return;
 		}
@@ -661,7 +676,7 @@ public:
 		double* sigval4 = &right;
 		double* sigval5 = &top;
 		double* sigval6 = &bottom;
-		miqt_exec_callback_QwtRichTextEngine_textMargins(this, handle__textMargins, sigval1, sigval2, sigval3, sigval4, sigval5, sigval6);
+		miqt_exec_callback_QwtRichTextEngine_textMargins(this, handle__textMargins.value(), sigval1, sigval2, sigval3, sigval4, sigval5, sigval6);
 
 	}
 
@@ -711,12 +726,13 @@ void QwtRichTextEngine_operatorAssign(QwtRichTextEngine* self, QwtRichTextEngine
 }
 
 bool QwtRichTextEngine_override_virtual_heightForWidth(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtRichTextEngine> slot_handle(slot);
 	MiqtVirtualQwtRichTextEngine* self_cast = dynamic_cast<MiqtVirtualQwtRichTextEngine*>( (QwtRichTextEngine*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__heightForWidth = slot;
+	self_cast->handle__heightForWidth = std::move(slot_handle);
 	return true;
 }
 
@@ -726,12 +742,13 @@ double QwtRichTextEngine_virtualbase_heightForWidth(const void* self, QFont* fon
 }
 
 bool QwtRichTextEngine_override_virtual_textSize(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtRichTextEngine> slot_handle(slot);
 	MiqtVirtualQwtRichTextEngine* self_cast = dynamic_cast<MiqtVirtualQwtRichTextEngine*>( (QwtRichTextEngine*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__textSize = slot;
+	self_cast->handle__textSize = std::move(slot_handle);
 	return true;
 }
 
@@ -741,12 +758,13 @@ QSizeF* QwtRichTextEngine_virtualbase_textSize(const void* self, QFont* font, in
 }
 
 bool QwtRichTextEngine_override_virtual_draw(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtRichTextEngine> slot_handle(slot);
 	MiqtVirtualQwtRichTextEngine* self_cast = dynamic_cast<MiqtVirtualQwtRichTextEngine*>( (QwtRichTextEngine*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__draw = slot;
+	self_cast->handle__draw = std::move(slot_handle);
 	return true;
 }
 
@@ -756,12 +774,13 @@ void QwtRichTextEngine_virtualbase_draw(const void* self, QPainter* painter, QRe
 }
 
 bool QwtRichTextEngine_override_virtual_mightRender(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtRichTextEngine> slot_handle(slot);
 	MiqtVirtualQwtRichTextEngine* self_cast = dynamic_cast<MiqtVirtualQwtRichTextEngine*>( (QwtRichTextEngine*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__mightRender = slot;
+	self_cast->handle__mightRender = std::move(slot_handle);
 	return true;
 }
 
@@ -771,12 +790,13 @@ bool QwtRichTextEngine_virtualbase_mightRender(const void* self, struct miqt_str
 }
 
 bool QwtRichTextEngine_override_virtual_textMargins(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtRichTextEngine> slot_handle(slot);
 	MiqtVirtualQwtRichTextEngine* self_cast = dynamic_cast<MiqtVirtualQwtRichTextEngine*>( (QwtRichTextEngine*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__textMargins = slot;
+	self_cast->handle__textMargins = std::move(slot_handle);
 	return true;
 }
 

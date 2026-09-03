@@ -14,6 +14,11 @@ import (
 	"unsafe"
 )
 
+//export miqt_exec_callback_handle_release_QUndoCommand
+func miqt_exec_callback_handle_release_QUndoCommand(cb C.intptr_t) {
+	cgo.Handle(cb).Delete()
+}
+
 type QUndoCommand struct {
 	h *C.QUndoCommand
 }
@@ -138,7 +143,11 @@ func (this *QUndoCommand) callVirtualBase_Undo() {
 
 }
 func (this *QUndoCommand) OnUndo(slot func(super func())) {
-	ok := C.QUndoCommand_override_virtual_undo(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QUndoCommand_override_virtual_undo(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -161,7 +170,11 @@ func (this *QUndoCommand) callVirtualBase_Redo() {
 
 }
 func (this *QUndoCommand) OnRedo(slot func(super func())) {
-	ok := C.QUndoCommand_override_virtual_redo(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QUndoCommand_override_virtual_redo(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -184,7 +197,11 @@ func (this *QUndoCommand) callVirtualBase_Id() int {
 
 }
 func (this *QUndoCommand) OnId(slot func(super func() int) int) {
-	ok := C.QUndoCommand_override_virtual_id(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QUndoCommand_override_virtual_id(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -209,7 +226,11 @@ func (this *QUndoCommand) callVirtualBase_MergeWith(other *QUndoCommand) bool {
 
 }
 func (this *QUndoCommand) OnMergeWith(slot func(super func(other *QUndoCommand) bool, other *QUndoCommand) bool) {
-	ok := C.QUndoCommand_override_virtual_mergeWith(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QUndoCommand_override_virtual_mergeWith(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -243,6 +264,11 @@ func (this *QUndoCommand) GoGC() {
 		this.Delete()
 		runtime.KeepAlive(this.h)
 	})
+}
+
+//export miqt_exec_callback_handle_release_QUndoStack
+func miqt_exec_callback_handle_release_QUndoStack(cb C.intptr_t) {
+	cgo.Handle(cb).Delete()
 }
 
 type QUndoStack struct {
@@ -437,8 +463,10 @@ func (this *QUndoStack) SetActive() {
 func (this *QUndoStack) IndexChanged(idx int) {
 	C.QUndoStack_indexChanged(this.h, (C.int)(idx))
 }
-func (this *QUndoStack) OnIndexChanged(slot func(idx int)) {
-	C.QUndoStack_connect_indexChanged(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QUndoStack) OnIndexChanged(slot func(idx int)) *SignalConnection {
+	_goptr := UnsafeNewQMetaObject__Connection(C.QUndoStack_connect_indexChanged(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QUndoStack_indexChanged
@@ -457,8 +485,10 @@ func miqt_exec_callback_QUndoStack_indexChanged(cb C.intptr_t, idx C.int) {
 func (this *QUndoStack) CleanChanged(clean bool) {
 	C.QUndoStack_cleanChanged(this.h, (C.bool)(clean))
 }
-func (this *QUndoStack) OnCleanChanged(slot func(clean bool)) {
-	C.QUndoStack_connect_cleanChanged(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QUndoStack) OnCleanChanged(slot func(clean bool)) *SignalConnection {
+	_goptr := UnsafeNewQMetaObject__Connection(C.QUndoStack_connect_cleanChanged(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QUndoStack_cleanChanged
@@ -477,8 +507,10 @@ func miqt_exec_callback_QUndoStack_cleanChanged(cb C.intptr_t, clean C.bool) {
 func (this *QUndoStack) CanUndoChanged(canUndo bool) {
 	C.QUndoStack_canUndoChanged(this.h, (C.bool)(canUndo))
 }
-func (this *QUndoStack) OnCanUndoChanged(slot func(canUndo bool)) {
-	C.QUndoStack_connect_canUndoChanged(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QUndoStack) OnCanUndoChanged(slot func(canUndo bool)) *SignalConnection {
+	_goptr := UnsafeNewQMetaObject__Connection(C.QUndoStack_connect_canUndoChanged(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QUndoStack_canUndoChanged
@@ -497,8 +529,10 @@ func miqt_exec_callback_QUndoStack_canUndoChanged(cb C.intptr_t, canUndo C.bool)
 func (this *QUndoStack) CanRedoChanged(canRedo bool) {
 	C.QUndoStack_canRedoChanged(this.h, (C.bool)(canRedo))
 }
-func (this *QUndoStack) OnCanRedoChanged(slot func(canRedo bool)) {
-	C.QUndoStack_connect_canRedoChanged(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QUndoStack) OnCanRedoChanged(slot func(canRedo bool)) *SignalConnection {
+	_goptr := UnsafeNewQMetaObject__Connection(C.QUndoStack_connect_canRedoChanged(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QUndoStack_canRedoChanged
@@ -521,8 +555,10 @@ func (this *QUndoStack) UndoTextChanged(undoText string) {
 	defer C.free(unsafe.Pointer(undoText_ms.data))
 	C.QUndoStack_undoTextChanged(this.h, undoText_ms)
 }
-func (this *QUndoStack) OnUndoTextChanged(slot func(undoText string)) {
-	C.QUndoStack_connect_undoTextChanged(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QUndoStack) OnUndoTextChanged(slot func(undoText string)) *SignalConnection {
+	_goptr := UnsafeNewQMetaObject__Connection(C.QUndoStack_connect_undoTextChanged(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QUndoStack_undoTextChanged
@@ -548,8 +584,10 @@ func (this *QUndoStack) RedoTextChanged(redoText string) {
 	defer C.free(unsafe.Pointer(redoText_ms.data))
 	C.QUndoStack_redoTextChanged(this.h, redoText_ms)
 }
-func (this *QUndoStack) OnRedoTextChanged(slot func(redoText string)) {
-	C.QUndoStack_connect_redoTextChanged(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QUndoStack) OnRedoTextChanged(slot func(redoText string)) *SignalConnection {
+	_goptr := UnsafeNewQMetaObject__Connection(C.QUndoStack_connect_redoTextChanged(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QUndoStack_redoTextChanged
@@ -696,7 +734,11 @@ func (this *QUndoStack) callVirtualBase_Event(event *QEvent) bool {
 
 }
 func (this *QUndoStack) OnEvent(slot func(super func(event *QEvent) bool, event *QEvent) bool) {
-	ok := C.QUndoStack_override_virtual_event(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QUndoStack_override_virtual_event(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -724,7 +766,11 @@ func (this *QUndoStack) callVirtualBase_EventFilter(watched *QObject, event *QEv
 
 }
 func (this *QUndoStack) OnEventFilter(slot func(super func(watched *QObject, event *QEvent) bool, watched *QObject, event *QEvent) bool) {
-	ok := C.QUndoStack_override_virtual_eventFilter(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QUndoStack_override_virtual_eventFilter(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -754,7 +800,11 @@ func (this *QUndoStack) callVirtualBase_TimerEvent(event *QTimerEvent) {
 
 }
 func (this *QUndoStack) OnTimerEvent(slot func(super func(event *QTimerEvent), event *QTimerEvent)) {
-	ok := C.QUndoStack_override_virtual_timerEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QUndoStack_override_virtual_timerEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -780,7 +830,11 @@ func (this *QUndoStack) callVirtualBase_ChildEvent(event *QChildEvent) {
 
 }
 func (this *QUndoStack) OnChildEvent(slot func(super func(event *QChildEvent), event *QChildEvent)) {
-	ok := C.QUndoStack_override_virtual_childEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QUndoStack_override_virtual_childEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -806,7 +860,11 @@ func (this *QUndoStack) callVirtualBase_CustomEvent(event *QEvent) {
 
 }
 func (this *QUndoStack) OnCustomEvent(slot func(super func(event *QEvent), event *QEvent)) {
-	ok := C.QUndoStack_override_virtual_customEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QUndoStack_override_virtual_customEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -832,7 +890,11 @@ func (this *QUndoStack) callVirtualBase_ConnectNotify(signal *QMetaMethod) {
 
 }
 func (this *QUndoStack) OnConnectNotify(slot func(super func(signal *QMetaMethod), signal *QMetaMethod)) {
-	ok := C.QUndoStack_override_virtual_connectNotify(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QUndoStack_override_virtual_connectNotify(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -858,7 +920,11 @@ func (this *QUndoStack) callVirtualBase_DisconnectNotify(signal *QMetaMethod) {
 
 }
 func (this *QUndoStack) OnDisconnectNotify(slot func(super func(signal *QMetaMethod), signal *QMetaMethod)) {
-	ok := C.QUndoStack_override_virtual_disconnectNotify(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QUndoStack_override_virtual_disconnectNotify(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}

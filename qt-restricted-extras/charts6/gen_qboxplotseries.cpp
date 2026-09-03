@@ -1,3 +1,5 @@
+#include <memory>
+#include <utility>
 #include <QAbstractSeries>
 #include <QBoxPlotSeries>
 #include <QBoxSet>
@@ -20,6 +22,7 @@
 extern "C" {
 #endif
 
+void miqt_exec_callback_handle_release_QBoxPlotSeries(intptr_t);
 void miqt_exec_callback_QBoxPlotSeries_clicked(intptr_t, QBoxSet*);
 void miqt_exec_callback_QBoxPlotSeries_hovered(intptr_t, bool, QBoxSet*);
 void miqt_exec_callback_QBoxPlotSeries_pressed(intptr_t, QBoxSet*);
@@ -53,110 +56,110 @@ public:
 	virtual ~MiqtVirtualQBoxPlotSeries() override = default;
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__type = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QBoxPlotSeries> handle__type;
 
 	// Subclass to allow providing a Go implementation
 	virtual QAbstractSeries::SeriesType type() const override {
-		if (handle__type == 0) {
+		if (!handle__type) {
 			return QBoxPlotSeries::type();
 		}
 
-		int callback_return_value = miqt_exec_callback_QBoxPlotSeries_type(this, handle__type);
+		int callback_return_value = miqt_exec_callback_QBoxPlotSeries_type(this, handle__type.value());
 		return static_cast<QAbstractSeries::SeriesType>(callback_return_value);
 	}
 
 	friend int QBoxPlotSeries_virtualbase_type(const void* self);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__event = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QBoxPlotSeries> handle__event;
 
 	// Subclass to allow providing a Go implementation
 	virtual bool event(QEvent* event) override {
-		if (handle__event == 0) {
+		if (!handle__event) {
 			return QBoxPlotSeries::event(event);
 		}
 
 		QEvent* sigval1 = event;
-		bool callback_return_value = miqt_exec_callback_QBoxPlotSeries_event(this, handle__event, sigval1);
+		bool callback_return_value = miqt_exec_callback_QBoxPlotSeries_event(this, handle__event.value(), sigval1);
 		return callback_return_value;
 	}
 
 	friend bool QBoxPlotSeries_virtualbase_event(void* self, QEvent* event);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__eventFilter = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QBoxPlotSeries> handle__eventFilter;
 
 	// Subclass to allow providing a Go implementation
 	virtual bool eventFilter(QObject* watched, QEvent* event) override {
-		if (handle__eventFilter == 0) {
+		if (!handle__eventFilter) {
 			return QBoxPlotSeries::eventFilter(watched, event);
 		}
 
 		QObject* sigval1 = watched;
 		QEvent* sigval2 = event;
-		bool callback_return_value = miqt_exec_callback_QBoxPlotSeries_eventFilter(this, handle__eventFilter, sigval1, sigval2);
+		bool callback_return_value = miqt_exec_callback_QBoxPlotSeries_eventFilter(this, handle__eventFilter.value(), sigval1, sigval2);
 		return callback_return_value;
 	}
 
 	friend bool QBoxPlotSeries_virtualbase_eventFilter(void* self, QObject* watched, QEvent* event);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__timerEvent = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QBoxPlotSeries> handle__timerEvent;
 
 	// Subclass to allow providing a Go implementation
 	virtual void timerEvent(QTimerEvent* event) override {
-		if (handle__timerEvent == 0) {
+		if (!handle__timerEvent) {
 			QBoxPlotSeries::timerEvent(event);
 			return;
 		}
 
 		QTimerEvent* sigval1 = event;
-		miqt_exec_callback_QBoxPlotSeries_timerEvent(this, handle__timerEvent, sigval1);
+		miqt_exec_callback_QBoxPlotSeries_timerEvent(this, handle__timerEvent.value(), sigval1);
 
 	}
 
 	friend void QBoxPlotSeries_virtualbase_timerEvent(void* self, QTimerEvent* event);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__childEvent = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QBoxPlotSeries> handle__childEvent;
 
 	// Subclass to allow providing a Go implementation
 	virtual void childEvent(QChildEvent* event) override {
-		if (handle__childEvent == 0) {
+		if (!handle__childEvent) {
 			QBoxPlotSeries::childEvent(event);
 			return;
 		}
 
 		QChildEvent* sigval1 = event;
-		miqt_exec_callback_QBoxPlotSeries_childEvent(this, handle__childEvent, sigval1);
+		miqt_exec_callback_QBoxPlotSeries_childEvent(this, handle__childEvent.value(), sigval1);
 
 	}
 
 	friend void QBoxPlotSeries_virtualbase_childEvent(void* self, QChildEvent* event);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__customEvent = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QBoxPlotSeries> handle__customEvent;
 
 	// Subclass to allow providing a Go implementation
 	virtual void customEvent(QEvent* event) override {
-		if (handle__customEvent == 0) {
+		if (!handle__customEvent) {
 			QBoxPlotSeries::customEvent(event);
 			return;
 		}
 
 		QEvent* sigval1 = event;
-		miqt_exec_callback_QBoxPlotSeries_customEvent(this, handle__customEvent, sigval1);
+		miqt_exec_callback_QBoxPlotSeries_customEvent(this, handle__customEvent.value(), sigval1);
 
 	}
 
 	friend void QBoxPlotSeries_virtualbase_customEvent(void* self, QEvent* event);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__connectNotify = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QBoxPlotSeries> handle__connectNotify;
 
 	// Subclass to allow providing a Go implementation
 	virtual void connectNotify(const QMetaMethod& signal) override {
-		if (handle__connectNotify == 0) {
+		if (!handle__connectNotify) {
 			QBoxPlotSeries::connectNotify(signal);
 			return;
 		}
@@ -164,18 +167,18 @@ public:
 		const QMetaMethod& signal_ret = signal;
 		// Cast returned reference into pointer
 		QMetaMethod* sigval1 = const_cast<QMetaMethod*>(&signal_ret);
-		miqt_exec_callback_QBoxPlotSeries_connectNotify(this, handle__connectNotify, sigval1);
+		miqt_exec_callback_QBoxPlotSeries_connectNotify(this, handle__connectNotify.value(), sigval1);
 
 	}
 
 	friend void QBoxPlotSeries_virtualbase_connectNotify(void* self, QMetaMethod* signal);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__disconnectNotify = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QBoxPlotSeries> handle__disconnectNotify;
 
 	// Subclass to allow providing a Go implementation
 	virtual void disconnectNotify(const QMetaMethod& signal) override {
-		if (handle__disconnectNotify == 0) {
+		if (!handle__disconnectNotify) {
 			QBoxPlotSeries::disconnectNotify(signal);
 			return;
 		}
@@ -183,7 +186,7 @@ public:
 		const QMetaMethod& signal_ret = signal;
 		// Cast returned reference into pointer
 		QMetaMethod* sigval1 = const_cast<QMetaMethod*>(&signal_ret);
-		miqt_exec_callback_QBoxPlotSeries_disconnectNotify(this, handle__disconnectNotify, sigval1);
+		miqt_exec_callback_QBoxPlotSeries_disconnectNotify(this, handle__disconnectNotify.value(), sigval1);
 
 	}
 
@@ -316,106 +319,126 @@ void QBoxPlotSeries_clicked(QBoxPlotSeries* self, QBoxSet* boxset) {
 	self->clicked(boxset);
 }
 
-void QBoxPlotSeries_connect_clicked(QBoxPlotSeries* self, intptr_t slot) {
-	QBoxPlotSeries::connect(self, static_cast<void (QBoxPlotSeries::*)(QBoxSet*)>(&QBoxPlotSeries::clicked), self, [=](QBoxSet* boxset) {
+void* QBoxPlotSeries_connect_clicked(QBoxPlotSeries* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QBoxPlotSeries>>(slot);
+	return new QMetaObject::Connection(QBoxPlotSeries::connect(self, static_cast<void (QBoxPlotSeries::*)(QBoxSet*)>(&QBoxPlotSeries::clicked), self, [slot_handle](QBoxSet* boxset) {
+		intptr_t slot = slot_handle->value();
 		QBoxSet* sigval1 = boxset;
 		miqt_exec_callback_QBoxPlotSeries_clicked(slot, sigval1);
-	});
+	}));
 }
 
 void QBoxPlotSeries_hovered(QBoxPlotSeries* self, bool status, QBoxSet* boxset) {
 	self->hovered(status, boxset);
 }
 
-void QBoxPlotSeries_connect_hovered(QBoxPlotSeries* self, intptr_t slot) {
-	QBoxPlotSeries::connect(self, static_cast<void (QBoxPlotSeries::*)(bool, QBoxSet*)>(&QBoxPlotSeries::hovered), self, [=](bool status, QBoxSet* boxset) {
+void* QBoxPlotSeries_connect_hovered(QBoxPlotSeries* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QBoxPlotSeries>>(slot);
+	return new QMetaObject::Connection(QBoxPlotSeries::connect(self, static_cast<void (QBoxPlotSeries::*)(bool, QBoxSet*)>(&QBoxPlotSeries::hovered), self, [slot_handle](bool status, QBoxSet* boxset) {
+		intptr_t slot = slot_handle->value();
 		bool sigval1 = status;
 		QBoxSet* sigval2 = boxset;
 		miqt_exec_callback_QBoxPlotSeries_hovered(slot, sigval1, sigval2);
-	});
+	}));
 }
 
 void QBoxPlotSeries_pressed(QBoxPlotSeries* self, QBoxSet* boxset) {
 	self->pressed(boxset);
 }
 
-void QBoxPlotSeries_connect_pressed(QBoxPlotSeries* self, intptr_t slot) {
-	QBoxPlotSeries::connect(self, static_cast<void (QBoxPlotSeries::*)(QBoxSet*)>(&QBoxPlotSeries::pressed), self, [=](QBoxSet* boxset) {
+void* QBoxPlotSeries_connect_pressed(QBoxPlotSeries* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QBoxPlotSeries>>(slot);
+	return new QMetaObject::Connection(QBoxPlotSeries::connect(self, static_cast<void (QBoxPlotSeries::*)(QBoxSet*)>(&QBoxPlotSeries::pressed), self, [slot_handle](QBoxSet* boxset) {
+		intptr_t slot = slot_handle->value();
 		QBoxSet* sigval1 = boxset;
 		miqt_exec_callback_QBoxPlotSeries_pressed(slot, sigval1);
-	});
+	}));
 }
 
 void QBoxPlotSeries_released(QBoxPlotSeries* self, QBoxSet* boxset) {
 	self->released(boxset);
 }
 
-void QBoxPlotSeries_connect_released(QBoxPlotSeries* self, intptr_t slot) {
-	QBoxPlotSeries::connect(self, static_cast<void (QBoxPlotSeries::*)(QBoxSet*)>(&QBoxPlotSeries::released), self, [=](QBoxSet* boxset) {
+void* QBoxPlotSeries_connect_released(QBoxPlotSeries* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QBoxPlotSeries>>(slot);
+	return new QMetaObject::Connection(QBoxPlotSeries::connect(self, static_cast<void (QBoxPlotSeries::*)(QBoxSet*)>(&QBoxPlotSeries::released), self, [slot_handle](QBoxSet* boxset) {
+		intptr_t slot = slot_handle->value();
 		QBoxSet* sigval1 = boxset;
 		miqt_exec_callback_QBoxPlotSeries_released(slot, sigval1);
-	});
+	}));
 }
 
 void QBoxPlotSeries_doubleClicked(QBoxPlotSeries* self, QBoxSet* boxset) {
 	self->doubleClicked(boxset);
 }
 
-void QBoxPlotSeries_connect_doubleClicked(QBoxPlotSeries* self, intptr_t slot) {
-	QBoxPlotSeries::connect(self, static_cast<void (QBoxPlotSeries::*)(QBoxSet*)>(&QBoxPlotSeries::doubleClicked), self, [=](QBoxSet* boxset) {
+void* QBoxPlotSeries_connect_doubleClicked(QBoxPlotSeries* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QBoxPlotSeries>>(slot);
+	return new QMetaObject::Connection(QBoxPlotSeries::connect(self, static_cast<void (QBoxPlotSeries::*)(QBoxSet*)>(&QBoxPlotSeries::doubleClicked), self, [slot_handle](QBoxSet* boxset) {
+		intptr_t slot = slot_handle->value();
 		QBoxSet* sigval1 = boxset;
 		miqt_exec_callback_QBoxPlotSeries_doubleClicked(slot, sigval1);
-	});
+	}));
 }
 
 void QBoxPlotSeries_countChanged(QBoxPlotSeries* self) {
 	self->countChanged();
 }
 
-void QBoxPlotSeries_connect_countChanged(QBoxPlotSeries* self, intptr_t slot) {
-	QBoxPlotSeries::connect(self, static_cast<void (QBoxPlotSeries::*)()>(&QBoxPlotSeries::countChanged), self, [=]() {
+void* QBoxPlotSeries_connect_countChanged(QBoxPlotSeries* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QBoxPlotSeries>>(slot);
+	return new QMetaObject::Connection(QBoxPlotSeries::connect(self, static_cast<void (QBoxPlotSeries::*)()>(&QBoxPlotSeries::countChanged), self, [slot_handle]() {
+		intptr_t slot = slot_handle->value();
 		miqt_exec_callback_QBoxPlotSeries_countChanged(slot);
-	});
+	}));
 }
 
 void QBoxPlotSeries_penChanged(QBoxPlotSeries* self) {
 	self->penChanged();
 }
 
-void QBoxPlotSeries_connect_penChanged(QBoxPlotSeries* self, intptr_t slot) {
-	QBoxPlotSeries::connect(self, static_cast<void (QBoxPlotSeries::*)()>(&QBoxPlotSeries::penChanged), self, [=]() {
+void* QBoxPlotSeries_connect_penChanged(QBoxPlotSeries* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QBoxPlotSeries>>(slot);
+	return new QMetaObject::Connection(QBoxPlotSeries::connect(self, static_cast<void (QBoxPlotSeries::*)()>(&QBoxPlotSeries::penChanged), self, [slot_handle]() {
+		intptr_t slot = slot_handle->value();
 		miqt_exec_callback_QBoxPlotSeries_penChanged(slot);
-	});
+	}));
 }
 
 void QBoxPlotSeries_brushChanged(QBoxPlotSeries* self) {
 	self->brushChanged();
 }
 
-void QBoxPlotSeries_connect_brushChanged(QBoxPlotSeries* self, intptr_t slot) {
-	QBoxPlotSeries::connect(self, static_cast<void (QBoxPlotSeries::*)()>(&QBoxPlotSeries::brushChanged), self, [=]() {
+void* QBoxPlotSeries_connect_brushChanged(QBoxPlotSeries* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QBoxPlotSeries>>(slot);
+	return new QMetaObject::Connection(QBoxPlotSeries::connect(self, static_cast<void (QBoxPlotSeries::*)()>(&QBoxPlotSeries::brushChanged), self, [slot_handle]() {
+		intptr_t slot = slot_handle->value();
 		miqt_exec_callback_QBoxPlotSeries_brushChanged(slot);
-	});
+	}));
 }
 
 void QBoxPlotSeries_boxOutlineVisibilityChanged(QBoxPlotSeries* self) {
 	self->boxOutlineVisibilityChanged();
 }
 
-void QBoxPlotSeries_connect_boxOutlineVisibilityChanged(QBoxPlotSeries* self, intptr_t slot) {
-	QBoxPlotSeries::connect(self, static_cast<void (QBoxPlotSeries::*)()>(&QBoxPlotSeries::boxOutlineVisibilityChanged), self, [=]() {
+void* QBoxPlotSeries_connect_boxOutlineVisibilityChanged(QBoxPlotSeries* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QBoxPlotSeries>>(slot);
+	return new QMetaObject::Connection(QBoxPlotSeries::connect(self, static_cast<void (QBoxPlotSeries::*)()>(&QBoxPlotSeries::boxOutlineVisibilityChanged), self, [slot_handle]() {
+		intptr_t slot = slot_handle->value();
 		miqt_exec_callback_QBoxPlotSeries_boxOutlineVisibilityChanged(slot);
-	});
+	}));
 }
 
 void QBoxPlotSeries_boxWidthChanged(QBoxPlotSeries* self) {
 	self->boxWidthChanged();
 }
 
-void QBoxPlotSeries_connect_boxWidthChanged(QBoxPlotSeries* self, intptr_t slot) {
-	QBoxPlotSeries::connect(self, static_cast<void (QBoxPlotSeries::*)()>(&QBoxPlotSeries::boxWidthChanged), self, [=]() {
+void* QBoxPlotSeries_connect_boxWidthChanged(QBoxPlotSeries* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QBoxPlotSeries>>(slot);
+	return new QMetaObject::Connection(QBoxPlotSeries::connect(self, static_cast<void (QBoxPlotSeries::*)()>(&QBoxPlotSeries::boxWidthChanged), self, [slot_handle]() {
+		intptr_t slot = slot_handle->value();
 		miqt_exec_callback_QBoxPlotSeries_boxWidthChanged(slot);
-	});
+	}));
 }
 
 void QBoxPlotSeries_boxsetsAdded(QBoxPlotSeries* self, struct miqt_array /* of QBoxSet* */  sets) {
@@ -428,8 +451,10 @@ void QBoxPlotSeries_boxsetsAdded(QBoxPlotSeries* self, struct miqt_array /* of Q
 	self->boxsetsAdded(sets_QList);
 }
 
-void QBoxPlotSeries_connect_boxsetsAdded(QBoxPlotSeries* self, intptr_t slot) {
-	QBoxPlotSeries::connect(self, static_cast<void (QBoxPlotSeries::*)(const QList<QBoxSet *>&)>(&QBoxPlotSeries::boxsetsAdded), self, [=](const QList<QBoxSet *>& sets) {
+void* QBoxPlotSeries_connect_boxsetsAdded(QBoxPlotSeries* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QBoxPlotSeries>>(slot);
+	return new QMetaObject::Connection(QBoxPlotSeries::connect(self, static_cast<void (QBoxPlotSeries::*)(const QList<QBoxSet *>&)>(&QBoxPlotSeries::boxsetsAdded), self, [slot_handle](const QList<QBoxSet *>& sets) {
+		intptr_t slot = slot_handle->value();
 		const QList<QBoxSet *>& sets_ret = sets;
 		// Convert QList<> from C++ memory to manually-managed C memory
 		QBoxSet** sets_arr = static_cast<QBoxSet**>(malloc(sizeof(QBoxSet*) * sets_ret.length()));
@@ -441,7 +466,7 @@ void QBoxPlotSeries_connect_boxsetsAdded(QBoxPlotSeries* self, intptr_t slot) {
 		sets_out.data = static_cast<void*>(sets_arr);
 		struct miqt_array /* of QBoxSet* */  sigval1 = sets_out;
 		miqt_exec_callback_QBoxPlotSeries_boxsetsAdded(slot, sigval1);
-	});
+	}));
 }
 
 void QBoxPlotSeries_boxsetsRemoved(QBoxPlotSeries* self, struct miqt_array /* of QBoxSet* */  sets) {
@@ -454,8 +479,10 @@ void QBoxPlotSeries_boxsetsRemoved(QBoxPlotSeries* self, struct miqt_array /* of
 	self->boxsetsRemoved(sets_QList);
 }
 
-void QBoxPlotSeries_connect_boxsetsRemoved(QBoxPlotSeries* self, intptr_t slot) {
-	QBoxPlotSeries::connect(self, static_cast<void (QBoxPlotSeries::*)(const QList<QBoxSet *>&)>(&QBoxPlotSeries::boxsetsRemoved), self, [=](const QList<QBoxSet *>& sets) {
+void* QBoxPlotSeries_connect_boxsetsRemoved(QBoxPlotSeries* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QBoxPlotSeries>>(slot);
+	return new QMetaObject::Connection(QBoxPlotSeries::connect(self, static_cast<void (QBoxPlotSeries::*)(const QList<QBoxSet *>&)>(&QBoxPlotSeries::boxsetsRemoved), self, [slot_handle](const QList<QBoxSet *>& sets) {
+		intptr_t slot = slot_handle->value();
 		const QList<QBoxSet *>& sets_ret = sets;
 		// Convert QList<> from C++ memory to manually-managed C memory
 		QBoxSet** sets_arr = static_cast<QBoxSet**>(malloc(sizeof(QBoxSet*) * sets_ret.length()));
@@ -467,7 +494,7 @@ void QBoxPlotSeries_connect_boxsetsRemoved(QBoxPlotSeries* self, intptr_t slot) 
 		sets_out.data = static_cast<void*>(sets_arr);
 		struct miqt_array /* of QBoxSet* */  sigval1 = sets_out;
 		miqt_exec_callback_QBoxPlotSeries_boxsetsRemoved(slot, sigval1);
-	});
+	}));
 }
 
 struct miqt_string QBoxPlotSeries_tr2(const char* s, const char* c) {
@@ -493,12 +520,13 @@ struct miqt_string QBoxPlotSeries_tr3(const char* s, const char* c, int n) {
 }
 
 bool QBoxPlotSeries_override_virtual_type(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QBoxPlotSeries> slot_handle(slot);
 	MiqtVirtualQBoxPlotSeries* self_cast = dynamic_cast<MiqtVirtualQBoxPlotSeries*>( (QBoxPlotSeries*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__type = slot;
+	self_cast->handle__type = std::move(slot_handle);
 	return true;
 }
 
@@ -508,12 +536,13 @@ int QBoxPlotSeries_virtualbase_type(const void* self) {
 }
 
 bool QBoxPlotSeries_override_virtual_event(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QBoxPlotSeries> slot_handle(slot);
 	MiqtVirtualQBoxPlotSeries* self_cast = dynamic_cast<MiqtVirtualQBoxPlotSeries*>( (QBoxPlotSeries*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__event = slot;
+	self_cast->handle__event = std::move(slot_handle);
 	return true;
 }
 
@@ -522,12 +551,13 @@ bool QBoxPlotSeries_virtualbase_event(void* self, QEvent* event) {
 }
 
 bool QBoxPlotSeries_override_virtual_eventFilter(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QBoxPlotSeries> slot_handle(slot);
 	MiqtVirtualQBoxPlotSeries* self_cast = dynamic_cast<MiqtVirtualQBoxPlotSeries*>( (QBoxPlotSeries*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__eventFilter = slot;
+	self_cast->handle__eventFilter = std::move(slot_handle);
 	return true;
 }
 
@@ -536,12 +566,13 @@ bool QBoxPlotSeries_virtualbase_eventFilter(void* self, QObject* watched, QEvent
 }
 
 bool QBoxPlotSeries_override_virtual_timerEvent(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QBoxPlotSeries> slot_handle(slot);
 	MiqtVirtualQBoxPlotSeries* self_cast = dynamic_cast<MiqtVirtualQBoxPlotSeries*>( (QBoxPlotSeries*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__timerEvent = slot;
+	self_cast->handle__timerEvent = std::move(slot_handle);
 	return true;
 }
 
@@ -550,12 +581,13 @@ void QBoxPlotSeries_virtualbase_timerEvent(void* self, QTimerEvent* event) {
 }
 
 bool QBoxPlotSeries_override_virtual_childEvent(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QBoxPlotSeries> slot_handle(slot);
 	MiqtVirtualQBoxPlotSeries* self_cast = dynamic_cast<MiqtVirtualQBoxPlotSeries*>( (QBoxPlotSeries*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__childEvent = slot;
+	self_cast->handle__childEvent = std::move(slot_handle);
 	return true;
 }
 
@@ -564,12 +596,13 @@ void QBoxPlotSeries_virtualbase_childEvent(void* self, QChildEvent* event) {
 }
 
 bool QBoxPlotSeries_override_virtual_customEvent(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QBoxPlotSeries> slot_handle(slot);
 	MiqtVirtualQBoxPlotSeries* self_cast = dynamic_cast<MiqtVirtualQBoxPlotSeries*>( (QBoxPlotSeries*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__customEvent = slot;
+	self_cast->handle__customEvent = std::move(slot_handle);
 	return true;
 }
 
@@ -578,12 +611,13 @@ void QBoxPlotSeries_virtualbase_customEvent(void* self, QEvent* event) {
 }
 
 bool QBoxPlotSeries_override_virtual_connectNotify(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QBoxPlotSeries> slot_handle(slot);
 	MiqtVirtualQBoxPlotSeries* self_cast = dynamic_cast<MiqtVirtualQBoxPlotSeries*>( (QBoxPlotSeries*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__connectNotify = slot;
+	self_cast->handle__connectNotify = std::move(slot_handle);
 	return true;
 }
 
@@ -592,12 +626,13 @@ void QBoxPlotSeries_virtualbase_connectNotify(void* self, QMetaMethod* signal) {
 }
 
 bool QBoxPlotSeries_override_virtual_disconnectNotify(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QBoxPlotSeries> slot_handle(slot);
 	MiqtVirtualQBoxPlotSeries* self_cast = dynamic_cast<MiqtVirtualQBoxPlotSeries*>( (QBoxPlotSeries*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__disconnectNotify = slot;
+	self_cast->handle__disconnectNotify = std::move(slot_handle);
 	return true;
 }
 

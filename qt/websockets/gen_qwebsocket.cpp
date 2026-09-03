@@ -1,3 +1,5 @@
+#include <memory>
+#include <utility>
 #include <QAuthenticator>
 #include <QByteArray>
 #include <QChildEvent>
@@ -26,6 +28,7 @@
 extern "C" {
 #endif
 
+void miqt_exec_callback_handle_release_QWebSocket(intptr_t);
 void miqt_exec_callback_QWebSocket_aboutToClose(intptr_t);
 void miqt_exec_callback_QWebSocket_connected(intptr_t);
 void miqt_exec_callback_QWebSocket_disconnected(intptr_t);
@@ -63,95 +66,95 @@ public:
 	virtual ~MiqtVirtualQWebSocket() override = default;
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__event = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QWebSocket> handle__event;
 
 	// Subclass to allow providing a Go implementation
 	virtual bool event(QEvent* event) override {
-		if (handle__event == 0) {
+		if (!handle__event) {
 			return QWebSocket::event(event);
 		}
 
 		QEvent* sigval1 = event;
-		bool callback_return_value = miqt_exec_callback_QWebSocket_event(this, handle__event, sigval1);
+		bool callback_return_value = miqt_exec_callback_QWebSocket_event(this, handle__event.value(), sigval1);
 		return callback_return_value;
 	}
 
 	friend bool QWebSocket_virtualbase_event(void* self, QEvent* event);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__eventFilter = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QWebSocket> handle__eventFilter;
 
 	// Subclass to allow providing a Go implementation
 	virtual bool eventFilter(QObject* watched, QEvent* event) override {
-		if (handle__eventFilter == 0) {
+		if (!handle__eventFilter) {
 			return QWebSocket::eventFilter(watched, event);
 		}
 
 		QObject* sigval1 = watched;
 		QEvent* sigval2 = event;
-		bool callback_return_value = miqt_exec_callback_QWebSocket_eventFilter(this, handle__eventFilter, sigval1, sigval2);
+		bool callback_return_value = miqt_exec_callback_QWebSocket_eventFilter(this, handle__eventFilter.value(), sigval1, sigval2);
 		return callback_return_value;
 	}
 
 	friend bool QWebSocket_virtualbase_eventFilter(void* self, QObject* watched, QEvent* event);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__timerEvent = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QWebSocket> handle__timerEvent;
 
 	// Subclass to allow providing a Go implementation
 	virtual void timerEvent(QTimerEvent* event) override {
-		if (handle__timerEvent == 0) {
+		if (!handle__timerEvent) {
 			QWebSocket::timerEvent(event);
 			return;
 		}
 
 		QTimerEvent* sigval1 = event;
-		miqt_exec_callback_QWebSocket_timerEvent(this, handle__timerEvent, sigval1);
+		miqt_exec_callback_QWebSocket_timerEvent(this, handle__timerEvent.value(), sigval1);
 
 	}
 
 	friend void QWebSocket_virtualbase_timerEvent(void* self, QTimerEvent* event);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__childEvent = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QWebSocket> handle__childEvent;
 
 	// Subclass to allow providing a Go implementation
 	virtual void childEvent(QChildEvent* event) override {
-		if (handle__childEvent == 0) {
+		if (!handle__childEvent) {
 			QWebSocket::childEvent(event);
 			return;
 		}
 
 		QChildEvent* sigval1 = event;
-		miqt_exec_callback_QWebSocket_childEvent(this, handle__childEvent, sigval1);
+		miqt_exec_callback_QWebSocket_childEvent(this, handle__childEvent.value(), sigval1);
 
 	}
 
 	friend void QWebSocket_virtualbase_childEvent(void* self, QChildEvent* event);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__customEvent = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QWebSocket> handle__customEvent;
 
 	// Subclass to allow providing a Go implementation
 	virtual void customEvent(QEvent* event) override {
-		if (handle__customEvent == 0) {
+		if (!handle__customEvent) {
 			QWebSocket::customEvent(event);
 			return;
 		}
 
 		QEvent* sigval1 = event;
-		miqt_exec_callback_QWebSocket_customEvent(this, handle__customEvent, sigval1);
+		miqt_exec_callback_QWebSocket_customEvent(this, handle__customEvent.value(), sigval1);
 
 	}
 
 	friend void QWebSocket_virtualbase_customEvent(void* self, QEvent* event);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__connectNotify = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QWebSocket> handle__connectNotify;
 
 	// Subclass to allow providing a Go implementation
 	virtual void connectNotify(const QMetaMethod& signal) override {
-		if (handle__connectNotify == 0) {
+		if (!handle__connectNotify) {
 			QWebSocket::connectNotify(signal);
 			return;
 		}
@@ -159,18 +162,18 @@ public:
 		const QMetaMethod& signal_ret = signal;
 		// Cast returned reference into pointer
 		QMetaMethod* sigval1 = const_cast<QMetaMethod*>(&signal_ret);
-		miqt_exec_callback_QWebSocket_connectNotify(this, handle__connectNotify, sigval1);
+		miqt_exec_callback_QWebSocket_connectNotify(this, handle__connectNotify.value(), sigval1);
 
 	}
 
 	friend void QWebSocket_virtualbase_connectNotify(void* self, QMetaMethod* signal);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__disconnectNotify = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QWebSocket> handle__disconnectNotify;
 
 	// Subclass to allow providing a Go implementation
 	virtual void disconnectNotify(const QMetaMethod& signal) override {
-		if (handle__disconnectNotify == 0) {
+		if (!handle__disconnectNotify) {
 			QWebSocket::disconnectNotify(signal);
 			return;
 		}
@@ -178,7 +181,7 @@ public:
 		const QMetaMethod& signal_ret = signal;
 		// Cast returned reference into pointer
 		QMetaMethod* sigval1 = const_cast<QMetaMethod*>(&signal_ret);
-		miqt_exec_callback_QWebSocket_disconnectNotify(this, handle__disconnectNotify, sigval1);
+		miqt_exec_callback_QWebSocket_disconnectNotify(this, handle__disconnectNotify.value(), sigval1);
 
 	}
 
@@ -496,66 +499,78 @@ void QWebSocket_aboutToClose(QWebSocket* self) {
 	self->aboutToClose();
 }
 
-void QWebSocket_connect_aboutToClose(QWebSocket* self, intptr_t slot) {
-	QWebSocket::connect(self, static_cast<void (QWebSocket::*)()>(&QWebSocket::aboutToClose), self, [=]() {
+void* QWebSocket_connect_aboutToClose(QWebSocket* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QWebSocket>>(slot);
+	return new QMetaObject::Connection(QWebSocket::connect(self, static_cast<void (QWebSocket::*)()>(&QWebSocket::aboutToClose), self, [slot_handle]() {
+		intptr_t slot = slot_handle->value();
 		miqt_exec_callback_QWebSocket_aboutToClose(slot);
-	});
+	}));
 }
 
 void QWebSocket_connected(QWebSocket* self) {
 	self->connected();
 }
 
-void QWebSocket_connect_connected(QWebSocket* self, intptr_t slot) {
-	QWebSocket::connect(self, static_cast<void (QWebSocket::*)()>(&QWebSocket::connected), self, [=]() {
+void* QWebSocket_connect_connected(QWebSocket* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QWebSocket>>(slot);
+	return new QMetaObject::Connection(QWebSocket::connect(self, static_cast<void (QWebSocket::*)()>(&QWebSocket::connected), self, [slot_handle]() {
+		intptr_t slot = slot_handle->value();
 		miqt_exec_callback_QWebSocket_connected(slot);
-	});
+	}));
 }
 
 void QWebSocket_disconnected(QWebSocket* self) {
 	self->disconnected();
 }
 
-void QWebSocket_connect_disconnected(QWebSocket* self, intptr_t slot) {
-	QWebSocket::connect(self, static_cast<void (QWebSocket::*)()>(&QWebSocket::disconnected), self, [=]() {
+void* QWebSocket_connect_disconnected(QWebSocket* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QWebSocket>>(slot);
+	return new QMetaObject::Connection(QWebSocket::connect(self, static_cast<void (QWebSocket::*)()>(&QWebSocket::disconnected), self, [slot_handle]() {
+		intptr_t slot = slot_handle->value();
 		miqt_exec_callback_QWebSocket_disconnected(slot);
-	});
+	}));
 }
 
 void QWebSocket_stateChanged(QWebSocket* self, int state) {
 	self->stateChanged(static_cast<QAbstractSocket::SocketState>(state));
 }
 
-void QWebSocket_connect_stateChanged(QWebSocket* self, intptr_t slot) {
-	QWebSocket::connect(self, static_cast<void (QWebSocket::*)(QAbstractSocket::SocketState)>(&QWebSocket::stateChanged), self, [=](QAbstractSocket::SocketState state) {
+void* QWebSocket_connect_stateChanged(QWebSocket* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QWebSocket>>(slot);
+	return new QMetaObject::Connection(QWebSocket::connect(self, static_cast<void (QWebSocket::*)(QAbstractSocket::SocketState)>(&QWebSocket::stateChanged), self, [slot_handle](QAbstractSocket::SocketState state) {
+		intptr_t slot = slot_handle->value();
 		QAbstractSocket::SocketState state_ret = state;
 		int sigval1 = static_cast<int>(state_ret);
 		miqt_exec_callback_QWebSocket_stateChanged(slot, sigval1);
-	});
+	}));
 }
 
 void QWebSocket_proxyAuthenticationRequired(QWebSocket* self, QNetworkProxy* proxy, QAuthenticator* pAuthenticator) {
 	self->proxyAuthenticationRequired(*proxy, pAuthenticator);
 }
 
-void QWebSocket_connect_proxyAuthenticationRequired(QWebSocket* self, intptr_t slot) {
-	QWebSocket::connect(self, static_cast<void (QWebSocket::*)(const QNetworkProxy&, QAuthenticator*)>(&QWebSocket::proxyAuthenticationRequired), self, [=](const QNetworkProxy& proxy, QAuthenticator* pAuthenticator) {
+void* QWebSocket_connect_proxyAuthenticationRequired(QWebSocket* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QWebSocket>>(slot);
+	return new QMetaObject::Connection(QWebSocket::connect(self, static_cast<void (QWebSocket::*)(const QNetworkProxy&, QAuthenticator*)>(&QWebSocket::proxyAuthenticationRequired), self, [slot_handle](const QNetworkProxy& proxy, QAuthenticator* pAuthenticator) {
+		intptr_t slot = slot_handle->value();
 		const QNetworkProxy& proxy_ret = proxy;
 		// Cast returned reference into pointer
 		QNetworkProxy* sigval1 = const_cast<QNetworkProxy*>(&proxy_ret);
 		QAuthenticator* sigval2 = pAuthenticator;
 		miqt_exec_callback_QWebSocket_proxyAuthenticationRequired(slot, sigval1, sigval2);
-	});
+	}));
 }
 
 void QWebSocket_readChannelFinished(QWebSocket* self) {
 	self->readChannelFinished();
 }
 
-void QWebSocket_connect_readChannelFinished(QWebSocket* self, intptr_t slot) {
-	QWebSocket::connect(self, static_cast<void (QWebSocket::*)()>(&QWebSocket::readChannelFinished), self, [=]() {
+void* QWebSocket_connect_readChannelFinished(QWebSocket* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QWebSocket>>(slot);
+	return new QMetaObject::Connection(QWebSocket::connect(self, static_cast<void (QWebSocket::*)()>(&QWebSocket::readChannelFinished), self, [slot_handle]() {
+		intptr_t slot = slot_handle->value();
 		miqt_exec_callback_QWebSocket_readChannelFinished(slot);
-	});
+	}));
 }
 
 void QWebSocket_textFrameReceived(QWebSocket* self, struct miqt_string frame, bool isLastFrame) {
@@ -563,8 +578,10 @@ void QWebSocket_textFrameReceived(QWebSocket* self, struct miqt_string frame, bo
 	self->textFrameReceived(frame_QString, isLastFrame);
 }
 
-void QWebSocket_connect_textFrameReceived(QWebSocket* self, intptr_t slot) {
-	QWebSocket::connect(self, static_cast<void (QWebSocket::*)(const QString&, bool)>(&QWebSocket::textFrameReceived), self, [=](const QString& frame, bool isLastFrame) {
+void* QWebSocket_connect_textFrameReceived(QWebSocket* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QWebSocket>>(slot);
+	return new QMetaObject::Connection(QWebSocket::connect(self, static_cast<void (QWebSocket::*)(const QString&, bool)>(&QWebSocket::textFrameReceived), self, [slot_handle](const QString& frame, bool isLastFrame) {
+		intptr_t slot = slot_handle->value();
 		const QString frame_ret = frame;
 		// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 		QByteArray frame_b = frame_ret.toUtf8();
@@ -575,7 +592,7 @@ void QWebSocket_connect_textFrameReceived(QWebSocket* self, intptr_t slot) {
 		struct miqt_string sigval1 = frame_ms;
 		bool sigval2 = isLastFrame;
 		miqt_exec_callback_QWebSocket_textFrameReceived(slot, sigval1, sigval2);
-	});
+	}));
 }
 
 void QWebSocket_binaryFrameReceived(QWebSocket* self, struct miqt_string frame, bool isLastFrame) {
@@ -583,8 +600,10 @@ void QWebSocket_binaryFrameReceived(QWebSocket* self, struct miqt_string frame, 
 	self->binaryFrameReceived(frame_QByteArray, isLastFrame);
 }
 
-void QWebSocket_connect_binaryFrameReceived(QWebSocket* self, intptr_t slot) {
-	QWebSocket::connect(self, static_cast<void (QWebSocket::*)(const QByteArray&, bool)>(&QWebSocket::binaryFrameReceived), self, [=](const QByteArray& frame, bool isLastFrame) {
+void* QWebSocket_connect_binaryFrameReceived(QWebSocket* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QWebSocket>>(slot);
+	return new QMetaObject::Connection(QWebSocket::connect(self, static_cast<void (QWebSocket::*)(const QByteArray&, bool)>(&QWebSocket::binaryFrameReceived), self, [slot_handle](const QByteArray& frame, bool isLastFrame) {
+		intptr_t slot = slot_handle->value();
 		const QByteArray frame_qb = frame;
 		struct miqt_string frame_ms;
 		frame_ms.len = frame_qb.length();
@@ -593,7 +612,7 @@ void QWebSocket_connect_binaryFrameReceived(QWebSocket* self, intptr_t slot) {
 		struct miqt_string sigval1 = frame_ms;
 		bool sigval2 = isLastFrame;
 		miqt_exec_callback_QWebSocket_binaryFrameReceived(slot, sigval1, sigval2);
-	});
+	}));
 }
 
 void QWebSocket_textMessageReceived(QWebSocket* self, struct miqt_string message) {
@@ -601,8 +620,10 @@ void QWebSocket_textMessageReceived(QWebSocket* self, struct miqt_string message
 	self->textMessageReceived(message_QString);
 }
 
-void QWebSocket_connect_textMessageReceived(QWebSocket* self, intptr_t slot) {
-	QWebSocket::connect(self, static_cast<void (QWebSocket::*)(const QString&)>(&QWebSocket::textMessageReceived), self, [=](const QString& message) {
+void* QWebSocket_connect_textMessageReceived(QWebSocket* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QWebSocket>>(slot);
+	return new QMetaObject::Connection(QWebSocket::connect(self, static_cast<void (QWebSocket::*)(const QString&)>(&QWebSocket::textMessageReceived), self, [slot_handle](const QString& message) {
+		intptr_t slot = slot_handle->value();
 		const QString message_ret = message;
 		// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 		QByteArray message_b = message_ret.toUtf8();
@@ -612,7 +633,7 @@ void QWebSocket_connect_textMessageReceived(QWebSocket* self, intptr_t slot) {
 		memcpy(message_ms.data, message_b.data(), message_ms.len);
 		struct miqt_string sigval1 = message_ms;
 		miqt_exec_callback_QWebSocket_textMessageReceived(slot, sigval1);
-	});
+	}));
 }
 
 void QWebSocket_binaryMessageReceived(QWebSocket* self, struct miqt_string message) {
@@ -620,8 +641,10 @@ void QWebSocket_binaryMessageReceived(QWebSocket* self, struct miqt_string messa
 	self->binaryMessageReceived(message_QByteArray);
 }
 
-void QWebSocket_connect_binaryMessageReceived(QWebSocket* self, intptr_t slot) {
-	QWebSocket::connect(self, static_cast<void (QWebSocket::*)(const QByteArray&)>(&QWebSocket::binaryMessageReceived), self, [=](const QByteArray& message) {
+void* QWebSocket_connect_binaryMessageReceived(QWebSocket* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QWebSocket>>(slot);
+	return new QMetaObject::Connection(QWebSocket::connect(self, static_cast<void (QWebSocket::*)(const QByteArray&)>(&QWebSocket::binaryMessageReceived), self, [slot_handle](const QByteArray& message) {
+		intptr_t slot = slot_handle->value();
 		const QByteArray message_qb = message;
 		struct miqt_string message_ms;
 		message_ms.len = message_qb.length();
@@ -629,19 +652,21 @@ void QWebSocket_connect_binaryMessageReceived(QWebSocket* self, intptr_t slot) {
 		memcpy(message_ms.data, message_qb.data(), message_ms.len);
 		struct miqt_string sigval1 = message_ms;
 		miqt_exec_callback_QWebSocket_binaryMessageReceived(slot, sigval1);
-	});
+	}));
 }
 
 void QWebSocket_errorWithError(QWebSocket* self, int error) {
 	self->error(static_cast<QAbstractSocket::SocketError>(error));
 }
 
-void QWebSocket_connect_errorWithError(QWebSocket* self, intptr_t slot) {
-	QWebSocket::connect(self, static_cast<void (QWebSocket::*)(QAbstractSocket::SocketError)>(&QWebSocket::error), self, [=](QAbstractSocket::SocketError error) {
+void* QWebSocket_connect_errorWithError(QWebSocket* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QWebSocket>>(slot);
+	return new QMetaObject::Connection(QWebSocket::connect(self, static_cast<void (QWebSocket::*)(QAbstractSocket::SocketError)>(&QWebSocket::error), self, [slot_handle](QAbstractSocket::SocketError error) {
+		intptr_t slot = slot_handle->value();
 		QAbstractSocket::SocketError error_ret = error;
 		int sigval1 = static_cast<int>(error_ret);
 		miqt_exec_callback_QWebSocket_errorWithError(slot, sigval1);
-	});
+	}));
 }
 
 void QWebSocket_pong(QWebSocket* self, unsigned long long elapsedTime, struct miqt_string payload) {
@@ -649,8 +674,10 @@ void QWebSocket_pong(QWebSocket* self, unsigned long long elapsedTime, struct mi
 	self->pong(static_cast<quint64>(elapsedTime), payload_QByteArray);
 }
 
-void QWebSocket_connect_pong(QWebSocket* self, intptr_t slot) {
-	QWebSocket::connect(self, static_cast<void (QWebSocket::*)(quint64, const QByteArray&)>(&QWebSocket::pong), self, [=](quint64 elapsedTime, const QByteArray& payload) {
+void* QWebSocket_connect_pong(QWebSocket* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QWebSocket>>(slot);
+	return new QMetaObject::Connection(QWebSocket::connect(self, static_cast<void (QWebSocket::*)(quint64, const QByteArray&)>(&QWebSocket::pong), self, [slot_handle](quint64 elapsedTime, const QByteArray& payload) {
+		intptr_t slot = slot_handle->value();
 		quint64 elapsedTime_ret = elapsedTime;
 		unsigned long long sigval1 = static_cast<unsigned long long>(elapsedTime_ret);
 		const QByteArray payload_qb = payload;
@@ -660,19 +687,21 @@ void QWebSocket_connect_pong(QWebSocket* self, intptr_t slot) {
 		memcpy(payload_ms.data, payload_qb.data(), payload_ms.len);
 		struct miqt_string sigval2 = payload_ms;
 		miqt_exec_callback_QWebSocket_pong(slot, sigval1, sigval2);
-	});
+	}));
 }
 
 void QWebSocket_bytesWritten(QWebSocket* self, long long bytes) {
 	self->bytesWritten(static_cast<qint64>(bytes));
 }
 
-void QWebSocket_connect_bytesWritten(QWebSocket* self, intptr_t slot) {
-	QWebSocket::connect(self, static_cast<void (QWebSocket::*)(qint64)>(&QWebSocket::bytesWritten), self, [=](qint64 bytes) {
+void* QWebSocket_connect_bytesWritten(QWebSocket* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QWebSocket>>(slot);
+	return new QMetaObject::Connection(QWebSocket::connect(self, static_cast<void (QWebSocket::*)(qint64)>(&QWebSocket::bytesWritten), self, [slot_handle](qint64 bytes) {
+		intptr_t slot = slot_handle->value();
 		qint64 bytes_ret = bytes;
 		long long sigval1 = static_cast<long long>(bytes_ret);
 		miqt_exec_callback_QWebSocket_bytesWritten(slot, sigval1);
-	});
+	}));
 }
 
 void QWebSocket_sslErrors(QWebSocket* self, struct miqt_array /* of QSslError* */  errors) {
@@ -685,8 +714,10 @@ void QWebSocket_sslErrors(QWebSocket* self, struct miqt_array /* of QSslError* *
 	self->sslErrors(errors_QList);
 }
 
-void QWebSocket_connect_sslErrors(QWebSocket* self, intptr_t slot) {
-	QWebSocket::connect(self, static_cast<void (QWebSocket::*)(const QList<QSslError>&)>(&QWebSocket::sslErrors), self, [=](const QList<QSslError>& errors) {
+void* QWebSocket_connect_sslErrors(QWebSocket* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QWebSocket>>(slot);
+	return new QMetaObject::Connection(QWebSocket::connect(self, static_cast<void (QWebSocket::*)(const QList<QSslError>&)>(&QWebSocket::sslErrors), self, [slot_handle](const QList<QSslError>& errors) {
+		intptr_t slot = slot_handle->value();
 		const QList<QSslError>& errors_ret = errors;
 		// Convert QList<> from C++ memory to manually-managed C memory
 		QSslError** errors_arr = static_cast<QSslError**>(malloc(sizeof(QSslError*) * errors_ret.length()));
@@ -698,18 +729,20 @@ void QWebSocket_connect_sslErrors(QWebSocket* self, intptr_t slot) {
 		errors_out.data = static_cast<void*>(errors_arr);
 		struct miqt_array /* of QSslError* */  sigval1 = errors_out;
 		miqt_exec_callback_QWebSocket_sslErrors(slot, sigval1);
-	});
+	}));
 }
 
 void QWebSocket_preSharedKeyAuthenticationRequired(QWebSocket* self, QSslPreSharedKeyAuthenticator* authenticator) {
 	self->preSharedKeyAuthenticationRequired(authenticator);
 }
 
-void QWebSocket_connect_preSharedKeyAuthenticationRequired(QWebSocket* self, intptr_t slot) {
-	QWebSocket::connect(self, static_cast<void (QWebSocket::*)(QSslPreSharedKeyAuthenticator*)>(&QWebSocket::preSharedKeyAuthenticationRequired), self, [=](QSslPreSharedKeyAuthenticator* authenticator) {
+void* QWebSocket_connect_preSharedKeyAuthenticationRequired(QWebSocket* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QWebSocket>>(slot);
+	return new QMetaObject::Connection(QWebSocket::connect(self, static_cast<void (QWebSocket::*)(QSslPreSharedKeyAuthenticator*)>(&QWebSocket::preSharedKeyAuthenticationRequired), self, [slot_handle](QSslPreSharedKeyAuthenticator* authenticator) {
+		intptr_t slot = slot_handle->value();
 		QSslPreSharedKeyAuthenticator* sigval1 = authenticator;
 		miqt_exec_callback_QWebSocket_preSharedKeyAuthenticationRequired(slot, sigval1);
-	});
+	}));
 }
 
 struct miqt_string QWebSocket_tr2(const char* s, const char* c) {
@@ -771,12 +804,13 @@ void QWebSocket_pingWithPayload(QWebSocket* self, struct miqt_string payload) {
 }
 
 bool QWebSocket_override_virtual_event(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QWebSocket> slot_handle(slot);
 	MiqtVirtualQWebSocket* self_cast = dynamic_cast<MiqtVirtualQWebSocket*>( (QWebSocket*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__event = slot;
+	self_cast->handle__event = std::move(slot_handle);
 	return true;
 }
 
@@ -785,12 +819,13 @@ bool QWebSocket_virtualbase_event(void* self, QEvent* event) {
 }
 
 bool QWebSocket_override_virtual_eventFilter(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QWebSocket> slot_handle(slot);
 	MiqtVirtualQWebSocket* self_cast = dynamic_cast<MiqtVirtualQWebSocket*>( (QWebSocket*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__eventFilter = slot;
+	self_cast->handle__eventFilter = std::move(slot_handle);
 	return true;
 }
 
@@ -799,12 +834,13 @@ bool QWebSocket_virtualbase_eventFilter(void* self, QObject* watched, QEvent* ev
 }
 
 bool QWebSocket_override_virtual_timerEvent(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QWebSocket> slot_handle(slot);
 	MiqtVirtualQWebSocket* self_cast = dynamic_cast<MiqtVirtualQWebSocket*>( (QWebSocket*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__timerEvent = slot;
+	self_cast->handle__timerEvent = std::move(slot_handle);
 	return true;
 }
 
@@ -813,12 +849,13 @@ void QWebSocket_virtualbase_timerEvent(void* self, QTimerEvent* event) {
 }
 
 bool QWebSocket_override_virtual_childEvent(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QWebSocket> slot_handle(slot);
 	MiqtVirtualQWebSocket* self_cast = dynamic_cast<MiqtVirtualQWebSocket*>( (QWebSocket*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__childEvent = slot;
+	self_cast->handle__childEvent = std::move(slot_handle);
 	return true;
 }
 
@@ -827,12 +864,13 @@ void QWebSocket_virtualbase_childEvent(void* self, QChildEvent* event) {
 }
 
 bool QWebSocket_override_virtual_customEvent(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QWebSocket> slot_handle(slot);
 	MiqtVirtualQWebSocket* self_cast = dynamic_cast<MiqtVirtualQWebSocket*>( (QWebSocket*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__customEvent = slot;
+	self_cast->handle__customEvent = std::move(slot_handle);
 	return true;
 }
 
@@ -841,12 +879,13 @@ void QWebSocket_virtualbase_customEvent(void* self, QEvent* event) {
 }
 
 bool QWebSocket_override_virtual_connectNotify(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QWebSocket> slot_handle(slot);
 	MiqtVirtualQWebSocket* self_cast = dynamic_cast<MiqtVirtualQWebSocket*>( (QWebSocket*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__connectNotify = slot;
+	self_cast->handle__connectNotify = std::move(slot_handle);
 	return true;
 }
 
@@ -855,12 +894,13 @@ void QWebSocket_virtualbase_connectNotify(void* self, QMetaMethod* signal) {
 }
 
 bool QWebSocket_override_virtual_disconnectNotify(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QWebSocket> slot_handle(slot);
 	MiqtVirtualQWebSocket* self_cast = dynamic_cast<MiqtVirtualQWebSocket*>( (QWebSocket*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__disconnectNotify = slot;
+	self_cast->handle__disconnectNotify = std::move(slot_handle);
 	return true;
 }
 

@@ -22,6 +22,11 @@ const (
 	QwtMatrixRasterData__BilinearInterpolation QwtMatrixRasterData__ResampleMode = 1
 )
 
+//export miqt_exec_callback_handle_release_QwtMatrixRasterData
+func miqt_exec_callback_handle_release_QwtMatrixRasterData(cb C.intptr_t) {
+	cgo.Handle(cb).Delete()
+}
+
 type QwtMatrixRasterData struct {
 	h *C.QwtMatrixRasterData
 	*QwtRasterData
@@ -124,7 +129,11 @@ func (this *QwtMatrixRasterData) callVirtualBase_SetInterval(param1 qt.Axis, par
 
 }
 func (this *QwtMatrixRasterData) OnSetInterval(slot func(super func(param1 qt.Axis, param2 *QwtInterval), param1 qt.Axis, param2 *QwtInterval)) {
-	ok := C.QwtMatrixRasterData_override_virtual_setInterval(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QwtMatrixRasterData_override_virtual_setInterval(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -154,7 +163,11 @@ func (this *QwtMatrixRasterData) callVirtualBase_PixelHint(param1 *qt.QRectF) *q
 
 }
 func (this *QwtMatrixRasterData) OnPixelHint(slot func(super func(param1 *qt.QRectF) *qt.QRectF, param1 *qt.QRectF) *qt.QRectF) {
-	ok := C.QwtMatrixRasterData_override_virtual_pixelHint(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QwtMatrixRasterData_override_virtual_pixelHint(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -182,7 +195,11 @@ func (this *QwtMatrixRasterData) callVirtualBase_Value(x float64, y float64) flo
 
 }
 func (this *QwtMatrixRasterData) OnValue(slot func(super func(x float64, y float64) float64, x float64, y float64) float64) {
-	ok := C.QwtMatrixRasterData_override_virtual_value(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QwtMatrixRasterData_override_virtual_value(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -212,7 +229,11 @@ func (this *QwtMatrixRasterData) callVirtualBase_InitRaster(param1 *qt.QRectF, r
 
 }
 func (this *QwtMatrixRasterData) OnInitRaster(slot func(super func(param1 *qt.QRectF, raster *qt.QSize), param1 *qt.QRectF, raster *qt.QSize)) {
-	ok := C.QwtMatrixRasterData_override_virtual_initRaster(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QwtMatrixRasterData_override_virtual_initRaster(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -240,7 +261,11 @@ func (this *QwtMatrixRasterData) callVirtualBase_DiscardRaster() {
 
 }
 func (this *QwtMatrixRasterData) OnDiscardRaster(slot func(super func())) {
-	ok := C.QwtMatrixRasterData_override_virtual_discardRaster(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QwtMatrixRasterData_override_virtual_discardRaster(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}

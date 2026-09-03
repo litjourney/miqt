@@ -48,9 +48,9 @@ void QCandlestickModelMapper_setSeries(QCandlestickModelMapper* self, QCandlesti
 QCandlestickSeries* QCandlestickModelMapper_series(const QCandlestickModelMapper* self);
 int QCandlestickModelMapper_orientation(const QCandlestickModelMapper* self);
 void QCandlestickModelMapper_modelReplaced(QCandlestickModelMapper* self);
-void QCandlestickModelMapper_connect_modelReplaced(QCandlestickModelMapper* self, intptr_t slot);
+void* QCandlestickModelMapper_connect_modelReplaced(QCandlestickModelMapper* self, intptr_t slot);
 void QCandlestickModelMapper_seriesReplaced(QCandlestickModelMapper* self);
-void QCandlestickModelMapper_connect_seriesReplaced(QCandlestickModelMapper* self, intptr_t slot);
+void* QCandlestickModelMapper_connect_seriesReplaced(QCandlestickModelMapper* self, intptr_t slot);
 struct miqt_string QCandlestickModelMapper_tr2(const char* s, const char* c);
 struct miqt_string QCandlestickModelMapper_tr3(const char* s, const char* c, int n);
 

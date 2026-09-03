@@ -217,6 +217,11 @@ func (this *QAbstractAudioDeviceInfo) GoGC() {
 	})
 }
 
+//export miqt_exec_callback_handle_release_QAbstractAudioOutput
+func miqt_exec_callback_handle_release_QAbstractAudioOutput(cb C.intptr_t) {
+	cgo.Handle(cb).Delete()
+}
+
 type QAbstractAudioOutput struct {
 	h *C.QAbstractAudioOutput
 	*qt.QObject
@@ -381,8 +386,10 @@ func (this *QAbstractAudioOutput) SetCategory(category string) {
 func (this *QAbstractAudioOutput) ErrorChanged(error QAudio__Error) {
 	C.QAbstractAudioOutput_errorChanged(this.h, (C.int)(error))
 }
-func (this *QAbstractAudioOutput) OnErrorChanged(slot func(error QAudio__Error)) {
-	C.QAbstractAudioOutput_connect_errorChanged(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QAbstractAudioOutput) OnErrorChanged(slot func(error QAudio__Error)) *qt.SignalConnection {
+	_goptr := qt.UnsafeNewQMetaObject__Connection(C.QAbstractAudioOutput_connect_errorChanged(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QAbstractAudioOutput_errorChanged
@@ -401,8 +408,10 @@ func miqt_exec_callback_QAbstractAudioOutput_errorChanged(cb C.intptr_t, error C
 func (this *QAbstractAudioOutput) StateChanged(state QAudio__State) {
 	C.QAbstractAudioOutput_stateChanged(this.h, (C.int)(state))
 }
-func (this *QAbstractAudioOutput) OnStateChanged(slot func(state QAudio__State)) {
-	C.QAbstractAudioOutput_connect_stateChanged(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QAbstractAudioOutput) OnStateChanged(slot func(state QAudio__State)) *qt.SignalConnection {
+	_goptr := qt.UnsafeNewQMetaObject__Connection(C.QAbstractAudioOutput_connect_stateChanged(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QAbstractAudioOutput_stateChanged
@@ -421,8 +430,10 @@ func miqt_exec_callback_QAbstractAudioOutput_stateChanged(cb C.intptr_t, state C
 func (this *QAbstractAudioOutput) Notify() {
 	C.QAbstractAudioOutput_notify(this.h)
 }
-func (this *QAbstractAudioOutput) OnNotify(slot func()) {
-	C.QAbstractAudioOutput_connect_notify(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QAbstractAudioOutput) OnNotify(slot func()) *qt.SignalConnection {
+	_goptr := qt.UnsafeNewQMetaObject__Connection(C.QAbstractAudioOutput_connect_notify(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QAbstractAudioOutput_notify
@@ -491,6 +502,11 @@ func (this *QAbstractAudioOutput) GoGC() {
 		this.Delete()
 		runtime.KeepAlive(this.h)
 	})
+}
+
+//export miqt_exec_callback_handle_release_QAbstractAudioInput
+func miqt_exec_callback_handle_release_QAbstractAudioInput(cb C.intptr_t) {
+	cgo.Handle(cb).Delete()
 }
 
 type QAbstractAudioInput struct {
@@ -642,8 +658,10 @@ func (this *QAbstractAudioInput) Volume() float64 {
 func (this *QAbstractAudioInput) ErrorChanged(error QAudio__Error) {
 	C.QAbstractAudioInput_errorChanged(this.h, (C.int)(error))
 }
-func (this *QAbstractAudioInput) OnErrorChanged(slot func(error QAudio__Error)) {
-	C.QAbstractAudioInput_connect_errorChanged(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QAbstractAudioInput) OnErrorChanged(slot func(error QAudio__Error)) *qt.SignalConnection {
+	_goptr := qt.UnsafeNewQMetaObject__Connection(C.QAbstractAudioInput_connect_errorChanged(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QAbstractAudioInput_errorChanged
@@ -662,8 +680,10 @@ func miqt_exec_callback_QAbstractAudioInput_errorChanged(cb C.intptr_t, error C.
 func (this *QAbstractAudioInput) StateChanged(state QAudio__State) {
 	C.QAbstractAudioInput_stateChanged(this.h, (C.int)(state))
 }
-func (this *QAbstractAudioInput) OnStateChanged(slot func(state QAudio__State)) {
-	C.QAbstractAudioInput_connect_stateChanged(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QAbstractAudioInput) OnStateChanged(slot func(state QAudio__State)) *qt.SignalConnection {
+	_goptr := qt.UnsafeNewQMetaObject__Connection(C.QAbstractAudioInput_connect_stateChanged(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QAbstractAudioInput_stateChanged
@@ -682,8 +702,10 @@ func miqt_exec_callback_QAbstractAudioInput_stateChanged(cb C.intptr_t, state C.
 func (this *QAbstractAudioInput) Notify() {
 	C.QAbstractAudioInput_notify(this.h)
 }
-func (this *QAbstractAudioInput) OnNotify(slot func()) {
-	C.QAbstractAudioInput_connect_notify(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QAbstractAudioInput) OnNotify(slot func()) *qt.SignalConnection {
+	_goptr := qt.UnsafeNewQMetaObject__Connection(C.QAbstractAudioInput_connect_notify(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QAbstractAudioInput_notify

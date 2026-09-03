@@ -38,6 +38,36 @@ func cabiCallbackName(c CppClass, m CppMethod) string {
 	return "miqt_exec_callback_" + cabiClassName(c.ClassName) + "_" + m.SafeMethodName()
 }
 
+func cabiCallbackReleaseName(c CppClass) string {
+	// Keep this prefix structurally distinct from per-method callback names. A
+	// Qt class may itself have a virtual method or signal named "release".
+	return "miqt_exec_callback_handle_release_" + cabiClassName(c.ClassName)
+}
+
+func classHasCallbacks(c *CppClass) bool {
+	if len(c.VirtualMethods()) > 0 || len(c.PrivateSignals) > 0 {
+		return true
+	}
+
+	for _, m := range c.Methods {
+		if m.IsSignal {
+			return true
+		}
+	}
+
+	return false
+}
+
+func sourceHasCallbacks(src *CppParsedHeader) bool {
+	for i := range src.Classes {
+		if classHasCallbacks(&src.Classes[i]) {
+			return true
+		}
+	}
+
+	return false
+}
+
 func cabiNewName(c CppClass, i int) string {
 	return cabiClassName(c.ClassName) + `_new` + maybeSuffix(i)
 }
@@ -905,7 +935,7 @@ extern "C" {
 			}
 
 			if m.IsSignal {
-				ret.WriteString(fmt.Sprintf("%s %s(%s* self, intptr_t slot);\n", m.ReturnType.RenderTypeCabi(), cabiConnectName(c, m), className))
+				ret.WriteString(fmt.Sprintf("void* %s(%s* self, intptr_t slot);\n", cabiConnectName(c, m), className))
 			}
 		}
 
@@ -930,7 +960,7 @@ extern "C" {
 		}
 
 		for _, m := range c.PrivateSignals {
-			ret.WriteString(fmt.Sprintf("%s %s(%s* self, intptr_t slot);\n", m.ReturnType.RenderTypeCabi(), cabiConnectName(c, m), className))
+			ret.WriteString(fmt.Sprintf("void* %s(%s* self, intptr_t slot);\n", cabiConnectName(c, m), className))
 		}
 		if len(c.PrivateSignals) > 0 {
 			ret.WriteString("\n")
@@ -965,6 +995,11 @@ func emitParametersCabiConstructor(c *CppClass, ctor *CppMethod) string {
 
 func emitBindingCpp(src *CppParsedHeader, filename string) (string, error) {
 	ret := strings.Builder{}
+
+	if sourceHasCallbacks(src) {
+		ret.WriteString("#include <memory>\n")
+		ret.WriteString("#include <utility>\n")
+	}
 
 	for _, ref := range getReferencedTypes(src) {
 
@@ -1011,6 +1046,10 @@ extern "C" {
 `)
 
 	for _, c := range src.Classes {
+		if classHasCallbacks(&c) {
+			ret.WriteString("void " + cabiCallbackReleaseName(c) + "(intptr_t);\n")
+		}
+
 		methodsAndPrivateSignals := append(c.Methods, c.PrivateSignals...)
 
 		for _, m := range methodsAndPrivateSignals {
@@ -1097,7 +1136,7 @@ extern "C" {
 
 					ret.WriteString(
 						"\t// cgo.Handle value for overwritten implementation\n" +
-							"\tintptr_t " + handleVarname + " = 0;\n" +
+							"\tmiqt_callback_handle<" + cabiCallbackReleaseName(c) + "> " + handleVarname + ";\n" +
 							"\n",
 					)
 
@@ -1109,7 +1148,7 @@ extern "C" {
 							"\tvirtual " + m.ReturnType.RenderTypeQtCpp() + " " + m.CppCallTarget() + "(" + emitParametersCpp(m) + ") " + ifv(m.IsConst, "const ", "") + ifv(len(m.Noexcept) > 0, m.Noexcept+" ", "") + "override {\n",
 					)
 
-					ret.WriteString("\t\tif (" + handleVarname + " == 0) {\n")
+					ret.WriteString("\t\tif (!" + handleVarname + ") {\n")
 					if m.IsPureVirtual {
 						if m.ReturnType.Void() {
 							ret.WriteString("\t\t\treturn; // Pure virtual, there is no base we can call\n")
@@ -1127,7 +1166,7 @@ extern "C" {
 
 					paramArgs := []string{}
 					paramArgs = append(paramArgs, "this")
-					paramArgs = append(paramArgs, handleVarname)
+					paramArgs = append(paramArgs, handleVarname+".value()")
 
 					var signalCode string
 
@@ -1376,10 +1415,12 @@ extern "C" {
 				signalCode += "\t\t" + cabiCallbackName(c, m) + "(" + strings.Join(paramArgs, `, `) + ");\n"
 
 				ret.WriteString(
-					`void ` + cabiConnectName(c, m) + `(` + className + `* self, intptr_t slot) {` + "\n" +
-						"\t" + className + `::connect(self, ` + exactSignal + `, self, [=](` + emitParametersCpp(m) + `) {` + "\n" +
+					`void* ` + cabiConnectName(c, m) + `(` + className + `* self, intptr_t slot) {` + "\n" +
+						"\tauto slot_handle = std::make_shared<miqt_callback_handle<" + cabiCallbackReleaseName(c) + ">>(slot);\n" +
+						"\treturn new QMetaObject::Connection(" + className + `::connect(self, ` + exactSignal + `, self, [slot_handle](` + emitParametersCpp(m) + `) {` + "\n" +
+						"\t\tintptr_t slot = slot_handle->value();\n" +
 						signalCode +
-						"\t});\n" +
+						"\t}));\n" +
 						"}\n" +
 						"\n",
 				)
@@ -1435,12 +1476,13 @@ extern "C" {
 
 				ret.WriteString(
 					`bool ` + cabiOverrideVirtualName(c, m) + `(void* self, intptr_t slot) {` + "\n" +
+						"\tmiqt_callback_handle<" + cabiCallbackReleaseName(c) + "> slot_handle(slot);\n" +
 						"\t" + subclassName + "* self_cast = dynamic_cast<" + subclassName + "*>( (" + c.ClassName + "*)(self) );\n" +
 						"\tif (self_cast == nullptr) {\n" +
 						"\t\treturn false;\n" +
 						"\t}\n" +
 						"\n" +
-						"\tself_cast->handle__" + m.SafeMethodName() + " = slot;\n" +
+						"\tself_cast->handle__" + m.SafeMethodName() + " = std::move(slot_handle);\n" +
 						"\treturn true;\n" +
 						"}\n" +
 						"\n",
@@ -1512,10 +1554,12 @@ extern "C" {
 			signalCode += "\t\t" + cabiCallbackName(c, m) + "(" + strings.Join(paramArgs, `, `) + ");\n"
 
 			ret.WriteString(
-				`void ` + cabiConnectName(c, m) + `(` + className + `* self, intptr_t slot) {` + "\n" +
-					"\t" + className + `::connect(self, ` + exactSignal + `, self, [=](` + emitParametersCpp(m) + `) {` + "\n" +
+				`void* ` + cabiConnectName(c, m) + `(` + className + `* self, intptr_t slot) {` + "\n" +
+					"\tauto slot_handle = std::make_shared<miqt_callback_handle<" + cabiCallbackReleaseName(c) + ">>(slot);\n" +
+					"\treturn new QMetaObject::Connection(" + className + `::connect(self, ` + exactSignal + `, self, [slot_handle](` + emitParametersCpp(m) + `) {` + "\n" +
+					"\t\tintptr_t slot = slot_handle->value();\n" +
 					signalCode +
-					"\t});\n" +
+					"\t}));\n" +
 					"}\n" +
 					"\n",
 			)

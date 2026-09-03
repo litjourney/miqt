@@ -41,9 +41,9 @@ QVariant* QMediaStreamsControl_metaData(QMediaStreamsControl* self, int streamNu
 bool QMediaStreamsControl_isActive(QMediaStreamsControl* self, int streamNumber);
 void QMediaStreamsControl_setActive(QMediaStreamsControl* self, int streamNumber, bool state);
 void QMediaStreamsControl_streamsChanged(QMediaStreamsControl* self);
-void QMediaStreamsControl_connect_streamsChanged(QMediaStreamsControl* self, intptr_t slot);
+void* QMediaStreamsControl_connect_streamsChanged(QMediaStreamsControl* self, intptr_t slot);
 void QMediaStreamsControl_activeStreamsChanged(QMediaStreamsControl* self);
-void QMediaStreamsControl_connect_activeStreamsChanged(QMediaStreamsControl* self, intptr_t slot);
+void* QMediaStreamsControl_connect_activeStreamsChanged(QMediaStreamsControl* self, intptr_t slot);
 struct miqt_string QMediaStreamsControl_tr2(const char* s, const char* c);
 struct miqt_string QMediaStreamsControl_tr3(const char* s, const char* c, int n);
 struct miqt_string QMediaStreamsControl_trUtf82(const char* s, const char* c);

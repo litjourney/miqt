@@ -1,3 +1,5 @@
+#include <memory>
+#include <utility>
 #include <QChildEvent>
 #include <QEvent>
 #include <QList>
@@ -22,6 +24,7 @@
 extern "C" {
 #endif
 
+void miqt_exec_callback_handle_release_QSqlDriver(intptr_t);
 void miqt_exec_callback_QSqlDriver_notification(intptr_t, struct miqt_string);
 void miqt_exec_callback_QSqlDriver_notification2(intptr_t, struct miqt_string, int, QVariant*);
 bool miqt_exec_callback_QSqlDriver_isOpen(const QSqlDriver*, intptr_t);
@@ -68,77 +71,77 @@ public:
 	virtual ~MiqtVirtualQSqlDriver() override = default;
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__isOpen = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QSqlDriver> handle__isOpen;
 
 	// Subclass to allow providing a Go implementation
 	virtual bool isOpen() const override {
-		if (handle__isOpen == 0) {
+		if (!handle__isOpen) {
 			return QSqlDriver::isOpen();
 		}
 
-		bool callback_return_value = miqt_exec_callback_QSqlDriver_isOpen(this, handle__isOpen);
+		bool callback_return_value = miqt_exec_callback_QSqlDriver_isOpen(this, handle__isOpen.value());
 		return callback_return_value;
 	}
 
 	friend bool QSqlDriver_virtualbase_isOpen(const void* self);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__beginTransaction = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QSqlDriver> handle__beginTransaction;
 
 	// Subclass to allow providing a Go implementation
 	virtual bool beginTransaction() override {
-		if (handle__beginTransaction == 0) {
+		if (!handle__beginTransaction) {
 			return QSqlDriver::beginTransaction();
 		}
 
-		bool callback_return_value = miqt_exec_callback_QSqlDriver_beginTransaction(this, handle__beginTransaction);
+		bool callback_return_value = miqt_exec_callback_QSqlDriver_beginTransaction(this, handle__beginTransaction.value());
 		return callback_return_value;
 	}
 
 	friend bool QSqlDriver_virtualbase_beginTransaction(void* self);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__commitTransaction = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QSqlDriver> handle__commitTransaction;
 
 	// Subclass to allow providing a Go implementation
 	virtual bool commitTransaction() override {
-		if (handle__commitTransaction == 0) {
+		if (!handle__commitTransaction) {
 			return QSqlDriver::commitTransaction();
 		}
 
-		bool callback_return_value = miqt_exec_callback_QSqlDriver_commitTransaction(this, handle__commitTransaction);
+		bool callback_return_value = miqt_exec_callback_QSqlDriver_commitTransaction(this, handle__commitTransaction.value());
 		return callback_return_value;
 	}
 
 	friend bool QSqlDriver_virtualbase_commitTransaction(void* self);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__rollbackTransaction = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QSqlDriver> handle__rollbackTransaction;
 
 	// Subclass to allow providing a Go implementation
 	virtual bool rollbackTransaction() override {
-		if (handle__rollbackTransaction == 0) {
+		if (!handle__rollbackTransaction) {
 			return QSqlDriver::rollbackTransaction();
 		}
 
-		bool callback_return_value = miqt_exec_callback_QSqlDriver_rollbackTransaction(this, handle__rollbackTransaction);
+		bool callback_return_value = miqt_exec_callback_QSqlDriver_rollbackTransaction(this, handle__rollbackTransaction.value());
 		return callback_return_value;
 	}
 
 	friend bool QSqlDriver_virtualbase_rollbackTransaction(void* self);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__tables = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QSqlDriver> handle__tables;
 
 	// Subclass to allow providing a Go implementation
 	virtual QStringList tables(QSql::TableType tableType) const override {
-		if (handle__tables == 0) {
+		if (!handle__tables) {
 			return QSqlDriver::tables(tableType);
 		}
 
 		QSql::TableType tableType_ret = tableType;
 		int sigval1 = static_cast<int>(tableType_ret);
-		struct miqt_array /* of struct miqt_string */  callback_return_value = miqt_exec_callback_QSqlDriver_tables(this, handle__tables, sigval1);
+		struct miqt_array /* of struct miqt_string */  callback_return_value = miqt_exec_callback_QSqlDriver_tables(this, handle__tables.value(), sigval1);
 		QStringList callback_return_value_QList;
 		callback_return_value_QList.reserve(callback_return_value.len);
 		struct miqt_string* callback_return_value_arr = static_cast<struct miqt_string*>(callback_return_value.data);
@@ -157,11 +160,11 @@ public:
 	friend struct miqt_array /* of struct miqt_string */  QSqlDriver_virtualbase_tables(const void* self, int tableType);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__primaryIndex = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QSqlDriver> handle__primaryIndex;
 
 	// Subclass to allow providing a Go implementation
 	virtual QSqlIndex primaryIndex(const QString& tableName) const override {
-		if (handle__primaryIndex == 0) {
+		if (!handle__primaryIndex) {
 			return QSqlDriver::primaryIndex(tableName);
 		}
 
@@ -173,18 +176,18 @@ public:
 		tableName_ms.data = static_cast<char*>(malloc(tableName_ms.len));
 		memcpy(tableName_ms.data, tableName_b.data(), tableName_ms.len);
 		struct miqt_string sigval1 = tableName_ms;
-		QSqlIndex* callback_return_value = miqt_exec_callback_QSqlDriver_primaryIndex(this, handle__primaryIndex, sigval1);
+		QSqlIndex* callback_return_value = miqt_exec_callback_QSqlDriver_primaryIndex(this, handle__primaryIndex.value(), sigval1);
 		return *callback_return_value;
 	}
 
 	friend QSqlIndex* QSqlDriver_virtualbase_primaryIndex(const void* self, struct miqt_string tableName);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__record = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QSqlDriver> handle__record;
 
 	// Subclass to allow providing a Go implementation
 	virtual QSqlRecord record(const QString& tableName) const override {
-		if (handle__record == 0) {
+		if (!handle__record) {
 			return QSqlDriver::record(tableName);
 		}
 
@@ -196,18 +199,18 @@ public:
 		tableName_ms.data = static_cast<char*>(malloc(tableName_ms.len));
 		memcpy(tableName_ms.data, tableName_b.data(), tableName_ms.len);
 		struct miqt_string sigval1 = tableName_ms;
-		QSqlRecord* callback_return_value = miqt_exec_callback_QSqlDriver_record(this, handle__record, sigval1);
+		QSqlRecord* callback_return_value = miqt_exec_callback_QSqlDriver_record(this, handle__record.value(), sigval1);
 		return *callback_return_value;
 	}
 
 	friend QSqlRecord* QSqlDriver_virtualbase_record(const void* self, struct miqt_string tableName);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__formatValue = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QSqlDriver> handle__formatValue;
 
 	// Subclass to allow providing a Go implementation
 	virtual QString formatValue(const QSqlField& field, bool trimStrings) const override {
-		if (handle__formatValue == 0) {
+		if (!handle__formatValue) {
 			return QSqlDriver::formatValue(field, trimStrings);
 		}
 
@@ -215,7 +218,7 @@ public:
 		// Cast returned reference into pointer
 		QSqlField* sigval1 = const_cast<QSqlField*>(&field_ret);
 		bool sigval2 = trimStrings;
-		struct miqt_string callback_return_value = miqt_exec_callback_QSqlDriver_formatValue(this, handle__formatValue, sigval1, sigval2);
+		struct miqt_string callback_return_value = miqt_exec_callback_QSqlDriver_formatValue(this, handle__formatValue.value(), sigval1, sigval2);
 		QString callback_return_value_QString = QString::fromUtf8(callback_return_value.data, callback_return_value.len);
 		free(callback_return_value.data);
 		return callback_return_value_QString;
@@ -224,11 +227,11 @@ public:
 	friend struct miqt_string QSqlDriver_virtualbase_formatValue(const void* self, QSqlField* field, bool trimStrings);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__escapeIdentifier = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QSqlDriver> handle__escapeIdentifier;
 
 	// Subclass to allow providing a Go implementation
 	virtual QString escapeIdentifier(const QString& identifier, QSqlDriver::IdentifierType type) const override {
-		if (handle__escapeIdentifier == 0) {
+		if (!handle__escapeIdentifier) {
 			return QSqlDriver::escapeIdentifier(identifier, type);
 		}
 
@@ -242,7 +245,7 @@ public:
 		struct miqt_string sigval1 = identifier_ms;
 		QSqlDriver::IdentifierType type_ret = type;
 		int sigval2 = static_cast<int>(type_ret);
-		struct miqt_string callback_return_value = miqt_exec_callback_QSqlDriver_escapeIdentifier(this, handle__escapeIdentifier, sigval1, sigval2);
+		struct miqt_string callback_return_value = miqt_exec_callback_QSqlDriver_escapeIdentifier(this, handle__escapeIdentifier.value(), sigval1, sigval2);
 		QString callback_return_value_QString = QString::fromUtf8(callback_return_value.data, callback_return_value.len);
 		free(callback_return_value.data);
 		return callback_return_value_QString;
@@ -251,11 +254,11 @@ public:
 	friend struct miqt_string QSqlDriver_virtualbase_escapeIdentifier(const void* self, struct miqt_string identifier, int type);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__sqlStatement = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QSqlDriver> handle__sqlStatement;
 
 	// Subclass to allow providing a Go implementation
 	virtual QString sqlStatement(QSqlDriver::StatementType type, const QString& tableName, const QSqlRecord& rec, bool preparedStatement) const override {
-		if (handle__sqlStatement == 0) {
+		if (!handle__sqlStatement) {
 			return QSqlDriver::sqlStatement(type, tableName, rec, preparedStatement);
 		}
 
@@ -273,7 +276,7 @@ public:
 		// Cast returned reference into pointer
 		QSqlRecord* sigval3 = const_cast<QSqlRecord*>(&rec_ret);
 		bool sigval4 = preparedStatement;
-		struct miqt_string callback_return_value = miqt_exec_callback_QSqlDriver_sqlStatement(this, handle__sqlStatement, sigval1, sigval2, sigval3, sigval4);
+		struct miqt_string callback_return_value = miqt_exec_callback_QSqlDriver_sqlStatement(this, handle__sqlStatement.value(), sigval1, sigval2, sigval3, sigval4);
 		QString callback_return_value_QString = QString::fromUtf8(callback_return_value.data, callback_return_value.len);
 		free(callback_return_value.data);
 		return callback_return_value_QString;
@@ -282,67 +285,67 @@ public:
 	friend struct miqt_string QSqlDriver_virtualbase_sqlStatement(const void* self, int type, struct miqt_string tableName, QSqlRecord* rec, bool preparedStatement);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__handle = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QSqlDriver> handle__handle;
 
 	// Subclass to allow providing a Go implementation
 	virtual QVariant handle() const override {
-		if (handle__handle == 0) {
+		if (!handle__handle) {
 			return QSqlDriver::handle();
 		}
 
-		QVariant* callback_return_value = miqt_exec_callback_QSqlDriver_handle(this, handle__handle);
+		QVariant* callback_return_value = miqt_exec_callback_QSqlDriver_handle(this, handle__handle.value());
 		return *callback_return_value;
 	}
 
 	friend QVariant* QSqlDriver_virtualbase_handle(const void* self);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__hasFeature = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QSqlDriver> handle__hasFeature;
 
 	// Subclass to allow providing a Go implementation
 	virtual bool hasFeature(QSqlDriver::DriverFeature f) const override {
-		if (handle__hasFeature == 0) {
+		if (!handle__hasFeature) {
 			return false; // Pure virtual, there is no base we can call
 		}
 
 		QSqlDriver::DriverFeature f_ret = f;
 		int sigval1 = static_cast<int>(f_ret);
-		bool callback_return_value = miqt_exec_callback_QSqlDriver_hasFeature(this, handle__hasFeature, sigval1);
+		bool callback_return_value = miqt_exec_callback_QSqlDriver_hasFeature(this, handle__hasFeature.value(), sigval1);
 		return callback_return_value;
 	}
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__close = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QSqlDriver> handle__close;
 
 	// Subclass to allow providing a Go implementation
 	virtual void close() override {
-		if (handle__close == 0) {
+		if (!handle__close) {
 			return; // Pure virtual, there is no base we can call
 		}
 
-		miqt_exec_callback_QSqlDriver_close(this, handle__close);
+		miqt_exec_callback_QSqlDriver_close(this, handle__close.value());
 
 	}
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__createResult = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QSqlDriver> handle__createResult;
 
 	// Subclass to allow providing a Go implementation
 	virtual QSqlResult* createResult() const override {
-		if (handle__createResult == 0) {
+		if (!handle__createResult) {
 			return nullptr; // Pure virtual, there is no base we can call
 		}
 
-		QSqlResult* callback_return_value = miqt_exec_callback_QSqlDriver_createResult(this, handle__createResult);
+		QSqlResult* callback_return_value = miqt_exec_callback_QSqlDriver_createResult(this, handle__createResult.value());
 		return callback_return_value;
 	}
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__open = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QSqlDriver> handle__open;
 
 	// Subclass to allow providing a Go implementation
 	virtual bool open(const QString& db, const QString& user, const QString& password, const QString& host, int port, const QString& connOpts) override {
-		if (handle__open == 0) {
+		if (!handle__open) {
 			return false; // Pure virtual, there is no base we can call
 		}
 
@@ -387,16 +390,16 @@ public:
 		connOpts_ms.data = static_cast<char*>(malloc(connOpts_ms.len));
 		memcpy(connOpts_ms.data, connOpts_b.data(), connOpts_ms.len);
 		struct miqt_string sigval6 = connOpts_ms;
-		bool callback_return_value = miqt_exec_callback_QSqlDriver_open(this, handle__open, sigval1, sigval2, sigval3, sigval4, sigval5, sigval6);
+		bool callback_return_value = miqt_exec_callback_QSqlDriver_open(this, handle__open.value(), sigval1, sigval2, sigval3, sigval4, sigval5, sigval6);
 		return callback_return_value;
 	}
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__subscribeToNotification = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QSqlDriver> handle__subscribeToNotification;
 
 	// Subclass to allow providing a Go implementation
 	virtual bool subscribeToNotification(const QString& name) override {
-		if (handle__subscribeToNotification == 0) {
+		if (!handle__subscribeToNotification) {
 			return QSqlDriver::subscribeToNotification(name);
 		}
 
@@ -408,18 +411,18 @@ public:
 		name_ms.data = static_cast<char*>(malloc(name_ms.len));
 		memcpy(name_ms.data, name_b.data(), name_ms.len);
 		struct miqt_string sigval1 = name_ms;
-		bool callback_return_value = miqt_exec_callback_QSqlDriver_subscribeToNotification(this, handle__subscribeToNotification, sigval1);
+		bool callback_return_value = miqt_exec_callback_QSqlDriver_subscribeToNotification(this, handle__subscribeToNotification.value(), sigval1);
 		return callback_return_value;
 	}
 
 	friend bool QSqlDriver_virtualbase_subscribeToNotification(void* self, struct miqt_string name);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__unsubscribeFromNotification = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QSqlDriver> handle__unsubscribeFromNotification;
 
 	// Subclass to allow providing a Go implementation
 	virtual bool unsubscribeFromNotification(const QString& name) override {
-		if (handle__unsubscribeFromNotification == 0) {
+		if (!handle__unsubscribeFromNotification) {
 			return QSqlDriver::unsubscribeFromNotification(name);
 		}
 
@@ -431,22 +434,22 @@ public:
 		name_ms.data = static_cast<char*>(malloc(name_ms.len));
 		memcpy(name_ms.data, name_b.data(), name_ms.len);
 		struct miqt_string sigval1 = name_ms;
-		bool callback_return_value = miqt_exec_callback_QSqlDriver_unsubscribeFromNotification(this, handle__unsubscribeFromNotification, sigval1);
+		bool callback_return_value = miqt_exec_callback_QSqlDriver_unsubscribeFromNotification(this, handle__unsubscribeFromNotification.value(), sigval1);
 		return callback_return_value;
 	}
 
 	friend bool QSqlDriver_virtualbase_unsubscribeFromNotification(void* self, struct miqt_string name);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__subscribedToNotifications = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QSqlDriver> handle__subscribedToNotifications;
 
 	// Subclass to allow providing a Go implementation
 	virtual QStringList subscribedToNotifications() const override {
-		if (handle__subscribedToNotifications == 0) {
+		if (!handle__subscribedToNotifications) {
 			return QSqlDriver::subscribedToNotifications();
 		}
 
-		struct miqt_array /* of struct miqt_string */  callback_return_value = miqt_exec_callback_QSqlDriver_subscribedToNotifications(this, handle__subscribedToNotifications);
+		struct miqt_array /* of struct miqt_string */  callback_return_value = miqt_exec_callback_QSqlDriver_subscribedToNotifications(this, handle__subscribedToNotifications.value());
 		QStringList callback_return_value_QList;
 		callback_return_value_QList.reserve(callback_return_value.len);
 		struct miqt_string* callback_return_value_arr = static_cast<struct miqt_string*>(callback_return_value.data);
@@ -465,11 +468,11 @@ public:
 	friend struct miqt_array /* of struct miqt_string */  QSqlDriver_virtualbase_subscribedToNotifications(const void* self);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__isIdentifierEscaped = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QSqlDriver> handle__isIdentifierEscaped;
 
 	// Subclass to allow providing a Go implementation
 	virtual bool isIdentifierEscaped(const QString& identifier, QSqlDriver::IdentifierType type) const override {
-		if (handle__isIdentifierEscaped == 0) {
+		if (!handle__isIdentifierEscaped) {
 			return QSqlDriver::isIdentifierEscaped(identifier, type);
 		}
 
@@ -483,18 +486,18 @@ public:
 		struct miqt_string sigval1 = identifier_ms;
 		QSqlDriver::IdentifierType type_ret = type;
 		int sigval2 = static_cast<int>(type_ret);
-		bool callback_return_value = miqt_exec_callback_QSqlDriver_isIdentifierEscaped(this, handle__isIdentifierEscaped, sigval1, sigval2);
+		bool callback_return_value = miqt_exec_callback_QSqlDriver_isIdentifierEscaped(this, handle__isIdentifierEscaped.value(), sigval1, sigval2);
 		return callback_return_value;
 	}
 
 	friend bool QSqlDriver_virtualbase_isIdentifierEscaped(const void* self, struct miqt_string identifier, int type);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__stripDelimiters = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QSqlDriver> handle__stripDelimiters;
 
 	// Subclass to allow providing a Go implementation
 	virtual QString stripDelimiters(const QString& identifier, QSqlDriver::IdentifierType type) const override {
-		if (handle__stripDelimiters == 0) {
+		if (!handle__stripDelimiters) {
 			return QSqlDriver::stripDelimiters(identifier, type);
 		}
 
@@ -508,7 +511,7 @@ public:
 		struct miqt_string sigval1 = identifier_ms;
 		QSqlDriver::IdentifierType type_ret = type;
 		int sigval2 = static_cast<int>(type_ret);
-		struct miqt_string callback_return_value = miqt_exec_callback_QSqlDriver_stripDelimiters(this, handle__stripDelimiters, sigval1, sigval2);
+		struct miqt_string callback_return_value = miqt_exec_callback_QSqlDriver_stripDelimiters(this, handle__stripDelimiters.value(), sigval1, sigval2);
 		QString callback_return_value_QString = QString::fromUtf8(callback_return_value.data, callback_return_value.len);
 		free(callback_return_value.data);
 		return callback_return_value_QString;
@@ -517,60 +520,60 @@ public:
 	friend struct miqt_string QSqlDriver_virtualbase_stripDelimiters(const void* self, struct miqt_string identifier, int type);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__cancelQuery = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QSqlDriver> handle__cancelQuery;
 
 	// Subclass to allow providing a Go implementation
 	virtual bool cancelQuery() override {
-		if (handle__cancelQuery == 0) {
+		if (!handle__cancelQuery) {
 			return QSqlDriver::cancelQuery();
 		}
 
-		bool callback_return_value = miqt_exec_callback_QSqlDriver_cancelQuery(this, handle__cancelQuery);
+		bool callback_return_value = miqt_exec_callback_QSqlDriver_cancelQuery(this, handle__cancelQuery.value());
 		return callback_return_value;
 	}
 
 	friend bool QSqlDriver_virtualbase_cancelQuery(void* self);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__setOpen = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QSqlDriver> handle__setOpen;
 
 	// Subclass to allow providing a Go implementation
 	virtual void setOpen(bool o) override {
-		if (handle__setOpen == 0) {
+		if (!handle__setOpen) {
 			QSqlDriver::setOpen(o);
 			return;
 		}
 
 		bool sigval1 = o;
-		miqt_exec_callback_QSqlDriver_setOpen(this, handle__setOpen, sigval1);
+		miqt_exec_callback_QSqlDriver_setOpen(this, handle__setOpen.value(), sigval1);
 
 	}
 
 	friend void QSqlDriver_virtualbase_setOpen(void* self, bool o);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__setOpenError = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QSqlDriver> handle__setOpenError;
 
 	// Subclass to allow providing a Go implementation
 	virtual void setOpenError(bool e) override {
-		if (handle__setOpenError == 0) {
+		if (!handle__setOpenError) {
 			QSqlDriver::setOpenError(e);
 			return;
 		}
 
 		bool sigval1 = e;
-		miqt_exec_callback_QSqlDriver_setOpenError(this, handle__setOpenError, sigval1);
+		miqt_exec_callback_QSqlDriver_setOpenError(this, handle__setOpenError.value(), sigval1);
 
 	}
 
 	friend void QSqlDriver_virtualbase_setOpenError(void* self, bool e);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__setLastError = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QSqlDriver> handle__setLastError;
 
 	// Subclass to allow providing a Go implementation
 	virtual void setLastError(const QSqlError& e) override {
-		if (handle__setLastError == 0) {
+		if (!handle__setLastError) {
 			QSqlDriver::setLastError(e);
 			return;
 		}
@@ -578,102 +581,102 @@ public:
 		const QSqlError& e_ret = e;
 		// Cast returned reference into pointer
 		QSqlError* sigval1 = const_cast<QSqlError*>(&e_ret);
-		miqt_exec_callback_QSqlDriver_setLastError(this, handle__setLastError, sigval1);
+		miqt_exec_callback_QSqlDriver_setLastError(this, handle__setLastError.value(), sigval1);
 
 	}
 
 	friend void QSqlDriver_virtualbase_setLastError(void* self, QSqlError* e);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__event = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QSqlDriver> handle__event;
 
 	// Subclass to allow providing a Go implementation
 	virtual bool event(QEvent* event) override {
-		if (handle__event == 0) {
+		if (!handle__event) {
 			return QSqlDriver::event(event);
 		}
 
 		QEvent* sigval1 = event;
-		bool callback_return_value = miqt_exec_callback_QSqlDriver_event(this, handle__event, sigval1);
+		bool callback_return_value = miqt_exec_callback_QSqlDriver_event(this, handle__event.value(), sigval1);
 		return callback_return_value;
 	}
 
 	friend bool QSqlDriver_virtualbase_event(void* self, QEvent* event);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__eventFilter = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QSqlDriver> handle__eventFilter;
 
 	// Subclass to allow providing a Go implementation
 	virtual bool eventFilter(QObject* watched, QEvent* event) override {
-		if (handle__eventFilter == 0) {
+		if (!handle__eventFilter) {
 			return QSqlDriver::eventFilter(watched, event);
 		}
 
 		QObject* sigval1 = watched;
 		QEvent* sigval2 = event;
-		bool callback_return_value = miqt_exec_callback_QSqlDriver_eventFilter(this, handle__eventFilter, sigval1, sigval2);
+		bool callback_return_value = miqt_exec_callback_QSqlDriver_eventFilter(this, handle__eventFilter.value(), sigval1, sigval2);
 		return callback_return_value;
 	}
 
 	friend bool QSqlDriver_virtualbase_eventFilter(void* self, QObject* watched, QEvent* event);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__timerEvent = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QSqlDriver> handle__timerEvent;
 
 	// Subclass to allow providing a Go implementation
 	virtual void timerEvent(QTimerEvent* event) override {
-		if (handle__timerEvent == 0) {
+		if (!handle__timerEvent) {
 			QSqlDriver::timerEvent(event);
 			return;
 		}
 
 		QTimerEvent* sigval1 = event;
-		miqt_exec_callback_QSqlDriver_timerEvent(this, handle__timerEvent, sigval1);
+		miqt_exec_callback_QSqlDriver_timerEvent(this, handle__timerEvent.value(), sigval1);
 
 	}
 
 	friend void QSqlDriver_virtualbase_timerEvent(void* self, QTimerEvent* event);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__childEvent = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QSqlDriver> handle__childEvent;
 
 	// Subclass to allow providing a Go implementation
 	virtual void childEvent(QChildEvent* event) override {
-		if (handle__childEvent == 0) {
+		if (!handle__childEvent) {
 			QSqlDriver::childEvent(event);
 			return;
 		}
 
 		QChildEvent* sigval1 = event;
-		miqt_exec_callback_QSqlDriver_childEvent(this, handle__childEvent, sigval1);
+		miqt_exec_callback_QSqlDriver_childEvent(this, handle__childEvent.value(), sigval1);
 
 	}
 
 	friend void QSqlDriver_virtualbase_childEvent(void* self, QChildEvent* event);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__customEvent = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QSqlDriver> handle__customEvent;
 
 	// Subclass to allow providing a Go implementation
 	virtual void customEvent(QEvent* event) override {
-		if (handle__customEvent == 0) {
+		if (!handle__customEvent) {
 			QSqlDriver::customEvent(event);
 			return;
 		}
 
 		QEvent* sigval1 = event;
-		miqt_exec_callback_QSqlDriver_customEvent(this, handle__customEvent, sigval1);
+		miqt_exec_callback_QSqlDriver_customEvent(this, handle__customEvent.value(), sigval1);
 
 	}
 
 	friend void QSqlDriver_virtualbase_customEvent(void* self, QEvent* event);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__connectNotify = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QSqlDriver> handle__connectNotify;
 
 	// Subclass to allow providing a Go implementation
 	virtual void connectNotify(const QMetaMethod& signal) override {
-		if (handle__connectNotify == 0) {
+		if (!handle__connectNotify) {
 			QSqlDriver::connectNotify(signal);
 			return;
 		}
@@ -681,18 +684,18 @@ public:
 		const QMetaMethod& signal_ret = signal;
 		// Cast returned reference into pointer
 		QMetaMethod* sigval1 = const_cast<QMetaMethod*>(&signal_ret);
-		miqt_exec_callback_QSqlDriver_connectNotify(this, handle__connectNotify, sigval1);
+		miqt_exec_callback_QSqlDriver_connectNotify(this, handle__connectNotify.value(), sigval1);
 
 	}
 
 	friend void QSqlDriver_virtualbase_connectNotify(void* self, QMetaMethod* signal);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__disconnectNotify = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QSqlDriver> handle__disconnectNotify;
 
 	// Subclass to allow providing a Go implementation
 	virtual void disconnectNotify(const QMetaMethod& signal) override {
-		if (handle__disconnectNotify == 0) {
+		if (!handle__disconnectNotify) {
 			QSqlDriver::disconnectNotify(signal);
 			return;
 		}
@@ -700,7 +703,7 @@ public:
 		const QMetaMethod& signal_ret = signal;
 		// Cast returned reference into pointer
 		QMetaMethod* sigval1 = const_cast<QMetaMethod*>(&signal_ret);
-		miqt_exec_callback_QSqlDriver_disconnectNotify(this, handle__disconnectNotify, sigval1);
+		miqt_exec_callback_QSqlDriver_disconnectNotify(this, handle__disconnectNotify.value(), sigval1);
 
 	}
 
@@ -939,8 +942,10 @@ void QSqlDriver_notification(QSqlDriver* self, struct miqt_string name) {
 	self->notification(name_QString);
 }
 
-void QSqlDriver_connect_notification(QSqlDriver* self, intptr_t slot) {
-	QSqlDriver::connect(self, static_cast<void (QSqlDriver::*)(const QString&)>(&QSqlDriver::notification), self, [=](const QString& name) {
+void* QSqlDriver_connect_notification(QSqlDriver* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QSqlDriver>>(slot);
+	return new QMetaObject::Connection(QSqlDriver::connect(self, static_cast<void (QSqlDriver::*)(const QString&)>(&QSqlDriver::notification), self, [slot_handle](const QString& name) {
+		intptr_t slot = slot_handle->value();
 		const QString name_ret = name;
 		// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 		QByteArray name_b = name_ret.toUtf8();
@@ -950,7 +955,7 @@ void QSqlDriver_connect_notification(QSqlDriver* self, intptr_t slot) {
 		memcpy(name_ms.data, name_b.data(), name_ms.len);
 		struct miqt_string sigval1 = name_ms;
 		miqt_exec_callback_QSqlDriver_notification(slot, sigval1);
-	});
+	}));
 }
 
 void QSqlDriver_notification2(QSqlDriver* self, struct miqt_string name, int source, QVariant* payload) {
@@ -958,8 +963,10 @@ void QSqlDriver_notification2(QSqlDriver* self, struct miqt_string name, int sou
 	self->notification(name_QString, static_cast<QSqlDriver::NotificationSource>(source), *payload);
 }
 
-void QSqlDriver_connect_notification2(QSqlDriver* self, intptr_t slot) {
-	QSqlDriver::connect(self, static_cast<void (QSqlDriver::*)(const QString&, QSqlDriver::NotificationSource, const QVariant&)>(&QSqlDriver::notification), self, [=](const QString& name, QSqlDriver::NotificationSource source, const QVariant& payload) {
+void* QSqlDriver_connect_notification2(QSqlDriver* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QSqlDriver>>(slot);
+	return new QMetaObject::Connection(QSqlDriver::connect(self, static_cast<void (QSqlDriver::*)(const QString&, QSqlDriver::NotificationSource, const QVariant&)>(&QSqlDriver::notification), self, [slot_handle](const QString& name, QSqlDriver::NotificationSource source, const QVariant& payload) {
+		intptr_t slot = slot_handle->value();
 		const QString name_ret = name;
 		// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 		QByteArray name_b = name_ret.toUtf8();
@@ -974,7 +981,7 @@ void QSqlDriver_connect_notification2(QSqlDriver* self, intptr_t slot) {
 		// Cast returned reference into pointer
 		QVariant* sigval3 = const_cast<QVariant*>(&payload_ret);
 		miqt_exec_callback_QSqlDriver_notification2(slot, sigval1, sigval2, sigval3);
-	});
+	}));
 }
 
 struct miqt_string QSqlDriver_tr2(const char* s, const char* c) {
@@ -1022,12 +1029,13 @@ struct miqt_string QSqlDriver_trUtf83(const char* s, const char* c, int n) {
 }
 
 bool QSqlDriver_override_virtual_isOpen(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QSqlDriver> slot_handle(slot);
 	MiqtVirtualQSqlDriver* self_cast = dynamic_cast<MiqtVirtualQSqlDriver*>( (QSqlDriver*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__isOpen = slot;
+	self_cast->handle__isOpen = std::move(slot_handle);
 	return true;
 }
 
@@ -1036,12 +1044,13 @@ bool QSqlDriver_virtualbase_isOpen(const void* self) {
 }
 
 bool QSqlDriver_override_virtual_beginTransaction(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QSqlDriver> slot_handle(slot);
 	MiqtVirtualQSqlDriver* self_cast = dynamic_cast<MiqtVirtualQSqlDriver*>( (QSqlDriver*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__beginTransaction = slot;
+	self_cast->handle__beginTransaction = std::move(slot_handle);
 	return true;
 }
 
@@ -1050,12 +1059,13 @@ bool QSqlDriver_virtualbase_beginTransaction(void* self) {
 }
 
 bool QSqlDriver_override_virtual_commitTransaction(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QSqlDriver> slot_handle(slot);
 	MiqtVirtualQSqlDriver* self_cast = dynamic_cast<MiqtVirtualQSqlDriver*>( (QSqlDriver*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__commitTransaction = slot;
+	self_cast->handle__commitTransaction = std::move(slot_handle);
 	return true;
 }
 
@@ -1064,12 +1074,13 @@ bool QSqlDriver_virtualbase_commitTransaction(void* self) {
 }
 
 bool QSqlDriver_override_virtual_rollbackTransaction(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QSqlDriver> slot_handle(slot);
 	MiqtVirtualQSqlDriver* self_cast = dynamic_cast<MiqtVirtualQSqlDriver*>( (QSqlDriver*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__rollbackTransaction = slot;
+	self_cast->handle__rollbackTransaction = std::move(slot_handle);
 	return true;
 }
 
@@ -1078,12 +1089,13 @@ bool QSqlDriver_virtualbase_rollbackTransaction(void* self) {
 }
 
 bool QSqlDriver_override_virtual_tables(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QSqlDriver> slot_handle(slot);
 	MiqtVirtualQSqlDriver* self_cast = dynamic_cast<MiqtVirtualQSqlDriver*>( (QSqlDriver*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__tables = slot;
+	self_cast->handle__tables = std::move(slot_handle);
 	return true;
 }
 
@@ -1108,12 +1120,13 @@ struct miqt_array /* of struct miqt_string */  QSqlDriver_virtualbase_tables(con
 }
 
 bool QSqlDriver_override_virtual_primaryIndex(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QSqlDriver> slot_handle(slot);
 	MiqtVirtualQSqlDriver* self_cast = dynamic_cast<MiqtVirtualQSqlDriver*>( (QSqlDriver*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__primaryIndex = slot;
+	self_cast->handle__primaryIndex = std::move(slot_handle);
 	return true;
 }
 
@@ -1123,12 +1136,13 @@ QSqlIndex* QSqlDriver_virtualbase_primaryIndex(const void* self, struct miqt_str
 }
 
 bool QSqlDriver_override_virtual_record(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QSqlDriver> slot_handle(slot);
 	MiqtVirtualQSqlDriver* self_cast = dynamic_cast<MiqtVirtualQSqlDriver*>( (QSqlDriver*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__record = slot;
+	self_cast->handle__record = std::move(slot_handle);
 	return true;
 }
 
@@ -1138,12 +1152,13 @@ QSqlRecord* QSqlDriver_virtualbase_record(const void* self, struct miqt_string t
 }
 
 bool QSqlDriver_override_virtual_formatValue(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QSqlDriver> slot_handle(slot);
 	MiqtVirtualQSqlDriver* self_cast = dynamic_cast<MiqtVirtualQSqlDriver*>( (QSqlDriver*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__formatValue = slot;
+	self_cast->handle__formatValue = std::move(slot_handle);
 	return true;
 }
 
@@ -1159,12 +1174,13 @@ struct miqt_string QSqlDriver_virtualbase_formatValue(const void* self, QSqlFiel
 }
 
 bool QSqlDriver_override_virtual_escapeIdentifier(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QSqlDriver> slot_handle(slot);
 	MiqtVirtualQSqlDriver* self_cast = dynamic_cast<MiqtVirtualQSqlDriver*>( (QSqlDriver*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__escapeIdentifier = slot;
+	self_cast->handle__escapeIdentifier = std::move(slot_handle);
 	return true;
 }
 
@@ -1181,12 +1197,13 @@ struct miqt_string QSqlDriver_virtualbase_escapeIdentifier(const void* self, str
 }
 
 bool QSqlDriver_override_virtual_sqlStatement(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QSqlDriver> slot_handle(slot);
 	MiqtVirtualQSqlDriver* self_cast = dynamic_cast<MiqtVirtualQSqlDriver*>( (QSqlDriver*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__sqlStatement = slot;
+	self_cast->handle__sqlStatement = std::move(slot_handle);
 	return true;
 }
 
@@ -1203,12 +1220,13 @@ struct miqt_string QSqlDriver_virtualbase_sqlStatement(const void* self, int typ
 }
 
 bool QSqlDriver_override_virtual_handle(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QSqlDriver> slot_handle(slot);
 	MiqtVirtualQSqlDriver* self_cast = dynamic_cast<MiqtVirtualQSqlDriver*>( (QSqlDriver*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__handle = slot;
+	self_cast->handle__handle = std::move(slot_handle);
 	return true;
 }
 
@@ -1217,52 +1235,57 @@ QVariant* QSqlDriver_virtualbase_handle(const void* self) {
 }
 
 bool QSqlDriver_override_virtual_hasFeature(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QSqlDriver> slot_handle(slot);
 	MiqtVirtualQSqlDriver* self_cast = dynamic_cast<MiqtVirtualQSqlDriver*>( (QSqlDriver*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__hasFeature = slot;
+	self_cast->handle__hasFeature = std::move(slot_handle);
 	return true;
 }
 
 bool QSqlDriver_override_virtual_close(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QSqlDriver> slot_handle(slot);
 	MiqtVirtualQSqlDriver* self_cast = dynamic_cast<MiqtVirtualQSqlDriver*>( (QSqlDriver*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__close = slot;
+	self_cast->handle__close = std::move(slot_handle);
 	return true;
 }
 
 bool QSqlDriver_override_virtual_createResult(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QSqlDriver> slot_handle(slot);
 	MiqtVirtualQSqlDriver* self_cast = dynamic_cast<MiqtVirtualQSqlDriver*>( (QSqlDriver*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__createResult = slot;
+	self_cast->handle__createResult = std::move(slot_handle);
 	return true;
 }
 
 bool QSqlDriver_override_virtual_open(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QSqlDriver> slot_handle(slot);
 	MiqtVirtualQSqlDriver* self_cast = dynamic_cast<MiqtVirtualQSqlDriver*>( (QSqlDriver*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__open = slot;
+	self_cast->handle__open = std::move(slot_handle);
 	return true;
 }
 
 bool QSqlDriver_override_virtual_subscribeToNotification(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QSqlDriver> slot_handle(slot);
 	MiqtVirtualQSqlDriver* self_cast = dynamic_cast<MiqtVirtualQSqlDriver*>( (QSqlDriver*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__subscribeToNotification = slot;
+	self_cast->handle__subscribeToNotification = std::move(slot_handle);
 	return true;
 }
 
@@ -1272,12 +1295,13 @@ bool QSqlDriver_virtualbase_subscribeToNotification(void* self, struct miqt_stri
 }
 
 bool QSqlDriver_override_virtual_unsubscribeFromNotification(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QSqlDriver> slot_handle(slot);
 	MiqtVirtualQSqlDriver* self_cast = dynamic_cast<MiqtVirtualQSqlDriver*>( (QSqlDriver*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__unsubscribeFromNotification = slot;
+	self_cast->handle__unsubscribeFromNotification = std::move(slot_handle);
 	return true;
 }
 
@@ -1287,12 +1311,13 @@ bool QSqlDriver_virtualbase_unsubscribeFromNotification(void* self, struct miqt_
 }
 
 bool QSqlDriver_override_virtual_subscribedToNotifications(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QSqlDriver> slot_handle(slot);
 	MiqtVirtualQSqlDriver* self_cast = dynamic_cast<MiqtVirtualQSqlDriver*>( (QSqlDriver*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__subscribedToNotifications = slot;
+	self_cast->handle__subscribedToNotifications = std::move(slot_handle);
 	return true;
 }
 
@@ -1317,12 +1342,13 @@ struct miqt_array /* of struct miqt_string */  QSqlDriver_virtualbase_subscribed
 }
 
 bool QSqlDriver_override_virtual_isIdentifierEscaped(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QSqlDriver> slot_handle(slot);
 	MiqtVirtualQSqlDriver* self_cast = dynamic_cast<MiqtVirtualQSqlDriver*>( (QSqlDriver*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__isIdentifierEscaped = slot;
+	self_cast->handle__isIdentifierEscaped = std::move(slot_handle);
 	return true;
 }
 
@@ -1332,12 +1358,13 @@ bool QSqlDriver_virtualbase_isIdentifierEscaped(const void* self, struct miqt_st
 }
 
 bool QSqlDriver_override_virtual_stripDelimiters(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QSqlDriver> slot_handle(slot);
 	MiqtVirtualQSqlDriver* self_cast = dynamic_cast<MiqtVirtualQSqlDriver*>( (QSqlDriver*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__stripDelimiters = slot;
+	self_cast->handle__stripDelimiters = std::move(slot_handle);
 	return true;
 }
 
@@ -1354,12 +1381,13 @@ struct miqt_string QSqlDriver_virtualbase_stripDelimiters(const void* self, stru
 }
 
 bool QSqlDriver_override_virtual_cancelQuery(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QSqlDriver> slot_handle(slot);
 	MiqtVirtualQSqlDriver* self_cast = dynamic_cast<MiqtVirtualQSqlDriver*>( (QSqlDriver*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__cancelQuery = slot;
+	self_cast->handle__cancelQuery = std::move(slot_handle);
 	return true;
 }
 
@@ -1368,12 +1396,13 @@ bool QSqlDriver_virtualbase_cancelQuery(void* self) {
 }
 
 bool QSqlDriver_override_virtual_setOpen(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QSqlDriver> slot_handle(slot);
 	MiqtVirtualQSqlDriver* self_cast = dynamic_cast<MiqtVirtualQSqlDriver*>( (QSqlDriver*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__setOpen = slot;
+	self_cast->handle__setOpen = std::move(slot_handle);
 	return true;
 }
 
@@ -1382,12 +1411,13 @@ void QSqlDriver_virtualbase_setOpen(void* self, bool o) {
 }
 
 bool QSqlDriver_override_virtual_setOpenError(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QSqlDriver> slot_handle(slot);
 	MiqtVirtualQSqlDriver* self_cast = dynamic_cast<MiqtVirtualQSqlDriver*>( (QSqlDriver*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__setOpenError = slot;
+	self_cast->handle__setOpenError = std::move(slot_handle);
 	return true;
 }
 
@@ -1396,12 +1426,13 @@ void QSqlDriver_virtualbase_setOpenError(void* self, bool e) {
 }
 
 bool QSqlDriver_override_virtual_setLastError(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QSqlDriver> slot_handle(slot);
 	MiqtVirtualQSqlDriver* self_cast = dynamic_cast<MiqtVirtualQSqlDriver*>( (QSqlDriver*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__setLastError = slot;
+	self_cast->handle__setLastError = std::move(slot_handle);
 	return true;
 }
 
@@ -1410,12 +1441,13 @@ void QSqlDriver_virtualbase_setLastError(void* self, QSqlError* e) {
 }
 
 bool QSqlDriver_override_virtual_event(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QSqlDriver> slot_handle(slot);
 	MiqtVirtualQSqlDriver* self_cast = dynamic_cast<MiqtVirtualQSqlDriver*>( (QSqlDriver*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__event = slot;
+	self_cast->handle__event = std::move(slot_handle);
 	return true;
 }
 
@@ -1424,12 +1456,13 @@ bool QSqlDriver_virtualbase_event(void* self, QEvent* event) {
 }
 
 bool QSqlDriver_override_virtual_eventFilter(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QSqlDriver> slot_handle(slot);
 	MiqtVirtualQSqlDriver* self_cast = dynamic_cast<MiqtVirtualQSqlDriver*>( (QSqlDriver*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__eventFilter = slot;
+	self_cast->handle__eventFilter = std::move(slot_handle);
 	return true;
 }
 
@@ -1438,12 +1471,13 @@ bool QSqlDriver_virtualbase_eventFilter(void* self, QObject* watched, QEvent* ev
 }
 
 bool QSqlDriver_override_virtual_timerEvent(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QSqlDriver> slot_handle(slot);
 	MiqtVirtualQSqlDriver* self_cast = dynamic_cast<MiqtVirtualQSqlDriver*>( (QSqlDriver*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__timerEvent = slot;
+	self_cast->handle__timerEvent = std::move(slot_handle);
 	return true;
 }
 
@@ -1452,12 +1486,13 @@ void QSqlDriver_virtualbase_timerEvent(void* self, QTimerEvent* event) {
 }
 
 bool QSqlDriver_override_virtual_childEvent(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QSqlDriver> slot_handle(slot);
 	MiqtVirtualQSqlDriver* self_cast = dynamic_cast<MiqtVirtualQSqlDriver*>( (QSqlDriver*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__childEvent = slot;
+	self_cast->handle__childEvent = std::move(slot_handle);
 	return true;
 }
 
@@ -1466,12 +1501,13 @@ void QSqlDriver_virtualbase_childEvent(void* self, QChildEvent* event) {
 }
 
 bool QSqlDriver_override_virtual_customEvent(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QSqlDriver> slot_handle(slot);
 	MiqtVirtualQSqlDriver* self_cast = dynamic_cast<MiqtVirtualQSqlDriver*>( (QSqlDriver*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__customEvent = slot;
+	self_cast->handle__customEvent = std::move(slot_handle);
 	return true;
 }
 
@@ -1480,12 +1516,13 @@ void QSqlDriver_virtualbase_customEvent(void* self, QEvent* event) {
 }
 
 bool QSqlDriver_override_virtual_connectNotify(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QSqlDriver> slot_handle(slot);
 	MiqtVirtualQSqlDriver* self_cast = dynamic_cast<MiqtVirtualQSqlDriver*>( (QSqlDriver*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__connectNotify = slot;
+	self_cast->handle__connectNotify = std::move(slot_handle);
 	return true;
 }
 
@@ -1494,12 +1531,13 @@ void QSqlDriver_virtualbase_connectNotify(void* self, QMetaMethod* signal) {
 }
 
 bool QSqlDriver_override_virtual_disconnectNotify(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QSqlDriver> slot_handle(slot);
 	MiqtVirtualQSqlDriver* self_cast = dynamic_cast<MiqtVirtualQSqlDriver*>( (QSqlDriver*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__disconnectNotify = slot;
+	self_cast->handle__disconnectNotify = std::move(slot_handle);
 	return true;
 }
 

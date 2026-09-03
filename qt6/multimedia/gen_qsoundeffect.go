@@ -30,6 +30,11 @@ const (
 	QSoundEffect__Error   QSoundEffect__Status = 3
 )
 
+//export miqt_exec_callback_handle_release_QSoundEffect
+func miqt_exec_callback_handle_release_QSoundEffect(cb C.intptr_t) {
+	cgo.Handle(cb).Delete()
+}
+
 type QSoundEffect struct {
 	h *C.QSoundEffect
 	*qt6.QObject
@@ -185,8 +190,10 @@ func (this *QSoundEffect) Status() QSoundEffect__Status {
 func (this *QSoundEffect) SourceChanged() {
 	C.QSoundEffect_sourceChanged(this.h)
 }
-func (this *QSoundEffect) OnSourceChanged(slot func()) {
-	C.QSoundEffect_connect_sourceChanged(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QSoundEffect) OnSourceChanged(slot func()) *qt6.SignalConnection {
+	_goptr := qt6.UnsafeNewQMetaObject__Connection(C.QSoundEffect_connect_sourceChanged(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QSoundEffect_sourceChanged
@@ -202,8 +209,10 @@ func miqt_exec_callback_QSoundEffect_sourceChanged(cb C.intptr_t) {
 func (this *QSoundEffect) LoopCountChanged() {
 	C.QSoundEffect_loopCountChanged(this.h)
 }
-func (this *QSoundEffect) OnLoopCountChanged(slot func()) {
-	C.QSoundEffect_connect_loopCountChanged(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QSoundEffect) OnLoopCountChanged(slot func()) *qt6.SignalConnection {
+	_goptr := qt6.UnsafeNewQMetaObject__Connection(C.QSoundEffect_connect_loopCountChanged(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QSoundEffect_loopCountChanged
@@ -219,8 +228,10 @@ func miqt_exec_callback_QSoundEffect_loopCountChanged(cb C.intptr_t) {
 func (this *QSoundEffect) LoopsRemainingChanged() {
 	C.QSoundEffect_loopsRemainingChanged(this.h)
 }
-func (this *QSoundEffect) OnLoopsRemainingChanged(slot func()) {
-	C.QSoundEffect_connect_loopsRemainingChanged(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QSoundEffect) OnLoopsRemainingChanged(slot func()) *qt6.SignalConnection {
+	_goptr := qt6.UnsafeNewQMetaObject__Connection(C.QSoundEffect_connect_loopsRemainingChanged(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QSoundEffect_loopsRemainingChanged
@@ -236,8 +247,10 @@ func miqt_exec_callback_QSoundEffect_loopsRemainingChanged(cb C.intptr_t) {
 func (this *QSoundEffect) VolumeChanged() {
 	C.QSoundEffect_volumeChanged(this.h)
 }
-func (this *QSoundEffect) OnVolumeChanged(slot func()) {
-	C.QSoundEffect_connect_volumeChanged(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QSoundEffect) OnVolumeChanged(slot func()) *qt6.SignalConnection {
+	_goptr := qt6.UnsafeNewQMetaObject__Connection(C.QSoundEffect_connect_volumeChanged(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QSoundEffect_volumeChanged
@@ -253,8 +266,10 @@ func miqt_exec_callback_QSoundEffect_volumeChanged(cb C.intptr_t) {
 func (this *QSoundEffect) MutedChanged() {
 	C.QSoundEffect_mutedChanged(this.h)
 }
-func (this *QSoundEffect) OnMutedChanged(slot func()) {
-	C.QSoundEffect_connect_mutedChanged(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QSoundEffect) OnMutedChanged(slot func()) *qt6.SignalConnection {
+	_goptr := qt6.UnsafeNewQMetaObject__Connection(C.QSoundEffect_connect_mutedChanged(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QSoundEffect_mutedChanged
@@ -270,8 +285,10 @@ func miqt_exec_callback_QSoundEffect_mutedChanged(cb C.intptr_t) {
 func (this *QSoundEffect) LoadedChanged() {
 	C.QSoundEffect_loadedChanged(this.h)
 }
-func (this *QSoundEffect) OnLoadedChanged(slot func()) {
-	C.QSoundEffect_connect_loadedChanged(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QSoundEffect) OnLoadedChanged(slot func()) *qt6.SignalConnection {
+	_goptr := qt6.UnsafeNewQMetaObject__Connection(C.QSoundEffect_connect_loadedChanged(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QSoundEffect_loadedChanged
@@ -287,8 +304,10 @@ func miqt_exec_callback_QSoundEffect_loadedChanged(cb C.intptr_t) {
 func (this *QSoundEffect) PlayingChanged() {
 	C.QSoundEffect_playingChanged(this.h)
 }
-func (this *QSoundEffect) OnPlayingChanged(slot func()) {
-	C.QSoundEffect_connect_playingChanged(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QSoundEffect) OnPlayingChanged(slot func()) *qt6.SignalConnection {
+	_goptr := qt6.UnsafeNewQMetaObject__Connection(C.QSoundEffect_connect_playingChanged(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QSoundEffect_playingChanged
@@ -304,8 +323,10 @@ func miqt_exec_callback_QSoundEffect_playingChanged(cb C.intptr_t) {
 func (this *QSoundEffect) StatusChanged() {
 	C.QSoundEffect_statusChanged(this.h)
 }
-func (this *QSoundEffect) OnStatusChanged(slot func()) {
-	C.QSoundEffect_connect_statusChanged(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QSoundEffect) OnStatusChanged(slot func()) *qt6.SignalConnection {
+	_goptr := qt6.UnsafeNewQMetaObject__Connection(C.QSoundEffect_connect_statusChanged(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QSoundEffect_statusChanged
@@ -321,8 +342,10 @@ func miqt_exec_callback_QSoundEffect_statusChanged(cb C.intptr_t) {
 func (this *QSoundEffect) AudioDeviceChanged() {
 	C.QSoundEffect_audioDeviceChanged(this.h)
 }
-func (this *QSoundEffect) OnAudioDeviceChanged(slot func()) {
-	C.QSoundEffect_connect_audioDeviceChanged(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QSoundEffect) OnAudioDeviceChanged(slot func()) *qt6.SignalConnection {
+	_goptr := qt6.UnsafeNewQMetaObject__Connection(C.QSoundEffect_connect_audioDeviceChanged(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QSoundEffect_audioDeviceChanged
@@ -429,7 +452,11 @@ func (this *QSoundEffect) callVirtualBase_Event(event *qt6.QEvent) bool {
 
 }
 func (this *QSoundEffect) OnEvent(slot func(super func(event *qt6.QEvent) bool, event *qt6.QEvent) bool) {
-	ok := C.QSoundEffect_override_virtual_event(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QSoundEffect_override_virtual_event(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -457,7 +484,11 @@ func (this *QSoundEffect) callVirtualBase_EventFilter(watched *qt6.QObject, even
 
 }
 func (this *QSoundEffect) OnEventFilter(slot func(super func(watched *qt6.QObject, event *qt6.QEvent) bool, watched *qt6.QObject, event *qt6.QEvent) bool) {
-	ok := C.QSoundEffect_override_virtual_eventFilter(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QSoundEffect_override_virtual_eventFilter(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -487,7 +518,11 @@ func (this *QSoundEffect) callVirtualBase_TimerEvent(event *qt6.QTimerEvent) {
 
 }
 func (this *QSoundEffect) OnTimerEvent(slot func(super func(event *qt6.QTimerEvent), event *qt6.QTimerEvent)) {
-	ok := C.QSoundEffect_override_virtual_timerEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QSoundEffect_override_virtual_timerEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -513,7 +548,11 @@ func (this *QSoundEffect) callVirtualBase_ChildEvent(event *qt6.QChildEvent) {
 
 }
 func (this *QSoundEffect) OnChildEvent(slot func(super func(event *qt6.QChildEvent), event *qt6.QChildEvent)) {
-	ok := C.QSoundEffect_override_virtual_childEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QSoundEffect_override_virtual_childEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -539,7 +578,11 @@ func (this *QSoundEffect) callVirtualBase_CustomEvent(event *qt6.QEvent) {
 
 }
 func (this *QSoundEffect) OnCustomEvent(slot func(super func(event *qt6.QEvent), event *qt6.QEvent)) {
-	ok := C.QSoundEffect_override_virtual_customEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QSoundEffect_override_virtual_customEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -565,7 +608,11 @@ func (this *QSoundEffect) callVirtualBase_ConnectNotify(signal *qt6.QMetaMethod)
 
 }
 func (this *QSoundEffect) OnConnectNotify(slot func(super func(signal *qt6.QMetaMethod), signal *qt6.QMetaMethod)) {
-	ok := C.QSoundEffect_override_virtual_connectNotify(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QSoundEffect_override_virtual_connectNotify(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -591,7 +638,11 @@ func (this *QSoundEffect) callVirtualBase_DisconnectNotify(signal *qt6.QMetaMeth
 
 }
 func (this *QSoundEffect) OnDisconnectNotify(slot func(super func(signal *qt6.QMetaMethod), signal *qt6.QMetaMethod)) {
-	ok := C.QSoundEffect_override_virtual_disconnectNotify(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QSoundEffect_override_virtual_disconnectNotify(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}

@@ -15,6 +15,11 @@ import (
 	"unsafe"
 )
 
+//export miqt_exec_callback_handle_release_QwtPointSeriesData
+func miqt_exec_callback_handle_release_QwtPointSeriesData(cb C.intptr_t) {
+	cgo.Handle(cb).Delete()
+}
+
 type QwtPointSeriesData struct {
 	h *C.QwtPointSeriesData
 }
@@ -79,7 +84,11 @@ func (this *QwtPointSeriesData) callVirtualBase_BoundingRect() *qt.QRectF {
 
 }
 func (this *QwtPointSeriesData) OnBoundingRect(slot func(super func() *qt.QRectF) *qt.QRectF) {
-	ok := C.QwtPointSeriesData_override_virtual_boundingRect(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QwtPointSeriesData_override_virtual_boundingRect(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -110,6 +119,11 @@ func (this *QwtPointSeriesData) GoGC() {
 		this.Delete()
 		runtime.KeepAlive(this.h)
 	})
+}
+
+//export miqt_exec_callback_handle_release_QwtPoint3DSeriesData
+func miqt_exec_callback_handle_release_QwtPoint3DSeriesData(cb C.intptr_t) {
+	cgo.Handle(cb).Delete()
 }
 
 type QwtPoint3DSeriesData struct {
@@ -176,7 +190,11 @@ func (this *QwtPoint3DSeriesData) callVirtualBase_BoundingRect() *qt.QRectF {
 
 }
 func (this *QwtPoint3DSeriesData) OnBoundingRect(slot func(super func() *qt.QRectF) *qt.QRectF) {
-	ok := C.QwtPoint3DSeriesData_override_virtual_boundingRect(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QwtPoint3DSeriesData_override_virtual_boundingRect(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -207,6 +225,11 @@ func (this *QwtPoint3DSeriesData) GoGC() {
 		this.Delete()
 		runtime.KeepAlive(this.h)
 	})
+}
+
+//export miqt_exec_callback_handle_release_QwtIntervalSeriesData
+func miqt_exec_callback_handle_release_QwtIntervalSeriesData(cb C.intptr_t) {
+	cgo.Handle(cb).Delete()
 }
 
 type QwtIntervalSeriesData struct {
@@ -273,7 +296,11 @@ func (this *QwtIntervalSeriesData) callVirtualBase_BoundingRect() *qt.QRectF {
 
 }
 func (this *QwtIntervalSeriesData) OnBoundingRect(slot func(super func() *qt.QRectF) *qt.QRectF) {
-	ok := C.QwtIntervalSeriesData_override_virtual_boundingRect(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QwtIntervalSeriesData_override_virtual_boundingRect(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -304,6 +331,11 @@ func (this *QwtIntervalSeriesData) GoGC() {
 		this.Delete()
 		runtime.KeepAlive(this.h)
 	})
+}
+
+//export miqt_exec_callback_handle_release_QwtSetSeriesData
+func miqt_exec_callback_handle_release_QwtSetSeriesData(cb C.intptr_t) {
+	cgo.Handle(cb).Delete()
 }
 
 type QwtSetSeriesData struct {
@@ -370,7 +402,11 @@ func (this *QwtSetSeriesData) callVirtualBase_BoundingRect() *qt.QRectF {
 
 }
 func (this *QwtSetSeriesData) OnBoundingRect(slot func(super func() *qt.QRectF) *qt.QRectF) {
-	ok := C.QwtSetSeriesData_override_virtual_boundingRect(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QwtSetSeriesData_override_virtual_boundingRect(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -401,6 +437,11 @@ func (this *QwtSetSeriesData) GoGC() {
 		this.Delete()
 		runtime.KeepAlive(this.h)
 	})
+}
+
+//export miqt_exec_callback_handle_release_QwtTradingChartData
+func miqt_exec_callback_handle_release_QwtTradingChartData(cb C.intptr_t) {
+	cgo.Handle(cb).Delete()
 }
 
 type QwtTradingChartData struct {
@@ -467,7 +508,11 @@ func (this *QwtTradingChartData) callVirtualBase_BoundingRect() *qt.QRectF {
 
 }
 func (this *QwtTradingChartData) OnBoundingRect(slot func(super func() *qt.QRectF) *qt.QRectF) {
-	ok := C.QwtTradingChartData_override_virtual_boundingRect(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QwtTradingChartData_override_virtual_boundingRect(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}

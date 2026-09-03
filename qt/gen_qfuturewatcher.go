@@ -14,6 +14,11 @@ import (
 	"unsafe"
 )
 
+//export miqt_exec_callback_handle_release_QFutureWatcherBase
+func miqt_exec_callback_handle_release_QFutureWatcherBase(cb C.intptr_t) {
+	cgo.Handle(cb).Delete()
+}
+
 type QFutureWatcherBase struct {
 	h *C.QFutureWatcherBase
 	*QObject
@@ -132,8 +137,10 @@ func (this *QFutureWatcherBase) Event(event *QEvent) bool {
 func (this *QFutureWatcherBase) Started() {
 	C.QFutureWatcherBase_started(this.h)
 }
-func (this *QFutureWatcherBase) OnStarted(slot func()) {
-	C.QFutureWatcherBase_connect_started(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QFutureWatcherBase) OnStarted(slot func()) *SignalConnection {
+	_goptr := UnsafeNewQMetaObject__Connection(C.QFutureWatcherBase_connect_started(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QFutureWatcherBase_started
@@ -149,8 +156,10 @@ func miqt_exec_callback_QFutureWatcherBase_started(cb C.intptr_t) {
 func (this *QFutureWatcherBase) Finished() {
 	C.QFutureWatcherBase_finished(this.h)
 }
-func (this *QFutureWatcherBase) OnFinished(slot func()) {
-	C.QFutureWatcherBase_connect_finished(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QFutureWatcherBase) OnFinished(slot func()) *SignalConnection {
+	_goptr := UnsafeNewQMetaObject__Connection(C.QFutureWatcherBase_connect_finished(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QFutureWatcherBase_finished
@@ -166,8 +175,10 @@ func miqt_exec_callback_QFutureWatcherBase_finished(cb C.intptr_t) {
 func (this *QFutureWatcherBase) Canceled() {
 	C.QFutureWatcherBase_canceled(this.h)
 }
-func (this *QFutureWatcherBase) OnCanceled(slot func()) {
-	C.QFutureWatcherBase_connect_canceled(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QFutureWatcherBase) OnCanceled(slot func()) *SignalConnection {
+	_goptr := UnsafeNewQMetaObject__Connection(C.QFutureWatcherBase_connect_canceled(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QFutureWatcherBase_canceled
@@ -183,8 +194,10 @@ func miqt_exec_callback_QFutureWatcherBase_canceled(cb C.intptr_t) {
 func (this *QFutureWatcherBase) Paused() {
 	C.QFutureWatcherBase_paused(this.h)
 }
-func (this *QFutureWatcherBase) OnPaused(slot func()) {
-	C.QFutureWatcherBase_connect_paused(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QFutureWatcherBase) OnPaused(slot func()) *SignalConnection {
+	_goptr := UnsafeNewQMetaObject__Connection(C.QFutureWatcherBase_connect_paused(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QFutureWatcherBase_paused
@@ -200,8 +213,10 @@ func miqt_exec_callback_QFutureWatcherBase_paused(cb C.intptr_t) {
 func (this *QFutureWatcherBase) Resumed() {
 	C.QFutureWatcherBase_resumed(this.h)
 }
-func (this *QFutureWatcherBase) OnResumed(slot func()) {
-	C.QFutureWatcherBase_connect_resumed(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QFutureWatcherBase) OnResumed(slot func()) *SignalConnection {
+	_goptr := UnsafeNewQMetaObject__Connection(C.QFutureWatcherBase_connect_resumed(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QFutureWatcherBase_resumed
@@ -217,8 +232,10 @@ func miqt_exec_callback_QFutureWatcherBase_resumed(cb C.intptr_t) {
 func (this *QFutureWatcherBase) ResultReadyAt(resultIndex int) {
 	C.QFutureWatcherBase_resultReadyAt(this.h, (C.int)(resultIndex))
 }
-func (this *QFutureWatcherBase) OnResultReadyAt(slot func(resultIndex int)) {
-	C.QFutureWatcherBase_connect_resultReadyAt(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QFutureWatcherBase) OnResultReadyAt(slot func(resultIndex int)) *SignalConnection {
+	_goptr := UnsafeNewQMetaObject__Connection(C.QFutureWatcherBase_connect_resultReadyAt(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QFutureWatcherBase_resultReadyAt
@@ -237,8 +254,10 @@ func miqt_exec_callback_QFutureWatcherBase_resultReadyAt(cb C.intptr_t, resultIn
 func (this *QFutureWatcherBase) ResultsReadyAt(beginIndex int, endIndex int) {
 	C.QFutureWatcherBase_resultsReadyAt(this.h, (C.int)(beginIndex), (C.int)(endIndex))
 }
-func (this *QFutureWatcherBase) OnResultsReadyAt(slot func(beginIndex int, endIndex int)) {
-	C.QFutureWatcherBase_connect_resultsReadyAt(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QFutureWatcherBase) OnResultsReadyAt(slot func(beginIndex int, endIndex int)) *SignalConnection {
+	_goptr := UnsafeNewQMetaObject__Connection(C.QFutureWatcherBase_connect_resultsReadyAt(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QFutureWatcherBase_resultsReadyAt
@@ -259,8 +278,10 @@ func miqt_exec_callback_QFutureWatcherBase_resultsReadyAt(cb C.intptr_t, beginIn
 func (this *QFutureWatcherBase) ProgressRangeChanged(minimum int, maximum int) {
 	C.QFutureWatcherBase_progressRangeChanged(this.h, (C.int)(minimum), (C.int)(maximum))
 }
-func (this *QFutureWatcherBase) OnProgressRangeChanged(slot func(minimum int, maximum int)) {
-	C.QFutureWatcherBase_connect_progressRangeChanged(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QFutureWatcherBase) OnProgressRangeChanged(slot func(minimum int, maximum int)) *SignalConnection {
+	_goptr := UnsafeNewQMetaObject__Connection(C.QFutureWatcherBase_connect_progressRangeChanged(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QFutureWatcherBase_progressRangeChanged
@@ -281,8 +302,10 @@ func miqt_exec_callback_QFutureWatcherBase_progressRangeChanged(cb C.intptr_t, m
 func (this *QFutureWatcherBase) ProgressValueChanged(progressValue int) {
 	C.QFutureWatcherBase_progressValueChanged(this.h, (C.int)(progressValue))
 }
-func (this *QFutureWatcherBase) OnProgressValueChanged(slot func(progressValue int)) {
-	C.QFutureWatcherBase_connect_progressValueChanged(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QFutureWatcherBase) OnProgressValueChanged(slot func(progressValue int)) *SignalConnection {
+	_goptr := UnsafeNewQMetaObject__Connection(C.QFutureWatcherBase_connect_progressValueChanged(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QFutureWatcherBase_progressValueChanged
@@ -305,8 +328,10 @@ func (this *QFutureWatcherBase) ProgressTextChanged(progressText string) {
 	defer C.free(unsafe.Pointer(progressText_ms.data))
 	C.QFutureWatcherBase_progressTextChanged(this.h, progressText_ms)
 }
-func (this *QFutureWatcherBase) OnProgressTextChanged(slot func(progressText string)) {
-	C.QFutureWatcherBase_connect_progressTextChanged(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QFutureWatcherBase) OnProgressTextChanged(slot func(progressText string)) *SignalConnection {
+	_goptr := UnsafeNewQMetaObject__Connection(C.QFutureWatcherBase_connect_progressTextChanged(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QFutureWatcherBase_progressTextChanged

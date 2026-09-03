@@ -1,3 +1,5 @@
+#include <memory>
+#include <utility>
 #include <QClipboard>
 #include <QImage>
 #include <QMetaMethod>
@@ -15,6 +17,7 @@
 extern "C" {
 #endif
 
+void miqt_exec_callback_handle_release_QClipboard(intptr_t);
 void miqt_exec_callback_QClipboard_changed(intptr_t, int);
 void miqt_exec_callback_QClipboard_selectionChanged(intptr_t);
 void miqt_exec_callback_QClipboard_findBufferChanged(intptr_t);
@@ -137,42 +140,50 @@ void QClipboard_changed(QClipboard* self, int mode) {
 	self->changed(static_cast<QClipboard::Mode>(mode));
 }
 
-void QClipboard_connect_changed(QClipboard* self, intptr_t slot) {
-	QClipboard::connect(self, static_cast<void (QClipboard::*)(QClipboard::Mode)>(&QClipboard::changed), self, [=](QClipboard::Mode mode) {
+void* QClipboard_connect_changed(QClipboard* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QClipboard>>(slot);
+	return new QMetaObject::Connection(QClipboard::connect(self, static_cast<void (QClipboard::*)(QClipboard::Mode)>(&QClipboard::changed), self, [slot_handle](QClipboard::Mode mode) {
+		intptr_t slot = slot_handle->value();
 		QClipboard::Mode mode_ret = mode;
 		int sigval1 = static_cast<int>(mode_ret);
 		miqt_exec_callback_QClipboard_changed(slot, sigval1);
-	});
+	}));
 }
 
 void QClipboard_selectionChanged(QClipboard* self) {
 	self->selectionChanged();
 }
 
-void QClipboard_connect_selectionChanged(QClipboard* self, intptr_t slot) {
-	QClipboard::connect(self, static_cast<void (QClipboard::*)()>(&QClipboard::selectionChanged), self, [=]() {
+void* QClipboard_connect_selectionChanged(QClipboard* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QClipboard>>(slot);
+	return new QMetaObject::Connection(QClipboard::connect(self, static_cast<void (QClipboard::*)()>(&QClipboard::selectionChanged), self, [slot_handle]() {
+		intptr_t slot = slot_handle->value();
 		miqt_exec_callback_QClipboard_selectionChanged(slot);
-	});
+	}));
 }
 
 void QClipboard_findBufferChanged(QClipboard* self) {
 	self->findBufferChanged();
 }
 
-void QClipboard_connect_findBufferChanged(QClipboard* self, intptr_t slot) {
-	QClipboard::connect(self, static_cast<void (QClipboard::*)()>(&QClipboard::findBufferChanged), self, [=]() {
+void* QClipboard_connect_findBufferChanged(QClipboard* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QClipboard>>(slot);
+	return new QMetaObject::Connection(QClipboard::connect(self, static_cast<void (QClipboard::*)()>(&QClipboard::findBufferChanged), self, [slot_handle]() {
+		intptr_t slot = slot_handle->value();
 		miqt_exec_callback_QClipboard_findBufferChanged(slot);
-	});
+	}));
 }
 
 void QClipboard_dataChanged(QClipboard* self) {
 	self->dataChanged();
 }
 
-void QClipboard_connect_dataChanged(QClipboard* self, intptr_t slot) {
-	QClipboard::connect(self, static_cast<void (QClipboard::*)()>(&QClipboard::dataChanged), self, [=]() {
+void* QClipboard_connect_dataChanged(QClipboard* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QClipboard>>(slot);
+	return new QMetaObject::Connection(QClipboard::connect(self, static_cast<void (QClipboard::*)()>(&QClipboard::dataChanged), self, [slot_handle]() {
+		intptr_t slot = slot_handle->value();
 		miqt_exec_callback_QClipboard_dataChanged(slot);
-	});
+	}));
 }
 
 struct miqt_string QClipboard_tr2(const char* s, const char* c) {

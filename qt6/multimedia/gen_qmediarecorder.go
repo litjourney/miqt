@@ -52,6 +52,11 @@ const (
 	QMediaRecorder__LocationNotWritable QMediaRecorder__Error = 4
 )
 
+//export miqt_exec_callback_handle_release_QMediaRecorder
+func miqt_exec_callback_handle_release_QMediaRecorder(cb C.intptr_t) {
+	cgo.Handle(cb).Delete()
+}
+
 type QMediaRecorder struct {
 	h *C.QMediaRecorder
 	*qt6.QObject
@@ -271,8 +276,10 @@ func (this *QMediaRecorder) Stop() {
 func (this *QMediaRecorder) RecorderStateChanged(state QMediaRecorder__RecorderState) {
 	C.QMediaRecorder_recorderStateChanged(this.h, (C.int)(state))
 }
-func (this *QMediaRecorder) OnRecorderStateChanged(slot func(state QMediaRecorder__RecorderState)) {
-	C.QMediaRecorder_connect_recorderStateChanged(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QMediaRecorder) OnRecorderStateChanged(slot func(state QMediaRecorder__RecorderState)) *qt6.SignalConnection {
+	_goptr := qt6.UnsafeNewQMetaObject__Connection(C.QMediaRecorder_connect_recorderStateChanged(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QMediaRecorder_recorderStateChanged
@@ -291,8 +298,10 @@ func miqt_exec_callback_QMediaRecorder_recorderStateChanged(cb C.intptr_t, state
 func (this *QMediaRecorder) DurationChanged(duration int64) {
 	C.QMediaRecorder_durationChanged(this.h, (C.longlong)(duration))
 }
-func (this *QMediaRecorder) OnDurationChanged(slot func(duration int64)) {
-	C.QMediaRecorder_connect_durationChanged(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QMediaRecorder) OnDurationChanged(slot func(duration int64)) *qt6.SignalConnection {
+	_goptr := qt6.UnsafeNewQMetaObject__Connection(C.QMediaRecorder_connect_durationChanged(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QMediaRecorder_durationChanged
@@ -311,8 +320,10 @@ func miqt_exec_callback_QMediaRecorder_durationChanged(cb C.intptr_t, duration C
 func (this *QMediaRecorder) ActualLocationChanged(location *qt6.QUrl) {
 	C.QMediaRecorder_actualLocationChanged(this.h, (*C.QUrl)(location.UnsafePointer()))
 }
-func (this *QMediaRecorder) OnActualLocationChanged(slot func(location *qt6.QUrl)) {
-	C.QMediaRecorder_connect_actualLocationChanged(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QMediaRecorder) OnActualLocationChanged(slot func(location *qt6.QUrl)) *qt6.SignalConnection {
+	_goptr := qt6.UnsafeNewQMetaObject__Connection(C.QMediaRecorder_connect_actualLocationChanged(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QMediaRecorder_actualLocationChanged
@@ -331,8 +342,10 @@ func miqt_exec_callback_QMediaRecorder_actualLocationChanged(cb C.intptr_t, loca
 func (this *QMediaRecorder) EncoderSettingsChanged() {
 	C.QMediaRecorder_encoderSettingsChanged(this.h)
 }
-func (this *QMediaRecorder) OnEncoderSettingsChanged(slot func()) {
-	C.QMediaRecorder_connect_encoderSettingsChanged(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QMediaRecorder) OnEncoderSettingsChanged(slot func()) *qt6.SignalConnection {
+	_goptr := qt6.UnsafeNewQMetaObject__Connection(C.QMediaRecorder_connect_encoderSettingsChanged(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QMediaRecorder_encoderSettingsChanged
@@ -352,8 +365,10 @@ func (this *QMediaRecorder) ErrorOccurred(error QMediaRecorder__Error, errorStri
 	defer C.free(unsafe.Pointer(errorString_ms.data))
 	C.QMediaRecorder_errorOccurred(this.h, (C.int)(error), errorString_ms)
 }
-func (this *QMediaRecorder) OnErrorOccurred(slot func(error QMediaRecorder__Error, errorString string)) {
-	C.QMediaRecorder_connect_errorOccurred(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QMediaRecorder) OnErrorOccurred(slot func(error QMediaRecorder__Error, errorString string)) *qt6.SignalConnection {
+	_goptr := qt6.UnsafeNewQMetaObject__Connection(C.QMediaRecorder_connect_errorOccurred(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QMediaRecorder_errorOccurred
@@ -377,8 +392,10 @@ func miqt_exec_callback_QMediaRecorder_errorOccurred(cb C.intptr_t, error C.int,
 func (this *QMediaRecorder) ErrorChanged() {
 	C.QMediaRecorder_errorChanged(this.h)
 }
-func (this *QMediaRecorder) OnErrorChanged(slot func()) {
-	C.QMediaRecorder_connect_errorChanged(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QMediaRecorder) OnErrorChanged(slot func()) *qt6.SignalConnection {
+	_goptr := qt6.UnsafeNewQMetaObject__Connection(C.QMediaRecorder_connect_errorChanged(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QMediaRecorder_errorChanged
@@ -394,8 +411,10 @@ func miqt_exec_callback_QMediaRecorder_errorChanged(cb C.intptr_t) {
 func (this *QMediaRecorder) MetaDataChanged() {
 	C.QMediaRecorder_metaDataChanged(this.h)
 }
-func (this *QMediaRecorder) OnMetaDataChanged(slot func()) {
-	C.QMediaRecorder_connect_metaDataChanged(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QMediaRecorder) OnMetaDataChanged(slot func()) *qt6.SignalConnection {
+	_goptr := qt6.UnsafeNewQMetaObject__Connection(C.QMediaRecorder_connect_metaDataChanged(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QMediaRecorder_metaDataChanged
@@ -411,8 +430,10 @@ func miqt_exec_callback_QMediaRecorder_metaDataChanged(cb C.intptr_t) {
 func (this *QMediaRecorder) MediaFormatChanged() {
 	C.QMediaRecorder_mediaFormatChanged(this.h)
 }
-func (this *QMediaRecorder) OnMediaFormatChanged(slot func()) {
-	C.QMediaRecorder_connect_mediaFormatChanged(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QMediaRecorder) OnMediaFormatChanged(slot func()) *qt6.SignalConnection {
+	_goptr := qt6.UnsafeNewQMetaObject__Connection(C.QMediaRecorder_connect_mediaFormatChanged(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QMediaRecorder_mediaFormatChanged
@@ -428,8 +449,10 @@ func miqt_exec_callback_QMediaRecorder_mediaFormatChanged(cb C.intptr_t) {
 func (this *QMediaRecorder) EncodingModeChanged() {
 	C.QMediaRecorder_encodingModeChanged(this.h)
 }
-func (this *QMediaRecorder) OnEncodingModeChanged(slot func()) {
-	C.QMediaRecorder_connect_encodingModeChanged(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QMediaRecorder) OnEncodingModeChanged(slot func()) *qt6.SignalConnection {
+	_goptr := qt6.UnsafeNewQMetaObject__Connection(C.QMediaRecorder_connect_encodingModeChanged(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QMediaRecorder_encodingModeChanged
@@ -445,8 +468,10 @@ func miqt_exec_callback_QMediaRecorder_encodingModeChanged(cb C.intptr_t) {
 func (this *QMediaRecorder) QualityChanged() {
 	C.QMediaRecorder_qualityChanged(this.h)
 }
-func (this *QMediaRecorder) OnQualityChanged(slot func()) {
-	C.QMediaRecorder_connect_qualityChanged(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QMediaRecorder) OnQualityChanged(slot func()) *qt6.SignalConnection {
+	_goptr := qt6.UnsafeNewQMetaObject__Connection(C.QMediaRecorder_connect_qualityChanged(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QMediaRecorder_qualityChanged
@@ -462,8 +487,10 @@ func miqt_exec_callback_QMediaRecorder_qualityChanged(cb C.intptr_t) {
 func (this *QMediaRecorder) VideoResolutionChanged() {
 	C.QMediaRecorder_videoResolutionChanged(this.h)
 }
-func (this *QMediaRecorder) OnVideoResolutionChanged(slot func()) {
-	C.QMediaRecorder_connect_videoResolutionChanged(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QMediaRecorder) OnVideoResolutionChanged(slot func()) *qt6.SignalConnection {
+	_goptr := qt6.UnsafeNewQMetaObject__Connection(C.QMediaRecorder_connect_videoResolutionChanged(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QMediaRecorder_videoResolutionChanged
@@ -479,8 +506,10 @@ func miqt_exec_callback_QMediaRecorder_videoResolutionChanged(cb C.intptr_t) {
 func (this *QMediaRecorder) VideoFrameRateChanged() {
 	C.QMediaRecorder_videoFrameRateChanged(this.h)
 }
-func (this *QMediaRecorder) OnVideoFrameRateChanged(slot func()) {
-	C.QMediaRecorder_connect_videoFrameRateChanged(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QMediaRecorder) OnVideoFrameRateChanged(slot func()) *qt6.SignalConnection {
+	_goptr := qt6.UnsafeNewQMetaObject__Connection(C.QMediaRecorder_connect_videoFrameRateChanged(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QMediaRecorder_videoFrameRateChanged
@@ -496,8 +525,10 @@ func miqt_exec_callback_QMediaRecorder_videoFrameRateChanged(cb C.intptr_t) {
 func (this *QMediaRecorder) VideoBitRateChanged() {
 	C.QMediaRecorder_videoBitRateChanged(this.h)
 }
-func (this *QMediaRecorder) OnVideoBitRateChanged(slot func()) {
-	C.QMediaRecorder_connect_videoBitRateChanged(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QMediaRecorder) OnVideoBitRateChanged(slot func()) *qt6.SignalConnection {
+	_goptr := qt6.UnsafeNewQMetaObject__Connection(C.QMediaRecorder_connect_videoBitRateChanged(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QMediaRecorder_videoBitRateChanged
@@ -513,8 +544,10 @@ func miqt_exec_callback_QMediaRecorder_videoBitRateChanged(cb C.intptr_t) {
 func (this *QMediaRecorder) AudioBitRateChanged() {
 	C.QMediaRecorder_audioBitRateChanged(this.h)
 }
-func (this *QMediaRecorder) OnAudioBitRateChanged(slot func()) {
-	C.QMediaRecorder_connect_audioBitRateChanged(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QMediaRecorder) OnAudioBitRateChanged(slot func()) *qt6.SignalConnection {
+	_goptr := qt6.UnsafeNewQMetaObject__Connection(C.QMediaRecorder_connect_audioBitRateChanged(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QMediaRecorder_audioBitRateChanged
@@ -530,8 +563,10 @@ func miqt_exec_callback_QMediaRecorder_audioBitRateChanged(cb C.intptr_t) {
 func (this *QMediaRecorder) AudioChannelCountChanged() {
 	C.QMediaRecorder_audioChannelCountChanged(this.h)
 }
-func (this *QMediaRecorder) OnAudioChannelCountChanged(slot func()) {
-	C.QMediaRecorder_connect_audioChannelCountChanged(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QMediaRecorder) OnAudioChannelCountChanged(slot func()) *qt6.SignalConnection {
+	_goptr := qt6.UnsafeNewQMetaObject__Connection(C.QMediaRecorder_connect_audioChannelCountChanged(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QMediaRecorder_audioChannelCountChanged
@@ -547,8 +582,10 @@ func miqt_exec_callback_QMediaRecorder_audioChannelCountChanged(cb C.intptr_t) {
 func (this *QMediaRecorder) AudioSampleRateChanged() {
 	C.QMediaRecorder_audioSampleRateChanged(this.h)
 }
-func (this *QMediaRecorder) OnAudioSampleRateChanged(slot func()) {
-	C.QMediaRecorder_connect_audioSampleRateChanged(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QMediaRecorder) OnAudioSampleRateChanged(slot func()) *qt6.SignalConnection {
+	_goptr := qt6.UnsafeNewQMetaObject__Connection(C.QMediaRecorder_connect_audioSampleRateChanged(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QMediaRecorder_audioSampleRateChanged
@@ -647,7 +684,11 @@ func (this *QMediaRecorder) callVirtualBase_Event(event *qt6.QEvent) bool {
 
 }
 func (this *QMediaRecorder) OnEvent(slot func(super func(event *qt6.QEvent) bool, event *qt6.QEvent) bool) {
-	ok := C.QMediaRecorder_override_virtual_event(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QMediaRecorder_override_virtual_event(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -675,7 +716,11 @@ func (this *QMediaRecorder) callVirtualBase_EventFilter(watched *qt6.QObject, ev
 
 }
 func (this *QMediaRecorder) OnEventFilter(slot func(super func(watched *qt6.QObject, event *qt6.QEvent) bool, watched *qt6.QObject, event *qt6.QEvent) bool) {
-	ok := C.QMediaRecorder_override_virtual_eventFilter(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QMediaRecorder_override_virtual_eventFilter(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -705,7 +750,11 @@ func (this *QMediaRecorder) callVirtualBase_TimerEvent(event *qt6.QTimerEvent) {
 
 }
 func (this *QMediaRecorder) OnTimerEvent(slot func(super func(event *qt6.QTimerEvent), event *qt6.QTimerEvent)) {
-	ok := C.QMediaRecorder_override_virtual_timerEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QMediaRecorder_override_virtual_timerEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -731,7 +780,11 @@ func (this *QMediaRecorder) callVirtualBase_ChildEvent(event *qt6.QChildEvent) {
 
 }
 func (this *QMediaRecorder) OnChildEvent(slot func(super func(event *qt6.QChildEvent), event *qt6.QChildEvent)) {
-	ok := C.QMediaRecorder_override_virtual_childEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QMediaRecorder_override_virtual_childEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -757,7 +810,11 @@ func (this *QMediaRecorder) callVirtualBase_CustomEvent(event *qt6.QEvent) {
 
 }
 func (this *QMediaRecorder) OnCustomEvent(slot func(super func(event *qt6.QEvent), event *qt6.QEvent)) {
-	ok := C.QMediaRecorder_override_virtual_customEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QMediaRecorder_override_virtual_customEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -783,7 +840,11 @@ func (this *QMediaRecorder) callVirtualBase_ConnectNotify(signal *qt6.QMetaMetho
 
 }
 func (this *QMediaRecorder) OnConnectNotify(slot func(super func(signal *qt6.QMetaMethod), signal *qt6.QMetaMethod)) {
-	ok := C.QMediaRecorder_override_virtual_connectNotify(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QMediaRecorder_override_virtual_connectNotify(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -809,7 +870,11 @@ func (this *QMediaRecorder) callVirtualBase_DisconnectNotify(signal *qt6.QMetaMe
 
 }
 func (this *QMediaRecorder) OnDisconnectNotify(slot func(super func(signal *qt6.QMetaMethod), signal *qt6.QMetaMethod)) {
-	ok := C.QMediaRecorder_override_virtual_disconnectNotify(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QMediaRecorder_override_virtual_disconnectNotify(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}

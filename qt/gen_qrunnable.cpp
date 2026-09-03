@@ -1,3 +1,5 @@
+#include <memory>
+#include <utility>
 #include <QRunnable>
 #include <qrunnable.h>
 #include "gen_qrunnable.h"
@@ -6,6 +8,7 @@
 extern "C" {
 #endif
 
+void miqt_exec_callback_handle_release_QRunnable(intptr_t);
 void miqt_exec_callback_QRunnable_run(QRunnable*, intptr_t);
 #ifdef __cplusplus
 } /* extern C */
@@ -19,15 +22,15 @@ public:
 	virtual ~MiqtVirtualQRunnable() override = default;
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__run = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QRunnable> handle__run;
 
 	// Subclass to allow providing a Go implementation
 	virtual void run() override {
-		if (handle__run == 0) {
+		if (!handle__run) {
 			return; // Pure virtual, there is no base we can call
 		}
 
-		miqt_exec_callback_QRunnable_run(this, handle__run);
+		miqt_exec_callback_QRunnable_run(this, handle__run.value());
 
 	}
 
@@ -54,12 +57,13 @@ void QRunnable_operatorAssign(QRunnable* self, QRunnable* param1) {
 }
 
 bool QRunnable_override_virtual_run(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QRunnable> slot_handle(slot);
 	MiqtVirtualQRunnable* self_cast = dynamic_cast<MiqtVirtualQRunnable*>( (QRunnable*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__run = slot;
+	self_cast->handle__run = std::move(slot_handle);
 	return true;
 }
 

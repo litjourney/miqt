@@ -95,13 +95,13 @@ void QAbstractTextDocumentLayout_registerHandler(QAbstractTextDocumentLayout* se
 void QAbstractTextDocumentLayout_unregisterHandler(QAbstractTextDocumentLayout* self, int objectType);
 QTextObjectInterface* QAbstractTextDocumentLayout_handlerForObject(const QAbstractTextDocumentLayout* self, int objectType);
 void QAbstractTextDocumentLayout_update(QAbstractTextDocumentLayout* self);
-void QAbstractTextDocumentLayout_connect_update(QAbstractTextDocumentLayout* self, intptr_t slot);
+void* QAbstractTextDocumentLayout_connect_update(QAbstractTextDocumentLayout* self, intptr_t slot);
 void QAbstractTextDocumentLayout_updateBlock(QAbstractTextDocumentLayout* self, QTextBlock* block);
-void QAbstractTextDocumentLayout_connect_updateBlock(QAbstractTextDocumentLayout* self, intptr_t slot);
+void* QAbstractTextDocumentLayout_connect_updateBlock(QAbstractTextDocumentLayout* self, intptr_t slot);
 void QAbstractTextDocumentLayout_documentSizeChanged(QAbstractTextDocumentLayout* self, QSizeF* newSize);
-void QAbstractTextDocumentLayout_connect_documentSizeChanged(QAbstractTextDocumentLayout* self, intptr_t slot);
+void* QAbstractTextDocumentLayout_connect_documentSizeChanged(QAbstractTextDocumentLayout* self, intptr_t slot);
 void QAbstractTextDocumentLayout_pageCountChanged(QAbstractTextDocumentLayout* self, int newPages);
-void QAbstractTextDocumentLayout_connect_pageCountChanged(QAbstractTextDocumentLayout* self, intptr_t slot);
+void* QAbstractTextDocumentLayout_connect_pageCountChanged(QAbstractTextDocumentLayout* self, intptr_t slot);
 void QAbstractTextDocumentLayout_documentChanged(QAbstractTextDocumentLayout* self, int from, int charsRemoved, int charsAdded);
 void QAbstractTextDocumentLayout_resizeInlineObject(QAbstractTextDocumentLayout* self, QTextInlineObject* item, int posInDocument, QTextFormat* format);
 void QAbstractTextDocumentLayout_positionInlineObject(QAbstractTextDocumentLayout* self, QTextInlineObject* item, int posInDocument, QTextFormat* format);
@@ -112,7 +112,7 @@ struct miqt_string QAbstractTextDocumentLayout_trUtf82(const char* s, const char
 struct miqt_string QAbstractTextDocumentLayout_trUtf83(const char* s, const char* c, int n);
 void QAbstractTextDocumentLayout_unregisterHandler2(QAbstractTextDocumentLayout* self, int objectType, QObject* component);
 void QAbstractTextDocumentLayout_updateWithQRectF(QAbstractTextDocumentLayout* self, QRectF* param1);
-void QAbstractTextDocumentLayout_connect_updateWithQRectF(QAbstractTextDocumentLayout* self, intptr_t slot);
+void* QAbstractTextDocumentLayout_connect_updateWithQRectF(QAbstractTextDocumentLayout* self, intptr_t slot);
 
 bool QAbstractTextDocumentLayout_override_virtual_draw(void* self, intptr_t slot);
 void QAbstractTextDocumentLayout_virtualbase_draw(void* self, QPainter* painter, QAbstractTextDocumentLayout__PaintContext* context);

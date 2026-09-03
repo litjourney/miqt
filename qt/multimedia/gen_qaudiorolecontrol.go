@@ -15,6 +15,11 @@ import (
 	"unsafe"
 )
 
+//export miqt_exec_callback_handle_release_QAudioRoleControl
+func miqt_exec_callback_handle_release_QAudioRoleControl(cb C.intptr_t) {
+	cgo.Handle(cb).Delete()
+}
+
 type QAudioRoleControl struct {
 	h *C.QAudioRoleControl
 	*QMediaControl
@@ -100,8 +105,10 @@ func (this *QAudioRoleControl) SupportedAudioRoles() []QAudio__Role {
 func (this *QAudioRoleControl) AudioRoleChanged(role QAudio__Role) {
 	C.QAudioRoleControl_audioRoleChanged(this.h, (C.int)(role))
 }
-func (this *QAudioRoleControl) OnAudioRoleChanged(slot func(role QAudio__Role)) {
-	C.QAudioRoleControl_connect_audioRoleChanged(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QAudioRoleControl) OnAudioRoleChanged(slot func(role QAudio__Role)) *qt.SignalConnection {
+	_goptr := qt.UnsafeNewQMetaObject__Connection(C.QAudioRoleControl_connect_audioRoleChanged(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QAudioRoleControl_audioRoleChanged

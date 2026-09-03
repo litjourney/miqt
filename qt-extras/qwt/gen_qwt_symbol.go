@@ -49,6 +49,11 @@ const (
 	QwtSymbol__AutoCache QwtSymbol__CachePolicy = 2
 )
 
+//export miqt_exec_callback_handle_release_QwtSymbol
+func miqt_exec_callback_handle_release_QwtSymbol(cb C.intptr_t) {
+	cgo.Handle(cb).Delete()
+}
+
 type QwtSymbol struct {
 	h *C.QwtSymbol
 }
@@ -254,7 +259,11 @@ func (this *QwtSymbol) callVirtualBase_SetColor(color *qt.QColor) {
 
 }
 func (this *QwtSymbol) OnSetColor(slot func(super func(color *qt.QColor), color *qt.QColor)) {
-	ok := C.QwtSymbol_override_virtual_setColor(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QwtSymbol_override_virtual_setColor(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -282,7 +291,11 @@ func (this *QwtSymbol) callVirtualBase_BoundingRect() *qt.QRect {
 
 }
 func (this *QwtSymbol) OnBoundingRect(slot func(super func() *qt.QRect) *qt.QRect) {
-	ok := C.QwtSymbol_override_virtual_boundingRect(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QwtSymbol_override_virtual_boundingRect(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -307,7 +320,11 @@ func (this *QwtSymbol) callVirtualBase_RenderSymbols(param1 *qt.QPainter, param2
 
 }
 func (this *QwtSymbol) OnRenderSymbols(slot func(super func(param1 *qt.QPainter, param2 *qt.QPointF, numPoints int), param1 *qt.QPainter, param2 *qt.QPointF, numPoints int)) {
-	ok := C.QwtSymbol_override_virtual_renderSymbols(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QwtSymbol_override_virtual_renderSymbols(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}

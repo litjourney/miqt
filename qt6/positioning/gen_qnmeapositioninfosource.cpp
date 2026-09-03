@@ -1,3 +1,5 @@
+#include <memory>
+#include <utility>
 #include <QChildEvent>
 #include <QEvent>
 #include <QGeoPositionInfo>
@@ -19,6 +21,7 @@
 extern "C" {
 #endif
 
+void miqt_exec_callback_handle_release_QNmeaPositionInfoSource(intptr_t);
 void miqt_exec_callback_QNmeaPositionInfoSource_setUpdateInterval(QNmeaPositionInfoSource*, intptr_t, int);
 QGeoPositionInfo* miqt_exec_callback_QNmeaPositionInfoSource_lastKnownPosition(const QNmeaPositionInfoSource*, intptr_t, bool);
 int miqt_exec_callback_QNmeaPositionInfoSource_supportedPositioningMethods(const QNmeaPositionInfoSource*, intptr_t);
@@ -51,138 +54,138 @@ public:
 	virtual ~MiqtVirtualQNmeaPositionInfoSource() override = default;
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__setUpdateInterval = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QNmeaPositionInfoSource> handle__setUpdateInterval;
 
 	// Subclass to allow providing a Go implementation
 	virtual void setUpdateInterval(int msec) override {
-		if (handle__setUpdateInterval == 0) {
+		if (!handle__setUpdateInterval) {
 			QNmeaPositionInfoSource::setUpdateInterval(msec);
 			return;
 		}
 
 		int sigval1 = msec;
-		miqt_exec_callback_QNmeaPositionInfoSource_setUpdateInterval(this, handle__setUpdateInterval, sigval1);
+		miqt_exec_callback_QNmeaPositionInfoSource_setUpdateInterval(this, handle__setUpdateInterval.value(), sigval1);
 
 	}
 
 	friend void QNmeaPositionInfoSource_virtualbase_setUpdateInterval(void* self, int msec);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__lastKnownPosition = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QNmeaPositionInfoSource> handle__lastKnownPosition;
 
 	// Subclass to allow providing a Go implementation
 	virtual QGeoPositionInfo lastKnownPosition(bool fromSatellitePositioningMethodsOnly) const override {
-		if (handle__lastKnownPosition == 0) {
+		if (!handle__lastKnownPosition) {
 			return QNmeaPositionInfoSource::lastKnownPosition(fromSatellitePositioningMethodsOnly);
 		}
 
 		bool sigval1 = fromSatellitePositioningMethodsOnly;
-		QGeoPositionInfo* callback_return_value = miqt_exec_callback_QNmeaPositionInfoSource_lastKnownPosition(this, handle__lastKnownPosition, sigval1);
+		QGeoPositionInfo* callback_return_value = miqt_exec_callback_QNmeaPositionInfoSource_lastKnownPosition(this, handle__lastKnownPosition.value(), sigval1);
 		return *callback_return_value;
 	}
 
 	friend QGeoPositionInfo* QNmeaPositionInfoSource_virtualbase_lastKnownPosition(const void* self, bool fromSatellitePositioningMethodsOnly);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__supportedPositioningMethods = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QNmeaPositionInfoSource> handle__supportedPositioningMethods;
 
 	// Subclass to allow providing a Go implementation
 	virtual QGeoPositionInfoSource::PositioningMethods supportedPositioningMethods() const override {
-		if (handle__supportedPositioningMethods == 0) {
+		if (!handle__supportedPositioningMethods) {
 			return QNmeaPositionInfoSource::supportedPositioningMethods();
 		}
 
-		int callback_return_value = miqt_exec_callback_QNmeaPositionInfoSource_supportedPositioningMethods(this, handle__supportedPositioningMethods);
+		int callback_return_value = miqt_exec_callback_QNmeaPositionInfoSource_supportedPositioningMethods(this, handle__supportedPositioningMethods.value());
 		return static_cast<QGeoPositionInfoSource::PositioningMethods>(callback_return_value);
 	}
 
 	friend int QNmeaPositionInfoSource_virtualbase_supportedPositioningMethods(const void* self);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__minimumUpdateInterval = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QNmeaPositionInfoSource> handle__minimumUpdateInterval;
 
 	// Subclass to allow providing a Go implementation
 	virtual int minimumUpdateInterval() const override {
-		if (handle__minimumUpdateInterval == 0) {
+		if (!handle__minimumUpdateInterval) {
 			return QNmeaPositionInfoSource::minimumUpdateInterval();
 		}
 
-		int callback_return_value = miqt_exec_callback_QNmeaPositionInfoSource_minimumUpdateInterval(this, handle__minimumUpdateInterval);
+		int callback_return_value = miqt_exec_callback_QNmeaPositionInfoSource_minimumUpdateInterval(this, handle__minimumUpdateInterval.value());
 		return static_cast<int>(callback_return_value);
 	}
 
 	friend int QNmeaPositionInfoSource_virtualbase_minimumUpdateInterval(const void* self);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__error = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QNmeaPositionInfoSource> handle__error;
 
 	// Subclass to allow providing a Go implementation
 	virtual QGeoPositionInfoSource::Error error() const override {
-		if (handle__error == 0) {
+		if (!handle__error) {
 			return QNmeaPositionInfoSource::error();
 		}
 
-		int callback_return_value = miqt_exec_callback_QNmeaPositionInfoSource_error(this, handle__error);
+		int callback_return_value = miqt_exec_callback_QNmeaPositionInfoSource_error(this, handle__error.value());
 		return static_cast<QGeoPositionInfoSource::Error>(callback_return_value);
 	}
 
 	friend int QNmeaPositionInfoSource_virtualbase_error(const void* self);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__startUpdates = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QNmeaPositionInfoSource> handle__startUpdates;
 
 	// Subclass to allow providing a Go implementation
 	virtual void startUpdates() override {
-		if (handle__startUpdates == 0) {
+		if (!handle__startUpdates) {
 			QNmeaPositionInfoSource::startUpdates();
 			return;
 		}
 
-		miqt_exec_callback_QNmeaPositionInfoSource_startUpdates(this, handle__startUpdates);
+		miqt_exec_callback_QNmeaPositionInfoSource_startUpdates(this, handle__startUpdates.value());
 
 	}
 
 	friend void QNmeaPositionInfoSource_virtualbase_startUpdates(void* self);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__stopUpdates = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QNmeaPositionInfoSource> handle__stopUpdates;
 
 	// Subclass to allow providing a Go implementation
 	virtual void stopUpdates() override {
-		if (handle__stopUpdates == 0) {
+		if (!handle__stopUpdates) {
 			QNmeaPositionInfoSource::stopUpdates();
 			return;
 		}
 
-		miqt_exec_callback_QNmeaPositionInfoSource_stopUpdates(this, handle__stopUpdates);
+		miqt_exec_callback_QNmeaPositionInfoSource_stopUpdates(this, handle__stopUpdates.value());
 
 	}
 
 	friend void QNmeaPositionInfoSource_virtualbase_stopUpdates(void* self);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__requestUpdate = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QNmeaPositionInfoSource> handle__requestUpdate;
 
 	// Subclass to allow providing a Go implementation
 	virtual void requestUpdate(int timeout) override {
-		if (handle__requestUpdate == 0) {
+		if (!handle__requestUpdate) {
 			QNmeaPositionInfoSource::requestUpdate(timeout);
 			return;
 		}
 
 		int sigval1 = timeout;
-		miqt_exec_callback_QNmeaPositionInfoSource_requestUpdate(this, handle__requestUpdate, sigval1);
+		miqt_exec_callback_QNmeaPositionInfoSource_requestUpdate(this, handle__requestUpdate.value(), sigval1);
 
 	}
 
 	friend void QNmeaPositionInfoSource_virtualbase_requestUpdate(void* self, int timeout);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__parsePosInfoFromNmeaData = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QNmeaPositionInfoSource> handle__parsePosInfoFromNmeaData;
 
 	// Subclass to allow providing a Go implementation
 	virtual bool parsePosInfoFromNmeaData(const char* data, int size, QGeoPositionInfo* posInfo, bool* hasFix) override {
-		if (handle__parsePosInfoFromNmeaData == 0) {
+		if (!handle__parsePosInfoFromNmeaData) {
 			return QNmeaPositionInfoSource::parsePosInfoFromNmeaData(data, size, posInfo, hasFix);
 		}
 
@@ -190,36 +193,36 @@ public:
 		int sigval2 = size;
 		QGeoPositionInfo* sigval3 = posInfo;
 		bool* sigval4 = hasFix;
-		bool callback_return_value = miqt_exec_callback_QNmeaPositionInfoSource_parsePosInfoFromNmeaData(this, handle__parsePosInfoFromNmeaData, sigval1, sigval2, sigval3, sigval4);
+		bool callback_return_value = miqt_exec_callback_QNmeaPositionInfoSource_parsePosInfoFromNmeaData(this, handle__parsePosInfoFromNmeaData.value(), sigval1, sigval2, sigval3, sigval4);
 		return callback_return_value;
 	}
 
 	friend bool QNmeaPositionInfoSource_virtualbase_parsePosInfoFromNmeaData(void* self, const char* data, int size, QGeoPositionInfo* posInfo, bool* hasFix);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__setPreferredPositioningMethods = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QNmeaPositionInfoSource> handle__setPreferredPositioningMethods;
 
 	// Subclass to allow providing a Go implementation
 	virtual void setPreferredPositioningMethods(QGeoPositionInfoSource::PositioningMethods methods) override {
-		if (handle__setPreferredPositioningMethods == 0) {
+		if (!handle__setPreferredPositioningMethods) {
 			QNmeaPositionInfoSource::setPreferredPositioningMethods(methods);
 			return;
 		}
 
 		QGeoPositionInfoSource::PositioningMethods methods_ret = methods;
 		int sigval1 = static_cast<int>(methods_ret);
-		miqt_exec_callback_QNmeaPositionInfoSource_setPreferredPositioningMethods(this, handle__setPreferredPositioningMethods, sigval1);
+		miqt_exec_callback_QNmeaPositionInfoSource_setPreferredPositioningMethods(this, handle__setPreferredPositioningMethods.value(), sigval1);
 
 	}
 
 	friend void QNmeaPositionInfoSource_virtualbase_setPreferredPositioningMethods(void* self, int methods);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__setBackendProperty = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QNmeaPositionInfoSource> handle__setBackendProperty;
 
 	// Subclass to allow providing a Go implementation
 	virtual bool setBackendProperty(const QString& name, const QVariant& value) override {
-		if (handle__setBackendProperty == 0) {
+		if (!handle__setBackendProperty) {
 			return QNmeaPositionInfoSource::setBackendProperty(name, value);
 		}
 
@@ -234,18 +237,18 @@ public:
 		const QVariant& value_ret = value;
 		// Cast returned reference into pointer
 		QVariant* sigval2 = const_cast<QVariant*>(&value_ret);
-		bool callback_return_value = miqt_exec_callback_QNmeaPositionInfoSource_setBackendProperty(this, handle__setBackendProperty, sigval1, sigval2);
+		bool callback_return_value = miqt_exec_callback_QNmeaPositionInfoSource_setBackendProperty(this, handle__setBackendProperty.value(), sigval1, sigval2);
 		return callback_return_value;
 	}
 
 	friend bool QNmeaPositionInfoSource_virtualbase_setBackendProperty(void* self, struct miqt_string name, QVariant* value);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__backendProperty = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QNmeaPositionInfoSource> handle__backendProperty;
 
 	// Subclass to allow providing a Go implementation
 	virtual QVariant backendProperty(const QString& name) const override {
-		if (handle__backendProperty == 0) {
+		if (!handle__backendProperty) {
 			return QNmeaPositionInfoSource::backendProperty(name);
 		}
 
@@ -257,102 +260,102 @@ public:
 		name_ms.data = static_cast<char*>(malloc(name_ms.len));
 		memcpy(name_ms.data, name_b.data(), name_ms.len);
 		struct miqt_string sigval1 = name_ms;
-		QVariant* callback_return_value = miqt_exec_callback_QNmeaPositionInfoSource_backendProperty(this, handle__backendProperty, sigval1);
+		QVariant* callback_return_value = miqt_exec_callback_QNmeaPositionInfoSource_backendProperty(this, handle__backendProperty.value(), sigval1);
 		return *callback_return_value;
 	}
 
 	friend QVariant* QNmeaPositionInfoSource_virtualbase_backendProperty(const void* self, struct miqt_string name);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__event = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QNmeaPositionInfoSource> handle__event;
 
 	// Subclass to allow providing a Go implementation
 	virtual bool event(QEvent* event) override {
-		if (handle__event == 0) {
+		if (!handle__event) {
 			return QNmeaPositionInfoSource::event(event);
 		}
 
 		QEvent* sigval1 = event;
-		bool callback_return_value = miqt_exec_callback_QNmeaPositionInfoSource_event(this, handle__event, sigval1);
+		bool callback_return_value = miqt_exec_callback_QNmeaPositionInfoSource_event(this, handle__event.value(), sigval1);
 		return callback_return_value;
 	}
 
 	friend bool QNmeaPositionInfoSource_virtualbase_event(void* self, QEvent* event);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__eventFilter = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QNmeaPositionInfoSource> handle__eventFilter;
 
 	// Subclass to allow providing a Go implementation
 	virtual bool eventFilter(QObject* watched, QEvent* event) override {
-		if (handle__eventFilter == 0) {
+		if (!handle__eventFilter) {
 			return QNmeaPositionInfoSource::eventFilter(watched, event);
 		}
 
 		QObject* sigval1 = watched;
 		QEvent* sigval2 = event;
-		bool callback_return_value = miqt_exec_callback_QNmeaPositionInfoSource_eventFilter(this, handle__eventFilter, sigval1, sigval2);
+		bool callback_return_value = miqt_exec_callback_QNmeaPositionInfoSource_eventFilter(this, handle__eventFilter.value(), sigval1, sigval2);
 		return callback_return_value;
 	}
 
 	friend bool QNmeaPositionInfoSource_virtualbase_eventFilter(void* self, QObject* watched, QEvent* event);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__timerEvent = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QNmeaPositionInfoSource> handle__timerEvent;
 
 	// Subclass to allow providing a Go implementation
 	virtual void timerEvent(QTimerEvent* event) override {
-		if (handle__timerEvent == 0) {
+		if (!handle__timerEvent) {
 			QNmeaPositionInfoSource::timerEvent(event);
 			return;
 		}
 
 		QTimerEvent* sigval1 = event;
-		miqt_exec_callback_QNmeaPositionInfoSource_timerEvent(this, handle__timerEvent, sigval1);
+		miqt_exec_callback_QNmeaPositionInfoSource_timerEvent(this, handle__timerEvent.value(), sigval1);
 
 	}
 
 	friend void QNmeaPositionInfoSource_virtualbase_timerEvent(void* self, QTimerEvent* event);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__childEvent = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QNmeaPositionInfoSource> handle__childEvent;
 
 	// Subclass to allow providing a Go implementation
 	virtual void childEvent(QChildEvent* event) override {
-		if (handle__childEvent == 0) {
+		if (!handle__childEvent) {
 			QNmeaPositionInfoSource::childEvent(event);
 			return;
 		}
 
 		QChildEvent* sigval1 = event;
-		miqt_exec_callback_QNmeaPositionInfoSource_childEvent(this, handle__childEvent, sigval1);
+		miqt_exec_callback_QNmeaPositionInfoSource_childEvent(this, handle__childEvent.value(), sigval1);
 
 	}
 
 	friend void QNmeaPositionInfoSource_virtualbase_childEvent(void* self, QChildEvent* event);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__customEvent = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QNmeaPositionInfoSource> handle__customEvent;
 
 	// Subclass to allow providing a Go implementation
 	virtual void customEvent(QEvent* event) override {
-		if (handle__customEvent == 0) {
+		if (!handle__customEvent) {
 			QNmeaPositionInfoSource::customEvent(event);
 			return;
 		}
 
 		QEvent* sigval1 = event;
-		miqt_exec_callback_QNmeaPositionInfoSource_customEvent(this, handle__customEvent, sigval1);
+		miqt_exec_callback_QNmeaPositionInfoSource_customEvent(this, handle__customEvent.value(), sigval1);
 
 	}
 
 	friend void QNmeaPositionInfoSource_virtualbase_customEvent(void* self, QEvent* event);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__connectNotify = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QNmeaPositionInfoSource> handle__connectNotify;
 
 	// Subclass to allow providing a Go implementation
 	virtual void connectNotify(const QMetaMethod& signal) override {
-		if (handle__connectNotify == 0) {
+		if (!handle__connectNotify) {
 			QNmeaPositionInfoSource::connectNotify(signal);
 			return;
 		}
@@ -360,18 +363,18 @@ public:
 		const QMetaMethod& signal_ret = signal;
 		// Cast returned reference into pointer
 		QMetaMethod* sigval1 = const_cast<QMetaMethod*>(&signal_ret);
-		miqt_exec_callback_QNmeaPositionInfoSource_connectNotify(this, handle__connectNotify, sigval1);
+		miqt_exec_callback_QNmeaPositionInfoSource_connectNotify(this, handle__connectNotify.value(), sigval1);
 
 	}
 
 	friend void QNmeaPositionInfoSource_virtualbase_connectNotify(void* self, QMetaMethod* signal);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__disconnectNotify = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QNmeaPositionInfoSource> handle__disconnectNotify;
 
 	// Subclass to allow providing a Go implementation
 	virtual void disconnectNotify(const QMetaMethod& signal) override {
-		if (handle__disconnectNotify == 0) {
+		if (!handle__disconnectNotify) {
 			QNmeaPositionInfoSource::disconnectNotify(signal);
 			return;
 		}
@@ -379,7 +382,7 @@ public:
 		const QMetaMethod& signal_ret = signal;
 		// Cast returned reference into pointer
 		QMetaMethod* sigval1 = const_cast<QMetaMethod*>(&signal_ret);
-		miqt_exec_callback_QNmeaPositionInfoSource_disconnectNotify(this, handle__disconnectNotify, sigval1);
+		miqt_exec_callback_QNmeaPositionInfoSource_disconnectNotify(this, handle__disconnectNotify.value(), sigval1);
 
 	}
 
@@ -502,12 +505,13 @@ struct miqt_string QNmeaPositionInfoSource_tr3(const char* s, const char* c, int
 }
 
 bool QNmeaPositionInfoSource_override_virtual_setUpdateInterval(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QNmeaPositionInfoSource> slot_handle(slot);
 	MiqtVirtualQNmeaPositionInfoSource* self_cast = dynamic_cast<MiqtVirtualQNmeaPositionInfoSource*>( (QNmeaPositionInfoSource*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__setUpdateInterval = slot;
+	self_cast->handle__setUpdateInterval = std::move(slot_handle);
 	return true;
 }
 
@@ -516,12 +520,13 @@ void QNmeaPositionInfoSource_virtualbase_setUpdateInterval(void* self, int msec)
 }
 
 bool QNmeaPositionInfoSource_override_virtual_lastKnownPosition(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QNmeaPositionInfoSource> slot_handle(slot);
 	MiqtVirtualQNmeaPositionInfoSource* self_cast = dynamic_cast<MiqtVirtualQNmeaPositionInfoSource*>( (QNmeaPositionInfoSource*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__lastKnownPosition = slot;
+	self_cast->handle__lastKnownPosition = std::move(slot_handle);
 	return true;
 }
 
@@ -530,12 +535,13 @@ QGeoPositionInfo* QNmeaPositionInfoSource_virtualbase_lastKnownPosition(const vo
 }
 
 bool QNmeaPositionInfoSource_override_virtual_supportedPositioningMethods(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QNmeaPositionInfoSource> slot_handle(slot);
 	MiqtVirtualQNmeaPositionInfoSource* self_cast = dynamic_cast<MiqtVirtualQNmeaPositionInfoSource*>( (QNmeaPositionInfoSource*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__supportedPositioningMethods = slot;
+	self_cast->handle__supportedPositioningMethods = std::move(slot_handle);
 	return true;
 }
 
@@ -545,12 +551,13 @@ int QNmeaPositionInfoSource_virtualbase_supportedPositioningMethods(const void* 
 }
 
 bool QNmeaPositionInfoSource_override_virtual_minimumUpdateInterval(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QNmeaPositionInfoSource> slot_handle(slot);
 	MiqtVirtualQNmeaPositionInfoSource* self_cast = dynamic_cast<MiqtVirtualQNmeaPositionInfoSource*>( (QNmeaPositionInfoSource*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__minimumUpdateInterval = slot;
+	self_cast->handle__minimumUpdateInterval = std::move(slot_handle);
 	return true;
 }
 
@@ -559,12 +566,13 @@ int QNmeaPositionInfoSource_virtualbase_minimumUpdateInterval(const void* self) 
 }
 
 bool QNmeaPositionInfoSource_override_virtual_error(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QNmeaPositionInfoSource> slot_handle(slot);
 	MiqtVirtualQNmeaPositionInfoSource* self_cast = dynamic_cast<MiqtVirtualQNmeaPositionInfoSource*>( (QNmeaPositionInfoSource*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__error = slot;
+	self_cast->handle__error = std::move(slot_handle);
 	return true;
 }
 
@@ -574,12 +582,13 @@ int QNmeaPositionInfoSource_virtualbase_error(const void* self) {
 }
 
 bool QNmeaPositionInfoSource_override_virtual_startUpdates(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QNmeaPositionInfoSource> slot_handle(slot);
 	MiqtVirtualQNmeaPositionInfoSource* self_cast = dynamic_cast<MiqtVirtualQNmeaPositionInfoSource*>( (QNmeaPositionInfoSource*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__startUpdates = slot;
+	self_cast->handle__startUpdates = std::move(slot_handle);
 	return true;
 }
 
@@ -588,12 +597,13 @@ void QNmeaPositionInfoSource_virtualbase_startUpdates(void* self) {
 }
 
 bool QNmeaPositionInfoSource_override_virtual_stopUpdates(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QNmeaPositionInfoSource> slot_handle(slot);
 	MiqtVirtualQNmeaPositionInfoSource* self_cast = dynamic_cast<MiqtVirtualQNmeaPositionInfoSource*>( (QNmeaPositionInfoSource*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__stopUpdates = slot;
+	self_cast->handle__stopUpdates = std::move(slot_handle);
 	return true;
 }
 
@@ -602,12 +612,13 @@ void QNmeaPositionInfoSource_virtualbase_stopUpdates(void* self) {
 }
 
 bool QNmeaPositionInfoSource_override_virtual_requestUpdate(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QNmeaPositionInfoSource> slot_handle(slot);
 	MiqtVirtualQNmeaPositionInfoSource* self_cast = dynamic_cast<MiqtVirtualQNmeaPositionInfoSource*>( (QNmeaPositionInfoSource*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__requestUpdate = slot;
+	self_cast->handle__requestUpdate = std::move(slot_handle);
 	return true;
 }
 
@@ -616,12 +627,13 @@ void QNmeaPositionInfoSource_virtualbase_requestUpdate(void* self, int timeout) 
 }
 
 bool QNmeaPositionInfoSource_override_virtual_parsePosInfoFromNmeaData(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QNmeaPositionInfoSource> slot_handle(slot);
 	MiqtVirtualQNmeaPositionInfoSource* self_cast = dynamic_cast<MiqtVirtualQNmeaPositionInfoSource*>( (QNmeaPositionInfoSource*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__parsePosInfoFromNmeaData = slot;
+	self_cast->handle__parsePosInfoFromNmeaData = std::move(slot_handle);
 	return true;
 }
 
@@ -630,12 +642,13 @@ bool QNmeaPositionInfoSource_virtualbase_parsePosInfoFromNmeaData(void* self, co
 }
 
 bool QNmeaPositionInfoSource_override_virtual_setPreferredPositioningMethods(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QNmeaPositionInfoSource> slot_handle(slot);
 	MiqtVirtualQNmeaPositionInfoSource* self_cast = dynamic_cast<MiqtVirtualQNmeaPositionInfoSource*>( (QNmeaPositionInfoSource*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__setPreferredPositioningMethods = slot;
+	self_cast->handle__setPreferredPositioningMethods = std::move(slot_handle);
 	return true;
 }
 
@@ -644,12 +657,13 @@ void QNmeaPositionInfoSource_virtualbase_setPreferredPositioningMethods(void* se
 }
 
 bool QNmeaPositionInfoSource_override_virtual_setBackendProperty(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QNmeaPositionInfoSource> slot_handle(slot);
 	MiqtVirtualQNmeaPositionInfoSource* self_cast = dynamic_cast<MiqtVirtualQNmeaPositionInfoSource*>( (QNmeaPositionInfoSource*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__setBackendProperty = slot;
+	self_cast->handle__setBackendProperty = std::move(slot_handle);
 	return true;
 }
 
@@ -659,12 +673,13 @@ bool QNmeaPositionInfoSource_virtualbase_setBackendProperty(void* self, struct m
 }
 
 bool QNmeaPositionInfoSource_override_virtual_backendProperty(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QNmeaPositionInfoSource> slot_handle(slot);
 	MiqtVirtualQNmeaPositionInfoSource* self_cast = dynamic_cast<MiqtVirtualQNmeaPositionInfoSource*>( (QNmeaPositionInfoSource*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__backendProperty = slot;
+	self_cast->handle__backendProperty = std::move(slot_handle);
 	return true;
 }
 
@@ -674,12 +689,13 @@ QVariant* QNmeaPositionInfoSource_virtualbase_backendProperty(const void* self, 
 }
 
 bool QNmeaPositionInfoSource_override_virtual_event(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QNmeaPositionInfoSource> slot_handle(slot);
 	MiqtVirtualQNmeaPositionInfoSource* self_cast = dynamic_cast<MiqtVirtualQNmeaPositionInfoSource*>( (QNmeaPositionInfoSource*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__event = slot;
+	self_cast->handle__event = std::move(slot_handle);
 	return true;
 }
 
@@ -688,12 +704,13 @@ bool QNmeaPositionInfoSource_virtualbase_event(void* self, QEvent* event) {
 }
 
 bool QNmeaPositionInfoSource_override_virtual_eventFilter(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QNmeaPositionInfoSource> slot_handle(slot);
 	MiqtVirtualQNmeaPositionInfoSource* self_cast = dynamic_cast<MiqtVirtualQNmeaPositionInfoSource*>( (QNmeaPositionInfoSource*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__eventFilter = slot;
+	self_cast->handle__eventFilter = std::move(slot_handle);
 	return true;
 }
 
@@ -702,12 +719,13 @@ bool QNmeaPositionInfoSource_virtualbase_eventFilter(void* self, QObject* watche
 }
 
 bool QNmeaPositionInfoSource_override_virtual_timerEvent(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QNmeaPositionInfoSource> slot_handle(slot);
 	MiqtVirtualQNmeaPositionInfoSource* self_cast = dynamic_cast<MiqtVirtualQNmeaPositionInfoSource*>( (QNmeaPositionInfoSource*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__timerEvent = slot;
+	self_cast->handle__timerEvent = std::move(slot_handle);
 	return true;
 }
 
@@ -716,12 +734,13 @@ void QNmeaPositionInfoSource_virtualbase_timerEvent(void* self, QTimerEvent* eve
 }
 
 bool QNmeaPositionInfoSource_override_virtual_childEvent(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QNmeaPositionInfoSource> slot_handle(slot);
 	MiqtVirtualQNmeaPositionInfoSource* self_cast = dynamic_cast<MiqtVirtualQNmeaPositionInfoSource*>( (QNmeaPositionInfoSource*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__childEvent = slot;
+	self_cast->handle__childEvent = std::move(slot_handle);
 	return true;
 }
 
@@ -730,12 +749,13 @@ void QNmeaPositionInfoSource_virtualbase_childEvent(void* self, QChildEvent* eve
 }
 
 bool QNmeaPositionInfoSource_override_virtual_customEvent(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QNmeaPositionInfoSource> slot_handle(slot);
 	MiqtVirtualQNmeaPositionInfoSource* self_cast = dynamic_cast<MiqtVirtualQNmeaPositionInfoSource*>( (QNmeaPositionInfoSource*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__customEvent = slot;
+	self_cast->handle__customEvent = std::move(slot_handle);
 	return true;
 }
 
@@ -744,12 +764,13 @@ void QNmeaPositionInfoSource_virtualbase_customEvent(void* self, QEvent* event) 
 }
 
 bool QNmeaPositionInfoSource_override_virtual_connectNotify(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QNmeaPositionInfoSource> slot_handle(slot);
 	MiqtVirtualQNmeaPositionInfoSource* self_cast = dynamic_cast<MiqtVirtualQNmeaPositionInfoSource*>( (QNmeaPositionInfoSource*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__connectNotify = slot;
+	self_cast->handle__connectNotify = std::move(slot_handle);
 	return true;
 }
 
@@ -758,12 +779,13 @@ void QNmeaPositionInfoSource_virtualbase_connectNotify(void* self, QMetaMethod* 
 }
 
 bool QNmeaPositionInfoSource_override_virtual_disconnectNotify(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QNmeaPositionInfoSource> slot_handle(slot);
 	MiqtVirtualQNmeaPositionInfoSource* self_cast = dynamic_cast<MiqtVirtualQNmeaPositionInfoSource*>( (QNmeaPositionInfoSource*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__disconnectNotify = slot;
+	self_cast->handle__disconnectNotify = std::move(slot_handle);
 	return true;
 }
 

@@ -1,3 +1,5 @@
+#include <memory>
+#include <utility>
 #include <QAbstractEventDispatcher>
 #define WORKAROUND_INNER_CLASS_DEFINITION_QAbstractEventDispatcher__TimerInfo
 #include <QAbstractNativeEventFilter>
@@ -18,6 +20,7 @@
 extern "C" {
 #endif
 
+void miqt_exec_callback_handle_release_QAbstractEventDispatcher(intptr_t);
 void miqt_exec_callback_QAbstractEventDispatcher_aboutToBlock(intptr_t);
 void miqt_exec_callback_QAbstractEventDispatcher_awake(intptr_t);
 #ifdef __cplusplus
@@ -129,20 +132,24 @@ void QAbstractEventDispatcher_aboutToBlock(QAbstractEventDispatcher* self) {
 	self->aboutToBlock();
 }
 
-void QAbstractEventDispatcher_connect_aboutToBlock(QAbstractEventDispatcher* self, intptr_t slot) {
-	QAbstractEventDispatcher::connect(self, static_cast<void (QAbstractEventDispatcher::*)()>(&QAbstractEventDispatcher::aboutToBlock), self, [=]() {
+void* QAbstractEventDispatcher_connect_aboutToBlock(QAbstractEventDispatcher* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QAbstractEventDispatcher>>(slot);
+	return new QMetaObject::Connection(QAbstractEventDispatcher::connect(self, static_cast<void (QAbstractEventDispatcher::*)()>(&QAbstractEventDispatcher::aboutToBlock), self, [slot_handle]() {
+		intptr_t slot = slot_handle->value();
 		miqt_exec_callback_QAbstractEventDispatcher_aboutToBlock(slot);
-	});
+	}));
 }
 
 void QAbstractEventDispatcher_awake(QAbstractEventDispatcher* self) {
 	self->awake();
 }
 
-void QAbstractEventDispatcher_connect_awake(QAbstractEventDispatcher* self, intptr_t slot) {
-	QAbstractEventDispatcher::connect(self, static_cast<void (QAbstractEventDispatcher::*)()>(&QAbstractEventDispatcher::awake), self, [=]() {
+void* QAbstractEventDispatcher_connect_awake(QAbstractEventDispatcher* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QAbstractEventDispatcher>>(slot);
+	return new QMetaObject::Connection(QAbstractEventDispatcher::connect(self, static_cast<void (QAbstractEventDispatcher::*)()>(&QAbstractEventDispatcher::awake), self, [slot_handle]() {
+		intptr_t slot = slot_handle->value();
 		miqt_exec_callback_QAbstractEventDispatcher_awake(slot);
-	});
+	}));
 }
 
 struct miqt_string QAbstractEventDispatcher_tr2(const char* s, const char* c) {

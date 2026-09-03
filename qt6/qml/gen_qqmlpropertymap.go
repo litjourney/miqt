@@ -15,6 +15,11 @@ import (
 	"unsafe"
 )
 
+//export miqt_exec_callback_handle_release_QQmlPropertyMap
+func miqt_exec_callback_handle_release_QQmlPropertyMap(cb C.intptr_t) {
+	cgo.Handle(cb).Delete()
+}
+
 type QQmlPropertyMap struct {
 	h *C.QQmlPropertyMap
 	*qt6.QObject
@@ -193,8 +198,10 @@ func (this *QQmlPropertyMap) ValueChanged(key string, value *qt6.QVariant) {
 	defer C.free(unsafe.Pointer(key_ms.data))
 	C.QQmlPropertyMap_valueChanged(this.h, key_ms, (*C.QVariant)(value.UnsafePointer()))
 }
-func (this *QQmlPropertyMap) OnValueChanged(slot func(key string, value *qt6.QVariant)) {
-	C.QQmlPropertyMap_connect_valueChanged(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QQmlPropertyMap) OnValueChanged(slot func(key string, value *qt6.QVariant)) *qt6.SignalConnection {
+	_goptr := qt6.UnsafeNewQMetaObject__Connection(C.QQmlPropertyMap_connect_valueChanged(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QQmlPropertyMap_valueChanged
@@ -306,7 +313,11 @@ func (this *QQmlPropertyMap) callVirtualBase_UpdateValue(key string, input *qt6.
 
 }
 func (this *QQmlPropertyMap) OnUpdateValue(slot func(super func(key string, input *qt6.QVariant) *qt6.QVariant, key string, input *qt6.QVariant) *qt6.QVariant) {
-	ok := C.QQmlPropertyMap_override_virtual_updateValue(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QQmlPropertyMap_override_virtual_updateValue(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -338,7 +349,11 @@ func (this *QQmlPropertyMap) callVirtualBase_Event(event *qt6.QEvent) bool {
 
 }
 func (this *QQmlPropertyMap) OnEvent(slot func(super func(event *qt6.QEvent) bool, event *qt6.QEvent) bool) {
-	ok := C.QQmlPropertyMap_override_virtual_event(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QQmlPropertyMap_override_virtual_event(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -366,7 +381,11 @@ func (this *QQmlPropertyMap) callVirtualBase_EventFilter(watched *qt6.QObject, e
 
 }
 func (this *QQmlPropertyMap) OnEventFilter(slot func(super func(watched *qt6.QObject, event *qt6.QEvent) bool, watched *qt6.QObject, event *qt6.QEvent) bool) {
-	ok := C.QQmlPropertyMap_override_virtual_eventFilter(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QQmlPropertyMap_override_virtual_eventFilter(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -396,7 +415,11 @@ func (this *QQmlPropertyMap) callVirtualBase_TimerEvent(event *qt6.QTimerEvent) 
 
 }
 func (this *QQmlPropertyMap) OnTimerEvent(slot func(super func(event *qt6.QTimerEvent), event *qt6.QTimerEvent)) {
-	ok := C.QQmlPropertyMap_override_virtual_timerEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QQmlPropertyMap_override_virtual_timerEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -422,7 +445,11 @@ func (this *QQmlPropertyMap) callVirtualBase_ChildEvent(event *qt6.QChildEvent) 
 
 }
 func (this *QQmlPropertyMap) OnChildEvent(slot func(super func(event *qt6.QChildEvent), event *qt6.QChildEvent)) {
-	ok := C.QQmlPropertyMap_override_virtual_childEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QQmlPropertyMap_override_virtual_childEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -448,7 +475,11 @@ func (this *QQmlPropertyMap) callVirtualBase_CustomEvent(event *qt6.QEvent) {
 
 }
 func (this *QQmlPropertyMap) OnCustomEvent(slot func(super func(event *qt6.QEvent), event *qt6.QEvent)) {
-	ok := C.QQmlPropertyMap_override_virtual_customEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QQmlPropertyMap_override_virtual_customEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -474,7 +505,11 @@ func (this *QQmlPropertyMap) callVirtualBase_ConnectNotify(signal *qt6.QMetaMeth
 
 }
 func (this *QQmlPropertyMap) OnConnectNotify(slot func(super func(signal *qt6.QMetaMethod), signal *qt6.QMetaMethod)) {
-	ok := C.QQmlPropertyMap_override_virtual_connectNotify(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QQmlPropertyMap_override_virtual_connectNotify(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -500,7 +535,11 @@ func (this *QQmlPropertyMap) callVirtualBase_DisconnectNotify(signal *qt6.QMetaM
 
 }
 func (this *QQmlPropertyMap) OnDisconnectNotify(slot func(super func(signal *qt6.QMetaMethod), signal *qt6.QMetaMethod)) {
-	ok := C.QQmlPropertyMap_override_virtual_disconnectNotify(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QQmlPropertyMap_override_virtual_disconnectNotify(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}

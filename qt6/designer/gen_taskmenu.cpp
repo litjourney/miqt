@@ -1,3 +1,5 @@
+#include <memory>
+#include <utility>
 #include <QAction>
 #include <QDesignerTaskMenuExtension>
 #include <QList>
@@ -8,6 +10,7 @@
 extern "C" {
 #endif
 
+void miqt_exec_callback_handle_release_QDesignerTaskMenuExtension(intptr_t);
 QAction* miqt_exec_callback_QDesignerTaskMenuExtension_preferredEditAction(const QDesignerTaskMenuExtension*, intptr_t);
 struct miqt_array /* of QAction* */  miqt_exec_callback_QDesignerTaskMenuExtension_taskActions(const QDesignerTaskMenuExtension*, intptr_t);
 #ifdef __cplusplus
@@ -22,30 +25,30 @@ public:
 	virtual ~MiqtVirtualQDesignerTaskMenuExtension() override = default;
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__preferredEditAction = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QDesignerTaskMenuExtension> handle__preferredEditAction;
 
 	// Subclass to allow providing a Go implementation
 	virtual QAction* preferredEditAction() const override {
-		if (handle__preferredEditAction == 0) {
+		if (!handle__preferredEditAction) {
 			return QDesignerTaskMenuExtension::preferredEditAction();
 		}
 
-		QAction* callback_return_value = miqt_exec_callback_QDesignerTaskMenuExtension_preferredEditAction(this, handle__preferredEditAction);
+		QAction* callback_return_value = miqt_exec_callback_QDesignerTaskMenuExtension_preferredEditAction(this, handle__preferredEditAction.value());
 		return callback_return_value;
 	}
 
 	friend QAction* QDesignerTaskMenuExtension_virtualbase_preferredEditAction(const void* self);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__taskActions = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QDesignerTaskMenuExtension> handle__taskActions;
 
 	// Subclass to allow providing a Go implementation
 	virtual QList<QAction *> taskActions() const override {
-		if (handle__taskActions == 0) {
+		if (!handle__taskActions) {
 			return QList<QAction *>(); // Pure virtual, there is no base we can call
 		}
 
-		struct miqt_array /* of QAction* */  callback_return_value = miqt_exec_callback_QDesignerTaskMenuExtension_taskActions(this, handle__taskActions);
+		struct miqt_array /* of QAction* */  callback_return_value = miqt_exec_callback_QDesignerTaskMenuExtension_taskActions(this, handle__taskActions.value());
 		QList<QAction *> callback_return_value_QList;
 		callback_return_value_QList.reserve(callback_return_value.len);
 		QAction** callback_return_value_arr = static_cast<QAction**>(callback_return_value.data);
@@ -80,12 +83,13 @@ struct miqt_array /* of QAction* */  QDesignerTaskMenuExtension_taskActions(cons
 }
 
 bool QDesignerTaskMenuExtension_override_virtual_preferredEditAction(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QDesignerTaskMenuExtension> slot_handle(slot);
 	MiqtVirtualQDesignerTaskMenuExtension* self_cast = dynamic_cast<MiqtVirtualQDesignerTaskMenuExtension*>( (QDesignerTaskMenuExtension*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__preferredEditAction = slot;
+	self_cast->handle__preferredEditAction = std::move(slot_handle);
 	return true;
 }
 
@@ -94,12 +98,13 @@ QAction* QDesignerTaskMenuExtension_virtualbase_preferredEditAction(const void* 
 }
 
 bool QDesignerTaskMenuExtension_override_virtual_taskActions(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QDesignerTaskMenuExtension> slot_handle(slot);
 	MiqtVirtualQDesignerTaskMenuExtension* self_cast = dynamic_cast<MiqtVirtualQDesignerTaskMenuExtension*>( (QDesignerTaskMenuExtension*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__taskActions = slot;
+	self_cast->handle__taskActions = std::move(slot_handle);
 	return true;
 }
 

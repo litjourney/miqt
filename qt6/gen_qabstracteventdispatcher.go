@@ -14,6 +14,11 @@ import (
 	"unsafe"
 )
 
+//export miqt_exec_callback_handle_release_QAbstractEventDispatcher
+func miqt_exec_callback_handle_release_QAbstractEventDispatcher(cb C.intptr_t) {
+	cgo.Handle(cb).Delete()
+}
+
 type QAbstractEventDispatcher struct {
 	h *C.QAbstractEventDispatcher
 	*QObject
@@ -155,8 +160,10 @@ func (this *QAbstractEventDispatcher) FilterNativeEvent(eventType []byte, messag
 func (this *QAbstractEventDispatcher) AboutToBlock() {
 	C.QAbstractEventDispatcher_aboutToBlock(this.h)
 }
-func (this *QAbstractEventDispatcher) OnAboutToBlock(slot func()) {
-	C.QAbstractEventDispatcher_connect_aboutToBlock(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QAbstractEventDispatcher) OnAboutToBlock(slot func()) *SignalConnection {
+	_goptr := UnsafeNewQMetaObject__Connection(C.QAbstractEventDispatcher_connect_aboutToBlock(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QAbstractEventDispatcher_aboutToBlock
@@ -172,8 +179,10 @@ func miqt_exec_callback_QAbstractEventDispatcher_aboutToBlock(cb C.intptr_t) {
 func (this *QAbstractEventDispatcher) Awake() {
 	C.QAbstractEventDispatcher_awake(this.h)
 }
-func (this *QAbstractEventDispatcher) OnAwake(slot func()) {
-	C.QAbstractEventDispatcher_connect_awake(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QAbstractEventDispatcher) OnAwake(slot func()) *SignalConnection {
+	_goptr := UnsafeNewQMetaObject__Connection(C.QAbstractEventDispatcher_connect_awake(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QAbstractEventDispatcher_awake

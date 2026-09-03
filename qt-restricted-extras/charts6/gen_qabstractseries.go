@@ -33,6 +33,11 @@ const (
 	QAbstractSeries__SeriesTypeCandlestick          QAbstractSeries__SeriesType = 12
 )
 
+//export miqt_exec_callback_handle_release_QAbstractSeries
+func miqt_exec_callback_handle_release_QAbstractSeries(cb C.intptr_t) {
+	cgo.Handle(cb).Delete()
+}
+
 type QAbstractSeries struct {
 	h *C.QAbstractSeries
 	*qt6.QObject
@@ -164,8 +169,10 @@ func (this *QAbstractSeries) Hide() {
 func (this *QAbstractSeries) NameChanged() {
 	C.QAbstractSeries_nameChanged(this.h)
 }
-func (this *QAbstractSeries) OnNameChanged(slot func()) {
-	C.QAbstractSeries_connect_nameChanged(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QAbstractSeries) OnNameChanged(slot func()) *qt6.SignalConnection {
+	_goptr := qt6.UnsafeNewQMetaObject__Connection(C.QAbstractSeries_connect_nameChanged(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QAbstractSeries_nameChanged
@@ -181,8 +188,10 @@ func miqt_exec_callback_QAbstractSeries_nameChanged(cb C.intptr_t) {
 func (this *QAbstractSeries) VisibleChanged() {
 	C.QAbstractSeries_visibleChanged(this.h)
 }
-func (this *QAbstractSeries) OnVisibleChanged(slot func()) {
-	C.QAbstractSeries_connect_visibleChanged(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QAbstractSeries) OnVisibleChanged(slot func()) *qt6.SignalConnection {
+	_goptr := qt6.UnsafeNewQMetaObject__Connection(C.QAbstractSeries_connect_visibleChanged(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QAbstractSeries_visibleChanged
@@ -198,8 +207,10 @@ func miqt_exec_callback_QAbstractSeries_visibleChanged(cb C.intptr_t) {
 func (this *QAbstractSeries) OpacityChanged() {
 	C.QAbstractSeries_opacityChanged(this.h)
 }
-func (this *QAbstractSeries) OnOpacityChanged(slot func()) {
-	C.QAbstractSeries_connect_opacityChanged(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QAbstractSeries) OnOpacityChanged(slot func()) *qt6.SignalConnection {
+	_goptr := qt6.UnsafeNewQMetaObject__Connection(C.QAbstractSeries_connect_opacityChanged(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QAbstractSeries_opacityChanged
@@ -215,8 +226,10 @@ func miqt_exec_callback_QAbstractSeries_opacityChanged(cb C.intptr_t) {
 func (this *QAbstractSeries) UseOpenGLChanged() {
 	C.QAbstractSeries_useOpenGLChanged(this.h)
 }
-func (this *QAbstractSeries) OnUseOpenGLChanged(slot func()) {
-	C.QAbstractSeries_connect_useOpenGLChanged(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QAbstractSeries) OnUseOpenGLChanged(slot func()) *qt6.SignalConnection {
+	_goptr := qt6.UnsafeNewQMetaObject__Connection(C.QAbstractSeries_connect_useOpenGLChanged(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QAbstractSeries_useOpenGLChanged

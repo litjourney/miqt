@@ -64,9 +64,9 @@ int QPdfBookmarkModel_rowCount(const QPdfBookmarkModel* self, QModelIndex* paren
 int QPdfBookmarkModel_columnCount(const QPdfBookmarkModel* self, QModelIndex* parent);
 struct miqt_map /* of int to struct miqt_string */  QPdfBookmarkModel_roleNames(const QPdfBookmarkModel* self);
 void QPdfBookmarkModel_documentChanged(QPdfBookmarkModel* self, QPdfDocument* document);
-void QPdfBookmarkModel_connect_documentChanged(QPdfBookmarkModel* self, intptr_t slot);
+void* QPdfBookmarkModel_connect_documentChanged(QPdfBookmarkModel* self, intptr_t slot);
 void QPdfBookmarkModel_structureModeChanged(QPdfBookmarkModel* self, int structureMode);
-void QPdfBookmarkModel_connect_structureModeChanged(QPdfBookmarkModel* self, intptr_t slot);
+void* QPdfBookmarkModel_connect_structureModeChanged(QPdfBookmarkModel* self, intptr_t slot);
 struct miqt_string QPdfBookmarkModel_tr2(const char* s, const char* c);
 struct miqt_string QPdfBookmarkModel_tr3(const char* s, const char* c, int n);
 struct miqt_string QPdfBookmarkModel_trUtf82(const char* s, const char* c);

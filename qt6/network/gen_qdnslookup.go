@@ -483,6 +483,11 @@ func (this *QDnsTextRecord) GoGC() {
 	})
 }
 
+//export miqt_exec_callback_handle_release_QDnsLookup
+func miqt_exec_callback_handle_release_QDnsLookup(cb C.intptr_t) {
+	cgo.Handle(cb).Delete()
+}
+
 type QDnsLookup struct {
 	h *C.QDnsLookup
 	*qt6.QObject
@@ -733,8 +738,10 @@ func (this *QDnsLookup) Lookup() {
 func (this *QDnsLookup) Finished() {
 	C.QDnsLookup_finished(this.h)
 }
-func (this *QDnsLookup) OnFinished(slot func()) {
-	C.QDnsLookup_connect_finished(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QDnsLookup) OnFinished(slot func()) *qt6.SignalConnection {
+	_goptr := qt6.UnsafeNewQMetaObject__Connection(C.QDnsLookup_connect_finished(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QDnsLookup_finished
@@ -754,8 +761,10 @@ func (this *QDnsLookup) NameChanged(name string) {
 	defer C.free(unsafe.Pointer(name_ms.data))
 	C.QDnsLookup_nameChanged(this.h, name_ms)
 }
-func (this *QDnsLookup) OnNameChanged(slot func(name string)) {
-	C.QDnsLookup_connect_nameChanged(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QDnsLookup) OnNameChanged(slot func(name string)) *qt6.SignalConnection {
+	_goptr := qt6.UnsafeNewQMetaObject__Connection(C.QDnsLookup_connect_nameChanged(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QDnsLookup_nameChanged
@@ -777,8 +786,10 @@ func miqt_exec_callback_QDnsLookup_nameChanged(cb C.intptr_t, name C.struct_miqt
 func (this *QDnsLookup) TypeChanged(typeVal QDnsLookup__Type) {
 	C.QDnsLookup_typeChanged(this.h, (C.int)(typeVal))
 }
-func (this *QDnsLookup) OnTypeChanged(slot func(typeVal QDnsLookup__Type)) {
-	C.QDnsLookup_connect_typeChanged(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QDnsLookup) OnTypeChanged(slot func(typeVal QDnsLookup__Type)) *qt6.SignalConnection {
+	_goptr := qt6.UnsafeNewQMetaObject__Connection(C.QDnsLookup_connect_typeChanged(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QDnsLookup_typeChanged
@@ -797,8 +808,10 @@ func miqt_exec_callback_QDnsLookup_typeChanged(cb C.intptr_t, typeVal C.int) {
 func (this *QDnsLookup) NameserverChanged(nameserver *QHostAddress) {
 	C.QDnsLookup_nameserverChanged(this.h, nameserver.cPointer())
 }
-func (this *QDnsLookup) OnNameserverChanged(slot func(nameserver *QHostAddress)) {
-	C.QDnsLookup_connect_nameserverChanged(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QDnsLookup) OnNameserverChanged(slot func(nameserver *QHostAddress)) *qt6.SignalConnection {
+	_goptr := qt6.UnsafeNewQMetaObject__Connection(C.QDnsLookup_connect_nameserverChanged(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QDnsLookup_nameserverChanged
@@ -900,7 +913,11 @@ func (this *QDnsLookup) callVirtualBase_Event(event *qt6.QEvent) bool {
 
 }
 func (this *QDnsLookup) OnEvent(slot func(super func(event *qt6.QEvent) bool, event *qt6.QEvent) bool) {
-	ok := C.QDnsLookup_override_virtual_event(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QDnsLookup_override_virtual_event(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -928,7 +945,11 @@ func (this *QDnsLookup) callVirtualBase_EventFilter(watched *qt6.QObject, event 
 
 }
 func (this *QDnsLookup) OnEventFilter(slot func(super func(watched *qt6.QObject, event *qt6.QEvent) bool, watched *qt6.QObject, event *qt6.QEvent) bool) {
-	ok := C.QDnsLookup_override_virtual_eventFilter(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QDnsLookup_override_virtual_eventFilter(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -958,7 +979,11 @@ func (this *QDnsLookup) callVirtualBase_TimerEvent(event *qt6.QTimerEvent) {
 
 }
 func (this *QDnsLookup) OnTimerEvent(slot func(super func(event *qt6.QTimerEvent), event *qt6.QTimerEvent)) {
-	ok := C.QDnsLookup_override_virtual_timerEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QDnsLookup_override_virtual_timerEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -984,7 +1009,11 @@ func (this *QDnsLookup) callVirtualBase_ChildEvent(event *qt6.QChildEvent) {
 
 }
 func (this *QDnsLookup) OnChildEvent(slot func(super func(event *qt6.QChildEvent), event *qt6.QChildEvent)) {
-	ok := C.QDnsLookup_override_virtual_childEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QDnsLookup_override_virtual_childEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1010,7 +1039,11 @@ func (this *QDnsLookup) callVirtualBase_CustomEvent(event *qt6.QEvent) {
 
 }
 func (this *QDnsLookup) OnCustomEvent(slot func(super func(event *qt6.QEvent), event *qt6.QEvent)) {
-	ok := C.QDnsLookup_override_virtual_customEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QDnsLookup_override_virtual_customEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1036,7 +1069,11 @@ func (this *QDnsLookup) callVirtualBase_ConnectNotify(signal *qt6.QMetaMethod) {
 
 }
 func (this *QDnsLookup) OnConnectNotify(slot func(super func(signal *qt6.QMetaMethod), signal *qt6.QMetaMethod)) {
-	ok := C.QDnsLookup_override_virtual_connectNotify(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QDnsLookup_override_virtual_connectNotify(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1062,7 +1099,11 @@ func (this *QDnsLookup) callVirtualBase_DisconnectNotify(signal *qt6.QMetaMethod
 
 }
 func (this *QDnsLookup) OnDisconnectNotify(slot func(super func(signal *qt6.QMetaMethod), signal *qt6.QMetaMethod)) {
-	ok := C.QDnsLookup_override_virtual_disconnectNotify(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QDnsLookup_override_virtual_disconnectNotify(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}

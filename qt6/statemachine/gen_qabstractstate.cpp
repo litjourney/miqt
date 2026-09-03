@@ -1,3 +1,5 @@
+#include <memory>
+#include <utility>
 #include <QAbstractState>
 #include <QEvent>
 #include <QMetaMethod>
@@ -15,6 +17,7 @@
 extern "C" {
 #endif
 
+void miqt_exec_callback_handle_release_QAbstractState(intptr_t);
 void miqt_exec_callback_QAbstractState_activeChanged(intptr_t, bool);
 void miqt_exec_callback_QAbstractState_entered(intptr_t);
 void miqt_exec_callback_QAbstractState_exited(intptr_t);
@@ -61,11 +64,13 @@ void QAbstractState_activeChanged(QAbstractState* self, bool active) {
 	self->activeChanged(active);
 }
 
-void QAbstractState_connect_activeChanged(QAbstractState* self, intptr_t slot) {
-	QAbstractState::connect(self, static_cast<void (QAbstractState::*)(bool)>(&QAbstractState::activeChanged), self, [=](bool active) {
+void* QAbstractState_connect_activeChanged(QAbstractState* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QAbstractState>>(slot);
+	return new QMetaObject::Connection(QAbstractState::connect(self, static_cast<void (QAbstractState::*)(bool)>(&QAbstractState::activeChanged), self, [slot_handle](bool active) {
+		intptr_t slot = slot_handle->value();
 		bool sigval1 = active;
 		miqt_exec_callback_QAbstractState_activeChanged(slot, sigval1);
-	});
+	}));
 }
 
 struct miqt_string QAbstractState_tr2(const char* s, const char* c) {
@@ -90,16 +95,20 @@ struct miqt_string QAbstractState_tr3(const char* s, const char* c, int n) {
 	return _ms;
 }
 
-void QAbstractState_connect_entered(QAbstractState* self, intptr_t slot) {
-	QAbstractState::connect(self, &QAbstractState::entered, self, [=]() {
+void* QAbstractState_connect_entered(QAbstractState* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QAbstractState>>(slot);
+	return new QMetaObject::Connection(QAbstractState::connect(self, &QAbstractState::entered, self, [slot_handle]() {
+		intptr_t slot = slot_handle->value();
 		miqt_exec_callback_QAbstractState_entered(slot);
-	});
+	}));
 }
 
-void QAbstractState_connect_exited(QAbstractState* self, intptr_t slot) {
-	QAbstractState::connect(self, &QAbstractState::exited, self, [=]() {
+void* QAbstractState_connect_exited(QAbstractState* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QAbstractState>>(slot);
+	return new QMetaObject::Connection(QAbstractState::connect(self, &QAbstractState::exited, self, [slot_handle]() {
+		intptr_t slot = slot_handle->value();
 		miqt_exec_callback_QAbstractState_exited(slot);
-	});
+	}));
 }
 
 void QAbstractState_delete(QAbstractState* self) {

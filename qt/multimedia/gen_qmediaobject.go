@@ -15,6 +15,11 @@ import (
 	"unsafe"
 )
 
+//export miqt_exec_callback_handle_release_QMediaObject
+func miqt_exec_callback_handle_release_QMediaObject(cb C.intptr_t) {
+	cgo.Handle(cb).Delete()
+}
+
 type QMediaObject struct {
 	h *C.QMediaObject
 	*qt.QObject
@@ -137,8 +142,10 @@ func (this *QMediaObject) AvailableMetaData() []string {
 func (this *QMediaObject) NotifyIntervalChanged(milliSeconds int) {
 	C.QMediaObject_notifyIntervalChanged(this.h, (C.int)(milliSeconds))
 }
-func (this *QMediaObject) OnNotifyIntervalChanged(slot func(milliSeconds int)) {
-	C.QMediaObject_connect_notifyIntervalChanged(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QMediaObject) OnNotifyIntervalChanged(slot func(milliSeconds int)) *qt.SignalConnection {
+	_goptr := qt.UnsafeNewQMetaObject__Connection(C.QMediaObject_connect_notifyIntervalChanged(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QMediaObject_notifyIntervalChanged
@@ -157,8 +164,10 @@ func miqt_exec_callback_QMediaObject_notifyIntervalChanged(cb C.intptr_t, milliS
 func (this *QMediaObject) MetaDataAvailableChanged(available bool) {
 	C.QMediaObject_metaDataAvailableChanged(this.h, (C.bool)(available))
 }
-func (this *QMediaObject) OnMetaDataAvailableChanged(slot func(available bool)) {
-	C.QMediaObject_connect_metaDataAvailableChanged(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QMediaObject) OnMetaDataAvailableChanged(slot func(available bool)) *qt.SignalConnection {
+	_goptr := qt.UnsafeNewQMetaObject__Connection(C.QMediaObject_connect_metaDataAvailableChanged(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QMediaObject_metaDataAvailableChanged
@@ -177,8 +186,10 @@ func miqt_exec_callback_QMediaObject_metaDataAvailableChanged(cb C.intptr_t, ava
 func (this *QMediaObject) MetaDataChanged() {
 	C.QMediaObject_metaDataChanged(this.h)
 }
-func (this *QMediaObject) OnMetaDataChanged(slot func()) {
-	C.QMediaObject_connect_metaDataChanged(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QMediaObject) OnMetaDataChanged(slot func()) *qt.SignalConnection {
+	_goptr := qt.UnsafeNewQMetaObject__Connection(C.QMediaObject_connect_metaDataChanged(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QMediaObject_metaDataChanged
@@ -198,8 +209,10 @@ func (this *QMediaObject) MetaDataChanged2(key string, value *qt.QVariant) {
 	defer C.free(unsafe.Pointer(key_ms.data))
 	C.QMediaObject_metaDataChanged2(this.h, key_ms, (*C.QVariant)(value.UnsafePointer()))
 }
-func (this *QMediaObject) OnMetaDataChanged2(slot func(key string, value *qt.QVariant)) {
-	C.QMediaObject_connect_metaDataChanged2(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QMediaObject) OnMetaDataChanged2(slot func(key string, value *qt.QVariant)) *qt.SignalConnection {
+	_goptr := qt.UnsafeNewQMetaObject__Connection(C.QMediaObject_connect_metaDataChanged2(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QMediaObject_metaDataChanged2
@@ -222,8 +235,10 @@ func miqt_exec_callback_QMediaObject_metaDataChanged2(cb C.intptr_t, key C.struc
 func (this *QMediaObject) AvailabilityChanged(available bool) {
 	C.QMediaObject_availabilityChanged(this.h, (C.bool)(available))
 }
-func (this *QMediaObject) OnAvailabilityChanged(slot func(available bool)) {
-	C.QMediaObject_connect_availabilityChanged(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QMediaObject) OnAvailabilityChanged(slot func(available bool)) *qt.SignalConnection {
+	_goptr := qt.UnsafeNewQMetaObject__Connection(C.QMediaObject_connect_availabilityChanged(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QMediaObject_availabilityChanged
@@ -242,8 +257,10 @@ func miqt_exec_callback_QMediaObject_availabilityChanged(cb C.intptr_t, availabl
 func (this *QMediaObject) AvailabilityChangedWithAvailability(availability QMultimedia__AvailabilityStatus) {
 	C.QMediaObject_availabilityChangedWithAvailability(this.h, (C.int)(availability))
 }
-func (this *QMediaObject) OnAvailabilityChangedWithAvailability(slot func(availability QMultimedia__AvailabilityStatus)) {
-	C.QMediaObject_connect_availabilityChangedWithAvailability(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QMediaObject) OnAvailabilityChangedWithAvailability(slot func(availability QMultimedia__AvailabilityStatus)) *qt.SignalConnection {
+	_goptr := qt.UnsafeNewQMetaObject__Connection(C.QMediaObject_connect_availabilityChangedWithAvailability(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QMediaObject_availabilityChangedWithAvailability

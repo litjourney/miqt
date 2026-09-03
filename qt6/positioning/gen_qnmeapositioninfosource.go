@@ -22,6 +22,11 @@ const (
 	QNmeaPositionInfoSource__SimulationMode QNmeaPositionInfoSource__UpdateMode = 2
 )
 
+//export miqt_exec_callback_handle_release_QNmeaPositionInfoSource
+func miqt_exec_callback_handle_release_QNmeaPositionInfoSource(cb C.intptr_t) {
+	cgo.Handle(cb).Delete()
+}
+
 type QNmeaPositionInfoSource struct {
 	h *C.QNmeaPositionInfoSource
 	*QGeoPositionInfoSource
@@ -241,7 +246,11 @@ func (this *QNmeaPositionInfoSource) callVirtualBase_SetUpdateInterval(msec int)
 
 }
 func (this *QNmeaPositionInfoSource) OnSetUpdateInterval(slot func(super func(msec int), msec int)) {
-	ok := C.QNmeaPositionInfoSource_override_virtual_setUpdateInterval(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QNmeaPositionInfoSource_override_virtual_setUpdateInterval(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -269,7 +278,11 @@ func (this *QNmeaPositionInfoSource) callVirtualBase_LastKnownPosition(fromSatel
 
 }
 func (this *QNmeaPositionInfoSource) OnLastKnownPosition(slot func(super func(fromSatellitePositioningMethodsOnly bool) *QGeoPositionInfo, fromSatellitePositioningMethodsOnly bool) *QGeoPositionInfo) {
-	ok := C.QNmeaPositionInfoSource_override_virtual_lastKnownPosition(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QNmeaPositionInfoSource_override_virtual_lastKnownPosition(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -297,7 +310,11 @@ func (this *QNmeaPositionInfoSource) callVirtualBase_SupportedPositioningMethods
 
 }
 func (this *QNmeaPositionInfoSource) OnSupportedPositioningMethods(slot func(super func() QGeoPositionInfoSource__PositioningMethod) QGeoPositionInfoSource__PositioningMethod) {
-	ok := C.QNmeaPositionInfoSource_override_virtual_supportedPositioningMethods(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QNmeaPositionInfoSource_override_virtual_supportedPositioningMethods(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -322,7 +339,11 @@ func (this *QNmeaPositionInfoSource) callVirtualBase_MinimumUpdateInterval() int
 
 }
 func (this *QNmeaPositionInfoSource) OnMinimumUpdateInterval(slot func(super func() int) int) {
-	ok := C.QNmeaPositionInfoSource_override_virtual_minimumUpdateInterval(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QNmeaPositionInfoSource_override_virtual_minimumUpdateInterval(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -347,7 +368,11 @@ func (this *QNmeaPositionInfoSource) callVirtualBase_Error() QGeoPositionInfoSou
 
 }
 func (this *QNmeaPositionInfoSource) OnError(slot func(super func() QGeoPositionInfoSource__Error) QGeoPositionInfoSource__Error) {
-	ok := C.QNmeaPositionInfoSource_override_virtual_error(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QNmeaPositionInfoSource_override_virtual_error(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -372,7 +397,11 @@ func (this *QNmeaPositionInfoSource) callVirtualBase_StartUpdates() {
 
 }
 func (this *QNmeaPositionInfoSource) OnStartUpdates(slot func(super func())) {
-	ok := C.QNmeaPositionInfoSource_override_virtual_startUpdates(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QNmeaPositionInfoSource_override_virtual_startUpdates(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -395,7 +424,11 @@ func (this *QNmeaPositionInfoSource) callVirtualBase_StopUpdates() {
 
 }
 func (this *QNmeaPositionInfoSource) OnStopUpdates(slot func(super func())) {
-	ok := C.QNmeaPositionInfoSource_override_virtual_stopUpdates(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QNmeaPositionInfoSource_override_virtual_stopUpdates(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -418,7 +451,11 @@ func (this *QNmeaPositionInfoSource) callVirtualBase_RequestUpdate(timeout int) 
 
 }
 func (this *QNmeaPositionInfoSource) OnRequestUpdate(slot func(super func(timeout int), timeout int)) {
-	ok := C.QNmeaPositionInfoSource_override_virtual_requestUpdate(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QNmeaPositionInfoSource_override_virtual_requestUpdate(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -446,7 +483,11 @@ func (this *QNmeaPositionInfoSource) callVirtualBase_ParsePosInfoFromNmeaData(da
 
 }
 func (this *QNmeaPositionInfoSource) OnParsePosInfoFromNmeaData(slot func(super func(data string, size int, posInfo *QGeoPositionInfo, hasFix *bool) bool, data string, size int, posInfo *QGeoPositionInfo, hasFix *bool) bool) {
-	ok := C.QNmeaPositionInfoSource_override_virtual_parsePosInfoFromNmeaData(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QNmeaPositionInfoSource_override_virtual_parsePosInfoFromNmeaData(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -481,7 +522,11 @@ func (this *QNmeaPositionInfoSource) callVirtualBase_SetPreferredPositioningMeth
 
 }
 func (this *QNmeaPositionInfoSource) OnSetPreferredPositioningMethods(slot func(super func(methods QGeoPositionInfoSource__PositioningMethod), methods QGeoPositionInfoSource__PositioningMethod)) {
-	ok := C.QNmeaPositionInfoSource_override_virtual_setPreferredPositioningMethods(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QNmeaPositionInfoSource_override_virtual_setPreferredPositioningMethods(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -511,7 +556,11 @@ func (this *QNmeaPositionInfoSource) callVirtualBase_SetBackendProperty(name str
 
 }
 func (this *QNmeaPositionInfoSource) OnSetBackendProperty(slot func(super func(name string, value *qt6.QVariant) bool, name string, value *qt6.QVariant) bool) {
-	ok := C.QNmeaPositionInfoSource_override_virtual_setBackendProperty(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QNmeaPositionInfoSource_override_virtual_setBackendProperty(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -549,7 +598,11 @@ func (this *QNmeaPositionInfoSource) callVirtualBase_BackendProperty(name string
 
 }
 func (this *QNmeaPositionInfoSource) OnBackendProperty(slot func(super func(name string) *qt6.QVariant, name string) *qt6.QVariant) {
-	ok := C.QNmeaPositionInfoSource_override_virtual_backendProperty(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QNmeaPositionInfoSource_override_virtual_backendProperty(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -580,7 +633,11 @@ func (this *QNmeaPositionInfoSource) callVirtualBase_Event(event *qt6.QEvent) bo
 
 }
 func (this *QNmeaPositionInfoSource) OnEvent(slot func(super func(event *qt6.QEvent) bool, event *qt6.QEvent) bool) {
-	ok := C.QNmeaPositionInfoSource_override_virtual_event(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QNmeaPositionInfoSource_override_virtual_event(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -608,7 +665,11 @@ func (this *QNmeaPositionInfoSource) callVirtualBase_EventFilter(watched *qt6.QO
 
 }
 func (this *QNmeaPositionInfoSource) OnEventFilter(slot func(super func(watched *qt6.QObject, event *qt6.QEvent) bool, watched *qt6.QObject, event *qt6.QEvent) bool) {
-	ok := C.QNmeaPositionInfoSource_override_virtual_eventFilter(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QNmeaPositionInfoSource_override_virtual_eventFilter(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -638,7 +699,11 @@ func (this *QNmeaPositionInfoSource) callVirtualBase_TimerEvent(event *qt6.QTime
 
 }
 func (this *QNmeaPositionInfoSource) OnTimerEvent(slot func(super func(event *qt6.QTimerEvent), event *qt6.QTimerEvent)) {
-	ok := C.QNmeaPositionInfoSource_override_virtual_timerEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QNmeaPositionInfoSource_override_virtual_timerEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -664,7 +729,11 @@ func (this *QNmeaPositionInfoSource) callVirtualBase_ChildEvent(event *qt6.QChil
 
 }
 func (this *QNmeaPositionInfoSource) OnChildEvent(slot func(super func(event *qt6.QChildEvent), event *qt6.QChildEvent)) {
-	ok := C.QNmeaPositionInfoSource_override_virtual_childEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QNmeaPositionInfoSource_override_virtual_childEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -690,7 +759,11 @@ func (this *QNmeaPositionInfoSource) callVirtualBase_CustomEvent(event *qt6.QEve
 
 }
 func (this *QNmeaPositionInfoSource) OnCustomEvent(slot func(super func(event *qt6.QEvent), event *qt6.QEvent)) {
-	ok := C.QNmeaPositionInfoSource_override_virtual_customEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QNmeaPositionInfoSource_override_virtual_customEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -716,7 +789,11 @@ func (this *QNmeaPositionInfoSource) callVirtualBase_ConnectNotify(signal *qt6.Q
 
 }
 func (this *QNmeaPositionInfoSource) OnConnectNotify(slot func(super func(signal *qt6.QMetaMethod), signal *qt6.QMetaMethod)) {
-	ok := C.QNmeaPositionInfoSource_override_virtual_connectNotify(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QNmeaPositionInfoSource_override_virtual_connectNotify(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -742,7 +819,11 @@ func (this *QNmeaPositionInfoSource) callVirtualBase_DisconnectNotify(signal *qt
 
 }
 func (this *QNmeaPositionInfoSource) OnDisconnectNotify(slot func(super func(signal *qt6.QMetaMethod), signal *qt6.QMetaMethod)) {
-	ok := C.QNmeaPositionInfoSource_override_virtual_disconnectNotify(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QNmeaPositionInfoSource_override_virtual_disconnectNotify(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}

@@ -1,3 +1,5 @@
+#include <memory>
+#include <utility>
 #include <QAudioBuffer>
 #include <QMediaAudioProbeControl>
 #include <QMediaControl>
@@ -14,6 +16,7 @@
 extern "C" {
 #endif
 
+void miqt_exec_callback_handle_release_QMediaAudioProbeControl(intptr_t);
 void miqt_exec_callback_QMediaAudioProbeControl_audioBufferProbed(intptr_t, QAudioBuffer*);
 void miqt_exec_callback_QMediaAudioProbeControl_flush(intptr_t);
 #ifdef __cplusplus
@@ -58,23 +61,27 @@ void QMediaAudioProbeControl_audioBufferProbed(QMediaAudioProbeControl* self, QA
 	self->audioBufferProbed(*buffer);
 }
 
-void QMediaAudioProbeControl_connect_audioBufferProbed(QMediaAudioProbeControl* self, intptr_t slot) {
-	QMediaAudioProbeControl::connect(self, static_cast<void (QMediaAudioProbeControl::*)(const QAudioBuffer&)>(&QMediaAudioProbeControl::audioBufferProbed), self, [=](const QAudioBuffer& buffer) {
+void* QMediaAudioProbeControl_connect_audioBufferProbed(QMediaAudioProbeControl* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QMediaAudioProbeControl>>(slot);
+	return new QMetaObject::Connection(QMediaAudioProbeControl::connect(self, static_cast<void (QMediaAudioProbeControl::*)(const QAudioBuffer&)>(&QMediaAudioProbeControl::audioBufferProbed), self, [slot_handle](const QAudioBuffer& buffer) {
+		intptr_t slot = slot_handle->value();
 		const QAudioBuffer& buffer_ret = buffer;
 		// Cast returned reference into pointer
 		QAudioBuffer* sigval1 = const_cast<QAudioBuffer*>(&buffer_ret);
 		miqt_exec_callback_QMediaAudioProbeControl_audioBufferProbed(slot, sigval1);
-	});
+	}));
 }
 
 void QMediaAudioProbeControl_flush(QMediaAudioProbeControl* self) {
 	self->flush();
 }
 
-void QMediaAudioProbeControl_connect_flush(QMediaAudioProbeControl* self, intptr_t slot) {
-	QMediaAudioProbeControl::connect(self, static_cast<void (QMediaAudioProbeControl::*)()>(&QMediaAudioProbeControl::flush), self, [=]() {
+void* QMediaAudioProbeControl_connect_flush(QMediaAudioProbeControl* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QMediaAudioProbeControl>>(slot);
+	return new QMetaObject::Connection(QMediaAudioProbeControl::connect(self, static_cast<void (QMediaAudioProbeControl::*)()>(&QMediaAudioProbeControl::flush), self, [slot_handle]() {
+		intptr_t slot = slot_handle->value();
 		miqt_exec_callback_QMediaAudioProbeControl_flush(slot);
-	});
+	}));
 }
 
 struct miqt_string QMediaAudioProbeControl_tr2(const char* s, const char* c) {

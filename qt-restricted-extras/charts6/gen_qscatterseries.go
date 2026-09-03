@@ -26,6 +26,11 @@ const (
 	QScatterSeries__MarkerShapePentagon         QScatterSeries__MarkerShape = 5
 )
 
+//export miqt_exec_callback_handle_release_QScatterSeries
+func miqt_exec_callback_handle_release_QScatterSeries(cb C.intptr_t) {
+	cgo.Handle(cb).Delete()
+}
+
 type QScatterSeries struct {
 	h *C.QScatterSeries
 	*QXYSeries
@@ -150,8 +155,10 @@ func (this *QScatterSeries) SetMarkerSize(size float64) {
 func (this *QScatterSeries) ColorChanged(color qt6.QColor) {
 	C.QScatterSeries_colorChanged(this.h, (*C.QColor)(color.UnsafePointer()))
 }
-func (this *QScatterSeries) OnColorChanged(slot func(color qt6.QColor)) {
-	C.QScatterSeries_connect_colorChanged(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QScatterSeries) OnColorChanged(slot func(color qt6.QColor)) *qt6.SignalConnection {
+	_goptr := qt6.UnsafeNewQMetaObject__Connection(C.QScatterSeries_connect_colorChanged(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QScatterSeries_colorChanged
@@ -172,8 +179,10 @@ func miqt_exec_callback_QScatterSeries_colorChanged(cb C.intptr_t, color *C.QCol
 func (this *QScatterSeries) BorderColorChanged(color qt6.QColor) {
 	C.QScatterSeries_borderColorChanged(this.h, (*C.QColor)(color.UnsafePointer()))
 }
-func (this *QScatterSeries) OnBorderColorChanged(slot func(color qt6.QColor)) {
-	C.QScatterSeries_connect_borderColorChanged(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QScatterSeries) OnBorderColorChanged(slot func(color qt6.QColor)) *qt6.SignalConnection {
+	_goptr := qt6.UnsafeNewQMetaObject__Connection(C.QScatterSeries_connect_borderColorChanged(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QScatterSeries_borderColorChanged
@@ -194,8 +203,10 @@ func miqt_exec_callback_QScatterSeries_borderColorChanged(cb C.intptr_t, color *
 func (this *QScatterSeries) MarkerShapeChanged(shape QScatterSeries__MarkerShape) {
 	C.QScatterSeries_markerShapeChanged(this.h, (C.int)(shape))
 }
-func (this *QScatterSeries) OnMarkerShapeChanged(slot func(shape QScatterSeries__MarkerShape)) {
-	C.QScatterSeries_connect_markerShapeChanged(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QScatterSeries) OnMarkerShapeChanged(slot func(shape QScatterSeries__MarkerShape)) *qt6.SignalConnection {
+	_goptr := qt6.UnsafeNewQMetaObject__Connection(C.QScatterSeries_connect_markerShapeChanged(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QScatterSeries_markerShapeChanged
@@ -214,8 +225,10 @@ func miqt_exec_callback_QScatterSeries_markerShapeChanged(cb C.intptr_t, shape C
 func (this *QScatterSeries) MarkerSizeChanged(size float64) {
 	C.QScatterSeries_markerSizeChanged(this.h, (C.double)(size))
 }
-func (this *QScatterSeries) OnMarkerSizeChanged(slot func(size float64)) {
-	C.QScatterSeries_connect_markerSizeChanged(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QScatterSeries) OnMarkerSizeChanged(slot func(size float64)) *qt6.SignalConnection {
+	_goptr := qt6.UnsafeNewQMetaObject__Connection(C.QScatterSeries_connect_markerSizeChanged(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QScatterSeries_markerSizeChanged
@@ -317,7 +330,11 @@ func (this *QScatterSeries) callVirtualBase_Type() QAbstractSeries__SeriesType {
 
 }
 func (this *QScatterSeries) OnType(slot func(super func() QAbstractSeries__SeriesType) QAbstractSeries__SeriesType) {
-	ok := C.QScatterSeries_override_virtual_type(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QScatterSeries_override_virtual_type(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -342,7 +359,11 @@ func (this *QScatterSeries) callVirtualBase_SetPen(pen *qt6.QPen) {
 
 }
 func (this *QScatterSeries) OnSetPen(slot func(super func(pen *qt6.QPen), pen *qt6.QPen)) {
-	ok := C.QScatterSeries_override_virtual_setPen(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QScatterSeries_override_virtual_setPen(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -368,7 +389,11 @@ func (this *QScatterSeries) callVirtualBase_SetBrush(brush *qt6.QBrush) {
 
 }
 func (this *QScatterSeries) OnSetBrush(slot func(super func(brush *qt6.QBrush), brush *qt6.QBrush)) {
-	ok := C.QScatterSeries_override_virtual_setBrush(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QScatterSeries_override_virtual_setBrush(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -394,7 +419,11 @@ func (this *QScatterSeries) callVirtualBase_SetColor(color *qt6.QColor) {
 
 }
 func (this *QScatterSeries) OnSetColor(slot func(super func(color *qt6.QColor), color *qt6.QColor)) {
-	ok := C.QScatterSeries_override_virtual_setColor(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QScatterSeries_override_virtual_setColor(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -422,7 +451,11 @@ func (this *QScatterSeries) callVirtualBase_Color() *qt6.QColor {
 
 }
 func (this *QScatterSeries) OnColor(slot func(super func() *qt6.QColor) *qt6.QColor) {
-	ok := C.QScatterSeries_override_virtual_color(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QScatterSeries_override_virtual_color(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -447,7 +480,11 @@ func (this *QScatterSeries) callVirtualBase_Event(event *qt6.QEvent) bool {
 
 }
 func (this *QScatterSeries) OnEvent(slot func(super func(event *qt6.QEvent) bool, event *qt6.QEvent) bool) {
-	ok := C.QScatterSeries_override_virtual_event(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QScatterSeries_override_virtual_event(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -475,7 +512,11 @@ func (this *QScatterSeries) callVirtualBase_EventFilter(watched *qt6.QObject, ev
 
 }
 func (this *QScatterSeries) OnEventFilter(slot func(super func(watched *qt6.QObject, event *qt6.QEvent) bool, watched *qt6.QObject, event *qt6.QEvent) bool) {
-	ok := C.QScatterSeries_override_virtual_eventFilter(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QScatterSeries_override_virtual_eventFilter(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -505,7 +546,11 @@ func (this *QScatterSeries) callVirtualBase_TimerEvent(event *qt6.QTimerEvent) {
 
 }
 func (this *QScatterSeries) OnTimerEvent(slot func(super func(event *qt6.QTimerEvent), event *qt6.QTimerEvent)) {
-	ok := C.QScatterSeries_override_virtual_timerEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QScatterSeries_override_virtual_timerEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -531,7 +576,11 @@ func (this *QScatterSeries) callVirtualBase_ChildEvent(event *qt6.QChildEvent) {
 
 }
 func (this *QScatterSeries) OnChildEvent(slot func(super func(event *qt6.QChildEvent), event *qt6.QChildEvent)) {
-	ok := C.QScatterSeries_override_virtual_childEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QScatterSeries_override_virtual_childEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -557,7 +606,11 @@ func (this *QScatterSeries) callVirtualBase_CustomEvent(event *qt6.QEvent) {
 
 }
 func (this *QScatterSeries) OnCustomEvent(slot func(super func(event *qt6.QEvent), event *qt6.QEvent)) {
-	ok := C.QScatterSeries_override_virtual_customEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QScatterSeries_override_virtual_customEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -583,7 +636,11 @@ func (this *QScatterSeries) callVirtualBase_ConnectNotify(signal *qt6.QMetaMetho
 
 }
 func (this *QScatterSeries) OnConnectNotify(slot func(super func(signal *qt6.QMetaMethod), signal *qt6.QMetaMethod)) {
-	ok := C.QScatterSeries_override_virtual_connectNotify(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QScatterSeries_override_virtual_connectNotify(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -609,7 +666,11 @@ func (this *QScatterSeries) callVirtualBase_DisconnectNotify(signal *qt6.QMetaMe
 
 }
 func (this *QScatterSeries) OnDisconnectNotify(slot func(super func(signal *qt6.QMetaMethod), signal *qt6.QMetaMethod)) {
-	ok := C.QScatterSeries_override_virtual_disconnectNotify(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QScatterSeries_override_virtual_disconnectNotify(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}

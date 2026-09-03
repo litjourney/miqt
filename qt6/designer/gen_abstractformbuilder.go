@@ -15,6 +15,11 @@ import (
 	"unsafe"
 )
 
+//export miqt_exec_callback_handle_release_QAbstractFormBuilder
+func miqt_exec_callback_handle_release_QAbstractFormBuilder(cb C.intptr_t) {
+	cgo.Handle(cb).Delete()
+}
+
 type QAbstractFormBuilder struct {
 	h *C.QAbstractFormBuilder
 }
@@ -114,7 +119,11 @@ func (this *QAbstractFormBuilder) callVirtualBase_Load(dev *qt6.QIODevice, paren
 
 }
 func (this *QAbstractFormBuilder) OnLoad(slot func(super func(dev *qt6.QIODevice, parentWidget *qt6.QWidget) *qt6.QWidget, dev *qt6.QIODevice, parentWidget *qt6.QWidget) *qt6.QWidget) {
-	ok := C.QAbstractFormBuilder_override_virtual_load(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QAbstractFormBuilder_override_virtual_load(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -144,7 +153,11 @@ func (this *QAbstractFormBuilder) callVirtualBase_Save(dev *qt6.QIODevice, widge
 
 }
 func (this *QAbstractFormBuilder) OnSave(slot func(super func(dev *qt6.QIODevice, widget *qt6.QWidget), dev *qt6.QIODevice, widget *qt6.QWidget)) {
-	ok := C.QAbstractFormBuilder_override_virtual_save(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QAbstractFormBuilder_override_virtual_save(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -172,7 +185,11 @@ func (this *QAbstractFormBuilder) callVirtualBase_AddMenuAction(action *qt6.QAct
 
 }
 func (this *QAbstractFormBuilder) OnAddMenuAction(slot func(super func(action *qt6.QAction), action *qt6.QAction)) {
-	ok := C.QAbstractFormBuilder_override_virtual_addMenuAction(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QAbstractFormBuilder_override_virtual_addMenuAction(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -206,7 +223,11 @@ func (this *QAbstractFormBuilder) callVirtualBase_CreateWidget(widgetName string
 
 }
 func (this *QAbstractFormBuilder) OnCreateWidget(slot func(super func(widgetName string, parentWidget *qt6.QWidget, name string) *qt6.QWidget, widgetName string, parentWidget *qt6.QWidget, name string) *qt6.QWidget) {
-	ok := C.QAbstractFormBuilder_override_virtual_createWidget(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QAbstractFormBuilder_override_virtual_createWidget(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -251,7 +272,11 @@ func (this *QAbstractFormBuilder) callVirtualBase_CreateLayout(layoutName string
 
 }
 func (this *QAbstractFormBuilder) OnCreateLayout(slot func(super func(layoutName string, parent *qt6.QObject, name string) *qt6.QLayout, layoutName string, parent *qt6.QObject, name string) *qt6.QLayout) {
-	ok := C.QAbstractFormBuilder_override_virtual_createLayout(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QAbstractFormBuilder_override_virtual_createLayout(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -292,7 +317,11 @@ func (this *QAbstractFormBuilder) callVirtualBase_CreateAction(parent *qt6.QObje
 
 }
 func (this *QAbstractFormBuilder) OnCreateAction(slot func(super func(parent *qt6.QObject, name string) *qt6.QAction, parent *qt6.QObject, name string) *qt6.QAction) {
-	ok := C.QAbstractFormBuilder_override_virtual_createAction(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QAbstractFormBuilder_override_virtual_createAction(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -329,7 +358,11 @@ func (this *QAbstractFormBuilder) callVirtualBase_CreateActionGroup(parent *qt6.
 
 }
 func (this *QAbstractFormBuilder) OnCreateActionGroup(slot func(super func(parent *qt6.QObject, name string) *qt6.QActionGroup, parent *qt6.QObject, name string) *qt6.QActionGroup) {
-	ok := C.QAbstractFormBuilder_override_virtual_createActionGroup(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QAbstractFormBuilder_override_virtual_createActionGroup(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -366,7 +399,11 @@ func (this *QAbstractFormBuilder) callVirtualBase_CheckProperty(obj *qt6.QObject
 
 }
 func (this *QAbstractFormBuilder) OnCheckProperty(slot func(super func(obj *qt6.QObject, prop string) bool, obj *qt6.QObject, prop string) bool) {
-	ok := C.QAbstractFormBuilder_override_virtual_checkProperty(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QAbstractFormBuilder_override_virtual_checkProperty(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}

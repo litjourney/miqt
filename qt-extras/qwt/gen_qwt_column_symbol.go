@@ -130,6 +130,11 @@ func (this *QwtColumnRect) GoGC() {
 	})
 }
 
+//export miqt_exec_callback_handle_release_QwtColumnSymbol
+func miqt_exec_callback_handle_release_QwtColumnSymbol(cb C.intptr_t) {
+	cgo.Handle(cb).Delete()
+}
+
 type QwtColumnSymbol struct {
 	h *C.QwtColumnSymbol
 }
@@ -232,7 +237,11 @@ func (this *QwtColumnSymbol) callVirtualBase_Draw(param1 *qt.QPainter, param2 *Q
 
 }
 func (this *QwtColumnSymbol) OnDraw(slot func(super func(param1 *qt.QPainter, param2 *QwtColumnRect), param1 *qt.QPainter, param2 *QwtColumnRect)) {
-	ok := C.QwtColumnSymbol_override_virtual_draw(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QwtColumnSymbol_override_virtual_draw(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}

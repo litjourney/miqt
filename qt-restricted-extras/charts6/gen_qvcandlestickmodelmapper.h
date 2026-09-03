@@ -56,19 +56,19 @@ int QVCandlestickModelMapper_firstSetColumn(const QVCandlestickModelMapper* self
 void QVCandlestickModelMapper_setLastSetColumn(QVCandlestickModelMapper* self, int lastSetColumn);
 int QVCandlestickModelMapper_lastSetColumn(const QVCandlestickModelMapper* self);
 void QVCandlestickModelMapper_timestampRowChanged(QVCandlestickModelMapper* self);
-void QVCandlestickModelMapper_connect_timestampRowChanged(QVCandlestickModelMapper* self, intptr_t slot);
+void* QVCandlestickModelMapper_connect_timestampRowChanged(QVCandlestickModelMapper* self, intptr_t slot);
 void QVCandlestickModelMapper_openRowChanged(QVCandlestickModelMapper* self);
-void QVCandlestickModelMapper_connect_openRowChanged(QVCandlestickModelMapper* self, intptr_t slot);
+void* QVCandlestickModelMapper_connect_openRowChanged(QVCandlestickModelMapper* self, intptr_t slot);
 void QVCandlestickModelMapper_highRowChanged(QVCandlestickModelMapper* self);
-void QVCandlestickModelMapper_connect_highRowChanged(QVCandlestickModelMapper* self, intptr_t slot);
+void* QVCandlestickModelMapper_connect_highRowChanged(QVCandlestickModelMapper* self, intptr_t slot);
 void QVCandlestickModelMapper_lowRowChanged(QVCandlestickModelMapper* self);
-void QVCandlestickModelMapper_connect_lowRowChanged(QVCandlestickModelMapper* self, intptr_t slot);
+void* QVCandlestickModelMapper_connect_lowRowChanged(QVCandlestickModelMapper* self, intptr_t slot);
 void QVCandlestickModelMapper_closeRowChanged(QVCandlestickModelMapper* self);
-void QVCandlestickModelMapper_connect_closeRowChanged(QVCandlestickModelMapper* self, intptr_t slot);
+void* QVCandlestickModelMapper_connect_closeRowChanged(QVCandlestickModelMapper* self, intptr_t slot);
 void QVCandlestickModelMapper_firstSetColumnChanged(QVCandlestickModelMapper* self);
-void QVCandlestickModelMapper_connect_firstSetColumnChanged(QVCandlestickModelMapper* self, intptr_t slot);
+void* QVCandlestickModelMapper_connect_firstSetColumnChanged(QVCandlestickModelMapper* self, intptr_t slot);
 void QVCandlestickModelMapper_lastSetColumnChanged(QVCandlestickModelMapper* self);
-void QVCandlestickModelMapper_connect_lastSetColumnChanged(QVCandlestickModelMapper* self, intptr_t slot);
+void* QVCandlestickModelMapper_connect_lastSetColumnChanged(QVCandlestickModelMapper* self, intptr_t slot);
 struct miqt_string QVCandlestickModelMapper_tr2(const char* s, const char* c);
 struct miqt_string QVCandlestickModelMapper_tr3(const char* s, const char* c, int n);
 

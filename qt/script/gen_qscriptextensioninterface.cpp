@@ -1,3 +1,5 @@
+#include <memory>
+#include <utility>
 #include <QFactoryInterface>
 #include <QList>
 #include <QScriptEngine>
@@ -12,6 +14,7 @@
 extern "C" {
 #endif
 
+void miqt_exec_callback_handle_release_QScriptExtensionInterface(intptr_t);
 void miqt_exec_callback_QScriptExtensionInterface_initialize(QScriptExtensionInterface*, intptr_t, struct miqt_string, QScriptEngine*);
 struct miqt_array /* of struct miqt_string */  miqt_exec_callback_QScriptExtensionInterface_keys(const QScriptExtensionInterface*, intptr_t);
 #ifdef __cplusplus
@@ -26,11 +29,11 @@ public:
 	virtual ~MiqtVirtualQScriptExtensionInterface() override = default;
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__initialize = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QScriptExtensionInterface> handle__initialize;
 
 	// Subclass to allow providing a Go implementation
 	virtual void initialize(const QString& key, QScriptEngine* engine) override {
-		if (handle__initialize == 0) {
+		if (!handle__initialize) {
 			return; // Pure virtual, there is no base we can call
 		}
 
@@ -43,20 +46,20 @@ public:
 		memcpy(key_ms.data, key_b.data(), key_ms.len);
 		struct miqt_string sigval1 = key_ms;
 		QScriptEngine* sigval2 = engine;
-		miqt_exec_callback_QScriptExtensionInterface_initialize(this, handle__initialize, sigval1, sigval2);
+		miqt_exec_callback_QScriptExtensionInterface_initialize(this, handle__initialize.value(), sigval1, sigval2);
 
 	}
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__keys = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QScriptExtensionInterface> handle__keys;
 
 	// Subclass to allow providing a Go implementation
 	virtual QStringList keys() const override {
-		if (handle__keys == 0) {
+		if (!handle__keys) {
 			return QStringList(); // Pure virtual, there is no base we can call
 		}
 
-		struct miqt_array /* of struct miqt_string */  callback_return_value = miqt_exec_callback_QScriptExtensionInterface_keys(this, handle__keys);
+		struct miqt_array /* of struct miqt_string */  callback_return_value = miqt_exec_callback_QScriptExtensionInterface_keys(this, handle__keys.value());
 		QStringList callback_return_value_QList;
 		callback_return_value_QList.reserve(callback_return_value.len);
 		struct miqt_string* callback_return_value_arr = static_cast<struct miqt_string*>(callback_return_value.data);
@@ -92,22 +95,24 @@ void QScriptExtensionInterface_operatorAssign(QScriptExtensionInterface* self, Q
 }
 
 bool QScriptExtensionInterface_override_virtual_initialize(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QScriptExtensionInterface> slot_handle(slot);
 	MiqtVirtualQScriptExtensionInterface* self_cast = dynamic_cast<MiqtVirtualQScriptExtensionInterface*>( (QScriptExtensionInterface*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__initialize = slot;
+	self_cast->handle__initialize = std::move(slot_handle);
 	return true;
 }
 
 bool QScriptExtensionInterface_override_virtual_keys(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QScriptExtensionInterface> slot_handle(slot);
 	MiqtVirtualQScriptExtensionInterface* self_cast = dynamic_cast<MiqtVirtualQScriptExtensionInterface*>( (QScriptExtensionInterface*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__keys = slot;
+	self_cast->handle__keys = std::move(slot_handle);
 	return true;
 }
 

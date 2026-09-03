@@ -58,11 +58,11 @@ struct miqt_array /* of struct miqt_string */  QsciAPIs_callTips(QsciAPIs* self,
 bool QsciAPIs_event(QsciAPIs* self, QEvent* e);
 struct miqt_array /* of struct miqt_string */  QsciAPIs_installedAPIFiles(const QsciAPIs* self);
 void QsciAPIs_apiPreparationCancelled(QsciAPIs* self);
-void QsciAPIs_connect_apiPreparationCancelled(QsciAPIs* self, intptr_t slot);
+void* QsciAPIs_connect_apiPreparationCancelled(QsciAPIs* self, intptr_t slot);
 void QsciAPIs_apiPreparationStarted(QsciAPIs* self);
-void QsciAPIs_connect_apiPreparationStarted(QsciAPIs* self, intptr_t slot);
+void* QsciAPIs_connect_apiPreparationStarted(QsciAPIs* self, intptr_t slot);
 void QsciAPIs_apiPreparationFinished(QsciAPIs* self);
-void QsciAPIs_connect_apiPreparationFinished(QsciAPIs* self, intptr_t slot);
+void* QsciAPIs_connect_apiPreparationFinished(QsciAPIs* self, intptr_t slot);
 struct miqt_string QsciAPIs_tr2(const char* s, const char* c);
 struct miqt_string QsciAPIs_tr3(const char* s, const char* c, int n);
 struct miqt_string QsciAPIs_trUtf82(const char* s, const char* c);

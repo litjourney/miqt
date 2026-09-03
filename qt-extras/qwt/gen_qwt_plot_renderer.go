@@ -36,6 +36,11 @@ const (
 	QwtPlotRenderer__FrameWithScales QwtPlotRenderer__LayoutFlag = 1
 )
 
+//export miqt_exec_callback_handle_release_QwtPlotRenderer
+func miqt_exec_callback_handle_release_QwtPlotRenderer(cb C.intptr_t) {
+	cgo.Handle(cb).Delete()
+}
+
 type QwtPlotRenderer struct {
 	h *C.QwtPlotRenderer
 	*qt.QObject
@@ -356,7 +361,11 @@ func (this *QwtPlotRenderer) callVirtualBase_Render(param1 *QwtPlot, param2 *qt.
 
 }
 func (this *QwtPlotRenderer) OnRender(slot func(super func(param1 *QwtPlot, param2 *qt.QPainter, plotRect *qt.QRectF), param1 *QwtPlot, param2 *qt.QPainter, plotRect *qt.QRectF)) {
-	ok := C.QwtPlotRenderer_override_virtual_render(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QwtPlotRenderer_override_virtual_render(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -386,7 +395,11 @@ func (this *QwtPlotRenderer) callVirtualBase_RenderTitle(param1 *QwtPlot, param2
 
 }
 func (this *QwtPlotRenderer) OnRenderTitle(slot func(super func(param1 *QwtPlot, param2 *qt.QPainter, titleRect *qt.QRectF), param1 *QwtPlot, param2 *qt.QPainter, titleRect *qt.QRectF)) {
-	ok := C.QwtPlotRenderer_override_virtual_renderTitle(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QwtPlotRenderer_override_virtual_renderTitle(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -416,7 +429,11 @@ func (this *QwtPlotRenderer) callVirtualBase_RenderFooter(param1 *QwtPlot, param
 
 }
 func (this *QwtPlotRenderer) OnRenderFooter(slot func(super func(param1 *QwtPlot, param2 *qt.QPainter, footerRect *qt.QRectF), param1 *QwtPlot, param2 *qt.QPainter, footerRect *qt.QRectF)) {
-	ok := C.QwtPlotRenderer_override_virtual_renderFooter(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QwtPlotRenderer_override_virtual_renderFooter(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -446,7 +463,11 @@ func (this *QwtPlotRenderer) callVirtualBase_RenderScale(param1 *QwtPlot, param2
 
 }
 func (this *QwtPlotRenderer) OnRenderScale(slot func(super func(param1 *QwtPlot, param2 *qt.QPainter, axisId int, startDist int, endDist int, baseDist int, scaleRect *qt.QRectF), param1 *QwtPlot, param2 *qt.QPainter, axisId int, startDist int, endDist int, baseDist int, scaleRect *qt.QRectF)) {
-	ok := C.QwtPlotRenderer_override_virtual_renderScale(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QwtPlotRenderer_override_virtual_renderScale(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -484,7 +505,11 @@ func (this *QwtPlotRenderer) callVirtualBase_RenderLegend(param1 *QwtPlot, param
 
 }
 func (this *QwtPlotRenderer) OnRenderLegend(slot func(super func(param1 *QwtPlot, param2 *qt.QPainter, legendRect *qt.QRectF), param1 *QwtPlot, param2 *qt.QPainter, legendRect *qt.QRectF)) {
-	ok := C.QwtPlotRenderer_override_virtual_renderLegend(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QwtPlotRenderer_override_virtual_renderLegend(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -514,7 +539,11 @@ func (this *QwtPlotRenderer) callVirtualBase_Event(event *qt.QEvent) bool {
 
 }
 func (this *QwtPlotRenderer) OnEvent(slot func(super func(event *qt.QEvent) bool, event *qt.QEvent) bool) {
-	ok := C.QwtPlotRenderer_override_virtual_event(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QwtPlotRenderer_override_virtual_event(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -542,7 +571,11 @@ func (this *QwtPlotRenderer) callVirtualBase_EventFilter(watched *qt.QObject, ev
 
 }
 func (this *QwtPlotRenderer) OnEventFilter(slot func(super func(watched *qt.QObject, event *qt.QEvent) bool, watched *qt.QObject, event *qt.QEvent) bool) {
-	ok := C.QwtPlotRenderer_override_virtual_eventFilter(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QwtPlotRenderer_override_virtual_eventFilter(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -572,7 +605,11 @@ func (this *QwtPlotRenderer) callVirtualBase_TimerEvent(event *qt.QTimerEvent) {
 
 }
 func (this *QwtPlotRenderer) OnTimerEvent(slot func(super func(event *qt.QTimerEvent), event *qt.QTimerEvent)) {
-	ok := C.QwtPlotRenderer_override_virtual_timerEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QwtPlotRenderer_override_virtual_timerEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -598,7 +635,11 @@ func (this *QwtPlotRenderer) callVirtualBase_ChildEvent(event *qt.QChildEvent) {
 
 }
 func (this *QwtPlotRenderer) OnChildEvent(slot func(super func(event *qt.QChildEvent), event *qt.QChildEvent)) {
-	ok := C.QwtPlotRenderer_override_virtual_childEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QwtPlotRenderer_override_virtual_childEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -624,7 +665,11 @@ func (this *QwtPlotRenderer) callVirtualBase_CustomEvent(event *qt.QEvent) {
 
 }
 func (this *QwtPlotRenderer) OnCustomEvent(slot func(super func(event *qt.QEvent), event *qt.QEvent)) {
-	ok := C.QwtPlotRenderer_override_virtual_customEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QwtPlotRenderer_override_virtual_customEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -650,7 +695,11 @@ func (this *QwtPlotRenderer) callVirtualBase_ConnectNotify(signal *qt.QMetaMetho
 
 }
 func (this *QwtPlotRenderer) OnConnectNotify(slot func(super func(signal *qt.QMetaMethod), signal *qt.QMetaMethod)) {
-	ok := C.QwtPlotRenderer_override_virtual_connectNotify(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QwtPlotRenderer_override_virtual_connectNotify(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -676,7 +725,11 @@ func (this *QwtPlotRenderer) callVirtualBase_DisconnectNotify(signal *qt.QMetaMe
 
 }
 func (this *QwtPlotRenderer) OnDisconnectNotify(slot func(super func(signal *qt.QMetaMethod), signal *qt.QMetaMethod)) {
-	ok := C.QwtPlotRenderer_override_virtual_disconnectNotify(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QwtPlotRenderer_override_virtual_disconnectNotify(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}

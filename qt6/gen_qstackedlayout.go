@@ -21,6 +21,11 @@ const (
 	QStackedLayout__StackAll QStackedLayout__StackingMode = 1
 )
 
+//export miqt_exec_callback_handle_release_QStackedLayout
+func miqt_exec_callback_handle_release_QStackedLayout(cb C.intptr_t) {
+	cgo.Handle(cb).Delete()
+}
+
 type QStackedLayout struct {
 	h *C.QStackedLayout
 	*QLayout
@@ -165,8 +170,10 @@ func (this *QStackedLayout) HeightForWidth(width int) int {
 func (this *QStackedLayout) WidgetRemoved(index int) {
 	C.QStackedLayout_widgetRemoved(this.h, (C.int)(index))
 }
-func (this *QStackedLayout) OnWidgetRemoved(slot func(index int)) {
-	C.QStackedLayout_connect_widgetRemoved(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QStackedLayout) OnWidgetRemoved(slot func(index int)) *SignalConnection {
+	_goptr := UnsafeNewQMetaObject__Connection(C.QStackedLayout_connect_widgetRemoved(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QStackedLayout_widgetRemoved
@@ -185,8 +192,10 @@ func miqt_exec_callback_QStackedLayout_widgetRemoved(cb C.intptr_t, index C.int)
 func (this *QStackedLayout) CurrentChanged(index int) {
 	C.QStackedLayout_currentChanged(this.h, (C.int)(index))
 }
-func (this *QStackedLayout) OnCurrentChanged(slot func(index int)) {
-	C.QStackedLayout_connect_currentChanged(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QStackedLayout) OnCurrentChanged(slot func(index int)) *SignalConnection {
+	_goptr := UnsafeNewQMetaObject__Connection(C.QStackedLayout_connect_currentChanged(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QStackedLayout_currentChanged
@@ -362,7 +371,11 @@ func (this *QStackedLayout) callVirtualBase_Count() int {
 
 }
 func (this *QStackedLayout) OnCount(slot func(super func() int) int) {
-	ok := C.QStackedLayout_override_virtual_count(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QStackedLayout_override_virtual_count(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -387,7 +400,11 @@ func (this *QStackedLayout) callVirtualBase_AddItem(item *QLayoutItem) {
 
 }
 func (this *QStackedLayout) OnAddItem(slot func(super func(item *QLayoutItem), item *QLayoutItem)) {
-	ok := C.QStackedLayout_override_virtual_addItem(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QStackedLayout_override_virtual_addItem(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -415,7 +432,11 @@ func (this *QStackedLayout) callVirtualBase_SizeHint() *QSize {
 
 }
 func (this *QStackedLayout) OnSizeHint(slot func(super func() *QSize) *QSize) {
-	ok := C.QStackedLayout_override_virtual_sizeHint(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QStackedLayout_override_virtual_sizeHint(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -442,7 +463,11 @@ func (this *QStackedLayout) callVirtualBase_MinimumSize() *QSize {
 
 }
 func (this *QStackedLayout) OnMinimumSize(slot func(super func() *QSize) *QSize) {
-	ok := C.QStackedLayout_override_virtual_minimumSize(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QStackedLayout_override_virtual_minimumSize(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -467,7 +492,11 @@ func (this *QStackedLayout) callVirtualBase_ItemAt(param1 int) *QLayoutItem {
 
 }
 func (this *QStackedLayout) OnItemAt(slot func(super func(param1 int) *QLayoutItem, param1 int) *QLayoutItem) {
-	ok := C.QStackedLayout_override_virtual_itemAt(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QStackedLayout_override_virtual_itemAt(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -495,7 +524,11 @@ func (this *QStackedLayout) callVirtualBase_TakeAt(param1 int) *QLayoutItem {
 
 }
 func (this *QStackedLayout) OnTakeAt(slot func(super func(param1 int) *QLayoutItem, param1 int) *QLayoutItem) {
-	ok := C.QStackedLayout_override_virtual_takeAt(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QStackedLayout_override_virtual_takeAt(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -523,7 +556,11 @@ func (this *QStackedLayout) callVirtualBase_SetGeometry(rect *QRect) {
 
 }
 func (this *QStackedLayout) OnSetGeometry(slot func(super func(rect *QRect), rect *QRect)) {
-	ok := C.QStackedLayout_override_virtual_setGeometry(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QStackedLayout_override_virtual_setGeometry(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -549,7 +586,11 @@ func (this *QStackedLayout) callVirtualBase_HasHeightForWidth() bool {
 
 }
 func (this *QStackedLayout) OnHasHeightForWidth(slot func(super func() bool) bool) {
-	ok := C.QStackedLayout_override_virtual_hasHeightForWidth(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QStackedLayout_override_virtual_hasHeightForWidth(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -574,7 +615,11 @@ func (this *QStackedLayout) callVirtualBase_HeightForWidth(width int) int {
 
 }
 func (this *QStackedLayout) OnHeightForWidth(slot func(super func(width int) int, width int) int) {
-	ok := C.QStackedLayout_override_virtual_heightForWidth(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QStackedLayout_override_virtual_heightForWidth(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -602,7 +647,11 @@ func (this *QStackedLayout) callVirtualBase_Spacing() int {
 
 }
 func (this *QStackedLayout) OnSpacing(slot func(super func() int) int) {
-	ok := C.QStackedLayout_override_virtual_spacing(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QStackedLayout_override_virtual_spacing(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -627,7 +676,11 @@ func (this *QStackedLayout) callVirtualBase_SetSpacing(spacing int) {
 
 }
 func (this *QStackedLayout) OnSetSpacing(slot func(super func(spacing int), spacing int)) {
-	ok := C.QStackedLayout_override_virtual_setSpacing(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QStackedLayout_override_virtual_setSpacing(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -653,7 +706,11 @@ func (this *QStackedLayout) callVirtualBase_Invalidate() {
 
 }
 func (this *QStackedLayout) OnInvalidate(slot func(super func())) {
-	ok := C.QStackedLayout_override_virtual_invalidate(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QStackedLayout_override_virtual_invalidate(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -678,7 +735,11 @@ func (this *QStackedLayout) callVirtualBase_Geometry() *QRect {
 
 }
 func (this *QStackedLayout) OnGeometry(slot func(super func() *QRect) *QRect) {
-	ok := C.QStackedLayout_override_virtual_geometry(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QStackedLayout_override_virtual_geometry(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -703,7 +764,11 @@ func (this *QStackedLayout) callVirtualBase_ExpandingDirections() Orientation {
 
 }
 func (this *QStackedLayout) OnExpandingDirections(slot func(super func() Orientation) Orientation) {
-	ok := C.QStackedLayout_override_virtual_expandingDirections(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QStackedLayout_override_virtual_expandingDirections(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -730,7 +795,11 @@ func (this *QStackedLayout) callVirtualBase_MaximumSize() *QSize {
 
 }
 func (this *QStackedLayout) OnMaximumSize(slot func(super func() *QSize) *QSize) {
-	ok := C.QStackedLayout_override_virtual_maximumSize(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QStackedLayout_override_virtual_maximumSize(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -755,7 +824,11 @@ func (this *QStackedLayout) callVirtualBase_IndexOf(param1 *QWidget) int {
 
 }
 func (this *QStackedLayout) OnIndexOf(slot func(super func(param1 *QWidget) int, param1 *QWidget) int) {
-	ok := C.QStackedLayout_override_virtual_indexOf(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QStackedLayout_override_virtual_indexOf(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -783,7 +856,11 @@ func (this *QStackedLayout) callVirtualBase_IsEmpty() bool {
 
 }
 func (this *QStackedLayout) OnIsEmpty(slot func(super func() bool) bool) {
-	ok := C.QStackedLayout_override_virtual_isEmpty(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QStackedLayout_override_virtual_isEmpty(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -808,7 +885,11 @@ func (this *QStackedLayout) callVirtualBase_ControlTypes() QSizePolicy__ControlT
 
 }
 func (this *QStackedLayout) OnControlTypes(slot func(super func() QSizePolicy__ControlType) QSizePolicy__ControlType) {
-	ok := C.QStackedLayout_override_virtual_controlTypes(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QStackedLayout_override_virtual_controlTypes(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -833,7 +914,11 @@ func (this *QStackedLayout) callVirtualBase_ReplaceWidget(from *QWidget, to *QWi
 
 }
 func (this *QStackedLayout) OnReplaceWidget(slot func(super func(from *QWidget, to *QWidget, options FindChildOption) *QLayoutItem, from *QWidget, to *QWidget, options FindChildOption) *QLayoutItem) {
-	ok := C.QStackedLayout_override_virtual_replaceWidget(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QStackedLayout_override_virtual_replaceWidget(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -865,7 +950,11 @@ func (this *QStackedLayout) callVirtualBase_Layout() *QLayout {
 
 }
 func (this *QStackedLayout) OnLayout(slot func(super func() *QLayout) *QLayout) {
-	ok := C.QStackedLayout_override_virtual_layout(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QStackedLayout_override_virtual_layout(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -890,7 +979,11 @@ func (this *QStackedLayout) callVirtualBase_ChildEvent(e *QChildEvent) {
 
 }
 func (this *QStackedLayout) OnChildEvent(slot func(super func(e *QChildEvent), e *QChildEvent)) {
-	ok := C.QStackedLayout_override_virtual_childEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QStackedLayout_override_virtual_childEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -916,7 +1009,11 @@ func (this *QStackedLayout) callVirtualBase_Event(event *QEvent) bool {
 
 }
 func (this *QStackedLayout) OnEvent(slot func(super func(event *QEvent) bool, event *QEvent) bool) {
-	ok := C.QStackedLayout_override_virtual_event(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QStackedLayout_override_virtual_event(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -944,7 +1041,11 @@ func (this *QStackedLayout) callVirtualBase_EventFilter(watched *QObject, event 
 
 }
 func (this *QStackedLayout) OnEventFilter(slot func(super func(watched *QObject, event *QEvent) bool, watched *QObject, event *QEvent) bool) {
-	ok := C.QStackedLayout_override_virtual_eventFilter(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QStackedLayout_override_virtual_eventFilter(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -974,7 +1075,11 @@ func (this *QStackedLayout) callVirtualBase_TimerEvent(event *QTimerEvent) {
 
 }
 func (this *QStackedLayout) OnTimerEvent(slot func(super func(event *QTimerEvent), event *QTimerEvent)) {
-	ok := C.QStackedLayout_override_virtual_timerEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QStackedLayout_override_virtual_timerEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1000,7 +1105,11 @@ func (this *QStackedLayout) callVirtualBase_CustomEvent(event *QEvent) {
 
 }
 func (this *QStackedLayout) OnCustomEvent(slot func(super func(event *QEvent), event *QEvent)) {
-	ok := C.QStackedLayout_override_virtual_customEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QStackedLayout_override_virtual_customEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1026,7 +1135,11 @@ func (this *QStackedLayout) callVirtualBase_ConnectNotify(signal *QMetaMethod) {
 
 }
 func (this *QStackedLayout) OnConnectNotify(slot func(super func(signal *QMetaMethod), signal *QMetaMethod)) {
-	ok := C.QStackedLayout_override_virtual_connectNotify(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QStackedLayout_override_virtual_connectNotify(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1052,7 +1165,11 @@ func (this *QStackedLayout) callVirtualBase_DisconnectNotify(signal *QMetaMethod
 
 }
 func (this *QStackedLayout) OnDisconnectNotify(slot func(super func(signal *QMetaMethod), signal *QMetaMethod)) {
-	ok := C.QStackedLayout_override_virtual_disconnectNotify(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QStackedLayout_override_virtual_disconnectNotify(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1078,7 +1195,11 @@ func (this *QStackedLayout) callVirtualBase_MinimumHeightForWidth(param1 int) in
 
 }
 func (this *QStackedLayout) OnMinimumHeightForWidth(slot func(super func(param1 int) int, param1 int) int) {
-	ok := C.QStackedLayout_override_virtual_minimumHeightForWidth(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QStackedLayout_override_virtual_minimumHeightForWidth(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1106,7 +1227,11 @@ func (this *QStackedLayout) callVirtualBase_Widget() *QWidget {
 
 }
 func (this *QStackedLayout) OnWidget(slot func(super func() *QWidget) *QWidget) {
-	ok := C.QStackedLayout_override_virtual_widget(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QStackedLayout_override_virtual_widget(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1131,7 +1256,11 @@ func (this *QStackedLayout) callVirtualBase_SpacerItem() *QSpacerItem {
 
 }
 func (this *QStackedLayout) OnSpacerItem(slot func(super func() *QSpacerItem) *QSpacerItem) {
-	ok := C.QStackedLayout_override_virtual_spacerItem(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QStackedLayout_override_virtual_spacerItem(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}

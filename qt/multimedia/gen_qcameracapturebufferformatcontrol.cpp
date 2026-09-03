@@ -1,3 +1,5 @@
+#include <memory>
+#include <utility>
 #include <QCameraCaptureBufferFormatControl>
 #include <QList>
 #include <QMediaControl>
@@ -14,6 +16,7 @@
 extern "C" {
 #endif
 
+void miqt_exec_callback_handle_release_QCameraCaptureBufferFormatControl(intptr_t);
 void miqt_exec_callback_QCameraCaptureBufferFormatControl_bufferFormatChanged(intptr_t, int);
 #ifdef __cplusplus
 } /* extern C */
@@ -80,12 +83,14 @@ void QCameraCaptureBufferFormatControl_bufferFormatChanged(QCameraCaptureBufferF
 	self->bufferFormatChanged(static_cast<QVideoFrame::PixelFormat>(format));
 }
 
-void QCameraCaptureBufferFormatControl_connect_bufferFormatChanged(QCameraCaptureBufferFormatControl* self, intptr_t slot) {
-	QCameraCaptureBufferFormatControl::connect(self, static_cast<void (QCameraCaptureBufferFormatControl::*)(QVideoFrame::PixelFormat)>(&QCameraCaptureBufferFormatControl::bufferFormatChanged), self, [=](QVideoFrame::PixelFormat format) {
+void* QCameraCaptureBufferFormatControl_connect_bufferFormatChanged(QCameraCaptureBufferFormatControl* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QCameraCaptureBufferFormatControl>>(slot);
+	return new QMetaObject::Connection(QCameraCaptureBufferFormatControl::connect(self, static_cast<void (QCameraCaptureBufferFormatControl::*)(QVideoFrame::PixelFormat)>(&QCameraCaptureBufferFormatControl::bufferFormatChanged), self, [slot_handle](QVideoFrame::PixelFormat format) {
+		intptr_t slot = slot_handle->value();
 		QVideoFrame::PixelFormat format_ret = format;
 		int sigval1 = static_cast<int>(format_ret);
 		miqt_exec_callback_QCameraCaptureBufferFormatControl_bufferFormatChanged(slot, sigval1);
-	});
+	}));
 }
 
 struct miqt_string QCameraCaptureBufferFormatControl_tr2(const char* s, const char* c) {

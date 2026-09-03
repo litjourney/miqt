@@ -1,3 +1,5 @@
+#include <memory>
+#include <utility>
 #include <QRectF>
 #include <QSize>
 #include <qwt_raster_data.h>
@@ -7,6 +9,7 @@
 extern "C" {
 #endif
 
+void miqt_exec_callback_handle_release_QwtRasterData(intptr_t);
 void miqt_exec_callback_QwtRasterData_setInterval(QwtRasterData*, intptr_t, int, QwtInterval*);
 QRectF* miqt_exec_callback_QwtRasterData_pixelHint(const QwtRasterData*, intptr_t, QRectF*);
 void miqt_exec_callback_QwtRasterData_initRaster(QwtRasterData*, intptr_t, QRectF*, QSize*);
@@ -24,11 +27,11 @@ public:
 	virtual ~MiqtVirtualQwtRasterData() override = default;
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__setInterval = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtRasterData> handle__setInterval;
 
 	// Subclass to allow providing a Go implementation
 	virtual void setInterval(Qt::Axis param1, const QwtInterval& param2) override {
-		if (handle__setInterval == 0) {
+		if (!handle__setInterval) {
 			QwtRasterData::setInterval(param1, param2);
 			return;
 		}
@@ -38,36 +41,36 @@ public:
 		const QwtInterval& param2_ret = param2;
 		// Cast returned reference into pointer
 		QwtInterval* sigval2 = const_cast<QwtInterval*>(&param2_ret);
-		miqt_exec_callback_QwtRasterData_setInterval(this, handle__setInterval, sigval1, sigval2);
+		miqt_exec_callback_QwtRasterData_setInterval(this, handle__setInterval.value(), sigval1, sigval2);
 
 	}
 
 	friend void QwtRasterData_virtualbase_setInterval(void* self, int param1, QwtInterval* param2);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__pixelHint = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtRasterData> handle__pixelHint;
 
 	// Subclass to allow providing a Go implementation
 	virtual QRectF pixelHint(const QRectF& param1) const override {
-		if (handle__pixelHint == 0) {
+		if (!handle__pixelHint) {
 			return QwtRasterData::pixelHint(param1);
 		}
 
 		const QRectF& param1_ret = param1;
 		// Cast returned reference into pointer
 		QRectF* sigval1 = const_cast<QRectF*>(&param1_ret);
-		QRectF* callback_return_value = miqt_exec_callback_QwtRasterData_pixelHint(this, handle__pixelHint, sigval1);
+		QRectF* callback_return_value = miqt_exec_callback_QwtRasterData_pixelHint(this, handle__pixelHint.value(), sigval1);
 		return *callback_return_value;
 	}
 
 	friend QRectF* QwtRasterData_virtualbase_pixelHint(const void* self, QRectF* param1);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__initRaster = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtRasterData> handle__initRaster;
 
 	// Subclass to allow providing a Go implementation
 	virtual void initRaster(const QRectF& param1, const QSize& raster) override {
-		if (handle__initRaster == 0) {
+		if (!handle__initRaster) {
 			QwtRasterData::initRaster(param1, raster);
 			return;
 		}
@@ -78,40 +81,40 @@ public:
 		const QSize& raster_ret = raster;
 		// Cast returned reference into pointer
 		QSize* sigval2 = const_cast<QSize*>(&raster_ret);
-		miqt_exec_callback_QwtRasterData_initRaster(this, handle__initRaster, sigval1, sigval2);
+		miqt_exec_callback_QwtRasterData_initRaster(this, handle__initRaster.value(), sigval1, sigval2);
 
 	}
 
 	friend void QwtRasterData_virtualbase_initRaster(void* self, QRectF* param1, QSize* raster);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__discardRaster = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtRasterData> handle__discardRaster;
 
 	// Subclass to allow providing a Go implementation
 	virtual void discardRaster() override {
-		if (handle__discardRaster == 0) {
+		if (!handle__discardRaster) {
 			QwtRasterData::discardRaster();
 			return;
 		}
 
-		miqt_exec_callback_QwtRasterData_discardRaster(this, handle__discardRaster);
+		miqt_exec_callback_QwtRasterData_discardRaster(this, handle__discardRaster.value());
 
 	}
 
 	friend void QwtRasterData_virtualbase_discardRaster(void* self);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__value = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtRasterData> handle__value;
 
 	// Subclass to allow providing a Go implementation
 	virtual double value(double x, double y) const override {
-		if (handle__value == 0) {
+		if (!handle__value) {
 			return 0; // Pure virtual, there is no base we can call
 		}
 
 		double sigval1 = x;
 		double sigval2 = y;
-		double callback_return_value = miqt_exec_callback_QwtRasterData_value(this, handle__value, sigval1, sigval2);
+		double callback_return_value = miqt_exec_callback_QwtRasterData_value(this, handle__value.value(), sigval1, sigval2);
 		return static_cast<double>(callback_return_value);
 	}
 
@@ -148,12 +151,13 @@ double QwtRasterData_value(const QwtRasterData* self, double x, double y) {
 }
 
 bool QwtRasterData_override_virtual_setInterval(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtRasterData> slot_handle(slot);
 	MiqtVirtualQwtRasterData* self_cast = dynamic_cast<MiqtVirtualQwtRasterData*>( (QwtRasterData*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__setInterval = slot;
+	self_cast->handle__setInterval = std::move(slot_handle);
 	return true;
 }
 
@@ -162,12 +166,13 @@ void QwtRasterData_virtualbase_setInterval(void* self, int param1, QwtInterval* 
 }
 
 bool QwtRasterData_override_virtual_pixelHint(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtRasterData> slot_handle(slot);
 	MiqtVirtualQwtRasterData* self_cast = dynamic_cast<MiqtVirtualQwtRasterData*>( (QwtRasterData*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__pixelHint = slot;
+	self_cast->handle__pixelHint = std::move(slot_handle);
 	return true;
 }
 
@@ -176,12 +181,13 @@ QRectF* QwtRasterData_virtualbase_pixelHint(const void* self, QRectF* param1) {
 }
 
 bool QwtRasterData_override_virtual_initRaster(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtRasterData> slot_handle(slot);
 	MiqtVirtualQwtRasterData* self_cast = dynamic_cast<MiqtVirtualQwtRasterData*>( (QwtRasterData*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__initRaster = slot;
+	self_cast->handle__initRaster = std::move(slot_handle);
 	return true;
 }
 
@@ -190,12 +196,13 @@ void QwtRasterData_virtualbase_initRaster(void* self, QRectF* param1, QSize* ras
 }
 
 bool QwtRasterData_override_virtual_discardRaster(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtRasterData> slot_handle(slot);
 	MiqtVirtualQwtRasterData* self_cast = dynamic_cast<MiqtVirtualQwtRasterData*>( (QwtRasterData*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__discardRaster = slot;
+	self_cast->handle__discardRaster = std::move(slot_handle);
 	return true;
 }
 
@@ -204,12 +211,13 @@ void QwtRasterData_virtualbase_discardRaster(void* self) {
 }
 
 bool QwtRasterData_override_virtual_value(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtRasterData> slot_handle(slot);
 	MiqtVirtualQwtRasterData* self_cast = dynamic_cast<MiqtVirtualQwtRasterData*>( (QwtRasterData*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__value = slot;
+	self_cast->handle__value = std::move(slot_handle);
 	return true;
 }
 

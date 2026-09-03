@@ -1,3 +1,5 @@
+#include <memory>
+#include <utility>
 #include <QAbstractAxis>
 #include <QAbstractSeries>
 #include <QChart>
@@ -15,6 +17,7 @@
 extern "C" {
 #endif
 
+void miqt_exec_callback_handle_release_QAbstractSeries(intptr_t);
 void miqt_exec_callback_QAbstractSeries_nameChanged(intptr_t);
 void miqt_exec_callback_QAbstractSeries_visibleChanged(intptr_t);
 void miqt_exec_callback_QAbstractSeries_opacityChanged(intptr_t);
@@ -129,40 +132,48 @@ void QAbstractSeries_nameChanged(QAbstractSeries* self) {
 	self->nameChanged();
 }
 
-void QAbstractSeries_connect_nameChanged(QAbstractSeries* self, intptr_t slot) {
-	QAbstractSeries::connect(self, static_cast<void (QAbstractSeries::*)()>(&QAbstractSeries::nameChanged), self, [=]() {
+void* QAbstractSeries_connect_nameChanged(QAbstractSeries* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QAbstractSeries>>(slot);
+	return new QMetaObject::Connection(QAbstractSeries::connect(self, static_cast<void (QAbstractSeries::*)()>(&QAbstractSeries::nameChanged), self, [slot_handle]() {
+		intptr_t slot = slot_handle->value();
 		miqt_exec_callback_QAbstractSeries_nameChanged(slot);
-	});
+	}));
 }
 
 void QAbstractSeries_visibleChanged(QAbstractSeries* self) {
 	self->visibleChanged();
 }
 
-void QAbstractSeries_connect_visibleChanged(QAbstractSeries* self, intptr_t slot) {
-	QAbstractSeries::connect(self, static_cast<void (QAbstractSeries::*)()>(&QAbstractSeries::visibleChanged), self, [=]() {
+void* QAbstractSeries_connect_visibleChanged(QAbstractSeries* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QAbstractSeries>>(slot);
+	return new QMetaObject::Connection(QAbstractSeries::connect(self, static_cast<void (QAbstractSeries::*)()>(&QAbstractSeries::visibleChanged), self, [slot_handle]() {
+		intptr_t slot = slot_handle->value();
 		miqt_exec_callback_QAbstractSeries_visibleChanged(slot);
-	});
+	}));
 }
 
 void QAbstractSeries_opacityChanged(QAbstractSeries* self) {
 	self->opacityChanged();
 }
 
-void QAbstractSeries_connect_opacityChanged(QAbstractSeries* self, intptr_t slot) {
-	QAbstractSeries::connect(self, static_cast<void (QAbstractSeries::*)()>(&QAbstractSeries::opacityChanged), self, [=]() {
+void* QAbstractSeries_connect_opacityChanged(QAbstractSeries* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QAbstractSeries>>(slot);
+	return new QMetaObject::Connection(QAbstractSeries::connect(self, static_cast<void (QAbstractSeries::*)()>(&QAbstractSeries::opacityChanged), self, [slot_handle]() {
+		intptr_t slot = slot_handle->value();
 		miqt_exec_callback_QAbstractSeries_opacityChanged(slot);
-	});
+	}));
 }
 
 void QAbstractSeries_useOpenGLChanged(QAbstractSeries* self) {
 	self->useOpenGLChanged();
 }
 
-void QAbstractSeries_connect_useOpenGLChanged(QAbstractSeries* self, intptr_t slot) {
-	QAbstractSeries::connect(self, static_cast<void (QAbstractSeries::*)()>(&QAbstractSeries::useOpenGLChanged), self, [=]() {
+void* QAbstractSeries_connect_useOpenGLChanged(QAbstractSeries* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QAbstractSeries>>(slot);
+	return new QMetaObject::Connection(QAbstractSeries::connect(self, static_cast<void (QAbstractSeries::*)()>(&QAbstractSeries::useOpenGLChanged), self, [slot_handle]() {
+		intptr_t slot = slot_handle->value();
 		miqt_exec_callback_QAbstractSeries_useOpenGLChanged(slot);
-	});
+	}));
 }
 
 struct miqt_string QAbstractSeries_tr2(const char* s, const char* c) {

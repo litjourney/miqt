@@ -1,3 +1,5 @@
+#include <memory>
+#include <utility>
 #include <QDesignerFormEditorInterface>
 #include <QDesignerNewFormWidgetInterface>
 #include <QMetaMethod>
@@ -15,6 +17,7 @@
 extern "C" {
 #endif
 
+void miqt_exec_callback_handle_release_QDesignerNewFormWidgetInterface(intptr_t);
 void miqt_exec_callback_QDesignerNewFormWidgetInterface_templateActivated(intptr_t);
 void miqt_exec_callback_QDesignerNewFormWidgetInterface_currentTemplateChanged(intptr_t, bool);
 #ifdef __cplusplus
@@ -67,21 +70,25 @@ void QDesignerNewFormWidgetInterface_templateActivated(QDesignerNewFormWidgetInt
 	self->templateActivated();
 }
 
-void QDesignerNewFormWidgetInterface_connect_templateActivated(QDesignerNewFormWidgetInterface* self, intptr_t slot) {
-	QDesignerNewFormWidgetInterface::connect(self, static_cast<void (QDesignerNewFormWidgetInterface::*)()>(&QDesignerNewFormWidgetInterface::templateActivated), self, [=]() {
+void* QDesignerNewFormWidgetInterface_connect_templateActivated(QDesignerNewFormWidgetInterface* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QDesignerNewFormWidgetInterface>>(slot);
+	return new QMetaObject::Connection(QDesignerNewFormWidgetInterface::connect(self, static_cast<void (QDesignerNewFormWidgetInterface::*)()>(&QDesignerNewFormWidgetInterface::templateActivated), self, [slot_handle]() {
+		intptr_t slot = slot_handle->value();
 		miqt_exec_callback_QDesignerNewFormWidgetInterface_templateActivated(slot);
-	});
+	}));
 }
 
 void QDesignerNewFormWidgetInterface_currentTemplateChanged(QDesignerNewFormWidgetInterface* self, bool templateSelected) {
 	self->currentTemplateChanged(templateSelected);
 }
 
-void QDesignerNewFormWidgetInterface_connect_currentTemplateChanged(QDesignerNewFormWidgetInterface* self, intptr_t slot) {
-	QDesignerNewFormWidgetInterface::connect(self, static_cast<void (QDesignerNewFormWidgetInterface::*)(bool)>(&QDesignerNewFormWidgetInterface::currentTemplateChanged), self, [=](bool templateSelected) {
+void* QDesignerNewFormWidgetInterface_connect_currentTemplateChanged(QDesignerNewFormWidgetInterface* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QDesignerNewFormWidgetInterface>>(slot);
+	return new QMetaObject::Connection(QDesignerNewFormWidgetInterface::connect(self, static_cast<void (QDesignerNewFormWidgetInterface::*)(bool)>(&QDesignerNewFormWidgetInterface::currentTemplateChanged), self, [slot_handle](bool templateSelected) {
+		intptr_t slot = slot_handle->value();
 		bool sigval1 = templateSelected;
 		miqt_exec_callback_QDesignerNewFormWidgetInterface_currentTemplateChanged(slot, sigval1);
-	});
+	}));
 }
 
 struct miqt_string QDesignerNewFormWidgetInterface_tr2(const char* s, const char* c) {

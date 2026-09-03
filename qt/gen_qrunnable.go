@@ -14,6 +14,11 @@ import (
 	"unsafe"
 )
 
+//export miqt_exec_callback_handle_release_QRunnable
+func miqt_exec_callback_handle_release_QRunnable(cb C.intptr_t) {
+	cgo.Handle(cb).Delete()
+}
+
 type QRunnable struct {
 	h *C.QRunnable
 }
@@ -68,7 +73,11 @@ func (this *QRunnable) OperatorAssign(param1 *QRunnable) {
 	C.QRunnable_operatorAssign(this.h, param1.cPointer())
 }
 func (this *QRunnable) OnRun(slot func()) {
-	ok := C.QRunnable_override_virtual_run(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QRunnable_override_virtual_run(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}

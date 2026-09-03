@@ -1,3 +1,5 @@
+#include <memory>
+#include <utility>
 #include <qwt_transform.h>
 #include "gen_qwt_transform.h"
 
@@ -5,18 +7,22 @@
 extern "C" {
 #endif
 
+void miqt_exec_callback_handle_release_QwtTransform(intptr_t);
 double miqt_exec_callback_QwtTransform_bounded(const QwtTransform*, intptr_t, double);
 double miqt_exec_callback_QwtTransform_transform(const QwtTransform*, intptr_t, double);
 double miqt_exec_callback_QwtTransform_invTransform(const QwtTransform*, intptr_t, double);
 QwtTransform* miqt_exec_callback_QwtTransform_copy(const QwtTransform*, intptr_t);
+void miqt_exec_callback_handle_release_QwtNullTransform(intptr_t);
 double miqt_exec_callback_QwtNullTransform_transform(const QwtNullTransform*, intptr_t, double);
 double miqt_exec_callback_QwtNullTransform_invTransform(const QwtNullTransform*, intptr_t, double);
 QwtTransform* miqt_exec_callback_QwtNullTransform_copy(const QwtNullTransform*, intptr_t);
 double miqt_exec_callback_QwtNullTransform_bounded(const QwtNullTransform*, intptr_t, double);
+void miqt_exec_callback_handle_release_QwtLogTransform(intptr_t);
 double miqt_exec_callback_QwtLogTransform_transform(const QwtLogTransform*, intptr_t, double);
 double miqt_exec_callback_QwtLogTransform_invTransform(const QwtLogTransform*, intptr_t, double);
 double miqt_exec_callback_QwtLogTransform_bounded(const QwtLogTransform*, intptr_t, double);
 QwtTransform* miqt_exec_callback_QwtLogTransform_copy(const QwtLogTransform*, intptr_t);
+void miqt_exec_callback_handle_release_QwtPowerTransform(intptr_t);
 double miqt_exec_callback_QwtPowerTransform_transform(const QwtPowerTransform*, intptr_t, double);
 double miqt_exec_callback_QwtPowerTransform_invTransform(const QwtPowerTransform*, intptr_t, double);
 QwtTransform* miqt_exec_callback_QwtPowerTransform_copy(const QwtPowerTransform*, intptr_t);
@@ -34,59 +40,59 @@ public:
 	virtual ~MiqtVirtualQwtTransform() override = default;
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__bounded = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtTransform> handle__bounded;
 
 	// Subclass to allow providing a Go implementation
 	virtual double bounded(double value) const override {
-		if (handle__bounded == 0) {
+		if (!handle__bounded) {
 			return QwtTransform::bounded(value);
 		}
 
 		double sigval1 = value;
-		double callback_return_value = miqt_exec_callback_QwtTransform_bounded(this, handle__bounded, sigval1);
+		double callback_return_value = miqt_exec_callback_QwtTransform_bounded(this, handle__bounded.value(), sigval1);
 		return static_cast<double>(callback_return_value);
 	}
 
 	friend double QwtTransform_virtualbase_bounded(const void* self, double value);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__transform = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtTransform> handle__transform;
 
 	// Subclass to allow providing a Go implementation
 	virtual double transform(double value) const override {
-		if (handle__transform == 0) {
+		if (!handle__transform) {
 			return 0; // Pure virtual, there is no base we can call
 		}
 
 		double sigval1 = value;
-		double callback_return_value = miqt_exec_callback_QwtTransform_transform(this, handle__transform, sigval1);
+		double callback_return_value = miqt_exec_callback_QwtTransform_transform(this, handle__transform.value(), sigval1);
 		return static_cast<double>(callback_return_value);
 	}
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__invTransform = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtTransform> handle__invTransform;
 
 	// Subclass to allow providing a Go implementation
 	virtual double invTransform(double value) const override {
-		if (handle__invTransform == 0) {
+		if (!handle__invTransform) {
 			return 0; // Pure virtual, there is no base we can call
 		}
 
 		double sigval1 = value;
-		double callback_return_value = miqt_exec_callback_QwtTransform_invTransform(this, handle__invTransform, sigval1);
+		double callback_return_value = miqt_exec_callback_QwtTransform_invTransform(this, handle__invTransform.value(), sigval1);
 		return static_cast<double>(callback_return_value);
 	}
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__copy = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtTransform> handle__copy;
 
 	// Subclass to allow providing a Go implementation
 	virtual QwtTransform* copy() const override {
-		if (handle__copy == 0) {
+		if (!handle__copy) {
 			return nullptr; // Pure virtual, there is no base we can call
 		}
 
-		QwtTransform* callback_return_value = miqt_exec_callback_QwtTransform_copy(this, handle__copy);
+		QwtTransform* callback_return_value = miqt_exec_callback_QwtTransform_copy(this, handle__copy.value());
 		return callback_return_value;
 	}
 
@@ -121,12 +127,13 @@ void QwtTransform_operatorAssign(QwtTransform* self, QwtTransform* param1) {
 }
 
 bool QwtTransform_override_virtual_bounded(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtTransform> slot_handle(slot);
 	MiqtVirtualQwtTransform* self_cast = dynamic_cast<MiqtVirtualQwtTransform*>( (QwtTransform*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__bounded = slot;
+	self_cast->handle__bounded = std::move(slot_handle);
 	return true;
 }
 
@@ -135,32 +142,35 @@ double QwtTransform_virtualbase_bounded(const void* self, double value) {
 }
 
 bool QwtTransform_override_virtual_transform(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtTransform> slot_handle(slot);
 	MiqtVirtualQwtTransform* self_cast = dynamic_cast<MiqtVirtualQwtTransform*>( (QwtTransform*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__transform = slot;
+	self_cast->handle__transform = std::move(slot_handle);
 	return true;
 }
 
 bool QwtTransform_override_virtual_invTransform(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtTransform> slot_handle(slot);
 	MiqtVirtualQwtTransform* self_cast = dynamic_cast<MiqtVirtualQwtTransform*>( (QwtTransform*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__invTransform = slot;
+	self_cast->handle__invTransform = std::move(slot_handle);
 	return true;
 }
 
 bool QwtTransform_override_virtual_copy(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtTransform> slot_handle(slot);
 	MiqtVirtualQwtTransform* self_cast = dynamic_cast<MiqtVirtualQwtTransform*>( (QwtTransform*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__copy = slot;
+	self_cast->handle__copy = std::move(slot_handle);
 	return true;
 }
 
@@ -177,63 +187,63 @@ public:
 	virtual ~MiqtVirtualQwtNullTransform() override = default;
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__transform = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtNullTransform> handle__transform;
 
 	// Subclass to allow providing a Go implementation
 	virtual double transform(double value) const override {
-		if (handle__transform == 0) {
+		if (!handle__transform) {
 			return QwtNullTransform::transform(value);
 		}
 
 		double sigval1 = value;
-		double callback_return_value = miqt_exec_callback_QwtNullTransform_transform(this, handle__transform, sigval1);
+		double callback_return_value = miqt_exec_callback_QwtNullTransform_transform(this, handle__transform.value(), sigval1);
 		return static_cast<double>(callback_return_value);
 	}
 
 	friend double QwtNullTransform_virtualbase_transform(const void* self, double value);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__invTransform = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtNullTransform> handle__invTransform;
 
 	// Subclass to allow providing a Go implementation
 	virtual double invTransform(double value) const override {
-		if (handle__invTransform == 0) {
+		if (!handle__invTransform) {
 			return QwtNullTransform::invTransform(value);
 		}
 
 		double sigval1 = value;
-		double callback_return_value = miqt_exec_callback_QwtNullTransform_invTransform(this, handle__invTransform, sigval1);
+		double callback_return_value = miqt_exec_callback_QwtNullTransform_invTransform(this, handle__invTransform.value(), sigval1);
 		return static_cast<double>(callback_return_value);
 	}
 
 	friend double QwtNullTransform_virtualbase_invTransform(const void* self, double value);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__copy = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtNullTransform> handle__copy;
 
 	// Subclass to allow providing a Go implementation
 	virtual QwtTransform* copy() const override {
-		if (handle__copy == 0) {
+		if (!handle__copy) {
 			return QwtNullTransform::copy();
 		}
 
-		QwtTransform* callback_return_value = miqt_exec_callback_QwtNullTransform_copy(this, handle__copy);
+		QwtTransform* callback_return_value = miqt_exec_callback_QwtNullTransform_copy(this, handle__copy.value());
 		return callback_return_value;
 	}
 
 	friend QwtTransform* QwtNullTransform_virtualbase_copy(const void* self);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__bounded = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtNullTransform> handle__bounded;
 
 	// Subclass to allow providing a Go implementation
 	virtual double bounded(double value) const override {
-		if (handle__bounded == 0) {
+		if (!handle__bounded) {
 			return QwtNullTransform::bounded(value);
 		}
 
 		double sigval1 = value;
-		double callback_return_value = miqt_exec_callback_QwtNullTransform_bounded(this, handle__bounded, sigval1);
+		double callback_return_value = miqt_exec_callback_QwtNullTransform_bounded(this, handle__bounded.value(), sigval1);
 		return static_cast<double>(callback_return_value);
 	}
 
@@ -270,12 +280,13 @@ void QwtNullTransform_operatorAssign(QwtNullTransform* self, QwtNullTransform* p
 }
 
 bool QwtNullTransform_override_virtual_transform(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtNullTransform> slot_handle(slot);
 	MiqtVirtualQwtNullTransform* self_cast = dynamic_cast<MiqtVirtualQwtNullTransform*>( (QwtNullTransform*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__transform = slot;
+	self_cast->handle__transform = std::move(slot_handle);
 	return true;
 }
 
@@ -284,12 +295,13 @@ double QwtNullTransform_virtualbase_transform(const void* self, double value) {
 }
 
 bool QwtNullTransform_override_virtual_invTransform(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtNullTransform> slot_handle(slot);
 	MiqtVirtualQwtNullTransform* self_cast = dynamic_cast<MiqtVirtualQwtNullTransform*>( (QwtNullTransform*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__invTransform = slot;
+	self_cast->handle__invTransform = std::move(slot_handle);
 	return true;
 }
 
@@ -298,12 +310,13 @@ double QwtNullTransform_virtualbase_invTransform(const void* self, double value)
 }
 
 bool QwtNullTransform_override_virtual_copy(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtNullTransform> slot_handle(slot);
 	MiqtVirtualQwtNullTransform* self_cast = dynamic_cast<MiqtVirtualQwtNullTransform*>( (QwtNullTransform*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__copy = slot;
+	self_cast->handle__copy = std::move(slot_handle);
 	return true;
 }
 
@@ -312,12 +325,13 @@ QwtTransform* QwtNullTransform_virtualbase_copy(const void* self) {
 }
 
 bool QwtNullTransform_override_virtual_bounded(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtNullTransform> slot_handle(slot);
 	MiqtVirtualQwtNullTransform* self_cast = dynamic_cast<MiqtVirtualQwtNullTransform*>( (QwtNullTransform*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__bounded = slot;
+	self_cast->handle__bounded = std::move(slot_handle);
 	return true;
 }
 
@@ -338,63 +352,63 @@ public:
 	virtual ~MiqtVirtualQwtLogTransform() override = default;
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__transform = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtLogTransform> handle__transform;
 
 	// Subclass to allow providing a Go implementation
 	virtual double transform(double value) const override {
-		if (handle__transform == 0) {
+		if (!handle__transform) {
 			return QwtLogTransform::transform(value);
 		}
 
 		double sigval1 = value;
-		double callback_return_value = miqt_exec_callback_QwtLogTransform_transform(this, handle__transform, sigval1);
+		double callback_return_value = miqt_exec_callback_QwtLogTransform_transform(this, handle__transform.value(), sigval1);
 		return static_cast<double>(callback_return_value);
 	}
 
 	friend double QwtLogTransform_virtualbase_transform(const void* self, double value);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__invTransform = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtLogTransform> handle__invTransform;
 
 	// Subclass to allow providing a Go implementation
 	virtual double invTransform(double value) const override {
-		if (handle__invTransform == 0) {
+		if (!handle__invTransform) {
 			return QwtLogTransform::invTransform(value);
 		}
 
 		double sigval1 = value;
-		double callback_return_value = miqt_exec_callback_QwtLogTransform_invTransform(this, handle__invTransform, sigval1);
+		double callback_return_value = miqt_exec_callback_QwtLogTransform_invTransform(this, handle__invTransform.value(), sigval1);
 		return static_cast<double>(callback_return_value);
 	}
 
 	friend double QwtLogTransform_virtualbase_invTransform(const void* self, double value);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__bounded = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtLogTransform> handle__bounded;
 
 	// Subclass to allow providing a Go implementation
 	virtual double bounded(double value) const override {
-		if (handle__bounded == 0) {
+		if (!handle__bounded) {
 			return QwtLogTransform::bounded(value);
 		}
 
 		double sigval1 = value;
-		double callback_return_value = miqt_exec_callback_QwtLogTransform_bounded(this, handle__bounded, sigval1);
+		double callback_return_value = miqt_exec_callback_QwtLogTransform_bounded(this, handle__bounded.value(), sigval1);
 		return static_cast<double>(callback_return_value);
 	}
 
 	friend double QwtLogTransform_virtualbase_bounded(const void* self, double value);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__copy = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtLogTransform> handle__copy;
 
 	// Subclass to allow providing a Go implementation
 	virtual QwtTransform* copy() const override {
-		if (handle__copy == 0) {
+		if (!handle__copy) {
 			return QwtLogTransform::copy();
 		}
 
-		QwtTransform* callback_return_value = miqt_exec_callback_QwtLogTransform_copy(this, handle__copy);
+		QwtTransform* callback_return_value = miqt_exec_callback_QwtLogTransform_copy(this, handle__copy.value());
 		return callback_return_value;
 	}
 
@@ -435,12 +449,13 @@ void QwtLogTransform_operatorAssign(QwtLogTransform* self, QwtLogTransform* para
 }
 
 bool QwtLogTransform_override_virtual_transform(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtLogTransform> slot_handle(slot);
 	MiqtVirtualQwtLogTransform* self_cast = dynamic_cast<MiqtVirtualQwtLogTransform*>( (QwtLogTransform*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__transform = slot;
+	self_cast->handle__transform = std::move(slot_handle);
 	return true;
 }
 
@@ -449,12 +464,13 @@ double QwtLogTransform_virtualbase_transform(const void* self, double value) {
 }
 
 bool QwtLogTransform_override_virtual_invTransform(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtLogTransform> slot_handle(slot);
 	MiqtVirtualQwtLogTransform* self_cast = dynamic_cast<MiqtVirtualQwtLogTransform*>( (QwtLogTransform*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__invTransform = slot;
+	self_cast->handle__invTransform = std::move(slot_handle);
 	return true;
 }
 
@@ -463,12 +479,13 @@ double QwtLogTransform_virtualbase_invTransform(const void* self, double value) 
 }
 
 bool QwtLogTransform_override_virtual_bounded(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtLogTransform> slot_handle(slot);
 	MiqtVirtualQwtLogTransform* self_cast = dynamic_cast<MiqtVirtualQwtLogTransform*>( (QwtLogTransform*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__bounded = slot;
+	self_cast->handle__bounded = std::move(slot_handle);
 	return true;
 }
 
@@ -477,12 +494,13 @@ double QwtLogTransform_virtualbase_bounded(const void* self, double value) {
 }
 
 bool QwtLogTransform_override_virtual_copy(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtLogTransform> slot_handle(slot);
 	MiqtVirtualQwtLogTransform* self_cast = dynamic_cast<MiqtVirtualQwtLogTransform*>( (QwtLogTransform*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__copy = slot;
+	self_cast->handle__copy = std::move(slot_handle);
 	return true;
 }
 
@@ -503,63 +521,63 @@ public:
 	virtual ~MiqtVirtualQwtPowerTransform() override = default;
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__transform = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtPowerTransform> handle__transform;
 
 	// Subclass to allow providing a Go implementation
 	virtual double transform(double value) const override {
-		if (handle__transform == 0) {
+		if (!handle__transform) {
 			return QwtPowerTransform::transform(value);
 		}
 
 		double sigval1 = value;
-		double callback_return_value = miqt_exec_callback_QwtPowerTransform_transform(this, handle__transform, sigval1);
+		double callback_return_value = miqt_exec_callback_QwtPowerTransform_transform(this, handle__transform.value(), sigval1);
 		return static_cast<double>(callback_return_value);
 	}
 
 	friend double QwtPowerTransform_virtualbase_transform(const void* self, double value);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__invTransform = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtPowerTransform> handle__invTransform;
 
 	// Subclass to allow providing a Go implementation
 	virtual double invTransform(double value) const override {
-		if (handle__invTransform == 0) {
+		if (!handle__invTransform) {
 			return QwtPowerTransform::invTransform(value);
 		}
 
 		double sigval1 = value;
-		double callback_return_value = miqt_exec_callback_QwtPowerTransform_invTransform(this, handle__invTransform, sigval1);
+		double callback_return_value = miqt_exec_callback_QwtPowerTransform_invTransform(this, handle__invTransform.value(), sigval1);
 		return static_cast<double>(callback_return_value);
 	}
 
 	friend double QwtPowerTransform_virtualbase_invTransform(const void* self, double value);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__copy = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtPowerTransform> handle__copy;
 
 	// Subclass to allow providing a Go implementation
 	virtual QwtTransform* copy() const override {
-		if (handle__copy == 0) {
+		if (!handle__copy) {
 			return QwtPowerTransform::copy();
 		}
 
-		QwtTransform* callback_return_value = miqt_exec_callback_QwtPowerTransform_copy(this, handle__copy);
+		QwtTransform* callback_return_value = miqt_exec_callback_QwtPowerTransform_copy(this, handle__copy.value());
 		return callback_return_value;
 	}
 
 	friend QwtTransform* QwtPowerTransform_virtualbase_copy(const void* self);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__bounded = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtPowerTransform> handle__bounded;
 
 	// Subclass to allow providing a Go implementation
 	virtual double bounded(double value) const override {
-		if (handle__bounded == 0) {
+		if (!handle__bounded) {
 			return QwtPowerTransform::bounded(value);
 		}
 
 		double sigval1 = value;
-		double callback_return_value = miqt_exec_callback_QwtPowerTransform_bounded(this, handle__bounded, sigval1);
+		double callback_return_value = miqt_exec_callback_QwtPowerTransform_bounded(this, handle__bounded.value(), sigval1);
 		return static_cast<double>(callback_return_value);
 	}
 
@@ -592,12 +610,13 @@ QwtTransform* QwtPowerTransform_copy(const QwtPowerTransform* self) {
 }
 
 bool QwtPowerTransform_override_virtual_transform(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtPowerTransform> slot_handle(slot);
 	MiqtVirtualQwtPowerTransform* self_cast = dynamic_cast<MiqtVirtualQwtPowerTransform*>( (QwtPowerTransform*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__transform = slot;
+	self_cast->handle__transform = std::move(slot_handle);
 	return true;
 }
 
@@ -606,12 +625,13 @@ double QwtPowerTransform_virtualbase_transform(const void* self, double value) {
 }
 
 bool QwtPowerTransform_override_virtual_invTransform(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtPowerTransform> slot_handle(slot);
 	MiqtVirtualQwtPowerTransform* self_cast = dynamic_cast<MiqtVirtualQwtPowerTransform*>( (QwtPowerTransform*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__invTransform = slot;
+	self_cast->handle__invTransform = std::move(slot_handle);
 	return true;
 }
 
@@ -620,12 +640,13 @@ double QwtPowerTransform_virtualbase_invTransform(const void* self, double value
 }
 
 bool QwtPowerTransform_override_virtual_copy(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtPowerTransform> slot_handle(slot);
 	MiqtVirtualQwtPowerTransform* self_cast = dynamic_cast<MiqtVirtualQwtPowerTransform*>( (QwtPowerTransform*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__copy = slot;
+	self_cast->handle__copy = std::move(slot_handle);
 	return true;
 }
 
@@ -634,12 +655,13 @@ QwtTransform* QwtPowerTransform_virtualbase_copy(const void* self) {
 }
 
 bool QwtPowerTransform_override_virtual_bounded(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtPowerTransform> slot_handle(slot);
 	MiqtVirtualQwtPowerTransform* self_cast = dynamic_cast<MiqtVirtualQwtPowerTransform*>( (QwtPowerTransform*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__bounded = slot;
+	self_cast->handle__bounded = std::move(slot_handle);
 	return true;
 }
 

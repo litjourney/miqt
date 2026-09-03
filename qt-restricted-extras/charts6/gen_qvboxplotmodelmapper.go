@@ -15,6 +15,11 @@ import (
 	"unsafe"
 )
 
+//export miqt_exec_callback_handle_release_QVBoxPlotModelMapper
+func miqt_exec_callback_handle_release_QVBoxPlotModelMapper(cb C.intptr_t) {
+	cgo.Handle(cb).Delete()
+}
+
 type QVBoxPlotModelMapper struct {
 	h *C.QVBoxPlotModelMapper
 	*QBoxPlotModelMapper
@@ -133,8 +138,10 @@ func (this *QVBoxPlotModelMapper) SetRowCount(rowCount int) {
 func (this *QVBoxPlotModelMapper) SeriesReplaced() {
 	C.QVBoxPlotModelMapper_seriesReplaced(this.h)
 }
-func (this *QVBoxPlotModelMapper) OnSeriesReplaced(slot func()) {
-	C.QVBoxPlotModelMapper_connect_seriesReplaced(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QVBoxPlotModelMapper) OnSeriesReplaced(slot func()) *qt6.SignalConnection {
+	_goptr := qt6.UnsafeNewQMetaObject__Connection(C.QVBoxPlotModelMapper_connect_seriesReplaced(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QVBoxPlotModelMapper_seriesReplaced
@@ -150,8 +157,10 @@ func miqt_exec_callback_QVBoxPlotModelMapper_seriesReplaced(cb C.intptr_t) {
 func (this *QVBoxPlotModelMapper) ModelReplaced() {
 	C.QVBoxPlotModelMapper_modelReplaced(this.h)
 }
-func (this *QVBoxPlotModelMapper) OnModelReplaced(slot func()) {
-	C.QVBoxPlotModelMapper_connect_modelReplaced(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QVBoxPlotModelMapper) OnModelReplaced(slot func()) *qt6.SignalConnection {
+	_goptr := qt6.UnsafeNewQMetaObject__Connection(C.QVBoxPlotModelMapper_connect_modelReplaced(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QVBoxPlotModelMapper_modelReplaced
@@ -167,8 +176,10 @@ func miqt_exec_callback_QVBoxPlotModelMapper_modelReplaced(cb C.intptr_t) {
 func (this *QVBoxPlotModelMapper) FirstBoxSetColumnChanged() {
 	C.QVBoxPlotModelMapper_firstBoxSetColumnChanged(this.h)
 }
-func (this *QVBoxPlotModelMapper) OnFirstBoxSetColumnChanged(slot func()) {
-	C.QVBoxPlotModelMapper_connect_firstBoxSetColumnChanged(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QVBoxPlotModelMapper) OnFirstBoxSetColumnChanged(slot func()) *qt6.SignalConnection {
+	_goptr := qt6.UnsafeNewQMetaObject__Connection(C.QVBoxPlotModelMapper_connect_firstBoxSetColumnChanged(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QVBoxPlotModelMapper_firstBoxSetColumnChanged
@@ -184,8 +195,10 @@ func miqt_exec_callback_QVBoxPlotModelMapper_firstBoxSetColumnChanged(cb C.intpt
 func (this *QVBoxPlotModelMapper) LastBoxSetColumnChanged() {
 	C.QVBoxPlotModelMapper_lastBoxSetColumnChanged(this.h)
 }
-func (this *QVBoxPlotModelMapper) OnLastBoxSetColumnChanged(slot func()) {
-	C.QVBoxPlotModelMapper_connect_lastBoxSetColumnChanged(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QVBoxPlotModelMapper) OnLastBoxSetColumnChanged(slot func()) *qt6.SignalConnection {
+	_goptr := qt6.UnsafeNewQMetaObject__Connection(C.QVBoxPlotModelMapper_connect_lastBoxSetColumnChanged(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QVBoxPlotModelMapper_lastBoxSetColumnChanged
@@ -201,8 +214,10 @@ func miqt_exec_callback_QVBoxPlotModelMapper_lastBoxSetColumnChanged(cb C.intptr
 func (this *QVBoxPlotModelMapper) FirstRowChanged() {
 	C.QVBoxPlotModelMapper_firstRowChanged(this.h)
 }
-func (this *QVBoxPlotModelMapper) OnFirstRowChanged(slot func()) {
-	C.QVBoxPlotModelMapper_connect_firstRowChanged(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QVBoxPlotModelMapper) OnFirstRowChanged(slot func()) *qt6.SignalConnection {
+	_goptr := qt6.UnsafeNewQMetaObject__Connection(C.QVBoxPlotModelMapper_connect_firstRowChanged(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QVBoxPlotModelMapper_firstRowChanged
@@ -218,8 +233,10 @@ func miqt_exec_callback_QVBoxPlotModelMapper_firstRowChanged(cb C.intptr_t) {
 func (this *QVBoxPlotModelMapper) RowCountChanged() {
 	C.QVBoxPlotModelMapper_rowCountChanged(this.h)
 }
-func (this *QVBoxPlotModelMapper) OnRowCountChanged(slot func()) {
-	C.QVBoxPlotModelMapper_connect_rowCountChanged(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QVBoxPlotModelMapper) OnRowCountChanged(slot func()) *qt6.SignalConnection {
+	_goptr := qt6.UnsafeNewQMetaObject__Connection(C.QVBoxPlotModelMapper_connect_rowCountChanged(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QVBoxPlotModelMapper_rowCountChanged
@@ -448,7 +465,11 @@ func (this *QVBoxPlotModelMapper) callVirtualBase_Event(event *qt6.QEvent) bool 
 
 }
 func (this *QVBoxPlotModelMapper) OnEvent(slot func(super func(event *qt6.QEvent) bool, event *qt6.QEvent) bool) {
-	ok := C.QVBoxPlotModelMapper_override_virtual_event(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QVBoxPlotModelMapper_override_virtual_event(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -476,7 +497,11 @@ func (this *QVBoxPlotModelMapper) callVirtualBase_EventFilter(watched *qt6.QObje
 
 }
 func (this *QVBoxPlotModelMapper) OnEventFilter(slot func(super func(watched *qt6.QObject, event *qt6.QEvent) bool, watched *qt6.QObject, event *qt6.QEvent) bool) {
-	ok := C.QVBoxPlotModelMapper_override_virtual_eventFilter(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QVBoxPlotModelMapper_override_virtual_eventFilter(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -506,7 +531,11 @@ func (this *QVBoxPlotModelMapper) callVirtualBase_TimerEvent(event *qt6.QTimerEv
 
 }
 func (this *QVBoxPlotModelMapper) OnTimerEvent(slot func(super func(event *qt6.QTimerEvent), event *qt6.QTimerEvent)) {
-	ok := C.QVBoxPlotModelMapper_override_virtual_timerEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QVBoxPlotModelMapper_override_virtual_timerEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -532,7 +561,11 @@ func (this *QVBoxPlotModelMapper) callVirtualBase_ChildEvent(event *qt6.QChildEv
 
 }
 func (this *QVBoxPlotModelMapper) OnChildEvent(slot func(super func(event *qt6.QChildEvent), event *qt6.QChildEvent)) {
-	ok := C.QVBoxPlotModelMapper_override_virtual_childEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QVBoxPlotModelMapper_override_virtual_childEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -558,7 +591,11 @@ func (this *QVBoxPlotModelMapper) callVirtualBase_CustomEvent(event *qt6.QEvent)
 
 }
 func (this *QVBoxPlotModelMapper) OnCustomEvent(slot func(super func(event *qt6.QEvent), event *qt6.QEvent)) {
-	ok := C.QVBoxPlotModelMapper_override_virtual_customEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QVBoxPlotModelMapper_override_virtual_customEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -584,7 +621,11 @@ func (this *QVBoxPlotModelMapper) callVirtualBase_ConnectNotify(signal *qt6.QMet
 
 }
 func (this *QVBoxPlotModelMapper) OnConnectNotify(slot func(super func(signal *qt6.QMetaMethod), signal *qt6.QMetaMethod)) {
-	ok := C.QVBoxPlotModelMapper_override_virtual_connectNotify(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QVBoxPlotModelMapper_override_virtual_connectNotify(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -610,7 +651,11 @@ func (this *QVBoxPlotModelMapper) callVirtualBase_DisconnectNotify(signal *qt6.Q
 
 }
 func (this *QVBoxPlotModelMapper) OnDisconnectNotify(slot func(super func(signal *qt6.QMetaMethod), signal *qt6.QMetaMethod)) {
-	ok := C.QVBoxPlotModelMapper_override_virtual_disconnectNotify(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QVBoxPlotModelMapper_override_virtual_disconnectNotify(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}

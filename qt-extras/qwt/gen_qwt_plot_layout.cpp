@@ -1,3 +1,5 @@
+#include <memory>
+#include <utility>
 #include <QRectF>
 #include <QSize>
 #include <qwt_plot_layout.h>
@@ -7,6 +9,7 @@
 extern "C" {
 #endif
 
+void miqt_exec_callback_handle_release_QwtPlotLayout(intptr_t);
 QSize* miqt_exec_callback_QwtPlotLayout_minimumSizeHint(const QwtPlotLayout*, intptr_t, QwtPlot*);
 void miqt_exec_callback_QwtPlotLayout_activate(QwtPlotLayout*, intptr_t, QwtPlot*, QRectF*, int);
 void miqt_exec_callback_QwtPlotLayout_invalidate(QwtPlotLayout*, intptr_t);
@@ -22,27 +25,27 @@ public:
 	virtual ~MiqtVirtualQwtPlotLayout() override = default;
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__minimumSizeHint = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtPlotLayout> handle__minimumSizeHint;
 
 	// Subclass to allow providing a Go implementation
 	virtual QSize minimumSizeHint(const QwtPlot* param1) const override {
-		if (handle__minimumSizeHint == 0) {
+		if (!handle__minimumSizeHint) {
 			return QwtPlotLayout::minimumSizeHint(param1);
 		}
 
 		QwtPlot* sigval1 = (QwtPlot*) param1;
-		QSize* callback_return_value = miqt_exec_callback_QwtPlotLayout_minimumSizeHint(this, handle__minimumSizeHint, sigval1);
+		QSize* callback_return_value = miqt_exec_callback_QwtPlotLayout_minimumSizeHint(this, handle__minimumSizeHint.value(), sigval1);
 		return *callback_return_value;
 	}
 
 	friend QSize* QwtPlotLayout_virtualbase_minimumSizeHint(const void* self, QwtPlot* param1);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__activate = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtPlotLayout> handle__activate;
 
 	// Subclass to allow providing a Go implementation
 	virtual void activate(const QwtPlot* param1, const QRectF& plotRect, QwtPlotLayout::Options options) override {
-		if (handle__activate == 0) {
+		if (!handle__activate) {
 			QwtPlotLayout::activate(param1, plotRect, options);
 			return;
 		}
@@ -53,23 +56,23 @@ public:
 		QRectF* sigval2 = const_cast<QRectF*>(&plotRect_ret);
 		QwtPlotLayout::Options options_ret = options;
 		int sigval3 = static_cast<int>(options_ret);
-		miqt_exec_callback_QwtPlotLayout_activate(this, handle__activate, sigval1, sigval2, sigval3);
+		miqt_exec_callback_QwtPlotLayout_activate(this, handle__activate.value(), sigval1, sigval2, sigval3);
 
 	}
 
 	friend void QwtPlotLayout_virtualbase_activate(void* self, QwtPlot* param1, QRectF* plotRect, int options);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__invalidate = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtPlotLayout> handle__invalidate;
 
 	// Subclass to allow providing a Go implementation
 	virtual void invalidate() override {
-		if (handle__invalidate == 0) {
+		if (!handle__invalidate) {
 			QwtPlotLayout::invalidate();
 			return;
 		}
 
-		miqt_exec_callback_QwtPlotLayout_invalidate(this, handle__invalidate);
+		miqt_exec_callback_QwtPlotLayout_invalidate(this, handle__invalidate.value());
 
 	}
 
@@ -181,12 +184,13 @@ void QwtPlotLayout_setCanvasMargin2(QwtPlotLayout* self, int margin, int axis) {
 }
 
 bool QwtPlotLayout_override_virtual_minimumSizeHint(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtPlotLayout> slot_handle(slot);
 	MiqtVirtualQwtPlotLayout* self_cast = dynamic_cast<MiqtVirtualQwtPlotLayout*>( (QwtPlotLayout*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__minimumSizeHint = slot;
+	self_cast->handle__minimumSizeHint = std::move(slot_handle);
 	return true;
 }
 
@@ -195,12 +199,13 @@ QSize* QwtPlotLayout_virtualbase_minimumSizeHint(const void* self, QwtPlot* para
 }
 
 bool QwtPlotLayout_override_virtual_activate(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtPlotLayout> slot_handle(slot);
 	MiqtVirtualQwtPlotLayout* self_cast = dynamic_cast<MiqtVirtualQwtPlotLayout*>( (QwtPlotLayout*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__activate = slot;
+	self_cast->handle__activate = std::move(slot_handle);
 	return true;
 }
 
@@ -209,12 +214,13 @@ void QwtPlotLayout_virtualbase_activate(void* self, QwtPlot* param1, QRectF* plo
 }
 
 bool QwtPlotLayout_override_virtual_invalidate(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtPlotLayout> slot_handle(slot);
 	MiqtVirtualQwtPlotLayout* self_cast = dynamic_cast<MiqtVirtualQwtPlotLayout*>( (QwtPlotLayout*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__invalidate = slot;
+	self_cast->handle__invalidate = std::move(slot_handle);
 	return true;
 }
 

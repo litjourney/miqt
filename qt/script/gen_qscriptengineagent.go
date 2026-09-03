@@ -21,6 +21,11 @@ const (
 	QScriptEngineAgent__DebuggerInvocationRequest QScriptEngineAgent__Extension = 0
 )
 
+//export miqt_exec_callback_handle_release_QScriptEngineAgent
+func miqt_exec_callback_handle_release_QScriptEngineAgent(cb C.intptr_t) {
+	cgo.Handle(cb).Delete()
+}
+
 type QScriptEngineAgent struct {
 	h *C.QScriptEngineAgent
 }
@@ -131,7 +136,11 @@ func (this *QScriptEngineAgent) callVirtualBase_ScriptLoad(id int64, program str
 
 }
 func (this *QScriptEngineAgent) OnScriptLoad(slot func(super func(id int64, program string, fileName string, baseLineNumber int), id int64, program string, fileName string, baseLineNumber int)) {
-	ok := C.QScriptEngineAgent_override_virtual_scriptLoad(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QScriptEngineAgent_override_virtual_scriptLoad(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -167,7 +176,11 @@ func (this *QScriptEngineAgent) callVirtualBase_ScriptUnload(id int64) {
 
 }
 func (this *QScriptEngineAgent) OnScriptUnload(slot func(super func(id int64), id int64)) {
-	ok := C.QScriptEngineAgent_override_virtual_scriptUnload(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QScriptEngineAgent_override_virtual_scriptUnload(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -193,7 +206,11 @@ func (this *QScriptEngineAgent) callVirtualBase_ContextPush() {
 
 }
 func (this *QScriptEngineAgent) OnContextPush(slot func(super func())) {
-	ok := C.QScriptEngineAgent_override_virtual_contextPush(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QScriptEngineAgent_override_virtual_contextPush(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -216,7 +233,11 @@ func (this *QScriptEngineAgent) callVirtualBase_ContextPop() {
 
 }
 func (this *QScriptEngineAgent) OnContextPop(slot func(super func())) {
-	ok := C.QScriptEngineAgent_override_virtual_contextPop(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QScriptEngineAgent_override_virtual_contextPop(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -239,7 +260,11 @@ func (this *QScriptEngineAgent) callVirtualBase_FunctionEntry(scriptId int64) {
 
 }
 func (this *QScriptEngineAgent) OnFunctionEntry(slot func(super func(scriptId int64), scriptId int64)) {
-	ok := C.QScriptEngineAgent_override_virtual_functionEntry(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QScriptEngineAgent_override_virtual_functionEntry(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -265,7 +290,11 @@ func (this *QScriptEngineAgent) callVirtualBase_FunctionExit(scriptId int64, ret
 
 }
 func (this *QScriptEngineAgent) OnFunctionExit(slot func(super func(scriptId int64, returnValue *QScriptValue), scriptId int64, returnValue *QScriptValue)) {
-	ok := C.QScriptEngineAgent_override_virtual_functionExit(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QScriptEngineAgent_override_virtual_functionExit(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -293,7 +322,11 @@ func (this *QScriptEngineAgent) callVirtualBase_PositionChange(scriptId int64, l
 
 }
 func (this *QScriptEngineAgent) OnPositionChange(slot func(super func(scriptId int64, lineNumber int, columnNumber int), scriptId int64, lineNumber int, columnNumber int)) {
-	ok := C.QScriptEngineAgent_override_virtual_positionChange(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QScriptEngineAgent_override_virtual_positionChange(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -323,7 +356,11 @@ func (this *QScriptEngineAgent) callVirtualBase_ExceptionThrow(scriptId int64, e
 
 }
 func (this *QScriptEngineAgent) OnExceptionThrow(slot func(super func(scriptId int64, exception *QScriptValue, hasHandler bool), scriptId int64, exception *QScriptValue, hasHandler bool)) {
-	ok := C.QScriptEngineAgent_override_virtual_exceptionThrow(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QScriptEngineAgent_override_virtual_exceptionThrow(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -353,7 +390,11 @@ func (this *QScriptEngineAgent) callVirtualBase_ExceptionCatch(scriptId int64, e
 
 }
 func (this *QScriptEngineAgent) OnExceptionCatch(slot func(super func(scriptId int64, exception *QScriptValue), scriptId int64, exception *QScriptValue)) {
-	ok := C.QScriptEngineAgent_override_virtual_exceptionCatch(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QScriptEngineAgent_override_virtual_exceptionCatch(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -381,7 +422,11 @@ func (this *QScriptEngineAgent) callVirtualBase_SupportsExtension(extension QScr
 
 }
 func (this *QScriptEngineAgent) OnSupportsExtension(slot func(super func(extension QScriptEngineAgent__Extension) bool, extension QScriptEngineAgent__Extension) bool) {
-	ok := C.QScriptEngineAgent_override_virtual_supportsExtension(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QScriptEngineAgent_override_virtual_supportsExtension(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -411,7 +456,11 @@ func (this *QScriptEngineAgent) callVirtualBase_Extension(extension QScriptEngin
 
 }
 func (this *QScriptEngineAgent) OnExtension(slot func(super func(extension QScriptEngineAgent__Extension, argument *qt.QVariant) *qt.QVariant, extension QScriptEngineAgent__Extension, argument *qt.QVariant) *qt.QVariant) {
-	ok := C.QScriptEngineAgent_override_virtual_extension(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QScriptEngineAgent_override_virtual_extension(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}

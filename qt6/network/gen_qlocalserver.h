@@ -41,7 +41,7 @@ QMetaObject* QLocalServer_metaObject(const QLocalServer* self);
 void* QLocalServer_metacast(QLocalServer* self, const char* param1);
 struct miqt_string QLocalServer_tr(const char* s);
 void QLocalServer_newConnection(QLocalServer* self);
-void QLocalServer_connect_newConnection(QLocalServer* self, intptr_t slot);
+void* QLocalServer_connect_newConnection(QLocalServer* self, intptr_t slot);
 void QLocalServer_close(QLocalServer* self);
 struct miqt_string QLocalServer_errorString(const QLocalServer* self);
 bool QLocalServer_hasPendingConnections(const QLocalServer* self);

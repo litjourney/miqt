@@ -30,6 +30,11 @@ const (
 	QCompleter__CaseInsensitivelySortedModel QCompleter__ModelSorting = 2
 )
 
+//export miqt_exec_callback_handle_release_QCompleter
+func miqt_exec_callback_handle_release_QCompleter(cb C.intptr_t) {
+	cgo.Handle(cb).Delete()
+}
+
 type QCompleter struct {
 	h *C.QCompleter
 	*QObject
@@ -317,8 +322,10 @@ func (this *QCompleter) Activated(text string) {
 	defer C.free(unsafe.Pointer(text_ms.data))
 	C.QCompleter_activated(this.h, text_ms)
 }
-func (this *QCompleter) OnActivated(slot func(text string)) {
-	C.QCompleter_connect_activated(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QCompleter) OnActivated(slot func(text string)) *SignalConnection {
+	_goptr := UnsafeNewQMetaObject__Connection(C.QCompleter_connect_activated(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QCompleter_activated
@@ -340,8 +347,10 @@ func miqt_exec_callback_QCompleter_activated(cb C.intptr_t, text C.struct_miqt_s
 func (this *QCompleter) ActivatedWithIndex(index *QModelIndex) {
 	C.QCompleter_activatedWithIndex(this.h, index.cPointer())
 }
-func (this *QCompleter) OnActivatedWithIndex(slot func(index *QModelIndex)) {
-	C.QCompleter_connect_activatedWithIndex(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QCompleter) OnActivatedWithIndex(slot func(index *QModelIndex)) *SignalConnection {
+	_goptr := UnsafeNewQMetaObject__Connection(C.QCompleter_connect_activatedWithIndex(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QCompleter_activatedWithIndex
@@ -364,8 +373,10 @@ func (this *QCompleter) Highlighted(text string) {
 	defer C.free(unsafe.Pointer(text_ms.data))
 	C.QCompleter_highlighted(this.h, text_ms)
 }
-func (this *QCompleter) OnHighlighted(slot func(text string)) {
-	C.QCompleter_connect_highlighted(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QCompleter) OnHighlighted(slot func(text string)) *SignalConnection {
+	_goptr := UnsafeNewQMetaObject__Connection(C.QCompleter_connect_highlighted(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QCompleter_highlighted
@@ -387,8 +398,10 @@ func miqt_exec_callback_QCompleter_highlighted(cb C.intptr_t, text C.struct_miqt
 func (this *QCompleter) HighlightedWithIndex(index *QModelIndex) {
 	C.QCompleter_highlightedWithIndex(this.h, index.cPointer())
 }
-func (this *QCompleter) OnHighlightedWithIndex(slot func(index *QModelIndex)) {
-	C.QCompleter_connect_highlightedWithIndex(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QCompleter) OnHighlightedWithIndex(slot func(index *QModelIndex)) *SignalConnection {
+	_goptr := UnsafeNewQMetaObject__Connection(C.QCompleter_connect_highlightedWithIndex(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QCompleter_highlightedWithIndex
@@ -518,7 +531,11 @@ func (this *QCompleter) callVirtualBase_PathFromIndex(index *QModelIndex) string
 	return _ret
 }
 func (this *QCompleter) OnPathFromIndex(slot func(super func(index *QModelIndex) string, index *QModelIndex) string) {
-	ok := C.QCompleter_override_virtual_pathFromIndex(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QCompleter_override_virtual_pathFromIndex(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -562,7 +579,11 @@ func (this *QCompleter) callVirtualBase_SplitPath(path string) []string {
 
 }
 func (this *QCompleter) OnSplitPath(slot func(super func(path string) []string, path string) []string) {
-	ok := C.QCompleter_override_virtual_splitPath(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QCompleter_override_virtual_splitPath(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -601,7 +622,11 @@ func (this *QCompleter) callVirtualBase_EventFilter(o *QObject, e *QEvent) bool 
 
 }
 func (this *QCompleter) OnEventFilter(slot func(super func(o *QObject, e *QEvent) bool, o *QObject, e *QEvent) bool) {
-	ok := C.QCompleter_override_virtual_eventFilter(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QCompleter_override_virtual_eventFilter(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -631,7 +656,11 @@ func (this *QCompleter) callVirtualBase_Event(param1 *QEvent) bool {
 
 }
 func (this *QCompleter) OnEvent(slot func(super func(param1 *QEvent) bool, param1 *QEvent) bool) {
-	ok := C.QCompleter_override_virtual_event(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QCompleter_override_virtual_event(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -659,7 +688,11 @@ func (this *QCompleter) callVirtualBase_TimerEvent(event *QTimerEvent) {
 
 }
 func (this *QCompleter) OnTimerEvent(slot func(super func(event *QTimerEvent), event *QTimerEvent)) {
-	ok := C.QCompleter_override_virtual_timerEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QCompleter_override_virtual_timerEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -685,7 +718,11 @@ func (this *QCompleter) callVirtualBase_ChildEvent(event *QChildEvent) {
 
 }
 func (this *QCompleter) OnChildEvent(slot func(super func(event *QChildEvent), event *QChildEvent)) {
-	ok := C.QCompleter_override_virtual_childEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QCompleter_override_virtual_childEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -711,7 +748,11 @@ func (this *QCompleter) callVirtualBase_CustomEvent(event *QEvent) {
 
 }
 func (this *QCompleter) OnCustomEvent(slot func(super func(event *QEvent), event *QEvent)) {
-	ok := C.QCompleter_override_virtual_customEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QCompleter_override_virtual_customEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -737,7 +778,11 @@ func (this *QCompleter) callVirtualBase_ConnectNotify(signal *QMetaMethod) {
 
 }
 func (this *QCompleter) OnConnectNotify(slot func(super func(signal *QMetaMethod), signal *QMetaMethod)) {
-	ok := C.QCompleter_override_virtual_connectNotify(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QCompleter_override_virtual_connectNotify(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -763,7 +808,11 @@ func (this *QCompleter) callVirtualBase_DisconnectNotify(signal *QMetaMethod) {
 
 }
 func (this *QCompleter) OnDisconnectNotify(slot func(super func(signal *QMetaMethod), signal *QMetaMethod)) {
-	ok := C.QCompleter_override_virtual_disconnectNotify(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QCompleter_override_virtual_disconnectNotify(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}

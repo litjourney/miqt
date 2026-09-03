@@ -15,6 +15,11 @@ import (
 	"unsafe"
 )
 
+//export miqt_exec_callback_handle_release_QBoxPlotSeries
+func miqt_exec_callback_handle_release_QBoxPlotSeries(cb C.intptr_t) {
+	cgo.Handle(cb).Delete()
+}
+
 type QBoxPlotSeries struct {
 	h *C.QBoxPlotSeries
 	*QAbstractSeries
@@ -169,8 +174,10 @@ func (this *QBoxPlotSeries) Pen() *qt6.QPen {
 func (this *QBoxPlotSeries) Clicked(boxset *QBoxSet) {
 	C.QBoxPlotSeries_clicked(this.h, boxset.cPointer())
 }
-func (this *QBoxPlotSeries) OnClicked(slot func(boxset *QBoxSet)) {
-	C.QBoxPlotSeries_connect_clicked(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QBoxPlotSeries) OnClicked(slot func(boxset *QBoxSet)) *qt6.SignalConnection {
+	_goptr := qt6.UnsafeNewQMetaObject__Connection(C.QBoxPlotSeries_connect_clicked(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QBoxPlotSeries_clicked
@@ -189,8 +196,10 @@ func miqt_exec_callback_QBoxPlotSeries_clicked(cb C.intptr_t, boxset *C.QBoxSet)
 func (this *QBoxPlotSeries) Hovered(status bool, boxset *QBoxSet) {
 	C.QBoxPlotSeries_hovered(this.h, (C.bool)(status), boxset.cPointer())
 }
-func (this *QBoxPlotSeries) OnHovered(slot func(status bool, boxset *QBoxSet)) {
-	C.QBoxPlotSeries_connect_hovered(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QBoxPlotSeries) OnHovered(slot func(status bool, boxset *QBoxSet)) *qt6.SignalConnection {
+	_goptr := qt6.UnsafeNewQMetaObject__Connection(C.QBoxPlotSeries_connect_hovered(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QBoxPlotSeries_hovered
@@ -211,8 +220,10 @@ func miqt_exec_callback_QBoxPlotSeries_hovered(cb C.intptr_t, status C.bool, box
 func (this *QBoxPlotSeries) Pressed(boxset *QBoxSet) {
 	C.QBoxPlotSeries_pressed(this.h, boxset.cPointer())
 }
-func (this *QBoxPlotSeries) OnPressed(slot func(boxset *QBoxSet)) {
-	C.QBoxPlotSeries_connect_pressed(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QBoxPlotSeries) OnPressed(slot func(boxset *QBoxSet)) *qt6.SignalConnection {
+	_goptr := qt6.UnsafeNewQMetaObject__Connection(C.QBoxPlotSeries_connect_pressed(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QBoxPlotSeries_pressed
@@ -231,8 +242,10 @@ func miqt_exec_callback_QBoxPlotSeries_pressed(cb C.intptr_t, boxset *C.QBoxSet)
 func (this *QBoxPlotSeries) Released(boxset *QBoxSet) {
 	C.QBoxPlotSeries_released(this.h, boxset.cPointer())
 }
-func (this *QBoxPlotSeries) OnReleased(slot func(boxset *QBoxSet)) {
-	C.QBoxPlotSeries_connect_released(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QBoxPlotSeries) OnReleased(slot func(boxset *QBoxSet)) *qt6.SignalConnection {
+	_goptr := qt6.UnsafeNewQMetaObject__Connection(C.QBoxPlotSeries_connect_released(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QBoxPlotSeries_released
@@ -251,8 +264,10 @@ func miqt_exec_callback_QBoxPlotSeries_released(cb C.intptr_t, boxset *C.QBoxSet
 func (this *QBoxPlotSeries) DoubleClicked(boxset *QBoxSet) {
 	C.QBoxPlotSeries_doubleClicked(this.h, boxset.cPointer())
 }
-func (this *QBoxPlotSeries) OnDoubleClicked(slot func(boxset *QBoxSet)) {
-	C.QBoxPlotSeries_connect_doubleClicked(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QBoxPlotSeries) OnDoubleClicked(slot func(boxset *QBoxSet)) *qt6.SignalConnection {
+	_goptr := qt6.UnsafeNewQMetaObject__Connection(C.QBoxPlotSeries_connect_doubleClicked(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QBoxPlotSeries_doubleClicked
@@ -271,8 +286,10 @@ func miqt_exec_callback_QBoxPlotSeries_doubleClicked(cb C.intptr_t, boxset *C.QB
 func (this *QBoxPlotSeries) CountChanged() {
 	C.QBoxPlotSeries_countChanged(this.h)
 }
-func (this *QBoxPlotSeries) OnCountChanged(slot func()) {
-	C.QBoxPlotSeries_connect_countChanged(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QBoxPlotSeries) OnCountChanged(slot func()) *qt6.SignalConnection {
+	_goptr := qt6.UnsafeNewQMetaObject__Connection(C.QBoxPlotSeries_connect_countChanged(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QBoxPlotSeries_countChanged
@@ -288,8 +305,10 @@ func miqt_exec_callback_QBoxPlotSeries_countChanged(cb C.intptr_t) {
 func (this *QBoxPlotSeries) PenChanged() {
 	C.QBoxPlotSeries_penChanged(this.h)
 }
-func (this *QBoxPlotSeries) OnPenChanged(slot func()) {
-	C.QBoxPlotSeries_connect_penChanged(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QBoxPlotSeries) OnPenChanged(slot func()) *qt6.SignalConnection {
+	_goptr := qt6.UnsafeNewQMetaObject__Connection(C.QBoxPlotSeries_connect_penChanged(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QBoxPlotSeries_penChanged
@@ -305,8 +324,10 @@ func miqt_exec_callback_QBoxPlotSeries_penChanged(cb C.intptr_t) {
 func (this *QBoxPlotSeries) BrushChanged() {
 	C.QBoxPlotSeries_brushChanged(this.h)
 }
-func (this *QBoxPlotSeries) OnBrushChanged(slot func()) {
-	C.QBoxPlotSeries_connect_brushChanged(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QBoxPlotSeries) OnBrushChanged(slot func()) *qt6.SignalConnection {
+	_goptr := qt6.UnsafeNewQMetaObject__Connection(C.QBoxPlotSeries_connect_brushChanged(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QBoxPlotSeries_brushChanged
@@ -322,8 +343,10 @@ func miqt_exec_callback_QBoxPlotSeries_brushChanged(cb C.intptr_t) {
 func (this *QBoxPlotSeries) BoxOutlineVisibilityChanged() {
 	C.QBoxPlotSeries_boxOutlineVisibilityChanged(this.h)
 }
-func (this *QBoxPlotSeries) OnBoxOutlineVisibilityChanged(slot func()) {
-	C.QBoxPlotSeries_connect_boxOutlineVisibilityChanged(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QBoxPlotSeries) OnBoxOutlineVisibilityChanged(slot func()) *qt6.SignalConnection {
+	_goptr := qt6.UnsafeNewQMetaObject__Connection(C.QBoxPlotSeries_connect_boxOutlineVisibilityChanged(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QBoxPlotSeries_boxOutlineVisibilityChanged
@@ -339,8 +362,10 @@ func miqt_exec_callback_QBoxPlotSeries_boxOutlineVisibilityChanged(cb C.intptr_t
 func (this *QBoxPlotSeries) BoxWidthChanged() {
 	C.QBoxPlotSeries_boxWidthChanged(this.h)
 }
-func (this *QBoxPlotSeries) OnBoxWidthChanged(slot func()) {
-	C.QBoxPlotSeries_connect_boxWidthChanged(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QBoxPlotSeries) OnBoxWidthChanged(slot func()) *qt6.SignalConnection {
+	_goptr := qt6.UnsafeNewQMetaObject__Connection(C.QBoxPlotSeries_connect_boxWidthChanged(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QBoxPlotSeries_boxWidthChanged
@@ -362,8 +387,10 @@ func (this *QBoxPlotSeries) BoxsetsAdded(sets []*QBoxSet) {
 	sets_ma := C.struct_miqt_array{len: C.size_t(len(sets)), data: unsafe.Pointer(sets_CArray)}
 	C.QBoxPlotSeries_boxsetsAdded(this.h, sets_ma)
 }
-func (this *QBoxPlotSeries) OnBoxsetsAdded(slot func(sets []*QBoxSet)) {
-	C.QBoxPlotSeries_connect_boxsetsAdded(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QBoxPlotSeries) OnBoxsetsAdded(slot func(sets []*QBoxSet)) *qt6.SignalConnection {
+	_goptr := qt6.UnsafeNewQMetaObject__Connection(C.QBoxPlotSeries_connect_boxsetsAdded(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QBoxPlotSeries_boxsetsAdded
@@ -394,8 +421,10 @@ func (this *QBoxPlotSeries) BoxsetsRemoved(sets []*QBoxSet) {
 	sets_ma := C.struct_miqt_array{len: C.size_t(len(sets)), data: unsafe.Pointer(sets_CArray)}
 	C.QBoxPlotSeries_boxsetsRemoved(this.h, sets_ma)
 }
-func (this *QBoxPlotSeries) OnBoxsetsRemoved(slot func(sets []*QBoxSet)) {
-	C.QBoxPlotSeries_connect_boxsetsRemoved(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QBoxPlotSeries) OnBoxsetsRemoved(slot func(sets []*QBoxSet)) *qt6.SignalConnection {
+	_goptr := qt6.UnsafeNewQMetaObject__Connection(C.QBoxPlotSeries_connect_boxsetsRemoved(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QBoxPlotSeries_boxsetsRemoved
@@ -503,7 +532,11 @@ func (this *QBoxPlotSeries) callVirtualBase_Type() QAbstractSeries__SeriesType {
 
 }
 func (this *QBoxPlotSeries) OnType(slot func(super func() QAbstractSeries__SeriesType) QAbstractSeries__SeriesType) {
-	ok := C.QBoxPlotSeries_override_virtual_type(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QBoxPlotSeries_override_virtual_type(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -528,7 +561,11 @@ func (this *QBoxPlotSeries) callVirtualBase_Event(event *qt6.QEvent) bool {
 
 }
 func (this *QBoxPlotSeries) OnEvent(slot func(super func(event *qt6.QEvent) bool, event *qt6.QEvent) bool) {
-	ok := C.QBoxPlotSeries_override_virtual_event(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QBoxPlotSeries_override_virtual_event(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -556,7 +593,11 @@ func (this *QBoxPlotSeries) callVirtualBase_EventFilter(watched *qt6.QObject, ev
 
 }
 func (this *QBoxPlotSeries) OnEventFilter(slot func(super func(watched *qt6.QObject, event *qt6.QEvent) bool, watched *qt6.QObject, event *qt6.QEvent) bool) {
-	ok := C.QBoxPlotSeries_override_virtual_eventFilter(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QBoxPlotSeries_override_virtual_eventFilter(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -586,7 +627,11 @@ func (this *QBoxPlotSeries) callVirtualBase_TimerEvent(event *qt6.QTimerEvent) {
 
 }
 func (this *QBoxPlotSeries) OnTimerEvent(slot func(super func(event *qt6.QTimerEvent), event *qt6.QTimerEvent)) {
-	ok := C.QBoxPlotSeries_override_virtual_timerEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QBoxPlotSeries_override_virtual_timerEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -612,7 +657,11 @@ func (this *QBoxPlotSeries) callVirtualBase_ChildEvent(event *qt6.QChildEvent) {
 
 }
 func (this *QBoxPlotSeries) OnChildEvent(slot func(super func(event *qt6.QChildEvent), event *qt6.QChildEvent)) {
-	ok := C.QBoxPlotSeries_override_virtual_childEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QBoxPlotSeries_override_virtual_childEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -638,7 +687,11 @@ func (this *QBoxPlotSeries) callVirtualBase_CustomEvent(event *qt6.QEvent) {
 
 }
 func (this *QBoxPlotSeries) OnCustomEvent(slot func(super func(event *qt6.QEvent), event *qt6.QEvent)) {
-	ok := C.QBoxPlotSeries_override_virtual_customEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QBoxPlotSeries_override_virtual_customEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -664,7 +717,11 @@ func (this *QBoxPlotSeries) callVirtualBase_ConnectNotify(signal *qt6.QMetaMetho
 
 }
 func (this *QBoxPlotSeries) OnConnectNotify(slot func(super func(signal *qt6.QMetaMethod), signal *qt6.QMetaMethod)) {
-	ok := C.QBoxPlotSeries_override_virtual_connectNotify(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QBoxPlotSeries_override_virtual_connectNotify(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -690,7 +747,11 @@ func (this *QBoxPlotSeries) callVirtualBase_DisconnectNotify(signal *qt6.QMetaMe
 
 }
 func (this *QBoxPlotSeries) OnDisconnectNotify(slot func(super func(signal *qt6.QMetaMethod), signal *qt6.QMetaMethod)) {
-	ok := C.QBoxPlotSeries_override_virtual_disconnectNotify(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QBoxPlotSeries_override_virtual_disconnectNotify(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}

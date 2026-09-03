@@ -1,3 +1,5 @@
+#include <memory>
+#include <utility>
 #include <QChildEvent>
 #include <QEvent>
 #include <QGeoSatelliteInfo>
@@ -20,6 +22,7 @@
 extern "C" {
 #endif
 
+void miqt_exec_callback_handle_release_QNmeaSatelliteInfoSource(intptr_t);
 void miqt_exec_callback_QNmeaSatelliteInfoSource_setUpdateInterval(QNmeaSatelliteInfoSource*, intptr_t, int);
 int miqt_exec_callback_QNmeaSatelliteInfoSource_minimumUpdateInterval(const QNmeaSatelliteInfoSource*, intptr_t);
 int miqt_exec_callback_QNmeaSatelliteInfoSource_error(const QNmeaSatelliteInfoSource*, intptr_t);
@@ -50,58 +53,58 @@ public:
 	virtual ~MiqtVirtualQNmeaSatelliteInfoSource() override = default;
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__setUpdateInterval = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QNmeaSatelliteInfoSource> handle__setUpdateInterval;
 
 	// Subclass to allow providing a Go implementation
 	virtual void setUpdateInterval(int msec) override {
-		if (handle__setUpdateInterval == 0) {
+		if (!handle__setUpdateInterval) {
 			QNmeaSatelliteInfoSource::setUpdateInterval(msec);
 			return;
 		}
 
 		int sigval1 = msec;
-		miqt_exec_callback_QNmeaSatelliteInfoSource_setUpdateInterval(this, handle__setUpdateInterval, sigval1);
+		miqt_exec_callback_QNmeaSatelliteInfoSource_setUpdateInterval(this, handle__setUpdateInterval.value(), sigval1);
 
 	}
 
 	friend void QNmeaSatelliteInfoSource_virtualbase_setUpdateInterval(void* self, int msec);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__minimumUpdateInterval = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QNmeaSatelliteInfoSource> handle__minimumUpdateInterval;
 
 	// Subclass to allow providing a Go implementation
 	virtual int minimumUpdateInterval() const override {
-		if (handle__minimumUpdateInterval == 0) {
+		if (!handle__minimumUpdateInterval) {
 			return QNmeaSatelliteInfoSource::minimumUpdateInterval();
 		}
 
-		int callback_return_value = miqt_exec_callback_QNmeaSatelliteInfoSource_minimumUpdateInterval(this, handle__minimumUpdateInterval);
+		int callback_return_value = miqt_exec_callback_QNmeaSatelliteInfoSource_minimumUpdateInterval(this, handle__minimumUpdateInterval.value());
 		return static_cast<int>(callback_return_value);
 	}
 
 	friend int QNmeaSatelliteInfoSource_virtualbase_minimumUpdateInterval(const void* self);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__error = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QNmeaSatelliteInfoSource> handle__error;
 
 	// Subclass to allow providing a Go implementation
 	virtual QGeoSatelliteInfoSource::Error error() const override {
-		if (handle__error == 0) {
+		if (!handle__error) {
 			return QNmeaSatelliteInfoSource::error();
 		}
 
-		int callback_return_value = miqt_exec_callback_QNmeaSatelliteInfoSource_error(this, handle__error);
+		int callback_return_value = miqt_exec_callback_QNmeaSatelliteInfoSource_error(this, handle__error.value());
 		return static_cast<QGeoSatelliteInfoSource::Error>(callback_return_value);
 	}
 
 	friend int QNmeaSatelliteInfoSource_virtualbase_error(const void* self);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__setBackendProperty = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QNmeaSatelliteInfoSource> handle__setBackendProperty;
 
 	// Subclass to allow providing a Go implementation
 	virtual bool setBackendProperty(const QString& name, const QVariant& value) override {
-		if (handle__setBackendProperty == 0) {
+		if (!handle__setBackendProperty) {
 			return QNmeaSatelliteInfoSource::setBackendProperty(name, value);
 		}
 
@@ -116,18 +119,18 @@ public:
 		const QVariant& value_ret = value;
 		// Cast returned reference into pointer
 		QVariant* sigval2 = const_cast<QVariant*>(&value_ret);
-		bool callback_return_value = miqt_exec_callback_QNmeaSatelliteInfoSource_setBackendProperty(this, handle__setBackendProperty, sigval1, sigval2);
+		bool callback_return_value = miqt_exec_callback_QNmeaSatelliteInfoSource_setBackendProperty(this, handle__setBackendProperty.value(), sigval1, sigval2);
 		return callback_return_value;
 	}
 
 	friend bool QNmeaSatelliteInfoSource_virtualbase_setBackendProperty(void* self, struct miqt_string name, QVariant* value);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__backendProperty = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QNmeaSatelliteInfoSource> handle__backendProperty;
 
 	// Subclass to allow providing a Go implementation
 	virtual QVariant backendProperty(const QString& name) const override {
-		if (handle__backendProperty == 0) {
+		if (!handle__backendProperty) {
 			return QNmeaSatelliteInfoSource::backendProperty(name);
 		}
 
@@ -139,67 +142,67 @@ public:
 		name_ms.data = static_cast<char*>(malloc(name_ms.len));
 		memcpy(name_ms.data, name_b.data(), name_ms.len);
 		struct miqt_string sigval1 = name_ms;
-		QVariant* callback_return_value = miqt_exec_callback_QNmeaSatelliteInfoSource_backendProperty(this, handle__backendProperty, sigval1);
+		QVariant* callback_return_value = miqt_exec_callback_QNmeaSatelliteInfoSource_backendProperty(this, handle__backendProperty.value(), sigval1);
 		return *callback_return_value;
 	}
 
 	friend QVariant* QNmeaSatelliteInfoSource_virtualbase_backendProperty(const void* self, struct miqt_string name);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__startUpdates = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QNmeaSatelliteInfoSource> handle__startUpdates;
 
 	// Subclass to allow providing a Go implementation
 	virtual void startUpdates() override {
-		if (handle__startUpdates == 0) {
+		if (!handle__startUpdates) {
 			QNmeaSatelliteInfoSource::startUpdates();
 			return;
 		}
 
-		miqt_exec_callback_QNmeaSatelliteInfoSource_startUpdates(this, handle__startUpdates);
+		miqt_exec_callback_QNmeaSatelliteInfoSource_startUpdates(this, handle__startUpdates.value());
 
 	}
 
 	friend void QNmeaSatelliteInfoSource_virtualbase_startUpdates(void* self);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__stopUpdates = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QNmeaSatelliteInfoSource> handle__stopUpdates;
 
 	// Subclass to allow providing a Go implementation
 	virtual void stopUpdates() override {
-		if (handle__stopUpdates == 0) {
+		if (!handle__stopUpdates) {
 			QNmeaSatelliteInfoSource::stopUpdates();
 			return;
 		}
 
-		miqt_exec_callback_QNmeaSatelliteInfoSource_stopUpdates(this, handle__stopUpdates);
+		miqt_exec_callback_QNmeaSatelliteInfoSource_stopUpdates(this, handle__stopUpdates.value());
 
 	}
 
 	friend void QNmeaSatelliteInfoSource_virtualbase_stopUpdates(void* self);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__requestUpdate = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QNmeaSatelliteInfoSource> handle__requestUpdate;
 
 	// Subclass to allow providing a Go implementation
 	virtual void requestUpdate(int timeout) override {
-		if (handle__requestUpdate == 0) {
+		if (!handle__requestUpdate) {
 			QNmeaSatelliteInfoSource::requestUpdate(timeout);
 			return;
 		}
 
 		int sigval1 = timeout;
-		miqt_exec_callback_QNmeaSatelliteInfoSource_requestUpdate(this, handle__requestUpdate, sigval1);
+		miqt_exec_callback_QNmeaSatelliteInfoSource_requestUpdate(this, handle__requestUpdate.value(), sigval1);
 
 	}
 
 	friend void QNmeaSatelliteInfoSource_virtualbase_requestUpdate(void* self, int timeout);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__parseSatellitesInUseFromNmea = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QNmeaSatelliteInfoSource> handle__parseSatellitesInUseFromNmea;
 
 	// Subclass to allow providing a Go implementation
 	virtual QGeoSatelliteInfo::SatelliteSystem parseSatellitesInUseFromNmea(const char* data, int size, QList<int>& pnrsInUse) override {
-		if (handle__parseSatellitesInUseFromNmea == 0) {
+		if (!handle__parseSatellitesInUseFromNmea) {
 			return QNmeaSatelliteInfoSource::parseSatellitesInUseFromNmea(data, size, pnrsInUse);
 		}
 
@@ -215,18 +218,18 @@ public:
 		pnrsInUse_out.len = pnrsInUse_ret.length();
 		pnrsInUse_out.data = static_cast<void*>(pnrsInUse_arr);
 		struct miqt_array /* of int */  sigval3 = pnrsInUse_out;
-		int callback_return_value = miqt_exec_callback_QNmeaSatelliteInfoSource_parseSatellitesInUseFromNmea(this, handle__parseSatellitesInUseFromNmea, sigval1, sigval2, sigval3);
+		int callback_return_value = miqt_exec_callback_QNmeaSatelliteInfoSource_parseSatellitesInUseFromNmea(this, handle__parseSatellitesInUseFromNmea.value(), sigval1, sigval2, sigval3);
 		return static_cast<QGeoSatelliteInfo::SatelliteSystem>(callback_return_value);
 	}
 
 	friend int QNmeaSatelliteInfoSource_virtualbase_parseSatellitesInUseFromNmea(void* self, const char* data, int size, struct miqt_array /* of int */  pnrsInUse);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__parseSatelliteInfoFromNmea = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QNmeaSatelliteInfoSource> handle__parseSatelliteInfoFromNmea;
 
 	// Subclass to allow providing a Go implementation
 	virtual QNmeaSatelliteInfoSource::SatelliteInfoParseStatus parseSatelliteInfoFromNmea(const char* data, int size, QList<QGeoSatelliteInfo>& infos, QGeoSatelliteInfo::SatelliteSystem& system) override {
-		if (handle__parseSatelliteInfoFromNmea == 0) {
+		if (!handle__parseSatelliteInfoFromNmea) {
 			return QNmeaSatelliteInfoSource::parseSatelliteInfoFromNmea(data, size, infos, system);
 		}
 
@@ -244,102 +247,102 @@ public:
 		struct miqt_array /* of QGeoSatelliteInfo* */  sigval3 = infos_out;
 		QGeoSatelliteInfo::SatelliteSystem& system_ret = system;
 		int* sigval4 = reinterpret_cast<int*>(&system_ret);
-		int callback_return_value = miqt_exec_callback_QNmeaSatelliteInfoSource_parseSatelliteInfoFromNmea(this, handle__parseSatelliteInfoFromNmea, sigval1, sigval2, sigval3, sigval4);
+		int callback_return_value = miqt_exec_callback_QNmeaSatelliteInfoSource_parseSatelliteInfoFromNmea(this, handle__parseSatelliteInfoFromNmea.value(), sigval1, sigval2, sigval3, sigval4);
 		return static_cast<QNmeaSatelliteInfoSource::SatelliteInfoParseStatus>(callback_return_value);
 	}
 
 	friend int QNmeaSatelliteInfoSource_virtualbase_parseSatelliteInfoFromNmea(void* self, const char* data, int size, struct miqt_array /* of QGeoSatelliteInfo* */  infos, int* system);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__event = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QNmeaSatelliteInfoSource> handle__event;
 
 	// Subclass to allow providing a Go implementation
 	virtual bool event(QEvent* event) override {
-		if (handle__event == 0) {
+		if (!handle__event) {
 			return QNmeaSatelliteInfoSource::event(event);
 		}
 
 		QEvent* sigval1 = event;
-		bool callback_return_value = miqt_exec_callback_QNmeaSatelliteInfoSource_event(this, handle__event, sigval1);
+		bool callback_return_value = miqt_exec_callback_QNmeaSatelliteInfoSource_event(this, handle__event.value(), sigval1);
 		return callback_return_value;
 	}
 
 	friend bool QNmeaSatelliteInfoSource_virtualbase_event(void* self, QEvent* event);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__eventFilter = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QNmeaSatelliteInfoSource> handle__eventFilter;
 
 	// Subclass to allow providing a Go implementation
 	virtual bool eventFilter(QObject* watched, QEvent* event) override {
-		if (handle__eventFilter == 0) {
+		if (!handle__eventFilter) {
 			return QNmeaSatelliteInfoSource::eventFilter(watched, event);
 		}
 
 		QObject* sigval1 = watched;
 		QEvent* sigval2 = event;
-		bool callback_return_value = miqt_exec_callback_QNmeaSatelliteInfoSource_eventFilter(this, handle__eventFilter, sigval1, sigval2);
+		bool callback_return_value = miqt_exec_callback_QNmeaSatelliteInfoSource_eventFilter(this, handle__eventFilter.value(), sigval1, sigval2);
 		return callback_return_value;
 	}
 
 	friend bool QNmeaSatelliteInfoSource_virtualbase_eventFilter(void* self, QObject* watched, QEvent* event);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__timerEvent = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QNmeaSatelliteInfoSource> handle__timerEvent;
 
 	// Subclass to allow providing a Go implementation
 	virtual void timerEvent(QTimerEvent* event) override {
-		if (handle__timerEvent == 0) {
+		if (!handle__timerEvent) {
 			QNmeaSatelliteInfoSource::timerEvent(event);
 			return;
 		}
 
 		QTimerEvent* sigval1 = event;
-		miqt_exec_callback_QNmeaSatelliteInfoSource_timerEvent(this, handle__timerEvent, sigval1);
+		miqt_exec_callback_QNmeaSatelliteInfoSource_timerEvent(this, handle__timerEvent.value(), sigval1);
 
 	}
 
 	friend void QNmeaSatelliteInfoSource_virtualbase_timerEvent(void* self, QTimerEvent* event);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__childEvent = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QNmeaSatelliteInfoSource> handle__childEvent;
 
 	// Subclass to allow providing a Go implementation
 	virtual void childEvent(QChildEvent* event) override {
-		if (handle__childEvent == 0) {
+		if (!handle__childEvent) {
 			QNmeaSatelliteInfoSource::childEvent(event);
 			return;
 		}
 
 		QChildEvent* sigval1 = event;
-		miqt_exec_callback_QNmeaSatelliteInfoSource_childEvent(this, handle__childEvent, sigval1);
+		miqt_exec_callback_QNmeaSatelliteInfoSource_childEvent(this, handle__childEvent.value(), sigval1);
 
 	}
 
 	friend void QNmeaSatelliteInfoSource_virtualbase_childEvent(void* self, QChildEvent* event);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__customEvent = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QNmeaSatelliteInfoSource> handle__customEvent;
 
 	// Subclass to allow providing a Go implementation
 	virtual void customEvent(QEvent* event) override {
-		if (handle__customEvent == 0) {
+		if (!handle__customEvent) {
 			QNmeaSatelliteInfoSource::customEvent(event);
 			return;
 		}
 
 		QEvent* sigval1 = event;
-		miqt_exec_callback_QNmeaSatelliteInfoSource_customEvent(this, handle__customEvent, sigval1);
+		miqt_exec_callback_QNmeaSatelliteInfoSource_customEvent(this, handle__customEvent.value(), sigval1);
 
 	}
 
 	friend void QNmeaSatelliteInfoSource_virtualbase_customEvent(void* self, QEvent* event);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__connectNotify = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QNmeaSatelliteInfoSource> handle__connectNotify;
 
 	// Subclass to allow providing a Go implementation
 	virtual void connectNotify(const QMetaMethod& signal) override {
-		if (handle__connectNotify == 0) {
+		if (!handle__connectNotify) {
 			QNmeaSatelliteInfoSource::connectNotify(signal);
 			return;
 		}
@@ -347,18 +350,18 @@ public:
 		const QMetaMethod& signal_ret = signal;
 		// Cast returned reference into pointer
 		QMetaMethod* sigval1 = const_cast<QMetaMethod*>(&signal_ret);
-		miqt_exec_callback_QNmeaSatelliteInfoSource_connectNotify(this, handle__connectNotify, sigval1);
+		miqt_exec_callback_QNmeaSatelliteInfoSource_connectNotify(this, handle__connectNotify.value(), sigval1);
 
 	}
 
 	friend void QNmeaSatelliteInfoSource_virtualbase_connectNotify(void* self, QMetaMethod* signal);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__disconnectNotify = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QNmeaSatelliteInfoSource> handle__disconnectNotify;
 
 	// Subclass to allow providing a Go implementation
 	virtual void disconnectNotify(const QMetaMethod& signal) override {
-		if (handle__disconnectNotify == 0) {
+		if (!handle__disconnectNotify) {
 			QNmeaSatelliteInfoSource::disconnectNotify(signal);
 			return;
 		}
@@ -366,7 +369,7 @@ public:
 		const QMetaMethod& signal_ret = signal;
 		// Cast returned reference into pointer
 		QMetaMethod* sigval1 = const_cast<QMetaMethod*>(&signal_ret);
-		miqt_exec_callback_QNmeaSatelliteInfoSource_disconnectNotify(this, handle__disconnectNotify, sigval1);
+		miqt_exec_callback_QNmeaSatelliteInfoSource_disconnectNotify(this, handle__disconnectNotify.value(), sigval1);
 
 	}
 
@@ -482,12 +485,13 @@ struct miqt_string QNmeaSatelliteInfoSource_tr3(const char* s, const char* c, in
 }
 
 bool QNmeaSatelliteInfoSource_override_virtual_setUpdateInterval(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QNmeaSatelliteInfoSource> slot_handle(slot);
 	MiqtVirtualQNmeaSatelliteInfoSource* self_cast = dynamic_cast<MiqtVirtualQNmeaSatelliteInfoSource*>( (QNmeaSatelliteInfoSource*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__setUpdateInterval = slot;
+	self_cast->handle__setUpdateInterval = std::move(slot_handle);
 	return true;
 }
 
@@ -496,12 +500,13 @@ void QNmeaSatelliteInfoSource_virtualbase_setUpdateInterval(void* self, int msec
 }
 
 bool QNmeaSatelliteInfoSource_override_virtual_minimumUpdateInterval(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QNmeaSatelliteInfoSource> slot_handle(slot);
 	MiqtVirtualQNmeaSatelliteInfoSource* self_cast = dynamic_cast<MiqtVirtualQNmeaSatelliteInfoSource*>( (QNmeaSatelliteInfoSource*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__minimumUpdateInterval = slot;
+	self_cast->handle__minimumUpdateInterval = std::move(slot_handle);
 	return true;
 }
 
@@ -510,12 +515,13 @@ int QNmeaSatelliteInfoSource_virtualbase_minimumUpdateInterval(const void* self)
 }
 
 bool QNmeaSatelliteInfoSource_override_virtual_error(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QNmeaSatelliteInfoSource> slot_handle(slot);
 	MiqtVirtualQNmeaSatelliteInfoSource* self_cast = dynamic_cast<MiqtVirtualQNmeaSatelliteInfoSource*>( (QNmeaSatelliteInfoSource*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__error = slot;
+	self_cast->handle__error = std::move(slot_handle);
 	return true;
 }
 
@@ -525,12 +531,13 @@ int QNmeaSatelliteInfoSource_virtualbase_error(const void* self) {
 }
 
 bool QNmeaSatelliteInfoSource_override_virtual_setBackendProperty(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QNmeaSatelliteInfoSource> slot_handle(slot);
 	MiqtVirtualQNmeaSatelliteInfoSource* self_cast = dynamic_cast<MiqtVirtualQNmeaSatelliteInfoSource*>( (QNmeaSatelliteInfoSource*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__setBackendProperty = slot;
+	self_cast->handle__setBackendProperty = std::move(slot_handle);
 	return true;
 }
 
@@ -540,12 +547,13 @@ bool QNmeaSatelliteInfoSource_virtualbase_setBackendProperty(void* self, struct 
 }
 
 bool QNmeaSatelliteInfoSource_override_virtual_backendProperty(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QNmeaSatelliteInfoSource> slot_handle(slot);
 	MiqtVirtualQNmeaSatelliteInfoSource* self_cast = dynamic_cast<MiqtVirtualQNmeaSatelliteInfoSource*>( (QNmeaSatelliteInfoSource*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__backendProperty = slot;
+	self_cast->handle__backendProperty = std::move(slot_handle);
 	return true;
 }
 
@@ -555,12 +563,13 @@ QVariant* QNmeaSatelliteInfoSource_virtualbase_backendProperty(const void* self,
 }
 
 bool QNmeaSatelliteInfoSource_override_virtual_startUpdates(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QNmeaSatelliteInfoSource> slot_handle(slot);
 	MiqtVirtualQNmeaSatelliteInfoSource* self_cast = dynamic_cast<MiqtVirtualQNmeaSatelliteInfoSource*>( (QNmeaSatelliteInfoSource*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__startUpdates = slot;
+	self_cast->handle__startUpdates = std::move(slot_handle);
 	return true;
 }
 
@@ -569,12 +578,13 @@ void QNmeaSatelliteInfoSource_virtualbase_startUpdates(void* self) {
 }
 
 bool QNmeaSatelliteInfoSource_override_virtual_stopUpdates(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QNmeaSatelliteInfoSource> slot_handle(slot);
 	MiqtVirtualQNmeaSatelliteInfoSource* self_cast = dynamic_cast<MiqtVirtualQNmeaSatelliteInfoSource*>( (QNmeaSatelliteInfoSource*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__stopUpdates = slot;
+	self_cast->handle__stopUpdates = std::move(slot_handle);
 	return true;
 }
 
@@ -583,12 +593,13 @@ void QNmeaSatelliteInfoSource_virtualbase_stopUpdates(void* self) {
 }
 
 bool QNmeaSatelliteInfoSource_override_virtual_requestUpdate(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QNmeaSatelliteInfoSource> slot_handle(slot);
 	MiqtVirtualQNmeaSatelliteInfoSource* self_cast = dynamic_cast<MiqtVirtualQNmeaSatelliteInfoSource*>( (QNmeaSatelliteInfoSource*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__requestUpdate = slot;
+	self_cast->handle__requestUpdate = std::move(slot_handle);
 	return true;
 }
 
@@ -597,12 +608,13 @@ void QNmeaSatelliteInfoSource_virtualbase_requestUpdate(void* self, int timeout)
 }
 
 bool QNmeaSatelliteInfoSource_override_virtual_parseSatellitesInUseFromNmea(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QNmeaSatelliteInfoSource> slot_handle(slot);
 	MiqtVirtualQNmeaSatelliteInfoSource* self_cast = dynamic_cast<MiqtVirtualQNmeaSatelliteInfoSource*>( (QNmeaSatelliteInfoSource*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__parseSatellitesInUseFromNmea = slot;
+	self_cast->handle__parseSatellitesInUseFromNmea = std::move(slot_handle);
 	return true;
 }
 
@@ -618,12 +630,13 @@ int QNmeaSatelliteInfoSource_virtualbase_parseSatellitesInUseFromNmea(void* self
 }
 
 bool QNmeaSatelliteInfoSource_override_virtual_parseSatelliteInfoFromNmea(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QNmeaSatelliteInfoSource> slot_handle(slot);
 	MiqtVirtualQNmeaSatelliteInfoSource* self_cast = dynamic_cast<MiqtVirtualQNmeaSatelliteInfoSource*>( (QNmeaSatelliteInfoSource*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__parseSatelliteInfoFromNmea = slot;
+	self_cast->handle__parseSatelliteInfoFromNmea = std::move(slot_handle);
 	return true;
 }
 
@@ -639,12 +652,13 @@ int QNmeaSatelliteInfoSource_virtualbase_parseSatelliteInfoFromNmea(void* self, 
 }
 
 bool QNmeaSatelliteInfoSource_override_virtual_event(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QNmeaSatelliteInfoSource> slot_handle(slot);
 	MiqtVirtualQNmeaSatelliteInfoSource* self_cast = dynamic_cast<MiqtVirtualQNmeaSatelliteInfoSource*>( (QNmeaSatelliteInfoSource*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__event = slot;
+	self_cast->handle__event = std::move(slot_handle);
 	return true;
 }
 
@@ -653,12 +667,13 @@ bool QNmeaSatelliteInfoSource_virtualbase_event(void* self, QEvent* event) {
 }
 
 bool QNmeaSatelliteInfoSource_override_virtual_eventFilter(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QNmeaSatelliteInfoSource> slot_handle(slot);
 	MiqtVirtualQNmeaSatelliteInfoSource* self_cast = dynamic_cast<MiqtVirtualQNmeaSatelliteInfoSource*>( (QNmeaSatelliteInfoSource*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__eventFilter = slot;
+	self_cast->handle__eventFilter = std::move(slot_handle);
 	return true;
 }
 
@@ -667,12 +682,13 @@ bool QNmeaSatelliteInfoSource_virtualbase_eventFilter(void* self, QObject* watch
 }
 
 bool QNmeaSatelliteInfoSource_override_virtual_timerEvent(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QNmeaSatelliteInfoSource> slot_handle(slot);
 	MiqtVirtualQNmeaSatelliteInfoSource* self_cast = dynamic_cast<MiqtVirtualQNmeaSatelliteInfoSource*>( (QNmeaSatelliteInfoSource*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__timerEvent = slot;
+	self_cast->handle__timerEvent = std::move(slot_handle);
 	return true;
 }
 
@@ -681,12 +697,13 @@ void QNmeaSatelliteInfoSource_virtualbase_timerEvent(void* self, QTimerEvent* ev
 }
 
 bool QNmeaSatelliteInfoSource_override_virtual_childEvent(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QNmeaSatelliteInfoSource> slot_handle(slot);
 	MiqtVirtualQNmeaSatelliteInfoSource* self_cast = dynamic_cast<MiqtVirtualQNmeaSatelliteInfoSource*>( (QNmeaSatelliteInfoSource*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__childEvent = slot;
+	self_cast->handle__childEvent = std::move(slot_handle);
 	return true;
 }
 
@@ -695,12 +712,13 @@ void QNmeaSatelliteInfoSource_virtualbase_childEvent(void* self, QChildEvent* ev
 }
 
 bool QNmeaSatelliteInfoSource_override_virtual_customEvent(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QNmeaSatelliteInfoSource> slot_handle(slot);
 	MiqtVirtualQNmeaSatelliteInfoSource* self_cast = dynamic_cast<MiqtVirtualQNmeaSatelliteInfoSource*>( (QNmeaSatelliteInfoSource*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__customEvent = slot;
+	self_cast->handle__customEvent = std::move(slot_handle);
 	return true;
 }
 
@@ -709,12 +727,13 @@ void QNmeaSatelliteInfoSource_virtualbase_customEvent(void* self, QEvent* event)
 }
 
 bool QNmeaSatelliteInfoSource_override_virtual_connectNotify(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QNmeaSatelliteInfoSource> slot_handle(slot);
 	MiqtVirtualQNmeaSatelliteInfoSource* self_cast = dynamic_cast<MiqtVirtualQNmeaSatelliteInfoSource*>( (QNmeaSatelliteInfoSource*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__connectNotify = slot;
+	self_cast->handle__connectNotify = std::move(slot_handle);
 	return true;
 }
 
@@ -723,12 +742,13 @@ void QNmeaSatelliteInfoSource_virtualbase_connectNotify(void* self, QMetaMethod*
 }
 
 bool QNmeaSatelliteInfoSource_override_virtual_disconnectNotify(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QNmeaSatelliteInfoSource> slot_handle(slot);
 	MiqtVirtualQNmeaSatelliteInfoSource* self_cast = dynamic_cast<MiqtVirtualQNmeaSatelliteInfoSource*>( (QNmeaSatelliteInfoSource*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__disconnectNotify = slot;
+	self_cast->handle__disconnectNotify = std::move(slot_handle);
 	return true;
 }
 

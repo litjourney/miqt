@@ -33,6 +33,11 @@ const (
 	QGeoPositionInfoSource__AllPositioningMethods          QGeoPositionInfoSource__PositioningMethod = -1
 )
 
+//export miqt_exec_callback_handle_release_QGeoPositionInfoSource
+func miqt_exec_callback_handle_release_QGeoPositionInfoSource(cb C.intptr_t) {
+	cgo.Handle(cb).Delete()
+}
+
 type QGeoPositionInfoSource struct {
 	h *C.QGeoPositionInfoSource
 	*qt.QObject
@@ -252,8 +257,10 @@ func (this *QGeoPositionInfoSource) RequestUpdate(timeout int) {
 func (this *QGeoPositionInfoSource) PositionUpdated(update *QGeoPositionInfo) {
 	C.QGeoPositionInfoSource_positionUpdated(this.h, update.cPointer())
 }
-func (this *QGeoPositionInfoSource) OnPositionUpdated(slot func(update *QGeoPositionInfo)) {
-	C.QGeoPositionInfoSource_connect_positionUpdated(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QGeoPositionInfoSource) OnPositionUpdated(slot func(update *QGeoPositionInfo)) *qt.SignalConnection {
+	_goptr := qt.UnsafeNewQMetaObject__Connection(C.QGeoPositionInfoSource_connect_positionUpdated(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QGeoPositionInfoSource_positionUpdated
@@ -272,8 +279,10 @@ func miqt_exec_callback_QGeoPositionInfoSource_positionUpdated(cb C.intptr_t, up
 func (this *QGeoPositionInfoSource) UpdateTimeout() {
 	C.QGeoPositionInfoSource_updateTimeout(this.h)
 }
-func (this *QGeoPositionInfoSource) OnUpdateTimeout(slot func()) {
-	C.QGeoPositionInfoSource_connect_updateTimeout(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QGeoPositionInfoSource) OnUpdateTimeout(slot func()) *qt.SignalConnection {
+	_goptr := qt.UnsafeNewQMetaObject__Connection(C.QGeoPositionInfoSource_connect_updateTimeout(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QGeoPositionInfoSource_updateTimeout
@@ -289,8 +298,10 @@ func miqt_exec_callback_QGeoPositionInfoSource_updateTimeout(cb C.intptr_t) {
 func (this *QGeoPositionInfoSource) ErrorWithQGeoPositionInfoSourceError(param1 QGeoPositionInfoSource__Error) {
 	C.QGeoPositionInfoSource_errorWithQGeoPositionInfoSourceError(this.h, (C.int)(param1))
 }
-func (this *QGeoPositionInfoSource) OnErrorWithQGeoPositionInfoSourceError(slot func(param1 QGeoPositionInfoSource__Error)) {
-	C.QGeoPositionInfoSource_connect_errorWithQGeoPositionInfoSourceError(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QGeoPositionInfoSource) OnErrorWithQGeoPositionInfoSourceError(slot func(param1 QGeoPositionInfoSource__Error)) *qt.SignalConnection {
+	_goptr := qt.UnsafeNewQMetaObject__Connection(C.QGeoPositionInfoSource_connect_errorWithQGeoPositionInfoSourceError(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QGeoPositionInfoSource_errorWithQGeoPositionInfoSourceError
@@ -309,8 +320,10 @@ func miqt_exec_callback_QGeoPositionInfoSource_errorWithQGeoPositionInfoSourceEr
 func (this *QGeoPositionInfoSource) SupportedPositioningMethodsChanged() {
 	C.QGeoPositionInfoSource_supportedPositioningMethodsChanged(this.h)
 }
-func (this *QGeoPositionInfoSource) OnSupportedPositioningMethodsChanged(slot func()) {
-	C.QGeoPositionInfoSource_connect_supportedPositioningMethodsChanged(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QGeoPositionInfoSource) OnSupportedPositioningMethodsChanged(slot func()) *qt.SignalConnection {
+	_goptr := qt.UnsafeNewQMetaObject__Connection(C.QGeoPositionInfoSource_connect_supportedPositioningMethodsChanged(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QGeoPositionInfoSource_supportedPositioningMethodsChanged
@@ -431,7 +444,11 @@ func (this *QGeoPositionInfoSource) callVirtualBase_SetUpdateInterval(msec int) 
 
 }
 func (this *QGeoPositionInfoSource) OnSetUpdateInterval(slot func(super func(msec int), msec int)) {
-	ok := C.QGeoPositionInfoSource_override_virtual_setUpdateInterval(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QGeoPositionInfoSource_override_virtual_setUpdateInterval(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -457,7 +474,11 @@ func (this *QGeoPositionInfoSource) callVirtualBase_SetPreferredPositioningMetho
 
 }
 func (this *QGeoPositionInfoSource) OnSetPreferredPositioningMethods(slot func(super func(methods QGeoPositionInfoSource__PositioningMethod), methods QGeoPositionInfoSource__PositioningMethod)) {
-	ok := C.QGeoPositionInfoSource_override_virtual_setPreferredPositioningMethods(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QGeoPositionInfoSource_override_virtual_setPreferredPositioningMethods(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -477,7 +498,11 @@ func miqt_exec_callback_QGeoPositionInfoSource_setPreferredPositioningMethods(se
 
 }
 func (this *QGeoPositionInfoSource) OnLastKnownPosition(slot func(fromSatellitePositioningMethodsOnly bool) *QGeoPositionInfo) {
-	ok := C.QGeoPositionInfoSource_override_virtual_lastKnownPosition(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QGeoPositionInfoSource_override_virtual_lastKnownPosition(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -499,7 +524,11 @@ func miqt_exec_callback_QGeoPositionInfoSource_lastKnownPosition(self *C.QGeoPos
 
 }
 func (this *QGeoPositionInfoSource) OnSupportedPositioningMethods(slot func() QGeoPositionInfoSource__PositioningMethod) {
-	ok := C.QGeoPositionInfoSource_override_virtual_supportedPositioningMethods(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QGeoPositionInfoSource_override_virtual_supportedPositioningMethods(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -518,7 +547,11 @@ func miqt_exec_callback_QGeoPositionInfoSource_supportedPositioningMethods(self 
 
 }
 func (this *QGeoPositionInfoSource) OnMinimumUpdateInterval(slot func() int) {
-	ok := C.QGeoPositionInfoSource_override_virtual_minimumUpdateInterval(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QGeoPositionInfoSource_override_virtual_minimumUpdateInterval(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -537,7 +570,11 @@ func miqt_exec_callback_QGeoPositionInfoSource_minimumUpdateInterval(self *C.QGe
 
 }
 func (this *QGeoPositionInfoSource) OnError(slot func() QGeoPositionInfoSource__Error) {
-	ok := C.QGeoPositionInfoSource_override_virtual_error(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QGeoPositionInfoSource_override_virtual_error(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -556,7 +593,11 @@ func miqt_exec_callback_QGeoPositionInfoSource_error(self *C.QGeoPositionInfoSou
 
 }
 func (this *QGeoPositionInfoSource) OnStartUpdates(slot func()) {
-	ok := C.QGeoPositionInfoSource_override_virtual_startUpdates(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QGeoPositionInfoSource_override_virtual_startUpdates(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -573,7 +614,11 @@ func miqt_exec_callback_QGeoPositionInfoSource_startUpdates(self *C.QGeoPosition
 
 }
 func (this *QGeoPositionInfoSource) OnStopUpdates(slot func()) {
-	ok := C.QGeoPositionInfoSource_override_virtual_stopUpdates(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QGeoPositionInfoSource_override_virtual_stopUpdates(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -590,7 +635,11 @@ func miqt_exec_callback_QGeoPositionInfoSource_stopUpdates(self *C.QGeoPositionI
 
 }
 func (this *QGeoPositionInfoSource) OnRequestUpdate(slot func(timeout int)) {
-	ok := C.QGeoPositionInfoSource_override_virtual_requestUpdate(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QGeoPositionInfoSource_override_virtual_requestUpdate(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -616,7 +665,11 @@ func (this *QGeoPositionInfoSource) callVirtualBase_Event(event *qt.QEvent) bool
 
 }
 func (this *QGeoPositionInfoSource) OnEvent(slot func(super func(event *qt.QEvent) bool, event *qt.QEvent) bool) {
-	ok := C.QGeoPositionInfoSource_override_virtual_event(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QGeoPositionInfoSource_override_virtual_event(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -644,7 +697,11 @@ func (this *QGeoPositionInfoSource) callVirtualBase_EventFilter(watched *qt.QObj
 
 }
 func (this *QGeoPositionInfoSource) OnEventFilter(slot func(super func(watched *qt.QObject, event *qt.QEvent) bool, watched *qt.QObject, event *qt.QEvent) bool) {
-	ok := C.QGeoPositionInfoSource_override_virtual_eventFilter(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QGeoPositionInfoSource_override_virtual_eventFilter(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -674,7 +731,11 @@ func (this *QGeoPositionInfoSource) callVirtualBase_TimerEvent(event *qt.QTimerE
 
 }
 func (this *QGeoPositionInfoSource) OnTimerEvent(slot func(super func(event *qt.QTimerEvent), event *qt.QTimerEvent)) {
-	ok := C.QGeoPositionInfoSource_override_virtual_timerEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QGeoPositionInfoSource_override_virtual_timerEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -700,7 +761,11 @@ func (this *QGeoPositionInfoSource) callVirtualBase_ChildEvent(event *qt.QChildE
 
 }
 func (this *QGeoPositionInfoSource) OnChildEvent(slot func(super func(event *qt.QChildEvent), event *qt.QChildEvent)) {
-	ok := C.QGeoPositionInfoSource_override_virtual_childEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QGeoPositionInfoSource_override_virtual_childEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -726,7 +791,11 @@ func (this *QGeoPositionInfoSource) callVirtualBase_CustomEvent(event *qt.QEvent
 
 }
 func (this *QGeoPositionInfoSource) OnCustomEvent(slot func(super func(event *qt.QEvent), event *qt.QEvent)) {
-	ok := C.QGeoPositionInfoSource_override_virtual_customEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QGeoPositionInfoSource_override_virtual_customEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -752,7 +821,11 @@ func (this *QGeoPositionInfoSource) callVirtualBase_ConnectNotify(signal *qt.QMe
 
 }
 func (this *QGeoPositionInfoSource) OnConnectNotify(slot func(super func(signal *qt.QMetaMethod), signal *qt.QMetaMethod)) {
-	ok := C.QGeoPositionInfoSource_override_virtual_connectNotify(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QGeoPositionInfoSource_override_virtual_connectNotify(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -778,7 +851,11 @@ func (this *QGeoPositionInfoSource) callVirtualBase_DisconnectNotify(signal *qt.
 
 }
 func (this *QGeoPositionInfoSource) OnDisconnectNotify(slot func(super func(signal *qt.QMetaMethod), signal *qt.QMetaMethod)) {
-	ok := C.QGeoPositionInfoSource_override_virtual_disconnectNotify(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QGeoPositionInfoSource_override_virtual_disconnectNotify(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}

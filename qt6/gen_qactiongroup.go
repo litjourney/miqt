@@ -22,6 +22,11 @@ const (
 	QActionGroup__ExclusiveOptional QActionGroup__ExclusionPolicy = 2
 )
 
+//export miqt_exec_callback_handle_release_QActionGroup
+func miqt_exec_callback_handle_release_QActionGroup(cb C.intptr_t) {
+	cgo.Handle(cb).Delete()
+}
+
 type QActionGroup struct {
 	h *C.QActionGroup
 	*QObject
@@ -160,8 +165,10 @@ func (this *QActionGroup) SetExclusionPolicy(policy QActionGroup__ExclusionPolic
 func (this *QActionGroup) Triggered(param1 *QAction) {
 	C.QActionGroup_triggered(this.h, param1.cPointer())
 }
-func (this *QActionGroup) OnTriggered(slot func(param1 *QAction)) {
-	C.QActionGroup_connect_triggered(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QActionGroup) OnTriggered(slot func(param1 *QAction)) *SignalConnection {
+	_goptr := UnsafeNewQMetaObject__Connection(C.QActionGroup_connect_triggered(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QActionGroup_triggered
@@ -180,8 +187,10 @@ func miqt_exec_callback_QActionGroup_triggered(cb C.intptr_t, param1 *C.QAction)
 func (this *QActionGroup) Hovered(param1 *QAction) {
 	C.QActionGroup_hovered(this.h, param1.cPointer())
 }
-func (this *QActionGroup) OnHovered(slot func(param1 *QAction)) {
-	C.QActionGroup_connect_hovered(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QActionGroup) OnHovered(slot func(param1 *QAction)) *SignalConnection {
+	_goptr := UnsafeNewQMetaObject__Connection(C.QActionGroup_connect_hovered(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QActionGroup_hovered
@@ -283,7 +292,11 @@ func (this *QActionGroup) callVirtualBase_Event(event *QEvent) bool {
 
 }
 func (this *QActionGroup) OnEvent(slot func(super func(event *QEvent) bool, event *QEvent) bool) {
-	ok := C.QActionGroup_override_virtual_event(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QActionGroup_override_virtual_event(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -311,7 +324,11 @@ func (this *QActionGroup) callVirtualBase_EventFilter(watched *QObject, event *Q
 
 }
 func (this *QActionGroup) OnEventFilter(slot func(super func(watched *QObject, event *QEvent) bool, watched *QObject, event *QEvent) bool) {
-	ok := C.QActionGroup_override_virtual_eventFilter(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QActionGroup_override_virtual_eventFilter(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -341,7 +358,11 @@ func (this *QActionGroup) callVirtualBase_TimerEvent(event *QTimerEvent) {
 
 }
 func (this *QActionGroup) OnTimerEvent(slot func(super func(event *QTimerEvent), event *QTimerEvent)) {
-	ok := C.QActionGroup_override_virtual_timerEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QActionGroup_override_virtual_timerEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -367,7 +388,11 @@ func (this *QActionGroup) callVirtualBase_ChildEvent(event *QChildEvent) {
 
 }
 func (this *QActionGroup) OnChildEvent(slot func(super func(event *QChildEvent), event *QChildEvent)) {
-	ok := C.QActionGroup_override_virtual_childEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QActionGroup_override_virtual_childEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -393,7 +418,11 @@ func (this *QActionGroup) callVirtualBase_CustomEvent(event *QEvent) {
 
 }
 func (this *QActionGroup) OnCustomEvent(slot func(super func(event *QEvent), event *QEvent)) {
-	ok := C.QActionGroup_override_virtual_customEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QActionGroup_override_virtual_customEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -419,7 +448,11 @@ func (this *QActionGroup) callVirtualBase_ConnectNotify(signal *QMetaMethod) {
 
 }
 func (this *QActionGroup) OnConnectNotify(slot func(super func(signal *QMetaMethod), signal *QMetaMethod)) {
-	ok := C.QActionGroup_override_virtual_connectNotify(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QActionGroup_override_virtual_connectNotify(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -445,7 +478,11 @@ func (this *QActionGroup) callVirtualBase_DisconnectNotify(signal *QMetaMethod) 
 
 }
 func (this *QActionGroup) OnDisconnectNotify(slot func(super func(signal *QMetaMethod), signal *QMetaMethod)) {
-	ok := C.QActionGroup_override_virtual_disconnectNotify(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QActionGroup_override_virtual_disconnectNotify(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}

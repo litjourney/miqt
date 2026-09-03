@@ -15,6 +15,11 @@ import (
 	"unsafe"
 )
 
+//export miqt_exec_callback_handle_release_QBarSet
+func miqt_exec_callback_handle_release_QBarSet(cb C.intptr_t) {
+	cgo.Handle(cb).Delete()
+}
+
 type QBarSet struct {
 	h *C.QBarSet
 	*qt6.QObject
@@ -298,8 +303,10 @@ func (this *QBarSet) SelectedBars() []int {
 func (this *QBarSet) Clicked(index int) {
 	C.QBarSet_clicked(this.h, (C.int)(index))
 }
-func (this *QBarSet) OnClicked(slot func(index int)) {
-	C.QBarSet_connect_clicked(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QBarSet) OnClicked(slot func(index int)) *qt6.SignalConnection {
+	_goptr := qt6.UnsafeNewQMetaObject__Connection(C.QBarSet_connect_clicked(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QBarSet_clicked
@@ -318,8 +325,10 @@ func miqt_exec_callback_QBarSet_clicked(cb C.intptr_t, index C.int) {
 func (this *QBarSet) Hovered(status bool, index int) {
 	C.QBarSet_hovered(this.h, (C.bool)(status), (C.int)(index))
 }
-func (this *QBarSet) OnHovered(slot func(status bool, index int)) {
-	C.QBarSet_connect_hovered(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QBarSet) OnHovered(slot func(status bool, index int)) *qt6.SignalConnection {
+	_goptr := qt6.UnsafeNewQMetaObject__Connection(C.QBarSet_connect_hovered(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QBarSet_hovered
@@ -340,8 +349,10 @@ func miqt_exec_callback_QBarSet_hovered(cb C.intptr_t, status C.bool, index C.in
 func (this *QBarSet) Pressed(index int) {
 	C.QBarSet_pressed(this.h, (C.int)(index))
 }
-func (this *QBarSet) OnPressed(slot func(index int)) {
-	C.QBarSet_connect_pressed(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QBarSet) OnPressed(slot func(index int)) *qt6.SignalConnection {
+	_goptr := qt6.UnsafeNewQMetaObject__Connection(C.QBarSet_connect_pressed(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QBarSet_pressed
@@ -360,8 +371,10 @@ func miqt_exec_callback_QBarSet_pressed(cb C.intptr_t, index C.int) {
 func (this *QBarSet) Released(index int) {
 	C.QBarSet_released(this.h, (C.int)(index))
 }
-func (this *QBarSet) OnReleased(slot func(index int)) {
-	C.QBarSet_connect_released(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QBarSet) OnReleased(slot func(index int)) *qt6.SignalConnection {
+	_goptr := qt6.UnsafeNewQMetaObject__Connection(C.QBarSet_connect_released(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QBarSet_released
@@ -380,8 +393,10 @@ func miqt_exec_callback_QBarSet_released(cb C.intptr_t, index C.int) {
 func (this *QBarSet) DoubleClicked(index int) {
 	C.QBarSet_doubleClicked(this.h, (C.int)(index))
 }
-func (this *QBarSet) OnDoubleClicked(slot func(index int)) {
-	C.QBarSet_connect_doubleClicked(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QBarSet) OnDoubleClicked(slot func(index int)) *qt6.SignalConnection {
+	_goptr := qt6.UnsafeNewQMetaObject__Connection(C.QBarSet_connect_doubleClicked(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QBarSet_doubleClicked
@@ -400,8 +415,10 @@ func miqt_exec_callback_QBarSet_doubleClicked(cb C.intptr_t, index C.int) {
 func (this *QBarSet) PenChanged() {
 	C.QBarSet_penChanged(this.h)
 }
-func (this *QBarSet) OnPenChanged(slot func()) {
-	C.QBarSet_connect_penChanged(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QBarSet) OnPenChanged(slot func()) *qt6.SignalConnection {
+	_goptr := qt6.UnsafeNewQMetaObject__Connection(C.QBarSet_connect_penChanged(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QBarSet_penChanged
@@ -417,8 +434,10 @@ func miqt_exec_callback_QBarSet_penChanged(cb C.intptr_t) {
 func (this *QBarSet) BrushChanged() {
 	C.QBarSet_brushChanged(this.h)
 }
-func (this *QBarSet) OnBrushChanged(slot func()) {
-	C.QBarSet_connect_brushChanged(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QBarSet) OnBrushChanged(slot func()) *qt6.SignalConnection {
+	_goptr := qt6.UnsafeNewQMetaObject__Connection(C.QBarSet_connect_brushChanged(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QBarSet_brushChanged
@@ -434,8 +453,10 @@ func miqt_exec_callback_QBarSet_brushChanged(cb C.intptr_t) {
 func (this *QBarSet) LabelChanged() {
 	C.QBarSet_labelChanged(this.h)
 }
-func (this *QBarSet) OnLabelChanged(slot func()) {
-	C.QBarSet_connect_labelChanged(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QBarSet) OnLabelChanged(slot func()) *qt6.SignalConnection {
+	_goptr := qt6.UnsafeNewQMetaObject__Connection(C.QBarSet_connect_labelChanged(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QBarSet_labelChanged
@@ -451,8 +472,10 @@ func miqt_exec_callback_QBarSet_labelChanged(cb C.intptr_t) {
 func (this *QBarSet) LabelBrushChanged() {
 	C.QBarSet_labelBrushChanged(this.h)
 }
-func (this *QBarSet) OnLabelBrushChanged(slot func()) {
-	C.QBarSet_connect_labelBrushChanged(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QBarSet) OnLabelBrushChanged(slot func()) *qt6.SignalConnection {
+	_goptr := qt6.UnsafeNewQMetaObject__Connection(C.QBarSet_connect_labelBrushChanged(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QBarSet_labelBrushChanged
@@ -468,8 +491,10 @@ func miqt_exec_callback_QBarSet_labelBrushChanged(cb C.intptr_t) {
 func (this *QBarSet) LabelFontChanged() {
 	C.QBarSet_labelFontChanged(this.h)
 }
-func (this *QBarSet) OnLabelFontChanged(slot func()) {
-	C.QBarSet_connect_labelFontChanged(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QBarSet) OnLabelFontChanged(slot func()) *qt6.SignalConnection {
+	_goptr := qt6.UnsafeNewQMetaObject__Connection(C.QBarSet_connect_labelFontChanged(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QBarSet_labelFontChanged
@@ -485,8 +510,10 @@ func miqt_exec_callback_QBarSet_labelFontChanged(cb C.intptr_t) {
 func (this *QBarSet) ColorChanged(color qt6.QColor) {
 	C.QBarSet_colorChanged(this.h, (*C.QColor)(color.UnsafePointer()))
 }
-func (this *QBarSet) OnColorChanged(slot func(color qt6.QColor)) {
-	C.QBarSet_connect_colorChanged(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QBarSet) OnColorChanged(slot func(color qt6.QColor)) *qt6.SignalConnection {
+	_goptr := qt6.UnsafeNewQMetaObject__Connection(C.QBarSet_connect_colorChanged(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QBarSet_colorChanged
@@ -507,8 +534,10 @@ func miqt_exec_callback_QBarSet_colorChanged(cb C.intptr_t, color *C.QColor) {
 func (this *QBarSet) BorderColorChanged(color qt6.QColor) {
 	C.QBarSet_borderColorChanged(this.h, (*C.QColor)(color.UnsafePointer()))
 }
-func (this *QBarSet) OnBorderColorChanged(slot func(color qt6.QColor)) {
-	C.QBarSet_connect_borderColorChanged(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QBarSet) OnBorderColorChanged(slot func(color qt6.QColor)) *qt6.SignalConnection {
+	_goptr := qt6.UnsafeNewQMetaObject__Connection(C.QBarSet_connect_borderColorChanged(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QBarSet_borderColorChanged
@@ -529,8 +558,10 @@ func miqt_exec_callback_QBarSet_borderColorChanged(cb C.intptr_t, color *C.QColo
 func (this *QBarSet) LabelColorChanged(color qt6.QColor) {
 	C.QBarSet_labelColorChanged(this.h, (*C.QColor)(color.UnsafePointer()))
 }
-func (this *QBarSet) OnLabelColorChanged(slot func(color qt6.QColor)) {
-	C.QBarSet_connect_labelColorChanged(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QBarSet) OnLabelColorChanged(slot func(color qt6.QColor)) *qt6.SignalConnection {
+	_goptr := qt6.UnsafeNewQMetaObject__Connection(C.QBarSet_connect_labelColorChanged(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QBarSet_labelColorChanged
@@ -551,8 +582,10 @@ func miqt_exec_callback_QBarSet_labelColorChanged(cb C.intptr_t, color *C.QColor
 func (this *QBarSet) SelectedColorChanged(color *qt6.QColor) {
 	C.QBarSet_selectedColorChanged(this.h, (*C.QColor)(color.UnsafePointer()))
 }
-func (this *QBarSet) OnSelectedColorChanged(slot func(color *qt6.QColor)) {
-	C.QBarSet_connect_selectedColorChanged(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QBarSet) OnSelectedColorChanged(slot func(color *qt6.QColor)) *qt6.SignalConnection {
+	_goptr := qt6.UnsafeNewQMetaObject__Connection(C.QBarSet_connect_selectedColorChanged(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QBarSet_selectedColorChanged
@@ -571,8 +604,10 @@ func miqt_exec_callback_QBarSet_selectedColorChanged(cb C.intptr_t, color *C.QCo
 func (this *QBarSet) ValuesAdded(index int, count int) {
 	C.QBarSet_valuesAdded(this.h, (C.int)(index), (C.int)(count))
 }
-func (this *QBarSet) OnValuesAdded(slot func(index int, count int)) {
-	C.QBarSet_connect_valuesAdded(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QBarSet) OnValuesAdded(slot func(index int, count int)) *qt6.SignalConnection {
+	_goptr := qt6.UnsafeNewQMetaObject__Connection(C.QBarSet_connect_valuesAdded(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QBarSet_valuesAdded
@@ -593,8 +628,10 @@ func miqt_exec_callback_QBarSet_valuesAdded(cb C.intptr_t, index C.int, count C.
 func (this *QBarSet) ValuesRemoved(index int, count int) {
 	C.QBarSet_valuesRemoved(this.h, (C.int)(index), (C.int)(count))
 }
-func (this *QBarSet) OnValuesRemoved(slot func(index int, count int)) {
-	C.QBarSet_connect_valuesRemoved(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QBarSet) OnValuesRemoved(slot func(index int, count int)) *qt6.SignalConnection {
+	_goptr := qt6.UnsafeNewQMetaObject__Connection(C.QBarSet_connect_valuesRemoved(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QBarSet_valuesRemoved
@@ -615,8 +652,10 @@ func miqt_exec_callback_QBarSet_valuesRemoved(cb C.intptr_t, index C.int, count 
 func (this *QBarSet) ValueChanged(index int) {
 	C.QBarSet_valueChanged(this.h, (C.int)(index))
 }
-func (this *QBarSet) OnValueChanged(slot func(index int)) {
-	C.QBarSet_connect_valueChanged(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QBarSet) OnValueChanged(slot func(index int)) *qt6.SignalConnection {
+	_goptr := qt6.UnsafeNewQMetaObject__Connection(C.QBarSet_connect_valueChanged(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QBarSet_valueChanged
@@ -641,8 +680,10 @@ func (this *QBarSet) SelectedBarsChanged(indexes []int) {
 	indexes_ma := C.struct_miqt_array{len: C.size_t(len(indexes)), data: unsafe.Pointer(indexes_CArray)}
 	C.QBarSet_selectedBarsChanged(this.h, indexes_ma)
 }
-func (this *QBarSet) OnSelectedBarsChanged(slot func(indexes []int)) {
-	C.QBarSet_connect_selectedBarsChanged(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QBarSet) OnSelectedBarsChanged(slot func(indexes []int)) *qt6.SignalConnection {
+	_goptr := qt6.UnsafeNewQMetaObject__Connection(C.QBarSet_connect_selectedBarsChanged(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QBarSet_selectedBarsChanged
@@ -754,7 +795,11 @@ func (this *QBarSet) callVirtualBase_Event(event *qt6.QEvent) bool {
 
 }
 func (this *QBarSet) OnEvent(slot func(super func(event *qt6.QEvent) bool, event *qt6.QEvent) bool) {
-	ok := C.QBarSet_override_virtual_event(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QBarSet_override_virtual_event(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -782,7 +827,11 @@ func (this *QBarSet) callVirtualBase_EventFilter(watched *qt6.QObject, event *qt
 
 }
 func (this *QBarSet) OnEventFilter(slot func(super func(watched *qt6.QObject, event *qt6.QEvent) bool, watched *qt6.QObject, event *qt6.QEvent) bool) {
-	ok := C.QBarSet_override_virtual_eventFilter(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QBarSet_override_virtual_eventFilter(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -812,7 +861,11 @@ func (this *QBarSet) callVirtualBase_TimerEvent(event *qt6.QTimerEvent) {
 
 }
 func (this *QBarSet) OnTimerEvent(slot func(super func(event *qt6.QTimerEvent), event *qt6.QTimerEvent)) {
-	ok := C.QBarSet_override_virtual_timerEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QBarSet_override_virtual_timerEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -838,7 +891,11 @@ func (this *QBarSet) callVirtualBase_ChildEvent(event *qt6.QChildEvent) {
 
 }
 func (this *QBarSet) OnChildEvent(slot func(super func(event *qt6.QChildEvent), event *qt6.QChildEvent)) {
-	ok := C.QBarSet_override_virtual_childEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QBarSet_override_virtual_childEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -864,7 +921,11 @@ func (this *QBarSet) callVirtualBase_CustomEvent(event *qt6.QEvent) {
 
 }
 func (this *QBarSet) OnCustomEvent(slot func(super func(event *qt6.QEvent), event *qt6.QEvent)) {
-	ok := C.QBarSet_override_virtual_customEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QBarSet_override_virtual_customEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -890,7 +951,11 @@ func (this *QBarSet) callVirtualBase_ConnectNotify(signal *qt6.QMetaMethod) {
 
 }
 func (this *QBarSet) OnConnectNotify(slot func(super func(signal *qt6.QMetaMethod), signal *qt6.QMetaMethod)) {
-	ok := C.QBarSet_override_virtual_connectNotify(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QBarSet_override_virtual_connectNotify(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -916,7 +981,11 @@ func (this *QBarSet) callVirtualBase_DisconnectNotify(signal *qt6.QMetaMethod) {
 
 }
 func (this *QBarSet) OnDisconnectNotify(slot func(super func(signal *qt6.QMetaMethod), signal *qt6.QMetaMethod)) {
-	ok := C.QBarSet_override_virtual_disconnectNotify(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QBarSet_override_virtual_disconnectNotify(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}

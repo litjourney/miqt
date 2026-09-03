@@ -1,3 +1,5 @@
+#include <memory>
+#include <utility>
 #include <QCamera>
 #include <QCameraDevice>
 #include <QCameraFormat>
@@ -19,6 +21,7 @@
 extern "C" {
 #endif
 
+void miqt_exec_callback_handle_release_QCamera(intptr_t);
 void miqt_exec_callback_QCamera_activeChanged(intptr_t, bool);
 void miqt_exec_callback_QCamera_errorChanged(intptr_t);
 void miqt_exec_callback_QCamera_errorOccurred(intptr_t, int, struct miqt_string);
@@ -71,95 +74,95 @@ public:
 	virtual ~MiqtVirtualQCamera() override = default;
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__event = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QCamera> handle__event;
 
 	// Subclass to allow providing a Go implementation
 	virtual bool event(QEvent* event) override {
-		if (handle__event == 0) {
+		if (!handle__event) {
 			return QCamera::event(event);
 		}
 
 		QEvent* sigval1 = event;
-		bool callback_return_value = miqt_exec_callback_QCamera_event(this, handle__event, sigval1);
+		bool callback_return_value = miqt_exec_callback_QCamera_event(this, handle__event.value(), sigval1);
 		return callback_return_value;
 	}
 
 	friend bool QCamera_virtualbase_event(void* self, QEvent* event);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__eventFilter = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QCamera> handle__eventFilter;
 
 	// Subclass to allow providing a Go implementation
 	virtual bool eventFilter(QObject* watched, QEvent* event) override {
-		if (handle__eventFilter == 0) {
+		if (!handle__eventFilter) {
 			return QCamera::eventFilter(watched, event);
 		}
 
 		QObject* sigval1 = watched;
 		QEvent* sigval2 = event;
-		bool callback_return_value = miqt_exec_callback_QCamera_eventFilter(this, handle__eventFilter, sigval1, sigval2);
+		bool callback_return_value = miqt_exec_callback_QCamera_eventFilter(this, handle__eventFilter.value(), sigval1, sigval2);
 		return callback_return_value;
 	}
 
 	friend bool QCamera_virtualbase_eventFilter(void* self, QObject* watched, QEvent* event);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__timerEvent = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QCamera> handle__timerEvent;
 
 	// Subclass to allow providing a Go implementation
 	virtual void timerEvent(QTimerEvent* event) override {
-		if (handle__timerEvent == 0) {
+		if (!handle__timerEvent) {
 			QCamera::timerEvent(event);
 			return;
 		}
 
 		QTimerEvent* sigval1 = event;
-		miqt_exec_callback_QCamera_timerEvent(this, handle__timerEvent, sigval1);
+		miqt_exec_callback_QCamera_timerEvent(this, handle__timerEvent.value(), sigval1);
 
 	}
 
 	friend void QCamera_virtualbase_timerEvent(void* self, QTimerEvent* event);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__childEvent = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QCamera> handle__childEvent;
 
 	// Subclass to allow providing a Go implementation
 	virtual void childEvent(QChildEvent* event) override {
-		if (handle__childEvent == 0) {
+		if (!handle__childEvent) {
 			QCamera::childEvent(event);
 			return;
 		}
 
 		QChildEvent* sigval1 = event;
-		miqt_exec_callback_QCamera_childEvent(this, handle__childEvent, sigval1);
+		miqt_exec_callback_QCamera_childEvent(this, handle__childEvent.value(), sigval1);
 
 	}
 
 	friend void QCamera_virtualbase_childEvent(void* self, QChildEvent* event);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__customEvent = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QCamera> handle__customEvent;
 
 	// Subclass to allow providing a Go implementation
 	virtual void customEvent(QEvent* event) override {
-		if (handle__customEvent == 0) {
+		if (!handle__customEvent) {
 			QCamera::customEvent(event);
 			return;
 		}
 
 		QEvent* sigval1 = event;
-		miqt_exec_callback_QCamera_customEvent(this, handle__customEvent, sigval1);
+		miqt_exec_callback_QCamera_customEvent(this, handle__customEvent.value(), sigval1);
 
 	}
 
 	friend void QCamera_virtualbase_customEvent(void* self, QEvent* event);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__connectNotify = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QCamera> handle__connectNotify;
 
 	// Subclass to allow providing a Go implementation
 	virtual void connectNotify(const QMetaMethod& signal) override {
-		if (handle__connectNotify == 0) {
+		if (!handle__connectNotify) {
 			QCamera::connectNotify(signal);
 			return;
 		}
@@ -167,18 +170,18 @@ public:
 		const QMetaMethod& signal_ret = signal;
 		// Cast returned reference into pointer
 		QMetaMethod* sigval1 = const_cast<QMetaMethod*>(&signal_ret);
-		miqt_exec_callback_QCamera_connectNotify(this, handle__connectNotify, sigval1);
+		miqt_exec_callback_QCamera_connectNotify(this, handle__connectNotify.value(), sigval1);
 
 	}
 
 	friend void QCamera_virtualbase_connectNotify(void* self, QMetaMethod* signal);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__disconnectNotify = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QCamera> handle__disconnectNotify;
 
 	// Subclass to allow providing a Go implementation
 	virtual void disconnectNotify(const QMetaMethod& signal) override {
-		if (handle__disconnectNotify == 0) {
+		if (!handle__disconnectNotify) {
 			QCamera::disconnectNotify(signal);
 			return;
 		}
@@ -186,7 +189,7 @@ public:
 		const QMetaMethod& signal_ret = signal;
 		// Cast returned reference into pointer
 		QMetaMethod* sigval1 = const_cast<QMetaMethod*>(&signal_ret);
-		miqt_exec_callback_QCamera_disconnectNotify(this, handle__disconnectNotify, sigval1);
+		miqt_exec_callback_QCamera_disconnectNotify(this, handle__disconnectNotify.value(), sigval1);
 
 	}
 
@@ -484,21 +487,25 @@ void QCamera_activeChanged(QCamera* self, bool param1) {
 	self->activeChanged(param1);
 }
 
-void QCamera_connect_activeChanged(QCamera* self, intptr_t slot) {
-	QCamera::connect(self, static_cast<void (QCamera::*)(bool)>(&QCamera::activeChanged), self, [=](bool param1) {
+void* QCamera_connect_activeChanged(QCamera* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QCamera>>(slot);
+	return new QMetaObject::Connection(QCamera::connect(self, static_cast<void (QCamera::*)(bool)>(&QCamera::activeChanged), self, [slot_handle](bool param1) {
+		intptr_t slot = slot_handle->value();
 		bool sigval1 = param1;
 		miqt_exec_callback_QCamera_activeChanged(slot, sigval1);
-	});
+	}));
 }
 
 void QCamera_errorChanged(QCamera* self) {
 	self->errorChanged();
 }
 
-void QCamera_connect_errorChanged(QCamera* self, intptr_t slot) {
-	QCamera::connect(self, static_cast<void (QCamera::*)()>(&QCamera::errorChanged), self, [=]() {
+void* QCamera_connect_errorChanged(QCamera* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QCamera>>(slot);
+	return new QMetaObject::Connection(QCamera::connect(self, static_cast<void (QCamera::*)()>(&QCamera::errorChanged), self, [slot_handle]() {
+		intptr_t slot = slot_handle->value();
 		miqt_exec_callback_QCamera_errorChanged(slot);
-	});
+	}));
 }
 
 void QCamera_errorOccurred(QCamera* self, int error, struct miqt_string errorString) {
@@ -506,8 +513,10 @@ void QCamera_errorOccurred(QCamera* self, int error, struct miqt_string errorStr
 	self->errorOccurred(static_cast<QCamera::Error>(error), errorString_QString);
 }
 
-void QCamera_connect_errorOccurred(QCamera* self, intptr_t slot) {
-	QCamera::connect(self, static_cast<void (QCamera::*)(QCamera::Error, const QString&)>(&QCamera::errorOccurred), self, [=](QCamera::Error error, const QString& errorString) {
+void* QCamera_connect_errorOccurred(QCamera* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QCamera>>(slot);
+	return new QMetaObject::Connection(QCamera::connect(self, static_cast<void (QCamera::*)(QCamera::Error, const QString&)>(&QCamera::errorOccurred), self, [slot_handle](QCamera::Error error, const QString& errorString) {
+		intptr_t slot = slot_handle->value();
 		QCamera::Error error_ret = error;
 		int sigval1 = static_cast<int>(error_ret);
 		const QString errorString_ret = errorString;
@@ -519,267 +528,317 @@ void QCamera_connect_errorOccurred(QCamera* self, intptr_t slot) {
 		memcpy(errorString_ms.data, errorString_b.data(), errorString_ms.len);
 		struct miqt_string sigval2 = errorString_ms;
 		miqt_exec_callback_QCamera_errorOccurred(slot, sigval1, sigval2);
-	});
+	}));
 }
 
 void QCamera_cameraDeviceChanged(QCamera* self) {
 	self->cameraDeviceChanged();
 }
 
-void QCamera_connect_cameraDeviceChanged(QCamera* self, intptr_t slot) {
-	QCamera::connect(self, static_cast<void (QCamera::*)()>(&QCamera::cameraDeviceChanged), self, [=]() {
+void* QCamera_connect_cameraDeviceChanged(QCamera* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QCamera>>(slot);
+	return new QMetaObject::Connection(QCamera::connect(self, static_cast<void (QCamera::*)()>(&QCamera::cameraDeviceChanged), self, [slot_handle]() {
+		intptr_t slot = slot_handle->value();
 		miqt_exec_callback_QCamera_cameraDeviceChanged(slot);
-	});
+	}));
 }
 
 void QCamera_cameraFormatChanged(QCamera* self) {
 	self->cameraFormatChanged();
 }
 
-void QCamera_connect_cameraFormatChanged(QCamera* self, intptr_t slot) {
-	QCamera::connect(self, static_cast<void (QCamera::*)()>(&QCamera::cameraFormatChanged), self, [=]() {
+void* QCamera_connect_cameraFormatChanged(QCamera* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QCamera>>(slot);
+	return new QMetaObject::Connection(QCamera::connect(self, static_cast<void (QCamera::*)()>(&QCamera::cameraFormatChanged), self, [slot_handle]() {
+		intptr_t slot = slot_handle->value();
 		miqt_exec_callback_QCamera_cameraFormatChanged(slot);
-	});
+	}));
 }
 
 void QCamera_supportedFeaturesChanged(QCamera* self) {
 	self->supportedFeaturesChanged();
 }
 
-void QCamera_connect_supportedFeaturesChanged(QCamera* self, intptr_t slot) {
-	QCamera::connect(self, static_cast<void (QCamera::*)()>(&QCamera::supportedFeaturesChanged), self, [=]() {
+void* QCamera_connect_supportedFeaturesChanged(QCamera* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QCamera>>(slot);
+	return new QMetaObject::Connection(QCamera::connect(self, static_cast<void (QCamera::*)()>(&QCamera::supportedFeaturesChanged), self, [slot_handle]() {
+		intptr_t slot = slot_handle->value();
 		miqt_exec_callback_QCamera_supportedFeaturesChanged(slot);
-	});
+	}));
 }
 
 void QCamera_focusModeChanged(QCamera* self) {
 	self->focusModeChanged();
 }
 
-void QCamera_connect_focusModeChanged(QCamera* self, intptr_t slot) {
-	QCamera::connect(self, static_cast<void (QCamera::*)()>(&QCamera::focusModeChanged), self, [=]() {
+void* QCamera_connect_focusModeChanged(QCamera* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QCamera>>(slot);
+	return new QMetaObject::Connection(QCamera::connect(self, static_cast<void (QCamera::*)()>(&QCamera::focusModeChanged), self, [slot_handle]() {
+		intptr_t slot = slot_handle->value();
 		miqt_exec_callback_QCamera_focusModeChanged(slot);
-	});
+	}));
 }
 
 void QCamera_zoomFactorChanged(QCamera* self, float param1) {
 	self->zoomFactorChanged(static_cast<float>(param1));
 }
 
-void QCamera_connect_zoomFactorChanged(QCamera* self, intptr_t slot) {
-	QCamera::connect(self, static_cast<void (QCamera::*)(float)>(&QCamera::zoomFactorChanged), self, [=](float param1) {
+void* QCamera_connect_zoomFactorChanged(QCamera* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QCamera>>(slot);
+	return new QMetaObject::Connection(QCamera::connect(self, static_cast<void (QCamera::*)(float)>(&QCamera::zoomFactorChanged), self, [slot_handle](float param1) {
+		intptr_t slot = slot_handle->value();
 		float sigval1 = param1;
 		miqt_exec_callback_QCamera_zoomFactorChanged(slot, sigval1);
-	});
+	}));
 }
 
 void QCamera_minimumZoomFactorChanged(QCamera* self, float param1) {
 	self->minimumZoomFactorChanged(static_cast<float>(param1));
 }
 
-void QCamera_connect_minimumZoomFactorChanged(QCamera* self, intptr_t slot) {
-	QCamera::connect(self, static_cast<void (QCamera::*)(float)>(&QCamera::minimumZoomFactorChanged), self, [=](float param1) {
+void* QCamera_connect_minimumZoomFactorChanged(QCamera* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QCamera>>(slot);
+	return new QMetaObject::Connection(QCamera::connect(self, static_cast<void (QCamera::*)(float)>(&QCamera::minimumZoomFactorChanged), self, [slot_handle](float param1) {
+		intptr_t slot = slot_handle->value();
 		float sigval1 = param1;
 		miqt_exec_callback_QCamera_minimumZoomFactorChanged(slot, sigval1);
-	});
+	}));
 }
 
 void QCamera_maximumZoomFactorChanged(QCamera* self, float param1) {
 	self->maximumZoomFactorChanged(static_cast<float>(param1));
 }
 
-void QCamera_connect_maximumZoomFactorChanged(QCamera* self, intptr_t slot) {
-	QCamera::connect(self, static_cast<void (QCamera::*)(float)>(&QCamera::maximumZoomFactorChanged), self, [=](float param1) {
+void* QCamera_connect_maximumZoomFactorChanged(QCamera* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QCamera>>(slot);
+	return new QMetaObject::Connection(QCamera::connect(self, static_cast<void (QCamera::*)(float)>(&QCamera::maximumZoomFactorChanged), self, [slot_handle](float param1) {
+		intptr_t slot = slot_handle->value();
 		float sigval1 = param1;
 		miqt_exec_callback_QCamera_maximumZoomFactorChanged(slot, sigval1);
-	});
+	}));
 }
 
 void QCamera_focusDistanceChanged(QCamera* self, float param1) {
 	self->focusDistanceChanged(static_cast<float>(param1));
 }
 
-void QCamera_connect_focusDistanceChanged(QCamera* self, intptr_t slot) {
-	QCamera::connect(self, static_cast<void (QCamera::*)(float)>(&QCamera::focusDistanceChanged), self, [=](float param1) {
+void* QCamera_connect_focusDistanceChanged(QCamera* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QCamera>>(slot);
+	return new QMetaObject::Connection(QCamera::connect(self, static_cast<void (QCamera::*)(float)>(&QCamera::focusDistanceChanged), self, [slot_handle](float param1) {
+		intptr_t slot = slot_handle->value();
 		float sigval1 = param1;
 		miqt_exec_callback_QCamera_focusDistanceChanged(slot, sigval1);
-	});
+	}));
 }
 
 void QCamera_focusPointChanged(QCamera* self) {
 	self->focusPointChanged();
 }
 
-void QCamera_connect_focusPointChanged(QCamera* self, intptr_t slot) {
-	QCamera::connect(self, static_cast<void (QCamera::*)()>(&QCamera::focusPointChanged), self, [=]() {
+void* QCamera_connect_focusPointChanged(QCamera* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QCamera>>(slot);
+	return new QMetaObject::Connection(QCamera::connect(self, static_cast<void (QCamera::*)()>(&QCamera::focusPointChanged), self, [slot_handle]() {
+		intptr_t slot = slot_handle->value();
 		miqt_exec_callback_QCamera_focusPointChanged(slot);
-	});
+	}));
 }
 
 void QCamera_customFocusPointChanged(QCamera* self) {
 	self->customFocusPointChanged();
 }
 
-void QCamera_connect_customFocusPointChanged(QCamera* self, intptr_t slot) {
-	QCamera::connect(self, static_cast<void (QCamera::*)()>(&QCamera::customFocusPointChanged), self, [=]() {
+void* QCamera_connect_customFocusPointChanged(QCamera* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QCamera>>(slot);
+	return new QMetaObject::Connection(QCamera::connect(self, static_cast<void (QCamera::*)()>(&QCamera::customFocusPointChanged), self, [slot_handle]() {
+		intptr_t slot = slot_handle->value();
 		miqt_exec_callback_QCamera_customFocusPointChanged(slot);
-	});
+	}));
 }
 
 void QCamera_flashReady(QCamera* self, bool param1) {
 	self->flashReady(param1);
 }
 
-void QCamera_connect_flashReady(QCamera* self, intptr_t slot) {
-	QCamera::connect(self, static_cast<void (QCamera::*)(bool)>(&QCamera::flashReady), self, [=](bool param1) {
+void* QCamera_connect_flashReady(QCamera* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QCamera>>(slot);
+	return new QMetaObject::Connection(QCamera::connect(self, static_cast<void (QCamera::*)(bool)>(&QCamera::flashReady), self, [slot_handle](bool param1) {
+		intptr_t slot = slot_handle->value();
 		bool sigval1 = param1;
 		miqt_exec_callback_QCamera_flashReady(slot, sigval1);
-	});
+	}));
 }
 
 void QCamera_flashModeChanged(QCamera* self) {
 	self->flashModeChanged();
 }
 
-void QCamera_connect_flashModeChanged(QCamera* self, intptr_t slot) {
-	QCamera::connect(self, static_cast<void (QCamera::*)()>(&QCamera::flashModeChanged), self, [=]() {
+void* QCamera_connect_flashModeChanged(QCamera* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QCamera>>(slot);
+	return new QMetaObject::Connection(QCamera::connect(self, static_cast<void (QCamera::*)()>(&QCamera::flashModeChanged), self, [slot_handle]() {
+		intptr_t slot = slot_handle->value();
 		miqt_exec_callback_QCamera_flashModeChanged(slot);
-	});
+	}));
 }
 
 void QCamera_torchModeChanged(QCamera* self) {
 	self->torchModeChanged();
 }
 
-void QCamera_connect_torchModeChanged(QCamera* self, intptr_t slot) {
-	QCamera::connect(self, static_cast<void (QCamera::*)()>(&QCamera::torchModeChanged), self, [=]() {
+void* QCamera_connect_torchModeChanged(QCamera* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QCamera>>(slot);
+	return new QMetaObject::Connection(QCamera::connect(self, static_cast<void (QCamera::*)()>(&QCamera::torchModeChanged), self, [slot_handle]() {
+		intptr_t slot = slot_handle->value();
 		miqt_exec_callback_QCamera_torchModeChanged(slot);
-	});
+	}));
 }
 
 void QCamera_exposureTimeChanged(QCamera* self, float speed) {
 	self->exposureTimeChanged(static_cast<float>(speed));
 }
 
-void QCamera_connect_exposureTimeChanged(QCamera* self, intptr_t slot) {
-	QCamera::connect(self, static_cast<void (QCamera::*)(float)>(&QCamera::exposureTimeChanged), self, [=](float speed) {
+void* QCamera_connect_exposureTimeChanged(QCamera* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QCamera>>(slot);
+	return new QMetaObject::Connection(QCamera::connect(self, static_cast<void (QCamera::*)(float)>(&QCamera::exposureTimeChanged), self, [slot_handle](float speed) {
+		intptr_t slot = slot_handle->value();
 		float sigval1 = speed;
 		miqt_exec_callback_QCamera_exposureTimeChanged(slot, sigval1);
-	});
+	}));
 }
 
 void QCamera_manualExposureTimeChanged(QCamera* self, float speed) {
 	self->manualExposureTimeChanged(static_cast<float>(speed));
 }
 
-void QCamera_connect_manualExposureTimeChanged(QCamera* self, intptr_t slot) {
-	QCamera::connect(self, static_cast<void (QCamera::*)(float)>(&QCamera::manualExposureTimeChanged), self, [=](float speed) {
+void* QCamera_connect_manualExposureTimeChanged(QCamera* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QCamera>>(slot);
+	return new QMetaObject::Connection(QCamera::connect(self, static_cast<void (QCamera::*)(float)>(&QCamera::manualExposureTimeChanged), self, [slot_handle](float speed) {
+		intptr_t slot = slot_handle->value();
 		float sigval1 = speed;
 		miqt_exec_callback_QCamera_manualExposureTimeChanged(slot, sigval1);
-	});
+	}));
 }
 
 void QCamera_isoSensitivityChanged(QCamera* self, int param1) {
 	self->isoSensitivityChanged(static_cast<int>(param1));
 }
 
-void QCamera_connect_isoSensitivityChanged(QCamera* self, intptr_t slot) {
-	QCamera::connect(self, static_cast<void (QCamera::*)(int)>(&QCamera::isoSensitivityChanged), self, [=](int param1) {
+void* QCamera_connect_isoSensitivityChanged(QCamera* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QCamera>>(slot);
+	return new QMetaObject::Connection(QCamera::connect(self, static_cast<void (QCamera::*)(int)>(&QCamera::isoSensitivityChanged), self, [slot_handle](int param1) {
+		intptr_t slot = slot_handle->value();
 		int sigval1 = param1;
 		miqt_exec_callback_QCamera_isoSensitivityChanged(slot, sigval1);
-	});
+	}));
 }
 
 void QCamera_manualIsoSensitivityChanged(QCamera* self, int param1) {
 	self->manualIsoSensitivityChanged(static_cast<int>(param1));
 }
 
-void QCamera_connect_manualIsoSensitivityChanged(QCamera* self, intptr_t slot) {
-	QCamera::connect(self, static_cast<void (QCamera::*)(int)>(&QCamera::manualIsoSensitivityChanged), self, [=](int param1) {
+void* QCamera_connect_manualIsoSensitivityChanged(QCamera* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QCamera>>(slot);
+	return new QMetaObject::Connection(QCamera::connect(self, static_cast<void (QCamera::*)(int)>(&QCamera::manualIsoSensitivityChanged), self, [slot_handle](int param1) {
+		intptr_t slot = slot_handle->value();
 		int sigval1 = param1;
 		miqt_exec_callback_QCamera_manualIsoSensitivityChanged(slot, sigval1);
-	});
+	}));
 }
 
 void QCamera_exposureCompensationChanged(QCamera* self, float param1) {
 	self->exposureCompensationChanged(static_cast<float>(param1));
 }
 
-void QCamera_connect_exposureCompensationChanged(QCamera* self, intptr_t slot) {
-	QCamera::connect(self, static_cast<void (QCamera::*)(float)>(&QCamera::exposureCompensationChanged), self, [=](float param1) {
+void* QCamera_connect_exposureCompensationChanged(QCamera* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QCamera>>(slot);
+	return new QMetaObject::Connection(QCamera::connect(self, static_cast<void (QCamera::*)(float)>(&QCamera::exposureCompensationChanged), self, [slot_handle](float param1) {
+		intptr_t slot = slot_handle->value();
 		float sigval1 = param1;
 		miqt_exec_callback_QCamera_exposureCompensationChanged(slot, sigval1);
-	});
+	}));
 }
 
 void QCamera_exposureModeChanged(QCamera* self) {
 	self->exposureModeChanged();
 }
 
-void QCamera_connect_exposureModeChanged(QCamera* self, intptr_t slot) {
-	QCamera::connect(self, static_cast<void (QCamera::*)()>(&QCamera::exposureModeChanged), self, [=]() {
+void* QCamera_connect_exposureModeChanged(QCamera* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QCamera>>(slot);
+	return new QMetaObject::Connection(QCamera::connect(self, static_cast<void (QCamera::*)()>(&QCamera::exposureModeChanged), self, [slot_handle]() {
+		intptr_t slot = slot_handle->value();
 		miqt_exec_callback_QCamera_exposureModeChanged(slot);
-	});
+	}));
 }
 
 void QCamera_whiteBalanceModeChanged(const QCamera* self) {
 	self->whiteBalanceModeChanged();
 }
 
-void QCamera_connect_whiteBalanceModeChanged(QCamera* self, intptr_t slot) {
-	QCamera::connect(self, static_cast<void (QCamera::*)() const>(&QCamera::whiteBalanceModeChanged), self, [=]() {
+void* QCamera_connect_whiteBalanceModeChanged(QCamera* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QCamera>>(slot);
+	return new QMetaObject::Connection(QCamera::connect(self, static_cast<void (QCamera::*)() const>(&QCamera::whiteBalanceModeChanged), self, [slot_handle]() {
+		intptr_t slot = slot_handle->value();
 		miqt_exec_callback_QCamera_whiteBalanceModeChanged(slot);
-	});
+	}));
 }
 
 void QCamera_colorTemperatureChanged(const QCamera* self) {
 	self->colorTemperatureChanged();
 }
 
-void QCamera_connect_colorTemperatureChanged(QCamera* self, intptr_t slot) {
-	QCamera::connect(self, static_cast<void (QCamera::*)() const>(&QCamera::colorTemperatureChanged), self, [=]() {
+void* QCamera_connect_colorTemperatureChanged(QCamera* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QCamera>>(slot);
+	return new QMetaObject::Connection(QCamera::connect(self, static_cast<void (QCamera::*)() const>(&QCamera::colorTemperatureChanged), self, [slot_handle]() {
+		intptr_t slot = slot_handle->value();
 		miqt_exec_callback_QCamera_colorTemperatureChanged(slot);
-	});
+	}));
 }
 
 void QCamera_brightnessChanged(QCamera* self) {
 	self->brightnessChanged();
 }
 
-void QCamera_connect_brightnessChanged(QCamera* self, intptr_t slot) {
-	QCamera::connect(self, static_cast<void (QCamera::*)()>(&QCamera::brightnessChanged), self, [=]() {
+void* QCamera_connect_brightnessChanged(QCamera* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QCamera>>(slot);
+	return new QMetaObject::Connection(QCamera::connect(self, static_cast<void (QCamera::*)()>(&QCamera::brightnessChanged), self, [slot_handle]() {
+		intptr_t slot = slot_handle->value();
 		miqt_exec_callback_QCamera_brightnessChanged(slot);
-	});
+	}));
 }
 
 void QCamera_contrastChanged(QCamera* self) {
 	self->contrastChanged();
 }
 
-void QCamera_connect_contrastChanged(QCamera* self, intptr_t slot) {
-	QCamera::connect(self, static_cast<void (QCamera::*)()>(&QCamera::contrastChanged), self, [=]() {
+void* QCamera_connect_contrastChanged(QCamera* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QCamera>>(slot);
+	return new QMetaObject::Connection(QCamera::connect(self, static_cast<void (QCamera::*)()>(&QCamera::contrastChanged), self, [slot_handle]() {
+		intptr_t slot = slot_handle->value();
 		miqt_exec_callback_QCamera_contrastChanged(slot);
-	});
+	}));
 }
 
 void QCamera_saturationChanged(QCamera* self) {
 	self->saturationChanged();
 }
 
-void QCamera_connect_saturationChanged(QCamera* self, intptr_t slot) {
-	QCamera::connect(self, static_cast<void (QCamera::*)()>(&QCamera::saturationChanged), self, [=]() {
+void* QCamera_connect_saturationChanged(QCamera* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QCamera>>(slot);
+	return new QMetaObject::Connection(QCamera::connect(self, static_cast<void (QCamera::*)()>(&QCamera::saturationChanged), self, [slot_handle]() {
+		intptr_t slot = slot_handle->value();
 		miqt_exec_callback_QCamera_saturationChanged(slot);
-	});
+	}));
 }
 
 void QCamera_hueChanged(QCamera* self) {
 	self->hueChanged();
 }
 
-void QCamera_connect_hueChanged(QCamera* self, intptr_t slot) {
-	QCamera::connect(self, static_cast<void (QCamera::*)()>(&QCamera::hueChanged), self, [=]() {
+void* QCamera_connect_hueChanged(QCamera* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QCamera>>(slot);
+	return new QMetaObject::Connection(QCamera::connect(self, static_cast<void (QCamera::*)()>(&QCamera::hueChanged), self, [slot_handle]() {
+		intptr_t slot = slot_handle->value();
 		miqt_exec_callback_QCamera_hueChanged(slot);
-	});
+	}));
 }
 
 struct miqt_string QCamera_tr2(const char* s, const char* c) {
@@ -805,12 +864,13 @@ struct miqt_string QCamera_tr3(const char* s, const char* c, int n) {
 }
 
 bool QCamera_override_virtual_event(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QCamera> slot_handle(slot);
 	MiqtVirtualQCamera* self_cast = dynamic_cast<MiqtVirtualQCamera*>( (QCamera*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__event = slot;
+	self_cast->handle__event = std::move(slot_handle);
 	return true;
 }
 
@@ -819,12 +879,13 @@ bool QCamera_virtualbase_event(void* self, QEvent* event) {
 }
 
 bool QCamera_override_virtual_eventFilter(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QCamera> slot_handle(slot);
 	MiqtVirtualQCamera* self_cast = dynamic_cast<MiqtVirtualQCamera*>( (QCamera*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__eventFilter = slot;
+	self_cast->handle__eventFilter = std::move(slot_handle);
 	return true;
 }
 
@@ -833,12 +894,13 @@ bool QCamera_virtualbase_eventFilter(void* self, QObject* watched, QEvent* event
 }
 
 bool QCamera_override_virtual_timerEvent(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QCamera> slot_handle(slot);
 	MiqtVirtualQCamera* self_cast = dynamic_cast<MiqtVirtualQCamera*>( (QCamera*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__timerEvent = slot;
+	self_cast->handle__timerEvent = std::move(slot_handle);
 	return true;
 }
 
@@ -847,12 +909,13 @@ void QCamera_virtualbase_timerEvent(void* self, QTimerEvent* event) {
 }
 
 bool QCamera_override_virtual_childEvent(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QCamera> slot_handle(slot);
 	MiqtVirtualQCamera* self_cast = dynamic_cast<MiqtVirtualQCamera*>( (QCamera*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__childEvent = slot;
+	self_cast->handle__childEvent = std::move(slot_handle);
 	return true;
 }
 
@@ -861,12 +924,13 @@ void QCamera_virtualbase_childEvent(void* self, QChildEvent* event) {
 }
 
 bool QCamera_override_virtual_customEvent(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QCamera> slot_handle(slot);
 	MiqtVirtualQCamera* self_cast = dynamic_cast<MiqtVirtualQCamera*>( (QCamera*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__customEvent = slot;
+	self_cast->handle__customEvent = std::move(slot_handle);
 	return true;
 }
 
@@ -875,12 +939,13 @@ void QCamera_virtualbase_customEvent(void* self, QEvent* event) {
 }
 
 bool QCamera_override_virtual_connectNotify(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QCamera> slot_handle(slot);
 	MiqtVirtualQCamera* self_cast = dynamic_cast<MiqtVirtualQCamera*>( (QCamera*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__connectNotify = slot;
+	self_cast->handle__connectNotify = std::move(slot_handle);
 	return true;
 }
 
@@ -889,12 +954,13 @@ void QCamera_virtualbase_connectNotify(void* self, QMetaMethod* signal) {
 }
 
 bool QCamera_override_virtual_disconnectNotify(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QCamera> slot_handle(slot);
 	MiqtVirtualQCamera* self_cast = dynamic_cast<MiqtVirtualQCamera*>( (QCamera*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__disconnectNotify = slot;
+	self_cast->handle__disconnectNotify = std::move(slot_handle);
 	return true;
 }
 

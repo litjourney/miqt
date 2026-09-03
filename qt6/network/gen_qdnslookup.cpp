@@ -1,3 +1,5 @@
+#include <memory>
+#include <utility>
 #include <QByteArray>
 #include <QChildEvent>
 #include <QDnsDomainNameRecord>
@@ -23,6 +25,7 @@
 extern "C" {
 #endif
 
+void miqt_exec_callback_handle_release_QDnsLookup(intptr_t);
 void miqt_exec_callback_QDnsLookup_finished(intptr_t);
 void miqt_exec_callback_QDnsLookup_nameChanged(intptr_t, struct miqt_string);
 void miqt_exec_callback_QDnsLookup_typeChanged(intptr_t, int);
@@ -306,95 +309,95 @@ public:
 	virtual ~MiqtVirtualQDnsLookup() override = default;
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__event = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QDnsLookup> handle__event;
 
 	// Subclass to allow providing a Go implementation
 	virtual bool event(QEvent* event) override {
-		if (handle__event == 0) {
+		if (!handle__event) {
 			return QDnsLookup::event(event);
 		}
 
 		QEvent* sigval1 = event;
-		bool callback_return_value = miqt_exec_callback_QDnsLookup_event(this, handle__event, sigval1);
+		bool callback_return_value = miqt_exec_callback_QDnsLookup_event(this, handle__event.value(), sigval1);
 		return callback_return_value;
 	}
 
 	friend bool QDnsLookup_virtualbase_event(void* self, QEvent* event);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__eventFilter = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QDnsLookup> handle__eventFilter;
 
 	// Subclass to allow providing a Go implementation
 	virtual bool eventFilter(QObject* watched, QEvent* event) override {
-		if (handle__eventFilter == 0) {
+		if (!handle__eventFilter) {
 			return QDnsLookup::eventFilter(watched, event);
 		}
 
 		QObject* sigval1 = watched;
 		QEvent* sigval2 = event;
-		bool callback_return_value = miqt_exec_callback_QDnsLookup_eventFilter(this, handle__eventFilter, sigval1, sigval2);
+		bool callback_return_value = miqt_exec_callback_QDnsLookup_eventFilter(this, handle__eventFilter.value(), sigval1, sigval2);
 		return callback_return_value;
 	}
 
 	friend bool QDnsLookup_virtualbase_eventFilter(void* self, QObject* watched, QEvent* event);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__timerEvent = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QDnsLookup> handle__timerEvent;
 
 	// Subclass to allow providing a Go implementation
 	virtual void timerEvent(QTimerEvent* event) override {
-		if (handle__timerEvent == 0) {
+		if (!handle__timerEvent) {
 			QDnsLookup::timerEvent(event);
 			return;
 		}
 
 		QTimerEvent* sigval1 = event;
-		miqt_exec_callback_QDnsLookup_timerEvent(this, handle__timerEvent, sigval1);
+		miqt_exec_callback_QDnsLookup_timerEvent(this, handle__timerEvent.value(), sigval1);
 
 	}
 
 	friend void QDnsLookup_virtualbase_timerEvent(void* self, QTimerEvent* event);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__childEvent = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QDnsLookup> handle__childEvent;
 
 	// Subclass to allow providing a Go implementation
 	virtual void childEvent(QChildEvent* event) override {
-		if (handle__childEvent == 0) {
+		if (!handle__childEvent) {
 			QDnsLookup::childEvent(event);
 			return;
 		}
 
 		QChildEvent* sigval1 = event;
-		miqt_exec_callback_QDnsLookup_childEvent(this, handle__childEvent, sigval1);
+		miqt_exec_callback_QDnsLookup_childEvent(this, handle__childEvent.value(), sigval1);
 
 	}
 
 	friend void QDnsLookup_virtualbase_childEvent(void* self, QChildEvent* event);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__customEvent = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QDnsLookup> handle__customEvent;
 
 	// Subclass to allow providing a Go implementation
 	virtual void customEvent(QEvent* event) override {
-		if (handle__customEvent == 0) {
+		if (!handle__customEvent) {
 			QDnsLookup::customEvent(event);
 			return;
 		}
 
 		QEvent* sigval1 = event;
-		miqt_exec_callback_QDnsLookup_customEvent(this, handle__customEvent, sigval1);
+		miqt_exec_callback_QDnsLookup_customEvent(this, handle__customEvent.value(), sigval1);
 
 	}
 
 	friend void QDnsLookup_virtualbase_customEvent(void* self, QEvent* event);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__connectNotify = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QDnsLookup> handle__connectNotify;
 
 	// Subclass to allow providing a Go implementation
 	virtual void connectNotify(const QMetaMethod& signal) override {
-		if (handle__connectNotify == 0) {
+		if (!handle__connectNotify) {
 			QDnsLookup::connectNotify(signal);
 			return;
 		}
@@ -402,18 +405,18 @@ public:
 		const QMetaMethod& signal_ret = signal;
 		// Cast returned reference into pointer
 		QMetaMethod* sigval1 = const_cast<QMetaMethod*>(&signal_ret);
-		miqt_exec_callback_QDnsLookup_connectNotify(this, handle__connectNotify, sigval1);
+		miqt_exec_callback_QDnsLookup_connectNotify(this, handle__connectNotify.value(), sigval1);
 
 	}
 
 	friend void QDnsLookup_virtualbase_connectNotify(void* self, QMetaMethod* signal);
 
 	// cgo.Handle value for overwritten implementation
-	intptr_t handle__disconnectNotify = 0;
+	miqt_callback_handle<miqt_exec_callback_handle_release_QDnsLookup> handle__disconnectNotify;
 
 	// Subclass to allow providing a Go implementation
 	virtual void disconnectNotify(const QMetaMethod& signal) override {
-		if (handle__disconnectNotify == 0) {
+		if (!handle__disconnectNotify) {
 			QDnsLookup::disconnectNotify(signal);
 			return;
 		}
@@ -421,7 +424,7 @@ public:
 		const QMetaMethod& signal_ret = signal;
 		// Cast returned reference into pointer
 		QMetaMethod* sigval1 = const_cast<QMetaMethod*>(&signal_ret);
-		miqt_exec_callback_QDnsLookup_disconnectNotify(this, handle__disconnectNotify, sigval1);
+		miqt_exec_callback_QDnsLookup_disconnectNotify(this, handle__disconnectNotify.value(), sigval1);
 
 	}
 
@@ -641,10 +644,12 @@ void QDnsLookup_finished(QDnsLookup* self) {
 	self->finished();
 }
 
-void QDnsLookup_connect_finished(QDnsLookup* self, intptr_t slot) {
-	QDnsLookup::connect(self, static_cast<void (QDnsLookup::*)()>(&QDnsLookup::finished), self, [=]() {
+void* QDnsLookup_connect_finished(QDnsLookup* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QDnsLookup>>(slot);
+	return new QMetaObject::Connection(QDnsLookup::connect(self, static_cast<void (QDnsLookup::*)()>(&QDnsLookup::finished), self, [slot_handle]() {
+		intptr_t slot = slot_handle->value();
 		miqt_exec_callback_QDnsLookup_finished(slot);
-	});
+	}));
 }
 
 void QDnsLookup_nameChanged(QDnsLookup* self, struct miqt_string name) {
@@ -652,8 +657,10 @@ void QDnsLookup_nameChanged(QDnsLookup* self, struct miqt_string name) {
 	self->nameChanged(name_QString);
 }
 
-void QDnsLookup_connect_nameChanged(QDnsLookup* self, intptr_t slot) {
-	QDnsLookup::connect(self, static_cast<void (QDnsLookup::*)(const QString&)>(&QDnsLookup::nameChanged), self, [=](const QString& name) {
+void* QDnsLookup_connect_nameChanged(QDnsLookup* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QDnsLookup>>(slot);
+	return new QMetaObject::Connection(QDnsLookup::connect(self, static_cast<void (QDnsLookup::*)(const QString&)>(&QDnsLookup::nameChanged), self, [slot_handle](const QString& name) {
+		intptr_t slot = slot_handle->value();
 		const QString name_ret = name;
 		// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 		QByteArray name_b = name_ret.toUtf8();
@@ -663,32 +670,36 @@ void QDnsLookup_connect_nameChanged(QDnsLookup* self, intptr_t slot) {
 		memcpy(name_ms.data, name_b.data(), name_ms.len);
 		struct miqt_string sigval1 = name_ms;
 		miqt_exec_callback_QDnsLookup_nameChanged(slot, sigval1);
-	});
+	}));
 }
 
 void QDnsLookup_typeChanged(QDnsLookup* self, int type) {
 	self->typeChanged(static_cast<QDnsLookup::Type>(type));
 }
 
-void QDnsLookup_connect_typeChanged(QDnsLookup* self, intptr_t slot) {
-	QDnsLookup::connect(self, static_cast<void (QDnsLookup::*)(QDnsLookup::Type)>(&QDnsLookup::typeChanged), self, [=](QDnsLookup::Type type) {
+void* QDnsLookup_connect_typeChanged(QDnsLookup* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QDnsLookup>>(slot);
+	return new QMetaObject::Connection(QDnsLookup::connect(self, static_cast<void (QDnsLookup::*)(QDnsLookup::Type)>(&QDnsLookup::typeChanged), self, [slot_handle](QDnsLookup::Type type) {
+		intptr_t slot = slot_handle->value();
 		QDnsLookup::Type type_ret = type;
 		int sigval1 = static_cast<int>(type_ret);
 		miqt_exec_callback_QDnsLookup_typeChanged(slot, sigval1);
-	});
+	}));
 }
 
 void QDnsLookup_nameserverChanged(QDnsLookup* self, QHostAddress* nameserver) {
 	self->nameserverChanged(*nameserver);
 }
 
-void QDnsLookup_connect_nameserverChanged(QDnsLookup* self, intptr_t slot) {
-	QDnsLookup::connect(self, static_cast<void (QDnsLookup::*)(const QHostAddress&)>(&QDnsLookup::nameserverChanged), self, [=](const QHostAddress& nameserver) {
+void* QDnsLookup_connect_nameserverChanged(QDnsLookup* self, intptr_t slot) {
+	auto slot_handle = std::make_shared<miqt_callback_handle<miqt_exec_callback_handle_release_QDnsLookup>>(slot);
+	return new QMetaObject::Connection(QDnsLookup::connect(self, static_cast<void (QDnsLookup::*)(const QHostAddress&)>(&QDnsLookup::nameserverChanged), self, [slot_handle](const QHostAddress& nameserver) {
+		intptr_t slot = slot_handle->value();
 		const QHostAddress& nameserver_ret = nameserver;
 		// Cast returned reference into pointer
 		QHostAddress* sigval1 = const_cast<QHostAddress*>(&nameserver_ret);
 		miqt_exec_callback_QDnsLookup_nameserverChanged(slot, sigval1);
-	});
+	}));
 }
 
 struct miqt_string QDnsLookup_tr2(const char* s, const char* c) {
@@ -714,12 +725,13 @@ struct miqt_string QDnsLookup_tr3(const char* s, const char* c, int n) {
 }
 
 bool QDnsLookup_override_virtual_event(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QDnsLookup> slot_handle(slot);
 	MiqtVirtualQDnsLookup* self_cast = dynamic_cast<MiqtVirtualQDnsLookup*>( (QDnsLookup*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__event = slot;
+	self_cast->handle__event = std::move(slot_handle);
 	return true;
 }
 
@@ -728,12 +740,13 @@ bool QDnsLookup_virtualbase_event(void* self, QEvent* event) {
 }
 
 bool QDnsLookup_override_virtual_eventFilter(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QDnsLookup> slot_handle(slot);
 	MiqtVirtualQDnsLookup* self_cast = dynamic_cast<MiqtVirtualQDnsLookup*>( (QDnsLookup*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__eventFilter = slot;
+	self_cast->handle__eventFilter = std::move(slot_handle);
 	return true;
 }
 
@@ -742,12 +755,13 @@ bool QDnsLookup_virtualbase_eventFilter(void* self, QObject* watched, QEvent* ev
 }
 
 bool QDnsLookup_override_virtual_timerEvent(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QDnsLookup> slot_handle(slot);
 	MiqtVirtualQDnsLookup* self_cast = dynamic_cast<MiqtVirtualQDnsLookup*>( (QDnsLookup*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__timerEvent = slot;
+	self_cast->handle__timerEvent = std::move(slot_handle);
 	return true;
 }
 
@@ -756,12 +770,13 @@ void QDnsLookup_virtualbase_timerEvent(void* self, QTimerEvent* event) {
 }
 
 bool QDnsLookup_override_virtual_childEvent(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QDnsLookup> slot_handle(slot);
 	MiqtVirtualQDnsLookup* self_cast = dynamic_cast<MiqtVirtualQDnsLookup*>( (QDnsLookup*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__childEvent = slot;
+	self_cast->handle__childEvent = std::move(slot_handle);
 	return true;
 }
 
@@ -770,12 +785,13 @@ void QDnsLookup_virtualbase_childEvent(void* self, QChildEvent* event) {
 }
 
 bool QDnsLookup_override_virtual_customEvent(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QDnsLookup> slot_handle(slot);
 	MiqtVirtualQDnsLookup* self_cast = dynamic_cast<MiqtVirtualQDnsLookup*>( (QDnsLookup*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__customEvent = slot;
+	self_cast->handle__customEvent = std::move(slot_handle);
 	return true;
 }
 
@@ -784,12 +800,13 @@ void QDnsLookup_virtualbase_customEvent(void* self, QEvent* event) {
 }
 
 bool QDnsLookup_override_virtual_connectNotify(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QDnsLookup> slot_handle(slot);
 	MiqtVirtualQDnsLookup* self_cast = dynamic_cast<MiqtVirtualQDnsLookup*>( (QDnsLookup*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__connectNotify = slot;
+	self_cast->handle__connectNotify = std::move(slot_handle);
 	return true;
 }
 
@@ -798,12 +815,13 @@ void QDnsLookup_virtualbase_connectNotify(void* self, QMetaMethod* signal) {
 }
 
 bool QDnsLookup_override_virtual_disconnectNotify(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QDnsLookup> slot_handle(slot);
 	MiqtVirtualQDnsLookup* self_cast = dynamic_cast<MiqtVirtualQDnsLookup*>( (QDnsLookup*)(self) );
 	if (self_cast == nullptr) {
 		return false;
 	}
 
-	self_cast->handle__disconnectNotify = slot;
+	self_cast->handle__disconnectNotify = std::move(slot_handle);
 	return true;
 }
 

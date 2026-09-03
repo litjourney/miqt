@@ -2,9 +2,13 @@
 #include <QApplication>
 #include <QWidget>
 #include <QPushButton>
+#include <memory>
+
+#include "../../libmiqt/libmiqt.h"
 
 extern "C" {
     extern void miqt_exec_callback(intptr_t cb, int argc, void* argv);
+    extern void miqt_handbindings_release_handle(intptr_t cb);
 }
 
 PQApplication QApplication_new(int* argc, char** argv) {
@@ -29,8 +33,9 @@ void QPushButton_show(PQPushButton self) {
 }
 
 void QPushButton_connect_pressed(PQPushButton self, intptr_t cb) {
-    QPushButton::connect(static_cast<QPushButton*>(self), &QPushButton::pressed, [=]() {
-        miqt_exec_callback(cb, 0, nullptr);
+    auto handle = std::make_shared<miqt_callback_handle<miqt_handbindings_release_handle>>(cb);
+    QPushButton::connect(static_cast<QPushButton*>(self), &QPushButton::pressed, [handle]() {
+        miqt_exec_callback(handle->value(), 0, nullptr);
     });
 }
 

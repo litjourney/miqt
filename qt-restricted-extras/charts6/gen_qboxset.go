@@ -25,6 +25,11 @@ const (
 	QBoxSet__UpperExtreme  QBoxSet__ValuePositions = 4
 )
 
+//export miqt_exec_callback_handle_release_QBoxSet
+func miqt_exec_callback_handle_release_QBoxSet(cb C.intptr_t) {
+	cgo.Handle(cb).Delete()
+}
+
 type QBoxSet struct {
 	h *C.QBoxSet
 	*qt6.QObject
@@ -208,8 +213,10 @@ func (this *QBoxSet) Brush() *qt6.QBrush {
 func (this *QBoxSet) Clicked() {
 	C.QBoxSet_clicked(this.h)
 }
-func (this *QBoxSet) OnClicked(slot func()) {
-	C.QBoxSet_connect_clicked(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QBoxSet) OnClicked(slot func()) *qt6.SignalConnection {
+	_goptr := qt6.UnsafeNewQMetaObject__Connection(C.QBoxSet_connect_clicked(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QBoxSet_clicked
@@ -225,8 +232,10 @@ func miqt_exec_callback_QBoxSet_clicked(cb C.intptr_t) {
 func (this *QBoxSet) Hovered(status bool) {
 	C.QBoxSet_hovered(this.h, (C.bool)(status))
 }
-func (this *QBoxSet) OnHovered(slot func(status bool)) {
-	C.QBoxSet_connect_hovered(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QBoxSet) OnHovered(slot func(status bool)) *qt6.SignalConnection {
+	_goptr := qt6.UnsafeNewQMetaObject__Connection(C.QBoxSet_connect_hovered(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QBoxSet_hovered
@@ -245,8 +254,10 @@ func miqt_exec_callback_QBoxSet_hovered(cb C.intptr_t, status C.bool) {
 func (this *QBoxSet) Pressed() {
 	C.QBoxSet_pressed(this.h)
 }
-func (this *QBoxSet) OnPressed(slot func()) {
-	C.QBoxSet_connect_pressed(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QBoxSet) OnPressed(slot func()) *qt6.SignalConnection {
+	_goptr := qt6.UnsafeNewQMetaObject__Connection(C.QBoxSet_connect_pressed(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QBoxSet_pressed
@@ -262,8 +273,10 @@ func miqt_exec_callback_QBoxSet_pressed(cb C.intptr_t) {
 func (this *QBoxSet) Released() {
 	C.QBoxSet_released(this.h)
 }
-func (this *QBoxSet) OnReleased(slot func()) {
-	C.QBoxSet_connect_released(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QBoxSet) OnReleased(slot func()) *qt6.SignalConnection {
+	_goptr := qt6.UnsafeNewQMetaObject__Connection(C.QBoxSet_connect_released(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QBoxSet_released
@@ -279,8 +292,10 @@ func miqt_exec_callback_QBoxSet_released(cb C.intptr_t) {
 func (this *QBoxSet) DoubleClicked() {
 	C.QBoxSet_doubleClicked(this.h)
 }
-func (this *QBoxSet) OnDoubleClicked(slot func()) {
-	C.QBoxSet_connect_doubleClicked(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QBoxSet) OnDoubleClicked(slot func()) *qt6.SignalConnection {
+	_goptr := qt6.UnsafeNewQMetaObject__Connection(C.QBoxSet_connect_doubleClicked(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QBoxSet_doubleClicked
@@ -296,8 +311,10 @@ func miqt_exec_callback_QBoxSet_doubleClicked(cb C.intptr_t) {
 func (this *QBoxSet) PenChanged() {
 	C.QBoxSet_penChanged(this.h)
 }
-func (this *QBoxSet) OnPenChanged(slot func()) {
-	C.QBoxSet_connect_penChanged(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QBoxSet) OnPenChanged(slot func()) *qt6.SignalConnection {
+	_goptr := qt6.UnsafeNewQMetaObject__Connection(C.QBoxSet_connect_penChanged(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QBoxSet_penChanged
@@ -313,8 +330,10 @@ func miqt_exec_callback_QBoxSet_penChanged(cb C.intptr_t) {
 func (this *QBoxSet) BrushChanged() {
 	C.QBoxSet_brushChanged(this.h)
 }
-func (this *QBoxSet) OnBrushChanged(slot func()) {
-	C.QBoxSet_connect_brushChanged(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QBoxSet) OnBrushChanged(slot func()) *qt6.SignalConnection {
+	_goptr := qt6.UnsafeNewQMetaObject__Connection(C.QBoxSet_connect_brushChanged(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QBoxSet_brushChanged
@@ -330,8 +349,10 @@ func miqt_exec_callback_QBoxSet_brushChanged(cb C.intptr_t) {
 func (this *QBoxSet) ValuesChanged() {
 	C.QBoxSet_valuesChanged(this.h)
 }
-func (this *QBoxSet) OnValuesChanged(slot func()) {
-	C.QBoxSet_connect_valuesChanged(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QBoxSet) OnValuesChanged(slot func()) *qt6.SignalConnection {
+	_goptr := qt6.UnsafeNewQMetaObject__Connection(C.QBoxSet_connect_valuesChanged(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QBoxSet_valuesChanged
@@ -347,8 +368,10 @@ func miqt_exec_callback_QBoxSet_valuesChanged(cb C.intptr_t) {
 func (this *QBoxSet) ValueChanged(index int) {
 	C.QBoxSet_valueChanged(this.h, (C.int)(index))
 }
-func (this *QBoxSet) OnValueChanged(slot func(index int)) {
-	C.QBoxSet_connect_valueChanged(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QBoxSet) OnValueChanged(slot func(index int)) *qt6.SignalConnection {
+	_goptr := qt6.UnsafeNewQMetaObject__Connection(C.QBoxSet_connect_valueChanged(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QBoxSet_valueChanged
@@ -367,8 +390,10 @@ func miqt_exec_callback_QBoxSet_valueChanged(cb C.intptr_t, index C.int) {
 func (this *QBoxSet) Cleared() {
 	C.QBoxSet_cleared(this.h)
 }
-func (this *QBoxSet) OnCleared(slot func()) {
-	C.QBoxSet_connect_cleared(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QBoxSet) OnCleared(slot func()) *qt6.SignalConnection {
+	_goptr := qt6.UnsafeNewQMetaObject__Connection(C.QBoxSet_connect_cleared(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QBoxSet_cleared
@@ -467,7 +492,11 @@ func (this *QBoxSet) callVirtualBase_Event(event *qt6.QEvent) bool {
 
 }
 func (this *QBoxSet) OnEvent(slot func(super func(event *qt6.QEvent) bool, event *qt6.QEvent) bool) {
-	ok := C.QBoxSet_override_virtual_event(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QBoxSet_override_virtual_event(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -495,7 +524,11 @@ func (this *QBoxSet) callVirtualBase_EventFilter(watched *qt6.QObject, event *qt
 
 }
 func (this *QBoxSet) OnEventFilter(slot func(super func(watched *qt6.QObject, event *qt6.QEvent) bool, watched *qt6.QObject, event *qt6.QEvent) bool) {
-	ok := C.QBoxSet_override_virtual_eventFilter(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QBoxSet_override_virtual_eventFilter(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -525,7 +558,11 @@ func (this *QBoxSet) callVirtualBase_TimerEvent(event *qt6.QTimerEvent) {
 
 }
 func (this *QBoxSet) OnTimerEvent(slot func(super func(event *qt6.QTimerEvent), event *qt6.QTimerEvent)) {
-	ok := C.QBoxSet_override_virtual_timerEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QBoxSet_override_virtual_timerEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -551,7 +588,11 @@ func (this *QBoxSet) callVirtualBase_ChildEvent(event *qt6.QChildEvent) {
 
 }
 func (this *QBoxSet) OnChildEvent(slot func(super func(event *qt6.QChildEvent), event *qt6.QChildEvent)) {
-	ok := C.QBoxSet_override_virtual_childEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QBoxSet_override_virtual_childEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -577,7 +618,11 @@ func (this *QBoxSet) callVirtualBase_CustomEvent(event *qt6.QEvent) {
 
 }
 func (this *QBoxSet) OnCustomEvent(slot func(super func(event *qt6.QEvent), event *qt6.QEvent)) {
-	ok := C.QBoxSet_override_virtual_customEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QBoxSet_override_virtual_customEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -603,7 +648,11 @@ func (this *QBoxSet) callVirtualBase_ConnectNotify(signal *qt6.QMetaMethod) {
 
 }
 func (this *QBoxSet) OnConnectNotify(slot func(super func(signal *qt6.QMetaMethod), signal *qt6.QMetaMethod)) {
-	ok := C.QBoxSet_override_virtual_connectNotify(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QBoxSet_override_virtual_connectNotify(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -629,7 +678,11 @@ func (this *QBoxSet) callVirtualBase_DisconnectNotify(signal *qt6.QMetaMethod) {
 
 }
 func (this *QBoxSet) OnDisconnectNotify(slot func(super func(signal *qt6.QMetaMethod), signal *qt6.QMetaMethod)) {
-	ok := C.QBoxSet_override_virtual_disconnectNotify(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QBoxSet_override_virtual_disconnectNotify(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}

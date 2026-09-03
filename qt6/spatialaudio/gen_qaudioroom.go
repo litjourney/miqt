@@ -55,6 +55,11 @@ const (
 	QAudioRoom__BackWall  QAudioRoom__Wall = 5
 )
 
+//export miqt_exec_callback_handle_release_QAudioRoom
+func miqt_exec_callback_handle_release_QAudioRoom(cb C.intptr_t) {
+	cgo.Handle(cb).Delete()
+}
+
 type QAudioRoom struct {
 	h *C.QAudioRoom
 	*qt6.QObject
@@ -189,8 +194,10 @@ func (this *QAudioRoom) ReverbBrightness() float32 {
 func (this *QAudioRoom) PositionChanged() {
 	C.QAudioRoom_positionChanged(this.h)
 }
-func (this *QAudioRoom) OnPositionChanged(slot func()) {
-	C.QAudioRoom_connect_positionChanged(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QAudioRoom) OnPositionChanged(slot func()) *qt6.SignalConnection {
+	_goptr := qt6.UnsafeNewQMetaObject__Connection(C.QAudioRoom_connect_positionChanged(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QAudioRoom_positionChanged
@@ -206,8 +213,10 @@ func miqt_exec_callback_QAudioRoom_positionChanged(cb C.intptr_t) {
 func (this *QAudioRoom) DimensionsChanged() {
 	C.QAudioRoom_dimensionsChanged(this.h)
 }
-func (this *QAudioRoom) OnDimensionsChanged(slot func()) {
-	C.QAudioRoom_connect_dimensionsChanged(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QAudioRoom) OnDimensionsChanged(slot func()) *qt6.SignalConnection {
+	_goptr := qt6.UnsafeNewQMetaObject__Connection(C.QAudioRoom_connect_dimensionsChanged(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QAudioRoom_dimensionsChanged
@@ -223,8 +232,10 @@ func miqt_exec_callback_QAudioRoom_dimensionsChanged(cb C.intptr_t) {
 func (this *QAudioRoom) RotationChanged() {
 	C.QAudioRoom_rotationChanged(this.h)
 }
-func (this *QAudioRoom) OnRotationChanged(slot func()) {
-	C.QAudioRoom_connect_rotationChanged(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QAudioRoom) OnRotationChanged(slot func()) *qt6.SignalConnection {
+	_goptr := qt6.UnsafeNewQMetaObject__Connection(C.QAudioRoom_connect_rotationChanged(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QAudioRoom_rotationChanged
@@ -240,8 +251,10 @@ func miqt_exec_callback_QAudioRoom_rotationChanged(cb C.intptr_t) {
 func (this *QAudioRoom) WallsChanged() {
 	C.QAudioRoom_wallsChanged(this.h)
 }
-func (this *QAudioRoom) OnWallsChanged(slot func()) {
-	C.QAudioRoom_connect_wallsChanged(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QAudioRoom) OnWallsChanged(slot func()) *qt6.SignalConnection {
+	_goptr := qt6.UnsafeNewQMetaObject__Connection(C.QAudioRoom_connect_wallsChanged(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QAudioRoom_wallsChanged
@@ -257,8 +270,10 @@ func miqt_exec_callback_QAudioRoom_wallsChanged(cb C.intptr_t) {
 func (this *QAudioRoom) ReflectionGainChanged() {
 	C.QAudioRoom_reflectionGainChanged(this.h)
 }
-func (this *QAudioRoom) OnReflectionGainChanged(slot func()) {
-	C.QAudioRoom_connect_reflectionGainChanged(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QAudioRoom) OnReflectionGainChanged(slot func()) *qt6.SignalConnection {
+	_goptr := qt6.UnsafeNewQMetaObject__Connection(C.QAudioRoom_connect_reflectionGainChanged(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QAudioRoom_reflectionGainChanged
@@ -274,8 +289,10 @@ func miqt_exec_callback_QAudioRoom_reflectionGainChanged(cb C.intptr_t) {
 func (this *QAudioRoom) ReverbGainChanged() {
 	C.QAudioRoom_reverbGainChanged(this.h)
 }
-func (this *QAudioRoom) OnReverbGainChanged(slot func()) {
-	C.QAudioRoom_connect_reverbGainChanged(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QAudioRoom) OnReverbGainChanged(slot func()) *qt6.SignalConnection {
+	_goptr := qt6.UnsafeNewQMetaObject__Connection(C.QAudioRoom_connect_reverbGainChanged(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QAudioRoom_reverbGainChanged
@@ -291,8 +308,10 @@ func miqt_exec_callback_QAudioRoom_reverbGainChanged(cb C.intptr_t) {
 func (this *QAudioRoom) ReverbTimeChanged() {
 	C.QAudioRoom_reverbTimeChanged(this.h)
 }
-func (this *QAudioRoom) OnReverbTimeChanged(slot func()) {
-	C.QAudioRoom_connect_reverbTimeChanged(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QAudioRoom) OnReverbTimeChanged(slot func()) *qt6.SignalConnection {
+	_goptr := qt6.UnsafeNewQMetaObject__Connection(C.QAudioRoom_connect_reverbTimeChanged(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QAudioRoom_reverbTimeChanged
@@ -308,8 +327,10 @@ func miqt_exec_callback_QAudioRoom_reverbTimeChanged(cb C.intptr_t) {
 func (this *QAudioRoom) ReverbBrightnessChanged() {
 	C.QAudioRoom_reverbBrightnessChanged(this.h)
 }
-func (this *QAudioRoom) OnReverbBrightnessChanged(slot func()) {
-	C.QAudioRoom_connect_reverbBrightnessChanged(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QAudioRoom) OnReverbBrightnessChanged(slot func()) *qt6.SignalConnection {
+	_goptr := qt6.UnsafeNewQMetaObject__Connection(C.QAudioRoom_connect_reverbBrightnessChanged(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QAudioRoom_reverbBrightnessChanged
@@ -408,7 +429,11 @@ func (this *QAudioRoom) callVirtualBase_Event(event *qt6.QEvent) bool {
 
 }
 func (this *QAudioRoom) OnEvent(slot func(super func(event *qt6.QEvent) bool, event *qt6.QEvent) bool) {
-	ok := C.QAudioRoom_override_virtual_event(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QAudioRoom_override_virtual_event(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -436,7 +461,11 @@ func (this *QAudioRoom) callVirtualBase_EventFilter(watched *qt6.QObject, event 
 
 }
 func (this *QAudioRoom) OnEventFilter(slot func(super func(watched *qt6.QObject, event *qt6.QEvent) bool, watched *qt6.QObject, event *qt6.QEvent) bool) {
-	ok := C.QAudioRoom_override_virtual_eventFilter(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QAudioRoom_override_virtual_eventFilter(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -466,7 +495,11 @@ func (this *QAudioRoom) callVirtualBase_TimerEvent(event *qt6.QTimerEvent) {
 
 }
 func (this *QAudioRoom) OnTimerEvent(slot func(super func(event *qt6.QTimerEvent), event *qt6.QTimerEvent)) {
-	ok := C.QAudioRoom_override_virtual_timerEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QAudioRoom_override_virtual_timerEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -492,7 +525,11 @@ func (this *QAudioRoom) callVirtualBase_ChildEvent(event *qt6.QChildEvent) {
 
 }
 func (this *QAudioRoom) OnChildEvent(slot func(super func(event *qt6.QChildEvent), event *qt6.QChildEvent)) {
-	ok := C.QAudioRoom_override_virtual_childEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QAudioRoom_override_virtual_childEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -518,7 +555,11 @@ func (this *QAudioRoom) callVirtualBase_CustomEvent(event *qt6.QEvent) {
 
 }
 func (this *QAudioRoom) OnCustomEvent(slot func(super func(event *qt6.QEvent), event *qt6.QEvent)) {
-	ok := C.QAudioRoom_override_virtual_customEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QAudioRoom_override_virtual_customEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -544,7 +585,11 @@ func (this *QAudioRoom) callVirtualBase_ConnectNotify(signal *qt6.QMetaMethod) {
 
 }
 func (this *QAudioRoom) OnConnectNotify(slot func(super func(signal *qt6.QMetaMethod), signal *qt6.QMetaMethod)) {
-	ok := C.QAudioRoom_override_virtual_connectNotify(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QAudioRoom_override_virtual_connectNotify(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -570,7 +615,11 @@ func (this *QAudioRoom) callVirtualBase_DisconnectNotify(signal *qt6.QMetaMethod
 
 }
 func (this *QAudioRoom) OnDisconnectNotify(slot func(super func(signal *qt6.QMetaMethod), signal *qt6.QMetaMethod)) {
-	ok := C.QAudioRoom_override_virtual_disconnectNotify(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QAudioRoom_override_virtual_disconnectNotify(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}

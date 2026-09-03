@@ -15,6 +15,11 @@ import (
 	"unsafe"
 )
 
+//export miqt_exec_callback_handle_release_QCameraCaptureDestinationControl
+func miqt_exec_callback_handle_release_QCameraCaptureDestinationControl(cb C.intptr_t) {
+	cgo.Handle(cb).Delete()
+}
+
 type QCameraCaptureDestinationControl struct {
 	h *C.QCameraCaptureDestinationControl
 	*QMediaControl
@@ -94,8 +99,10 @@ func (this *QCameraCaptureDestinationControl) SetCaptureDestination(destination 
 func (this *QCameraCaptureDestinationControl) CaptureDestinationChanged(destination QCameraImageCapture__CaptureDestination) {
 	C.QCameraCaptureDestinationControl_captureDestinationChanged(this.h, (C.int)(destination))
 }
-func (this *QCameraCaptureDestinationControl) OnCaptureDestinationChanged(slot func(destination QCameraImageCapture__CaptureDestination)) {
-	C.QCameraCaptureDestinationControl_connect_captureDestinationChanged(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QCameraCaptureDestinationControl) OnCaptureDestinationChanged(slot func(destination QCameraImageCapture__CaptureDestination)) *qt.SignalConnection {
+	_goptr := qt.UnsafeNewQMetaObject__Connection(C.QCameraCaptureDestinationControl_connect_captureDestinationChanged(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QCameraCaptureDestinationControl_captureDestinationChanged

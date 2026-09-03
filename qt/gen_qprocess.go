@@ -236,6 +236,11 @@ func (this *QProcessEnvironment) GoGC() {
 	})
 }
 
+//export miqt_exec_callback_handle_release_QProcess
+func miqt_exec_callback_handle_release_QProcess(cb C.intptr_t) {
+	cgo.Handle(cb).Delete()
+}
+
 type QProcess struct {
 	h *C.QProcess
 	*QIODevice
@@ -699,8 +704,10 @@ func (this *QProcess) Kill() {
 func (this *QProcess) Finished(exitCode int) {
 	C.QProcess_finished(this.h, (C.int)(exitCode))
 }
-func (this *QProcess) OnFinished(slot func(exitCode int)) {
-	C.QProcess_connect_finished(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QProcess) OnFinished(slot func(exitCode int)) *SignalConnection {
+	_goptr := UnsafeNewQMetaObject__Connection(C.QProcess_connect_finished(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QProcess_finished
@@ -719,8 +726,10 @@ func miqt_exec_callback_QProcess_finished(cb C.intptr_t, exitCode C.int) {
 func (this *QProcess) Finished2(exitCode int, exitStatus QProcess__ExitStatus) {
 	C.QProcess_finished2(this.h, (C.int)(exitCode), (C.int)(exitStatus))
 }
-func (this *QProcess) OnFinished2(slot func(exitCode int, exitStatus QProcess__ExitStatus)) {
-	C.QProcess_connect_finished2(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QProcess) OnFinished2(slot func(exitCode int, exitStatus QProcess__ExitStatus)) *SignalConnection {
+	_goptr := UnsafeNewQMetaObject__Connection(C.QProcess_connect_finished2(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QProcess_finished2
@@ -741,8 +750,10 @@ func miqt_exec_callback_QProcess_finished2(cb C.intptr_t, exitCode C.int, exitSt
 func (this *QProcess) ErrorWithError(error QProcess__ProcessError) {
 	C.QProcess_errorWithError(this.h, (C.int)(error))
 }
-func (this *QProcess) OnErrorWithError(slot func(error QProcess__ProcessError)) {
-	C.QProcess_connect_errorWithError(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QProcess) OnErrorWithError(slot func(error QProcess__ProcessError)) *SignalConnection {
+	_goptr := UnsafeNewQMetaObject__Connection(C.QProcess_connect_errorWithError(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QProcess_errorWithError
@@ -761,8 +772,10 @@ func miqt_exec_callback_QProcess_errorWithError(cb C.intptr_t, error C.int) {
 func (this *QProcess) ErrorOccurred(error QProcess__ProcessError) {
 	C.QProcess_errorOccurred(this.h, (C.int)(error))
 }
-func (this *QProcess) OnErrorOccurred(slot func(error QProcess__ProcessError)) {
-	C.QProcess_connect_errorOccurred(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QProcess) OnErrorOccurred(slot func(error QProcess__ProcessError)) *SignalConnection {
+	_goptr := UnsafeNewQMetaObject__Connection(C.QProcess_connect_errorOccurred(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QProcess_errorOccurred
@@ -1006,7 +1019,11 @@ func (this *QProcess) callVirtualBase_Open(mode QIODevice__OpenModeFlag) bool {
 
 }
 func (this *QProcess) OnOpen(slot func(super func(mode QIODevice__OpenModeFlag) bool, mode QIODevice__OpenModeFlag) bool) {
-	ok := C.QProcess_override_virtual_open(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QProcess_override_virtual_open(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1034,7 +1051,11 @@ func (this *QProcess) callVirtualBase_WaitForReadyRead(msecs int) bool {
 
 }
 func (this *QProcess) OnWaitForReadyRead(slot func(super func(msecs int) bool, msecs int) bool) {
-	ok := C.QProcess_override_virtual_waitForReadyRead(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QProcess_override_virtual_waitForReadyRead(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1062,7 +1083,11 @@ func (this *QProcess) callVirtualBase_WaitForBytesWritten(msecs int) bool {
 
 }
 func (this *QProcess) OnWaitForBytesWritten(slot func(super func(msecs int) bool, msecs int) bool) {
-	ok := C.QProcess_override_virtual_waitForBytesWritten(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QProcess_override_virtual_waitForBytesWritten(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1090,7 +1115,11 @@ func (this *QProcess) callVirtualBase_BytesAvailable() int64 {
 
 }
 func (this *QProcess) OnBytesAvailable(slot func(super func() int64) int64) {
-	ok := C.QProcess_override_virtual_bytesAvailable(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QProcess_override_virtual_bytesAvailable(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1115,7 +1144,11 @@ func (this *QProcess) callVirtualBase_BytesToWrite() int64 {
 
 }
 func (this *QProcess) OnBytesToWrite(slot func(super func() int64) int64) {
-	ok := C.QProcess_override_virtual_bytesToWrite(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QProcess_override_virtual_bytesToWrite(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1140,7 +1173,11 @@ func (this *QProcess) callVirtualBase_IsSequential() bool {
 
 }
 func (this *QProcess) OnIsSequential(slot func(super func() bool) bool) {
-	ok := C.QProcess_override_virtual_isSequential(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QProcess_override_virtual_isSequential(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1165,7 +1202,11 @@ func (this *QProcess) callVirtualBase_CanReadLine() bool {
 
 }
 func (this *QProcess) OnCanReadLine(slot func(super func() bool) bool) {
-	ok := C.QProcess_override_virtual_canReadLine(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QProcess_override_virtual_canReadLine(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1190,7 +1231,11 @@ func (this *QProcess) callVirtualBase_Close() {
 
 }
 func (this *QProcess) OnClose(slot func(super func())) {
-	ok := C.QProcess_override_virtual_close(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QProcess_override_virtual_close(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1213,7 +1258,11 @@ func (this *QProcess) callVirtualBase_AtEnd() bool {
 
 }
 func (this *QProcess) OnAtEnd(slot func(super func() bool) bool) {
-	ok := C.QProcess_override_virtual_atEnd(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QProcess_override_virtual_atEnd(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1238,7 +1287,11 @@ func (this *QProcess) callVirtualBase_SetupChildProcess() {
 
 }
 func (this *QProcess) OnSetupChildProcess(slot func(super func())) {
-	ok := C.QProcess_override_virtual_setupChildProcess(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QProcess_override_virtual_setupChildProcess(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1263,7 +1316,11 @@ func (this *QProcess) callVirtualBase_ReadData(data string, maxlen int64) int64 
 
 }
 func (this *QProcess) OnReadData(slot func(super func(data string, maxlen int64) int64, data string, maxlen int64) int64) {
-	ok := C.QProcess_override_virtual_readData(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QProcess_override_virtual_readData(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1296,7 +1353,11 @@ func (this *QProcess) callVirtualBase_WriteData(data string, lenVal int64) int64
 
 }
 func (this *QProcess) OnWriteData(slot func(super func(data string, lenVal int64) int64, data string, lenVal int64) int64) {
-	ok := C.QProcess_override_virtual_writeData(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QProcess_override_virtual_writeData(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1327,7 +1388,11 @@ func (this *QProcess) callVirtualBase_Pos() int64 {
 
 }
 func (this *QProcess) OnPos(slot func(super func() int64) int64) {
-	ok := C.QProcess_override_virtual_pos(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QProcess_override_virtual_pos(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1352,7 +1417,11 @@ func (this *QProcess) callVirtualBase_Size() int64 {
 
 }
 func (this *QProcess) OnSize(slot func(super func() int64) int64) {
-	ok := C.QProcess_override_virtual_size(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QProcess_override_virtual_size(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1377,7 +1446,11 @@ func (this *QProcess) callVirtualBase_Seek(pos int64) bool {
 
 }
 func (this *QProcess) OnSeek(slot func(super func(pos int64) bool, pos int64) bool) {
-	ok := C.QProcess_override_virtual_seek(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QProcess_override_virtual_seek(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1405,7 +1478,11 @@ func (this *QProcess) callVirtualBase_Reset() bool {
 
 }
 func (this *QProcess) OnReset(slot func(super func() bool) bool) {
-	ok := C.QProcess_override_virtual_reset(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QProcess_override_virtual_reset(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1432,7 +1509,11 @@ func (this *QProcess) callVirtualBase_ReadLineData(data string, maxlen int64) in
 
 }
 func (this *QProcess) OnReadLineData(slot func(super func(data string, maxlen int64) int64, data string, maxlen int64) int64) {
-	ok := C.QProcess_override_virtual_readLineData(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QProcess_override_virtual_readLineData(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1463,7 +1544,11 @@ func (this *QProcess) callVirtualBase_Event(event *QEvent) bool {
 
 }
 func (this *QProcess) OnEvent(slot func(super func(event *QEvent) bool, event *QEvent) bool) {
-	ok := C.QProcess_override_virtual_event(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QProcess_override_virtual_event(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1491,7 +1576,11 @@ func (this *QProcess) callVirtualBase_EventFilter(watched *QObject, event *QEven
 
 }
 func (this *QProcess) OnEventFilter(slot func(super func(watched *QObject, event *QEvent) bool, watched *QObject, event *QEvent) bool) {
-	ok := C.QProcess_override_virtual_eventFilter(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QProcess_override_virtual_eventFilter(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1521,7 +1610,11 @@ func (this *QProcess) callVirtualBase_TimerEvent(event *QTimerEvent) {
 
 }
 func (this *QProcess) OnTimerEvent(slot func(super func(event *QTimerEvent), event *QTimerEvent)) {
-	ok := C.QProcess_override_virtual_timerEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QProcess_override_virtual_timerEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1547,7 +1640,11 @@ func (this *QProcess) callVirtualBase_ChildEvent(event *QChildEvent) {
 
 }
 func (this *QProcess) OnChildEvent(slot func(super func(event *QChildEvent), event *QChildEvent)) {
-	ok := C.QProcess_override_virtual_childEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QProcess_override_virtual_childEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1573,7 +1670,11 @@ func (this *QProcess) callVirtualBase_CustomEvent(event *QEvent) {
 
 }
 func (this *QProcess) OnCustomEvent(slot func(super func(event *QEvent), event *QEvent)) {
-	ok := C.QProcess_override_virtual_customEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QProcess_override_virtual_customEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1599,7 +1700,11 @@ func (this *QProcess) callVirtualBase_ConnectNotify(signal *QMetaMethod) {
 
 }
 func (this *QProcess) OnConnectNotify(slot func(super func(signal *QMetaMethod), signal *QMetaMethod)) {
-	ok := C.QProcess_override_virtual_connectNotify(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QProcess_override_virtual_connectNotify(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1625,7 +1730,11 @@ func (this *QProcess) callVirtualBase_DisconnectNotify(signal *QMetaMethod) {
 
 }
 func (this *QProcess) OnDisconnectNotify(slot func(super func(signal *QMetaMethod), signal *QMetaMethod)) {
-	ok := C.QProcess_override_virtual_disconnectNotify(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QProcess_override_virtual_disconnectNotify(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -1644,8 +1753,10 @@ func miqt_exec_callback_QProcess_disconnectNotify(self *C.QProcess, cb C.intptr_
 	gofunc((&QProcess{h: self}).callVirtualBase_DisconnectNotify, slotval1)
 
 }
-func (this *QProcess) OnStarted(slot func()) {
-	C.QProcess_connect_started(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QProcess) OnStarted(slot func()) *SignalConnection {
+	_goptr := UnsafeNewQMetaObject__Connection(C.QProcess_connect_started(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QProcess_started
@@ -1658,8 +1769,10 @@ func miqt_exec_callback_QProcess_started(cb C.intptr_t) {
 	gofunc()
 }
 
-func (this *QProcess) OnStateChanged(slot func(state QProcess__ProcessState)) {
-	C.QProcess_connect_stateChanged(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QProcess) OnStateChanged(slot func(state QProcess__ProcessState)) *SignalConnection {
+	_goptr := UnsafeNewQMetaObject__Connection(C.QProcess_connect_stateChanged(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QProcess_stateChanged
@@ -1675,8 +1788,10 @@ func miqt_exec_callback_QProcess_stateChanged(cb C.intptr_t, state C.int) {
 	gofunc(slotval1)
 }
 
-func (this *QProcess) OnReadyReadStandardOutput(slot func()) {
-	C.QProcess_connect_readyReadStandardOutput(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QProcess) OnReadyReadStandardOutput(slot func()) *SignalConnection {
+	_goptr := UnsafeNewQMetaObject__Connection(C.QProcess_connect_readyReadStandardOutput(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QProcess_readyReadStandardOutput
@@ -1689,8 +1804,10 @@ func miqt_exec_callback_QProcess_readyReadStandardOutput(cb C.intptr_t) {
 	gofunc()
 }
 
-func (this *QProcess) OnReadyReadStandardError(slot func()) {
-	C.QProcess_connect_readyReadStandardError(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QProcess) OnReadyReadStandardError(slot func()) *SignalConnection {
+	_goptr := UnsafeNewQMetaObject__Connection(C.QProcess_connect_readyReadStandardError(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QProcess_readyReadStandardError

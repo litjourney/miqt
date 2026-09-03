@@ -56,6 +56,11 @@ const (
 	QRadioTuner__SearchGetStationId QRadioTuner__SearchMode = 1
 )
 
+//export miqt_exec_callback_handle_release_QRadioTuner
+func miqt_exec_callback_handle_release_QRadioTuner(cb C.intptr_t) {
+	cgo.Handle(cb).Delete()
+}
+
 type QRadioTuner struct {
 	h *C.QRadioTuner
 	*QMediaObject
@@ -263,8 +268,10 @@ func (this *QRadioTuner) Stop() {
 func (this *QRadioTuner) StateChanged(state QRadioTuner__State) {
 	C.QRadioTuner_stateChanged(this.h, (C.int)(state))
 }
-func (this *QRadioTuner) OnStateChanged(slot func(state QRadioTuner__State)) {
-	C.QRadioTuner_connect_stateChanged(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QRadioTuner) OnStateChanged(slot func(state QRadioTuner__State)) *qt.SignalConnection {
+	_goptr := qt.UnsafeNewQMetaObject__Connection(C.QRadioTuner_connect_stateChanged(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QRadioTuner_stateChanged
@@ -283,8 +290,10 @@ func miqt_exec_callback_QRadioTuner_stateChanged(cb C.intptr_t, state C.int) {
 func (this *QRadioTuner) BandChanged(band QRadioTuner__Band) {
 	C.QRadioTuner_bandChanged(this.h, (C.int)(band))
 }
-func (this *QRadioTuner) OnBandChanged(slot func(band QRadioTuner__Band)) {
-	C.QRadioTuner_connect_bandChanged(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QRadioTuner) OnBandChanged(slot func(band QRadioTuner__Band)) *qt.SignalConnection {
+	_goptr := qt.UnsafeNewQMetaObject__Connection(C.QRadioTuner_connect_bandChanged(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QRadioTuner_bandChanged
@@ -303,8 +312,10 @@ func miqt_exec_callback_QRadioTuner_bandChanged(cb C.intptr_t, band C.int) {
 func (this *QRadioTuner) FrequencyChanged(frequency int) {
 	C.QRadioTuner_frequencyChanged(this.h, (C.int)(frequency))
 }
-func (this *QRadioTuner) OnFrequencyChanged(slot func(frequency int)) {
-	C.QRadioTuner_connect_frequencyChanged(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QRadioTuner) OnFrequencyChanged(slot func(frequency int)) *qt.SignalConnection {
+	_goptr := qt.UnsafeNewQMetaObject__Connection(C.QRadioTuner_connect_frequencyChanged(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QRadioTuner_frequencyChanged
@@ -323,8 +334,10 @@ func miqt_exec_callback_QRadioTuner_frequencyChanged(cb C.intptr_t, frequency C.
 func (this *QRadioTuner) StereoStatusChanged(stereo bool) {
 	C.QRadioTuner_stereoStatusChanged(this.h, (C.bool)(stereo))
 }
-func (this *QRadioTuner) OnStereoStatusChanged(slot func(stereo bool)) {
-	C.QRadioTuner_connect_stereoStatusChanged(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QRadioTuner) OnStereoStatusChanged(slot func(stereo bool)) *qt.SignalConnection {
+	_goptr := qt.UnsafeNewQMetaObject__Connection(C.QRadioTuner_connect_stereoStatusChanged(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QRadioTuner_stereoStatusChanged
@@ -343,8 +356,10 @@ func miqt_exec_callback_QRadioTuner_stereoStatusChanged(cb C.intptr_t, stereo C.
 func (this *QRadioTuner) SearchingChanged(searching bool) {
 	C.QRadioTuner_searchingChanged(this.h, (C.bool)(searching))
 }
-func (this *QRadioTuner) OnSearchingChanged(slot func(searching bool)) {
-	C.QRadioTuner_connect_searchingChanged(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QRadioTuner) OnSearchingChanged(slot func(searching bool)) *qt.SignalConnection {
+	_goptr := qt.UnsafeNewQMetaObject__Connection(C.QRadioTuner_connect_searchingChanged(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QRadioTuner_searchingChanged
@@ -363,8 +378,10 @@ func miqt_exec_callback_QRadioTuner_searchingChanged(cb C.intptr_t, searching C.
 func (this *QRadioTuner) SignalStrengthChanged(signalStrength int) {
 	C.QRadioTuner_signalStrengthChanged(this.h, (C.int)(signalStrength))
 }
-func (this *QRadioTuner) OnSignalStrengthChanged(slot func(signalStrength int)) {
-	C.QRadioTuner_connect_signalStrengthChanged(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QRadioTuner) OnSignalStrengthChanged(slot func(signalStrength int)) *qt.SignalConnection {
+	_goptr := qt.UnsafeNewQMetaObject__Connection(C.QRadioTuner_connect_signalStrengthChanged(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QRadioTuner_signalStrengthChanged
@@ -383,8 +400,10 @@ func miqt_exec_callback_QRadioTuner_signalStrengthChanged(cb C.intptr_t, signalS
 func (this *QRadioTuner) VolumeChanged(volume int) {
 	C.QRadioTuner_volumeChanged(this.h, (C.int)(volume))
 }
-func (this *QRadioTuner) OnVolumeChanged(slot func(volume int)) {
-	C.QRadioTuner_connect_volumeChanged(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QRadioTuner) OnVolumeChanged(slot func(volume int)) *qt.SignalConnection {
+	_goptr := qt.UnsafeNewQMetaObject__Connection(C.QRadioTuner_connect_volumeChanged(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QRadioTuner_volumeChanged
@@ -403,8 +422,10 @@ func miqt_exec_callback_QRadioTuner_volumeChanged(cb C.intptr_t, volume C.int) {
 func (this *QRadioTuner) MutedChanged(muted bool) {
 	C.QRadioTuner_mutedChanged(this.h, (C.bool)(muted))
 }
-func (this *QRadioTuner) OnMutedChanged(slot func(muted bool)) {
-	C.QRadioTuner_connect_mutedChanged(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QRadioTuner) OnMutedChanged(slot func(muted bool)) *qt.SignalConnection {
+	_goptr := qt.UnsafeNewQMetaObject__Connection(C.QRadioTuner_connect_mutedChanged(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QRadioTuner_mutedChanged
@@ -427,8 +448,10 @@ func (this *QRadioTuner) StationFound(frequency int, stationId string) {
 	defer C.free(unsafe.Pointer(stationId_ms.data))
 	C.QRadioTuner_stationFound(this.h, (C.int)(frequency), stationId_ms)
 }
-func (this *QRadioTuner) OnStationFound(slot func(frequency int, stationId string)) {
-	C.QRadioTuner_connect_stationFound(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QRadioTuner) OnStationFound(slot func(frequency int, stationId string)) *qt.SignalConnection {
+	_goptr := qt.UnsafeNewQMetaObject__Connection(C.QRadioTuner_connect_stationFound(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QRadioTuner_stationFound
@@ -452,8 +475,10 @@ func miqt_exec_callback_QRadioTuner_stationFound(cb C.intptr_t, frequency C.int,
 func (this *QRadioTuner) AntennaConnectedChanged(connectionStatus bool) {
 	C.QRadioTuner_antennaConnectedChanged(this.h, (C.bool)(connectionStatus))
 }
-func (this *QRadioTuner) OnAntennaConnectedChanged(slot func(connectionStatus bool)) {
-	C.QRadioTuner_connect_antennaConnectedChanged(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QRadioTuner) OnAntennaConnectedChanged(slot func(connectionStatus bool)) *qt.SignalConnection {
+	_goptr := qt.UnsafeNewQMetaObject__Connection(C.QRadioTuner_connect_antennaConnectedChanged(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QRadioTuner_antennaConnectedChanged
@@ -472,8 +497,10 @@ func miqt_exec_callback_QRadioTuner_antennaConnectedChanged(cb C.intptr_t, conne
 func (this *QRadioTuner) ErrorWithError(error QRadioTuner__Error) {
 	C.QRadioTuner_errorWithError(this.h, (C.int)(error))
 }
-func (this *QRadioTuner) OnErrorWithError(slot func(error QRadioTuner__Error)) {
-	C.QRadioTuner_connect_errorWithError(this.h, C.intptr_t(cgo.NewHandle(slot)))
+func (this *QRadioTuner) OnErrorWithError(slot func(error QRadioTuner__Error)) *qt.SignalConnection {
+	_goptr := qt.UnsafeNewQMetaObject__Connection(C.QRadioTuner_connect_errorWithError(this.h, C.intptr_t(cgo.NewHandle(slot))))
+	_goptr.GoGC()
+	return _goptr
 }
 
 //export miqt_exec_callback_QRadioTuner_errorWithError
@@ -639,7 +666,11 @@ func (this *QRadioTuner) callVirtualBase_Availability() QMultimedia__Availabilit
 
 }
 func (this *QRadioTuner) OnAvailability(slot func(super func() QMultimedia__AvailabilityStatus) QMultimedia__AvailabilityStatus) {
-	ok := C.QRadioTuner_override_virtual_availability(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QRadioTuner_override_virtual_availability(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -664,7 +695,11 @@ func (this *QRadioTuner) callVirtualBase_IsAvailable() bool {
 
 }
 func (this *QRadioTuner) OnIsAvailable(slot func(super func() bool) bool) {
-	ok := C.QRadioTuner_override_virtual_isAvailable(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QRadioTuner_override_virtual_isAvailable(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -689,7 +724,11 @@ func (this *QRadioTuner) callVirtualBase_Service() *QMediaService {
 
 }
 func (this *QRadioTuner) OnService(slot func(super func() *QMediaService) *QMediaService) {
-	ok := C.QRadioTuner_override_virtual_service(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QRadioTuner_override_virtual_service(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -714,7 +753,11 @@ func (this *QRadioTuner) callVirtualBase_Bind(param1 *qt.QObject) bool {
 
 }
 func (this *QRadioTuner) OnBind(slot func(super func(param1 *qt.QObject) bool, param1 *qt.QObject) bool) {
-	ok := C.QRadioTuner_override_virtual_bind(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QRadioTuner_override_virtual_bind(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -742,7 +785,11 @@ func (this *QRadioTuner) callVirtualBase_Unbind(param1 *qt.QObject) {
 
 }
 func (this *QRadioTuner) OnUnbind(slot func(super func(param1 *qt.QObject), param1 *qt.QObject)) {
-	ok := C.QRadioTuner_override_virtual_unbind(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QRadioTuner_override_virtual_unbind(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -768,7 +815,11 @@ func (this *QRadioTuner) callVirtualBase_Event(event *qt.QEvent) bool {
 
 }
 func (this *QRadioTuner) OnEvent(slot func(super func(event *qt.QEvent) bool, event *qt.QEvent) bool) {
-	ok := C.QRadioTuner_override_virtual_event(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QRadioTuner_override_virtual_event(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -796,7 +847,11 @@ func (this *QRadioTuner) callVirtualBase_EventFilter(watched *qt.QObject, event 
 
 }
 func (this *QRadioTuner) OnEventFilter(slot func(super func(watched *qt.QObject, event *qt.QEvent) bool, watched *qt.QObject, event *qt.QEvent) bool) {
-	ok := C.QRadioTuner_override_virtual_eventFilter(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QRadioTuner_override_virtual_eventFilter(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -826,7 +881,11 @@ func (this *QRadioTuner) callVirtualBase_TimerEvent(event *qt.QTimerEvent) {
 
 }
 func (this *QRadioTuner) OnTimerEvent(slot func(super func(event *qt.QTimerEvent), event *qt.QTimerEvent)) {
-	ok := C.QRadioTuner_override_virtual_timerEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QRadioTuner_override_virtual_timerEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -852,7 +911,11 @@ func (this *QRadioTuner) callVirtualBase_ChildEvent(event *qt.QChildEvent) {
 
 }
 func (this *QRadioTuner) OnChildEvent(slot func(super func(event *qt.QChildEvent), event *qt.QChildEvent)) {
-	ok := C.QRadioTuner_override_virtual_childEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QRadioTuner_override_virtual_childEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -878,7 +941,11 @@ func (this *QRadioTuner) callVirtualBase_CustomEvent(event *qt.QEvent) {
 
 }
 func (this *QRadioTuner) OnCustomEvent(slot func(super func(event *qt.QEvent), event *qt.QEvent)) {
-	ok := C.QRadioTuner_override_virtual_customEvent(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QRadioTuner_override_virtual_customEvent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -904,7 +971,11 @@ func (this *QRadioTuner) callVirtualBase_ConnectNotify(signal *qt.QMetaMethod) {
 
 }
 func (this *QRadioTuner) OnConnectNotify(slot func(super func(signal *qt.QMetaMethod), signal *qt.QMetaMethod)) {
-	ok := C.QRadioTuner_override_virtual_connectNotify(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QRadioTuner_override_virtual_connectNotify(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
@@ -930,7 +1001,11 @@ func (this *QRadioTuner) callVirtualBase_DisconnectNotify(signal *qt.QMetaMethod
 
 }
 func (this *QRadioTuner) OnDisconnectNotify(slot func(super func(signal *qt.QMetaMethod), signal *qt.QMetaMethod)) {
-	ok := C.QRadioTuner_override_virtual_disconnectNotify(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QRadioTuner_override_virtual_disconnectNotify(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}

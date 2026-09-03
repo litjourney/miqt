@@ -24,6 +24,11 @@ const (
 	QwtIntervalSymbol__UserSymbol QwtIntervalSymbol__Style = 1000
 )
 
+//export miqt_exec_callback_handle_release_QwtIntervalSymbol
+func miqt_exec_callback_handle_release_QwtIntervalSymbol(cb C.intptr_t) {
+	cgo.Handle(cb).Delete()
+}
+
 type QwtIntervalSymbol struct {
 	h *C.QwtIntervalSymbol
 }
@@ -140,7 +145,11 @@ func (this *QwtIntervalSymbol) callVirtualBase_Draw(param1 *qt.QPainter, param2 
 
 }
 func (this *QwtIntervalSymbol) OnDraw(slot func(super func(param1 *qt.QPainter, param2 qt.Orientation, from *qt.QPointF, to *qt.QPointF), param1 *qt.QPainter, param2 qt.Orientation, from *qt.QPointF, to *qt.QPointF)) {
-	ok := C.QwtIntervalSymbol_override_virtual_draw(unsafe.Pointer(this.h), C.intptr_t(cgo.NewHandle(slot)))
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+	}
+	ok := C.QwtIntervalSymbol_override_virtual_draw(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
 		panic("miqt: can only override virtual methods for directly constructed types")
 	}
