@@ -1,0 +1,19 @@
+.github/workflows/callback-leak-stress.yml
+  s_64fea63fed100b::t_aa325e76f464c6 28-30
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.23",
+  "base_commit_sha": "e6ee495f1623332959d35f46192f171aa0b12e42",
+  "prompts": {},
+  "sessions": {
+    "s_64fea63fed100b": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a065ca-ada4-7b03-a69b-c6bf4de41004",
+        "model": "gpt-5.6-sol"
+      },
+      "human_author": "doublemine <doublemine@doubleminedeMacBook-Pro.local>"
+    }
+  }
+}
