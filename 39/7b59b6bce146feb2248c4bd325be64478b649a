@@ -1,0 +1,26 @@
+qt/callback_leak_stress_test.go
+  s_64fea63fed100b::t_c27f7fe79a9675 1-43,45-46,50-51,53-56,58-60,64-83,88,91-92,94-95,97-100,107-108,112
+  s_64fea63fed100b::t_2b19dec470f617 44,47-49,52,57,61-63,84-87,89-90,93,96,101-106,109-111
+qt6/callback_leak_stress_test.go
+  s_64fea63fed100b::t_2b19dec470f617 44,47-49,52,57,61-63,84-87,89-90,93,96,101-106,109-111
+  s_64fea63fed100b::t_c27f7fe79a9675 1-43,45-46,50-51,53-56,58-60,64-83,88,91-92,94-95,97-100,107-108,112
+.github/workflows/callback-leak-stress.yml
+  s_64fea63fed100b::t_c27f7fe79a9675 1-10,12-18,20,22-29
+  s_64fea63fed100b::t_3c7594fcc14b48 11,19,21
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.23",
+  "base_commit_sha": "397b59b6bce146feb2248c4bd325be64478b649a",
+  "prompts": {},
+  "sessions": {
+    "s_64fea63fed100b": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a065ca-ada4-7b03-a69b-c6bf4de41004",
+        "model": "gpt-5.6-sol"
+      },
+      "human_author": "doublemine <doublemine@doubleminedeMacBook-Pro.local>"
+    }
+  }
+}
