@@ -1,0 +1,19 @@
+.github/workflows/miqt.yml
+  s_64fea63fed100b::t_4846a9502e4989 9-12
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.23",
+  "base_commit_sha": "878709780e61775f7fb727c6a45231e25efb1c33",
+  "prompts": {},
+  "sessions": {
+    "s_64fea63fed100b": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a065ca-ada4-7b03-a69b-c6bf4de41004",
+        "model": "gpt-5.6-sol"
+      },
+      "human_author": "doublemine <doublemine@doubleminedeMacBook-Pro.local>"
+    }
+  }
+}
