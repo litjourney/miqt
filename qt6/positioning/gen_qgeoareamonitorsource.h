@@ -94,6 +94,7 @@ struct miqt_array /* of QGeoAreaMonitorInfo* */  QGeoAreaMonitorSource_virtualba
 bool QGeoAreaMonitorSource_override_virtual_setBackendProperty(void* self, intptr_t slot);
 bool QGeoAreaMonitorSource_virtualbase_setBackendProperty(void* self, struct miqt_string name, QVariant* value);
 bool QGeoAreaMonitorSource_override_virtual_backendProperty(void* self, intptr_t slot);
+bool QGeoAreaMonitorSource_override_virtual_owned_backendProperty(void* self, intptr_t slot);
 QVariant* QGeoAreaMonitorSource_virtualbase_backendProperty(const void* self, struct miqt_string name);
 bool QGeoAreaMonitorSource_override_virtual_event(void* self, intptr_t slot);
 bool QGeoAreaMonitorSource_virtualbase_event(void* self, QEvent* event);

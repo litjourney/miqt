@@ -209,8 +209,10 @@ void QwtPlot_insertLegend2(QwtPlot* self, QwtAbstractLegend* param1, int param2)
 void QwtPlot_insertLegend3(QwtPlot* self, QwtAbstractLegend* param1, int param2, double ratio);
 
 bool QwtPlot_override_virtual_sizeHint(void* self, intptr_t slot);
+bool QwtPlot_override_virtual_owned_sizeHint(void* self, intptr_t slot);
 QSize* QwtPlot_virtualbase_sizeHint(const void* self);
 bool QwtPlot_override_virtual_minimumSizeHint(void* self, intptr_t slot);
+bool QwtPlot_override_virtual_owned_minimumSizeHint(void* self, intptr_t slot);
 QSize* QwtPlot_virtualbase_minimumSizeHint(const void* self);
 bool QwtPlot_override_virtual_updateLayout(void* self, intptr_t slot);
 void QwtPlot_virtualbase_updateLayout(void* self);
@@ -221,6 +223,7 @@ bool QwtPlot_virtualbase_event(void* self, QEvent* param1);
 bool QwtPlot_override_virtual_eventFilter(void* self, intptr_t slot);
 bool QwtPlot_virtualbase_eventFilter(void* self, QObject* param1, QEvent* param2);
 bool QwtPlot_override_virtual_itemToInfo(void* self, intptr_t slot);
+bool QwtPlot_override_virtual_owned_itemToInfo(void* self, intptr_t slot);
 QVariant* QwtPlot_virtualbase_itemToInfo(const void* self, QwtPlotItem* param1);
 bool QwtPlot_override_virtual_infoToItem(void* self, intptr_t slot);
 QwtPlotItem* QwtPlot_virtualbase_infoToItem(const void* self, QVariant* param1);
@@ -299,6 +302,7 @@ QPainter* QwtPlot_virtualbase_sharedPainter(const void* self);
 bool QwtPlot_override_virtual_inputMethodEvent(void* self, intptr_t slot);
 void QwtPlot_virtualbase_inputMethodEvent(void* self, QInputMethodEvent* param1);
 bool QwtPlot_override_virtual_inputMethodQuery(void* self, intptr_t slot);
+bool QwtPlot_override_virtual_owned_inputMethodQuery(void* self, intptr_t slot);
 QVariant* QwtPlot_virtualbase_inputMethodQuery(const void* self, int param1);
 bool QwtPlot_override_virtual_focusNextPrevChild(void* self, intptr_t slot);
 bool QwtPlot_virtualbase_focusNextPrevChild(void* self, bool next);

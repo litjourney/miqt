@@ -67,6 +67,7 @@ public:
 
 	// cgo.Handle value for overwritten implementation
 	miqt_callback_handle<miqt_exec_callback_handle_release_QIconEngine> handle__actualSize;
+	bool owns_return__actualSize = false;
 
 	// Subclass to allow providing a Go implementation
 	virtual QSize actualSize(const QSize& size, QIcon::Mode mode, QIcon::State state) override {
@@ -82,6 +83,10 @@ public:
 		QIcon::State state_ret = state;
 		int sigval3 = static_cast<int>(state_ret);
 		QSize* callback_return_value = miqt_exec_callback_QIconEngine_actualSize(this, handle__actualSize.value(), sigval1, sigval2, sigval3);
+		std::unique_ptr<QSize> callback_return_value_owner;
+		if (owns_return__actualSize) {
+			callback_return_value_owner.reset(callback_return_value);
+		}
 		return *callback_return_value;
 	}
 
@@ -89,6 +94,7 @@ public:
 
 	// cgo.Handle value for overwritten implementation
 	miqt_callback_handle<miqt_exec_callback_handle_release_QIconEngine> handle__pixmap;
+	bool owns_return__pixmap = false;
 
 	// Subclass to allow providing a Go implementation
 	virtual QPixmap pixmap(const QSize& size, QIcon::Mode mode, QIcon::State state) override {
@@ -104,6 +110,10 @@ public:
 		QIcon::State state_ret = state;
 		int sigval3 = static_cast<int>(state_ret);
 		QPixmap* callback_return_value = miqt_exec_callback_QIconEngine_pixmap(this, handle__pixmap.value(), sigval1, sigval2, sigval3);
+		std::unique_ptr<QPixmap> callback_return_value_owner;
+		if (owns_return__pixmap) {
+			callback_return_value_owner.reset(callback_return_value);
+		}
 		return *callback_return_value;
 	}
 
@@ -399,6 +409,19 @@ bool QIconEngine_override_virtual_actualSize(void* self, intptr_t slot) {
 	}
 
 	self_cast->handle__actualSize = std::move(slot_handle);
+	self_cast->owns_return__actualSize = false;
+	return true;
+}
+
+bool QIconEngine_override_virtual_owned_actualSize(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QIconEngine> slot_handle(slot);
+	MiqtVirtualQIconEngine* self_cast = dynamic_cast<MiqtVirtualQIconEngine*>( (QIconEngine*)(self) );
+	if (self_cast == nullptr) {
+		return false;
+	}
+
+	self_cast->handle__actualSize = std::move(slot_handle);
+	self_cast->owns_return__actualSize = true;
 	return true;
 }
 
@@ -414,6 +437,19 @@ bool QIconEngine_override_virtual_pixmap(void* self, intptr_t slot) {
 	}
 
 	self_cast->handle__pixmap = std::move(slot_handle);
+	self_cast->owns_return__pixmap = false;
+	return true;
+}
+
+bool QIconEngine_override_virtual_owned_pixmap(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QIconEngine> slot_handle(slot);
+	MiqtVirtualQIconEngine* self_cast = dynamic_cast<MiqtVirtualQIconEngine*>( (QIconEngine*)(self) );
+	if (self_cast == nullptr) {
+		return false;
+	}
+
+	self_cast->handle__pixmap = std::move(slot_handle);
+	self_cast->owns_return__pixmap = true;
 	return true;
 }
 

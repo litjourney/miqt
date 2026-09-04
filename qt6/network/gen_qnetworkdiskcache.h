@@ -66,6 +66,7 @@ struct miqt_string QNetworkDiskCache_tr3(const char* s, const char* c, int n);
 bool QNetworkDiskCache_override_virtual_cacheSize(void* self, intptr_t slot);
 long long QNetworkDiskCache_virtualbase_cacheSize(const void* self);
 bool QNetworkDiskCache_override_virtual_metaData(void* self, intptr_t slot);
+bool QNetworkDiskCache_override_virtual_owned_metaData(void* self, intptr_t slot);
 QNetworkCacheMetaData* QNetworkDiskCache_virtualbase_metaData(void* self, QUrl* url);
 bool QNetworkDiskCache_override_virtual_updateMetaData(void* self, intptr_t slot);
 void QNetworkDiskCache_virtualbase_updateMetaData(void* self, QNetworkCacheMetaData* metaData);

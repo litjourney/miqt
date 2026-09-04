@@ -71,6 +71,7 @@ int QNmeaSatelliteInfoSource_virtualbase_error(const void* self);
 bool QNmeaSatelliteInfoSource_override_virtual_setBackendProperty(void* self, intptr_t slot);
 bool QNmeaSatelliteInfoSource_virtualbase_setBackendProperty(void* self, struct miqt_string name, QVariant* value);
 bool QNmeaSatelliteInfoSource_override_virtual_backendProperty(void* self, intptr_t slot);
+bool QNmeaSatelliteInfoSource_override_virtual_owned_backendProperty(void* self, intptr_t slot);
 QVariant* QNmeaSatelliteInfoSource_virtualbase_backendProperty(const void* self, struct miqt_string name);
 bool QNmeaSatelliteInfoSource_override_virtual_startUpdates(void* self, intptr_t slot);
 void QNmeaSatelliteInfoSource_virtualbase_startUpdates(void* self);

@@ -187,8 +187,10 @@ double QInputDialog_getDouble7(QWidget* parent, struct miqt_string title, struct
 double QInputDialog_getDouble8(QWidget* parent, struct miqt_string title, struct miqt_string label, double value, double minValue, double maxValue, int decimals, bool* ok, int flags);
 
 bool QInputDialog_override_virtual_minimumSizeHint(void* self, intptr_t slot);
+bool QInputDialog_override_virtual_owned_minimumSizeHint(void* self, intptr_t slot);
 QSize* QInputDialog_virtualbase_minimumSizeHint(const void* self);
 bool QInputDialog_override_virtual_sizeHint(void* self, intptr_t slot);
+bool QInputDialog_override_virtual_owned_sizeHint(void* self, intptr_t slot);
 QSize* QInputDialog_virtualbase_sizeHint(const void* self);
 bool QInputDialog_override_virtual_setVisible(void* self, intptr_t slot);
 void QInputDialog_virtualbase_setVisible(void* self, bool visible);
@@ -277,6 +279,7 @@ QPainter* QInputDialog_virtualbase_sharedPainter(const void* self);
 bool QInputDialog_override_virtual_inputMethodEvent(void* self, intptr_t slot);
 void QInputDialog_virtualbase_inputMethodEvent(void* self, QInputMethodEvent* param1);
 bool QInputDialog_override_virtual_inputMethodQuery(void* self, intptr_t slot);
+bool QInputDialog_override_virtual_owned_inputMethodQuery(void* self, intptr_t slot);
 QVariant* QInputDialog_virtualbase_inputMethodQuery(const void* self, int param1);
 bool QInputDialog_override_virtual_focusNextPrevChild(void* self, intptr_t slot);
 bool QInputDialog_virtualbase_focusNextPrevChild(void* self, bool next);

@@ -58,6 +58,7 @@ void QwtAbstractScaleDraw_enableComponent2(QwtAbstractScaleDraw* self, int param
 bool QwtAbstractScaleDraw_override_virtual_draw(void* self, intptr_t slot);
 void QwtAbstractScaleDraw_virtualbase_draw(const void* self, QPainter* param1, QPalette* param2);
 bool QwtAbstractScaleDraw_override_virtual_label(void* self, intptr_t slot);
+bool QwtAbstractScaleDraw_override_virtual_owned_label(void* self, intptr_t slot);
 QwtText* QwtAbstractScaleDraw_virtualbase_label(const void* self, double param1);
 bool QwtAbstractScaleDraw_override_virtual_extent(void* self, intptr_t slot);
 double QwtAbstractScaleDraw_virtualbase_extent(const void* self, QFont* font);

@@ -123,6 +123,7 @@ void QScrollArea_ensureWidgetVisible2(QScrollArea* self, QWidget* childWidget, i
 void QScrollArea_ensureWidgetVisible3(QScrollArea* self, QWidget* childWidget, int xmargin, int ymargin);
 
 bool QScrollArea_override_virtual_sizeHint(void* self, intptr_t slot);
+bool QScrollArea_override_virtual_owned_sizeHint(void* self, intptr_t slot);
 QSize* QScrollArea_virtualbase_sizeHint(const void* self);
 bool QScrollArea_override_virtual_focusNextPrevChild(void* self, intptr_t slot);
 bool QScrollArea_virtualbase_focusNextPrevChild(void* self, bool next);
@@ -135,8 +136,10 @@ void QScrollArea_virtualbase_resizeEvent(void* self, QResizeEvent* param1);
 bool QScrollArea_override_virtual_scrollContentsBy(void* self, intptr_t slot);
 void QScrollArea_virtualbase_scrollContentsBy(void* self, int dx, int dy);
 bool QScrollArea_override_virtual_viewportSizeHint(void* self, intptr_t slot);
+bool QScrollArea_override_virtual_owned_viewportSizeHint(void* self, intptr_t slot);
 QSize* QScrollArea_virtualbase_viewportSizeHint(const void* self);
 bool QScrollArea_override_virtual_minimumSizeHint(void* self, intptr_t slot);
+bool QScrollArea_override_virtual_owned_minimumSizeHint(void* self, intptr_t slot);
 QSize* QScrollArea_virtualbase_minimumSizeHint(const void* self);
 bool QScrollArea_override_virtual_setupViewport(void* self, intptr_t slot);
 void QScrollArea_virtualbase_setupViewport(void* self, QWidget* viewport);
@@ -213,6 +216,7 @@ QPainter* QScrollArea_virtualbase_sharedPainter(const void* self);
 bool QScrollArea_override_virtual_inputMethodEvent(void* self, intptr_t slot);
 void QScrollArea_virtualbase_inputMethodEvent(void* self, QInputMethodEvent* param1);
 bool QScrollArea_override_virtual_inputMethodQuery(void* self, intptr_t slot);
+bool QScrollArea_override_virtual_owned_inputMethodQuery(void* self, intptr_t slot);
 QVariant* QScrollArea_virtualbase_inputMethodQuery(const void* self, int param1);
 bool QScrollArea_override_virtual_timerEvent(void* self, intptr_t slot);
 void QScrollArea_virtualbase_timerEvent(void* self, QTimerEvent* event);

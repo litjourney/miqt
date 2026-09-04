@@ -108,8 +108,10 @@ int QDesignerResourceBrowserInterface_virtualbase_devType(const void* self);
 bool QDesignerResourceBrowserInterface_override_virtual_setVisible(void* self, intptr_t slot);
 void QDesignerResourceBrowserInterface_virtualbase_setVisible(void* self, bool visible);
 bool QDesignerResourceBrowserInterface_override_virtual_sizeHint(void* self, intptr_t slot);
+bool QDesignerResourceBrowserInterface_override_virtual_owned_sizeHint(void* self, intptr_t slot);
 QSize* QDesignerResourceBrowserInterface_virtualbase_sizeHint(const void* self);
 bool QDesignerResourceBrowserInterface_override_virtual_minimumSizeHint(void* self, intptr_t slot);
+bool QDesignerResourceBrowserInterface_override_virtual_owned_minimumSizeHint(void* self, intptr_t slot);
 QSize* QDesignerResourceBrowserInterface_virtualbase_minimumSizeHint(const void* self);
 bool QDesignerResourceBrowserInterface_override_virtual_heightForWidth(void* self, intptr_t slot);
 int QDesignerResourceBrowserInterface_virtualbase_heightForWidth(const void* self, int param1);
@@ -182,6 +184,7 @@ QPainter* QDesignerResourceBrowserInterface_virtualbase_sharedPainter(const void
 bool QDesignerResourceBrowserInterface_override_virtual_inputMethodEvent(void* self, intptr_t slot);
 void QDesignerResourceBrowserInterface_virtualbase_inputMethodEvent(void* self, QInputMethodEvent* param1);
 bool QDesignerResourceBrowserInterface_override_virtual_inputMethodQuery(void* self, intptr_t slot);
+bool QDesignerResourceBrowserInterface_override_virtual_owned_inputMethodQuery(void* self, intptr_t slot);
 QVariant* QDesignerResourceBrowserInterface_virtualbase_inputMethodQuery(const void* self, int param1);
 bool QDesignerResourceBrowserInterface_override_virtual_focusNextPrevChild(void* self, intptr_t slot);
 bool QDesignerResourceBrowserInterface_virtualbase_focusNextPrevChild(void* self, bool next);

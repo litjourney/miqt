@@ -74,6 +74,7 @@ int QGeoSatelliteInfoSource_virtualbase_error(const void* self);
 bool QGeoSatelliteInfoSource_override_virtual_setBackendProperty(void* self, intptr_t slot);
 bool QGeoSatelliteInfoSource_virtualbase_setBackendProperty(void* self, struct miqt_string name, QVariant* value);
 bool QGeoSatelliteInfoSource_override_virtual_backendProperty(void* self, intptr_t slot);
+bool QGeoSatelliteInfoSource_override_virtual_owned_backendProperty(void* self, intptr_t slot);
 QVariant* QGeoSatelliteInfoSource_virtualbase_backendProperty(const void* self, struct miqt_string name);
 bool QGeoSatelliteInfoSource_override_virtual_startUpdates(void* self, intptr_t slot);
 void QGeoSatelliteInfoSource_virtualbase_startUpdates(void* self);

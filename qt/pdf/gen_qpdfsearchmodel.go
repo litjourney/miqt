@@ -718,10 +718,16 @@ func (this *QPdfSearchModel) callVirtualBase_Data(index *qt.QModelIndex, role in
 	return _goptr
 
 }
+
+type miqtVirtualCallback_QPdfSearchModel_data struct {
+	callback   func(super func(index *qt.QModelIndex, role int) *qt.QVariant, index *qt.QModelIndex, role int) *qt.QVariant
+	ownsReturn bool
+}
+
 func (this *QPdfSearchModel) OnData(slot func(super func(index *qt.QModelIndex, role int) *qt.QVariant, index *qt.QModelIndex, role int) *qt.QVariant) {
 	var slotHandle C.intptr_t
 	if slot != nil {
-		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QPdfSearchModel_data{callback: slot}))
 	}
 	ok := C.QPdfSearchModel_override_virtual_data(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
@@ -729,12 +735,26 @@ func (this *QPdfSearchModel) OnData(slot func(super func(index *qt.QModelIndex, 
 	}
 }
 
+// OnDataOwned installs a virtual override that transfers
+// ownership of each non-nil returned Qt value object to C++.
+func (this *QPdfSearchModel) OnDataOwned(slot func(super func(index *qt.QModelIndex, role int) *qt.QVariant, index *qt.QModelIndex, role int) *qt.QVariant) {
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QPdfSearchModel_data{callback: slot, ownsReturn: true}))
+	}
+	ok := C.QPdfSearchModel_override_virtual_owned_data(unsafe.Pointer(this.h), slotHandle)
+	if !ok {
+		panic("miqt: can only override virtual methods for directly constructed types")
+	}
+}
+
 //export miqt_exec_callback_QPdfSearchModel_data
 func miqt_exec_callback_QPdfSearchModel_data(self *C.QPdfSearchModel, cb C.intptr_t, index *C.QModelIndex, role C.int) *C.QVariant {
-	gofunc, ok := cgo.Handle(cb).Value().(func(super func(index *qt.QModelIndex, role int) *qt.QVariant, index *qt.QModelIndex, role int) *qt.QVariant)
+	callbackData, ok := cgo.Handle(cb).Value().(miqtVirtualCallback_QPdfSearchModel_data)
 	if !ok {
 		panic("miqt: callback of non-callback type (heap corruption?)")
 	}
+	gofunc := callbackData.callback
 
 	// Convert all CABI parameters to Go parameters
 	slotval1 := qt.UnsafeNewQModelIndex(unsafe.Pointer(index))
@@ -742,6 +762,9 @@ func miqt_exec_callback_QPdfSearchModel_data(self *C.QPdfSearchModel, cb C.intpt
 	slotval2 := (int)(role)
 
 	virtualReturn := gofunc((&QPdfSearchModel{h: self}).callVirtualBase_Data, slotval1, slotval2)
+	if callbackData.ownsReturn && virtualReturn != nil {
+		runtime.SetFinalizer(virtualReturn, nil)
+	}
 
 	return (*C.QVariant)(virtualReturn.UnsafePointer())
 
@@ -784,10 +807,16 @@ func (this *QPdfSearchModel) callVirtualBase_Index(row int, column int, parent *
 	return _goptr
 
 }
+
+type miqtVirtualCallback_QPdfSearchModel_index struct {
+	callback   func(super func(row int, column int, parent *qt.QModelIndex) *qt.QModelIndex, row int, column int, parent *qt.QModelIndex) *qt.QModelIndex
+	ownsReturn bool
+}
+
 func (this *QPdfSearchModel) OnIndex(slot func(super func(row int, column int, parent *qt.QModelIndex) *qt.QModelIndex, row int, column int, parent *qt.QModelIndex) *qt.QModelIndex) {
 	var slotHandle C.intptr_t
 	if slot != nil {
-		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QPdfSearchModel_index{callback: slot}))
 	}
 	ok := C.QPdfSearchModel_override_virtual_index(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
@@ -795,12 +824,26 @@ func (this *QPdfSearchModel) OnIndex(slot func(super func(row int, column int, p
 	}
 }
 
+// OnIndexOwned installs a virtual override that transfers
+// ownership of each non-nil returned Qt value object to C++.
+func (this *QPdfSearchModel) OnIndexOwned(slot func(super func(row int, column int, parent *qt.QModelIndex) *qt.QModelIndex, row int, column int, parent *qt.QModelIndex) *qt.QModelIndex) {
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QPdfSearchModel_index{callback: slot, ownsReturn: true}))
+	}
+	ok := C.QPdfSearchModel_override_virtual_owned_index(unsafe.Pointer(this.h), slotHandle)
+	if !ok {
+		panic("miqt: can only override virtual methods for directly constructed types")
+	}
+}
+
 //export miqt_exec_callback_QPdfSearchModel_index
 func miqt_exec_callback_QPdfSearchModel_index(self *C.QPdfSearchModel, cb C.intptr_t, row C.int, column C.int, parent *C.QModelIndex) *C.QModelIndex {
-	gofunc, ok := cgo.Handle(cb).Value().(func(super func(row int, column int, parent *qt.QModelIndex) *qt.QModelIndex, row int, column int, parent *qt.QModelIndex) *qt.QModelIndex)
+	callbackData, ok := cgo.Handle(cb).Value().(miqtVirtualCallback_QPdfSearchModel_index)
 	if !ok {
 		panic("miqt: callback of non-callback type (heap corruption?)")
 	}
+	gofunc := callbackData.callback
 
 	// Convert all CABI parameters to Go parameters
 	slotval1 := (int)(row)
@@ -810,6 +853,9 @@ func miqt_exec_callback_QPdfSearchModel_index(self *C.QPdfSearchModel, cb C.intp
 	slotval3 := qt.UnsafeNewQModelIndex(unsafe.Pointer(parent))
 
 	virtualReturn := gofunc((&QPdfSearchModel{h: self}).callVirtualBase_Index, slotval1, slotval2, slotval3)
+	if callbackData.ownsReturn && virtualReturn != nil {
+		runtime.SetFinalizer(virtualReturn, nil)
+	}
 
 	return (*C.QModelIndex)(virtualReturn.UnsafePointer())
 
@@ -822,10 +868,16 @@ func (this *QPdfSearchModel) callVirtualBase_Sibling(row int, column int, idx *q
 	return _goptr
 
 }
+
+type miqtVirtualCallback_QPdfSearchModel_sibling struct {
+	callback   func(super func(row int, column int, idx *qt.QModelIndex) *qt.QModelIndex, row int, column int, idx *qt.QModelIndex) *qt.QModelIndex
+	ownsReturn bool
+}
+
 func (this *QPdfSearchModel) OnSibling(slot func(super func(row int, column int, idx *qt.QModelIndex) *qt.QModelIndex, row int, column int, idx *qt.QModelIndex) *qt.QModelIndex) {
 	var slotHandle C.intptr_t
 	if slot != nil {
-		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QPdfSearchModel_sibling{callback: slot}))
 	}
 	ok := C.QPdfSearchModel_override_virtual_sibling(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
@@ -833,12 +885,26 @@ func (this *QPdfSearchModel) OnSibling(slot func(super func(row int, column int,
 	}
 }
 
+// OnSiblingOwned installs a virtual override that transfers
+// ownership of each non-nil returned Qt value object to C++.
+func (this *QPdfSearchModel) OnSiblingOwned(slot func(super func(row int, column int, idx *qt.QModelIndex) *qt.QModelIndex, row int, column int, idx *qt.QModelIndex) *qt.QModelIndex) {
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QPdfSearchModel_sibling{callback: slot, ownsReturn: true}))
+	}
+	ok := C.QPdfSearchModel_override_virtual_owned_sibling(unsafe.Pointer(this.h), slotHandle)
+	if !ok {
+		panic("miqt: can only override virtual methods for directly constructed types")
+	}
+}
+
 //export miqt_exec_callback_QPdfSearchModel_sibling
 func miqt_exec_callback_QPdfSearchModel_sibling(self *C.QPdfSearchModel, cb C.intptr_t, row C.int, column C.int, idx *C.QModelIndex) *C.QModelIndex {
-	gofunc, ok := cgo.Handle(cb).Value().(func(super func(row int, column int, idx *qt.QModelIndex) *qt.QModelIndex, row int, column int, idx *qt.QModelIndex) *qt.QModelIndex)
+	callbackData, ok := cgo.Handle(cb).Value().(miqtVirtualCallback_QPdfSearchModel_sibling)
 	if !ok {
 		panic("miqt: callback of non-callback type (heap corruption?)")
 	}
+	gofunc := callbackData.callback
 
 	// Convert all CABI parameters to Go parameters
 	slotval1 := (int)(row)
@@ -848,6 +914,9 @@ func miqt_exec_callback_QPdfSearchModel_sibling(self *C.QPdfSearchModel, cb C.in
 	slotval3 := qt.UnsafeNewQModelIndex(unsafe.Pointer(idx))
 
 	virtualReturn := gofunc((&QPdfSearchModel{h: self}).callVirtualBase_Sibling, slotval1, slotval2, slotval3)
+	if callbackData.ownsReturn && virtualReturn != nil {
+		runtime.SetFinalizer(virtualReturn, nil)
+	}
 
 	return (*C.QModelIndex)(virtualReturn.UnsafePointer())
 
@@ -968,10 +1037,16 @@ func (this *QPdfSearchModel) callVirtualBase_HeaderData(section int, orientation
 	return _goptr
 
 }
+
+type miqtVirtualCallback_QPdfSearchModel_headerData struct {
+	callback   func(super func(section int, orientation qt.Orientation, role int) *qt.QVariant, section int, orientation qt.Orientation, role int) *qt.QVariant
+	ownsReturn bool
+}
+
 func (this *QPdfSearchModel) OnHeaderData(slot func(super func(section int, orientation qt.Orientation, role int) *qt.QVariant, section int, orientation qt.Orientation, role int) *qt.QVariant) {
 	var slotHandle C.intptr_t
 	if slot != nil {
-		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QPdfSearchModel_headerData{callback: slot}))
 	}
 	ok := C.QPdfSearchModel_override_virtual_headerData(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
@@ -979,12 +1054,26 @@ func (this *QPdfSearchModel) OnHeaderData(slot func(super func(section int, orie
 	}
 }
 
+// OnHeaderDataOwned installs a virtual override that transfers
+// ownership of each non-nil returned Qt value object to C++.
+func (this *QPdfSearchModel) OnHeaderDataOwned(slot func(super func(section int, orientation qt.Orientation, role int) *qt.QVariant, section int, orientation qt.Orientation, role int) *qt.QVariant) {
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QPdfSearchModel_headerData{callback: slot, ownsReturn: true}))
+	}
+	ok := C.QPdfSearchModel_override_virtual_owned_headerData(unsafe.Pointer(this.h), slotHandle)
+	if !ok {
+		panic("miqt: can only override virtual methods for directly constructed types")
+	}
+}
+
 //export miqt_exec_callback_QPdfSearchModel_headerData
 func miqt_exec_callback_QPdfSearchModel_headerData(self *C.QPdfSearchModel, cb C.intptr_t, section C.int, orientation C.int, role C.int) *C.QVariant {
-	gofunc, ok := cgo.Handle(cb).Value().(func(super func(section int, orientation qt.Orientation, role int) *qt.QVariant, section int, orientation qt.Orientation, role int) *qt.QVariant)
+	callbackData, ok := cgo.Handle(cb).Value().(miqtVirtualCallback_QPdfSearchModel_headerData)
 	if !ok {
 		panic("miqt: callback of non-callback type (heap corruption?)")
 	}
+	gofunc := callbackData.callback
 
 	// Convert all CABI parameters to Go parameters
 	slotval1 := (int)(section)
@@ -994,6 +1083,9 @@ func miqt_exec_callback_QPdfSearchModel_headerData(self *C.QPdfSearchModel, cb C
 	slotval3 := (int)(role)
 
 	virtualReturn := gofunc((&QPdfSearchModel{h: self}).callVirtualBase_HeaderData, slotval1, slotval2, slotval3)
+	if callbackData.ownsReturn && virtualReturn != nil {
+		runtime.SetFinalizer(virtualReturn, nil)
+	}
 
 	return (*C.QVariant)(virtualReturn.UnsafePointer())
 
@@ -1672,10 +1764,16 @@ func (this *QPdfSearchModel) callVirtualBase_Buddy(index *qt.QModelIndex) *qt.QM
 	return _goptr
 
 }
+
+type miqtVirtualCallback_QPdfSearchModel_buddy struct {
+	callback   func(super func(index *qt.QModelIndex) *qt.QModelIndex, index *qt.QModelIndex) *qt.QModelIndex
+	ownsReturn bool
+}
+
 func (this *QPdfSearchModel) OnBuddy(slot func(super func(index *qt.QModelIndex) *qt.QModelIndex, index *qt.QModelIndex) *qt.QModelIndex) {
 	var slotHandle C.intptr_t
 	if slot != nil {
-		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QPdfSearchModel_buddy{callback: slot}))
 	}
 	ok := C.QPdfSearchModel_override_virtual_buddy(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
@@ -1683,17 +1781,34 @@ func (this *QPdfSearchModel) OnBuddy(slot func(super func(index *qt.QModelIndex)
 	}
 }
 
+// OnBuddyOwned installs a virtual override that transfers
+// ownership of each non-nil returned Qt value object to C++.
+func (this *QPdfSearchModel) OnBuddyOwned(slot func(super func(index *qt.QModelIndex) *qt.QModelIndex, index *qt.QModelIndex) *qt.QModelIndex) {
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QPdfSearchModel_buddy{callback: slot, ownsReturn: true}))
+	}
+	ok := C.QPdfSearchModel_override_virtual_owned_buddy(unsafe.Pointer(this.h), slotHandle)
+	if !ok {
+		panic("miqt: can only override virtual methods for directly constructed types")
+	}
+}
+
 //export miqt_exec_callback_QPdfSearchModel_buddy
 func miqt_exec_callback_QPdfSearchModel_buddy(self *C.QPdfSearchModel, cb C.intptr_t, index *C.QModelIndex) *C.QModelIndex {
-	gofunc, ok := cgo.Handle(cb).Value().(func(super func(index *qt.QModelIndex) *qt.QModelIndex, index *qt.QModelIndex) *qt.QModelIndex)
+	callbackData, ok := cgo.Handle(cb).Value().(miqtVirtualCallback_QPdfSearchModel_buddy)
 	if !ok {
 		panic("miqt: callback of non-callback type (heap corruption?)")
 	}
+	gofunc := callbackData.callback
 
 	// Convert all CABI parameters to Go parameters
 	slotval1 := qt.UnsafeNewQModelIndex(unsafe.Pointer(index))
 
 	virtualReturn := gofunc((&QPdfSearchModel{h: self}).callVirtualBase_Buddy, slotval1)
+	if callbackData.ownsReturn && virtualReturn != nil {
+		runtime.SetFinalizer(virtualReturn, nil)
+	}
 
 	return (*C.QModelIndex)(virtualReturn.UnsafePointer())
 
@@ -1759,10 +1874,16 @@ func (this *QPdfSearchModel) callVirtualBase_Span(index *qt.QModelIndex) *qt.QSi
 	return _goptr
 
 }
+
+type miqtVirtualCallback_QPdfSearchModel_span struct {
+	callback   func(super func(index *qt.QModelIndex) *qt.QSize, index *qt.QModelIndex) *qt.QSize
+	ownsReturn bool
+}
+
 func (this *QPdfSearchModel) OnSpan(slot func(super func(index *qt.QModelIndex) *qt.QSize, index *qt.QModelIndex) *qt.QSize) {
 	var slotHandle C.intptr_t
 	if slot != nil {
-		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QPdfSearchModel_span{callback: slot}))
 	}
 	ok := C.QPdfSearchModel_override_virtual_span(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
@@ -1770,17 +1891,34 @@ func (this *QPdfSearchModel) OnSpan(slot func(super func(index *qt.QModelIndex) 
 	}
 }
 
+// OnSpanOwned installs a virtual override that transfers
+// ownership of each non-nil returned Qt value object to C++.
+func (this *QPdfSearchModel) OnSpanOwned(slot func(super func(index *qt.QModelIndex) *qt.QSize, index *qt.QModelIndex) *qt.QSize) {
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QPdfSearchModel_span{callback: slot, ownsReturn: true}))
+	}
+	ok := C.QPdfSearchModel_override_virtual_owned_span(unsafe.Pointer(this.h), slotHandle)
+	if !ok {
+		panic("miqt: can only override virtual methods for directly constructed types")
+	}
+}
+
 //export miqt_exec_callback_QPdfSearchModel_span
 func miqt_exec_callback_QPdfSearchModel_span(self *C.QPdfSearchModel, cb C.intptr_t, index *C.QModelIndex) *C.QSize {
-	gofunc, ok := cgo.Handle(cb).Value().(func(super func(index *qt.QModelIndex) *qt.QSize, index *qt.QModelIndex) *qt.QSize)
+	callbackData, ok := cgo.Handle(cb).Value().(miqtVirtualCallback_QPdfSearchModel_span)
 	if !ok {
 		panic("miqt: callback of non-callback type (heap corruption?)")
 	}
+	gofunc := callbackData.callback
 
 	// Convert all CABI parameters to Go parameters
 	slotval1 := qt.UnsafeNewQModelIndex(unsafe.Pointer(index))
 
 	virtualReturn := gofunc((&QPdfSearchModel{h: self}).callVirtualBase_Span, slotval1)
+	if callbackData.ownsReturn && virtualReturn != nil {
+		runtime.SetFinalizer(virtualReturn, nil)
+	}
 
 	return (*C.QSize)(virtualReturn.UnsafePointer())
 

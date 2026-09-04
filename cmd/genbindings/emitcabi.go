@@ -100,6 +100,21 @@ func cabiOverrideVirtualName(c CppClass, m CppMethod) string {
 	return cabiClassName(c.ClassName) + `_override_virtual_` + m.SafeMethodName()
 }
 
+func cabiOverrideVirtualOwnedName(c CppClass, m CppMethod) string {
+	return cabiClassName(c.ClassName) + `_override_virtual_owned_` + m.SafeMethodName()
+}
+
+// virtualCallbackReturnsQtValue reports whether a virtual callback returns a
+// Qt class by value. The C ABI represents these values as pointers, unlike real
+// C++ pointer/reference returns whose ownership must not be changed here.
+func virtualCallbackReturnsQtValue(m CppMethod) bool {
+	return m.ReturnType.QtClassType() &&
+		m.ReturnType.ParameterType != "QString" &&
+		m.ReturnType.ParameterType != "QByteArray" &&
+		!m.ReturnType.Pointer &&
+		!m.ReturnType.ByRef
+}
+
 func cppSubclassName(c CppClass) string {
 	return "MiqtVirtual" + strings.Replace(c.ClassName, `::`, ``, -1)
 }
@@ -945,6 +960,9 @@ extern "C" {
 
 		for _, m := range virtualMethods {
 			ret.WriteString(fmt.Sprintf("bool %s(%s* self, intptr_t slot);\n", cabiOverrideVirtualName(c, m), "void" /*methodPrefixName*/))
+			if virtualCallbackReturnsQtValue(m) {
+				ret.WriteString(fmt.Sprintf("bool %s(%s* self, intptr_t slot);\n", cabiOverrideVirtualOwnedName(c, m), "void" /*methodPrefixName*/))
+			}
 
 			ret.WriteString(fmt.Sprintf("%s %s(%s);\n", m.ReturnType.RenderTypeCabi(), cabiVirtualBaseName(c, m), emitParametersCabi(m, ifv(m.IsConst, "const ", "")+"void" /*className*/ +"*")))
 		}
@@ -1119,7 +1137,7 @@ extern "C" {
 
 				{
 					var maybeReturn, maybeReturn2 string
-					var returnTransformP, returnTransformF, returnFree string
+					var returnTransformP, returnTransformF, returnFree, returnOwner string
 					if !m.ReturnType.Void() {
 						maybeReturn = "return "
 
@@ -1130,6 +1148,12 @@ extern "C" {
 						// The Go callback hands us malloc'd CABI memory and no longer frees it;
 						// free it here after the copy into the C++ return type.
 						returnFree = emitCABI2CppFreeReturn(returnParam, "callback_return_value", "\t\t")
+						if virtualCallbackReturnsQtValue(m) {
+							returnOwner = "\t\tstd::unique_ptr<" + m.ReturnType.ParameterType + "> callback_return_value_owner;\n" +
+								"\t\tif (owns_return__" + m.SafeMethodName() + ") {\n" +
+								"\t\t\tcallback_return_value_owner.reset(callback_return_value);\n" +
+								"\t\t}\n"
+						}
 					}
 
 					handleVarname := "handle__" + m.SafeMethodName()
@@ -1137,6 +1161,7 @@ extern "C" {
 					ret.WriteString(
 						"\t// cgo.Handle value for overwritten implementation\n" +
 							"\tmiqt_callback_handle<" + cabiCallbackReleaseName(c) + "> " + handleVarname + ";\n" +
+							ifv(virtualCallbackReturnsQtValue(m), "\tbool owns_return__"+m.SafeMethodName()+" = false;\n", "") +
 							"\n",
 					)
 
@@ -1181,6 +1206,7 @@ extern "C" {
 							"\t\t" + maybeReturn2 + cabiCallbackName(c, m) + "(" + strings.Join(paramArgs, `, `) + ");\n" +
 							returnTransformP +
 							returnFree +
+							returnOwner +
 							ifv(maybeReturn == "", "", "\t\treturn "+returnTransformF+";") + "\n" +
 							"\t}\n" +
 
@@ -1483,10 +1509,28 @@ extern "C" {
 						"\t}\n" +
 						"\n" +
 						"\tself_cast->handle__" + m.SafeMethodName() + " = std::move(slot_handle);\n" +
+						ifv(virtualCallbackReturnsQtValue(m), "\tself_cast->owns_return__"+m.SafeMethodName()+" = false;\n", "") +
 						"\treturn true;\n" +
 						"}\n" +
 						"\n",
 				)
+
+				if virtualCallbackReturnsQtValue(m) {
+					ret.WriteString(
+						`bool ` + cabiOverrideVirtualOwnedName(c, m) + `(void* self, intptr_t slot) {` + "\n" +
+							"\tmiqt_callback_handle<" + cabiCallbackReleaseName(c) + "> slot_handle(slot);\n" +
+							"\t" + subclassName + "* self_cast = dynamic_cast<" + subclassName + "*>( (" + c.ClassName + "*)(self) );\n" +
+							"\tif (self_cast == nullptr) {\n" +
+							"\t\treturn false;\n" +
+							"\t}\n" +
+							"\n" +
+							"\tself_cast->handle__" + m.SafeMethodName() + " = std::move(slot_handle);\n" +
+							"\tself_cast->owns_return__" + m.SafeMethodName() + " = true;\n" +
+							"\treturn true;\n" +
+							"}\n" +
+							"\n",
+					)
+				}
 
 				// 2. Add CABI function to call the base method
 

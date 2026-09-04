@@ -409,10 +409,16 @@ func (this *QGraphicsEffect) callVirtualBase_BoundingRectFor(sourceRect *QRectF)
 	return _goptr
 
 }
+
+type miqtVirtualCallback_QGraphicsEffect_boundingRectFor struct {
+	callback   func(super func(sourceRect *QRectF) *QRectF, sourceRect *QRectF) *QRectF
+	ownsReturn bool
+}
+
 func (this *QGraphicsEffect) OnBoundingRectFor(slot func(super func(sourceRect *QRectF) *QRectF, sourceRect *QRectF) *QRectF) {
 	var slotHandle C.intptr_t
 	if slot != nil {
-		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QGraphicsEffect_boundingRectFor{callback: slot}))
 	}
 	ok := C.QGraphicsEffect_override_virtual_boundingRectFor(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
@@ -420,17 +426,34 @@ func (this *QGraphicsEffect) OnBoundingRectFor(slot func(super func(sourceRect *
 	}
 }
 
+// OnBoundingRectForOwned installs a virtual override that transfers
+// ownership of each non-nil returned Qt value object to C++.
+func (this *QGraphicsEffect) OnBoundingRectForOwned(slot func(super func(sourceRect *QRectF) *QRectF, sourceRect *QRectF) *QRectF) {
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QGraphicsEffect_boundingRectFor{callback: slot, ownsReturn: true}))
+	}
+	ok := C.QGraphicsEffect_override_virtual_owned_boundingRectFor(unsafe.Pointer(this.h), slotHandle)
+	if !ok {
+		panic("miqt: can only override virtual methods for directly constructed types")
+	}
+}
+
 //export miqt_exec_callback_QGraphicsEffect_boundingRectFor
 func miqt_exec_callback_QGraphicsEffect_boundingRectFor(self *C.QGraphicsEffect, cb C.intptr_t, sourceRect *C.QRectF) *C.QRectF {
-	gofunc, ok := cgo.Handle(cb).Value().(func(super func(sourceRect *QRectF) *QRectF, sourceRect *QRectF) *QRectF)
+	callbackData, ok := cgo.Handle(cb).Value().(miqtVirtualCallback_QGraphicsEffect_boundingRectFor)
 	if !ok {
 		panic("miqt: callback of non-callback type (heap corruption?)")
 	}
+	gofunc := callbackData.callback
 
 	// Convert all CABI parameters to Go parameters
 	slotval1 := newQRectF(sourceRect)
 
 	virtualReturn := gofunc((&QGraphicsEffect{h: self}).callVirtualBase_BoundingRectFor, slotval1)
+	if callbackData.ownsReturn && virtualReturn != nil {
+		runtime.SetFinalizer(virtualReturn, nil)
+	}
 
 	return virtualReturn.cPointer()
 
@@ -1072,10 +1095,16 @@ func (this *QGraphicsColorizeEffect) callVirtualBase_BoundingRectFor(sourceRect 
 	return _goptr
 
 }
+
+type miqtVirtualCallback_QGraphicsColorizeEffect_boundingRectFor struct {
+	callback   func(super func(sourceRect *QRectF) *QRectF, sourceRect *QRectF) *QRectF
+	ownsReturn bool
+}
+
 func (this *QGraphicsColorizeEffect) OnBoundingRectFor(slot func(super func(sourceRect *QRectF) *QRectF, sourceRect *QRectF) *QRectF) {
 	var slotHandle C.intptr_t
 	if slot != nil {
-		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QGraphicsColorizeEffect_boundingRectFor{callback: slot}))
 	}
 	ok := C.QGraphicsColorizeEffect_override_virtual_boundingRectFor(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
@@ -1083,17 +1112,34 @@ func (this *QGraphicsColorizeEffect) OnBoundingRectFor(slot func(super func(sour
 	}
 }
 
+// OnBoundingRectForOwned installs a virtual override that transfers
+// ownership of each non-nil returned Qt value object to C++.
+func (this *QGraphicsColorizeEffect) OnBoundingRectForOwned(slot func(super func(sourceRect *QRectF) *QRectF, sourceRect *QRectF) *QRectF) {
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QGraphicsColorizeEffect_boundingRectFor{callback: slot, ownsReturn: true}))
+	}
+	ok := C.QGraphicsColorizeEffect_override_virtual_owned_boundingRectFor(unsafe.Pointer(this.h), slotHandle)
+	if !ok {
+		panic("miqt: can only override virtual methods for directly constructed types")
+	}
+}
+
 //export miqt_exec_callback_QGraphicsColorizeEffect_boundingRectFor
 func miqt_exec_callback_QGraphicsColorizeEffect_boundingRectFor(self *C.QGraphicsColorizeEffect, cb C.intptr_t, sourceRect *C.QRectF) *C.QRectF {
-	gofunc, ok := cgo.Handle(cb).Value().(func(super func(sourceRect *QRectF) *QRectF, sourceRect *QRectF) *QRectF)
+	callbackData, ok := cgo.Handle(cb).Value().(miqtVirtualCallback_QGraphicsColorizeEffect_boundingRectFor)
 	if !ok {
 		panic("miqt: callback of non-callback type (heap corruption?)")
 	}
+	gofunc := callbackData.callback
 
 	// Convert all CABI parameters to Go parameters
 	slotval1 := newQRectF(sourceRect)
 
 	virtualReturn := gofunc((&QGraphicsColorizeEffect{h: self}).callVirtualBase_BoundingRectFor, slotval1)
+	if callbackData.ownsReturn && virtualReturn != nil {
+		runtime.SetFinalizer(virtualReturn, nil)
+	}
 
 	return virtualReturn.cPointer()
 
@@ -1685,10 +1731,16 @@ func (this *QGraphicsBlurEffect) callVirtualBase_BoundingRectFor(rect *QRectF) *
 	return _goptr
 
 }
+
+type miqtVirtualCallback_QGraphicsBlurEffect_boundingRectFor struct {
+	callback   func(super func(rect *QRectF) *QRectF, rect *QRectF) *QRectF
+	ownsReturn bool
+}
+
 func (this *QGraphicsBlurEffect) OnBoundingRectFor(slot func(super func(rect *QRectF) *QRectF, rect *QRectF) *QRectF) {
 	var slotHandle C.intptr_t
 	if slot != nil {
-		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QGraphicsBlurEffect_boundingRectFor{callback: slot}))
 	}
 	ok := C.QGraphicsBlurEffect_override_virtual_boundingRectFor(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
@@ -1696,17 +1748,34 @@ func (this *QGraphicsBlurEffect) OnBoundingRectFor(slot func(super func(rect *QR
 	}
 }
 
+// OnBoundingRectForOwned installs a virtual override that transfers
+// ownership of each non-nil returned Qt value object to C++.
+func (this *QGraphicsBlurEffect) OnBoundingRectForOwned(slot func(super func(rect *QRectF) *QRectF, rect *QRectF) *QRectF) {
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QGraphicsBlurEffect_boundingRectFor{callback: slot, ownsReturn: true}))
+	}
+	ok := C.QGraphicsBlurEffect_override_virtual_owned_boundingRectFor(unsafe.Pointer(this.h), slotHandle)
+	if !ok {
+		panic("miqt: can only override virtual methods for directly constructed types")
+	}
+}
+
 //export miqt_exec_callback_QGraphicsBlurEffect_boundingRectFor
 func miqt_exec_callback_QGraphicsBlurEffect_boundingRectFor(self *C.QGraphicsBlurEffect, cb C.intptr_t, rect *C.QRectF) *C.QRectF {
-	gofunc, ok := cgo.Handle(cb).Value().(func(super func(rect *QRectF) *QRectF, rect *QRectF) *QRectF)
+	callbackData, ok := cgo.Handle(cb).Value().(miqtVirtualCallback_QGraphicsBlurEffect_boundingRectFor)
 	if !ok {
 		panic("miqt: callback of non-callback type (heap corruption?)")
 	}
+	gofunc := callbackData.callback
 
 	// Convert all CABI parameters to Go parameters
 	slotval1 := newQRectF(rect)
 
 	virtualReturn := gofunc((&QGraphicsBlurEffect{h: self}).callVirtualBase_BoundingRectFor, slotval1)
+	if callbackData.ownsReturn && virtualReturn != nil {
+		runtime.SetFinalizer(virtualReturn, nil)
+	}
 
 	return virtualReturn.cPointer()
 
@@ -2386,10 +2455,16 @@ func (this *QGraphicsDropShadowEffect) callVirtualBase_BoundingRectFor(rect *QRe
 	return _goptr
 
 }
+
+type miqtVirtualCallback_QGraphicsDropShadowEffect_boundingRectFor struct {
+	callback   func(super func(rect *QRectF) *QRectF, rect *QRectF) *QRectF
+	ownsReturn bool
+}
+
 func (this *QGraphicsDropShadowEffect) OnBoundingRectFor(slot func(super func(rect *QRectF) *QRectF, rect *QRectF) *QRectF) {
 	var slotHandle C.intptr_t
 	if slot != nil {
-		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QGraphicsDropShadowEffect_boundingRectFor{callback: slot}))
 	}
 	ok := C.QGraphicsDropShadowEffect_override_virtual_boundingRectFor(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
@@ -2397,17 +2472,34 @@ func (this *QGraphicsDropShadowEffect) OnBoundingRectFor(slot func(super func(re
 	}
 }
 
+// OnBoundingRectForOwned installs a virtual override that transfers
+// ownership of each non-nil returned Qt value object to C++.
+func (this *QGraphicsDropShadowEffect) OnBoundingRectForOwned(slot func(super func(rect *QRectF) *QRectF, rect *QRectF) *QRectF) {
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QGraphicsDropShadowEffect_boundingRectFor{callback: slot, ownsReturn: true}))
+	}
+	ok := C.QGraphicsDropShadowEffect_override_virtual_owned_boundingRectFor(unsafe.Pointer(this.h), slotHandle)
+	if !ok {
+		panic("miqt: can only override virtual methods for directly constructed types")
+	}
+}
+
 //export miqt_exec_callback_QGraphicsDropShadowEffect_boundingRectFor
 func miqt_exec_callback_QGraphicsDropShadowEffect_boundingRectFor(self *C.QGraphicsDropShadowEffect, cb C.intptr_t, rect *C.QRectF) *C.QRectF {
-	gofunc, ok := cgo.Handle(cb).Value().(func(super func(rect *QRectF) *QRectF, rect *QRectF) *QRectF)
+	callbackData, ok := cgo.Handle(cb).Value().(miqtVirtualCallback_QGraphicsDropShadowEffect_boundingRectFor)
 	if !ok {
 		panic("miqt: callback of non-callback type (heap corruption?)")
 	}
+	gofunc := callbackData.callback
 
 	// Convert all CABI parameters to Go parameters
 	slotval1 := newQRectF(rect)
 
 	virtualReturn := gofunc((&QGraphicsDropShadowEffect{h: self}).callVirtualBase_BoundingRectFor, slotval1)
+	if callbackData.ownsReturn && virtualReturn != nil {
+		runtime.SetFinalizer(virtualReturn, nil)
+	}
 
 	return virtualReturn.cPointer()
 
@@ -3055,10 +3147,16 @@ func (this *QGraphicsOpacityEffect) callVirtualBase_BoundingRectFor(sourceRect *
 	return _goptr
 
 }
+
+type miqtVirtualCallback_QGraphicsOpacityEffect_boundingRectFor struct {
+	callback   func(super func(sourceRect *QRectF) *QRectF, sourceRect *QRectF) *QRectF
+	ownsReturn bool
+}
+
 func (this *QGraphicsOpacityEffect) OnBoundingRectFor(slot func(super func(sourceRect *QRectF) *QRectF, sourceRect *QRectF) *QRectF) {
 	var slotHandle C.intptr_t
 	if slot != nil {
-		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QGraphicsOpacityEffect_boundingRectFor{callback: slot}))
 	}
 	ok := C.QGraphicsOpacityEffect_override_virtual_boundingRectFor(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
@@ -3066,17 +3164,34 @@ func (this *QGraphicsOpacityEffect) OnBoundingRectFor(slot func(super func(sourc
 	}
 }
 
+// OnBoundingRectForOwned installs a virtual override that transfers
+// ownership of each non-nil returned Qt value object to C++.
+func (this *QGraphicsOpacityEffect) OnBoundingRectForOwned(slot func(super func(sourceRect *QRectF) *QRectF, sourceRect *QRectF) *QRectF) {
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QGraphicsOpacityEffect_boundingRectFor{callback: slot, ownsReturn: true}))
+	}
+	ok := C.QGraphicsOpacityEffect_override_virtual_owned_boundingRectFor(unsafe.Pointer(this.h), slotHandle)
+	if !ok {
+		panic("miqt: can only override virtual methods for directly constructed types")
+	}
+}
+
 //export miqt_exec_callback_QGraphicsOpacityEffect_boundingRectFor
 func miqt_exec_callback_QGraphicsOpacityEffect_boundingRectFor(self *C.QGraphicsOpacityEffect, cb C.intptr_t, sourceRect *C.QRectF) *C.QRectF {
-	gofunc, ok := cgo.Handle(cb).Value().(func(super func(sourceRect *QRectF) *QRectF, sourceRect *QRectF) *QRectF)
+	callbackData, ok := cgo.Handle(cb).Value().(miqtVirtualCallback_QGraphicsOpacityEffect_boundingRectFor)
 	if !ok {
 		panic("miqt: callback of non-callback type (heap corruption?)")
 	}
+	gofunc := callbackData.callback
 
 	// Convert all CABI parameters to Go parameters
 	slotval1 := newQRectF(sourceRect)
 
 	virtualReturn := gofunc((&QGraphicsOpacityEffect{h: self}).callVirtualBase_BoundingRectFor, slotval1)
+	if callbackData.ownsReturn && virtualReturn != nil {
+		runtime.SetFinalizer(virtualReturn, nil)
+	}
 
 	return virtualReturn.cPointer()
 

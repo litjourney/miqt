@@ -663,10 +663,16 @@ func (this *QTabBar) callVirtualBase_SizeHint() *QSize {
 	return _goptr
 
 }
+
+type miqtVirtualCallback_QTabBar_sizeHint struct {
+	callback   func(super func() *QSize) *QSize
+	ownsReturn bool
+}
+
 func (this *QTabBar) OnSizeHint(slot func(super func() *QSize) *QSize) {
 	var slotHandle C.intptr_t
 	if slot != nil {
-		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QTabBar_sizeHint{callback: slot}))
 	}
 	ok := C.QTabBar_override_virtual_sizeHint(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
@@ -674,14 +680,31 @@ func (this *QTabBar) OnSizeHint(slot func(super func() *QSize) *QSize) {
 	}
 }
 
+// OnSizeHintOwned installs a virtual override that transfers
+// ownership of each non-nil returned Qt value object to C++.
+func (this *QTabBar) OnSizeHintOwned(slot func(super func() *QSize) *QSize) {
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QTabBar_sizeHint{callback: slot, ownsReturn: true}))
+	}
+	ok := C.QTabBar_override_virtual_owned_sizeHint(unsafe.Pointer(this.h), slotHandle)
+	if !ok {
+		panic("miqt: can only override virtual methods for directly constructed types")
+	}
+}
+
 //export miqt_exec_callback_QTabBar_sizeHint
 func miqt_exec_callback_QTabBar_sizeHint(self *C.QTabBar, cb C.intptr_t) *C.QSize {
-	gofunc, ok := cgo.Handle(cb).Value().(func(super func() *QSize) *QSize)
+	callbackData, ok := cgo.Handle(cb).Value().(miqtVirtualCallback_QTabBar_sizeHint)
 	if !ok {
 		panic("miqt: callback of non-callback type (heap corruption?)")
 	}
+	gofunc := callbackData.callback
 
 	virtualReturn := gofunc((&QTabBar{h: self}).callVirtualBase_SizeHint)
+	if callbackData.ownsReturn && virtualReturn != nil {
+		runtime.SetFinalizer(virtualReturn, nil)
+	}
 
 	return virtualReturn.cPointer()
 
@@ -694,10 +717,16 @@ func (this *QTabBar) callVirtualBase_MinimumSizeHint() *QSize {
 	return _goptr
 
 }
+
+type miqtVirtualCallback_QTabBar_minimumSizeHint struct {
+	callback   func(super func() *QSize) *QSize
+	ownsReturn bool
+}
+
 func (this *QTabBar) OnMinimumSizeHint(slot func(super func() *QSize) *QSize) {
 	var slotHandle C.intptr_t
 	if slot != nil {
-		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QTabBar_minimumSizeHint{callback: slot}))
 	}
 	ok := C.QTabBar_override_virtual_minimumSizeHint(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
@@ -705,14 +734,31 @@ func (this *QTabBar) OnMinimumSizeHint(slot func(super func() *QSize) *QSize) {
 	}
 }
 
+// OnMinimumSizeHintOwned installs a virtual override that transfers
+// ownership of each non-nil returned Qt value object to C++.
+func (this *QTabBar) OnMinimumSizeHintOwned(slot func(super func() *QSize) *QSize) {
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QTabBar_minimumSizeHint{callback: slot, ownsReturn: true}))
+	}
+	ok := C.QTabBar_override_virtual_owned_minimumSizeHint(unsafe.Pointer(this.h), slotHandle)
+	if !ok {
+		panic("miqt: can only override virtual methods for directly constructed types")
+	}
+}
+
 //export miqt_exec_callback_QTabBar_minimumSizeHint
 func miqt_exec_callback_QTabBar_minimumSizeHint(self *C.QTabBar, cb C.intptr_t) *C.QSize {
-	gofunc, ok := cgo.Handle(cb).Value().(func(super func() *QSize) *QSize)
+	callbackData, ok := cgo.Handle(cb).Value().(miqtVirtualCallback_QTabBar_minimumSizeHint)
 	if !ok {
 		panic("miqt: callback of non-callback type (heap corruption?)")
 	}
+	gofunc := callbackData.callback
 
 	virtualReturn := gofunc((&QTabBar{h: self}).callVirtualBase_MinimumSizeHint)
+	if callbackData.ownsReturn && virtualReturn != nil {
+		runtime.SetFinalizer(virtualReturn, nil)
+	}
 
 	return virtualReturn.cPointer()
 
@@ -725,10 +771,16 @@ func (this *QTabBar) callVirtualBase_TabSizeHint(index int) *QSize {
 	return _goptr
 
 }
+
+type miqtVirtualCallback_QTabBar_tabSizeHint struct {
+	callback   func(super func(index int) *QSize, index int) *QSize
+	ownsReturn bool
+}
+
 func (this *QTabBar) OnTabSizeHint(slot func(super func(index int) *QSize, index int) *QSize) {
 	var slotHandle C.intptr_t
 	if slot != nil {
-		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QTabBar_tabSizeHint{callback: slot}))
 	}
 	ok := C.QTabBar_override_virtual_tabSizeHint(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
@@ -736,17 +788,34 @@ func (this *QTabBar) OnTabSizeHint(slot func(super func(index int) *QSize, index
 	}
 }
 
+// OnTabSizeHintOwned installs a virtual override that transfers
+// ownership of each non-nil returned Qt value object to C++.
+func (this *QTabBar) OnTabSizeHintOwned(slot func(super func(index int) *QSize, index int) *QSize) {
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QTabBar_tabSizeHint{callback: slot, ownsReturn: true}))
+	}
+	ok := C.QTabBar_override_virtual_owned_tabSizeHint(unsafe.Pointer(this.h), slotHandle)
+	if !ok {
+		panic("miqt: can only override virtual methods for directly constructed types")
+	}
+}
+
 //export miqt_exec_callback_QTabBar_tabSizeHint
 func miqt_exec_callback_QTabBar_tabSizeHint(self *C.QTabBar, cb C.intptr_t, index C.int) *C.QSize {
-	gofunc, ok := cgo.Handle(cb).Value().(func(super func(index int) *QSize, index int) *QSize)
+	callbackData, ok := cgo.Handle(cb).Value().(miqtVirtualCallback_QTabBar_tabSizeHint)
 	if !ok {
 		panic("miqt: callback of non-callback type (heap corruption?)")
 	}
+	gofunc := callbackData.callback
 
 	// Convert all CABI parameters to Go parameters
 	slotval1 := (int)(index)
 
 	virtualReturn := gofunc((&QTabBar{h: self}).callVirtualBase_TabSizeHint, slotval1)
+	if callbackData.ownsReturn && virtualReturn != nil {
+		runtime.SetFinalizer(virtualReturn, nil)
+	}
 
 	return virtualReturn.cPointer()
 
@@ -759,10 +828,16 @@ func (this *QTabBar) callVirtualBase_MinimumTabSizeHint(index int) *QSize {
 	return _goptr
 
 }
+
+type miqtVirtualCallback_QTabBar_minimumTabSizeHint struct {
+	callback   func(super func(index int) *QSize, index int) *QSize
+	ownsReturn bool
+}
+
 func (this *QTabBar) OnMinimumTabSizeHint(slot func(super func(index int) *QSize, index int) *QSize) {
 	var slotHandle C.intptr_t
 	if slot != nil {
-		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QTabBar_minimumTabSizeHint{callback: slot}))
 	}
 	ok := C.QTabBar_override_virtual_minimumTabSizeHint(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
@@ -770,17 +845,34 @@ func (this *QTabBar) OnMinimumTabSizeHint(slot func(super func(index int) *QSize
 	}
 }
 
+// OnMinimumTabSizeHintOwned installs a virtual override that transfers
+// ownership of each non-nil returned Qt value object to C++.
+func (this *QTabBar) OnMinimumTabSizeHintOwned(slot func(super func(index int) *QSize, index int) *QSize) {
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QTabBar_minimumTabSizeHint{callback: slot, ownsReturn: true}))
+	}
+	ok := C.QTabBar_override_virtual_owned_minimumTabSizeHint(unsafe.Pointer(this.h), slotHandle)
+	if !ok {
+		panic("miqt: can only override virtual methods for directly constructed types")
+	}
+}
+
 //export miqt_exec_callback_QTabBar_minimumTabSizeHint
 func miqt_exec_callback_QTabBar_minimumTabSizeHint(self *C.QTabBar, cb C.intptr_t, index C.int) *C.QSize {
-	gofunc, ok := cgo.Handle(cb).Value().(func(super func(index int) *QSize, index int) *QSize)
+	callbackData, ok := cgo.Handle(cb).Value().(miqtVirtualCallback_QTabBar_minimumTabSizeHint)
 	if !ok {
 		panic("miqt: callback of non-callback type (heap corruption?)")
 	}
+	gofunc := callbackData.callback
 
 	// Convert all CABI parameters to Go parameters
 	slotval1 := (int)(index)
 
 	virtualReturn := gofunc((&QTabBar{h: self}).callVirtualBase_MinimumTabSizeHint, slotval1)
+	if callbackData.ownsReturn && virtualReturn != nil {
+		runtime.SetFinalizer(virtualReturn, nil)
+	}
 
 	return virtualReturn.cPointer()
 
@@ -2071,10 +2163,16 @@ func (this *QTabBar) callVirtualBase_InputMethodQuery(param1 InputMethodQuery) *
 	return _goptr
 
 }
+
+type miqtVirtualCallback_QTabBar_inputMethodQuery struct {
+	callback   func(super func(param1 InputMethodQuery) *QVariant, param1 InputMethodQuery) *QVariant
+	ownsReturn bool
+}
+
 func (this *QTabBar) OnInputMethodQuery(slot func(super func(param1 InputMethodQuery) *QVariant, param1 InputMethodQuery) *QVariant) {
 	var slotHandle C.intptr_t
 	if slot != nil {
-		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QTabBar_inputMethodQuery{callback: slot}))
 	}
 	ok := C.QTabBar_override_virtual_inputMethodQuery(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
@@ -2082,17 +2180,34 @@ func (this *QTabBar) OnInputMethodQuery(slot func(super func(param1 InputMethodQ
 	}
 }
 
+// OnInputMethodQueryOwned installs a virtual override that transfers
+// ownership of each non-nil returned Qt value object to C++.
+func (this *QTabBar) OnInputMethodQueryOwned(slot func(super func(param1 InputMethodQuery) *QVariant, param1 InputMethodQuery) *QVariant) {
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QTabBar_inputMethodQuery{callback: slot, ownsReturn: true}))
+	}
+	ok := C.QTabBar_override_virtual_owned_inputMethodQuery(unsafe.Pointer(this.h), slotHandle)
+	if !ok {
+		panic("miqt: can only override virtual methods for directly constructed types")
+	}
+}
+
 //export miqt_exec_callback_QTabBar_inputMethodQuery
 func miqt_exec_callback_QTabBar_inputMethodQuery(self *C.QTabBar, cb C.intptr_t, param1 C.int) *C.QVariant {
-	gofunc, ok := cgo.Handle(cb).Value().(func(super func(param1 InputMethodQuery) *QVariant, param1 InputMethodQuery) *QVariant)
+	callbackData, ok := cgo.Handle(cb).Value().(miqtVirtualCallback_QTabBar_inputMethodQuery)
 	if !ok {
 		panic("miqt: callback of non-callback type (heap corruption?)")
 	}
+	gofunc := callbackData.callback
 
 	// Convert all CABI parameters to Go parameters
 	slotval1 := (InputMethodQuery)(param1)
 
 	virtualReturn := gofunc((&QTabBar{h: self}).callVirtualBase_InputMethodQuery, slotval1)
+	if callbackData.ownsReturn && virtualReturn != nil {
+		runtime.SetFinalizer(virtualReturn, nil)
+	}
 
 	return virtualReturn.cPointer()
 

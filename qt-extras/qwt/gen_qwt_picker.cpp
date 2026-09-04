@@ -99,6 +99,7 @@ public:
 
 	// cgo.Handle value for overwritten implementation
 	miqt_callback_handle<miqt_exec_callback_handle_release_QwtPicker> handle__pickArea;
+	bool owns_return__pickArea = false;
 
 	// Subclass to allow providing a Go implementation
 	virtual QPainterPath pickArea() const override {
@@ -107,6 +108,10 @@ public:
 		}
 
 		QPainterPath* callback_return_value = miqt_exec_callback_QwtPicker_pickArea(this, handle__pickArea.value());
+		std::unique_ptr<QPainterPath> callback_return_value_owner;
+		if (owns_return__pickArea) {
+			callback_return_value_owner.reset(callback_return_value);
+		}
 		return *callback_return_value;
 	}
 
@@ -148,6 +153,7 @@ public:
 
 	// cgo.Handle value for overwritten implementation
 	miqt_callback_handle<miqt_exec_callback_handle_release_QwtPicker> handle__rubberBandMask;
+	bool owns_return__rubberBandMask = false;
 
 	// Subclass to allow providing a Go implementation
 	virtual QRegion rubberBandMask() const override {
@@ -156,6 +162,10 @@ public:
 		}
 
 		QRegion* callback_return_value = miqt_exec_callback_QwtPicker_rubberBandMask(this, handle__rubberBandMask.value());
+		std::unique_ptr<QRegion> callback_return_value_owner;
+		if (owns_return__rubberBandMask) {
+			callback_return_value_owner.reset(callback_return_value);
+		}
 		return *callback_return_value;
 	}
 
@@ -163,6 +173,7 @@ public:
 
 	// cgo.Handle value for overwritten implementation
 	miqt_callback_handle<miqt_exec_callback_handle_release_QwtPicker> handle__trackerText;
+	bool owns_return__trackerText = false;
 
 	// Subclass to allow providing a Go implementation
 	virtual QwtText trackerText(const QPoint& pos) const override {
@@ -174,6 +185,10 @@ public:
 		// Cast returned reference into pointer
 		QPoint* sigval1 = const_cast<QPoint*>(&pos_ret);
 		QwtText* callback_return_value = miqt_exec_callback_QwtPicker_trackerText(this, handle__trackerText.value(), sigval1);
+		std::unique_ptr<QwtText> callback_return_value_owner;
+		if (owns_return__trackerText) {
+			callback_return_value_owner.reset(callback_return_value);
+		}
 		return *callback_return_value;
 	}
 
@@ -181,6 +196,7 @@ public:
 
 	// cgo.Handle value for overwritten implementation
 	miqt_callback_handle<miqt_exec_callback_handle_release_QwtPicker> handle__trackerRect;
+	bool owns_return__trackerRect = false;
 
 	// Subclass to allow providing a Go implementation
 	virtual QRect trackerRect(const QFont& param1) const override {
@@ -192,6 +208,10 @@ public:
 		// Cast returned reference into pointer
 		QFont* sigval1 = const_cast<QFont*>(&param1_ret);
 		QRect* callback_return_value = miqt_exec_callback_QwtPicker_trackerRect(this, handle__trackerRect.value(), sigval1);
+		std::unique_ptr<QRect> callback_return_value_owner;
+		if (owns_return__trackerRect) {
+			callback_return_value_owner.reset(callback_return_value);
+		}
 		return *callback_return_value;
 	}
 
@@ -942,6 +962,19 @@ bool QwtPicker_override_virtual_pickArea(void* self, intptr_t slot) {
 	}
 
 	self_cast->handle__pickArea = std::move(slot_handle);
+	self_cast->owns_return__pickArea = false;
+	return true;
+}
+
+bool QwtPicker_override_virtual_owned_pickArea(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtPicker> slot_handle(slot);
+	MiqtVirtualQwtPicker* self_cast = dynamic_cast<MiqtVirtualQwtPicker*>( (QwtPicker*)(self) );
+	if (self_cast == nullptr) {
+		return false;
+	}
+
+	self_cast->handle__pickArea = std::move(slot_handle);
+	self_cast->owns_return__pickArea = true;
 	return true;
 }
 
@@ -987,6 +1020,19 @@ bool QwtPicker_override_virtual_rubberBandMask(void* self, intptr_t slot) {
 	}
 
 	self_cast->handle__rubberBandMask = std::move(slot_handle);
+	self_cast->owns_return__rubberBandMask = false;
+	return true;
+}
+
+bool QwtPicker_override_virtual_owned_rubberBandMask(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtPicker> slot_handle(slot);
+	MiqtVirtualQwtPicker* self_cast = dynamic_cast<MiqtVirtualQwtPicker*>( (QwtPicker*)(self) );
+	if (self_cast == nullptr) {
+		return false;
+	}
+
+	self_cast->handle__rubberBandMask = std::move(slot_handle);
+	self_cast->owns_return__rubberBandMask = true;
 	return true;
 }
 
@@ -1002,6 +1048,19 @@ bool QwtPicker_override_virtual_trackerText(void* self, intptr_t slot) {
 	}
 
 	self_cast->handle__trackerText = std::move(slot_handle);
+	self_cast->owns_return__trackerText = false;
+	return true;
+}
+
+bool QwtPicker_override_virtual_owned_trackerText(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtPicker> slot_handle(slot);
+	MiqtVirtualQwtPicker* self_cast = dynamic_cast<MiqtVirtualQwtPicker*>( (QwtPicker*)(self) );
+	if (self_cast == nullptr) {
+		return false;
+	}
+
+	self_cast->handle__trackerText = std::move(slot_handle);
+	self_cast->owns_return__trackerText = true;
 	return true;
 }
 
@@ -1017,6 +1076,19 @@ bool QwtPicker_override_virtual_trackerRect(void* self, intptr_t slot) {
 	}
 
 	self_cast->handle__trackerRect = std::move(slot_handle);
+	self_cast->owns_return__trackerRect = false;
+	return true;
+}
+
+bool QwtPicker_override_virtual_owned_trackerRect(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtPicker> slot_handle(slot);
+	MiqtVirtualQwtPicker* self_cast = dynamic_cast<MiqtVirtualQwtPicker*>( (QwtPicker*)(self) );
+	if (self_cast == nullptr) {
+		return false;
+	}
+
+	self_cast->handle__trackerRect = std::move(slot_handle);
+	self_cast->owns_return__trackerRect = true;
 	return true;
 }
 

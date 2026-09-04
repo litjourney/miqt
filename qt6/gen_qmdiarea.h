@@ -153,8 +153,10 @@ QMdiSubWindow* QMdiArea_addSubWindow2(QMdiArea* self, QWidget* widget, int flags
 void QMdiArea_setOption2(QMdiArea* self, int option, bool on);
 
 bool QMdiArea_override_virtual_sizeHint(void* self, intptr_t slot);
+bool QMdiArea_override_virtual_owned_sizeHint(void* self, intptr_t slot);
 QSize* QMdiArea_virtualbase_sizeHint(const void* self);
 bool QMdiArea_override_virtual_minimumSizeHint(void* self, intptr_t slot);
+bool QMdiArea_override_virtual_owned_minimumSizeHint(void* self, intptr_t slot);
 QSize* QMdiArea_virtualbase_minimumSizeHint(const void* self);
 bool QMdiArea_override_virtual_setupViewport(void* self, intptr_t slot);
 void QMdiArea_virtualbase_setupViewport(void* self, QWidget* viewport);
@@ -199,6 +201,7 @@ void QMdiArea_virtualbase_dropEvent(void* self, QDropEvent* param1);
 bool QMdiArea_override_virtual_keyPressEvent(void* self, intptr_t slot);
 void QMdiArea_virtualbase_keyPressEvent(void* self, QKeyEvent* param1);
 bool QMdiArea_override_virtual_viewportSizeHint(void* self, intptr_t slot);
+bool QMdiArea_override_virtual_owned_viewportSizeHint(void* self, intptr_t slot);
 QSize* QMdiArea_virtualbase_viewportSizeHint(const void* self);
 bool QMdiArea_override_virtual_changeEvent(void* self, intptr_t slot);
 void QMdiArea_virtualbase_changeEvent(void* self, QEvent* param1);
@@ -247,6 +250,7 @@ QPainter* QMdiArea_virtualbase_sharedPainter(const void* self);
 bool QMdiArea_override_virtual_inputMethodEvent(void* self, intptr_t slot);
 void QMdiArea_virtualbase_inputMethodEvent(void* self, QInputMethodEvent* param1);
 bool QMdiArea_override_virtual_inputMethodQuery(void* self, intptr_t slot);
+bool QMdiArea_override_virtual_owned_inputMethodQuery(void* self, intptr_t slot);
 QVariant* QMdiArea_virtualbase_inputMethodQuery(const void* self, int param1);
 bool QMdiArea_override_virtual_focusNextPrevChild(void* self, intptr_t slot);
 bool QMdiArea_virtualbase_focusNextPrevChild(void* self, bool next);

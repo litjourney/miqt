@@ -310,10 +310,16 @@ func miqt_exec_callback_QwtScaleEngine_autoScale(self *C.QwtScaleEngine, cb C.in
 	gofunc(slotval1, slotval2, slotval3, slotval4)
 
 }
+
+type miqtVirtualCallback_QwtScaleEngine_divideScale struct {
+	callback   func(x1 float64, x2 float64, maxMajorSteps int, maxMinorSteps int, stepSize float64) *QwtScaleDiv
+	ownsReturn bool
+}
+
 func (this *QwtScaleEngine) OnDivideScale(slot func(x1 float64, x2 float64, maxMajorSteps int, maxMinorSteps int, stepSize float64) *QwtScaleDiv) {
 	var slotHandle C.intptr_t
 	if slot != nil {
-		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QwtScaleEngine_divideScale{callback: slot}))
 	}
 	ok := C.QwtScaleEngine_override_virtual_divideScale(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
@@ -321,12 +327,26 @@ func (this *QwtScaleEngine) OnDivideScale(slot func(x1 float64, x2 float64, maxM
 	}
 }
 
+// OnDivideScaleOwned installs a virtual override that transfers
+// ownership of each non-nil returned Qt value object to C++.
+func (this *QwtScaleEngine) OnDivideScaleOwned(slot func(x1 float64, x2 float64, maxMajorSteps int, maxMinorSteps int, stepSize float64) *QwtScaleDiv) {
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QwtScaleEngine_divideScale{callback: slot, ownsReturn: true}))
+	}
+	ok := C.QwtScaleEngine_override_virtual_owned_divideScale(unsafe.Pointer(this.h), slotHandle)
+	if !ok {
+		panic("miqt: can only override virtual methods for directly constructed types")
+	}
+}
+
 //export miqt_exec_callback_QwtScaleEngine_divideScale
 func miqt_exec_callback_QwtScaleEngine_divideScale(self *C.QwtScaleEngine, cb C.intptr_t, x1 C.double, x2 C.double, maxMajorSteps C.int, maxMinorSteps C.int, stepSize C.double) *C.QwtScaleDiv {
-	gofunc, ok := cgo.Handle(cb).Value().(func(x1 float64, x2 float64, maxMajorSteps int, maxMinorSteps int, stepSize float64) *QwtScaleDiv)
+	callbackData, ok := cgo.Handle(cb).Value().(miqtVirtualCallback_QwtScaleEngine_divideScale)
 	if !ok {
 		panic("miqt: callback of non-callback type (heap corruption?)")
 	}
+	gofunc := callbackData.callback
 
 	// Convert all CABI parameters to Go parameters
 	slotval1 := (float64)(x1)
@@ -340,6 +360,9 @@ func miqt_exec_callback_QwtScaleEngine_divideScale(self *C.QwtScaleEngine, cb C.
 	slotval5 := (float64)(stepSize)
 
 	virtualReturn := gofunc(slotval1, slotval2, slotval3, slotval4, slotval5)
+	if callbackData.ownsReturn && virtualReturn != nil {
+		runtime.SetFinalizer(virtualReturn, nil)
+	}
 
 	return virtualReturn.cPointer()
 
@@ -629,10 +652,16 @@ func (this *QwtLinearScaleEngine) callVirtualBase_DivideScale(x1 float64, x2 flo
 	return _goptr
 
 }
+
+type miqtVirtualCallback_QwtLinearScaleEngine_divideScale struct {
+	callback   func(super func(x1 float64, x2 float64, maxMajorSteps int, maxMinorSteps int, stepSize float64) *QwtScaleDiv, x1 float64, x2 float64, maxMajorSteps int, maxMinorSteps int, stepSize float64) *QwtScaleDiv
+	ownsReturn bool
+}
+
 func (this *QwtLinearScaleEngine) OnDivideScale(slot func(super func(x1 float64, x2 float64, maxMajorSteps int, maxMinorSteps int, stepSize float64) *QwtScaleDiv, x1 float64, x2 float64, maxMajorSteps int, maxMinorSteps int, stepSize float64) *QwtScaleDiv) {
 	var slotHandle C.intptr_t
 	if slot != nil {
-		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QwtLinearScaleEngine_divideScale{callback: slot}))
 	}
 	ok := C.QwtLinearScaleEngine_override_virtual_divideScale(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
@@ -640,12 +669,26 @@ func (this *QwtLinearScaleEngine) OnDivideScale(slot func(super func(x1 float64,
 	}
 }
 
+// OnDivideScaleOwned installs a virtual override that transfers
+// ownership of each non-nil returned Qt value object to C++.
+func (this *QwtLinearScaleEngine) OnDivideScaleOwned(slot func(super func(x1 float64, x2 float64, maxMajorSteps int, maxMinorSteps int, stepSize float64) *QwtScaleDiv, x1 float64, x2 float64, maxMajorSteps int, maxMinorSteps int, stepSize float64) *QwtScaleDiv) {
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QwtLinearScaleEngine_divideScale{callback: slot, ownsReturn: true}))
+	}
+	ok := C.QwtLinearScaleEngine_override_virtual_owned_divideScale(unsafe.Pointer(this.h), slotHandle)
+	if !ok {
+		panic("miqt: can only override virtual methods for directly constructed types")
+	}
+}
+
 //export miqt_exec_callback_QwtLinearScaleEngine_divideScale
 func miqt_exec_callback_QwtLinearScaleEngine_divideScale(self *C.QwtLinearScaleEngine, cb C.intptr_t, x1 C.double, x2 C.double, maxMajorSteps C.int, maxMinorSteps C.int, stepSize C.double) *C.QwtScaleDiv {
-	gofunc, ok := cgo.Handle(cb).Value().(func(super func(x1 float64, x2 float64, maxMajorSteps int, maxMinorSteps int, stepSize float64) *QwtScaleDiv, x1 float64, x2 float64, maxMajorSteps int, maxMinorSteps int, stepSize float64) *QwtScaleDiv)
+	callbackData, ok := cgo.Handle(cb).Value().(miqtVirtualCallback_QwtLinearScaleEngine_divideScale)
 	if !ok {
 		panic("miqt: callback of non-callback type (heap corruption?)")
 	}
+	gofunc := callbackData.callback
 
 	// Convert all CABI parameters to Go parameters
 	slotval1 := (float64)(x1)
@@ -659,6 +702,9 @@ func miqt_exec_callback_QwtLinearScaleEngine_divideScale(self *C.QwtLinearScaleE
 	slotval5 := (float64)(stepSize)
 
 	virtualReturn := gofunc((&QwtLinearScaleEngine{h: self}).callVirtualBase_DivideScale, slotval1, slotval2, slotval3, slotval4, slotval5)
+	if callbackData.ownsReturn && virtualReturn != nil {
+		runtime.SetFinalizer(virtualReturn, nil)
+	}
 
 	return virtualReturn.cPointer()
 
@@ -948,10 +994,16 @@ func (this *QwtLogScaleEngine) callVirtualBase_DivideScale(x1 float64, x2 float6
 	return _goptr
 
 }
+
+type miqtVirtualCallback_QwtLogScaleEngine_divideScale struct {
+	callback   func(super func(x1 float64, x2 float64, maxMajorSteps int, maxMinorSteps int, stepSize float64) *QwtScaleDiv, x1 float64, x2 float64, maxMajorSteps int, maxMinorSteps int, stepSize float64) *QwtScaleDiv
+	ownsReturn bool
+}
+
 func (this *QwtLogScaleEngine) OnDivideScale(slot func(super func(x1 float64, x2 float64, maxMajorSteps int, maxMinorSteps int, stepSize float64) *QwtScaleDiv, x1 float64, x2 float64, maxMajorSteps int, maxMinorSteps int, stepSize float64) *QwtScaleDiv) {
 	var slotHandle C.intptr_t
 	if slot != nil {
-		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QwtLogScaleEngine_divideScale{callback: slot}))
 	}
 	ok := C.QwtLogScaleEngine_override_virtual_divideScale(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
@@ -959,12 +1011,26 @@ func (this *QwtLogScaleEngine) OnDivideScale(slot func(super func(x1 float64, x2
 	}
 }
 
+// OnDivideScaleOwned installs a virtual override that transfers
+// ownership of each non-nil returned Qt value object to C++.
+func (this *QwtLogScaleEngine) OnDivideScaleOwned(slot func(super func(x1 float64, x2 float64, maxMajorSteps int, maxMinorSteps int, stepSize float64) *QwtScaleDiv, x1 float64, x2 float64, maxMajorSteps int, maxMinorSteps int, stepSize float64) *QwtScaleDiv) {
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QwtLogScaleEngine_divideScale{callback: slot, ownsReturn: true}))
+	}
+	ok := C.QwtLogScaleEngine_override_virtual_owned_divideScale(unsafe.Pointer(this.h), slotHandle)
+	if !ok {
+		panic("miqt: can only override virtual methods for directly constructed types")
+	}
+}
+
 //export miqt_exec_callback_QwtLogScaleEngine_divideScale
 func miqt_exec_callback_QwtLogScaleEngine_divideScale(self *C.QwtLogScaleEngine, cb C.intptr_t, x1 C.double, x2 C.double, maxMajorSteps C.int, maxMinorSteps C.int, stepSize C.double) *C.QwtScaleDiv {
-	gofunc, ok := cgo.Handle(cb).Value().(func(super func(x1 float64, x2 float64, maxMajorSteps int, maxMinorSteps int, stepSize float64) *QwtScaleDiv, x1 float64, x2 float64, maxMajorSteps int, maxMinorSteps int, stepSize float64) *QwtScaleDiv)
+	callbackData, ok := cgo.Handle(cb).Value().(miqtVirtualCallback_QwtLogScaleEngine_divideScale)
 	if !ok {
 		panic("miqt: callback of non-callback type (heap corruption?)")
 	}
+	gofunc := callbackData.callback
 
 	// Convert all CABI parameters to Go parameters
 	slotval1 := (float64)(x1)
@@ -978,6 +1044,9 @@ func miqt_exec_callback_QwtLogScaleEngine_divideScale(self *C.QwtLogScaleEngine,
 	slotval5 := (float64)(stepSize)
 
 	virtualReturn := gofunc((&QwtLogScaleEngine{h: self}).callVirtualBase_DivideScale, slotval1, slotval2, slotval3, slotval4, slotval5)
+	if callbackData.ownsReturn && virtualReturn != nil {
+		runtime.SetFinalizer(virtualReturn, nil)
+	}
 
 	return virtualReturn.cPointer()
 

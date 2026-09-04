@@ -223,6 +223,7 @@ public:
 
 	// cgo.Handle value for overwritten implementation
 	miqt_callback_handle<miqt_exec_callback_handle_release_QPolarChart> handle__boundingRect;
+	bool owns_return__boundingRect = false;
 
 	// Subclass to allow providing a Go implementation
 	virtual QRectF boundingRect() const override {
@@ -231,6 +232,10 @@ public:
 		}
 
 		QRectF* callback_return_value = miqt_exec_callback_QPolarChart_boundingRect(this, handle__boundingRect.value());
+		std::unique_ptr<QRectF> callback_return_value_owner;
+		if (owns_return__boundingRect) {
+			callback_return_value_owner.reset(callback_return_value);
+		}
 		return *callback_return_value;
 	}
 
@@ -238,6 +243,7 @@ public:
 
 	// cgo.Handle value for overwritten implementation
 	miqt_callback_handle<miqt_exec_callback_handle_release_QPolarChart> handle__shape;
+	bool owns_return__shape = false;
 
 	// Subclass to allow providing a Go implementation
 	virtual QPainterPath shape() const override {
@@ -246,6 +252,10 @@ public:
 		}
 
 		QPainterPath* callback_return_value = miqt_exec_callback_QPolarChart_shape(this, handle__shape.value());
+		std::unique_ptr<QPainterPath> callback_return_value_owner;
+		if (owns_return__shape) {
+			callback_return_value_owner.reset(callback_return_value);
+		}
 		return *callback_return_value;
 	}
 
@@ -270,6 +280,7 @@ public:
 
 	// cgo.Handle value for overwritten implementation
 	miqt_callback_handle<miqt_exec_callback_handle_release_QPolarChart> handle__sizeHint;
+	bool owns_return__sizeHint = false;
 
 	// Subclass to allow providing a Go implementation
 	virtual QSizeF sizeHint(Qt::SizeHint which, const QSizeF& constraint) const override {
@@ -283,6 +294,10 @@ public:
 		// Cast returned reference into pointer
 		QSizeF* sigval2 = const_cast<QSizeF*>(&constraint_ret);
 		QSizeF* callback_return_value = miqt_exec_callback_QPolarChart_sizeHint(this, handle__sizeHint.value(), sigval1, sigval2);
+		std::unique_ptr<QSizeF> callback_return_value_owner;
+		if (owns_return__sizeHint) {
+			callback_return_value_owner.reset(callback_return_value);
+		}
 		return *callback_return_value;
 	}
 
@@ -306,6 +321,7 @@ public:
 
 	// cgo.Handle value for overwritten implementation
 	miqt_callback_handle<miqt_exec_callback_handle_release_QPolarChart> handle__itemChange;
+	bool owns_return__itemChange = false;
 
 	// Subclass to allow providing a Go implementation
 	virtual QVariant itemChange(QGraphicsItem::GraphicsItemChange change, const QVariant& value) override {
@@ -319,6 +335,10 @@ public:
 		// Cast returned reference into pointer
 		QVariant* sigval2 = const_cast<QVariant*>(&value_ret);
 		QVariant* callback_return_value = miqt_exec_callback_QPolarChart_itemChange(this, handle__itemChange.value(), sigval1, sigval2);
+		std::unique_ptr<QVariant> callback_return_value_owner;
+		if (owns_return__itemChange) {
+			callback_return_value_owner.reset(callback_return_value);
+		}
 		return *callback_return_value;
 	}
 
@@ -326,6 +346,7 @@ public:
 
 	// cgo.Handle value for overwritten implementation
 	miqt_callback_handle<miqt_exec_callback_handle_release_QPolarChart> handle__propertyChange;
+	bool owns_return__propertyChange = false;
 
 	// Subclass to allow providing a Go implementation
 	virtual QVariant propertyChange(const QString& propertyName, const QVariant& value) override {
@@ -345,6 +366,10 @@ public:
 		// Cast returned reference into pointer
 		QVariant* sigval2 = const_cast<QVariant*>(&value_ret);
 		QVariant* callback_return_value = miqt_exec_callback_QPolarChart_propertyChange(this, handle__propertyChange.value(), sigval1, sigval2);
+		std::unique_ptr<QVariant> callback_return_value_owner;
+		if (owns_return__propertyChange) {
+			callback_return_value_owner.reset(callback_return_value);
+		}
 		return *callback_return_value;
 	}
 
@@ -883,6 +908,7 @@ public:
 
 	// cgo.Handle value for overwritten implementation
 	miqt_callback_handle<miqt_exec_callback_handle_release_QPolarChart> handle__opaqueArea;
+	bool owns_return__opaqueArea = false;
 
 	// Subclass to allow providing a Go implementation
 	virtual QPainterPath opaqueArea() const override {
@@ -891,6 +917,10 @@ public:
 		}
 
 		QPainterPath* callback_return_value = miqt_exec_callback_QPolarChart_opaqueArea(this, handle__opaqueArea.value());
+		std::unique_ptr<QPainterPath> callback_return_value_owner;
+		if (owns_return__opaqueArea) {
+			callback_return_value_owner.reset(callback_return_value);
+		}
 		return *callback_return_value;
 	}
 
@@ -1153,6 +1183,7 @@ public:
 
 	// cgo.Handle value for overwritten implementation
 	miqt_callback_handle<miqt_exec_callback_handle_release_QPolarChart> handle__inputMethodQuery;
+	bool owns_return__inputMethodQuery = false;
 
 	// Subclass to allow providing a Go implementation
 	virtual QVariant inputMethodQuery(Qt::InputMethodQuery query) const override {
@@ -1163,6 +1194,10 @@ public:
 		Qt::InputMethodQuery query_ret = query;
 		int sigval1 = static_cast<int>(query_ret);
 		QVariant* callback_return_value = miqt_exec_callback_QPolarChart_inputMethodQuery(this, handle__inputMethodQuery.value(), sigval1);
+		std::unique_ptr<QVariant> callback_return_value_owner;
+		if (owns_return__inputMethodQuery) {
+			callback_return_value_owner.reset(callback_return_value);
+		}
 		return *callback_return_value;
 	}
 
@@ -1208,6 +1243,7 @@ public:
 
 	// cgo.Handle value for overwritten implementation
 	miqt_callback_handle<miqt_exec_callback_handle_release_QPolarChart> handle__extension;
+	bool owns_return__extension = false;
 
 	// Subclass to allow providing a Go implementation
 	virtual QVariant extension(const QVariant& variant) const override {
@@ -1219,6 +1255,10 @@ public:
 		// Cast returned reference into pointer
 		QVariant* sigval1 = const_cast<QVariant*>(&variant_ret);
 		QVariant* callback_return_value = miqt_exec_callback_QPolarChart_extension(this, handle__extension.value(), sigval1);
+		std::unique_ptr<QVariant> callback_return_value_owner;
+		if (owns_return__extension) {
+			callback_return_value_owner.reset(callback_return_value);
+		}
 		return *callback_return_value;
 	}
 
@@ -1440,6 +1480,19 @@ bool QPolarChart_override_virtual_boundingRect(void* self, intptr_t slot) {
 	}
 
 	self_cast->handle__boundingRect = std::move(slot_handle);
+	self_cast->owns_return__boundingRect = false;
+	return true;
+}
+
+bool QPolarChart_override_virtual_owned_boundingRect(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QPolarChart> slot_handle(slot);
+	MiqtVirtualQPolarChart* self_cast = dynamic_cast<MiqtVirtualQPolarChart*>( (QPolarChart*)(self) );
+	if (self_cast == nullptr) {
+		return false;
+	}
+
+	self_cast->handle__boundingRect = std::move(slot_handle);
+	self_cast->owns_return__boundingRect = true;
 	return true;
 }
 
@@ -1455,6 +1508,19 @@ bool QPolarChart_override_virtual_shape(void* self, intptr_t slot) {
 	}
 
 	self_cast->handle__shape = std::move(slot_handle);
+	self_cast->owns_return__shape = false;
+	return true;
+}
+
+bool QPolarChart_override_virtual_owned_shape(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QPolarChart> slot_handle(slot);
+	MiqtVirtualQPolarChart* self_cast = dynamic_cast<MiqtVirtualQPolarChart*>( (QPolarChart*)(self) );
+	if (self_cast == nullptr) {
+		return false;
+	}
+
+	self_cast->handle__shape = std::move(slot_handle);
+	self_cast->owns_return__shape = true;
 	return true;
 }
 
@@ -1485,6 +1551,19 @@ bool QPolarChart_override_virtual_sizeHint(void* self, intptr_t slot) {
 	}
 
 	self_cast->handle__sizeHint = std::move(slot_handle);
+	self_cast->owns_return__sizeHint = false;
+	return true;
+}
+
+bool QPolarChart_override_virtual_owned_sizeHint(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QPolarChart> slot_handle(slot);
+	MiqtVirtualQPolarChart* self_cast = dynamic_cast<MiqtVirtualQPolarChart*>( (QPolarChart*)(self) );
+	if (self_cast == nullptr) {
+		return false;
+	}
+
+	self_cast->handle__sizeHint = std::move(slot_handle);
+	self_cast->owns_return__sizeHint = true;
 	return true;
 }
 
@@ -1515,6 +1594,19 @@ bool QPolarChart_override_virtual_itemChange(void* self, intptr_t slot) {
 	}
 
 	self_cast->handle__itemChange = std::move(slot_handle);
+	self_cast->owns_return__itemChange = false;
+	return true;
+}
+
+bool QPolarChart_override_virtual_owned_itemChange(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QPolarChart> slot_handle(slot);
+	MiqtVirtualQPolarChart* self_cast = dynamic_cast<MiqtVirtualQPolarChart*>( (QPolarChart*)(self) );
+	if (self_cast == nullptr) {
+		return false;
+	}
+
+	self_cast->handle__itemChange = std::move(slot_handle);
+	self_cast->owns_return__itemChange = true;
 	return true;
 }
 
@@ -1530,6 +1622,19 @@ bool QPolarChart_override_virtual_propertyChange(void* self, intptr_t slot) {
 	}
 
 	self_cast->handle__propertyChange = std::move(slot_handle);
+	self_cast->owns_return__propertyChange = false;
+	return true;
+}
+
+bool QPolarChart_override_virtual_owned_propertyChange(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QPolarChart> slot_handle(slot);
+	MiqtVirtualQPolarChart* self_cast = dynamic_cast<MiqtVirtualQPolarChart*>( (QPolarChart*)(self) );
+	if (self_cast == nullptr) {
+		return false;
+	}
+
+	self_cast->handle__propertyChange = std::move(slot_handle);
+	self_cast->owns_return__propertyChange = true;
 	return true;
 }
 
@@ -2012,6 +2117,19 @@ bool QPolarChart_override_virtual_opaqueArea(void* self, intptr_t slot) {
 	}
 
 	self_cast->handle__opaqueArea = std::move(slot_handle);
+	self_cast->owns_return__opaqueArea = false;
+	return true;
+}
+
+bool QPolarChart_override_virtual_owned_opaqueArea(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QPolarChart> slot_handle(slot);
+	MiqtVirtualQPolarChart* self_cast = dynamic_cast<MiqtVirtualQPolarChart*>( (QPolarChart*)(self) );
+	if (self_cast == nullptr) {
+		return false;
+	}
+
+	self_cast->handle__opaqueArea = std::move(slot_handle);
+	self_cast->owns_return__opaqueArea = true;
 	return true;
 }
 
@@ -2252,6 +2370,19 @@ bool QPolarChart_override_virtual_inputMethodQuery(void* self, intptr_t slot) {
 	}
 
 	self_cast->handle__inputMethodQuery = std::move(slot_handle);
+	self_cast->owns_return__inputMethodQuery = false;
+	return true;
+}
+
+bool QPolarChart_override_virtual_owned_inputMethodQuery(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QPolarChart> slot_handle(slot);
+	MiqtVirtualQPolarChart* self_cast = dynamic_cast<MiqtVirtualQPolarChart*>( (QPolarChart*)(self) );
+	if (self_cast == nullptr) {
+		return false;
+	}
+
+	self_cast->handle__inputMethodQuery = std::move(slot_handle);
+	self_cast->owns_return__inputMethodQuery = true;
 	return true;
 }
 
@@ -2297,6 +2428,19 @@ bool QPolarChart_override_virtual_extension(void* self, intptr_t slot) {
 	}
 
 	self_cast->handle__extension = std::move(slot_handle);
+	self_cast->owns_return__extension = false;
+	return true;
+}
+
+bool QPolarChart_override_virtual_owned_extension(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QPolarChart> slot_handle(slot);
+	MiqtVirtualQPolarChart* self_cast = dynamic_cast<MiqtVirtualQPolarChart*>( (QPolarChart*)(self) );
+	if (self_cast == nullptr) {
+		return false;
+	}
+
+	self_cast->handle__extension = std::move(slot_handle);
+	self_cast->owns_return__extension = true;
 	return true;
 }
 

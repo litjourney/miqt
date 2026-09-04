@@ -75,6 +75,7 @@ bool QTcpSocket_virtualbase_setSocketDescriptor(void* self, intptr_t socketDescr
 bool QTcpSocket_override_virtual_setSocketOption(void* self, intptr_t slot);
 void QTcpSocket_virtualbase_setSocketOption(void* self, int option, QVariant* value);
 bool QTcpSocket_override_virtual_socketOption(void* self, intptr_t slot);
+bool QTcpSocket_override_virtual_owned_socketOption(void* self, intptr_t slot);
 QVariant* QTcpSocket_virtualbase_socketOption(void* self, int option);
 bool QTcpSocket_override_virtual_close(void* self, intptr_t slot);
 void QTcpSocket_virtualbase_close(void* self);

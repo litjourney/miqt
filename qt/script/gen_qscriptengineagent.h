@@ -61,6 +61,7 @@ void QScriptEngineAgent_virtualbase_exceptionCatch(void* self, long long scriptI
 bool QScriptEngineAgent_override_virtual_supportsExtension(void* self, intptr_t slot);
 bool QScriptEngineAgent_virtualbase_supportsExtension(const void* self, int extension);
 bool QScriptEngineAgent_override_virtual_extension(void* self, intptr_t slot);
+bool QScriptEngineAgent_override_virtual_owned_extension(void* self, intptr_t slot);
 QVariant* QScriptEngineAgent_virtualbase_extension(void* self, int extension, QVariant* argument);
 
 void QScriptEngineAgent_delete(QScriptEngineAgent* self);

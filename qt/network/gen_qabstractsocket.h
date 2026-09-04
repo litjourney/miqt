@@ -136,6 +136,7 @@ bool QAbstractSocket_virtualbase_setSocketDescriptor(void* self, intptr_t socket
 bool QAbstractSocket_override_virtual_setSocketOption(void* self, intptr_t slot);
 void QAbstractSocket_virtualbase_setSocketOption(void* self, int option, QVariant* value);
 bool QAbstractSocket_override_virtual_socketOption(void* self, intptr_t slot);
+bool QAbstractSocket_override_virtual_owned_socketOption(void* self, intptr_t slot);
 QVariant* QAbstractSocket_virtualbase_socketOption(void* self, int option);
 bool QAbstractSocket_override_virtual_close(void* self, intptr_t slot);
 void QAbstractSocket_virtualbase_close(void* self);

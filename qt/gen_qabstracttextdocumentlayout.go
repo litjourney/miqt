@@ -488,10 +488,16 @@ func miqt_exec_callback_QAbstractTextDocumentLayout_pageCount(self *C.QAbstractT
 	return (C.int)(virtualReturn)
 
 }
+
+type miqtVirtualCallback_QAbstractTextDocumentLayout_documentSize struct {
+	callback   func() *QSizeF
+	ownsReturn bool
+}
+
 func (this *QAbstractTextDocumentLayout) OnDocumentSize(slot func() *QSizeF) {
 	var slotHandle C.intptr_t
 	if slot != nil {
-		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QAbstractTextDocumentLayout_documentSize{callback: slot}))
 	}
 	ok := C.QAbstractTextDocumentLayout_override_virtual_documentSize(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
@@ -499,22 +505,45 @@ func (this *QAbstractTextDocumentLayout) OnDocumentSize(slot func() *QSizeF) {
 	}
 }
 
+// OnDocumentSizeOwned installs a virtual override that transfers
+// ownership of each non-nil returned Qt value object to C++.
+func (this *QAbstractTextDocumentLayout) OnDocumentSizeOwned(slot func() *QSizeF) {
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QAbstractTextDocumentLayout_documentSize{callback: slot, ownsReturn: true}))
+	}
+	ok := C.QAbstractTextDocumentLayout_override_virtual_owned_documentSize(unsafe.Pointer(this.h), slotHandle)
+	if !ok {
+		panic("miqt: can only override virtual methods for directly constructed types")
+	}
+}
+
 //export miqt_exec_callback_QAbstractTextDocumentLayout_documentSize
 func miqt_exec_callback_QAbstractTextDocumentLayout_documentSize(self *C.QAbstractTextDocumentLayout, cb C.intptr_t) *C.QSizeF {
-	gofunc, ok := cgo.Handle(cb).Value().(func() *QSizeF)
+	callbackData, ok := cgo.Handle(cb).Value().(miqtVirtualCallback_QAbstractTextDocumentLayout_documentSize)
 	if !ok {
 		panic("miqt: callback of non-callback type (heap corruption?)")
 	}
+	gofunc := callbackData.callback
 
 	virtualReturn := gofunc()
+	if callbackData.ownsReturn && virtualReturn != nil {
+		runtime.SetFinalizer(virtualReturn, nil)
+	}
 
 	return virtualReturn.cPointer()
 
 }
+
+type miqtVirtualCallback_QAbstractTextDocumentLayout_frameBoundingRect struct {
+	callback   func(frame *QTextFrame) *QRectF
+	ownsReturn bool
+}
+
 func (this *QAbstractTextDocumentLayout) OnFrameBoundingRect(slot func(frame *QTextFrame) *QRectF) {
 	var slotHandle C.intptr_t
 	if slot != nil {
-		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QAbstractTextDocumentLayout_frameBoundingRect{callback: slot}))
 	}
 	ok := C.QAbstractTextDocumentLayout_override_virtual_frameBoundingRect(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
@@ -522,25 +551,48 @@ func (this *QAbstractTextDocumentLayout) OnFrameBoundingRect(slot func(frame *QT
 	}
 }
 
+// OnFrameBoundingRectOwned installs a virtual override that transfers
+// ownership of each non-nil returned Qt value object to C++.
+func (this *QAbstractTextDocumentLayout) OnFrameBoundingRectOwned(slot func(frame *QTextFrame) *QRectF) {
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QAbstractTextDocumentLayout_frameBoundingRect{callback: slot, ownsReturn: true}))
+	}
+	ok := C.QAbstractTextDocumentLayout_override_virtual_owned_frameBoundingRect(unsafe.Pointer(this.h), slotHandle)
+	if !ok {
+		panic("miqt: can only override virtual methods for directly constructed types")
+	}
+}
+
 //export miqt_exec_callback_QAbstractTextDocumentLayout_frameBoundingRect
 func miqt_exec_callback_QAbstractTextDocumentLayout_frameBoundingRect(self *C.QAbstractTextDocumentLayout, cb C.intptr_t, frame *C.QTextFrame) *C.QRectF {
-	gofunc, ok := cgo.Handle(cb).Value().(func(frame *QTextFrame) *QRectF)
+	callbackData, ok := cgo.Handle(cb).Value().(miqtVirtualCallback_QAbstractTextDocumentLayout_frameBoundingRect)
 	if !ok {
 		panic("miqt: callback of non-callback type (heap corruption?)")
 	}
+	gofunc := callbackData.callback
 
 	// Convert all CABI parameters to Go parameters
 	slotval1 := newQTextFrame(frame)
 
 	virtualReturn := gofunc(slotval1)
+	if callbackData.ownsReturn && virtualReturn != nil {
+		runtime.SetFinalizer(virtualReturn, nil)
+	}
 
 	return virtualReturn.cPointer()
 
 }
+
+type miqtVirtualCallback_QAbstractTextDocumentLayout_blockBoundingRect struct {
+	callback   func(block *QTextBlock) *QRectF
+	ownsReturn bool
+}
+
 func (this *QAbstractTextDocumentLayout) OnBlockBoundingRect(slot func(block *QTextBlock) *QRectF) {
 	var slotHandle C.intptr_t
 	if slot != nil {
-		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QAbstractTextDocumentLayout_blockBoundingRect{callback: slot}))
 	}
 	ok := C.QAbstractTextDocumentLayout_override_virtual_blockBoundingRect(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
@@ -548,17 +600,34 @@ func (this *QAbstractTextDocumentLayout) OnBlockBoundingRect(slot func(block *QT
 	}
 }
 
+// OnBlockBoundingRectOwned installs a virtual override that transfers
+// ownership of each non-nil returned Qt value object to C++.
+func (this *QAbstractTextDocumentLayout) OnBlockBoundingRectOwned(slot func(block *QTextBlock) *QRectF) {
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QAbstractTextDocumentLayout_blockBoundingRect{callback: slot, ownsReturn: true}))
+	}
+	ok := C.QAbstractTextDocumentLayout_override_virtual_owned_blockBoundingRect(unsafe.Pointer(this.h), slotHandle)
+	if !ok {
+		panic("miqt: can only override virtual methods for directly constructed types")
+	}
+}
+
 //export miqt_exec_callback_QAbstractTextDocumentLayout_blockBoundingRect
 func miqt_exec_callback_QAbstractTextDocumentLayout_blockBoundingRect(self *C.QAbstractTextDocumentLayout, cb C.intptr_t, block *C.QTextBlock) *C.QRectF {
-	gofunc, ok := cgo.Handle(cb).Value().(func(block *QTextBlock) *QRectF)
+	callbackData, ok := cgo.Handle(cb).Value().(miqtVirtualCallback_QAbstractTextDocumentLayout_blockBoundingRect)
 	if !ok {
 		panic("miqt: callback of non-callback type (heap corruption?)")
 	}
+	gofunc := callbackData.callback
 
 	// Convert all CABI parameters to Go parameters
 	slotval1 := newQTextBlock(block)
 
 	virtualReturn := gofunc(slotval1)
+	if callbackData.ownsReturn && virtualReturn != nil {
+		runtime.SetFinalizer(virtualReturn, nil)
+	}
 
 	return virtualReturn.cPointer()
 

@@ -503,10 +503,16 @@ func (this *QwtPlotPicker) callVirtualBase_TrackerText(param1 *qt.QPoint) *QwtTe
 	return _goptr
 
 }
+
+type miqtVirtualCallback_QwtPlotPicker_trackerText struct {
+	callback   func(super func(param1 *qt.QPoint) *QwtText, param1 *qt.QPoint) *QwtText
+	ownsReturn bool
+}
+
 func (this *QwtPlotPicker) OnTrackerText(slot func(super func(param1 *qt.QPoint) *QwtText, param1 *qt.QPoint) *QwtText) {
 	var slotHandle C.intptr_t
 	if slot != nil {
-		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QwtPlotPicker_trackerText{callback: slot}))
 	}
 	ok := C.QwtPlotPicker_override_virtual_trackerText(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
@@ -514,17 +520,34 @@ func (this *QwtPlotPicker) OnTrackerText(slot func(super func(param1 *qt.QPoint)
 	}
 }
 
+// OnTrackerTextOwned installs a virtual override that transfers
+// ownership of each non-nil returned Qt value object to C++.
+func (this *QwtPlotPicker) OnTrackerTextOwned(slot func(super func(param1 *qt.QPoint) *QwtText, param1 *qt.QPoint) *QwtText) {
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QwtPlotPicker_trackerText{callback: slot, ownsReturn: true}))
+	}
+	ok := C.QwtPlotPicker_override_virtual_owned_trackerText(unsafe.Pointer(this.h), slotHandle)
+	if !ok {
+		panic("miqt: can only override virtual methods for directly constructed types")
+	}
+}
+
 //export miqt_exec_callback_QwtPlotPicker_trackerText
 func miqt_exec_callback_QwtPlotPicker_trackerText(self *C.QwtPlotPicker, cb C.intptr_t, param1 *C.QPoint) *C.QwtText {
-	gofunc, ok := cgo.Handle(cb).Value().(func(super func(param1 *qt.QPoint) *QwtText, param1 *qt.QPoint) *QwtText)
+	callbackData, ok := cgo.Handle(cb).Value().(miqtVirtualCallback_QwtPlotPicker_trackerText)
 	if !ok {
 		panic("miqt: callback of non-callback type (heap corruption?)")
 	}
+	gofunc := callbackData.callback
 
 	// Convert all CABI parameters to Go parameters
 	slotval1 := qt.UnsafeNewQPoint(unsafe.Pointer(param1))
 
 	virtualReturn := gofunc((&QwtPlotPicker{h: self}).callVirtualBase_TrackerText, slotval1)
+	if callbackData.ownsReturn && virtualReturn != nil {
+		runtime.SetFinalizer(virtualReturn, nil)
+	}
 
 	return virtualReturn.cPointer()
 
@@ -537,10 +560,16 @@ func (this *QwtPlotPicker) callVirtualBase_TrackerTextF(param1 *qt.QPointF) *Qwt
 	return _goptr
 
 }
+
+type miqtVirtualCallback_QwtPlotPicker_trackerTextF struct {
+	callback   func(super func(param1 *qt.QPointF) *QwtText, param1 *qt.QPointF) *QwtText
+	ownsReturn bool
+}
+
 func (this *QwtPlotPicker) OnTrackerTextF(slot func(super func(param1 *qt.QPointF) *QwtText, param1 *qt.QPointF) *QwtText) {
 	var slotHandle C.intptr_t
 	if slot != nil {
-		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QwtPlotPicker_trackerTextF{callback: slot}))
 	}
 	ok := C.QwtPlotPicker_override_virtual_trackerTextF(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
@@ -548,17 +577,34 @@ func (this *QwtPlotPicker) OnTrackerTextF(slot func(super func(param1 *qt.QPoint
 	}
 }
 
+// OnTrackerTextFOwned installs a virtual override that transfers
+// ownership of each non-nil returned Qt value object to C++.
+func (this *QwtPlotPicker) OnTrackerTextFOwned(slot func(super func(param1 *qt.QPointF) *QwtText, param1 *qt.QPointF) *QwtText) {
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QwtPlotPicker_trackerTextF{callback: slot, ownsReturn: true}))
+	}
+	ok := C.QwtPlotPicker_override_virtual_owned_trackerTextF(unsafe.Pointer(this.h), slotHandle)
+	if !ok {
+		panic("miqt: can only override virtual methods for directly constructed types")
+	}
+}
+
 //export miqt_exec_callback_QwtPlotPicker_trackerTextF
 func miqt_exec_callback_QwtPlotPicker_trackerTextF(self *C.QwtPlotPicker, cb C.intptr_t, param1 *C.QPointF) *C.QwtText {
-	gofunc, ok := cgo.Handle(cb).Value().(func(super func(param1 *qt.QPointF) *QwtText, param1 *qt.QPointF) *QwtText)
+	callbackData, ok := cgo.Handle(cb).Value().(miqtVirtualCallback_QwtPlotPicker_trackerTextF)
 	if !ok {
 		panic("miqt: callback of non-callback type (heap corruption?)")
 	}
+	gofunc := callbackData.callback
 
 	// Convert all CABI parameters to Go parameters
 	slotval1 := qt.UnsafeNewQPointF(unsafe.Pointer(param1))
 
 	virtualReturn := gofunc((&QwtPlotPicker{h: self}).callVirtualBase_TrackerTextF, slotval1)
+	if callbackData.ownsReturn && virtualReturn != nil {
+		runtime.SetFinalizer(virtualReturn, nil)
+	}
 
 	return virtualReturn.cPointer()
 
@@ -697,10 +743,16 @@ func (this *QwtPlotPicker) callVirtualBase_PickArea() *qt.QPainterPath {
 	return _goptr
 
 }
+
+type miqtVirtualCallback_QwtPlotPicker_pickArea struct {
+	callback   func(super func() *qt.QPainterPath) *qt.QPainterPath
+	ownsReturn bool
+}
+
 func (this *QwtPlotPicker) OnPickArea(slot func(super func() *qt.QPainterPath) *qt.QPainterPath) {
 	var slotHandle C.intptr_t
 	if slot != nil {
-		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QwtPlotPicker_pickArea{callback: slot}))
 	}
 	ok := C.QwtPlotPicker_override_virtual_pickArea(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
@@ -708,14 +760,31 @@ func (this *QwtPlotPicker) OnPickArea(slot func(super func() *qt.QPainterPath) *
 	}
 }
 
+// OnPickAreaOwned installs a virtual override that transfers
+// ownership of each non-nil returned Qt value object to C++.
+func (this *QwtPlotPicker) OnPickAreaOwned(slot func(super func() *qt.QPainterPath) *qt.QPainterPath) {
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QwtPlotPicker_pickArea{callback: slot, ownsReturn: true}))
+	}
+	ok := C.QwtPlotPicker_override_virtual_owned_pickArea(unsafe.Pointer(this.h), slotHandle)
+	if !ok {
+		panic("miqt: can only override virtual methods for directly constructed types")
+	}
+}
+
 //export miqt_exec_callback_QwtPlotPicker_pickArea
 func miqt_exec_callback_QwtPlotPicker_pickArea(self *C.QwtPlotPicker, cb C.intptr_t) *C.QPainterPath {
-	gofunc, ok := cgo.Handle(cb).Value().(func(super func() *qt.QPainterPath) *qt.QPainterPath)
+	callbackData, ok := cgo.Handle(cb).Value().(miqtVirtualCallback_QwtPlotPicker_pickArea)
 	if !ok {
 		panic("miqt: callback of non-callback type (heap corruption?)")
 	}
+	gofunc := callbackData.callback
 
 	virtualReturn := gofunc((&QwtPlotPicker{h: self}).callVirtualBase_PickArea)
+	if callbackData.ownsReturn && virtualReturn != nil {
+		runtime.SetFinalizer(virtualReturn, nil)
+	}
 
 	return (*C.QPainterPath)(virtualReturn.UnsafePointer())
 
@@ -788,10 +857,16 @@ func (this *QwtPlotPicker) callVirtualBase_RubberBandMask() *qt.QRegion {
 	return _goptr
 
 }
+
+type miqtVirtualCallback_QwtPlotPicker_rubberBandMask struct {
+	callback   func(super func() *qt.QRegion) *qt.QRegion
+	ownsReturn bool
+}
+
 func (this *QwtPlotPicker) OnRubberBandMask(slot func(super func() *qt.QRegion) *qt.QRegion) {
 	var slotHandle C.intptr_t
 	if slot != nil {
-		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QwtPlotPicker_rubberBandMask{callback: slot}))
 	}
 	ok := C.QwtPlotPicker_override_virtual_rubberBandMask(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
@@ -799,14 +874,31 @@ func (this *QwtPlotPicker) OnRubberBandMask(slot func(super func() *qt.QRegion) 
 	}
 }
 
+// OnRubberBandMaskOwned installs a virtual override that transfers
+// ownership of each non-nil returned Qt value object to C++.
+func (this *QwtPlotPicker) OnRubberBandMaskOwned(slot func(super func() *qt.QRegion) *qt.QRegion) {
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QwtPlotPicker_rubberBandMask{callback: slot, ownsReturn: true}))
+	}
+	ok := C.QwtPlotPicker_override_virtual_owned_rubberBandMask(unsafe.Pointer(this.h), slotHandle)
+	if !ok {
+		panic("miqt: can only override virtual methods for directly constructed types")
+	}
+}
+
 //export miqt_exec_callback_QwtPlotPicker_rubberBandMask
 func miqt_exec_callback_QwtPlotPicker_rubberBandMask(self *C.QwtPlotPicker, cb C.intptr_t) *C.QRegion {
-	gofunc, ok := cgo.Handle(cb).Value().(func(super func() *qt.QRegion) *qt.QRegion)
+	callbackData, ok := cgo.Handle(cb).Value().(miqtVirtualCallback_QwtPlotPicker_rubberBandMask)
 	if !ok {
 		panic("miqt: callback of non-callback type (heap corruption?)")
 	}
+	gofunc := callbackData.callback
 
 	virtualReturn := gofunc((&QwtPlotPicker{h: self}).callVirtualBase_RubberBandMask)
+	if callbackData.ownsReturn && virtualReturn != nil {
+		runtime.SetFinalizer(virtualReturn, nil)
+	}
 
 	return (*C.QRegion)(virtualReturn.UnsafePointer())
 
@@ -819,10 +911,16 @@ func (this *QwtPlotPicker) callVirtualBase_TrackerRect(param1 *qt.QFont) *qt.QRe
 	return _goptr
 
 }
+
+type miqtVirtualCallback_QwtPlotPicker_trackerRect struct {
+	callback   func(super func(param1 *qt.QFont) *qt.QRect, param1 *qt.QFont) *qt.QRect
+	ownsReturn bool
+}
+
 func (this *QwtPlotPicker) OnTrackerRect(slot func(super func(param1 *qt.QFont) *qt.QRect, param1 *qt.QFont) *qt.QRect) {
 	var slotHandle C.intptr_t
 	if slot != nil {
-		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QwtPlotPicker_trackerRect{callback: slot}))
 	}
 	ok := C.QwtPlotPicker_override_virtual_trackerRect(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
@@ -830,17 +928,34 @@ func (this *QwtPlotPicker) OnTrackerRect(slot func(super func(param1 *qt.QFont) 
 	}
 }
 
+// OnTrackerRectOwned installs a virtual override that transfers
+// ownership of each non-nil returned Qt value object to C++.
+func (this *QwtPlotPicker) OnTrackerRectOwned(slot func(super func(param1 *qt.QFont) *qt.QRect, param1 *qt.QFont) *qt.QRect) {
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QwtPlotPicker_trackerRect{callback: slot, ownsReturn: true}))
+	}
+	ok := C.QwtPlotPicker_override_virtual_owned_trackerRect(unsafe.Pointer(this.h), slotHandle)
+	if !ok {
+		panic("miqt: can only override virtual methods for directly constructed types")
+	}
+}
+
 //export miqt_exec_callback_QwtPlotPicker_trackerRect
 func miqt_exec_callback_QwtPlotPicker_trackerRect(self *C.QwtPlotPicker, cb C.intptr_t, param1 *C.QFont) *C.QRect {
-	gofunc, ok := cgo.Handle(cb).Value().(func(super func(param1 *qt.QFont) *qt.QRect, param1 *qt.QFont) *qt.QRect)
+	callbackData, ok := cgo.Handle(cb).Value().(miqtVirtualCallback_QwtPlotPicker_trackerRect)
 	if !ok {
 		panic("miqt: callback of non-callback type (heap corruption?)")
 	}
+	gofunc := callbackData.callback
 
 	// Convert all CABI parameters to Go parameters
 	slotval1 := qt.UnsafeNewQFont(unsafe.Pointer(param1))
 
 	virtualReturn := gofunc((&QwtPlotPicker{h: self}).callVirtualBase_TrackerRect, slotval1)
+	if callbackData.ownsReturn && virtualReturn != nil {
+		runtime.SetFinalizer(virtualReturn, nil)
+	}
 
 	return (*C.QRect)(virtualReturn.UnsafePointer())
 

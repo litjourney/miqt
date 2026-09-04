@@ -118,6 +118,7 @@ public:
 
 	// cgo.Handle value for overwritten implementation
 	miqt_callback_handle<miqt_exec_callback_handle_release_QAbstractTextDocumentLayout> handle__documentSize;
+	bool owns_return__documentSize = false;
 
 	// Subclass to allow providing a Go implementation
 	virtual QSizeF documentSize() const override {
@@ -126,11 +127,16 @@ public:
 		}
 
 		QSizeF* callback_return_value = miqt_exec_callback_QAbstractTextDocumentLayout_documentSize(this, handle__documentSize.value());
+		std::unique_ptr<QSizeF> callback_return_value_owner;
+		if (owns_return__documentSize) {
+			callback_return_value_owner.reset(callback_return_value);
+		}
 		return *callback_return_value;
 	}
 
 	// cgo.Handle value for overwritten implementation
 	miqt_callback_handle<miqt_exec_callback_handle_release_QAbstractTextDocumentLayout> handle__frameBoundingRect;
+	bool owns_return__frameBoundingRect = false;
 
 	// Subclass to allow providing a Go implementation
 	virtual QRectF frameBoundingRect(QTextFrame* frame) const override {
@@ -140,11 +146,16 @@ public:
 
 		QTextFrame* sigval1 = frame;
 		QRectF* callback_return_value = miqt_exec_callback_QAbstractTextDocumentLayout_frameBoundingRect(this, handle__frameBoundingRect.value(), sigval1);
+		std::unique_ptr<QRectF> callback_return_value_owner;
+		if (owns_return__frameBoundingRect) {
+			callback_return_value_owner.reset(callback_return_value);
+		}
 		return *callback_return_value;
 	}
 
 	// cgo.Handle value for overwritten implementation
 	miqt_callback_handle<miqt_exec_callback_handle_release_QAbstractTextDocumentLayout> handle__blockBoundingRect;
+	bool owns_return__blockBoundingRect = false;
 
 	// Subclass to allow providing a Go implementation
 	virtual QRectF blockBoundingRect(const QTextBlock& block) const override {
@@ -156,6 +167,10 @@ public:
 		// Cast returned reference into pointer
 		QTextBlock* sigval1 = const_cast<QTextBlock*>(&block_ret);
 		QRectF* callback_return_value = miqt_exec_callback_QAbstractTextDocumentLayout_blockBoundingRect(this, handle__blockBoundingRect.value(), sigval1);
+		std::unique_ptr<QRectF> callback_return_value_owner;
+		if (owns_return__blockBoundingRect) {
+			callback_return_value_owner.reset(callback_return_value);
+		}
 		return *callback_return_value;
 	}
 
@@ -615,6 +630,19 @@ bool QAbstractTextDocumentLayout_override_virtual_documentSize(void* self, intpt
 	}
 
 	self_cast->handle__documentSize = std::move(slot_handle);
+	self_cast->owns_return__documentSize = false;
+	return true;
+}
+
+bool QAbstractTextDocumentLayout_override_virtual_owned_documentSize(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QAbstractTextDocumentLayout> slot_handle(slot);
+	MiqtVirtualQAbstractTextDocumentLayout* self_cast = dynamic_cast<MiqtVirtualQAbstractTextDocumentLayout*>( (QAbstractTextDocumentLayout*)(self) );
+	if (self_cast == nullptr) {
+		return false;
+	}
+
+	self_cast->handle__documentSize = std::move(slot_handle);
+	self_cast->owns_return__documentSize = true;
 	return true;
 }
 
@@ -626,6 +654,19 @@ bool QAbstractTextDocumentLayout_override_virtual_frameBoundingRect(void* self, 
 	}
 
 	self_cast->handle__frameBoundingRect = std::move(slot_handle);
+	self_cast->owns_return__frameBoundingRect = false;
+	return true;
+}
+
+bool QAbstractTextDocumentLayout_override_virtual_owned_frameBoundingRect(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QAbstractTextDocumentLayout> slot_handle(slot);
+	MiqtVirtualQAbstractTextDocumentLayout* self_cast = dynamic_cast<MiqtVirtualQAbstractTextDocumentLayout*>( (QAbstractTextDocumentLayout*)(self) );
+	if (self_cast == nullptr) {
+		return false;
+	}
+
+	self_cast->handle__frameBoundingRect = std::move(slot_handle);
+	self_cast->owns_return__frameBoundingRect = true;
 	return true;
 }
 
@@ -637,6 +678,19 @@ bool QAbstractTextDocumentLayout_override_virtual_blockBoundingRect(void* self, 
 	}
 
 	self_cast->handle__blockBoundingRect = std::move(slot_handle);
+	self_cast->owns_return__blockBoundingRect = false;
+	return true;
+}
+
+bool QAbstractTextDocumentLayout_override_virtual_owned_blockBoundingRect(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QAbstractTextDocumentLayout> slot_handle(slot);
+	MiqtVirtualQAbstractTextDocumentLayout* self_cast = dynamic_cast<MiqtVirtualQAbstractTextDocumentLayout*>( (QAbstractTextDocumentLayout*)(self) );
+	if (self_cast == nullptr) {
+		return false;
+	}
+
+	self_cast->handle__blockBoundingRect = std::move(slot_handle);
+	self_cast->owns_return__blockBoundingRect = true;
 	return true;
 }
 

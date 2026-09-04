@@ -29,6 +29,10 @@ func (nm CppMethod) goMethodName() string {
 	return tmp
 }
 
+func goVirtualCallbackHolderName(c CppClass, m CppMethod) string {
+	return "miqtVirtualCallback_" + cabiClassName(c.ClassName) + "_" + m.SafeMethodName()
+}
+
 func (p CppParameter) goParameterName() string {
 	// Also make the first letter uppercase so it becomes public in Go
 	parmName := p.ParameterName
@@ -1137,25 +1141,65 @@ import "C"
 				goCbType += gfs.emitParametersGo(m.Parameters)
 				goCbType += `) ` + m.ReturnType.renderReturnTypeGo(&gfs, true)
 				callbackName := cabiCallbackName(c, m)
+				ownedQtValueReturn := virtualCallbackReturnsQtValue(m)
+				callbackHandleValue := "slot"
+				callbackLookup := `gofunc, ok := cgo.Handle(cb).Value().(` + goCbType + `)
+					if !ok {
+						panic("miqt: callback of non-callback type (heap corruption?)")
+					}`
+				if ownedQtValueReturn {
+					gfs.imports["runtime"] = struct{}{}
+					holderName := goVirtualCallbackHolderName(c, m)
+					callbackHandleValue = holderName + "{callback: slot}"
+					callbackLookup = `callbackData, ok := cgo.Handle(cb).Value().(` + holderName + `)
+					if !ok {
+						panic("miqt: callback of non-callback type (heap corruption?)")
+					}
+					gofunc := callbackData.callback`
+					ret.WriteString(`type ` + holderName + ` struct {
+					callback ` + goCbType + `
+					ownsReturn bool
+				}
+
+				`)
+				}
 				// The C++ setter consumes slotHandle even when its dynamic_cast
 				// fails. Do not delete the handle again on the Go error path.
 				ret.WriteString(`func (this *` + goClassName + `) On` + m.goMethodName() + `(slot ` + goCbType + `) {
 					var slotHandle C.intptr_t
 					if slot != nil {
-						slotHandle = C.intptr_t(cgo.NewHandle(slot))
+						slotHandle = C.intptr_t(cgo.NewHandle(` + callbackHandleValue + `))
 					}
 					ok := C.` + cabiOverrideVirtualName(c, m) + `(unsafe.Pointer(this.h), slotHandle)
 					if !ok {
 						panic("miqt: can only override virtual methods for directly constructed types")
 					}
 				}
+				`)
+
+				if ownedQtValueReturn {
+					holderName := goVirtualCallbackHolderName(c, m)
+					ret.WriteString(`
+				// On` + m.goMethodName() + `Owned installs a virtual override that transfers
+				// ownership of each non-nil returned Qt value object to C++.
+				func (this *` + goClassName + `) On` + m.goMethodName() + `Owned(slot ` + goCbType + `) {
+					var slotHandle C.intptr_t
+					if slot != nil {
+						slotHandle = C.intptr_t(cgo.NewHandle(` + holderName + `{callback: slot, ownsReturn: true}))
+					}
+					ok := C.` + cabiOverrideVirtualOwnedName(c, m) + `(unsafe.Pointer(this.h), slotHandle)
+					if !ok {
+						panic("miqt: can only override virtual methods for directly constructed types")
+					}
+				}
+				`)
+				}
+
+				ret.WriteString(`
 
 				//export ` + callbackName + `
 				func ` + callbackName + `(self *C.` + goClassName + `, cb C.intptr_t` + ifv(len(m.Parameters) > 0, ", ", "") + strings.Join(cgoNamedParams, `, `) + `) ` + cabiReturnType + `{
-					gofunc, ok := cgo.Handle(cb).Value().(` + goCbType + `)
-					if !ok {
-						panic("miqt: callback of non-callback type (heap corruption?)")
-					}
+					` + callbackLookup + `
 
 			`)
 				ret.WriteString(conversion + "\n")
@@ -1163,6 +1207,12 @@ import "C"
 					ret.WriteString(`gofunc(` + strings.Join(paramNames, `, `) + " )\n")
 				} else {
 					ret.WriteString(`virtualReturn := gofunc(` + strings.Join(paramNames, `, `) + " )\n")
+					if ownedQtValueReturn {
+						ret.WriteString(`if callbackData.ownsReturn && virtualReturn != nil {
+						runtime.SetFinalizer(virtualReturn, nil)
+					}
+					`)
+					}
 					virtualRetP := m.ReturnType // copy
 					virtualRetP.ParameterName = "virtualReturn"
 					binding, rvalue := gfs.emitParameterGo2CABIForwarding(virtualRetP)

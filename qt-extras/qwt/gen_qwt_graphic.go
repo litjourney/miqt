@@ -201,10 +201,16 @@ func (this *QwtGraphic) callVirtualBase_SizeMetrics() *qt.QSize {
 	return _goptr
 
 }
+
+type miqtVirtualCallback_QwtGraphic_sizeMetrics struct {
+	callback   func(super func() *qt.QSize) *qt.QSize
+	ownsReturn bool
+}
+
 func (this *QwtGraphic) OnSizeMetrics(slot func(super func() *qt.QSize) *qt.QSize) {
 	var slotHandle C.intptr_t
 	if slot != nil {
-		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QwtGraphic_sizeMetrics{callback: slot}))
 	}
 	ok := C.QwtGraphic_override_virtual_sizeMetrics(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
@@ -212,14 +218,31 @@ func (this *QwtGraphic) OnSizeMetrics(slot func(super func() *qt.QSize) *qt.QSiz
 	}
 }
 
+// OnSizeMetricsOwned installs a virtual override that transfers
+// ownership of each non-nil returned Qt value object to C++.
+func (this *QwtGraphic) OnSizeMetricsOwned(slot func(super func() *qt.QSize) *qt.QSize) {
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QwtGraphic_sizeMetrics{callback: slot, ownsReturn: true}))
+	}
+	ok := C.QwtGraphic_override_virtual_owned_sizeMetrics(unsafe.Pointer(this.h), slotHandle)
+	if !ok {
+		panic("miqt: can only override virtual methods for directly constructed types")
+	}
+}
+
 //export miqt_exec_callback_QwtGraphic_sizeMetrics
 func miqt_exec_callback_QwtGraphic_sizeMetrics(self *C.QwtGraphic, cb C.intptr_t) *C.QSize {
-	gofunc, ok := cgo.Handle(cb).Value().(func(super func() *qt.QSize) *qt.QSize)
+	callbackData, ok := cgo.Handle(cb).Value().(miqtVirtualCallback_QwtGraphic_sizeMetrics)
 	if !ok {
 		panic("miqt: callback of non-callback type (heap corruption?)")
 	}
+	gofunc := callbackData.callback
 
 	virtualReturn := gofunc((&QwtGraphic{h: self}).callVirtualBase_SizeMetrics)
+	if callbackData.ownsReturn && virtualReturn != nil {
+		runtime.SetFinalizer(virtualReturn, nil)
+	}
 
 	return (*C.QSize)(virtualReturn.UnsafePointer())
 

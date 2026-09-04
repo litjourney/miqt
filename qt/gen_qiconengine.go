@@ -189,10 +189,16 @@ func (this *QIconEngine) callVirtualBase_ActualSize(size *QSize, mode QIcon__Mod
 	return _goptr
 
 }
+
+type miqtVirtualCallback_QIconEngine_actualSize struct {
+	callback   func(super func(size *QSize, mode QIcon__Mode, state QIcon__State) *QSize, size *QSize, mode QIcon__Mode, state QIcon__State) *QSize
+	ownsReturn bool
+}
+
 func (this *QIconEngine) OnActualSize(slot func(super func(size *QSize, mode QIcon__Mode, state QIcon__State) *QSize, size *QSize, mode QIcon__Mode, state QIcon__State) *QSize) {
 	var slotHandle C.intptr_t
 	if slot != nil {
-		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QIconEngine_actualSize{callback: slot}))
 	}
 	ok := C.QIconEngine_override_virtual_actualSize(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
@@ -200,12 +206,26 @@ func (this *QIconEngine) OnActualSize(slot func(super func(size *QSize, mode QIc
 	}
 }
 
+// OnActualSizeOwned installs a virtual override that transfers
+// ownership of each non-nil returned Qt value object to C++.
+func (this *QIconEngine) OnActualSizeOwned(slot func(super func(size *QSize, mode QIcon__Mode, state QIcon__State) *QSize, size *QSize, mode QIcon__Mode, state QIcon__State) *QSize) {
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QIconEngine_actualSize{callback: slot, ownsReturn: true}))
+	}
+	ok := C.QIconEngine_override_virtual_owned_actualSize(unsafe.Pointer(this.h), slotHandle)
+	if !ok {
+		panic("miqt: can only override virtual methods for directly constructed types")
+	}
+}
+
 //export miqt_exec_callback_QIconEngine_actualSize
 func miqt_exec_callback_QIconEngine_actualSize(self *C.QIconEngine, cb C.intptr_t, size *C.QSize, mode C.int, state C.int) *C.QSize {
-	gofunc, ok := cgo.Handle(cb).Value().(func(super func(size *QSize, mode QIcon__Mode, state QIcon__State) *QSize, size *QSize, mode QIcon__Mode, state QIcon__State) *QSize)
+	callbackData, ok := cgo.Handle(cb).Value().(miqtVirtualCallback_QIconEngine_actualSize)
 	if !ok {
 		panic("miqt: callback of non-callback type (heap corruption?)")
 	}
+	gofunc := callbackData.callback
 
 	// Convert all CABI parameters to Go parameters
 	slotval1 := newQSize(size)
@@ -215,6 +235,9 @@ func miqt_exec_callback_QIconEngine_actualSize(self *C.QIconEngine, cb C.intptr_
 	slotval3 := (QIcon__State)(state)
 
 	virtualReturn := gofunc((&QIconEngine{h: self}).callVirtualBase_ActualSize, slotval1, slotval2, slotval3)
+	if callbackData.ownsReturn && virtualReturn != nil {
+		runtime.SetFinalizer(virtualReturn, nil)
+	}
 
 	return virtualReturn.cPointer()
 
@@ -227,10 +250,16 @@ func (this *QIconEngine) callVirtualBase_Pixmap(size *QSize, mode QIcon__Mode, s
 	return _goptr
 
 }
+
+type miqtVirtualCallback_QIconEngine_pixmap struct {
+	callback   func(super func(size *QSize, mode QIcon__Mode, state QIcon__State) *QPixmap, size *QSize, mode QIcon__Mode, state QIcon__State) *QPixmap
+	ownsReturn bool
+}
+
 func (this *QIconEngine) OnPixmap(slot func(super func(size *QSize, mode QIcon__Mode, state QIcon__State) *QPixmap, size *QSize, mode QIcon__Mode, state QIcon__State) *QPixmap) {
 	var slotHandle C.intptr_t
 	if slot != nil {
-		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QIconEngine_pixmap{callback: slot}))
 	}
 	ok := C.QIconEngine_override_virtual_pixmap(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
@@ -238,12 +267,26 @@ func (this *QIconEngine) OnPixmap(slot func(super func(size *QSize, mode QIcon__
 	}
 }
 
+// OnPixmapOwned installs a virtual override that transfers
+// ownership of each non-nil returned Qt value object to C++.
+func (this *QIconEngine) OnPixmapOwned(slot func(super func(size *QSize, mode QIcon__Mode, state QIcon__State) *QPixmap, size *QSize, mode QIcon__Mode, state QIcon__State) *QPixmap) {
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QIconEngine_pixmap{callback: slot, ownsReturn: true}))
+	}
+	ok := C.QIconEngine_override_virtual_owned_pixmap(unsafe.Pointer(this.h), slotHandle)
+	if !ok {
+		panic("miqt: can only override virtual methods for directly constructed types")
+	}
+}
+
 //export miqt_exec_callback_QIconEngine_pixmap
 func miqt_exec_callback_QIconEngine_pixmap(self *C.QIconEngine, cb C.intptr_t, size *C.QSize, mode C.int, state C.int) *C.QPixmap {
-	gofunc, ok := cgo.Handle(cb).Value().(func(super func(size *QSize, mode QIcon__Mode, state QIcon__State) *QPixmap, size *QSize, mode QIcon__Mode, state QIcon__State) *QPixmap)
+	callbackData, ok := cgo.Handle(cb).Value().(miqtVirtualCallback_QIconEngine_pixmap)
 	if !ok {
 		panic("miqt: callback of non-callback type (heap corruption?)")
 	}
+	gofunc := callbackData.callback
 
 	// Convert all CABI parameters to Go parameters
 	slotval1 := newQSize(size)
@@ -253,6 +296,9 @@ func miqt_exec_callback_QIconEngine_pixmap(self *C.QIconEngine, cb C.intptr_t, s
 	slotval3 := (QIcon__State)(state)
 
 	virtualReturn := gofunc((&QIconEngine{h: self}).callVirtualBase_Pixmap, slotval1, slotval2, slotval3)
+	if callbackData.ownsReturn && virtualReturn != nil {
+		runtime.SetFinalizer(virtualReturn, nil)
+	}
 
 	return virtualReturn.cPointer()
 

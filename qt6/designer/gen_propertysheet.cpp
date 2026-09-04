@@ -216,6 +216,7 @@ public:
 
 	// cgo.Handle value for overwritten implementation
 	miqt_callback_handle<miqt_exec_callback_handle_release_QDesignerPropertySheetExtension> handle__property;
+	bool owns_return__property = false;
 
 	// Subclass to allow providing a Go implementation
 	virtual QVariant property(int index) const override {
@@ -225,6 +226,10 @@ public:
 
 		int sigval1 = index;
 		QVariant* callback_return_value = miqt_exec_callback_QDesignerPropertySheetExtension_property(this, handle__property.value(), sigval1);
+		std::unique_ptr<QVariant> callback_return_value_owner;
+		if (owns_return__property) {
+			callback_return_value_owner.reset(callback_return_value);
+		}
 		return *callback_return_value;
 	}
 
@@ -503,6 +508,19 @@ bool QDesignerPropertySheetExtension_override_virtual_property(void* self, intpt
 	}
 
 	self_cast->handle__property = std::move(slot_handle);
+	self_cast->owns_return__property = false;
+	return true;
+}
+
+bool QDesignerPropertySheetExtension_override_virtual_owned_property(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QDesignerPropertySheetExtension> slot_handle(slot);
+	MiqtVirtualQDesignerPropertySheetExtension* self_cast = dynamic_cast<MiqtVirtualQDesignerPropertySheetExtension*>( (QDesignerPropertySheetExtension*)(self) );
+	if (self_cast == nullptr) {
+		return false;
+	}
+
+	self_cast->handle__property = std::move(slot_handle);
+	self_cast->owns_return__property = true;
 	return true;
 }
 

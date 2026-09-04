@@ -80,6 +80,7 @@ struct miqt_string QStyledItemDelegate_tr3(const char* s, const char* c, int n);
 bool QStyledItemDelegate_override_virtual_paint(void* self, intptr_t slot);
 void QStyledItemDelegate_virtualbase_paint(const void* self, QPainter* painter, QStyleOptionViewItem* option, QModelIndex* index);
 bool QStyledItemDelegate_override_virtual_sizeHint(void* self, intptr_t slot);
+bool QStyledItemDelegate_override_virtual_owned_sizeHint(void* self, intptr_t slot);
 QSize* QStyledItemDelegate_virtualbase_sizeHint(const void* self, QStyleOptionViewItem* option, QModelIndex* index);
 bool QStyledItemDelegate_override_virtual_createEditor(void* self, intptr_t slot);
 QWidget* QStyledItemDelegate_virtualbase_createEditor(const void* self, QWidget* parent, QStyleOptionViewItem* option, QModelIndex* index);

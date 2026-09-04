@@ -145,8 +145,10 @@ struct miqt_string QwtThermo_trUtf82(const char* s, const char* c);
 struct miqt_string QwtThermo_trUtf83(const char* s, const char* c, int n);
 
 bool QwtThermo_override_virtual_sizeHint(void* self, intptr_t slot);
+bool QwtThermo_override_virtual_owned_sizeHint(void* self, intptr_t slot);
 QSize* QwtThermo_virtualbase_sizeHint(const void* self);
 bool QwtThermo_override_virtual_minimumSizeHint(void* self, intptr_t slot);
+bool QwtThermo_override_virtual_owned_minimumSizeHint(void* self, intptr_t slot);
 QSize* QwtThermo_virtualbase_minimumSizeHint(const void* self);
 bool QwtThermo_override_virtual_setValue(void* self, intptr_t slot);
 void QwtThermo_virtualbase_setValue(void* self, double value);
@@ -229,6 +231,7 @@ QPainter* QwtThermo_virtualbase_sharedPainter(const void* self);
 bool QwtThermo_override_virtual_inputMethodEvent(void* self, intptr_t slot);
 void QwtThermo_virtualbase_inputMethodEvent(void* self, QInputMethodEvent* param1);
 bool QwtThermo_override_virtual_inputMethodQuery(void* self, intptr_t slot);
+bool QwtThermo_override_virtual_owned_inputMethodQuery(void* self, intptr_t slot);
 QVariant* QwtThermo_virtualbase_inputMethodQuery(const void* self, int param1);
 bool QwtThermo_override_virtual_focusNextPrevChild(void* self, intptr_t slot);
 bool QwtThermo_virtualbase_focusNextPrevChild(void* self, bool next);

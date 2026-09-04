@@ -77,6 +77,7 @@ struct miqt_string QConcatenateTablesProxyModel_trUtf82(const char* s, const cha
 struct miqt_string QConcatenateTablesProxyModel_trUtf83(const char* s, const char* c, int n);
 
 bool QConcatenateTablesProxyModel_override_virtual_data(void* self, intptr_t slot);
+bool QConcatenateTablesProxyModel_override_virtual_owned_data(void* self, intptr_t slot);
 QVariant* QConcatenateTablesProxyModel_virtualbase_data(const void* self, QModelIndex* index, int role);
 bool QConcatenateTablesProxyModel_override_virtual_setData(void* self, intptr_t slot);
 bool QConcatenateTablesProxyModel_virtualbase_setData(void* self, QModelIndex* index, QVariant* value, int role);
@@ -87,12 +88,15 @@ bool QConcatenateTablesProxyModel_virtualbase_setItemData(void* self, QModelInde
 bool QConcatenateTablesProxyModel_override_virtual_flags(void* self, intptr_t slot);
 int QConcatenateTablesProxyModel_virtualbase_flags(const void* self, QModelIndex* index);
 bool QConcatenateTablesProxyModel_override_virtual_index(void* self, intptr_t slot);
+bool QConcatenateTablesProxyModel_override_virtual_owned_index(void* self, intptr_t slot);
 QModelIndex* QConcatenateTablesProxyModel_virtualbase_index(const void* self, int row, int column, QModelIndex* parent);
 bool QConcatenateTablesProxyModel_override_virtual_parent(void* self, intptr_t slot);
+bool QConcatenateTablesProxyModel_override_virtual_owned_parent(void* self, intptr_t slot);
 QModelIndex* QConcatenateTablesProxyModel_virtualbase_parent(const void* self, QModelIndex* index);
 bool QConcatenateTablesProxyModel_override_virtual_rowCount(void* self, intptr_t slot);
 int QConcatenateTablesProxyModel_virtualbase_rowCount(const void* self, QModelIndex* parent);
 bool QConcatenateTablesProxyModel_override_virtual_headerData(void* self, intptr_t slot);
+bool QConcatenateTablesProxyModel_override_virtual_owned_headerData(void* self, intptr_t slot);
 QVariant* QConcatenateTablesProxyModel_virtualbase_headerData(const void* self, int section, int orientation, int role);
 bool QConcatenateTablesProxyModel_override_virtual_columnCount(void* self, intptr_t slot);
 int QConcatenateTablesProxyModel_virtualbase_columnCount(const void* self, QModelIndex* parent);
@@ -105,8 +109,10 @@ bool QConcatenateTablesProxyModel_virtualbase_canDropMimeData(const void* self, 
 bool QConcatenateTablesProxyModel_override_virtual_dropMimeData(void* self, intptr_t slot);
 bool QConcatenateTablesProxyModel_virtualbase_dropMimeData(void* self, QMimeData* data, int action, int row, int column, QModelIndex* parent);
 bool QConcatenateTablesProxyModel_override_virtual_span(void* self, intptr_t slot);
+bool QConcatenateTablesProxyModel_override_virtual_owned_span(void* self, intptr_t slot);
 QSize* QConcatenateTablesProxyModel_virtualbase_span(const void* self, QModelIndex* index);
 bool QConcatenateTablesProxyModel_override_virtual_sibling(void* self, intptr_t slot);
+bool QConcatenateTablesProxyModel_override_virtual_owned_sibling(void* self, intptr_t slot);
 QModelIndex* QConcatenateTablesProxyModel_virtualbase_sibling(const void* self, int row, int column, QModelIndex* idx);
 bool QConcatenateTablesProxyModel_override_virtual_hasChildren(void* self, intptr_t slot);
 bool QConcatenateTablesProxyModel_virtualbase_hasChildren(const void* self, QModelIndex* parent);
@@ -135,6 +141,7 @@ bool QConcatenateTablesProxyModel_virtualbase_canFetchMore(const void* self, QMo
 bool QConcatenateTablesProxyModel_override_virtual_sort(void* self, intptr_t slot);
 void QConcatenateTablesProxyModel_virtualbase_sort(void* self, int column, int order);
 bool QConcatenateTablesProxyModel_override_virtual_buddy(void* self, intptr_t slot);
+bool QConcatenateTablesProxyModel_override_virtual_owned_buddy(void* self, intptr_t slot);
 QModelIndex* QConcatenateTablesProxyModel_virtualbase_buddy(const void* self, QModelIndex* index);
 bool QConcatenateTablesProxyModel_override_virtual_match(void* self, intptr_t slot);
 struct miqt_array /* of QModelIndex* */  QConcatenateTablesProxyModel_virtualbase_match(const void* self, QModelIndex* start, int role, QVariant* value, int hits, int flags);

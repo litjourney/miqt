@@ -128,10 +128,13 @@ QVariant* QFileSystemModel_myComputerWithRole(const QFileSystemModel* self, int 
 void QFileSystemModel_setOption2(QFileSystemModel* self, int option, bool on);
 
 bool QFileSystemModel_override_virtual_index(void* self, intptr_t slot);
+bool QFileSystemModel_override_virtual_owned_index(void* self, intptr_t slot);
 QModelIndex* QFileSystemModel_virtualbase_index(const void* self, int row, int column, QModelIndex* parent);
 bool QFileSystemModel_override_virtual_parent(void* self, intptr_t slot);
+bool QFileSystemModel_override_virtual_owned_parent(void* self, intptr_t slot);
 QModelIndex* QFileSystemModel_virtualbase_parent(const void* self, QModelIndex* child);
 bool QFileSystemModel_override_virtual_sibling(void* self, intptr_t slot);
+bool QFileSystemModel_override_virtual_owned_sibling(void* self, intptr_t slot);
 QModelIndex* QFileSystemModel_virtualbase_sibling(const void* self, int row, int column, QModelIndex* idx);
 bool QFileSystemModel_override_virtual_hasChildren(void* self, intptr_t slot);
 bool QFileSystemModel_virtualbase_hasChildren(const void* self, QModelIndex* parent);
@@ -144,10 +147,12 @@ int QFileSystemModel_virtualbase_rowCount(const void* self, QModelIndex* parent)
 bool QFileSystemModel_override_virtual_columnCount(void* self, intptr_t slot);
 int QFileSystemModel_virtualbase_columnCount(const void* self, QModelIndex* parent);
 bool QFileSystemModel_override_virtual_data(void* self, intptr_t slot);
+bool QFileSystemModel_override_virtual_owned_data(void* self, intptr_t slot);
 QVariant* QFileSystemModel_virtualbase_data(const void* self, QModelIndex* index, int role);
 bool QFileSystemModel_override_virtual_setData(void* self, intptr_t slot);
 bool QFileSystemModel_virtualbase_setData(void* self, QModelIndex* index, QVariant* value, int role);
 bool QFileSystemModel_override_virtual_headerData(void* self, intptr_t slot);
+bool QFileSystemModel_override_virtual_owned_headerData(void* self, intptr_t slot);
 QVariant* QFileSystemModel_virtualbase_headerData(const void* self, int section, int orientation, int role);
 bool QFileSystemModel_override_virtual_flags(void* self, intptr_t slot);
 int QFileSystemModel_virtualbase_flags(const void* self, QModelIndex* index);
@@ -188,10 +193,12 @@ bool QFileSystemModel_virtualbase_moveRows(void* self, QModelIndex* sourceParent
 bool QFileSystemModel_override_virtual_moveColumns(void* self, intptr_t slot);
 bool QFileSystemModel_virtualbase_moveColumns(void* self, QModelIndex* sourceParent, int sourceColumn, int count, QModelIndex* destinationParent, int destinationChild);
 bool QFileSystemModel_override_virtual_buddy(void* self, intptr_t slot);
+bool QFileSystemModel_override_virtual_owned_buddy(void* self, intptr_t slot);
 QModelIndex* QFileSystemModel_virtualbase_buddy(const void* self, QModelIndex* index);
 bool QFileSystemModel_override_virtual_match(void* self, intptr_t slot);
 struct miqt_array /* of QModelIndex* */  QFileSystemModel_virtualbase_match(const void* self, QModelIndex* start, int role, QVariant* value, int hits, int flags);
 bool QFileSystemModel_override_virtual_span(void* self, intptr_t slot);
+bool QFileSystemModel_override_virtual_owned_span(void* self, intptr_t slot);
 QSize* QFileSystemModel_virtualbase_span(const void* self, QModelIndex* index);
 bool QFileSystemModel_override_virtual_roleNames(void* self, intptr_t slot);
 struct miqt_map /* of int to struct miqt_string */  QFileSystemModel_virtualbase_roleNames(const void* self);

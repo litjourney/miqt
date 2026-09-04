@@ -39,6 +39,7 @@ bool QDesignerSettingsInterface_virtualbase_contains(const void* self, struct mi
 bool QDesignerSettingsInterface_override_virtual_setValue(void* self, intptr_t slot);
 void QDesignerSettingsInterface_virtualbase_setValue(void* self, struct miqt_string key, QVariant* value);
 bool QDesignerSettingsInterface_override_virtual_value(void* self, intptr_t slot);
+bool QDesignerSettingsInterface_override_virtual_owned_value(void* self, intptr_t slot);
 QVariant* QDesignerSettingsInterface_virtualbase_value(const void* self, struct miqt_string key, QVariant* defaultValue);
 bool QDesignerSettingsInterface_override_virtual_remove(void* self, intptr_t slot);
 void QDesignerSettingsInterface_virtualbase_remove(void* self, struct miqt_string key);

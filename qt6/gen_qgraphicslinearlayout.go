@@ -372,10 +372,16 @@ func (this *QGraphicsLinearLayout) callVirtualBase_SizeHint(which SizeHint, cons
 	return _goptr
 
 }
+
+type miqtVirtualCallback_QGraphicsLinearLayout_sizeHint struct {
+	callback   func(super func(which SizeHint, constraint *QSizeF) *QSizeF, which SizeHint, constraint *QSizeF) *QSizeF
+	ownsReturn bool
+}
+
 func (this *QGraphicsLinearLayout) OnSizeHint(slot func(super func(which SizeHint, constraint *QSizeF) *QSizeF, which SizeHint, constraint *QSizeF) *QSizeF) {
 	var slotHandle C.intptr_t
 	if slot != nil {
-		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QGraphicsLinearLayout_sizeHint{callback: slot}))
 	}
 	ok := C.QGraphicsLinearLayout_override_virtual_sizeHint(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
@@ -383,12 +389,26 @@ func (this *QGraphicsLinearLayout) OnSizeHint(slot func(super func(which SizeHin
 	}
 }
 
+// OnSizeHintOwned installs a virtual override that transfers
+// ownership of each non-nil returned Qt value object to C++.
+func (this *QGraphicsLinearLayout) OnSizeHintOwned(slot func(super func(which SizeHint, constraint *QSizeF) *QSizeF, which SizeHint, constraint *QSizeF) *QSizeF) {
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QGraphicsLinearLayout_sizeHint{callback: slot, ownsReturn: true}))
+	}
+	ok := C.QGraphicsLinearLayout_override_virtual_owned_sizeHint(unsafe.Pointer(this.h), slotHandle)
+	if !ok {
+		panic("miqt: can only override virtual methods for directly constructed types")
+	}
+}
+
 //export miqt_exec_callback_QGraphicsLinearLayout_sizeHint
 func miqt_exec_callback_QGraphicsLinearLayout_sizeHint(self *C.QGraphicsLinearLayout, cb C.intptr_t, which C.int, constraint *C.QSizeF) *C.QSizeF {
-	gofunc, ok := cgo.Handle(cb).Value().(func(super func(which SizeHint, constraint *QSizeF) *QSizeF, which SizeHint, constraint *QSizeF) *QSizeF)
+	callbackData, ok := cgo.Handle(cb).Value().(miqtVirtualCallback_QGraphicsLinearLayout_sizeHint)
 	if !ok {
 		panic("miqt: callback of non-callback type (heap corruption?)")
 	}
+	gofunc := callbackData.callback
 
 	// Convert all CABI parameters to Go parameters
 	slotval1 := (SizeHint)(which)
@@ -396,6 +416,9 @@ func miqt_exec_callback_QGraphicsLinearLayout_sizeHint(self *C.QGraphicsLinearLa
 	slotval2 := newQSizeF(constraint)
 
 	virtualReturn := gofunc((&QGraphicsLinearLayout{h: self}).callVirtualBase_SizeHint, slotval1, slotval2)
+	if callbackData.ownsReturn && virtualReturn != nil {
+		runtime.SetFinalizer(virtualReturn, nil)
+	}
 
 	return virtualReturn.cPointer()
 

@@ -50,6 +50,7 @@ void QDesignerLayoutDecorationExtension_adjustIndicator(QDesignerLayoutDecoratio
 bool QDesignerLayoutDecorationExtension_override_virtual_widgets(void* self, intptr_t slot);
 struct miqt_array /* of QWidget* */  QDesignerLayoutDecorationExtension_virtualbase_widgets(const void* self, QLayout* layout);
 bool QDesignerLayoutDecorationExtension_override_virtual_itemInfo(void* self, intptr_t slot);
+bool QDesignerLayoutDecorationExtension_override_virtual_owned_itemInfo(void* self, intptr_t slot);
 QRect* QDesignerLayoutDecorationExtension_virtualbase_itemInfo(const void* self, int index);
 bool QDesignerLayoutDecorationExtension_override_virtual_indexOf(void* self, intptr_t slot);
 int QDesignerLayoutDecorationExtension_virtualbase_indexOf(const void* self, QWidget* widget);

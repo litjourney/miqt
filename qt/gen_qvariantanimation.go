@@ -485,10 +485,16 @@ func (this *QVariantAnimation) callVirtualBase_Interpolated(from *QVariant, to *
 	return _goptr
 
 }
+
+type miqtVirtualCallback_QVariantAnimation_interpolated struct {
+	callback   func(super func(from *QVariant, to *QVariant, progress float64) *QVariant, from *QVariant, to *QVariant, progress float64) *QVariant
+	ownsReturn bool
+}
+
 func (this *QVariantAnimation) OnInterpolated(slot func(super func(from *QVariant, to *QVariant, progress float64) *QVariant, from *QVariant, to *QVariant, progress float64) *QVariant) {
 	var slotHandle C.intptr_t
 	if slot != nil {
-		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QVariantAnimation_interpolated{callback: slot}))
 	}
 	ok := C.QVariantAnimation_override_virtual_interpolated(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
@@ -496,12 +502,26 @@ func (this *QVariantAnimation) OnInterpolated(slot func(super func(from *QVarian
 	}
 }
 
+// OnInterpolatedOwned installs a virtual override that transfers
+// ownership of each non-nil returned Qt value object to C++.
+func (this *QVariantAnimation) OnInterpolatedOwned(slot func(super func(from *QVariant, to *QVariant, progress float64) *QVariant, from *QVariant, to *QVariant, progress float64) *QVariant) {
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QVariantAnimation_interpolated{callback: slot, ownsReturn: true}))
+	}
+	ok := C.QVariantAnimation_override_virtual_owned_interpolated(unsafe.Pointer(this.h), slotHandle)
+	if !ok {
+		panic("miqt: can only override virtual methods for directly constructed types")
+	}
+}
+
 //export miqt_exec_callback_QVariantAnimation_interpolated
 func miqt_exec_callback_QVariantAnimation_interpolated(self *C.QVariantAnimation, cb C.intptr_t, from *C.QVariant, to *C.QVariant, progress C.double) *C.QVariant {
-	gofunc, ok := cgo.Handle(cb).Value().(func(super func(from *QVariant, to *QVariant, progress float64) *QVariant, from *QVariant, to *QVariant, progress float64) *QVariant)
+	callbackData, ok := cgo.Handle(cb).Value().(miqtVirtualCallback_QVariantAnimation_interpolated)
 	if !ok {
 		panic("miqt: callback of non-callback type (heap corruption?)")
 	}
+	gofunc := callbackData.callback
 
 	// Convert all CABI parameters to Go parameters
 	slotval1 := newQVariant(from)
@@ -511,6 +531,9 @@ func miqt_exec_callback_QVariantAnimation_interpolated(self *C.QVariantAnimation
 	slotval3 := (float64)(progress)
 
 	virtualReturn := gofunc((&QVariantAnimation{h: self}).callVirtualBase_Interpolated, slotval1, slotval2, slotval3)
+	if callbackData.ownsReturn && virtualReturn != nil {
+		runtime.SetFinalizer(virtualReturn, nil)
+	}
 
 	return virtualReturn.cPointer()
 

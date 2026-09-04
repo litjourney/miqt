@@ -44,6 +44,7 @@ double QwtMatrixRasterData_value(const QwtMatrixRasterData* self, double x, doub
 bool QwtMatrixRasterData_override_virtual_setInterval(void* self, intptr_t slot);
 void QwtMatrixRasterData_virtualbase_setInterval(void* self, int param1, QwtInterval* param2);
 bool QwtMatrixRasterData_override_virtual_pixelHint(void* self, intptr_t slot);
+bool QwtMatrixRasterData_override_virtual_owned_pixelHint(void* self, intptr_t slot);
 QRectF* QwtMatrixRasterData_virtualbase_pixelHint(const void* self, QRectF* param1);
 bool QwtMatrixRasterData_override_virtual_value(void* self, intptr_t slot);
 double QwtMatrixRasterData_virtualbase_value(const void* self, double x, double y);

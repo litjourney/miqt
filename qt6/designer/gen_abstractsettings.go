@@ -208,10 +208,16 @@ func miqt_exec_callback_QDesignerSettingsInterface_setValue(self *C.QDesignerSet
 	gofunc(slotval1, slotval2)
 
 }
+
+type miqtVirtualCallback_QDesignerSettingsInterface_value struct {
+	callback   func(key string, defaultValue *qt6.QVariant) *qt6.QVariant
+	ownsReturn bool
+}
+
 func (this *QDesignerSettingsInterface) OnValue(slot func(key string, defaultValue *qt6.QVariant) *qt6.QVariant) {
 	var slotHandle C.intptr_t
 	if slot != nil {
-		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QDesignerSettingsInterface_value{callback: slot}))
 	}
 	ok := C.QDesignerSettingsInterface_override_virtual_value(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
@@ -219,12 +225,26 @@ func (this *QDesignerSettingsInterface) OnValue(slot func(key string, defaultVal
 	}
 }
 
+// OnValueOwned installs a virtual override that transfers
+// ownership of each non-nil returned Qt value object to C++.
+func (this *QDesignerSettingsInterface) OnValueOwned(slot func(key string, defaultValue *qt6.QVariant) *qt6.QVariant) {
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QDesignerSettingsInterface_value{callback: slot, ownsReturn: true}))
+	}
+	ok := C.QDesignerSettingsInterface_override_virtual_owned_value(unsafe.Pointer(this.h), slotHandle)
+	if !ok {
+		panic("miqt: can only override virtual methods for directly constructed types")
+	}
+}
+
 //export miqt_exec_callback_QDesignerSettingsInterface_value
 func miqt_exec_callback_QDesignerSettingsInterface_value(self *C.QDesignerSettingsInterface, cb C.intptr_t, key C.struct_miqt_string, defaultValue *C.QVariant) *C.QVariant {
-	gofunc, ok := cgo.Handle(cb).Value().(func(key string, defaultValue *qt6.QVariant) *qt6.QVariant)
+	callbackData, ok := cgo.Handle(cb).Value().(miqtVirtualCallback_QDesignerSettingsInterface_value)
 	if !ok {
 		panic("miqt: callback of non-callback type (heap corruption?)")
 	}
+	gofunc := callbackData.callback
 
 	// Convert all CABI parameters to Go parameters
 	var key_ms C.struct_miqt_string = key
@@ -234,6 +254,9 @@ func miqt_exec_callback_QDesignerSettingsInterface_value(self *C.QDesignerSettin
 	slotval2 := qt6.UnsafeNewQVariant(unsafe.Pointer(defaultValue))
 
 	virtualReturn := gofunc(slotval1, slotval2)
+	if callbackData.ownsReturn && virtualReturn != nil {
+		runtime.SetFinalizer(virtualReturn, nil)
+	}
 
 	return (*C.QVariant)(virtualReturn.UnsafePointer())
 

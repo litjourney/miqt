@@ -121,6 +121,7 @@ public:
 
 	// cgo.Handle value for overwritten implementation
 	miqt_callback_handle<miqt_exec_callback_handle_release_QLineSeries> handle__color;
+	bool owns_return__color = false;
 
 	// Subclass to allow providing a Go implementation
 	virtual QColor color() const override {
@@ -129,6 +130,10 @@ public:
 		}
 
 		QColor* callback_return_value = miqt_exec_callback_QLineSeries_color(this, handle__color.value());
+		std::unique_ptr<QColor> callback_return_value_owner;
+		if (owns_return__color) {
+			callback_return_value_owner.reset(callback_return_value);
+		}
 		return *callback_return_value;
 	}
 
@@ -390,6 +395,19 @@ bool QLineSeries_override_virtual_color(void* self, intptr_t slot) {
 	}
 
 	self_cast->handle__color = std::move(slot_handle);
+	self_cast->owns_return__color = false;
+	return true;
+}
+
+bool QLineSeries_override_virtual_owned_color(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QLineSeries> slot_handle(slot);
+	MiqtVirtualQLineSeries* self_cast = dynamic_cast<MiqtVirtualQLineSeries*>( (QLineSeries*)(self) );
+	if (self_cast == nullptr) {
+		return false;
+	}
+
+	self_cast->handle__color = std::move(slot_handle);
+	self_cast->owns_return__color = true;
 	return true;
 }
 

@@ -45,6 +45,7 @@ QVariant* QScriptClass_extension(QScriptClass* self, int extension, QVariant* ar
 bool QScriptClass_override_virtual_queryProperty(void* self, intptr_t slot);
 int QScriptClass_virtualbase_queryProperty(void* self, QScriptValue* object, QScriptString* name, int flags, unsigned int* id);
 bool QScriptClass_override_virtual_property(void* self, intptr_t slot);
+bool QScriptClass_override_virtual_owned_property(void* self, intptr_t slot);
 QScriptValue* QScriptClass_virtualbase_property(void* self, QScriptValue* object, QScriptString* name, unsigned int id);
 bool QScriptClass_override_virtual_setProperty(void* self, intptr_t slot);
 void QScriptClass_virtualbase_setProperty(void* self, QScriptValue* object, QScriptString* name, unsigned int id, QScriptValue* value);
@@ -53,12 +54,14 @@ int QScriptClass_virtualbase_propertyFlags(void* self, QScriptValue* object, QSc
 bool QScriptClass_override_virtual_newIterator(void* self, intptr_t slot);
 QScriptClassPropertyIterator* QScriptClass_virtualbase_newIterator(void* self, QScriptValue* object);
 bool QScriptClass_override_virtual_prototype(void* self, intptr_t slot);
+bool QScriptClass_override_virtual_owned_prototype(void* self, intptr_t slot);
 QScriptValue* QScriptClass_virtualbase_prototype(const void* self);
 bool QScriptClass_override_virtual_name(void* self, intptr_t slot);
 struct miqt_string QScriptClass_virtualbase_name(const void* self);
 bool QScriptClass_override_virtual_supportsExtension(void* self, intptr_t slot);
 bool QScriptClass_virtualbase_supportsExtension(const void* self, int extension);
 bool QScriptClass_override_virtual_extension(void* self, intptr_t slot);
+bool QScriptClass_override_virtual_owned_extension(void* self, intptr_t slot);
 QVariant* QScriptClass_virtualbase_extension(void* self, int extension, QVariant* argument);
 
 void QScriptClass_delete(QScriptClass* self);

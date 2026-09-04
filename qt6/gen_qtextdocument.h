@@ -210,6 +210,7 @@ void QTextDocument_virtualbase_clear(void* self);
 bool QTextDocument_override_virtual_createObject(void* self, intptr_t slot);
 QTextObject* QTextDocument_virtualbase_createObject(void* self, QTextFormat* f);
 bool QTextDocument_override_virtual_loadResource(void* self, intptr_t slot);
+bool QTextDocument_override_virtual_owned_loadResource(void* self, intptr_t slot);
 QVariant* QTextDocument_virtualbase_loadResource(void* self, int type, QUrl* name);
 bool QTextDocument_override_virtual_event(void* self, intptr_t slot);
 bool QTextDocument_virtualbase_event(void* self, QEvent* event);

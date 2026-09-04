@@ -51,6 +51,7 @@ void QwtPlotLayout_operatorAssign(QwtPlotLayout* self, QwtPlotLayout* param1);
 void QwtPlotLayout_setCanvasMargin2(QwtPlotLayout* self, int margin, int axis);
 
 bool QwtPlotLayout_override_virtual_minimumSizeHint(void* self, intptr_t slot);
+bool QwtPlotLayout_override_virtual_owned_minimumSizeHint(void* self, intptr_t slot);
 QSize* QwtPlotLayout_virtualbase_minimumSizeHint(const void* self, QwtPlot* param1);
 bool QwtPlotLayout_override_virtual_activate(void* self, intptr_t slot);
 void QwtPlotLayout_virtualbase_activate(void* self, QwtPlot* param1, QRectF* plotRect, int options);

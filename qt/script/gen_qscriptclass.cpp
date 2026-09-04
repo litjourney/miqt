@@ -64,6 +64,7 @@ public:
 
 	// cgo.Handle value for overwritten implementation
 	miqt_callback_handle<miqt_exec_callback_handle_release_QScriptClass> handle__property;
+	bool owns_return__property = false;
 
 	// Subclass to allow providing a Go implementation
 	virtual QScriptValue property(const QScriptValue& object, const QScriptString& name, uint id) override {
@@ -80,6 +81,10 @@ public:
 		uint id_ret = id;
 		unsigned int sigval3 = static_cast<unsigned int>(id_ret);
 		QScriptValue* callback_return_value = miqt_exec_callback_QScriptClass_property(this, handle__property.value(), sigval1, sigval2, sigval3);
+		std::unique_ptr<QScriptValue> callback_return_value_owner;
+		if (owns_return__property) {
+			callback_return_value_owner.reset(callback_return_value);
+		}
 		return *callback_return_value;
 	}
 
@@ -155,6 +160,7 @@ public:
 
 	// cgo.Handle value for overwritten implementation
 	miqt_callback_handle<miqt_exec_callback_handle_release_QScriptClass> handle__prototype;
+	bool owns_return__prototype = false;
 
 	// Subclass to allow providing a Go implementation
 	virtual QScriptValue prototype() const override {
@@ -163,6 +169,10 @@ public:
 		}
 
 		QScriptValue* callback_return_value = miqt_exec_callback_QScriptClass_prototype(this, handle__prototype.value());
+		std::unique_ptr<QScriptValue> callback_return_value_owner;
+		if (owns_return__prototype) {
+			callback_return_value_owner.reset(callback_return_value);
+		}
 		return *callback_return_value;
 	}
 
@@ -204,6 +214,7 @@ public:
 
 	// cgo.Handle value for overwritten implementation
 	miqt_callback_handle<miqt_exec_callback_handle_release_QScriptClass> handle__extension;
+	bool owns_return__extension = false;
 
 	// Subclass to allow providing a Go implementation
 	virtual QVariant extension(QScriptClass::Extension extension, const QVariant& argument) override {
@@ -217,6 +228,10 @@ public:
 		// Cast returned reference into pointer
 		QVariant* sigval2 = const_cast<QVariant*>(&argument_ret);
 		QVariant* callback_return_value = miqt_exec_callback_QScriptClass_extension(this, handle__extension.value(), sigval1, sigval2);
+		std::unique_ptr<QVariant> callback_return_value_owner;
+		if (owns_return__extension) {
+			callback_return_value_owner.reset(callback_return_value);
+		}
 		return *callback_return_value;
 	}
 
@@ -301,6 +316,19 @@ bool QScriptClass_override_virtual_property(void* self, intptr_t slot) {
 	}
 
 	self_cast->handle__property = std::move(slot_handle);
+	self_cast->owns_return__property = false;
+	return true;
+}
+
+bool QScriptClass_override_virtual_owned_property(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QScriptClass> slot_handle(slot);
+	MiqtVirtualQScriptClass* self_cast = dynamic_cast<MiqtVirtualQScriptClass*>( (QScriptClass*)(self) );
+	if (self_cast == nullptr) {
+		return false;
+	}
+
+	self_cast->handle__property = std::move(slot_handle);
+	self_cast->owns_return__property = true;
 	return true;
 }
 
@@ -362,6 +390,19 @@ bool QScriptClass_override_virtual_prototype(void* self, intptr_t slot) {
 	}
 
 	self_cast->handle__prototype = std::move(slot_handle);
+	self_cast->owns_return__prototype = false;
+	return true;
+}
+
+bool QScriptClass_override_virtual_owned_prototype(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QScriptClass> slot_handle(slot);
+	MiqtVirtualQScriptClass* self_cast = dynamic_cast<MiqtVirtualQScriptClass*>( (QScriptClass*)(self) );
+	if (self_cast == nullptr) {
+		return false;
+	}
+
+	self_cast->handle__prototype = std::move(slot_handle);
+	self_cast->owns_return__prototype = true;
 	return true;
 }
 
@@ -414,6 +455,19 @@ bool QScriptClass_override_virtual_extension(void* self, intptr_t slot) {
 	}
 
 	self_cast->handle__extension = std::move(slot_handle);
+	self_cast->owns_return__extension = false;
+	return true;
+}
+
+bool QScriptClass_override_virtual_owned_extension(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QScriptClass> slot_handle(slot);
+	MiqtVirtualQScriptClass* self_cast = dynamic_cast<MiqtVirtualQScriptClass*>( (QScriptClass*)(self) );
+	if (self_cast == nullptr) {
+		return false;
+	}
+
+	self_cast->handle__extension = std::move(slot_handle);
+	self_cast->owns_return__extension = true;
 	return true;
 }
 

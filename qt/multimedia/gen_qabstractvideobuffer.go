@@ -214,10 +214,16 @@ func (this *QAbstractVideoBuffer) callVirtualBase_Handle() *qt.QVariant {
 	return _goptr
 
 }
+
+type miqtVirtualCallback_QAbstractVideoBuffer_handle struct {
+	callback   func(super func() *qt.QVariant) *qt.QVariant
+	ownsReturn bool
+}
+
 func (this *QAbstractVideoBuffer) OnHandle(slot func(super func() *qt.QVariant) *qt.QVariant) {
 	var slotHandle C.intptr_t
 	if slot != nil {
-		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QAbstractVideoBuffer_handle{callback: slot}))
 	}
 	ok := C.QAbstractVideoBuffer_override_virtual_handle(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
@@ -225,14 +231,31 @@ func (this *QAbstractVideoBuffer) OnHandle(slot func(super func() *qt.QVariant) 
 	}
 }
 
+// OnHandleOwned installs a virtual override that transfers
+// ownership of each non-nil returned Qt value object to C++.
+func (this *QAbstractVideoBuffer) OnHandleOwned(slot func(super func() *qt.QVariant) *qt.QVariant) {
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QAbstractVideoBuffer_handle{callback: slot, ownsReturn: true}))
+	}
+	ok := C.QAbstractVideoBuffer_override_virtual_owned_handle(unsafe.Pointer(this.h), slotHandle)
+	if !ok {
+		panic("miqt: can only override virtual methods for directly constructed types")
+	}
+}
+
 //export miqt_exec_callback_QAbstractVideoBuffer_handle
 func miqt_exec_callback_QAbstractVideoBuffer_handle(self *C.QAbstractVideoBuffer, cb C.intptr_t) *C.QVariant {
-	gofunc, ok := cgo.Handle(cb).Value().(func(super func() *qt.QVariant) *qt.QVariant)
+	callbackData, ok := cgo.Handle(cb).Value().(miqtVirtualCallback_QAbstractVideoBuffer_handle)
 	if !ok {
 		panic("miqt: callback of non-callback type (heap corruption?)")
 	}
+	gofunc := callbackData.callback
 
 	virtualReturn := gofunc((&QAbstractVideoBuffer{h: self}).callVirtualBase_Handle)
+	if callbackData.ownsReturn && virtualReturn != nil {
+		runtime.SetFinalizer(virtualReturn, nil)
+	}
 
 	return (*C.QVariant)(virtualReturn.UnsafePointer())
 

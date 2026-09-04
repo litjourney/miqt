@@ -137,10 +137,16 @@ func miqt_exec_callback_QwtTextEngine_heightForWidth(self *C.QwtTextEngine, cb C
 	return (C.double)(virtualReturn)
 
 }
+
+type miqtVirtualCallback_QwtTextEngine_textSize struct {
+	callback   func(font *qt.QFont, flags int, text string) *qt.QSizeF
+	ownsReturn bool
+}
+
 func (this *QwtTextEngine) OnTextSize(slot func(font *qt.QFont, flags int, text string) *qt.QSizeF) {
 	var slotHandle C.intptr_t
 	if slot != nil {
-		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QwtTextEngine_textSize{callback: slot}))
 	}
 	ok := C.QwtTextEngine_override_virtual_textSize(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
@@ -148,12 +154,26 @@ func (this *QwtTextEngine) OnTextSize(slot func(font *qt.QFont, flags int, text 
 	}
 }
 
+// OnTextSizeOwned installs a virtual override that transfers
+// ownership of each non-nil returned Qt value object to C++.
+func (this *QwtTextEngine) OnTextSizeOwned(slot func(font *qt.QFont, flags int, text string) *qt.QSizeF) {
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QwtTextEngine_textSize{callback: slot, ownsReturn: true}))
+	}
+	ok := C.QwtTextEngine_override_virtual_owned_textSize(unsafe.Pointer(this.h), slotHandle)
+	if !ok {
+		panic("miqt: can only override virtual methods for directly constructed types")
+	}
+}
+
 //export miqt_exec_callback_QwtTextEngine_textSize
 func miqt_exec_callback_QwtTextEngine_textSize(self *C.QwtTextEngine, cb C.intptr_t, font *C.QFont, flags C.int, text C.struct_miqt_string) *C.QSizeF {
-	gofunc, ok := cgo.Handle(cb).Value().(func(font *qt.QFont, flags int, text string) *qt.QSizeF)
+	callbackData, ok := cgo.Handle(cb).Value().(miqtVirtualCallback_QwtTextEngine_textSize)
 	if !ok {
 		panic("miqt: callback of non-callback type (heap corruption?)")
 	}
+	gofunc := callbackData.callback
 
 	// Convert all CABI parameters to Go parameters
 	slotval1 := qt.UnsafeNewQFont(unsafe.Pointer(font))
@@ -166,6 +186,9 @@ func miqt_exec_callback_QwtTextEngine_textSize(self *C.QwtTextEngine, cb C.intpt
 	slotval3 := text_ret
 
 	virtualReturn := gofunc(slotval1, slotval2, slotval3)
+	if callbackData.ownsReturn && virtualReturn != nil {
+		runtime.SetFinalizer(virtualReturn, nil)
+	}
 
 	return (*C.QSizeF)(virtualReturn.UnsafePointer())
 
@@ -437,10 +460,16 @@ func (this *QwtPlainTextEngine) callVirtualBase_TextSize(font *qt.QFont, flags i
 	return _goptr
 
 }
+
+type miqtVirtualCallback_QwtPlainTextEngine_textSize struct {
+	callback   func(super func(font *qt.QFont, flags int, text string) *qt.QSizeF, font *qt.QFont, flags int, text string) *qt.QSizeF
+	ownsReturn bool
+}
+
 func (this *QwtPlainTextEngine) OnTextSize(slot func(super func(font *qt.QFont, flags int, text string) *qt.QSizeF, font *qt.QFont, flags int, text string) *qt.QSizeF) {
 	var slotHandle C.intptr_t
 	if slot != nil {
-		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QwtPlainTextEngine_textSize{callback: slot}))
 	}
 	ok := C.QwtPlainTextEngine_override_virtual_textSize(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
@@ -448,12 +477,26 @@ func (this *QwtPlainTextEngine) OnTextSize(slot func(super func(font *qt.QFont, 
 	}
 }
 
+// OnTextSizeOwned installs a virtual override that transfers
+// ownership of each non-nil returned Qt value object to C++.
+func (this *QwtPlainTextEngine) OnTextSizeOwned(slot func(super func(font *qt.QFont, flags int, text string) *qt.QSizeF, font *qt.QFont, flags int, text string) *qt.QSizeF) {
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QwtPlainTextEngine_textSize{callback: slot, ownsReturn: true}))
+	}
+	ok := C.QwtPlainTextEngine_override_virtual_owned_textSize(unsafe.Pointer(this.h), slotHandle)
+	if !ok {
+		panic("miqt: can only override virtual methods for directly constructed types")
+	}
+}
+
 //export miqt_exec_callback_QwtPlainTextEngine_textSize
 func miqt_exec_callback_QwtPlainTextEngine_textSize(self *C.QwtPlainTextEngine, cb C.intptr_t, font *C.QFont, flags C.int, text C.struct_miqt_string) *C.QSizeF {
-	gofunc, ok := cgo.Handle(cb).Value().(func(super func(font *qt.QFont, flags int, text string) *qt.QSizeF, font *qt.QFont, flags int, text string) *qt.QSizeF)
+	callbackData, ok := cgo.Handle(cb).Value().(miqtVirtualCallback_QwtPlainTextEngine_textSize)
 	if !ok {
 		panic("miqt: callback of non-callback type (heap corruption?)")
 	}
+	gofunc := callbackData.callback
 
 	// Convert all CABI parameters to Go parameters
 	slotval1 := qt.UnsafeNewQFont(unsafe.Pointer(font))
@@ -466,6 +509,9 @@ func miqt_exec_callback_QwtPlainTextEngine_textSize(self *C.QwtPlainTextEngine, 
 	slotval3 := text_ret
 
 	virtualReturn := gofunc((&QwtPlainTextEngine{h: self}).callVirtualBase_TextSize, slotval1, slotval2, slotval3)
+	if callbackData.ownsReturn && virtualReturn != nil {
+		runtime.SetFinalizer(virtualReturn, nil)
+	}
 
 	return (*C.QSizeF)(virtualReturn.UnsafePointer())
 
@@ -767,10 +813,16 @@ func (this *QwtRichTextEngine) callVirtualBase_TextSize(font *qt.QFont, flags in
 	return _goptr
 
 }
+
+type miqtVirtualCallback_QwtRichTextEngine_textSize struct {
+	callback   func(super func(font *qt.QFont, flags int, text string) *qt.QSizeF, font *qt.QFont, flags int, text string) *qt.QSizeF
+	ownsReturn bool
+}
+
 func (this *QwtRichTextEngine) OnTextSize(slot func(super func(font *qt.QFont, flags int, text string) *qt.QSizeF, font *qt.QFont, flags int, text string) *qt.QSizeF) {
 	var slotHandle C.intptr_t
 	if slot != nil {
-		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QwtRichTextEngine_textSize{callback: slot}))
 	}
 	ok := C.QwtRichTextEngine_override_virtual_textSize(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
@@ -778,12 +830,26 @@ func (this *QwtRichTextEngine) OnTextSize(slot func(super func(font *qt.QFont, f
 	}
 }
 
+// OnTextSizeOwned installs a virtual override that transfers
+// ownership of each non-nil returned Qt value object to C++.
+func (this *QwtRichTextEngine) OnTextSizeOwned(slot func(super func(font *qt.QFont, flags int, text string) *qt.QSizeF, font *qt.QFont, flags int, text string) *qt.QSizeF) {
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QwtRichTextEngine_textSize{callback: slot, ownsReturn: true}))
+	}
+	ok := C.QwtRichTextEngine_override_virtual_owned_textSize(unsafe.Pointer(this.h), slotHandle)
+	if !ok {
+		panic("miqt: can only override virtual methods for directly constructed types")
+	}
+}
+
 //export miqt_exec_callback_QwtRichTextEngine_textSize
 func miqt_exec_callback_QwtRichTextEngine_textSize(self *C.QwtRichTextEngine, cb C.intptr_t, font *C.QFont, flags C.int, text C.struct_miqt_string) *C.QSizeF {
-	gofunc, ok := cgo.Handle(cb).Value().(func(super func(font *qt.QFont, flags int, text string) *qt.QSizeF, font *qt.QFont, flags int, text string) *qt.QSizeF)
+	callbackData, ok := cgo.Handle(cb).Value().(miqtVirtualCallback_QwtRichTextEngine_textSize)
 	if !ok {
 		panic("miqt: callback of non-callback type (heap corruption?)")
 	}
+	gofunc := callbackData.callback
 
 	// Convert all CABI parameters to Go parameters
 	slotval1 := qt.UnsafeNewQFont(unsafe.Pointer(font))
@@ -796,6 +862,9 @@ func miqt_exec_callback_QwtRichTextEngine_textSize(self *C.QwtRichTextEngine, cb
 	slotval3 := text_ret
 
 	virtualReturn := gofunc((&QwtRichTextEngine{h: self}).callVirtualBase_TextSize, slotval1, slotval2, slotval3)
+	if callbackData.ownsReturn && virtualReturn != nil {
+		runtime.SetFinalizer(virtualReturn, nil)
+	}
 
 	return (*C.QSizeF)(virtualReturn.UnsafePointer())
 

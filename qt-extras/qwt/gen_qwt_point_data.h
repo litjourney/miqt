@@ -40,10 +40,12 @@ struct miqt_array /* of double */  QwtPointArrayData_xData(const QwtPointArrayDa
 struct miqt_array /* of double */  QwtPointArrayData_yData(const QwtPointArrayData* self);
 
 bool QwtPointArrayData_override_virtual_boundingRect(void* self, intptr_t slot);
+bool QwtPointArrayData_override_virtual_owned_boundingRect(void* self, intptr_t slot);
 QRectF* QwtPointArrayData_virtualbase_boundingRect(const void* self);
 bool QwtPointArrayData_override_virtual_size(void* self, intptr_t slot);
 size_t QwtPointArrayData_virtualbase_size(const void* self);
 bool QwtPointArrayData_override_virtual_sample(void* self, intptr_t slot);
+bool QwtPointArrayData_override_virtual_owned_sample(void* self, intptr_t slot);
 QPointF* QwtPointArrayData_virtualbase_sample(const void* self, size_t index);
 
 void QwtPointArrayData_delete(QwtPointArrayData* self);
@@ -57,10 +59,12 @@ const double* QwtCPointerData_xData(const QwtCPointerData* self);
 const double* QwtCPointerData_yData(const QwtCPointerData* self);
 
 bool QwtCPointerData_override_virtual_boundingRect(void* self, intptr_t slot);
+bool QwtCPointerData_override_virtual_owned_boundingRect(void* self, intptr_t slot);
 QRectF* QwtCPointerData_virtualbase_boundingRect(const void* self);
 bool QwtCPointerData_override_virtual_size(void* self, intptr_t slot);
 size_t QwtCPointerData_virtualbase_size(const void* self);
 bool QwtCPointerData_override_virtual_sample(void* self, intptr_t slot);
+bool QwtCPointerData_override_virtual_owned_sample(void* self, intptr_t slot);
 QPointF* QwtCPointerData_virtualbase_sample(const void* self, size_t index);
 
 void QwtCPointerData_delete(QwtCPointerData* self);
@@ -82,8 +86,10 @@ QRectF* QwtSyntheticPointData_rectOfInterest(const QwtSyntheticPointData* self);
 bool QwtSyntheticPointData_override_virtual_size(void* self, intptr_t slot);
 size_t QwtSyntheticPointData_virtualbase_size(const void* self);
 bool QwtSyntheticPointData_override_virtual_boundingRect(void* self, intptr_t slot);
+bool QwtSyntheticPointData_override_virtual_owned_boundingRect(void* self, intptr_t slot);
 QRectF* QwtSyntheticPointData_virtualbase_boundingRect(const void* self);
 bool QwtSyntheticPointData_override_virtual_sample(void* self, intptr_t slot);
+bool QwtSyntheticPointData_override_virtual_owned_sample(void* self, intptr_t slot);
 QPointF* QwtSyntheticPointData_virtualbase_sample(const void* self, size_t index);
 bool QwtSyntheticPointData_override_virtual_y(void* self, intptr_t slot);
 double QwtSyntheticPointData_virtualbase_y(const void* self, double x);

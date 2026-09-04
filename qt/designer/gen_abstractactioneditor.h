@@ -117,8 +117,10 @@ int QDesignerActionEditorInterface_virtualbase_devType(const void* self);
 bool QDesignerActionEditorInterface_override_virtual_setVisible(void* self, intptr_t slot);
 void QDesignerActionEditorInterface_virtualbase_setVisible(void* self, bool visible);
 bool QDesignerActionEditorInterface_override_virtual_sizeHint(void* self, intptr_t slot);
+bool QDesignerActionEditorInterface_override_virtual_owned_sizeHint(void* self, intptr_t slot);
 QSize* QDesignerActionEditorInterface_virtualbase_sizeHint(const void* self);
 bool QDesignerActionEditorInterface_override_virtual_minimumSizeHint(void* self, intptr_t slot);
+bool QDesignerActionEditorInterface_override_virtual_owned_minimumSizeHint(void* self, intptr_t slot);
 QSize* QDesignerActionEditorInterface_virtualbase_minimumSizeHint(const void* self);
 bool QDesignerActionEditorInterface_override_virtual_heightForWidth(void* self, intptr_t slot);
 int QDesignerActionEditorInterface_virtualbase_heightForWidth(const void* self, int param1);
@@ -191,6 +193,7 @@ QPainter* QDesignerActionEditorInterface_virtualbase_sharedPainter(const void* s
 bool QDesignerActionEditorInterface_override_virtual_inputMethodEvent(void* self, intptr_t slot);
 void QDesignerActionEditorInterface_virtualbase_inputMethodEvent(void* self, QInputMethodEvent* param1);
 bool QDesignerActionEditorInterface_override_virtual_inputMethodQuery(void* self, intptr_t slot);
+bool QDesignerActionEditorInterface_override_virtual_owned_inputMethodQuery(void* self, intptr_t slot);
 QVariant* QDesignerActionEditorInterface_virtualbase_inputMethodQuery(const void* self, int param1);
 bool QDesignerActionEditorInterface_override_virtual_focusNextPrevChild(void* self, intptr_t slot);
 bool QDesignerActionEditorInterface_virtualbase_focusNextPrevChild(void* self, bool next);

@@ -243,6 +243,7 @@ public:
 
 	// cgo.Handle value for overwritten implementation
 	miqt_callback_handle<miqt_exec_callback_handle_release_QScriptEngineAgent> handle__extension;
+	bool owns_return__extension = false;
 
 	// Subclass to allow providing a Go implementation
 	virtual QVariant extension(QScriptEngineAgent::Extension extension, const QVariant& argument) override {
@@ -256,6 +257,10 @@ public:
 		// Cast returned reference into pointer
 		QVariant* sigval2 = const_cast<QVariant*>(&argument_ret);
 		QVariant* callback_return_value = miqt_exec_callback_QScriptEngineAgent_extension(this, handle__extension.value(), sigval1, sigval2);
+		std::unique_ptr<QVariant> callback_return_value_owner;
+		if (owns_return__extension) {
+			callback_return_value_owner.reset(callback_return_value);
+		}
 		return *callback_return_value;
 	}
 
@@ -477,6 +482,19 @@ bool QScriptEngineAgent_override_virtual_extension(void* self, intptr_t slot) {
 	}
 
 	self_cast->handle__extension = std::move(slot_handle);
+	self_cast->owns_return__extension = false;
+	return true;
+}
+
+bool QScriptEngineAgent_override_virtual_owned_extension(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QScriptEngineAgent> slot_handle(slot);
+	MiqtVirtualQScriptEngineAgent* self_cast = dynamic_cast<MiqtVirtualQScriptEngineAgent*>( (QScriptEngineAgent*)(self) );
+	if (self_cast == nullptr) {
+		return false;
+	}
+
+	self_cast->handle__extension = std::move(slot_handle);
+	self_cast->owns_return__extension = true;
 	return true;
 }
 

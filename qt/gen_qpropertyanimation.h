@@ -70,6 +70,7 @@ int QPropertyAnimation_virtualbase_duration(const void* self);
 bool QPropertyAnimation_override_virtual_updateCurrentTime(void* self, intptr_t slot);
 void QPropertyAnimation_virtualbase_updateCurrentTime(void* self, int param1);
 bool QPropertyAnimation_override_virtual_interpolated(void* self, intptr_t slot);
+bool QPropertyAnimation_override_virtual_owned_interpolated(void* self, intptr_t slot);
 QVariant* QPropertyAnimation_virtualbase_interpolated(const void* self, QVariant* from, QVariant* to, double progress);
 bool QPropertyAnimation_override_virtual_updateDirection(void* self, intptr_t slot);
 void QPropertyAnimation_virtualbase_updateDirection(void* self, int direction);

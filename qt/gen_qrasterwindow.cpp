@@ -187,6 +187,7 @@ public:
 
 	// cgo.Handle value for overwritten implementation
 	miqt_callback_handle<miqt_exec_callback_handle_release_QRasterWindow> handle__format;
+	bool owns_return__format = false;
 
 	// Subclass to allow providing a Go implementation
 	virtual QSurfaceFormat format() const override {
@@ -195,6 +196,10 @@ public:
 		}
 
 		QSurfaceFormat* callback_return_value = miqt_exec_callback_QRasterWindow_format(this, handle__format.value());
+		std::unique_ptr<QSurfaceFormat> callback_return_value_owner;
+		if (owns_return__format) {
+			callback_return_value_owner.reset(callback_return_value);
+		}
 		return *callback_return_value;
 	}
 
@@ -202,6 +207,7 @@ public:
 
 	// cgo.Handle value for overwritten implementation
 	miqt_callback_handle<miqt_exec_callback_handle_release_QRasterWindow> handle__size;
+	bool owns_return__size = false;
 
 	// Subclass to allow providing a Go implementation
 	virtual QSize size() const override {
@@ -210,6 +216,10 @@ public:
 		}
 
 		QSize* callback_return_value = miqt_exec_callback_QRasterWindow_size(this, handle__size.value());
+		std::unique_ptr<QSize> callback_return_value_owner;
+		if (owns_return__size) {
+			callback_return_value_owner.reset(callback_return_value);
+		}
 		return *callback_return_value;
 	}
 
@@ -868,6 +878,19 @@ bool QRasterWindow_override_virtual_format(void* self, intptr_t slot) {
 	}
 
 	self_cast->handle__format = std::move(slot_handle);
+	self_cast->owns_return__format = false;
+	return true;
+}
+
+bool QRasterWindow_override_virtual_owned_format(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QRasterWindow> slot_handle(slot);
+	MiqtVirtualQRasterWindow* self_cast = dynamic_cast<MiqtVirtualQRasterWindow*>( (QRasterWindow*)(self) );
+	if (self_cast == nullptr) {
+		return false;
+	}
+
+	self_cast->handle__format = std::move(slot_handle);
+	self_cast->owns_return__format = true;
 	return true;
 }
 
@@ -883,6 +906,19 @@ bool QRasterWindow_override_virtual_size(void* self, intptr_t slot) {
 	}
 
 	self_cast->handle__size = std::move(slot_handle);
+	self_cast->owns_return__size = false;
+	return true;
+}
+
+bool QRasterWindow_override_virtual_owned_size(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QRasterWindow> slot_handle(slot);
+	MiqtVirtualQRasterWindow* self_cast = dynamic_cast<MiqtVirtualQRasterWindow*>( (QRasterWindow*)(self) );
+	if (self_cast == nullptr) {
+		return false;
+	}
+
+	self_cast->handle__size = std::move(slot_handle);
+	self_cast->owns_return__size = true;
 	return true;
 }
 

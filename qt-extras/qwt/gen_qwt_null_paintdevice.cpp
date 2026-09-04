@@ -414,6 +414,7 @@ public:
 
 	// cgo.Handle value for overwritten implementation
 	miqt_callback_handle<miqt_exec_callback_handle_release_QwtNullPaintDevice> handle__sizeMetrics;
+	bool owns_return__sizeMetrics = false;
 
 	// Subclass to allow providing a Go implementation
 	virtual QSize sizeMetrics() const override {
@@ -422,6 +423,10 @@ public:
 		}
 
 		QSize* callback_return_value = miqt_exec_callback_QwtNullPaintDevice_sizeMetrics(this, handle__sizeMetrics.value());
+		std::unique_ptr<QSize> callback_return_value_owner;
+		if (owns_return__sizeMetrics) {
+			callback_return_value_owner.reset(callback_return_value);
+		}
 		return *callback_return_value;
 	}
 
@@ -857,6 +862,19 @@ bool QwtNullPaintDevice_override_virtual_sizeMetrics(void* self, intptr_t slot) 
 	}
 
 	self_cast->handle__sizeMetrics = std::move(slot_handle);
+	self_cast->owns_return__sizeMetrics = false;
+	return true;
+}
+
+bool QwtNullPaintDevice_override_virtual_owned_sizeMetrics(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtNullPaintDevice> slot_handle(slot);
+	MiqtVirtualQwtNullPaintDevice* self_cast = dynamic_cast<MiqtVirtualQwtNullPaintDevice*>( (QwtNullPaintDevice*)(self) );
+	if (self_cast == nullptr) {
+		return false;
+	}
+
+	self_cast->handle__sizeMetrics = std::move(slot_handle);
+	self_cast->owns_return__sizeMetrics = true;
 	return true;
 }
 

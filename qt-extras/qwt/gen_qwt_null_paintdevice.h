@@ -111,6 +111,7 @@ void QwtNullPaintDevice_virtualbase_drawImage(void* self, QRectF* param1, QImage
 bool QwtNullPaintDevice_override_virtual_updateState(void* self, intptr_t slot);
 void QwtNullPaintDevice_virtualbase_updateState(void* self, QPaintEngineState* param1);
 bool QwtNullPaintDevice_override_virtual_sizeMetrics(void* self, intptr_t slot);
+bool QwtNullPaintDevice_override_virtual_owned_sizeMetrics(void* self, intptr_t slot);
 QSize* QwtNullPaintDevice_virtualbase_sizeMetrics(const void* self);
 bool QwtNullPaintDevice_override_virtual_devType(void* self, intptr_t slot);
 int QwtNullPaintDevice_virtualbase_devType(const void* self);

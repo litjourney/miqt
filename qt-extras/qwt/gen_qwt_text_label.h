@@ -127,8 +127,10 @@ void QwtTextLabel_setText2(QwtTextLabel* self, struct miqt_string param1, int te
 bool QwtTextLabel_override_virtual_setTextWithText(void* self, intptr_t slot);
 void QwtTextLabel_virtualbase_setTextWithText(void* self, QwtText* text);
 bool QwtTextLabel_override_virtual_sizeHint(void* self, intptr_t slot);
+bool QwtTextLabel_override_virtual_owned_sizeHint(void* self, intptr_t slot);
 QSize* QwtTextLabel_virtualbase_sizeHint(const void* self);
 bool QwtTextLabel_override_virtual_minimumSizeHint(void* self, intptr_t slot);
+bool QwtTextLabel_override_virtual_owned_minimumSizeHint(void* self, intptr_t slot);
 QSize* QwtTextLabel_virtualbase_minimumSizeHint(const void* self);
 bool QwtTextLabel_override_virtual_heightForWidth(void* self, intptr_t slot);
 int QwtTextLabel_virtualbase_heightForWidth(const void* self, int param1);
@@ -209,6 +211,7 @@ QPainter* QwtTextLabel_virtualbase_sharedPainter(const void* self);
 bool QwtTextLabel_override_virtual_inputMethodEvent(void* self, intptr_t slot);
 void QwtTextLabel_virtualbase_inputMethodEvent(void* self, QInputMethodEvent* param1);
 bool QwtTextLabel_override_virtual_inputMethodQuery(void* self, intptr_t slot);
+bool QwtTextLabel_override_virtual_owned_inputMethodQuery(void* self, intptr_t slot);
 QVariant* QwtTextLabel_virtualbase_inputMethodQuery(const void* self, int param1);
 bool QwtTextLabel_override_virtual_focusNextPrevChild(void* self, intptr_t slot);
 bool QwtTextLabel_virtualbase_focusNextPrevChild(void* self, bool next);

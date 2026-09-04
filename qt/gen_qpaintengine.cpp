@@ -448,6 +448,7 @@ public:
 
 	// cgo.Handle value for overwritten implementation
 	miqt_callback_handle<miqt_exec_callback_handle_release_QPaintEngine> handle__coordinateOffset;
+	bool owns_return__coordinateOffset = false;
 
 	// Subclass to allow providing a Go implementation
 	virtual QPoint coordinateOffset() const override {
@@ -456,6 +457,10 @@ public:
 		}
 
 		QPoint* callback_return_value = miqt_exec_callback_QPaintEngine_coordinateOffset(this, handle__coordinateOffset.value());
+		std::unique_ptr<QPoint> callback_return_value_owner;
+		if (owns_return__coordinateOffset) {
+			callback_return_value_owner.reset(callback_return_value);
+		}
 		return *callback_return_value;
 	}
 
@@ -891,6 +896,19 @@ bool QPaintEngine_override_virtual_coordinateOffset(void* self, intptr_t slot) {
 	}
 
 	self_cast->handle__coordinateOffset = std::move(slot_handle);
+	self_cast->owns_return__coordinateOffset = false;
+	return true;
+}
+
+bool QPaintEngine_override_virtual_owned_coordinateOffset(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QPaintEngine> slot_handle(slot);
+	MiqtVirtualQPaintEngine* self_cast = dynamic_cast<MiqtVirtualQPaintEngine*>( (QPaintEngine*)(self) );
+	if (self_cast == nullptr) {
+		return false;
+	}
+
+	self_cast->handle__coordinateOffset = std::move(slot_handle);
+	self_cast->owns_return__coordinateOffset = true;
 	return true;
 }
 

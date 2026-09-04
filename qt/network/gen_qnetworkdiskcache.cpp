@@ -67,6 +67,7 @@ public:
 
 	// cgo.Handle value for overwritten implementation
 	miqt_callback_handle<miqt_exec_callback_handle_release_QNetworkDiskCache> handle__metaData;
+	bool owns_return__metaData = false;
 
 	// Subclass to allow providing a Go implementation
 	virtual QNetworkCacheMetaData metaData(const QUrl& url) override {
@@ -78,6 +79,10 @@ public:
 		// Cast returned reference into pointer
 		QUrl* sigval1 = const_cast<QUrl*>(&url_ret);
 		QNetworkCacheMetaData* callback_return_value = miqt_exec_callback_QNetworkDiskCache_metaData(this, handle__metaData.value(), sigval1);
+		std::unique_ptr<QNetworkCacheMetaData> callback_return_value_owner;
+		if (owns_return__metaData) {
+			callback_return_value_owner.reset(callback_return_value);
+		}
 		return *callback_return_value;
 	}
 
@@ -506,6 +511,19 @@ bool QNetworkDiskCache_override_virtual_metaData(void* self, intptr_t slot) {
 	}
 
 	self_cast->handle__metaData = std::move(slot_handle);
+	self_cast->owns_return__metaData = false;
+	return true;
+}
+
+bool QNetworkDiskCache_override_virtual_owned_metaData(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QNetworkDiskCache> slot_handle(slot);
+	MiqtVirtualQNetworkDiskCache* self_cast = dynamic_cast<MiqtVirtualQNetworkDiskCache*>( (QNetworkDiskCache*)(self) );
+	if (self_cast == nullptr) {
+		return false;
+	}
+
+	self_cast->handle__metaData = std::move(slot_handle);
+	self_cast->owns_return__metaData = true;
 	return true;
 }
 

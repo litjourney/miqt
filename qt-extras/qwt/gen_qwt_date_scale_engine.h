@@ -52,10 +52,12 @@ void QwtDateScaleEngine_operatorAssign(QwtDateScaleEngine* self, QwtDateScaleEng
 bool QwtDateScaleEngine_override_virtual_autoScale(void* self, intptr_t slot);
 void QwtDateScaleEngine_virtualbase_autoScale(const void* self, int maxNumSteps, double* x1, double* x2, double* stepSize);
 bool QwtDateScaleEngine_override_virtual_divideScale(void* self, intptr_t slot);
+bool QwtDateScaleEngine_override_virtual_owned_divideScale(void* self, intptr_t slot);
 QwtScaleDiv* QwtDateScaleEngine_virtualbase_divideScale(const void* self, double x1, double x2, int maxMajorSteps, int maxMinorSteps, double stepSize);
 bool QwtDateScaleEngine_override_virtual_intervalType(void* self, intptr_t slot);
 int QwtDateScaleEngine_virtualbase_intervalType(const void* self, QDateTime* param1, QDateTime* param2, int maxSteps);
 bool QwtDateScaleEngine_override_virtual_alignDate(void* self, intptr_t slot);
+bool QwtDateScaleEngine_override_virtual_owned_alignDate(void* self, intptr_t slot);
 QDateTime* QwtDateScaleEngine_virtualbase_alignDate(const void* self, QDateTime* param1, double stepSize, int param3, bool up);
 
 QwtInterval* QwtDateScaleEngine_protectedbase_align(bool* _dynamic_cast_ok, const void* self, QwtInterval* param1, double stepSize);

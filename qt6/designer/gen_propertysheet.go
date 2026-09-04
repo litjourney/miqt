@@ -432,10 +432,16 @@ func miqt_exec_callback_QDesignerPropertySheetExtension_setAttribute(self *C.QDe
 	gofunc(slotval1, slotval2)
 
 }
+
+type miqtVirtualCallback_QDesignerPropertySheetExtension_property struct {
+	callback   func(index int) *qt6.QVariant
+	ownsReturn bool
+}
+
 func (this *QDesignerPropertySheetExtension) OnProperty(slot func(index int) *qt6.QVariant) {
 	var slotHandle C.intptr_t
 	if slot != nil {
-		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QDesignerPropertySheetExtension_property{callback: slot}))
 	}
 	ok := C.QDesignerPropertySheetExtension_override_virtual_property(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
@@ -443,17 +449,34 @@ func (this *QDesignerPropertySheetExtension) OnProperty(slot func(index int) *qt
 	}
 }
 
+// OnPropertyOwned installs a virtual override that transfers
+// ownership of each non-nil returned Qt value object to C++.
+func (this *QDesignerPropertySheetExtension) OnPropertyOwned(slot func(index int) *qt6.QVariant) {
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QDesignerPropertySheetExtension_property{callback: slot, ownsReturn: true}))
+	}
+	ok := C.QDesignerPropertySheetExtension_override_virtual_owned_property(unsafe.Pointer(this.h), slotHandle)
+	if !ok {
+		panic("miqt: can only override virtual methods for directly constructed types")
+	}
+}
+
 //export miqt_exec_callback_QDesignerPropertySheetExtension_property
 func miqt_exec_callback_QDesignerPropertySheetExtension_property(self *C.QDesignerPropertySheetExtension, cb C.intptr_t, index C.int) *C.QVariant {
-	gofunc, ok := cgo.Handle(cb).Value().(func(index int) *qt6.QVariant)
+	callbackData, ok := cgo.Handle(cb).Value().(miqtVirtualCallback_QDesignerPropertySheetExtension_property)
 	if !ok {
 		panic("miqt: callback of non-callback type (heap corruption?)")
 	}
+	gofunc := callbackData.callback
 
 	// Convert all CABI parameters to Go parameters
 	slotval1 := (int)(index)
 
 	virtualReturn := gofunc(slotval1)
+	if callbackData.ownsReturn && virtualReturn != nil {
+		runtime.SetFinalizer(virtualReturn, nil)
+	}
 
 	return (*C.QVariant)(virtualReturn.UnsafePointer())
 

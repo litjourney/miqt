@@ -34,6 +34,7 @@ public:
 
 	// cgo.Handle value for overwritten implementation
 	miqt_callback_handle<miqt_exec_callback_handle_release_QwtPointSeriesData> handle__boundingRect;
+	bool owns_return__boundingRect = false;
 
 	// Subclass to allow providing a Go implementation
 	virtual QRectF boundingRect() const override {
@@ -42,6 +43,10 @@ public:
 		}
 
 		QRectF* callback_return_value = miqt_exec_callback_QwtPointSeriesData_boundingRect(this, handle__boundingRect.value());
+		std::unique_ptr<QRectF> callback_return_value_owner;
+		if (owns_return__boundingRect) {
+			callback_return_value_owner.reset(callback_return_value);
+		}
 		return *callback_return_value;
 	}
 
@@ -75,6 +80,19 @@ bool QwtPointSeriesData_override_virtual_boundingRect(void* self, intptr_t slot)
 	}
 
 	self_cast->handle__boundingRect = std::move(slot_handle);
+	self_cast->owns_return__boundingRect = false;
+	return true;
+}
+
+bool QwtPointSeriesData_override_virtual_owned_boundingRect(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtPointSeriesData> slot_handle(slot);
+	MiqtVirtualQwtPointSeriesData* self_cast = dynamic_cast<MiqtVirtualQwtPointSeriesData*>( (QwtPointSeriesData*)(self) );
+	if (self_cast == nullptr) {
+		return false;
+	}
+
+	self_cast->handle__boundingRect = std::move(slot_handle);
+	self_cast->owns_return__boundingRect = true;
 	return true;
 }
 
@@ -96,6 +114,7 @@ public:
 
 	// cgo.Handle value for overwritten implementation
 	miqt_callback_handle<miqt_exec_callback_handle_release_QwtPoint3DSeriesData> handle__boundingRect;
+	bool owns_return__boundingRect = false;
 
 	// Subclass to allow providing a Go implementation
 	virtual QRectF boundingRect() const override {
@@ -104,6 +123,10 @@ public:
 		}
 
 		QRectF* callback_return_value = miqt_exec_callback_QwtPoint3DSeriesData_boundingRect(this, handle__boundingRect.value());
+		std::unique_ptr<QRectF> callback_return_value_owner;
+		if (owns_return__boundingRect) {
+			callback_return_value_owner.reset(callback_return_value);
+		}
 		return *callback_return_value;
 	}
 
@@ -137,6 +160,19 @@ bool QwtPoint3DSeriesData_override_virtual_boundingRect(void* self, intptr_t slo
 	}
 
 	self_cast->handle__boundingRect = std::move(slot_handle);
+	self_cast->owns_return__boundingRect = false;
+	return true;
+}
+
+bool QwtPoint3DSeriesData_override_virtual_owned_boundingRect(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtPoint3DSeriesData> slot_handle(slot);
+	MiqtVirtualQwtPoint3DSeriesData* self_cast = dynamic_cast<MiqtVirtualQwtPoint3DSeriesData*>( (QwtPoint3DSeriesData*)(self) );
+	if (self_cast == nullptr) {
+		return false;
+	}
+
+	self_cast->handle__boundingRect = std::move(slot_handle);
+	self_cast->owns_return__boundingRect = true;
 	return true;
 }
 
@@ -158,6 +194,7 @@ public:
 
 	// cgo.Handle value for overwritten implementation
 	miqt_callback_handle<miqt_exec_callback_handle_release_QwtIntervalSeriesData> handle__boundingRect;
+	bool owns_return__boundingRect = false;
 
 	// Subclass to allow providing a Go implementation
 	virtual QRectF boundingRect() const override {
@@ -166,6 +203,10 @@ public:
 		}
 
 		QRectF* callback_return_value = miqt_exec_callback_QwtIntervalSeriesData_boundingRect(this, handle__boundingRect.value());
+		std::unique_ptr<QRectF> callback_return_value_owner;
+		if (owns_return__boundingRect) {
+			callback_return_value_owner.reset(callback_return_value);
+		}
 		return *callback_return_value;
 	}
 
@@ -199,6 +240,19 @@ bool QwtIntervalSeriesData_override_virtual_boundingRect(void* self, intptr_t sl
 	}
 
 	self_cast->handle__boundingRect = std::move(slot_handle);
+	self_cast->owns_return__boundingRect = false;
+	return true;
+}
+
+bool QwtIntervalSeriesData_override_virtual_owned_boundingRect(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtIntervalSeriesData> slot_handle(slot);
+	MiqtVirtualQwtIntervalSeriesData* self_cast = dynamic_cast<MiqtVirtualQwtIntervalSeriesData*>( (QwtIntervalSeriesData*)(self) );
+	if (self_cast == nullptr) {
+		return false;
+	}
+
+	self_cast->handle__boundingRect = std::move(slot_handle);
+	self_cast->owns_return__boundingRect = true;
 	return true;
 }
 
@@ -220,6 +274,7 @@ public:
 
 	// cgo.Handle value for overwritten implementation
 	miqt_callback_handle<miqt_exec_callback_handle_release_QwtSetSeriesData> handle__boundingRect;
+	bool owns_return__boundingRect = false;
 
 	// Subclass to allow providing a Go implementation
 	virtual QRectF boundingRect() const override {
@@ -228,6 +283,10 @@ public:
 		}
 
 		QRectF* callback_return_value = miqt_exec_callback_QwtSetSeriesData_boundingRect(this, handle__boundingRect.value());
+		std::unique_ptr<QRectF> callback_return_value_owner;
+		if (owns_return__boundingRect) {
+			callback_return_value_owner.reset(callback_return_value);
+		}
 		return *callback_return_value;
 	}
 
@@ -261,6 +320,19 @@ bool QwtSetSeriesData_override_virtual_boundingRect(void* self, intptr_t slot) {
 	}
 
 	self_cast->handle__boundingRect = std::move(slot_handle);
+	self_cast->owns_return__boundingRect = false;
+	return true;
+}
+
+bool QwtSetSeriesData_override_virtual_owned_boundingRect(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtSetSeriesData> slot_handle(slot);
+	MiqtVirtualQwtSetSeriesData* self_cast = dynamic_cast<MiqtVirtualQwtSetSeriesData*>( (QwtSetSeriesData*)(self) );
+	if (self_cast == nullptr) {
+		return false;
+	}
+
+	self_cast->handle__boundingRect = std::move(slot_handle);
+	self_cast->owns_return__boundingRect = true;
 	return true;
 }
 
@@ -282,6 +354,7 @@ public:
 
 	// cgo.Handle value for overwritten implementation
 	miqt_callback_handle<miqt_exec_callback_handle_release_QwtTradingChartData> handle__boundingRect;
+	bool owns_return__boundingRect = false;
 
 	// Subclass to allow providing a Go implementation
 	virtual QRectF boundingRect() const override {
@@ -290,6 +363,10 @@ public:
 		}
 
 		QRectF* callback_return_value = miqt_exec_callback_QwtTradingChartData_boundingRect(this, handle__boundingRect.value());
+		std::unique_ptr<QRectF> callback_return_value_owner;
+		if (owns_return__boundingRect) {
+			callback_return_value_owner.reset(callback_return_value);
+		}
 		return *callback_return_value;
 	}
 
@@ -323,6 +400,19 @@ bool QwtTradingChartData_override_virtual_boundingRect(void* self, intptr_t slot
 	}
 
 	self_cast->handle__boundingRect = std::move(slot_handle);
+	self_cast->owns_return__boundingRect = false;
+	return true;
+}
+
+bool QwtTradingChartData_override_virtual_owned_boundingRect(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtTradingChartData> slot_handle(slot);
+	MiqtVirtualQwtTradingChartData* self_cast = dynamic_cast<MiqtVirtualQwtTradingChartData*>( (QwtTradingChartData*)(self) );
+	if (self_cast == nullptr) {
+		return false;
+	}
+
+	self_cast->handle__boundingRect = std::move(slot_handle);
+	self_cast->owns_return__boundingRect = true;
 	return true;
 }
 
