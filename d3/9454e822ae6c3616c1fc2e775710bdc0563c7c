@@ -1,0 +1,28 @@
+.github/workflows/miqt.yml
+  s_7590bf24d681dc::t_8a117697e21695 38-48
+cmd/genbindings/emitcabi.go
+  s_7590bf24d681dc::t_9f532f64f25a0e 103-117
+  s_7590bf24d681dc::t_f8dcf9e0de2f8c 963-965,1140,1151-1156,1164,1209,1512,1518-1533
+  s_7590bf24d681dc::t_46424d9376ec04 1534
+cmd/genbindings/emitcallback_test.go
+  s_7590bf24d681dc::t_6264b32bd5a33a 31-40,52-59,143-198
+  s_7590bf24d681dc::t_18f975c05d6fab 199-200
+cmd/genbindings/emitgo.go
+  s_7590bf24d681dc::t_bf706a77cbce08 32-35,1144-1165,1171,1178,1180-1190,1192,1194-1202,1210-1215
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.23",
+  "base_commit_sha": "d39454e822ae6c3616c1fc2e775710bdc0563c7c",
+  "prompts": {},
+  "sessions": {
+    "s_7590bf24d681dc": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a06a12-e6e1-71c1-81c9-f42c4eca375f",
+        "model": "gpt-5.6-sol"
+      },
+      "human_author": "doublemine <doublemine@doubleminedeMacBook-Pro.local>"
+    }
+  }
+}
