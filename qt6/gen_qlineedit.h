@@ -215,8 +215,10 @@ void QLineEdit_cursorForward2(QLineEdit* self, bool mark, int steps);
 void QLineEdit_cursorBackward2(QLineEdit* self, bool mark, int steps);
 
 bool QLineEdit_override_virtual_sizeHint(void* self, intptr_t slot);
+bool QLineEdit_override_virtual_owned_sizeHint(void* self, intptr_t slot);
 QSize* QLineEdit_virtualbase_sizeHint(const void* self);
 bool QLineEdit_override_virtual_minimumSizeHint(void* self, intptr_t slot);
+bool QLineEdit_override_virtual_owned_minimumSizeHint(void* self, intptr_t slot);
 QSize* QLineEdit_virtualbase_minimumSizeHint(const void* self);
 bool QLineEdit_override_virtual_mousePressEvent(void* self, intptr_t slot);
 void QLineEdit_virtualbase_mousePressEvent(void* self, QMouseEvent* param1);
@@ -253,6 +255,7 @@ void QLineEdit_virtualbase_inputMethodEvent(void* self, QInputMethodEvent* param
 bool QLineEdit_override_virtual_initStyleOption(void* self, intptr_t slot);
 void QLineEdit_virtualbase_initStyleOption(const void* self, QStyleOptionFrame* option);
 bool QLineEdit_override_virtual_inputMethodQuery(void* self, intptr_t slot);
+bool QLineEdit_override_virtual_owned_inputMethodQuery(void* self, intptr_t slot);
 QVariant* QLineEdit_virtualbase_inputMethodQuery(const void* self, int param1);
 bool QLineEdit_override_virtual_timerEvent(void* self, intptr_t slot);
 void QLineEdit_virtualbase_timerEvent(void* self, QTimerEvent* param1);

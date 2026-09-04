@@ -35,17 +35,6 @@ jobs:
     
     - name: Rebuild binding source
       run: make genbindings
-
-    # Temporary handoff for development on non-x86 hosts. This step is removed
-    # once the regenerated bindings have been applied to the branch.
-    - name: Save regenerated binding patch
-      run: git diff --binary > generated-bindings.patch
-
-    - name: Upload regenerated binding patch
-      uses: actions/upload-artifact@v4
-      with:
-        name: generated-bindings-patch
-        path: generated-bindings.patch
     
     - name: Assert no changes
       run: git update-index --really-refresh && git diff-index HEAD

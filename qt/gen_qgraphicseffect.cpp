@@ -107,6 +107,7 @@ public:
 
 	// cgo.Handle value for overwritten implementation
 	miqt_callback_handle<miqt_exec_callback_handle_release_QGraphicsEffect> handle__boundingRectFor;
+	bool owns_return__boundingRectFor = false;
 
 	// Subclass to allow providing a Go implementation
 	virtual QRectF boundingRectFor(const QRectF& sourceRect) const override {
@@ -118,6 +119,10 @@ public:
 		// Cast returned reference into pointer
 		QRectF* sigval1 = const_cast<QRectF*>(&sourceRect_ret);
 		QRectF* callback_return_value = miqt_exec_callback_QGraphicsEffect_boundingRectFor(this, handle__boundingRectFor.value(), sigval1);
+		std::unique_ptr<QRectF> callback_return_value_owner;
+		if (owns_return__boundingRectFor) {
+			callback_return_value_owner.reset(callback_return_value);
+		}
 		return *callback_return_value;
 	}
 
@@ -420,6 +425,19 @@ bool QGraphicsEffect_override_virtual_boundingRectFor(void* self, intptr_t slot)
 	}
 
 	self_cast->handle__boundingRectFor = std::move(slot_handle);
+	self_cast->owns_return__boundingRectFor = false;
+	return true;
+}
+
+bool QGraphicsEffect_override_virtual_owned_boundingRectFor(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QGraphicsEffect> slot_handle(slot);
+	MiqtVirtualQGraphicsEffect* self_cast = dynamic_cast<MiqtVirtualQGraphicsEffect*>( (QGraphicsEffect*)(self) );
+	if (self_cast == nullptr) {
+		return false;
+	}
+
+	self_cast->handle__boundingRectFor = std::move(slot_handle);
+	self_cast->owns_return__boundingRectFor = true;
 	return true;
 }
 
@@ -732,6 +750,7 @@ public:
 
 	// cgo.Handle value for overwritten implementation
 	miqt_callback_handle<miqt_exec_callback_handle_release_QGraphicsColorizeEffect> handle__boundingRectFor;
+	bool owns_return__boundingRectFor = false;
 
 	// Subclass to allow providing a Go implementation
 	virtual QRectF boundingRectFor(const QRectF& sourceRect) const override {
@@ -743,6 +762,10 @@ public:
 		// Cast returned reference into pointer
 		QRectF* sigval1 = const_cast<QRectF*>(&sourceRect_ret);
 		QRectF* callback_return_value = miqt_exec_callback_QGraphicsColorizeEffect_boundingRectFor(this, handle__boundingRectFor.value(), sigval1);
+		std::unique_ptr<QRectF> callback_return_value_owner;
+		if (owns_return__boundingRectFor) {
+			callback_return_value_owner.reset(callback_return_value);
+		}
 		return *callback_return_value;
 	}
 
@@ -1055,6 +1078,19 @@ bool QGraphicsColorizeEffect_override_virtual_boundingRectFor(void* self, intptr
 	}
 
 	self_cast->handle__boundingRectFor = std::move(slot_handle);
+	self_cast->owns_return__boundingRectFor = false;
+	return true;
+}
+
+bool QGraphicsColorizeEffect_override_virtual_owned_boundingRectFor(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QGraphicsColorizeEffect> slot_handle(slot);
+	MiqtVirtualQGraphicsColorizeEffect* self_cast = dynamic_cast<MiqtVirtualQGraphicsColorizeEffect*>( (QGraphicsColorizeEffect*)(self) );
+	if (self_cast == nullptr) {
+		return false;
+	}
+
+	self_cast->handle__boundingRectFor = std::move(slot_handle);
+	self_cast->owns_return__boundingRectFor = true;
 	return true;
 }
 
@@ -1295,6 +1331,7 @@ public:
 
 	// cgo.Handle value for overwritten implementation
 	miqt_callback_handle<miqt_exec_callback_handle_release_QGraphicsBlurEffect> handle__boundingRectFor;
+	bool owns_return__boundingRectFor = false;
 
 	// Subclass to allow providing a Go implementation
 	virtual QRectF boundingRectFor(const QRectF& rect) const override {
@@ -1306,6 +1343,10 @@ public:
 		// Cast returned reference into pointer
 		QRectF* sigval1 = const_cast<QRectF*>(&rect_ret);
 		QRectF* callback_return_value = miqt_exec_callback_QGraphicsBlurEffect_boundingRectFor(this, handle__boundingRectFor.value(), sigval1);
+		std::unique_ptr<QRectF> callback_return_value_owner;
+		if (owns_return__boundingRectFor) {
+			callback_return_value_owner.reset(callback_return_value);
+		}
 		return *callback_return_value;
 	}
 
@@ -1624,6 +1665,19 @@ bool QGraphicsBlurEffect_override_virtual_boundingRectFor(void* self, intptr_t s
 	}
 
 	self_cast->handle__boundingRectFor = std::move(slot_handle);
+	self_cast->owns_return__boundingRectFor = false;
+	return true;
+}
+
+bool QGraphicsBlurEffect_override_virtual_owned_boundingRectFor(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QGraphicsBlurEffect> slot_handle(slot);
+	MiqtVirtualQGraphicsBlurEffect* self_cast = dynamic_cast<MiqtVirtualQGraphicsBlurEffect*>( (QGraphicsBlurEffect*)(self) );
+	if (self_cast == nullptr) {
+		return false;
+	}
+
+	self_cast->handle__boundingRectFor = std::move(slot_handle);
+	self_cast->owns_return__boundingRectFor = true;
 	return true;
 }
 
@@ -1879,6 +1933,7 @@ public:
 
 	// cgo.Handle value for overwritten implementation
 	miqt_callback_handle<miqt_exec_callback_handle_release_QGraphicsDropShadowEffect> handle__boundingRectFor;
+	bool owns_return__boundingRectFor = false;
 
 	// Subclass to allow providing a Go implementation
 	virtual QRectF boundingRectFor(const QRectF& rect) const override {
@@ -1890,6 +1945,10 @@ public:
 		// Cast returned reference into pointer
 		QRectF* sigval1 = const_cast<QRectF*>(&rect_ret);
 		QRectF* callback_return_value = miqt_exec_callback_QGraphicsDropShadowEffect_boundingRectFor(this, handle__boundingRectFor.value(), sigval1);
+		std::unique_ptr<QRectF> callback_return_value_owner;
+		if (owns_return__boundingRectFor) {
+			callback_return_value_owner.reset(callback_return_value);
+		}
 		return *callback_return_value;
 	}
 
@@ -2257,6 +2316,19 @@ bool QGraphicsDropShadowEffect_override_virtual_boundingRectFor(void* self, intp
 	}
 
 	self_cast->handle__boundingRectFor = std::move(slot_handle);
+	self_cast->owns_return__boundingRectFor = false;
+	return true;
+}
+
+bool QGraphicsDropShadowEffect_override_virtual_owned_boundingRectFor(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QGraphicsDropShadowEffect> slot_handle(slot);
+	MiqtVirtualQGraphicsDropShadowEffect* self_cast = dynamic_cast<MiqtVirtualQGraphicsDropShadowEffect*>( (QGraphicsDropShadowEffect*)(self) );
+	if (self_cast == nullptr) {
+		return false;
+	}
+
+	self_cast->handle__boundingRectFor = std::move(slot_handle);
+	self_cast->owns_return__boundingRectFor = true;
 	return true;
 }
 
@@ -2529,6 +2601,7 @@ public:
 
 	// cgo.Handle value for overwritten implementation
 	miqt_callback_handle<miqt_exec_callback_handle_release_QGraphicsOpacityEffect> handle__boundingRectFor;
+	bool owns_return__boundingRectFor = false;
 
 	// Subclass to allow providing a Go implementation
 	virtual QRectF boundingRectFor(const QRectF& sourceRect) const override {
@@ -2540,6 +2613,10 @@ public:
 		// Cast returned reference into pointer
 		QRectF* sigval1 = const_cast<QRectF*>(&sourceRect_ret);
 		QRectF* callback_return_value = miqt_exec_callback_QGraphicsOpacityEffect_boundingRectFor(this, handle__boundingRectFor.value(), sigval1);
+		std::unique_ptr<QRectF> callback_return_value_owner;
+		if (owns_return__boundingRectFor) {
+			callback_return_value_owner.reset(callback_return_value);
+		}
 		return *callback_return_value;
 	}
 
@@ -2852,6 +2929,19 @@ bool QGraphicsOpacityEffect_override_virtual_boundingRectFor(void* self, intptr_
 	}
 
 	self_cast->handle__boundingRectFor = std::move(slot_handle);
+	self_cast->owns_return__boundingRectFor = false;
+	return true;
+}
+
+bool QGraphicsOpacityEffect_override_virtual_owned_boundingRectFor(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QGraphicsOpacityEffect> slot_handle(slot);
+	MiqtVirtualQGraphicsOpacityEffect* self_cast = dynamic_cast<MiqtVirtualQGraphicsOpacityEffect*>( (QGraphicsOpacityEffect*)(self) );
+	if (self_cast == nullptr) {
+		return false;
+	}
+
+	self_cast->handle__boundingRectFor = std::move(slot_handle);
+	self_cast->owns_return__boundingRectFor = true;
 	return true;
 }
 

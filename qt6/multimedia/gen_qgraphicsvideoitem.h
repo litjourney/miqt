@@ -95,6 +95,7 @@ struct miqt_string QGraphicsVideoItem_tr2(const char* s, const char* c);
 struct miqt_string QGraphicsVideoItem_tr3(const char* s, const char* c, int n);
 
 bool QGraphicsVideoItem_override_virtual_boundingRect(void* self, intptr_t slot);
+bool QGraphicsVideoItem_override_virtual_owned_boundingRect(void* self, intptr_t slot);
 QRectF* QGraphicsVideoItem_virtualbase_boundingRect(const void* self);
 bool QGraphicsVideoItem_override_virtual_paint(void* self, intptr_t slot);
 void QGraphicsVideoItem_virtualbase_paint(void* self, QPainter* painter, QStyleOptionGraphicsItem* option, QWidget* widget);
@@ -103,6 +104,7 @@ int QGraphicsVideoItem_virtualbase_type(const void* self);
 bool QGraphicsVideoItem_override_virtual_timerEvent(void* self, intptr_t slot);
 void QGraphicsVideoItem_virtualbase_timerEvent(void* self, QTimerEvent* event);
 bool QGraphicsVideoItem_override_virtual_itemChange(void* self, intptr_t slot);
+bool QGraphicsVideoItem_override_virtual_owned_itemChange(void* self, intptr_t slot);
 QVariant* QGraphicsVideoItem_virtualbase_itemChange(void* self, int change, QVariant* value);
 bool QGraphicsVideoItem_override_virtual_event(void* self, intptr_t slot);
 bool QGraphicsVideoItem_virtualbase_event(void* self, QEvent* ev);
@@ -119,6 +121,7 @@ void QGraphicsVideoItem_virtualbase_disconnectNotify(void* self, QMetaMethod* si
 bool QGraphicsVideoItem_override_virtual_advance(void* self, intptr_t slot);
 void QGraphicsVideoItem_virtualbase_advance(void* self, int phase);
 bool QGraphicsVideoItem_override_virtual_shape(void* self, intptr_t slot);
+bool QGraphicsVideoItem_override_virtual_owned_shape(void* self, intptr_t slot);
 QPainterPath* QGraphicsVideoItem_virtualbase_shape(const void* self);
 bool QGraphicsVideoItem_override_virtual_contains(void* self, intptr_t slot);
 bool QGraphicsVideoItem_virtualbase_contains(const void* self, QPointF* point);
@@ -129,6 +132,7 @@ bool QGraphicsVideoItem_virtualbase_collidesWithPath(const void* self, QPainterP
 bool QGraphicsVideoItem_override_virtual_isObscuredBy(void* self, intptr_t slot);
 bool QGraphicsVideoItem_virtualbase_isObscuredBy(const void* self, QGraphicsItem* item);
 bool QGraphicsVideoItem_override_virtual_opaqueArea(void* self, intptr_t slot);
+bool QGraphicsVideoItem_override_virtual_owned_opaqueArea(void* self, intptr_t slot);
 QPainterPath* QGraphicsVideoItem_virtualbase_opaqueArea(const void* self);
 bool QGraphicsVideoItem_override_virtual_sceneEventFilter(void* self, intptr_t slot);
 bool QGraphicsVideoItem_virtualbase_sceneEventFilter(void* self, QGraphicsItem* watched, QEvent* event);
@@ -171,12 +175,14 @@ void QGraphicsVideoItem_virtualbase_wheelEvent(void* self, QGraphicsSceneWheelEv
 bool QGraphicsVideoItem_override_virtual_inputMethodEvent(void* self, intptr_t slot);
 void QGraphicsVideoItem_virtualbase_inputMethodEvent(void* self, QInputMethodEvent* event);
 bool QGraphicsVideoItem_override_virtual_inputMethodQuery(void* self, intptr_t slot);
+bool QGraphicsVideoItem_override_virtual_owned_inputMethodQuery(void* self, intptr_t slot);
 QVariant* QGraphicsVideoItem_virtualbase_inputMethodQuery(const void* self, int query);
 bool QGraphicsVideoItem_override_virtual_supportsExtension(void* self, intptr_t slot);
 bool QGraphicsVideoItem_virtualbase_supportsExtension(const void* self, int extension);
 bool QGraphicsVideoItem_override_virtual_setExtension(void* self, intptr_t slot);
 void QGraphicsVideoItem_virtualbase_setExtension(void* self, int extension, QVariant* variant);
 bool QGraphicsVideoItem_override_virtual_extension(void* self, intptr_t slot);
+bool QGraphicsVideoItem_override_virtual_owned_extension(void* self, intptr_t slot);
 QVariant* QGraphicsVideoItem_virtualbase_extension(const void* self, QVariant* variant);
 
 void QGraphicsVideoItem_protectedbase_updateMicroFocus(bool* _dynamic_cast_ok, void* self);

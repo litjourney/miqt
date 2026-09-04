@@ -106,6 +106,7 @@ public:
 
 	// cgo.Handle value for overwritten implementation
 	miqt_callback_handle<miqt_exec_callback_handle_release_QNmeaPositionInfoSource> handle__lastKnownPosition;
+	bool owns_return__lastKnownPosition = false;
 
 	// Subclass to allow providing a Go implementation
 	virtual QGeoPositionInfo lastKnownPosition(bool fromSatellitePositioningMethodsOnly) const override {
@@ -115,6 +116,10 @@ public:
 
 		bool sigval1 = fromSatellitePositioningMethodsOnly;
 		QGeoPositionInfo* callback_return_value = miqt_exec_callback_QNmeaPositionInfoSource_lastKnownPosition(this, handle__lastKnownPosition.value(), sigval1);
+		std::unique_ptr<QGeoPositionInfo> callback_return_value_owner;
+		if (owns_return__lastKnownPosition) {
+			callback_return_value_owner.reset(callback_return_value);
+		}
 		return *callback_return_value;
 	}
 
@@ -528,6 +533,19 @@ bool QNmeaPositionInfoSource_override_virtual_lastKnownPosition(void* self, intp
 	}
 
 	self_cast->handle__lastKnownPosition = std::move(slot_handle);
+	self_cast->owns_return__lastKnownPosition = false;
+	return true;
+}
+
+bool QNmeaPositionInfoSource_override_virtual_owned_lastKnownPosition(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QNmeaPositionInfoSource> slot_handle(slot);
+	MiqtVirtualQNmeaPositionInfoSource* self_cast = dynamic_cast<MiqtVirtualQNmeaPositionInfoSource*>( (QNmeaPositionInfoSource*)(self) );
+	if (self_cast == nullptr) {
+		return false;
+	}
+
+	self_cast->handle__lastKnownPosition = std::move(slot_handle);
+	self_cast->owns_return__lastKnownPosition = true;
 	return true;
 }
 

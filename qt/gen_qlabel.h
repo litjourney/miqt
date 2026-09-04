@@ -162,8 +162,10 @@ struct miqt_string QLabel_trUtf82(const char* s, const char* c);
 struct miqt_string QLabel_trUtf83(const char* s, const char* c, int n);
 
 bool QLabel_override_virtual_sizeHint(void* self, intptr_t slot);
+bool QLabel_override_virtual_owned_sizeHint(void* self, intptr_t slot);
 QSize* QLabel_virtualbase_sizeHint(const void* self);
 bool QLabel_override_virtual_minimumSizeHint(void* self, intptr_t slot);
+bool QLabel_override_virtual_owned_minimumSizeHint(void* self, intptr_t slot);
 QSize* QLabel_virtualbase_minimumSizeHint(const void* self);
 bool QLabel_override_virtual_heightForWidth(void* self, intptr_t slot);
 int QLabel_virtualbase_heightForWidth(const void* self, int param1);
@@ -242,6 +244,7 @@ QPainter* QLabel_virtualbase_sharedPainter(const void* self);
 bool QLabel_override_virtual_inputMethodEvent(void* self, intptr_t slot);
 void QLabel_virtualbase_inputMethodEvent(void* self, QInputMethodEvent* param1);
 bool QLabel_override_virtual_inputMethodQuery(void* self, intptr_t slot);
+bool QLabel_override_virtual_owned_inputMethodQuery(void* self, intptr_t slot);
 QVariant* QLabel_virtualbase_inputMethodQuery(const void* self, int param1);
 bool QLabel_override_virtual_eventFilter(void* self, intptr_t slot);
 bool QLabel_virtualbase_eventFilter(void* self, QObject* watched, QEvent* event);

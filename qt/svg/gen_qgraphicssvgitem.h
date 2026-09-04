@@ -96,6 +96,7 @@ struct miqt_string QGraphicsSvgItem_trUtf82(const char* s, const char* c);
 struct miqt_string QGraphicsSvgItem_trUtf83(const char* s, const char* c, int n);
 
 bool QGraphicsSvgItem_override_virtual_boundingRect(void* self, intptr_t slot);
+bool QGraphicsSvgItem_override_virtual_owned_boundingRect(void* self, intptr_t slot);
 QRectF* QGraphicsSvgItem_virtualbase_boundingRect(const void* self);
 bool QGraphicsSvgItem_override_virtual_paint(void* self, intptr_t slot);
 void QGraphicsSvgItem_virtualbase_paint(void* self, QPainter* painter, QStyleOptionGraphicsItem* option, QWidget* widget);
@@ -118,6 +119,7 @@ void QGraphicsSvgItem_virtualbase_disconnectNotify(void* self, QMetaMethod* sign
 bool QGraphicsSvgItem_override_virtual_advance(void* self, intptr_t slot);
 void QGraphicsSvgItem_virtualbase_advance(void* self, int phase);
 bool QGraphicsSvgItem_override_virtual_shape(void* self, intptr_t slot);
+bool QGraphicsSvgItem_override_virtual_owned_shape(void* self, intptr_t slot);
 QPainterPath* QGraphicsSvgItem_virtualbase_shape(const void* self);
 bool QGraphicsSvgItem_override_virtual_contains(void* self, intptr_t slot);
 bool QGraphicsSvgItem_virtualbase_contains(const void* self, QPointF* point);
@@ -128,6 +130,7 @@ bool QGraphicsSvgItem_virtualbase_collidesWithPath(const void* self, QPainterPat
 bool QGraphicsSvgItem_override_virtual_isObscuredBy(void* self, intptr_t slot);
 bool QGraphicsSvgItem_virtualbase_isObscuredBy(const void* self, QGraphicsItem* item);
 bool QGraphicsSvgItem_override_virtual_opaqueArea(void* self, intptr_t slot);
+bool QGraphicsSvgItem_override_virtual_owned_opaqueArea(void* self, intptr_t slot);
 QPainterPath* QGraphicsSvgItem_virtualbase_opaqueArea(const void* self);
 bool QGraphicsSvgItem_override_virtual_sceneEventFilter(void* self, intptr_t slot);
 bool QGraphicsSvgItem_virtualbase_sceneEventFilter(void* self, QGraphicsItem* watched, QEvent* event);
@@ -170,14 +173,17 @@ void QGraphicsSvgItem_virtualbase_wheelEvent(void* self, QGraphicsSceneWheelEven
 bool QGraphicsSvgItem_override_virtual_inputMethodEvent(void* self, intptr_t slot);
 void QGraphicsSvgItem_virtualbase_inputMethodEvent(void* self, QInputMethodEvent* event);
 bool QGraphicsSvgItem_override_virtual_inputMethodQuery(void* self, intptr_t slot);
+bool QGraphicsSvgItem_override_virtual_owned_inputMethodQuery(void* self, intptr_t slot);
 QVariant* QGraphicsSvgItem_virtualbase_inputMethodQuery(const void* self, int query);
 bool QGraphicsSvgItem_override_virtual_itemChange(void* self, intptr_t slot);
+bool QGraphicsSvgItem_override_virtual_owned_itemChange(void* self, intptr_t slot);
 QVariant* QGraphicsSvgItem_virtualbase_itemChange(void* self, int change, QVariant* value);
 bool QGraphicsSvgItem_override_virtual_supportsExtension(void* self, intptr_t slot);
 bool QGraphicsSvgItem_virtualbase_supportsExtension(const void* self, int extension);
 bool QGraphicsSvgItem_override_virtual_setExtension(void* self, intptr_t slot);
 void QGraphicsSvgItem_virtualbase_setExtension(void* self, int extension, QVariant* variant);
 bool QGraphicsSvgItem_override_virtual_extension(void* self, intptr_t slot);
+bool QGraphicsSvgItem_override_virtual_owned_extension(void* self, intptr_t slot);
 QVariant* QGraphicsSvgItem_virtualbase_extension(const void* self, QVariant* variant);
 
 void QGraphicsSvgItem_protectedbase_updateMicroFocus(bool* _dynamic_cast_ok, void* self);

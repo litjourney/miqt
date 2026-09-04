@@ -100,8 +100,10 @@ bool QSqlDriver_virtualbase_rollbackTransaction(void* self);
 bool QSqlDriver_override_virtual_tables(void* self, intptr_t slot);
 struct miqt_array /* of struct miqt_string */  QSqlDriver_virtualbase_tables(const void* self, int tableType);
 bool QSqlDriver_override_virtual_primaryIndex(void* self, intptr_t slot);
+bool QSqlDriver_override_virtual_owned_primaryIndex(void* self, intptr_t slot);
 QSqlIndex* QSqlDriver_virtualbase_primaryIndex(const void* self, struct miqt_string tableName);
 bool QSqlDriver_override_virtual_record(void* self, intptr_t slot);
+bool QSqlDriver_override_virtual_owned_record(void* self, intptr_t slot);
 QSqlRecord* QSqlDriver_virtualbase_record(const void* self, struct miqt_string tableName);
 bool QSqlDriver_override_virtual_formatValue(void* self, intptr_t slot);
 struct miqt_string QSqlDriver_virtualbase_formatValue(const void* self, QSqlField* field, bool trimStrings);
@@ -110,6 +112,7 @@ struct miqt_string QSqlDriver_virtualbase_escapeIdentifier(const void* self, str
 bool QSqlDriver_override_virtual_sqlStatement(void* self, intptr_t slot);
 struct miqt_string QSqlDriver_virtualbase_sqlStatement(const void* self, int type, struct miqt_string tableName, QSqlRecord* rec, bool preparedStatement);
 bool QSqlDriver_override_virtual_handle(void* self, intptr_t slot);
+bool QSqlDriver_override_virtual_owned_handle(void* self, intptr_t slot);
 QVariant* QSqlDriver_virtualbase_handle(const void* self);
 bool QSqlDriver_override_virtual_hasFeature(void* self, intptr_t slot);
 bool QSqlDriver_virtualbase_hasFeature(const void* self, int f);

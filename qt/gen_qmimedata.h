@@ -74,6 +74,7 @@ bool QMimeData_virtualbase_hasFormat(const void* self, struct miqt_string mimety
 bool QMimeData_override_virtual_formats(void* self, intptr_t slot);
 struct miqt_array /* of struct miqt_string */  QMimeData_virtualbase_formats(const void* self);
 bool QMimeData_override_virtual_retrieveData(void* self, intptr_t slot);
+bool QMimeData_override_virtual_owned_retrieveData(void* self, intptr_t slot);
 QVariant* QMimeData_virtualbase_retrieveData(const void* self, struct miqt_string mimetype, int preferredType);
 bool QMimeData_override_virtual_event(void* self, intptr_t slot);
 bool QMimeData_virtualbase_event(void* self, QEvent* event);

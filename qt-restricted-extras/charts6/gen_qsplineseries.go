@@ -297,10 +297,16 @@ func (this *QSplineSeries) callVirtualBase_Color() *qt6.QColor {
 	return _goptr
 
 }
+
+type miqtVirtualCallback_QSplineSeries_color struct {
+	callback   func(super func() *qt6.QColor) *qt6.QColor
+	ownsReturn bool
+}
+
 func (this *QSplineSeries) OnColor(slot func(super func() *qt6.QColor) *qt6.QColor) {
 	var slotHandle C.intptr_t
 	if slot != nil {
-		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QSplineSeries_color{callback: slot}))
 	}
 	ok := C.QSplineSeries_override_virtual_color(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
@@ -308,14 +314,31 @@ func (this *QSplineSeries) OnColor(slot func(super func() *qt6.QColor) *qt6.QCol
 	}
 }
 
+// OnColorOwned installs a virtual override that transfers
+// ownership of each non-nil returned Qt value object to C++.
+func (this *QSplineSeries) OnColorOwned(slot func(super func() *qt6.QColor) *qt6.QColor) {
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QSplineSeries_color{callback: slot, ownsReturn: true}))
+	}
+	ok := C.QSplineSeries_override_virtual_owned_color(unsafe.Pointer(this.h), slotHandle)
+	if !ok {
+		panic("miqt: can only override virtual methods for directly constructed types")
+	}
+}
+
 //export miqt_exec_callback_QSplineSeries_color
 func miqt_exec_callback_QSplineSeries_color(self *C.QSplineSeries, cb C.intptr_t) *C.QColor {
-	gofunc, ok := cgo.Handle(cb).Value().(func(super func() *qt6.QColor) *qt6.QColor)
+	callbackData, ok := cgo.Handle(cb).Value().(miqtVirtualCallback_QSplineSeries_color)
 	if !ok {
 		panic("miqt: callback of non-callback type (heap corruption?)")
 	}
+	gofunc := callbackData.callback
 
 	virtualReturn := gofunc((&QSplineSeries{h: self}).callVirtualBase_Color)
+	if callbackData.ownsReturn && virtualReturn != nil {
+		runtime.SetFinalizer(virtualReturn, nil)
+	}
 
 	return (*C.QColor)(virtualReturn.UnsafePointer())
 

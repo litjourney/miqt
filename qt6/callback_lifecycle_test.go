@@ -202,3 +202,35 @@ func TestVirtualCallbackReleasedWhenQtParentDeletesChild(t *testing.T) {
 	timer = nil
 	waitForCallbackRelease(t, released)
 }
+
+func TestOwnedVirtualValueReturn(t *testing.T) {
+	lockCallbackTestThread(t)
+	app := NewQApplication([]string{"callback-lifecycle-test"})
+	defer app.Delete()
+	widget := NewQWidget2()
+	defer widget.Delete()
+
+	calls := 0
+	widget.OnSizeHintOwned(func(super func() *QSize) *QSize {
+		calls++
+		size := NewQSize2(37, 41)
+		// OnSizeHintOwned must clear this finalizer before C++ consumes and
+		// deletes the returned native value.
+		size.GoGC()
+		return size
+	})
+
+	for i := 0; i < 64; i++ {
+		size := widget.SizeHint()
+		width, height := size.Width(), size.Height()
+		runtime.SetFinalizer(size, nil)
+		size.Delete()
+		if width != 37 || height != 41 {
+			t.Fatalf("SizeHint returned %dx%d, want 37x41", width, height)
+		}
+		runtime.GC()
+	}
+	if calls != 64 {
+		t.Fatalf("owned value callback ran %d times, want 64", calls)
+	}
+}

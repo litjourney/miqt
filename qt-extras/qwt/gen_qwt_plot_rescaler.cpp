@@ -99,6 +99,7 @@ public:
 
 	// cgo.Handle value for overwritten implementation
 	miqt_callback_handle<miqt_exec_callback_handle_release_QwtPlotRescaler> handle__expandScale;
+	bool owns_return__expandScale = false;
 
 	// Subclass to allow providing a Go implementation
 	virtual QwtInterval expandScale(int axis, const QSize& oldSize, const QSize& newSize) const override {
@@ -114,6 +115,10 @@ public:
 		// Cast returned reference into pointer
 		QSize* sigval3 = const_cast<QSize*>(&newSize_ret);
 		QwtInterval* callback_return_value = miqt_exec_callback_QwtPlotRescaler_expandScale(this, handle__expandScale.value(), sigval1, sigval2, sigval3);
+		std::unique_ptr<QwtInterval> callback_return_value_owner;
+		if (owns_return__expandScale) {
+			callback_return_value_owner.reset(callback_return_value);
+		}
 		return *callback_return_value;
 	}
 
@@ -121,6 +126,7 @@ public:
 
 	// cgo.Handle value for overwritten implementation
 	miqt_callback_handle<miqt_exec_callback_handle_release_QwtPlotRescaler> handle__syncScale;
+	bool owns_return__syncScale = false;
 
 	// Subclass to allow providing a Go implementation
 	virtual QwtInterval syncScale(int axis, const QwtInterval& reference, const QSize& size) const override {
@@ -136,6 +142,10 @@ public:
 		// Cast returned reference into pointer
 		QSize* sigval3 = const_cast<QSize*>(&size_ret);
 		QwtInterval* callback_return_value = miqt_exec_callback_QwtPlotRescaler_syncScale(this, handle__syncScale.value(), sigval1, sigval2, sigval3);
+		std::unique_ptr<QwtInterval> callback_return_value_owner;
+		if (owns_return__syncScale) {
+			callback_return_value_owner.reset(callback_return_value);
+		}
 		return *callback_return_value;
 	}
 
@@ -424,6 +434,19 @@ bool QwtPlotRescaler_override_virtual_expandScale(void* self, intptr_t slot) {
 	}
 
 	self_cast->handle__expandScale = std::move(slot_handle);
+	self_cast->owns_return__expandScale = false;
+	return true;
+}
+
+bool QwtPlotRescaler_override_virtual_owned_expandScale(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtPlotRescaler> slot_handle(slot);
+	MiqtVirtualQwtPlotRescaler* self_cast = dynamic_cast<MiqtVirtualQwtPlotRescaler*>( (QwtPlotRescaler*)(self) );
+	if (self_cast == nullptr) {
+		return false;
+	}
+
+	self_cast->handle__expandScale = std::move(slot_handle);
+	self_cast->owns_return__expandScale = true;
 	return true;
 }
 
@@ -439,6 +462,19 @@ bool QwtPlotRescaler_override_virtual_syncScale(void* self, intptr_t slot) {
 	}
 
 	self_cast->handle__syncScale = std::move(slot_handle);
+	self_cast->owns_return__syncScale = false;
+	return true;
+}
+
+bool QwtPlotRescaler_override_virtual_owned_syncScale(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtPlotRescaler> slot_handle(slot);
+	MiqtVirtualQwtPlotRescaler* self_cast = dynamic_cast<MiqtVirtualQwtPlotRescaler*>( (QwtPlotRescaler*)(self) );
+	if (self_cast == nullptr) {
+		return false;
+	}
+
+	self_cast->handle__syncScale = std::move(slot_handle);
+	self_cast->owns_return__syncScale = true;
 	return true;
 }
 

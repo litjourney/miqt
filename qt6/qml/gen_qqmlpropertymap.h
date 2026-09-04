@@ -59,6 +59,7 @@ struct miqt_string QQmlPropertyMap_tr2(const char* s, const char* c);
 struct miqt_string QQmlPropertyMap_tr3(const char* s, const char* c, int n);
 
 bool QQmlPropertyMap_override_virtual_updateValue(void* self, intptr_t slot);
+bool QQmlPropertyMap_override_virtual_owned_updateValue(void* self, intptr_t slot);
 QVariant* QQmlPropertyMap_virtualbase_updateValue(void* self, struct miqt_string key, QVariant* input);
 bool QQmlPropertyMap_override_virtual_event(void* self, intptr_t slot);
 bool QQmlPropertyMap_virtualbase_event(void* self, QEvent* event);

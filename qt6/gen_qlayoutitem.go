@@ -148,10 +148,16 @@ func (this *QLayoutItem) ControlTypes() QSizePolicy__ControlType {
 func (this *QLayoutItem) OperatorAssign(param1 *QLayoutItem) {
 	C.QLayoutItem_operatorAssign(this.h, param1.cPointer())
 }
+
+type miqtVirtualCallback_QLayoutItem_sizeHint struct {
+	callback   func() *QSize
+	ownsReturn bool
+}
+
 func (this *QLayoutItem) OnSizeHint(slot func() *QSize) {
 	var slotHandle C.intptr_t
 	if slot != nil {
-		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QLayoutItem_sizeHint{callback: slot}))
 	}
 	ok := C.QLayoutItem_override_virtual_sizeHint(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
@@ -159,22 +165,45 @@ func (this *QLayoutItem) OnSizeHint(slot func() *QSize) {
 	}
 }
 
+// OnSizeHintOwned installs a virtual override that transfers
+// ownership of each non-nil returned Qt value object to C++.
+func (this *QLayoutItem) OnSizeHintOwned(slot func() *QSize) {
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QLayoutItem_sizeHint{callback: slot, ownsReturn: true}))
+	}
+	ok := C.QLayoutItem_override_virtual_owned_sizeHint(unsafe.Pointer(this.h), slotHandle)
+	if !ok {
+		panic("miqt: can only override virtual methods for directly constructed types")
+	}
+}
+
 //export miqt_exec_callback_QLayoutItem_sizeHint
 func miqt_exec_callback_QLayoutItem_sizeHint(self *C.QLayoutItem, cb C.intptr_t) *C.QSize {
-	gofunc, ok := cgo.Handle(cb).Value().(func() *QSize)
+	callbackData, ok := cgo.Handle(cb).Value().(miqtVirtualCallback_QLayoutItem_sizeHint)
 	if !ok {
 		panic("miqt: callback of non-callback type (heap corruption?)")
 	}
+	gofunc := callbackData.callback
 
 	virtualReturn := gofunc()
+	if callbackData.ownsReturn && virtualReturn != nil {
+		runtime.SetFinalizer(virtualReturn, nil)
+	}
 
 	return virtualReturn.cPointer()
 
 }
+
+type miqtVirtualCallback_QLayoutItem_minimumSize struct {
+	callback   func() *QSize
+	ownsReturn bool
+}
+
 func (this *QLayoutItem) OnMinimumSize(slot func() *QSize) {
 	var slotHandle C.intptr_t
 	if slot != nil {
-		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QLayoutItem_minimumSize{callback: slot}))
 	}
 	ok := C.QLayoutItem_override_virtual_minimumSize(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
@@ -182,22 +211,45 @@ func (this *QLayoutItem) OnMinimumSize(slot func() *QSize) {
 	}
 }
 
+// OnMinimumSizeOwned installs a virtual override that transfers
+// ownership of each non-nil returned Qt value object to C++.
+func (this *QLayoutItem) OnMinimumSizeOwned(slot func() *QSize) {
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QLayoutItem_minimumSize{callback: slot, ownsReturn: true}))
+	}
+	ok := C.QLayoutItem_override_virtual_owned_minimumSize(unsafe.Pointer(this.h), slotHandle)
+	if !ok {
+		panic("miqt: can only override virtual methods for directly constructed types")
+	}
+}
+
 //export miqt_exec_callback_QLayoutItem_minimumSize
 func miqt_exec_callback_QLayoutItem_minimumSize(self *C.QLayoutItem, cb C.intptr_t) *C.QSize {
-	gofunc, ok := cgo.Handle(cb).Value().(func() *QSize)
+	callbackData, ok := cgo.Handle(cb).Value().(miqtVirtualCallback_QLayoutItem_minimumSize)
 	if !ok {
 		panic("miqt: callback of non-callback type (heap corruption?)")
 	}
+	gofunc := callbackData.callback
 
 	virtualReturn := gofunc()
+	if callbackData.ownsReturn && virtualReturn != nil {
+		runtime.SetFinalizer(virtualReturn, nil)
+	}
 
 	return virtualReturn.cPointer()
 
 }
+
+type miqtVirtualCallback_QLayoutItem_maximumSize struct {
+	callback   func() *QSize
+	ownsReturn bool
+}
+
 func (this *QLayoutItem) OnMaximumSize(slot func() *QSize) {
 	var slotHandle C.intptr_t
 	if slot != nil {
-		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QLayoutItem_maximumSize{callback: slot}))
 	}
 	ok := C.QLayoutItem_override_virtual_maximumSize(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
@@ -205,14 +257,31 @@ func (this *QLayoutItem) OnMaximumSize(slot func() *QSize) {
 	}
 }
 
+// OnMaximumSizeOwned installs a virtual override that transfers
+// ownership of each non-nil returned Qt value object to C++.
+func (this *QLayoutItem) OnMaximumSizeOwned(slot func() *QSize) {
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QLayoutItem_maximumSize{callback: slot, ownsReturn: true}))
+	}
+	ok := C.QLayoutItem_override_virtual_owned_maximumSize(unsafe.Pointer(this.h), slotHandle)
+	if !ok {
+		panic("miqt: can only override virtual methods for directly constructed types")
+	}
+}
+
 //export miqt_exec_callback_QLayoutItem_maximumSize
 func miqt_exec_callback_QLayoutItem_maximumSize(self *C.QLayoutItem, cb C.intptr_t) *C.QSize {
-	gofunc, ok := cgo.Handle(cb).Value().(func() *QSize)
+	callbackData, ok := cgo.Handle(cb).Value().(miqtVirtualCallback_QLayoutItem_maximumSize)
 	if !ok {
 		panic("miqt: callback of non-callback type (heap corruption?)")
 	}
+	gofunc := callbackData.callback
 
 	virtualReturn := gofunc()
+	if callbackData.ownsReturn && virtualReturn != nil {
+		runtime.SetFinalizer(virtualReturn, nil)
+	}
 
 	return virtualReturn.cPointer()
 
@@ -264,10 +333,16 @@ func miqt_exec_callback_QLayoutItem_setGeometry(self *C.QLayoutItem, cb C.intptr
 	gofunc(slotval1)
 
 }
+
+type miqtVirtualCallback_QLayoutItem_geometry struct {
+	callback   func() *QRect
+	ownsReturn bool
+}
+
 func (this *QLayoutItem) OnGeometry(slot func() *QRect) {
 	var slotHandle C.intptr_t
 	if slot != nil {
-		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QLayoutItem_geometry{callback: slot}))
 	}
 	ok := C.QLayoutItem_override_virtual_geometry(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
@@ -275,14 +350,31 @@ func (this *QLayoutItem) OnGeometry(slot func() *QRect) {
 	}
 }
 
+// OnGeometryOwned installs a virtual override that transfers
+// ownership of each non-nil returned Qt value object to C++.
+func (this *QLayoutItem) OnGeometryOwned(slot func() *QRect) {
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QLayoutItem_geometry{callback: slot, ownsReturn: true}))
+	}
+	ok := C.QLayoutItem_override_virtual_owned_geometry(unsafe.Pointer(this.h), slotHandle)
+	if !ok {
+		panic("miqt: can only override virtual methods for directly constructed types")
+	}
+}
+
 //export miqt_exec_callback_QLayoutItem_geometry
 func miqt_exec_callback_QLayoutItem_geometry(self *C.QLayoutItem, cb C.intptr_t) *C.QRect {
-	gofunc, ok := cgo.Handle(cb).Value().(func() *QRect)
+	callbackData, ok := cgo.Handle(cb).Value().(miqtVirtualCallback_QLayoutItem_geometry)
 	if !ok {
 		panic("miqt: callback of non-callback type (heap corruption?)")
 	}
+	gofunc := callbackData.callback
 
 	virtualReturn := gofunc()
+	if callbackData.ownsReturn && virtualReturn != nil {
+		runtime.SetFinalizer(virtualReturn, nil)
+	}
 
 	return virtualReturn.cPointer()
 
@@ -695,10 +787,16 @@ func (this *QSpacerItem) callVirtualBase_SizeHint() *QSize {
 	return _goptr
 
 }
+
+type miqtVirtualCallback_QSpacerItem_sizeHint struct {
+	callback   func(super func() *QSize) *QSize
+	ownsReturn bool
+}
+
 func (this *QSpacerItem) OnSizeHint(slot func(super func() *QSize) *QSize) {
 	var slotHandle C.intptr_t
 	if slot != nil {
-		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QSpacerItem_sizeHint{callback: slot}))
 	}
 	ok := C.QSpacerItem_override_virtual_sizeHint(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
@@ -706,14 +804,31 @@ func (this *QSpacerItem) OnSizeHint(slot func(super func() *QSize) *QSize) {
 	}
 }
 
+// OnSizeHintOwned installs a virtual override that transfers
+// ownership of each non-nil returned Qt value object to C++.
+func (this *QSpacerItem) OnSizeHintOwned(slot func(super func() *QSize) *QSize) {
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QSpacerItem_sizeHint{callback: slot, ownsReturn: true}))
+	}
+	ok := C.QSpacerItem_override_virtual_owned_sizeHint(unsafe.Pointer(this.h), slotHandle)
+	if !ok {
+		panic("miqt: can only override virtual methods for directly constructed types")
+	}
+}
+
 //export miqt_exec_callback_QSpacerItem_sizeHint
 func miqt_exec_callback_QSpacerItem_sizeHint(self *C.QSpacerItem, cb C.intptr_t) *C.QSize {
-	gofunc, ok := cgo.Handle(cb).Value().(func(super func() *QSize) *QSize)
+	callbackData, ok := cgo.Handle(cb).Value().(miqtVirtualCallback_QSpacerItem_sizeHint)
 	if !ok {
 		panic("miqt: callback of non-callback type (heap corruption?)")
 	}
+	gofunc := callbackData.callback
 
 	virtualReturn := gofunc((&QSpacerItem{h: self}).callVirtualBase_SizeHint)
+	if callbackData.ownsReturn && virtualReturn != nil {
+		runtime.SetFinalizer(virtualReturn, nil)
+	}
 
 	return virtualReturn.cPointer()
 
@@ -726,10 +841,16 @@ func (this *QSpacerItem) callVirtualBase_MinimumSize() *QSize {
 	return _goptr
 
 }
+
+type miqtVirtualCallback_QSpacerItem_minimumSize struct {
+	callback   func(super func() *QSize) *QSize
+	ownsReturn bool
+}
+
 func (this *QSpacerItem) OnMinimumSize(slot func(super func() *QSize) *QSize) {
 	var slotHandle C.intptr_t
 	if slot != nil {
-		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QSpacerItem_minimumSize{callback: slot}))
 	}
 	ok := C.QSpacerItem_override_virtual_minimumSize(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
@@ -737,14 +858,31 @@ func (this *QSpacerItem) OnMinimumSize(slot func(super func() *QSize) *QSize) {
 	}
 }
 
+// OnMinimumSizeOwned installs a virtual override that transfers
+// ownership of each non-nil returned Qt value object to C++.
+func (this *QSpacerItem) OnMinimumSizeOwned(slot func(super func() *QSize) *QSize) {
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QSpacerItem_minimumSize{callback: slot, ownsReturn: true}))
+	}
+	ok := C.QSpacerItem_override_virtual_owned_minimumSize(unsafe.Pointer(this.h), slotHandle)
+	if !ok {
+		panic("miqt: can only override virtual methods for directly constructed types")
+	}
+}
+
 //export miqt_exec_callback_QSpacerItem_minimumSize
 func miqt_exec_callback_QSpacerItem_minimumSize(self *C.QSpacerItem, cb C.intptr_t) *C.QSize {
-	gofunc, ok := cgo.Handle(cb).Value().(func(super func() *QSize) *QSize)
+	callbackData, ok := cgo.Handle(cb).Value().(miqtVirtualCallback_QSpacerItem_minimumSize)
 	if !ok {
 		panic("miqt: callback of non-callback type (heap corruption?)")
 	}
+	gofunc := callbackData.callback
 
 	virtualReturn := gofunc((&QSpacerItem{h: self}).callVirtualBase_MinimumSize)
+	if callbackData.ownsReturn && virtualReturn != nil {
+		runtime.SetFinalizer(virtualReturn, nil)
+	}
 
 	return virtualReturn.cPointer()
 
@@ -757,10 +895,16 @@ func (this *QSpacerItem) callVirtualBase_MaximumSize() *QSize {
 	return _goptr
 
 }
+
+type miqtVirtualCallback_QSpacerItem_maximumSize struct {
+	callback   func(super func() *QSize) *QSize
+	ownsReturn bool
+}
+
 func (this *QSpacerItem) OnMaximumSize(slot func(super func() *QSize) *QSize) {
 	var slotHandle C.intptr_t
 	if slot != nil {
-		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QSpacerItem_maximumSize{callback: slot}))
 	}
 	ok := C.QSpacerItem_override_virtual_maximumSize(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
@@ -768,14 +912,31 @@ func (this *QSpacerItem) OnMaximumSize(slot func(super func() *QSize) *QSize) {
 	}
 }
 
+// OnMaximumSizeOwned installs a virtual override that transfers
+// ownership of each non-nil returned Qt value object to C++.
+func (this *QSpacerItem) OnMaximumSizeOwned(slot func(super func() *QSize) *QSize) {
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QSpacerItem_maximumSize{callback: slot, ownsReturn: true}))
+	}
+	ok := C.QSpacerItem_override_virtual_owned_maximumSize(unsafe.Pointer(this.h), slotHandle)
+	if !ok {
+		panic("miqt: can only override virtual methods for directly constructed types")
+	}
+}
+
 //export miqt_exec_callback_QSpacerItem_maximumSize
 func miqt_exec_callback_QSpacerItem_maximumSize(self *C.QSpacerItem, cb C.intptr_t) *C.QSize {
-	gofunc, ok := cgo.Handle(cb).Value().(func(super func() *QSize) *QSize)
+	callbackData, ok := cgo.Handle(cb).Value().(miqtVirtualCallback_QSpacerItem_maximumSize)
 	if !ok {
 		panic("miqt: callback of non-callback type (heap corruption?)")
 	}
+	gofunc := callbackData.callback
 
 	virtualReturn := gofunc((&QSpacerItem{h: self}).callVirtualBase_MaximumSize)
+	if callbackData.ownsReturn && virtualReturn != nil {
+		runtime.SetFinalizer(virtualReturn, nil)
+	}
 
 	return virtualReturn.cPointer()
 
@@ -876,10 +1037,16 @@ func (this *QSpacerItem) callVirtualBase_Geometry() *QRect {
 	return _goptr
 
 }
+
+type miqtVirtualCallback_QSpacerItem_geometry struct {
+	callback   func(super func() *QRect) *QRect
+	ownsReturn bool
+}
+
 func (this *QSpacerItem) OnGeometry(slot func(super func() *QRect) *QRect) {
 	var slotHandle C.intptr_t
 	if slot != nil {
-		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QSpacerItem_geometry{callback: slot}))
 	}
 	ok := C.QSpacerItem_override_virtual_geometry(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
@@ -887,14 +1054,31 @@ func (this *QSpacerItem) OnGeometry(slot func(super func() *QRect) *QRect) {
 	}
 }
 
+// OnGeometryOwned installs a virtual override that transfers
+// ownership of each non-nil returned Qt value object to C++.
+func (this *QSpacerItem) OnGeometryOwned(slot func(super func() *QRect) *QRect) {
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QSpacerItem_geometry{callback: slot, ownsReturn: true}))
+	}
+	ok := C.QSpacerItem_override_virtual_owned_geometry(unsafe.Pointer(this.h), slotHandle)
+	if !ok {
+		panic("miqt: can only override virtual methods for directly constructed types")
+	}
+}
+
 //export miqt_exec_callback_QSpacerItem_geometry
 func miqt_exec_callback_QSpacerItem_geometry(self *C.QSpacerItem, cb C.intptr_t) *C.QRect {
-	gofunc, ok := cgo.Handle(cb).Value().(func(super func() *QRect) *QRect)
+	callbackData, ok := cgo.Handle(cb).Value().(miqtVirtualCallback_QSpacerItem_geometry)
 	if !ok {
 		panic("miqt: callback of non-callback type (heap corruption?)")
 	}
+	gofunc := callbackData.callback
 
 	virtualReturn := gofunc((&QSpacerItem{h: self}).callVirtualBase_Geometry)
+	if callbackData.ownsReturn && virtualReturn != nil {
+		runtime.SetFinalizer(virtualReturn, nil)
+	}
 
 	return virtualReturn.cPointer()
 
@@ -1260,10 +1444,16 @@ func (this *QWidgetItem) callVirtualBase_SizeHint() *QSize {
 	return _goptr
 
 }
+
+type miqtVirtualCallback_QWidgetItem_sizeHint struct {
+	callback   func(super func() *QSize) *QSize
+	ownsReturn bool
+}
+
 func (this *QWidgetItem) OnSizeHint(slot func(super func() *QSize) *QSize) {
 	var slotHandle C.intptr_t
 	if slot != nil {
-		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QWidgetItem_sizeHint{callback: slot}))
 	}
 	ok := C.QWidgetItem_override_virtual_sizeHint(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
@@ -1271,14 +1461,31 @@ func (this *QWidgetItem) OnSizeHint(slot func(super func() *QSize) *QSize) {
 	}
 }
 
+// OnSizeHintOwned installs a virtual override that transfers
+// ownership of each non-nil returned Qt value object to C++.
+func (this *QWidgetItem) OnSizeHintOwned(slot func(super func() *QSize) *QSize) {
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QWidgetItem_sizeHint{callback: slot, ownsReturn: true}))
+	}
+	ok := C.QWidgetItem_override_virtual_owned_sizeHint(unsafe.Pointer(this.h), slotHandle)
+	if !ok {
+		panic("miqt: can only override virtual methods for directly constructed types")
+	}
+}
+
 //export miqt_exec_callback_QWidgetItem_sizeHint
 func miqt_exec_callback_QWidgetItem_sizeHint(self *C.QWidgetItem, cb C.intptr_t) *C.QSize {
-	gofunc, ok := cgo.Handle(cb).Value().(func(super func() *QSize) *QSize)
+	callbackData, ok := cgo.Handle(cb).Value().(miqtVirtualCallback_QWidgetItem_sizeHint)
 	if !ok {
 		panic("miqt: callback of non-callback type (heap corruption?)")
 	}
+	gofunc := callbackData.callback
 
 	virtualReturn := gofunc((&QWidgetItem{h: self}).callVirtualBase_SizeHint)
+	if callbackData.ownsReturn && virtualReturn != nil {
+		runtime.SetFinalizer(virtualReturn, nil)
+	}
 
 	return virtualReturn.cPointer()
 
@@ -1291,10 +1498,16 @@ func (this *QWidgetItem) callVirtualBase_MinimumSize() *QSize {
 	return _goptr
 
 }
+
+type miqtVirtualCallback_QWidgetItem_minimumSize struct {
+	callback   func(super func() *QSize) *QSize
+	ownsReturn bool
+}
+
 func (this *QWidgetItem) OnMinimumSize(slot func(super func() *QSize) *QSize) {
 	var slotHandle C.intptr_t
 	if slot != nil {
-		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QWidgetItem_minimumSize{callback: slot}))
 	}
 	ok := C.QWidgetItem_override_virtual_minimumSize(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
@@ -1302,14 +1515,31 @@ func (this *QWidgetItem) OnMinimumSize(slot func(super func() *QSize) *QSize) {
 	}
 }
 
+// OnMinimumSizeOwned installs a virtual override that transfers
+// ownership of each non-nil returned Qt value object to C++.
+func (this *QWidgetItem) OnMinimumSizeOwned(slot func(super func() *QSize) *QSize) {
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QWidgetItem_minimumSize{callback: slot, ownsReturn: true}))
+	}
+	ok := C.QWidgetItem_override_virtual_owned_minimumSize(unsafe.Pointer(this.h), slotHandle)
+	if !ok {
+		panic("miqt: can only override virtual methods for directly constructed types")
+	}
+}
+
 //export miqt_exec_callback_QWidgetItem_minimumSize
 func miqt_exec_callback_QWidgetItem_minimumSize(self *C.QWidgetItem, cb C.intptr_t) *C.QSize {
-	gofunc, ok := cgo.Handle(cb).Value().(func(super func() *QSize) *QSize)
+	callbackData, ok := cgo.Handle(cb).Value().(miqtVirtualCallback_QWidgetItem_minimumSize)
 	if !ok {
 		panic("miqt: callback of non-callback type (heap corruption?)")
 	}
+	gofunc := callbackData.callback
 
 	virtualReturn := gofunc((&QWidgetItem{h: self}).callVirtualBase_MinimumSize)
+	if callbackData.ownsReturn && virtualReturn != nil {
+		runtime.SetFinalizer(virtualReturn, nil)
+	}
 
 	return virtualReturn.cPointer()
 
@@ -1322,10 +1552,16 @@ func (this *QWidgetItem) callVirtualBase_MaximumSize() *QSize {
 	return _goptr
 
 }
+
+type miqtVirtualCallback_QWidgetItem_maximumSize struct {
+	callback   func(super func() *QSize) *QSize
+	ownsReturn bool
+}
+
 func (this *QWidgetItem) OnMaximumSize(slot func(super func() *QSize) *QSize) {
 	var slotHandle C.intptr_t
 	if slot != nil {
-		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QWidgetItem_maximumSize{callback: slot}))
 	}
 	ok := C.QWidgetItem_override_virtual_maximumSize(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
@@ -1333,14 +1569,31 @@ func (this *QWidgetItem) OnMaximumSize(slot func(super func() *QSize) *QSize) {
 	}
 }
 
+// OnMaximumSizeOwned installs a virtual override that transfers
+// ownership of each non-nil returned Qt value object to C++.
+func (this *QWidgetItem) OnMaximumSizeOwned(slot func(super func() *QSize) *QSize) {
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QWidgetItem_maximumSize{callback: slot, ownsReturn: true}))
+	}
+	ok := C.QWidgetItem_override_virtual_owned_maximumSize(unsafe.Pointer(this.h), slotHandle)
+	if !ok {
+		panic("miqt: can only override virtual methods for directly constructed types")
+	}
+}
+
 //export miqt_exec_callback_QWidgetItem_maximumSize
 func miqt_exec_callback_QWidgetItem_maximumSize(self *C.QWidgetItem, cb C.intptr_t) *C.QSize {
-	gofunc, ok := cgo.Handle(cb).Value().(func(super func() *QSize) *QSize)
+	callbackData, ok := cgo.Handle(cb).Value().(miqtVirtualCallback_QWidgetItem_maximumSize)
 	if !ok {
 		panic("miqt: callback of non-callback type (heap corruption?)")
 	}
+	gofunc := callbackData.callback
 
 	virtualReturn := gofunc((&QWidgetItem{h: self}).callVirtualBase_MaximumSize)
+	if callbackData.ownsReturn && virtualReturn != nil {
+		runtime.SetFinalizer(virtualReturn, nil)
+	}
 
 	return virtualReturn.cPointer()
 
@@ -1441,10 +1694,16 @@ func (this *QWidgetItem) callVirtualBase_Geometry() *QRect {
 	return _goptr
 
 }
+
+type miqtVirtualCallback_QWidgetItem_geometry struct {
+	callback   func(super func() *QRect) *QRect
+	ownsReturn bool
+}
+
 func (this *QWidgetItem) OnGeometry(slot func(super func() *QRect) *QRect) {
 	var slotHandle C.intptr_t
 	if slot != nil {
-		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QWidgetItem_geometry{callback: slot}))
 	}
 	ok := C.QWidgetItem_override_virtual_geometry(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
@@ -1452,14 +1711,31 @@ func (this *QWidgetItem) OnGeometry(slot func(super func() *QRect) *QRect) {
 	}
 }
 
+// OnGeometryOwned installs a virtual override that transfers
+// ownership of each non-nil returned Qt value object to C++.
+func (this *QWidgetItem) OnGeometryOwned(slot func(super func() *QRect) *QRect) {
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QWidgetItem_geometry{callback: slot, ownsReturn: true}))
+	}
+	ok := C.QWidgetItem_override_virtual_owned_geometry(unsafe.Pointer(this.h), slotHandle)
+	if !ok {
+		panic("miqt: can only override virtual methods for directly constructed types")
+	}
+}
+
 //export miqt_exec_callback_QWidgetItem_geometry
 func miqt_exec_callback_QWidgetItem_geometry(self *C.QWidgetItem, cb C.intptr_t) *C.QRect {
-	gofunc, ok := cgo.Handle(cb).Value().(func(super func() *QRect) *QRect)
+	callbackData, ok := cgo.Handle(cb).Value().(miqtVirtualCallback_QWidgetItem_geometry)
 	if !ok {
 		panic("miqt: callback of non-callback type (heap corruption?)")
 	}
+	gofunc := callbackData.callback
 
 	virtualReturn := gofunc((&QWidgetItem{h: self}).callVirtualBase_Geometry)
+	if callbackData.ownsReturn && virtualReturn != nil {
+		runtime.SetFinalizer(virtualReturn, nil)
+	}
 
 	return virtualReturn.cPointer()
 
@@ -1791,10 +2067,16 @@ func (this *QWidgetItemV2) callVirtualBase_SizeHint() *QSize {
 	return _goptr
 
 }
+
+type miqtVirtualCallback_QWidgetItemV2_sizeHint struct {
+	callback   func(super func() *QSize) *QSize
+	ownsReturn bool
+}
+
 func (this *QWidgetItemV2) OnSizeHint(slot func(super func() *QSize) *QSize) {
 	var slotHandle C.intptr_t
 	if slot != nil {
-		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QWidgetItemV2_sizeHint{callback: slot}))
 	}
 	ok := C.QWidgetItemV2_override_virtual_sizeHint(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
@@ -1802,14 +2084,31 @@ func (this *QWidgetItemV2) OnSizeHint(slot func(super func() *QSize) *QSize) {
 	}
 }
 
+// OnSizeHintOwned installs a virtual override that transfers
+// ownership of each non-nil returned Qt value object to C++.
+func (this *QWidgetItemV2) OnSizeHintOwned(slot func(super func() *QSize) *QSize) {
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QWidgetItemV2_sizeHint{callback: slot, ownsReturn: true}))
+	}
+	ok := C.QWidgetItemV2_override_virtual_owned_sizeHint(unsafe.Pointer(this.h), slotHandle)
+	if !ok {
+		panic("miqt: can only override virtual methods for directly constructed types")
+	}
+}
+
 //export miqt_exec_callback_QWidgetItemV2_sizeHint
 func miqt_exec_callback_QWidgetItemV2_sizeHint(self *C.QWidgetItemV2, cb C.intptr_t) *C.QSize {
-	gofunc, ok := cgo.Handle(cb).Value().(func(super func() *QSize) *QSize)
+	callbackData, ok := cgo.Handle(cb).Value().(miqtVirtualCallback_QWidgetItemV2_sizeHint)
 	if !ok {
 		panic("miqt: callback of non-callback type (heap corruption?)")
 	}
+	gofunc := callbackData.callback
 
 	virtualReturn := gofunc((&QWidgetItemV2{h: self}).callVirtualBase_SizeHint)
+	if callbackData.ownsReturn && virtualReturn != nil {
+		runtime.SetFinalizer(virtualReturn, nil)
+	}
 
 	return virtualReturn.cPointer()
 
@@ -1822,10 +2121,16 @@ func (this *QWidgetItemV2) callVirtualBase_MinimumSize() *QSize {
 	return _goptr
 
 }
+
+type miqtVirtualCallback_QWidgetItemV2_minimumSize struct {
+	callback   func(super func() *QSize) *QSize
+	ownsReturn bool
+}
+
 func (this *QWidgetItemV2) OnMinimumSize(slot func(super func() *QSize) *QSize) {
 	var slotHandle C.intptr_t
 	if slot != nil {
-		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QWidgetItemV2_minimumSize{callback: slot}))
 	}
 	ok := C.QWidgetItemV2_override_virtual_minimumSize(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
@@ -1833,14 +2138,31 @@ func (this *QWidgetItemV2) OnMinimumSize(slot func(super func() *QSize) *QSize) 
 	}
 }
 
+// OnMinimumSizeOwned installs a virtual override that transfers
+// ownership of each non-nil returned Qt value object to C++.
+func (this *QWidgetItemV2) OnMinimumSizeOwned(slot func(super func() *QSize) *QSize) {
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QWidgetItemV2_minimumSize{callback: slot, ownsReturn: true}))
+	}
+	ok := C.QWidgetItemV2_override_virtual_owned_minimumSize(unsafe.Pointer(this.h), slotHandle)
+	if !ok {
+		panic("miqt: can only override virtual methods for directly constructed types")
+	}
+}
+
 //export miqt_exec_callback_QWidgetItemV2_minimumSize
 func miqt_exec_callback_QWidgetItemV2_minimumSize(self *C.QWidgetItemV2, cb C.intptr_t) *C.QSize {
-	gofunc, ok := cgo.Handle(cb).Value().(func(super func() *QSize) *QSize)
+	callbackData, ok := cgo.Handle(cb).Value().(miqtVirtualCallback_QWidgetItemV2_minimumSize)
 	if !ok {
 		panic("miqt: callback of non-callback type (heap corruption?)")
 	}
+	gofunc := callbackData.callback
 
 	virtualReturn := gofunc((&QWidgetItemV2{h: self}).callVirtualBase_MinimumSize)
+	if callbackData.ownsReturn && virtualReturn != nil {
+		runtime.SetFinalizer(virtualReturn, nil)
+	}
 
 	return virtualReturn.cPointer()
 
@@ -1853,10 +2175,16 @@ func (this *QWidgetItemV2) callVirtualBase_MaximumSize() *QSize {
 	return _goptr
 
 }
+
+type miqtVirtualCallback_QWidgetItemV2_maximumSize struct {
+	callback   func(super func() *QSize) *QSize
+	ownsReturn bool
+}
+
 func (this *QWidgetItemV2) OnMaximumSize(slot func(super func() *QSize) *QSize) {
 	var slotHandle C.intptr_t
 	if slot != nil {
-		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QWidgetItemV2_maximumSize{callback: slot}))
 	}
 	ok := C.QWidgetItemV2_override_virtual_maximumSize(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
@@ -1864,14 +2192,31 @@ func (this *QWidgetItemV2) OnMaximumSize(slot func(super func() *QSize) *QSize) 
 	}
 }
 
+// OnMaximumSizeOwned installs a virtual override that transfers
+// ownership of each non-nil returned Qt value object to C++.
+func (this *QWidgetItemV2) OnMaximumSizeOwned(slot func(super func() *QSize) *QSize) {
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QWidgetItemV2_maximumSize{callback: slot, ownsReturn: true}))
+	}
+	ok := C.QWidgetItemV2_override_virtual_owned_maximumSize(unsafe.Pointer(this.h), slotHandle)
+	if !ok {
+		panic("miqt: can only override virtual methods for directly constructed types")
+	}
+}
+
 //export miqt_exec_callback_QWidgetItemV2_maximumSize
 func miqt_exec_callback_QWidgetItemV2_maximumSize(self *C.QWidgetItemV2, cb C.intptr_t) *C.QSize {
-	gofunc, ok := cgo.Handle(cb).Value().(func(super func() *QSize) *QSize)
+	callbackData, ok := cgo.Handle(cb).Value().(miqtVirtualCallback_QWidgetItemV2_maximumSize)
 	if !ok {
 		panic("miqt: callback of non-callback type (heap corruption?)")
 	}
+	gofunc := callbackData.callback
 
 	virtualReturn := gofunc((&QWidgetItemV2{h: self}).callVirtualBase_MaximumSize)
+	if callbackData.ownsReturn && virtualReturn != nil {
+		runtime.SetFinalizer(virtualReturn, nil)
+	}
 
 	return virtualReturn.cPointer()
 
@@ -2004,10 +2349,16 @@ func (this *QWidgetItemV2) callVirtualBase_Geometry() *QRect {
 	return _goptr
 
 }
+
+type miqtVirtualCallback_QWidgetItemV2_geometry struct {
+	callback   func(super func() *QRect) *QRect
+	ownsReturn bool
+}
+
 func (this *QWidgetItemV2) OnGeometry(slot func(super func() *QRect) *QRect) {
 	var slotHandle C.intptr_t
 	if slot != nil {
-		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QWidgetItemV2_geometry{callback: slot}))
 	}
 	ok := C.QWidgetItemV2_override_virtual_geometry(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
@@ -2015,14 +2366,31 @@ func (this *QWidgetItemV2) OnGeometry(slot func(super func() *QRect) *QRect) {
 	}
 }
 
+// OnGeometryOwned installs a virtual override that transfers
+// ownership of each non-nil returned Qt value object to C++.
+func (this *QWidgetItemV2) OnGeometryOwned(slot func(super func() *QRect) *QRect) {
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QWidgetItemV2_geometry{callback: slot, ownsReturn: true}))
+	}
+	ok := C.QWidgetItemV2_override_virtual_owned_geometry(unsafe.Pointer(this.h), slotHandle)
+	if !ok {
+		panic("miqt: can only override virtual methods for directly constructed types")
+	}
+}
+
 //export miqt_exec_callback_QWidgetItemV2_geometry
 func miqt_exec_callback_QWidgetItemV2_geometry(self *C.QWidgetItemV2, cb C.intptr_t) *C.QRect {
-	gofunc, ok := cgo.Handle(cb).Value().(func(super func() *QRect) *QRect)
+	callbackData, ok := cgo.Handle(cb).Value().(miqtVirtualCallback_QWidgetItemV2_geometry)
 	if !ok {
 		panic("miqt: callback of non-callback type (heap corruption?)")
 	}
+	gofunc := callbackData.callback
 
 	virtualReturn := gofunc((&QWidgetItemV2{h: self}).callVirtualBase_Geometry)
+	if callbackData.ownsReturn && virtualReturn != nil {
+		runtime.SetFinalizer(virtualReturn, nil)
+	}
 
 	return virtualReturn.cPointer()
 

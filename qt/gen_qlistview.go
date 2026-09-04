@@ -794,10 +794,16 @@ func (this *QListView) callVirtualBase_VisualRect(index *QModelIndex) *QRect {
 	return _goptr
 
 }
+
+type miqtVirtualCallback_QListView_visualRect struct {
+	callback   func(super func(index *QModelIndex) *QRect, index *QModelIndex) *QRect
+	ownsReturn bool
+}
+
 func (this *QListView) OnVisualRect(slot func(super func(index *QModelIndex) *QRect, index *QModelIndex) *QRect) {
 	var slotHandle C.intptr_t
 	if slot != nil {
-		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QListView_visualRect{callback: slot}))
 	}
 	ok := C.QListView_override_virtual_visualRect(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
@@ -805,17 +811,34 @@ func (this *QListView) OnVisualRect(slot func(super func(index *QModelIndex) *QR
 	}
 }
 
+// OnVisualRectOwned installs a virtual override that transfers
+// ownership of each non-nil returned Qt value object to C++.
+func (this *QListView) OnVisualRectOwned(slot func(super func(index *QModelIndex) *QRect, index *QModelIndex) *QRect) {
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QListView_visualRect{callback: slot, ownsReturn: true}))
+	}
+	ok := C.QListView_override_virtual_owned_visualRect(unsafe.Pointer(this.h), slotHandle)
+	if !ok {
+		panic("miqt: can only override virtual methods for directly constructed types")
+	}
+}
+
 //export miqt_exec_callback_QListView_visualRect
 func miqt_exec_callback_QListView_visualRect(self *C.QListView, cb C.intptr_t, index *C.QModelIndex) *C.QRect {
-	gofunc, ok := cgo.Handle(cb).Value().(func(super func(index *QModelIndex) *QRect, index *QModelIndex) *QRect)
+	callbackData, ok := cgo.Handle(cb).Value().(miqtVirtualCallback_QListView_visualRect)
 	if !ok {
 		panic("miqt: callback of non-callback type (heap corruption?)")
 	}
+	gofunc := callbackData.callback
 
 	// Convert all CABI parameters to Go parameters
 	slotval1 := newQModelIndex(index)
 
 	virtualReturn := gofunc((&QListView{h: self}).callVirtualBase_VisualRect, slotval1)
+	if callbackData.ownsReturn && virtualReturn != nil {
+		runtime.SetFinalizer(virtualReturn, nil)
+	}
 
 	return virtualReturn.cPointer()
 
@@ -860,10 +883,16 @@ func (this *QListView) callVirtualBase_IndexAt(p *QPoint) *QModelIndex {
 	return _goptr
 
 }
+
+type miqtVirtualCallback_QListView_indexAt struct {
+	callback   func(super func(p *QPoint) *QModelIndex, p *QPoint) *QModelIndex
+	ownsReturn bool
+}
+
 func (this *QListView) OnIndexAt(slot func(super func(p *QPoint) *QModelIndex, p *QPoint) *QModelIndex) {
 	var slotHandle C.intptr_t
 	if slot != nil {
-		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QListView_indexAt{callback: slot}))
 	}
 	ok := C.QListView_override_virtual_indexAt(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
@@ -871,17 +900,34 @@ func (this *QListView) OnIndexAt(slot func(super func(p *QPoint) *QModelIndex, p
 	}
 }
 
+// OnIndexAtOwned installs a virtual override that transfers
+// ownership of each non-nil returned Qt value object to C++.
+func (this *QListView) OnIndexAtOwned(slot func(super func(p *QPoint) *QModelIndex, p *QPoint) *QModelIndex) {
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QListView_indexAt{callback: slot, ownsReturn: true}))
+	}
+	ok := C.QListView_override_virtual_owned_indexAt(unsafe.Pointer(this.h), slotHandle)
+	if !ok {
+		panic("miqt: can only override virtual methods for directly constructed types")
+	}
+}
+
 //export miqt_exec_callback_QListView_indexAt
 func miqt_exec_callback_QListView_indexAt(self *C.QListView, cb C.intptr_t, p *C.QPoint) *C.QModelIndex {
-	gofunc, ok := cgo.Handle(cb).Value().(func(super func(p *QPoint) *QModelIndex, p *QPoint) *QModelIndex)
+	callbackData, ok := cgo.Handle(cb).Value().(miqtVirtualCallback_QListView_indexAt)
 	if !ok {
 		panic("miqt: callback of non-callback type (heap corruption?)")
 	}
+	gofunc := callbackData.callback
 
 	// Convert all CABI parameters to Go parameters
 	slotval1 := newQPoint(p)
 
 	virtualReturn := gofunc((&QListView{h: self}).callVirtualBase_IndexAt, slotval1)
+	if callbackData.ownsReturn && virtualReturn != nil {
+		runtime.SetFinalizer(virtualReturn, nil)
+	}
 
 	return virtualReturn.cPointer()
 
@@ -1426,10 +1472,16 @@ func (this *QListView) callVirtualBase_ViewOptions() *QStyleOptionViewItem {
 	return _goptr
 
 }
+
+type miqtVirtualCallback_QListView_viewOptions struct {
+	callback   func(super func() *QStyleOptionViewItem) *QStyleOptionViewItem
+	ownsReturn bool
+}
+
 func (this *QListView) OnViewOptions(slot func(super func() *QStyleOptionViewItem) *QStyleOptionViewItem) {
 	var slotHandle C.intptr_t
 	if slot != nil {
-		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QListView_viewOptions{callback: slot}))
 	}
 	ok := C.QListView_override_virtual_viewOptions(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
@@ -1437,14 +1489,31 @@ func (this *QListView) OnViewOptions(slot func(super func() *QStyleOptionViewIte
 	}
 }
 
+// OnViewOptionsOwned installs a virtual override that transfers
+// ownership of each non-nil returned Qt value object to C++.
+func (this *QListView) OnViewOptionsOwned(slot func(super func() *QStyleOptionViewItem) *QStyleOptionViewItem) {
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QListView_viewOptions{callback: slot, ownsReturn: true}))
+	}
+	ok := C.QListView_override_virtual_owned_viewOptions(unsafe.Pointer(this.h), slotHandle)
+	if !ok {
+		panic("miqt: can only override virtual methods for directly constructed types")
+	}
+}
+
 //export miqt_exec_callback_QListView_viewOptions
 func miqt_exec_callback_QListView_viewOptions(self *C.QListView, cb C.intptr_t) *C.QStyleOptionViewItem {
-	gofunc, ok := cgo.Handle(cb).Value().(func(super func() *QStyleOptionViewItem) *QStyleOptionViewItem)
+	callbackData, ok := cgo.Handle(cb).Value().(miqtVirtualCallback_QListView_viewOptions)
 	if !ok {
 		panic("miqt: callback of non-callback type (heap corruption?)")
 	}
+	gofunc := callbackData.callback
 
 	virtualReturn := gofunc((&QListView{h: self}).callVirtualBase_ViewOptions)
+	if callbackData.ownsReturn && virtualReturn != nil {
+		runtime.SetFinalizer(virtualReturn, nil)
+	}
 
 	return virtualReturn.cPointer()
 
@@ -1545,10 +1614,16 @@ func (this *QListView) callVirtualBase_MoveCursor(cursorAction QAbstractItemView
 	return _goptr
 
 }
+
+type miqtVirtualCallback_QListView_moveCursor struct {
+	callback   func(super func(cursorAction QAbstractItemView__CursorAction, modifiers KeyboardModifier) *QModelIndex, cursorAction QAbstractItemView__CursorAction, modifiers KeyboardModifier) *QModelIndex
+	ownsReturn bool
+}
+
 func (this *QListView) OnMoveCursor(slot func(super func(cursorAction QAbstractItemView__CursorAction, modifiers KeyboardModifier) *QModelIndex, cursorAction QAbstractItemView__CursorAction, modifiers KeyboardModifier) *QModelIndex) {
 	var slotHandle C.intptr_t
 	if slot != nil {
-		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QListView_moveCursor{callback: slot}))
 	}
 	ok := C.QListView_override_virtual_moveCursor(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
@@ -1556,12 +1631,26 @@ func (this *QListView) OnMoveCursor(slot func(super func(cursorAction QAbstractI
 	}
 }
 
+// OnMoveCursorOwned installs a virtual override that transfers
+// ownership of each non-nil returned Qt value object to C++.
+func (this *QListView) OnMoveCursorOwned(slot func(super func(cursorAction QAbstractItemView__CursorAction, modifiers KeyboardModifier) *QModelIndex, cursorAction QAbstractItemView__CursorAction, modifiers KeyboardModifier) *QModelIndex) {
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QListView_moveCursor{callback: slot, ownsReturn: true}))
+	}
+	ok := C.QListView_override_virtual_owned_moveCursor(unsafe.Pointer(this.h), slotHandle)
+	if !ok {
+		panic("miqt: can only override virtual methods for directly constructed types")
+	}
+}
+
 //export miqt_exec_callback_QListView_moveCursor
 func miqt_exec_callback_QListView_moveCursor(self *C.QListView, cb C.intptr_t, cursorAction C.int, modifiers C.int) *C.QModelIndex {
-	gofunc, ok := cgo.Handle(cb).Value().(func(super func(cursorAction QAbstractItemView__CursorAction, modifiers KeyboardModifier) *QModelIndex, cursorAction QAbstractItemView__CursorAction, modifiers KeyboardModifier) *QModelIndex)
+	callbackData, ok := cgo.Handle(cb).Value().(miqtVirtualCallback_QListView_moveCursor)
 	if !ok {
 		panic("miqt: callback of non-callback type (heap corruption?)")
 	}
+	gofunc := callbackData.callback
 
 	// Convert all CABI parameters to Go parameters
 	slotval1 := (QAbstractItemView__CursorAction)(cursorAction)
@@ -1569,6 +1658,9 @@ func miqt_exec_callback_QListView_moveCursor(self *C.QListView, cb C.intptr_t, c
 	slotval2 := (KeyboardModifier)(modifiers)
 
 	virtualReturn := gofunc((&QListView{h: self}).callVirtualBase_MoveCursor, slotval1, slotval2)
+	if callbackData.ownsReturn && virtualReturn != nil {
+		runtime.SetFinalizer(virtualReturn, nil)
+	}
 
 	return virtualReturn.cPointer()
 
@@ -1613,10 +1705,16 @@ func (this *QListView) callVirtualBase_VisualRegionForSelection(selection *QItem
 	return _goptr
 
 }
+
+type miqtVirtualCallback_QListView_visualRegionForSelection struct {
+	callback   func(super func(selection *QItemSelection) *QRegion, selection *QItemSelection) *QRegion
+	ownsReturn bool
+}
+
 func (this *QListView) OnVisualRegionForSelection(slot func(super func(selection *QItemSelection) *QRegion, selection *QItemSelection) *QRegion) {
 	var slotHandle C.intptr_t
 	if slot != nil {
-		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QListView_visualRegionForSelection{callback: slot}))
 	}
 	ok := C.QListView_override_virtual_visualRegionForSelection(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
@@ -1624,17 +1722,34 @@ func (this *QListView) OnVisualRegionForSelection(slot func(super func(selection
 	}
 }
 
+// OnVisualRegionForSelectionOwned installs a virtual override that transfers
+// ownership of each non-nil returned Qt value object to C++.
+func (this *QListView) OnVisualRegionForSelectionOwned(slot func(super func(selection *QItemSelection) *QRegion, selection *QItemSelection) *QRegion) {
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QListView_visualRegionForSelection{callback: slot, ownsReturn: true}))
+	}
+	ok := C.QListView_override_virtual_owned_visualRegionForSelection(unsafe.Pointer(this.h), slotHandle)
+	if !ok {
+		panic("miqt: can only override virtual methods for directly constructed types")
+	}
+}
+
 //export miqt_exec_callback_QListView_visualRegionForSelection
 func miqt_exec_callback_QListView_visualRegionForSelection(self *C.QListView, cb C.intptr_t, selection *C.QItemSelection) *C.QRegion {
-	gofunc, ok := cgo.Handle(cb).Value().(func(super func(selection *QItemSelection) *QRegion, selection *QItemSelection) *QRegion)
+	callbackData, ok := cgo.Handle(cb).Value().(miqtVirtualCallback_QListView_visualRegionForSelection)
 	if !ok {
 		panic("miqt: callback of non-callback type (heap corruption?)")
 	}
+	gofunc := callbackData.callback
 
 	// Convert all CABI parameters to Go parameters
 	slotval1 := newQItemSelection(selection)
 
 	virtualReturn := gofunc((&QListView{h: self}).callVirtualBase_VisualRegionForSelection, slotval1)
+	if callbackData.ownsReturn && virtualReturn != nil {
+		runtime.SetFinalizer(virtualReturn, nil)
+	}
 
 	return virtualReturn.cPointer()
 
@@ -1812,10 +1927,16 @@ func (this *QListView) callVirtualBase_ViewportSizeHint() *QSize {
 	return _goptr
 
 }
+
+type miqtVirtualCallback_QListView_viewportSizeHint struct {
+	callback   func(super func() *QSize) *QSize
+	ownsReturn bool
+}
+
 func (this *QListView) OnViewportSizeHint(slot func(super func() *QSize) *QSize) {
 	var slotHandle C.intptr_t
 	if slot != nil {
-		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QListView_viewportSizeHint{callback: slot}))
 	}
 	ok := C.QListView_override_virtual_viewportSizeHint(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
@@ -1823,14 +1944,31 @@ func (this *QListView) OnViewportSizeHint(slot func(super func() *QSize) *QSize)
 	}
 }
 
+// OnViewportSizeHintOwned installs a virtual override that transfers
+// ownership of each non-nil returned Qt value object to C++.
+func (this *QListView) OnViewportSizeHintOwned(slot func(super func() *QSize) *QSize) {
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QListView_viewportSizeHint{callback: slot, ownsReturn: true}))
+	}
+	ok := C.QListView_override_virtual_owned_viewportSizeHint(unsafe.Pointer(this.h), slotHandle)
+	if !ok {
+		panic("miqt: can only override virtual methods for directly constructed types")
+	}
+}
+
 //export miqt_exec_callback_QListView_viewportSizeHint
 func miqt_exec_callback_QListView_viewportSizeHint(self *C.QListView, cb C.intptr_t) *C.QSize {
-	gofunc, ok := cgo.Handle(cb).Value().(func(super func() *QSize) *QSize)
+	callbackData, ok := cgo.Handle(cb).Value().(miqtVirtualCallback_QListView_viewportSizeHint)
 	if !ok {
 		panic("miqt: callback of non-callback type (heap corruption?)")
 	}
+	gofunc := callbackData.callback
 
 	virtualReturn := gofunc((&QListView{h: self}).callVirtualBase_ViewportSizeHint)
+	if callbackData.ownsReturn && virtualReturn != nil {
+		runtime.SetFinalizer(virtualReturn, nil)
+	}
 
 	return virtualReturn.cPointer()
 
@@ -2004,10 +2142,16 @@ func (this *QListView) callVirtualBase_InputMethodQuery(query InputMethodQuery) 
 	return _goptr
 
 }
+
+type miqtVirtualCallback_QListView_inputMethodQuery struct {
+	callback   func(super func(query InputMethodQuery) *QVariant, query InputMethodQuery) *QVariant
+	ownsReturn bool
+}
+
 func (this *QListView) OnInputMethodQuery(slot func(super func(query InputMethodQuery) *QVariant, query InputMethodQuery) *QVariant) {
 	var slotHandle C.intptr_t
 	if slot != nil {
-		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QListView_inputMethodQuery{callback: slot}))
 	}
 	ok := C.QListView_override_virtual_inputMethodQuery(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
@@ -2015,17 +2159,34 @@ func (this *QListView) OnInputMethodQuery(slot func(super func(query InputMethod
 	}
 }
 
+// OnInputMethodQueryOwned installs a virtual override that transfers
+// ownership of each non-nil returned Qt value object to C++.
+func (this *QListView) OnInputMethodQueryOwned(slot func(super func(query InputMethodQuery) *QVariant, query InputMethodQuery) *QVariant) {
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QListView_inputMethodQuery{callback: slot, ownsReturn: true}))
+	}
+	ok := C.QListView_override_virtual_owned_inputMethodQuery(unsafe.Pointer(this.h), slotHandle)
+	if !ok {
+		panic("miqt: can only override virtual methods for directly constructed types")
+	}
+}
+
 //export miqt_exec_callback_QListView_inputMethodQuery
 func miqt_exec_callback_QListView_inputMethodQuery(self *C.QListView, cb C.intptr_t, query C.int) *C.QVariant {
-	gofunc, ok := cgo.Handle(cb).Value().(func(super func(query InputMethodQuery) *QVariant, query InputMethodQuery) *QVariant)
+	callbackData, ok := cgo.Handle(cb).Value().(miqtVirtualCallback_QListView_inputMethodQuery)
 	if !ok {
 		panic("miqt: callback of non-callback type (heap corruption?)")
 	}
+	gofunc := callbackData.callback
 
 	// Convert all CABI parameters to Go parameters
 	slotval1 := (InputMethodQuery)(query)
 
 	virtualReturn := gofunc((&QListView{h: self}).callVirtualBase_InputMethodQuery, slotval1)
+	if callbackData.ownsReturn && virtualReturn != nil {
+		runtime.SetFinalizer(virtualReturn, nil)
+	}
 
 	return virtualReturn.cPointer()
 
@@ -2709,10 +2870,16 @@ func (this *QListView) callVirtualBase_MinimumSizeHint() *QSize {
 	return _goptr
 
 }
+
+type miqtVirtualCallback_QListView_minimumSizeHint struct {
+	callback   func(super func() *QSize) *QSize
+	ownsReturn bool
+}
+
 func (this *QListView) OnMinimumSizeHint(slot func(super func() *QSize) *QSize) {
 	var slotHandle C.intptr_t
 	if slot != nil {
-		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QListView_minimumSizeHint{callback: slot}))
 	}
 	ok := C.QListView_override_virtual_minimumSizeHint(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
@@ -2720,14 +2887,31 @@ func (this *QListView) OnMinimumSizeHint(slot func(super func() *QSize) *QSize) 
 	}
 }
 
+// OnMinimumSizeHintOwned installs a virtual override that transfers
+// ownership of each non-nil returned Qt value object to C++.
+func (this *QListView) OnMinimumSizeHintOwned(slot func(super func() *QSize) *QSize) {
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QListView_minimumSizeHint{callback: slot, ownsReturn: true}))
+	}
+	ok := C.QListView_override_virtual_owned_minimumSizeHint(unsafe.Pointer(this.h), slotHandle)
+	if !ok {
+		panic("miqt: can only override virtual methods for directly constructed types")
+	}
+}
+
 //export miqt_exec_callback_QListView_minimumSizeHint
 func miqt_exec_callback_QListView_minimumSizeHint(self *C.QListView, cb C.intptr_t) *C.QSize {
-	gofunc, ok := cgo.Handle(cb).Value().(func(super func() *QSize) *QSize)
+	callbackData, ok := cgo.Handle(cb).Value().(miqtVirtualCallback_QListView_minimumSizeHint)
 	if !ok {
 		panic("miqt: callback of non-callback type (heap corruption?)")
 	}
+	gofunc := callbackData.callback
 
 	virtualReturn := gofunc((&QListView{h: self}).callVirtualBase_MinimumSizeHint)
+	if callbackData.ownsReturn && virtualReturn != nil {
+		runtime.SetFinalizer(virtualReturn, nil)
+	}
 
 	return virtualReturn.cPointer()
 
@@ -2740,10 +2924,16 @@ func (this *QListView) callVirtualBase_SizeHint() *QSize {
 	return _goptr
 
 }
+
+type miqtVirtualCallback_QListView_sizeHint struct {
+	callback   func(super func() *QSize) *QSize
+	ownsReturn bool
+}
+
 func (this *QListView) OnSizeHint(slot func(super func() *QSize) *QSize) {
 	var slotHandle C.intptr_t
 	if slot != nil {
-		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QListView_sizeHint{callback: slot}))
 	}
 	ok := C.QListView_override_virtual_sizeHint(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
@@ -2751,14 +2941,31 @@ func (this *QListView) OnSizeHint(slot func(super func() *QSize) *QSize) {
 	}
 }
 
+// OnSizeHintOwned installs a virtual override that transfers
+// ownership of each non-nil returned Qt value object to C++.
+func (this *QListView) OnSizeHintOwned(slot func(super func() *QSize) *QSize) {
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QListView_sizeHint{callback: slot, ownsReturn: true}))
+	}
+	ok := C.QListView_override_virtual_owned_sizeHint(unsafe.Pointer(this.h), slotHandle)
+	if !ok {
+		panic("miqt: can only override virtual methods for directly constructed types")
+	}
+}
+
 //export miqt_exec_callback_QListView_sizeHint
 func miqt_exec_callback_QListView_sizeHint(self *C.QListView, cb C.intptr_t) *C.QSize {
-	gofunc, ok := cgo.Handle(cb).Value().(func(super func() *QSize) *QSize)
+	callbackData, ok := cgo.Handle(cb).Value().(miqtVirtualCallback_QListView_sizeHint)
 	if !ok {
 		panic("miqt: callback of non-callback type (heap corruption?)")
 	}
+	gofunc := callbackData.callback
 
 	virtualReturn := gofunc((&QListView{h: self}).callVirtualBase_SizeHint)
+	if callbackData.ownsReturn && virtualReturn != nil {
+		runtime.SetFinalizer(virtualReturn, nil)
+	}
 
 	return virtualReturn.cPointer()
 

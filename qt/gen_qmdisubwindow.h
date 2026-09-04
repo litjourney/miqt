@@ -143,8 +143,10 @@ struct miqt_string QMdiSubWindow_trUtf83(const char* s, const char* c, int n);
 void QMdiSubWindow_setOption2(QMdiSubWindow* self, int option, bool on);
 
 bool QMdiSubWindow_override_virtual_sizeHint(void* self, intptr_t slot);
+bool QMdiSubWindow_override_virtual_owned_sizeHint(void* self, intptr_t slot);
 QSize* QMdiSubWindow_virtualbase_sizeHint(const void* self);
 bool QMdiSubWindow_override_virtual_minimumSizeHint(void* self, intptr_t slot);
+bool QMdiSubWindow_override_virtual_owned_minimumSizeHint(void* self, intptr_t slot);
 QSize* QMdiSubWindow_virtualbase_minimumSizeHint(const void* self);
 bool QMdiSubWindow_override_virtual_eventFilter(void* self, intptr_t slot);
 bool QMdiSubWindow_virtualbase_eventFilter(void* self, QObject* object, QEvent* event);
@@ -227,6 +229,7 @@ QPainter* QMdiSubWindow_virtualbase_sharedPainter(const void* self);
 bool QMdiSubWindow_override_virtual_inputMethodEvent(void* self, intptr_t slot);
 void QMdiSubWindow_virtualbase_inputMethodEvent(void* self, QInputMethodEvent* param1);
 bool QMdiSubWindow_override_virtual_inputMethodQuery(void* self, intptr_t slot);
+bool QMdiSubWindow_override_virtual_owned_inputMethodQuery(void* self, intptr_t slot);
 QVariant* QMdiSubWindow_virtualbase_inputMethodQuery(const void* self, int param1);
 bool QMdiSubWindow_override_virtual_focusNextPrevChild(void* self, intptr_t slot);
 bool QMdiSubWindow_virtualbase_focusNextPrevChild(void* self, bool next);

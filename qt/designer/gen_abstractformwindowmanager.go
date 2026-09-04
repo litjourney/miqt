@@ -661,10 +661,16 @@ func miqt_exec_callback_QDesignerFormWindowManagerInterface_dragItems(self *C.QD
 	gofunc(slotval1)
 
 }
+
+type miqtVirtualCallback_QDesignerFormWindowManagerInterface_createPreviewPixmap struct {
+	callback   func() *qt.QPixmap
+	ownsReturn bool
+}
+
 func (this *QDesignerFormWindowManagerInterface) OnCreatePreviewPixmap(slot func() *qt.QPixmap) {
 	var slotHandle C.intptr_t
 	if slot != nil {
-		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QDesignerFormWindowManagerInterface_createPreviewPixmap{callback: slot}))
 	}
 	ok := C.QDesignerFormWindowManagerInterface_override_virtual_createPreviewPixmap(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
@@ -672,14 +678,31 @@ func (this *QDesignerFormWindowManagerInterface) OnCreatePreviewPixmap(slot func
 	}
 }
 
+// OnCreatePreviewPixmapOwned installs a virtual override that transfers
+// ownership of each non-nil returned Qt value object to C++.
+func (this *QDesignerFormWindowManagerInterface) OnCreatePreviewPixmapOwned(slot func() *qt.QPixmap) {
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QDesignerFormWindowManagerInterface_createPreviewPixmap{callback: slot, ownsReturn: true}))
+	}
+	ok := C.QDesignerFormWindowManagerInterface_override_virtual_owned_createPreviewPixmap(unsafe.Pointer(this.h), slotHandle)
+	if !ok {
+		panic("miqt: can only override virtual methods for directly constructed types")
+	}
+}
+
 //export miqt_exec_callback_QDesignerFormWindowManagerInterface_createPreviewPixmap
 func miqt_exec_callback_QDesignerFormWindowManagerInterface_createPreviewPixmap(self *C.QDesignerFormWindowManagerInterface, cb C.intptr_t) *C.QPixmap {
-	gofunc, ok := cgo.Handle(cb).Value().(func() *qt.QPixmap)
+	callbackData, ok := cgo.Handle(cb).Value().(miqtVirtualCallback_QDesignerFormWindowManagerInterface_createPreviewPixmap)
 	if !ok {
 		panic("miqt: callback of non-callback type (heap corruption?)")
 	}
+	gofunc := callbackData.callback
 
 	virtualReturn := gofunc()
+	if callbackData.ownsReturn && virtualReturn != nil {
+		runtime.SetFinalizer(virtualReturn, nil)
+	}
 
 	return (*C.QPixmap)(virtualReturn.UnsafePointer())
 

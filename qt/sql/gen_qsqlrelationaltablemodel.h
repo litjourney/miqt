@@ -103,6 +103,7 @@ struct miqt_string QSqlRelationalTableModel_trUtf82(const char* s, const char* c
 struct miqt_string QSqlRelationalTableModel_trUtf83(const char* s, const char* c, int n);
 
 bool QSqlRelationalTableModel_override_virtual_data(void* self, intptr_t slot);
+bool QSqlRelationalTableModel_override_virtual_owned_data(void* self, intptr_t slot);
 QVariant* QSqlRelationalTableModel_virtualbase_data(const void* self, QModelIndex* item, int role);
 bool QSqlRelationalTableModel_override_virtual_setData(void* self, intptr_t slot);
 bool QSqlRelationalTableModel_virtualbase_setData(void* self, QModelIndex* item, QVariant* value, int role);
@@ -131,6 +132,7 @@ struct miqt_string QSqlRelationalTableModel_virtualbase_orderByClause(const void
 bool QSqlRelationalTableModel_override_virtual_flags(void* self, intptr_t slot);
 int QSqlRelationalTableModel_virtualbase_flags(const void* self, QModelIndex* index);
 bool QSqlRelationalTableModel_override_virtual_headerData(void* self, intptr_t slot);
+bool QSqlRelationalTableModel_override_virtual_owned_headerData(void* self, intptr_t slot);
 QVariant* QSqlRelationalTableModel_virtualbase_headerData(const void* self, int section, int orientation, int role);
 bool QSqlRelationalTableModel_override_virtual_setEditStrategy(void* self, intptr_t slot);
 void QSqlRelationalTableModel_virtualbase_setEditStrategy(void* self, int strategy);
@@ -155,6 +157,7 @@ void QSqlRelationalTableModel_virtualbase_revert(void* self);
 bool QSqlRelationalTableModel_override_virtual_deleteRowFromTable(void* self, intptr_t slot);
 bool QSqlRelationalTableModel_virtualbase_deleteRowFromTable(void* self, int row);
 bool QSqlRelationalTableModel_override_virtual_indexInQuery(void* self, intptr_t slot);
+bool QSqlRelationalTableModel_override_virtual_owned_indexInQuery(void* self, intptr_t slot);
 QModelIndex* QSqlRelationalTableModel_virtualbase_indexInQuery(const void* self, QModelIndex* item);
 bool QSqlRelationalTableModel_override_virtual_columnCount(void* self, intptr_t slot);
 int QSqlRelationalTableModel_virtualbase_columnCount(const void* self, QModelIndex* parent);
@@ -171,8 +174,10 @@ struct miqt_map /* of int to struct miqt_string */  QSqlRelationalTableModel_vir
 bool QSqlRelationalTableModel_override_virtual_queryChange(void* self, intptr_t slot);
 void QSqlRelationalTableModel_virtualbase_queryChange(void* self);
 bool QSqlRelationalTableModel_override_virtual_index(void* self, intptr_t slot);
+bool QSqlRelationalTableModel_override_virtual_owned_index(void* self, intptr_t slot);
 QModelIndex* QSqlRelationalTableModel_virtualbase_index(const void* self, int row, int column, QModelIndex* parent);
 bool QSqlRelationalTableModel_override_virtual_sibling(void* self, intptr_t slot);
+bool QSqlRelationalTableModel_override_virtual_owned_sibling(void* self, intptr_t slot);
 QModelIndex* QSqlRelationalTableModel_virtualbase_sibling(const void* self, int row, int column, QModelIndex* idx);
 bool QSqlRelationalTableModel_override_virtual_dropMimeData(void* self, intptr_t slot);
 bool QSqlRelationalTableModel_virtualbase_dropMimeData(void* self, QMimeData* data, int action, int row, int column, QModelIndex* parent);
@@ -195,10 +200,12 @@ bool QSqlRelationalTableModel_virtualbase_moveRows(void* self, QModelIndex* sour
 bool QSqlRelationalTableModel_override_virtual_moveColumns(void* self, intptr_t slot);
 bool QSqlRelationalTableModel_virtualbase_moveColumns(void* self, QModelIndex* sourceParent, int sourceColumn, int count, QModelIndex* destinationParent, int destinationChild);
 bool QSqlRelationalTableModel_override_virtual_buddy(void* self, intptr_t slot);
+bool QSqlRelationalTableModel_override_virtual_owned_buddy(void* self, intptr_t slot);
 QModelIndex* QSqlRelationalTableModel_virtualbase_buddy(const void* self, QModelIndex* index);
 bool QSqlRelationalTableModel_override_virtual_match(void* self, intptr_t slot);
 struct miqt_array /* of QModelIndex* */  QSqlRelationalTableModel_virtualbase_match(const void* self, QModelIndex* start, int role, QVariant* value, int hits, int flags);
 bool QSqlRelationalTableModel_override_virtual_span(void* self, intptr_t slot);
+bool QSqlRelationalTableModel_override_virtual_owned_span(void* self, intptr_t slot);
 QSize* QSqlRelationalTableModel_virtualbase_span(const void* self, QModelIndex* index);
 bool QSqlRelationalTableModel_override_virtual_event(void* self, intptr_t slot);
 bool QSqlRelationalTableModel_virtualbase_event(void* self, QEvent* event);

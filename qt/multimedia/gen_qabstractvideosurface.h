@@ -73,6 +73,7 @@ struct miqt_array /* of int */  QAbstractVideoSurface_virtualbase_supportedPixel
 bool QAbstractVideoSurface_override_virtual_isFormatSupported(void* self, intptr_t slot);
 bool QAbstractVideoSurface_virtualbase_isFormatSupported(const void* self, QVideoSurfaceFormat* format);
 bool QAbstractVideoSurface_override_virtual_nearestFormat(void* self, intptr_t slot);
+bool QAbstractVideoSurface_override_virtual_owned_nearestFormat(void* self, intptr_t slot);
 QVideoSurfaceFormat* QAbstractVideoSurface_virtualbase_nearestFormat(const void* self, QVideoSurfaceFormat* format);
 bool QAbstractVideoSurface_override_virtual_start(void* self, intptr_t slot);
 bool QAbstractVideoSurface_virtualbase_start(void* self, QVideoSurfaceFormat* format);

@@ -93,6 +93,7 @@ public:
 
 	// cgo.Handle value for overwritten implementation
 	miqt_callback_handle<miqt_exec_callback_handle_release_QAbstractVideoSurface> handle__nearestFormat;
+	bool owns_return__nearestFormat = false;
 
 	// Subclass to allow providing a Go implementation
 	virtual QVideoSurfaceFormat nearestFormat(const QVideoSurfaceFormat& format) const override {
@@ -104,6 +105,10 @@ public:
 		// Cast returned reference into pointer
 		QVideoSurfaceFormat* sigval1 = const_cast<QVideoSurfaceFormat*>(&format_ret);
 		QVideoSurfaceFormat* callback_return_value = miqt_exec_callback_QAbstractVideoSurface_nearestFormat(this, handle__nearestFormat.value(), sigval1);
+		std::unique_ptr<QVideoSurfaceFormat> callback_return_value_owner;
+		if (owns_return__nearestFormat) {
+			callback_return_value_owner.reset(callback_return_value);
+		}
 		return *callback_return_value;
 	}
 
@@ -516,6 +521,19 @@ bool QAbstractVideoSurface_override_virtual_nearestFormat(void* self, intptr_t s
 	}
 
 	self_cast->handle__nearestFormat = std::move(slot_handle);
+	self_cast->owns_return__nearestFormat = false;
+	return true;
+}
+
+bool QAbstractVideoSurface_override_virtual_owned_nearestFormat(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QAbstractVideoSurface> slot_handle(slot);
+	MiqtVirtualQAbstractVideoSurface* self_cast = dynamic_cast<MiqtVirtualQAbstractVideoSurface*>( (QAbstractVideoSurface*)(self) );
+	if (self_cast == nullptr) {
+		return false;
+	}
+
+	self_cast->handle__nearestFormat = std::move(slot_handle);
+	self_cast->owns_return__nearestFormat = true;
 	return true;
 }
 

@@ -350,10 +350,16 @@ func miqt_exec_callback_QDesignerWidgetBoxInterface_categoryCount(self *C.QDesig
 	return (C.int)(virtualReturn)
 
 }
+
+type miqtVirtualCallback_QDesignerWidgetBoxInterface_category struct {
+	callback   func(cat_idx int) *QDesignerWidgetBoxInterface__Category
+	ownsReturn bool
+}
+
 func (this *QDesignerWidgetBoxInterface) OnCategory(slot func(cat_idx int) *QDesignerWidgetBoxInterface__Category) {
 	var slotHandle C.intptr_t
 	if slot != nil {
-		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QDesignerWidgetBoxInterface_category{callback: slot}))
 	}
 	ok := C.QDesignerWidgetBoxInterface_override_virtual_category(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
@@ -361,17 +367,34 @@ func (this *QDesignerWidgetBoxInterface) OnCategory(slot func(cat_idx int) *QDes
 	}
 }
 
+// OnCategoryOwned installs a virtual override that transfers
+// ownership of each non-nil returned Qt value object to C++.
+func (this *QDesignerWidgetBoxInterface) OnCategoryOwned(slot func(cat_idx int) *QDesignerWidgetBoxInterface__Category) {
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QDesignerWidgetBoxInterface_category{callback: slot, ownsReturn: true}))
+	}
+	ok := C.QDesignerWidgetBoxInterface_override_virtual_owned_category(unsafe.Pointer(this.h), slotHandle)
+	if !ok {
+		panic("miqt: can only override virtual methods for directly constructed types")
+	}
+}
+
 //export miqt_exec_callback_QDesignerWidgetBoxInterface_category
 func miqt_exec_callback_QDesignerWidgetBoxInterface_category(self *C.QDesignerWidgetBoxInterface, cb C.intptr_t, cat_idx C.int) *C.QDesignerWidgetBoxInterface__Category {
-	gofunc, ok := cgo.Handle(cb).Value().(func(cat_idx int) *QDesignerWidgetBoxInterface__Category)
+	callbackData, ok := cgo.Handle(cb).Value().(miqtVirtualCallback_QDesignerWidgetBoxInterface_category)
 	if !ok {
 		panic("miqt: callback of non-callback type (heap corruption?)")
 	}
+	gofunc := callbackData.callback
 
 	// Convert all CABI parameters to Go parameters
 	slotval1 := (int)(cat_idx)
 
 	virtualReturn := gofunc(slotval1)
+	if callbackData.ownsReturn && virtualReturn != nil {
+		runtime.SetFinalizer(virtualReturn, nil)
+	}
 
 	return virtualReturn.cPointer()
 
@@ -450,10 +473,16 @@ func miqt_exec_callback_QDesignerWidgetBoxInterface_widgetCount(self *C.QDesigne
 	return (C.int)(virtualReturn)
 
 }
+
+type miqtVirtualCallback_QDesignerWidgetBoxInterface_widget struct {
+	callback   func(cat_idx int, wgt_idx int) *QDesignerWidgetBoxInterface__Widget
+	ownsReturn bool
+}
+
 func (this *QDesignerWidgetBoxInterface) OnWidget(slot func(cat_idx int, wgt_idx int) *QDesignerWidgetBoxInterface__Widget) {
 	var slotHandle C.intptr_t
 	if slot != nil {
-		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QDesignerWidgetBoxInterface_widget{callback: slot}))
 	}
 	ok := C.QDesignerWidgetBoxInterface_override_virtual_widget(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
@@ -461,12 +490,26 @@ func (this *QDesignerWidgetBoxInterface) OnWidget(slot func(cat_idx int, wgt_idx
 	}
 }
 
+// OnWidgetOwned installs a virtual override that transfers
+// ownership of each non-nil returned Qt value object to C++.
+func (this *QDesignerWidgetBoxInterface) OnWidgetOwned(slot func(cat_idx int, wgt_idx int) *QDesignerWidgetBoxInterface__Widget) {
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QDesignerWidgetBoxInterface_widget{callback: slot, ownsReturn: true}))
+	}
+	ok := C.QDesignerWidgetBoxInterface_override_virtual_owned_widget(unsafe.Pointer(this.h), slotHandle)
+	if !ok {
+		panic("miqt: can only override virtual methods for directly constructed types")
+	}
+}
+
 //export miqt_exec_callback_QDesignerWidgetBoxInterface_widget
 func miqt_exec_callback_QDesignerWidgetBoxInterface_widget(self *C.QDesignerWidgetBoxInterface, cb C.intptr_t, cat_idx C.int, wgt_idx C.int) *C.QDesignerWidgetBoxInterface__Widget {
-	gofunc, ok := cgo.Handle(cb).Value().(func(cat_idx int, wgt_idx int) *QDesignerWidgetBoxInterface__Widget)
+	callbackData, ok := cgo.Handle(cb).Value().(miqtVirtualCallback_QDesignerWidgetBoxInterface_widget)
 	if !ok {
 		panic("miqt: callback of non-callback type (heap corruption?)")
 	}
+	gofunc := callbackData.callback
 
 	// Convert all CABI parameters to Go parameters
 	slotval1 := (int)(cat_idx)
@@ -474,6 +517,9 @@ func miqt_exec_callback_QDesignerWidgetBoxInterface_widget(self *C.QDesignerWidg
 	slotval2 := (int)(wgt_idx)
 
 	virtualReturn := gofunc(slotval1, slotval2)
+	if callbackData.ownsReturn && virtualReturn != nil {
+		runtime.SetFinalizer(virtualReturn, nil)
+	}
 
 	return virtualReturn.cPointer()
 
@@ -728,10 +774,16 @@ func (this *QDesignerWidgetBoxInterface) callVirtualBase_SizeHint() *qt6.QSize {
 	return _goptr
 
 }
+
+type miqtVirtualCallback_QDesignerWidgetBoxInterface_sizeHint struct {
+	callback   func(super func() *qt6.QSize) *qt6.QSize
+	ownsReturn bool
+}
+
 func (this *QDesignerWidgetBoxInterface) OnSizeHint(slot func(super func() *qt6.QSize) *qt6.QSize) {
 	var slotHandle C.intptr_t
 	if slot != nil {
-		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QDesignerWidgetBoxInterface_sizeHint{callback: slot}))
 	}
 	ok := C.QDesignerWidgetBoxInterface_override_virtual_sizeHint(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
@@ -739,14 +791,31 @@ func (this *QDesignerWidgetBoxInterface) OnSizeHint(slot func(super func() *qt6.
 	}
 }
 
+// OnSizeHintOwned installs a virtual override that transfers
+// ownership of each non-nil returned Qt value object to C++.
+func (this *QDesignerWidgetBoxInterface) OnSizeHintOwned(slot func(super func() *qt6.QSize) *qt6.QSize) {
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QDesignerWidgetBoxInterface_sizeHint{callback: slot, ownsReturn: true}))
+	}
+	ok := C.QDesignerWidgetBoxInterface_override_virtual_owned_sizeHint(unsafe.Pointer(this.h), slotHandle)
+	if !ok {
+		panic("miqt: can only override virtual methods for directly constructed types")
+	}
+}
+
 //export miqt_exec_callback_QDesignerWidgetBoxInterface_sizeHint
 func miqt_exec_callback_QDesignerWidgetBoxInterface_sizeHint(self *C.QDesignerWidgetBoxInterface, cb C.intptr_t) *C.QSize {
-	gofunc, ok := cgo.Handle(cb).Value().(func(super func() *qt6.QSize) *qt6.QSize)
+	callbackData, ok := cgo.Handle(cb).Value().(miqtVirtualCallback_QDesignerWidgetBoxInterface_sizeHint)
 	if !ok {
 		panic("miqt: callback of non-callback type (heap corruption?)")
 	}
+	gofunc := callbackData.callback
 
 	virtualReturn := gofunc((&QDesignerWidgetBoxInterface{h: self}).callVirtualBase_SizeHint)
+	if callbackData.ownsReturn && virtualReturn != nil {
+		runtime.SetFinalizer(virtualReturn, nil)
+	}
 
 	return (*C.QSize)(virtualReturn.UnsafePointer())
 
@@ -759,10 +828,16 @@ func (this *QDesignerWidgetBoxInterface) callVirtualBase_MinimumSizeHint() *qt6.
 	return _goptr
 
 }
+
+type miqtVirtualCallback_QDesignerWidgetBoxInterface_minimumSizeHint struct {
+	callback   func(super func() *qt6.QSize) *qt6.QSize
+	ownsReturn bool
+}
+
 func (this *QDesignerWidgetBoxInterface) OnMinimumSizeHint(slot func(super func() *qt6.QSize) *qt6.QSize) {
 	var slotHandle C.intptr_t
 	if slot != nil {
-		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QDesignerWidgetBoxInterface_minimumSizeHint{callback: slot}))
 	}
 	ok := C.QDesignerWidgetBoxInterface_override_virtual_minimumSizeHint(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
@@ -770,14 +845,31 @@ func (this *QDesignerWidgetBoxInterface) OnMinimumSizeHint(slot func(super func(
 	}
 }
 
+// OnMinimumSizeHintOwned installs a virtual override that transfers
+// ownership of each non-nil returned Qt value object to C++.
+func (this *QDesignerWidgetBoxInterface) OnMinimumSizeHintOwned(slot func(super func() *qt6.QSize) *qt6.QSize) {
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QDesignerWidgetBoxInterface_minimumSizeHint{callback: slot, ownsReturn: true}))
+	}
+	ok := C.QDesignerWidgetBoxInterface_override_virtual_owned_minimumSizeHint(unsafe.Pointer(this.h), slotHandle)
+	if !ok {
+		panic("miqt: can only override virtual methods for directly constructed types")
+	}
+}
+
 //export miqt_exec_callback_QDesignerWidgetBoxInterface_minimumSizeHint
 func miqt_exec_callback_QDesignerWidgetBoxInterface_minimumSizeHint(self *C.QDesignerWidgetBoxInterface, cb C.intptr_t) *C.QSize {
-	gofunc, ok := cgo.Handle(cb).Value().(func(super func() *qt6.QSize) *qt6.QSize)
+	callbackData, ok := cgo.Handle(cb).Value().(miqtVirtualCallback_QDesignerWidgetBoxInterface_minimumSizeHint)
 	if !ok {
 		panic("miqt: callback of non-callback type (heap corruption?)")
 	}
+	gofunc := callbackData.callback
 
 	virtualReturn := gofunc((&QDesignerWidgetBoxInterface{h: self}).callVirtualBase_MinimumSizeHint)
+	if callbackData.ownsReturn && virtualReturn != nil {
+		runtime.SetFinalizer(virtualReturn, nil)
+	}
 
 	return (*C.QSize)(virtualReturn.UnsafePointer())
 
@@ -1860,10 +1952,16 @@ func (this *QDesignerWidgetBoxInterface) callVirtualBase_InputMethodQuery(param1
 	return _goptr
 
 }
+
+type miqtVirtualCallback_QDesignerWidgetBoxInterface_inputMethodQuery struct {
+	callback   func(super func(param1 qt6.InputMethodQuery) *qt6.QVariant, param1 qt6.InputMethodQuery) *qt6.QVariant
+	ownsReturn bool
+}
+
 func (this *QDesignerWidgetBoxInterface) OnInputMethodQuery(slot func(super func(param1 qt6.InputMethodQuery) *qt6.QVariant, param1 qt6.InputMethodQuery) *qt6.QVariant) {
 	var slotHandle C.intptr_t
 	if slot != nil {
-		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QDesignerWidgetBoxInterface_inputMethodQuery{callback: slot}))
 	}
 	ok := C.QDesignerWidgetBoxInterface_override_virtual_inputMethodQuery(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
@@ -1871,17 +1969,34 @@ func (this *QDesignerWidgetBoxInterface) OnInputMethodQuery(slot func(super func
 	}
 }
 
+// OnInputMethodQueryOwned installs a virtual override that transfers
+// ownership of each non-nil returned Qt value object to C++.
+func (this *QDesignerWidgetBoxInterface) OnInputMethodQueryOwned(slot func(super func(param1 qt6.InputMethodQuery) *qt6.QVariant, param1 qt6.InputMethodQuery) *qt6.QVariant) {
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QDesignerWidgetBoxInterface_inputMethodQuery{callback: slot, ownsReturn: true}))
+	}
+	ok := C.QDesignerWidgetBoxInterface_override_virtual_owned_inputMethodQuery(unsafe.Pointer(this.h), slotHandle)
+	if !ok {
+		panic("miqt: can only override virtual methods for directly constructed types")
+	}
+}
+
 //export miqt_exec_callback_QDesignerWidgetBoxInterface_inputMethodQuery
 func miqt_exec_callback_QDesignerWidgetBoxInterface_inputMethodQuery(self *C.QDesignerWidgetBoxInterface, cb C.intptr_t, param1 C.int) *C.QVariant {
-	gofunc, ok := cgo.Handle(cb).Value().(func(super func(param1 qt6.InputMethodQuery) *qt6.QVariant, param1 qt6.InputMethodQuery) *qt6.QVariant)
+	callbackData, ok := cgo.Handle(cb).Value().(miqtVirtualCallback_QDesignerWidgetBoxInterface_inputMethodQuery)
 	if !ok {
 		panic("miqt: callback of non-callback type (heap corruption?)")
 	}
+	gofunc := callbackData.callback
 
 	// Convert all CABI parameters to Go parameters
 	slotval1 := (qt6.InputMethodQuery)(param1)
 
 	virtualReturn := gofunc((&QDesignerWidgetBoxInterface{h: self}).callVirtualBase_InputMethodQuery, slotval1)
+	if callbackData.ownsReturn && virtualReturn != nil {
+		runtime.SetFinalizer(virtualReturn, nil)
+	}
 
 	return (*C.QVariant)(virtualReturn.UnsafePointer())
 

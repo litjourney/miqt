@@ -37,6 +37,7 @@ double QwtRasterData_value(const QwtRasterData* self, double x, double y);
 bool QwtRasterData_override_virtual_setInterval(void* self, intptr_t slot);
 void QwtRasterData_virtualbase_setInterval(void* self, int param1, QwtInterval* param2);
 bool QwtRasterData_override_virtual_pixelHint(void* self, intptr_t slot);
+bool QwtRasterData_override_virtual_owned_pixelHint(void* self, intptr_t slot);
 QRectF* QwtRasterData_virtualbase_pixelHint(const void* self, QRectF* param1);
 bool QwtRasterData_override_virtual_initRaster(void* self, intptr_t slot);
 void QwtRasterData_virtualbase_initRaster(void* self, QRectF* param1, QSize* raster);

@@ -59,6 +59,7 @@ int QwtDateScaleDraw_intervalType(const QwtDateScaleDraw* self, QwtScaleDiv* par
 struct miqt_string QwtDateScaleDraw_dateFormatOfDate(const QwtDateScaleDraw* self, QDateTime* param1, int param2);
 
 bool QwtDateScaleDraw_override_virtual_label(void* self, intptr_t slot);
+bool QwtDateScaleDraw_override_virtual_owned_label(void* self, intptr_t slot);
 QwtText* QwtDateScaleDraw_virtualbase_label(const void* self, double param1);
 bool QwtDateScaleDraw_override_virtual_intervalType(void* self, intptr_t slot);
 int QwtDateScaleDraw_virtualbase_intervalType(const void* self, QwtScaleDiv* param1);

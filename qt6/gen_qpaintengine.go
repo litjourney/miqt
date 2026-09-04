@@ -947,10 +947,16 @@ func (this *QPaintEngine) callVirtualBase_CoordinateOffset() *QPoint {
 	return _goptr
 
 }
+
+type miqtVirtualCallback_QPaintEngine_coordinateOffset struct {
+	callback   func(super func() *QPoint) *QPoint
+	ownsReturn bool
+}
+
 func (this *QPaintEngine) OnCoordinateOffset(slot func(super func() *QPoint) *QPoint) {
 	var slotHandle C.intptr_t
 	if slot != nil {
-		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QPaintEngine_coordinateOffset{callback: slot}))
 	}
 	ok := C.QPaintEngine_override_virtual_coordinateOffset(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
@@ -958,14 +964,31 @@ func (this *QPaintEngine) OnCoordinateOffset(slot func(super func() *QPoint) *QP
 	}
 }
 
+// OnCoordinateOffsetOwned installs a virtual override that transfers
+// ownership of each non-nil returned Qt value object to C++.
+func (this *QPaintEngine) OnCoordinateOffsetOwned(slot func(super func() *QPoint) *QPoint) {
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QPaintEngine_coordinateOffset{callback: slot, ownsReturn: true}))
+	}
+	ok := C.QPaintEngine_override_virtual_owned_coordinateOffset(unsafe.Pointer(this.h), slotHandle)
+	if !ok {
+		panic("miqt: can only override virtual methods for directly constructed types")
+	}
+}
+
 //export miqt_exec_callback_QPaintEngine_coordinateOffset
 func miqt_exec_callback_QPaintEngine_coordinateOffset(self *C.QPaintEngine, cb C.intptr_t) *C.QPoint {
-	gofunc, ok := cgo.Handle(cb).Value().(func(super func() *QPoint) *QPoint)
+	callbackData, ok := cgo.Handle(cb).Value().(miqtVirtualCallback_QPaintEngine_coordinateOffset)
 	if !ok {
 		panic("miqt: callback of non-callback type (heap corruption?)")
 	}
+	gofunc := callbackData.callback
 
 	virtualReturn := gofunc((&QPaintEngine{h: self}).callVirtualBase_CoordinateOffset)
+	if callbackData.ownsReturn && virtualReturn != nil {
+		runtime.SetFinalizer(virtualReturn, nil)
+	}
 
 	return virtualReturn.cPointer()
 
@@ -1001,10 +1024,16 @@ func (this *QPaintEngine) callVirtualBase_CreatePixmap(size QSize) *QPixmap {
 	return _goptr
 
 }
+
+type miqtVirtualCallback_QPaintEngine_createPixmap struct {
+	callback   func(super func(size QSize) *QPixmap, size QSize) *QPixmap
+	ownsReturn bool
+}
+
 func (this *QPaintEngine) OnCreatePixmap(slot func(super func(size QSize) *QPixmap, size QSize) *QPixmap) {
 	var slotHandle C.intptr_t
 	if slot != nil {
-		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QPaintEngine_createPixmap{callback: slot}))
 	}
 	ok := C.QPaintEngine_override_virtual_createPixmap(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
@@ -1012,12 +1041,26 @@ func (this *QPaintEngine) OnCreatePixmap(slot func(super func(size QSize) *QPixm
 	}
 }
 
+// OnCreatePixmapOwned installs a virtual override that transfers
+// ownership of each non-nil returned Qt value object to C++.
+func (this *QPaintEngine) OnCreatePixmapOwned(slot func(super func(size QSize) *QPixmap, size QSize) *QPixmap) {
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QPaintEngine_createPixmap{callback: slot, ownsReturn: true}))
+	}
+	ok := C.QPaintEngine_override_virtual_owned_createPixmap(unsafe.Pointer(this.h), slotHandle)
+	if !ok {
+		panic("miqt: can only override virtual methods for directly constructed types")
+	}
+}
+
 //export miqt_exec_callback_QPaintEngine_createPixmap
 func miqt_exec_callback_QPaintEngine_createPixmap(self *C.QPaintEngine, cb C.intptr_t, size *C.QSize) *C.QPixmap {
-	gofunc, ok := cgo.Handle(cb).Value().(func(super func(size QSize) *QPixmap, size QSize) *QPixmap)
+	callbackData, ok := cgo.Handle(cb).Value().(miqtVirtualCallback_QPaintEngine_createPixmap)
 	if !ok {
 		panic("miqt: callback of non-callback type (heap corruption?)")
 	}
+	gofunc := callbackData.callback
 
 	// Convert all CABI parameters to Go parameters
 	size_goptr := newQSize(size)
@@ -1025,6 +1068,9 @@ func miqt_exec_callback_QPaintEngine_createPixmap(self *C.QPaintEngine, cb C.int
 	slotval1 := *size_goptr
 
 	virtualReturn := gofunc((&QPaintEngine{h: self}).callVirtualBase_CreatePixmap, slotval1)
+	if callbackData.ownsReturn && virtualReturn != nil {
+		runtime.SetFinalizer(virtualReturn, nil)
+	}
 
 	return virtualReturn.cPointer()
 
@@ -1037,10 +1083,16 @@ func (this *QPaintEngine) callVirtualBase_CreatePixmapFromImage(image QImage, fl
 	return _goptr
 
 }
+
+type miqtVirtualCallback_QPaintEngine_createPixmapFromImage struct {
+	callback   func(super func(image QImage, flags ImageConversionFlag) *QPixmap, image QImage, flags ImageConversionFlag) *QPixmap
+	ownsReturn bool
+}
+
 func (this *QPaintEngine) OnCreatePixmapFromImage(slot func(super func(image QImage, flags ImageConversionFlag) *QPixmap, image QImage, flags ImageConversionFlag) *QPixmap) {
 	var slotHandle C.intptr_t
 	if slot != nil {
-		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QPaintEngine_createPixmapFromImage{callback: slot}))
 	}
 	ok := C.QPaintEngine_override_virtual_createPixmapFromImage(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
@@ -1048,12 +1100,26 @@ func (this *QPaintEngine) OnCreatePixmapFromImage(slot func(super func(image QIm
 	}
 }
 
+// OnCreatePixmapFromImageOwned installs a virtual override that transfers
+// ownership of each non-nil returned Qt value object to C++.
+func (this *QPaintEngine) OnCreatePixmapFromImageOwned(slot func(super func(image QImage, flags ImageConversionFlag) *QPixmap, image QImage, flags ImageConversionFlag) *QPixmap) {
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QPaintEngine_createPixmapFromImage{callback: slot, ownsReturn: true}))
+	}
+	ok := C.QPaintEngine_override_virtual_owned_createPixmapFromImage(unsafe.Pointer(this.h), slotHandle)
+	if !ok {
+		panic("miqt: can only override virtual methods for directly constructed types")
+	}
+}
+
 //export miqt_exec_callback_QPaintEngine_createPixmapFromImage
 func miqt_exec_callback_QPaintEngine_createPixmapFromImage(self *C.QPaintEngine, cb C.intptr_t, image *C.QImage, flags C.int) *C.QPixmap {
-	gofunc, ok := cgo.Handle(cb).Value().(func(super func(image QImage, flags ImageConversionFlag) *QPixmap, image QImage, flags ImageConversionFlag) *QPixmap)
+	callbackData, ok := cgo.Handle(cb).Value().(miqtVirtualCallback_QPaintEngine_createPixmapFromImage)
 	if !ok {
 		panic("miqt: callback of non-callback type (heap corruption?)")
 	}
+	gofunc := callbackData.callback
 
 	// Convert all CABI parameters to Go parameters
 	image_goptr := newQImage(image)
@@ -1063,6 +1129,9 @@ func miqt_exec_callback_QPaintEngine_createPixmapFromImage(self *C.QPaintEngine,
 	slotval2 := (ImageConversionFlag)(flags)
 
 	virtualReturn := gofunc((&QPaintEngine{h: self}).callVirtualBase_CreatePixmapFromImage, slotval1, slotval2)
+	if callbackData.ownsReturn && virtualReturn != nil {
+		runtime.SetFinalizer(virtualReturn, nil)
+	}
 
 	return virtualReturn.cPointer()
 

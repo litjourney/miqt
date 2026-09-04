@@ -1170,10 +1170,16 @@ func (this *QWindow) callVirtualBase_Format() *QSurfaceFormat {
 	return _goptr
 
 }
+
+type miqtVirtualCallback_QWindow_format struct {
+	callback   func(super func() *QSurfaceFormat) *QSurfaceFormat
+	ownsReturn bool
+}
+
 func (this *QWindow) OnFormat(slot func(super func() *QSurfaceFormat) *QSurfaceFormat) {
 	var slotHandle C.intptr_t
 	if slot != nil {
-		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QWindow_format{callback: slot}))
 	}
 	ok := C.QWindow_override_virtual_format(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
@@ -1181,14 +1187,31 @@ func (this *QWindow) OnFormat(slot func(super func() *QSurfaceFormat) *QSurfaceF
 	}
 }
 
+// OnFormatOwned installs a virtual override that transfers
+// ownership of each non-nil returned Qt value object to C++.
+func (this *QWindow) OnFormatOwned(slot func(super func() *QSurfaceFormat) *QSurfaceFormat) {
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QWindow_format{callback: slot, ownsReturn: true}))
+	}
+	ok := C.QWindow_override_virtual_owned_format(unsafe.Pointer(this.h), slotHandle)
+	if !ok {
+		panic("miqt: can only override virtual methods for directly constructed types")
+	}
+}
+
 //export miqt_exec_callback_QWindow_format
 func miqt_exec_callback_QWindow_format(self *C.QWindow, cb C.intptr_t) *C.QSurfaceFormat {
-	gofunc, ok := cgo.Handle(cb).Value().(func(super func() *QSurfaceFormat) *QSurfaceFormat)
+	callbackData, ok := cgo.Handle(cb).Value().(miqtVirtualCallback_QWindow_format)
 	if !ok {
 		panic("miqt: callback of non-callback type (heap corruption?)")
 	}
+	gofunc := callbackData.callback
 
 	virtualReturn := gofunc((&QWindow{h: self}).callVirtualBase_Format)
+	if callbackData.ownsReturn && virtualReturn != nil {
+		runtime.SetFinalizer(virtualReturn, nil)
+	}
 
 	return virtualReturn.cPointer()
 
@@ -1201,10 +1224,16 @@ func (this *QWindow) callVirtualBase_Size() *QSize {
 	return _goptr
 
 }
+
+type miqtVirtualCallback_QWindow_size struct {
+	callback   func(super func() *QSize) *QSize
+	ownsReturn bool
+}
+
 func (this *QWindow) OnSize(slot func(super func() *QSize) *QSize) {
 	var slotHandle C.intptr_t
 	if slot != nil {
-		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QWindow_size{callback: slot}))
 	}
 	ok := C.QWindow_override_virtual_size(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
@@ -1212,14 +1241,31 @@ func (this *QWindow) OnSize(slot func(super func() *QSize) *QSize) {
 	}
 }
 
+// OnSizeOwned installs a virtual override that transfers
+// ownership of each non-nil returned Qt value object to C++.
+func (this *QWindow) OnSizeOwned(slot func(super func() *QSize) *QSize) {
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QWindow_size{callback: slot, ownsReturn: true}))
+	}
+	ok := C.QWindow_override_virtual_owned_size(unsafe.Pointer(this.h), slotHandle)
+	if !ok {
+		panic("miqt: can only override virtual methods for directly constructed types")
+	}
+}
+
 //export miqt_exec_callback_QWindow_size
 func miqt_exec_callback_QWindow_size(self *C.QWindow, cb C.intptr_t) *C.QSize {
-	gofunc, ok := cgo.Handle(cb).Value().(func(super func() *QSize) *QSize)
+	callbackData, ok := cgo.Handle(cb).Value().(miqtVirtualCallback_QWindow_size)
 	if !ok {
 		panic("miqt: callback of non-callback type (heap corruption?)")
 	}
+	gofunc := callbackData.callback
 
 	virtualReturn := gofunc((&QWindow{h: self}).callVirtualBase_Size)
+	if callbackData.ownsReturn && virtualReturn != nil {
+		runtime.SetFinalizer(virtualReturn, nil)
+	}
 
 	return virtualReturn.cPointer()
 

@@ -73,6 +73,7 @@ void QNmeaPositionInfoSource_virtualbase_setUpdateInterval(void* self, int msec)
 bool QNmeaPositionInfoSource_override_virtual_setPreferredPositioningMethods(void* self, intptr_t slot);
 void QNmeaPositionInfoSource_virtualbase_setPreferredPositioningMethods(void* self, int methods);
 bool QNmeaPositionInfoSource_override_virtual_lastKnownPosition(void* self, intptr_t slot);
+bool QNmeaPositionInfoSource_override_virtual_owned_lastKnownPosition(void* self, intptr_t slot);
 QGeoPositionInfo* QNmeaPositionInfoSource_virtualbase_lastKnownPosition(const void* self, bool fromSatellitePositioningMethodsOnly);
 bool QNmeaPositionInfoSource_override_virtual_supportedPositioningMethods(void* self, intptr_t slot);
 int QNmeaPositionInfoSource_virtualbase_supportedPositioningMethods(const void* self);

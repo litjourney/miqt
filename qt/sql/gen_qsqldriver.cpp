@@ -161,6 +161,7 @@ public:
 
 	// cgo.Handle value for overwritten implementation
 	miqt_callback_handle<miqt_exec_callback_handle_release_QSqlDriver> handle__primaryIndex;
+	bool owns_return__primaryIndex = false;
 
 	// Subclass to allow providing a Go implementation
 	virtual QSqlIndex primaryIndex(const QString& tableName) const override {
@@ -177,6 +178,10 @@ public:
 		memcpy(tableName_ms.data, tableName_b.data(), tableName_ms.len);
 		struct miqt_string sigval1 = tableName_ms;
 		QSqlIndex* callback_return_value = miqt_exec_callback_QSqlDriver_primaryIndex(this, handle__primaryIndex.value(), sigval1);
+		std::unique_ptr<QSqlIndex> callback_return_value_owner;
+		if (owns_return__primaryIndex) {
+			callback_return_value_owner.reset(callback_return_value);
+		}
 		return *callback_return_value;
 	}
 
@@ -184,6 +189,7 @@ public:
 
 	// cgo.Handle value for overwritten implementation
 	miqt_callback_handle<miqt_exec_callback_handle_release_QSqlDriver> handle__record;
+	bool owns_return__record = false;
 
 	// Subclass to allow providing a Go implementation
 	virtual QSqlRecord record(const QString& tableName) const override {
@@ -200,6 +206,10 @@ public:
 		memcpy(tableName_ms.data, tableName_b.data(), tableName_ms.len);
 		struct miqt_string sigval1 = tableName_ms;
 		QSqlRecord* callback_return_value = miqt_exec_callback_QSqlDriver_record(this, handle__record.value(), sigval1);
+		std::unique_ptr<QSqlRecord> callback_return_value_owner;
+		if (owns_return__record) {
+			callback_return_value_owner.reset(callback_return_value);
+		}
 		return *callback_return_value;
 	}
 
@@ -286,6 +296,7 @@ public:
 
 	// cgo.Handle value for overwritten implementation
 	miqt_callback_handle<miqt_exec_callback_handle_release_QSqlDriver> handle__handle;
+	bool owns_return__handle = false;
 
 	// Subclass to allow providing a Go implementation
 	virtual QVariant handle() const override {
@@ -294,6 +305,10 @@ public:
 		}
 
 		QVariant* callback_return_value = miqt_exec_callback_QSqlDriver_handle(this, handle__handle.value());
+		std::unique_ptr<QVariant> callback_return_value_owner;
+		if (owns_return__handle) {
+			callback_return_value_owner.reset(callback_return_value);
+		}
 		return *callback_return_value;
 	}
 
@@ -1127,6 +1142,19 @@ bool QSqlDriver_override_virtual_primaryIndex(void* self, intptr_t slot) {
 	}
 
 	self_cast->handle__primaryIndex = std::move(slot_handle);
+	self_cast->owns_return__primaryIndex = false;
+	return true;
+}
+
+bool QSqlDriver_override_virtual_owned_primaryIndex(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QSqlDriver> slot_handle(slot);
+	MiqtVirtualQSqlDriver* self_cast = dynamic_cast<MiqtVirtualQSqlDriver*>( (QSqlDriver*)(self) );
+	if (self_cast == nullptr) {
+		return false;
+	}
+
+	self_cast->handle__primaryIndex = std::move(slot_handle);
+	self_cast->owns_return__primaryIndex = true;
 	return true;
 }
 
@@ -1143,6 +1171,19 @@ bool QSqlDriver_override_virtual_record(void* self, intptr_t slot) {
 	}
 
 	self_cast->handle__record = std::move(slot_handle);
+	self_cast->owns_return__record = false;
+	return true;
+}
+
+bool QSqlDriver_override_virtual_owned_record(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QSqlDriver> slot_handle(slot);
+	MiqtVirtualQSqlDriver* self_cast = dynamic_cast<MiqtVirtualQSqlDriver*>( (QSqlDriver*)(self) );
+	if (self_cast == nullptr) {
+		return false;
+	}
+
+	self_cast->handle__record = std::move(slot_handle);
+	self_cast->owns_return__record = true;
 	return true;
 }
 
@@ -1227,6 +1268,19 @@ bool QSqlDriver_override_virtual_handle(void* self, intptr_t slot) {
 	}
 
 	self_cast->handle__handle = std::move(slot_handle);
+	self_cast->owns_return__handle = false;
+	return true;
+}
+
+bool QSqlDriver_override_virtual_owned_handle(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QSqlDriver> slot_handle(slot);
+	MiqtVirtualQSqlDriver* self_cast = dynamic_cast<MiqtVirtualQSqlDriver*>( (QSqlDriver*)(self) );
+	if (self_cast == nullptr) {
+		return false;
+	}
+
+	self_cast->handle__handle = std::move(slot_handle);
+	self_cast->owns_return__handle = true;
 	return true;
 }
 

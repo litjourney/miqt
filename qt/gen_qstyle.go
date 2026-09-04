@@ -1147,10 +1147,16 @@ func (this *QStyle) callVirtualBase_ItemTextRect(fm *QFontMetrics, r *QRect, fla
 	return _goptr
 
 }
+
+type miqtVirtualCallback_QStyle_itemTextRect struct {
+	callback   func(super func(fm *QFontMetrics, r *QRect, flags int, enabled bool, text string) *QRect, fm *QFontMetrics, r *QRect, flags int, enabled bool, text string) *QRect
+	ownsReturn bool
+}
+
 func (this *QStyle) OnItemTextRect(slot func(super func(fm *QFontMetrics, r *QRect, flags int, enabled bool, text string) *QRect, fm *QFontMetrics, r *QRect, flags int, enabled bool, text string) *QRect) {
 	var slotHandle C.intptr_t
 	if slot != nil {
-		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QStyle_itemTextRect{callback: slot}))
 	}
 	ok := C.QStyle_override_virtual_itemTextRect(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
@@ -1158,12 +1164,26 @@ func (this *QStyle) OnItemTextRect(slot func(super func(fm *QFontMetrics, r *QRe
 	}
 }
 
+// OnItemTextRectOwned installs a virtual override that transfers
+// ownership of each non-nil returned Qt value object to C++.
+func (this *QStyle) OnItemTextRectOwned(slot func(super func(fm *QFontMetrics, r *QRect, flags int, enabled bool, text string) *QRect, fm *QFontMetrics, r *QRect, flags int, enabled bool, text string) *QRect) {
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QStyle_itemTextRect{callback: slot, ownsReturn: true}))
+	}
+	ok := C.QStyle_override_virtual_owned_itemTextRect(unsafe.Pointer(this.h), slotHandle)
+	if !ok {
+		panic("miqt: can only override virtual methods for directly constructed types")
+	}
+}
+
 //export miqt_exec_callback_QStyle_itemTextRect
 func miqt_exec_callback_QStyle_itemTextRect(self *C.QStyle, cb C.intptr_t, fm *C.QFontMetrics, r *C.QRect, flags C.int, enabled C.bool, text C.struct_miqt_string) *C.QRect {
-	gofunc, ok := cgo.Handle(cb).Value().(func(super func(fm *QFontMetrics, r *QRect, flags int, enabled bool, text string) *QRect, fm *QFontMetrics, r *QRect, flags int, enabled bool, text string) *QRect)
+	callbackData, ok := cgo.Handle(cb).Value().(miqtVirtualCallback_QStyle_itemTextRect)
 	if !ok {
 		panic("miqt: callback of non-callback type (heap corruption?)")
 	}
+	gofunc := callbackData.callback
 
 	// Convert all CABI parameters to Go parameters
 	slotval1 := newQFontMetrics(fm)
@@ -1180,6 +1200,9 @@ func miqt_exec_callback_QStyle_itemTextRect(self *C.QStyle, cb C.intptr_t, fm *C
 	slotval5 := text_ret
 
 	virtualReturn := gofunc((&QStyle{h: self}).callVirtualBase_ItemTextRect, slotval1, slotval2, slotval3, slotval4, slotval5)
+	if callbackData.ownsReturn && virtualReturn != nil {
+		runtime.SetFinalizer(virtualReturn, nil)
+	}
 
 	return virtualReturn.cPointer()
 
@@ -1192,10 +1215,16 @@ func (this *QStyle) callVirtualBase_ItemPixmapRect(r *QRect, flags int, pixmap *
 	return _goptr
 
 }
+
+type miqtVirtualCallback_QStyle_itemPixmapRect struct {
+	callback   func(super func(r *QRect, flags int, pixmap *QPixmap) *QRect, r *QRect, flags int, pixmap *QPixmap) *QRect
+	ownsReturn bool
+}
+
 func (this *QStyle) OnItemPixmapRect(slot func(super func(r *QRect, flags int, pixmap *QPixmap) *QRect, r *QRect, flags int, pixmap *QPixmap) *QRect) {
 	var slotHandle C.intptr_t
 	if slot != nil {
-		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QStyle_itemPixmapRect{callback: slot}))
 	}
 	ok := C.QStyle_override_virtual_itemPixmapRect(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
@@ -1203,12 +1232,26 @@ func (this *QStyle) OnItemPixmapRect(slot func(super func(r *QRect, flags int, p
 	}
 }
 
+// OnItemPixmapRectOwned installs a virtual override that transfers
+// ownership of each non-nil returned Qt value object to C++.
+func (this *QStyle) OnItemPixmapRectOwned(slot func(super func(r *QRect, flags int, pixmap *QPixmap) *QRect, r *QRect, flags int, pixmap *QPixmap) *QRect) {
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QStyle_itemPixmapRect{callback: slot, ownsReturn: true}))
+	}
+	ok := C.QStyle_override_virtual_owned_itemPixmapRect(unsafe.Pointer(this.h), slotHandle)
+	if !ok {
+		panic("miqt: can only override virtual methods for directly constructed types")
+	}
+}
+
 //export miqt_exec_callback_QStyle_itemPixmapRect
 func miqt_exec_callback_QStyle_itemPixmapRect(self *C.QStyle, cb C.intptr_t, r *C.QRect, flags C.int, pixmap *C.QPixmap) *C.QRect {
-	gofunc, ok := cgo.Handle(cb).Value().(func(super func(r *QRect, flags int, pixmap *QPixmap) *QRect, r *QRect, flags int, pixmap *QPixmap) *QRect)
+	callbackData, ok := cgo.Handle(cb).Value().(miqtVirtualCallback_QStyle_itemPixmapRect)
 	if !ok {
 		panic("miqt: callback of non-callback type (heap corruption?)")
 	}
+	gofunc := callbackData.callback
 
 	// Convert all CABI parameters to Go parameters
 	slotval1 := newQRect(r)
@@ -1218,6 +1261,9 @@ func miqt_exec_callback_QStyle_itemPixmapRect(self *C.QStyle, cb C.intptr_t, r *
 	slotval3 := newQPixmap(pixmap)
 
 	virtualReturn := gofunc((&QStyle{h: self}).callVirtualBase_ItemPixmapRect, slotval1, slotval2, slotval3)
+	if callbackData.ownsReturn && virtualReturn != nil {
+		runtime.SetFinalizer(virtualReturn, nil)
+	}
 
 	return virtualReturn.cPointer()
 
@@ -1314,10 +1360,16 @@ func (this *QStyle) callVirtualBase_StandardPalette() *QPalette {
 	return _goptr
 
 }
+
+type miqtVirtualCallback_QStyle_standardPalette struct {
+	callback   func(super func() *QPalette) *QPalette
+	ownsReturn bool
+}
+
 func (this *QStyle) OnStandardPalette(slot func(super func() *QPalette) *QPalette) {
 	var slotHandle C.intptr_t
 	if slot != nil {
-		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QStyle_standardPalette{callback: slot}))
 	}
 	ok := C.QStyle_override_virtual_standardPalette(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
@@ -1325,14 +1377,31 @@ func (this *QStyle) OnStandardPalette(slot func(super func() *QPalette) *QPalett
 	}
 }
 
+// OnStandardPaletteOwned installs a virtual override that transfers
+// ownership of each non-nil returned Qt value object to C++.
+func (this *QStyle) OnStandardPaletteOwned(slot func(super func() *QPalette) *QPalette) {
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QStyle_standardPalette{callback: slot, ownsReturn: true}))
+	}
+	ok := C.QStyle_override_virtual_owned_standardPalette(unsafe.Pointer(this.h), slotHandle)
+	if !ok {
+		panic("miqt: can only override virtual methods for directly constructed types")
+	}
+}
+
 //export miqt_exec_callback_QStyle_standardPalette
 func miqt_exec_callback_QStyle_standardPalette(self *C.QStyle, cb C.intptr_t) *C.QPalette {
-	gofunc, ok := cgo.Handle(cb).Value().(func(super func() *QPalette) *QPalette)
+	callbackData, ok := cgo.Handle(cb).Value().(miqtVirtualCallback_QStyle_standardPalette)
 	if !ok {
 		panic("miqt: callback of non-callback type (heap corruption?)")
 	}
+	gofunc := callbackData.callback
 
 	virtualReturn := gofunc((&QStyle{h: self}).callVirtualBase_StandardPalette)
+	if callbackData.ownsReturn && virtualReturn != nil {
+		runtime.SetFinalizer(virtualReturn, nil)
+	}
 
 	return virtualReturn.cPointer()
 
@@ -1397,10 +1466,16 @@ func miqt_exec_callback_QStyle_drawControl(self *C.QStyle, cb C.intptr_t, elemen
 	gofunc(slotval1, slotval2, slotval3, slotval4)
 
 }
+
+type miqtVirtualCallback_QStyle_subElementRect struct {
+	callback   func(subElement QStyle__SubElement, option *QStyleOption, widget *QWidget) *QRect
+	ownsReturn bool
+}
+
 func (this *QStyle) OnSubElementRect(slot func(subElement QStyle__SubElement, option *QStyleOption, widget *QWidget) *QRect) {
 	var slotHandle C.intptr_t
 	if slot != nil {
-		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QStyle_subElementRect{callback: slot}))
 	}
 	ok := C.QStyle_override_virtual_subElementRect(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
@@ -1408,12 +1483,26 @@ func (this *QStyle) OnSubElementRect(slot func(subElement QStyle__SubElement, op
 	}
 }
 
+// OnSubElementRectOwned installs a virtual override that transfers
+// ownership of each non-nil returned Qt value object to C++.
+func (this *QStyle) OnSubElementRectOwned(slot func(subElement QStyle__SubElement, option *QStyleOption, widget *QWidget) *QRect) {
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QStyle_subElementRect{callback: slot, ownsReturn: true}))
+	}
+	ok := C.QStyle_override_virtual_owned_subElementRect(unsafe.Pointer(this.h), slotHandle)
+	if !ok {
+		panic("miqt: can only override virtual methods for directly constructed types")
+	}
+}
+
 //export miqt_exec_callback_QStyle_subElementRect
 func miqt_exec_callback_QStyle_subElementRect(self *C.QStyle, cb C.intptr_t, subElement C.int, option *C.QStyleOption, widget *C.QWidget) *C.QRect {
-	gofunc, ok := cgo.Handle(cb).Value().(func(subElement QStyle__SubElement, option *QStyleOption, widget *QWidget) *QRect)
+	callbackData, ok := cgo.Handle(cb).Value().(miqtVirtualCallback_QStyle_subElementRect)
 	if !ok {
 		panic("miqt: callback of non-callback type (heap corruption?)")
 	}
+	gofunc := callbackData.callback
 
 	// Convert all CABI parameters to Go parameters
 	slotval1 := (QStyle__SubElement)(subElement)
@@ -1423,6 +1512,9 @@ func miqt_exec_callback_QStyle_subElementRect(self *C.QStyle, cb C.intptr_t, sub
 	slotval3 := newQWidget(widget)
 
 	virtualReturn := gofunc(slotval1, slotval2, slotval3)
+	if callbackData.ownsReturn && virtualReturn != nil {
+		runtime.SetFinalizer(virtualReturn, nil)
+	}
 
 	return virtualReturn.cPointer()
 
@@ -1489,10 +1581,16 @@ func miqt_exec_callback_QStyle_hitTestComplexControl(self *C.QStyle, cb C.intptr
 	return (C.int)(virtualReturn)
 
 }
+
+type miqtVirtualCallback_QStyle_subControlRect struct {
+	callback   func(cc QStyle__ComplexControl, opt *QStyleOptionComplex, sc QStyle__SubControl, widget *QWidget) *QRect
+	ownsReturn bool
+}
+
 func (this *QStyle) OnSubControlRect(slot func(cc QStyle__ComplexControl, opt *QStyleOptionComplex, sc QStyle__SubControl, widget *QWidget) *QRect) {
 	var slotHandle C.intptr_t
 	if slot != nil {
-		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QStyle_subControlRect{callback: slot}))
 	}
 	ok := C.QStyle_override_virtual_subControlRect(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
@@ -1500,12 +1598,26 @@ func (this *QStyle) OnSubControlRect(slot func(cc QStyle__ComplexControl, opt *Q
 	}
 }
 
+// OnSubControlRectOwned installs a virtual override that transfers
+// ownership of each non-nil returned Qt value object to C++.
+func (this *QStyle) OnSubControlRectOwned(slot func(cc QStyle__ComplexControl, opt *QStyleOptionComplex, sc QStyle__SubControl, widget *QWidget) *QRect) {
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QStyle_subControlRect{callback: slot, ownsReturn: true}))
+	}
+	ok := C.QStyle_override_virtual_owned_subControlRect(unsafe.Pointer(this.h), slotHandle)
+	if !ok {
+		panic("miqt: can only override virtual methods for directly constructed types")
+	}
+}
+
 //export miqt_exec_callback_QStyle_subControlRect
 func miqt_exec_callback_QStyle_subControlRect(self *C.QStyle, cb C.intptr_t, cc C.int, opt *C.QStyleOptionComplex, sc C.int, widget *C.QWidget) *C.QRect {
-	gofunc, ok := cgo.Handle(cb).Value().(func(cc QStyle__ComplexControl, opt *QStyleOptionComplex, sc QStyle__SubControl, widget *QWidget) *QRect)
+	callbackData, ok := cgo.Handle(cb).Value().(miqtVirtualCallback_QStyle_subControlRect)
 	if !ok {
 		panic("miqt: callback of non-callback type (heap corruption?)")
 	}
+	gofunc := callbackData.callback
 
 	// Convert all CABI parameters to Go parameters
 	slotval1 := (QStyle__ComplexControl)(cc)
@@ -1517,6 +1629,9 @@ func miqt_exec_callback_QStyle_subControlRect(self *C.QStyle, cb C.intptr_t, cc 
 	slotval4 := newQWidget(widget)
 
 	virtualReturn := gofunc(slotval1, slotval2, slotval3, slotval4)
+	if callbackData.ownsReturn && virtualReturn != nil {
+		runtime.SetFinalizer(virtualReturn, nil)
+	}
 
 	return virtualReturn.cPointer()
 
@@ -1551,10 +1666,16 @@ func miqt_exec_callback_QStyle_pixelMetric(self *C.QStyle, cb C.intptr_t, metric
 	return (C.int)(virtualReturn)
 
 }
+
+type miqtVirtualCallback_QStyle_sizeFromContents struct {
+	callback   func(ct QStyle__ContentsType, opt *QStyleOption, contentsSize *QSize, w *QWidget) *QSize
+	ownsReturn bool
+}
+
 func (this *QStyle) OnSizeFromContents(slot func(ct QStyle__ContentsType, opt *QStyleOption, contentsSize *QSize, w *QWidget) *QSize) {
 	var slotHandle C.intptr_t
 	if slot != nil {
-		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QStyle_sizeFromContents{callback: slot}))
 	}
 	ok := C.QStyle_override_virtual_sizeFromContents(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
@@ -1562,12 +1683,26 @@ func (this *QStyle) OnSizeFromContents(slot func(ct QStyle__ContentsType, opt *Q
 	}
 }
 
+// OnSizeFromContentsOwned installs a virtual override that transfers
+// ownership of each non-nil returned Qt value object to C++.
+func (this *QStyle) OnSizeFromContentsOwned(slot func(ct QStyle__ContentsType, opt *QStyleOption, contentsSize *QSize, w *QWidget) *QSize) {
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QStyle_sizeFromContents{callback: slot, ownsReturn: true}))
+	}
+	ok := C.QStyle_override_virtual_owned_sizeFromContents(unsafe.Pointer(this.h), slotHandle)
+	if !ok {
+		panic("miqt: can only override virtual methods for directly constructed types")
+	}
+}
+
 //export miqt_exec_callback_QStyle_sizeFromContents
 func miqt_exec_callback_QStyle_sizeFromContents(self *C.QStyle, cb C.intptr_t, ct C.int, opt *C.QStyleOption, contentsSize *C.QSize, w *C.QWidget) *C.QSize {
-	gofunc, ok := cgo.Handle(cb).Value().(func(ct QStyle__ContentsType, opt *QStyleOption, contentsSize *QSize, w *QWidget) *QSize)
+	callbackData, ok := cgo.Handle(cb).Value().(miqtVirtualCallback_QStyle_sizeFromContents)
 	if !ok {
 		panic("miqt: callback of non-callback type (heap corruption?)")
 	}
+	gofunc := callbackData.callback
 
 	// Convert all CABI parameters to Go parameters
 	slotval1 := (QStyle__ContentsType)(ct)
@@ -1579,6 +1714,9 @@ func miqt_exec_callback_QStyle_sizeFromContents(self *C.QStyle, cb C.intptr_t, c
 	slotval4 := newQWidget(w)
 
 	virtualReturn := gofunc(slotval1, slotval2, slotval3, slotval4)
+	if callbackData.ownsReturn && virtualReturn != nil {
+		runtime.SetFinalizer(virtualReturn, nil)
+	}
 
 	return virtualReturn.cPointer()
 
@@ -1615,10 +1753,16 @@ func miqt_exec_callback_QStyle_styleHint(self *C.QStyle, cb C.intptr_t, stylehin
 	return (C.int)(virtualReturn)
 
 }
+
+type miqtVirtualCallback_QStyle_standardPixmap struct {
+	callback   func(standardPixmap QStyle__StandardPixmap, opt *QStyleOption, widget *QWidget) *QPixmap
+	ownsReturn bool
+}
+
 func (this *QStyle) OnStandardPixmap(slot func(standardPixmap QStyle__StandardPixmap, opt *QStyleOption, widget *QWidget) *QPixmap) {
 	var slotHandle C.intptr_t
 	if slot != nil {
-		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QStyle_standardPixmap{callback: slot}))
 	}
 	ok := C.QStyle_override_virtual_standardPixmap(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
@@ -1626,12 +1770,26 @@ func (this *QStyle) OnStandardPixmap(slot func(standardPixmap QStyle__StandardPi
 	}
 }
 
+// OnStandardPixmapOwned installs a virtual override that transfers
+// ownership of each non-nil returned Qt value object to C++.
+func (this *QStyle) OnStandardPixmapOwned(slot func(standardPixmap QStyle__StandardPixmap, opt *QStyleOption, widget *QWidget) *QPixmap) {
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QStyle_standardPixmap{callback: slot, ownsReturn: true}))
+	}
+	ok := C.QStyle_override_virtual_owned_standardPixmap(unsafe.Pointer(this.h), slotHandle)
+	if !ok {
+		panic("miqt: can only override virtual methods for directly constructed types")
+	}
+}
+
 //export miqt_exec_callback_QStyle_standardPixmap
 func miqt_exec_callback_QStyle_standardPixmap(self *C.QStyle, cb C.intptr_t, standardPixmap C.int, opt *C.QStyleOption, widget *C.QWidget) *C.QPixmap {
-	gofunc, ok := cgo.Handle(cb).Value().(func(standardPixmap QStyle__StandardPixmap, opt *QStyleOption, widget *QWidget) *QPixmap)
+	callbackData, ok := cgo.Handle(cb).Value().(miqtVirtualCallback_QStyle_standardPixmap)
 	if !ok {
 		panic("miqt: callback of non-callback type (heap corruption?)")
 	}
+	gofunc := callbackData.callback
 
 	// Convert all CABI parameters to Go parameters
 	slotval1 := (QStyle__StandardPixmap)(standardPixmap)
@@ -1641,14 +1799,23 @@ func miqt_exec_callback_QStyle_standardPixmap(self *C.QStyle, cb C.intptr_t, sta
 	slotval3 := newQWidget(widget)
 
 	virtualReturn := gofunc(slotval1, slotval2, slotval3)
+	if callbackData.ownsReturn && virtualReturn != nil {
+		runtime.SetFinalizer(virtualReturn, nil)
+	}
 
 	return virtualReturn.cPointer()
 
 }
+
+type miqtVirtualCallback_QStyle_standardIcon struct {
+	callback   func(standardIcon QStyle__StandardPixmap, option *QStyleOption, widget *QWidget) *QIcon
+	ownsReturn bool
+}
+
 func (this *QStyle) OnStandardIcon(slot func(standardIcon QStyle__StandardPixmap, option *QStyleOption, widget *QWidget) *QIcon) {
 	var slotHandle C.intptr_t
 	if slot != nil {
-		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QStyle_standardIcon{callback: slot}))
 	}
 	ok := C.QStyle_override_virtual_standardIcon(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
@@ -1656,12 +1823,26 @@ func (this *QStyle) OnStandardIcon(slot func(standardIcon QStyle__StandardPixmap
 	}
 }
 
+// OnStandardIconOwned installs a virtual override that transfers
+// ownership of each non-nil returned Qt value object to C++.
+func (this *QStyle) OnStandardIconOwned(slot func(standardIcon QStyle__StandardPixmap, option *QStyleOption, widget *QWidget) *QIcon) {
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QStyle_standardIcon{callback: slot, ownsReturn: true}))
+	}
+	ok := C.QStyle_override_virtual_owned_standardIcon(unsafe.Pointer(this.h), slotHandle)
+	if !ok {
+		panic("miqt: can only override virtual methods for directly constructed types")
+	}
+}
+
 //export miqt_exec_callback_QStyle_standardIcon
 func miqt_exec_callback_QStyle_standardIcon(self *C.QStyle, cb C.intptr_t, standardIcon C.int, option *C.QStyleOption, widget *C.QWidget) *C.QIcon {
-	gofunc, ok := cgo.Handle(cb).Value().(func(standardIcon QStyle__StandardPixmap, option *QStyleOption, widget *QWidget) *QIcon)
+	callbackData, ok := cgo.Handle(cb).Value().(miqtVirtualCallback_QStyle_standardIcon)
 	if !ok {
 		panic("miqt: callback of non-callback type (heap corruption?)")
 	}
+	gofunc := callbackData.callback
 
 	// Convert all CABI parameters to Go parameters
 	slotval1 := (QStyle__StandardPixmap)(standardIcon)
@@ -1671,14 +1852,23 @@ func miqt_exec_callback_QStyle_standardIcon(self *C.QStyle, cb C.intptr_t, stand
 	slotval3 := newQWidget(widget)
 
 	virtualReturn := gofunc(slotval1, slotval2, slotval3)
+	if callbackData.ownsReturn && virtualReturn != nil {
+		runtime.SetFinalizer(virtualReturn, nil)
+	}
 
 	return virtualReturn.cPointer()
 
 }
+
+type miqtVirtualCallback_QStyle_generatedIconPixmap struct {
+	callback   func(iconMode QIcon__Mode, pixmap *QPixmap, opt *QStyleOption) *QPixmap
+	ownsReturn bool
+}
+
 func (this *QStyle) OnGeneratedIconPixmap(slot func(iconMode QIcon__Mode, pixmap *QPixmap, opt *QStyleOption) *QPixmap) {
 	var slotHandle C.intptr_t
 	if slot != nil {
-		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QStyle_generatedIconPixmap{callback: slot}))
 	}
 	ok := C.QStyle_override_virtual_generatedIconPixmap(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
@@ -1686,12 +1876,26 @@ func (this *QStyle) OnGeneratedIconPixmap(slot func(iconMode QIcon__Mode, pixmap
 	}
 }
 
+// OnGeneratedIconPixmapOwned installs a virtual override that transfers
+// ownership of each non-nil returned Qt value object to C++.
+func (this *QStyle) OnGeneratedIconPixmapOwned(slot func(iconMode QIcon__Mode, pixmap *QPixmap, opt *QStyleOption) *QPixmap) {
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QStyle_generatedIconPixmap{callback: slot, ownsReturn: true}))
+	}
+	ok := C.QStyle_override_virtual_owned_generatedIconPixmap(unsafe.Pointer(this.h), slotHandle)
+	if !ok {
+		panic("miqt: can only override virtual methods for directly constructed types")
+	}
+}
+
 //export miqt_exec_callback_QStyle_generatedIconPixmap
 func miqt_exec_callback_QStyle_generatedIconPixmap(self *C.QStyle, cb C.intptr_t, iconMode C.int, pixmap *C.QPixmap, opt *C.QStyleOption) *C.QPixmap {
-	gofunc, ok := cgo.Handle(cb).Value().(func(iconMode QIcon__Mode, pixmap *QPixmap, opt *QStyleOption) *QPixmap)
+	callbackData, ok := cgo.Handle(cb).Value().(miqtVirtualCallback_QStyle_generatedIconPixmap)
 	if !ok {
 		panic("miqt: callback of non-callback type (heap corruption?)")
 	}
+	gofunc := callbackData.callback
 
 	// Convert all CABI parameters to Go parameters
 	slotval1 := (QIcon__Mode)(iconMode)
@@ -1701,6 +1905,9 @@ func miqt_exec_callback_QStyle_generatedIconPixmap(self *C.QStyle, cb C.intptr_t
 	slotval3 := newQStyleOption(opt)
 
 	virtualReturn := gofunc(slotval1, slotval2, slotval3)
+	if callbackData.ownsReturn && virtualReturn != nil {
+		runtime.SetFinalizer(virtualReturn, nil)
+	}
 
 	return virtualReturn.cPointer()
 

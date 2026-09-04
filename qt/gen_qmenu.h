@@ -172,6 +172,7 @@ QAction* QMenu_exec4(struct miqt_array /* of QAction* */  actions, QPoint* pos, 
 QAction* QMenu_exec5(struct miqt_array /* of QAction* */  actions, QPoint* pos, QAction* at, QWidget* parent);
 
 bool QMenu_override_virtual_sizeHint(void* self, intptr_t slot);
+bool QMenu_override_virtual_owned_sizeHint(void* self, intptr_t slot);
 QSize* QMenu_virtualbase_sizeHint(const void* self);
 bool QMenu_override_virtual_changeEvent(void* self, intptr_t slot);
 void QMenu_virtualbase_changeEvent(void* self, QEvent* param1);
@@ -206,6 +207,7 @@ int QMenu_virtualbase_devType(const void* self);
 bool QMenu_override_virtual_setVisible(void* self, intptr_t slot);
 void QMenu_virtualbase_setVisible(void* self, bool visible);
 bool QMenu_override_virtual_minimumSizeHint(void* self, intptr_t slot);
+bool QMenu_override_virtual_owned_minimumSizeHint(void* self, intptr_t slot);
 QSize* QMenu_virtualbase_minimumSizeHint(const void* self);
 bool QMenu_override_virtual_heightForWidth(void* self, intptr_t slot);
 int QMenu_virtualbase_heightForWidth(const void* self, int param1);
@@ -254,6 +256,7 @@ QPainter* QMenu_virtualbase_sharedPainter(const void* self);
 bool QMenu_override_virtual_inputMethodEvent(void* self, intptr_t slot);
 void QMenu_virtualbase_inputMethodEvent(void* self, QInputMethodEvent* param1);
 bool QMenu_override_virtual_inputMethodQuery(void* self, intptr_t slot);
+bool QMenu_override_virtual_owned_inputMethodQuery(void* self, intptr_t slot);
 QVariant* QMenu_virtualbase_inputMethodQuery(const void* self, int param1);
 bool QMenu_override_virtual_eventFilter(void* self, intptr_t slot);
 bool QMenu_virtualbase_eventFilter(void* self, QObject* watched, QEvent* event);

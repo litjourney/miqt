@@ -26,6 +26,7 @@ public:
 
 	// cgo.Handle value for overwritten implementation
 	miqt_callback_handle<miqt_exec_callback_handle_release_QwtPlotLayout> handle__minimumSizeHint;
+	bool owns_return__minimumSizeHint = false;
 
 	// Subclass to allow providing a Go implementation
 	virtual QSize minimumSizeHint(const QwtPlot* param1) const override {
@@ -35,6 +36,10 @@ public:
 
 		QwtPlot* sigval1 = (QwtPlot*) param1;
 		QSize* callback_return_value = miqt_exec_callback_QwtPlotLayout_minimumSizeHint(this, handle__minimumSizeHint.value(), sigval1);
+		std::unique_ptr<QSize> callback_return_value_owner;
+		if (owns_return__minimumSizeHint) {
+			callback_return_value_owner.reset(callback_return_value);
+		}
 		return *callback_return_value;
 	}
 
@@ -191,6 +196,19 @@ bool QwtPlotLayout_override_virtual_minimumSizeHint(void* self, intptr_t slot) {
 	}
 
 	self_cast->handle__minimumSizeHint = std::move(slot_handle);
+	self_cast->owns_return__minimumSizeHint = false;
+	return true;
+}
+
+bool QwtPlotLayout_override_virtual_owned_minimumSizeHint(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtPlotLayout> slot_handle(slot);
+	MiqtVirtualQwtPlotLayout* self_cast = dynamic_cast<MiqtVirtualQwtPlotLayout*>( (QwtPlotLayout*)(self) );
+	if (self_cast == nullptr) {
+		return false;
+	}
+
+	self_cast->handle__minimumSizeHint = std::move(slot_handle);
+	self_cast->owns_return__minimumSizeHint = true;
 	return true;
 }
 

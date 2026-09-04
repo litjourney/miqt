@@ -478,10 +478,16 @@ func (this *QPrintPreviewWidget) callVirtualBase_SizeHint() *qt6.QSize {
 	return _goptr
 
 }
+
+type miqtVirtualCallback_QPrintPreviewWidget_sizeHint struct {
+	callback   func(super func() *qt6.QSize) *qt6.QSize
+	ownsReturn bool
+}
+
 func (this *QPrintPreviewWidget) OnSizeHint(slot func(super func() *qt6.QSize) *qt6.QSize) {
 	var slotHandle C.intptr_t
 	if slot != nil {
-		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QPrintPreviewWidget_sizeHint{callback: slot}))
 	}
 	ok := C.QPrintPreviewWidget_override_virtual_sizeHint(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
@@ -489,14 +495,31 @@ func (this *QPrintPreviewWidget) OnSizeHint(slot func(super func() *qt6.QSize) *
 	}
 }
 
+// OnSizeHintOwned installs a virtual override that transfers
+// ownership of each non-nil returned Qt value object to C++.
+func (this *QPrintPreviewWidget) OnSizeHintOwned(slot func(super func() *qt6.QSize) *qt6.QSize) {
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QPrintPreviewWidget_sizeHint{callback: slot, ownsReturn: true}))
+	}
+	ok := C.QPrintPreviewWidget_override_virtual_owned_sizeHint(unsafe.Pointer(this.h), slotHandle)
+	if !ok {
+		panic("miqt: can only override virtual methods for directly constructed types")
+	}
+}
+
 //export miqt_exec_callback_QPrintPreviewWidget_sizeHint
 func miqt_exec_callback_QPrintPreviewWidget_sizeHint(self *C.QPrintPreviewWidget, cb C.intptr_t) *C.QSize {
-	gofunc, ok := cgo.Handle(cb).Value().(func(super func() *qt6.QSize) *qt6.QSize)
+	callbackData, ok := cgo.Handle(cb).Value().(miqtVirtualCallback_QPrintPreviewWidget_sizeHint)
 	if !ok {
 		panic("miqt: callback of non-callback type (heap corruption?)")
 	}
+	gofunc := callbackData.callback
 
 	virtualReturn := gofunc((&QPrintPreviewWidget{h: self}).callVirtualBase_SizeHint)
+	if callbackData.ownsReturn && virtualReturn != nil {
+		runtime.SetFinalizer(virtualReturn, nil)
+	}
 
 	return (*C.QSize)(virtualReturn.UnsafePointer())
 
@@ -509,10 +532,16 @@ func (this *QPrintPreviewWidget) callVirtualBase_MinimumSizeHint() *qt6.QSize {
 	return _goptr
 
 }
+
+type miqtVirtualCallback_QPrintPreviewWidget_minimumSizeHint struct {
+	callback   func(super func() *qt6.QSize) *qt6.QSize
+	ownsReturn bool
+}
+
 func (this *QPrintPreviewWidget) OnMinimumSizeHint(slot func(super func() *qt6.QSize) *qt6.QSize) {
 	var slotHandle C.intptr_t
 	if slot != nil {
-		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QPrintPreviewWidget_minimumSizeHint{callback: slot}))
 	}
 	ok := C.QPrintPreviewWidget_override_virtual_minimumSizeHint(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
@@ -520,14 +549,31 @@ func (this *QPrintPreviewWidget) OnMinimumSizeHint(slot func(super func() *qt6.Q
 	}
 }
 
+// OnMinimumSizeHintOwned installs a virtual override that transfers
+// ownership of each non-nil returned Qt value object to C++.
+func (this *QPrintPreviewWidget) OnMinimumSizeHintOwned(slot func(super func() *qt6.QSize) *qt6.QSize) {
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QPrintPreviewWidget_minimumSizeHint{callback: slot, ownsReturn: true}))
+	}
+	ok := C.QPrintPreviewWidget_override_virtual_owned_minimumSizeHint(unsafe.Pointer(this.h), slotHandle)
+	if !ok {
+		panic("miqt: can only override virtual methods for directly constructed types")
+	}
+}
+
 //export miqt_exec_callback_QPrintPreviewWidget_minimumSizeHint
 func miqt_exec_callback_QPrintPreviewWidget_minimumSizeHint(self *C.QPrintPreviewWidget, cb C.intptr_t) *C.QSize {
-	gofunc, ok := cgo.Handle(cb).Value().(func(super func() *qt6.QSize) *qt6.QSize)
+	callbackData, ok := cgo.Handle(cb).Value().(miqtVirtualCallback_QPrintPreviewWidget_minimumSizeHint)
 	if !ok {
 		panic("miqt: callback of non-callback type (heap corruption?)")
 	}
+	gofunc := callbackData.callback
 
 	virtualReturn := gofunc((&QPrintPreviewWidget{h: self}).callVirtualBase_MinimumSizeHint)
+	if callbackData.ownsReturn && virtualReturn != nil {
+		runtime.SetFinalizer(virtualReturn, nil)
+	}
 
 	return (*C.QSize)(virtualReturn.UnsafePointer())
 
@@ -1610,10 +1656,16 @@ func (this *QPrintPreviewWidget) callVirtualBase_InputMethodQuery(param1 qt6.Inp
 	return _goptr
 
 }
+
+type miqtVirtualCallback_QPrintPreviewWidget_inputMethodQuery struct {
+	callback   func(super func(param1 qt6.InputMethodQuery) *qt6.QVariant, param1 qt6.InputMethodQuery) *qt6.QVariant
+	ownsReturn bool
+}
+
 func (this *QPrintPreviewWidget) OnInputMethodQuery(slot func(super func(param1 qt6.InputMethodQuery) *qt6.QVariant, param1 qt6.InputMethodQuery) *qt6.QVariant) {
 	var slotHandle C.intptr_t
 	if slot != nil {
-		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QPrintPreviewWidget_inputMethodQuery{callback: slot}))
 	}
 	ok := C.QPrintPreviewWidget_override_virtual_inputMethodQuery(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
@@ -1621,17 +1673,34 @@ func (this *QPrintPreviewWidget) OnInputMethodQuery(slot func(super func(param1 
 	}
 }
 
+// OnInputMethodQueryOwned installs a virtual override that transfers
+// ownership of each non-nil returned Qt value object to C++.
+func (this *QPrintPreviewWidget) OnInputMethodQueryOwned(slot func(super func(param1 qt6.InputMethodQuery) *qt6.QVariant, param1 qt6.InputMethodQuery) *qt6.QVariant) {
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QPrintPreviewWidget_inputMethodQuery{callback: slot, ownsReturn: true}))
+	}
+	ok := C.QPrintPreviewWidget_override_virtual_owned_inputMethodQuery(unsafe.Pointer(this.h), slotHandle)
+	if !ok {
+		panic("miqt: can only override virtual methods for directly constructed types")
+	}
+}
+
 //export miqt_exec_callback_QPrintPreviewWidget_inputMethodQuery
 func miqt_exec_callback_QPrintPreviewWidget_inputMethodQuery(self *C.QPrintPreviewWidget, cb C.intptr_t, param1 C.int) *C.QVariant {
-	gofunc, ok := cgo.Handle(cb).Value().(func(super func(param1 qt6.InputMethodQuery) *qt6.QVariant, param1 qt6.InputMethodQuery) *qt6.QVariant)
+	callbackData, ok := cgo.Handle(cb).Value().(miqtVirtualCallback_QPrintPreviewWidget_inputMethodQuery)
 	if !ok {
 		panic("miqt: callback of non-callback type (heap corruption?)")
 	}
+	gofunc := callbackData.callback
 
 	// Convert all CABI parameters to Go parameters
 	slotval1 := (qt6.InputMethodQuery)(param1)
 
 	virtualReturn := gofunc((&QPrintPreviewWidget{h: self}).callVirtualBase_InputMethodQuery, slotval1)
+	if callbackData.ownsReturn && virtualReturn != nil {
+		runtime.SetFinalizer(virtualReturn, nil)
+	}
 
 	return (*C.QVariant)(virtualReturn.UnsafePointer())
 

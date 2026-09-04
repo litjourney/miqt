@@ -63,6 +63,7 @@ void QwtScaleEngine_setAttribute2(QwtScaleEngine* self, int param1, bool on);
 bool QwtScaleEngine_override_virtual_autoScale(void* self, intptr_t slot);
 void QwtScaleEngine_virtualbase_autoScale(const void* self, int maxNumSteps, double* x1, double* x2, double* stepSize);
 bool QwtScaleEngine_override_virtual_divideScale(void* self, intptr_t slot);
+bool QwtScaleEngine_override_virtual_owned_divideScale(void* self, intptr_t slot);
 QwtScaleDiv* QwtScaleEngine_virtualbase_divideScale(const void* self, double x1, double x2, int maxMajorSteps, int maxMinorSteps, double stepSize);
 
 bool QwtScaleEngine_protectedbase_contains(bool* _dynamic_cast_ok, const void* self, QwtInterval* param1, double value);
@@ -83,6 +84,7 @@ void QwtLinearScaleEngine_operatorAssign(QwtLinearScaleEngine* self, QwtLinearSc
 bool QwtLinearScaleEngine_override_virtual_autoScale(void* self, intptr_t slot);
 void QwtLinearScaleEngine_virtualbase_autoScale(const void* self, int maxNumSteps, double* x1, double* x2, double* stepSize);
 bool QwtLinearScaleEngine_override_virtual_divideScale(void* self, intptr_t slot);
+bool QwtLinearScaleEngine_override_virtual_owned_divideScale(void* self, intptr_t slot);
 QwtScaleDiv* QwtLinearScaleEngine_virtualbase_divideScale(const void* self, double x1, double x2, int maxMajorSteps, int maxMinorSteps, double stepSize);
 
 QwtInterval* QwtLinearScaleEngine_protectedbase_align(bool* _dynamic_cast_ok, const void* self, QwtInterval* param1, double stepSize);
@@ -107,6 +109,7 @@ void QwtLogScaleEngine_operatorAssign(QwtLogScaleEngine* self, QwtLogScaleEngine
 bool QwtLogScaleEngine_override_virtual_autoScale(void* self, intptr_t slot);
 void QwtLogScaleEngine_virtualbase_autoScale(const void* self, int maxNumSteps, double* x1, double* x2, double* stepSize);
 bool QwtLogScaleEngine_override_virtual_divideScale(void* self, intptr_t slot);
+bool QwtLogScaleEngine_override_virtual_owned_divideScale(void* self, intptr_t slot);
 QwtScaleDiv* QwtLogScaleEngine_virtualbase_divideScale(const void* self, double x1, double x2, int maxMajorSteps, int maxMinorSteps, double stepSize);
 
 QwtInterval* QwtLogScaleEngine_protectedbase_align(bool* _dynamic_cast_ok, const void* self, QwtInterval* param1, double stepSize);

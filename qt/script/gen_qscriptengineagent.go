@@ -455,10 +455,16 @@ func (this *QScriptEngineAgent) callVirtualBase_Extension(extension QScriptEngin
 	return _goptr
 
 }
+
+type miqtVirtualCallback_QScriptEngineAgent_extension struct {
+	callback   func(super func(extension QScriptEngineAgent__Extension, argument *qt.QVariant) *qt.QVariant, extension QScriptEngineAgent__Extension, argument *qt.QVariant) *qt.QVariant
+	ownsReturn bool
+}
+
 func (this *QScriptEngineAgent) OnExtension(slot func(super func(extension QScriptEngineAgent__Extension, argument *qt.QVariant) *qt.QVariant, extension QScriptEngineAgent__Extension, argument *qt.QVariant) *qt.QVariant) {
 	var slotHandle C.intptr_t
 	if slot != nil {
-		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QScriptEngineAgent_extension{callback: slot}))
 	}
 	ok := C.QScriptEngineAgent_override_virtual_extension(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
@@ -466,12 +472,26 @@ func (this *QScriptEngineAgent) OnExtension(slot func(super func(extension QScri
 	}
 }
 
+// OnExtensionOwned installs a virtual override that transfers
+// ownership of each non-nil returned Qt value object to C++.
+func (this *QScriptEngineAgent) OnExtensionOwned(slot func(super func(extension QScriptEngineAgent__Extension, argument *qt.QVariant) *qt.QVariant, extension QScriptEngineAgent__Extension, argument *qt.QVariant) *qt.QVariant) {
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QScriptEngineAgent_extension{callback: slot, ownsReturn: true}))
+	}
+	ok := C.QScriptEngineAgent_override_virtual_owned_extension(unsafe.Pointer(this.h), slotHandle)
+	if !ok {
+		panic("miqt: can only override virtual methods for directly constructed types")
+	}
+}
+
 //export miqt_exec_callback_QScriptEngineAgent_extension
 func miqt_exec_callback_QScriptEngineAgent_extension(self *C.QScriptEngineAgent, cb C.intptr_t, extension C.int, argument *C.QVariant) *C.QVariant {
-	gofunc, ok := cgo.Handle(cb).Value().(func(super func(extension QScriptEngineAgent__Extension, argument *qt.QVariant) *qt.QVariant, extension QScriptEngineAgent__Extension, argument *qt.QVariant) *qt.QVariant)
+	callbackData, ok := cgo.Handle(cb).Value().(miqtVirtualCallback_QScriptEngineAgent_extension)
 	if !ok {
 		panic("miqt: callback of non-callback type (heap corruption?)")
 	}
+	gofunc := callbackData.callback
 
 	// Convert all CABI parameters to Go parameters
 	slotval1 := (QScriptEngineAgent__Extension)(extension)
@@ -479,6 +499,9 @@ func miqt_exec_callback_QScriptEngineAgent_extension(self *C.QScriptEngineAgent,
 	slotval2 := qt.UnsafeNewQVariant(unsafe.Pointer(argument))
 
 	virtualReturn := gofunc((&QScriptEngineAgent{h: self}).callVirtualBase_Extension, slotval1, slotval2)
+	if callbackData.ownsReturn && virtualReturn != nil {
+		runtime.SetFinalizer(virtualReturn, nil)
+	}
 
 	return (*C.QVariant)(virtualReturn.UnsafePointer())
 

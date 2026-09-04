@@ -87,6 +87,7 @@ QImage* QwtGraphic_toImage2(const QwtGraphic* self, QSize* param1, int param2);
 void QwtGraphic_setRenderHint2(QwtGraphic* self, int param1, bool on);
 
 bool QwtGraphic_override_virtual_sizeMetrics(void* self, intptr_t slot);
+bool QwtGraphic_override_virtual_owned_sizeMetrics(void* self, intptr_t slot);
 QSize* QwtGraphic_virtualbase_sizeMetrics(const void* self);
 bool QwtGraphic_override_virtual_drawPath(void* self, intptr_t slot);
 void QwtGraphic_virtualbase_drawPath(void* self, QPainterPath* param1);

@@ -191,8 +191,10 @@ void QWebView_setRenderHint2(QWebView* self, int hint, bool enabled);
 bool QWebView_findText2(QWebView* self, struct miqt_string subString, int options);
 
 bool QWebView_override_virtual_inputMethodQuery(void* self, intptr_t slot);
+bool QWebView_override_virtual_owned_inputMethodQuery(void* self, intptr_t slot);
 QVariant* QWebView_virtualbase_inputMethodQuery(const void* self, int property);
 bool QWebView_override_virtual_sizeHint(void* self, intptr_t slot);
+bool QWebView_override_virtual_owned_sizeHint(void* self, intptr_t slot);
 QSize* QWebView_virtualbase_sizeHint(const void* self);
 bool QWebView_override_virtual_event(void* self, intptr_t slot);
 bool QWebView_virtualbase_event(void* self, QEvent* param1);
@@ -241,6 +243,7 @@ int QWebView_virtualbase_devType(const void* self);
 bool QWebView_override_virtual_setVisible(void* self, intptr_t slot);
 void QWebView_virtualbase_setVisible(void* self, bool visible);
 bool QWebView_override_virtual_minimumSizeHint(void* self, intptr_t slot);
+bool QWebView_override_virtual_owned_minimumSizeHint(void* self, intptr_t slot);
 QSize* QWebView_virtualbase_minimumSizeHint(const void* self);
 bool QWebView_override_virtual_heightForWidth(void* self, intptr_t slot);
 int QWebView_virtualbase_heightForWidth(const void* self, int param1);

@@ -263,6 +263,7 @@ void QGraphicsScene_invalidateWithRect(QGraphicsScene* self, QRectF* rect);
 void QGraphicsScene_invalidate4(QGraphicsScene* self, QRectF* rect, int layers);
 
 bool QGraphicsScene_override_virtual_inputMethodQuery(void* self, intptr_t slot);
+bool QGraphicsScene_override_virtual_owned_inputMethodQuery(void* self, intptr_t slot);
 QVariant* QGraphicsScene_virtualbase_inputMethodQuery(const void* self, int query);
 bool QGraphicsScene_override_virtual_event(void* self, intptr_t slot);
 bool QGraphicsScene_virtualbase_event(void* self, QEvent* event);

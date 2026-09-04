@@ -66,6 +66,7 @@ struct miqt_string QNmeaPositionInfoSource_tr3(const char* s, const char* c, int
 bool QNmeaPositionInfoSource_override_virtual_setUpdateInterval(void* self, intptr_t slot);
 void QNmeaPositionInfoSource_virtualbase_setUpdateInterval(void* self, int msec);
 bool QNmeaPositionInfoSource_override_virtual_lastKnownPosition(void* self, intptr_t slot);
+bool QNmeaPositionInfoSource_override_virtual_owned_lastKnownPosition(void* self, intptr_t slot);
 QGeoPositionInfo* QNmeaPositionInfoSource_virtualbase_lastKnownPosition(const void* self, bool fromSatellitePositioningMethodsOnly);
 bool QNmeaPositionInfoSource_override_virtual_supportedPositioningMethods(void* self, intptr_t slot);
 int QNmeaPositionInfoSource_virtualbase_supportedPositioningMethods(const void* self);
@@ -86,6 +87,7 @@ void QNmeaPositionInfoSource_virtualbase_setPreferredPositioningMethods(void* se
 bool QNmeaPositionInfoSource_override_virtual_setBackendProperty(void* self, intptr_t slot);
 bool QNmeaPositionInfoSource_virtualbase_setBackendProperty(void* self, struct miqt_string name, QVariant* value);
 bool QNmeaPositionInfoSource_override_virtual_backendProperty(void* self, intptr_t slot);
+bool QNmeaPositionInfoSource_override_virtual_owned_backendProperty(void* self, intptr_t slot);
 QVariant* QNmeaPositionInfoSource_virtualbase_backendProperty(const void* self, struct miqt_string name);
 bool QNmeaPositionInfoSource_override_virtual_event(void* self, intptr_t slot);
 bool QNmeaPositionInfoSource_virtualbase_event(void* self, QEvent* event);

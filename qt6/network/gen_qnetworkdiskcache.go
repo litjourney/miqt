@@ -270,10 +270,16 @@ func (this *QNetworkDiskCache) callVirtualBase_MetaData(url *qt6.QUrl) *QNetwork
 	return _goptr
 
 }
+
+type miqtVirtualCallback_QNetworkDiskCache_metaData struct {
+	callback   func(super func(url *qt6.QUrl) *QNetworkCacheMetaData, url *qt6.QUrl) *QNetworkCacheMetaData
+	ownsReturn bool
+}
+
 func (this *QNetworkDiskCache) OnMetaData(slot func(super func(url *qt6.QUrl) *QNetworkCacheMetaData, url *qt6.QUrl) *QNetworkCacheMetaData) {
 	var slotHandle C.intptr_t
 	if slot != nil {
-		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QNetworkDiskCache_metaData{callback: slot}))
 	}
 	ok := C.QNetworkDiskCache_override_virtual_metaData(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
@@ -281,17 +287,34 @@ func (this *QNetworkDiskCache) OnMetaData(slot func(super func(url *qt6.QUrl) *Q
 	}
 }
 
+// OnMetaDataOwned installs a virtual override that transfers
+// ownership of each non-nil returned Qt value object to C++.
+func (this *QNetworkDiskCache) OnMetaDataOwned(slot func(super func(url *qt6.QUrl) *QNetworkCacheMetaData, url *qt6.QUrl) *QNetworkCacheMetaData) {
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QNetworkDiskCache_metaData{callback: slot, ownsReturn: true}))
+	}
+	ok := C.QNetworkDiskCache_override_virtual_owned_metaData(unsafe.Pointer(this.h), slotHandle)
+	if !ok {
+		panic("miqt: can only override virtual methods for directly constructed types")
+	}
+}
+
 //export miqt_exec_callback_QNetworkDiskCache_metaData
 func miqt_exec_callback_QNetworkDiskCache_metaData(self *C.QNetworkDiskCache, cb C.intptr_t, url *C.QUrl) *C.QNetworkCacheMetaData {
-	gofunc, ok := cgo.Handle(cb).Value().(func(super func(url *qt6.QUrl) *QNetworkCacheMetaData, url *qt6.QUrl) *QNetworkCacheMetaData)
+	callbackData, ok := cgo.Handle(cb).Value().(miqtVirtualCallback_QNetworkDiskCache_metaData)
 	if !ok {
 		panic("miqt: callback of non-callback type (heap corruption?)")
 	}
+	gofunc := callbackData.callback
 
 	// Convert all CABI parameters to Go parameters
 	slotval1 := qt6.UnsafeNewQUrl(unsafe.Pointer(url))
 
 	virtualReturn := gofunc((&QNetworkDiskCache{h: self}).callVirtualBase_MetaData, slotval1)
+	if callbackData.ownsReturn && virtualReturn != nil {
+		runtime.SetFinalizer(virtualReturn, nil)
+	}
 
 	return virtualReturn.cPointer()
 

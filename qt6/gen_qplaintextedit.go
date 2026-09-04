@@ -953,10 +953,16 @@ func (this *QPlainTextEdit) callVirtualBase_LoadResource(typeVal int, name *QUrl
 	return _goptr
 
 }
+
+type miqtVirtualCallback_QPlainTextEdit_loadResource struct {
+	callback   func(super func(typeVal int, name *QUrl) *QVariant, typeVal int, name *QUrl) *QVariant
+	ownsReturn bool
+}
+
 func (this *QPlainTextEdit) OnLoadResource(slot func(super func(typeVal int, name *QUrl) *QVariant, typeVal int, name *QUrl) *QVariant) {
 	var slotHandle C.intptr_t
 	if slot != nil {
-		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QPlainTextEdit_loadResource{callback: slot}))
 	}
 	ok := C.QPlainTextEdit_override_virtual_loadResource(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
@@ -964,12 +970,26 @@ func (this *QPlainTextEdit) OnLoadResource(slot func(super func(typeVal int, nam
 	}
 }
 
+// OnLoadResourceOwned installs a virtual override that transfers
+// ownership of each non-nil returned Qt value object to C++.
+func (this *QPlainTextEdit) OnLoadResourceOwned(slot func(super func(typeVal int, name *QUrl) *QVariant, typeVal int, name *QUrl) *QVariant) {
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QPlainTextEdit_loadResource{callback: slot, ownsReturn: true}))
+	}
+	ok := C.QPlainTextEdit_override_virtual_owned_loadResource(unsafe.Pointer(this.h), slotHandle)
+	if !ok {
+		panic("miqt: can only override virtual methods for directly constructed types")
+	}
+}
+
 //export miqt_exec_callback_QPlainTextEdit_loadResource
 func miqt_exec_callback_QPlainTextEdit_loadResource(self *C.QPlainTextEdit, cb C.intptr_t, typeVal C.int, name *C.QUrl) *C.QVariant {
-	gofunc, ok := cgo.Handle(cb).Value().(func(super func(typeVal int, name *QUrl) *QVariant, typeVal int, name *QUrl) *QVariant)
+	callbackData, ok := cgo.Handle(cb).Value().(miqtVirtualCallback_QPlainTextEdit_loadResource)
 	if !ok {
 		panic("miqt: callback of non-callback type (heap corruption?)")
 	}
+	gofunc := callbackData.callback
 
 	// Convert all CABI parameters to Go parameters
 	slotval1 := (int)(typeVal)
@@ -977,6 +997,9 @@ func miqt_exec_callback_QPlainTextEdit_loadResource(self *C.QPlainTextEdit, cb C
 	slotval2 := newQUrl(name)
 
 	virtualReturn := gofunc((&QPlainTextEdit{h: self}).callVirtualBase_LoadResource, slotval1, slotval2)
+	if callbackData.ownsReturn && virtualReturn != nil {
+		runtime.SetFinalizer(virtualReturn, nil)
+	}
 
 	return virtualReturn.cPointer()
 
@@ -989,10 +1012,16 @@ func (this *QPlainTextEdit) callVirtualBase_InputMethodQuery(property InputMetho
 	return _goptr
 
 }
+
+type miqtVirtualCallback_QPlainTextEdit_inputMethodQuery struct {
+	callback   func(super func(property InputMethodQuery) *QVariant, property InputMethodQuery) *QVariant
+	ownsReturn bool
+}
+
 func (this *QPlainTextEdit) OnInputMethodQuery(slot func(super func(property InputMethodQuery) *QVariant, property InputMethodQuery) *QVariant) {
 	var slotHandle C.intptr_t
 	if slot != nil {
-		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QPlainTextEdit_inputMethodQuery{callback: slot}))
 	}
 	ok := C.QPlainTextEdit_override_virtual_inputMethodQuery(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
@@ -1000,17 +1029,34 @@ func (this *QPlainTextEdit) OnInputMethodQuery(slot func(super func(property Inp
 	}
 }
 
+// OnInputMethodQueryOwned installs a virtual override that transfers
+// ownership of each non-nil returned Qt value object to C++.
+func (this *QPlainTextEdit) OnInputMethodQueryOwned(slot func(super func(property InputMethodQuery) *QVariant, property InputMethodQuery) *QVariant) {
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QPlainTextEdit_inputMethodQuery{callback: slot, ownsReturn: true}))
+	}
+	ok := C.QPlainTextEdit_override_virtual_owned_inputMethodQuery(unsafe.Pointer(this.h), slotHandle)
+	if !ok {
+		panic("miqt: can only override virtual methods for directly constructed types")
+	}
+}
+
 //export miqt_exec_callback_QPlainTextEdit_inputMethodQuery
 func miqt_exec_callback_QPlainTextEdit_inputMethodQuery(self *C.QPlainTextEdit, cb C.intptr_t, property C.int) *C.QVariant {
-	gofunc, ok := cgo.Handle(cb).Value().(func(super func(property InputMethodQuery) *QVariant, property InputMethodQuery) *QVariant)
+	callbackData, ok := cgo.Handle(cb).Value().(miqtVirtualCallback_QPlainTextEdit_inputMethodQuery)
 	if !ok {
 		panic("miqt: callback of non-callback type (heap corruption?)")
 	}
+	gofunc := callbackData.callback
 
 	// Convert all CABI parameters to Go parameters
 	slotval1 := (InputMethodQuery)(property)
 
 	virtualReturn := gofunc((&QPlainTextEdit{h: self}).callVirtualBase_InputMethodQuery, slotval1)
+	if callbackData.ownsReturn && virtualReturn != nil {
+		runtime.SetFinalizer(virtualReturn, nil)
+	}
 
 	return virtualReturn.cPointer()
 
@@ -1840,10 +1886,16 @@ func (this *QPlainTextEdit) callVirtualBase_MinimumSizeHint() *QSize {
 	return _goptr
 
 }
+
+type miqtVirtualCallback_QPlainTextEdit_minimumSizeHint struct {
+	callback   func(super func() *QSize) *QSize
+	ownsReturn bool
+}
+
 func (this *QPlainTextEdit) OnMinimumSizeHint(slot func(super func() *QSize) *QSize) {
 	var slotHandle C.intptr_t
 	if slot != nil {
-		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QPlainTextEdit_minimumSizeHint{callback: slot}))
 	}
 	ok := C.QPlainTextEdit_override_virtual_minimumSizeHint(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
@@ -1851,14 +1903,31 @@ func (this *QPlainTextEdit) OnMinimumSizeHint(slot func(super func() *QSize) *QS
 	}
 }
 
+// OnMinimumSizeHintOwned installs a virtual override that transfers
+// ownership of each non-nil returned Qt value object to C++.
+func (this *QPlainTextEdit) OnMinimumSizeHintOwned(slot func(super func() *QSize) *QSize) {
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QPlainTextEdit_minimumSizeHint{callback: slot, ownsReturn: true}))
+	}
+	ok := C.QPlainTextEdit_override_virtual_owned_minimumSizeHint(unsafe.Pointer(this.h), slotHandle)
+	if !ok {
+		panic("miqt: can only override virtual methods for directly constructed types")
+	}
+}
+
 //export miqt_exec_callback_QPlainTextEdit_minimumSizeHint
 func miqt_exec_callback_QPlainTextEdit_minimumSizeHint(self *C.QPlainTextEdit, cb C.intptr_t) *C.QSize {
-	gofunc, ok := cgo.Handle(cb).Value().(func(super func() *QSize) *QSize)
+	callbackData, ok := cgo.Handle(cb).Value().(miqtVirtualCallback_QPlainTextEdit_minimumSizeHint)
 	if !ok {
 		panic("miqt: callback of non-callback type (heap corruption?)")
 	}
+	gofunc := callbackData.callback
 
 	virtualReturn := gofunc((&QPlainTextEdit{h: self}).callVirtualBase_MinimumSizeHint)
+	if callbackData.ownsReturn && virtualReturn != nil {
+		runtime.SetFinalizer(virtualReturn, nil)
+	}
 
 	return virtualReturn.cPointer()
 
@@ -1871,10 +1940,16 @@ func (this *QPlainTextEdit) callVirtualBase_SizeHint() *QSize {
 	return _goptr
 
 }
+
+type miqtVirtualCallback_QPlainTextEdit_sizeHint struct {
+	callback   func(super func() *QSize) *QSize
+	ownsReturn bool
+}
+
 func (this *QPlainTextEdit) OnSizeHint(slot func(super func() *QSize) *QSize) {
 	var slotHandle C.intptr_t
 	if slot != nil {
-		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QPlainTextEdit_sizeHint{callback: slot}))
 	}
 	ok := C.QPlainTextEdit_override_virtual_sizeHint(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
@@ -1882,14 +1957,31 @@ func (this *QPlainTextEdit) OnSizeHint(slot func(super func() *QSize) *QSize) {
 	}
 }
 
+// OnSizeHintOwned installs a virtual override that transfers
+// ownership of each non-nil returned Qt value object to C++.
+func (this *QPlainTextEdit) OnSizeHintOwned(slot func(super func() *QSize) *QSize) {
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QPlainTextEdit_sizeHint{callback: slot, ownsReturn: true}))
+	}
+	ok := C.QPlainTextEdit_override_virtual_owned_sizeHint(unsafe.Pointer(this.h), slotHandle)
+	if !ok {
+		panic("miqt: can only override virtual methods for directly constructed types")
+	}
+}
+
 //export miqt_exec_callback_QPlainTextEdit_sizeHint
 func miqt_exec_callback_QPlainTextEdit_sizeHint(self *C.QPlainTextEdit, cb C.intptr_t) *C.QSize {
-	gofunc, ok := cgo.Handle(cb).Value().(func(super func() *QSize) *QSize)
+	callbackData, ok := cgo.Handle(cb).Value().(miqtVirtualCallback_QPlainTextEdit_sizeHint)
 	if !ok {
 		panic("miqt: callback of non-callback type (heap corruption?)")
 	}
+	gofunc := callbackData.callback
 
 	virtualReturn := gofunc((&QPlainTextEdit{h: self}).callVirtualBase_SizeHint)
+	if callbackData.ownsReturn && virtualReturn != nil {
+		runtime.SetFinalizer(virtualReturn, nil)
+	}
 
 	return virtualReturn.cPointer()
 
@@ -1998,10 +2090,16 @@ func (this *QPlainTextEdit) callVirtualBase_ViewportSizeHint() *QSize {
 	return _goptr
 
 }
+
+type miqtVirtualCallback_QPlainTextEdit_viewportSizeHint struct {
+	callback   func(super func() *QSize) *QSize
+	ownsReturn bool
+}
+
 func (this *QPlainTextEdit) OnViewportSizeHint(slot func(super func() *QSize) *QSize) {
 	var slotHandle C.intptr_t
 	if slot != nil {
-		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QPlainTextEdit_viewportSizeHint{callback: slot}))
 	}
 	ok := C.QPlainTextEdit_override_virtual_viewportSizeHint(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
@@ -2009,14 +2107,31 @@ func (this *QPlainTextEdit) OnViewportSizeHint(slot func(super func() *QSize) *Q
 	}
 }
 
+// OnViewportSizeHintOwned installs a virtual override that transfers
+// ownership of each non-nil returned Qt value object to C++.
+func (this *QPlainTextEdit) OnViewportSizeHintOwned(slot func(super func() *QSize) *QSize) {
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QPlainTextEdit_viewportSizeHint{callback: slot, ownsReturn: true}))
+	}
+	ok := C.QPlainTextEdit_override_virtual_owned_viewportSizeHint(unsafe.Pointer(this.h), slotHandle)
+	if !ok {
+		panic("miqt: can only override virtual methods for directly constructed types")
+	}
+}
+
 //export miqt_exec_callback_QPlainTextEdit_viewportSizeHint
 func miqt_exec_callback_QPlainTextEdit_viewportSizeHint(self *C.QPlainTextEdit, cb C.intptr_t) *C.QSize {
-	gofunc, ok := cgo.Handle(cb).Value().(func(super func() *QSize) *QSize)
+	callbackData, ok := cgo.Handle(cb).Value().(miqtVirtualCallback_QPlainTextEdit_viewportSizeHint)
 	if !ok {
 		panic("miqt: callback of non-callback type (heap corruption?)")
 	}
+	gofunc := callbackData.callback
 
 	virtualReturn := gofunc((&QPlainTextEdit{h: self}).callVirtualBase_ViewportSizeHint)
+	if callbackData.ownsReturn && virtualReturn != nil {
+		runtime.SetFinalizer(virtualReturn, nil)
+	}
 
 	return virtualReturn.cPointer()
 
@@ -3037,10 +3152,16 @@ func (this *QPlainTextDocumentLayout) callVirtualBase_DocumentSize() *QSizeF {
 	return _goptr
 
 }
+
+type miqtVirtualCallback_QPlainTextDocumentLayout_documentSize struct {
+	callback   func(super func() *QSizeF) *QSizeF
+	ownsReturn bool
+}
+
 func (this *QPlainTextDocumentLayout) OnDocumentSize(slot func(super func() *QSizeF) *QSizeF) {
 	var slotHandle C.intptr_t
 	if slot != nil {
-		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QPlainTextDocumentLayout_documentSize{callback: slot}))
 	}
 	ok := C.QPlainTextDocumentLayout_override_virtual_documentSize(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
@@ -3048,14 +3169,31 @@ func (this *QPlainTextDocumentLayout) OnDocumentSize(slot func(super func() *QSi
 	}
 }
 
+// OnDocumentSizeOwned installs a virtual override that transfers
+// ownership of each non-nil returned Qt value object to C++.
+func (this *QPlainTextDocumentLayout) OnDocumentSizeOwned(slot func(super func() *QSizeF) *QSizeF) {
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QPlainTextDocumentLayout_documentSize{callback: slot, ownsReturn: true}))
+	}
+	ok := C.QPlainTextDocumentLayout_override_virtual_owned_documentSize(unsafe.Pointer(this.h), slotHandle)
+	if !ok {
+		panic("miqt: can only override virtual methods for directly constructed types")
+	}
+}
+
 //export miqt_exec_callback_QPlainTextDocumentLayout_documentSize
 func miqt_exec_callback_QPlainTextDocumentLayout_documentSize(self *C.QPlainTextDocumentLayout, cb C.intptr_t) *C.QSizeF {
-	gofunc, ok := cgo.Handle(cb).Value().(func(super func() *QSizeF) *QSizeF)
+	callbackData, ok := cgo.Handle(cb).Value().(miqtVirtualCallback_QPlainTextDocumentLayout_documentSize)
 	if !ok {
 		panic("miqt: callback of non-callback type (heap corruption?)")
 	}
+	gofunc := callbackData.callback
 
 	virtualReturn := gofunc((&QPlainTextDocumentLayout{h: self}).callVirtualBase_DocumentSize)
+	if callbackData.ownsReturn && virtualReturn != nil {
+		runtime.SetFinalizer(virtualReturn, nil)
+	}
 
 	return virtualReturn.cPointer()
 
@@ -3068,10 +3206,16 @@ func (this *QPlainTextDocumentLayout) callVirtualBase_FrameBoundingRect(param1 *
 	return _goptr
 
 }
+
+type miqtVirtualCallback_QPlainTextDocumentLayout_frameBoundingRect struct {
+	callback   func(super func(param1 *QTextFrame) *QRectF, param1 *QTextFrame) *QRectF
+	ownsReturn bool
+}
+
 func (this *QPlainTextDocumentLayout) OnFrameBoundingRect(slot func(super func(param1 *QTextFrame) *QRectF, param1 *QTextFrame) *QRectF) {
 	var slotHandle C.intptr_t
 	if slot != nil {
-		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QPlainTextDocumentLayout_frameBoundingRect{callback: slot}))
 	}
 	ok := C.QPlainTextDocumentLayout_override_virtual_frameBoundingRect(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
@@ -3079,17 +3223,34 @@ func (this *QPlainTextDocumentLayout) OnFrameBoundingRect(slot func(super func(p
 	}
 }
 
+// OnFrameBoundingRectOwned installs a virtual override that transfers
+// ownership of each non-nil returned Qt value object to C++.
+func (this *QPlainTextDocumentLayout) OnFrameBoundingRectOwned(slot func(super func(param1 *QTextFrame) *QRectF, param1 *QTextFrame) *QRectF) {
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QPlainTextDocumentLayout_frameBoundingRect{callback: slot, ownsReturn: true}))
+	}
+	ok := C.QPlainTextDocumentLayout_override_virtual_owned_frameBoundingRect(unsafe.Pointer(this.h), slotHandle)
+	if !ok {
+		panic("miqt: can only override virtual methods for directly constructed types")
+	}
+}
+
 //export miqt_exec_callback_QPlainTextDocumentLayout_frameBoundingRect
 func miqt_exec_callback_QPlainTextDocumentLayout_frameBoundingRect(self *C.QPlainTextDocumentLayout, cb C.intptr_t, param1 *C.QTextFrame) *C.QRectF {
-	gofunc, ok := cgo.Handle(cb).Value().(func(super func(param1 *QTextFrame) *QRectF, param1 *QTextFrame) *QRectF)
+	callbackData, ok := cgo.Handle(cb).Value().(miqtVirtualCallback_QPlainTextDocumentLayout_frameBoundingRect)
 	if !ok {
 		panic("miqt: callback of non-callback type (heap corruption?)")
 	}
+	gofunc := callbackData.callback
 
 	// Convert all CABI parameters to Go parameters
 	slotval1 := newQTextFrame(param1)
 
 	virtualReturn := gofunc((&QPlainTextDocumentLayout{h: self}).callVirtualBase_FrameBoundingRect, slotval1)
+	if callbackData.ownsReturn && virtualReturn != nil {
+		runtime.SetFinalizer(virtualReturn, nil)
+	}
 
 	return virtualReturn.cPointer()
 
@@ -3102,10 +3263,16 @@ func (this *QPlainTextDocumentLayout) callVirtualBase_BlockBoundingRect(block *Q
 	return _goptr
 
 }
+
+type miqtVirtualCallback_QPlainTextDocumentLayout_blockBoundingRect struct {
+	callback   func(super func(block *QTextBlock) *QRectF, block *QTextBlock) *QRectF
+	ownsReturn bool
+}
+
 func (this *QPlainTextDocumentLayout) OnBlockBoundingRect(slot func(super func(block *QTextBlock) *QRectF, block *QTextBlock) *QRectF) {
 	var slotHandle C.intptr_t
 	if slot != nil {
-		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QPlainTextDocumentLayout_blockBoundingRect{callback: slot}))
 	}
 	ok := C.QPlainTextDocumentLayout_override_virtual_blockBoundingRect(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
@@ -3113,17 +3280,34 @@ func (this *QPlainTextDocumentLayout) OnBlockBoundingRect(slot func(super func(b
 	}
 }
 
+// OnBlockBoundingRectOwned installs a virtual override that transfers
+// ownership of each non-nil returned Qt value object to C++.
+func (this *QPlainTextDocumentLayout) OnBlockBoundingRectOwned(slot func(super func(block *QTextBlock) *QRectF, block *QTextBlock) *QRectF) {
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QPlainTextDocumentLayout_blockBoundingRect{callback: slot, ownsReturn: true}))
+	}
+	ok := C.QPlainTextDocumentLayout_override_virtual_owned_blockBoundingRect(unsafe.Pointer(this.h), slotHandle)
+	if !ok {
+		panic("miqt: can only override virtual methods for directly constructed types")
+	}
+}
+
 //export miqt_exec_callback_QPlainTextDocumentLayout_blockBoundingRect
 func miqt_exec_callback_QPlainTextDocumentLayout_blockBoundingRect(self *C.QPlainTextDocumentLayout, cb C.intptr_t, block *C.QTextBlock) *C.QRectF {
-	gofunc, ok := cgo.Handle(cb).Value().(func(super func(block *QTextBlock) *QRectF, block *QTextBlock) *QRectF)
+	callbackData, ok := cgo.Handle(cb).Value().(miqtVirtualCallback_QPlainTextDocumentLayout_blockBoundingRect)
 	if !ok {
 		panic("miqt: callback of non-callback type (heap corruption?)")
 	}
+	gofunc := callbackData.callback
 
 	// Convert all CABI parameters to Go parameters
 	slotval1 := newQTextBlock(block)
 
 	virtualReturn := gofunc((&QPlainTextDocumentLayout{h: self}).callVirtualBase_BlockBoundingRect, slotval1)
+	if callbackData.ownsReturn && virtualReturn != nil {
+		runtime.SetFinalizer(virtualReturn, nil)
+	}
 
 	return virtualReturn.cPointer()
 

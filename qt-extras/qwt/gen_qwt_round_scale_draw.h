@@ -56,6 +56,7 @@ void QwtRoundScaleDraw_virtualbase_drawLabel(const void* self, QPainter* param1,
 bool QwtRoundScaleDraw_override_virtual_draw(void* self, intptr_t slot);
 void QwtRoundScaleDraw_virtualbase_draw(const void* self, QPainter* param1, QPalette* param2);
 bool QwtRoundScaleDraw_override_virtual_label(void* self, intptr_t slot);
+bool QwtRoundScaleDraw_override_virtual_owned_label(void* self, intptr_t slot);
 QwtText* QwtRoundScaleDraw_virtualbase_label(const void* self, double param1);
 
 void QwtRoundScaleDraw_protectedbase_invalidateCache(bool* _dynamic_cast_ok, void* self);

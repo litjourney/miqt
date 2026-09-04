@@ -136,6 +136,7 @@ public:
 
 	// cgo.Handle value for overwritten implementation
 	miqt_callback_handle<miqt_exec_callback_handle_release_QDesignerWidgetBoxInterface> handle__category;
+	bool owns_return__category = false;
 
 	// Subclass to allow providing a Go implementation
 	virtual QDesignerWidgetBoxInterface::Category category(int cat_idx) const override {
@@ -145,6 +146,10 @@ public:
 
 		int sigval1 = cat_idx;
 		QDesignerWidgetBoxInterface__Category* callback_return_value = miqt_exec_callback_QDesignerWidgetBoxInterface_category(this, handle__category.value(), sigval1);
+		std::unique_ptr<QDesignerWidgetBoxInterface::Category> callback_return_value_owner;
+		if (owns_return__category) {
+			callback_return_value_owner.reset(callback_return_value);
+		}
 		return *callback_return_value;
 	}
 
@@ -194,6 +199,7 @@ public:
 
 	// cgo.Handle value for overwritten implementation
 	miqt_callback_handle<miqt_exec_callback_handle_release_QDesignerWidgetBoxInterface> handle__widget;
+	bool owns_return__widget = false;
 
 	// Subclass to allow providing a Go implementation
 	virtual QDesignerWidgetBoxInterface::Widget widget(int cat_idx, int wgt_idx) const override {
@@ -204,6 +210,10 @@ public:
 		int sigval1 = cat_idx;
 		int sigval2 = wgt_idx;
 		QDesignerWidgetBoxInterface__Widget* callback_return_value = miqt_exec_callback_QDesignerWidgetBoxInterface_widget(this, handle__widget.value(), sigval1, sigval2);
+		std::unique_ptr<QDesignerWidgetBoxInterface::Widget> callback_return_value_owner;
+		if (owns_return__widget) {
+			callback_return_value_owner.reset(callback_return_value);
+		}
 		return *callback_return_value;
 	}
 
@@ -361,6 +371,7 @@ public:
 
 	// cgo.Handle value for overwritten implementation
 	miqt_callback_handle<miqt_exec_callback_handle_release_QDesignerWidgetBoxInterface> handle__sizeHint;
+	bool owns_return__sizeHint = false;
 
 	// Subclass to allow providing a Go implementation
 	virtual QSize sizeHint() const override {
@@ -369,6 +380,10 @@ public:
 		}
 
 		QSize* callback_return_value = miqt_exec_callback_QDesignerWidgetBoxInterface_sizeHint(this, handle__sizeHint.value());
+		std::unique_ptr<QSize> callback_return_value_owner;
+		if (owns_return__sizeHint) {
+			callback_return_value_owner.reset(callback_return_value);
+		}
 		return *callback_return_value;
 	}
 
@@ -376,6 +391,7 @@ public:
 
 	// cgo.Handle value for overwritten implementation
 	miqt_callback_handle<miqt_exec_callback_handle_release_QDesignerWidgetBoxInterface> handle__minimumSizeHint;
+	bool owns_return__minimumSizeHint = false;
 
 	// Subclass to allow providing a Go implementation
 	virtual QSize minimumSizeHint() const override {
@@ -384,6 +400,10 @@ public:
 		}
 
 		QSize* callback_return_value = miqt_exec_callback_QDesignerWidgetBoxInterface_minimumSizeHint(this, handle__minimumSizeHint.value());
+		std::unique_ptr<QSize> callback_return_value_owner;
+		if (owns_return__minimumSizeHint) {
+			callback_return_value_owner.reset(callback_return_value);
+		}
 		return *callback_return_value;
 	}
 
@@ -983,6 +1003,7 @@ public:
 
 	// cgo.Handle value for overwritten implementation
 	miqt_callback_handle<miqt_exec_callback_handle_release_QDesignerWidgetBoxInterface> handle__inputMethodQuery;
+	bool owns_return__inputMethodQuery = false;
 
 	// Subclass to allow providing a Go implementation
 	virtual QVariant inputMethodQuery(Qt::InputMethodQuery param1) const override {
@@ -993,6 +1014,10 @@ public:
 		Qt::InputMethodQuery param1_ret = param1;
 		int sigval1 = static_cast<int>(param1_ret);
 		QVariant* callback_return_value = miqt_exec_callback_QDesignerWidgetBoxInterface_inputMethodQuery(this, handle__inputMethodQuery.value(), sigval1);
+		std::unique_ptr<QVariant> callback_return_value_owner;
+		if (owns_return__inputMethodQuery) {
+			callback_return_value_owner.reset(callback_return_value);
+		}
 		return *callback_return_value;
 	}
 
@@ -1312,6 +1337,19 @@ bool QDesignerWidgetBoxInterface_override_virtual_category(void* self, intptr_t 
 	}
 
 	self_cast->handle__category = std::move(slot_handle);
+	self_cast->owns_return__category = false;
+	return true;
+}
+
+bool QDesignerWidgetBoxInterface_override_virtual_owned_category(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QDesignerWidgetBoxInterface> slot_handle(slot);
+	MiqtVirtualQDesignerWidgetBoxInterface* self_cast = dynamic_cast<MiqtVirtualQDesignerWidgetBoxInterface*>( (QDesignerWidgetBoxInterface*)(self) );
+	if (self_cast == nullptr) {
+		return false;
+	}
+
+	self_cast->handle__category = std::move(slot_handle);
+	self_cast->owns_return__category = true;
 	return true;
 }
 
@@ -1356,6 +1394,19 @@ bool QDesignerWidgetBoxInterface_override_virtual_widget(void* self, intptr_t sl
 	}
 
 	self_cast->handle__widget = std::move(slot_handle);
+	self_cast->owns_return__widget = false;
+	return true;
+}
+
+bool QDesignerWidgetBoxInterface_override_virtual_owned_widget(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QDesignerWidgetBoxInterface> slot_handle(slot);
+	MiqtVirtualQDesignerWidgetBoxInterface* self_cast = dynamic_cast<MiqtVirtualQDesignerWidgetBoxInterface*>( (QDesignerWidgetBoxInterface*)(self) );
+	if (self_cast == nullptr) {
+		return false;
+	}
+
+	self_cast->handle__widget = std::move(slot_handle);
+	self_cast->owns_return__widget = true;
 	return true;
 }
 
@@ -1474,6 +1525,19 @@ bool QDesignerWidgetBoxInterface_override_virtual_sizeHint(void* self, intptr_t 
 	}
 
 	self_cast->handle__sizeHint = std::move(slot_handle);
+	self_cast->owns_return__sizeHint = false;
+	return true;
+}
+
+bool QDesignerWidgetBoxInterface_override_virtual_owned_sizeHint(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QDesignerWidgetBoxInterface> slot_handle(slot);
+	MiqtVirtualQDesignerWidgetBoxInterface* self_cast = dynamic_cast<MiqtVirtualQDesignerWidgetBoxInterface*>( (QDesignerWidgetBoxInterface*)(self) );
+	if (self_cast == nullptr) {
+		return false;
+	}
+
+	self_cast->handle__sizeHint = std::move(slot_handle);
+	self_cast->owns_return__sizeHint = true;
 	return true;
 }
 
@@ -1489,6 +1553,19 @@ bool QDesignerWidgetBoxInterface_override_virtual_minimumSizeHint(void* self, in
 	}
 
 	self_cast->handle__minimumSizeHint = std::move(slot_handle);
+	self_cast->owns_return__minimumSizeHint = false;
+	return true;
+}
+
+bool QDesignerWidgetBoxInterface_override_virtual_owned_minimumSizeHint(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QDesignerWidgetBoxInterface> slot_handle(slot);
+	MiqtVirtualQDesignerWidgetBoxInterface* self_cast = dynamic_cast<MiqtVirtualQDesignerWidgetBoxInterface*>( (QDesignerWidgetBoxInterface*)(self) );
+	if (self_cast == nullptr) {
+		return false;
+	}
+
+	self_cast->handle__minimumSizeHint = std::move(slot_handle);
+	self_cast->owns_return__minimumSizeHint = true;
 	return true;
 }
 
@@ -2030,6 +2107,19 @@ bool QDesignerWidgetBoxInterface_override_virtual_inputMethodQuery(void* self, i
 	}
 
 	self_cast->handle__inputMethodQuery = std::move(slot_handle);
+	self_cast->owns_return__inputMethodQuery = false;
+	return true;
+}
+
+bool QDesignerWidgetBoxInterface_override_virtual_owned_inputMethodQuery(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QDesignerWidgetBoxInterface> slot_handle(slot);
+	MiqtVirtualQDesignerWidgetBoxInterface* self_cast = dynamic_cast<MiqtVirtualQDesignerWidgetBoxInterface*>( (QDesignerWidgetBoxInterface*)(self) );
+	if (self_cast == nullptr) {
+		return false;
+	}
+
+	self_cast->handle__inputMethodQuery = std::move(slot_handle);
+	self_cast->owns_return__inputMethodQuery = true;
 	return true;
 }
 

@@ -57,6 +57,7 @@ public:
 
 	// cgo.Handle value for overwritten implementation
 	miqt_callback_handle<miqt_exec_callback_handle_release_QwtSymbol> handle__boundingRect;
+	bool owns_return__boundingRect = false;
 
 	// Subclass to allow providing a Go implementation
 	virtual QRect boundingRect() const override {
@@ -65,6 +66,10 @@ public:
 		}
 
 		QRect* callback_return_value = miqt_exec_callback_QwtSymbol_boundingRect(this, handle__boundingRect.value());
+		std::unique_ptr<QRect> callback_return_value_owner;
+		if (owns_return__boundingRect) {
+			callback_return_value_owner.reset(callback_return_value);
+		}
 		return *callback_return_value;
 	}
 
@@ -277,6 +282,19 @@ bool QwtSymbol_override_virtual_boundingRect(void* self, intptr_t slot) {
 	}
 
 	self_cast->handle__boundingRect = std::move(slot_handle);
+	self_cast->owns_return__boundingRect = false;
+	return true;
+}
+
+bool QwtSymbol_override_virtual_owned_boundingRect(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtSymbol> slot_handle(slot);
+	MiqtVirtualQwtSymbol* self_cast = dynamic_cast<MiqtVirtualQwtSymbol*>( (QwtSymbol*)(self) );
+	if (self_cast == nullptr) {
+		return false;
+	}
+
+	self_cast->handle__boundingRect = std::move(slot_handle);
+	self_cast->owns_return__boundingRect = true;
 	return true;
 }
 

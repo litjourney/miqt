@@ -89,6 +89,7 @@ struct miqt_string QDesignerWidgetDataBaseItemInterface_virtualbase_includeFile(
 bool QDesignerWidgetDataBaseItemInterface_override_virtual_setIncludeFile(void* self, intptr_t slot);
 void QDesignerWidgetDataBaseItemInterface_virtualbase_setIncludeFile(void* self, struct miqt_string includeFile);
 bool QDesignerWidgetDataBaseItemInterface_override_virtual_icon(void* self, intptr_t slot);
+bool QDesignerWidgetDataBaseItemInterface_override_virtual_owned_icon(void* self, intptr_t slot);
 QIcon* QDesignerWidgetDataBaseItemInterface_virtualbase_icon(const void* self);
 bool QDesignerWidgetDataBaseItemInterface_override_virtual_setIcon(void* self, intptr_t slot);
 void QDesignerWidgetDataBaseItemInterface_virtualbase_setIcon(void* self, QIcon* icon);

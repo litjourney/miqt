@@ -50,6 +50,7 @@ public:
 
 	// cgo.Handle value for overwritten implementation
 	miqt_callback_handle<miqt_exec_callback_handle_release_QwtMatrixRasterData> handle__pixelHint;
+	bool owns_return__pixelHint = false;
 
 	// Subclass to allow providing a Go implementation
 	virtual QRectF pixelHint(const QRectF& param1) const override {
@@ -61,6 +62,10 @@ public:
 		// Cast returned reference into pointer
 		QRectF* sigval1 = const_cast<QRectF*>(&param1_ret);
 		QRectF* callback_return_value = miqt_exec_callback_QwtMatrixRasterData_pixelHint(this, handle__pixelHint.value(), sigval1);
+		std::unique_ptr<QRectF> callback_return_value_owner;
+		if (owns_return__pixelHint) {
+			callback_return_value_owner.reset(callback_return_value);
+		}
 		return *callback_return_value;
 	}
 
@@ -210,6 +215,19 @@ bool QwtMatrixRasterData_override_virtual_pixelHint(void* self, intptr_t slot) {
 	}
 
 	self_cast->handle__pixelHint = std::move(slot_handle);
+	self_cast->owns_return__pixelHint = false;
+	return true;
+}
+
+bool QwtMatrixRasterData_override_virtual_owned_pixelHint(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtMatrixRasterData> slot_handle(slot);
+	MiqtVirtualQwtMatrixRasterData* self_cast = dynamic_cast<MiqtVirtualQwtMatrixRasterData*>( (QwtMatrixRasterData*)(self) );
+	if (self_cast == nullptr) {
+		return false;
+	}
+
+	self_cast->handle__pixelHint = std::move(slot_handle);
+	self_cast->owns_return__pixelHint = true;
 	return true;
 }
 

@@ -102,10 +102,13 @@ void QGridLayout_addItem3(QGridLayout* self, QLayoutItem* item, int row, int col
 void QGridLayout_addItem4(QGridLayout* self, QLayoutItem* item, int row, int column, int rowSpan, int columnSpan, int param6);
 
 bool QGridLayout_override_virtual_sizeHint(void* self, intptr_t slot);
+bool QGridLayout_override_virtual_owned_sizeHint(void* self, intptr_t slot);
 QSize* QGridLayout_virtualbase_sizeHint(const void* self);
 bool QGridLayout_override_virtual_minimumSize(void* self, intptr_t slot);
+bool QGridLayout_override_virtual_owned_minimumSize(void* self, intptr_t slot);
 QSize* QGridLayout_virtualbase_minimumSize(const void* self);
 bool QGridLayout_override_virtual_maximumSize(void* self, intptr_t slot);
+bool QGridLayout_override_virtual_owned_maximumSize(void* self, intptr_t slot);
 QSize* QGridLayout_virtualbase_maximumSize(const void* self);
 bool QGridLayout_override_virtual_setSpacing(void* self, intptr_t slot);
 void QGridLayout_virtualbase_setSpacing(void* self, int spacing);
@@ -132,6 +135,7 @@ void QGridLayout_virtualbase_setGeometry(void* self, QRect* geometry);
 bool QGridLayout_override_virtual_addItemWithQLayoutItem(void* self, intptr_t slot);
 void QGridLayout_virtualbase_addItemWithQLayoutItem(void* self, QLayoutItem* param1);
 bool QGridLayout_override_virtual_geometry(void* self, intptr_t slot);
+bool QGridLayout_override_virtual_owned_geometry(void* self, intptr_t slot);
 QRect* QGridLayout_virtualbase_geometry(const void* self);
 bool QGridLayout_override_virtual_indexOf(void* self, intptr_t slot);
 int QGridLayout_virtualbase_indexOf(const void* self, QWidget* param1);

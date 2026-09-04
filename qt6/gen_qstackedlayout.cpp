@@ -103,6 +103,7 @@ public:
 
 	// cgo.Handle value for overwritten implementation
 	miqt_callback_handle<miqt_exec_callback_handle_release_QStackedLayout> handle__sizeHint;
+	bool owns_return__sizeHint = false;
 
 	// Subclass to allow providing a Go implementation
 	virtual QSize sizeHint() const override {
@@ -111,6 +112,10 @@ public:
 		}
 
 		QSize* callback_return_value = miqt_exec_callback_QStackedLayout_sizeHint(this, handle__sizeHint.value());
+		std::unique_ptr<QSize> callback_return_value_owner;
+		if (owns_return__sizeHint) {
+			callback_return_value_owner.reset(callback_return_value);
+		}
 		return *callback_return_value;
 	}
 
@@ -118,6 +123,7 @@ public:
 
 	// cgo.Handle value for overwritten implementation
 	miqt_callback_handle<miqt_exec_callback_handle_release_QStackedLayout> handle__minimumSize;
+	bool owns_return__minimumSize = false;
 
 	// Subclass to allow providing a Go implementation
 	virtual QSize minimumSize() const override {
@@ -126,6 +132,10 @@ public:
 		}
 
 		QSize* callback_return_value = miqt_exec_callback_QStackedLayout_minimumSize(this, handle__minimumSize.value());
+		std::unique_ptr<QSize> callback_return_value_owner;
+		if (owns_return__minimumSize) {
+			callback_return_value_owner.reset(callback_return_value);
+		}
 		return *callback_return_value;
 	}
 
@@ -263,6 +273,7 @@ public:
 
 	// cgo.Handle value for overwritten implementation
 	miqt_callback_handle<miqt_exec_callback_handle_release_QStackedLayout> handle__geometry;
+	bool owns_return__geometry = false;
 
 	// Subclass to allow providing a Go implementation
 	virtual QRect geometry() const override {
@@ -271,6 +282,10 @@ public:
 		}
 
 		QRect* callback_return_value = miqt_exec_callback_QStackedLayout_geometry(this, handle__geometry.value());
+		std::unique_ptr<QRect> callback_return_value_owner;
+		if (owns_return__geometry) {
+			callback_return_value_owner.reset(callback_return_value);
+		}
 		return *callback_return_value;
 	}
 
@@ -293,6 +308,7 @@ public:
 
 	// cgo.Handle value for overwritten implementation
 	miqt_callback_handle<miqt_exec_callback_handle_release_QStackedLayout> handle__maximumSize;
+	bool owns_return__maximumSize = false;
 
 	// Subclass to allow providing a Go implementation
 	virtual QSize maximumSize() const override {
@@ -301,6 +317,10 @@ public:
 		}
 
 		QSize* callback_return_value = miqt_exec_callback_QStackedLayout_maximumSize(this, handle__maximumSize.value());
+		std::unique_ptr<QSize> callback_return_value_owner;
+		if (owns_return__maximumSize) {
+			callback_return_value_owner.reset(callback_return_value);
+		}
 		return *callback_return_value;
 	}
 
@@ -760,6 +780,19 @@ bool QStackedLayout_override_virtual_sizeHint(void* self, intptr_t slot) {
 	}
 
 	self_cast->handle__sizeHint = std::move(slot_handle);
+	self_cast->owns_return__sizeHint = false;
+	return true;
+}
+
+bool QStackedLayout_override_virtual_owned_sizeHint(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QStackedLayout> slot_handle(slot);
+	MiqtVirtualQStackedLayout* self_cast = dynamic_cast<MiqtVirtualQStackedLayout*>( (QStackedLayout*)(self) );
+	if (self_cast == nullptr) {
+		return false;
+	}
+
+	self_cast->handle__sizeHint = std::move(slot_handle);
+	self_cast->owns_return__sizeHint = true;
 	return true;
 }
 
@@ -775,6 +808,19 @@ bool QStackedLayout_override_virtual_minimumSize(void* self, intptr_t slot) {
 	}
 
 	self_cast->handle__minimumSize = std::move(slot_handle);
+	self_cast->owns_return__minimumSize = false;
+	return true;
+}
+
+bool QStackedLayout_override_virtual_owned_minimumSize(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QStackedLayout> slot_handle(slot);
+	MiqtVirtualQStackedLayout* self_cast = dynamic_cast<MiqtVirtualQStackedLayout*>( (QStackedLayout*)(self) );
+	if (self_cast == nullptr) {
+		return false;
+	}
+
+	self_cast->handle__minimumSize = std::move(slot_handle);
+	self_cast->owns_return__minimumSize = true;
 	return true;
 }
 
@@ -910,6 +956,19 @@ bool QStackedLayout_override_virtual_geometry(void* self, intptr_t slot) {
 	}
 
 	self_cast->handle__geometry = std::move(slot_handle);
+	self_cast->owns_return__geometry = false;
+	return true;
+}
+
+bool QStackedLayout_override_virtual_owned_geometry(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QStackedLayout> slot_handle(slot);
+	MiqtVirtualQStackedLayout* self_cast = dynamic_cast<MiqtVirtualQStackedLayout*>( (QStackedLayout*)(self) );
+	if (self_cast == nullptr) {
+		return false;
+	}
+
+	self_cast->handle__geometry = std::move(slot_handle);
+	self_cast->owns_return__geometry = true;
 	return true;
 }
 
@@ -941,6 +1000,19 @@ bool QStackedLayout_override_virtual_maximumSize(void* self, intptr_t slot) {
 	}
 
 	self_cast->handle__maximumSize = std::move(slot_handle);
+	self_cast->owns_return__maximumSize = false;
+	return true;
+}
+
+bool QStackedLayout_override_virtual_owned_maximumSize(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QStackedLayout> slot_handle(slot);
+	MiqtVirtualQStackedLayout* self_cast = dynamic_cast<MiqtVirtualQStackedLayout*>( (QStackedLayout*)(self) );
+	if (self_cast == nullptr) {
+		return false;
+	}
+
+	self_cast->handle__maximumSize = std::move(slot_handle);
+	self_cast->owns_return__maximumSize = true;
 	return true;
 }
 

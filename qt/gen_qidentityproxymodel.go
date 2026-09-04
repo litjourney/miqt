@@ -626,10 +626,16 @@ func (this *QIdentityProxyModel) callVirtualBase_Index(row int, column int, pare
 	return _goptr
 
 }
+
+type miqtVirtualCallback_QIdentityProxyModel_index struct {
+	callback   func(super func(row int, column int, parent *QModelIndex) *QModelIndex, row int, column int, parent *QModelIndex) *QModelIndex
+	ownsReturn bool
+}
+
 func (this *QIdentityProxyModel) OnIndex(slot func(super func(row int, column int, parent *QModelIndex) *QModelIndex, row int, column int, parent *QModelIndex) *QModelIndex) {
 	var slotHandle C.intptr_t
 	if slot != nil {
-		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QIdentityProxyModel_index{callback: slot}))
 	}
 	ok := C.QIdentityProxyModel_override_virtual_index(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
@@ -637,12 +643,26 @@ func (this *QIdentityProxyModel) OnIndex(slot func(super func(row int, column in
 	}
 }
 
+// OnIndexOwned installs a virtual override that transfers
+// ownership of each non-nil returned Qt value object to C++.
+func (this *QIdentityProxyModel) OnIndexOwned(slot func(super func(row int, column int, parent *QModelIndex) *QModelIndex, row int, column int, parent *QModelIndex) *QModelIndex) {
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QIdentityProxyModel_index{callback: slot, ownsReturn: true}))
+	}
+	ok := C.QIdentityProxyModel_override_virtual_owned_index(unsafe.Pointer(this.h), slotHandle)
+	if !ok {
+		panic("miqt: can only override virtual methods for directly constructed types")
+	}
+}
+
 //export miqt_exec_callback_QIdentityProxyModel_index
 func miqt_exec_callback_QIdentityProxyModel_index(self *C.QIdentityProxyModel, cb C.intptr_t, row C.int, column C.int, parent *C.QModelIndex) *C.QModelIndex {
-	gofunc, ok := cgo.Handle(cb).Value().(func(super func(row int, column int, parent *QModelIndex) *QModelIndex, row int, column int, parent *QModelIndex) *QModelIndex)
+	callbackData, ok := cgo.Handle(cb).Value().(miqtVirtualCallback_QIdentityProxyModel_index)
 	if !ok {
 		panic("miqt: callback of non-callback type (heap corruption?)")
 	}
+	gofunc := callbackData.callback
 
 	// Convert all CABI parameters to Go parameters
 	slotval1 := (int)(row)
@@ -652,6 +672,9 @@ func miqt_exec_callback_QIdentityProxyModel_index(self *C.QIdentityProxyModel, c
 	slotval3 := newQModelIndex(parent)
 
 	virtualReturn := gofunc((&QIdentityProxyModel{h: self}).callVirtualBase_Index, slotval1, slotval2, slotval3)
+	if callbackData.ownsReturn && virtualReturn != nil {
+		runtime.SetFinalizer(virtualReturn, nil)
+	}
 
 	return virtualReturn.cPointer()
 
@@ -664,10 +687,16 @@ func (this *QIdentityProxyModel) callVirtualBase_MapFromSource(sourceIndex *QMod
 	return _goptr
 
 }
+
+type miqtVirtualCallback_QIdentityProxyModel_mapFromSource struct {
+	callback   func(super func(sourceIndex *QModelIndex) *QModelIndex, sourceIndex *QModelIndex) *QModelIndex
+	ownsReturn bool
+}
+
 func (this *QIdentityProxyModel) OnMapFromSource(slot func(super func(sourceIndex *QModelIndex) *QModelIndex, sourceIndex *QModelIndex) *QModelIndex) {
 	var slotHandle C.intptr_t
 	if slot != nil {
-		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QIdentityProxyModel_mapFromSource{callback: slot}))
 	}
 	ok := C.QIdentityProxyModel_override_virtual_mapFromSource(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
@@ -675,17 +704,34 @@ func (this *QIdentityProxyModel) OnMapFromSource(slot func(super func(sourceInde
 	}
 }
 
+// OnMapFromSourceOwned installs a virtual override that transfers
+// ownership of each non-nil returned Qt value object to C++.
+func (this *QIdentityProxyModel) OnMapFromSourceOwned(slot func(super func(sourceIndex *QModelIndex) *QModelIndex, sourceIndex *QModelIndex) *QModelIndex) {
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QIdentityProxyModel_mapFromSource{callback: slot, ownsReturn: true}))
+	}
+	ok := C.QIdentityProxyModel_override_virtual_owned_mapFromSource(unsafe.Pointer(this.h), slotHandle)
+	if !ok {
+		panic("miqt: can only override virtual methods for directly constructed types")
+	}
+}
+
 //export miqt_exec_callback_QIdentityProxyModel_mapFromSource
 func miqt_exec_callback_QIdentityProxyModel_mapFromSource(self *C.QIdentityProxyModel, cb C.intptr_t, sourceIndex *C.QModelIndex) *C.QModelIndex {
-	gofunc, ok := cgo.Handle(cb).Value().(func(super func(sourceIndex *QModelIndex) *QModelIndex, sourceIndex *QModelIndex) *QModelIndex)
+	callbackData, ok := cgo.Handle(cb).Value().(miqtVirtualCallback_QIdentityProxyModel_mapFromSource)
 	if !ok {
 		panic("miqt: callback of non-callback type (heap corruption?)")
 	}
+	gofunc := callbackData.callback
 
 	// Convert all CABI parameters to Go parameters
 	slotval1 := newQModelIndex(sourceIndex)
 
 	virtualReturn := gofunc((&QIdentityProxyModel{h: self}).callVirtualBase_MapFromSource, slotval1)
+	if callbackData.ownsReturn && virtualReturn != nil {
+		runtime.SetFinalizer(virtualReturn, nil)
+	}
 
 	return virtualReturn.cPointer()
 
@@ -698,10 +744,16 @@ func (this *QIdentityProxyModel) callVirtualBase_MapToSource(proxyIndex *QModelI
 	return _goptr
 
 }
+
+type miqtVirtualCallback_QIdentityProxyModel_mapToSource struct {
+	callback   func(super func(proxyIndex *QModelIndex) *QModelIndex, proxyIndex *QModelIndex) *QModelIndex
+	ownsReturn bool
+}
+
 func (this *QIdentityProxyModel) OnMapToSource(slot func(super func(proxyIndex *QModelIndex) *QModelIndex, proxyIndex *QModelIndex) *QModelIndex) {
 	var slotHandle C.intptr_t
 	if slot != nil {
-		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QIdentityProxyModel_mapToSource{callback: slot}))
 	}
 	ok := C.QIdentityProxyModel_override_virtual_mapToSource(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
@@ -709,17 +761,34 @@ func (this *QIdentityProxyModel) OnMapToSource(slot func(super func(proxyIndex *
 	}
 }
 
+// OnMapToSourceOwned installs a virtual override that transfers
+// ownership of each non-nil returned Qt value object to C++.
+func (this *QIdentityProxyModel) OnMapToSourceOwned(slot func(super func(proxyIndex *QModelIndex) *QModelIndex, proxyIndex *QModelIndex) *QModelIndex) {
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QIdentityProxyModel_mapToSource{callback: slot, ownsReturn: true}))
+	}
+	ok := C.QIdentityProxyModel_override_virtual_owned_mapToSource(unsafe.Pointer(this.h), slotHandle)
+	if !ok {
+		panic("miqt: can only override virtual methods for directly constructed types")
+	}
+}
+
 //export miqt_exec_callback_QIdentityProxyModel_mapToSource
 func miqt_exec_callback_QIdentityProxyModel_mapToSource(self *C.QIdentityProxyModel, cb C.intptr_t, proxyIndex *C.QModelIndex) *C.QModelIndex {
-	gofunc, ok := cgo.Handle(cb).Value().(func(super func(proxyIndex *QModelIndex) *QModelIndex, proxyIndex *QModelIndex) *QModelIndex)
+	callbackData, ok := cgo.Handle(cb).Value().(miqtVirtualCallback_QIdentityProxyModel_mapToSource)
 	if !ok {
 		panic("miqt: callback of non-callback type (heap corruption?)")
 	}
+	gofunc := callbackData.callback
 
 	// Convert all CABI parameters to Go parameters
 	slotval1 := newQModelIndex(proxyIndex)
 
 	virtualReturn := gofunc((&QIdentityProxyModel{h: self}).callVirtualBase_MapToSource, slotval1)
+	if callbackData.ownsReturn && virtualReturn != nil {
+		runtime.SetFinalizer(virtualReturn, nil)
+	}
 
 	return virtualReturn.cPointer()
 
@@ -732,10 +801,16 @@ func (this *QIdentityProxyModel) callVirtualBase_Parent(child *QModelIndex) *QMo
 	return _goptr
 
 }
+
+type miqtVirtualCallback_QIdentityProxyModel_parent struct {
+	callback   func(super func(child *QModelIndex) *QModelIndex, child *QModelIndex) *QModelIndex
+	ownsReturn bool
+}
+
 func (this *QIdentityProxyModel) OnParent(slot func(super func(child *QModelIndex) *QModelIndex, child *QModelIndex) *QModelIndex) {
 	var slotHandle C.intptr_t
 	if slot != nil {
-		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QIdentityProxyModel_parent{callback: slot}))
 	}
 	ok := C.QIdentityProxyModel_override_virtual_parent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
@@ -743,17 +818,34 @@ func (this *QIdentityProxyModel) OnParent(slot func(super func(child *QModelInde
 	}
 }
 
+// OnParentOwned installs a virtual override that transfers
+// ownership of each non-nil returned Qt value object to C++.
+func (this *QIdentityProxyModel) OnParentOwned(slot func(super func(child *QModelIndex) *QModelIndex, child *QModelIndex) *QModelIndex) {
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QIdentityProxyModel_parent{callback: slot, ownsReturn: true}))
+	}
+	ok := C.QIdentityProxyModel_override_virtual_owned_parent(unsafe.Pointer(this.h), slotHandle)
+	if !ok {
+		panic("miqt: can only override virtual methods for directly constructed types")
+	}
+}
+
 //export miqt_exec_callback_QIdentityProxyModel_parent
 func miqt_exec_callback_QIdentityProxyModel_parent(self *C.QIdentityProxyModel, cb C.intptr_t, child *C.QModelIndex) *C.QModelIndex {
-	gofunc, ok := cgo.Handle(cb).Value().(func(super func(child *QModelIndex) *QModelIndex, child *QModelIndex) *QModelIndex)
+	callbackData, ok := cgo.Handle(cb).Value().(miqtVirtualCallback_QIdentityProxyModel_parent)
 	if !ok {
 		panic("miqt: callback of non-callback type (heap corruption?)")
 	}
+	gofunc := callbackData.callback
 
 	// Convert all CABI parameters to Go parameters
 	slotval1 := newQModelIndex(child)
 
 	virtualReturn := gofunc((&QIdentityProxyModel{h: self}).callVirtualBase_Parent, slotval1)
+	if callbackData.ownsReturn && virtualReturn != nil {
+		runtime.SetFinalizer(virtualReturn, nil)
+	}
 
 	return virtualReturn.cPointer()
 
@@ -798,10 +890,16 @@ func (this *QIdentityProxyModel) callVirtualBase_HeaderData(section int, orienta
 	return _goptr
 
 }
+
+type miqtVirtualCallback_QIdentityProxyModel_headerData struct {
+	callback   func(super func(section int, orientation Orientation, role int) *QVariant, section int, orientation Orientation, role int) *QVariant
+	ownsReturn bool
+}
+
 func (this *QIdentityProxyModel) OnHeaderData(slot func(super func(section int, orientation Orientation, role int) *QVariant, section int, orientation Orientation, role int) *QVariant) {
 	var slotHandle C.intptr_t
 	if slot != nil {
-		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QIdentityProxyModel_headerData{callback: slot}))
 	}
 	ok := C.QIdentityProxyModel_override_virtual_headerData(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
@@ -809,12 +907,26 @@ func (this *QIdentityProxyModel) OnHeaderData(slot func(super func(section int, 
 	}
 }
 
+// OnHeaderDataOwned installs a virtual override that transfers
+// ownership of each non-nil returned Qt value object to C++.
+func (this *QIdentityProxyModel) OnHeaderDataOwned(slot func(super func(section int, orientation Orientation, role int) *QVariant, section int, orientation Orientation, role int) *QVariant) {
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QIdentityProxyModel_headerData{callback: slot, ownsReturn: true}))
+	}
+	ok := C.QIdentityProxyModel_override_virtual_owned_headerData(unsafe.Pointer(this.h), slotHandle)
+	if !ok {
+		panic("miqt: can only override virtual methods for directly constructed types")
+	}
+}
+
 //export miqt_exec_callback_QIdentityProxyModel_headerData
 func miqt_exec_callback_QIdentityProxyModel_headerData(self *C.QIdentityProxyModel, cb C.intptr_t, section C.int, orientation C.int, role C.int) *C.QVariant {
-	gofunc, ok := cgo.Handle(cb).Value().(func(super func(section int, orientation Orientation, role int) *QVariant, section int, orientation Orientation, role int) *QVariant)
+	callbackData, ok := cgo.Handle(cb).Value().(miqtVirtualCallback_QIdentityProxyModel_headerData)
 	if !ok {
 		panic("miqt: callback of non-callback type (heap corruption?)")
 	}
+	gofunc := callbackData.callback
 
 	// Convert all CABI parameters to Go parameters
 	slotval1 := (int)(section)
@@ -824,6 +936,9 @@ func miqt_exec_callback_QIdentityProxyModel_headerData(self *C.QIdentityProxyMod
 	slotval3 := (int)(role)
 
 	virtualReturn := gofunc((&QIdentityProxyModel{h: self}).callVirtualBase_HeaderData, slotval1, slotval2, slotval3)
+	if callbackData.ownsReturn && virtualReturn != nil {
+		runtime.SetFinalizer(virtualReturn, nil)
+	}
 
 	return virtualReturn.cPointer()
 
@@ -876,10 +991,16 @@ func (this *QIdentityProxyModel) callVirtualBase_Sibling(row int, column int, id
 	return _goptr
 
 }
+
+type miqtVirtualCallback_QIdentityProxyModel_sibling struct {
+	callback   func(super func(row int, column int, idx *QModelIndex) *QModelIndex, row int, column int, idx *QModelIndex) *QModelIndex
+	ownsReturn bool
+}
+
 func (this *QIdentityProxyModel) OnSibling(slot func(super func(row int, column int, idx *QModelIndex) *QModelIndex, row int, column int, idx *QModelIndex) *QModelIndex) {
 	var slotHandle C.intptr_t
 	if slot != nil {
-		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QIdentityProxyModel_sibling{callback: slot}))
 	}
 	ok := C.QIdentityProxyModel_override_virtual_sibling(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
@@ -887,12 +1008,26 @@ func (this *QIdentityProxyModel) OnSibling(slot func(super func(row int, column 
 	}
 }
 
+// OnSiblingOwned installs a virtual override that transfers
+// ownership of each non-nil returned Qt value object to C++.
+func (this *QIdentityProxyModel) OnSiblingOwned(slot func(super func(row int, column int, idx *QModelIndex) *QModelIndex, row int, column int, idx *QModelIndex) *QModelIndex) {
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QIdentityProxyModel_sibling{callback: slot, ownsReturn: true}))
+	}
+	ok := C.QIdentityProxyModel_override_virtual_owned_sibling(unsafe.Pointer(this.h), slotHandle)
+	if !ok {
+		panic("miqt: can only override virtual methods for directly constructed types")
+	}
+}
+
 //export miqt_exec_callback_QIdentityProxyModel_sibling
 func miqt_exec_callback_QIdentityProxyModel_sibling(self *C.QIdentityProxyModel, cb C.intptr_t, row C.int, column C.int, idx *C.QModelIndex) *C.QModelIndex {
-	gofunc, ok := cgo.Handle(cb).Value().(func(super func(row int, column int, idx *QModelIndex) *QModelIndex, row int, column int, idx *QModelIndex) *QModelIndex)
+	callbackData, ok := cgo.Handle(cb).Value().(miqtVirtualCallback_QIdentityProxyModel_sibling)
 	if !ok {
 		panic("miqt: callback of non-callback type (heap corruption?)")
 	}
+	gofunc := callbackData.callback
 
 	// Convert all CABI parameters to Go parameters
 	slotval1 := (int)(row)
@@ -902,6 +1037,9 @@ func miqt_exec_callback_QIdentityProxyModel_sibling(self *C.QIdentityProxyModel,
 	slotval3 := newQModelIndex(idx)
 
 	virtualReturn := gofunc((&QIdentityProxyModel{h: self}).callVirtualBase_Sibling, slotval1, slotval2, slotval3)
+	if callbackData.ownsReturn && virtualReturn != nil {
+		runtime.SetFinalizer(virtualReturn, nil)
+	}
 
 	return virtualReturn.cPointer()
 
@@ -914,10 +1052,16 @@ func (this *QIdentityProxyModel) callVirtualBase_MapSelectionFromSource(selectio
 	return _goptr
 
 }
+
+type miqtVirtualCallback_QIdentityProxyModel_mapSelectionFromSource struct {
+	callback   func(super func(selection *QItemSelection) *QItemSelection, selection *QItemSelection) *QItemSelection
+	ownsReturn bool
+}
+
 func (this *QIdentityProxyModel) OnMapSelectionFromSource(slot func(super func(selection *QItemSelection) *QItemSelection, selection *QItemSelection) *QItemSelection) {
 	var slotHandle C.intptr_t
 	if slot != nil {
-		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QIdentityProxyModel_mapSelectionFromSource{callback: slot}))
 	}
 	ok := C.QIdentityProxyModel_override_virtual_mapSelectionFromSource(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
@@ -925,17 +1069,34 @@ func (this *QIdentityProxyModel) OnMapSelectionFromSource(slot func(super func(s
 	}
 }
 
+// OnMapSelectionFromSourceOwned installs a virtual override that transfers
+// ownership of each non-nil returned Qt value object to C++.
+func (this *QIdentityProxyModel) OnMapSelectionFromSourceOwned(slot func(super func(selection *QItemSelection) *QItemSelection, selection *QItemSelection) *QItemSelection) {
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QIdentityProxyModel_mapSelectionFromSource{callback: slot, ownsReturn: true}))
+	}
+	ok := C.QIdentityProxyModel_override_virtual_owned_mapSelectionFromSource(unsafe.Pointer(this.h), slotHandle)
+	if !ok {
+		panic("miqt: can only override virtual methods for directly constructed types")
+	}
+}
+
 //export miqt_exec_callback_QIdentityProxyModel_mapSelectionFromSource
 func miqt_exec_callback_QIdentityProxyModel_mapSelectionFromSource(self *C.QIdentityProxyModel, cb C.intptr_t, selection *C.QItemSelection) *C.QItemSelection {
-	gofunc, ok := cgo.Handle(cb).Value().(func(super func(selection *QItemSelection) *QItemSelection, selection *QItemSelection) *QItemSelection)
+	callbackData, ok := cgo.Handle(cb).Value().(miqtVirtualCallback_QIdentityProxyModel_mapSelectionFromSource)
 	if !ok {
 		panic("miqt: callback of non-callback type (heap corruption?)")
 	}
+	gofunc := callbackData.callback
 
 	// Convert all CABI parameters to Go parameters
 	slotval1 := newQItemSelection(selection)
 
 	virtualReturn := gofunc((&QIdentityProxyModel{h: self}).callVirtualBase_MapSelectionFromSource, slotval1)
+	if callbackData.ownsReturn && virtualReturn != nil {
+		runtime.SetFinalizer(virtualReturn, nil)
+	}
 
 	return virtualReturn.cPointer()
 
@@ -948,10 +1109,16 @@ func (this *QIdentityProxyModel) callVirtualBase_MapSelectionToSource(selection 
 	return _goptr
 
 }
+
+type miqtVirtualCallback_QIdentityProxyModel_mapSelectionToSource struct {
+	callback   func(super func(selection *QItemSelection) *QItemSelection, selection *QItemSelection) *QItemSelection
+	ownsReturn bool
+}
+
 func (this *QIdentityProxyModel) OnMapSelectionToSource(slot func(super func(selection *QItemSelection) *QItemSelection, selection *QItemSelection) *QItemSelection) {
 	var slotHandle C.intptr_t
 	if slot != nil {
-		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QIdentityProxyModel_mapSelectionToSource{callback: slot}))
 	}
 	ok := C.QIdentityProxyModel_override_virtual_mapSelectionToSource(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
@@ -959,17 +1126,34 @@ func (this *QIdentityProxyModel) OnMapSelectionToSource(slot func(super func(sel
 	}
 }
 
+// OnMapSelectionToSourceOwned installs a virtual override that transfers
+// ownership of each non-nil returned Qt value object to C++.
+func (this *QIdentityProxyModel) OnMapSelectionToSourceOwned(slot func(super func(selection *QItemSelection) *QItemSelection, selection *QItemSelection) *QItemSelection) {
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QIdentityProxyModel_mapSelectionToSource{callback: slot, ownsReturn: true}))
+	}
+	ok := C.QIdentityProxyModel_override_virtual_owned_mapSelectionToSource(unsafe.Pointer(this.h), slotHandle)
+	if !ok {
+		panic("miqt: can only override virtual methods for directly constructed types")
+	}
+}
+
 //export miqt_exec_callback_QIdentityProxyModel_mapSelectionToSource
 func miqt_exec_callback_QIdentityProxyModel_mapSelectionToSource(self *C.QIdentityProxyModel, cb C.intptr_t, selection *C.QItemSelection) *C.QItemSelection {
-	gofunc, ok := cgo.Handle(cb).Value().(func(super func(selection *QItemSelection) *QItemSelection, selection *QItemSelection) *QItemSelection)
+	callbackData, ok := cgo.Handle(cb).Value().(miqtVirtualCallback_QIdentityProxyModel_mapSelectionToSource)
 	if !ok {
 		panic("miqt: callback of non-callback type (heap corruption?)")
 	}
+	gofunc := callbackData.callback
 
 	// Convert all CABI parameters to Go parameters
 	slotval1 := newQItemSelection(selection)
 
 	virtualReturn := gofunc((&QIdentityProxyModel{h: self}).callVirtualBase_MapSelectionToSource, slotval1)
+	if callbackData.ownsReturn && virtualReturn != nil {
+		runtime.SetFinalizer(virtualReturn, nil)
+	}
 
 	return virtualReturn.cPointer()
 
@@ -1345,10 +1529,16 @@ func (this *QIdentityProxyModel) callVirtualBase_Data(proxyIndex *QModelIndex, r
 	return _goptr
 
 }
+
+type miqtVirtualCallback_QIdentityProxyModel_data struct {
+	callback   func(super func(proxyIndex *QModelIndex, role int) *QVariant, proxyIndex *QModelIndex, role int) *QVariant
+	ownsReturn bool
+}
+
 func (this *QIdentityProxyModel) OnData(slot func(super func(proxyIndex *QModelIndex, role int) *QVariant, proxyIndex *QModelIndex, role int) *QVariant) {
 	var slotHandle C.intptr_t
 	if slot != nil {
-		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QIdentityProxyModel_data{callback: slot}))
 	}
 	ok := C.QIdentityProxyModel_override_virtual_data(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
@@ -1356,12 +1546,26 @@ func (this *QIdentityProxyModel) OnData(slot func(super func(proxyIndex *QModelI
 	}
 }
 
+// OnDataOwned installs a virtual override that transfers
+// ownership of each non-nil returned Qt value object to C++.
+func (this *QIdentityProxyModel) OnDataOwned(slot func(super func(proxyIndex *QModelIndex, role int) *QVariant, proxyIndex *QModelIndex, role int) *QVariant) {
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QIdentityProxyModel_data{callback: slot, ownsReturn: true}))
+	}
+	ok := C.QIdentityProxyModel_override_virtual_owned_data(unsafe.Pointer(this.h), slotHandle)
+	if !ok {
+		panic("miqt: can only override virtual methods for directly constructed types")
+	}
+}
+
 //export miqt_exec_callback_QIdentityProxyModel_data
 func miqt_exec_callback_QIdentityProxyModel_data(self *C.QIdentityProxyModel, cb C.intptr_t, proxyIndex *C.QModelIndex, role C.int) *C.QVariant {
-	gofunc, ok := cgo.Handle(cb).Value().(func(super func(proxyIndex *QModelIndex, role int) *QVariant, proxyIndex *QModelIndex, role int) *QVariant)
+	callbackData, ok := cgo.Handle(cb).Value().(miqtVirtualCallback_QIdentityProxyModel_data)
 	if !ok {
 		panic("miqt: callback of non-callback type (heap corruption?)")
 	}
+	gofunc := callbackData.callback
 
 	// Convert all CABI parameters to Go parameters
 	slotval1 := newQModelIndex(proxyIndex)
@@ -1369,6 +1573,9 @@ func miqt_exec_callback_QIdentityProxyModel_data(self *C.QIdentityProxyModel, cb
 	slotval2 := (int)(role)
 
 	virtualReturn := gofunc((&QIdentityProxyModel{h: self}).callVirtualBase_Data, slotval1, slotval2)
+	if callbackData.ownsReturn && virtualReturn != nil {
+		runtime.SetFinalizer(virtualReturn, nil)
+	}
 
 	return virtualReturn.cPointer()
 
@@ -1607,10 +1814,16 @@ func (this *QIdentityProxyModel) callVirtualBase_Buddy(index *QModelIndex) *QMod
 	return _goptr
 
 }
+
+type miqtVirtualCallback_QIdentityProxyModel_buddy struct {
+	callback   func(super func(index *QModelIndex) *QModelIndex, index *QModelIndex) *QModelIndex
+	ownsReturn bool
+}
+
 func (this *QIdentityProxyModel) OnBuddy(slot func(super func(index *QModelIndex) *QModelIndex, index *QModelIndex) *QModelIndex) {
 	var slotHandle C.intptr_t
 	if slot != nil {
-		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QIdentityProxyModel_buddy{callback: slot}))
 	}
 	ok := C.QIdentityProxyModel_override_virtual_buddy(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
@@ -1618,17 +1831,34 @@ func (this *QIdentityProxyModel) OnBuddy(slot func(super func(index *QModelIndex
 	}
 }
 
+// OnBuddyOwned installs a virtual override that transfers
+// ownership of each non-nil returned Qt value object to C++.
+func (this *QIdentityProxyModel) OnBuddyOwned(slot func(super func(index *QModelIndex) *QModelIndex, index *QModelIndex) *QModelIndex) {
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QIdentityProxyModel_buddy{callback: slot, ownsReturn: true}))
+	}
+	ok := C.QIdentityProxyModel_override_virtual_owned_buddy(unsafe.Pointer(this.h), slotHandle)
+	if !ok {
+		panic("miqt: can only override virtual methods for directly constructed types")
+	}
+}
+
 //export miqt_exec_callback_QIdentityProxyModel_buddy
 func miqt_exec_callback_QIdentityProxyModel_buddy(self *C.QIdentityProxyModel, cb C.intptr_t, index *C.QModelIndex) *C.QModelIndex {
-	gofunc, ok := cgo.Handle(cb).Value().(func(super func(index *QModelIndex) *QModelIndex, index *QModelIndex) *QModelIndex)
+	callbackData, ok := cgo.Handle(cb).Value().(miqtVirtualCallback_QIdentityProxyModel_buddy)
 	if !ok {
 		panic("miqt: callback of non-callback type (heap corruption?)")
 	}
+	gofunc := callbackData.callback
 
 	// Convert all CABI parameters to Go parameters
 	slotval1 := newQModelIndex(index)
 
 	virtualReturn := gofunc((&QIdentityProxyModel{h: self}).callVirtualBase_Buddy, slotval1)
+	if callbackData.ownsReturn && virtualReturn != nil {
+		runtime.SetFinalizer(virtualReturn, nil)
+	}
 
 	return virtualReturn.cPointer()
 
@@ -1735,10 +1965,16 @@ func (this *QIdentityProxyModel) callVirtualBase_Span(index *QModelIndex) *QSize
 	return _goptr
 
 }
+
+type miqtVirtualCallback_QIdentityProxyModel_span struct {
+	callback   func(super func(index *QModelIndex) *QSize, index *QModelIndex) *QSize
+	ownsReturn bool
+}
+
 func (this *QIdentityProxyModel) OnSpan(slot func(super func(index *QModelIndex) *QSize, index *QModelIndex) *QSize) {
 	var slotHandle C.intptr_t
 	if slot != nil {
-		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QIdentityProxyModel_span{callback: slot}))
 	}
 	ok := C.QIdentityProxyModel_override_virtual_span(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
@@ -1746,17 +1982,34 @@ func (this *QIdentityProxyModel) OnSpan(slot func(super func(index *QModelIndex)
 	}
 }
 
+// OnSpanOwned installs a virtual override that transfers
+// ownership of each non-nil returned Qt value object to C++.
+func (this *QIdentityProxyModel) OnSpanOwned(slot func(super func(index *QModelIndex) *QSize, index *QModelIndex) *QSize) {
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QIdentityProxyModel_span{callback: slot, ownsReturn: true}))
+	}
+	ok := C.QIdentityProxyModel_override_virtual_owned_span(unsafe.Pointer(this.h), slotHandle)
+	if !ok {
+		panic("miqt: can only override virtual methods for directly constructed types")
+	}
+}
+
 //export miqt_exec_callback_QIdentityProxyModel_span
 func miqt_exec_callback_QIdentityProxyModel_span(self *C.QIdentityProxyModel, cb C.intptr_t, index *C.QModelIndex) *C.QSize {
-	gofunc, ok := cgo.Handle(cb).Value().(func(super func(index *QModelIndex) *QSize, index *QModelIndex) *QSize)
+	callbackData, ok := cgo.Handle(cb).Value().(miqtVirtualCallback_QIdentityProxyModel_span)
 	if !ok {
 		panic("miqt: callback of non-callback type (heap corruption?)")
 	}
+	gofunc := callbackData.callback
 
 	// Convert all CABI parameters to Go parameters
 	slotval1 := newQModelIndex(index)
 
 	virtualReturn := gofunc((&QIdentityProxyModel{h: self}).callVirtualBase_Span, slotval1)
+	if callbackData.ownsReturn && virtualReturn != nil {
+		runtime.SetFinalizer(virtualReturn, nil)
+	}
 
 	return virtualReturn.cPointer()
 

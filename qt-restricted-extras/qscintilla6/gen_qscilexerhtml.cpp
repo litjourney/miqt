@@ -308,6 +308,7 @@ public:
 
 	// cgo.Handle value for overwritten implementation
 	miqt_callback_handle<miqt_exec_callback_handle_release_QsciLexerHTML> handle__color;
+	bool owns_return__color = false;
 
 	// Subclass to allow providing a Go implementation
 	virtual QColor color(int style) const override {
@@ -317,6 +318,10 @@ public:
 
 		int sigval1 = style;
 		QColor* callback_return_value = miqt_exec_callback_QsciLexerHTML_color(this, handle__color.value(), sigval1);
+		std::unique_ptr<QColor> callback_return_value_owner;
+		if (owns_return__color) {
+			callback_return_value_owner.reset(callback_return_value);
+		}
 		return *callback_return_value;
 	}
 
@@ -340,6 +345,7 @@ public:
 
 	// cgo.Handle value for overwritten implementation
 	miqt_callback_handle<miqt_exec_callback_handle_release_QsciLexerHTML> handle__font;
+	bool owns_return__font = false;
 
 	// Subclass to allow providing a Go implementation
 	virtual QFont font(int style) const override {
@@ -349,6 +355,10 @@ public:
 
 		int sigval1 = style;
 		QFont* callback_return_value = miqt_exec_callback_QsciLexerHTML_font(this, handle__font.value(), sigval1);
+		std::unique_ptr<QFont> callback_return_value_owner;
+		if (owns_return__font) {
+			callback_return_value_owner.reset(callback_return_value);
+		}
 		return *callback_return_value;
 	}
 
@@ -418,6 +428,7 @@ public:
 
 	// cgo.Handle value for overwritten implementation
 	miqt_callback_handle<miqt_exec_callback_handle_release_QsciLexerHTML> handle__paper;
+	bool owns_return__paper = false;
 
 	// Subclass to allow providing a Go implementation
 	virtual QColor paper(int style) const override {
@@ -427,6 +438,10 @@ public:
 
 		int sigval1 = style;
 		QColor* callback_return_value = miqt_exec_callback_QsciLexerHTML_paper(this, handle__paper.value(), sigval1);
+		std::unique_ptr<QColor> callback_return_value_owner;
+		if (owns_return__paper) {
+			callback_return_value_owner.reset(callback_return_value);
+		}
 		return *callback_return_value;
 	}
 
@@ -434,6 +449,7 @@ public:
 
 	// cgo.Handle value for overwritten implementation
 	miqt_callback_handle<miqt_exec_callback_handle_release_QsciLexerHTML> handle__defaultColorWithStyle;
+	bool owns_return__defaultColorWithStyle = false;
 
 	// Subclass to allow providing a Go implementation
 	virtual QColor defaultColor(int style) const override {
@@ -443,6 +459,10 @@ public:
 
 		int sigval1 = style;
 		QColor* callback_return_value = miqt_exec_callback_QsciLexerHTML_defaultColorWithStyle(this, handle__defaultColorWithStyle.value(), sigval1);
+		std::unique_ptr<QColor> callback_return_value_owner;
+		if (owns_return__defaultColorWithStyle) {
+			callback_return_value_owner.reset(callback_return_value);
+		}
 		return *callback_return_value;
 	}
 
@@ -466,6 +486,7 @@ public:
 
 	// cgo.Handle value for overwritten implementation
 	miqt_callback_handle<miqt_exec_callback_handle_release_QsciLexerHTML> handle__defaultFontWithStyle;
+	bool owns_return__defaultFontWithStyle = false;
 
 	// Subclass to allow providing a Go implementation
 	virtual QFont defaultFont(int style) const override {
@@ -475,6 +496,10 @@ public:
 
 		int sigval1 = style;
 		QFont* callback_return_value = miqt_exec_callback_QsciLexerHTML_defaultFontWithStyle(this, handle__defaultFontWithStyle.value(), sigval1);
+		std::unique_ptr<QFont> callback_return_value_owner;
+		if (owns_return__defaultFontWithStyle) {
+			callback_return_value_owner.reset(callback_return_value);
+		}
 		return *callback_return_value;
 	}
 
@@ -482,6 +507,7 @@ public:
 
 	// cgo.Handle value for overwritten implementation
 	miqt_callback_handle<miqt_exec_callback_handle_release_QsciLexerHTML> handle__defaultPaperWithStyle;
+	bool owns_return__defaultPaperWithStyle = false;
 
 	// Subclass to allow providing a Go implementation
 	virtual QColor defaultPaper(int style) const override {
@@ -491,6 +517,10 @@ public:
 
 		int sigval1 = style;
 		QColor* callback_return_value = miqt_exec_callback_QsciLexerHTML_defaultPaperWithStyle(this, handle__defaultPaperWithStyle.value(), sigval1);
+		std::unique_ptr<QColor> callback_return_value_owner;
+		if (owns_return__defaultPaperWithStyle) {
+			callback_return_value_owner.reset(callback_return_value);
+		}
 		return *callback_return_value;
 	}
 
@@ -1227,6 +1257,19 @@ bool QsciLexerHTML_override_virtual_color(void* self, intptr_t slot) {
 	}
 
 	self_cast->handle__color = std::move(slot_handle);
+	self_cast->owns_return__color = false;
+	return true;
+}
+
+bool QsciLexerHTML_override_virtual_owned_color(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QsciLexerHTML> slot_handle(slot);
+	MiqtVirtualQsciLexerHTML* self_cast = dynamic_cast<MiqtVirtualQsciLexerHTML*>( (QsciLexerHTML*)(self) );
+	if (self_cast == nullptr) {
+		return false;
+	}
+
+	self_cast->handle__color = std::move(slot_handle);
+	self_cast->owns_return__color = true;
 	return true;
 }
 
@@ -1257,6 +1300,19 @@ bool QsciLexerHTML_override_virtual_font(void* self, intptr_t slot) {
 	}
 
 	self_cast->handle__font = std::move(slot_handle);
+	self_cast->owns_return__font = false;
+	return true;
+}
+
+bool QsciLexerHTML_override_virtual_owned_font(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QsciLexerHTML> slot_handle(slot);
+	MiqtVirtualQsciLexerHTML* self_cast = dynamic_cast<MiqtVirtualQsciLexerHTML*>( (QsciLexerHTML*)(self) );
+	if (self_cast == nullptr) {
+		return false;
+	}
+
+	self_cast->handle__font = std::move(slot_handle);
+	self_cast->owns_return__font = true;
 	return true;
 }
 
@@ -1328,6 +1384,19 @@ bool QsciLexerHTML_override_virtual_paper(void* self, intptr_t slot) {
 	}
 
 	self_cast->handle__paper = std::move(slot_handle);
+	self_cast->owns_return__paper = false;
+	return true;
+}
+
+bool QsciLexerHTML_override_virtual_owned_paper(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QsciLexerHTML> slot_handle(slot);
+	MiqtVirtualQsciLexerHTML* self_cast = dynamic_cast<MiqtVirtualQsciLexerHTML*>( (QsciLexerHTML*)(self) );
+	if (self_cast == nullptr) {
+		return false;
+	}
+
+	self_cast->handle__paper = std::move(slot_handle);
+	self_cast->owns_return__paper = true;
 	return true;
 }
 
@@ -1343,6 +1412,19 @@ bool QsciLexerHTML_override_virtual_defaultColorWithStyle(void* self, intptr_t s
 	}
 
 	self_cast->handle__defaultColorWithStyle = std::move(slot_handle);
+	self_cast->owns_return__defaultColorWithStyle = false;
+	return true;
+}
+
+bool QsciLexerHTML_override_virtual_owned_defaultColorWithStyle(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QsciLexerHTML> slot_handle(slot);
+	MiqtVirtualQsciLexerHTML* self_cast = dynamic_cast<MiqtVirtualQsciLexerHTML*>( (QsciLexerHTML*)(self) );
+	if (self_cast == nullptr) {
+		return false;
+	}
+
+	self_cast->handle__defaultColorWithStyle = std::move(slot_handle);
+	self_cast->owns_return__defaultColorWithStyle = true;
 	return true;
 }
 
@@ -1373,6 +1455,19 @@ bool QsciLexerHTML_override_virtual_defaultFontWithStyle(void* self, intptr_t sl
 	}
 
 	self_cast->handle__defaultFontWithStyle = std::move(slot_handle);
+	self_cast->owns_return__defaultFontWithStyle = false;
+	return true;
+}
+
+bool QsciLexerHTML_override_virtual_owned_defaultFontWithStyle(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QsciLexerHTML> slot_handle(slot);
+	MiqtVirtualQsciLexerHTML* self_cast = dynamic_cast<MiqtVirtualQsciLexerHTML*>( (QsciLexerHTML*)(self) );
+	if (self_cast == nullptr) {
+		return false;
+	}
+
+	self_cast->handle__defaultFontWithStyle = std::move(slot_handle);
+	self_cast->owns_return__defaultFontWithStyle = true;
 	return true;
 }
 
@@ -1388,6 +1483,19 @@ bool QsciLexerHTML_override_virtual_defaultPaperWithStyle(void* self, intptr_t s
 	}
 
 	self_cast->handle__defaultPaperWithStyle = std::move(slot_handle);
+	self_cast->owns_return__defaultPaperWithStyle = false;
+	return true;
+}
+
+bool QsciLexerHTML_override_virtual_owned_defaultPaperWithStyle(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QsciLexerHTML> slot_handle(slot);
+	MiqtVirtualQsciLexerHTML* self_cast = dynamic_cast<MiqtVirtualQsciLexerHTML*>( (QsciLexerHTML*)(self) );
+	if (self_cast == nullptr) {
+		return false;
+	}
+
+	self_cast->handle__defaultPaperWithStyle = std::move(slot_handle);
+	self_cast->owns_return__defaultPaperWithStyle = true;
 	return true;
 }
 

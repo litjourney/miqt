@@ -123,6 +123,7 @@ public:
 
 	// cgo.Handle value for overwritten implementation
 	miqt_callback_handle<miqt_exec_callback_handle_release_QImageIOHandler> handle__option;
+	bool owns_return__option = false;
 
 	// Subclass to allow providing a Go implementation
 	virtual QVariant option(QImageIOHandler::ImageOption option) const override {
@@ -133,6 +134,10 @@ public:
 		QImageIOHandler::ImageOption option_ret = option;
 		int sigval1 = static_cast<int>(option_ret);
 		QVariant* callback_return_value = miqt_exec_callback_QImageIOHandler_option(this, handle__option.value(), sigval1);
+		std::unique_ptr<QVariant> callback_return_value_owner;
+		if (owns_return__option) {
+			callback_return_value_owner.reset(callback_return_value);
+		}
 		return *callback_return_value;
 	}
 
@@ -269,6 +274,7 @@ public:
 
 	// cgo.Handle value for overwritten implementation
 	miqt_callback_handle<miqt_exec_callback_handle_release_QImageIOHandler> handle__currentImageRect;
+	bool owns_return__currentImageRect = false;
 
 	// Subclass to allow providing a Go implementation
 	virtual QRect currentImageRect() const override {
@@ -277,6 +283,10 @@ public:
 		}
 
 		QRect* callback_return_value = miqt_exec_callback_QImageIOHandler_currentImageRect(this, handle__currentImageRect.value());
+		std::unique_ptr<QRect> callback_return_value_owner;
+		if (owns_return__currentImageRect) {
+			callback_return_value_owner.reset(callback_return_value);
+		}
 		return *callback_return_value;
 	}
 
@@ -441,6 +451,19 @@ bool QImageIOHandler_override_virtual_option(void* self, intptr_t slot) {
 	}
 
 	self_cast->handle__option = std::move(slot_handle);
+	self_cast->owns_return__option = false;
+	return true;
+}
+
+bool QImageIOHandler_override_virtual_owned_option(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QImageIOHandler> slot_handle(slot);
+	MiqtVirtualQImageIOHandler* self_cast = dynamic_cast<MiqtVirtualQImageIOHandler*>( (QImageIOHandler*)(self) );
+	if (self_cast == nullptr) {
+		return false;
+	}
+
+	self_cast->handle__option = std::move(slot_handle);
+	self_cast->owns_return__option = true;
 	return true;
 }
 
@@ -576,6 +599,19 @@ bool QImageIOHandler_override_virtual_currentImageRect(void* self, intptr_t slot
 	}
 
 	self_cast->handle__currentImageRect = std::move(slot_handle);
+	self_cast->owns_return__currentImageRect = false;
+	return true;
+}
+
+bool QImageIOHandler_override_virtual_owned_currentImageRect(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QImageIOHandler> slot_handle(slot);
+	MiqtVirtualQImageIOHandler* self_cast = dynamic_cast<MiqtVirtualQImageIOHandler*>( (QImageIOHandler*)(self) );
+	if (self_cast == nullptr) {
+		return false;
+	}
+
+	self_cast->handle__currentImageRect = std::move(slot_handle);
+	self_cast->owns_return__currentImageRect = true;
 	return true;
 }
 

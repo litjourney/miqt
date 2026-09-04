@@ -116,6 +116,7 @@ QDesignerFormEditorInterface* QDesignerFormWindowManagerInterface_virtualbase_co
 bool QDesignerFormWindowManagerInterface_override_virtual_dragItems(void* self, intptr_t slot);
 void QDesignerFormWindowManagerInterface_virtualbase_dragItems(void* self, struct miqt_array /* of QDesignerDnDItemInterface* */  item_list);
 bool QDesignerFormWindowManagerInterface_override_virtual_createPreviewPixmap(void* self, intptr_t slot);
+bool QDesignerFormWindowManagerInterface_override_virtual_owned_createPreviewPixmap(void* self, intptr_t slot);
 QPixmap* QDesignerFormWindowManagerInterface_virtualbase_createPreviewPixmap(const void* self);
 bool QDesignerFormWindowManagerInterface_override_virtual_addFormWindow(void* self, intptr_t slot);
 void QDesignerFormWindowManagerInterface_virtualbase_addFormWindow(void* self, QDesignerFormWindowInterface* formWindow);

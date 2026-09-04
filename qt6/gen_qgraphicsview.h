@@ -238,8 +238,10 @@ void QGraphicsView_invalidateSceneWithRect(QGraphicsView* self, QRectF* rect);
 void QGraphicsView_invalidateScene2(QGraphicsView* self, QRectF* rect, int layers);
 
 bool QGraphicsView_override_virtual_sizeHint(void* self, intptr_t slot);
+bool QGraphicsView_override_virtual_owned_sizeHint(void* self, intptr_t slot);
 QSize* QGraphicsView_virtualbase_sizeHint(const void* self);
 bool QGraphicsView_override_virtual_inputMethodQuery(void* self, intptr_t slot);
+bool QGraphicsView_override_virtual_owned_inputMethodQuery(void* self, intptr_t slot);
 QVariant* QGraphicsView_virtualbase_inputMethodQuery(const void* self, int query);
 bool QGraphicsView_override_virtual_setupViewport(void* self, intptr_t slot);
 void QGraphicsView_virtualbase_setupViewport(void* self, QWidget* widget);
@@ -292,10 +294,12 @@ void QGraphicsView_virtualbase_drawBackground(void* self, QPainter* painter, QRe
 bool QGraphicsView_override_virtual_drawForeground(void* self, intptr_t slot);
 void QGraphicsView_virtualbase_drawForeground(void* self, QPainter* painter, QRectF* rect);
 bool QGraphicsView_override_virtual_minimumSizeHint(void* self, intptr_t slot);
+bool QGraphicsView_override_virtual_owned_minimumSizeHint(void* self, intptr_t slot);
 QSize* QGraphicsView_virtualbase_minimumSizeHint(const void* self);
 bool QGraphicsView_override_virtual_eventFilter(void* self, intptr_t slot);
 bool QGraphicsView_virtualbase_eventFilter(void* self, QObject* param1, QEvent* param2);
 bool QGraphicsView_override_virtual_viewportSizeHint(void* self, intptr_t slot);
+bool QGraphicsView_override_virtual_owned_viewportSizeHint(void* self, intptr_t slot);
 QSize* QGraphicsView_virtualbase_viewportSizeHint(const void* self);
 bool QGraphicsView_override_virtual_changeEvent(void* self, intptr_t slot);
 void QGraphicsView_virtualbase_changeEvent(void* self, QEvent* param1);

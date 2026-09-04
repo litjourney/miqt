@@ -152,12 +152,15 @@ struct miqt_string QAbstractSpinBox_tr2(const char* s, const char* c);
 struct miqt_string QAbstractSpinBox_tr3(const char* s, const char* c, int n);
 
 bool QAbstractSpinBox_override_virtual_sizeHint(void* self, intptr_t slot);
+bool QAbstractSpinBox_override_virtual_owned_sizeHint(void* self, intptr_t slot);
 QSize* QAbstractSpinBox_virtualbase_sizeHint(const void* self);
 bool QAbstractSpinBox_override_virtual_minimumSizeHint(void* self, intptr_t slot);
+bool QAbstractSpinBox_override_virtual_owned_minimumSizeHint(void* self, intptr_t slot);
 QSize* QAbstractSpinBox_virtualbase_minimumSizeHint(const void* self);
 bool QAbstractSpinBox_override_virtual_event(void* self, intptr_t slot);
 bool QAbstractSpinBox_virtualbase_event(void* self, QEvent* event);
 bool QAbstractSpinBox_override_virtual_inputMethodQuery(void* self, intptr_t slot);
+bool QAbstractSpinBox_override_virtual_owned_inputMethodQuery(void* self, intptr_t slot);
 QVariant* QAbstractSpinBox_virtualbase_inputMethodQuery(const void* self, int param1);
 bool QAbstractSpinBox_override_virtual_validate(void* self, intptr_t slot);
 int QAbstractSpinBox_virtualbase_validate(const void* self, struct miqt_string input, int* pos);

@@ -115,8 +115,10 @@ struct miqt_string QAbstractPrintDialog_trUtf83(const char* s, const char* c, in
 bool QAbstractPrintDialog_override_virtual_setVisible(void* self, intptr_t slot);
 void QAbstractPrintDialog_virtualbase_setVisible(void* self, bool visible);
 bool QAbstractPrintDialog_override_virtual_sizeHint(void* self, intptr_t slot);
+bool QAbstractPrintDialog_override_virtual_owned_sizeHint(void* self, intptr_t slot);
 QSize* QAbstractPrintDialog_virtualbase_sizeHint(const void* self);
 bool QAbstractPrintDialog_override_virtual_minimumSizeHint(void* self, intptr_t slot);
+bool QAbstractPrintDialog_override_virtual_owned_minimumSizeHint(void* self, intptr_t slot);
 QSize* QAbstractPrintDialog_virtualbase_minimumSizeHint(const void* self);
 bool QAbstractPrintDialog_override_virtual_open(void* self, intptr_t slot);
 void QAbstractPrintDialog_virtualbase_open(void* self);
@@ -203,6 +205,7 @@ QPainter* QAbstractPrintDialog_virtualbase_sharedPainter(const void* self);
 bool QAbstractPrintDialog_override_virtual_inputMethodEvent(void* self, intptr_t slot);
 void QAbstractPrintDialog_virtualbase_inputMethodEvent(void* self, QInputMethodEvent* param1);
 bool QAbstractPrintDialog_override_virtual_inputMethodQuery(void* self, intptr_t slot);
+bool QAbstractPrintDialog_override_virtual_owned_inputMethodQuery(void* self, intptr_t slot);
 QVariant* QAbstractPrintDialog_virtualbase_inputMethodQuery(const void* self, int param1);
 bool QAbstractPrintDialog_override_virtual_focusNextPrevChild(void* self, intptr_t slot);
 bool QAbstractPrintDialog_virtualbase_focusNextPrevChild(void* self, bool next);

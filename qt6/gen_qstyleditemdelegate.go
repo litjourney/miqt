@@ -248,10 +248,16 @@ func (this *QStyledItemDelegate) callVirtualBase_SizeHint(option *QStyleOptionVi
 	return _goptr
 
 }
+
+type miqtVirtualCallback_QStyledItemDelegate_sizeHint struct {
+	callback   func(super func(option *QStyleOptionViewItem, index *QModelIndex) *QSize, option *QStyleOptionViewItem, index *QModelIndex) *QSize
+	ownsReturn bool
+}
+
 func (this *QStyledItemDelegate) OnSizeHint(slot func(super func(option *QStyleOptionViewItem, index *QModelIndex) *QSize, option *QStyleOptionViewItem, index *QModelIndex) *QSize) {
 	var slotHandle C.intptr_t
 	if slot != nil {
-		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QStyledItemDelegate_sizeHint{callback: slot}))
 	}
 	ok := C.QStyledItemDelegate_override_virtual_sizeHint(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
@@ -259,12 +265,26 @@ func (this *QStyledItemDelegate) OnSizeHint(slot func(super func(option *QStyleO
 	}
 }
 
+// OnSizeHintOwned installs a virtual override that transfers
+// ownership of each non-nil returned Qt value object to C++.
+func (this *QStyledItemDelegate) OnSizeHintOwned(slot func(super func(option *QStyleOptionViewItem, index *QModelIndex) *QSize, option *QStyleOptionViewItem, index *QModelIndex) *QSize) {
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QStyledItemDelegate_sizeHint{callback: slot, ownsReturn: true}))
+	}
+	ok := C.QStyledItemDelegate_override_virtual_owned_sizeHint(unsafe.Pointer(this.h), slotHandle)
+	if !ok {
+		panic("miqt: can only override virtual methods for directly constructed types")
+	}
+}
+
 //export miqt_exec_callback_QStyledItemDelegate_sizeHint
 func miqt_exec_callback_QStyledItemDelegate_sizeHint(self *C.QStyledItemDelegate, cb C.intptr_t, option *C.QStyleOptionViewItem, index *C.QModelIndex) *C.QSize {
-	gofunc, ok := cgo.Handle(cb).Value().(func(super func(option *QStyleOptionViewItem, index *QModelIndex) *QSize, option *QStyleOptionViewItem, index *QModelIndex) *QSize)
+	callbackData, ok := cgo.Handle(cb).Value().(miqtVirtualCallback_QStyledItemDelegate_sizeHint)
 	if !ok {
 		panic("miqt: callback of non-callback type (heap corruption?)")
 	}
+	gofunc := callbackData.callback
 
 	// Convert all CABI parameters to Go parameters
 	slotval1 := newQStyleOptionViewItem(option)
@@ -272,6 +292,9 @@ func miqt_exec_callback_QStyledItemDelegate_sizeHint(self *C.QStyledItemDelegate
 	slotval2 := newQModelIndex(index)
 
 	virtualReturn := gofunc((&QStyledItemDelegate{h: self}).callVirtualBase_SizeHint, slotval1, slotval2)
+	if callbackData.ownsReturn && virtualReturn != nil {
+		runtime.SetFinalizer(virtualReturn, nil)
+	}
 
 	return virtualReturn.cPointer()
 

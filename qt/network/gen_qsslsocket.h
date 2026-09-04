@@ -184,6 +184,7 @@ void QSslSocket_virtualbase_disconnectFromHost(void* self);
 bool QSslSocket_override_virtual_setSocketOption(void* self, intptr_t slot);
 void QSslSocket_virtualbase_setSocketOption(void* self, int option, QVariant* value);
 bool QSslSocket_override_virtual_socketOption(void* self, intptr_t slot);
+bool QSslSocket_override_virtual_owned_socketOption(void* self, intptr_t slot);
 QVariant* QSslSocket_virtualbase_socketOption(void* self, int option);
 bool QSslSocket_override_virtual_bytesAvailable(void* self, intptr_t slot);
 long long QSslSocket_virtualbase_bytesAvailable(const void* self);

@@ -552,6 +552,7 @@ public:
 
 	// cgo.Handle value for overwritten implementation
 	miqt_callback_handle<miqt_exec_callback_handle_release_QGraphicsItem> handle__boundingRect;
+	bool owns_return__boundingRect = false;
 
 	// Subclass to allow providing a Go implementation
 	virtual QRectF boundingRect() const override {
@@ -560,11 +561,16 @@ public:
 		}
 
 		QRectF* callback_return_value = miqt_exec_callback_QGraphicsItem_boundingRect(this, handle__boundingRect.value());
+		std::unique_ptr<QRectF> callback_return_value_owner;
+		if (owns_return__boundingRect) {
+			callback_return_value_owner.reset(callback_return_value);
+		}
 		return *callback_return_value;
 	}
 
 	// cgo.Handle value for overwritten implementation
 	miqt_callback_handle<miqt_exec_callback_handle_release_QGraphicsItem> handle__shape;
+	bool owns_return__shape = false;
 
 	// Subclass to allow providing a Go implementation
 	virtual QPainterPath shape() const override {
@@ -573,6 +579,10 @@ public:
 		}
 
 		QPainterPath* callback_return_value = miqt_exec_callback_QGraphicsItem_shape(this, handle__shape.value());
+		std::unique_ptr<QPainterPath> callback_return_value_owner;
+		if (owns_return__shape) {
+			callback_return_value_owner.reset(callback_return_value);
+		}
 		return *callback_return_value;
 	}
 
@@ -652,6 +662,7 @@ public:
 
 	// cgo.Handle value for overwritten implementation
 	miqt_callback_handle<miqt_exec_callback_handle_release_QGraphicsItem> handle__opaqueArea;
+	bool owns_return__opaqueArea = false;
 
 	// Subclass to allow providing a Go implementation
 	virtual QPainterPath opaqueArea() const override {
@@ -660,6 +671,10 @@ public:
 		}
 
 		QPainterPath* callback_return_value = miqt_exec_callback_QGraphicsItem_opaqueArea(this, handle__opaqueArea.value());
+		std::unique_ptr<QPainterPath> callback_return_value_owner;
+		if (owns_return__opaqueArea) {
+			callback_return_value_owner.reset(callback_return_value);
+		}
 		return *callback_return_value;
 	}
 
@@ -1037,6 +1052,7 @@ public:
 
 	// cgo.Handle value for overwritten implementation
 	miqt_callback_handle<miqt_exec_callback_handle_release_QGraphicsItem> handle__inputMethodQuery;
+	bool owns_return__inputMethodQuery = false;
 
 	// Subclass to allow providing a Go implementation
 	virtual QVariant inputMethodQuery(Qt::InputMethodQuery query) const override {
@@ -1047,6 +1063,10 @@ public:
 		Qt::InputMethodQuery query_ret = query;
 		int sigval1 = static_cast<int>(query_ret);
 		QVariant* callback_return_value = miqt_exec_callback_QGraphicsItem_inputMethodQuery(this, handle__inputMethodQuery.value(), sigval1);
+		std::unique_ptr<QVariant> callback_return_value_owner;
+		if (owns_return__inputMethodQuery) {
+			callback_return_value_owner.reset(callback_return_value);
+		}
 		return *callback_return_value;
 	}
 
@@ -1054,6 +1074,7 @@ public:
 
 	// cgo.Handle value for overwritten implementation
 	miqt_callback_handle<miqt_exec_callback_handle_release_QGraphicsItem> handle__itemChange;
+	bool owns_return__itemChange = false;
 
 	// Subclass to allow providing a Go implementation
 	virtual QVariant itemChange(QGraphicsItem::GraphicsItemChange change, const QVariant& value) override {
@@ -1067,6 +1088,10 @@ public:
 		// Cast returned reference into pointer
 		QVariant* sigval2 = const_cast<QVariant*>(&value_ret);
 		QVariant* callback_return_value = miqt_exec_callback_QGraphicsItem_itemChange(this, handle__itemChange.value(), sigval1, sigval2);
+		std::unique_ptr<QVariant> callback_return_value_owner;
+		if (owns_return__itemChange) {
+			callback_return_value_owner.reset(callback_return_value);
+		}
 		return *callback_return_value;
 	}
 
@@ -1112,6 +1137,7 @@ public:
 
 	// cgo.Handle value for overwritten implementation
 	miqt_callback_handle<miqt_exec_callback_handle_release_QGraphicsItem> handle__extension;
+	bool owns_return__extension = false;
 
 	// Subclass to allow providing a Go implementation
 	virtual QVariant extension(const QVariant& variant) const override {
@@ -1123,6 +1149,10 @@ public:
 		// Cast returned reference into pointer
 		QVariant* sigval1 = const_cast<QVariant*>(&variant_ret);
 		QVariant* callback_return_value = miqt_exec_callback_QGraphicsItem_extension(this, handle__extension.value(), sigval1);
+		std::unique_ptr<QVariant> callback_return_value_owner;
+		if (owns_return__extension) {
+			callback_return_value_owner.reset(callback_return_value);
+		}
 		return *callback_return_value;
 	}
 
@@ -1949,6 +1979,19 @@ bool QGraphicsItem_override_virtual_boundingRect(void* self, intptr_t slot) {
 	}
 
 	self_cast->handle__boundingRect = std::move(slot_handle);
+	self_cast->owns_return__boundingRect = false;
+	return true;
+}
+
+bool QGraphicsItem_override_virtual_owned_boundingRect(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QGraphicsItem> slot_handle(slot);
+	MiqtVirtualQGraphicsItem* self_cast = dynamic_cast<MiqtVirtualQGraphicsItem*>( (QGraphicsItem*)(self) );
+	if (self_cast == nullptr) {
+		return false;
+	}
+
+	self_cast->handle__boundingRect = std::move(slot_handle);
+	self_cast->owns_return__boundingRect = true;
 	return true;
 }
 
@@ -1960,6 +2003,19 @@ bool QGraphicsItem_override_virtual_shape(void* self, intptr_t slot) {
 	}
 
 	self_cast->handle__shape = std::move(slot_handle);
+	self_cast->owns_return__shape = false;
+	return true;
+}
+
+bool QGraphicsItem_override_virtual_owned_shape(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QGraphicsItem> slot_handle(slot);
+	MiqtVirtualQGraphicsItem* self_cast = dynamic_cast<MiqtVirtualQGraphicsItem*>( (QGraphicsItem*)(self) );
+	if (self_cast == nullptr) {
+		return false;
+	}
+
+	self_cast->handle__shape = std::move(slot_handle);
+	self_cast->owns_return__shape = true;
 	return true;
 }
 
@@ -2035,6 +2091,19 @@ bool QGraphicsItem_override_virtual_opaqueArea(void* self, intptr_t slot) {
 	}
 
 	self_cast->handle__opaqueArea = std::move(slot_handle);
+	self_cast->owns_return__opaqueArea = false;
+	return true;
+}
+
+bool QGraphicsItem_override_virtual_owned_opaqueArea(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QGraphicsItem> slot_handle(slot);
+	MiqtVirtualQGraphicsItem* self_cast = dynamic_cast<MiqtVirtualQGraphicsItem*>( (QGraphicsItem*)(self) );
+	if (self_cast == nullptr) {
+		return false;
+	}
+
+	self_cast->handle__opaqueArea = std::move(slot_handle);
+	self_cast->owns_return__opaqueArea = true;
 	return true;
 }
 
@@ -2376,6 +2445,19 @@ bool QGraphicsItem_override_virtual_inputMethodQuery(void* self, intptr_t slot) 
 	}
 
 	self_cast->handle__inputMethodQuery = std::move(slot_handle);
+	self_cast->owns_return__inputMethodQuery = false;
+	return true;
+}
+
+bool QGraphicsItem_override_virtual_owned_inputMethodQuery(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QGraphicsItem> slot_handle(slot);
+	MiqtVirtualQGraphicsItem* self_cast = dynamic_cast<MiqtVirtualQGraphicsItem*>( (QGraphicsItem*)(self) );
+	if (self_cast == nullptr) {
+		return false;
+	}
+
+	self_cast->handle__inputMethodQuery = std::move(slot_handle);
+	self_cast->owns_return__inputMethodQuery = true;
 	return true;
 }
 
@@ -2391,6 +2473,19 @@ bool QGraphicsItem_override_virtual_itemChange(void* self, intptr_t slot) {
 	}
 
 	self_cast->handle__itemChange = std::move(slot_handle);
+	self_cast->owns_return__itemChange = false;
+	return true;
+}
+
+bool QGraphicsItem_override_virtual_owned_itemChange(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QGraphicsItem> slot_handle(slot);
+	MiqtVirtualQGraphicsItem* self_cast = dynamic_cast<MiqtVirtualQGraphicsItem*>( (QGraphicsItem*)(self) );
+	if (self_cast == nullptr) {
+		return false;
+	}
+
+	self_cast->handle__itemChange = std::move(slot_handle);
+	self_cast->owns_return__itemChange = true;
 	return true;
 }
 
@@ -2436,6 +2531,19 @@ bool QGraphicsItem_override_virtual_extension(void* self, intptr_t slot) {
 	}
 
 	self_cast->handle__extension = std::move(slot_handle);
+	self_cast->owns_return__extension = false;
+	return true;
+}
+
+bool QGraphicsItem_override_virtual_owned_extension(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QGraphicsItem> slot_handle(slot);
+	MiqtVirtualQGraphicsItem* self_cast = dynamic_cast<MiqtVirtualQGraphicsItem*>( (QGraphicsItem*)(self) );
+	if (self_cast == nullptr) {
+		return false;
+	}
+
+	self_cast->handle__extension = std::move(slot_handle);
+	self_cast->owns_return__extension = true;
 	return true;
 }
 
@@ -2640,6 +2748,7 @@ public:
 
 	// cgo.Handle value for overwritten implementation
 	miqt_callback_handle<miqt_exec_callback_handle_release_QGraphicsObject> handle__boundingRect;
+	bool owns_return__boundingRect = false;
 
 	// Subclass to allow providing a Go implementation
 	virtual QRectF boundingRect() const override {
@@ -2648,11 +2757,16 @@ public:
 		}
 
 		QRectF* callback_return_value = miqt_exec_callback_QGraphicsObject_boundingRect(this, handle__boundingRect.value());
+		std::unique_ptr<QRectF> callback_return_value_owner;
+		if (owns_return__boundingRect) {
+			callback_return_value_owner.reset(callback_return_value);
+		}
 		return *callback_return_value;
 	}
 
 	// cgo.Handle value for overwritten implementation
 	miqt_callback_handle<miqt_exec_callback_handle_release_QGraphicsObject> handle__shape;
+	bool owns_return__shape = false;
 
 	// Subclass to allow providing a Go implementation
 	virtual QPainterPath shape() const override {
@@ -2661,6 +2775,10 @@ public:
 		}
 
 		QPainterPath* callback_return_value = miqt_exec_callback_QGraphicsObject_shape(this, handle__shape.value());
+		std::unique_ptr<QPainterPath> callback_return_value_owner;
+		if (owns_return__shape) {
+			callback_return_value_owner.reset(callback_return_value);
+		}
 		return *callback_return_value;
 	}
 
@@ -2740,6 +2858,7 @@ public:
 
 	// cgo.Handle value for overwritten implementation
 	miqt_callback_handle<miqt_exec_callback_handle_release_QGraphicsObject> handle__opaqueArea;
+	bool owns_return__opaqueArea = false;
 
 	// Subclass to allow providing a Go implementation
 	virtual QPainterPath opaqueArea() const override {
@@ -2748,6 +2867,10 @@ public:
 		}
 
 		QPainterPath* callback_return_value = miqt_exec_callback_QGraphicsObject_opaqueArea(this, handle__opaqueArea.value());
+		std::unique_ptr<QPainterPath> callback_return_value_owner;
+		if (owns_return__opaqueArea) {
+			callback_return_value_owner.reset(callback_return_value);
+		}
 		return *callback_return_value;
 	}
 
@@ -3125,6 +3248,7 @@ public:
 
 	// cgo.Handle value for overwritten implementation
 	miqt_callback_handle<miqt_exec_callback_handle_release_QGraphicsObject> handle__inputMethodQuery;
+	bool owns_return__inputMethodQuery = false;
 
 	// Subclass to allow providing a Go implementation
 	virtual QVariant inputMethodQuery(Qt::InputMethodQuery query) const override {
@@ -3135,6 +3259,10 @@ public:
 		Qt::InputMethodQuery query_ret = query;
 		int sigval1 = static_cast<int>(query_ret);
 		QVariant* callback_return_value = miqt_exec_callback_QGraphicsObject_inputMethodQuery(this, handle__inputMethodQuery.value(), sigval1);
+		std::unique_ptr<QVariant> callback_return_value_owner;
+		if (owns_return__inputMethodQuery) {
+			callback_return_value_owner.reset(callback_return_value);
+		}
 		return *callback_return_value;
 	}
 
@@ -3142,6 +3270,7 @@ public:
 
 	// cgo.Handle value for overwritten implementation
 	miqt_callback_handle<miqt_exec_callback_handle_release_QGraphicsObject> handle__itemChange;
+	bool owns_return__itemChange = false;
 
 	// Subclass to allow providing a Go implementation
 	virtual QVariant itemChange(QGraphicsItem::GraphicsItemChange change, const QVariant& value) override {
@@ -3155,6 +3284,10 @@ public:
 		// Cast returned reference into pointer
 		QVariant* sigval2 = const_cast<QVariant*>(&value_ret);
 		QVariant* callback_return_value = miqt_exec_callback_QGraphicsObject_itemChange(this, handle__itemChange.value(), sigval1, sigval2);
+		std::unique_ptr<QVariant> callback_return_value_owner;
+		if (owns_return__itemChange) {
+			callback_return_value_owner.reset(callback_return_value);
+		}
 		return *callback_return_value;
 	}
 
@@ -3200,6 +3333,7 @@ public:
 
 	// cgo.Handle value for overwritten implementation
 	miqt_callback_handle<miqt_exec_callback_handle_release_QGraphicsObject> handle__extension;
+	bool owns_return__extension = false;
 
 	// Subclass to allow providing a Go implementation
 	virtual QVariant extension(const QVariant& variant) const override {
@@ -3211,6 +3345,10 @@ public:
 		// Cast returned reference into pointer
 		QVariant* sigval1 = const_cast<QVariant*>(&variant_ret);
 		QVariant* callback_return_value = miqt_exec_callback_QGraphicsObject_extension(this, handle__extension.value(), sigval1);
+		std::unique_ptr<QVariant> callback_return_value_owner;
+		if (owns_return__extension) {
+			callback_return_value_owner.reset(callback_return_value);
+		}
 		return *callback_return_value;
 	}
 
@@ -3598,6 +3736,19 @@ bool QGraphicsObject_override_virtual_boundingRect(void* self, intptr_t slot) {
 	}
 
 	self_cast->handle__boundingRect = std::move(slot_handle);
+	self_cast->owns_return__boundingRect = false;
+	return true;
+}
+
+bool QGraphicsObject_override_virtual_owned_boundingRect(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QGraphicsObject> slot_handle(slot);
+	MiqtVirtualQGraphicsObject* self_cast = dynamic_cast<MiqtVirtualQGraphicsObject*>( (QGraphicsObject*)(self) );
+	if (self_cast == nullptr) {
+		return false;
+	}
+
+	self_cast->handle__boundingRect = std::move(slot_handle);
+	self_cast->owns_return__boundingRect = true;
 	return true;
 }
 
@@ -3609,6 +3760,19 @@ bool QGraphicsObject_override_virtual_shape(void* self, intptr_t slot) {
 	}
 
 	self_cast->handle__shape = std::move(slot_handle);
+	self_cast->owns_return__shape = false;
+	return true;
+}
+
+bool QGraphicsObject_override_virtual_owned_shape(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QGraphicsObject> slot_handle(slot);
+	MiqtVirtualQGraphicsObject* self_cast = dynamic_cast<MiqtVirtualQGraphicsObject*>( (QGraphicsObject*)(self) );
+	if (self_cast == nullptr) {
+		return false;
+	}
+
+	self_cast->handle__shape = std::move(slot_handle);
+	self_cast->owns_return__shape = true;
 	return true;
 }
 
@@ -3684,6 +3848,19 @@ bool QGraphicsObject_override_virtual_opaqueArea(void* self, intptr_t slot) {
 	}
 
 	self_cast->handle__opaqueArea = std::move(slot_handle);
+	self_cast->owns_return__opaqueArea = false;
+	return true;
+}
+
+bool QGraphicsObject_override_virtual_owned_opaqueArea(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QGraphicsObject> slot_handle(slot);
+	MiqtVirtualQGraphicsObject* self_cast = dynamic_cast<MiqtVirtualQGraphicsObject*>( (QGraphicsObject*)(self) );
+	if (self_cast == nullptr) {
+		return false;
+	}
+
+	self_cast->handle__opaqueArea = std::move(slot_handle);
+	self_cast->owns_return__opaqueArea = true;
 	return true;
 }
 
@@ -4025,6 +4202,19 @@ bool QGraphicsObject_override_virtual_inputMethodQuery(void* self, intptr_t slot
 	}
 
 	self_cast->handle__inputMethodQuery = std::move(slot_handle);
+	self_cast->owns_return__inputMethodQuery = false;
+	return true;
+}
+
+bool QGraphicsObject_override_virtual_owned_inputMethodQuery(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QGraphicsObject> slot_handle(slot);
+	MiqtVirtualQGraphicsObject* self_cast = dynamic_cast<MiqtVirtualQGraphicsObject*>( (QGraphicsObject*)(self) );
+	if (self_cast == nullptr) {
+		return false;
+	}
+
+	self_cast->handle__inputMethodQuery = std::move(slot_handle);
+	self_cast->owns_return__inputMethodQuery = true;
 	return true;
 }
 
@@ -4040,6 +4230,19 @@ bool QGraphicsObject_override_virtual_itemChange(void* self, intptr_t slot) {
 	}
 
 	self_cast->handle__itemChange = std::move(slot_handle);
+	self_cast->owns_return__itemChange = false;
+	return true;
+}
+
+bool QGraphicsObject_override_virtual_owned_itemChange(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QGraphicsObject> slot_handle(slot);
+	MiqtVirtualQGraphicsObject* self_cast = dynamic_cast<MiqtVirtualQGraphicsObject*>( (QGraphicsObject*)(self) );
+	if (self_cast == nullptr) {
+		return false;
+	}
+
+	self_cast->handle__itemChange = std::move(slot_handle);
+	self_cast->owns_return__itemChange = true;
 	return true;
 }
 
@@ -4085,6 +4288,19 @@ bool QGraphicsObject_override_virtual_extension(void* self, intptr_t slot) {
 	}
 
 	self_cast->handle__extension = std::move(slot_handle);
+	self_cast->owns_return__extension = false;
+	return true;
+}
+
+bool QGraphicsObject_override_virtual_owned_extension(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QGraphicsObject> slot_handle(slot);
+	MiqtVirtualQGraphicsObject* self_cast = dynamic_cast<MiqtVirtualQGraphicsObject*>( (QGraphicsObject*)(self) );
+	if (self_cast == nullptr) {
+		return false;
+	}
+
+	self_cast->handle__extension = std::move(slot_handle);
+	self_cast->owns_return__extension = true;
 	return true;
 }
 
@@ -4210,6 +4426,7 @@ public:
 
 	// cgo.Handle value for overwritten implementation
 	miqt_callback_handle<miqt_exec_callback_handle_release_QAbstractGraphicsShapeItem> handle__opaqueArea;
+	bool owns_return__opaqueArea = false;
 
 	// Subclass to allow providing a Go implementation
 	virtual QPainterPath opaqueArea() const override {
@@ -4218,6 +4435,10 @@ public:
 		}
 
 		QPainterPath* callback_return_value = miqt_exec_callback_QAbstractGraphicsShapeItem_opaqueArea(this, handle__opaqueArea.value());
+		std::unique_ptr<QPainterPath> callback_return_value_owner;
+		if (owns_return__opaqueArea) {
+			callback_return_value_owner.reset(callback_return_value);
+		}
 		return *callback_return_value;
 	}
 
@@ -4242,6 +4463,7 @@ public:
 
 	// cgo.Handle value for overwritten implementation
 	miqt_callback_handle<miqt_exec_callback_handle_release_QAbstractGraphicsShapeItem> handle__boundingRect;
+	bool owns_return__boundingRect = false;
 
 	// Subclass to allow providing a Go implementation
 	virtual QRectF boundingRect() const override {
@@ -4250,11 +4472,16 @@ public:
 		}
 
 		QRectF* callback_return_value = miqt_exec_callback_QAbstractGraphicsShapeItem_boundingRect(this, handle__boundingRect.value());
+		std::unique_ptr<QRectF> callback_return_value_owner;
+		if (owns_return__boundingRect) {
+			callback_return_value_owner.reset(callback_return_value);
+		}
 		return *callback_return_value;
 	}
 
 	// cgo.Handle value for overwritten implementation
 	miqt_callback_handle<miqt_exec_callback_handle_release_QAbstractGraphicsShapeItem> handle__shape;
+	bool owns_return__shape = false;
 
 	// Subclass to allow providing a Go implementation
 	virtual QPainterPath shape() const override {
@@ -4263,6 +4490,10 @@ public:
 		}
 
 		QPainterPath* callback_return_value = miqt_exec_callback_QAbstractGraphicsShapeItem_shape(this, handle__shape.value());
+		std::unique_ptr<QPainterPath> callback_return_value_owner;
+		if (owns_return__shape) {
+			callback_return_value_owner.reset(callback_return_value);
+		}
 		return *callback_return_value;
 	}
 
@@ -4696,6 +4927,7 @@ public:
 
 	// cgo.Handle value for overwritten implementation
 	miqt_callback_handle<miqt_exec_callback_handle_release_QAbstractGraphicsShapeItem> handle__inputMethodQuery;
+	bool owns_return__inputMethodQuery = false;
 
 	// Subclass to allow providing a Go implementation
 	virtual QVariant inputMethodQuery(Qt::InputMethodQuery query) const override {
@@ -4706,6 +4938,10 @@ public:
 		Qt::InputMethodQuery query_ret = query;
 		int sigval1 = static_cast<int>(query_ret);
 		QVariant* callback_return_value = miqt_exec_callback_QAbstractGraphicsShapeItem_inputMethodQuery(this, handle__inputMethodQuery.value(), sigval1);
+		std::unique_ptr<QVariant> callback_return_value_owner;
+		if (owns_return__inputMethodQuery) {
+			callback_return_value_owner.reset(callback_return_value);
+		}
 		return *callback_return_value;
 	}
 
@@ -4713,6 +4949,7 @@ public:
 
 	// cgo.Handle value for overwritten implementation
 	miqt_callback_handle<miqt_exec_callback_handle_release_QAbstractGraphicsShapeItem> handle__itemChange;
+	bool owns_return__itemChange = false;
 
 	// Subclass to allow providing a Go implementation
 	virtual QVariant itemChange(QGraphicsItem::GraphicsItemChange change, const QVariant& value) override {
@@ -4726,6 +4963,10 @@ public:
 		// Cast returned reference into pointer
 		QVariant* sigval2 = const_cast<QVariant*>(&value_ret);
 		QVariant* callback_return_value = miqt_exec_callback_QAbstractGraphicsShapeItem_itemChange(this, handle__itemChange.value(), sigval1, sigval2);
+		std::unique_ptr<QVariant> callback_return_value_owner;
+		if (owns_return__itemChange) {
+			callback_return_value_owner.reset(callback_return_value);
+		}
 		return *callback_return_value;
 	}
 
@@ -4771,6 +5012,7 @@ public:
 
 	// cgo.Handle value for overwritten implementation
 	miqt_callback_handle<miqt_exec_callback_handle_release_QAbstractGraphicsShapeItem> handle__extension;
+	bool owns_return__extension = false;
 
 	// Subclass to allow providing a Go implementation
 	virtual QVariant extension(const QVariant& variant) const override {
@@ -4782,6 +5024,10 @@ public:
 		// Cast returned reference into pointer
 		QVariant* sigval1 = const_cast<QVariant*>(&variant_ret);
 		QVariant* callback_return_value = miqt_exec_callback_QAbstractGraphicsShapeItem_extension(this, handle__extension.value(), sigval1);
+		std::unique_ptr<QVariant> callback_return_value_owner;
+		if (owns_return__extension) {
+			callback_return_value_owner.reset(callback_return_value);
+		}
 		return *callback_return_value;
 	}
 
@@ -4853,6 +5099,19 @@ bool QAbstractGraphicsShapeItem_override_virtual_opaqueArea(void* self, intptr_t
 	}
 
 	self_cast->handle__opaqueArea = std::move(slot_handle);
+	self_cast->owns_return__opaqueArea = false;
+	return true;
+}
+
+bool QAbstractGraphicsShapeItem_override_virtual_owned_opaqueArea(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QAbstractGraphicsShapeItem> slot_handle(slot);
+	MiqtVirtualQAbstractGraphicsShapeItem* self_cast = dynamic_cast<MiqtVirtualQAbstractGraphicsShapeItem*>( (QAbstractGraphicsShapeItem*)(self) );
+	if (self_cast == nullptr) {
+		return false;
+	}
+
+	self_cast->handle__opaqueArea = std::move(slot_handle);
+	self_cast->owns_return__opaqueArea = true;
 	return true;
 }
 
@@ -4883,6 +5142,19 @@ bool QAbstractGraphicsShapeItem_override_virtual_boundingRect(void* self, intptr
 	}
 
 	self_cast->handle__boundingRect = std::move(slot_handle);
+	self_cast->owns_return__boundingRect = false;
+	return true;
+}
+
+bool QAbstractGraphicsShapeItem_override_virtual_owned_boundingRect(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QAbstractGraphicsShapeItem> slot_handle(slot);
+	MiqtVirtualQAbstractGraphicsShapeItem* self_cast = dynamic_cast<MiqtVirtualQAbstractGraphicsShapeItem*>( (QAbstractGraphicsShapeItem*)(self) );
+	if (self_cast == nullptr) {
+		return false;
+	}
+
+	self_cast->handle__boundingRect = std::move(slot_handle);
+	self_cast->owns_return__boundingRect = true;
 	return true;
 }
 
@@ -4894,6 +5166,19 @@ bool QAbstractGraphicsShapeItem_override_virtual_shape(void* self, intptr_t slot
 	}
 
 	self_cast->handle__shape = std::move(slot_handle);
+	self_cast->owns_return__shape = false;
+	return true;
+}
+
+bool QAbstractGraphicsShapeItem_override_virtual_owned_shape(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QAbstractGraphicsShapeItem> slot_handle(slot);
+	MiqtVirtualQAbstractGraphicsShapeItem* self_cast = dynamic_cast<MiqtVirtualQAbstractGraphicsShapeItem*>( (QAbstractGraphicsShapeItem*)(self) );
+	if (self_cast == nullptr) {
+		return false;
+	}
+
+	self_cast->handle__shape = std::move(slot_handle);
+	self_cast->owns_return__shape = true;
 	return true;
 }
 
@@ -5280,6 +5565,19 @@ bool QAbstractGraphicsShapeItem_override_virtual_inputMethodQuery(void* self, in
 	}
 
 	self_cast->handle__inputMethodQuery = std::move(slot_handle);
+	self_cast->owns_return__inputMethodQuery = false;
+	return true;
+}
+
+bool QAbstractGraphicsShapeItem_override_virtual_owned_inputMethodQuery(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QAbstractGraphicsShapeItem> slot_handle(slot);
+	MiqtVirtualQAbstractGraphicsShapeItem* self_cast = dynamic_cast<MiqtVirtualQAbstractGraphicsShapeItem*>( (QAbstractGraphicsShapeItem*)(self) );
+	if (self_cast == nullptr) {
+		return false;
+	}
+
+	self_cast->handle__inputMethodQuery = std::move(slot_handle);
+	self_cast->owns_return__inputMethodQuery = true;
 	return true;
 }
 
@@ -5295,6 +5593,19 @@ bool QAbstractGraphicsShapeItem_override_virtual_itemChange(void* self, intptr_t
 	}
 
 	self_cast->handle__itemChange = std::move(slot_handle);
+	self_cast->owns_return__itemChange = false;
+	return true;
+}
+
+bool QAbstractGraphicsShapeItem_override_virtual_owned_itemChange(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QAbstractGraphicsShapeItem> slot_handle(slot);
+	MiqtVirtualQAbstractGraphicsShapeItem* self_cast = dynamic_cast<MiqtVirtualQAbstractGraphicsShapeItem*>( (QAbstractGraphicsShapeItem*)(self) );
+	if (self_cast == nullptr) {
+		return false;
+	}
+
+	self_cast->handle__itemChange = std::move(slot_handle);
+	self_cast->owns_return__itemChange = true;
 	return true;
 }
 
@@ -5340,6 +5651,19 @@ bool QAbstractGraphicsShapeItem_override_virtual_extension(void* self, intptr_t 
 	}
 
 	self_cast->handle__extension = std::move(slot_handle);
+	self_cast->owns_return__extension = false;
+	return true;
+}
+
+bool QAbstractGraphicsShapeItem_override_virtual_owned_extension(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QAbstractGraphicsShapeItem> slot_handle(slot);
+	MiqtVirtualQAbstractGraphicsShapeItem* self_cast = dynamic_cast<MiqtVirtualQAbstractGraphicsShapeItem*>( (QAbstractGraphicsShapeItem*)(self) );
+	if (self_cast == nullptr) {
+		return false;
+	}
+
+	self_cast->handle__extension = std::move(slot_handle);
+	self_cast->owns_return__extension = true;
 	return true;
 }
 
@@ -5407,6 +5731,7 @@ public:
 
 	// cgo.Handle value for overwritten implementation
 	miqt_callback_handle<miqt_exec_callback_handle_release_QGraphicsPathItem> handle__boundingRect;
+	bool owns_return__boundingRect = false;
 
 	// Subclass to allow providing a Go implementation
 	virtual QRectF boundingRect() const override {
@@ -5415,6 +5740,10 @@ public:
 		}
 
 		QRectF* callback_return_value = miqt_exec_callback_QGraphicsPathItem_boundingRect(this, handle__boundingRect.value());
+		std::unique_ptr<QRectF> callback_return_value_owner;
+		if (owns_return__boundingRect) {
+			callback_return_value_owner.reset(callback_return_value);
+		}
 		return *callback_return_value;
 	}
 
@@ -5422,6 +5751,7 @@ public:
 
 	// cgo.Handle value for overwritten implementation
 	miqt_callback_handle<miqt_exec_callback_handle_release_QGraphicsPathItem> handle__shape;
+	bool owns_return__shape = false;
 
 	// Subclass to allow providing a Go implementation
 	virtual QPainterPath shape() const override {
@@ -5430,6 +5760,10 @@ public:
 		}
 
 		QPainterPath* callback_return_value = miqt_exec_callback_QGraphicsPathItem_shape(this, handle__shape.value());
+		std::unique_ptr<QPainterPath> callback_return_value_owner;
+		if (owns_return__shape) {
+			callback_return_value_owner.reset(callback_return_value);
+		}
 		return *callback_return_value;
 	}
 
@@ -5490,6 +5824,7 @@ public:
 
 	// cgo.Handle value for overwritten implementation
 	miqt_callback_handle<miqt_exec_callback_handle_release_QGraphicsPathItem> handle__opaqueArea;
+	bool owns_return__opaqueArea = false;
 
 	// Subclass to allow providing a Go implementation
 	virtual QPainterPath opaqueArea() const override {
@@ -5498,6 +5833,10 @@ public:
 		}
 
 		QPainterPath* callback_return_value = miqt_exec_callback_QGraphicsPathItem_opaqueArea(this, handle__opaqueArea.value());
+		std::unique_ptr<QPainterPath> callback_return_value_owner;
+		if (owns_return__opaqueArea) {
+			callback_return_value_owner.reset(callback_return_value);
+		}
 		return *callback_return_value;
 	}
 
@@ -5558,6 +5897,7 @@ public:
 
 	// cgo.Handle value for overwritten implementation
 	miqt_callback_handle<miqt_exec_callback_handle_release_QGraphicsPathItem> handle__extension;
+	bool owns_return__extension = false;
 
 	// Subclass to allow providing a Go implementation
 	virtual QVariant extension(const QVariant& variant) const override {
@@ -5569,6 +5909,10 @@ public:
 		// Cast returned reference into pointer
 		QVariant* sigval1 = const_cast<QVariant*>(&variant_ret);
 		QVariant* callback_return_value = miqt_exec_callback_QGraphicsPathItem_extension(this, handle__extension.value(), sigval1);
+		std::unique_ptr<QVariant> callback_return_value_owner;
+		if (owns_return__extension) {
+			callback_return_value_owner.reset(callback_return_value);
+		}
 		return *callback_return_value;
 	}
 
@@ -5970,6 +6314,7 @@ public:
 
 	// cgo.Handle value for overwritten implementation
 	miqt_callback_handle<miqt_exec_callback_handle_release_QGraphicsPathItem> handle__inputMethodQuery;
+	bool owns_return__inputMethodQuery = false;
 
 	// Subclass to allow providing a Go implementation
 	virtual QVariant inputMethodQuery(Qt::InputMethodQuery query) const override {
@@ -5980,6 +6325,10 @@ public:
 		Qt::InputMethodQuery query_ret = query;
 		int sigval1 = static_cast<int>(query_ret);
 		QVariant* callback_return_value = miqt_exec_callback_QGraphicsPathItem_inputMethodQuery(this, handle__inputMethodQuery.value(), sigval1);
+		std::unique_ptr<QVariant> callback_return_value_owner;
+		if (owns_return__inputMethodQuery) {
+			callback_return_value_owner.reset(callback_return_value);
+		}
 		return *callback_return_value;
 	}
 
@@ -5987,6 +6336,7 @@ public:
 
 	// cgo.Handle value for overwritten implementation
 	miqt_callback_handle<miqt_exec_callback_handle_release_QGraphicsPathItem> handle__itemChange;
+	bool owns_return__itemChange = false;
 
 	// Subclass to allow providing a Go implementation
 	virtual QVariant itemChange(QGraphicsItem::GraphicsItemChange change, const QVariant& value) override {
@@ -6000,6 +6350,10 @@ public:
 		// Cast returned reference into pointer
 		QVariant* sigval2 = const_cast<QVariant*>(&value_ret);
 		QVariant* callback_return_value = miqt_exec_callback_QGraphicsPathItem_itemChange(this, handle__itemChange.value(), sigval1, sigval2);
+		std::unique_ptr<QVariant> callback_return_value_owner;
+		if (owns_return__itemChange) {
+			callback_return_value_owner.reset(callback_return_value);
+		}
 		return *callback_return_value;
 	}
 
@@ -6076,6 +6430,19 @@ bool QGraphicsPathItem_override_virtual_boundingRect(void* self, intptr_t slot) 
 	}
 
 	self_cast->handle__boundingRect = std::move(slot_handle);
+	self_cast->owns_return__boundingRect = false;
+	return true;
+}
+
+bool QGraphicsPathItem_override_virtual_owned_boundingRect(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QGraphicsPathItem> slot_handle(slot);
+	MiqtVirtualQGraphicsPathItem* self_cast = dynamic_cast<MiqtVirtualQGraphicsPathItem*>( (QGraphicsPathItem*)(self) );
+	if (self_cast == nullptr) {
+		return false;
+	}
+
+	self_cast->handle__boundingRect = std::move(slot_handle);
+	self_cast->owns_return__boundingRect = true;
 	return true;
 }
 
@@ -6091,6 +6458,19 @@ bool QGraphicsPathItem_override_virtual_shape(void* self, intptr_t slot) {
 	}
 
 	self_cast->handle__shape = std::move(slot_handle);
+	self_cast->owns_return__shape = false;
+	return true;
+}
+
+bool QGraphicsPathItem_override_virtual_owned_shape(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QGraphicsPathItem> slot_handle(slot);
+	MiqtVirtualQGraphicsPathItem* self_cast = dynamic_cast<MiqtVirtualQGraphicsPathItem*>( (QGraphicsPathItem*)(self) );
+	if (self_cast == nullptr) {
+		return false;
+	}
+
+	self_cast->handle__shape = std::move(slot_handle);
+	self_cast->owns_return__shape = true;
 	return true;
 }
 
@@ -6151,6 +6531,19 @@ bool QGraphicsPathItem_override_virtual_opaqueArea(void* self, intptr_t slot) {
 	}
 
 	self_cast->handle__opaqueArea = std::move(slot_handle);
+	self_cast->owns_return__opaqueArea = false;
+	return true;
+}
+
+bool QGraphicsPathItem_override_virtual_owned_opaqueArea(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QGraphicsPathItem> slot_handle(slot);
+	MiqtVirtualQGraphicsPathItem* self_cast = dynamic_cast<MiqtVirtualQGraphicsPathItem*>( (QGraphicsPathItem*)(self) );
+	if (self_cast == nullptr) {
+		return false;
+	}
+
+	self_cast->handle__opaqueArea = std::move(slot_handle);
+	self_cast->owns_return__opaqueArea = true;
 	return true;
 }
 
@@ -6211,6 +6604,19 @@ bool QGraphicsPathItem_override_virtual_extension(void* self, intptr_t slot) {
 	}
 
 	self_cast->handle__extension = std::move(slot_handle);
+	self_cast->owns_return__extension = false;
+	return true;
+}
+
+bool QGraphicsPathItem_override_virtual_owned_extension(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QGraphicsPathItem> slot_handle(slot);
+	MiqtVirtualQGraphicsPathItem* self_cast = dynamic_cast<MiqtVirtualQGraphicsPathItem*>( (QGraphicsPathItem*)(self) );
+	if (self_cast == nullptr) {
+		return false;
+	}
+
+	self_cast->handle__extension = std::move(slot_handle);
+	self_cast->owns_return__extension = true;
 	return true;
 }
 
@@ -6571,6 +6977,19 @@ bool QGraphicsPathItem_override_virtual_inputMethodQuery(void* self, intptr_t sl
 	}
 
 	self_cast->handle__inputMethodQuery = std::move(slot_handle);
+	self_cast->owns_return__inputMethodQuery = false;
+	return true;
+}
+
+bool QGraphicsPathItem_override_virtual_owned_inputMethodQuery(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QGraphicsPathItem> slot_handle(slot);
+	MiqtVirtualQGraphicsPathItem* self_cast = dynamic_cast<MiqtVirtualQGraphicsPathItem*>( (QGraphicsPathItem*)(self) );
+	if (self_cast == nullptr) {
+		return false;
+	}
+
+	self_cast->handle__inputMethodQuery = std::move(slot_handle);
+	self_cast->owns_return__inputMethodQuery = true;
 	return true;
 }
 
@@ -6586,6 +7005,19 @@ bool QGraphicsPathItem_override_virtual_itemChange(void* self, intptr_t slot) {
 	}
 
 	self_cast->handle__itemChange = std::move(slot_handle);
+	self_cast->owns_return__itemChange = false;
+	return true;
+}
+
+bool QGraphicsPathItem_override_virtual_owned_itemChange(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QGraphicsPathItem> slot_handle(slot);
+	MiqtVirtualQGraphicsPathItem* self_cast = dynamic_cast<MiqtVirtualQGraphicsPathItem*>( (QGraphicsPathItem*)(self) );
+	if (self_cast == nullptr) {
+		return false;
+	}
+
+	self_cast->handle__itemChange = std::move(slot_handle);
+	self_cast->owns_return__itemChange = true;
 	return true;
 }
 
@@ -6655,6 +7087,7 @@ public:
 
 	// cgo.Handle value for overwritten implementation
 	miqt_callback_handle<miqt_exec_callback_handle_release_QGraphicsRectItem> handle__boundingRect;
+	bool owns_return__boundingRect = false;
 
 	// Subclass to allow providing a Go implementation
 	virtual QRectF boundingRect() const override {
@@ -6663,6 +7096,10 @@ public:
 		}
 
 		QRectF* callback_return_value = miqt_exec_callback_QGraphicsRectItem_boundingRect(this, handle__boundingRect.value());
+		std::unique_ptr<QRectF> callback_return_value_owner;
+		if (owns_return__boundingRect) {
+			callback_return_value_owner.reset(callback_return_value);
+		}
 		return *callback_return_value;
 	}
 
@@ -6670,6 +7107,7 @@ public:
 
 	// cgo.Handle value for overwritten implementation
 	miqt_callback_handle<miqt_exec_callback_handle_release_QGraphicsRectItem> handle__shape;
+	bool owns_return__shape = false;
 
 	// Subclass to allow providing a Go implementation
 	virtual QPainterPath shape() const override {
@@ -6678,6 +7116,10 @@ public:
 		}
 
 		QPainterPath* callback_return_value = miqt_exec_callback_QGraphicsRectItem_shape(this, handle__shape.value());
+		std::unique_ptr<QPainterPath> callback_return_value_owner;
+		if (owns_return__shape) {
+			callback_return_value_owner.reset(callback_return_value);
+		}
 		return *callback_return_value;
 	}
 
@@ -6738,6 +7180,7 @@ public:
 
 	// cgo.Handle value for overwritten implementation
 	miqt_callback_handle<miqt_exec_callback_handle_release_QGraphicsRectItem> handle__opaqueArea;
+	bool owns_return__opaqueArea = false;
 
 	// Subclass to allow providing a Go implementation
 	virtual QPainterPath opaqueArea() const override {
@@ -6746,6 +7189,10 @@ public:
 		}
 
 		QPainterPath* callback_return_value = miqt_exec_callback_QGraphicsRectItem_opaqueArea(this, handle__opaqueArea.value());
+		std::unique_ptr<QPainterPath> callback_return_value_owner;
+		if (owns_return__opaqueArea) {
+			callback_return_value_owner.reset(callback_return_value);
+		}
 		return *callback_return_value;
 	}
 
@@ -6806,6 +7253,7 @@ public:
 
 	// cgo.Handle value for overwritten implementation
 	miqt_callback_handle<miqt_exec_callback_handle_release_QGraphicsRectItem> handle__extension;
+	bool owns_return__extension = false;
 
 	// Subclass to allow providing a Go implementation
 	virtual QVariant extension(const QVariant& variant) const override {
@@ -6817,6 +7265,10 @@ public:
 		// Cast returned reference into pointer
 		QVariant* sigval1 = const_cast<QVariant*>(&variant_ret);
 		QVariant* callback_return_value = miqt_exec_callback_QGraphicsRectItem_extension(this, handle__extension.value(), sigval1);
+		std::unique_ptr<QVariant> callback_return_value_owner;
+		if (owns_return__extension) {
+			callback_return_value_owner.reset(callback_return_value);
+		}
 		return *callback_return_value;
 	}
 
@@ -7218,6 +7670,7 @@ public:
 
 	// cgo.Handle value for overwritten implementation
 	miqt_callback_handle<miqt_exec_callback_handle_release_QGraphicsRectItem> handle__inputMethodQuery;
+	bool owns_return__inputMethodQuery = false;
 
 	// Subclass to allow providing a Go implementation
 	virtual QVariant inputMethodQuery(Qt::InputMethodQuery query) const override {
@@ -7228,6 +7681,10 @@ public:
 		Qt::InputMethodQuery query_ret = query;
 		int sigval1 = static_cast<int>(query_ret);
 		QVariant* callback_return_value = miqt_exec_callback_QGraphicsRectItem_inputMethodQuery(this, handle__inputMethodQuery.value(), sigval1);
+		std::unique_ptr<QVariant> callback_return_value_owner;
+		if (owns_return__inputMethodQuery) {
+			callback_return_value_owner.reset(callback_return_value);
+		}
 		return *callback_return_value;
 	}
 
@@ -7235,6 +7692,7 @@ public:
 
 	// cgo.Handle value for overwritten implementation
 	miqt_callback_handle<miqt_exec_callback_handle_release_QGraphicsRectItem> handle__itemChange;
+	bool owns_return__itemChange = false;
 
 	// Subclass to allow providing a Go implementation
 	virtual QVariant itemChange(QGraphicsItem::GraphicsItemChange change, const QVariant& value) override {
@@ -7248,6 +7706,10 @@ public:
 		// Cast returned reference into pointer
 		QVariant* sigval2 = const_cast<QVariant*>(&value_ret);
 		QVariant* callback_return_value = miqt_exec_callback_QGraphicsRectItem_itemChange(this, handle__itemChange.value(), sigval1, sigval2);
+		std::unique_ptr<QVariant> callback_return_value_owner;
+		if (owns_return__itemChange) {
+			callback_return_value_owner.reset(callback_return_value);
+		}
 		return *callback_return_value;
 	}
 
@@ -7336,6 +7798,19 @@ bool QGraphicsRectItem_override_virtual_boundingRect(void* self, intptr_t slot) 
 	}
 
 	self_cast->handle__boundingRect = std::move(slot_handle);
+	self_cast->owns_return__boundingRect = false;
+	return true;
+}
+
+bool QGraphicsRectItem_override_virtual_owned_boundingRect(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QGraphicsRectItem> slot_handle(slot);
+	MiqtVirtualQGraphicsRectItem* self_cast = dynamic_cast<MiqtVirtualQGraphicsRectItem*>( (QGraphicsRectItem*)(self) );
+	if (self_cast == nullptr) {
+		return false;
+	}
+
+	self_cast->handle__boundingRect = std::move(slot_handle);
+	self_cast->owns_return__boundingRect = true;
 	return true;
 }
 
@@ -7351,6 +7826,19 @@ bool QGraphicsRectItem_override_virtual_shape(void* self, intptr_t slot) {
 	}
 
 	self_cast->handle__shape = std::move(slot_handle);
+	self_cast->owns_return__shape = false;
+	return true;
+}
+
+bool QGraphicsRectItem_override_virtual_owned_shape(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QGraphicsRectItem> slot_handle(slot);
+	MiqtVirtualQGraphicsRectItem* self_cast = dynamic_cast<MiqtVirtualQGraphicsRectItem*>( (QGraphicsRectItem*)(self) );
+	if (self_cast == nullptr) {
+		return false;
+	}
+
+	self_cast->handle__shape = std::move(slot_handle);
+	self_cast->owns_return__shape = true;
 	return true;
 }
 
@@ -7411,6 +7899,19 @@ bool QGraphicsRectItem_override_virtual_opaqueArea(void* self, intptr_t slot) {
 	}
 
 	self_cast->handle__opaqueArea = std::move(slot_handle);
+	self_cast->owns_return__opaqueArea = false;
+	return true;
+}
+
+bool QGraphicsRectItem_override_virtual_owned_opaqueArea(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QGraphicsRectItem> slot_handle(slot);
+	MiqtVirtualQGraphicsRectItem* self_cast = dynamic_cast<MiqtVirtualQGraphicsRectItem*>( (QGraphicsRectItem*)(self) );
+	if (self_cast == nullptr) {
+		return false;
+	}
+
+	self_cast->handle__opaqueArea = std::move(slot_handle);
+	self_cast->owns_return__opaqueArea = true;
 	return true;
 }
 
@@ -7471,6 +7972,19 @@ bool QGraphicsRectItem_override_virtual_extension(void* self, intptr_t slot) {
 	}
 
 	self_cast->handle__extension = std::move(slot_handle);
+	self_cast->owns_return__extension = false;
+	return true;
+}
+
+bool QGraphicsRectItem_override_virtual_owned_extension(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QGraphicsRectItem> slot_handle(slot);
+	MiqtVirtualQGraphicsRectItem* self_cast = dynamic_cast<MiqtVirtualQGraphicsRectItem*>( (QGraphicsRectItem*)(self) );
+	if (self_cast == nullptr) {
+		return false;
+	}
+
+	self_cast->handle__extension = std::move(slot_handle);
+	self_cast->owns_return__extension = true;
 	return true;
 }
 
@@ -7831,6 +8345,19 @@ bool QGraphicsRectItem_override_virtual_inputMethodQuery(void* self, intptr_t sl
 	}
 
 	self_cast->handle__inputMethodQuery = std::move(slot_handle);
+	self_cast->owns_return__inputMethodQuery = false;
+	return true;
+}
+
+bool QGraphicsRectItem_override_virtual_owned_inputMethodQuery(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QGraphicsRectItem> slot_handle(slot);
+	MiqtVirtualQGraphicsRectItem* self_cast = dynamic_cast<MiqtVirtualQGraphicsRectItem*>( (QGraphicsRectItem*)(self) );
+	if (self_cast == nullptr) {
+		return false;
+	}
+
+	self_cast->handle__inputMethodQuery = std::move(slot_handle);
+	self_cast->owns_return__inputMethodQuery = true;
 	return true;
 }
 
@@ -7846,6 +8373,19 @@ bool QGraphicsRectItem_override_virtual_itemChange(void* self, intptr_t slot) {
 	}
 
 	self_cast->handle__itemChange = std::move(slot_handle);
+	self_cast->owns_return__itemChange = false;
+	return true;
+}
+
+bool QGraphicsRectItem_override_virtual_owned_itemChange(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QGraphicsRectItem> slot_handle(slot);
+	MiqtVirtualQGraphicsRectItem* self_cast = dynamic_cast<MiqtVirtualQGraphicsRectItem*>( (QGraphicsRectItem*)(self) );
+	if (self_cast == nullptr) {
+		return false;
+	}
+
+	self_cast->handle__itemChange = std::move(slot_handle);
+	self_cast->owns_return__itemChange = true;
 	return true;
 }
 
@@ -7915,6 +8455,7 @@ public:
 
 	// cgo.Handle value for overwritten implementation
 	miqt_callback_handle<miqt_exec_callback_handle_release_QGraphicsEllipseItem> handle__boundingRect;
+	bool owns_return__boundingRect = false;
 
 	// Subclass to allow providing a Go implementation
 	virtual QRectF boundingRect() const override {
@@ -7923,6 +8464,10 @@ public:
 		}
 
 		QRectF* callback_return_value = miqt_exec_callback_QGraphicsEllipseItem_boundingRect(this, handle__boundingRect.value());
+		std::unique_ptr<QRectF> callback_return_value_owner;
+		if (owns_return__boundingRect) {
+			callback_return_value_owner.reset(callback_return_value);
+		}
 		return *callback_return_value;
 	}
 
@@ -7930,6 +8475,7 @@ public:
 
 	// cgo.Handle value for overwritten implementation
 	miqt_callback_handle<miqt_exec_callback_handle_release_QGraphicsEllipseItem> handle__shape;
+	bool owns_return__shape = false;
 
 	// Subclass to allow providing a Go implementation
 	virtual QPainterPath shape() const override {
@@ -7938,6 +8484,10 @@ public:
 		}
 
 		QPainterPath* callback_return_value = miqt_exec_callback_QGraphicsEllipseItem_shape(this, handle__shape.value());
+		std::unique_ptr<QPainterPath> callback_return_value_owner;
+		if (owns_return__shape) {
+			callback_return_value_owner.reset(callback_return_value);
+		}
 		return *callback_return_value;
 	}
 
@@ -7998,6 +8548,7 @@ public:
 
 	// cgo.Handle value for overwritten implementation
 	miqt_callback_handle<miqt_exec_callback_handle_release_QGraphicsEllipseItem> handle__opaqueArea;
+	bool owns_return__opaqueArea = false;
 
 	// Subclass to allow providing a Go implementation
 	virtual QPainterPath opaqueArea() const override {
@@ -8006,6 +8557,10 @@ public:
 		}
 
 		QPainterPath* callback_return_value = miqt_exec_callback_QGraphicsEllipseItem_opaqueArea(this, handle__opaqueArea.value());
+		std::unique_ptr<QPainterPath> callback_return_value_owner;
+		if (owns_return__opaqueArea) {
+			callback_return_value_owner.reset(callback_return_value);
+		}
 		return *callback_return_value;
 	}
 
@@ -8066,6 +8621,7 @@ public:
 
 	// cgo.Handle value for overwritten implementation
 	miqt_callback_handle<miqt_exec_callback_handle_release_QGraphicsEllipseItem> handle__extension;
+	bool owns_return__extension = false;
 
 	// Subclass to allow providing a Go implementation
 	virtual QVariant extension(const QVariant& variant) const override {
@@ -8077,6 +8633,10 @@ public:
 		// Cast returned reference into pointer
 		QVariant* sigval1 = const_cast<QVariant*>(&variant_ret);
 		QVariant* callback_return_value = miqt_exec_callback_QGraphicsEllipseItem_extension(this, handle__extension.value(), sigval1);
+		std::unique_ptr<QVariant> callback_return_value_owner;
+		if (owns_return__extension) {
+			callback_return_value_owner.reset(callback_return_value);
+		}
 		return *callback_return_value;
 	}
 
@@ -8478,6 +9038,7 @@ public:
 
 	// cgo.Handle value for overwritten implementation
 	miqt_callback_handle<miqt_exec_callback_handle_release_QGraphicsEllipseItem> handle__inputMethodQuery;
+	bool owns_return__inputMethodQuery = false;
 
 	// Subclass to allow providing a Go implementation
 	virtual QVariant inputMethodQuery(Qt::InputMethodQuery query) const override {
@@ -8488,6 +9049,10 @@ public:
 		Qt::InputMethodQuery query_ret = query;
 		int sigval1 = static_cast<int>(query_ret);
 		QVariant* callback_return_value = miqt_exec_callback_QGraphicsEllipseItem_inputMethodQuery(this, handle__inputMethodQuery.value(), sigval1);
+		std::unique_ptr<QVariant> callback_return_value_owner;
+		if (owns_return__inputMethodQuery) {
+			callback_return_value_owner.reset(callback_return_value);
+		}
 		return *callback_return_value;
 	}
 
@@ -8495,6 +9060,7 @@ public:
 
 	// cgo.Handle value for overwritten implementation
 	miqt_callback_handle<miqt_exec_callback_handle_release_QGraphicsEllipseItem> handle__itemChange;
+	bool owns_return__itemChange = false;
 
 	// Subclass to allow providing a Go implementation
 	virtual QVariant itemChange(QGraphicsItem::GraphicsItemChange change, const QVariant& value) override {
@@ -8508,6 +9074,10 @@ public:
 		// Cast returned reference into pointer
 		QVariant* sigval2 = const_cast<QVariant*>(&value_ret);
 		QVariant* callback_return_value = miqt_exec_callback_QGraphicsEllipseItem_itemChange(this, handle__itemChange.value(), sigval1, sigval2);
+		std::unique_ptr<QVariant> callback_return_value_owner;
+		if (owns_return__itemChange) {
+			callback_return_value_owner.reset(callback_return_value);
+		}
 		return *callback_return_value;
 	}
 
@@ -8612,6 +9182,19 @@ bool QGraphicsEllipseItem_override_virtual_boundingRect(void* self, intptr_t slo
 	}
 
 	self_cast->handle__boundingRect = std::move(slot_handle);
+	self_cast->owns_return__boundingRect = false;
+	return true;
+}
+
+bool QGraphicsEllipseItem_override_virtual_owned_boundingRect(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QGraphicsEllipseItem> slot_handle(slot);
+	MiqtVirtualQGraphicsEllipseItem* self_cast = dynamic_cast<MiqtVirtualQGraphicsEllipseItem*>( (QGraphicsEllipseItem*)(self) );
+	if (self_cast == nullptr) {
+		return false;
+	}
+
+	self_cast->handle__boundingRect = std::move(slot_handle);
+	self_cast->owns_return__boundingRect = true;
 	return true;
 }
 
@@ -8627,6 +9210,19 @@ bool QGraphicsEllipseItem_override_virtual_shape(void* self, intptr_t slot) {
 	}
 
 	self_cast->handle__shape = std::move(slot_handle);
+	self_cast->owns_return__shape = false;
+	return true;
+}
+
+bool QGraphicsEllipseItem_override_virtual_owned_shape(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QGraphicsEllipseItem> slot_handle(slot);
+	MiqtVirtualQGraphicsEllipseItem* self_cast = dynamic_cast<MiqtVirtualQGraphicsEllipseItem*>( (QGraphicsEllipseItem*)(self) );
+	if (self_cast == nullptr) {
+		return false;
+	}
+
+	self_cast->handle__shape = std::move(slot_handle);
+	self_cast->owns_return__shape = true;
 	return true;
 }
 
@@ -8687,6 +9283,19 @@ bool QGraphicsEllipseItem_override_virtual_opaqueArea(void* self, intptr_t slot)
 	}
 
 	self_cast->handle__opaqueArea = std::move(slot_handle);
+	self_cast->owns_return__opaqueArea = false;
+	return true;
+}
+
+bool QGraphicsEllipseItem_override_virtual_owned_opaqueArea(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QGraphicsEllipseItem> slot_handle(slot);
+	MiqtVirtualQGraphicsEllipseItem* self_cast = dynamic_cast<MiqtVirtualQGraphicsEllipseItem*>( (QGraphicsEllipseItem*)(self) );
+	if (self_cast == nullptr) {
+		return false;
+	}
+
+	self_cast->handle__opaqueArea = std::move(slot_handle);
+	self_cast->owns_return__opaqueArea = true;
 	return true;
 }
 
@@ -8747,6 +9356,19 @@ bool QGraphicsEllipseItem_override_virtual_extension(void* self, intptr_t slot) 
 	}
 
 	self_cast->handle__extension = std::move(slot_handle);
+	self_cast->owns_return__extension = false;
+	return true;
+}
+
+bool QGraphicsEllipseItem_override_virtual_owned_extension(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QGraphicsEllipseItem> slot_handle(slot);
+	MiqtVirtualQGraphicsEllipseItem* self_cast = dynamic_cast<MiqtVirtualQGraphicsEllipseItem*>( (QGraphicsEllipseItem*)(self) );
+	if (self_cast == nullptr) {
+		return false;
+	}
+
+	self_cast->handle__extension = std::move(slot_handle);
+	self_cast->owns_return__extension = true;
 	return true;
 }
 
@@ -9107,6 +9729,19 @@ bool QGraphicsEllipseItem_override_virtual_inputMethodQuery(void* self, intptr_t
 	}
 
 	self_cast->handle__inputMethodQuery = std::move(slot_handle);
+	self_cast->owns_return__inputMethodQuery = false;
+	return true;
+}
+
+bool QGraphicsEllipseItem_override_virtual_owned_inputMethodQuery(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QGraphicsEllipseItem> slot_handle(slot);
+	MiqtVirtualQGraphicsEllipseItem* self_cast = dynamic_cast<MiqtVirtualQGraphicsEllipseItem*>( (QGraphicsEllipseItem*)(self) );
+	if (self_cast == nullptr) {
+		return false;
+	}
+
+	self_cast->handle__inputMethodQuery = std::move(slot_handle);
+	self_cast->owns_return__inputMethodQuery = true;
 	return true;
 }
 
@@ -9122,6 +9757,19 @@ bool QGraphicsEllipseItem_override_virtual_itemChange(void* self, intptr_t slot)
 	}
 
 	self_cast->handle__itemChange = std::move(slot_handle);
+	self_cast->owns_return__itemChange = false;
+	return true;
+}
+
+bool QGraphicsEllipseItem_override_virtual_owned_itemChange(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QGraphicsEllipseItem> slot_handle(slot);
+	MiqtVirtualQGraphicsEllipseItem* self_cast = dynamic_cast<MiqtVirtualQGraphicsEllipseItem*>( (QGraphicsEllipseItem*)(self) );
+	if (self_cast == nullptr) {
+		return false;
+	}
+
+	self_cast->handle__itemChange = std::move(slot_handle);
+	self_cast->owns_return__itemChange = true;
 	return true;
 }
 
@@ -9187,6 +9835,7 @@ public:
 
 	// cgo.Handle value for overwritten implementation
 	miqt_callback_handle<miqt_exec_callback_handle_release_QGraphicsPolygonItem> handle__boundingRect;
+	bool owns_return__boundingRect = false;
 
 	// Subclass to allow providing a Go implementation
 	virtual QRectF boundingRect() const override {
@@ -9195,6 +9844,10 @@ public:
 		}
 
 		QRectF* callback_return_value = miqt_exec_callback_QGraphicsPolygonItem_boundingRect(this, handle__boundingRect.value());
+		std::unique_ptr<QRectF> callback_return_value_owner;
+		if (owns_return__boundingRect) {
+			callback_return_value_owner.reset(callback_return_value);
+		}
 		return *callback_return_value;
 	}
 
@@ -9202,6 +9855,7 @@ public:
 
 	// cgo.Handle value for overwritten implementation
 	miqt_callback_handle<miqt_exec_callback_handle_release_QGraphicsPolygonItem> handle__shape;
+	bool owns_return__shape = false;
 
 	// Subclass to allow providing a Go implementation
 	virtual QPainterPath shape() const override {
@@ -9210,6 +9864,10 @@ public:
 		}
 
 		QPainterPath* callback_return_value = miqt_exec_callback_QGraphicsPolygonItem_shape(this, handle__shape.value());
+		std::unique_ptr<QPainterPath> callback_return_value_owner;
+		if (owns_return__shape) {
+			callback_return_value_owner.reset(callback_return_value);
+		}
 		return *callback_return_value;
 	}
 
@@ -9270,6 +9928,7 @@ public:
 
 	// cgo.Handle value for overwritten implementation
 	miqt_callback_handle<miqt_exec_callback_handle_release_QGraphicsPolygonItem> handle__opaqueArea;
+	bool owns_return__opaqueArea = false;
 
 	// Subclass to allow providing a Go implementation
 	virtual QPainterPath opaqueArea() const override {
@@ -9278,6 +9937,10 @@ public:
 		}
 
 		QPainterPath* callback_return_value = miqt_exec_callback_QGraphicsPolygonItem_opaqueArea(this, handle__opaqueArea.value());
+		std::unique_ptr<QPainterPath> callback_return_value_owner;
+		if (owns_return__opaqueArea) {
+			callback_return_value_owner.reset(callback_return_value);
+		}
 		return *callback_return_value;
 	}
 
@@ -9338,6 +10001,7 @@ public:
 
 	// cgo.Handle value for overwritten implementation
 	miqt_callback_handle<miqt_exec_callback_handle_release_QGraphicsPolygonItem> handle__extension;
+	bool owns_return__extension = false;
 
 	// Subclass to allow providing a Go implementation
 	virtual QVariant extension(const QVariant& variant) const override {
@@ -9349,6 +10013,10 @@ public:
 		// Cast returned reference into pointer
 		QVariant* sigval1 = const_cast<QVariant*>(&variant_ret);
 		QVariant* callback_return_value = miqt_exec_callback_QGraphicsPolygonItem_extension(this, handle__extension.value(), sigval1);
+		std::unique_ptr<QVariant> callback_return_value_owner;
+		if (owns_return__extension) {
+			callback_return_value_owner.reset(callback_return_value);
+		}
 		return *callback_return_value;
 	}
 
@@ -9750,6 +10418,7 @@ public:
 
 	// cgo.Handle value for overwritten implementation
 	miqt_callback_handle<miqt_exec_callback_handle_release_QGraphicsPolygonItem> handle__inputMethodQuery;
+	bool owns_return__inputMethodQuery = false;
 
 	// Subclass to allow providing a Go implementation
 	virtual QVariant inputMethodQuery(Qt::InputMethodQuery query) const override {
@@ -9760,6 +10429,10 @@ public:
 		Qt::InputMethodQuery query_ret = query;
 		int sigval1 = static_cast<int>(query_ret);
 		QVariant* callback_return_value = miqt_exec_callback_QGraphicsPolygonItem_inputMethodQuery(this, handle__inputMethodQuery.value(), sigval1);
+		std::unique_ptr<QVariant> callback_return_value_owner;
+		if (owns_return__inputMethodQuery) {
+			callback_return_value_owner.reset(callback_return_value);
+		}
 		return *callback_return_value;
 	}
 
@@ -9767,6 +10440,7 @@ public:
 
 	// cgo.Handle value for overwritten implementation
 	miqt_callback_handle<miqt_exec_callback_handle_release_QGraphicsPolygonItem> handle__itemChange;
+	bool owns_return__itemChange = false;
 
 	// Subclass to allow providing a Go implementation
 	virtual QVariant itemChange(QGraphicsItem::GraphicsItemChange change, const QVariant& value) override {
@@ -9780,6 +10454,10 @@ public:
 		// Cast returned reference into pointer
 		QVariant* sigval2 = const_cast<QVariant*>(&value_ret);
 		QVariant* callback_return_value = miqt_exec_callback_QGraphicsPolygonItem_itemChange(this, handle__itemChange.value(), sigval1, sigval2);
+		std::unique_ptr<QVariant> callback_return_value_owner;
+		if (owns_return__itemChange) {
+			callback_return_value_owner.reset(callback_return_value);
+		}
 		return *callback_return_value;
 	}
 
@@ -9849,6 +10527,19 @@ bool QGraphicsPolygonItem_override_virtual_boundingRect(void* self, intptr_t slo
 	}
 
 	self_cast->handle__boundingRect = std::move(slot_handle);
+	self_cast->owns_return__boundingRect = false;
+	return true;
+}
+
+bool QGraphicsPolygonItem_override_virtual_owned_boundingRect(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QGraphicsPolygonItem> slot_handle(slot);
+	MiqtVirtualQGraphicsPolygonItem* self_cast = dynamic_cast<MiqtVirtualQGraphicsPolygonItem*>( (QGraphicsPolygonItem*)(self) );
+	if (self_cast == nullptr) {
+		return false;
+	}
+
+	self_cast->handle__boundingRect = std::move(slot_handle);
+	self_cast->owns_return__boundingRect = true;
 	return true;
 }
 
@@ -9864,6 +10555,19 @@ bool QGraphicsPolygonItem_override_virtual_shape(void* self, intptr_t slot) {
 	}
 
 	self_cast->handle__shape = std::move(slot_handle);
+	self_cast->owns_return__shape = false;
+	return true;
+}
+
+bool QGraphicsPolygonItem_override_virtual_owned_shape(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QGraphicsPolygonItem> slot_handle(slot);
+	MiqtVirtualQGraphicsPolygonItem* self_cast = dynamic_cast<MiqtVirtualQGraphicsPolygonItem*>( (QGraphicsPolygonItem*)(self) );
+	if (self_cast == nullptr) {
+		return false;
+	}
+
+	self_cast->handle__shape = std::move(slot_handle);
+	self_cast->owns_return__shape = true;
 	return true;
 }
 
@@ -9924,6 +10628,19 @@ bool QGraphicsPolygonItem_override_virtual_opaqueArea(void* self, intptr_t slot)
 	}
 
 	self_cast->handle__opaqueArea = std::move(slot_handle);
+	self_cast->owns_return__opaqueArea = false;
+	return true;
+}
+
+bool QGraphicsPolygonItem_override_virtual_owned_opaqueArea(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QGraphicsPolygonItem> slot_handle(slot);
+	MiqtVirtualQGraphicsPolygonItem* self_cast = dynamic_cast<MiqtVirtualQGraphicsPolygonItem*>( (QGraphicsPolygonItem*)(self) );
+	if (self_cast == nullptr) {
+		return false;
+	}
+
+	self_cast->handle__opaqueArea = std::move(slot_handle);
+	self_cast->owns_return__opaqueArea = true;
 	return true;
 }
 
@@ -9984,6 +10701,19 @@ bool QGraphicsPolygonItem_override_virtual_extension(void* self, intptr_t slot) 
 	}
 
 	self_cast->handle__extension = std::move(slot_handle);
+	self_cast->owns_return__extension = false;
+	return true;
+}
+
+bool QGraphicsPolygonItem_override_virtual_owned_extension(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QGraphicsPolygonItem> slot_handle(slot);
+	MiqtVirtualQGraphicsPolygonItem* self_cast = dynamic_cast<MiqtVirtualQGraphicsPolygonItem*>( (QGraphicsPolygonItem*)(self) );
+	if (self_cast == nullptr) {
+		return false;
+	}
+
+	self_cast->handle__extension = std::move(slot_handle);
+	self_cast->owns_return__extension = true;
 	return true;
 }
 
@@ -10344,6 +11074,19 @@ bool QGraphicsPolygonItem_override_virtual_inputMethodQuery(void* self, intptr_t
 	}
 
 	self_cast->handle__inputMethodQuery = std::move(slot_handle);
+	self_cast->owns_return__inputMethodQuery = false;
+	return true;
+}
+
+bool QGraphicsPolygonItem_override_virtual_owned_inputMethodQuery(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QGraphicsPolygonItem> slot_handle(slot);
+	MiqtVirtualQGraphicsPolygonItem* self_cast = dynamic_cast<MiqtVirtualQGraphicsPolygonItem*>( (QGraphicsPolygonItem*)(self) );
+	if (self_cast == nullptr) {
+		return false;
+	}
+
+	self_cast->handle__inputMethodQuery = std::move(slot_handle);
+	self_cast->owns_return__inputMethodQuery = true;
 	return true;
 }
 
@@ -10359,6 +11102,19 @@ bool QGraphicsPolygonItem_override_virtual_itemChange(void* self, intptr_t slot)
 	}
 
 	self_cast->handle__itemChange = std::move(slot_handle);
+	self_cast->owns_return__itemChange = false;
+	return true;
+}
+
+bool QGraphicsPolygonItem_override_virtual_owned_itemChange(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QGraphicsPolygonItem> slot_handle(slot);
+	MiqtVirtualQGraphicsPolygonItem* self_cast = dynamic_cast<MiqtVirtualQGraphicsPolygonItem*>( (QGraphicsPolygonItem*)(self) );
+	if (self_cast == nullptr) {
+		return false;
+	}
+
+	self_cast->handle__itemChange = std::move(slot_handle);
+	self_cast->owns_return__itemChange = true;
 	return true;
 }
 
@@ -10428,6 +11184,7 @@ public:
 
 	// cgo.Handle value for overwritten implementation
 	miqt_callback_handle<miqt_exec_callback_handle_release_QGraphicsLineItem> handle__boundingRect;
+	bool owns_return__boundingRect = false;
 
 	// Subclass to allow providing a Go implementation
 	virtual QRectF boundingRect() const override {
@@ -10436,6 +11193,10 @@ public:
 		}
 
 		QRectF* callback_return_value = miqt_exec_callback_QGraphicsLineItem_boundingRect(this, handle__boundingRect.value());
+		std::unique_ptr<QRectF> callback_return_value_owner;
+		if (owns_return__boundingRect) {
+			callback_return_value_owner.reset(callback_return_value);
+		}
 		return *callback_return_value;
 	}
 
@@ -10443,6 +11204,7 @@ public:
 
 	// cgo.Handle value for overwritten implementation
 	miqt_callback_handle<miqt_exec_callback_handle_release_QGraphicsLineItem> handle__shape;
+	bool owns_return__shape = false;
 
 	// Subclass to allow providing a Go implementation
 	virtual QPainterPath shape() const override {
@@ -10451,6 +11213,10 @@ public:
 		}
 
 		QPainterPath* callback_return_value = miqt_exec_callback_QGraphicsLineItem_shape(this, handle__shape.value());
+		std::unique_ptr<QPainterPath> callback_return_value_owner;
+		if (owns_return__shape) {
+			callback_return_value_owner.reset(callback_return_value);
+		}
 		return *callback_return_value;
 	}
 
@@ -10511,6 +11277,7 @@ public:
 
 	// cgo.Handle value for overwritten implementation
 	miqt_callback_handle<miqt_exec_callback_handle_release_QGraphicsLineItem> handle__opaqueArea;
+	bool owns_return__opaqueArea = false;
 
 	// Subclass to allow providing a Go implementation
 	virtual QPainterPath opaqueArea() const override {
@@ -10519,6 +11286,10 @@ public:
 		}
 
 		QPainterPath* callback_return_value = miqt_exec_callback_QGraphicsLineItem_opaqueArea(this, handle__opaqueArea.value());
+		std::unique_ptr<QPainterPath> callback_return_value_owner;
+		if (owns_return__opaqueArea) {
+			callback_return_value_owner.reset(callback_return_value);
+		}
 		return *callback_return_value;
 	}
 
@@ -10579,6 +11350,7 @@ public:
 
 	// cgo.Handle value for overwritten implementation
 	miqt_callback_handle<miqt_exec_callback_handle_release_QGraphicsLineItem> handle__extension;
+	bool owns_return__extension = false;
 
 	// Subclass to allow providing a Go implementation
 	virtual QVariant extension(const QVariant& variant) const override {
@@ -10590,6 +11362,10 @@ public:
 		// Cast returned reference into pointer
 		QVariant* sigval1 = const_cast<QVariant*>(&variant_ret);
 		QVariant* callback_return_value = miqt_exec_callback_QGraphicsLineItem_extension(this, handle__extension.value(), sigval1);
+		std::unique_ptr<QVariant> callback_return_value_owner;
+		if (owns_return__extension) {
+			callback_return_value_owner.reset(callback_return_value);
+		}
 		return *callback_return_value;
 	}
 
@@ -10991,6 +11767,7 @@ public:
 
 	// cgo.Handle value for overwritten implementation
 	miqt_callback_handle<miqt_exec_callback_handle_release_QGraphicsLineItem> handle__inputMethodQuery;
+	bool owns_return__inputMethodQuery = false;
 
 	// Subclass to allow providing a Go implementation
 	virtual QVariant inputMethodQuery(Qt::InputMethodQuery query) const override {
@@ -11001,6 +11778,10 @@ public:
 		Qt::InputMethodQuery query_ret = query;
 		int sigval1 = static_cast<int>(query_ret);
 		QVariant* callback_return_value = miqt_exec_callback_QGraphicsLineItem_inputMethodQuery(this, handle__inputMethodQuery.value(), sigval1);
+		std::unique_ptr<QVariant> callback_return_value_owner;
+		if (owns_return__inputMethodQuery) {
+			callback_return_value_owner.reset(callback_return_value);
+		}
 		return *callback_return_value;
 	}
 
@@ -11008,6 +11789,7 @@ public:
 
 	// cgo.Handle value for overwritten implementation
 	miqt_callback_handle<miqt_exec_callback_handle_release_QGraphicsLineItem> handle__itemChange;
+	bool owns_return__itemChange = false;
 
 	// Subclass to allow providing a Go implementation
 	virtual QVariant itemChange(QGraphicsItem::GraphicsItemChange change, const QVariant& value) override {
@@ -11021,6 +11803,10 @@ public:
 		// Cast returned reference into pointer
 		QVariant* sigval2 = const_cast<QVariant*>(&value_ret);
 		QVariant* callback_return_value = miqt_exec_callback_QGraphicsLineItem_itemChange(this, handle__itemChange.value(), sigval1, sigval2);
+		std::unique_ptr<QVariant> callback_return_value_owner;
+		if (owns_return__itemChange) {
+			callback_return_value_owner.reset(callback_return_value);
+		}
 		return *callback_return_value;
 	}
 
@@ -11117,6 +11903,19 @@ bool QGraphicsLineItem_override_virtual_boundingRect(void* self, intptr_t slot) 
 	}
 
 	self_cast->handle__boundingRect = std::move(slot_handle);
+	self_cast->owns_return__boundingRect = false;
+	return true;
+}
+
+bool QGraphicsLineItem_override_virtual_owned_boundingRect(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QGraphicsLineItem> slot_handle(slot);
+	MiqtVirtualQGraphicsLineItem* self_cast = dynamic_cast<MiqtVirtualQGraphicsLineItem*>( (QGraphicsLineItem*)(self) );
+	if (self_cast == nullptr) {
+		return false;
+	}
+
+	self_cast->handle__boundingRect = std::move(slot_handle);
+	self_cast->owns_return__boundingRect = true;
 	return true;
 }
 
@@ -11132,6 +11931,19 @@ bool QGraphicsLineItem_override_virtual_shape(void* self, intptr_t slot) {
 	}
 
 	self_cast->handle__shape = std::move(slot_handle);
+	self_cast->owns_return__shape = false;
+	return true;
+}
+
+bool QGraphicsLineItem_override_virtual_owned_shape(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QGraphicsLineItem> slot_handle(slot);
+	MiqtVirtualQGraphicsLineItem* self_cast = dynamic_cast<MiqtVirtualQGraphicsLineItem*>( (QGraphicsLineItem*)(self) );
+	if (self_cast == nullptr) {
+		return false;
+	}
+
+	self_cast->handle__shape = std::move(slot_handle);
+	self_cast->owns_return__shape = true;
 	return true;
 }
 
@@ -11192,6 +12004,19 @@ bool QGraphicsLineItem_override_virtual_opaqueArea(void* self, intptr_t slot) {
 	}
 
 	self_cast->handle__opaqueArea = std::move(slot_handle);
+	self_cast->owns_return__opaqueArea = false;
+	return true;
+}
+
+bool QGraphicsLineItem_override_virtual_owned_opaqueArea(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QGraphicsLineItem> slot_handle(slot);
+	MiqtVirtualQGraphicsLineItem* self_cast = dynamic_cast<MiqtVirtualQGraphicsLineItem*>( (QGraphicsLineItem*)(self) );
+	if (self_cast == nullptr) {
+		return false;
+	}
+
+	self_cast->handle__opaqueArea = std::move(slot_handle);
+	self_cast->owns_return__opaqueArea = true;
 	return true;
 }
 
@@ -11252,6 +12077,19 @@ bool QGraphicsLineItem_override_virtual_extension(void* self, intptr_t slot) {
 	}
 
 	self_cast->handle__extension = std::move(slot_handle);
+	self_cast->owns_return__extension = false;
+	return true;
+}
+
+bool QGraphicsLineItem_override_virtual_owned_extension(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QGraphicsLineItem> slot_handle(slot);
+	MiqtVirtualQGraphicsLineItem* self_cast = dynamic_cast<MiqtVirtualQGraphicsLineItem*>( (QGraphicsLineItem*)(self) );
+	if (self_cast == nullptr) {
+		return false;
+	}
+
+	self_cast->handle__extension = std::move(slot_handle);
+	self_cast->owns_return__extension = true;
 	return true;
 }
 
@@ -11612,6 +12450,19 @@ bool QGraphicsLineItem_override_virtual_inputMethodQuery(void* self, intptr_t sl
 	}
 
 	self_cast->handle__inputMethodQuery = std::move(slot_handle);
+	self_cast->owns_return__inputMethodQuery = false;
+	return true;
+}
+
+bool QGraphicsLineItem_override_virtual_owned_inputMethodQuery(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QGraphicsLineItem> slot_handle(slot);
+	MiqtVirtualQGraphicsLineItem* self_cast = dynamic_cast<MiqtVirtualQGraphicsLineItem*>( (QGraphicsLineItem*)(self) );
+	if (self_cast == nullptr) {
+		return false;
+	}
+
+	self_cast->handle__inputMethodQuery = std::move(slot_handle);
+	self_cast->owns_return__inputMethodQuery = true;
 	return true;
 }
 
@@ -11627,6 +12478,19 @@ bool QGraphicsLineItem_override_virtual_itemChange(void* self, intptr_t slot) {
 	}
 
 	self_cast->handle__itemChange = std::move(slot_handle);
+	self_cast->owns_return__itemChange = false;
+	return true;
+}
+
+bool QGraphicsLineItem_override_virtual_owned_itemChange(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QGraphicsLineItem> slot_handle(slot);
+	MiqtVirtualQGraphicsLineItem* self_cast = dynamic_cast<MiqtVirtualQGraphicsLineItem*>( (QGraphicsLineItem*)(self) );
+	if (self_cast == nullptr) {
+		return false;
+	}
+
+	self_cast->handle__itemChange = std::move(slot_handle);
+	self_cast->owns_return__itemChange = true;
 	return true;
 }
 
@@ -11694,6 +12558,7 @@ public:
 
 	// cgo.Handle value for overwritten implementation
 	miqt_callback_handle<miqt_exec_callback_handle_release_QGraphicsPixmapItem> handle__boundingRect;
+	bool owns_return__boundingRect = false;
 
 	// Subclass to allow providing a Go implementation
 	virtual QRectF boundingRect() const override {
@@ -11702,6 +12567,10 @@ public:
 		}
 
 		QRectF* callback_return_value = miqt_exec_callback_QGraphicsPixmapItem_boundingRect(this, handle__boundingRect.value());
+		std::unique_ptr<QRectF> callback_return_value_owner;
+		if (owns_return__boundingRect) {
+			callback_return_value_owner.reset(callback_return_value);
+		}
 		return *callback_return_value;
 	}
 
@@ -11709,6 +12578,7 @@ public:
 
 	// cgo.Handle value for overwritten implementation
 	miqt_callback_handle<miqt_exec_callback_handle_release_QGraphicsPixmapItem> handle__shape;
+	bool owns_return__shape = false;
 
 	// Subclass to allow providing a Go implementation
 	virtual QPainterPath shape() const override {
@@ -11717,6 +12587,10 @@ public:
 		}
 
 		QPainterPath* callback_return_value = miqt_exec_callback_QGraphicsPixmapItem_shape(this, handle__shape.value());
+		std::unique_ptr<QPainterPath> callback_return_value_owner;
+		if (owns_return__shape) {
+			callback_return_value_owner.reset(callback_return_value);
+		}
 		return *callback_return_value;
 	}
 
@@ -11777,6 +12651,7 @@ public:
 
 	// cgo.Handle value for overwritten implementation
 	miqt_callback_handle<miqt_exec_callback_handle_release_QGraphicsPixmapItem> handle__opaqueArea;
+	bool owns_return__opaqueArea = false;
 
 	// Subclass to allow providing a Go implementation
 	virtual QPainterPath opaqueArea() const override {
@@ -11785,6 +12660,10 @@ public:
 		}
 
 		QPainterPath* callback_return_value = miqt_exec_callback_QGraphicsPixmapItem_opaqueArea(this, handle__opaqueArea.value());
+		std::unique_ptr<QPainterPath> callback_return_value_owner;
+		if (owns_return__opaqueArea) {
+			callback_return_value_owner.reset(callback_return_value);
+		}
 		return *callback_return_value;
 	}
 
@@ -11845,6 +12724,7 @@ public:
 
 	// cgo.Handle value for overwritten implementation
 	miqt_callback_handle<miqt_exec_callback_handle_release_QGraphicsPixmapItem> handle__extension;
+	bool owns_return__extension = false;
 
 	// Subclass to allow providing a Go implementation
 	virtual QVariant extension(const QVariant& variant) const override {
@@ -11856,6 +12736,10 @@ public:
 		// Cast returned reference into pointer
 		QVariant* sigval1 = const_cast<QVariant*>(&variant_ret);
 		QVariant* callback_return_value = miqt_exec_callback_QGraphicsPixmapItem_extension(this, handle__extension.value(), sigval1);
+		std::unique_ptr<QVariant> callback_return_value_owner;
+		if (owns_return__extension) {
+			callback_return_value_owner.reset(callback_return_value);
+		}
 		return *callback_return_value;
 	}
 
@@ -12257,6 +13141,7 @@ public:
 
 	// cgo.Handle value for overwritten implementation
 	miqt_callback_handle<miqt_exec_callback_handle_release_QGraphicsPixmapItem> handle__inputMethodQuery;
+	bool owns_return__inputMethodQuery = false;
 
 	// Subclass to allow providing a Go implementation
 	virtual QVariant inputMethodQuery(Qt::InputMethodQuery query) const override {
@@ -12267,6 +13152,10 @@ public:
 		Qt::InputMethodQuery query_ret = query;
 		int sigval1 = static_cast<int>(query_ret);
 		QVariant* callback_return_value = miqt_exec_callback_QGraphicsPixmapItem_inputMethodQuery(this, handle__inputMethodQuery.value(), sigval1);
+		std::unique_ptr<QVariant> callback_return_value_owner;
+		if (owns_return__inputMethodQuery) {
+			callback_return_value_owner.reset(callback_return_value);
+		}
 		return *callback_return_value;
 	}
 
@@ -12274,6 +13163,7 @@ public:
 
 	// cgo.Handle value for overwritten implementation
 	miqt_callback_handle<miqt_exec_callback_handle_release_QGraphicsPixmapItem> handle__itemChange;
+	bool owns_return__itemChange = false;
 
 	// Subclass to allow providing a Go implementation
 	virtual QVariant itemChange(QGraphicsItem::GraphicsItemChange change, const QVariant& value) override {
@@ -12287,6 +13177,10 @@ public:
 		// Cast returned reference into pointer
 		QVariant* sigval2 = const_cast<QVariant*>(&value_ret);
 		QVariant* callback_return_value = miqt_exec_callback_QGraphicsPixmapItem_itemChange(this, handle__itemChange.value(), sigval1, sigval2);
+		std::unique_ptr<QVariant> callback_return_value_owner;
+		if (owns_return__itemChange) {
+			callback_return_value_owner.reset(callback_return_value);
+		}
 		return *callback_return_value;
 	}
 
@@ -12393,6 +13287,19 @@ bool QGraphicsPixmapItem_override_virtual_boundingRect(void* self, intptr_t slot
 	}
 
 	self_cast->handle__boundingRect = std::move(slot_handle);
+	self_cast->owns_return__boundingRect = false;
+	return true;
+}
+
+bool QGraphicsPixmapItem_override_virtual_owned_boundingRect(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QGraphicsPixmapItem> slot_handle(slot);
+	MiqtVirtualQGraphicsPixmapItem* self_cast = dynamic_cast<MiqtVirtualQGraphicsPixmapItem*>( (QGraphicsPixmapItem*)(self) );
+	if (self_cast == nullptr) {
+		return false;
+	}
+
+	self_cast->handle__boundingRect = std::move(slot_handle);
+	self_cast->owns_return__boundingRect = true;
 	return true;
 }
 
@@ -12408,6 +13315,19 @@ bool QGraphicsPixmapItem_override_virtual_shape(void* self, intptr_t slot) {
 	}
 
 	self_cast->handle__shape = std::move(slot_handle);
+	self_cast->owns_return__shape = false;
+	return true;
+}
+
+bool QGraphicsPixmapItem_override_virtual_owned_shape(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QGraphicsPixmapItem> slot_handle(slot);
+	MiqtVirtualQGraphicsPixmapItem* self_cast = dynamic_cast<MiqtVirtualQGraphicsPixmapItem*>( (QGraphicsPixmapItem*)(self) );
+	if (self_cast == nullptr) {
+		return false;
+	}
+
+	self_cast->handle__shape = std::move(slot_handle);
+	self_cast->owns_return__shape = true;
 	return true;
 }
 
@@ -12468,6 +13388,19 @@ bool QGraphicsPixmapItem_override_virtual_opaqueArea(void* self, intptr_t slot) 
 	}
 
 	self_cast->handle__opaqueArea = std::move(slot_handle);
+	self_cast->owns_return__opaqueArea = false;
+	return true;
+}
+
+bool QGraphicsPixmapItem_override_virtual_owned_opaqueArea(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QGraphicsPixmapItem> slot_handle(slot);
+	MiqtVirtualQGraphicsPixmapItem* self_cast = dynamic_cast<MiqtVirtualQGraphicsPixmapItem*>( (QGraphicsPixmapItem*)(self) );
+	if (self_cast == nullptr) {
+		return false;
+	}
+
+	self_cast->handle__opaqueArea = std::move(slot_handle);
+	self_cast->owns_return__opaqueArea = true;
 	return true;
 }
 
@@ -12528,6 +13461,19 @@ bool QGraphicsPixmapItem_override_virtual_extension(void* self, intptr_t slot) {
 	}
 
 	self_cast->handle__extension = std::move(slot_handle);
+	self_cast->owns_return__extension = false;
+	return true;
+}
+
+bool QGraphicsPixmapItem_override_virtual_owned_extension(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QGraphicsPixmapItem> slot_handle(slot);
+	MiqtVirtualQGraphicsPixmapItem* self_cast = dynamic_cast<MiqtVirtualQGraphicsPixmapItem*>( (QGraphicsPixmapItem*)(self) );
+	if (self_cast == nullptr) {
+		return false;
+	}
+
+	self_cast->handle__extension = std::move(slot_handle);
+	self_cast->owns_return__extension = true;
 	return true;
 }
 
@@ -12888,6 +13834,19 @@ bool QGraphicsPixmapItem_override_virtual_inputMethodQuery(void* self, intptr_t 
 	}
 
 	self_cast->handle__inputMethodQuery = std::move(slot_handle);
+	self_cast->owns_return__inputMethodQuery = false;
+	return true;
+}
+
+bool QGraphicsPixmapItem_override_virtual_owned_inputMethodQuery(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QGraphicsPixmapItem> slot_handle(slot);
+	MiqtVirtualQGraphicsPixmapItem* self_cast = dynamic_cast<MiqtVirtualQGraphicsPixmapItem*>( (QGraphicsPixmapItem*)(self) );
+	if (self_cast == nullptr) {
+		return false;
+	}
+
+	self_cast->handle__inputMethodQuery = std::move(slot_handle);
+	self_cast->owns_return__inputMethodQuery = true;
 	return true;
 }
 
@@ -12903,6 +13862,19 @@ bool QGraphicsPixmapItem_override_virtual_itemChange(void* self, intptr_t slot) 
 	}
 
 	self_cast->handle__itemChange = std::move(slot_handle);
+	self_cast->owns_return__itemChange = false;
+	return true;
+}
+
+bool QGraphicsPixmapItem_override_virtual_owned_itemChange(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QGraphicsPixmapItem> slot_handle(slot);
+	MiqtVirtualQGraphicsPixmapItem* self_cast = dynamic_cast<MiqtVirtualQGraphicsPixmapItem*>( (QGraphicsPixmapItem*)(self) );
+	if (self_cast == nullptr) {
+		return false;
+	}
+
+	self_cast->handle__itemChange = std::move(slot_handle);
+	self_cast->owns_return__itemChange = true;
 	return true;
 }
 
@@ -12970,6 +13942,7 @@ public:
 
 	// cgo.Handle value for overwritten implementation
 	miqt_callback_handle<miqt_exec_callback_handle_release_QGraphicsTextItem> handle__boundingRect;
+	bool owns_return__boundingRect = false;
 
 	// Subclass to allow providing a Go implementation
 	virtual QRectF boundingRect() const override {
@@ -12978,6 +13951,10 @@ public:
 		}
 
 		QRectF* callback_return_value = miqt_exec_callback_QGraphicsTextItem_boundingRect(this, handle__boundingRect.value());
+		std::unique_ptr<QRectF> callback_return_value_owner;
+		if (owns_return__boundingRect) {
+			callback_return_value_owner.reset(callback_return_value);
+		}
 		return *callback_return_value;
 	}
 
@@ -12985,6 +13962,7 @@ public:
 
 	// cgo.Handle value for overwritten implementation
 	miqt_callback_handle<miqt_exec_callback_handle_release_QGraphicsTextItem> handle__shape;
+	bool owns_return__shape = false;
 
 	// Subclass to allow providing a Go implementation
 	virtual QPainterPath shape() const override {
@@ -12993,6 +13971,10 @@ public:
 		}
 
 		QPainterPath* callback_return_value = miqt_exec_callback_QGraphicsTextItem_shape(this, handle__shape.value());
+		std::unique_ptr<QPainterPath> callback_return_value_owner;
+		if (owns_return__shape) {
+			callback_return_value_owner.reset(callback_return_value);
+		}
 		return *callback_return_value;
 	}
 
@@ -13053,6 +14035,7 @@ public:
 
 	// cgo.Handle value for overwritten implementation
 	miqt_callback_handle<miqt_exec_callback_handle_release_QGraphicsTextItem> handle__opaqueArea;
+	bool owns_return__opaqueArea = false;
 
 	// Subclass to allow providing a Go implementation
 	virtual QPainterPath opaqueArea() const override {
@@ -13061,6 +14044,10 @@ public:
 		}
 
 		QPainterPath* callback_return_value = miqt_exec_callback_QGraphicsTextItem_opaqueArea(this, handle__opaqueArea.value());
+		std::unique_ptr<QPainterPath> callback_return_value_owner;
+		if (owns_return__opaqueArea) {
+			callback_return_value_owner.reset(callback_return_value);
+		}
 		return *callback_return_value;
 	}
 
@@ -13388,6 +14375,7 @@ public:
 
 	// cgo.Handle value for overwritten implementation
 	miqt_callback_handle<miqt_exec_callback_handle_release_QGraphicsTextItem> handle__inputMethodQuery;
+	bool owns_return__inputMethodQuery = false;
 
 	// Subclass to allow providing a Go implementation
 	virtual QVariant inputMethodQuery(Qt::InputMethodQuery query) const override {
@@ -13398,6 +14386,10 @@ public:
 		Qt::InputMethodQuery query_ret = query;
 		int sigval1 = static_cast<int>(query_ret);
 		QVariant* callback_return_value = miqt_exec_callback_QGraphicsTextItem_inputMethodQuery(this, handle__inputMethodQuery.value(), sigval1);
+		std::unique_ptr<QVariant> callback_return_value_owner;
+		if (owns_return__inputMethodQuery) {
+			callback_return_value_owner.reset(callback_return_value);
+		}
 		return *callback_return_value;
 	}
 
@@ -13443,6 +14435,7 @@ public:
 
 	// cgo.Handle value for overwritten implementation
 	miqt_callback_handle<miqt_exec_callback_handle_release_QGraphicsTextItem> handle__extension;
+	bool owns_return__extension = false;
 
 	// Subclass to allow providing a Go implementation
 	virtual QVariant extension(const QVariant& variant) const override {
@@ -13454,6 +14447,10 @@ public:
 		// Cast returned reference into pointer
 		QVariant* sigval1 = const_cast<QVariant*>(&variant_ret);
 		QVariant* callback_return_value = miqt_exec_callback_QGraphicsTextItem_extension(this, handle__extension.value(), sigval1);
+		std::unique_ptr<QVariant> callback_return_value_owner;
+		if (owns_return__extension) {
+			callback_return_value_owner.reset(callback_return_value);
+		}
 		return *callback_return_value;
 	}
 
@@ -13672,6 +14669,7 @@ public:
 
 	// cgo.Handle value for overwritten implementation
 	miqt_callback_handle<miqt_exec_callback_handle_release_QGraphicsTextItem> handle__itemChange;
+	bool owns_return__itemChange = false;
 
 	// Subclass to allow providing a Go implementation
 	virtual QVariant itemChange(QGraphicsItem::GraphicsItemChange change, const QVariant& value) override {
@@ -13685,6 +14683,10 @@ public:
 		// Cast returned reference into pointer
 		QVariant* sigval2 = const_cast<QVariant*>(&value_ret);
 		QVariant* callback_return_value = miqt_exec_callback_QGraphicsTextItem_itemChange(this, handle__itemChange.value(), sigval1, sigval2);
+		std::unique_ptr<QVariant> callback_return_value_owner;
+		if (owns_return__itemChange) {
+			callback_return_value_owner.reset(callback_return_value);
+		}
 		return *callback_return_value;
 	}
 
@@ -13977,6 +14979,19 @@ bool QGraphicsTextItem_override_virtual_boundingRect(void* self, intptr_t slot) 
 	}
 
 	self_cast->handle__boundingRect = std::move(slot_handle);
+	self_cast->owns_return__boundingRect = false;
+	return true;
+}
+
+bool QGraphicsTextItem_override_virtual_owned_boundingRect(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QGraphicsTextItem> slot_handle(slot);
+	MiqtVirtualQGraphicsTextItem* self_cast = dynamic_cast<MiqtVirtualQGraphicsTextItem*>( (QGraphicsTextItem*)(self) );
+	if (self_cast == nullptr) {
+		return false;
+	}
+
+	self_cast->handle__boundingRect = std::move(slot_handle);
+	self_cast->owns_return__boundingRect = true;
 	return true;
 }
 
@@ -13992,6 +15007,19 @@ bool QGraphicsTextItem_override_virtual_shape(void* self, intptr_t slot) {
 	}
 
 	self_cast->handle__shape = std::move(slot_handle);
+	self_cast->owns_return__shape = false;
+	return true;
+}
+
+bool QGraphicsTextItem_override_virtual_owned_shape(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QGraphicsTextItem> slot_handle(slot);
+	MiqtVirtualQGraphicsTextItem* self_cast = dynamic_cast<MiqtVirtualQGraphicsTextItem*>( (QGraphicsTextItem*)(self) );
+	if (self_cast == nullptr) {
+		return false;
+	}
+
+	self_cast->handle__shape = std::move(slot_handle);
+	self_cast->owns_return__shape = true;
 	return true;
 }
 
@@ -14052,6 +15080,19 @@ bool QGraphicsTextItem_override_virtual_opaqueArea(void* self, intptr_t slot) {
 	}
 
 	self_cast->handle__opaqueArea = std::move(slot_handle);
+	self_cast->owns_return__opaqueArea = false;
+	return true;
+}
+
+bool QGraphicsTextItem_override_virtual_owned_opaqueArea(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QGraphicsTextItem> slot_handle(slot);
+	MiqtVirtualQGraphicsTextItem* self_cast = dynamic_cast<MiqtVirtualQGraphicsTextItem*>( (QGraphicsTextItem*)(self) );
+	if (self_cast == nullptr) {
+		return false;
+	}
+
+	self_cast->handle__opaqueArea = std::move(slot_handle);
+	self_cast->owns_return__opaqueArea = true;
 	return true;
 }
 
@@ -14352,6 +15393,19 @@ bool QGraphicsTextItem_override_virtual_inputMethodQuery(void* self, intptr_t sl
 	}
 
 	self_cast->handle__inputMethodQuery = std::move(slot_handle);
+	self_cast->owns_return__inputMethodQuery = false;
+	return true;
+}
+
+bool QGraphicsTextItem_override_virtual_owned_inputMethodQuery(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QGraphicsTextItem> slot_handle(slot);
+	MiqtVirtualQGraphicsTextItem* self_cast = dynamic_cast<MiqtVirtualQGraphicsTextItem*>( (QGraphicsTextItem*)(self) );
+	if (self_cast == nullptr) {
+		return false;
+	}
+
+	self_cast->handle__inputMethodQuery = std::move(slot_handle);
+	self_cast->owns_return__inputMethodQuery = true;
 	return true;
 }
 
@@ -14397,6 +15451,19 @@ bool QGraphicsTextItem_override_virtual_extension(void* self, intptr_t slot) {
 	}
 
 	self_cast->handle__extension = std::move(slot_handle);
+	self_cast->owns_return__extension = false;
+	return true;
+}
+
+bool QGraphicsTextItem_override_virtual_owned_extension(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QGraphicsTextItem> slot_handle(slot);
+	MiqtVirtualQGraphicsTextItem* self_cast = dynamic_cast<MiqtVirtualQGraphicsTextItem*>( (QGraphicsTextItem*)(self) );
+	if (self_cast == nullptr) {
+		return false;
+	}
+
+	self_cast->handle__extension = std::move(slot_handle);
+	self_cast->owns_return__extension = true;
 	return true;
 }
 
@@ -14592,6 +15659,19 @@ bool QGraphicsTextItem_override_virtual_itemChange(void* self, intptr_t slot) {
 	}
 
 	self_cast->handle__itemChange = std::move(slot_handle);
+	self_cast->owns_return__itemChange = false;
+	return true;
+}
+
+bool QGraphicsTextItem_override_virtual_owned_itemChange(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QGraphicsTextItem> slot_handle(slot);
+	MiqtVirtualQGraphicsTextItem* self_cast = dynamic_cast<MiqtVirtualQGraphicsTextItem*>( (QGraphicsTextItem*)(self) );
+	if (self_cast == nullptr) {
+		return false;
+	}
+
+	self_cast->handle__itemChange = std::move(slot_handle);
+	self_cast->owns_return__itemChange = true;
 	return true;
 }
 
@@ -14703,6 +15783,7 @@ public:
 
 	// cgo.Handle value for overwritten implementation
 	miqt_callback_handle<miqt_exec_callback_handle_release_QGraphicsSimpleTextItem> handle__boundingRect;
+	bool owns_return__boundingRect = false;
 
 	// Subclass to allow providing a Go implementation
 	virtual QRectF boundingRect() const override {
@@ -14711,6 +15792,10 @@ public:
 		}
 
 		QRectF* callback_return_value = miqt_exec_callback_QGraphicsSimpleTextItem_boundingRect(this, handle__boundingRect.value());
+		std::unique_ptr<QRectF> callback_return_value_owner;
+		if (owns_return__boundingRect) {
+			callback_return_value_owner.reset(callback_return_value);
+		}
 		return *callback_return_value;
 	}
 
@@ -14718,6 +15803,7 @@ public:
 
 	// cgo.Handle value for overwritten implementation
 	miqt_callback_handle<miqt_exec_callback_handle_release_QGraphicsSimpleTextItem> handle__shape;
+	bool owns_return__shape = false;
 
 	// Subclass to allow providing a Go implementation
 	virtual QPainterPath shape() const override {
@@ -14726,6 +15812,10 @@ public:
 		}
 
 		QPainterPath* callback_return_value = miqt_exec_callback_QGraphicsSimpleTextItem_shape(this, handle__shape.value());
+		std::unique_ptr<QPainterPath> callback_return_value_owner;
+		if (owns_return__shape) {
+			callback_return_value_owner.reset(callback_return_value);
+		}
 		return *callback_return_value;
 	}
 
@@ -14786,6 +15876,7 @@ public:
 
 	// cgo.Handle value for overwritten implementation
 	miqt_callback_handle<miqt_exec_callback_handle_release_QGraphicsSimpleTextItem> handle__opaqueArea;
+	bool owns_return__opaqueArea = false;
 
 	// Subclass to allow providing a Go implementation
 	virtual QPainterPath opaqueArea() const override {
@@ -14794,6 +15885,10 @@ public:
 		}
 
 		QPainterPath* callback_return_value = miqt_exec_callback_QGraphicsSimpleTextItem_opaqueArea(this, handle__opaqueArea.value());
+		std::unique_ptr<QPainterPath> callback_return_value_owner;
+		if (owns_return__opaqueArea) {
+			callback_return_value_owner.reset(callback_return_value);
+		}
 		return *callback_return_value;
 	}
 
@@ -14854,6 +15949,7 @@ public:
 
 	// cgo.Handle value for overwritten implementation
 	miqt_callback_handle<miqt_exec_callback_handle_release_QGraphicsSimpleTextItem> handle__extension;
+	bool owns_return__extension = false;
 
 	// Subclass to allow providing a Go implementation
 	virtual QVariant extension(const QVariant& variant) const override {
@@ -14865,6 +15961,10 @@ public:
 		// Cast returned reference into pointer
 		QVariant* sigval1 = const_cast<QVariant*>(&variant_ret);
 		QVariant* callback_return_value = miqt_exec_callback_QGraphicsSimpleTextItem_extension(this, handle__extension.value(), sigval1);
+		std::unique_ptr<QVariant> callback_return_value_owner;
+		if (owns_return__extension) {
+			callback_return_value_owner.reset(callback_return_value);
+		}
 		return *callback_return_value;
 	}
 
@@ -15266,6 +16366,7 @@ public:
 
 	// cgo.Handle value for overwritten implementation
 	miqt_callback_handle<miqt_exec_callback_handle_release_QGraphicsSimpleTextItem> handle__inputMethodQuery;
+	bool owns_return__inputMethodQuery = false;
 
 	// Subclass to allow providing a Go implementation
 	virtual QVariant inputMethodQuery(Qt::InputMethodQuery query) const override {
@@ -15276,6 +16377,10 @@ public:
 		Qt::InputMethodQuery query_ret = query;
 		int sigval1 = static_cast<int>(query_ret);
 		QVariant* callback_return_value = miqt_exec_callback_QGraphicsSimpleTextItem_inputMethodQuery(this, handle__inputMethodQuery.value(), sigval1);
+		std::unique_ptr<QVariant> callback_return_value_owner;
+		if (owns_return__inputMethodQuery) {
+			callback_return_value_owner.reset(callback_return_value);
+		}
 		return *callback_return_value;
 	}
 
@@ -15283,6 +16388,7 @@ public:
 
 	// cgo.Handle value for overwritten implementation
 	miqt_callback_handle<miqt_exec_callback_handle_release_QGraphicsSimpleTextItem> handle__itemChange;
+	bool owns_return__itemChange = false;
 
 	// Subclass to allow providing a Go implementation
 	virtual QVariant itemChange(QGraphicsItem::GraphicsItemChange change, const QVariant& value) override {
@@ -15296,6 +16402,10 @@ public:
 		// Cast returned reference into pointer
 		QVariant* sigval2 = const_cast<QVariant*>(&value_ret);
 		QVariant* callback_return_value = miqt_exec_callback_QGraphicsSimpleTextItem_itemChange(this, handle__itemChange.value(), sigval1, sigval2);
+		std::unique_ptr<QVariant> callback_return_value_owner;
+		if (owns_return__itemChange) {
+			callback_return_value_owner.reset(callback_return_value);
+		}
 		return *callback_return_value;
 	}
 
@@ -15390,6 +16500,19 @@ bool QGraphicsSimpleTextItem_override_virtual_boundingRect(void* self, intptr_t 
 	}
 
 	self_cast->handle__boundingRect = std::move(slot_handle);
+	self_cast->owns_return__boundingRect = false;
+	return true;
+}
+
+bool QGraphicsSimpleTextItem_override_virtual_owned_boundingRect(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QGraphicsSimpleTextItem> slot_handle(slot);
+	MiqtVirtualQGraphicsSimpleTextItem* self_cast = dynamic_cast<MiqtVirtualQGraphicsSimpleTextItem*>( (QGraphicsSimpleTextItem*)(self) );
+	if (self_cast == nullptr) {
+		return false;
+	}
+
+	self_cast->handle__boundingRect = std::move(slot_handle);
+	self_cast->owns_return__boundingRect = true;
 	return true;
 }
 
@@ -15405,6 +16528,19 @@ bool QGraphicsSimpleTextItem_override_virtual_shape(void* self, intptr_t slot) {
 	}
 
 	self_cast->handle__shape = std::move(slot_handle);
+	self_cast->owns_return__shape = false;
+	return true;
+}
+
+bool QGraphicsSimpleTextItem_override_virtual_owned_shape(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QGraphicsSimpleTextItem> slot_handle(slot);
+	MiqtVirtualQGraphicsSimpleTextItem* self_cast = dynamic_cast<MiqtVirtualQGraphicsSimpleTextItem*>( (QGraphicsSimpleTextItem*)(self) );
+	if (self_cast == nullptr) {
+		return false;
+	}
+
+	self_cast->handle__shape = std::move(slot_handle);
+	self_cast->owns_return__shape = true;
 	return true;
 }
 
@@ -15465,6 +16601,19 @@ bool QGraphicsSimpleTextItem_override_virtual_opaqueArea(void* self, intptr_t sl
 	}
 
 	self_cast->handle__opaqueArea = std::move(slot_handle);
+	self_cast->owns_return__opaqueArea = false;
+	return true;
+}
+
+bool QGraphicsSimpleTextItem_override_virtual_owned_opaqueArea(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QGraphicsSimpleTextItem> slot_handle(slot);
+	MiqtVirtualQGraphicsSimpleTextItem* self_cast = dynamic_cast<MiqtVirtualQGraphicsSimpleTextItem*>( (QGraphicsSimpleTextItem*)(self) );
+	if (self_cast == nullptr) {
+		return false;
+	}
+
+	self_cast->handle__opaqueArea = std::move(slot_handle);
+	self_cast->owns_return__opaqueArea = true;
 	return true;
 }
 
@@ -15525,6 +16674,19 @@ bool QGraphicsSimpleTextItem_override_virtual_extension(void* self, intptr_t slo
 	}
 
 	self_cast->handle__extension = std::move(slot_handle);
+	self_cast->owns_return__extension = false;
+	return true;
+}
+
+bool QGraphicsSimpleTextItem_override_virtual_owned_extension(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QGraphicsSimpleTextItem> slot_handle(slot);
+	MiqtVirtualQGraphicsSimpleTextItem* self_cast = dynamic_cast<MiqtVirtualQGraphicsSimpleTextItem*>( (QGraphicsSimpleTextItem*)(self) );
+	if (self_cast == nullptr) {
+		return false;
+	}
+
+	self_cast->handle__extension = std::move(slot_handle);
+	self_cast->owns_return__extension = true;
 	return true;
 }
 
@@ -15885,6 +17047,19 @@ bool QGraphicsSimpleTextItem_override_virtual_inputMethodQuery(void* self, intpt
 	}
 
 	self_cast->handle__inputMethodQuery = std::move(slot_handle);
+	self_cast->owns_return__inputMethodQuery = false;
+	return true;
+}
+
+bool QGraphicsSimpleTextItem_override_virtual_owned_inputMethodQuery(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QGraphicsSimpleTextItem> slot_handle(slot);
+	MiqtVirtualQGraphicsSimpleTextItem* self_cast = dynamic_cast<MiqtVirtualQGraphicsSimpleTextItem*>( (QGraphicsSimpleTextItem*)(self) );
+	if (self_cast == nullptr) {
+		return false;
+	}
+
+	self_cast->handle__inputMethodQuery = std::move(slot_handle);
+	self_cast->owns_return__inputMethodQuery = true;
 	return true;
 }
 
@@ -15900,6 +17075,19 @@ bool QGraphicsSimpleTextItem_override_virtual_itemChange(void* self, intptr_t sl
 	}
 
 	self_cast->handle__itemChange = std::move(slot_handle);
+	self_cast->owns_return__itemChange = false;
+	return true;
+}
+
+bool QGraphicsSimpleTextItem_override_virtual_owned_itemChange(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QGraphicsSimpleTextItem> slot_handle(slot);
+	MiqtVirtualQGraphicsSimpleTextItem* self_cast = dynamic_cast<MiqtVirtualQGraphicsSimpleTextItem*>( (QGraphicsSimpleTextItem*)(self) );
+	if (self_cast == nullptr) {
+		return false;
+	}
+
+	self_cast->handle__itemChange = std::move(slot_handle);
+	self_cast->owns_return__itemChange = true;
 	return true;
 }
 
@@ -15965,6 +17153,7 @@ public:
 
 	// cgo.Handle value for overwritten implementation
 	miqt_callback_handle<miqt_exec_callback_handle_release_QGraphicsItemGroup> handle__boundingRect;
+	bool owns_return__boundingRect = false;
 
 	// Subclass to allow providing a Go implementation
 	virtual QRectF boundingRect() const override {
@@ -15973,6 +17162,10 @@ public:
 		}
 
 		QRectF* callback_return_value = miqt_exec_callback_QGraphicsItemGroup_boundingRect(this, handle__boundingRect.value());
+		std::unique_ptr<QRectF> callback_return_value_owner;
+		if (owns_return__boundingRect) {
+			callback_return_value_owner.reset(callback_return_value);
+		}
 		return *callback_return_value;
 	}
 
@@ -16015,6 +17208,7 @@ public:
 
 	// cgo.Handle value for overwritten implementation
 	miqt_callback_handle<miqt_exec_callback_handle_release_QGraphicsItemGroup> handle__opaqueArea;
+	bool owns_return__opaqueArea = false;
 
 	// Subclass to allow providing a Go implementation
 	virtual QPainterPath opaqueArea() const override {
@@ -16023,6 +17217,10 @@ public:
 		}
 
 		QPainterPath* callback_return_value = miqt_exec_callback_QGraphicsItemGroup_opaqueArea(this, handle__opaqueArea.value());
+		std::unique_ptr<QPainterPath> callback_return_value_owner;
+		if (owns_return__opaqueArea) {
+			callback_return_value_owner.reset(callback_return_value);
+		}
 		return *callback_return_value;
 	}
 
@@ -16062,6 +17260,7 @@ public:
 
 	// cgo.Handle value for overwritten implementation
 	miqt_callback_handle<miqt_exec_callback_handle_release_QGraphicsItemGroup> handle__shape;
+	bool owns_return__shape = false;
 
 	// Subclass to allow providing a Go implementation
 	virtual QPainterPath shape() const override {
@@ -16070,6 +17269,10 @@ public:
 		}
 
 		QPainterPath* callback_return_value = miqt_exec_callback_QGraphicsItemGroup_shape(this, handle__shape.value());
+		std::unique_ptr<QPainterPath> callback_return_value_owner;
+		if (owns_return__shape) {
+			callback_return_value_owner.reset(callback_return_value);
+		}
 		return *callback_return_value;
 	}
 
@@ -16472,6 +17675,7 @@ public:
 
 	// cgo.Handle value for overwritten implementation
 	miqt_callback_handle<miqt_exec_callback_handle_release_QGraphicsItemGroup> handle__inputMethodQuery;
+	bool owns_return__inputMethodQuery = false;
 
 	// Subclass to allow providing a Go implementation
 	virtual QVariant inputMethodQuery(Qt::InputMethodQuery query) const override {
@@ -16482,6 +17686,10 @@ public:
 		Qt::InputMethodQuery query_ret = query;
 		int sigval1 = static_cast<int>(query_ret);
 		QVariant* callback_return_value = miqt_exec_callback_QGraphicsItemGroup_inputMethodQuery(this, handle__inputMethodQuery.value(), sigval1);
+		std::unique_ptr<QVariant> callback_return_value_owner;
+		if (owns_return__inputMethodQuery) {
+			callback_return_value_owner.reset(callback_return_value);
+		}
 		return *callback_return_value;
 	}
 
@@ -16489,6 +17697,7 @@ public:
 
 	// cgo.Handle value for overwritten implementation
 	miqt_callback_handle<miqt_exec_callback_handle_release_QGraphicsItemGroup> handle__itemChange;
+	bool owns_return__itemChange = false;
 
 	// Subclass to allow providing a Go implementation
 	virtual QVariant itemChange(QGraphicsItem::GraphicsItemChange change, const QVariant& value) override {
@@ -16502,6 +17711,10 @@ public:
 		// Cast returned reference into pointer
 		QVariant* sigval2 = const_cast<QVariant*>(&value_ret);
 		QVariant* callback_return_value = miqt_exec_callback_QGraphicsItemGroup_itemChange(this, handle__itemChange.value(), sigval1, sigval2);
+		std::unique_ptr<QVariant> callback_return_value_owner;
+		if (owns_return__itemChange) {
+			callback_return_value_owner.reset(callback_return_value);
+		}
 		return *callback_return_value;
 	}
 
@@ -16547,6 +17760,7 @@ public:
 
 	// cgo.Handle value for overwritten implementation
 	miqt_callback_handle<miqt_exec_callback_handle_release_QGraphicsItemGroup> handle__extension;
+	bool owns_return__extension = false;
 
 	// Subclass to allow providing a Go implementation
 	virtual QVariant extension(const QVariant& variant) const override {
@@ -16558,6 +17772,10 @@ public:
 		// Cast returned reference into pointer
 		QVariant* sigval1 = const_cast<QVariant*>(&variant_ret);
 		QVariant* callback_return_value = miqt_exec_callback_QGraphicsItemGroup_extension(this, handle__extension.value(), sigval1);
+		std::unique_ptr<QVariant> callback_return_value_owner;
+		if (owns_return__extension) {
+			callback_return_value_owner.reset(callback_return_value);
+		}
 		return *callback_return_value;
 	}
 
@@ -16618,6 +17836,19 @@ bool QGraphicsItemGroup_override_virtual_boundingRect(void* self, intptr_t slot)
 	}
 
 	self_cast->handle__boundingRect = std::move(slot_handle);
+	self_cast->owns_return__boundingRect = false;
+	return true;
+}
+
+bool QGraphicsItemGroup_override_virtual_owned_boundingRect(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QGraphicsItemGroup> slot_handle(slot);
+	MiqtVirtualQGraphicsItemGroup* self_cast = dynamic_cast<MiqtVirtualQGraphicsItemGroup*>( (QGraphicsItemGroup*)(self) );
+	if (self_cast == nullptr) {
+		return false;
+	}
+
+	self_cast->handle__boundingRect = std::move(slot_handle);
+	self_cast->owns_return__boundingRect = true;
 	return true;
 }
 
@@ -16663,6 +17894,19 @@ bool QGraphicsItemGroup_override_virtual_opaqueArea(void* self, intptr_t slot) {
 	}
 
 	self_cast->handle__opaqueArea = std::move(slot_handle);
+	self_cast->owns_return__opaqueArea = false;
+	return true;
+}
+
+bool QGraphicsItemGroup_override_virtual_owned_opaqueArea(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QGraphicsItemGroup> slot_handle(slot);
+	MiqtVirtualQGraphicsItemGroup* self_cast = dynamic_cast<MiqtVirtualQGraphicsItemGroup*>( (QGraphicsItemGroup*)(self) );
+	if (self_cast == nullptr) {
+		return false;
+	}
+
+	self_cast->handle__opaqueArea = std::move(slot_handle);
+	self_cast->owns_return__opaqueArea = true;
 	return true;
 }
 
@@ -16708,6 +17952,19 @@ bool QGraphicsItemGroup_override_virtual_shape(void* self, intptr_t slot) {
 	}
 
 	self_cast->handle__shape = std::move(slot_handle);
+	self_cast->owns_return__shape = false;
+	return true;
+}
+
+bool QGraphicsItemGroup_override_virtual_owned_shape(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QGraphicsItemGroup> slot_handle(slot);
+	MiqtVirtualQGraphicsItemGroup* self_cast = dynamic_cast<MiqtVirtualQGraphicsItemGroup*>( (QGraphicsItemGroup*)(self) );
+	if (self_cast == nullptr) {
+		return false;
+	}
+
+	self_cast->handle__shape = std::move(slot_handle);
+	self_cast->owns_return__shape = true;
 	return true;
 }
 
@@ -17068,6 +18325,19 @@ bool QGraphicsItemGroup_override_virtual_inputMethodQuery(void* self, intptr_t s
 	}
 
 	self_cast->handle__inputMethodQuery = std::move(slot_handle);
+	self_cast->owns_return__inputMethodQuery = false;
+	return true;
+}
+
+bool QGraphicsItemGroup_override_virtual_owned_inputMethodQuery(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QGraphicsItemGroup> slot_handle(slot);
+	MiqtVirtualQGraphicsItemGroup* self_cast = dynamic_cast<MiqtVirtualQGraphicsItemGroup*>( (QGraphicsItemGroup*)(self) );
+	if (self_cast == nullptr) {
+		return false;
+	}
+
+	self_cast->handle__inputMethodQuery = std::move(slot_handle);
+	self_cast->owns_return__inputMethodQuery = true;
 	return true;
 }
 
@@ -17083,6 +18353,19 @@ bool QGraphicsItemGroup_override_virtual_itemChange(void* self, intptr_t slot) {
 	}
 
 	self_cast->handle__itemChange = std::move(slot_handle);
+	self_cast->owns_return__itemChange = false;
+	return true;
+}
+
+bool QGraphicsItemGroup_override_virtual_owned_itemChange(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QGraphicsItemGroup> slot_handle(slot);
+	MiqtVirtualQGraphicsItemGroup* self_cast = dynamic_cast<MiqtVirtualQGraphicsItemGroup*>( (QGraphicsItemGroup*)(self) );
+	if (self_cast == nullptr) {
+		return false;
+	}
+
+	self_cast->handle__itemChange = std::move(slot_handle);
+	self_cast->owns_return__itemChange = true;
 	return true;
 }
 
@@ -17128,6 +18411,19 @@ bool QGraphicsItemGroup_override_virtual_extension(void* self, intptr_t slot) {
 	}
 
 	self_cast->handle__extension = std::move(slot_handle);
+	self_cast->owns_return__extension = false;
+	return true;
+}
+
+bool QGraphicsItemGroup_override_virtual_owned_extension(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QGraphicsItemGroup> slot_handle(slot);
+	MiqtVirtualQGraphicsItemGroup* self_cast = dynamic_cast<MiqtVirtualQGraphicsItemGroup*>( (QGraphicsItemGroup*)(self) );
+	if (self_cast == nullptr) {
+		return false;
+	}
+
+	self_cast->handle__extension = std::move(slot_handle);
+	self_cast->owns_return__extension = true;
 	return true;
 }
 

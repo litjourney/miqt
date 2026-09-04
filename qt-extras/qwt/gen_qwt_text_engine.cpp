@@ -71,6 +71,7 @@ public:
 
 	// cgo.Handle value for overwritten implementation
 	miqt_callback_handle<miqt_exec_callback_handle_release_QwtTextEngine> handle__textSize;
+	bool owns_return__textSize = false;
 
 	// Subclass to allow providing a Go implementation
 	virtual QSizeF textSize(const QFont& font, int flags, const QString& text) const override {
@@ -91,6 +92,10 @@ public:
 		memcpy(text_ms.data, text_b.data(), text_ms.len);
 		struct miqt_string sigval3 = text_ms;
 		QSizeF* callback_return_value = miqt_exec_callback_QwtTextEngine_textSize(this, handle__textSize.value(), sigval1, sigval2, sigval3);
+		std::unique_ptr<QSizeF> callback_return_value_owner;
+		if (owns_return__textSize) {
+			callback_return_value_owner.reset(callback_return_value);
+		}
 		return *callback_return_value;
 	}
 
@@ -223,6 +228,19 @@ bool QwtTextEngine_override_virtual_textSize(void* self, intptr_t slot) {
 	}
 
 	self_cast->handle__textSize = std::move(slot_handle);
+	self_cast->owns_return__textSize = false;
+	return true;
+}
+
+bool QwtTextEngine_override_virtual_owned_textSize(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtTextEngine> slot_handle(slot);
+	MiqtVirtualQwtTextEngine* self_cast = dynamic_cast<MiqtVirtualQwtTextEngine*>( (QwtTextEngine*)(self) );
+	if (self_cast == nullptr) {
+		return false;
+	}
+
+	self_cast->handle__textSize = std::move(slot_handle);
+	self_cast->owns_return__textSize = true;
 	return true;
 }
 
@@ -301,6 +319,7 @@ public:
 
 	// cgo.Handle value for overwritten implementation
 	miqt_callback_handle<miqt_exec_callback_handle_release_QwtPlainTextEngine> handle__textSize;
+	bool owns_return__textSize = false;
 
 	// Subclass to allow providing a Go implementation
 	virtual QSizeF textSize(const QFont& font, int flags, const QString& text) const override {
@@ -321,6 +340,10 @@ public:
 		memcpy(text_ms.data, text_b.data(), text_ms.len);
 		struct miqt_string sigval3 = text_ms;
 		QSizeF* callback_return_value = miqt_exec_callback_QwtPlainTextEngine_textSize(this, handle__textSize.value(), sigval1, sigval2, sigval3);
+		std::unique_ptr<QSizeF> callback_return_value_owner;
+		if (owns_return__textSize) {
+			callback_return_value_owner.reset(callback_return_value);
+		}
 		return *callback_return_value;
 	}
 
@@ -476,6 +499,19 @@ bool QwtPlainTextEngine_override_virtual_textSize(void* self, intptr_t slot) {
 	}
 
 	self_cast->handle__textSize = std::move(slot_handle);
+	self_cast->owns_return__textSize = false;
+	return true;
+}
+
+bool QwtPlainTextEngine_override_virtual_owned_textSize(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtPlainTextEngine> slot_handle(slot);
+	MiqtVirtualQwtPlainTextEngine* self_cast = dynamic_cast<MiqtVirtualQwtPlainTextEngine*>( (QwtPlainTextEngine*)(self) );
+	if (self_cast == nullptr) {
+		return false;
+	}
+
+	self_cast->handle__textSize = std::move(slot_handle);
+	self_cast->owns_return__textSize = true;
 	return true;
 }
 
@@ -574,6 +610,7 @@ public:
 
 	// cgo.Handle value for overwritten implementation
 	miqt_callback_handle<miqt_exec_callback_handle_release_QwtRichTextEngine> handle__textSize;
+	bool owns_return__textSize = false;
 
 	// Subclass to allow providing a Go implementation
 	virtual QSizeF textSize(const QFont& font, int flags, const QString& text) const override {
@@ -594,6 +631,10 @@ public:
 		memcpy(text_ms.data, text_b.data(), text_ms.len);
 		struct miqt_string sigval3 = text_ms;
 		QSizeF* callback_return_value = miqt_exec_callback_QwtRichTextEngine_textSize(this, handle__textSize.value(), sigval1, sigval2, sigval3);
+		std::unique_ptr<QSizeF> callback_return_value_owner;
+		if (owns_return__textSize) {
+			callback_return_value_owner.reset(callback_return_value);
+		}
 		return *callback_return_value;
 	}
 
@@ -749,6 +790,19 @@ bool QwtRichTextEngine_override_virtual_textSize(void* self, intptr_t slot) {
 	}
 
 	self_cast->handle__textSize = std::move(slot_handle);
+	self_cast->owns_return__textSize = false;
+	return true;
+}
+
+bool QwtRichTextEngine_override_virtual_owned_textSize(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtRichTextEngine> slot_handle(slot);
+	MiqtVirtualQwtRichTextEngine* self_cast = dynamic_cast<MiqtVirtualQwtRichTextEngine*>( (QwtRichTextEngine*)(self) );
+	if (self_cast == nullptr) {
+		return false;
+	}
+
+	self_cast->handle__textSize = std::move(slot_handle);
+	self_cast->owns_return__textSize = true;
 	return true;
 }
 

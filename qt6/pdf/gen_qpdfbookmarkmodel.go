@@ -536,10 +536,16 @@ func (this *QPdfBookmarkModel) callVirtualBase_Data(index *qt6.QModelIndex, role
 	return _goptr
 
 }
+
+type miqtVirtualCallback_QPdfBookmarkModel_data struct {
+	callback   func(super func(index *qt6.QModelIndex, role int) *qt6.QVariant, index *qt6.QModelIndex, role int) *qt6.QVariant
+	ownsReturn bool
+}
+
 func (this *QPdfBookmarkModel) OnData(slot func(super func(index *qt6.QModelIndex, role int) *qt6.QVariant, index *qt6.QModelIndex, role int) *qt6.QVariant) {
 	var slotHandle C.intptr_t
 	if slot != nil {
-		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QPdfBookmarkModel_data{callback: slot}))
 	}
 	ok := C.QPdfBookmarkModel_override_virtual_data(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
@@ -547,12 +553,26 @@ func (this *QPdfBookmarkModel) OnData(slot func(super func(index *qt6.QModelInde
 	}
 }
 
+// OnDataOwned installs a virtual override that transfers
+// ownership of each non-nil returned Qt value object to C++.
+func (this *QPdfBookmarkModel) OnDataOwned(slot func(super func(index *qt6.QModelIndex, role int) *qt6.QVariant, index *qt6.QModelIndex, role int) *qt6.QVariant) {
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QPdfBookmarkModel_data{callback: slot, ownsReturn: true}))
+	}
+	ok := C.QPdfBookmarkModel_override_virtual_owned_data(unsafe.Pointer(this.h), slotHandle)
+	if !ok {
+		panic("miqt: can only override virtual methods for directly constructed types")
+	}
+}
+
 //export miqt_exec_callback_QPdfBookmarkModel_data
 func miqt_exec_callback_QPdfBookmarkModel_data(self *C.QPdfBookmarkModel, cb C.intptr_t, index *C.QModelIndex, role C.int) *C.QVariant {
-	gofunc, ok := cgo.Handle(cb).Value().(func(super func(index *qt6.QModelIndex, role int) *qt6.QVariant, index *qt6.QModelIndex, role int) *qt6.QVariant)
+	callbackData, ok := cgo.Handle(cb).Value().(miqtVirtualCallback_QPdfBookmarkModel_data)
 	if !ok {
 		panic("miqt: callback of non-callback type (heap corruption?)")
 	}
+	gofunc := callbackData.callback
 
 	// Convert all CABI parameters to Go parameters
 	slotval1 := qt6.UnsafeNewQModelIndex(unsafe.Pointer(index))
@@ -560,6 +580,9 @@ func miqt_exec_callback_QPdfBookmarkModel_data(self *C.QPdfBookmarkModel, cb C.i
 	slotval2 := (int)(role)
 
 	virtualReturn := gofunc((&QPdfBookmarkModel{h: self}).callVirtualBase_Data, slotval1, slotval2)
+	if callbackData.ownsReturn && virtualReturn != nil {
+		runtime.SetFinalizer(virtualReturn, nil)
+	}
 
 	return (*C.QVariant)(virtualReturn.UnsafePointer())
 
@@ -572,10 +595,16 @@ func (this *QPdfBookmarkModel) callVirtualBase_Index(row int, column int, parent
 	return _goptr
 
 }
+
+type miqtVirtualCallback_QPdfBookmarkModel_index struct {
+	callback   func(super func(row int, column int, parent *qt6.QModelIndex) *qt6.QModelIndex, row int, column int, parent *qt6.QModelIndex) *qt6.QModelIndex
+	ownsReturn bool
+}
+
 func (this *QPdfBookmarkModel) OnIndex(slot func(super func(row int, column int, parent *qt6.QModelIndex) *qt6.QModelIndex, row int, column int, parent *qt6.QModelIndex) *qt6.QModelIndex) {
 	var slotHandle C.intptr_t
 	if slot != nil {
-		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QPdfBookmarkModel_index{callback: slot}))
 	}
 	ok := C.QPdfBookmarkModel_override_virtual_index(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
@@ -583,12 +612,26 @@ func (this *QPdfBookmarkModel) OnIndex(slot func(super func(row int, column int,
 	}
 }
 
+// OnIndexOwned installs a virtual override that transfers
+// ownership of each non-nil returned Qt value object to C++.
+func (this *QPdfBookmarkModel) OnIndexOwned(slot func(super func(row int, column int, parent *qt6.QModelIndex) *qt6.QModelIndex, row int, column int, parent *qt6.QModelIndex) *qt6.QModelIndex) {
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QPdfBookmarkModel_index{callback: slot, ownsReturn: true}))
+	}
+	ok := C.QPdfBookmarkModel_override_virtual_owned_index(unsafe.Pointer(this.h), slotHandle)
+	if !ok {
+		panic("miqt: can only override virtual methods for directly constructed types")
+	}
+}
+
 //export miqt_exec_callback_QPdfBookmarkModel_index
 func miqt_exec_callback_QPdfBookmarkModel_index(self *C.QPdfBookmarkModel, cb C.intptr_t, row C.int, column C.int, parent *C.QModelIndex) *C.QModelIndex {
-	gofunc, ok := cgo.Handle(cb).Value().(func(super func(row int, column int, parent *qt6.QModelIndex) *qt6.QModelIndex, row int, column int, parent *qt6.QModelIndex) *qt6.QModelIndex)
+	callbackData, ok := cgo.Handle(cb).Value().(miqtVirtualCallback_QPdfBookmarkModel_index)
 	if !ok {
 		panic("miqt: callback of non-callback type (heap corruption?)")
 	}
+	gofunc := callbackData.callback
 
 	// Convert all CABI parameters to Go parameters
 	slotval1 := (int)(row)
@@ -598,6 +641,9 @@ func miqt_exec_callback_QPdfBookmarkModel_index(self *C.QPdfBookmarkModel, cb C.
 	slotval3 := qt6.UnsafeNewQModelIndex(unsafe.Pointer(parent))
 
 	virtualReturn := gofunc((&QPdfBookmarkModel{h: self}).callVirtualBase_Index, slotval1, slotval2, slotval3)
+	if callbackData.ownsReturn && virtualReturn != nil {
+		runtime.SetFinalizer(virtualReturn, nil)
+	}
 
 	return (*C.QModelIndex)(virtualReturn.UnsafePointer())
 
@@ -610,10 +656,16 @@ func (this *QPdfBookmarkModel) callVirtualBase_Parent(index *qt6.QModelIndex) *q
 	return _goptr
 
 }
+
+type miqtVirtualCallback_QPdfBookmarkModel_parent struct {
+	callback   func(super func(index *qt6.QModelIndex) *qt6.QModelIndex, index *qt6.QModelIndex) *qt6.QModelIndex
+	ownsReturn bool
+}
+
 func (this *QPdfBookmarkModel) OnParent(slot func(super func(index *qt6.QModelIndex) *qt6.QModelIndex, index *qt6.QModelIndex) *qt6.QModelIndex) {
 	var slotHandle C.intptr_t
 	if slot != nil {
-		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QPdfBookmarkModel_parent{callback: slot}))
 	}
 	ok := C.QPdfBookmarkModel_override_virtual_parent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
@@ -621,17 +673,34 @@ func (this *QPdfBookmarkModel) OnParent(slot func(super func(index *qt6.QModelIn
 	}
 }
 
+// OnParentOwned installs a virtual override that transfers
+// ownership of each non-nil returned Qt value object to C++.
+func (this *QPdfBookmarkModel) OnParentOwned(slot func(super func(index *qt6.QModelIndex) *qt6.QModelIndex, index *qt6.QModelIndex) *qt6.QModelIndex) {
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QPdfBookmarkModel_parent{callback: slot, ownsReturn: true}))
+	}
+	ok := C.QPdfBookmarkModel_override_virtual_owned_parent(unsafe.Pointer(this.h), slotHandle)
+	if !ok {
+		panic("miqt: can only override virtual methods for directly constructed types")
+	}
+}
+
 //export miqt_exec_callback_QPdfBookmarkModel_parent
 func miqt_exec_callback_QPdfBookmarkModel_parent(self *C.QPdfBookmarkModel, cb C.intptr_t, index *C.QModelIndex) *C.QModelIndex {
-	gofunc, ok := cgo.Handle(cb).Value().(func(super func(index *qt6.QModelIndex) *qt6.QModelIndex, index *qt6.QModelIndex) *qt6.QModelIndex)
+	callbackData, ok := cgo.Handle(cb).Value().(miqtVirtualCallback_QPdfBookmarkModel_parent)
 	if !ok {
 		panic("miqt: callback of non-callback type (heap corruption?)")
 	}
+	gofunc := callbackData.callback
 
 	// Convert all CABI parameters to Go parameters
 	slotval1 := qt6.UnsafeNewQModelIndex(unsafe.Pointer(index))
 
 	virtualReturn := gofunc((&QPdfBookmarkModel{h: self}).callVirtualBase_Parent, slotval1)
+	if callbackData.ownsReturn && virtualReturn != nil {
+		runtime.SetFinalizer(virtualReturn, nil)
+	}
 
 	return (*C.QModelIndex)(virtualReturn.UnsafePointer())
 
@@ -770,10 +839,16 @@ func (this *QPdfBookmarkModel) callVirtualBase_Sibling(row int, column int, idx 
 	return _goptr
 
 }
+
+type miqtVirtualCallback_QPdfBookmarkModel_sibling struct {
+	callback   func(super func(row int, column int, idx *qt6.QModelIndex) *qt6.QModelIndex, row int, column int, idx *qt6.QModelIndex) *qt6.QModelIndex
+	ownsReturn bool
+}
+
 func (this *QPdfBookmarkModel) OnSibling(slot func(super func(row int, column int, idx *qt6.QModelIndex) *qt6.QModelIndex, row int, column int, idx *qt6.QModelIndex) *qt6.QModelIndex) {
 	var slotHandle C.intptr_t
 	if slot != nil {
-		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QPdfBookmarkModel_sibling{callback: slot}))
 	}
 	ok := C.QPdfBookmarkModel_override_virtual_sibling(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
@@ -781,12 +856,26 @@ func (this *QPdfBookmarkModel) OnSibling(slot func(super func(row int, column in
 	}
 }
 
+// OnSiblingOwned installs a virtual override that transfers
+// ownership of each non-nil returned Qt value object to C++.
+func (this *QPdfBookmarkModel) OnSiblingOwned(slot func(super func(row int, column int, idx *qt6.QModelIndex) *qt6.QModelIndex, row int, column int, idx *qt6.QModelIndex) *qt6.QModelIndex) {
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QPdfBookmarkModel_sibling{callback: slot, ownsReturn: true}))
+	}
+	ok := C.QPdfBookmarkModel_override_virtual_owned_sibling(unsafe.Pointer(this.h), slotHandle)
+	if !ok {
+		panic("miqt: can only override virtual methods for directly constructed types")
+	}
+}
+
 //export miqt_exec_callback_QPdfBookmarkModel_sibling
 func miqt_exec_callback_QPdfBookmarkModel_sibling(self *C.QPdfBookmarkModel, cb C.intptr_t, row C.int, column C.int, idx *C.QModelIndex) *C.QModelIndex {
-	gofunc, ok := cgo.Handle(cb).Value().(func(super func(row int, column int, idx *qt6.QModelIndex) *qt6.QModelIndex, row int, column int, idx *qt6.QModelIndex) *qt6.QModelIndex)
+	callbackData, ok := cgo.Handle(cb).Value().(miqtVirtualCallback_QPdfBookmarkModel_sibling)
 	if !ok {
 		panic("miqt: callback of non-callback type (heap corruption?)")
 	}
+	gofunc := callbackData.callback
 
 	// Convert all CABI parameters to Go parameters
 	slotval1 := (int)(row)
@@ -796,6 +885,9 @@ func miqt_exec_callback_QPdfBookmarkModel_sibling(self *C.QPdfBookmarkModel, cb 
 	slotval3 := qt6.UnsafeNewQModelIndex(unsafe.Pointer(idx))
 
 	virtualReturn := gofunc((&QPdfBookmarkModel{h: self}).callVirtualBase_Sibling, slotval1, slotval2, slotval3)
+	if callbackData.ownsReturn && virtualReturn != nil {
+		runtime.SetFinalizer(virtualReturn, nil)
+	}
 
 	return (*C.QModelIndex)(virtualReturn.UnsafePointer())
 
@@ -876,10 +968,16 @@ func (this *QPdfBookmarkModel) callVirtualBase_HeaderData(section int, orientati
 	return _goptr
 
 }
+
+type miqtVirtualCallback_QPdfBookmarkModel_headerData struct {
+	callback   func(super func(section int, orientation qt6.Orientation, role int) *qt6.QVariant, section int, orientation qt6.Orientation, role int) *qt6.QVariant
+	ownsReturn bool
+}
+
 func (this *QPdfBookmarkModel) OnHeaderData(slot func(super func(section int, orientation qt6.Orientation, role int) *qt6.QVariant, section int, orientation qt6.Orientation, role int) *qt6.QVariant) {
 	var slotHandle C.intptr_t
 	if slot != nil {
-		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QPdfBookmarkModel_headerData{callback: slot}))
 	}
 	ok := C.QPdfBookmarkModel_override_virtual_headerData(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
@@ -887,12 +985,26 @@ func (this *QPdfBookmarkModel) OnHeaderData(slot func(super func(section int, or
 	}
 }
 
+// OnHeaderDataOwned installs a virtual override that transfers
+// ownership of each non-nil returned Qt value object to C++.
+func (this *QPdfBookmarkModel) OnHeaderDataOwned(slot func(super func(section int, orientation qt6.Orientation, role int) *qt6.QVariant, section int, orientation qt6.Orientation, role int) *qt6.QVariant) {
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QPdfBookmarkModel_headerData{callback: slot, ownsReturn: true}))
+	}
+	ok := C.QPdfBookmarkModel_override_virtual_owned_headerData(unsafe.Pointer(this.h), slotHandle)
+	if !ok {
+		panic("miqt: can only override virtual methods for directly constructed types")
+	}
+}
+
 //export miqt_exec_callback_QPdfBookmarkModel_headerData
 func miqt_exec_callback_QPdfBookmarkModel_headerData(self *C.QPdfBookmarkModel, cb C.intptr_t, section C.int, orientation C.int, role C.int) *C.QVariant {
-	gofunc, ok := cgo.Handle(cb).Value().(func(super func(section int, orientation qt6.Orientation, role int) *qt6.QVariant, section int, orientation qt6.Orientation, role int) *qt6.QVariant)
+	callbackData, ok := cgo.Handle(cb).Value().(miqtVirtualCallback_QPdfBookmarkModel_headerData)
 	if !ok {
 		panic("miqt: callback of non-callback type (heap corruption?)")
 	}
+	gofunc := callbackData.callback
 
 	// Convert all CABI parameters to Go parameters
 	slotval1 := (int)(section)
@@ -902,6 +1014,9 @@ func miqt_exec_callback_QPdfBookmarkModel_headerData(self *C.QPdfBookmarkModel, 
 	slotval3 := (int)(role)
 
 	virtualReturn := gofunc((&QPdfBookmarkModel{h: self}).callVirtualBase_HeaderData, slotval1, slotval2, slotval3)
+	if callbackData.ownsReturn && virtualReturn != nil {
+		runtime.SetFinalizer(virtualReturn, nil)
+	}
 
 	return (*C.QVariant)(virtualReturn.UnsafePointer())
 
@@ -1684,10 +1799,16 @@ func (this *QPdfBookmarkModel) callVirtualBase_Buddy(index *qt6.QModelIndex) *qt
 	return _goptr
 
 }
+
+type miqtVirtualCallback_QPdfBookmarkModel_buddy struct {
+	callback   func(super func(index *qt6.QModelIndex) *qt6.QModelIndex, index *qt6.QModelIndex) *qt6.QModelIndex
+	ownsReturn bool
+}
+
 func (this *QPdfBookmarkModel) OnBuddy(slot func(super func(index *qt6.QModelIndex) *qt6.QModelIndex, index *qt6.QModelIndex) *qt6.QModelIndex) {
 	var slotHandle C.intptr_t
 	if slot != nil {
-		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QPdfBookmarkModel_buddy{callback: slot}))
 	}
 	ok := C.QPdfBookmarkModel_override_virtual_buddy(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
@@ -1695,17 +1816,34 @@ func (this *QPdfBookmarkModel) OnBuddy(slot func(super func(index *qt6.QModelInd
 	}
 }
 
+// OnBuddyOwned installs a virtual override that transfers
+// ownership of each non-nil returned Qt value object to C++.
+func (this *QPdfBookmarkModel) OnBuddyOwned(slot func(super func(index *qt6.QModelIndex) *qt6.QModelIndex, index *qt6.QModelIndex) *qt6.QModelIndex) {
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QPdfBookmarkModel_buddy{callback: slot, ownsReturn: true}))
+	}
+	ok := C.QPdfBookmarkModel_override_virtual_owned_buddy(unsafe.Pointer(this.h), slotHandle)
+	if !ok {
+		panic("miqt: can only override virtual methods for directly constructed types")
+	}
+}
+
 //export miqt_exec_callback_QPdfBookmarkModel_buddy
 func miqt_exec_callback_QPdfBookmarkModel_buddy(self *C.QPdfBookmarkModel, cb C.intptr_t, index *C.QModelIndex) *C.QModelIndex {
-	gofunc, ok := cgo.Handle(cb).Value().(func(super func(index *qt6.QModelIndex) *qt6.QModelIndex, index *qt6.QModelIndex) *qt6.QModelIndex)
+	callbackData, ok := cgo.Handle(cb).Value().(miqtVirtualCallback_QPdfBookmarkModel_buddy)
 	if !ok {
 		panic("miqt: callback of non-callback type (heap corruption?)")
 	}
+	gofunc := callbackData.callback
 
 	// Convert all CABI parameters to Go parameters
 	slotval1 := qt6.UnsafeNewQModelIndex(unsafe.Pointer(index))
 
 	virtualReturn := gofunc((&QPdfBookmarkModel{h: self}).callVirtualBase_Buddy, slotval1)
+	if callbackData.ownsReturn && virtualReturn != nil {
+		runtime.SetFinalizer(virtualReturn, nil)
+	}
 
 	return (*C.QModelIndex)(virtualReturn.UnsafePointer())
 
@@ -1771,10 +1909,16 @@ func (this *QPdfBookmarkModel) callVirtualBase_Span(index *qt6.QModelIndex) *qt6
 	return _goptr
 
 }
+
+type miqtVirtualCallback_QPdfBookmarkModel_span struct {
+	callback   func(super func(index *qt6.QModelIndex) *qt6.QSize, index *qt6.QModelIndex) *qt6.QSize
+	ownsReturn bool
+}
+
 func (this *QPdfBookmarkModel) OnSpan(slot func(super func(index *qt6.QModelIndex) *qt6.QSize, index *qt6.QModelIndex) *qt6.QSize) {
 	var slotHandle C.intptr_t
 	if slot != nil {
-		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QPdfBookmarkModel_span{callback: slot}))
 	}
 	ok := C.QPdfBookmarkModel_override_virtual_span(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
@@ -1782,17 +1926,34 @@ func (this *QPdfBookmarkModel) OnSpan(slot func(super func(index *qt6.QModelInde
 	}
 }
 
+// OnSpanOwned installs a virtual override that transfers
+// ownership of each non-nil returned Qt value object to C++.
+func (this *QPdfBookmarkModel) OnSpanOwned(slot func(super func(index *qt6.QModelIndex) *qt6.QSize, index *qt6.QModelIndex) *qt6.QSize) {
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QPdfBookmarkModel_span{callback: slot, ownsReturn: true}))
+	}
+	ok := C.QPdfBookmarkModel_override_virtual_owned_span(unsafe.Pointer(this.h), slotHandle)
+	if !ok {
+		panic("miqt: can only override virtual methods for directly constructed types")
+	}
+}
+
 //export miqt_exec_callback_QPdfBookmarkModel_span
 func miqt_exec_callback_QPdfBookmarkModel_span(self *C.QPdfBookmarkModel, cb C.intptr_t, index *C.QModelIndex) *C.QSize {
-	gofunc, ok := cgo.Handle(cb).Value().(func(super func(index *qt6.QModelIndex) *qt6.QSize, index *qt6.QModelIndex) *qt6.QSize)
+	callbackData, ok := cgo.Handle(cb).Value().(miqtVirtualCallback_QPdfBookmarkModel_span)
 	if !ok {
 		panic("miqt: callback of non-callback type (heap corruption?)")
 	}
+	gofunc := callbackData.callback
 
 	// Convert all CABI parameters to Go parameters
 	slotval1 := qt6.UnsafeNewQModelIndex(unsafe.Pointer(index))
 
 	virtualReturn := gofunc((&QPdfBookmarkModel{h: self}).callVirtualBase_Span, slotval1)
+	if callbackData.ownsReturn && virtualReturn != nil {
+		runtime.SetFinalizer(virtualReturn, nil)
+	}
 
 	return (*C.QSize)(virtualReturn.UnsafePointer())
 

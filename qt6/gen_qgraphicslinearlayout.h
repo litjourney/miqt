@@ -74,6 +74,7 @@ QGraphicsLayoutItem* QGraphicsLinearLayout_virtualbase_itemAt(const void* self, 
 bool QGraphicsLinearLayout_override_virtual_invalidate(void* self, intptr_t slot);
 void QGraphicsLinearLayout_virtualbase_invalidate(void* self);
 bool QGraphicsLinearLayout_override_virtual_sizeHint(void* self, intptr_t slot);
+bool QGraphicsLinearLayout_override_virtual_owned_sizeHint(void* self, intptr_t slot);
 QSizeF* QGraphicsLinearLayout_virtualbase_sizeHint(const void* self, int which, QSizeF* constraint);
 bool QGraphicsLinearLayout_override_virtual_getContentsMargins(void* self, intptr_t slot);
 void QGraphicsLinearLayout_virtualbase_getContentsMargins(const void* self, double* left, double* top, double* right, double* bottom);

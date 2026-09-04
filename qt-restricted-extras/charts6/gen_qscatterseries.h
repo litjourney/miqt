@@ -80,6 +80,7 @@ void QScatterSeries_virtualbase_setBrush(void* self, QBrush* brush);
 bool QScatterSeries_override_virtual_setColor(void* self, intptr_t slot);
 void QScatterSeries_virtualbase_setColor(void* self, QColor* color);
 bool QScatterSeries_override_virtual_color(void* self, intptr_t slot);
+bool QScatterSeries_override_virtual_owned_color(void* self, intptr_t slot);
 QColor* QScatterSeries_virtualbase_color(const void* self);
 bool QScatterSeries_override_virtual_event(void* self, intptr_t slot);
 bool QScatterSeries_virtualbase_event(void* self, QEvent* event);

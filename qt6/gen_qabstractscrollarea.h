@@ -140,8 +140,10 @@ struct miqt_string QAbstractScrollArea_tr2(const char* s, const char* c);
 struct miqt_string QAbstractScrollArea_tr3(const char* s, const char* c, int n);
 
 bool QAbstractScrollArea_override_virtual_minimumSizeHint(void* self, intptr_t slot);
+bool QAbstractScrollArea_override_virtual_owned_minimumSizeHint(void* self, intptr_t slot);
 QSize* QAbstractScrollArea_virtualbase_minimumSizeHint(const void* self);
 bool QAbstractScrollArea_override_virtual_sizeHint(void* self, intptr_t slot);
+bool QAbstractScrollArea_override_virtual_owned_sizeHint(void* self, intptr_t slot);
 QSize* QAbstractScrollArea_virtualbase_sizeHint(const void* self);
 bool QAbstractScrollArea_override_virtual_setupViewport(void* self, intptr_t slot);
 void QAbstractScrollArea_virtualbase_setupViewport(void* self, QWidget* viewport);
@@ -180,6 +182,7 @@ void QAbstractScrollArea_virtualbase_keyPressEvent(void* self, QKeyEvent* param1
 bool QAbstractScrollArea_override_virtual_scrollContentsBy(void* self, intptr_t slot);
 void QAbstractScrollArea_virtualbase_scrollContentsBy(void* self, int dx, int dy);
 bool QAbstractScrollArea_override_virtual_viewportSizeHint(void* self, intptr_t slot);
+bool QAbstractScrollArea_override_virtual_owned_viewportSizeHint(void* self, intptr_t slot);
 QSize* QAbstractScrollArea_virtualbase_viewportSizeHint(const void* self);
 bool QAbstractScrollArea_override_virtual_changeEvent(void* self, intptr_t slot);
 void QAbstractScrollArea_virtualbase_changeEvent(void* self, QEvent* param1);
@@ -230,6 +233,7 @@ QPainter* QAbstractScrollArea_virtualbase_sharedPainter(const void* self);
 bool QAbstractScrollArea_override_virtual_inputMethodEvent(void* self, intptr_t slot);
 void QAbstractScrollArea_virtualbase_inputMethodEvent(void* self, QInputMethodEvent* param1);
 bool QAbstractScrollArea_override_virtual_inputMethodQuery(void* self, intptr_t slot);
+bool QAbstractScrollArea_override_virtual_owned_inputMethodQuery(void* self, intptr_t slot);
 QVariant* QAbstractScrollArea_virtualbase_inputMethodQuery(const void* self, int param1);
 bool QAbstractScrollArea_override_virtual_focusNextPrevChild(void* self, intptr_t slot);
 bool QAbstractScrollArea_virtualbase_focusNextPrevChild(void* self, bool next);

@@ -78,6 +78,7 @@ void QVariantAnimation_virtualbase_updateState(void* self, int newState, int old
 bool QVariantAnimation_override_virtual_updateCurrentValue(void* self, intptr_t slot);
 void QVariantAnimation_virtualbase_updateCurrentValue(void* self, QVariant* value);
 bool QVariantAnimation_override_virtual_interpolated(void* self, intptr_t slot);
+bool QVariantAnimation_override_virtual_owned_interpolated(void* self, intptr_t slot);
 QVariant* QVariantAnimation_virtualbase_interpolated(const void* self, QVariant* from, QVariant* to, double progress);
 bool QVariantAnimation_override_virtual_updateDirection(void* self, intptr_t slot);
 void QVariantAnimation_virtualbase_updateDirection(void* self, int direction);

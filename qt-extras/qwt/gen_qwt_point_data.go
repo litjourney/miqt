@@ -125,10 +125,16 @@ func (this *QwtPointArrayData) callVirtualBase_BoundingRect() *qt.QRectF {
 	return _goptr
 
 }
+
+type miqtVirtualCallback_QwtPointArrayData_boundingRect struct {
+	callback   func(super func() *qt.QRectF) *qt.QRectF
+	ownsReturn bool
+}
+
 func (this *QwtPointArrayData) OnBoundingRect(slot func(super func() *qt.QRectF) *qt.QRectF) {
 	var slotHandle C.intptr_t
 	if slot != nil {
-		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QwtPointArrayData_boundingRect{callback: slot}))
 	}
 	ok := C.QwtPointArrayData_override_virtual_boundingRect(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
@@ -136,14 +142,31 @@ func (this *QwtPointArrayData) OnBoundingRect(slot func(super func() *qt.QRectF)
 	}
 }
 
+// OnBoundingRectOwned installs a virtual override that transfers
+// ownership of each non-nil returned Qt value object to C++.
+func (this *QwtPointArrayData) OnBoundingRectOwned(slot func(super func() *qt.QRectF) *qt.QRectF) {
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QwtPointArrayData_boundingRect{callback: slot, ownsReturn: true}))
+	}
+	ok := C.QwtPointArrayData_override_virtual_owned_boundingRect(unsafe.Pointer(this.h), slotHandle)
+	if !ok {
+		panic("miqt: can only override virtual methods for directly constructed types")
+	}
+}
+
 //export miqt_exec_callback_QwtPointArrayData_boundingRect
 func miqt_exec_callback_QwtPointArrayData_boundingRect(self *C.QwtPointArrayData, cb C.intptr_t) *C.QRectF {
-	gofunc, ok := cgo.Handle(cb).Value().(func(super func() *qt.QRectF) *qt.QRectF)
+	callbackData, ok := cgo.Handle(cb).Value().(miqtVirtualCallback_QwtPointArrayData_boundingRect)
 	if !ok {
 		panic("miqt: callback of non-callback type (heap corruption?)")
 	}
+	gofunc := callbackData.callback
 
 	virtualReturn := gofunc((&QwtPointArrayData{h: self}).callVirtualBase_BoundingRect)
+	if callbackData.ownsReturn && virtualReturn != nil {
+		runtime.SetFinalizer(virtualReturn, nil)
+	}
 
 	return (*C.QRectF)(virtualReturn.UnsafePointer())
 
@@ -185,10 +208,16 @@ func (this *QwtPointArrayData) callVirtualBase_Sample(index uint64) *qt.QPointF 
 	return _goptr
 
 }
+
+type miqtVirtualCallback_QwtPointArrayData_sample struct {
+	callback   func(super func(index uint64) *qt.QPointF, index uint64) *qt.QPointF
+	ownsReturn bool
+}
+
 func (this *QwtPointArrayData) OnSample(slot func(super func(index uint64) *qt.QPointF, index uint64) *qt.QPointF) {
 	var slotHandle C.intptr_t
 	if slot != nil {
-		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QwtPointArrayData_sample{callback: slot}))
 	}
 	ok := C.QwtPointArrayData_override_virtual_sample(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
@@ -196,17 +225,34 @@ func (this *QwtPointArrayData) OnSample(slot func(super func(index uint64) *qt.Q
 	}
 }
 
+// OnSampleOwned installs a virtual override that transfers
+// ownership of each non-nil returned Qt value object to C++.
+func (this *QwtPointArrayData) OnSampleOwned(slot func(super func(index uint64) *qt.QPointF, index uint64) *qt.QPointF) {
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QwtPointArrayData_sample{callback: slot, ownsReturn: true}))
+	}
+	ok := C.QwtPointArrayData_override_virtual_owned_sample(unsafe.Pointer(this.h), slotHandle)
+	if !ok {
+		panic("miqt: can only override virtual methods for directly constructed types")
+	}
+}
+
 //export miqt_exec_callback_QwtPointArrayData_sample
 func miqt_exec_callback_QwtPointArrayData_sample(self *C.QwtPointArrayData, cb C.intptr_t, index C.size_t) *C.QPointF {
-	gofunc, ok := cgo.Handle(cb).Value().(func(super func(index uint64) *qt.QPointF, index uint64) *qt.QPointF)
+	callbackData, ok := cgo.Handle(cb).Value().(miqtVirtualCallback_QwtPointArrayData_sample)
 	if !ok {
 		panic("miqt: callback of non-callback type (heap corruption?)")
 	}
+	gofunc := callbackData.callback
 
 	// Convert all CABI parameters to Go parameters
 	slotval1 := (uint64)(index)
 
 	virtualReturn := gofunc((&QwtPointArrayData{h: self}).callVirtualBase_Sample, slotval1)
+	if callbackData.ownsReturn && virtualReturn != nil {
+		runtime.SetFinalizer(virtualReturn, nil)
+	}
 
 	return (*C.QPointF)(virtualReturn.UnsafePointer())
 
@@ -306,10 +352,16 @@ func (this *QwtCPointerData) callVirtualBase_BoundingRect() *qt.QRectF {
 	return _goptr
 
 }
+
+type miqtVirtualCallback_QwtCPointerData_boundingRect struct {
+	callback   func(super func() *qt.QRectF) *qt.QRectF
+	ownsReturn bool
+}
+
 func (this *QwtCPointerData) OnBoundingRect(slot func(super func() *qt.QRectF) *qt.QRectF) {
 	var slotHandle C.intptr_t
 	if slot != nil {
-		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QwtCPointerData_boundingRect{callback: slot}))
 	}
 	ok := C.QwtCPointerData_override_virtual_boundingRect(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
@@ -317,14 +369,31 @@ func (this *QwtCPointerData) OnBoundingRect(slot func(super func() *qt.QRectF) *
 	}
 }
 
+// OnBoundingRectOwned installs a virtual override that transfers
+// ownership of each non-nil returned Qt value object to C++.
+func (this *QwtCPointerData) OnBoundingRectOwned(slot func(super func() *qt.QRectF) *qt.QRectF) {
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QwtCPointerData_boundingRect{callback: slot, ownsReturn: true}))
+	}
+	ok := C.QwtCPointerData_override_virtual_owned_boundingRect(unsafe.Pointer(this.h), slotHandle)
+	if !ok {
+		panic("miqt: can only override virtual methods for directly constructed types")
+	}
+}
+
 //export miqt_exec_callback_QwtCPointerData_boundingRect
 func miqt_exec_callback_QwtCPointerData_boundingRect(self *C.QwtCPointerData, cb C.intptr_t) *C.QRectF {
-	gofunc, ok := cgo.Handle(cb).Value().(func(super func() *qt.QRectF) *qt.QRectF)
+	callbackData, ok := cgo.Handle(cb).Value().(miqtVirtualCallback_QwtCPointerData_boundingRect)
 	if !ok {
 		panic("miqt: callback of non-callback type (heap corruption?)")
 	}
+	gofunc := callbackData.callback
 
 	virtualReturn := gofunc((&QwtCPointerData{h: self}).callVirtualBase_BoundingRect)
+	if callbackData.ownsReturn && virtualReturn != nil {
+		runtime.SetFinalizer(virtualReturn, nil)
+	}
 
 	return (*C.QRectF)(virtualReturn.UnsafePointer())
 
@@ -366,10 +435,16 @@ func (this *QwtCPointerData) callVirtualBase_Sample(index uint64) *qt.QPointF {
 	return _goptr
 
 }
+
+type miqtVirtualCallback_QwtCPointerData_sample struct {
+	callback   func(super func(index uint64) *qt.QPointF, index uint64) *qt.QPointF
+	ownsReturn bool
+}
+
 func (this *QwtCPointerData) OnSample(slot func(super func(index uint64) *qt.QPointF, index uint64) *qt.QPointF) {
 	var slotHandle C.intptr_t
 	if slot != nil {
-		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QwtCPointerData_sample{callback: slot}))
 	}
 	ok := C.QwtCPointerData_override_virtual_sample(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
@@ -377,17 +452,34 @@ func (this *QwtCPointerData) OnSample(slot func(super func(index uint64) *qt.QPo
 	}
 }
 
+// OnSampleOwned installs a virtual override that transfers
+// ownership of each non-nil returned Qt value object to C++.
+func (this *QwtCPointerData) OnSampleOwned(slot func(super func(index uint64) *qt.QPointF, index uint64) *qt.QPointF) {
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QwtCPointerData_sample{callback: slot, ownsReturn: true}))
+	}
+	ok := C.QwtCPointerData_override_virtual_owned_sample(unsafe.Pointer(this.h), slotHandle)
+	if !ok {
+		panic("miqt: can only override virtual methods for directly constructed types")
+	}
+}
+
 //export miqt_exec_callback_QwtCPointerData_sample
 func miqt_exec_callback_QwtCPointerData_sample(self *C.QwtCPointerData, cb C.intptr_t, index C.size_t) *C.QPointF {
-	gofunc, ok := cgo.Handle(cb).Value().(func(super func(index uint64) *qt.QPointF, index uint64) *qt.QPointF)
+	callbackData, ok := cgo.Handle(cb).Value().(miqtVirtualCallback_QwtCPointerData_sample)
 	if !ok {
 		panic("miqt: callback of non-callback type (heap corruption?)")
 	}
+	gofunc := callbackData.callback
 
 	// Convert all CABI parameters to Go parameters
 	slotval1 := (uint64)(index)
 
 	virtualReturn := gofunc((&QwtCPointerData{h: self}).callVirtualBase_Sample, slotval1)
+	if callbackData.ownsReturn && virtualReturn != nil {
+		runtime.SetFinalizer(virtualReturn, nil)
+	}
 
 	return (*C.QPointF)(virtualReturn.UnsafePointer())
 
@@ -546,10 +638,16 @@ func (this *QwtSyntheticPointData) callVirtualBase_BoundingRect() *qt.QRectF {
 	return _goptr
 
 }
+
+type miqtVirtualCallback_QwtSyntheticPointData_boundingRect struct {
+	callback   func(super func() *qt.QRectF) *qt.QRectF
+	ownsReturn bool
+}
+
 func (this *QwtSyntheticPointData) OnBoundingRect(slot func(super func() *qt.QRectF) *qt.QRectF) {
 	var slotHandle C.intptr_t
 	if slot != nil {
-		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QwtSyntheticPointData_boundingRect{callback: slot}))
 	}
 	ok := C.QwtSyntheticPointData_override_virtual_boundingRect(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
@@ -557,14 +655,31 @@ func (this *QwtSyntheticPointData) OnBoundingRect(slot func(super func() *qt.QRe
 	}
 }
 
+// OnBoundingRectOwned installs a virtual override that transfers
+// ownership of each non-nil returned Qt value object to C++.
+func (this *QwtSyntheticPointData) OnBoundingRectOwned(slot func(super func() *qt.QRectF) *qt.QRectF) {
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QwtSyntheticPointData_boundingRect{callback: slot, ownsReturn: true}))
+	}
+	ok := C.QwtSyntheticPointData_override_virtual_owned_boundingRect(unsafe.Pointer(this.h), slotHandle)
+	if !ok {
+		panic("miqt: can only override virtual methods for directly constructed types")
+	}
+}
+
 //export miqt_exec_callback_QwtSyntheticPointData_boundingRect
 func miqt_exec_callback_QwtSyntheticPointData_boundingRect(self *C.QwtSyntheticPointData, cb C.intptr_t) *C.QRectF {
-	gofunc, ok := cgo.Handle(cb).Value().(func(super func() *qt.QRectF) *qt.QRectF)
+	callbackData, ok := cgo.Handle(cb).Value().(miqtVirtualCallback_QwtSyntheticPointData_boundingRect)
 	if !ok {
 		panic("miqt: callback of non-callback type (heap corruption?)")
 	}
+	gofunc := callbackData.callback
 
 	virtualReturn := gofunc((&QwtSyntheticPointData{h: self}).callVirtualBase_BoundingRect)
+	if callbackData.ownsReturn && virtualReturn != nil {
+		runtime.SetFinalizer(virtualReturn, nil)
+	}
 
 	return (*C.QRectF)(virtualReturn.UnsafePointer())
 
@@ -577,10 +692,16 @@ func (this *QwtSyntheticPointData) callVirtualBase_Sample(index uint64) *qt.QPoi
 	return _goptr
 
 }
+
+type miqtVirtualCallback_QwtSyntheticPointData_sample struct {
+	callback   func(super func(index uint64) *qt.QPointF, index uint64) *qt.QPointF
+	ownsReturn bool
+}
+
 func (this *QwtSyntheticPointData) OnSample(slot func(super func(index uint64) *qt.QPointF, index uint64) *qt.QPointF) {
 	var slotHandle C.intptr_t
 	if slot != nil {
-		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QwtSyntheticPointData_sample{callback: slot}))
 	}
 	ok := C.QwtSyntheticPointData_override_virtual_sample(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
@@ -588,17 +709,34 @@ func (this *QwtSyntheticPointData) OnSample(slot func(super func(index uint64) *
 	}
 }
 
+// OnSampleOwned installs a virtual override that transfers
+// ownership of each non-nil returned Qt value object to C++.
+func (this *QwtSyntheticPointData) OnSampleOwned(slot func(super func(index uint64) *qt.QPointF, index uint64) *qt.QPointF) {
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QwtSyntheticPointData_sample{callback: slot, ownsReturn: true}))
+	}
+	ok := C.QwtSyntheticPointData_override_virtual_owned_sample(unsafe.Pointer(this.h), slotHandle)
+	if !ok {
+		panic("miqt: can only override virtual methods for directly constructed types")
+	}
+}
+
 //export miqt_exec_callback_QwtSyntheticPointData_sample
 func miqt_exec_callback_QwtSyntheticPointData_sample(self *C.QwtSyntheticPointData, cb C.intptr_t, index C.size_t) *C.QPointF {
-	gofunc, ok := cgo.Handle(cb).Value().(func(super func(index uint64) *qt.QPointF, index uint64) *qt.QPointF)
+	callbackData, ok := cgo.Handle(cb).Value().(miqtVirtualCallback_QwtSyntheticPointData_sample)
 	if !ok {
 		panic("miqt: callback of non-callback type (heap corruption?)")
 	}
+	gofunc := callbackData.callback
 
 	// Convert all CABI parameters to Go parameters
 	slotval1 := (uint64)(index)
 
 	virtualReturn := gofunc((&QwtSyntheticPointData{h: self}).callVirtualBase_Sample, slotval1)
+	if callbackData.ownsReturn && virtualReturn != nil {
+		runtime.SetFinalizer(virtualReturn, nil)
+	}
 
 	return (*C.QPointF)(virtualReturn.UnsafePointer())
 

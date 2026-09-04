@@ -439,10 +439,16 @@ func (this *QAbstractVideoSurface) callVirtualBase_NearestFormat(format *QVideoS
 	return _goptr
 
 }
+
+type miqtVirtualCallback_QAbstractVideoSurface_nearestFormat struct {
+	callback   func(super func(format *QVideoSurfaceFormat) *QVideoSurfaceFormat, format *QVideoSurfaceFormat) *QVideoSurfaceFormat
+	ownsReturn bool
+}
+
 func (this *QAbstractVideoSurface) OnNearestFormat(slot func(super func(format *QVideoSurfaceFormat) *QVideoSurfaceFormat, format *QVideoSurfaceFormat) *QVideoSurfaceFormat) {
 	var slotHandle C.intptr_t
 	if slot != nil {
-		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QAbstractVideoSurface_nearestFormat{callback: slot}))
 	}
 	ok := C.QAbstractVideoSurface_override_virtual_nearestFormat(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
@@ -450,17 +456,34 @@ func (this *QAbstractVideoSurface) OnNearestFormat(slot func(super func(format *
 	}
 }
 
+// OnNearestFormatOwned installs a virtual override that transfers
+// ownership of each non-nil returned Qt value object to C++.
+func (this *QAbstractVideoSurface) OnNearestFormatOwned(slot func(super func(format *QVideoSurfaceFormat) *QVideoSurfaceFormat, format *QVideoSurfaceFormat) *QVideoSurfaceFormat) {
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QAbstractVideoSurface_nearestFormat{callback: slot, ownsReturn: true}))
+	}
+	ok := C.QAbstractVideoSurface_override_virtual_owned_nearestFormat(unsafe.Pointer(this.h), slotHandle)
+	if !ok {
+		panic("miqt: can only override virtual methods for directly constructed types")
+	}
+}
+
 //export miqt_exec_callback_QAbstractVideoSurface_nearestFormat
 func miqt_exec_callback_QAbstractVideoSurface_nearestFormat(self *C.QAbstractVideoSurface, cb C.intptr_t, format *C.QVideoSurfaceFormat) *C.QVideoSurfaceFormat {
-	gofunc, ok := cgo.Handle(cb).Value().(func(super func(format *QVideoSurfaceFormat) *QVideoSurfaceFormat, format *QVideoSurfaceFormat) *QVideoSurfaceFormat)
+	callbackData, ok := cgo.Handle(cb).Value().(miqtVirtualCallback_QAbstractVideoSurface_nearestFormat)
 	if !ok {
 		panic("miqt: callback of non-callback type (heap corruption?)")
 	}
+	gofunc := callbackData.callback
 
 	// Convert all CABI parameters to Go parameters
 	slotval1 := newQVideoSurfaceFormat(format)
 
 	virtualReturn := gofunc((&QAbstractVideoSurface{h: self}).callVirtualBase_NearestFormat, slotval1)
+	if callbackData.ownsReturn && virtualReturn != nil {
+		runtime.SetFinalizer(virtualReturn, nil)
+	}
 
 	return virtualReturn.cPointer()
 

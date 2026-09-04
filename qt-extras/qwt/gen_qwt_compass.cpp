@@ -129,6 +129,7 @@ public:
 
 	// cgo.Handle value for overwritten implementation
 	miqt_callback_handle<miqt_exec_callback_handle_release_QwtCompassScaleDraw> handle__label;
+	bool owns_return__label = false;
 
 	// Subclass to allow providing a Go implementation
 	virtual QwtText label(double value) const override {
@@ -138,6 +139,10 @@ public:
 
 		double sigval1 = value;
 		QwtText* callback_return_value = miqt_exec_callback_QwtCompassScaleDraw_label(this, handle__label.value(), sigval1);
+		std::unique_ptr<QwtText> callback_return_value_owner;
+		if (owns_return__label) {
+			callback_return_value_owner.reset(callback_return_value);
+		}
 		return *callback_return_value;
 	}
 
@@ -307,6 +312,19 @@ bool QwtCompassScaleDraw_override_virtual_label(void* self, intptr_t slot) {
 	}
 
 	self_cast->handle__label = std::move(slot_handle);
+	self_cast->owns_return__label = false;
+	return true;
+}
+
+bool QwtCompassScaleDraw_override_virtual_owned_label(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtCompassScaleDraw> slot_handle(slot);
+	MiqtVirtualQwtCompassScaleDraw* self_cast = dynamic_cast<MiqtVirtualQwtCompassScaleDraw*>( (QwtCompassScaleDraw*)(self) );
+	if (self_cast == nullptr) {
+		return false;
+	}
+
+	self_cast->handle__label = std::move(slot_handle);
+	self_cast->owns_return__label = true;
 	return true;
 }
 
@@ -506,6 +524,7 @@ public:
 
 	// cgo.Handle value for overwritten implementation
 	miqt_callback_handle<miqt_exec_callback_handle_release_QwtCompass> handle__scaleInnerRect;
+	bool owns_return__scaleInnerRect = false;
 
 	// Subclass to allow providing a Go implementation
 	virtual QRect scaleInnerRect() const override {
@@ -514,6 +533,10 @@ public:
 		}
 
 		QRect* callback_return_value = miqt_exec_callback_QwtCompass_scaleInnerRect(this, handle__scaleInnerRect.value());
+		std::unique_ptr<QRect> callback_return_value_owner;
+		if (owns_return__scaleInnerRect) {
+			callback_return_value_owner.reset(callback_return_value);
+		}
 		return *callback_return_value;
 	}
 
@@ -521,6 +544,7 @@ public:
 
 	// cgo.Handle value for overwritten implementation
 	miqt_callback_handle<miqt_exec_callback_handle_release_QwtCompass> handle__sizeHint;
+	bool owns_return__sizeHint = false;
 
 	// Subclass to allow providing a Go implementation
 	virtual QSize sizeHint() const override {
@@ -529,6 +553,10 @@ public:
 		}
 
 		QSize* callback_return_value = miqt_exec_callback_QwtCompass_sizeHint(this, handle__sizeHint.value());
+		std::unique_ptr<QSize> callback_return_value_owner;
+		if (owns_return__sizeHint) {
+			callback_return_value_owner.reset(callback_return_value);
+		}
 		return *callback_return_value;
 	}
 
@@ -536,6 +564,7 @@ public:
 
 	// cgo.Handle value for overwritten implementation
 	miqt_callback_handle<miqt_exec_callback_handle_release_QwtCompass> handle__minimumSizeHint;
+	bool owns_return__minimumSizeHint = false;
 
 	// Subclass to allow providing a Go implementation
 	virtual QSize minimumSizeHint() const override {
@@ -544,6 +573,10 @@ public:
 		}
 
 		QSize* callback_return_value = miqt_exec_callback_QwtCompass_minimumSizeHint(this, handle__minimumSizeHint.value());
+		std::unique_ptr<QSize> callback_return_value_owner;
+		if (owns_return__minimumSizeHint) {
+			callback_return_value_owner.reset(callback_return_value);
+		}
 		return *callback_return_value;
 	}
 
@@ -1322,6 +1355,7 @@ public:
 
 	// cgo.Handle value for overwritten implementation
 	miqt_callback_handle<miqt_exec_callback_handle_release_QwtCompass> handle__inputMethodQuery;
+	bool owns_return__inputMethodQuery = false;
 
 	// Subclass to allow providing a Go implementation
 	virtual QVariant inputMethodQuery(Qt::InputMethodQuery param1) const override {
@@ -1332,6 +1366,10 @@ public:
 		Qt::InputMethodQuery param1_ret = param1;
 		int sigval1 = static_cast<int>(param1_ret);
 		QVariant* callback_return_value = miqt_exec_callback_QwtCompass_inputMethodQuery(this, handle__inputMethodQuery.value(), sigval1);
+		std::unique_ptr<QVariant> callback_return_value_owner;
+		if (owns_return__inputMethodQuery) {
+			callback_return_value_owner.reset(callback_return_value);
+		}
 		return *callback_return_value;
 	}
 
@@ -1643,6 +1681,19 @@ bool QwtCompass_override_virtual_scaleInnerRect(void* self, intptr_t slot) {
 	}
 
 	self_cast->handle__scaleInnerRect = std::move(slot_handle);
+	self_cast->owns_return__scaleInnerRect = false;
+	return true;
+}
+
+bool QwtCompass_override_virtual_owned_scaleInnerRect(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtCompass> slot_handle(slot);
+	MiqtVirtualQwtCompass* self_cast = dynamic_cast<MiqtVirtualQwtCompass*>( (QwtCompass*)(self) );
+	if (self_cast == nullptr) {
+		return false;
+	}
+
+	self_cast->handle__scaleInnerRect = std::move(slot_handle);
+	self_cast->owns_return__scaleInnerRect = true;
 	return true;
 }
 
@@ -1658,6 +1709,19 @@ bool QwtCompass_override_virtual_sizeHint(void* self, intptr_t slot) {
 	}
 
 	self_cast->handle__sizeHint = std::move(slot_handle);
+	self_cast->owns_return__sizeHint = false;
+	return true;
+}
+
+bool QwtCompass_override_virtual_owned_sizeHint(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtCompass> slot_handle(slot);
+	MiqtVirtualQwtCompass* self_cast = dynamic_cast<MiqtVirtualQwtCompass*>( (QwtCompass*)(self) );
+	if (self_cast == nullptr) {
+		return false;
+	}
+
+	self_cast->handle__sizeHint = std::move(slot_handle);
+	self_cast->owns_return__sizeHint = true;
 	return true;
 }
 
@@ -1673,6 +1737,19 @@ bool QwtCompass_override_virtual_minimumSizeHint(void* self, intptr_t slot) {
 	}
 
 	self_cast->handle__minimumSizeHint = std::move(slot_handle);
+	self_cast->owns_return__minimumSizeHint = false;
+	return true;
+}
+
+bool QwtCompass_override_virtual_owned_minimumSizeHint(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtCompass> slot_handle(slot);
+	MiqtVirtualQwtCompass* self_cast = dynamic_cast<MiqtVirtualQwtCompass*>( (QwtCompass*)(self) );
+	if (self_cast == nullptr) {
+		return false;
+	}
+
+	self_cast->handle__minimumSizeHint = std::move(slot_handle);
+	self_cast->owns_return__minimumSizeHint = true;
 	return true;
 }
 
@@ -2364,6 +2441,19 @@ bool QwtCompass_override_virtual_inputMethodQuery(void* self, intptr_t slot) {
 	}
 
 	self_cast->handle__inputMethodQuery = std::move(slot_handle);
+	self_cast->owns_return__inputMethodQuery = false;
+	return true;
+}
+
+bool QwtCompass_override_virtual_owned_inputMethodQuery(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtCompass> slot_handle(slot);
+	MiqtVirtualQwtCompass* self_cast = dynamic_cast<MiqtVirtualQwtCompass*>( (QwtCompass*)(self) );
+	if (self_cast == nullptr) {
+		return false;
+	}
+
+	self_cast->handle__inputMethodQuery = std::move(slot_handle);
+	self_cast->owns_return__inputMethodQuery = true;
 	return true;
 }
 

@@ -61,6 +61,7 @@ void QLineSeries_virtualbase_setBrush(void* self, QBrush* brush);
 bool QLineSeries_override_virtual_setColor(void* self, intptr_t slot);
 void QLineSeries_virtualbase_setColor(void* self, QColor* color);
 bool QLineSeries_override_virtual_color(void* self, intptr_t slot);
+bool QLineSeries_override_virtual_owned_color(void* self, intptr_t slot);
 QColor* QLineSeries_virtualbase_color(const void* self);
 bool QLineSeries_override_virtual_event(void* self, intptr_t slot);
 bool QLineSeries_virtualbase_event(void* self, QEvent* event);
