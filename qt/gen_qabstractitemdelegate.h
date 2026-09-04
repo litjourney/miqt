@@ -84,6 +84,7 @@ void* QAbstractItemDelegate_connect_closeEditor2(QAbstractItemDelegate* self, in
 bool QAbstractItemDelegate_override_virtual_paint(void* self, intptr_t slot);
 void QAbstractItemDelegate_virtualbase_paint(const void* self, QPainter* painter, QStyleOptionViewItem* option, QModelIndex* index);
 bool QAbstractItemDelegate_override_virtual_sizeHint(void* self, intptr_t slot);
+bool QAbstractItemDelegate_override_virtual_owned_sizeHint(void* self, intptr_t slot);
 QSize* QAbstractItemDelegate_virtualbase_sizeHint(const void* self, QStyleOptionViewItem* option, QModelIndex* index);
 bool QAbstractItemDelegate_override_virtual_createEditor(void* self, intptr_t slot);
 QWidget* QAbstractItemDelegate_virtualbase_createEditor(const void* self, QWidget* parent, QStyleOptionViewItem* option, QModelIndex* index);

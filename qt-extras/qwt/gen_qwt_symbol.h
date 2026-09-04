@@ -84,6 +84,7 @@ void QwtSymbol_setPen3(QwtSymbol* self, QColor* param1, double width, int param3
 bool QwtSymbol_override_virtual_setColor(void* self, intptr_t slot);
 void QwtSymbol_virtualbase_setColor(void* self, QColor* color);
 bool QwtSymbol_override_virtual_boundingRect(void* self, intptr_t slot);
+bool QwtSymbol_override_virtual_owned_boundingRect(void* self, intptr_t slot);
 QRect* QwtSymbol_virtualbase_boundingRect(const void* self);
 bool QwtSymbol_override_virtual_renderSymbols(void* self, intptr_t slot);
 void QwtSymbol_virtualbase_renderSymbols(const void* self, QPainter* param1, QPointF* param2, int numPoints);

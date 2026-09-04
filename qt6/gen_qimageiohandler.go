@@ -287,10 +287,16 @@ func (this *QImageIOHandler) callVirtualBase_Option(option QImageIOHandler__Imag
 	return _goptr
 
 }
+
+type miqtVirtualCallback_QImageIOHandler_option struct {
+	callback   func(super func(option QImageIOHandler__ImageOption) *QVariant, option QImageIOHandler__ImageOption) *QVariant
+	ownsReturn bool
+}
+
 func (this *QImageIOHandler) OnOption(slot func(super func(option QImageIOHandler__ImageOption) *QVariant, option QImageIOHandler__ImageOption) *QVariant) {
 	var slotHandle C.intptr_t
 	if slot != nil {
-		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QImageIOHandler_option{callback: slot}))
 	}
 	ok := C.QImageIOHandler_override_virtual_option(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
@@ -298,17 +304,34 @@ func (this *QImageIOHandler) OnOption(slot func(super func(option QImageIOHandle
 	}
 }
 
+// OnOptionOwned installs a virtual override that transfers
+// ownership of each non-nil returned Qt value object to C++.
+func (this *QImageIOHandler) OnOptionOwned(slot func(super func(option QImageIOHandler__ImageOption) *QVariant, option QImageIOHandler__ImageOption) *QVariant) {
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QImageIOHandler_option{callback: slot, ownsReturn: true}))
+	}
+	ok := C.QImageIOHandler_override_virtual_owned_option(unsafe.Pointer(this.h), slotHandle)
+	if !ok {
+		panic("miqt: can only override virtual methods for directly constructed types")
+	}
+}
+
 //export miqt_exec_callback_QImageIOHandler_option
 func miqt_exec_callback_QImageIOHandler_option(self *C.QImageIOHandler, cb C.intptr_t, option C.int) *C.QVariant {
-	gofunc, ok := cgo.Handle(cb).Value().(func(super func(option QImageIOHandler__ImageOption) *QVariant, option QImageIOHandler__ImageOption) *QVariant)
+	callbackData, ok := cgo.Handle(cb).Value().(miqtVirtualCallback_QImageIOHandler_option)
 	if !ok {
 		panic("miqt: callback of non-callback type (heap corruption?)")
 	}
+	gofunc := callbackData.callback
 
 	// Convert all CABI parameters to Go parameters
 	slotval1 := (QImageIOHandler__ImageOption)(option)
 
 	virtualReturn := gofunc((&QImageIOHandler{h: self}).callVirtualBase_Option, slotval1)
+	if callbackData.ownsReturn && virtualReturn != nil {
+		runtime.SetFinalizer(virtualReturn, nil)
+	}
 
 	return virtualReturn.cPointer()
 
@@ -562,10 +585,16 @@ func (this *QImageIOHandler) callVirtualBase_CurrentImageRect() *QRect {
 	return _goptr
 
 }
+
+type miqtVirtualCallback_QImageIOHandler_currentImageRect struct {
+	callback   func(super func() *QRect) *QRect
+	ownsReturn bool
+}
+
 func (this *QImageIOHandler) OnCurrentImageRect(slot func(super func() *QRect) *QRect) {
 	var slotHandle C.intptr_t
 	if slot != nil {
-		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QImageIOHandler_currentImageRect{callback: slot}))
 	}
 	ok := C.QImageIOHandler_override_virtual_currentImageRect(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
@@ -573,14 +602,31 @@ func (this *QImageIOHandler) OnCurrentImageRect(slot func(super func() *QRect) *
 	}
 }
 
+// OnCurrentImageRectOwned installs a virtual override that transfers
+// ownership of each non-nil returned Qt value object to C++.
+func (this *QImageIOHandler) OnCurrentImageRectOwned(slot func(super func() *QRect) *QRect) {
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QImageIOHandler_currentImageRect{callback: slot, ownsReturn: true}))
+	}
+	ok := C.QImageIOHandler_override_virtual_owned_currentImageRect(unsafe.Pointer(this.h), slotHandle)
+	if !ok {
+		panic("miqt: can only override virtual methods for directly constructed types")
+	}
+}
+
 //export miqt_exec_callback_QImageIOHandler_currentImageRect
 func miqt_exec_callback_QImageIOHandler_currentImageRect(self *C.QImageIOHandler, cb C.intptr_t) *C.QRect {
-	gofunc, ok := cgo.Handle(cb).Value().(func(super func() *QRect) *QRect)
+	callbackData, ok := cgo.Handle(cb).Value().(miqtVirtualCallback_QImageIOHandler_currentImageRect)
 	if !ok {
 		panic("miqt: callback of non-callback type (heap corruption?)")
 	}
+	gofunc := callbackData.callback
 
 	virtualReturn := gofunc((&QImageIOHandler{h: self}).callVirtualBase_CurrentImageRect)
+	if callbackData.ownsReturn && virtualReturn != nil {
+		runtime.SetFinalizer(virtualReturn, nil)
+	}
 
 	return virtualReturn.cPointer()
 

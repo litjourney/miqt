@@ -5202,10 +5202,16 @@ func (this *QsciScintilla) callVirtualBase_InputMethodQuery(query qt.InputMethod
 	return _goptr
 
 }
+
+type miqtVirtualCallback_QsciScintilla_inputMethodQuery struct {
+	callback   func(super func(query qt.InputMethodQuery) *qt.QVariant, query qt.InputMethodQuery) *qt.QVariant
+	ownsReturn bool
+}
+
 func (this *QsciScintilla) OnInputMethodQuery(slot func(super func(query qt.InputMethodQuery) *qt.QVariant, query qt.InputMethodQuery) *qt.QVariant) {
 	var slotHandle C.intptr_t
 	if slot != nil {
-		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QsciScintilla_inputMethodQuery{callback: slot}))
 	}
 	ok := C.QsciScintilla_override_virtual_inputMethodQuery(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
@@ -5213,17 +5219,34 @@ func (this *QsciScintilla) OnInputMethodQuery(slot func(super func(query qt.Inpu
 	}
 }
 
+// OnInputMethodQueryOwned installs a virtual override that transfers
+// ownership of each non-nil returned Qt value object to C++.
+func (this *QsciScintilla) OnInputMethodQueryOwned(slot func(super func(query qt.InputMethodQuery) *qt.QVariant, query qt.InputMethodQuery) *qt.QVariant) {
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QsciScintilla_inputMethodQuery{callback: slot, ownsReturn: true}))
+	}
+	ok := C.QsciScintilla_override_virtual_owned_inputMethodQuery(unsafe.Pointer(this.h), slotHandle)
+	if !ok {
+		panic("miqt: can only override virtual methods for directly constructed types")
+	}
+}
+
 //export miqt_exec_callback_QsciScintilla_inputMethodQuery
 func miqt_exec_callback_QsciScintilla_inputMethodQuery(self *C.QsciScintilla, cb C.intptr_t, query C.int) *C.QVariant {
-	gofunc, ok := cgo.Handle(cb).Value().(func(super func(query qt.InputMethodQuery) *qt.QVariant, query qt.InputMethodQuery) *qt.QVariant)
+	callbackData, ok := cgo.Handle(cb).Value().(miqtVirtualCallback_QsciScintilla_inputMethodQuery)
 	if !ok {
 		panic("miqt: callback of non-callback type (heap corruption?)")
 	}
+	gofunc := callbackData.callback
 
 	// Convert all CABI parameters to Go parameters
 	slotval1 := (qt.InputMethodQuery)(query)
 
 	virtualReturn := gofunc((&QsciScintilla{h: self}).callVirtualBase_InputMethodQuery, slotval1)
+	if callbackData.ownsReturn && virtualReturn != nil {
+		runtime.SetFinalizer(virtualReturn, nil)
+	}
 
 	return (*C.QVariant)(virtualReturn.UnsafePointer())
 
@@ -5448,10 +5471,16 @@ func (this *QsciScintilla) callVirtualBase_MinimumSizeHint() *qt.QSize {
 	return _goptr
 
 }
+
+type miqtVirtualCallback_QsciScintilla_minimumSizeHint struct {
+	callback   func(super func() *qt.QSize) *qt.QSize
+	ownsReturn bool
+}
+
 func (this *QsciScintilla) OnMinimumSizeHint(slot func(super func() *qt.QSize) *qt.QSize) {
 	var slotHandle C.intptr_t
 	if slot != nil {
-		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QsciScintilla_minimumSizeHint{callback: slot}))
 	}
 	ok := C.QsciScintilla_override_virtual_minimumSizeHint(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
@@ -5459,14 +5488,31 @@ func (this *QsciScintilla) OnMinimumSizeHint(slot func(super func() *qt.QSize) *
 	}
 }
 
+// OnMinimumSizeHintOwned installs a virtual override that transfers
+// ownership of each non-nil returned Qt value object to C++.
+func (this *QsciScintilla) OnMinimumSizeHintOwned(slot func(super func() *qt.QSize) *qt.QSize) {
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QsciScintilla_minimumSizeHint{callback: slot, ownsReturn: true}))
+	}
+	ok := C.QsciScintilla_override_virtual_owned_minimumSizeHint(unsafe.Pointer(this.h), slotHandle)
+	if !ok {
+		panic("miqt: can only override virtual methods for directly constructed types")
+	}
+}
+
 //export miqt_exec_callback_QsciScintilla_minimumSizeHint
 func miqt_exec_callback_QsciScintilla_minimumSizeHint(self *C.QsciScintilla, cb C.intptr_t) *C.QSize {
-	gofunc, ok := cgo.Handle(cb).Value().(func(super func() *qt.QSize) *qt.QSize)
+	callbackData, ok := cgo.Handle(cb).Value().(miqtVirtualCallback_QsciScintilla_minimumSizeHint)
 	if !ok {
 		panic("miqt: callback of non-callback type (heap corruption?)")
 	}
+	gofunc := callbackData.callback
 
 	virtualReturn := gofunc((&QsciScintilla{h: self}).callVirtualBase_MinimumSizeHint)
+	if callbackData.ownsReturn && virtualReturn != nil {
+		runtime.SetFinalizer(virtualReturn, nil)
+	}
 
 	return (*C.QSize)(virtualReturn.UnsafePointer())
 
@@ -5479,10 +5525,16 @@ func (this *QsciScintilla) callVirtualBase_SizeHint() *qt.QSize {
 	return _goptr
 
 }
+
+type miqtVirtualCallback_QsciScintilla_sizeHint struct {
+	callback   func(super func() *qt.QSize) *qt.QSize
+	ownsReturn bool
+}
+
 func (this *QsciScintilla) OnSizeHint(slot func(super func() *qt.QSize) *qt.QSize) {
 	var slotHandle C.intptr_t
 	if slot != nil {
-		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QsciScintilla_sizeHint{callback: slot}))
 	}
 	ok := C.QsciScintilla_override_virtual_sizeHint(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
@@ -5490,14 +5542,31 @@ func (this *QsciScintilla) OnSizeHint(slot func(super func() *qt.QSize) *qt.QSiz
 	}
 }
 
+// OnSizeHintOwned installs a virtual override that transfers
+// ownership of each non-nil returned Qt value object to C++.
+func (this *QsciScintilla) OnSizeHintOwned(slot func(super func() *qt.QSize) *qt.QSize) {
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QsciScintilla_sizeHint{callback: slot, ownsReturn: true}))
+	}
+	ok := C.QsciScintilla_override_virtual_owned_sizeHint(unsafe.Pointer(this.h), slotHandle)
+	if !ok {
+		panic("miqt: can only override virtual methods for directly constructed types")
+	}
+}
+
 //export miqt_exec_callback_QsciScintilla_sizeHint
 func miqt_exec_callback_QsciScintilla_sizeHint(self *C.QsciScintilla, cb C.intptr_t) *C.QSize {
-	gofunc, ok := cgo.Handle(cb).Value().(func(super func() *qt.QSize) *qt.QSize)
+	callbackData, ok := cgo.Handle(cb).Value().(miqtVirtualCallback_QsciScintilla_sizeHint)
 	if !ok {
 		panic("miqt: callback of non-callback type (heap corruption?)")
 	}
+	gofunc := callbackData.callback
 
 	virtualReturn := gofunc((&QsciScintilla{h: self}).callVirtualBase_SizeHint)
+	if callbackData.ownsReturn && virtualReturn != nil {
+		runtime.SetFinalizer(virtualReturn, nil)
+	}
 
 	return (*C.QSize)(virtualReturn.UnsafePointer())
 
@@ -5606,10 +5675,16 @@ func (this *QsciScintilla) callVirtualBase_ViewportSizeHint() *qt.QSize {
 	return _goptr
 
 }
+
+type miqtVirtualCallback_QsciScintilla_viewportSizeHint struct {
+	callback   func(super func() *qt.QSize) *qt.QSize
+	ownsReturn bool
+}
+
 func (this *QsciScintilla) OnViewportSizeHint(slot func(super func() *qt.QSize) *qt.QSize) {
 	var slotHandle C.intptr_t
 	if slot != nil {
-		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QsciScintilla_viewportSizeHint{callback: slot}))
 	}
 	ok := C.QsciScintilla_override_virtual_viewportSizeHint(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
@@ -5617,14 +5692,31 @@ func (this *QsciScintilla) OnViewportSizeHint(slot func(super func() *qt.QSize) 
 	}
 }
 
+// OnViewportSizeHintOwned installs a virtual override that transfers
+// ownership of each non-nil returned Qt value object to C++.
+func (this *QsciScintilla) OnViewportSizeHintOwned(slot func(super func() *qt.QSize) *qt.QSize) {
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QsciScintilla_viewportSizeHint{callback: slot, ownsReturn: true}))
+	}
+	ok := C.QsciScintilla_override_virtual_owned_viewportSizeHint(unsafe.Pointer(this.h), slotHandle)
+	if !ok {
+		panic("miqt: can only override virtual methods for directly constructed types")
+	}
+}
+
 //export miqt_exec_callback_QsciScintilla_viewportSizeHint
 func miqt_exec_callback_QsciScintilla_viewportSizeHint(self *C.QsciScintilla, cb C.intptr_t) *C.QSize {
-	gofunc, ok := cgo.Handle(cb).Value().(func(super func() *qt.QSize) *qt.QSize)
+	callbackData, ok := cgo.Handle(cb).Value().(miqtVirtualCallback_QsciScintilla_viewportSizeHint)
 	if !ok {
 		panic("miqt: callback of non-callback type (heap corruption?)")
 	}
+	gofunc := callbackData.callback
 
 	virtualReturn := gofunc((&QsciScintilla{h: self}).callVirtualBase_ViewportSizeHint)
+	if callbackData.ownsReturn && virtualReturn != nil {
+		runtime.SetFinalizer(virtualReturn, nil)
+	}
 
 	return (*C.QSize)(virtualReturn.UnsafePointer())
 

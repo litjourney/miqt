@@ -491,10 +491,16 @@ func miqt_exec_callback_QDesignerWidgetDataBaseItemInterface_setIncludeFile(self
 	gofunc(slotval1)
 
 }
+
+type miqtVirtualCallback_QDesignerWidgetDataBaseItemInterface_icon struct {
+	callback   func() *qt6.QIcon
+	ownsReturn bool
+}
+
 func (this *QDesignerWidgetDataBaseItemInterface) OnIcon(slot func() *qt6.QIcon) {
 	var slotHandle C.intptr_t
 	if slot != nil {
-		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QDesignerWidgetDataBaseItemInterface_icon{callback: slot}))
 	}
 	ok := C.QDesignerWidgetDataBaseItemInterface_override_virtual_icon(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
@@ -502,14 +508,31 @@ func (this *QDesignerWidgetDataBaseItemInterface) OnIcon(slot func() *qt6.QIcon)
 	}
 }
 
+// OnIconOwned installs a virtual override that transfers
+// ownership of each non-nil returned Qt value object to C++.
+func (this *QDesignerWidgetDataBaseItemInterface) OnIconOwned(slot func() *qt6.QIcon) {
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QDesignerWidgetDataBaseItemInterface_icon{callback: slot, ownsReturn: true}))
+	}
+	ok := C.QDesignerWidgetDataBaseItemInterface_override_virtual_owned_icon(unsafe.Pointer(this.h), slotHandle)
+	if !ok {
+		panic("miqt: can only override virtual methods for directly constructed types")
+	}
+}
+
 //export miqt_exec_callback_QDesignerWidgetDataBaseItemInterface_icon
 func miqt_exec_callback_QDesignerWidgetDataBaseItemInterface_icon(self *C.QDesignerWidgetDataBaseItemInterface, cb C.intptr_t) *C.QIcon {
-	gofunc, ok := cgo.Handle(cb).Value().(func() *qt6.QIcon)
+	callbackData, ok := cgo.Handle(cb).Value().(miqtVirtualCallback_QDesignerWidgetDataBaseItemInterface_icon)
 	if !ok {
 		panic("miqt: callback of non-callback type (heap corruption?)")
 	}
+	gofunc := callbackData.callback
 
 	virtualReturn := gofunc()
+	if callbackData.ownsReturn && virtualReturn != nil {
+		runtime.SetFinalizer(virtualReturn, nil)
+	}
 
 	return (*C.QIcon)(virtualReturn.UnsafePointer())
 

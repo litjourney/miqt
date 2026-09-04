@@ -1381,10 +1381,16 @@ func (this *QAbstractItemModel) IsSignalConnected(signal *QMetaMethod) bool {
 	return _method_ret
 
 }
+
+type miqtVirtualCallback_QAbstractItemModel_index struct {
+	callback   func(row int, column int, parent *QModelIndex) *QModelIndex
+	ownsReturn bool
+}
+
 func (this *QAbstractItemModel) OnIndex(slot func(row int, column int, parent *QModelIndex) *QModelIndex) {
 	var slotHandle C.intptr_t
 	if slot != nil {
-		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QAbstractItemModel_index{callback: slot}))
 	}
 	ok := C.QAbstractItemModel_override_virtual_index(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
@@ -1392,12 +1398,26 @@ func (this *QAbstractItemModel) OnIndex(slot func(row int, column int, parent *Q
 	}
 }
 
+// OnIndexOwned installs a virtual override that transfers
+// ownership of each non-nil returned Qt value object to C++.
+func (this *QAbstractItemModel) OnIndexOwned(slot func(row int, column int, parent *QModelIndex) *QModelIndex) {
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QAbstractItemModel_index{callback: slot, ownsReturn: true}))
+	}
+	ok := C.QAbstractItemModel_override_virtual_owned_index(unsafe.Pointer(this.h), slotHandle)
+	if !ok {
+		panic("miqt: can only override virtual methods for directly constructed types")
+	}
+}
+
 //export miqt_exec_callback_QAbstractItemModel_index
 func miqt_exec_callback_QAbstractItemModel_index(self *C.QAbstractItemModel, cb C.intptr_t, row C.int, column C.int, parent *C.QModelIndex) *C.QModelIndex {
-	gofunc, ok := cgo.Handle(cb).Value().(func(row int, column int, parent *QModelIndex) *QModelIndex)
+	callbackData, ok := cgo.Handle(cb).Value().(miqtVirtualCallback_QAbstractItemModel_index)
 	if !ok {
 		panic("miqt: callback of non-callback type (heap corruption?)")
 	}
+	gofunc := callbackData.callback
 
 	// Convert all CABI parameters to Go parameters
 	slotval1 := (int)(row)
@@ -1407,14 +1427,23 @@ func miqt_exec_callback_QAbstractItemModel_index(self *C.QAbstractItemModel, cb 
 	slotval3 := newQModelIndex(parent)
 
 	virtualReturn := gofunc(slotval1, slotval2, slotval3)
+	if callbackData.ownsReturn && virtualReturn != nil {
+		runtime.SetFinalizer(virtualReturn, nil)
+	}
 
 	return virtualReturn.cPointer()
 
 }
+
+type miqtVirtualCallback_QAbstractItemModel_parent struct {
+	callback   func(child *QModelIndex) *QModelIndex
+	ownsReturn bool
+}
+
 func (this *QAbstractItemModel) OnParent(slot func(child *QModelIndex) *QModelIndex) {
 	var slotHandle C.intptr_t
 	if slot != nil {
-		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QAbstractItemModel_parent{callback: slot}))
 	}
 	ok := C.QAbstractItemModel_override_virtual_parent(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
@@ -1422,17 +1451,34 @@ func (this *QAbstractItemModel) OnParent(slot func(child *QModelIndex) *QModelIn
 	}
 }
 
+// OnParentOwned installs a virtual override that transfers
+// ownership of each non-nil returned Qt value object to C++.
+func (this *QAbstractItemModel) OnParentOwned(slot func(child *QModelIndex) *QModelIndex) {
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QAbstractItemModel_parent{callback: slot, ownsReturn: true}))
+	}
+	ok := C.QAbstractItemModel_override_virtual_owned_parent(unsafe.Pointer(this.h), slotHandle)
+	if !ok {
+		panic("miqt: can only override virtual methods for directly constructed types")
+	}
+}
+
 //export miqt_exec_callback_QAbstractItemModel_parent
 func miqt_exec_callback_QAbstractItemModel_parent(self *C.QAbstractItemModel, cb C.intptr_t, child *C.QModelIndex) *C.QModelIndex {
-	gofunc, ok := cgo.Handle(cb).Value().(func(child *QModelIndex) *QModelIndex)
+	callbackData, ok := cgo.Handle(cb).Value().(miqtVirtualCallback_QAbstractItemModel_parent)
 	if !ok {
 		panic("miqt: callback of non-callback type (heap corruption?)")
 	}
+	gofunc := callbackData.callback
 
 	// Convert all CABI parameters to Go parameters
 	slotval1 := newQModelIndex(child)
 
 	virtualReturn := gofunc(slotval1)
+	if callbackData.ownsReturn && virtualReturn != nil {
+		runtime.SetFinalizer(virtualReturn, nil)
+	}
 
 	return virtualReturn.cPointer()
 
@@ -1445,10 +1491,16 @@ func (this *QAbstractItemModel) callVirtualBase_Sibling(row int, column int, idx
 	return _goptr
 
 }
+
+type miqtVirtualCallback_QAbstractItemModel_sibling struct {
+	callback   func(super func(row int, column int, idx *QModelIndex) *QModelIndex, row int, column int, idx *QModelIndex) *QModelIndex
+	ownsReturn bool
+}
+
 func (this *QAbstractItemModel) OnSibling(slot func(super func(row int, column int, idx *QModelIndex) *QModelIndex, row int, column int, idx *QModelIndex) *QModelIndex) {
 	var slotHandle C.intptr_t
 	if slot != nil {
-		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QAbstractItemModel_sibling{callback: slot}))
 	}
 	ok := C.QAbstractItemModel_override_virtual_sibling(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
@@ -1456,12 +1508,26 @@ func (this *QAbstractItemModel) OnSibling(slot func(super func(row int, column i
 	}
 }
 
+// OnSiblingOwned installs a virtual override that transfers
+// ownership of each non-nil returned Qt value object to C++.
+func (this *QAbstractItemModel) OnSiblingOwned(slot func(super func(row int, column int, idx *QModelIndex) *QModelIndex, row int, column int, idx *QModelIndex) *QModelIndex) {
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QAbstractItemModel_sibling{callback: slot, ownsReturn: true}))
+	}
+	ok := C.QAbstractItemModel_override_virtual_owned_sibling(unsafe.Pointer(this.h), slotHandle)
+	if !ok {
+		panic("miqt: can only override virtual methods for directly constructed types")
+	}
+}
+
 //export miqt_exec_callback_QAbstractItemModel_sibling
 func miqt_exec_callback_QAbstractItemModel_sibling(self *C.QAbstractItemModel, cb C.intptr_t, row C.int, column C.int, idx *C.QModelIndex) *C.QModelIndex {
-	gofunc, ok := cgo.Handle(cb).Value().(func(super func(row int, column int, idx *QModelIndex) *QModelIndex, row int, column int, idx *QModelIndex) *QModelIndex)
+	callbackData, ok := cgo.Handle(cb).Value().(miqtVirtualCallback_QAbstractItemModel_sibling)
 	if !ok {
 		panic("miqt: callback of non-callback type (heap corruption?)")
 	}
+	gofunc := callbackData.callback
 
 	// Convert all CABI parameters to Go parameters
 	slotval1 := (int)(row)
@@ -1471,6 +1537,9 @@ func miqt_exec_callback_QAbstractItemModel_sibling(self *C.QAbstractItemModel, c
 	slotval3 := newQModelIndex(idx)
 
 	virtualReturn := gofunc((&QAbstractItemModel{h: self}).callVirtualBase_Sibling, slotval1, slotval2, slotval3)
+	if callbackData.ownsReturn && virtualReturn != nil {
+		runtime.SetFinalizer(virtualReturn, nil)
+	}
 
 	return virtualReturn.cPointer()
 
@@ -1559,10 +1628,16 @@ func miqt_exec_callback_QAbstractItemModel_hasChildren(self *C.QAbstractItemMode
 	return (C.bool)(virtualReturn)
 
 }
+
+type miqtVirtualCallback_QAbstractItemModel_data struct {
+	callback   func(index *QModelIndex, role int) *QVariant
+	ownsReturn bool
+}
+
 func (this *QAbstractItemModel) OnData(slot func(index *QModelIndex, role int) *QVariant) {
 	var slotHandle C.intptr_t
 	if slot != nil {
-		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QAbstractItemModel_data{callback: slot}))
 	}
 	ok := C.QAbstractItemModel_override_virtual_data(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
@@ -1570,12 +1645,26 @@ func (this *QAbstractItemModel) OnData(slot func(index *QModelIndex, role int) *
 	}
 }
 
+// OnDataOwned installs a virtual override that transfers
+// ownership of each non-nil returned Qt value object to C++.
+func (this *QAbstractItemModel) OnDataOwned(slot func(index *QModelIndex, role int) *QVariant) {
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QAbstractItemModel_data{callback: slot, ownsReturn: true}))
+	}
+	ok := C.QAbstractItemModel_override_virtual_owned_data(unsafe.Pointer(this.h), slotHandle)
+	if !ok {
+		panic("miqt: can only override virtual methods for directly constructed types")
+	}
+}
+
 //export miqt_exec_callback_QAbstractItemModel_data
 func miqt_exec_callback_QAbstractItemModel_data(self *C.QAbstractItemModel, cb C.intptr_t, index *C.QModelIndex, role C.int) *C.QVariant {
-	gofunc, ok := cgo.Handle(cb).Value().(func(index *QModelIndex, role int) *QVariant)
+	callbackData, ok := cgo.Handle(cb).Value().(miqtVirtualCallback_QAbstractItemModel_data)
 	if !ok {
 		panic("miqt: callback of non-callback type (heap corruption?)")
 	}
+	gofunc := callbackData.callback
 
 	// Convert all CABI parameters to Go parameters
 	slotval1 := newQModelIndex(index)
@@ -1583,6 +1672,9 @@ func miqt_exec_callback_QAbstractItemModel_data(self *C.QAbstractItemModel, cb C
 	slotval2 := (int)(role)
 
 	virtualReturn := gofunc(slotval1, slotval2)
+	if callbackData.ownsReturn && virtualReturn != nil {
+		runtime.SetFinalizer(virtualReturn, nil)
+	}
 
 	return virtualReturn.cPointer()
 
@@ -1631,10 +1723,16 @@ func (this *QAbstractItemModel) callVirtualBase_HeaderData(section int, orientat
 	return _goptr
 
 }
+
+type miqtVirtualCallback_QAbstractItemModel_headerData struct {
+	callback   func(super func(section int, orientation Orientation, role int) *QVariant, section int, orientation Orientation, role int) *QVariant
+	ownsReturn bool
+}
+
 func (this *QAbstractItemModel) OnHeaderData(slot func(super func(section int, orientation Orientation, role int) *QVariant, section int, orientation Orientation, role int) *QVariant) {
 	var slotHandle C.intptr_t
 	if slot != nil {
-		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QAbstractItemModel_headerData{callback: slot}))
 	}
 	ok := C.QAbstractItemModel_override_virtual_headerData(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
@@ -1642,12 +1740,26 @@ func (this *QAbstractItemModel) OnHeaderData(slot func(super func(section int, o
 	}
 }
 
+// OnHeaderDataOwned installs a virtual override that transfers
+// ownership of each non-nil returned Qt value object to C++.
+func (this *QAbstractItemModel) OnHeaderDataOwned(slot func(super func(section int, orientation Orientation, role int) *QVariant, section int, orientation Orientation, role int) *QVariant) {
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QAbstractItemModel_headerData{callback: slot, ownsReturn: true}))
+	}
+	ok := C.QAbstractItemModel_override_virtual_owned_headerData(unsafe.Pointer(this.h), slotHandle)
+	if !ok {
+		panic("miqt: can only override virtual methods for directly constructed types")
+	}
+}
+
 //export miqt_exec_callback_QAbstractItemModel_headerData
 func miqt_exec_callback_QAbstractItemModel_headerData(self *C.QAbstractItemModel, cb C.intptr_t, section C.int, orientation C.int, role C.int) *C.QVariant {
-	gofunc, ok := cgo.Handle(cb).Value().(func(super func(section int, orientation Orientation, role int) *QVariant, section int, orientation Orientation, role int) *QVariant)
+	callbackData, ok := cgo.Handle(cb).Value().(miqtVirtualCallback_QAbstractItemModel_headerData)
 	if !ok {
 		panic("miqt: callback of non-callback type (heap corruption?)")
 	}
+	gofunc := callbackData.callback
 
 	// Convert all CABI parameters to Go parameters
 	slotval1 := (int)(section)
@@ -1657,6 +1769,9 @@ func miqt_exec_callback_QAbstractItemModel_headerData(self *C.QAbstractItemModel
 	slotval3 := (int)(role)
 
 	virtualReturn := gofunc((&QAbstractItemModel{h: self}).callVirtualBase_HeaderData, slotval1, slotval2, slotval3)
+	if callbackData.ownsReturn && virtualReturn != nil {
+		runtime.SetFinalizer(virtualReturn, nil)
+	}
 
 	return virtualReturn.cPointer()
 
@@ -2407,10 +2522,16 @@ func (this *QAbstractItemModel) callVirtualBase_Buddy(index *QModelIndex) *QMode
 	return _goptr
 
 }
+
+type miqtVirtualCallback_QAbstractItemModel_buddy struct {
+	callback   func(super func(index *QModelIndex) *QModelIndex, index *QModelIndex) *QModelIndex
+	ownsReturn bool
+}
+
 func (this *QAbstractItemModel) OnBuddy(slot func(super func(index *QModelIndex) *QModelIndex, index *QModelIndex) *QModelIndex) {
 	var slotHandle C.intptr_t
 	if slot != nil {
-		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QAbstractItemModel_buddy{callback: slot}))
 	}
 	ok := C.QAbstractItemModel_override_virtual_buddy(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
@@ -2418,17 +2539,34 @@ func (this *QAbstractItemModel) OnBuddy(slot func(super func(index *QModelIndex)
 	}
 }
 
+// OnBuddyOwned installs a virtual override that transfers
+// ownership of each non-nil returned Qt value object to C++.
+func (this *QAbstractItemModel) OnBuddyOwned(slot func(super func(index *QModelIndex) *QModelIndex, index *QModelIndex) *QModelIndex) {
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QAbstractItemModel_buddy{callback: slot, ownsReturn: true}))
+	}
+	ok := C.QAbstractItemModel_override_virtual_owned_buddy(unsafe.Pointer(this.h), slotHandle)
+	if !ok {
+		panic("miqt: can only override virtual methods for directly constructed types")
+	}
+}
+
 //export miqt_exec_callback_QAbstractItemModel_buddy
 func miqt_exec_callback_QAbstractItemModel_buddy(self *C.QAbstractItemModel, cb C.intptr_t, index *C.QModelIndex) *C.QModelIndex {
-	gofunc, ok := cgo.Handle(cb).Value().(func(super func(index *QModelIndex) *QModelIndex, index *QModelIndex) *QModelIndex)
+	callbackData, ok := cgo.Handle(cb).Value().(miqtVirtualCallback_QAbstractItemModel_buddy)
 	if !ok {
 		panic("miqt: callback of non-callback type (heap corruption?)")
 	}
+	gofunc := callbackData.callback
 
 	// Convert all CABI parameters to Go parameters
 	slotval1 := newQModelIndex(index)
 
 	virtualReturn := gofunc((&QAbstractItemModel{h: self}).callVirtualBase_Buddy, slotval1)
+	if callbackData.ownsReturn && virtualReturn != nil {
+		runtime.SetFinalizer(virtualReturn, nil)
+	}
 
 	return virtualReturn.cPointer()
 
@@ -2494,10 +2632,16 @@ func (this *QAbstractItemModel) callVirtualBase_Span(index *QModelIndex) *QSize 
 	return _goptr
 
 }
+
+type miqtVirtualCallback_QAbstractItemModel_span struct {
+	callback   func(super func(index *QModelIndex) *QSize, index *QModelIndex) *QSize
+	ownsReturn bool
+}
+
 func (this *QAbstractItemModel) OnSpan(slot func(super func(index *QModelIndex) *QSize, index *QModelIndex) *QSize) {
 	var slotHandle C.intptr_t
 	if slot != nil {
-		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QAbstractItemModel_span{callback: slot}))
 	}
 	ok := C.QAbstractItemModel_override_virtual_span(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
@@ -2505,17 +2649,34 @@ func (this *QAbstractItemModel) OnSpan(slot func(super func(index *QModelIndex) 
 	}
 }
 
+// OnSpanOwned installs a virtual override that transfers
+// ownership of each non-nil returned Qt value object to C++.
+func (this *QAbstractItemModel) OnSpanOwned(slot func(super func(index *QModelIndex) *QSize, index *QModelIndex) *QSize) {
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QAbstractItemModel_span{callback: slot, ownsReturn: true}))
+	}
+	ok := C.QAbstractItemModel_override_virtual_owned_span(unsafe.Pointer(this.h), slotHandle)
+	if !ok {
+		panic("miqt: can only override virtual methods for directly constructed types")
+	}
+}
+
 //export miqt_exec_callback_QAbstractItemModel_span
 func miqt_exec_callback_QAbstractItemModel_span(self *C.QAbstractItemModel, cb C.intptr_t, index *C.QModelIndex) *C.QSize {
-	gofunc, ok := cgo.Handle(cb).Value().(func(super func(index *QModelIndex) *QSize, index *QModelIndex) *QSize)
+	callbackData, ok := cgo.Handle(cb).Value().(miqtVirtualCallback_QAbstractItemModel_span)
 	if !ok {
 		panic("miqt: callback of non-callback type (heap corruption?)")
 	}
+	gofunc := callbackData.callback
 
 	// Convert all CABI parameters to Go parameters
 	slotval1 := newQModelIndex(index)
 
 	virtualReturn := gofunc((&QAbstractItemModel{h: self}).callVirtualBase_Span, slotval1)
+	if callbackData.ownsReturn && virtualReturn != nil {
+		runtime.SetFinalizer(virtualReturn, nil)
+	}
 
 	return virtualReturn.cPointer()
 
@@ -3692,10 +3853,16 @@ func (this *QAbstractTableModel) callVirtualBase_Index(row int, column int, pare
 	return _goptr
 
 }
+
+type miqtVirtualCallback_QAbstractTableModel_index struct {
+	callback   func(super func(row int, column int, parent *QModelIndex) *QModelIndex, row int, column int, parent *QModelIndex) *QModelIndex
+	ownsReturn bool
+}
+
 func (this *QAbstractTableModel) OnIndex(slot func(super func(row int, column int, parent *QModelIndex) *QModelIndex, row int, column int, parent *QModelIndex) *QModelIndex) {
 	var slotHandle C.intptr_t
 	if slot != nil {
-		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QAbstractTableModel_index{callback: slot}))
 	}
 	ok := C.QAbstractTableModel_override_virtual_index(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
@@ -3703,12 +3870,26 @@ func (this *QAbstractTableModel) OnIndex(slot func(super func(row int, column in
 	}
 }
 
+// OnIndexOwned installs a virtual override that transfers
+// ownership of each non-nil returned Qt value object to C++.
+func (this *QAbstractTableModel) OnIndexOwned(slot func(super func(row int, column int, parent *QModelIndex) *QModelIndex, row int, column int, parent *QModelIndex) *QModelIndex) {
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QAbstractTableModel_index{callback: slot, ownsReturn: true}))
+	}
+	ok := C.QAbstractTableModel_override_virtual_owned_index(unsafe.Pointer(this.h), slotHandle)
+	if !ok {
+		panic("miqt: can only override virtual methods for directly constructed types")
+	}
+}
+
 //export miqt_exec_callback_QAbstractTableModel_index
 func miqt_exec_callback_QAbstractTableModel_index(self *C.QAbstractTableModel, cb C.intptr_t, row C.int, column C.int, parent *C.QModelIndex) *C.QModelIndex {
-	gofunc, ok := cgo.Handle(cb).Value().(func(super func(row int, column int, parent *QModelIndex) *QModelIndex, row int, column int, parent *QModelIndex) *QModelIndex)
+	callbackData, ok := cgo.Handle(cb).Value().(miqtVirtualCallback_QAbstractTableModel_index)
 	if !ok {
 		panic("miqt: callback of non-callback type (heap corruption?)")
 	}
+	gofunc := callbackData.callback
 
 	// Convert all CABI parameters to Go parameters
 	slotval1 := (int)(row)
@@ -3718,6 +3899,9 @@ func miqt_exec_callback_QAbstractTableModel_index(self *C.QAbstractTableModel, c
 	slotval3 := newQModelIndex(parent)
 
 	virtualReturn := gofunc((&QAbstractTableModel{h: self}).callVirtualBase_Index, slotval1, slotval2, slotval3)
+	if callbackData.ownsReturn && virtualReturn != nil {
+		runtime.SetFinalizer(virtualReturn, nil)
+	}
 
 	return virtualReturn.cPointer()
 
@@ -3730,10 +3914,16 @@ func (this *QAbstractTableModel) callVirtualBase_Sibling(row int, column int, id
 	return _goptr
 
 }
+
+type miqtVirtualCallback_QAbstractTableModel_sibling struct {
+	callback   func(super func(row int, column int, idx *QModelIndex) *QModelIndex, row int, column int, idx *QModelIndex) *QModelIndex
+	ownsReturn bool
+}
+
 func (this *QAbstractTableModel) OnSibling(slot func(super func(row int, column int, idx *QModelIndex) *QModelIndex, row int, column int, idx *QModelIndex) *QModelIndex) {
 	var slotHandle C.intptr_t
 	if slot != nil {
-		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QAbstractTableModel_sibling{callback: slot}))
 	}
 	ok := C.QAbstractTableModel_override_virtual_sibling(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
@@ -3741,12 +3931,26 @@ func (this *QAbstractTableModel) OnSibling(slot func(super func(row int, column 
 	}
 }
 
+// OnSiblingOwned installs a virtual override that transfers
+// ownership of each non-nil returned Qt value object to C++.
+func (this *QAbstractTableModel) OnSiblingOwned(slot func(super func(row int, column int, idx *QModelIndex) *QModelIndex, row int, column int, idx *QModelIndex) *QModelIndex) {
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QAbstractTableModel_sibling{callback: slot, ownsReturn: true}))
+	}
+	ok := C.QAbstractTableModel_override_virtual_owned_sibling(unsafe.Pointer(this.h), slotHandle)
+	if !ok {
+		panic("miqt: can only override virtual methods for directly constructed types")
+	}
+}
+
 //export miqt_exec_callback_QAbstractTableModel_sibling
 func miqt_exec_callback_QAbstractTableModel_sibling(self *C.QAbstractTableModel, cb C.intptr_t, row C.int, column C.int, idx *C.QModelIndex) *C.QModelIndex {
-	gofunc, ok := cgo.Handle(cb).Value().(func(super func(row int, column int, idx *QModelIndex) *QModelIndex, row int, column int, idx *QModelIndex) *QModelIndex)
+	callbackData, ok := cgo.Handle(cb).Value().(miqtVirtualCallback_QAbstractTableModel_sibling)
 	if !ok {
 		panic("miqt: callback of non-callback type (heap corruption?)")
 	}
+	gofunc := callbackData.callback
 
 	// Convert all CABI parameters to Go parameters
 	slotval1 := (int)(row)
@@ -3756,6 +3960,9 @@ func miqt_exec_callback_QAbstractTableModel_sibling(self *C.QAbstractTableModel,
 	slotval3 := newQModelIndex(idx)
 
 	virtualReturn := gofunc((&QAbstractTableModel{h: self}).callVirtualBase_Sibling, slotval1, slotval2, slotval3)
+	if callbackData.ownsReturn && virtualReturn != nil {
+		runtime.SetFinalizer(virtualReturn, nil)
+	}
 
 	return virtualReturn.cPointer()
 
@@ -3884,10 +4091,16 @@ func miqt_exec_callback_QAbstractTableModel_columnCount(self *C.QAbstractTableMo
 	return (C.int)(virtualReturn)
 
 }
+
+type miqtVirtualCallback_QAbstractTableModel_data struct {
+	callback   func(index *QModelIndex, role int) *QVariant
+	ownsReturn bool
+}
+
 func (this *QAbstractTableModel) OnData(slot func(index *QModelIndex, role int) *QVariant) {
 	var slotHandle C.intptr_t
 	if slot != nil {
-		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QAbstractTableModel_data{callback: slot}))
 	}
 	ok := C.QAbstractTableModel_override_virtual_data(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
@@ -3895,12 +4108,26 @@ func (this *QAbstractTableModel) OnData(slot func(index *QModelIndex, role int) 
 	}
 }
 
+// OnDataOwned installs a virtual override that transfers
+// ownership of each non-nil returned Qt value object to C++.
+func (this *QAbstractTableModel) OnDataOwned(slot func(index *QModelIndex, role int) *QVariant) {
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QAbstractTableModel_data{callback: slot, ownsReturn: true}))
+	}
+	ok := C.QAbstractTableModel_override_virtual_owned_data(unsafe.Pointer(this.h), slotHandle)
+	if !ok {
+		panic("miqt: can only override virtual methods for directly constructed types")
+	}
+}
+
 //export miqt_exec_callback_QAbstractTableModel_data
 func miqt_exec_callback_QAbstractTableModel_data(self *C.QAbstractTableModel, cb C.intptr_t, index *C.QModelIndex, role C.int) *C.QVariant {
-	gofunc, ok := cgo.Handle(cb).Value().(func(index *QModelIndex, role int) *QVariant)
+	callbackData, ok := cgo.Handle(cb).Value().(miqtVirtualCallback_QAbstractTableModel_data)
 	if !ok {
 		panic("miqt: callback of non-callback type (heap corruption?)")
 	}
+	gofunc := callbackData.callback
 
 	// Convert all CABI parameters to Go parameters
 	slotval1 := newQModelIndex(index)
@@ -3908,6 +4135,9 @@ func miqt_exec_callback_QAbstractTableModel_data(self *C.QAbstractTableModel, cb
 	slotval2 := (int)(role)
 
 	virtualReturn := gofunc(slotval1, slotval2)
+	if callbackData.ownsReturn && virtualReturn != nil {
+		runtime.SetFinalizer(virtualReturn, nil)
+	}
 
 	return virtualReturn.cPointer()
 
@@ -3956,10 +4186,16 @@ func (this *QAbstractTableModel) callVirtualBase_HeaderData(section int, orienta
 	return _goptr
 
 }
+
+type miqtVirtualCallback_QAbstractTableModel_headerData struct {
+	callback   func(super func(section int, orientation Orientation, role int) *QVariant, section int, orientation Orientation, role int) *QVariant
+	ownsReturn bool
+}
+
 func (this *QAbstractTableModel) OnHeaderData(slot func(super func(section int, orientation Orientation, role int) *QVariant, section int, orientation Orientation, role int) *QVariant) {
 	var slotHandle C.intptr_t
 	if slot != nil {
-		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QAbstractTableModel_headerData{callback: slot}))
 	}
 	ok := C.QAbstractTableModel_override_virtual_headerData(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
@@ -3967,12 +4203,26 @@ func (this *QAbstractTableModel) OnHeaderData(slot func(super func(section int, 
 	}
 }
 
+// OnHeaderDataOwned installs a virtual override that transfers
+// ownership of each non-nil returned Qt value object to C++.
+func (this *QAbstractTableModel) OnHeaderDataOwned(slot func(super func(section int, orientation Orientation, role int) *QVariant, section int, orientation Orientation, role int) *QVariant) {
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QAbstractTableModel_headerData{callback: slot, ownsReturn: true}))
+	}
+	ok := C.QAbstractTableModel_override_virtual_owned_headerData(unsafe.Pointer(this.h), slotHandle)
+	if !ok {
+		panic("miqt: can only override virtual methods for directly constructed types")
+	}
+}
+
 //export miqt_exec_callback_QAbstractTableModel_headerData
 func miqt_exec_callback_QAbstractTableModel_headerData(self *C.QAbstractTableModel, cb C.intptr_t, section C.int, orientation C.int, role C.int) *C.QVariant {
-	gofunc, ok := cgo.Handle(cb).Value().(func(super func(section int, orientation Orientation, role int) *QVariant, section int, orientation Orientation, role int) *QVariant)
+	callbackData, ok := cgo.Handle(cb).Value().(miqtVirtualCallback_QAbstractTableModel_headerData)
 	if !ok {
 		panic("miqt: callback of non-callback type (heap corruption?)")
 	}
+	gofunc := callbackData.callback
 
 	// Convert all CABI parameters to Go parameters
 	slotval1 := (int)(section)
@@ -3982,6 +4232,9 @@ func miqt_exec_callback_QAbstractTableModel_headerData(self *C.QAbstractTableMod
 	slotval3 := (int)(role)
 
 	virtualReturn := gofunc((&QAbstractTableModel{h: self}).callVirtualBase_HeaderData, slotval1, slotval2, slotval3)
+	if callbackData.ownsReturn && virtualReturn != nil {
+		runtime.SetFinalizer(virtualReturn, nil)
+	}
 
 	return virtualReturn.cPointer()
 
@@ -4660,10 +4913,16 @@ func (this *QAbstractTableModel) callVirtualBase_Buddy(index *QModelIndex) *QMod
 	return _goptr
 
 }
+
+type miqtVirtualCallback_QAbstractTableModel_buddy struct {
+	callback   func(super func(index *QModelIndex) *QModelIndex, index *QModelIndex) *QModelIndex
+	ownsReturn bool
+}
+
 func (this *QAbstractTableModel) OnBuddy(slot func(super func(index *QModelIndex) *QModelIndex, index *QModelIndex) *QModelIndex) {
 	var slotHandle C.intptr_t
 	if slot != nil {
-		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QAbstractTableModel_buddy{callback: slot}))
 	}
 	ok := C.QAbstractTableModel_override_virtual_buddy(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
@@ -4671,17 +4930,34 @@ func (this *QAbstractTableModel) OnBuddy(slot func(super func(index *QModelIndex
 	}
 }
 
+// OnBuddyOwned installs a virtual override that transfers
+// ownership of each non-nil returned Qt value object to C++.
+func (this *QAbstractTableModel) OnBuddyOwned(slot func(super func(index *QModelIndex) *QModelIndex, index *QModelIndex) *QModelIndex) {
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QAbstractTableModel_buddy{callback: slot, ownsReturn: true}))
+	}
+	ok := C.QAbstractTableModel_override_virtual_owned_buddy(unsafe.Pointer(this.h), slotHandle)
+	if !ok {
+		panic("miqt: can only override virtual methods for directly constructed types")
+	}
+}
+
 //export miqt_exec_callback_QAbstractTableModel_buddy
 func miqt_exec_callback_QAbstractTableModel_buddy(self *C.QAbstractTableModel, cb C.intptr_t, index *C.QModelIndex) *C.QModelIndex {
-	gofunc, ok := cgo.Handle(cb).Value().(func(super func(index *QModelIndex) *QModelIndex, index *QModelIndex) *QModelIndex)
+	callbackData, ok := cgo.Handle(cb).Value().(miqtVirtualCallback_QAbstractTableModel_buddy)
 	if !ok {
 		panic("miqt: callback of non-callback type (heap corruption?)")
 	}
+	gofunc := callbackData.callback
 
 	// Convert all CABI parameters to Go parameters
 	slotval1 := newQModelIndex(index)
 
 	virtualReturn := gofunc((&QAbstractTableModel{h: self}).callVirtualBase_Buddy, slotval1)
+	if callbackData.ownsReturn && virtualReturn != nil {
+		runtime.SetFinalizer(virtualReturn, nil)
+	}
 
 	return virtualReturn.cPointer()
 
@@ -4747,10 +5023,16 @@ func (this *QAbstractTableModel) callVirtualBase_Span(index *QModelIndex) *QSize
 	return _goptr
 
 }
+
+type miqtVirtualCallback_QAbstractTableModel_span struct {
+	callback   func(super func(index *QModelIndex) *QSize, index *QModelIndex) *QSize
+	ownsReturn bool
+}
+
 func (this *QAbstractTableModel) OnSpan(slot func(super func(index *QModelIndex) *QSize, index *QModelIndex) *QSize) {
 	var slotHandle C.intptr_t
 	if slot != nil {
-		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QAbstractTableModel_span{callback: slot}))
 	}
 	ok := C.QAbstractTableModel_override_virtual_span(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
@@ -4758,17 +5040,34 @@ func (this *QAbstractTableModel) OnSpan(slot func(super func(index *QModelIndex)
 	}
 }
 
+// OnSpanOwned installs a virtual override that transfers
+// ownership of each non-nil returned Qt value object to C++.
+func (this *QAbstractTableModel) OnSpanOwned(slot func(super func(index *QModelIndex) *QSize, index *QModelIndex) *QSize) {
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QAbstractTableModel_span{callback: slot, ownsReturn: true}))
+	}
+	ok := C.QAbstractTableModel_override_virtual_owned_span(unsafe.Pointer(this.h), slotHandle)
+	if !ok {
+		panic("miqt: can only override virtual methods for directly constructed types")
+	}
+}
+
 //export miqt_exec_callback_QAbstractTableModel_span
 func miqt_exec_callback_QAbstractTableModel_span(self *C.QAbstractTableModel, cb C.intptr_t, index *C.QModelIndex) *C.QSize {
-	gofunc, ok := cgo.Handle(cb).Value().(func(super func(index *QModelIndex) *QSize, index *QModelIndex) *QSize)
+	callbackData, ok := cgo.Handle(cb).Value().(miqtVirtualCallback_QAbstractTableModel_span)
 	if !ok {
 		panic("miqt: callback of non-callback type (heap corruption?)")
 	}
+	gofunc := callbackData.callback
 
 	// Convert all CABI parameters to Go parameters
 	slotval1 := newQModelIndex(index)
 
 	virtualReturn := gofunc((&QAbstractTableModel{h: self}).callVirtualBase_Span, slotval1)
+	if callbackData.ownsReturn && virtualReturn != nil {
+		runtime.SetFinalizer(virtualReturn, nil)
+	}
 
 	return virtualReturn.cPointer()
 
@@ -5622,10 +5921,16 @@ func (this *QAbstractListModel) callVirtualBase_Index(row int, column int, paren
 	return _goptr
 
 }
+
+type miqtVirtualCallback_QAbstractListModel_index struct {
+	callback   func(super func(row int, column int, parent *QModelIndex) *QModelIndex, row int, column int, parent *QModelIndex) *QModelIndex
+	ownsReturn bool
+}
+
 func (this *QAbstractListModel) OnIndex(slot func(super func(row int, column int, parent *QModelIndex) *QModelIndex, row int, column int, parent *QModelIndex) *QModelIndex) {
 	var slotHandle C.intptr_t
 	if slot != nil {
-		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QAbstractListModel_index{callback: slot}))
 	}
 	ok := C.QAbstractListModel_override_virtual_index(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
@@ -5633,12 +5938,26 @@ func (this *QAbstractListModel) OnIndex(slot func(super func(row int, column int
 	}
 }
 
+// OnIndexOwned installs a virtual override that transfers
+// ownership of each non-nil returned Qt value object to C++.
+func (this *QAbstractListModel) OnIndexOwned(slot func(super func(row int, column int, parent *QModelIndex) *QModelIndex, row int, column int, parent *QModelIndex) *QModelIndex) {
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QAbstractListModel_index{callback: slot, ownsReturn: true}))
+	}
+	ok := C.QAbstractListModel_override_virtual_owned_index(unsafe.Pointer(this.h), slotHandle)
+	if !ok {
+		panic("miqt: can only override virtual methods for directly constructed types")
+	}
+}
+
 //export miqt_exec_callback_QAbstractListModel_index
 func miqt_exec_callback_QAbstractListModel_index(self *C.QAbstractListModel, cb C.intptr_t, row C.int, column C.int, parent *C.QModelIndex) *C.QModelIndex {
-	gofunc, ok := cgo.Handle(cb).Value().(func(super func(row int, column int, parent *QModelIndex) *QModelIndex, row int, column int, parent *QModelIndex) *QModelIndex)
+	callbackData, ok := cgo.Handle(cb).Value().(miqtVirtualCallback_QAbstractListModel_index)
 	if !ok {
 		panic("miqt: callback of non-callback type (heap corruption?)")
 	}
+	gofunc := callbackData.callback
 
 	// Convert all CABI parameters to Go parameters
 	slotval1 := (int)(row)
@@ -5648,6 +5967,9 @@ func miqt_exec_callback_QAbstractListModel_index(self *C.QAbstractListModel, cb 
 	slotval3 := newQModelIndex(parent)
 
 	virtualReturn := gofunc((&QAbstractListModel{h: self}).callVirtualBase_Index, slotval1, slotval2, slotval3)
+	if callbackData.ownsReturn && virtualReturn != nil {
+		runtime.SetFinalizer(virtualReturn, nil)
+	}
 
 	return virtualReturn.cPointer()
 
@@ -5660,10 +5982,16 @@ func (this *QAbstractListModel) callVirtualBase_Sibling(row int, column int, idx
 	return _goptr
 
 }
+
+type miqtVirtualCallback_QAbstractListModel_sibling struct {
+	callback   func(super func(row int, column int, idx *QModelIndex) *QModelIndex, row int, column int, idx *QModelIndex) *QModelIndex
+	ownsReturn bool
+}
+
 func (this *QAbstractListModel) OnSibling(slot func(super func(row int, column int, idx *QModelIndex) *QModelIndex, row int, column int, idx *QModelIndex) *QModelIndex) {
 	var slotHandle C.intptr_t
 	if slot != nil {
-		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QAbstractListModel_sibling{callback: slot}))
 	}
 	ok := C.QAbstractListModel_override_virtual_sibling(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
@@ -5671,12 +5999,26 @@ func (this *QAbstractListModel) OnSibling(slot func(super func(row int, column i
 	}
 }
 
+// OnSiblingOwned installs a virtual override that transfers
+// ownership of each non-nil returned Qt value object to C++.
+func (this *QAbstractListModel) OnSiblingOwned(slot func(super func(row int, column int, idx *QModelIndex) *QModelIndex, row int, column int, idx *QModelIndex) *QModelIndex) {
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QAbstractListModel_sibling{callback: slot, ownsReturn: true}))
+	}
+	ok := C.QAbstractListModel_override_virtual_owned_sibling(unsafe.Pointer(this.h), slotHandle)
+	if !ok {
+		panic("miqt: can only override virtual methods for directly constructed types")
+	}
+}
+
 //export miqt_exec_callback_QAbstractListModel_sibling
 func miqt_exec_callback_QAbstractListModel_sibling(self *C.QAbstractListModel, cb C.intptr_t, row C.int, column C.int, idx *C.QModelIndex) *C.QModelIndex {
-	gofunc, ok := cgo.Handle(cb).Value().(func(super func(row int, column int, idx *QModelIndex) *QModelIndex, row int, column int, idx *QModelIndex) *QModelIndex)
+	callbackData, ok := cgo.Handle(cb).Value().(miqtVirtualCallback_QAbstractListModel_sibling)
 	if !ok {
 		panic("miqt: callback of non-callback type (heap corruption?)")
 	}
+	gofunc := callbackData.callback
 
 	// Convert all CABI parameters to Go parameters
 	slotval1 := (int)(row)
@@ -5686,6 +6028,9 @@ func miqt_exec_callback_QAbstractListModel_sibling(self *C.QAbstractListModel, c
 	slotval3 := newQModelIndex(idx)
 
 	virtualReturn := gofunc((&QAbstractListModel{h: self}).callVirtualBase_Sibling, slotval1, slotval2, slotval3)
+	if callbackData.ownsReturn && virtualReturn != nil {
+		runtime.SetFinalizer(virtualReturn, nil)
+	}
 
 	return virtualReturn.cPointer()
 
@@ -5788,10 +6133,16 @@ func miqt_exec_callback_QAbstractListModel_rowCount(self *C.QAbstractListModel, 
 	return (C.int)(virtualReturn)
 
 }
+
+type miqtVirtualCallback_QAbstractListModel_data struct {
+	callback   func(index *QModelIndex, role int) *QVariant
+	ownsReturn bool
+}
+
 func (this *QAbstractListModel) OnData(slot func(index *QModelIndex, role int) *QVariant) {
 	var slotHandle C.intptr_t
 	if slot != nil {
-		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QAbstractListModel_data{callback: slot}))
 	}
 	ok := C.QAbstractListModel_override_virtual_data(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
@@ -5799,12 +6150,26 @@ func (this *QAbstractListModel) OnData(slot func(index *QModelIndex, role int) *
 	}
 }
 
+// OnDataOwned installs a virtual override that transfers
+// ownership of each non-nil returned Qt value object to C++.
+func (this *QAbstractListModel) OnDataOwned(slot func(index *QModelIndex, role int) *QVariant) {
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QAbstractListModel_data{callback: slot, ownsReturn: true}))
+	}
+	ok := C.QAbstractListModel_override_virtual_owned_data(unsafe.Pointer(this.h), slotHandle)
+	if !ok {
+		panic("miqt: can only override virtual methods for directly constructed types")
+	}
+}
+
 //export miqt_exec_callback_QAbstractListModel_data
 func miqt_exec_callback_QAbstractListModel_data(self *C.QAbstractListModel, cb C.intptr_t, index *C.QModelIndex, role C.int) *C.QVariant {
-	gofunc, ok := cgo.Handle(cb).Value().(func(index *QModelIndex, role int) *QVariant)
+	callbackData, ok := cgo.Handle(cb).Value().(miqtVirtualCallback_QAbstractListModel_data)
 	if !ok {
 		panic("miqt: callback of non-callback type (heap corruption?)")
 	}
+	gofunc := callbackData.callback
 
 	// Convert all CABI parameters to Go parameters
 	slotval1 := newQModelIndex(index)
@@ -5812,6 +6177,9 @@ func miqt_exec_callback_QAbstractListModel_data(self *C.QAbstractListModel, cb C
 	slotval2 := (int)(role)
 
 	virtualReturn := gofunc(slotval1, slotval2)
+	if callbackData.ownsReturn && virtualReturn != nil {
+		runtime.SetFinalizer(virtualReturn, nil)
+	}
 
 	return virtualReturn.cPointer()
 
@@ -5860,10 +6228,16 @@ func (this *QAbstractListModel) callVirtualBase_HeaderData(section int, orientat
 	return _goptr
 
 }
+
+type miqtVirtualCallback_QAbstractListModel_headerData struct {
+	callback   func(super func(section int, orientation Orientation, role int) *QVariant, section int, orientation Orientation, role int) *QVariant
+	ownsReturn bool
+}
+
 func (this *QAbstractListModel) OnHeaderData(slot func(super func(section int, orientation Orientation, role int) *QVariant, section int, orientation Orientation, role int) *QVariant) {
 	var slotHandle C.intptr_t
 	if slot != nil {
-		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QAbstractListModel_headerData{callback: slot}))
 	}
 	ok := C.QAbstractListModel_override_virtual_headerData(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
@@ -5871,12 +6245,26 @@ func (this *QAbstractListModel) OnHeaderData(slot func(super func(section int, o
 	}
 }
 
+// OnHeaderDataOwned installs a virtual override that transfers
+// ownership of each non-nil returned Qt value object to C++.
+func (this *QAbstractListModel) OnHeaderDataOwned(slot func(super func(section int, orientation Orientation, role int) *QVariant, section int, orientation Orientation, role int) *QVariant) {
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QAbstractListModel_headerData{callback: slot, ownsReturn: true}))
+	}
+	ok := C.QAbstractListModel_override_virtual_owned_headerData(unsafe.Pointer(this.h), slotHandle)
+	if !ok {
+		panic("miqt: can only override virtual methods for directly constructed types")
+	}
+}
+
 //export miqt_exec_callback_QAbstractListModel_headerData
 func miqt_exec_callback_QAbstractListModel_headerData(self *C.QAbstractListModel, cb C.intptr_t, section C.int, orientation C.int, role C.int) *C.QVariant {
-	gofunc, ok := cgo.Handle(cb).Value().(func(super func(section int, orientation Orientation, role int) *QVariant, section int, orientation Orientation, role int) *QVariant)
+	callbackData, ok := cgo.Handle(cb).Value().(miqtVirtualCallback_QAbstractListModel_headerData)
 	if !ok {
 		panic("miqt: callback of non-callback type (heap corruption?)")
 	}
+	gofunc := callbackData.callback
 
 	// Convert all CABI parameters to Go parameters
 	slotval1 := (int)(section)
@@ -5886,6 +6274,9 @@ func miqt_exec_callback_QAbstractListModel_headerData(self *C.QAbstractListModel
 	slotval3 := (int)(role)
 
 	virtualReturn := gofunc((&QAbstractListModel{h: self}).callVirtualBase_HeaderData, slotval1, slotval2, slotval3)
+	if callbackData.ownsReturn && virtualReturn != nil {
+		runtime.SetFinalizer(virtualReturn, nil)
+	}
 
 	return virtualReturn.cPointer()
 
@@ -6564,10 +6955,16 @@ func (this *QAbstractListModel) callVirtualBase_Buddy(index *QModelIndex) *QMode
 	return _goptr
 
 }
+
+type miqtVirtualCallback_QAbstractListModel_buddy struct {
+	callback   func(super func(index *QModelIndex) *QModelIndex, index *QModelIndex) *QModelIndex
+	ownsReturn bool
+}
+
 func (this *QAbstractListModel) OnBuddy(slot func(super func(index *QModelIndex) *QModelIndex, index *QModelIndex) *QModelIndex) {
 	var slotHandle C.intptr_t
 	if slot != nil {
-		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QAbstractListModel_buddy{callback: slot}))
 	}
 	ok := C.QAbstractListModel_override_virtual_buddy(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
@@ -6575,17 +6972,34 @@ func (this *QAbstractListModel) OnBuddy(slot func(super func(index *QModelIndex)
 	}
 }
 
+// OnBuddyOwned installs a virtual override that transfers
+// ownership of each non-nil returned Qt value object to C++.
+func (this *QAbstractListModel) OnBuddyOwned(slot func(super func(index *QModelIndex) *QModelIndex, index *QModelIndex) *QModelIndex) {
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QAbstractListModel_buddy{callback: slot, ownsReturn: true}))
+	}
+	ok := C.QAbstractListModel_override_virtual_owned_buddy(unsafe.Pointer(this.h), slotHandle)
+	if !ok {
+		panic("miqt: can only override virtual methods for directly constructed types")
+	}
+}
+
 //export miqt_exec_callback_QAbstractListModel_buddy
 func miqt_exec_callback_QAbstractListModel_buddy(self *C.QAbstractListModel, cb C.intptr_t, index *C.QModelIndex) *C.QModelIndex {
-	gofunc, ok := cgo.Handle(cb).Value().(func(super func(index *QModelIndex) *QModelIndex, index *QModelIndex) *QModelIndex)
+	callbackData, ok := cgo.Handle(cb).Value().(miqtVirtualCallback_QAbstractListModel_buddy)
 	if !ok {
 		panic("miqt: callback of non-callback type (heap corruption?)")
 	}
+	gofunc := callbackData.callback
 
 	// Convert all CABI parameters to Go parameters
 	slotval1 := newQModelIndex(index)
 
 	virtualReturn := gofunc((&QAbstractListModel{h: self}).callVirtualBase_Buddy, slotval1)
+	if callbackData.ownsReturn && virtualReturn != nil {
+		runtime.SetFinalizer(virtualReturn, nil)
+	}
 
 	return virtualReturn.cPointer()
 
@@ -6651,10 +7065,16 @@ func (this *QAbstractListModel) callVirtualBase_Span(index *QModelIndex) *QSize 
 	return _goptr
 
 }
+
+type miqtVirtualCallback_QAbstractListModel_span struct {
+	callback   func(super func(index *QModelIndex) *QSize, index *QModelIndex) *QSize
+	ownsReturn bool
+}
+
 func (this *QAbstractListModel) OnSpan(slot func(super func(index *QModelIndex) *QSize, index *QModelIndex) *QSize) {
 	var slotHandle C.intptr_t
 	if slot != nil {
-		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QAbstractListModel_span{callback: slot}))
 	}
 	ok := C.QAbstractListModel_override_virtual_span(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
@@ -6662,17 +7082,34 @@ func (this *QAbstractListModel) OnSpan(slot func(super func(index *QModelIndex) 
 	}
 }
 
+// OnSpanOwned installs a virtual override that transfers
+// ownership of each non-nil returned Qt value object to C++.
+func (this *QAbstractListModel) OnSpanOwned(slot func(super func(index *QModelIndex) *QSize, index *QModelIndex) *QSize) {
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QAbstractListModel_span{callback: slot, ownsReturn: true}))
+	}
+	ok := C.QAbstractListModel_override_virtual_owned_span(unsafe.Pointer(this.h), slotHandle)
+	if !ok {
+		panic("miqt: can only override virtual methods for directly constructed types")
+	}
+}
+
 //export miqt_exec_callback_QAbstractListModel_span
 func miqt_exec_callback_QAbstractListModel_span(self *C.QAbstractListModel, cb C.intptr_t, index *C.QModelIndex) *C.QSize {
-	gofunc, ok := cgo.Handle(cb).Value().(func(super func(index *QModelIndex) *QSize, index *QModelIndex) *QSize)
+	callbackData, ok := cgo.Handle(cb).Value().(miqtVirtualCallback_QAbstractListModel_span)
 	if !ok {
 		panic("miqt: callback of non-callback type (heap corruption?)")
 	}
+	gofunc := callbackData.callback
 
 	// Convert all CABI parameters to Go parameters
 	slotval1 := newQModelIndex(index)
 
 	virtualReturn := gofunc((&QAbstractListModel{h: self}).callVirtualBase_Span, slotval1)
+	if callbackData.ownsReturn && virtualReturn != nil {
+		runtime.SetFinalizer(virtualReturn, nil)
+	}
 
 	return virtualReturn.cPointer()
 

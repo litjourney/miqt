@@ -936,10 +936,16 @@ func (this *QPaintEngine) callVirtualBase_CoordinateOffset() *QPoint {
 	return _goptr
 
 }
+
+type miqtVirtualCallback_QPaintEngine_coordinateOffset struct {
+	callback   func(super func() *QPoint) *QPoint
+	ownsReturn bool
+}
+
 func (this *QPaintEngine) OnCoordinateOffset(slot func(super func() *QPoint) *QPoint) {
 	var slotHandle C.intptr_t
 	if slot != nil {
-		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QPaintEngine_coordinateOffset{callback: slot}))
 	}
 	ok := C.QPaintEngine_override_virtual_coordinateOffset(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
@@ -947,14 +953,31 @@ func (this *QPaintEngine) OnCoordinateOffset(slot func(super func() *QPoint) *QP
 	}
 }
 
+// OnCoordinateOffsetOwned installs a virtual override that transfers
+// ownership of each non-nil returned Qt value object to C++.
+func (this *QPaintEngine) OnCoordinateOffsetOwned(slot func(super func() *QPoint) *QPoint) {
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QPaintEngine_coordinateOffset{callback: slot, ownsReturn: true}))
+	}
+	ok := C.QPaintEngine_override_virtual_owned_coordinateOffset(unsafe.Pointer(this.h), slotHandle)
+	if !ok {
+		panic("miqt: can only override virtual methods for directly constructed types")
+	}
+}
+
 //export miqt_exec_callback_QPaintEngine_coordinateOffset
 func miqt_exec_callback_QPaintEngine_coordinateOffset(self *C.QPaintEngine, cb C.intptr_t) *C.QPoint {
-	gofunc, ok := cgo.Handle(cb).Value().(func(super func() *QPoint) *QPoint)
+	callbackData, ok := cgo.Handle(cb).Value().(miqtVirtualCallback_QPaintEngine_coordinateOffset)
 	if !ok {
 		panic("miqt: callback of non-callback type (heap corruption?)")
 	}
+	gofunc := callbackData.callback
 
 	virtualReturn := gofunc((&QPaintEngine{h: self}).callVirtualBase_CoordinateOffset)
+	if callbackData.ownsReturn && virtualReturn != nil {
+		runtime.SetFinalizer(virtualReturn, nil)
+	}
 
 	return virtualReturn.cPointer()
 

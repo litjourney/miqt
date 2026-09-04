@@ -77,8 +77,10 @@ void QwtPlotRescaler_virtualbase_canvasResizeEvent(void* self, QResizeEvent* par
 bool QwtPlotRescaler_override_virtual_rescale2(void* self, intptr_t slot);
 void QwtPlotRescaler_virtualbase_rescale2(const void* self, QSize* oldSize, QSize* newSize);
 bool QwtPlotRescaler_override_virtual_expandScale(void* self, intptr_t slot);
+bool QwtPlotRescaler_override_virtual_owned_expandScale(void* self, intptr_t slot);
 QwtInterval* QwtPlotRescaler_virtualbase_expandScale(const void* self, int axis, QSize* oldSize, QSize* newSize);
 bool QwtPlotRescaler_override_virtual_syncScale(void* self, intptr_t slot);
+bool QwtPlotRescaler_override_virtual_owned_syncScale(void* self, intptr_t slot);
 QwtInterval* QwtPlotRescaler_virtualbase_syncScale(const void* self, int axis, QwtInterval* reference, QSize* size);
 bool QwtPlotRescaler_override_virtual_updateScales(void* self, intptr_t slot);
 void QwtPlotRescaler_virtualbase_updateScales(const void* self, QwtInterval* intervals);

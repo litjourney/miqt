@@ -482,10 +482,16 @@ func (this *QwtAnalogClock) callVirtualBase_ScaleInnerRect() *qt.QRect {
 	return _goptr
 
 }
+
+type miqtVirtualCallback_QwtAnalogClock_scaleInnerRect struct {
+	callback   func(super func() *qt.QRect) *qt.QRect
+	ownsReturn bool
+}
+
 func (this *QwtAnalogClock) OnScaleInnerRect(slot func(super func() *qt.QRect) *qt.QRect) {
 	var slotHandle C.intptr_t
 	if slot != nil {
-		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QwtAnalogClock_scaleInnerRect{callback: slot}))
 	}
 	ok := C.QwtAnalogClock_override_virtual_scaleInnerRect(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
@@ -493,14 +499,31 @@ func (this *QwtAnalogClock) OnScaleInnerRect(slot func(super func() *qt.QRect) *
 	}
 }
 
+// OnScaleInnerRectOwned installs a virtual override that transfers
+// ownership of each non-nil returned Qt value object to C++.
+func (this *QwtAnalogClock) OnScaleInnerRectOwned(slot func(super func() *qt.QRect) *qt.QRect) {
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QwtAnalogClock_scaleInnerRect{callback: slot, ownsReturn: true}))
+	}
+	ok := C.QwtAnalogClock_override_virtual_owned_scaleInnerRect(unsafe.Pointer(this.h), slotHandle)
+	if !ok {
+		panic("miqt: can only override virtual methods for directly constructed types")
+	}
+}
+
 //export miqt_exec_callback_QwtAnalogClock_scaleInnerRect
 func miqt_exec_callback_QwtAnalogClock_scaleInnerRect(self *C.QwtAnalogClock, cb C.intptr_t) *C.QRect {
-	gofunc, ok := cgo.Handle(cb).Value().(func(super func() *qt.QRect) *qt.QRect)
+	callbackData, ok := cgo.Handle(cb).Value().(miqtVirtualCallback_QwtAnalogClock_scaleInnerRect)
 	if !ok {
 		panic("miqt: callback of non-callback type (heap corruption?)")
 	}
+	gofunc := callbackData.callback
 
 	virtualReturn := gofunc((&QwtAnalogClock{h: self}).callVirtualBase_ScaleInnerRect)
+	if callbackData.ownsReturn && virtualReturn != nil {
+		runtime.SetFinalizer(virtualReturn, nil)
+	}
 
 	return (*C.QRect)(virtualReturn.UnsafePointer())
 
@@ -513,10 +536,16 @@ func (this *QwtAnalogClock) callVirtualBase_SizeHint() *qt.QSize {
 	return _goptr
 
 }
+
+type miqtVirtualCallback_QwtAnalogClock_sizeHint struct {
+	callback   func(super func() *qt.QSize) *qt.QSize
+	ownsReturn bool
+}
+
 func (this *QwtAnalogClock) OnSizeHint(slot func(super func() *qt.QSize) *qt.QSize) {
 	var slotHandle C.intptr_t
 	if slot != nil {
-		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QwtAnalogClock_sizeHint{callback: slot}))
 	}
 	ok := C.QwtAnalogClock_override_virtual_sizeHint(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
@@ -524,14 +553,31 @@ func (this *QwtAnalogClock) OnSizeHint(slot func(super func() *qt.QSize) *qt.QSi
 	}
 }
 
+// OnSizeHintOwned installs a virtual override that transfers
+// ownership of each non-nil returned Qt value object to C++.
+func (this *QwtAnalogClock) OnSizeHintOwned(slot func(super func() *qt.QSize) *qt.QSize) {
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QwtAnalogClock_sizeHint{callback: slot, ownsReturn: true}))
+	}
+	ok := C.QwtAnalogClock_override_virtual_owned_sizeHint(unsafe.Pointer(this.h), slotHandle)
+	if !ok {
+		panic("miqt: can only override virtual methods for directly constructed types")
+	}
+}
+
 //export miqt_exec_callback_QwtAnalogClock_sizeHint
 func miqt_exec_callback_QwtAnalogClock_sizeHint(self *C.QwtAnalogClock, cb C.intptr_t) *C.QSize {
-	gofunc, ok := cgo.Handle(cb).Value().(func(super func() *qt.QSize) *qt.QSize)
+	callbackData, ok := cgo.Handle(cb).Value().(miqtVirtualCallback_QwtAnalogClock_sizeHint)
 	if !ok {
 		panic("miqt: callback of non-callback type (heap corruption?)")
 	}
+	gofunc := callbackData.callback
 
 	virtualReturn := gofunc((&QwtAnalogClock{h: self}).callVirtualBase_SizeHint)
+	if callbackData.ownsReturn && virtualReturn != nil {
+		runtime.SetFinalizer(virtualReturn, nil)
+	}
 
 	return (*C.QSize)(virtualReturn.UnsafePointer())
 
@@ -544,10 +590,16 @@ func (this *QwtAnalogClock) callVirtualBase_MinimumSizeHint() *qt.QSize {
 	return _goptr
 
 }
+
+type miqtVirtualCallback_QwtAnalogClock_minimumSizeHint struct {
+	callback   func(super func() *qt.QSize) *qt.QSize
+	ownsReturn bool
+}
+
 func (this *QwtAnalogClock) OnMinimumSizeHint(slot func(super func() *qt.QSize) *qt.QSize) {
 	var slotHandle C.intptr_t
 	if slot != nil {
-		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QwtAnalogClock_minimumSizeHint{callback: slot}))
 	}
 	ok := C.QwtAnalogClock_override_virtual_minimumSizeHint(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
@@ -555,14 +607,31 @@ func (this *QwtAnalogClock) OnMinimumSizeHint(slot func(super func() *qt.QSize) 
 	}
 }
 
+// OnMinimumSizeHintOwned installs a virtual override that transfers
+// ownership of each non-nil returned Qt value object to C++.
+func (this *QwtAnalogClock) OnMinimumSizeHintOwned(slot func(super func() *qt.QSize) *qt.QSize) {
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QwtAnalogClock_minimumSizeHint{callback: slot, ownsReturn: true}))
+	}
+	ok := C.QwtAnalogClock_override_virtual_owned_minimumSizeHint(unsafe.Pointer(this.h), slotHandle)
+	if !ok {
+		panic("miqt: can only override virtual methods for directly constructed types")
+	}
+}
+
 //export miqt_exec_callback_QwtAnalogClock_minimumSizeHint
 func miqt_exec_callback_QwtAnalogClock_minimumSizeHint(self *C.QwtAnalogClock, cb C.intptr_t) *C.QSize {
-	gofunc, ok := cgo.Handle(cb).Value().(func(super func() *qt.QSize) *qt.QSize)
+	callbackData, ok := cgo.Handle(cb).Value().(miqtVirtualCallback_QwtAnalogClock_minimumSizeHint)
 	if !ok {
 		panic("miqt: callback of non-callback type (heap corruption?)")
 	}
+	gofunc := callbackData.callback
 
 	virtualReturn := gofunc((&QwtAnalogClock{h: self}).callVirtualBase_MinimumSizeHint)
+	if callbackData.ownsReturn && virtualReturn != nil {
+		runtime.SetFinalizer(virtualReturn, nil)
+	}
 
 	return (*C.QSize)(virtualReturn.UnsafePointer())
 
@@ -1980,10 +2049,16 @@ func (this *QwtAnalogClock) callVirtualBase_InputMethodQuery(param1 qt.InputMeth
 	return _goptr
 
 }
+
+type miqtVirtualCallback_QwtAnalogClock_inputMethodQuery struct {
+	callback   func(super func(param1 qt.InputMethodQuery) *qt.QVariant, param1 qt.InputMethodQuery) *qt.QVariant
+	ownsReturn bool
+}
+
 func (this *QwtAnalogClock) OnInputMethodQuery(slot func(super func(param1 qt.InputMethodQuery) *qt.QVariant, param1 qt.InputMethodQuery) *qt.QVariant) {
 	var slotHandle C.intptr_t
 	if slot != nil {
-		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QwtAnalogClock_inputMethodQuery{callback: slot}))
 	}
 	ok := C.QwtAnalogClock_override_virtual_inputMethodQuery(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
@@ -1991,17 +2066,34 @@ func (this *QwtAnalogClock) OnInputMethodQuery(slot func(super func(param1 qt.In
 	}
 }
 
+// OnInputMethodQueryOwned installs a virtual override that transfers
+// ownership of each non-nil returned Qt value object to C++.
+func (this *QwtAnalogClock) OnInputMethodQueryOwned(slot func(super func(param1 qt.InputMethodQuery) *qt.QVariant, param1 qt.InputMethodQuery) *qt.QVariant) {
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QwtAnalogClock_inputMethodQuery{callback: slot, ownsReturn: true}))
+	}
+	ok := C.QwtAnalogClock_override_virtual_owned_inputMethodQuery(unsafe.Pointer(this.h), slotHandle)
+	if !ok {
+		panic("miqt: can only override virtual methods for directly constructed types")
+	}
+}
+
 //export miqt_exec_callback_QwtAnalogClock_inputMethodQuery
 func miqt_exec_callback_QwtAnalogClock_inputMethodQuery(self *C.QwtAnalogClock, cb C.intptr_t, param1 C.int) *C.QVariant {
-	gofunc, ok := cgo.Handle(cb).Value().(func(super func(param1 qt.InputMethodQuery) *qt.QVariant, param1 qt.InputMethodQuery) *qt.QVariant)
+	callbackData, ok := cgo.Handle(cb).Value().(miqtVirtualCallback_QwtAnalogClock_inputMethodQuery)
 	if !ok {
 		panic("miqt: callback of non-callback type (heap corruption?)")
 	}
+	gofunc := callbackData.callback
 
 	// Convert all CABI parameters to Go parameters
 	slotval1 := (qt.InputMethodQuery)(param1)
 
 	virtualReturn := gofunc((&QwtAnalogClock{h: self}).callVirtualBase_InputMethodQuery, slotval1)
+	if callbackData.ownsReturn && virtualReturn != nil {
+		runtime.SetFinalizer(virtualReturn, nil)
+	}
 
 	return (*C.QVariant)(virtualReturn.UnsafePointer())
 

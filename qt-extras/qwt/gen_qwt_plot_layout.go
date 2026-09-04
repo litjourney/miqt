@@ -292,10 +292,16 @@ func (this *QwtPlotLayout) callVirtualBase_MinimumSizeHint(param1 *QwtPlot) *qt.
 	return _goptr
 
 }
+
+type miqtVirtualCallback_QwtPlotLayout_minimumSizeHint struct {
+	callback   func(super func(param1 *QwtPlot) *qt.QSize, param1 *QwtPlot) *qt.QSize
+	ownsReturn bool
+}
+
 func (this *QwtPlotLayout) OnMinimumSizeHint(slot func(super func(param1 *QwtPlot) *qt.QSize, param1 *QwtPlot) *qt.QSize) {
 	var slotHandle C.intptr_t
 	if slot != nil {
-		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QwtPlotLayout_minimumSizeHint{callback: slot}))
 	}
 	ok := C.QwtPlotLayout_override_virtual_minimumSizeHint(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
@@ -303,17 +309,34 @@ func (this *QwtPlotLayout) OnMinimumSizeHint(slot func(super func(param1 *QwtPlo
 	}
 }
 
+// OnMinimumSizeHintOwned installs a virtual override that transfers
+// ownership of each non-nil returned Qt value object to C++.
+func (this *QwtPlotLayout) OnMinimumSizeHintOwned(slot func(super func(param1 *QwtPlot) *qt.QSize, param1 *QwtPlot) *qt.QSize) {
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QwtPlotLayout_minimumSizeHint{callback: slot, ownsReturn: true}))
+	}
+	ok := C.QwtPlotLayout_override_virtual_owned_minimumSizeHint(unsafe.Pointer(this.h), slotHandle)
+	if !ok {
+		panic("miqt: can only override virtual methods for directly constructed types")
+	}
+}
+
 //export miqt_exec_callback_QwtPlotLayout_minimumSizeHint
 func miqt_exec_callback_QwtPlotLayout_minimumSizeHint(self *C.QwtPlotLayout, cb C.intptr_t, param1 *C.QwtPlot) *C.QSize {
-	gofunc, ok := cgo.Handle(cb).Value().(func(super func(param1 *QwtPlot) *qt.QSize, param1 *QwtPlot) *qt.QSize)
+	callbackData, ok := cgo.Handle(cb).Value().(miqtVirtualCallback_QwtPlotLayout_minimumSizeHint)
 	if !ok {
 		panic("miqt: callback of non-callback type (heap corruption?)")
 	}
+	gofunc := callbackData.callback
 
 	// Convert all CABI parameters to Go parameters
 	slotval1 := newQwtPlot(param1)
 
 	virtualReturn := gofunc((&QwtPlotLayout{h: self}).callVirtualBase_MinimumSizeHint, slotval1)
+	if callbackData.ownsReturn && virtualReturn != nil {
+		runtime.SetFinalizer(virtualReturn, nil)
+	}
 
 	return (*C.QSize)(virtualReturn.UnsafePointer())
 

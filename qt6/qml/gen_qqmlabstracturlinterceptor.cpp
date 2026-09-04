@@ -24,6 +24,7 @@ public:
 
 	// cgo.Handle value for overwritten implementation
 	miqt_callback_handle<miqt_exec_callback_handle_release_QQmlAbstractUrlInterceptor> handle__intercept;
+	bool owns_return__intercept = false;
 
 	// Subclass to allow providing a Go implementation
 	virtual QUrl intercept(const QUrl& path, QQmlAbstractUrlInterceptor::DataType type) override {
@@ -37,6 +38,10 @@ public:
 		QQmlAbstractUrlInterceptor::DataType type_ret = type;
 		int sigval2 = static_cast<int>(type_ret);
 		QUrl* callback_return_value = miqt_exec_callback_QQmlAbstractUrlInterceptor_intercept(this, handle__intercept.value(), sigval1, sigval2);
+		std::unique_ptr<QUrl> callback_return_value_owner;
+		if (owns_return__intercept) {
+			callback_return_value_owner.reset(callback_return_value);
+		}
 		return *callback_return_value;
 	}
 
@@ -62,6 +67,19 @@ bool QQmlAbstractUrlInterceptor_override_virtual_intercept(void* self, intptr_t 
 	}
 
 	self_cast->handle__intercept = std::move(slot_handle);
+	self_cast->owns_return__intercept = false;
+	return true;
+}
+
+bool QQmlAbstractUrlInterceptor_override_virtual_owned_intercept(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QQmlAbstractUrlInterceptor> slot_handle(slot);
+	MiqtVirtualQQmlAbstractUrlInterceptor* self_cast = dynamic_cast<MiqtVirtualQQmlAbstractUrlInterceptor*>( (QQmlAbstractUrlInterceptor*)(self) );
+	if (self_cast == nullptr) {
+		return false;
+	}
+
+	self_cast->handle__intercept = std::move(slot_handle);
+	self_cast->owns_return__intercept = true;
 	return true;
 }
 

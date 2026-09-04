@@ -63,6 +63,7 @@ void QGraphicsLayout_virtualbase_removeAt(void* self, int index);
 bool QGraphicsLayout_override_virtual_setGeometry(void* self, intptr_t slot);
 void QGraphicsLayout_virtualbase_setGeometry(void* self, QRectF* rect);
 bool QGraphicsLayout_override_virtual_sizeHint(void* self, intptr_t slot);
+bool QGraphicsLayout_override_virtual_owned_sizeHint(void* self, intptr_t slot);
 QSizeF* QGraphicsLayout_virtualbase_sizeHint(const void* self, int which, QSizeF* constraint);
 
 void QGraphicsLayout_protectedbase_addChildLayoutItem(bool* _dynamic_cast_ok, void* self, QGraphicsLayoutItem* layoutItem);

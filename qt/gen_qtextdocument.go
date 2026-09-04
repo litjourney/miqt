@@ -1131,10 +1131,16 @@ func (this *QTextDocument) callVirtualBase_LoadResource(typeVal int, name *QUrl)
 	return _goptr
 
 }
+
+type miqtVirtualCallback_QTextDocument_loadResource struct {
+	callback   func(super func(typeVal int, name *QUrl) *QVariant, typeVal int, name *QUrl) *QVariant
+	ownsReturn bool
+}
+
 func (this *QTextDocument) OnLoadResource(slot func(super func(typeVal int, name *QUrl) *QVariant, typeVal int, name *QUrl) *QVariant) {
 	var slotHandle C.intptr_t
 	if slot != nil {
-		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QTextDocument_loadResource{callback: slot}))
 	}
 	ok := C.QTextDocument_override_virtual_loadResource(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
@@ -1142,12 +1148,26 @@ func (this *QTextDocument) OnLoadResource(slot func(super func(typeVal int, name
 	}
 }
 
+// OnLoadResourceOwned installs a virtual override that transfers
+// ownership of each non-nil returned Qt value object to C++.
+func (this *QTextDocument) OnLoadResourceOwned(slot func(super func(typeVal int, name *QUrl) *QVariant, typeVal int, name *QUrl) *QVariant) {
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QTextDocument_loadResource{callback: slot, ownsReturn: true}))
+	}
+	ok := C.QTextDocument_override_virtual_owned_loadResource(unsafe.Pointer(this.h), slotHandle)
+	if !ok {
+		panic("miqt: can only override virtual methods for directly constructed types")
+	}
+}
+
 //export miqt_exec_callback_QTextDocument_loadResource
 func miqt_exec_callback_QTextDocument_loadResource(self *C.QTextDocument, cb C.intptr_t, typeVal C.int, name *C.QUrl) *C.QVariant {
-	gofunc, ok := cgo.Handle(cb).Value().(func(super func(typeVal int, name *QUrl) *QVariant, typeVal int, name *QUrl) *QVariant)
+	callbackData, ok := cgo.Handle(cb).Value().(miqtVirtualCallback_QTextDocument_loadResource)
 	if !ok {
 		panic("miqt: callback of non-callback type (heap corruption?)")
 	}
+	gofunc := callbackData.callback
 
 	// Convert all CABI parameters to Go parameters
 	slotval1 := (int)(typeVal)
@@ -1155,6 +1175,9 @@ func miqt_exec_callback_QTextDocument_loadResource(self *C.QTextDocument, cb C.i
 	slotval2 := newQUrl(name)
 
 	virtualReturn := gofunc((&QTextDocument{h: self}).callVirtualBase_LoadResource, slotval1, slotval2)
+	if callbackData.ownsReturn && virtualReturn != nil {
+		runtime.SetFinalizer(virtualReturn, nil)
+	}
 
 	return virtualReturn.cPointer()
 

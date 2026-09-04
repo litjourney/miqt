@@ -315,6 +315,7 @@ public:
 
 	// cgo.Handle value for overwritten implementation
 	miqt_callback_handle<miqt_exec_callback_handle_release_QSctpSocket> handle__socketOption;
+	bool owns_return__socketOption = false;
 
 	// Subclass to allow providing a Go implementation
 	virtual QVariant socketOption(QAbstractSocket::SocketOption option) override {
@@ -325,6 +326,10 @@ public:
 		QAbstractSocket::SocketOption option_ret = option;
 		int sigval1 = static_cast<int>(option_ret);
 		QVariant* callback_return_value = miqt_exec_callback_QSctpSocket_socketOption(this, handle__socketOption.value(), sigval1);
+		std::unique_ptr<QVariant> callback_return_value_owner;
+		if (owns_return__socketOption) {
+			callback_return_value_owner.reset(callback_return_value);
+		}
 		return *callback_return_value;
 	}
 
@@ -981,6 +986,19 @@ bool QSctpSocket_override_virtual_socketOption(void* self, intptr_t slot) {
 	}
 
 	self_cast->handle__socketOption = std::move(slot_handle);
+	self_cast->owns_return__socketOption = false;
+	return true;
+}
+
+bool QSctpSocket_override_virtual_owned_socketOption(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QSctpSocket> slot_handle(slot);
+	MiqtVirtualQSctpSocket* self_cast = dynamic_cast<MiqtVirtualQSctpSocket*>( (QSctpSocket*)(self) );
+	if (self_cast == nullptr) {
+		return false;
+	}
+
+	self_cast->handle__socketOption = std::move(slot_handle);
+	self_cast->owns_return__socketOption = true;
 	return true;
 }
 

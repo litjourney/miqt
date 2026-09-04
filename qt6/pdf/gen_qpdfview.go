@@ -573,10 +573,16 @@ func (this *QPdfView) callVirtualBase_MinimumSizeHint() *qt6.QSize {
 	return _goptr
 
 }
+
+type miqtVirtualCallback_QPdfView_minimumSizeHint struct {
+	callback   func(super func() *qt6.QSize) *qt6.QSize
+	ownsReturn bool
+}
+
 func (this *QPdfView) OnMinimumSizeHint(slot func(super func() *qt6.QSize) *qt6.QSize) {
 	var slotHandle C.intptr_t
 	if slot != nil {
-		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QPdfView_minimumSizeHint{callback: slot}))
 	}
 	ok := C.QPdfView_override_virtual_minimumSizeHint(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
@@ -584,14 +590,31 @@ func (this *QPdfView) OnMinimumSizeHint(slot func(super func() *qt6.QSize) *qt6.
 	}
 }
 
+// OnMinimumSizeHintOwned installs a virtual override that transfers
+// ownership of each non-nil returned Qt value object to C++.
+func (this *QPdfView) OnMinimumSizeHintOwned(slot func(super func() *qt6.QSize) *qt6.QSize) {
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QPdfView_minimumSizeHint{callback: slot, ownsReturn: true}))
+	}
+	ok := C.QPdfView_override_virtual_owned_minimumSizeHint(unsafe.Pointer(this.h), slotHandle)
+	if !ok {
+		panic("miqt: can only override virtual methods for directly constructed types")
+	}
+}
+
 //export miqt_exec_callback_QPdfView_minimumSizeHint
 func miqt_exec_callback_QPdfView_minimumSizeHint(self *C.QPdfView, cb C.intptr_t) *C.QSize {
-	gofunc, ok := cgo.Handle(cb).Value().(func(super func() *qt6.QSize) *qt6.QSize)
+	callbackData, ok := cgo.Handle(cb).Value().(miqtVirtualCallback_QPdfView_minimumSizeHint)
 	if !ok {
 		panic("miqt: callback of non-callback type (heap corruption?)")
 	}
+	gofunc := callbackData.callback
 
 	virtualReturn := gofunc((&QPdfView{h: self}).callVirtualBase_MinimumSizeHint)
+	if callbackData.ownsReturn && virtualReturn != nil {
+		runtime.SetFinalizer(virtualReturn, nil)
+	}
 
 	return (*C.QSize)(virtualReturn.UnsafePointer())
 
@@ -604,10 +627,16 @@ func (this *QPdfView) callVirtualBase_SizeHint() *qt6.QSize {
 	return _goptr
 
 }
+
+type miqtVirtualCallback_QPdfView_sizeHint struct {
+	callback   func(super func() *qt6.QSize) *qt6.QSize
+	ownsReturn bool
+}
+
 func (this *QPdfView) OnSizeHint(slot func(super func() *qt6.QSize) *qt6.QSize) {
 	var slotHandle C.intptr_t
 	if slot != nil {
-		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QPdfView_sizeHint{callback: slot}))
 	}
 	ok := C.QPdfView_override_virtual_sizeHint(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
@@ -615,14 +644,31 @@ func (this *QPdfView) OnSizeHint(slot func(super func() *qt6.QSize) *qt6.QSize) 
 	}
 }
 
+// OnSizeHintOwned installs a virtual override that transfers
+// ownership of each non-nil returned Qt value object to C++.
+func (this *QPdfView) OnSizeHintOwned(slot func(super func() *qt6.QSize) *qt6.QSize) {
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QPdfView_sizeHint{callback: slot, ownsReturn: true}))
+	}
+	ok := C.QPdfView_override_virtual_owned_sizeHint(unsafe.Pointer(this.h), slotHandle)
+	if !ok {
+		panic("miqt: can only override virtual methods for directly constructed types")
+	}
+}
+
 //export miqt_exec_callback_QPdfView_sizeHint
 func miqt_exec_callback_QPdfView_sizeHint(self *C.QPdfView, cb C.intptr_t) *C.QSize {
-	gofunc, ok := cgo.Handle(cb).Value().(func(super func() *qt6.QSize) *qt6.QSize)
+	callbackData, ok := cgo.Handle(cb).Value().(miqtVirtualCallback_QPdfView_sizeHint)
 	if !ok {
 		panic("miqt: callback of non-callback type (heap corruption?)")
 	}
+	gofunc := callbackData.callback
 
 	virtualReturn := gofunc((&QPdfView{h: self}).callVirtualBase_SizeHint)
+	if callbackData.ownsReturn && virtualReturn != nil {
+		runtime.SetFinalizer(virtualReturn, nil)
+	}
 
 	return (*C.QSize)(virtualReturn.UnsafePointer())
 
@@ -1093,10 +1139,16 @@ func (this *QPdfView) callVirtualBase_ViewportSizeHint() *qt6.QSize {
 	return _goptr
 
 }
+
+type miqtVirtualCallback_QPdfView_viewportSizeHint struct {
+	callback   func(super func() *qt6.QSize) *qt6.QSize
+	ownsReturn bool
+}
+
 func (this *QPdfView) OnViewportSizeHint(slot func(super func() *qt6.QSize) *qt6.QSize) {
 	var slotHandle C.intptr_t
 	if slot != nil {
-		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QPdfView_viewportSizeHint{callback: slot}))
 	}
 	ok := C.QPdfView_override_virtual_viewportSizeHint(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
@@ -1104,14 +1156,31 @@ func (this *QPdfView) OnViewportSizeHint(slot func(super func() *qt6.QSize) *qt6
 	}
 }
 
+// OnViewportSizeHintOwned installs a virtual override that transfers
+// ownership of each non-nil returned Qt value object to C++.
+func (this *QPdfView) OnViewportSizeHintOwned(slot func(super func() *qt6.QSize) *qt6.QSize) {
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QPdfView_viewportSizeHint{callback: slot, ownsReturn: true}))
+	}
+	ok := C.QPdfView_override_virtual_owned_viewportSizeHint(unsafe.Pointer(this.h), slotHandle)
+	if !ok {
+		panic("miqt: can only override virtual methods for directly constructed types")
+	}
+}
+
 //export miqt_exec_callback_QPdfView_viewportSizeHint
 func miqt_exec_callback_QPdfView_viewportSizeHint(self *C.QPdfView, cb C.intptr_t) *C.QSize {
-	gofunc, ok := cgo.Handle(cb).Value().(func(super func() *qt6.QSize) *qt6.QSize)
+	callbackData, ok := cgo.Handle(cb).Value().(miqtVirtualCallback_QPdfView_viewportSizeHint)
 	if !ok {
 		panic("miqt: callback of non-callback type (heap corruption?)")
 	}
+	gofunc := callbackData.callback
 
 	virtualReturn := gofunc((&QPdfView{h: self}).callVirtualBase_ViewportSizeHint)
+	if callbackData.ownsReturn && virtualReturn != nil {
+		runtime.SetFinalizer(virtualReturn, nil)
+	}
 
 	return (*C.QSize)(virtualReturn.UnsafePointer())
 
@@ -1861,10 +1930,16 @@ func (this *QPdfView) callVirtualBase_InputMethodQuery(param1 qt6.InputMethodQue
 	return _goptr
 
 }
+
+type miqtVirtualCallback_QPdfView_inputMethodQuery struct {
+	callback   func(super func(param1 qt6.InputMethodQuery) *qt6.QVariant, param1 qt6.InputMethodQuery) *qt6.QVariant
+	ownsReturn bool
+}
+
 func (this *QPdfView) OnInputMethodQuery(slot func(super func(param1 qt6.InputMethodQuery) *qt6.QVariant, param1 qt6.InputMethodQuery) *qt6.QVariant) {
 	var slotHandle C.intptr_t
 	if slot != nil {
-		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QPdfView_inputMethodQuery{callback: slot}))
 	}
 	ok := C.QPdfView_override_virtual_inputMethodQuery(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
@@ -1872,17 +1947,34 @@ func (this *QPdfView) OnInputMethodQuery(slot func(super func(param1 qt6.InputMe
 	}
 }
 
+// OnInputMethodQueryOwned installs a virtual override that transfers
+// ownership of each non-nil returned Qt value object to C++.
+func (this *QPdfView) OnInputMethodQueryOwned(slot func(super func(param1 qt6.InputMethodQuery) *qt6.QVariant, param1 qt6.InputMethodQuery) *qt6.QVariant) {
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QPdfView_inputMethodQuery{callback: slot, ownsReturn: true}))
+	}
+	ok := C.QPdfView_override_virtual_owned_inputMethodQuery(unsafe.Pointer(this.h), slotHandle)
+	if !ok {
+		panic("miqt: can only override virtual methods for directly constructed types")
+	}
+}
+
 //export miqt_exec_callback_QPdfView_inputMethodQuery
 func miqt_exec_callback_QPdfView_inputMethodQuery(self *C.QPdfView, cb C.intptr_t, param1 C.int) *C.QVariant {
-	gofunc, ok := cgo.Handle(cb).Value().(func(super func(param1 qt6.InputMethodQuery) *qt6.QVariant, param1 qt6.InputMethodQuery) *qt6.QVariant)
+	callbackData, ok := cgo.Handle(cb).Value().(miqtVirtualCallback_QPdfView_inputMethodQuery)
 	if !ok {
 		panic("miqt: callback of non-callback type (heap corruption?)")
 	}
+	gofunc := callbackData.callback
 
 	// Convert all CABI parameters to Go parameters
 	slotval1 := (qt6.InputMethodQuery)(param1)
 
 	virtualReturn := gofunc((&QPdfView{h: self}).callVirtualBase_InputMethodQuery, slotval1)
+	if callbackData.ownsReturn && virtualReturn != nil {
+		runtime.SetFinalizer(virtualReturn, nil)
+	}
 
 	return (*C.QVariant)(virtualReturn.UnsafePointer())
 

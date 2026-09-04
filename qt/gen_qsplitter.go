@@ -500,10 +500,16 @@ func (this *QSplitter) callVirtualBase_SizeHint() *QSize {
 	return _goptr
 
 }
+
+type miqtVirtualCallback_QSplitter_sizeHint struct {
+	callback   func(super func() *QSize) *QSize
+	ownsReturn bool
+}
+
 func (this *QSplitter) OnSizeHint(slot func(super func() *QSize) *QSize) {
 	var slotHandle C.intptr_t
 	if slot != nil {
-		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QSplitter_sizeHint{callback: slot}))
 	}
 	ok := C.QSplitter_override_virtual_sizeHint(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
@@ -511,14 +517,31 @@ func (this *QSplitter) OnSizeHint(slot func(super func() *QSize) *QSize) {
 	}
 }
 
+// OnSizeHintOwned installs a virtual override that transfers
+// ownership of each non-nil returned Qt value object to C++.
+func (this *QSplitter) OnSizeHintOwned(slot func(super func() *QSize) *QSize) {
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QSplitter_sizeHint{callback: slot, ownsReturn: true}))
+	}
+	ok := C.QSplitter_override_virtual_owned_sizeHint(unsafe.Pointer(this.h), slotHandle)
+	if !ok {
+		panic("miqt: can only override virtual methods for directly constructed types")
+	}
+}
+
 //export miqt_exec_callback_QSplitter_sizeHint
 func miqt_exec_callback_QSplitter_sizeHint(self *C.QSplitter, cb C.intptr_t) *C.QSize {
-	gofunc, ok := cgo.Handle(cb).Value().(func(super func() *QSize) *QSize)
+	callbackData, ok := cgo.Handle(cb).Value().(miqtVirtualCallback_QSplitter_sizeHint)
 	if !ok {
 		panic("miqt: callback of non-callback type (heap corruption?)")
 	}
+	gofunc := callbackData.callback
 
 	virtualReturn := gofunc((&QSplitter{h: self}).callVirtualBase_SizeHint)
+	if callbackData.ownsReturn && virtualReturn != nil {
+		runtime.SetFinalizer(virtualReturn, nil)
+	}
 
 	return virtualReturn.cPointer()
 
@@ -531,10 +554,16 @@ func (this *QSplitter) callVirtualBase_MinimumSizeHint() *QSize {
 	return _goptr
 
 }
+
+type miqtVirtualCallback_QSplitter_minimumSizeHint struct {
+	callback   func(super func() *QSize) *QSize
+	ownsReturn bool
+}
+
 func (this *QSplitter) OnMinimumSizeHint(slot func(super func() *QSize) *QSize) {
 	var slotHandle C.intptr_t
 	if slot != nil {
-		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QSplitter_minimumSizeHint{callback: slot}))
 	}
 	ok := C.QSplitter_override_virtual_minimumSizeHint(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
@@ -542,14 +571,31 @@ func (this *QSplitter) OnMinimumSizeHint(slot func(super func() *QSize) *QSize) 
 	}
 }
 
+// OnMinimumSizeHintOwned installs a virtual override that transfers
+// ownership of each non-nil returned Qt value object to C++.
+func (this *QSplitter) OnMinimumSizeHintOwned(slot func(super func() *QSize) *QSize) {
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QSplitter_minimumSizeHint{callback: slot, ownsReturn: true}))
+	}
+	ok := C.QSplitter_override_virtual_owned_minimumSizeHint(unsafe.Pointer(this.h), slotHandle)
+	if !ok {
+		panic("miqt: can only override virtual methods for directly constructed types")
+	}
+}
+
 //export miqt_exec_callback_QSplitter_minimumSizeHint
 func miqt_exec_callback_QSplitter_minimumSizeHint(self *C.QSplitter, cb C.intptr_t) *C.QSize {
-	gofunc, ok := cgo.Handle(cb).Value().(func(super func() *QSize) *QSize)
+	callbackData, ok := cgo.Handle(cb).Value().(miqtVirtualCallback_QSplitter_minimumSizeHint)
 	if !ok {
 		panic("miqt: callback of non-callback type (heap corruption?)")
 	}
+	gofunc := callbackData.callback
 
 	virtualReturn := gofunc((&QSplitter{h: self}).callVirtualBase_MinimumSizeHint)
+	if callbackData.ownsReturn && virtualReturn != nil {
+		runtime.SetFinalizer(virtualReturn, nil)
+	}
 
 	return virtualReturn.cPointer()
 
@@ -1750,10 +1796,16 @@ func (this *QSplitter) callVirtualBase_InputMethodQuery(param1 InputMethodQuery)
 	return _goptr
 
 }
+
+type miqtVirtualCallback_QSplitter_inputMethodQuery struct {
+	callback   func(super func(param1 InputMethodQuery) *QVariant, param1 InputMethodQuery) *QVariant
+	ownsReturn bool
+}
+
 func (this *QSplitter) OnInputMethodQuery(slot func(super func(param1 InputMethodQuery) *QVariant, param1 InputMethodQuery) *QVariant) {
 	var slotHandle C.intptr_t
 	if slot != nil {
-		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QSplitter_inputMethodQuery{callback: slot}))
 	}
 	ok := C.QSplitter_override_virtual_inputMethodQuery(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
@@ -1761,17 +1813,34 @@ func (this *QSplitter) OnInputMethodQuery(slot func(super func(param1 InputMetho
 	}
 }
 
+// OnInputMethodQueryOwned installs a virtual override that transfers
+// ownership of each non-nil returned Qt value object to C++.
+func (this *QSplitter) OnInputMethodQueryOwned(slot func(super func(param1 InputMethodQuery) *QVariant, param1 InputMethodQuery) *QVariant) {
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QSplitter_inputMethodQuery{callback: slot, ownsReturn: true}))
+	}
+	ok := C.QSplitter_override_virtual_owned_inputMethodQuery(unsafe.Pointer(this.h), slotHandle)
+	if !ok {
+		panic("miqt: can only override virtual methods for directly constructed types")
+	}
+}
+
 //export miqt_exec_callback_QSplitter_inputMethodQuery
 func miqt_exec_callback_QSplitter_inputMethodQuery(self *C.QSplitter, cb C.intptr_t, param1 C.int) *C.QVariant {
-	gofunc, ok := cgo.Handle(cb).Value().(func(super func(param1 InputMethodQuery) *QVariant, param1 InputMethodQuery) *QVariant)
+	callbackData, ok := cgo.Handle(cb).Value().(miqtVirtualCallback_QSplitter_inputMethodQuery)
 	if !ok {
 		panic("miqt: callback of non-callback type (heap corruption?)")
 	}
+	gofunc := callbackData.callback
 
 	// Convert all CABI parameters to Go parameters
 	slotval1 := (InputMethodQuery)(param1)
 
 	virtualReturn := gofunc((&QSplitter{h: self}).callVirtualBase_InputMethodQuery, slotval1)
+	if callbackData.ownsReturn && virtualReturn != nil {
+		runtime.SetFinalizer(virtualReturn, nil)
+	}
 
 	return virtualReturn.cPointer()
 
@@ -2273,10 +2342,16 @@ func (this *QSplitterHandle) callVirtualBase_SizeHint() *QSize {
 	return _goptr
 
 }
+
+type miqtVirtualCallback_QSplitterHandle_sizeHint struct {
+	callback   func(super func() *QSize) *QSize
+	ownsReturn bool
+}
+
 func (this *QSplitterHandle) OnSizeHint(slot func(super func() *QSize) *QSize) {
 	var slotHandle C.intptr_t
 	if slot != nil {
-		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QSplitterHandle_sizeHint{callback: slot}))
 	}
 	ok := C.QSplitterHandle_override_virtual_sizeHint(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
@@ -2284,14 +2359,31 @@ func (this *QSplitterHandle) OnSizeHint(slot func(super func() *QSize) *QSize) {
 	}
 }
 
+// OnSizeHintOwned installs a virtual override that transfers
+// ownership of each non-nil returned Qt value object to C++.
+func (this *QSplitterHandle) OnSizeHintOwned(slot func(super func() *QSize) *QSize) {
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QSplitterHandle_sizeHint{callback: slot, ownsReturn: true}))
+	}
+	ok := C.QSplitterHandle_override_virtual_owned_sizeHint(unsafe.Pointer(this.h), slotHandle)
+	if !ok {
+		panic("miqt: can only override virtual methods for directly constructed types")
+	}
+}
+
 //export miqt_exec_callback_QSplitterHandle_sizeHint
 func miqt_exec_callback_QSplitterHandle_sizeHint(self *C.QSplitterHandle, cb C.intptr_t) *C.QSize {
-	gofunc, ok := cgo.Handle(cb).Value().(func(super func() *QSize) *QSize)
+	callbackData, ok := cgo.Handle(cb).Value().(miqtVirtualCallback_QSplitterHandle_sizeHint)
 	if !ok {
 		panic("miqt: callback of non-callback type (heap corruption?)")
 	}
+	gofunc := callbackData.callback
 
 	virtualReturn := gofunc((&QSplitterHandle{h: self}).callVirtualBase_SizeHint)
+	if callbackData.ownsReturn && virtualReturn != nil {
+		runtime.SetFinalizer(virtualReturn, nil)
+	}
 
 	return virtualReturn.cPointer()
 
@@ -2545,10 +2637,16 @@ func (this *QSplitterHandle) callVirtualBase_MinimumSizeHint() *QSize {
 	return _goptr
 
 }
+
+type miqtVirtualCallback_QSplitterHandle_minimumSizeHint struct {
+	callback   func(super func() *QSize) *QSize
+	ownsReturn bool
+}
+
 func (this *QSplitterHandle) OnMinimumSizeHint(slot func(super func() *QSize) *QSize) {
 	var slotHandle C.intptr_t
 	if slot != nil {
-		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QSplitterHandle_minimumSizeHint{callback: slot}))
 	}
 	ok := C.QSplitterHandle_override_virtual_minimumSizeHint(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
@@ -2556,14 +2654,31 @@ func (this *QSplitterHandle) OnMinimumSizeHint(slot func(super func() *QSize) *Q
 	}
 }
 
+// OnMinimumSizeHintOwned installs a virtual override that transfers
+// ownership of each non-nil returned Qt value object to C++.
+func (this *QSplitterHandle) OnMinimumSizeHintOwned(slot func(super func() *QSize) *QSize) {
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QSplitterHandle_minimumSizeHint{callback: slot, ownsReturn: true}))
+	}
+	ok := C.QSplitterHandle_override_virtual_owned_minimumSizeHint(unsafe.Pointer(this.h), slotHandle)
+	if !ok {
+		panic("miqt: can only override virtual methods for directly constructed types")
+	}
+}
+
 //export miqt_exec_callback_QSplitterHandle_minimumSizeHint
 func miqt_exec_callback_QSplitterHandle_minimumSizeHint(self *C.QSplitterHandle, cb C.intptr_t) *C.QSize {
-	gofunc, ok := cgo.Handle(cb).Value().(func(super func() *QSize) *QSize)
+	callbackData, ok := cgo.Handle(cb).Value().(miqtVirtualCallback_QSplitterHandle_minimumSizeHint)
 	if !ok {
 		panic("miqt: callback of non-callback type (heap corruption?)")
 	}
+	gofunc := callbackData.callback
 
 	virtualReturn := gofunc((&QSplitterHandle{h: self}).callVirtualBase_MinimumSizeHint)
+	if callbackData.ownsReturn && virtualReturn != nil {
+		runtime.SetFinalizer(virtualReturn, nil)
+	}
 
 	return virtualReturn.cPointer()
 
@@ -3464,10 +3579,16 @@ func (this *QSplitterHandle) callVirtualBase_InputMethodQuery(param1 InputMethod
 	return _goptr
 
 }
+
+type miqtVirtualCallback_QSplitterHandle_inputMethodQuery struct {
+	callback   func(super func(param1 InputMethodQuery) *QVariant, param1 InputMethodQuery) *QVariant
+	ownsReturn bool
+}
+
 func (this *QSplitterHandle) OnInputMethodQuery(slot func(super func(param1 InputMethodQuery) *QVariant, param1 InputMethodQuery) *QVariant) {
 	var slotHandle C.intptr_t
 	if slot != nil {
-		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QSplitterHandle_inputMethodQuery{callback: slot}))
 	}
 	ok := C.QSplitterHandle_override_virtual_inputMethodQuery(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
@@ -3475,17 +3596,34 @@ func (this *QSplitterHandle) OnInputMethodQuery(slot func(super func(param1 Inpu
 	}
 }
 
+// OnInputMethodQueryOwned installs a virtual override that transfers
+// ownership of each non-nil returned Qt value object to C++.
+func (this *QSplitterHandle) OnInputMethodQueryOwned(slot func(super func(param1 InputMethodQuery) *QVariant, param1 InputMethodQuery) *QVariant) {
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QSplitterHandle_inputMethodQuery{callback: slot, ownsReturn: true}))
+	}
+	ok := C.QSplitterHandle_override_virtual_owned_inputMethodQuery(unsafe.Pointer(this.h), slotHandle)
+	if !ok {
+		panic("miqt: can only override virtual methods for directly constructed types")
+	}
+}
+
 //export miqt_exec_callback_QSplitterHandle_inputMethodQuery
 func miqt_exec_callback_QSplitterHandle_inputMethodQuery(self *C.QSplitterHandle, cb C.intptr_t, param1 C.int) *C.QVariant {
-	gofunc, ok := cgo.Handle(cb).Value().(func(super func(param1 InputMethodQuery) *QVariant, param1 InputMethodQuery) *QVariant)
+	callbackData, ok := cgo.Handle(cb).Value().(miqtVirtualCallback_QSplitterHandle_inputMethodQuery)
 	if !ok {
 		panic("miqt: callback of non-callback type (heap corruption?)")
 	}
+	gofunc := callbackData.callback
 
 	// Convert all CABI parameters to Go parameters
 	slotval1 := (InputMethodQuery)(param1)
 
 	virtualReturn := gofunc((&QSplitterHandle{h: self}).callVirtualBase_InputMethodQuery, slotval1)
+	if callbackData.ownsReturn && virtualReturn != nil {
+		runtime.SetFinalizer(virtualReturn, nil)
+	}
 
 	return virtualReturn.cPointer()
 

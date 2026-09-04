@@ -379,10 +379,16 @@ func (this *QwtPlotRescaler) callVirtualBase_ExpandScale(axis int, oldSize *qt.Q
 	return _goptr
 
 }
+
+type miqtVirtualCallback_QwtPlotRescaler_expandScale struct {
+	callback   func(super func(axis int, oldSize *qt.QSize, newSize *qt.QSize) *QwtInterval, axis int, oldSize *qt.QSize, newSize *qt.QSize) *QwtInterval
+	ownsReturn bool
+}
+
 func (this *QwtPlotRescaler) OnExpandScale(slot func(super func(axis int, oldSize *qt.QSize, newSize *qt.QSize) *QwtInterval, axis int, oldSize *qt.QSize, newSize *qt.QSize) *QwtInterval) {
 	var slotHandle C.intptr_t
 	if slot != nil {
-		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QwtPlotRescaler_expandScale{callback: slot}))
 	}
 	ok := C.QwtPlotRescaler_override_virtual_expandScale(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
@@ -390,12 +396,26 @@ func (this *QwtPlotRescaler) OnExpandScale(slot func(super func(axis int, oldSiz
 	}
 }
 
+// OnExpandScaleOwned installs a virtual override that transfers
+// ownership of each non-nil returned Qt value object to C++.
+func (this *QwtPlotRescaler) OnExpandScaleOwned(slot func(super func(axis int, oldSize *qt.QSize, newSize *qt.QSize) *QwtInterval, axis int, oldSize *qt.QSize, newSize *qt.QSize) *QwtInterval) {
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QwtPlotRescaler_expandScale{callback: slot, ownsReturn: true}))
+	}
+	ok := C.QwtPlotRescaler_override_virtual_owned_expandScale(unsafe.Pointer(this.h), slotHandle)
+	if !ok {
+		panic("miqt: can only override virtual methods for directly constructed types")
+	}
+}
+
 //export miqt_exec_callback_QwtPlotRescaler_expandScale
 func miqt_exec_callback_QwtPlotRescaler_expandScale(self *C.QwtPlotRescaler, cb C.intptr_t, axis C.int, oldSize *C.QSize, newSize *C.QSize) *C.QwtInterval {
-	gofunc, ok := cgo.Handle(cb).Value().(func(super func(axis int, oldSize *qt.QSize, newSize *qt.QSize) *QwtInterval, axis int, oldSize *qt.QSize, newSize *qt.QSize) *QwtInterval)
+	callbackData, ok := cgo.Handle(cb).Value().(miqtVirtualCallback_QwtPlotRescaler_expandScale)
 	if !ok {
 		panic("miqt: callback of non-callback type (heap corruption?)")
 	}
+	gofunc := callbackData.callback
 
 	// Convert all CABI parameters to Go parameters
 	slotval1 := (int)(axis)
@@ -405,6 +425,9 @@ func miqt_exec_callback_QwtPlotRescaler_expandScale(self *C.QwtPlotRescaler, cb 
 	slotval3 := qt.UnsafeNewQSize(unsafe.Pointer(newSize))
 
 	virtualReturn := gofunc((&QwtPlotRescaler{h: self}).callVirtualBase_ExpandScale, slotval1, slotval2, slotval3)
+	if callbackData.ownsReturn && virtualReturn != nil {
+		runtime.SetFinalizer(virtualReturn, nil)
+	}
 
 	return virtualReturn.cPointer()
 
@@ -417,10 +440,16 @@ func (this *QwtPlotRescaler) callVirtualBase_SyncScale(axis int, reference *QwtI
 	return _goptr
 
 }
+
+type miqtVirtualCallback_QwtPlotRescaler_syncScale struct {
+	callback   func(super func(axis int, reference *QwtInterval, size *qt.QSize) *QwtInterval, axis int, reference *QwtInterval, size *qt.QSize) *QwtInterval
+	ownsReturn bool
+}
+
 func (this *QwtPlotRescaler) OnSyncScale(slot func(super func(axis int, reference *QwtInterval, size *qt.QSize) *QwtInterval, axis int, reference *QwtInterval, size *qt.QSize) *QwtInterval) {
 	var slotHandle C.intptr_t
 	if slot != nil {
-		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QwtPlotRescaler_syncScale{callback: slot}))
 	}
 	ok := C.QwtPlotRescaler_override_virtual_syncScale(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
@@ -428,12 +457,26 @@ func (this *QwtPlotRescaler) OnSyncScale(slot func(super func(axis int, referenc
 	}
 }
 
+// OnSyncScaleOwned installs a virtual override that transfers
+// ownership of each non-nil returned Qt value object to C++.
+func (this *QwtPlotRescaler) OnSyncScaleOwned(slot func(super func(axis int, reference *QwtInterval, size *qt.QSize) *QwtInterval, axis int, reference *QwtInterval, size *qt.QSize) *QwtInterval) {
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QwtPlotRescaler_syncScale{callback: slot, ownsReturn: true}))
+	}
+	ok := C.QwtPlotRescaler_override_virtual_owned_syncScale(unsafe.Pointer(this.h), slotHandle)
+	if !ok {
+		panic("miqt: can only override virtual methods for directly constructed types")
+	}
+}
+
 //export miqt_exec_callback_QwtPlotRescaler_syncScale
 func miqt_exec_callback_QwtPlotRescaler_syncScale(self *C.QwtPlotRescaler, cb C.intptr_t, axis C.int, reference *C.QwtInterval, size *C.QSize) *C.QwtInterval {
-	gofunc, ok := cgo.Handle(cb).Value().(func(super func(axis int, reference *QwtInterval, size *qt.QSize) *QwtInterval, axis int, reference *QwtInterval, size *qt.QSize) *QwtInterval)
+	callbackData, ok := cgo.Handle(cb).Value().(miqtVirtualCallback_QwtPlotRescaler_syncScale)
 	if !ok {
 		panic("miqt: callback of non-callback type (heap corruption?)")
 	}
+	gofunc := callbackData.callback
 
 	// Convert all CABI parameters to Go parameters
 	slotval1 := (int)(axis)
@@ -443,6 +486,9 @@ func miqt_exec_callback_QwtPlotRescaler_syncScale(self *C.QwtPlotRescaler, cb C.
 	slotval3 := qt.UnsafeNewQSize(unsafe.Pointer(size))
 
 	virtualReturn := gofunc((&QwtPlotRescaler{h: self}).callVirtualBase_SyncScale, slotval1, slotval2, slotval3)
+	if callbackData.ownsReturn && virtualReturn != nil {
+		runtime.SetFinalizer(virtualReturn, nil)
+	}
 
 	return virtualReturn.cPointer()
 

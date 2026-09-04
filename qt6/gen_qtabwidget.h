@@ -169,8 +169,10 @@ void QTabWidget_setCornerWidget2(QTabWidget* self, QWidget* w, int corner);
 QWidget* QTabWidget_cornerWidgetWithCorner(const QTabWidget* self, int corner);
 
 bool QTabWidget_override_virtual_sizeHint(void* self, intptr_t slot);
+bool QTabWidget_override_virtual_owned_sizeHint(void* self, intptr_t slot);
 QSize* QTabWidget_virtualbase_sizeHint(const void* self);
 bool QTabWidget_override_virtual_minimumSizeHint(void* self, intptr_t slot);
+bool QTabWidget_override_virtual_owned_minimumSizeHint(void* self, intptr_t slot);
 QSize* QTabWidget_virtualbase_minimumSizeHint(const void* self);
 bool QTabWidget_override_virtual_heightForWidth(void* self, intptr_t slot);
 int QTabWidget_virtualbase_heightForWidth(const void* self, int width);
@@ -253,6 +255,7 @@ QPainter* QTabWidget_virtualbase_sharedPainter(const void* self);
 bool QTabWidget_override_virtual_inputMethodEvent(void* self, intptr_t slot);
 void QTabWidget_virtualbase_inputMethodEvent(void* self, QInputMethodEvent* param1);
 bool QTabWidget_override_virtual_inputMethodQuery(void* self, intptr_t slot);
+bool QTabWidget_override_virtual_owned_inputMethodQuery(void* self, intptr_t slot);
 QVariant* QTabWidget_virtualbase_inputMethodQuery(const void* self, int param1);
 bool QTabWidget_override_virtual_focusNextPrevChild(void* self, intptr_t slot);
 bool QTabWidget_virtualbase_focusNextPrevChild(void* self, bool next);

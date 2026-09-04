@@ -32,8 +32,10 @@ void QAbstractFileIconProvider_setOptions(QAbstractFileIconProvider* self, int o
 int QAbstractFileIconProvider_options(const QAbstractFileIconProvider* self);
 
 bool QAbstractFileIconProvider_override_virtual_icon(void* self, intptr_t slot);
+bool QAbstractFileIconProvider_override_virtual_owned_icon(void* self, intptr_t slot);
 QIcon* QAbstractFileIconProvider_virtualbase_icon(const void* self, int param1);
 bool QAbstractFileIconProvider_override_virtual_iconWithQFileInfo(void* self, intptr_t slot);
+bool QAbstractFileIconProvider_override_virtual_owned_iconWithQFileInfo(void* self, intptr_t slot);
 QIcon* QAbstractFileIconProvider_virtualbase_iconWithQFileInfo(const void* self, QFileInfo* param1);
 bool QAbstractFileIconProvider_override_virtual_type(void* self, intptr_t slot);
 struct miqt_string QAbstractFileIconProvider_virtualbase_type(const void* self, QFileInfo* param1);

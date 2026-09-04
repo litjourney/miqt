@@ -72,6 +72,7 @@ bool QImageIOHandler_virtualbase_read(void* self, QImage* image);
 bool QImageIOHandler_override_virtual_write(void* self, intptr_t slot);
 bool QImageIOHandler_virtualbase_write(void* self, QImage* image);
 bool QImageIOHandler_override_virtual_option(void* self, intptr_t slot);
+bool QImageIOHandler_override_virtual_owned_option(void* self, intptr_t slot);
 QVariant* QImageIOHandler_virtualbase_option(const void* self, int option);
 bool QImageIOHandler_override_virtual_setOption(void* self, intptr_t slot);
 void QImageIOHandler_virtualbase_setOption(void* self, int option, QVariant* value);
@@ -90,6 +91,7 @@ int QImageIOHandler_virtualbase_nextImageDelay(const void* self);
 bool QImageIOHandler_override_virtual_currentImageNumber(void* self, intptr_t slot);
 int QImageIOHandler_virtualbase_currentImageNumber(const void* self);
 bool QImageIOHandler_override_virtual_currentImageRect(void* self, intptr_t slot);
+bool QImageIOHandler_override_virtual_owned_currentImageRect(void* self, intptr_t slot);
 QRect* QImageIOHandler_virtualbase_currentImageRect(const void* self);
 
 void QImageIOHandler_delete(QImageIOHandler* self);

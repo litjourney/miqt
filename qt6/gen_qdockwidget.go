@@ -654,10 +654,16 @@ func (this *QDockWidget) callVirtualBase_SizeHint() *QSize {
 	return _goptr
 
 }
+
+type miqtVirtualCallback_QDockWidget_sizeHint struct {
+	callback   func(super func() *QSize) *QSize
+	ownsReturn bool
+}
+
 func (this *QDockWidget) OnSizeHint(slot func(super func() *QSize) *QSize) {
 	var slotHandle C.intptr_t
 	if slot != nil {
-		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QDockWidget_sizeHint{callback: slot}))
 	}
 	ok := C.QDockWidget_override_virtual_sizeHint(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
@@ -665,14 +671,31 @@ func (this *QDockWidget) OnSizeHint(slot func(super func() *QSize) *QSize) {
 	}
 }
 
+// OnSizeHintOwned installs a virtual override that transfers
+// ownership of each non-nil returned Qt value object to C++.
+func (this *QDockWidget) OnSizeHintOwned(slot func(super func() *QSize) *QSize) {
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QDockWidget_sizeHint{callback: slot, ownsReturn: true}))
+	}
+	ok := C.QDockWidget_override_virtual_owned_sizeHint(unsafe.Pointer(this.h), slotHandle)
+	if !ok {
+		panic("miqt: can only override virtual methods for directly constructed types")
+	}
+}
+
 //export miqt_exec_callback_QDockWidget_sizeHint
 func miqt_exec_callback_QDockWidget_sizeHint(self *C.QDockWidget, cb C.intptr_t) *C.QSize {
-	gofunc, ok := cgo.Handle(cb).Value().(func(super func() *QSize) *QSize)
+	callbackData, ok := cgo.Handle(cb).Value().(miqtVirtualCallback_QDockWidget_sizeHint)
 	if !ok {
 		panic("miqt: callback of non-callback type (heap corruption?)")
 	}
+	gofunc := callbackData.callback
 
 	virtualReturn := gofunc((&QDockWidget{h: self}).callVirtualBase_SizeHint)
+	if callbackData.ownsReturn && virtualReturn != nil {
+		runtime.SetFinalizer(virtualReturn, nil)
+	}
 
 	return virtualReturn.cPointer()
 
@@ -685,10 +708,16 @@ func (this *QDockWidget) callVirtualBase_MinimumSizeHint() *QSize {
 	return _goptr
 
 }
+
+type miqtVirtualCallback_QDockWidget_minimumSizeHint struct {
+	callback   func(super func() *QSize) *QSize
+	ownsReturn bool
+}
+
 func (this *QDockWidget) OnMinimumSizeHint(slot func(super func() *QSize) *QSize) {
 	var slotHandle C.intptr_t
 	if slot != nil {
-		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QDockWidget_minimumSizeHint{callback: slot}))
 	}
 	ok := C.QDockWidget_override_virtual_minimumSizeHint(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
@@ -696,14 +725,31 @@ func (this *QDockWidget) OnMinimumSizeHint(slot func(super func() *QSize) *QSize
 	}
 }
 
+// OnMinimumSizeHintOwned installs a virtual override that transfers
+// ownership of each non-nil returned Qt value object to C++.
+func (this *QDockWidget) OnMinimumSizeHintOwned(slot func(super func() *QSize) *QSize) {
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QDockWidget_minimumSizeHint{callback: slot, ownsReturn: true}))
+	}
+	ok := C.QDockWidget_override_virtual_owned_minimumSizeHint(unsafe.Pointer(this.h), slotHandle)
+	if !ok {
+		panic("miqt: can only override virtual methods for directly constructed types")
+	}
+}
+
 //export miqt_exec_callback_QDockWidget_minimumSizeHint
 func miqt_exec_callback_QDockWidget_minimumSizeHint(self *C.QDockWidget, cb C.intptr_t) *C.QSize {
-	gofunc, ok := cgo.Handle(cb).Value().(func(super func() *QSize) *QSize)
+	callbackData, ok := cgo.Handle(cb).Value().(miqtVirtualCallback_QDockWidget_minimumSizeHint)
 	if !ok {
 		panic("miqt: callback of non-callback type (heap corruption?)")
 	}
+	gofunc := callbackData.callback
 
 	virtualReturn := gofunc((&QDockWidget{h: self}).callVirtualBase_MinimumSizeHint)
+	if callbackData.ownsReturn && virtualReturn != nil {
+		runtime.SetFinalizer(virtualReturn, nil)
+	}
 
 	return virtualReturn.cPointer()
 
@@ -1664,10 +1710,16 @@ func (this *QDockWidget) callVirtualBase_InputMethodQuery(param1 InputMethodQuer
 	return _goptr
 
 }
+
+type miqtVirtualCallback_QDockWidget_inputMethodQuery struct {
+	callback   func(super func(param1 InputMethodQuery) *QVariant, param1 InputMethodQuery) *QVariant
+	ownsReturn bool
+}
+
 func (this *QDockWidget) OnInputMethodQuery(slot func(super func(param1 InputMethodQuery) *QVariant, param1 InputMethodQuery) *QVariant) {
 	var slotHandle C.intptr_t
 	if slot != nil {
-		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QDockWidget_inputMethodQuery{callback: slot}))
 	}
 	ok := C.QDockWidget_override_virtual_inputMethodQuery(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
@@ -1675,17 +1727,34 @@ func (this *QDockWidget) OnInputMethodQuery(slot func(super func(param1 InputMet
 	}
 }
 
+// OnInputMethodQueryOwned installs a virtual override that transfers
+// ownership of each non-nil returned Qt value object to C++.
+func (this *QDockWidget) OnInputMethodQueryOwned(slot func(super func(param1 InputMethodQuery) *QVariant, param1 InputMethodQuery) *QVariant) {
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QDockWidget_inputMethodQuery{callback: slot, ownsReturn: true}))
+	}
+	ok := C.QDockWidget_override_virtual_owned_inputMethodQuery(unsafe.Pointer(this.h), slotHandle)
+	if !ok {
+		panic("miqt: can only override virtual methods for directly constructed types")
+	}
+}
+
 //export miqt_exec_callback_QDockWidget_inputMethodQuery
 func miqt_exec_callback_QDockWidget_inputMethodQuery(self *C.QDockWidget, cb C.intptr_t, param1 C.int) *C.QVariant {
-	gofunc, ok := cgo.Handle(cb).Value().(func(super func(param1 InputMethodQuery) *QVariant, param1 InputMethodQuery) *QVariant)
+	callbackData, ok := cgo.Handle(cb).Value().(miqtVirtualCallback_QDockWidget_inputMethodQuery)
 	if !ok {
 		panic("miqt: callback of non-callback type (heap corruption?)")
 	}
+	gofunc := callbackData.callback
 
 	// Convert all CABI parameters to Go parameters
 	slotval1 := (InputMethodQuery)(param1)
 
 	virtualReturn := gofunc((&QDockWidget{h: self}).callVirtualBase_InputMethodQuery, slotval1)
+	if callbackData.ownsReturn && virtualReturn != nil {
+		runtime.SetFinalizer(virtualReturn, nil)
+	}
 
 	return virtualReturn.cPointer()
 

@@ -210,18 +210,23 @@ void QGraphicsWidget_virtualbase_paint(void* self, QPainter* painter, QStyleOpti
 bool QGraphicsWidget_override_virtual_paintWindowFrame(void* self, intptr_t slot);
 void QGraphicsWidget_virtualbase_paintWindowFrame(void* self, QPainter* painter, QStyleOptionGraphicsItem* option, QWidget* widget);
 bool QGraphicsWidget_override_virtual_boundingRect(void* self, intptr_t slot);
+bool QGraphicsWidget_override_virtual_owned_boundingRect(void* self, intptr_t slot);
 QRectF* QGraphicsWidget_virtualbase_boundingRect(const void* self);
 bool QGraphicsWidget_override_virtual_shape(void* self, intptr_t slot);
+bool QGraphicsWidget_override_virtual_owned_shape(void* self, intptr_t slot);
 QPainterPath* QGraphicsWidget_virtualbase_shape(const void* self);
 bool QGraphicsWidget_override_virtual_initStyleOption(void* self, intptr_t slot);
 void QGraphicsWidget_virtualbase_initStyleOption(const void* self, QStyleOption* option);
 bool QGraphicsWidget_override_virtual_sizeHint(void* self, intptr_t slot);
+bool QGraphicsWidget_override_virtual_owned_sizeHint(void* self, intptr_t slot);
 QSizeF* QGraphicsWidget_virtualbase_sizeHint(const void* self, int which, QSizeF* constraint);
 bool QGraphicsWidget_override_virtual_updateGeometry(void* self, intptr_t slot);
 void QGraphicsWidget_virtualbase_updateGeometry(void* self);
 bool QGraphicsWidget_override_virtual_itemChange(void* self, intptr_t slot);
+bool QGraphicsWidget_override_virtual_owned_itemChange(void* self, intptr_t slot);
 QVariant* QGraphicsWidget_virtualbase_itemChange(void* self, int change, QVariant* value);
 bool QGraphicsWidget_override_virtual_propertyChange(void* self, intptr_t slot);
+bool QGraphicsWidget_override_virtual_owned_propertyChange(void* self, intptr_t slot);
 QVariant* QGraphicsWidget_virtualbase_propertyChange(void* self, struct miqt_string propertyName, QVariant* value);
 bool QGraphicsWidget_override_virtual_sceneEvent(void* self, intptr_t slot);
 bool QGraphicsWidget_virtualbase_sceneEvent(void* self, QEvent* event);
@@ -286,6 +291,7 @@ bool QGraphicsWidget_virtualbase_collidesWithPath(const void* self, QPainterPath
 bool QGraphicsWidget_override_virtual_isObscuredBy(void* self, intptr_t slot);
 bool QGraphicsWidget_virtualbase_isObscuredBy(const void* self, QGraphicsItem* item);
 bool QGraphicsWidget_override_virtual_opaqueArea(void* self, intptr_t slot);
+bool QGraphicsWidget_override_virtual_owned_opaqueArea(void* self, intptr_t slot);
 QPainterPath* QGraphicsWidget_virtualbase_opaqueArea(const void* self);
 bool QGraphicsWidget_override_virtual_sceneEventFilter(void* self, intptr_t slot);
 bool QGraphicsWidget_virtualbase_sceneEventFilter(void* self, QGraphicsItem* watched, QEvent* event);
@@ -318,12 +324,14 @@ void QGraphicsWidget_virtualbase_wheelEvent(void* self, QGraphicsSceneWheelEvent
 bool QGraphicsWidget_override_virtual_inputMethodEvent(void* self, intptr_t slot);
 void QGraphicsWidget_virtualbase_inputMethodEvent(void* self, QInputMethodEvent* event);
 bool QGraphicsWidget_override_virtual_inputMethodQuery(void* self, intptr_t slot);
+bool QGraphicsWidget_override_virtual_owned_inputMethodQuery(void* self, intptr_t slot);
 QVariant* QGraphicsWidget_virtualbase_inputMethodQuery(const void* self, int query);
 bool QGraphicsWidget_override_virtual_supportsExtension(void* self, intptr_t slot);
 bool QGraphicsWidget_virtualbase_supportsExtension(const void* self, int extension);
 bool QGraphicsWidget_override_virtual_setExtension(void* self, intptr_t slot);
 void QGraphicsWidget_virtualbase_setExtension(void* self, int extension, QVariant* variant);
 bool QGraphicsWidget_override_virtual_extension(void* self, intptr_t slot);
+bool QGraphicsWidget_override_virtual_owned_extension(void* self, intptr_t slot);
 QVariant* QGraphicsWidget_virtualbase_extension(const void* self, QVariant* variant);
 
 void QGraphicsWidget_protectedbase_updateMicroFocus(bool* _dynamic_cast_ok, void* self);

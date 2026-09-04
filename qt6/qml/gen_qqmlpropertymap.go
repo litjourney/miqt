@@ -312,10 +312,16 @@ func (this *QQmlPropertyMap) callVirtualBase_UpdateValue(key string, input *qt6.
 	return _goptr
 
 }
+
+type miqtVirtualCallback_QQmlPropertyMap_updateValue struct {
+	callback   func(super func(key string, input *qt6.QVariant) *qt6.QVariant, key string, input *qt6.QVariant) *qt6.QVariant
+	ownsReturn bool
+}
+
 func (this *QQmlPropertyMap) OnUpdateValue(slot func(super func(key string, input *qt6.QVariant) *qt6.QVariant, key string, input *qt6.QVariant) *qt6.QVariant) {
 	var slotHandle C.intptr_t
 	if slot != nil {
-		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QQmlPropertyMap_updateValue{callback: slot}))
 	}
 	ok := C.QQmlPropertyMap_override_virtual_updateValue(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
@@ -323,12 +329,26 @@ func (this *QQmlPropertyMap) OnUpdateValue(slot func(super func(key string, inpu
 	}
 }
 
+// OnUpdateValueOwned installs a virtual override that transfers
+// ownership of each non-nil returned Qt value object to C++.
+func (this *QQmlPropertyMap) OnUpdateValueOwned(slot func(super func(key string, input *qt6.QVariant) *qt6.QVariant, key string, input *qt6.QVariant) *qt6.QVariant) {
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QQmlPropertyMap_updateValue{callback: slot, ownsReturn: true}))
+	}
+	ok := C.QQmlPropertyMap_override_virtual_owned_updateValue(unsafe.Pointer(this.h), slotHandle)
+	if !ok {
+		panic("miqt: can only override virtual methods for directly constructed types")
+	}
+}
+
 //export miqt_exec_callback_QQmlPropertyMap_updateValue
 func miqt_exec_callback_QQmlPropertyMap_updateValue(self *C.QQmlPropertyMap, cb C.intptr_t, key C.struct_miqt_string, input *C.QVariant) *C.QVariant {
-	gofunc, ok := cgo.Handle(cb).Value().(func(super func(key string, input *qt6.QVariant) *qt6.QVariant, key string, input *qt6.QVariant) *qt6.QVariant)
+	callbackData, ok := cgo.Handle(cb).Value().(miqtVirtualCallback_QQmlPropertyMap_updateValue)
 	if !ok {
 		panic("miqt: callback of non-callback type (heap corruption?)")
 	}
+	gofunc := callbackData.callback
 
 	// Convert all CABI parameters to Go parameters
 	var key_ms C.struct_miqt_string = key
@@ -338,6 +358,9 @@ func miqt_exec_callback_QQmlPropertyMap_updateValue(self *C.QQmlPropertyMap, cb 
 	slotval2 := qt6.UnsafeNewQVariant(unsafe.Pointer(input))
 
 	virtualReturn := gofunc((&QQmlPropertyMap{h: self}).callVirtualBase_UpdateValue, slotval1, slotval2)
+	if callbackData.ownsReturn && virtualReturn != nil {
+		runtime.SetFinalizer(virtualReturn, nil)
+	}
 
 	return (*C.QVariant)(virtualReturn.UnsafePointer())
 

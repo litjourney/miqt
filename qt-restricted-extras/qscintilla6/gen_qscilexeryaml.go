@@ -661,10 +661,16 @@ func (this *QsciLexerYAML) callVirtualBase_Color(style int) *qt6.QColor {
 	return _goptr
 
 }
+
+type miqtVirtualCallback_QsciLexerYAML_color struct {
+	callback   func(super func(style int) *qt6.QColor, style int) *qt6.QColor
+	ownsReturn bool
+}
+
 func (this *QsciLexerYAML) OnColor(slot func(super func(style int) *qt6.QColor, style int) *qt6.QColor) {
 	var slotHandle C.intptr_t
 	if slot != nil {
-		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QsciLexerYAML_color{callback: slot}))
 	}
 	ok := C.QsciLexerYAML_override_virtual_color(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
@@ -672,17 +678,34 @@ func (this *QsciLexerYAML) OnColor(slot func(super func(style int) *qt6.QColor, 
 	}
 }
 
+// OnColorOwned installs a virtual override that transfers
+// ownership of each non-nil returned Qt value object to C++.
+func (this *QsciLexerYAML) OnColorOwned(slot func(super func(style int) *qt6.QColor, style int) *qt6.QColor) {
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QsciLexerYAML_color{callback: slot, ownsReturn: true}))
+	}
+	ok := C.QsciLexerYAML_override_virtual_owned_color(unsafe.Pointer(this.h), slotHandle)
+	if !ok {
+		panic("miqt: can only override virtual methods for directly constructed types")
+	}
+}
+
 //export miqt_exec_callback_QsciLexerYAML_color
 func miqt_exec_callback_QsciLexerYAML_color(self *C.QsciLexerYAML, cb C.intptr_t, style C.int) *C.QColor {
-	gofunc, ok := cgo.Handle(cb).Value().(func(super func(style int) *qt6.QColor, style int) *qt6.QColor)
+	callbackData, ok := cgo.Handle(cb).Value().(miqtVirtualCallback_QsciLexerYAML_color)
 	if !ok {
 		panic("miqt: callback of non-callback type (heap corruption?)")
 	}
+	gofunc := callbackData.callback
 
 	// Convert all CABI parameters to Go parameters
 	slotval1 := (int)(style)
 
 	virtualReturn := gofunc((&QsciLexerYAML{h: self}).callVirtualBase_Color, slotval1)
+	if callbackData.ownsReturn && virtualReturn != nil {
+		runtime.SetFinalizer(virtualReturn, nil)
+	}
 
 	return (*C.QColor)(virtualReturn.UnsafePointer())
 
@@ -727,10 +750,16 @@ func (this *QsciLexerYAML) callVirtualBase_Font(style int) *qt6.QFont {
 	return _goptr
 
 }
+
+type miqtVirtualCallback_QsciLexerYAML_font struct {
+	callback   func(super func(style int) *qt6.QFont, style int) *qt6.QFont
+	ownsReturn bool
+}
+
 func (this *QsciLexerYAML) OnFont(slot func(super func(style int) *qt6.QFont, style int) *qt6.QFont) {
 	var slotHandle C.intptr_t
 	if slot != nil {
-		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QsciLexerYAML_font{callback: slot}))
 	}
 	ok := C.QsciLexerYAML_override_virtual_font(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
@@ -738,17 +767,34 @@ func (this *QsciLexerYAML) OnFont(slot func(super func(style int) *qt6.QFont, st
 	}
 }
 
+// OnFontOwned installs a virtual override that transfers
+// ownership of each non-nil returned Qt value object to C++.
+func (this *QsciLexerYAML) OnFontOwned(slot func(super func(style int) *qt6.QFont, style int) *qt6.QFont) {
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QsciLexerYAML_font{callback: slot, ownsReturn: true}))
+	}
+	ok := C.QsciLexerYAML_override_virtual_owned_font(unsafe.Pointer(this.h), slotHandle)
+	if !ok {
+		panic("miqt: can only override virtual methods for directly constructed types")
+	}
+}
+
 //export miqt_exec_callback_QsciLexerYAML_font
 func miqt_exec_callback_QsciLexerYAML_font(self *C.QsciLexerYAML, cb C.intptr_t, style C.int) *C.QFont {
-	gofunc, ok := cgo.Handle(cb).Value().(func(super func(style int) *qt6.QFont, style int) *qt6.QFont)
+	callbackData, ok := cgo.Handle(cb).Value().(miqtVirtualCallback_QsciLexerYAML_font)
 	if !ok {
 		panic("miqt: callback of non-callback type (heap corruption?)")
 	}
+	gofunc := callbackData.callback
 
 	// Convert all CABI parameters to Go parameters
 	slotval1 := (int)(style)
 
 	virtualReturn := gofunc((&QsciLexerYAML{h: self}).callVirtualBase_Font, slotval1)
+	if callbackData.ownsReturn && virtualReturn != nil {
+		runtime.SetFinalizer(virtualReturn, nil)
+	}
 
 	return (*C.QFont)(virtualReturn.UnsafePointer())
 
@@ -882,10 +928,16 @@ func (this *QsciLexerYAML) callVirtualBase_Paper(style int) *qt6.QColor {
 	return _goptr
 
 }
+
+type miqtVirtualCallback_QsciLexerYAML_paper struct {
+	callback   func(super func(style int) *qt6.QColor, style int) *qt6.QColor
+	ownsReturn bool
+}
+
 func (this *QsciLexerYAML) OnPaper(slot func(super func(style int) *qt6.QColor, style int) *qt6.QColor) {
 	var slotHandle C.intptr_t
 	if slot != nil {
-		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QsciLexerYAML_paper{callback: slot}))
 	}
 	ok := C.QsciLexerYAML_override_virtual_paper(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
@@ -893,17 +945,34 @@ func (this *QsciLexerYAML) OnPaper(slot func(super func(style int) *qt6.QColor, 
 	}
 }
 
+// OnPaperOwned installs a virtual override that transfers
+// ownership of each non-nil returned Qt value object to C++.
+func (this *QsciLexerYAML) OnPaperOwned(slot func(super func(style int) *qt6.QColor, style int) *qt6.QColor) {
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QsciLexerYAML_paper{callback: slot, ownsReturn: true}))
+	}
+	ok := C.QsciLexerYAML_override_virtual_owned_paper(unsafe.Pointer(this.h), slotHandle)
+	if !ok {
+		panic("miqt: can only override virtual methods for directly constructed types")
+	}
+}
+
 //export miqt_exec_callback_QsciLexerYAML_paper
 func miqt_exec_callback_QsciLexerYAML_paper(self *C.QsciLexerYAML, cb C.intptr_t, style C.int) *C.QColor {
-	gofunc, ok := cgo.Handle(cb).Value().(func(super func(style int) *qt6.QColor, style int) *qt6.QColor)
+	callbackData, ok := cgo.Handle(cb).Value().(miqtVirtualCallback_QsciLexerYAML_paper)
 	if !ok {
 		panic("miqt: callback of non-callback type (heap corruption?)")
 	}
+	gofunc := callbackData.callback
 
 	// Convert all CABI parameters to Go parameters
 	slotval1 := (int)(style)
 
 	virtualReturn := gofunc((&QsciLexerYAML{h: self}).callVirtualBase_Paper, slotval1)
+	if callbackData.ownsReturn && virtualReturn != nil {
+		runtime.SetFinalizer(virtualReturn, nil)
+	}
 
 	return (*C.QColor)(virtualReturn.UnsafePointer())
 
@@ -916,10 +985,16 @@ func (this *QsciLexerYAML) callVirtualBase_DefaultColorWithStyle(style int) *qt6
 	return _goptr
 
 }
+
+type miqtVirtualCallback_QsciLexerYAML_defaultColorWithStyle struct {
+	callback   func(super func(style int) *qt6.QColor, style int) *qt6.QColor
+	ownsReturn bool
+}
+
 func (this *QsciLexerYAML) OnDefaultColorWithStyle(slot func(super func(style int) *qt6.QColor, style int) *qt6.QColor) {
 	var slotHandle C.intptr_t
 	if slot != nil {
-		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QsciLexerYAML_defaultColorWithStyle{callback: slot}))
 	}
 	ok := C.QsciLexerYAML_override_virtual_defaultColorWithStyle(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
@@ -927,17 +1002,34 @@ func (this *QsciLexerYAML) OnDefaultColorWithStyle(slot func(super func(style in
 	}
 }
 
+// OnDefaultColorWithStyleOwned installs a virtual override that transfers
+// ownership of each non-nil returned Qt value object to C++.
+func (this *QsciLexerYAML) OnDefaultColorWithStyleOwned(slot func(super func(style int) *qt6.QColor, style int) *qt6.QColor) {
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QsciLexerYAML_defaultColorWithStyle{callback: slot, ownsReturn: true}))
+	}
+	ok := C.QsciLexerYAML_override_virtual_owned_defaultColorWithStyle(unsafe.Pointer(this.h), slotHandle)
+	if !ok {
+		panic("miqt: can only override virtual methods for directly constructed types")
+	}
+}
+
 //export miqt_exec_callback_QsciLexerYAML_defaultColorWithStyle
 func miqt_exec_callback_QsciLexerYAML_defaultColorWithStyle(self *C.QsciLexerYAML, cb C.intptr_t, style C.int) *C.QColor {
-	gofunc, ok := cgo.Handle(cb).Value().(func(super func(style int) *qt6.QColor, style int) *qt6.QColor)
+	callbackData, ok := cgo.Handle(cb).Value().(miqtVirtualCallback_QsciLexerYAML_defaultColorWithStyle)
 	if !ok {
 		panic("miqt: callback of non-callback type (heap corruption?)")
 	}
+	gofunc := callbackData.callback
 
 	// Convert all CABI parameters to Go parameters
 	slotval1 := (int)(style)
 
 	virtualReturn := gofunc((&QsciLexerYAML{h: self}).callVirtualBase_DefaultColorWithStyle, slotval1)
+	if callbackData.ownsReturn && virtualReturn != nil {
+		runtime.SetFinalizer(virtualReturn, nil)
+	}
 
 	return (*C.QColor)(virtualReturn.UnsafePointer())
 
@@ -982,10 +1074,16 @@ func (this *QsciLexerYAML) callVirtualBase_DefaultFontWithStyle(style int) *qt6.
 	return _goptr
 
 }
+
+type miqtVirtualCallback_QsciLexerYAML_defaultFontWithStyle struct {
+	callback   func(super func(style int) *qt6.QFont, style int) *qt6.QFont
+	ownsReturn bool
+}
+
 func (this *QsciLexerYAML) OnDefaultFontWithStyle(slot func(super func(style int) *qt6.QFont, style int) *qt6.QFont) {
 	var slotHandle C.intptr_t
 	if slot != nil {
-		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QsciLexerYAML_defaultFontWithStyle{callback: slot}))
 	}
 	ok := C.QsciLexerYAML_override_virtual_defaultFontWithStyle(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
@@ -993,17 +1091,34 @@ func (this *QsciLexerYAML) OnDefaultFontWithStyle(slot func(super func(style int
 	}
 }
 
+// OnDefaultFontWithStyleOwned installs a virtual override that transfers
+// ownership of each non-nil returned Qt value object to C++.
+func (this *QsciLexerYAML) OnDefaultFontWithStyleOwned(slot func(super func(style int) *qt6.QFont, style int) *qt6.QFont) {
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QsciLexerYAML_defaultFontWithStyle{callback: slot, ownsReturn: true}))
+	}
+	ok := C.QsciLexerYAML_override_virtual_owned_defaultFontWithStyle(unsafe.Pointer(this.h), slotHandle)
+	if !ok {
+		panic("miqt: can only override virtual methods for directly constructed types")
+	}
+}
+
 //export miqt_exec_callback_QsciLexerYAML_defaultFontWithStyle
 func miqt_exec_callback_QsciLexerYAML_defaultFontWithStyle(self *C.QsciLexerYAML, cb C.intptr_t, style C.int) *C.QFont {
-	gofunc, ok := cgo.Handle(cb).Value().(func(super func(style int) *qt6.QFont, style int) *qt6.QFont)
+	callbackData, ok := cgo.Handle(cb).Value().(miqtVirtualCallback_QsciLexerYAML_defaultFontWithStyle)
 	if !ok {
 		panic("miqt: callback of non-callback type (heap corruption?)")
 	}
+	gofunc := callbackData.callback
 
 	// Convert all CABI parameters to Go parameters
 	slotval1 := (int)(style)
 
 	virtualReturn := gofunc((&QsciLexerYAML{h: self}).callVirtualBase_DefaultFontWithStyle, slotval1)
+	if callbackData.ownsReturn && virtualReturn != nil {
+		runtime.SetFinalizer(virtualReturn, nil)
+	}
 
 	return (*C.QFont)(virtualReturn.UnsafePointer())
 
@@ -1016,10 +1131,16 @@ func (this *QsciLexerYAML) callVirtualBase_DefaultPaperWithStyle(style int) *qt6
 	return _goptr
 
 }
+
+type miqtVirtualCallback_QsciLexerYAML_defaultPaperWithStyle struct {
+	callback   func(super func(style int) *qt6.QColor, style int) *qt6.QColor
+	ownsReturn bool
+}
+
 func (this *QsciLexerYAML) OnDefaultPaperWithStyle(slot func(super func(style int) *qt6.QColor, style int) *qt6.QColor) {
 	var slotHandle C.intptr_t
 	if slot != nil {
-		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QsciLexerYAML_defaultPaperWithStyle{callback: slot}))
 	}
 	ok := C.QsciLexerYAML_override_virtual_defaultPaperWithStyle(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
@@ -1027,17 +1148,34 @@ func (this *QsciLexerYAML) OnDefaultPaperWithStyle(slot func(super func(style in
 	}
 }
 
+// OnDefaultPaperWithStyleOwned installs a virtual override that transfers
+// ownership of each non-nil returned Qt value object to C++.
+func (this *QsciLexerYAML) OnDefaultPaperWithStyleOwned(slot func(super func(style int) *qt6.QColor, style int) *qt6.QColor) {
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QsciLexerYAML_defaultPaperWithStyle{callback: slot, ownsReturn: true}))
+	}
+	ok := C.QsciLexerYAML_override_virtual_owned_defaultPaperWithStyle(unsafe.Pointer(this.h), slotHandle)
+	if !ok {
+		panic("miqt: can only override virtual methods for directly constructed types")
+	}
+}
+
 //export miqt_exec_callback_QsciLexerYAML_defaultPaperWithStyle
 func miqt_exec_callback_QsciLexerYAML_defaultPaperWithStyle(self *C.QsciLexerYAML, cb C.intptr_t, style C.int) *C.QColor {
-	gofunc, ok := cgo.Handle(cb).Value().(func(super func(style int) *qt6.QColor, style int) *qt6.QColor)
+	callbackData, ok := cgo.Handle(cb).Value().(miqtVirtualCallback_QsciLexerYAML_defaultPaperWithStyle)
 	if !ok {
 		panic("miqt: callback of non-callback type (heap corruption?)")
 	}
+	gofunc := callbackData.callback
 
 	// Convert all CABI parameters to Go parameters
 	slotval1 := (int)(style)
 
 	virtualReturn := gofunc((&QsciLexerYAML{h: self}).callVirtualBase_DefaultPaperWithStyle, slotval1)
+	if callbackData.ownsReturn && virtualReturn != nil {
+		runtime.SetFinalizer(virtualReturn, nil)
+	}
 
 	return (*C.QColor)(virtualReturn.UnsafePointer())
 

@@ -127,6 +127,7 @@ public:
 
 	// cgo.Handle value for overwritten implementation
 	miqt_callback_handle<miqt_exec_callback_handle_release_QNmeaSatelliteInfoSource> handle__backendProperty;
+	bool owns_return__backendProperty = false;
 
 	// Subclass to allow providing a Go implementation
 	virtual QVariant backendProperty(const QString& name) const override {
@@ -143,6 +144,10 @@ public:
 		memcpy(name_ms.data, name_b.data(), name_ms.len);
 		struct miqt_string sigval1 = name_ms;
 		QVariant* callback_return_value = miqt_exec_callback_QNmeaSatelliteInfoSource_backendProperty(this, handle__backendProperty.value(), sigval1);
+		std::unique_ptr<QVariant> callback_return_value_owner;
+		if (owns_return__backendProperty) {
+			callback_return_value_owner.reset(callback_return_value);
+		}
 		return *callback_return_value;
 	}
 
@@ -554,6 +559,19 @@ bool QNmeaSatelliteInfoSource_override_virtual_backendProperty(void* self, intpt
 	}
 
 	self_cast->handle__backendProperty = std::move(slot_handle);
+	self_cast->owns_return__backendProperty = false;
+	return true;
+}
+
+bool QNmeaSatelliteInfoSource_override_virtual_owned_backendProperty(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QNmeaSatelliteInfoSource> slot_handle(slot);
+	MiqtVirtualQNmeaSatelliteInfoSource* self_cast = dynamic_cast<MiqtVirtualQNmeaSatelliteInfoSource*>( (QNmeaSatelliteInfoSource*)(self) );
+	if (self_cast == nullptr) {
+		return false;
+	}
+
+	self_cast->handle__backendProperty = std::move(slot_handle);
+	self_cast->owns_return__backendProperty = true;
 	return true;
 }
 

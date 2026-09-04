@@ -407,10 +407,16 @@ func (this *QMimeData) callVirtualBase_RetrieveData(mimetype string, preferredTy
 	return _goptr
 
 }
+
+type miqtVirtualCallback_QMimeData_retrieveData struct {
+	callback   func(super func(mimetype string, preferredType QMetaType) *QVariant, mimetype string, preferredType QMetaType) *QVariant
+	ownsReturn bool
+}
+
 func (this *QMimeData) OnRetrieveData(slot func(super func(mimetype string, preferredType QMetaType) *QVariant, mimetype string, preferredType QMetaType) *QVariant) {
 	var slotHandle C.intptr_t
 	if slot != nil {
-		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QMimeData_retrieveData{callback: slot}))
 	}
 	ok := C.QMimeData_override_virtual_retrieveData(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
@@ -418,12 +424,26 @@ func (this *QMimeData) OnRetrieveData(slot func(super func(mimetype string, pref
 	}
 }
 
+// OnRetrieveDataOwned installs a virtual override that transfers
+// ownership of each non-nil returned Qt value object to C++.
+func (this *QMimeData) OnRetrieveDataOwned(slot func(super func(mimetype string, preferredType QMetaType) *QVariant, mimetype string, preferredType QMetaType) *QVariant) {
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QMimeData_retrieveData{callback: slot, ownsReturn: true}))
+	}
+	ok := C.QMimeData_override_virtual_owned_retrieveData(unsafe.Pointer(this.h), slotHandle)
+	if !ok {
+		panic("miqt: can only override virtual methods for directly constructed types")
+	}
+}
+
 //export miqt_exec_callback_QMimeData_retrieveData
 func miqt_exec_callback_QMimeData_retrieveData(self *C.QMimeData, cb C.intptr_t, mimetype C.struct_miqt_string, preferredType *C.QMetaType) *C.QVariant {
-	gofunc, ok := cgo.Handle(cb).Value().(func(super func(mimetype string, preferredType QMetaType) *QVariant, mimetype string, preferredType QMetaType) *QVariant)
+	callbackData, ok := cgo.Handle(cb).Value().(miqtVirtualCallback_QMimeData_retrieveData)
 	if !ok {
 		panic("miqt: callback of non-callback type (heap corruption?)")
 	}
+	gofunc := callbackData.callback
 
 	// Convert all CABI parameters to Go parameters
 	var mimetype_ms C.struct_miqt_string = mimetype
@@ -435,6 +455,9 @@ func miqt_exec_callback_QMimeData_retrieveData(self *C.QMimeData, cb C.intptr_t,
 	slotval2 := *preferredType_goptr
 
 	virtualReturn := gofunc((&QMimeData{h: self}).callVirtualBase_RetrieveData, slotval1, slotval2)
+	if callbackData.ownsReturn && virtualReturn != nil {
+		runtime.SetFinalizer(virtualReturn, nil)
+	}
 
 	return virtualReturn.cPointer()
 

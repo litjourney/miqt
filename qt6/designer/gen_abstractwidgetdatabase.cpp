@@ -259,6 +259,7 @@ public:
 
 	// cgo.Handle value for overwritten implementation
 	miqt_callback_handle<miqt_exec_callback_handle_release_QDesignerWidgetDataBaseItemInterface> handle__icon;
+	bool owns_return__icon = false;
 
 	// Subclass to allow providing a Go implementation
 	virtual QIcon icon() const override {
@@ -267,6 +268,10 @@ public:
 		}
 
 		QIcon* callback_return_value = miqt_exec_callback_QDesignerWidgetDataBaseItemInterface_icon(this, handle__icon.value());
+		std::unique_ptr<QIcon> callback_return_value_owner;
+		if (owns_return__icon) {
+			callback_return_value_owner.reset(callback_return_value);
+		}
 		return *callback_return_value;
 	}
 
@@ -808,6 +813,19 @@ bool QDesignerWidgetDataBaseItemInterface_override_virtual_icon(void* self, intp
 	}
 
 	self_cast->handle__icon = std::move(slot_handle);
+	self_cast->owns_return__icon = false;
+	return true;
+}
+
+bool QDesignerWidgetDataBaseItemInterface_override_virtual_owned_icon(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QDesignerWidgetDataBaseItemInterface> slot_handle(slot);
+	MiqtVirtualQDesignerWidgetDataBaseItemInterface* self_cast = dynamic_cast<MiqtVirtualQDesignerWidgetDataBaseItemInterface*>( (QDesignerWidgetDataBaseItemInterface*)(self) );
+	if (self_cast == nullptr) {
+		return false;
+	}
+
+	self_cast->handle__icon = std::move(slot_handle);
+	self_cast->owns_return__icon = true;
 	return true;
 }
 

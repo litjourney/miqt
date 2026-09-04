@@ -111,6 +111,7 @@ public:
 
 	// cgo.Handle value for overwritten implementation
 	miqt_callback_handle<miqt_exec_callback_handle_release_QGroupBox> handle__minimumSizeHint;
+	bool owns_return__minimumSizeHint = false;
 
 	// Subclass to allow providing a Go implementation
 	virtual QSize minimumSizeHint() const override {
@@ -119,6 +120,10 @@ public:
 		}
 
 		QSize* callback_return_value = miqt_exec_callback_QGroupBox_minimumSizeHint(this, handle__minimumSizeHint.value());
+		std::unique_ptr<QSize> callback_return_value_owner;
+		if (owns_return__minimumSizeHint) {
+			callback_return_value_owner.reset(callback_return_value);
+		}
 		return *callback_return_value;
 	}
 
@@ -310,6 +315,7 @@ public:
 
 	// cgo.Handle value for overwritten implementation
 	miqt_callback_handle<miqt_exec_callback_handle_release_QGroupBox> handle__sizeHint;
+	bool owns_return__sizeHint = false;
 
 	// Subclass to allow providing a Go implementation
 	virtual QSize sizeHint() const override {
@@ -318,6 +324,10 @@ public:
 		}
 
 		QSize* callback_return_value = miqt_exec_callback_QGroupBox_sizeHint(this, handle__sizeHint.value());
+		std::unique_ptr<QSize> callback_return_value_owner;
+		if (owns_return__sizeHint) {
+			callback_return_value_owner.reset(callback_return_value);
+		}
 		return *callback_return_value;
 	}
 
@@ -782,6 +792,7 @@ public:
 
 	// cgo.Handle value for overwritten implementation
 	miqt_callback_handle<miqt_exec_callback_handle_release_QGroupBox> handle__inputMethodQuery;
+	bool owns_return__inputMethodQuery = false;
 
 	// Subclass to allow providing a Go implementation
 	virtual QVariant inputMethodQuery(Qt::InputMethodQuery param1) const override {
@@ -792,6 +803,10 @@ public:
 		Qt::InputMethodQuery param1_ret = param1;
 		int sigval1 = static_cast<int>(param1_ret);
 		QVariant* callback_return_value = miqt_exec_callback_QGroupBox_inputMethodQuery(this, handle__inputMethodQuery.value(), sigval1);
+		std::unique_ptr<QVariant> callback_return_value_owner;
+		if (owns_return__inputMethodQuery) {
+			callback_return_value_owner.reset(callback_return_value);
+		}
 		return *callback_return_value;
 	}
 
@@ -1110,6 +1125,19 @@ bool QGroupBox_override_virtual_minimumSizeHint(void* self, intptr_t slot) {
 	}
 
 	self_cast->handle__minimumSizeHint = std::move(slot_handle);
+	self_cast->owns_return__minimumSizeHint = false;
+	return true;
+}
+
+bool QGroupBox_override_virtual_owned_minimumSizeHint(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QGroupBox> slot_handle(slot);
+	MiqtVirtualQGroupBox* self_cast = dynamic_cast<MiqtVirtualQGroupBox*>( (QGroupBox*)(self) );
+	if (self_cast == nullptr) {
+		return false;
+	}
+
+	self_cast->handle__minimumSizeHint = std::move(slot_handle);
+	self_cast->owns_return__minimumSizeHint = true;
 	return true;
 }
 
@@ -1290,6 +1318,19 @@ bool QGroupBox_override_virtual_sizeHint(void* self, intptr_t slot) {
 	}
 
 	self_cast->handle__sizeHint = std::move(slot_handle);
+	self_cast->owns_return__sizeHint = false;
+	return true;
+}
+
+bool QGroupBox_override_virtual_owned_sizeHint(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QGroupBox> slot_handle(slot);
+	MiqtVirtualQGroupBox* self_cast = dynamic_cast<MiqtVirtualQGroupBox*>( (QGroupBox*)(self) );
+	if (self_cast == nullptr) {
+		return false;
+	}
+
+	self_cast->handle__sizeHint = std::move(slot_handle);
+	self_cast->owns_return__sizeHint = true;
 	return true;
 }
 
@@ -1711,6 +1752,19 @@ bool QGroupBox_override_virtual_inputMethodQuery(void* self, intptr_t slot) {
 	}
 
 	self_cast->handle__inputMethodQuery = std::move(slot_handle);
+	self_cast->owns_return__inputMethodQuery = false;
+	return true;
+}
+
+bool QGroupBox_override_virtual_owned_inputMethodQuery(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QGroupBox> slot_handle(slot);
+	MiqtVirtualQGroupBox* self_cast = dynamic_cast<MiqtVirtualQGroupBox*>( (QGroupBox*)(self) );
+	if (self_cast == nullptr) {
+		return false;
+	}
+
+	self_cast->handle__inputMethodQuery = std::move(slot_handle);
+	self_cast->owns_return__inputMethodQuery = true;
 	return true;
 }
 

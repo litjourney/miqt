@@ -94,6 +94,7 @@ void QGraphicsGridLayout_virtualbase_invalidate(void* self);
 bool QGraphicsGridLayout_override_virtual_setGeometry(void* self, intptr_t slot);
 void QGraphicsGridLayout_virtualbase_setGeometry(void* self, QRectF* rect);
 bool QGraphicsGridLayout_override_virtual_sizeHint(void* self, intptr_t slot);
+bool QGraphicsGridLayout_override_virtual_owned_sizeHint(void* self, intptr_t slot);
 QSizeF* QGraphicsGridLayout_virtualbase_sizeHint(const void* self, int which, QSizeF* constraint);
 bool QGraphicsGridLayout_override_virtual_getContentsMargins(void* self, intptr_t slot);
 void QGraphicsGridLayout_virtualbase_getContentsMargins(const void* self, double* left, double* top, double* right, double* bottom);

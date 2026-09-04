@@ -85,6 +85,7 @@ QGraphicsLayoutItem* QGraphicsAnchorLayout_virtualbase_itemAt(const void* self, 
 bool QGraphicsAnchorLayout_override_virtual_invalidate(void* self, intptr_t slot);
 void QGraphicsAnchorLayout_virtualbase_invalidate(void* self);
 bool QGraphicsAnchorLayout_override_virtual_sizeHint(void* self, intptr_t slot);
+bool QGraphicsAnchorLayout_override_virtual_owned_sizeHint(void* self, intptr_t slot);
 QSizeF* QGraphicsAnchorLayout_virtualbase_sizeHint(const void* self, int which, QSizeF* constraint);
 bool QGraphicsAnchorLayout_override_virtual_getContentsMargins(void* self, intptr_t slot);
 void QGraphicsAnchorLayout_virtualbase_getContentsMargins(const void* self, double* left, double* top, double* right, double* bottom);

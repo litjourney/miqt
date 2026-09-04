@@ -229,8 +229,10 @@ void QComboBox_insertItem4(QComboBox* self, int index, QIcon* icon, struct miqt_
 void QComboBox_setItemData2(QComboBox* self, int index, QVariant* value, int role);
 
 bool QComboBox_override_virtual_sizeHint(void* self, intptr_t slot);
+bool QComboBox_override_virtual_owned_sizeHint(void* self, intptr_t slot);
 QSize* QComboBox_virtualbase_sizeHint(const void* self);
 bool QComboBox_override_virtual_minimumSizeHint(void* self, intptr_t slot);
+bool QComboBox_override_virtual_owned_minimumSizeHint(void* self, intptr_t slot);
 QSize* QComboBox_virtualbase_minimumSizeHint(const void* self);
 bool QComboBox_override_virtual_showPopup(void* self, intptr_t slot);
 void QComboBox_virtualbase_showPopup(void* self);
@@ -239,6 +241,7 @@ void QComboBox_virtualbase_hidePopup(void* self);
 bool QComboBox_override_virtual_event(void* self, intptr_t slot);
 bool QComboBox_virtualbase_event(void* self, QEvent* event);
 bool QComboBox_override_virtual_inputMethodQuery(void* self, intptr_t slot);
+bool QComboBox_override_virtual_owned_inputMethodQuery(void* self, intptr_t slot);
 QVariant* QComboBox_virtualbase_inputMethodQuery(const void* self, int param1);
 bool QComboBox_override_virtual_focusInEvent(void* self, intptr_t slot);
 void QComboBox_virtualbase_focusInEvent(void* self, QFocusEvent* e);

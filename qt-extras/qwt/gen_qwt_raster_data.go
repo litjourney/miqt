@@ -130,10 +130,16 @@ func (this *QwtRasterData) callVirtualBase_PixelHint(param1 *qt.QRectF) *qt.QRec
 	return _goptr
 
 }
+
+type miqtVirtualCallback_QwtRasterData_pixelHint struct {
+	callback   func(super func(param1 *qt.QRectF) *qt.QRectF, param1 *qt.QRectF) *qt.QRectF
+	ownsReturn bool
+}
+
 func (this *QwtRasterData) OnPixelHint(slot func(super func(param1 *qt.QRectF) *qt.QRectF, param1 *qt.QRectF) *qt.QRectF) {
 	var slotHandle C.intptr_t
 	if slot != nil {
-		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QwtRasterData_pixelHint{callback: slot}))
 	}
 	ok := C.QwtRasterData_override_virtual_pixelHint(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
@@ -141,17 +147,34 @@ func (this *QwtRasterData) OnPixelHint(slot func(super func(param1 *qt.QRectF) *
 	}
 }
 
+// OnPixelHintOwned installs a virtual override that transfers
+// ownership of each non-nil returned Qt value object to C++.
+func (this *QwtRasterData) OnPixelHintOwned(slot func(super func(param1 *qt.QRectF) *qt.QRectF, param1 *qt.QRectF) *qt.QRectF) {
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QwtRasterData_pixelHint{callback: slot, ownsReturn: true}))
+	}
+	ok := C.QwtRasterData_override_virtual_owned_pixelHint(unsafe.Pointer(this.h), slotHandle)
+	if !ok {
+		panic("miqt: can only override virtual methods for directly constructed types")
+	}
+}
+
 //export miqt_exec_callback_QwtRasterData_pixelHint
 func miqt_exec_callback_QwtRasterData_pixelHint(self *C.QwtRasterData, cb C.intptr_t, param1 *C.QRectF) *C.QRectF {
-	gofunc, ok := cgo.Handle(cb).Value().(func(super func(param1 *qt.QRectF) *qt.QRectF, param1 *qt.QRectF) *qt.QRectF)
+	callbackData, ok := cgo.Handle(cb).Value().(miqtVirtualCallback_QwtRasterData_pixelHint)
 	if !ok {
 		panic("miqt: callback of non-callback type (heap corruption?)")
 	}
+	gofunc := callbackData.callback
 
 	// Convert all CABI parameters to Go parameters
 	slotval1 := qt.UnsafeNewQRectF(unsafe.Pointer(param1))
 
 	virtualReturn := gofunc((&QwtRasterData{h: self}).callVirtualBase_PixelHint, slotval1)
+	if callbackData.ownsReturn && virtualReturn != nil {
+		runtime.SetFinalizer(virtualReturn, nil)
+	}
 
 	return (*C.QRectF)(virtualReturn.UnsafePointer())
 

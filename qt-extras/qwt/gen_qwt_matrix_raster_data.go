@@ -162,10 +162,16 @@ func (this *QwtMatrixRasterData) callVirtualBase_PixelHint(param1 *qt.QRectF) *q
 	return _goptr
 
 }
+
+type miqtVirtualCallback_QwtMatrixRasterData_pixelHint struct {
+	callback   func(super func(param1 *qt.QRectF) *qt.QRectF, param1 *qt.QRectF) *qt.QRectF
+	ownsReturn bool
+}
+
 func (this *QwtMatrixRasterData) OnPixelHint(slot func(super func(param1 *qt.QRectF) *qt.QRectF, param1 *qt.QRectF) *qt.QRectF) {
 	var slotHandle C.intptr_t
 	if slot != nil {
-		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QwtMatrixRasterData_pixelHint{callback: slot}))
 	}
 	ok := C.QwtMatrixRasterData_override_virtual_pixelHint(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
@@ -173,17 +179,34 @@ func (this *QwtMatrixRasterData) OnPixelHint(slot func(super func(param1 *qt.QRe
 	}
 }
 
+// OnPixelHintOwned installs a virtual override that transfers
+// ownership of each non-nil returned Qt value object to C++.
+func (this *QwtMatrixRasterData) OnPixelHintOwned(slot func(super func(param1 *qt.QRectF) *qt.QRectF, param1 *qt.QRectF) *qt.QRectF) {
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QwtMatrixRasterData_pixelHint{callback: slot, ownsReturn: true}))
+	}
+	ok := C.QwtMatrixRasterData_override_virtual_owned_pixelHint(unsafe.Pointer(this.h), slotHandle)
+	if !ok {
+		panic("miqt: can only override virtual methods for directly constructed types")
+	}
+}
+
 //export miqt_exec_callback_QwtMatrixRasterData_pixelHint
 func miqt_exec_callback_QwtMatrixRasterData_pixelHint(self *C.QwtMatrixRasterData, cb C.intptr_t, param1 *C.QRectF) *C.QRectF {
-	gofunc, ok := cgo.Handle(cb).Value().(func(super func(param1 *qt.QRectF) *qt.QRectF, param1 *qt.QRectF) *qt.QRectF)
+	callbackData, ok := cgo.Handle(cb).Value().(miqtVirtualCallback_QwtMatrixRasterData_pixelHint)
 	if !ok {
 		panic("miqt: callback of non-callback type (heap corruption?)")
 	}
+	gofunc := callbackData.callback
 
 	// Convert all CABI parameters to Go parameters
 	slotval1 := qt.UnsafeNewQRectF(unsafe.Pointer(param1))
 
 	virtualReturn := gofunc((&QwtMatrixRasterData{h: self}).callVirtualBase_PixelHint, slotval1)
+	if callbackData.ownsReturn && virtualReturn != nil {
+		runtime.SetFinalizer(virtualReturn, nil)
+	}
 
 	return (*C.QRectF)(virtualReturn.UnsafePointer())
 

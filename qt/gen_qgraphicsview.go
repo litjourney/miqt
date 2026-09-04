@@ -876,10 +876,16 @@ func (this *QGraphicsView) callVirtualBase_SizeHint() *QSize {
 	return _goptr
 
 }
+
+type miqtVirtualCallback_QGraphicsView_sizeHint struct {
+	callback   func(super func() *QSize) *QSize
+	ownsReturn bool
+}
+
 func (this *QGraphicsView) OnSizeHint(slot func(super func() *QSize) *QSize) {
 	var slotHandle C.intptr_t
 	if slot != nil {
-		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QGraphicsView_sizeHint{callback: slot}))
 	}
 	ok := C.QGraphicsView_override_virtual_sizeHint(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
@@ -887,14 +893,31 @@ func (this *QGraphicsView) OnSizeHint(slot func(super func() *QSize) *QSize) {
 	}
 }
 
+// OnSizeHintOwned installs a virtual override that transfers
+// ownership of each non-nil returned Qt value object to C++.
+func (this *QGraphicsView) OnSizeHintOwned(slot func(super func() *QSize) *QSize) {
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QGraphicsView_sizeHint{callback: slot, ownsReturn: true}))
+	}
+	ok := C.QGraphicsView_override_virtual_owned_sizeHint(unsafe.Pointer(this.h), slotHandle)
+	if !ok {
+		panic("miqt: can only override virtual methods for directly constructed types")
+	}
+}
+
 //export miqt_exec_callback_QGraphicsView_sizeHint
 func miqt_exec_callback_QGraphicsView_sizeHint(self *C.QGraphicsView, cb C.intptr_t) *C.QSize {
-	gofunc, ok := cgo.Handle(cb).Value().(func(super func() *QSize) *QSize)
+	callbackData, ok := cgo.Handle(cb).Value().(miqtVirtualCallback_QGraphicsView_sizeHint)
 	if !ok {
 		panic("miqt: callback of non-callback type (heap corruption?)")
 	}
+	gofunc := callbackData.callback
 
 	virtualReturn := gofunc((&QGraphicsView{h: self}).callVirtualBase_SizeHint)
+	if callbackData.ownsReturn && virtualReturn != nil {
+		runtime.SetFinalizer(virtualReturn, nil)
+	}
 
 	return virtualReturn.cPointer()
 
@@ -907,10 +930,16 @@ func (this *QGraphicsView) callVirtualBase_InputMethodQuery(query InputMethodQue
 	return _goptr
 
 }
+
+type miqtVirtualCallback_QGraphicsView_inputMethodQuery struct {
+	callback   func(super func(query InputMethodQuery) *QVariant, query InputMethodQuery) *QVariant
+	ownsReturn bool
+}
+
 func (this *QGraphicsView) OnInputMethodQuery(slot func(super func(query InputMethodQuery) *QVariant, query InputMethodQuery) *QVariant) {
 	var slotHandle C.intptr_t
 	if slot != nil {
-		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QGraphicsView_inputMethodQuery{callback: slot}))
 	}
 	ok := C.QGraphicsView_override_virtual_inputMethodQuery(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
@@ -918,17 +947,34 @@ func (this *QGraphicsView) OnInputMethodQuery(slot func(super func(query InputMe
 	}
 }
 
+// OnInputMethodQueryOwned installs a virtual override that transfers
+// ownership of each non-nil returned Qt value object to C++.
+func (this *QGraphicsView) OnInputMethodQueryOwned(slot func(super func(query InputMethodQuery) *QVariant, query InputMethodQuery) *QVariant) {
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QGraphicsView_inputMethodQuery{callback: slot, ownsReturn: true}))
+	}
+	ok := C.QGraphicsView_override_virtual_owned_inputMethodQuery(unsafe.Pointer(this.h), slotHandle)
+	if !ok {
+		panic("miqt: can only override virtual methods for directly constructed types")
+	}
+}
+
 //export miqt_exec_callback_QGraphicsView_inputMethodQuery
 func miqt_exec_callback_QGraphicsView_inputMethodQuery(self *C.QGraphicsView, cb C.intptr_t, query C.int) *C.QVariant {
-	gofunc, ok := cgo.Handle(cb).Value().(func(super func(query InputMethodQuery) *QVariant, query InputMethodQuery) *QVariant)
+	callbackData, ok := cgo.Handle(cb).Value().(miqtVirtualCallback_QGraphicsView_inputMethodQuery)
 	if !ok {
 		panic("miqt: callback of non-callback type (heap corruption?)")
 	}
+	gofunc := callbackData.callback
 
 	// Convert all CABI parameters to Go parameters
 	slotval1 := (InputMethodQuery)(query)
 
 	virtualReturn := gofunc((&QGraphicsView{h: self}).callVirtualBase_InputMethodQuery, slotval1)
+	if callbackData.ownsReturn && virtualReturn != nil {
+		runtime.SetFinalizer(virtualReturn, nil)
+	}
 
 	return virtualReturn.cPointer()
 
@@ -1703,10 +1749,16 @@ func (this *QGraphicsView) callVirtualBase_MinimumSizeHint() *QSize {
 	return _goptr
 
 }
+
+type miqtVirtualCallback_QGraphicsView_minimumSizeHint struct {
+	callback   func(super func() *QSize) *QSize
+	ownsReturn bool
+}
+
 func (this *QGraphicsView) OnMinimumSizeHint(slot func(super func() *QSize) *QSize) {
 	var slotHandle C.intptr_t
 	if slot != nil {
-		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QGraphicsView_minimumSizeHint{callback: slot}))
 	}
 	ok := C.QGraphicsView_override_virtual_minimumSizeHint(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
@@ -1714,14 +1766,31 @@ func (this *QGraphicsView) OnMinimumSizeHint(slot func(super func() *QSize) *QSi
 	}
 }
 
+// OnMinimumSizeHintOwned installs a virtual override that transfers
+// ownership of each non-nil returned Qt value object to C++.
+func (this *QGraphicsView) OnMinimumSizeHintOwned(slot func(super func() *QSize) *QSize) {
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QGraphicsView_minimumSizeHint{callback: slot, ownsReturn: true}))
+	}
+	ok := C.QGraphicsView_override_virtual_owned_minimumSizeHint(unsafe.Pointer(this.h), slotHandle)
+	if !ok {
+		panic("miqt: can only override virtual methods for directly constructed types")
+	}
+}
+
 //export miqt_exec_callback_QGraphicsView_minimumSizeHint
 func miqt_exec_callback_QGraphicsView_minimumSizeHint(self *C.QGraphicsView, cb C.intptr_t) *C.QSize {
-	gofunc, ok := cgo.Handle(cb).Value().(func(super func() *QSize) *QSize)
+	callbackData, ok := cgo.Handle(cb).Value().(miqtVirtualCallback_QGraphicsView_minimumSizeHint)
 	if !ok {
 		panic("miqt: callback of non-callback type (heap corruption?)")
 	}
+	gofunc := callbackData.callback
 
 	virtualReturn := gofunc((&QGraphicsView{h: self}).callVirtualBase_MinimumSizeHint)
+	if callbackData.ownsReturn && virtualReturn != nil {
+		runtime.SetFinalizer(virtualReturn, nil)
+	}
 
 	return virtualReturn.cPointer()
 
@@ -1768,10 +1837,16 @@ func (this *QGraphicsView) callVirtualBase_ViewportSizeHint() *QSize {
 	return _goptr
 
 }
+
+type miqtVirtualCallback_QGraphicsView_viewportSizeHint struct {
+	callback   func(super func() *QSize) *QSize
+	ownsReturn bool
+}
+
 func (this *QGraphicsView) OnViewportSizeHint(slot func(super func() *QSize) *QSize) {
 	var slotHandle C.intptr_t
 	if slot != nil {
-		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QGraphicsView_viewportSizeHint{callback: slot}))
 	}
 	ok := C.QGraphicsView_override_virtual_viewportSizeHint(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
@@ -1779,14 +1854,31 @@ func (this *QGraphicsView) OnViewportSizeHint(slot func(super func() *QSize) *QS
 	}
 }
 
+// OnViewportSizeHintOwned installs a virtual override that transfers
+// ownership of each non-nil returned Qt value object to C++.
+func (this *QGraphicsView) OnViewportSizeHintOwned(slot func(super func() *QSize) *QSize) {
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QGraphicsView_viewportSizeHint{callback: slot, ownsReturn: true}))
+	}
+	ok := C.QGraphicsView_override_virtual_owned_viewportSizeHint(unsafe.Pointer(this.h), slotHandle)
+	if !ok {
+		panic("miqt: can only override virtual methods for directly constructed types")
+	}
+}
+
 //export miqt_exec_callback_QGraphicsView_viewportSizeHint
 func miqt_exec_callback_QGraphicsView_viewportSizeHint(self *C.QGraphicsView, cb C.intptr_t) *C.QSize {
-	gofunc, ok := cgo.Handle(cb).Value().(func(super func() *QSize) *QSize)
+	callbackData, ok := cgo.Handle(cb).Value().(miqtVirtualCallback_QGraphicsView_viewportSizeHint)
 	if !ok {
 		panic("miqt: callback of non-callback type (heap corruption?)")
 	}
+	gofunc := callbackData.callback
 
 	virtualReturn := gofunc((&QGraphicsView{h: self}).callVirtualBase_ViewportSizeHint)
+	if callbackData.ownsReturn && virtualReturn != nil {
+		runtime.SetFinalizer(virtualReturn, nil)
+	}
 
 	return virtualReturn.cPointer()
 

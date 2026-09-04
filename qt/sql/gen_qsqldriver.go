@@ -688,10 +688,16 @@ func (this *QSqlDriver) callVirtualBase_PrimaryIndex(tableName string) *QSqlInde
 	return _goptr
 
 }
+
+type miqtVirtualCallback_QSqlDriver_primaryIndex struct {
+	callback   func(super func(tableName string) *QSqlIndex, tableName string) *QSqlIndex
+	ownsReturn bool
+}
+
 func (this *QSqlDriver) OnPrimaryIndex(slot func(super func(tableName string) *QSqlIndex, tableName string) *QSqlIndex) {
 	var slotHandle C.intptr_t
 	if slot != nil {
-		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QSqlDriver_primaryIndex{callback: slot}))
 	}
 	ok := C.QSqlDriver_override_virtual_primaryIndex(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
@@ -699,12 +705,26 @@ func (this *QSqlDriver) OnPrimaryIndex(slot func(super func(tableName string) *Q
 	}
 }
 
+// OnPrimaryIndexOwned installs a virtual override that transfers
+// ownership of each non-nil returned Qt value object to C++.
+func (this *QSqlDriver) OnPrimaryIndexOwned(slot func(super func(tableName string) *QSqlIndex, tableName string) *QSqlIndex) {
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QSqlDriver_primaryIndex{callback: slot, ownsReturn: true}))
+	}
+	ok := C.QSqlDriver_override_virtual_owned_primaryIndex(unsafe.Pointer(this.h), slotHandle)
+	if !ok {
+		panic("miqt: can only override virtual methods for directly constructed types")
+	}
+}
+
 //export miqt_exec_callback_QSqlDriver_primaryIndex
 func miqt_exec_callback_QSqlDriver_primaryIndex(self *C.QSqlDriver, cb C.intptr_t, tableName C.struct_miqt_string) *C.QSqlIndex {
-	gofunc, ok := cgo.Handle(cb).Value().(func(super func(tableName string) *QSqlIndex, tableName string) *QSqlIndex)
+	callbackData, ok := cgo.Handle(cb).Value().(miqtVirtualCallback_QSqlDriver_primaryIndex)
 	if !ok {
 		panic("miqt: callback of non-callback type (heap corruption?)")
 	}
+	gofunc := callbackData.callback
 
 	// Convert all CABI parameters to Go parameters
 	var tableName_ms C.struct_miqt_string = tableName
@@ -713,6 +733,9 @@ func miqt_exec_callback_QSqlDriver_primaryIndex(self *C.QSqlDriver, cb C.intptr_
 	slotval1 := tableName_ret
 
 	virtualReturn := gofunc((&QSqlDriver{h: self}).callVirtualBase_PrimaryIndex, slotval1)
+	if callbackData.ownsReturn && virtualReturn != nil {
+		runtime.SetFinalizer(virtualReturn, nil)
+	}
 
 	return virtualReturn.cPointer()
 
@@ -729,10 +752,16 @@ func (this *QSqlDriver) callVirtualBase_Record(tableName string) *QSqlRecord {
 	return _goptr
 
 }
+
+type miqtVirtualCallback_QSqlDriver_record struct {
+	callback   func(super func(tableName string) *QSqlRecord, tableName string) *QSqlRecord
+	ownsReturn bool
+}
+
 func (this *QSqlDriver) OnRecord(slot func(super func(tableName string) *QSqlRecord, tableName string) *QSqlRecord) {
 	var slotHandle C.intptr_t
 	if slot != nil {
-		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QSqlDriver_record{callback: slot}))
 	}
 	ok := C.QSqlDriver_override_virtual_record(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
@@ -740,12 +769,26 @@ func (this *QSqlDriver) OnRecord(slot func(super func(tableName string) *QSqlRec
 	}
 }
 
+// OnRecordOwned installs a virtual override that transfers
+// ownership of each non-nil returned Qt value object to C++.
+func (this *QSqlDriver) OnRecordOwned(slot func(super func(tableName string) *QSqlRecord, tableName string) *QSqlRecord) {
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QSqlDriver_record{callback: slot, ownsReturn: true}))
+	}
+	ok := C.QSqlDriver_override_virtual_owned_record(unsafe.Pointer(this.h), slotHandle)
+	if !ok {
+		panic("miqt: can only override virtual methods for directly constructed types")
+	}
+}
+
 //export miqt_exec_callback_QSqlDriver_record
 func miqt_exec_callback_QSqlDriver_record(self *C.QSqlDriver, cb C.intptr_t, tableName C.struct_miqt_string) *C.QSqlRecord {
-	gofunc, ok := cgo.Handle(cb).Value().(func(super func(tableName string) *QSqlRecord, tableName string) *QSqlRecord)
+	callbackData, ok := cgo.Handle(cb).Value().(miqtVirtualCallback_QSqlDriver_record)
 	if !ok {
 		panic("miqt: callback of non-callback type (heap corruption?)")
 	}
+	gofunc := callbackData.callback
 
 	// Convert all CABI parameters to Go parameters
 	var tableName_ms C.struct_miqt_string = tableName
@@ -754,6 +797,9 @@ func miqt_exec_callback_QSqlDriver_record(self *C.QSqlDriver, cb C.intptr_t, tab
 	slotval1 := tableName_ret
 
 	virtualReturn := gofunc((&QSqlDriver{h: self}).callVirtualBase_Record, slotval1)
+	if callbackData.ownsReturn && virtualReturn != nil {
+		runtime.SetFinalizer(virtualReturn, nil)
+	}
 
 	return virtualReturn.cPointer()
 
@@ -899,10 +945,16 @@ func (this *QSqlDriver) callVirtualBase_Handle() *qt.QVariant {
 	return _goptr
 
 }
+
+type miqtVirtualCallback_QSqlDriver_handle struct {
+	callback   func(super func() *qt.QVariant) *qt.QVariant
+	ownsReturn bool
+}
+
 func (this *QSqlDriver) OnHandle(slot func(super func() *qt.QVariant) *qt.QVariant) {
 	var slotHandle C.intptr_t
 	if slot != nil {
-		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QSqlDriver_handle{callback: slot}))
 	}
 	ok := C.QSqlDriver_override_virtual_handle(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
@@ -910,14 +962,31 @@ func (this *QSqlDriver) OnHandle(slot func(super func() *qt.QVariant) *qt.QVaria
 	}
 }
 
+// OnHandleOwned installs a virtual override that transfers
+// ownership of each non-nil returned Qt value object to C++.
+func (this *QSqlDriver) OnHandleOwned(slot func(super func() *qt.QVariant) *qt.QVariant) {
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QSqlDriver_handle{callback: slot, ownsReturn: true}))
+	}
+	ok := C.QSqlDriver_override_virtual_owned_handle(unsafe.Pointer(this.h), slotHandle)
+	if !ok {
+		panic("miqt: can only override virtual methods for directly constructed types")
+	}
+}
+
 //export miqt_exec_callback_QSqlDriver_handle
 func miqt_exec_callback_QSqlDriver_handle(self *C.QSqlDriver, cb C.intptr_t) *C.QVariant {
-	gofunc, ok := cgo.Handle(cb).Value().(func(super func() *qt.QVariant) *qt.QVariant)
+	callbackData, ok := cgo.Handle(cb).Value().(miqtVirtualCallback_QSqlDriver_handle)
 	if !ok {
 		panic("miqt: callback of non-callback type (heap corruption?)")
 	}
+	gofunc := callbackData.callback
 
 	virtualReturn := gofunc((&QSqlDriver{h: self}).callVirtualBase_Handle)
+	if callbackData.ownsReturn && virtualReturn != nil {
+		runtime.SetFinalizer(virtualReturn, nil)
+	}
 
 	return (*C.QVariant)(virtualReturn.UnsafePointer())
 

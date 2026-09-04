@@ -33,6 +33,7 @@ public:
 
 	// cgo.Handle value for overwritten implementation
 	miqt_callback_handle<miqt_exec_callback_handle_release_QFileIconProvider> handle__icon;
+	bool owns_return__icon = false;
 
 	// Subclass to allow providing a Go implementation
 	virtual QIcon icon(QAbstractFileIconProvider::IconType type) const override {
@@ -43,6 +44,10 @@ public:
 		QAbstractFileIconProvider::IconType type_ret = type;
 		int sigval1 = static_cast<int>(type_ret);
 		QIcon* callback_return_value = miqt_exec_callback_QFileIconProvider_icon(this, handle__icon.value(), sigval1);
+		std::unique_ptr<QIcon> callback_return_value_owner;
+		if (owns_return__icon) {
+			callback_return_value_owner.reset(callback_return_value);
+		}
 		return *callback_return_value;
 	}
 
@@ -50,6 +55,7 @@ public:
 
 	// cgo.Handle value for overwritten implementation
 	miqt_callback_handle<miqt_exec_callback_handle_release_QFileIconProvider> handle__iconWithInfo;
+	bool owns_return__iconWithInfo = false;
 
 	// Subclass to allow providing a Go implementation
 	virtual QIcon icon(const QFileInfo& info) const override {
@@ -61,6 +67,10 @@ public:
 		// Cast returned reference into pointer
 		QFileInfo* sigval1 = const_cast<QFileInfo*>(&info_ret);
 		QIcon* callback_return_value = miqt_exec_callback_QFileIconProvider_iconWithInfo(this, handle__iconWithInfo.value(), sigval1);
+		std::unique_ptr<QIcon> callback_return_value_owner;
+		if (owns_return__iconWithInfo) {
+			callback_return_value_owner.reset(callback_return_value);
+		}
 		return *callback_return_value;
 	}
 
@@ -145,6 +155,19 @@ bool QFileIconProvider_override_virtual_icon(void* self, intptr_t slot) {
 	}
 
 	self_cast->handle__icon = std::move(slot_handle);
+	self_cast->owns_return__icon = false;
+	return true;
+}
+
+bool QFileIconProvider_override_virtual_owned_icon(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QFileIconProvider> slot_handle(slot);
+	MiqtVirtualQFileIconProvider* self_cast = dynamic_cast<MiqtVirtualQFileIconProvider*>( (QFileIconProvider*)(self) );
+	if (self_cast == nullptr) {
+		return false;
+	}
+
+	self_cast->handle__icon = std::move(slot_handle);
+	self_cast->owns_return__icon = true;
 	return true;
 }
 
@@ -160,6 +183,19 @@ bool QFileIconProvider_override_virtual_iconWithInfo(void* self, intptr_t slot) 
 	}
 
 	self_cast->handle__iconWithInfo = std::move(slot_handle);
+	self_cast->owns_return__iconWithInfo = false;
+	return true;
+}
+
+bool QFileIconProvider_override_virtual_owned_iconWithInfo(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QFileIconProvider> slot_handle(slot);
+	MiqtVirtualQFileIconProvider* self_cast = dynamic_cast<MiqtVirtualQFileIconProvider*>( (QFileIconProvider*)(self) );
+	if (self_cast == nullptr) {
+		return false;
+	}
+
+	self_cast->handle__iconWithInfo = std::move(slot_handle);
+	self_cast->owns_return__iconWithInfo = true;
 	return true;
 }
 

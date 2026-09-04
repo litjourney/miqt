@@ -45,6 +45,7 @@ QwtPointSeriesData* QwtPointSeriesData_new2(struct miqt_array /* of QPointF* */ 
 QRectF* QwtPointSeriesData_boundingRect(const QwtPointSeriesData* self);
 
 bool QwtPointSeriesData_override_virtual_boundingRect(void* self, intptr_t slot);
+bool QwtPointSeriesData_override_virtual_owned_boundingRect(void* self, intptr_t slot);
 QRectF* QwtPointSeriesData_virtualbase_boundingRect(const void* self);
 
 void QwtPointSeriesData_delete(QwtPointSeriesData* self);
@@ -54,6 +55,7 @@ QwtPoint3DSeriesData* QwtPoint3DSeriesData_new2(struct miqt_array /* of QwtPoint
 QRectF* QwtPoint3DSeriesData_boundingRect(const QwtPoint3DSeriesData* self);
 
 bool QwtPoint3DSeriesData_override_virtual_boundingRect(void* self, intptr_t slot);
+bool QwtPoint3DSeriesData_override_virtual_owned_boundingRect(void* self, intptr_t slot);
 QRectF* QwtPoint3DSeriesData_virtualbase_boundingRect(const void* self);
 
 void QwtPoint3DSeriesData_delete(QwtPoint3DSeriesData* self);
@@ -63,6 +65,7 @@ QwtIntervalSeriesData* QwtIntervalSeriesData_new2(struct miqt_array /* of QwtInt
 QRectF* QwtIntervalSeriesData_boundingRect(const QwtIntervalSeriesData* self);
 
 bool QwtIntervalSeriesData_override_virtual_boundingRect(void* self, intptr_t slot);
+bool QwtIntervalSeriesData_override_virtual_owned_boundingRect(void* self, intptr_t slot);
 QRectF* QwtIntervalSeriesData_virtualbase_boundingRect(const void* self);
 
 void QwtIntervalSeriesData_delete(QwtIntervalSeriesData* self);
@@ -72,6 +75,7 @@ QwtSetSeriesData* QwtSetSeriesData_new2(struct miqt_array /* of QwtSetSample* */
 QRectF* QwtSetSeriesData_boundingRect(const QwtSetSeriesData* self);
 
 bool QwtSetSeriesData_override_virtual_boundingRect(void* self, intptr_t slot);
+bool QwtSetSeriesData_override_virtual_owned_boundingRect(void* self, intptr_t slot);
 QRectF* QwtSetSeriesData_virtualbase_boundingRect(const void* self);
 
 void QwtSetSeriesData_delete(QwtSetSeriesData* self);
@@ -81,6 +85,7 @@ QwtTradingChartData* QwtTradingChartData_new2(struct miqt_array /* of QwtOHLCSam
 QRectF* QwtTradingChartData_boundingRect(const QwtTradingChartData* self);
 
 bool QwtTradingChartData_override_virtual_boundingRect(void* self, intptr_t slot);
+bool QwtTradingChartData_override_virtual_owned_boundingRect(void* self, intptr_t slot);
 QRectF* QwtTradingChartData_virtualbase_boundingRect(const void* self);
 
 void QwtTradingChartData_delete(QwtTradingChartData* self);

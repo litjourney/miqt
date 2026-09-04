@@ -217,6 +217,7 @@ public:
 
 	// cgo.Handle value for overwritten implementation
 	miqt_callback_handle<miqt_exec_callback_handle_release_QwtPlotZoomer> handle__minZoomSize;
+	bool owns_return__minZoomSize = false;
 
 	// Subclass to allow providing a Go implementation
 	virtual QSizeF minZoomSize() const override {
@@ -225,6 +226,10 @@ public:
 		}
 
 		QSizeF* callback_return_value = miqt_exec_callback_QwtPlotZoomer_minZoomSize(this, handle__minZoomSize.value());
+		std::unique_ptr<QSizeF> callback_return_value_owner;
+		if (owns_return__minZoomSize) {
+			callback_return_value_owner.reset(callback_return_value);
+		}
 		return *callback_return_value;
 	}
 
@@ -298,6 +303,7 @@ public:
 
 	// cgo.Handle value for overwritten implementation
 	miqt_callback_handle<miqt_exec_callback_handle_release_QwtPlotZoomer> handle__trackerText;
+	bool owns_return__trackerText = false;
 
 	// Subclass to allow providing a Go implementation
 	virtual QwtText trackerText(const QPoint& param1) const override {
@@ -309,6 +315,10 @@ public:
 		// Cast returned reference into pointer
 		QPoint* sigval1 = const_cast<QPoint*>(&param1_ret);
 		QwtText* callback_return_value = miqt_exec_callback_QwtPlotZoomer_trackerText(this, handle__trackerText.value(), sigval1);
+		std::unique_ptr<QwtText> callback_return_value_owner;
+		if (owns_return__trackerText) {
+			callback_return_value_owner.reset(callback_return_value);
+		}
 		return *callback_return_value;
 	}
 
@@ -316,6 +326,7 @@ public:
 
 	// cgo.Handle value for overwritten implementation
 	miqt_callback_handle<miqt_exec_callback_handle_release_QwtPlotZoomer> handle__trackerTextF;
+	bool owns_return__trackerTextF = false;
 
 	// Subclass to allow providing a Go implementation
 	virtual QwtText trackerTextF(const QPointF& param1) const override {
@@ -327,6 +338,10 @@ public:
 		// Cast returned reference into pointer
 		QPointF* sigval1 = const_cast<QPointF*>(&param1_ret);
 		QwtText* callback_return_value = miqt_exec_callback_QwtPlotZoomer_trackerTextF(this, handle__trackerTextF.value(), sigval1);
+		std::unique_ptr<QwtText> callback_return_value_owner;
+		if (owns_return__trackerTextF) {
+			callback_return_value_owner.reset(callback_return_value);
+		}
 		return *callback_return_value;
 	}
 
@@ -389,6 +404,7 @@ public:
 
 	// cgo.Handle value for overwritten implementation
 	miqt_callback_handle<miqt_exec_callback_handle_release_QwtPlotZoomer> handle__pickArea;
+	bool owns_return__pickArea = false;
 
 	// Subclass to allow providing a Go implementation
 	virtual QPainterPath pickArea() const override {
@@ -397,6 +413,10 @@ public:
 		}
 
 		QPainterPath* callback_return_value = miqt_exec_callback_QwtPlotZoomer_pickArea(this, handle__pickArea.value());
+		std::unique_ptr<QPainterPath> callback_return_value_owner;
+		if (owns_return__pickArea) {
+			callback_return_value_owner.reset(callback_return_value);
+		}
 		return *callback_return_value;
 	}
 
@@ -438,6 +458,7 @@ public:
 
 	// cgo.Handle value for overwritten implementation
 	miqt_callback_handle<miqt_exec_callback_handle_release_QwtPlotZoomer> handle__rubberBandMask;
+	bool owns_return__rubberBandMask = false;
 
 	// Subclass to allow providing a Go implementation
 	virtual QRegion rubberBandMask() const override {
@@ -446,6 +467,10 @@ public:
 		}
 
 		QRegion* callback_return_value = miqt_exec_callback_QwtPlotZoomer_rubberBandMask(this, handle__rubberBandMask.value());
+		std::unique_ptr<QRegion> callback_return_value_owner;
+		if (owns_return__rubberBandMask) {
+			callback_return_value_owner.reset(callback_return_value);
+		}
 		return *callback_return_value;
 	}
 
@@ -453,6 +478,7 @@ public:
 
 	// cgo.Handle value for overwritten implementation
 	miqt_callback_handle<miqt_exec_callback_handle_release_QwtPlotZoomer> handle__trackerRect;
+	bool owns_return__trackerRect = false;
 
 	// Subclass to allow providing a Go implementation
 	virtual QRect trackerRect(const QFont& param1) const override {
@@ -464,6 +490,10 @@ public:
 		// Cast returned reference into pointer
 		QFont* sigval1 = const_cast<QFont*>(&param1_ret);
 		QRect* callback_return_value = miqt_exec_callback_QwtPlotZoomer_trackerRect(this, handle__trackerRect.value(), sigval1);
+		std::unique_ptr<QRect> callback_return_value_owner;
+		if (owns_return__trackerRect) {
+			callback_return_value_owner.reset(callback_return_value);
+		}
 		return *callback_return_value;
 	}
 
@@ -1101,6 +1131,19 @@ bool QwtPlotZoomer_override_virtual_minZoomSize(void* self, intptr_t slot) {
 	}
 
 	self_cast->handle__minZoomSize = std::move(slot_handle);
+	self_cast->owns_return__minZoomSize = false;
+	return true;
+}
+
+bool QwtPlotZoomer_override_virtual_owned_minZoomSize(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtPlotZoomer> slot_handle(slot);
+	MiqtVirtualQwtPlotZoomer* self_cast = dynamic_cast<MiqtVirtualQwtPlotZoomer*>( (QwtPlotZoomer*)(self) );
+	if (self_cast == nullptr) {
+		return false;
+	}
+
+	self_cast->handle__minZoomSize = std::move(slot_handle);
+	self_cast->owns_return__minZoomSize = true;
 	return true;
 }
 
@@ -1176,6 +1219,19 @@ bool QwtPlotZoomer_override_virtual_trackerText(void* self, intptr_t slot) {
 	}
 
 	self_cast->handle__trackerText = std::move(slot_handle);
+	self_cast->owns_return__trackerText = false;
+	return true;
+}
+
+bool QwtPlotZoomer_override_virtual_owned_trackerText(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtPlotZoomer> slot_handle(slot);
+	MiqtVirtualQwtPlotZoomer* self_cast = dynamic_cast<MiqtVirtualQwtPlotZoomer*>( (QwtPlotZoomer*)(self) );
+	if (self_cast == nullptr) {
+		return false;
+	}
+
+	self_cast->handle__trackerText = std::move(slot_handle);
+	self_cast->owns_return__trackerText = true;
 	return true;
 }
 
@@ -1191,6 +1247,19 @@ bool QwtPlotZoomer_override_virtual_trackerTextF(void* self, intptr_t slot) {
 	}
 
 	self_cast->handle__trackerTextF = std::move(slot_handle);
+	self_cast->owns_return__trackerTextF = false;
+	return true;
+}
+
+bool QwtPlotZoomer_override_virtual_owned_trackerTextF(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtPlotZoomer> slot_handle(slot);
+	MiqtVirtualQwtPlotZoomer* self_cast = dynamic_cast<MiqtVirtualQwtPlotZoomer*>( (QwtPlotZoomer*)(self) );
+	if (self_cast == nullptr) {
+		return false;
+	}
+
+	self_cast->handle__trackerTextF = std::move(slot_handle);
+	self_cast->owns_return__trackerTextF = true;
 	return true;
 }
 
@@ -1251,6 +1320,19 @@ bool QwtPlotZoomer_override_virtual_pickArea(void* self, intptr_t slot) {
 	}
 
 	self_cast->handle__pickArea = std::move(slot_handle);
+	self_cast->owns_return__pickArea = false;
+	return true;
+}
+
+bool QwtPlotZoomer_override_virtual_owned_pickArea(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtPlotZoomer> slot_handle(slot);
+	MiqtVirtualQwtPlotZoomer* self_cast = dynamic_cast<MiqtVirtualQwtPlotZoomer*>( (QwtPlotZoomer*)(self) );
+	if (self_cast == nullptr) {
+		return false;
+	}
+
+	self_cast->handle__pickArea = std::move(slot_handle);
+	self_cast->owns_return__pickArea = true;
 	return true;
 }
 
@@ -1296,6 +1378,19 @@ bool QwtPlotZoomer_override_virtual_rubberBandMask(void* self, intptr_t slot) {
 	}
 
 	self_cast->handle__rubberBandMask = std::move(slot_handle);
+	self_cast->owns_return__rubberBandMask = false;
+	return true;
+}
+
+bool QwtPlotZoomer_override_virtual_owned_rubberBandMask(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtPlotZoomer> slot_handle(slot);
+	MiqtVirtualQwtPlotZoomer* self_cast = dynamic_cast<MiqtVirtualQwtPlotZoomer*>( (QwtPlotZoomer*)(self) );
+	if (self_cast == nullptr) {
+		return false;
+	}
+
+	self_cast->handle__rubberBandMask = std::move(slot_handle);
+	self_cast->owns_return__rubberBandMask = true;
 	return true;
 }
 
@@ -1311,6 +1406,19 @@ bool QwtPlotZoomer_override_virtual_trackerRect(void* self, intptr_t slot) {
 	}
 
 	self_cast->handle__trackerRect = std::move(slot_handle);
+	self_cast->owns_return__trackerRect = false;
+	return true;
+}
+
+bool QwtPlotZoomer_override_virtual_owned_trackerRect(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtPlotZoomer> slot_handle(slot);
+	MiqtVirtualQwtPlotZoomer* self_cast = dynamic_cast<MiqtVirtualQwtPlotZoomer*>( (QwtPlotZoomer*)(self) );
+	if (self_cast == nullptr) {
+		return false;
+	}
+
+	self_cast->handle__trackerRect = std::move(slot_handle);
+	self_cast->owns_return__trackerRect = true;
 	return true;
 }
 

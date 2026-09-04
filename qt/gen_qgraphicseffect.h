@@ -76,6 +76,7 @@ struct miqt_string QGraphicsEffect_trUtf82(const char* s, const char* c);
 struct miqt_string QGraphicsEffect_trUtf83(const char* s, const char* c, int n);
 
 bool QGraphicsEffect_override_virtual_boundingRectFor(void* self, intptr_t slot);
+bool QGraphicsEffect_override_virtual_owned_boundingRectFor(void* self, intptr_t slot);
 QRectF* QGraphicsEffect_virtualbase_boundingRectFor(const void* self, QRectF* sourceRect);
 bool QGraphicsEffect_override_virtual_draw(void* self, intptr_t slot);
 void QGraphicsEffect_virtualbase_draw(void* self, QPainter* painter);
@@ -136,6 +137,7 @@ struct miqt_string QGraphicsColorizeEffect_trUtf83(const char* s, const char* c,
 bool QGraphicsColorizeEffect_override_virtual_draw(void* self, intptr_t slot);
 void QGraphicsColorizeEffect_virtualbase_draw(void* self, QPainter* painter);
 bool QGraphicsColorizeEffect_override_virtual_boundingRectFor(void* self, intptr_t slot);
+bool QGraphicsColorizeEffect_override_virtual_owned_boundingRectFor(void* self, intptr_t slot);
 QRectF* QGraphicsColorizeEffect_virtualbase_boundingRectFor(const void* self, QRectF* sourceRect);
 bool QGraphicsColorizeEffect_override_virtual_sourceChanged(void* self, intptr_t slot);
 void QGraphicsColorizeEffect_virtualbase_sourceChanged(void* self, int flags);
@@ -189,6 +191,7 @@ struct miqt_string QGraphicsBlurEffect_trUtf82(const char* s, const char* c);
 struct miqt_string QGraphicsBlurEffect_trUtf83(const char* s, const char* c, int n);
 
 bool QGraphicsBlurEffect_override_virtual_boundingRectFor(void* self, intptr_t slot);
+bool QGraphicsBlurEffect_override_virtual_owned_boundingRectFor(void* self, intptr_t slot);
 QRectF* QGraphicsBlurEffect_virtualbase_boundingRectFor(const void* self, QRectF* rect);
 bool QGraphicsBlurEffect_override_virtual_draw(void* self, intptr_t slot);
 void QGraphicsBlurEffect_virtualbase_draw(void* self, QPainter* painter);
@@ -254,6 +257,7 @@ struct miqt_string QGraphicsDropShadowEffect_trUtf82(const char* s, const char* 
 struct miqt_string QGraphicsDropShadowEffect_trUtf83(const char* s, const char* c, int n);
 
 bool QGraphicsDropShadowEffect_override_virtual_boundingRectFor(void* self, intptr_t slot);
+bool QGraphicsDropShadowEffect_override_virtual_owned_boundingRectFor(void* self, intptr_t slot);
 QRectF* QGraphicsDropShadowEffect_virtualbase_boundingRectFor(const void* self, QRectF* rect);
 bool QGraphicsDropShadowEffect_override_virtual_draw(void* self, intptr_t slot);
 void QGraphicsDropShadowEffect_virtualbase_draw(void* self, QPainter* painter);
@@ -310,6 +314,7 @@ struct miqt_string QGraphicsOpacityEffect_trUtf83(const char* s, const char* c, 
 bool QGraphicsOpacityEffect_override_virtual_draw(void* self, intptr_t slot);
 void QGraphicsOpacityEffect_virtualbase_draw(void* self, QPainter* painter);
 bool QGraphicsOpacityEffect_override_virtual_boundingRectFor(void* self, intptr_t slot);
+bool QGraphicsOpacityEffect_override_virtual_owned_boundingRectFor(void* self, intptr_t slot);
 QRectF* QGraphicsOpacityEffect_virtualbase_boundingRectFor(const void* self, QRectF* sourceRect);
 bool QGraphicsOpacityEffect_override_virtual_sourceChanged(void* self, intptr_t slot);
 void QGraphicsOpacityEffect_virtualbase_sourceChanged(void* self, int flags);

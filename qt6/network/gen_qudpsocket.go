@@ -704,10 +704,16 @@ func (this *QUdpSocket) callVirtualBase_SocketOption(option QAbstractSocket__Soc
 	return _goptr
 
 }
+
+type miqtVirtualCallback_QUdpSocket_socketOption struct {
+	callback   func(super func(option QAbstractSocket__SocketOption) *qt6.QVariant, option QAbstractSocket__SocketOption) *qt6.QVariant
+	ownsReturn bool
+}
+
 func (this *QUdpSocket) OnSocketOption(slot func(super func(option QAbstractSocket__SocketOption) *qt6.QVariant, option QAbstractSocket__SocketOption) *qt6.QVariant) {
 	var slotHandle C.intptr_t
 	if slot != nil {
-		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QUdpSocket_socketOption{callback: slot}))
 	}
 	ok := C.QUdpSocket_override_virtual_socketOption(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
@@ -715,17 +721,34 @@ func (this *QUdpSocket) OnSocketOption(slot func(super func(option QAbstractSock
 	}
 }
 
+// OnSocketOptionOwned installs a virtual override that transfers
+// ownership of each non-nil returned Qt value object to C++.
+func (this *QUdpSocket) OnSocketOptionOwned(slot func(super func(option QAbstractSocket__SocketOption) *qt6.QVariant, option QAbstractSocket__SocketOption) *qt6.QVariant) {
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QUdpSocket_socketOption{callback: slot, ownsReturn: true}))
+	}
+	ok := C.QUdpSocket_override_virtual_owned_socketOption(unsafe.Pointer(this.h), slotHandle)
+	if !ok {
+		panic("miqt: can only override virtual methods for directly constructed types")
+	}
+}
+
 //export miqt_exec_callback_QUdpSocket_socketOption
 func miqt_exec_callback_QUdpSocket_socketOption(self *C.QUdpSocket, cb C.intptr_t, option C.int) *C.QVariant {
-	gofunc, ok := cgo.Handle(cb).Value().(func(super func(option QAbstractSocket__SocketOption) *qt6.QVariant, option QAbstractSocket__SocketOption) *qt6.QVariant)
+	callbackData, ok := cgo.Handle(cb).Value().(miqtVirtualCallback_QUdpSocket_socketOption)
 	if !ok {
 		panic("miqt: callback of non-callback type (heap corruption?)")
 	}
+	gofunc := callbackData.callback
 
 	// Convert all CABI parameters to Go parameters
 	slotval1 := (QAbstractSocket__SocketOption)(option)
 
 	virtualReturn := gofunc((&QUdpSocket{h: self}).callVirtualBase_SocketOption, slotval1)
+	if callbackData.ownsReturn && virtualReturn != nil {
+		runtime.SetFinalizer(virtualReturn, nil)
+	}
 
 	return (*C.QVariant)(virtualReturn.UnsafePointer())
 

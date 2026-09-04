@@ -534,10 +534,16 @@ func (this *QTextBrowser) callVirtualBase_LoadResource(typeVal int, name *QUrl) 
 	return _goptr
 
 }
+
+type miqtVirtualCallback_QTextBrowser_loadResource struct {
+	callback   func(super func(typeVal int, name *QUrl) *QVariant, typeVal int, name *QUrl) *QVariant
+	ownsReturn bool
+}
+
 func (this *QTextBrowser) OnLoadResource(slot func(super func(typeVal int, name *QUrl) *QVariant, typeVal int, name *QUrl) *QVariant) {
 	var slotHandle C.intptr_t
 	if slot != nil {
-		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QTextBrowser_loadResource{callback: slot}))
 	}
 	ok := C.QTextBrowser_override_virtual_loadResource(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
@@ -545,12 +551,26 @@ func (this *QTextBrowser) OnLoadResource(slot func(super func(typeVal int, name 
 	}
 }
 
+// OnLoadResourceOwned installs a virtual override that transfers
+// ownership of each non-nil returned Qt value object to C++.
+func (this *QTextBrowser) OnLoadResourceOwned(slot func(super func(typeVal int, name *QUrl) *QVariant, typeVal int, name *QUrl) *QVariant) {
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QTextBrowser_loadResource{callback: slot, ownsReturn: true}))
+	}
+	ok := C.QTextBrowser_override_virtual_owned_loadResource(unsafe.Pointer(this.h), slotHandle)
+	if !ok {
+		panic("miqt: can only override virtual methods for directly constructed types")
+	}
+}
+
 //export miqt_exec_callback_QTextBrowser_loadResource
 func miqt_exec_callback_QTextBrowser_loadResource(self *C.QTextBrowser, cb C.intptr_t, typeVal C.int, name *C.QUrl) *C.QVariant {
-	gofunc, ok := cgo.Handle(cb).Value().(func(super func(typeVal int, name *QUrl) *QVariant, typeVal int, name *QUrl) *QVariant)
+	callbackData, ok := cgo.Handle(cb).Value().(miqtVirtualCallback_QTextBrowser_loadResource)
 	if !ok {
 		panic("miqt: callback of non-callback type (heap corruption?)")
 	}
+	gofunc := callbackData.callback
 
 	// Convert all CABI parameters to Go parameters
 	slotval1 := (int)(typeVal)
@@ -558,6 +578,9 @@ func miqt_exec_callback_QTextBrowser_loadResource(self *C.QTextBrowser, cb C.int
 	slotval2 := newQUrl(name)
 
 	virtualReturn := gofunc((&QTextBrowser{h: self}).callVirtualBase_LoadResource, slotval1, slotval2)
+	if callbackData.ownsReturn && virtualReturn != nil {
+		runtime.SetFinalizer(virtualReturn, nil)
+	}
 
 	return virtualReturn.cPointer()
 
@@ -954,10 +977,16 @@ func (this *QTextBrowser) callVirtualBase_InputMethodQuery(property InputMethodQ
 	return _goptr
 
 }
+
+type miqtVirtualCallback_QTextBrowser_inputMethodQuery struct {
+	callback   func(super func(property InputMethodQuery) *QVariant, property InputMethodQuery) *QVariant
+	ownsReturn bool
+}
+
 func (this *QTextBrowser) OnInputMethodQuery(slot func(super func(property InputMethodQuery) *QVariant, property InputMethodQuery) *QVariant) {
 	var slotHandle C.intptr_t
 	if slot != nil {
-		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QTextBrowser_inputMethodQuery{callback: slot}))
 	}
 	ok := C.QTextBrowser_override_virtual_inputMethodQuery(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
@@ -965,17 +994,34 @@ func (this *QTextBrowser) OnInputMethodQuery(slot func(super func(property Input
 	}
 }
 
+// OnInputMethodQueryOwned installs a virtual override that transfers
+// ownership of each non-nil returned Qt value object to C++.
+func (this *QTextBrowser) OnInputMethodQueryOwned(slot func(super func(property InputMethodQuery) *QVariant, property InputMethodQuery) *QVariant) {
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QTextBrowser_inputMethodQuery{callback: slot, ownsReturn: true}))
+	}
+	ok := C.QTextBrowser_override_virtual_owned_inputMethodQuery(unsafe.Pointer(this.h), slotHandle)
+	if !ok {
+		panic("miqt: can only override virtual methods for directly constructed types")
+	}
+}
+
 //export miqt_exec_callback_QTextBrowser_inputMethodQuery
 func miqt_exec_callback_QTextBrowser_inputMethodQuery(self *C.QTextBrowser, cb C.intptr_t, property C.int) *C.QVariant {
-	gofunc, ok := cgo.Handle(cb).Value().(func(super func(property InputMethodQuery) *QVariant, property InputMethodQuery) *QVariant)
+	callbackData, ok := cgo.Handle(cb).Value().(miqtVirtualCallback_QTextBrowser_inputMethodQuery)
 	if !ok {
 		panic("miqt: callback of non-callback type (heap corruption?)")
 	}
+	gofunc := callbackData.callback
 
 	// Convert all CABI parameters to Go parameters
 	slotval1 := (InputMethodQuery)(property)
 
 	virtualReturn := gofunc((&QTextBrowser{h: self}).callVirtualBase_InputMethodQuery, slotval1)
+	if callbackData.ownsReturn && virtualReturn != nil {
+		runtime.SetFinalizer(virtualReturn, nil)
+	}
 
 	return virtualReturn.cPointer()
 
@@ -1561,10 +1607,16 @@ func (this *QTextBrowser) callVirtualBase_MinimumSizeHint() *QSize {
 	return _goptr
 
 }
+
+type miqtVirtualCallback_QTextBrowser_minimumSizeHint struct {
+	callback   func(super func() *QSize) *QSize
+	ownsReturn bool
+}
+
 func (this *QTextBrowser) OnMinimumSizeHint(slot func(super func() *QSize) *QSize) {
 	var slotHandle C.intptr_t
 	if slot != nil {
-		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QTextBrowser_minimumSizeHint{callback: slot}))
 	}
 	ok := C.QTextBrowser_override_virtual_minimumSizeHint(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
@@ -1572,14 +1624,31 @@ func (this *QTextBrowser) OnMinimumSizeHint(slot func(super func() *QSize) *QSiz
 	}
 }
 
+// OnMinimumSizeHintOwned installs a virtual override that transfers
+// ownership of each non-nil returned Qt value object to C++.
+func (this *QTextBrowser) OnMinimumSizeHintOwned(slot func(super func() *QSize) *QSize) {
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QTextBrowser_minimumSizeHint{callback: slot, ownsReturn: true}))
+	}
+	ok := C.QTextBrowser_override_virtual_owned_minimumSizeHint(unsafe.Pointer(this.h), slotHandle)
+	if !ok {
+		panic("miqt: can only override virtual methods for directly constructed types")
+	}
+}
+
 //export miqt_exec_callback_QTextBrowser_minimumSizeHint
 func miqt_exec_callback_QTextBrowser_minimumSizeHint(self *C.QTextBrowser, cb C.intptr_t) *C.QSize {
-	gofunc, ok := cgo.Handle(cb).Value().(func(super func() *QSize) *QSize)
+	callbackData, ok := cgo.Handle(cb).Value().(miqtVirtualCallback_QTextBrowser_minimumSizeHint)
 	if !ok {
 		panic("miqt: callback of non-callback type (heap corruption?)")
 	}
+	gofunc := callbackData.callback
 
 	virtualReturn := gofunc((&QTextBrowser{h: self}).callVirtualBase_MinimumSizeHint)
+	if callbackData.ownsReturn && virtualReturn != nil {
+		runtime.SetFinalizer(virtualReturn, nil)
+	}
 
 	return virtualReturn.cPointer()
 
@@ -1592,10 +1661,16 @@ func (this *QTextBrowser) callVirtualBase_SizeHint() *QSize {
 	return _goptr
 
 }
+
+type miqtVirtualCallback_QTextBrowser_sizeHint struct {
+	callback   func(super func() *QSize) *QSize
+	ownsReturn bool
+}
+
 func (this *QTextBrowser) OnSizeHint(slot func(super func() *QSize) *QSize) {
 	var slotHandle C.intptr_t
 	if slot != nil {
-		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QTextBrowser_sizeHint{callback: slot}))
 	}
 	ok := C.QTextBrowser_override_virtual_sizeHint(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
@@ -1603,14 +1678,31 @@ func (this *QTextBrowser) OnSizeHint(slot func(super func() *QSize) *QSize) {
 	}
 }
 
+// OnSizeHintOwned installs a virtual override that transfers
+// ownership of each non-nil returned Qt value object to C++.
+func (this *QTextBrowser) OnSizeHintOwned(slot func(super func() *QSize) *QSize) {
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QTextBrowser_sizeHint{callback: slot, ownsReturn: true}))
+	}
+	ok := C.QTextBrowser_override_virtual_owned_sizeHint(unsafe.Pointer(this.h), slotHandle)
+	if !ok {
+		panic("miqt: can only override virtual methods for directly constructed types")
+	}
+}
+
 //export miqt_exec_callback_QTextBrowser_sizeHint
 func miqt_exec_callback_QTextBrowser_sizeHint(self *C.QTextBrowser, cb C.intptr_t) *C.QSize {
-	gofunc, ok := cgo.Handle(cb).Value().(func(super func() *QSize) *QSize)
+	callbackData, ok := cgo.Handle(cb).Value().(miqtVirtualCallback_QTextBrowser_sizeHint)
 	if !ok {
 		panic("miqt: callback of non-callback type (heap corruption?)")
 	}
+	gofunc := callbackData.callback
 
 	virtualReturn := gofunc((&QTextBrowser{h: self}).callVirtualBase_SizeHint)
+	if callbackData.ownsReturn && virtualReturn != nil {
+		runtime.SetFinalizer(virtualReturn, nil)
+	}
 
 	return virtualReturn.cPointer()
 
@@ -1719,10 +1811,16 @@ func (this *QTextBrowser) callVirtualBase_ViewportSizeHint() *QSize {
 	return _goptr
 
 }
+
+type miqtVirtualCallback_QTextBrowser_viewportSizeHint struct {
+	callback   func(super func() *QSize) *QSize
+	ownsReturn bool
+}
+
 func (this *QTextBrowser) OnViewportSizeHint(slot func(super func() *QSize) *QSize) {
 	var slotHandle C.intptr_t
 	if slot != nil {
-		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QTextBrowser_viewportSizeHint{callback: slot}))
 	}
 	ok := C.QTextBrowser_override_virtual_viewportSizeHint(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
@@ -1730,14 +1828,31 @@ func (this *QTextBrowser) OnViewportSizeHint(slot func(super func() *QSize) *QSi
 	}
 }
 
+// OnViewportSizeHintOwned installs a virtual override that transfers
+// ownership of each non-nil returned Qt value object to C++.
+func (this *QTextBrowser) OnViewportSizeHintOwned(slot func(super func() *QSize) *QSize) {
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QTextBrowser_viewportSizeHint{callback: slot, ownsReturn: true}))
+	}
+	ok := C.QTextBrowser_override_virtual_owned_viewportSizeHint(unsafe.Pointer(this.h), slotHandle)
+	if !ok {
+		panic("miqt: can only override virtual methods for directly constructed types")
+	}
+}
+
 //export miqt_exec_callback_QTextBrowser_viewportSizeHint
 func miqt_exec_callback_QTextBrowser_viewportSizeHint(self *C.QTextBrowser, cb C.intptr_t) *C.QSize {
-	gofunc, ok := cgo.Handle(cb).Value().(func(super func() *QSize) *QSize)
+	callbackData, ok := cgo.Handle(cb).Value().(miqtVirtualCallback_QTextBrowser_viewportSizeHint)
 	if !ok {
 		panic("miqt: callback of non-callback type (heap corruption?)")
 	}
+	gofunc := callbackData.callback
 
 	virtualReturn := gofunc((&QTextBrowser{h: self}).callVirtualBase_ViewportSizeHint)
+	if callbackData.ownsReturn && virtualReturn != nil {
+		runtime.SetFinalizer(virtualReturn, nil)
+	}
 
 	return virtualReturn.cPointer()
 

@@ -40,6 +40,7 @@ public:
 
 	// cgo.Handle value for overwritten implementation
 	miqt_callback_handle<miqt_exec_callback_handle_release_QwtPointArrayData> handle__boundingRect;
+	bool owns_return__boundingRect = false;
 
 	// Subclass to allow providing a Go implementation
 	virtual QRectF boundingRect() const override {
@@ -48,6 +49,10 @@ public:
 		}
 
 		QRectF* callback_return_value = miqt_exec_callback_QwtPointArrayData_boundingRect(this, handle__boundingRect.value());
+		std::unique_ptr<QRectF> callback_return_value_owner;
+		if (owns_return__boundingRect) {
+			callback_return_value_owner.reset(callback_return_value);
+		}
 		return *callback_return_value;
 	}
 
@@ -70,6 +75,7 @@ public:
 
 	// cgo.Handle value for overwritten implementation
 	miqt_callback_handle<miqt_exec_callback_handle_release_QwtPointArrayData> handle__sample;
+	bool owns_return__sample = false;
 
 	// Subclass to allow providing a Go implementation
 	virtual QPointF sample(size_t index) const override {
@@ -79,6 +85,10 @@ public:
 
 		size_t sigval1 = index;
 		QPointF* callback_return_value = miqt_exec_callback_QwtPointArrayData_sample(this, handle__sample.value(), sigval1);
+		std::unique_ptr<QPointF> callback_return_value_owner;
+		if (owns_return__sample) {
+			callback_return_value_owner.reset(callback_return_value);
+		}
 		return *callback_return_value;
 	}
 
@@ -156,6 +166,19 @@ bool QwtPointArrayData_override_virtual_boundingRect(void* self, intptr_t slot) 
 	}
 
 	self_cast->handle__boundingRect = std::move(slot_handle);
+	self_cast->owns_return__boundingRect = false;
+	return true;
+}
+
+bool QwtPointArrayData_override_virtual_owned_boundingRect(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtPointArrayData> slot_handle(slot);
+	MiqtVirtualQwtPointArrayData* self_cast = dynamic_cast<MiqtVirtualQwtPointArrayData*>( (QwtPointArrayData*)(self) );
+	if (self_cast == nullptr) {
+		return false;
+	}
+
+	self_cast->handle__boundingRect = std::move(slot_handle);
+	self_cast->owns_return__boundingRect = true;
 	return true;
 }
 
@@ -186,6 +209,19 @@ bool QwtPointArrayData_override_virtual_sample(void* self, intptr_t slot) {
 	}
 
 	self_cast->handle__sample = std::move(slot_handle);
+	self_cast->owns_return__sample = false;
+	return true;
+}
+
+bool QwtPointArrayData_override_virtual_owned_sample(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtPointArrayData> slot_handle(slot);
+	MiqtVirtualQwtPointArrayData* self_cast = dynamic_cast<MiqtVirtualQwtPointArrayData*>( (QwtPointArrayData*)(self) );
+	if (self_cast == nullptr) {
+		return false;
+	}
+
+	self_cast->handle__sample = std::move(slot_handle);
+	self_cast->owns_return__sample = true;
 	return true;
 }
 
@@ -207,6 +243,7 @@ public:
 
 	// cgo.Handle value for overwritten implementation
 	miqt_callback_handle<miqt_exec_callback_handle_release_QwtCPointerData> handle__boundingRect;
+	bool owns_return__boundingRect = false;
 
 	// Subclass to allow providing a Go implementation
 	virtual QRectF boundingRect() const override {
@@ -215,6 +252,10 @@ public:
 		}
 
 		QRectF* callback_return_value = miqt_exec_callback_QwtCPointerData_boundingRect(this, handle__boundingRect.value());
+		std::unique_ptr<QRectF> callback_return_value_owner;
+		if (owns_return__boundingRect) {
+			callback_return_value_owner.reset(callback_return_value);
+		}
 		return *callback_return_value;
 	}
 
@@ -237,6 +278,7 @@ public:
 
 	// cgo.Handle value for overwritten implementation
 	miqt_callback_handle<miqt_exec_callback_handle_release_QwtCPointerData> handle__sample;
+	bool owns_return__sample = false;
 
 	// Subclass to allow providing a Go implementation
 	virtual QPointF sample(size_t index) const override {
@@ -246,6 +288,10 @@ public:
 
 		size_t sigval1 = index;
 		QPointF* callback_return_value = miqt_exec_callback_QwtCPointerData_sample(this, handle__sample.value(), sigval1);
+		std::unique_ptr<QPointF> callback_return_value_owner;
+		if (owns_return__sample) {
+			callback_return_value_owner.reset(callback_return_value);
+		}
 		return *callback_return_value;
 	}
 
@@ -289,6 +335,19 @@ bool QwtCPointerData_override_virtual_boundingRect(void* self, intptr_t slot) {
 	}
 
 	self_cast->handle__boundingRect = std::move(slot_handle);
+	self_cast->owns_return__boundingRect = false;
+	return true;
+}
+
+bool QwtCPointerData_override_virtual_owned_boundingRect(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtCPointerData> slot_handle(slot);
+	MiqtVirtualQwtCPointerData* self_cast = dynamic_cast<MiqtVirtualQwtCPointerData*>( (QwtCPointerData*)(self) );
+	if (self_cast == nullptr) {
+		return false;
+	}
+
+	self_cast->handle__boundingRect = std::move(slot_handle);
+	self_cast->owns_return__boundingRect = true;
 	return true;
 }
 
@@ -319,6 +378,19 @@ bool QwtCPointerData_override_virtual_sample(void* self, intptr_t slot) {
 	}
 
 	self_cast->handle__sample = std::move(slot_handle);
+	self_cast->owns_return__sample = false;
+	return true;
+}
+
+bool QwtCPointerData_override_virtual_owned_sample(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtCPointerData> slot_handle(slot);
+	MiqtVirtualQwtCPointerData* self_cast = dynamic_cast<MiqtVirtualQwtCPointerData*>( (QwtCPointerData*)(self) );
+	if (self_cast == nullptr) {
+		return false;
+	}
+
+	self_cast->handle__sample = std::move(slot_handle);
+	self_cast->owns_return__sample = true;
 	return true;
 }
 
@@ -356,6 +428,7 @@ public:
 
 	// cgo.Handle value for overwritten implementation
 	miqt_callback_handle<miqt_exec_callback_handle_release_QwtSyntheticPointData> handle__boundingRect;
+	bool owns_return__boundingRect = false;
 
 	// Subclass to allow providing a Go implementation
 	virtual QRectF boundingRect() const override {
@@ -364,6 +437,10 @@ public:
 		}
 
 		QRectF* callback_return_value = miqt_exec_callback_QwtSyntheticPointData_boundingRect(this, handle__boundingRect.value());
+		std::unique_ptr<QRectF> callback_return_value_owner;
+		if (owns_return__boundingRect) {
+			callback_return_value_owner.reset(callback_return_value);
+		}
 		return *callback_return_value;
 	}
 
@@ -371,6 +448,7 @@ public:
 
 	// cgo.Handle value for overwritten implementation
 	miqt_callback_handle<miqt_exec_callback_handle_release_QwtSyntheticPointData> handle__sample;
+	bool owns_return__sample = false;
 
 	// Subclass to allow providing a Go implementation
 	virtual QPointF sample(size_t index) const override {
@@ -380,6 +458,10 @@ public:
 
 		size_t sigval1 = index;
 		QPointF* callback_return_value = miqt_exec_callback_QwtSyntheticPointData_sample(this, handle__sample.value(), sigval1);
+		std::unique_ptr<QPointF> callback_return_value_owner;
+		if (owns_return__sample) {
+			callback_return_value_owner.reset(callback_return_value);
+		}
 		return *callback_return_value;
 	}
 
@@ -512,6 +594,19 @@ bool QwtSyntheticPointData_override_virtual_boundingRect(void* self, intptr_t sl
 	}
 
 	self_cast->handle__boundingRect = std::move(slot_handle);
+	self_cast->owns_return__boundingRect = false;
+	return true;
+}
+
+bool QwtSyntheticPointData_override_virtual_owned_boundingRect(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtSyntheticPointData> slot_handle(slot);
+	MiqtVirtualQwtSyntheticPointData* self_cast = dynamic_cast<MiqtVirtualQwtSyntheticPointData*>( (QwtSyntheticPointData*)(self) );
+	if (self_cast == nullptr) {
+		return false;
+	}
+
+	self_cast->handle__boundingRect = std::move(slot_handle);
+	self_cast->owns_return__boundingRect = true;
 	return true;
 }
 
@@ -527,6 +622,19 @@ bool QwtSyntheticPointData_override_virtual_sample(void* self, intptr_t slot) {
 	}
 
 	self_cast->handle__sample = std::move(slot_handle);
+	self_cast->owns_return__sample = false;
+	return true;
+}
+
+bool QwtSyntheticPointData_override_virtual_owned_sample(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtSyntheticPointData> slot_handle(slot);
+	MiqtVirtualQwtSyntheticPointData* self_cast = dynamic_cast<MiqtVirtualQwtSyntheticPointData*>( (QwtSyntheticPointData*)(self) );
+	if (self_cast == nullptr) {
+		return false;
+	}
+
+	self_cast->handle__sample = std::move(slot_handle);
+	self_cast->owns_return__sample = true;
 	return true;
 }
 

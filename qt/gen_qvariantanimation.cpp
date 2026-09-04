@@ -138,6 +138,7 @@ public:
 
 	// cgo.Handle value for overwritten implementation
 	miqt_callback_handle<miqt_exec_callback_handle_release_QVariantAnimation> handle__interpolated;
+	bool owns_return__interpolated = false;
 
 	// Subclass to allow providing a Go implementation
 	virtual QVariant interpolated(const QVariant& from, const QVariant& to, qreal progress) const override {
@@ -154,6 +155,10 @@ public:
 		qreal progress_ret = progress;
 		double sigval3 = static_cast<double>(progress_ret);
 		QVariant* callback_return_value = miqt_exec_callback_QVariantAnimation_interpolated(this, handle__interpolated.value(), sigval1, sigval2, sigval3);
+		std::unique_ptr<QVariant> callback_return_value_owner;
+		if (owns_return__interpolated) {
+			callback_return_value_owner.reset(callback_return_value);
+		}
 		return *callback_return_value;
 	}
 
@@ -556,6 +561,19 @@ bool QVariantAnimation_override_virtual_interpolated(void* self, intptr_t slot) 
 	}
 
 	self_cast->handle__interpolated = std::move(slot_handle);
+	self_cast->owns_return__interpolated = false;
+	return true;
+}
+
+bool QVariantAnimation_override_virtual_owned_interpolated(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QVariantAnimation> slot_handle(slot);
+	MiqtVirtualQVariantAnimation* self_cast = dynamic_cast<MiqtVirtualQVariantAnimation*>( (QVariantAnimation*)(self) );
+	if (self_cast == nullptr) {
+		return false;
+	}
+
+	self_cast->handle__interpolated = std::move(slot_handle);
+	self_cast->owns_return__interpolated = true;
 	return true;
 }
 

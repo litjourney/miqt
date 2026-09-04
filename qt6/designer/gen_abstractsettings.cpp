@@ -111,6 +111,7 @@ public:
 
 	// cgo.Handle value for overwritten implementation
 	miqt_callback_handle<miqt_exec_callback_handle_release_QDesignerSettingsInterface> handle__value;
+	bool owns_return__value = false;
 
 	// Subclass to allow providing a Go implementation
 	virtual QVariant value(const QString& key, const QVariant& defaultValue) const override {
@@ -130,6 +131,10 @@ public:
 		// Cast returned reference into pointer
 		QVariant* sigval2 = const_cast<QVariant*>(&defaultValue_ret);
 		QVariant* callback_return_value = miqt_exec_callback_QDesignerSettingsInterface_value(this, handle__value.value(), sigval1, sigval2);
+		std::unique_ptr<QVariant> callback_return_value_owner;
+		if (owns_return__value) {
+			callback_return_value_owner.reset(callback_return_value);
+		}
 		return *callback_return_value;
 	}
 
@@ -241,6 +246,19 @@ bool QDesignerSettingsInterface_override_virtual_value(void* self, intptr_t slot
 	}
 
 	self_cast->handle__value = std::move(slot_handle);
+	self_cast->owns_return__value = false;
+	return true;
+}
+
+bool QDesignerSettingsInterface_override_virtual_owned_value(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QDesignerSettingsInterface> slot_handle(slot);
+	MiqtVirtualQDesignerSettingsInterface* self_cast = dynamic_cast<MiqtVirtualQDesignerSettingsInterface*>( (QDesignerSettingsInterface*)(self) );
+	if (self_cast == nullptr) {
+		return false;
+	}
+
+	self_cast->handle__value = std::move(slot_handle);
+	self_cast->owns_return__value = true;
 	return true;
 }
 

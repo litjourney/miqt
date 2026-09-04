@@ -188,6 +188,7 @@ public:
 
 	// cgo.Handle value for overwritten implementation
 	miqt_callback_handle<miqt_exec_callback_handle_release_QDesignerFormWindowManagerInterface> handle__createPreviewPixmap;
+	bool owns_return__createPreviewPixmap = false;
 
 	// Subclass to allow providing a Go implementation
 	virtual QPixmap createPreviewPixmap() const override {
@@ -196,6 +197,10 @@ public:
 		}
 
 		QPixmap* callback_return_value = miqt_exec_callback_QDesignerFormWindowManagerInterface_createPreviewPixmap(this, handle__createPreviewPixmap.value());
+		std::unique_ptr<QPixmap> callback_return_value_owner;
+		if (owns_return__createPreviewPixmap) {
+			callback_return_value_owner.reset(callback_return_value);
+		}
 		return *callback_return_value;
 	}
 
@@ -748,6 +753,19 @@ bool QDesignerFormWindowManagerInterface_override_virtual_createPreviewPixmap(vo
 	}
 
 	self_cast->handle__createPreviewPixmap = std::move(slot_handle);
+	self_cast->owns_return__createPreviewPixmap = false;
+	return true;
+}
+
+bool QDesignerFormWindowManagerInterface_override_virtual_owned_createPreviewPixmap(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QDesignerFormWindowManagerInterface> slot_handle(slot);
+	MiqtVirtualQDesignerFormWindowManagerInterface* self_cast = dynamic_cast<MiqtVirtualQDesignerFormWindowManagerInterface*>( (QDesignerFormWindowManagerInterface*)(self) );
+	if (self_cast == nullptr) {
+		return false;
+	}
+
+	self_cast->handle__createPreviewPixmap = std::move(slot_handle);
+	self_cast->owns_return__createPreviewPixmap = true;
 	return true;
 }
 

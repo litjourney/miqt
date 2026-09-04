@@ -121,10 +121,13 @@ int QAbstractTextDocumentLayout_virtualbase_hitTest(const void* self, QPointF* p
 bool QAbstractTextDocumentLayout_override_virtual_pageCount(void* self, intptr_t slot);
 int QAbstractTextDocumentLayout_virtualbase_pageCount(const void* self);
 bool QAbstractTextDocumentLayout_override_virtual_documentSize(void* self, intptr_t slot);
+bool QAbstractTextDocumentLayout_override_virtual_owned_documentSize(void* self, intptr_t slot);
 QSizeF* QAbstractTextDocumentLayout_virtualbase_documentSize(const void* self);
 bool QAbstractTextDocumentLayout_override_virtual_frameBoundingRect(void* self, intptr_t slot);
+bool QAbstractTextDocumentLayout_override_virtual_owned_frameBoundingRect(void* self, intptr_t slot);
 QRectF* QAbstractTextDocumentLayout_virtualbase_frameBoundingRect(const void* self, QTextFrame* frame);
 bool QAbstractTextDocumentLayout_override_virtual_blockBoundingRect(void* self, intptr_t slot);
+bool QAbstractTextDocumentLayout_override_virtual_owned_blockBoundingRect(void* self, intptr_t slot);
 QRectF* QAbstractTextDocumentLayout_virtualbase_blockBoundingRect(const void* self, QTextBlock* block);
 bool QAbstractTextDocumentLayout_override_virtual_documentChanged(void* self, intptr_t slot);
 void QAbstractTextDocumentLayout_virtualbase_documentChanged(void* self, int from, int charsRemoved, int charsAdded);

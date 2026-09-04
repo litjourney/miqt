@@ -726,10 +726,16 @@ func (this *QwtDynGridLayout) callVirtualBase_SizeHint() *qt.QSize {
 	return _goptr
 
 }
+
+type miqtVirtualCallback_QwtDynGridLayout_sizeHint struct {
+	callback   func(super func() *qt.QSize) *qt.QSize
+	ownsReturn bool
+}
+
 func (this *QwtDynGridLayout) OnSizeHint(slot func(super func() *qt.QSize) *qt.QSize) {
 	var slotHandle C.intptr_t
 	if slot != nil {
-		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QwtDynGridLayout_sizeHint{callback: slot}))
 	}
 	ok := C.QwtDynGridLayout_override_virtual_sizeHint(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
@@ -737,14 +743,31 @@ func (this *QwtDynGridLayout) OnSizeHint(slot func(super func() *qt.QSize) *qt.Q
 	}
 }
 
+// OnSizeHintOwned installs a virtual override that transfers
+// ownership of each non-nil returned Qt value object to C++.
+func (this *QwtDynGridLayout) OnSizeHintOwned(slot func(super func() *qt.QSize) *qt.QSize) {
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QwtDynGridLayout_sizeHint{callback: slot, ownsReturn: true}))
+	}
+	ok := C.QwtDynGridLayout_override_virtual_owned_sizeHint(unsafe.Pointer(this.h), slotHandle)
+	if !ok {
+		panic("miqt: can only override virtual methods for directly constructed types")
+	}
+}
+
 //export miqt_exec_callback_QwtDynGridLayout_sizeHint
 func miqt_exec_callback_QwtDynGridLayout_sizeHint(self *C.QwtDynGridLayout, cb C.intptr_t) *C.QSize {
-	gofunc, ok := cgo.Handle(cb).Value().(func(super func() *qt.QSize) *qt.QSize)
+	callbackData, ok := cgo.Handle(cb).Value().(miqtVirtualCallback_QwtDynGridLayout_sizeHint)
 	if !ok {
 		panic("miqt: callback of non-callback type (heap corruption?)")
 	}
+	gofunc := callbackData.callback
 
 	virtualReturn := gofunc((&QwtDynGridLayout{h: self}).callVirtualBase_SizeHint)
+	if callbackData.ownsReturn && virtualReturn != nil {
+		runtime.SetFinalizer(virtualReturn, nil)
+	}
 
 	return (*C.QSize)(virtualReturn.UnsafePointer())
 
@@ -818,10 +841,16 @@ func (this *QwtDynGridLayout) callVirtualBase_Geometry() *qt.QRect {
 	return _goptr
 
 }
+
+type miqtVirtualCallback_QwtDynGridLayout_geometry struct {
+	callback   func(super func() *qt.QRect) *qt.QRect
+	ownsReturn bool
+}
+
 func (this *QwtDynGridLayout) OnGeometry(slot func(super func() *qt.QRect) *qt.QRect) {
 	var slotHandle C.intptr_t
 	if slot != nil {
-		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QwtDynGridLayout_geometry{callback: slot}))
 	}
 	ok := C.QwtDynGridLayout_override_virtual_geometry(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
@@ -829,14 +858,31 @@ func (this *QwtDynGridLayout) OnGeometry(slot func(super func() *qt.QRect) *qt.Q
 	}
 }
 
+// OnGeometryOwned installs a virtual override that transfers
+// ownership of each non-nil returned Qt value object to C++.
+func (this *QwtDynGridLayout) OnGeometryOwned(slot func(super func() *qt.QRect) *qt.QRect) {
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QwtDynGridLayout_geometry{callback: slot, ownsReturn: true}))
+	}
+	ok := C.QwtDynGridLayout_override_virtual_owned_geometry(unsafe.Pointer(this.h), slotHandle)
+	if !ok {
+		panic("miqt: can only override virtual methods for directly constructed types")
+	}
+}
+
 //export miqt_exec_callback_QwtDynGridLayout_geometry
 func miqt_exec_callback_QwtDynGridLayout_geometry(self *C.QwtDynGridLayout, cb C.intptr_t) *C.QRect {
-	gofunc, ok := cgo.Handle(cb).Value().(func(super func() *qt.QRect) *qt.QRect)
+	callbackData, ok := cgo.Handle(cb).Value().(miqtVirtualCallback_QwtDynGridLayout_geometry)
 	if !ok {
 		panic("miqt: callback of non-callback type (heap corruption?)")
 	}
+	gofunc := callbackData.callback
 
 	virtualReturn := gofunc((&QwtDynGridLayout{h: self}).callVirtualBase_Geometry)
+	if callbackData.ownsReturn && virtualReturn != nil {
+		runtime.SetFinalizer(virtualReturn, nil)
+	}
 
 	return (*C.QRect)(virtualReturn.UnsafePointer())
 
@@ -849,10 +895,16 @@ func (this *QwtDynGridLayout) callVirtualBase_MinimumSize() *qt.QSize {
 	return _goptr
 
 }
+
+type miqtVirtualCallback_QwtDynGridLayout_minimumSize struct {
+	callback   func(super func() *qt.QSize) *qt.QSize
+	ownsReturn bool
+}
+
 func (this *QwtDynGridLayout) OnMinimumSize(slot func(super func() *qt.QSize) *qt.QSize) {
 	var slotHandle C.intptr_t
 	if slot != nil {
-		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QwtDynGridLayout_minimumSize{callback: slot}))
 	}
 	ok := C.QwtDynGridLayout_override_virtual_minimumSize(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
@@ -860,14 +912,31 @@ func (this *QwtDynGridLayout) OnMinimumSize(slot func(super func() *qt.QSize) *q
 	}
 }
 
+// OnMinimumSizeOwned installs a virtual override that transfers
+// ownership of each non-nil returned Qt value object to C++.
+func (this *QwtDynGridLayout) OnMinimumSizeOwned(slot func(super func() *qt.QSize) *qt.QSize) {
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QwtDynGridLayout_minimumSize{callback: slot, ownsReturn: true}))
+	}
+	ok := C.QwtDynGridLayout_override_virtual_owned_minimumSize(unsafe.Pointer(this.h), slotHandle)
+	if !ok {
+		panic("miqt: can only override virtual methods for directly constructed types")
+	}
+}
+
 //export miqt_exec_callback_QwtDynGridLayout_minimumSize
 func miqt_exec_callback_QwtDynGridLayout_minimumSize(self *C.QwtDynGridLayout, cb C.intptr_t) *C.QSize {
-	gofunc, ok := cgo.Handle(cb).Value().(func(super func() *qt.QSize) *qt.QSize)
+	callbackData, ok := cgo.Handle(cb).Value().(miqtVirtualCallback_QwtDynGridLayout_minimumSize)
 	if !ok {
 		panic("miqt: callback of non-callback type (heap corruption?)")
 	}
+	gofunc := callbackData.callback
 
 	virtualReturn := gofunc((&QwtDynGridLayout{h: self}).callVirtualBase_MinimumSize)
+	if callbackData.ownsReturn && virtualReturn != nil {
+		runtime.SetFinalizer(virtualReturn, nil)
+	}
 
 	return (*C.QSize)(virtualReturn.UnsafePointer())
 
@@ -880,10 +949,16 @@ func (this *QwtDynGridLayout) callVirtualBase_MaximumSize() *qt.QSize {
 	return _goptr
 
 }
+
+type miqtVirtualCallback_QwtDynGridLayout_maximumSize struct {
+	callback   func(super func() *qt.QSize) *qt.QSize
+	ownsReturn bool
+}
+
 func (this *QwtDynGridLayout) OnMaximumSize(slot func(super func() *qt.QSize) *qt.QSize) {
 	var slotHandle C.intptr_t
 	if slot != nil {
-		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QwtDynGridLayout_maximumSize{callback: slot}))
 	}
 	ok := C.QwtDynGridLayout_override_virtual_maximumSize(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
@@ -891,14 +966,31 @@ func (this *QwtDynGridLayout) OnMaximumSize(slot func(super func() *qt.QSize) *q
 	}
 }
 
+// OnMaximumSizeOwned installs a virtual override that transfers
+// ownership of each non-nil returned Qt value object to C++.
+func (this *QwtDynGridLayout) OnMaximumSizeOwned(slot func(super func() *qt.QSize) *qt.QSize) {
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QwtDynGridLayout_maximumSize{callback: slot, ownsReturn: true}))
+	}
+	ok := C.QwtDynGridLayout_override_virtual_owned_maximumSize(unsafe.Pointer(this.h), slotHandle)
+	if !ok {
+		panic("miqt: can only override virtual methods for directly constructed types")
+	}
+}
+
 //export miqt_exec_callback_QwtDynGridLayout_maximumSize
 func miqt_exec_callback_QwtDynGridLayout_maximumSize(self *C.QwtDynGridLayout, cb C.intptr_t) *C.QSize {
-	gofunc, ok := cgo.Handle(cb).Value().(func(super func() *qt.QSize) *qt.QSize)
+	callbackData, ok := cgo.Handle(cb).Value().(miqtVirtualCallback_QwtDynGridLayout_maximumSize)
 	if !ok {
 		panic("miqt: callback of non-callback type (heap corruption?)")
 	}
+	gofunc := callbackData.callback
 
 	virtualReturn := gofunc((&QwtDynGridLayout{h: self}).callVirtualBase_MaximumSize)
+	if callbackData.ownsReturn && virtualReturn != nil {
+		runtime.SetFinalizer(virtualReturn, nil)
+	}
 
 	return (*C.QSize)(virtualReturn.UnsafePointer())
 

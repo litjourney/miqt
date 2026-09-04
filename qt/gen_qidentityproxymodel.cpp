@@ -108,6 +108,7 @@ public:
 
 	// cgo.Handle value for overwritten implementation
 	miqt_callback_handle<miqt_exec_callback_handle_release_QIdentityProxyModel> handle__index;
+	bool owns_return__index = false;
 
 	// Subclass to allow providing a Go implementation
 	virtual QModelIndex index(int row, int column, const QModelIndex& parent) const override {
@@ -121,6 +122,10 @@ public:
 		// Cast returned reference into pointer
 		QModelIndex* sigval3 = const_cast<QModelIndex*>(&parent_ret);
 		QModelIndex* callback_return_value = miqt_exec_callback_QIdentityProxyModel_index(this, handle__index.value(), sigval1, sigval2, sigval3);
+		std::unique_ptr<QModelIndex> callback_return_value_owner;
+		if (owns_return__index) {
+			callback_return_value_owner.reset(callback_return_value);
+		}
 		return *callback_return_value;
 	}
 
@@ -128,6 +133,7 @@ public:
 
 	// cgo.Handle value for overwritten implementation
 	miqt_callback_handle<miqt_exec_callback_handle_release_QIdentityProxyModel> handle__mapFromSource;
+	bool owns_return__mapFromSource = false;
 
 	// Subclass to allow providing a Go implementation
 	virtual QModelIndex mapFromSource(const QModelIndex& sourceIndex) const override {
@@ -139,6 +145,10 @@ public:
 		// Cast returned reference into pointer
 		QModelIndex* sigval1 = const_cast<QModelIndex*>(&sourceIndex_ret);
 		QModelIndex* callback_return_value = miqt_exec_callback_QIdentityProxyModel_mapFromSource(this, handle__mapFromSource.value(), sigval1);
+		std::unique_ptr<QModelIndex> callback_return_value_owner;
+		if (owns_return__mapFromSource) {
+			callback_return_value_owner.reset(callback_return_value);
+		}
 		return *callback_return_value;
 	}
 
@@ -146,6 +156,7 @@ public:
 
 	// cgo.Handle value for overwritten implementation
 	miqt_callback_handle<miqt_exec_callback_handle_release_QIdentityProxyModel> handle__mapToSource;
+	bool owns_return__mapToSource = false;
 
 	// Subclass to allow providing a Go implementation
 	virtual QModelIndex mapToSource(const QModelIndex& proxyIndex) const override {
@@ -157,6 +168,10 @@ public:
 		// Cast returned reference into pointer
 		QModelIndex* sigval1 = const_cast<QModelIndex*>(&proxyIndex_ret);
 		QModelIndex* callback_return_value = miqt_exec_callback_QIdentityProxyModel_mapToSource(this, handle__mapToSource.value(), sigval1);
+		std::unique_ptr<QModelIndex> callback_return_value_owner;
+		if (owns_return__mapToSource) {
+			callback_return_value_owner.reset(callback_return_value);
+		}
 		return *callback_return_value;
 	}
 
@@ -164,6 +179,7 @@ public:
 
 	// cgo.Handle value for overwritten implementation
 	miqt_callback_handle<miqt_exec_callback_handle_release_QIdentityProxyModel> handle__parent;
+	bool owns_return__parent = false;
 
 	// Subclass to allow providing a Go implementation
 	virtual QModelIndex parent(const QModelIndex& child) const override {
@@ -175,6 +191,10 @@ public:
 		// Cast returned reference into pointer
 		QModelIndex* sigval1 = const_cast<QModelIndex*>(&child_ret);
 		QModelIndex* callback_return_value = miqt_exec_callback_QIdentityProxyModel_parent(this, handle__parent.value(), sigval1);
+		std::unique_ptr<QModelIndex> callback_return_value_owner;
+		if (owns_return__parent) {
+			callback_return_value_owner.reset(callback_return_value);
+		}
 		return *callback_return_value;
 	}
 
@@ -200,6 +220,7 @@ public:
 
 	// cgo.Handle value for overwritten implementation
 	miqt_callback_handle<miqt_exec_callback_handle_release_QIdentityProxyModel> handle__headerData;
+	bool owns_return__headerData = false;
 
 	// Subclass to allow providing a Go implementation
 	virtual QVariant headerData(int section, Qt::Orientation orientation, int role) const override {
@@ -212,6 +233,10 @@ public:
 		int sigval2 = static_cast<int>(orientation_ret);
 		int sigval3 = role;
 		QVariant* callback_return_value = miqt_exec_callback_QIdentityProxyModel_headerData(this, handle__headerData.value(), sigval1, sigval2, sigval3);
+		std::unique_ptr<QVariant> callback_return_value_owner;
+		if (owns_return__headerData) {
+			callback_return_value_owner.reset(callback_return_value);
+		}
 		return *callback_return_value;
 	}
 
@@ -242,6 +267,7 @@ public:
 
 	// cgo.Handle value for overwritten implementation
 	miqt_callback_handle<miqt_exec_callback_handle_release_QIdentityProxyModel> handle__sibling;
+	bool owns_return__sibling = false;
 
 	// Subclass to allow providing a Go implementation
 	virtual QModelIndex sibling(int row, int column, const QModelIndex& idx) const override {
@@ -255,6 +281,10 @@ public:
 		// Cast returned reference into pointer
 		QModelIndex* sigval3 = const_cast<QModelIndex*>(&idx_ret);
 		QModelIndex* callback_return_value = miqt_exec_callback_QIdentityProxyModel_sibling(this, handle__sibling.value(), sigval1, sigval2, sigval3);
+		std::unique_ptr<QModelIndex> callback_return_value_owner;
+		if (owns_return__sibling) {
+			callback_return_value_owner.reset(callback_return_value);
+		}
 		return *callback_return_value;
 	}
 
@@ -262,6 +292,7 @@ public:
 
 	// cgo.Handle value for overwritten implementation
 	miqt_callback_handle<miqt_exec_callback_handle_release_QIdentityProxyModel> handle__mapSelectionFromSource;
+	bool owns_return__mapSelectionFromSource = false;
 
 	// Subclass to allow providing a Go implementation
 	virtual QItemSelection mapSelectionFromSource(const QItemSelection& selection) const override {
@@ -273,6 +304,10 @@ public:
 		// Cast returned reference into pointer
 		QItemSelection* sigval1 = const_cast<QItemSelection*>(&selection_ret);
 		QItemSelection* callback_return_value = miqt_exec_callback_QIdentityProxyModel_mapSelectionFromSource(this, handle__mapSelectionFromSource.value(), sigval1);
+		std::unique_ptr<QItemSelection> callback_return_value_owner;
+		if (owns_return__mapSelectionFromSource) {
+			callback_return_value_owner.reset(callback_return_value);
+		}
 		return *callback_return_value;
 	}
 
@@ -280,6 +315,7 @@ public:
 
 	// cgo.Handle value for overwritten implementation
 	miqt_callback_handle<miqt_exec_callback_handle_release_QIdentityProxyModel> handle__mapSelectionToSource;
+	bool owns_return__mapSelectionToSource = false;
 
 	// Subclass to allow providing a Go implementation
 	virtual QItemSelection mapSelectionToSource(const QItemSelection& selection) const override {
@@ -291,6 +327,10 @@ public:
 		// Cast returned reference into pointer
 		QItemSelection* sigval1 = const_cast<QItemSelection*>(&selection_ret);
 		QItemSelection* callback_return_value = miqt_exec_callback_QIdentityProxyModel_mapSelectionToSource(this, handle__mapSelectionToSource.value(), sigval1);
+		std::unique_ptr<QItemSelection> callback_return_value_owner;
+		if (owns_return__mapSelectionToSource) {
+			callback_return_value_owner.reset(callback_return_value);
+		}
 		return *callback_return_value;
 	}
 
@@ -506,6 +546,7 @@ public:
 
 	// cgo.Handle value for overwritten implementation
 	miqt_callback_handle<miqt_exec_callback_handle_release_QIdentityProxyModel> handle__data;
+	bool owns_return__data = false;
 
 	// Subclass to allow providing a Go implementation
 	virtual QVariant data(const QModelIndex& proxyIndex, int role) const override {
@@ -518,6 +559,10 @@ public:
 		QModelIndex* sigval1 = const_cast<QModelIndex*>(&proxyIndex_ret);
 		int sigval2 = role;
 		QVariant* callback_return_value = miqt_exec_callback_QIdentityProxyModel_data(this, handle__data.value(), sigval1, sigval2);
+		std::unique_ptr<QVariant> callback_return_value_owner;
+		if (owns_return__data) {
+			callback_return_value_owner.reset(callback_return_value);
+		}
 		return *callback_return_value;
 	}
 
@@ -644,6 +689,7 @@ public:
 
 	// cgo.Handle value for overwritten implementation
 	miqt_callback_handle<miqt_exec_callback_handle_release_QIdentityProxyModel> handle__buddy;
+	bool owns_return__buddy = false;
 
 	// Subclass to allow providing a Go implementation
 	virtual QModelIndex buddy(const QModelIndex& index) const override {
@@ -655,6 +701,10 @@ public:
 		// Cast returned reference into pointer
 		QModelIndex* sigval1 = const_cast<QModelIndex*>(&index_ret);
 		QModelIndex* callback_return_value = miqt_exec_callback_QIdentityProxyModel_buddy(this, handle__buddy.value(), sigval1);
+		std::unique_ptr<QModelIndex> callback_return_value_owner;
+		if (owns_return__buddy) {
+			callback_return_value_owner.reset(callback_return_value);
+		}
 		return *callback_return_value;
 	}
 
@@ -718,6 +768,7 @@ public:
 
 	// cgo.Handle value for overwritten implementation
 	miqt_callback_handle<miqt_exec_callback_handle_release_QIdentityProxyModel> handle__span;
+	bool owns_return__span = false;
 
 	// Subclass to allow providing a Go implementation
 	virtual QSize span(const QModelIndex& index) const override {
@@ -729,6 +780,10 @@ public:
 		// Cast returned reference into pointer
 		QModelIndex* sigval1 = const_cast<QModelIndex*>(&index_ret);
 		QSize* callback_return_value = miqt_exec_callback_QIdentityProxyModel_span(this, handle__span.value(), sigval1);
+		std::unique_ptr<QSize> callback_return_value_owner;
+		if (owns_return__span) {
+			callback_return_value_owner.reset(callback_return_value);
+		}
 		return *callback_return_value;
 	}
 
@@ -1224,6 +1279,19 @@ bool QIdentityProxyModel_override_virtual_index(void* self, intptr_t slot) {
 	}
 
 	self_cast->handle__index = std::move(slot_handle);
+	self_cast->owns_return__index = false;
+	return true;
+}
+
+bool QIdentityProxyModel_override_virtual_owned_index(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QIdentityProxyModel> slot_handle(slot);
+	MiqtVirtualQIdentityProxyModel* self_cast = dynamic_cast<MiqtVirtualQIdentityProxyModel*>( (QIdentityProxyModel*)(self) );
+	if (self_cast == nullptr) {
+		return false;
+	}
+
+	self_cast->handle__index = std::move(slot_handle);
+	self_cast->owns_return__index = true;
 	return true;
 }
 
@@ -1239,6 +1307,19 @@ bool QIdentityProxyModel_override_virtual_mapFromSource(void* self, intptr_t slo
 	}
 
 	self_cast->handle__mapFromSource = std::move(slot_handle);
+	self_cast->owns_return__mapFromSource = false;
+	return true;
+}
+
+bool QIdentityProxyModel_override_virtual_owned_mapFromSource(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QIdentityProxyModel> slot_handle(slot);
+	MiqtVirtualQIdentityProxyModel* self_cast = dynamic_cast<MiqtVirtualQIdentityProxyModel*>( (QIdentityProxyModel*)(self) );
+	if (self_cast == nullptr) {
+		return false;
+	}
+
+	self_cast->handle__mapFromSource = std::move(slot_handle);
+	self_cast->owns_return__mapFromSource = true;
 	return true;
 }
 
@@ -1254,6 +1335,19 @@ bool QIdentityProxyModel_override_virtual_mapToSource(void* self, intptr_t slot)
 	}
 
 	self_cast->handle__mapToSource = std::move(slot_handle);
+	self_cast->owns_return__mapToSource = false;
+	return true;
+}
+
+bool QIdentityProxyModel_override_virtual_owned_mapToSource(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QIdentityProxyModel> slot_handle(slot);
+	MiqtVirtualQIdentityProxyModel* self_cast = dynamic_cast<MiqtVirtualQIdentityProxyModel*>( (QIdentityProxyModel*)(self) );
+	if (self_cast == nullptr) {
+		return false;
+	}
+
+	self_cast->handle__mapToSource = std::move(slot_handle);
+	self_cast->owns_return__mapToSource = true;
 	return true;
 }
 
@@ -1269,6 +1363,19 @@ bool QIdentityProxyModel_override_virtual_parent(void* self, intptr_t slot) {
 	}
 
 	self_cast->handle__parent = std::move(slot_handle);
+	self_cast->owns_return__parent = false;
+	return true;
+}
+
+bool QIdentityProxyModel_override_virtual_owned_parent(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QIdentityProxyModel> slot_handle(slot);
+	MiqtVirtualQIdentityProxyModel* self_cast = dynamic_cast<MiqtVirtualQIdentityProxyModel*>( (QIdentityProxyModel*)(self) );
+	if (self_cast == nullptr) {
+		return false;
+	}
+
+	self_cast->handle__parent = std::move(slot_handle);
+	self_cast->owns_return__parent = true;
 	return true;
 }
 
@@ -1299,6 +1406,19 @@ bool QIdentityProxyModel_override_virtual_headerData(void* self, intptr_t slot) 
 	}
 
 	self_cast->handle__headerData = std::move(slot_handle);
+	self_cast->owns_return__headerData = false;
+	return true;
+}
+
+bool QIdentityProxyModel_override_virtual_owned_headerData(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QIdentityProxyModel> slot_handle(slot);
+	MiqtVirtualQIdentityProxyModel* self_cast = dynamic_cast<MiqtVirtualQIdentityProxyModel*>( (QIdentityProxyModel*)(self) );
+	if (self_cast == nullptr) {
+		return false;
+	}
+
+	self_cast->handle__headerData = std::move(slot_handle);
+	self_cast->owns_return__headerData = true;
 	return true;
 }
 
@@ -1329,6 +1449,19 @@ bool QIdentityProxyModel_override_virtual_sibling(void* self, intptr_t slot) {
 	}
 
 	self_cast->handle__sibling = std::move(slot_handle);
+	self_cast->owns_return__sibling = false;
+	return true;
+}
+
+bool QIdentityProxyModel_override_virtual_owned_sibling(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QIdentityProxyModel> slot_handle(slot);
+	MiqtVirtualQIdentityProxyModel* self_cast = dynamic_cast<MiqtVirtualQIdentityProxyModel*>( (QIdentityProxyModel*)(self) );
+	if (self_cast == nullptr) {
+		return false;
+	}
+
+	self_cast->handle__sibling = std::move(slot_handle);
+	self_cast->owns_return__sibling = true;
 	return true;
 }
 
@@ -1344,6 +1477,19 @@ bool QIdentityProxyModel_override_virtual_mapSelectionFromSource(void* self, int
 	}
 
 	self_cast->handle__mapSelectionFromSource = std::move(slot_handle);
+	self_cast->owns_return__mapSelectionFromSource = false;
+	return true;
+}
+
+bool QIdentityProxyModel_override_virtual_owned_mapSelectionFromSource(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QIdentityProxyModel> slot_handle(slot);
+	MiqtVirtualQIdentityProxyModel* self_cast = dynamic_cast<MiqtVirtualQIdentityProxyModel*>( (QIdentityProxyModel*)(self) );
+	if (self_cast == nullptr) {
+		return false;
+	}
+
+	self_cast->handle__mapSelectionFromSource = std::move(slot_handle);
+	self_cast->owns_return__mapSelectionFromSource = true;
 	return true;
 }
 
@@ -1359,6 +1505,19 @@ bool QIdentityProxyModel_override_virtual_mapSelectionToSource(void* self, intpt
 	}
 
 	self_cast->handle__mapSelectionToSource = std::move(slot_handle);
+	self_cast->owns_return__mapSelectionToSource = false;
+	return true;
+}
+
+bool QIdentityProxyModel_override_virtual_owned_mapSelectionToSource(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QIdentityProxyModel> slot_handle(slot);
+	MiqtVirtualQIdentityProxyModel* self_cast = dynamic_cast<MiqtVirtualQIdentityProxyModel*>( (QIdentityProxyModel*)(self) );
+	if (self_cast == nullptr) {
+		return false;
+	}
+
+	self_cast->handle__mapSelectionToSource = std::move(slot_handle);
+	self_cast->owns_return__mapSelectionToSource = true;
 	return true;
 }
 
@@ -1533,6 +1692,19 @@ bool QIdentityProxyModel_override_virtual_data(void* self, intptr_t slot) {
 	}
 
 	self_cast->handle__data = std::move(slot_handle);
+	self_cast->owns_return__data = false;
+	return true;
+}
+
+bool QIdentityProxyModel_override_virtual_owned_data(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QIdentityProxyModel> slot_handle(slot);
+	MiqtVirtualQIdentityProxyModel* self_cast = dynamic_cast<MiqtVirtualQIdentityProxyModel*>( (QIdentityProxyModel*)(self) );
+	if (self_cast == nullptr) {
+		return false;
+	}
+
+	self_cast->handle__data = std::move(slot_handle);
+	self_cast->owns_return__data = true;
 	return true;
 }
 
@@ -1644,6 +1816,19 @@ bool QIdentityProxyModel_override_virtual_buddy(void* self, intptr_t slot) {
 	}
 
 	self_cast->handle__buddy = std::move(slot_handle);
+	self_cast->owns_return__buddy = false;
+	return true;
+}
+
+bool QIdentityProxyModel_override_virtual_owned_buddy(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QIdentityProxyModel> slot_handle(slot);
+	MiqtVirtualQIdentityProxyModel* self_cast = dynamic_cast<MiqtVirtualQIdentityProxyModel*>( (QIdentityProxyModel*)(self) );
+	if (self_cast == nullptr) {
+		return false;
+	}
+
+	self_cast->handle__buddy = std::move(slot_handle);
+	self_cast->owns_return__buddy = true;
 	return true;
 }
 
@@ -1704,6 +1889,19 @@ bool QIdentityProxyModel_override_virtual_span(void* self, intptr_t slot) {
 	}
 
 	self_cast->handle__span = std::move(slot_handle);
+	self_cast->owns_return__span = false;
+	return true;
+}
+
+bool QIdentityProxyModel_override_virtual_owned_span(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QIdentityProxyModel> slot_handle(slot);
+	MiqtVirtualQIdentityProxyModel* self_cast = dynamic_cast<MiqtVirtualQIdentityProxyModel*>( (QIdentityProxyModel*)(self) );
+	if (self_cast == nullptr) {
+		return false;
+	}
+
+	self_cast->handle__span = std::move(slot_handle);
+	self_cast->owns_return__span = true;
 	return true;
 }
 

@@ -478,6 +478,7 @@ public:
 
 	// cgo.Handle value for overwritten implementation
 	miqt_callback_handle<miqt_exec_callback_handle_release_QAbstractItemModel> handle__index;
+	bool owns_return__index = false;
 
 	// Subclass to allow providing a Go implementation
 	virtual QModelIndex index(int row, int column, const QModelIndex& parent) const override {
@@ -491,11 +492,16 @@ public:
 		// Cast returned reference into pointer
 		QModelIndex* sigval3 = const_cast<QModelIndex*>(&parent_ret);
 		QModelIndex* callback_return_value = miqt_exec_callback_QAbstractItemModel_index(this, handle__index.value(), sigval1, sigval2, sigval3);
+		std::unique_ptr<QModelIndex> callback_return_value_owner;
+		if (owns_return__index) {
+			callback_return_value_owner.reset(callback_return_value);
+		}
 		return *callback_return_value;
 	}
 
 	// cgo.Handle value for overwritten implementation
 	miqt_callback_handle<miqt_exec_callback_handle_release_QAbstractItemModel> handle__parent;
+	bool owns_return__parent = false;
 
 	// Subclass to allow providing a Go implementation
 	virtual QModelIndex parent(const QModelIndex& child) const override {
@@ -507,11 +513,16 @@ public:
 		// Cast returned reference into pointer
 		QModelIndex* sigval1 = const_cast<QModelIndex*>(&child_ret);
 		QModelIndex* callback_return_value = miqt_exec_callback_QAbstractItemModel_parent(this, handle__parent.value(), sigval1);
+		std::unique_ptr<QModelIndex> callback_return_value_owner;
+		if (owns_return__parent) {
+			callback_return_value_owner.reset(callback_return_value);
+		}
 		return *callback_return_value;
 	}
 
 	// cgo.Handle value for overwritten implementation
 	miqt_callback_handle<miqt_exec_callback_handle_release_QAbstractItemModel> handle__sibling;
+	bool owns_return__sibling = false;
 
 	// Subclass to allow providing a Go implementation
 	virtual QModelIndex sibling(int row, int column, const QModelIndex& idx) const override {
@@ -525,6 +536,10 @@ public:
 		// Cast returned reference into pointer
 		QModelIndex* sigval3 = const_cast<QModelIndex*>(&idx_ret);
 		QModelIndex* callback_return_value = miqt_exec_callback_QAbstractItemModel_sibling(this, handle__sibling.value(), sigval1, sigval2, sigval3);
+		std::unique_ptr<QModelIndex> callback_return_value_owner;
+		if (owns_return__sibling) {
+			callback_return_value_owner.reset(callback_return_value);
+		}
 		return *callback_return_value;
 	}
 
@@ -582,6 +597,7 @@ public:
 
 	// cgo.Handle value for overwritten implementation
 	miqt_callback_handle<miqt_exec_callback_handle_release_QAbstractItemModel> handle__data;
+	bool owns_return__data = false;
 
 	// Subclass to allow providing a Go implementation
 	virtual QVariant data(const QModelIndex& index, int role) const override {
@@ -594,6 +610,10 @@ public:
 		QModelIndex* sigval1 = const_cast<QModelIndex*>(&index_ret);
 		int sigval2 = role;
 		QVariant* callback_return_value = miqt_exec_callback_QAbstractItemModel_data(this, handle__data.value(), sigval1, sigval2);
+		std::unique_ptr<QVariant> callback_return_value_owner;
+		if (owns_return__data) {
+			callback_return_value_owner.reset(callback_return_value);
+		}
 		return *callback_return_value;
 	}
 
@@ -621,6 +641,7 @@ public:
 
 	// cgo.Handle value for overwritten implementation
 	miqt_callback_handle<miqt_exec_callback_handle_release_QAbstractItemModel> handle__headerData;
+	bool owns_return__headerData = false;
 
 	// Subclass to allow providing a Go implementation
 	virtual QVariant headerData(int section, Qt::Orientation orientation, int role) const override {
@@ -633,6 +654,10 @@ public:
 		int sigval2 = static_cast<int>(orientation_ret);
 		int sigval3 = role;
 		QVariant* callback_return_value = miqt_exec_callback_QAbstractItemModel_headerData(this, handle__headerData.value(), sigval1, sigval2, sigval3);
+		std::unique_ptr<QVariant> callback_return_value_owner;
+		if (owns_return__headerData) {
+			callback_return_value_owner.reset(callback_return_value);
+		}
 		return *callback_return_value;
 	}
 
@@ -1067,6 +1092,7 @@ public:
 
 	// cgo.Handle value for overwritten implementation
 	miqt_callback_handle<miqt_exec_callback_handle_release_QAbstractItemModel> handle__buddy;
+	bool owns_return__buddy = false;
 
 	// Subclass to allow providing a Go implementation
 	virtual QModelIndex buddy(const QModelIndex& index) const override {
@@ -1078,6 +1104,10 @@ public:
 		// Cast returned reference into pointer
 		QModelIndex* sigval1 = const_cast<QModelIndex*>(&index_ret);
 		QModelIndex* callback_return_value = miqt_exec_callback_QAbstractItemModel_buddy(this, handle__buddy.value(), sigval1);
+		std::unique_ptr<QModelIndex> callback_return_value_owner;
+		if (owns_return__buddy) {
+			callback_return_value_owner.reset(callback_return_value);
+		}
 		return *callback_return_value;
 	}
 
@@ -1117,6 +1147,7 @@ public:
 
 	// cgo.Handle value for overwritten implementation
 	miqt_callback_handle<miqt_exec_callback_handle_release_QAbstractItemModel> handle__span;
+	bool owns_return__span = false;
 
 	// Subclass to allow providing a Go implementation
 	virtual QSize span(const QModelIndex& index) const override {
@@ -1128,6 +1159,10 @@ public:
 		// Cast returned reference into pointer
 		QModelIndex* sigval1 = const_cast<QModelIndex*>(&index_ret);
 		QSize* callback_return_value = miqt_exec_callback_QAbstractItemModel_span(this, handle__span.value(), sigval1);
+		std::unique_ptr<QSize> callback_return_value_owner;
+		if (owns_return__span) {
+			callback_return_value_owner.reset(callback_return_value);
+		}
 		return *callback_return_value;
 	}
 
@@ -1916,6 +1951,19 @@ bool QAbstractItemModel_override_virtual_index(void* self, intptr_t slot) {
 	}
 
 	self_cast->handle__index = std::move(slot_handle);
+	self_cast->owns_return__index = false;
+	return true;
+}
+
+bool QAbstractItemModel_override_virtual_owned_index(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QAbstractItemModel> slot_handle(slot);
+	MiqtVirtualQAbstractItemModel* self_cast = dynamic_cast<MiqtVirtualQAbstractItemModel*>( (QAbstractItemModel*)(self) );
+	if (self_cast == nullptr) {
+		return false;
+	}
+
+	self_cast->handle__index = std::move(slot_handle);
+	self_cast->owns_return__index = true;
 	return true;
 }
 
@@ -1927,6 +1975,19 @@ bool QAbstractItemModel_override_virtual_parent(void* self, intptr_t slot) {
 	}
 
 	self_cast->handle__parent = std::move(slot_handle);
+	self_cast->owns_return__parent = false;
+	return true;
+}
+
+bool QAbstractItemModel_override_virtual_owned_parent(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QAbstractItemModel> slot_handle(slot);
+	MiqtVirtualQAbstractItemModel* self_cast = dynamic_cast<MiqtVirtualQAbstractItemModel*>( (QAbstractItemModel*)(self) );
+	if (self_cast == nullptr) {
+		return false;
+	}
+
+	self_cast->handle__parent = std::move(slot_handle);
+	self_cast->owns_return__parent = true;
 	return true;
 }
 
@@ -1938,6 +1999,19 @@ bool QAbstractItemModel_override_virtual_sibling(void* self, intptr_t slot) {
 	}
 
 	self_cast->handle__sibling = std::move(slot_handle);
+	self_cast->owns_return__sibling = false;
+	return true;
+}
+
+bool QAbstractItemModel_override_virtual_owned_sibling(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QAbstractItemModel> slot_handle(slot);
+	MiqtVirtualQAbstractItemModel* self_cast = dynamic_cast<MiqtVirtualQAbstractItemModel*>( (QAbstractItemModel*)(self) );
+	if (self_cast == nullptr) {
+		return false;
+	}
+
+	self_cast->handle__sibling = std::move(slot_handle);
+	self_cast->owns_return__sibling = true;
 	return true;
 }
 
@@ -1990,6 +2064,19 @@ bool QAbstractItemModel_override_virtual_data(void* self, intptr_t slot) {
 	}
 
 	self_cast->handle__data = std::move(slot_handle);
+	self_cast->owns_return__data = false;
+	return true;
+}
+
+bool QAbstractItemModel_override_virtual_owned_data(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QAbstractItemModel> slot_handle(slot);
+	MiqtVirtualQAbstractItemModel* self_cast = dynamic_cast<MiqtVirtualQAbstractItemModel*>( (QAbstractItemModel*)(self) );
+	if (self_cast == nullptr) {
+		return false;
+	}
+
+	self_cast->handle__data = std::move(slot_handle);
+	self_cast->owns_return__data = true;
 	return true;
 }
 
@@ -2016,6 +2103,19 @@ bool QAbstractItemModel_override_virtual_headerData(void* self, intptr_t slot) {
 	}
 
 	self_cast->handle__headerData = std::move(slot_handle);
+	self_cast->owns_return__headerData = false;
+	return true;
+}
+
+bool QAbstractItemModel_override_virtual_owned_headerData(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QAbstractItemModel> slot_handle(slot);
+	MiqtVirtualQAbstractItemModel* self_cast = dynamic_cast<MiqtVirtualQAbstractItemModel*>( (QAbstractItemModel*)(self) );
+	if (self_cast == nullptr) {
+		return false;
+	}
+
+	self_cast->handle__headerData = std::move(slot_handle);
+	self_cast->owns_return__headerData = true;
 	return true;
 }
 
@@ -2376,6 +2476,19 @@ bool QAbstractItemModel_override_virtual_buddy(void* self, intptr_t slot) {
 	}
 
 	self_cast->handle__buddy = std::move(slot_handle);
+	self_cast->owns_return__buddy = false;
+	return true;
+}
+
+bool QAbstractItemModel_override_virtual_owned_buddy(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QAbstractItemModel> slot_handle(slot);
+	MiqtVirtualQAbstractItemModel* self_cast = dynamic_cast<MiqtVirtualQAbstractItemModel*>( (QAbstractItemModel*)(self) );
+	if (self_cast == nullptr) {
+		return false;
+	}
+
+	self_cast->handle__buddy = std::move(slot_handle);
+	self_cast->owns_return__buddy = true;
 	return true;
 }
 
@@ -2415,6 +2528,19 @@ bool QAbstractItemModel_override_virtual_span(void* self, intptr_t slot) {
 	}
 
 	self_cast->handle__span = std::move(slot_handle);
+	self_cast->owns_return__span = false;
+	return true;
+}
+
+bool QAbstractItemModel_override_virtual_owned_span(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QAbstractItemModel> slot_handle(slot);
+	MiqtVirtualQAbstractItemModel* self_cast = dynamic_cast<MiqtVirtualQAbstractItemModel*>( (QAbstractItemModel*)(self) );
+	if (self_cast == nullptr) {
+		return false;
+	}
+
+	self_cast->handle__span = std::move(slot_handle);
+	self_cast->owns_return__span = true;
 	return true;
 }
 
@@ -3136,6 +3262,7 @@ public:
 
 	// cgo.Handle value for overwritten implementation
 	miqt_callback_handle<miqt_exec_callback_handle_release_QAbstractTableModel> handle__index;
+	bool owns_return__index = false;
 
 	// Subclass to allow providing a Go implementation
 	virtual QModelIndex index(int row, int column, const QModelIndex& parent) const override {
@@ -3149,6 +3276,10 @@ public:
 		// Cast returned reference into pointer
 		QModelIndex* sigval3 = const_cast<QModelIndex*>(&parent_ret);
 		QModelIndex* callback_return_value = miqt_exec_callback_QAbstractTableModel_index(this, handle__index.value(), sigval1, sigval2, sigval3);
+		std::unique_ptr<QModelIndex> callback_return_value_owner;
+		if (owns_return__index) {
+			callback_return_value_owner.reset(callback_return_value);
+		}
 		return *callback_return_value;
 	}
 
@@ -3156,6 +3287,7 @@ public:
 
 	// cgo.Handle value for overwritten implementation
 	miqt_callback_handle<miqt_exec_callback_handle_release_QAbstractTableModel> handle__sibling;
+	bool owns_return__sibling = false;
 
 	// Subclass to allow providing a Go implementation
 	virtual QModelIndex sibling(int row, int column, const QModelIndex& idx) const override {
@@ -3169,6 +3301,10 @@ public:
 		// Cast returned reference into pointer
 		QModelIndex* sigval3 = const_cast<QModelIndex*>(&idx_ret);
 		QModelIndex* callback_return_value = miqt_exec_callback_QAbstractTableModel_sibling(this, handle__sibling.value(), sigval1, sigval2, sigval3);
+		std::unique_ptr<QModelIndex> callback_return_value_owner;
+		if (owns_return__sibling) {
+			callback_return_value_owner.reset(callback_return_value);
+		}
 		return *callback_return_value;
 	}
 
@@ -3249,6 +3385,7 @@ public:
 
 	// cgo.Handle value for overwritten implementation
 	miqt_callback_handle<miqt_exec_callback_handle_release_QAbstractTableModel> handle__data;
+	bool owns_return__data = false;
 
 	// Subclass to allow providing a Go implementation
 	virtual QVariant data(const QModelIndex& index, int role) const override {
@@ -3261,6 +3398,10 @@ public:
 		QModelIndex* sigval1 = const_cast<QModelIndex*>(&index_ret);
 		int sigval2 = role;
 		QVariant* callback_return_value = miqt_exec_callback_QAbstractTableModel_data(this, handle__data.value(), sigval1, sigval2);
+		std::unique_ptr<QVariant> callback_return_value_owner;
+		if (owns_return__data) {
+			callback_return_value_owner.reset(callback_return_value);
+		}
 		return *callback_return_value;
 	}
 
@@ -3288,6 +3429,7 @@ public:
 
 	// cgo.Handle value for overwritten implementation
 	miqt_callback_handle<miqt_exec_callback_handle_release_QAbstractTableModel> handle__headerData;
+	bool owns_return__headerData = false;
 
 	// Subclass to allow providing a Go implementation
 	virtual QVariant headerData(int section, Qt::Orientation orientation, int role) const override {
@@ -3300,6 +3442,10 @@ public:
 		int sigval2 = static_cast<int>(orientation_ret);
 		int sigval3 = role;
 		QVariant* callback_return_value = miqt_exec_callback_QAbstractTableModel_headerData(this, handle__headerData.value(), sigval1, sigval2, sigval3);
+		std::unique_ptr<QVariant> callback_return_value_owner;
+		if (owns_return__headerData) {
+			callback_return_value_owner.reset(callback_return_value);
+		}
 		return *callback_return_value;
 	}
 
@@ -3693,6 +3839,7 @@ public:
 
 	// cgo.Handle value for overwritten implementation
 	miqt_callback_handle<miqt_exec_callback_handle_release_QAbstractTableModel> handle__buddy;
+	bool owns_return__buddy = false;
 
 	// Subclass to allow providing a Go implementation
 	virtual QModelIndex buddy(const QModelIndex& index) const override {
@@ -3704,6 +3851,10 @@ public:
 		// Cast returned reference into pointer
 		QModelIndex* sigval1 = const_cast<QModelIndex*>(&index_ret);
 		QModelIndex* callback_return_value = miqt_exec_callback_QAbstractTableModel_buddy(this, handle__buddy.value(), sigval1);
+		std::unique_ptr<QModelIndex> callback_return_value_owner;
+		if (owns_return__buddy) {
+			callback_return_value_owner.reset(callback_return_value);
+		}
 		return *callback_return_value;
 	}
 
@@ -3743,6 +3894,7 @@ public:
 
 	// cgo.Handle value for overwritten implementation
 	miqt_callback_handle<miqt_exec_callback_handle_release_QAbstractTableModel> handle__span;
+	bool owns_return__span = false;
 
 	// Subclass to allow providing a Go implementation
 	virtual QSize span(const QModelIndex& index) const override {
@@ -3754,6 +3906,10 @@ public:
 		// Cast returned reference into pointer
 		QModelIndex* sigval1 = const_cast<QModelIndex*>(&index_ret);
 		QSize* callback_return_value = miqt_exec_callback_QAbstractTableModel_span(this, handle__span.value(), sigval1);
+		std::unique_ptr<QSize> callback_return_value_owner;
+		if (owns_return__span) {
+			callback_return_value_owner.reset(callback_return_value);
+		}
 		return *callback_return_value;
 	}
 
@@ -4076,6 +4232,19 @@ bool QAbstractTableModel_override_virtual_index(void* self, intptr_t slot) {
 	}
 
 	self_cast->handle__index = std::move(slot_handle);
+	self_cast->owns_return__index = false;
+	return true;
+}
+
+bool QAbstractTableModel_override_virtual_owned_index(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QAbstractTableModel> slot_handle(slot);
+	MiqtVirtualQAbstractTableModel* self_cast = dynamic_cast<MiqtVirtualQAbstractTableModel*>( (QAbstractTableModel*)(self) );
+	if (self_cast == nullptr) {
+		return false;
+	}
+
+	self_cast->handle__index = std::move(slot_handle);
+	self_cast->owns_return__index = true;
 	return true;
 }
 
@@ -4091,6 +4260,19 @@ bool QAbstractTableModel_override_virtual_sibling(void* self, intptr_t slot) {
 	}
 
 	self_cast->handle__sibling = std::move(slot_handle);
+	self_cast->owns_return__sibling = false;
+	return true;
+}
+
+bool QAbstractTableModel_override_virtual_owned_sibling(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QAbstractTableModel> slot_handle(slot);
+	MiqtVirtualQAbstractTableModel* self_cast = dynamic_cast<MiqtVirtualQAbstractTableModel*>( (QAbstractTableModel*)(self) );
+	if (self_cast == nullptr) {
+		return false;
+	}
+
+	self_cast->handle__sibling = std::move(slot_handle);
+	self_cast->owns_return__sibling = true;
 	return true;
 }
 
@@ -4159,6 +4341,19 @@ bool QAbstractTableModel_override_virtual_data(void* self, intptr_t slot) {
 	}
 
 	self_cast->handle__data = std::move(slot_handle);
+	self_cast->owns_return__data = false;
+	return true;
+}
+
+bool QAbstractTableModel_override_virtual_owned_data(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QAbstractTableModel> slot_handle(slot);
+	MiqtVirtualQAbstractTableModel* self_cast = dynamic_cast<MiqtVirtualQAbstractTableModel*>( (QAbstractTableModel*)(self) );
+	if (self_cast == nullptr) {
+		return false;
+	}
+
+	self_cast->handle__data = std::move(slot_handle);
+	self_cast->owns_return__data = true;
 	return true;
 }
 
@@ -4185,6 +4380,19 @@ bool QAbstractTableModel_override_virtual_headerData(void* self, intptr_t slot) 
 	}
 
 	self_cast->handle__headerData = std::move(slot_handle);
+	self_cast->owns_return__headerData = false;
+	return true;
+}
+
+bool QAbstractTableModel_override_virtual_owned_headerData(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QAbstractTableModel> slot_handle(slot);
+	MiqtVirtualQAbstractTableModel* self_cast = dynamic_cast<MiqtVirtualQAbstractTableModel*>( (QAbstractTableModel*)(self) );
+	if (self_cast == nullptr) {
+		return false;
+	}
+
+	self_cast->handle__headerData = std::move(slot_handle);
+	self_cast->owns_return__headerData = true;
 	return true;
 }
 
@@ -4514,6 +4722,19 @@ bool QAbstractTableModel_override_virtual_buddy(void* self, intptr_t slot) {
 	}
 
 	self_cast->handle__buddy = std::move(slot_handle);
+	self_cast->owns_return__buddy = false;
+	return true;
+}
+
+bool QAbstractTableModel_override_virtual_owned_buddy(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QAbstractTableModel> slot_handle(slot);
+	MiqtVirtualQAbstractTableModel* self_cast = dynamic_cast<MiqtVirtualQAbstractTableModel*>( (QAbstractTableModel*)(self) );
+	if (self_cast == nullptr) {
+		return false;
+	}
+
+	self_cast->handle__buddy = std::move(slot_handle);
+	self_cast->owns_return__buddy = true;
 	return true;
 }
 
@@ -4553,6 +4774,19 @@ bool QAbstractTableModel_override_virtual_span(void* self, intptr_t slot) {
 	}
 
 	self_cast->handle__span = std::move(slot_handle);
+	self_cast->owns_return__span = false;
+	return true;
+}
+
+bool QAbstractTableModel_override_virtual_owned_span(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QAbstractTableModel> slot_handle(slot);
+	MiqtVirtualQAbstractTableModel* self_cast = dynamic_cast<MiqtVirtualQAbstractTableModel*>( (QAbstractTableModel*)(self) );
+	if (self_cast == nullptr) {
+		return false;
+	}
+
+	self_cast->handle__span = std::move(slot_handle);
+	self_cast->owns_return__span = true;
 	return true;
 }
 
@@ -5064,6 +5298,7 @@ public:
 
 	// cgo.Handle value for overwritten implementation
 	miqt_callback_handle<miqt_exec_callback_handle_release_QAbstractListModel> handle__index;
+	bool owns_return__index = false;
 
 	// Subclass to allow providing a Go implementation
 	virtual QModelIndex index(int row, int column, const QModelIndex& parent) const override {
@@ -5077,6 +5312,10 @@ public:
 		// Cast returned reference into pointer
 		QModelIndex* sigval3 = const_cast<QModelIndex*>(&parent_ret);
 		QModelIndex* callback_return_value = miqt_exec_callback_QAbstractListModel_index(this, handle__index.value(), sigval1, sigval2, sigval3);
+		std::unique_ptr<QModelIndex> callback_return_value_owner;
+		if (owns_return__index) {
+			callback_return_value_owner.reset(callback_return_value);
+		}
 		return *callback_return_value;
 	}
 
@@ -5084,6 +5323,7 @@ public:
 
 	// cgo.Handle value for overwritten implementation
 	miqt_callback_handle<miqt_exec_callback_handle_release_QAbstractListModel> handle__sibling;
+	bool owns_return__sibling = false;
 
 	// Subclass to allow providing a Go implementation
 	virtual QModelIndex sibling(int row, int column, const QModelIndex& idx) const override {
@@ -5097,6 +5337,10 @@ public:
 		// Cast returned reference into pointer
 		QModelIndex* sigval3 = const_cast<QModelIndex*>(&idx_ret);
 		QModelIndex* callback_return_value = miqt_exec_callback_QAbstractListModel_sibling(this, handle__sibling.value(), sigval1, sigval2, sigval3);
+		std::unique_ptr<QModelIndex> callback_return_value_owner;
+		if (owns_return__sibling) {
+			callback_return_value_owner.reset(callback_return_value);
+		}
 		return *callback_return_value;
 	}
 
@@ -5161,6 +5405,7 @@ public:
 
 	// cgo.Handle value for overwritten implementation
 	miqt_callback_handle<miqt_exec_callback_handle_release_QAbstractListModel> handle__data;
+	bool owns_return__data = false;
 
 	// Subclass to allow providing a Go implementation
 	virtual QVariant data(const QModelIndex& index, int role) const override {
@@ -5173,6 +5418,10 @@ public:
 		QModelIndex* sigval1 = const_cast<QModelIndex*>(&index_ret);
 		int sigval2 = role;
 		QVariant* callback_return_value = miqt_exec_callback_QAbstractListModel_data(this, handle__data.value(), sigval1, sigval2);
+		std::unique_ptr<QVariant> callback_return_value_owner;
+		if (owns_return__data) {
+			callback_return_value_owner.reset(callback_return_value);
+		}
 		return *callback_return_value;
 	}
 
@@ -5200,6 +5449,7 @@ public:
 
 	// cgo.Handle value for overwritten implementation
 	miqt_callback_handle<miqt_exec_callback_handle_release_QAbstractListModel> handle__headerData;
+	bool owns_return__headerData = false;
 
 	// Subclass to allow providing a Go implementation
 	virtual QVariant headerData(int section, Qt::Orientation orientation, int role) const override {
@@ -5212,6 +5462,10 @@ public:
 		int sigval2 = static_cast<int>(orientation_ret);
 		int sigval3 = role;
 		QVariant* callback_return_value = miqt_exec_callback_QAbstractListModel_headerData(this, handle__headerData.value(), sigval1, sigval2, sigval3);
+		std::unique_ptr<QVariant> callback_return_value_owner;
+		if (owns_return__headerData) {
+			callback_return_value_owner.reset(callback_return_value);
+		}
 		return *callback_return_value;
 	}
 
@@ -5605,6 +5859,7 @@ public:
 
 	// cgo.Handle value for overwritten implementation
 	miqt_callback_handle<miqt_exec_callback_handle_release_QAbstractListModel> handle__buddy;
+	bool owns_return__buddy = false;
 
 	// Subclass to allow providing a Go implementation
 	virtual QModelIndex buddy(const QModelIndex& index) const override {
@@ -5616,6 +5871,10 @@ public:
 		// Cast returned reference into pointer
 		QModelIndex* sigval1 = const_cast<QModelIndex*>(&index_ret);
 		QModelIndex* callback_return_value = miqt_exec_callback_QAbstractListModel_buddy(this, handle__buddy.value(), sigval1);
+		std::unique_ptr<QModelIndex> callback_return_value_owner;
+		if (owns_return__buddy) {
+			callback_return_value_owner.reset(callback_return_value);
+		}
 		return *callback_return_value;
 	}
 
@@ -5655,6 +5914,7 @@ public:
 
 	// cgo.Handle value for overwritten implementation
 	miqt_callback_handle<miqt_exec_callback_handle_release_QAbstractListModel> handle__span;
+	bool owns_return__span = false;
 
 	// Subclass to allow providing a Go implementation
 	virtual QSize span(const QModelIndex& index) const override {
@@ -5666,6 +5926,10 @@ public:
 		// Cast returned reference into pointer
 		QModelIndex* sigval1 = const_cast<QModelIndex*>(&index_ret);
 		QSize* callback_return_value = miqt_exec_callback_QAbstractListModel_span(this, handle__span.value(), sigval1);
+		std::unique_ptr<QSize> callback_return_value_owner;
+		if (owns_return__span) {
+			callback_return_value_owner.reset(callback_return_value);
+		}
 		return *callback_return_value;
 	}
 
@@ -5988,6 +6252,19 @@ bool QAbstractListModel_override_virtual_index(void* self, intptr_t slot) {
 	}
 
 	self_cast->handle__index = std::move(slot_handle);
+	self_cast->owns_return__index = false;
+	return true;
+}
+
+bool QAbstractListModel_override_virtual_owned_index(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QAbstractListModel> slot_handle(slot);
+	MiqtVirtualQAbstractListModel* self_cast = dynamic_cast<MiqtVirtualQAbstractListModel*>( (QAbstractListModel*)(self) );
+	if (self_cast == nullptr) {
+		return false;
+	}
+
+	self_cast->handle__index = std::move(slot_handle);
+	self_cast->owns_return__index = true;
 	return true;
 }
 
@@ -6003,6 +6280,19 @@ bool QAbstractListModel_override_virtual_sibling(void* self, intptr_t slot) {
 	}
 
 	self_cast->handle__sibling = std::move(slot_handle);
+	self_cast->owns_return__sibling = false;
+	return true;
+}
+
+bool QAbstractListModel_override_virtual_owned_sibling(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QAbstractListModel> slot_handle(slot);
+	MiqtVirtualQAbstractListModel* self_cast = dynamic_cast<MiqtVirtualQAbstractListModel*>( (QAbstractListModel*)(self) );
+	if (self_cast == nullptr) {
+		return false;
+	}
+
+	self_cast->handle__sibling = std::move(slot_handle);
+	self_cast->owns_return__sibling = true;
 	return true;
 }
 
@@ -6060,6 +6350,19 @@ bool QAbstractListModel_override_virtual_data(void* self, intptr_t slot) {
 	}
 
 	self_cast->handle__data = std::move(slot_handle);
+	self_cast->owns_return__data = false;
+	return true;
+}
+
+bool QAbstractListModel_override_virtual_owned_data(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QAbstractListModel> slot_handle(slot);
+	MiqtVirtualQAbstractListModel* self_cast = dynamic_cast<MiqtVirtualQAbstractListModel*>( (QAbstractListModel*)(self) );
+	if (self_cast == nullptr) {
+		return false;
+	}
+
+	self_cast->handle__data = std::move(slot_handle);
+	self_cast->owns_return__data = true;
 	return true;
 }
 
@@ -6086,6 +6389,19 @@ bool QAbstractListModel_override_virtual_headerData(void* self, intptr_t slot) {
 	}
 
 	self_cast->handle__headerData = std::move(slot_handle);
+	self_cast->owns_return__headerData = false;
+	return true;
+}
+
+bool QAbstractListModel_override_virtual_owned_headerData(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QAbstractListModel> slot_handle(slot);
+	MiqtVirtualQAbstractListModel* self_cast = dynamic_cast<MiqtVirtualQAbstractListModel*>( (QAbstractListModel*)(self) );
+	if (self_cast == nullptr) {
+		return false;
+	}
+
+	self_cast->handle__headerData = std::move(slot_handle);
+	self_cast->owns_return__headerData = true;
 	return true;
 }
 
@@ -6415,6 +6731,19 @@ bool QAbstractListModel_override_virtual_buddy(void* self, intptr_t slot) {
 	}
 
 	self_cast->handle__buddy = std::move(slot_handle);
+	self_cast->owns_return__buddy = false;
+	return true;
+}
+
+bool QAbstractListModel_override_virtual_owned_buddy(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QAbstractListModel> slot_handle(slot);
+	MiqtVirtualQAbstractListModel* self_cast = dynamic_cast<MiqtVirtualQAbstractListModel*>( (QAbstractListModel*)(self) );
+	if (self_cast == nullptr) {
+		return false;
+	}
+
+	self_cast->handle__buddy = std::move(slot_handle);
+	self_cast->owns_return__buddy = true;
 	return true;
 }
 
@@ -6454,6 +6783,19 @@ bool QAbstractListModel_override_virtual_span(void* self, intptr_t slot) {
 	}
 
 	self_cast->handle__span = std::move(slot_handle);
+	self_cast->owns_return__span = false;
+	return true;
+}
+
+bool QAbstractListModel_override_virtual_owned_span(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QAbstractListModel> slot_handle(slot);
+	MiqtVirtualQAbstractListModel* self_cast = dynamic_cast<MiqtVirtualQAbstractListModel*>( (QAbstractListModel*)(self) );
+	if (self_cast == nullptr) {
+		return false;
+	}
+
+	self_cast->handle__span = std::move(slot_handle);
+	self_cast->owns_return__span = true;
 	return true;
 }
 

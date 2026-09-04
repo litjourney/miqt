@@ -319,10 +319,16 @@ func (this *QwtPlotPanner) callVirtualBase_ContentsMask() *qt.QBitmap {
 	return _goptr
 
 }
+
+type miqtVirtualCallback_QwtPlotPanner_contentsMask struct {
+	callback   func(super func() *qt.QBitmap) *qt.QBitmap
+	ownsReturn bool
+}
+
 func (this *QwtPlotPanner) OnContentsMask(slot func(super func() *qt.QBitmap) *qt.QBitmap) {
 	var slotHandle C.intptr_t
 	if slot != nil {
-		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QwtPlotPanner_contentsMask{callback: slot}))
 	}
 	ok := C.QwtPlotPanner_override_virtual_contentsMask(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
@@ -330,14 +336,31 @@ func (this *QwtPlotPanner) OnContentsMask(slot func(super func() *qt.QBitmap) *q
 	}
 }
 
+// OnContentsMaskOwned installs a virtual override that transfers
+// ownership of each non-nil returned Qt value object to C++.
+func (this *QwtPlotPanner) OnContentsMaskOwned(slot func(super func() *qt.QBitmap) *qt.QBitmap) {
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QwtPlotPanner_contentsMask{callback: slot, ownsReturn: true}))
+	}
+	ok := C.QwtPlotPanner_override_virtual_owned_contentsMask(unsafe.Pointer(this.h), slotHandle)
+	if !ok {
+		panic("miqt: can only override virtual methods for directly constructed types")
+	}
+}
+
 //export miqt_exec_callback_QwtPlotPanner_contentsMask
 func miqt_exec_callback_QwtPlotPanner_contentsMask(self *C.QwtPlotPanner, cb C.intptr_t) *C.QBitmap {
-	gofunc, ok := cgo.Handle(cb).Value().(func(super func() *qt.QBitmap) *qt.QBitmap)
+	callbackData, ok := cgo.Handle(cb).Value().(miqtVirtualCallback_QwtPlotPanner_contentsMask)
 	if !ok {
 		panic("miqt: callback of non-callback type (heap corruption?)")
 	}
+	gofunc := callbackData.callback
 
 	virtualReturn := gofunc((&QwtPlotPanner{h: self}).callVirtualBase_ContentsMask)
+	if callbackData.ownsReturn && virtualReturn != nil {
+		runtime.SetFinalizer(virtualReturn, nil)
+	}
 
 	return (*C.QBitmap)(virtualReturn.UnsafePointer())
 
@@ -350,10 +373,16 @@ func (this *QwtPlotPanner) callVirtualBase_Grab() *qt.QPixmap {
 	return _goptr
 
 }
+
+type miqtVirtualCallback_QwtPlotPanner_grab struct {
+	callback   func(super func() *qt.QPixmap) *qt.QPixmap
+	ownsReturn bool
+}
+
 func (this *QwtPlotPanner) OnGrab(slot func(super func() *qt.QPixmap) *qt.QPixmap) {
 	var slotHandle C.intptr_t
 	if slot != nil {
-		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QwtPlotPanner_grab{callback: slot}))
 	}
 	ok := C.QwtPlotPanner_override_virtual_grab(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
@@ -361,14 +390,31 @@ func (this *QwtPlotPanner) OnGrab(slot func(super func() *qt.QPixmap) *qt.QPixma
 	}
 }
 
+// OnGrabOwned installs a virtual override that transfers
+// ownership of each non-nil returned Qt value object to C++.
+func (this *QwtPlotPanner) OnGrabOwned(slot func(super func() *qt.QPixmap) *qt.QPixmap) {
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QwtPlotPanner_grab{callback: slot, ownsReturn: true}))
+	}
+	ok := C.QwtPlotPanner_override_virtual_owned_grab(unsafe.Pointer(this.h), slotHandle)
+	if !ok {
+		panic("miqt: can only override virtual methods for directly constructed types")
+	}
+}
+
 //export miqt_exec_callback_QwtPlotPanner_grab
 func miqt_exec_callback_QwtPlotPanner_grab(self *C.QwtPlotPanner, cb C.intptr_t) *C.QPixmap {
-	gofunc, ok := cgo.Handle(cb).Value().(func(super func() *qt.QPixmap) *qt.QPixmap)
+	callbackData, ok := cgo.Handle(cb).Value().(miqtVirtualCallback_QwtPlotPanner_grab)
 	if !ok {
 		panic("miqt: callback of non-callback type (heap corruption?)")
 	}
+	gofunc := callbackData.callback
 
 	virtualReturn := gofunc((&QwtPlotPanner{h: self}).callVirtualBase_Grab)
+	if callbackData.ownsReturn && virtualReturn != nil {
+		runtime.SetFinalizer(virtualReturn, nil)
+	}
 
 	return (*C.QPixmap)(virtualReturn.UnsafePointer())
 
@@ -654,10 +700,16 @@ func (this *QwtPlotPanner) callVirtualBase_SizeHint() *qt.QSize {
 	return _goptr
 
 }
+
+type miqtVirtualCallback_QwtPlotPanner_sizeHint struct {
+	callback   func(super func() *qt.QSize) *qt.QSize
+	ownsReturn bool
+}
+
 func (this *QwtPlotPanner) OnSizeHint(slot func(super func() *qt.QSize) *qt.QSize) {
 	var slotHandle C.intptr_t
 	if slot != nil {
-		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QwtPlotPanner_sizeHint{callback: slot}))
 	}
 	ok := C.QwtPlotPanner_override_virtual_sizeHint(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
@@ -665,14 +717,31 @@ func (this *QwtPlotPanner) OnSizeHint(slot func(super func() *qt.QSize) *qt.QSiz
 	}
 }
 
+// OnSizeHintOwned installs a virtual override that transfers
+// ownership of each non-nil returned Qt value object to C++.
+func (this *QwtPlotPanner) OnSizeHintOwned(slot func(super func() *qt.QSize) *qt.QSize) {
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QwtPlotPanner_sizeHint{callback: slot, ownsReturn: true}))
+	}
+	ok := C.QwtPlotPanner_override_virtual_owned_sizeHint(unsafe.Pointer(this.h), slotHandle)
+	if !ok {
+		panic("miqt: can only override virtual methods for directly constructed types")
+	}
+}
+
 //export miqt_exec_callback_QwtPlotPanner_sizeHint
 func miqt_exec_callback_QwtPlotPanner_sizeHint(self *C.QwtPlotPanner, cb C.intptr_t) *C.QSize {
-	gofunc, ok := cgo.Handle(cb).Value().(func(super func() *qt.QSize) *qt.QSize)
+	callbackData, ok := cgo.Handle(cb).Value().(miqtVirtualCallback_QwtPlotPanner_sizeHint)
 	if !ok {
 		panic("miqt: callback of non-callback type (heap corruption?)")
 	}
+	gofunc := callbackData.callback
 
 	virtualReturn := gofunc((&QwtPlotPanner{h: self}).callVirtualBase_SizeHint)
+	if callbackData.ownsReturn && virtualReturn != nil {
+		runtime.SetFinalizer(virtualReturn, nil)
+	}
 
 	return (*C.QSize)(virtualReturn.UnsafePointer())
 
@@ -685,10 +754,16 @@ func (this *QwtPlotPanner) callVirtualBase_MinimumSizeHint() *qt.QSize {
 	return _goptr
 
 }
+
+type miqtVirtualCallback_QwtPlotPanner_minimumSizeHint struct {
+	callback   func(super func() *qt.QSize) *qt.QSize
+	ownsReturn bool
+}
+
 func (this *QwtPlotPanner) OnMinimumSizeHint(slot func(super func() *qt.QSize) *qt.QSize) {
 	var slotHandle C.intptr_t
 	if slot != nil {
-		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QwtPlotPanner_minimumSizeHint{callback: slot}))
 	}
 	ok := C.QwtPlotPanner_override_virtual_minimumSizeHint(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
@@ -696,14 +771,31 @@ func (this *QwtPlotPanner) OnMinimumSizeHint(slot func(super func() *qt.QSize) *
 	}
 }
 
+// OnMinimumSizeHintOwned installs a virtual override that transfers
+// ownership of each non-nil returned Qt value object to C++.
+func (this *QwtPlotPanner) OnMinimumSizeHintOwned(slot func(super func() *qt.QSize) *qt.QSize) {
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QwtPlotPanner_minimumSizeHint{callback: slot, ownsReturn: true}))
+	}
+	ok := C.QwtPlotPanner_override_virtual_owned_minimumSizeHint(unsafe.Pointer(this.h), slotHandle)
+	if !ok {
+		panic("miqt: can only override virtual methods for directly constructed types")
+	}
+}
+
 //export miqt_exec_callback_QwtPlotPanner_minimumSizeHint
 func miqt_exec_callback_QwtPlotPanner_minimumSizeHint(self *C.QwtPlotPanner, cb C.intptr_t) *C.QSize {
-	gofunc, ok := cgo.Handle(cb).Value().(func(super func() *qt.QSize) *qt.QSize)
+	callbackData, ok := cgo.Handle(cb).Value().(miqtVirtualCallback_QwtPlotPanner_minimumSizeHint)
 	if !ok {
 		panic("miqt: callback of non-callback type (heap corruption?)")
 	}
+	gofunc := callbackData.callback
 
 	virtualReturn := gofunc((&QwtPlotPanner{h: self}).callVirtualBase_MinimumSizeHint)
+	if callbackData.ownsReturn && virtualReturn != nil {
+		runtime.SetFinalizer(virtualReturn, nil)
+	}
 
 	return (*C.QSize)(virtualReturn.UnsafePointer())
 
@@ -1756,10 +1848,16 @@ func (this *QwtPlotPanner) callVirtualBase_InputMethodQuery(param1 qt.InputMetho
 	return _goptr
 
 }
+
+type miqtVirtualCallback_QwtPlotPanner_inputMethodQuery struct {
+	callback   func(super func(param1 qt.InputMethodQuery) *qt.QVariant, param1 qt.InputMethodQuery) *qt.QVariant
+	ownsReturn bool
+}
+
 func (this *QwtPlotPanner) OnInputMethodQuery(slot func(super func(param1 qt.InputMethodQuery) *qt.QVariant, param1 qt.InputMethodQuery) *qt.QVariant) {
 	var slotHandle C.intptr_t
 	if slot != nil {
-		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QwtPlotPanner_inputMethodQuery{callback: slot}))
 	}
 	ok := C.QwtPlotPanner_override_virtual_inputMethodQuery(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
@@ -1767,17 +1865,34 @@ func (this *QwtPlotPanner) OnInputMethodQuery(slot func(super func(param1 qt.Inp
 	}
 }
 
+// OnInputMethodQueryOwned installs a virtual override that transfers
+// ownership of each non-nil returned Qt value object to C++.
+func (this *QwtPlotPanner) OnInputMethodQueryOwned(slot func(super func(param1 qt.InputMethodQuery) *qt.QVariant, param1 qt.InputMethodQuery) *qt.QVariant) {
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QwtPlotPanner_inputMethodQuery{callback: slot, ownsReturn: true}))
+	}
+	ok := C.QwtPlotPanner_override_virtual_owned_inputMethodQuery(unsafe.Pointer(this.h), slotHandle)
+	if !ok {
+		panic("miqt: can only override virtual methods for directly constructed types")
+	}
+}
+
 //export miqt_exec_callback_QwtPlotPanner_inputMethodQuery
 func miqt_exec_callback_QwtPlotPanner_inputMethodQuery(self *C.QwtPlotPanner, cb C.intptr_t, param1 C.int) *C.QVariant {
-	gofunc, ok := cgo.Handle(cb).Value().(func(super func(param1 qt.InputMethodQuery) *qt.QVariant, param1 qt.InputMethodQuery) *qt.QVariant)
+	callbackData, ok := cgo.Handle(cb).Value().(miqtVirtualCallback_QwtPlotPanner_inputMethodQuery)
 	if !ok {
 		panic("miqt: callback of non-callback type (heap corruption?)")
 	}
+	gofunc := callbackData.callback
 
 	// Convert all CABI parameters to Go parameters
 	slotval1 := (qt.InputMethodQuery)(param1)
 
 	virtualReturn := gofunc((&QwtPlotPanner{h: self}).callVirtualBase_InputMethodQuery, slotval1)
+	if callbackData.ownsReturn && virtualReturn != nil {
+		runtime.SetFinalizer(virtualReturn, nil)
+	}
 
 	return (*C.QVariant)(virtualReturn.UnsafePointer())
 

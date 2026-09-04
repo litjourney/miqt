@@ -44,6 +44,7 @@ public:
 
 	// cgo.Handle value for overwritten implementation
 	miqt_callback_handle<miqt_exec_callback_handle_release_QQmlPropertyMap> handle__updateValue;
+	bool owns_return__updateValue = false;
 
 	// Subclass to allow providing a Go implementation
 	virtual QVariant updateValue(const QString& key, const QVariant& input) override {
@@ -63,6 +64,10 @@ public:
 		// Cast returned reference into pointer
 		QVariant* sigval2 = const_cast<QVariant*>(&input_ret);
 		QVariant* callback_return_value = miqt_exec_callback_QQmlPropertyMap_updateValue(this, handle__updateValue.value(), sigval1, sigval2);
+		std::unique_ptr<QVariant> callback_return_value_owner;
+		if (owns_return__updateValue) {
+			callback_return_value_owner.reset(callback_return_value);
+		}
 		return *callback_return_value;
 	}
 
@@ -362,6 +367,19 @@ bool QQmlPropertyMap_override_virtual_updateValue(void* self, intptr_t slot) {
 	}
 
 	self_cast->handle__updateValue = std::move(slot_handle);
+	self_cast->owns_return__updateValue = false;
+	return true;
+}
+
+bool QQmlPropertyMap_override_virtual_owned_updateValue(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QQmlPropertyMap> slot_handle(slot);
+	MiqtVirtualQQmlPropertyMap* self_cast = dynamic_cast<MiqtVirtualQQmlPropertyMap*>( (QQmlPropertyMap*)(self) );
+	if (self_cast == nullptr) {
+		return false;
+	}
+
+	self_cast->handle__updateValue = std::move(slot_handle);
+	self_cast->owns_return__updateValue = true;
 	return true;
 }
 

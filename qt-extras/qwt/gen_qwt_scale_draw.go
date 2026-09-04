@@ -378,10 +378,16 @@ func (this *QwtScaleDraw) callVirtualBase_Label(param1 float64) *QwtText {
 	return _goptr
 
 }
+
+type miqtVirtualCallback_QwtScaleDraw_label struct {
+	callback   func(super func(param1 float64) *QwtText, param1 float64) *QwtText
+	ownsReturn bool
+}
+
 func (this *QwtScaleDraw) OnLabel(slot func(super func(param1 float64) *QwtText, param1 float64) *QwtText) {
 	var slotHandle C.intptr_t
 	if slot != nil {
-		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QwtScaleDraw_label{callback: slot}))
 	}
 	ok := C.QwtScaleDraw_override_virtual_label(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
@@ -389,17 +395,34 @@ func (this *QwtScaleDraw) OnLabel(slot func(super func(param1 float64) *QwtText,
 	}
 }
 
+// OnLabelOwned installs a virtual override that transfers
+// ownership of each non-nil returned Qt value object to C++.
+func (this *QwtScaleDraw) OnLabelOwned(slot func(super func(param1 float64) *QwtText, param1 float64) *QwtText) {
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QwtScaleDraw_label{callback: slot, ownsReturn: true}))
+	}
+	ok := C.QwtScaleDraw_override_virtual_owned_label(unsafe.Pointer(this.h), slotHandle)
+	if !ok {
+		panic("miqt: can only override virtual methods for directly constructed types")
+	}
+}
+
 //export miqt_exec_callback_QwtScaleDraw_label
 func miqt_exec_callback_QwtScaleDraw_label(self *C.QwtScaleDraw, cb C.intptr_t, param1 C.double) *C.QwtText {
-	gofunc, ok := cgo.Handle(cb).Value().(func(super func(param1 float64) *QwtText, param1 float64) *QwtText)
+	callbackData, ok := cgo.Handle(cb).Value().(miqtVirtualCallback_QwtScaleDraw_label)
 	if !ok {
 		panic("miqt: callback of non-callback type (heap corruption?)")
 	}
+	gofunc := callbackData.callback
 
 	// Convert all CABI parameters to Go parameters
 	slotval1 := (float64)(param1)
 
 	virtualReturn := gofunc((&QwtScaleDraw{h: self}).callVirtualBase_Label, slotval1)
+	if callbackData.ownsReturn && virtualReturn != nil {
+		runtime.SetFinalizer(virtualReturn, nil)
+	}
 
 	return virtualReturn.cPointer()
 

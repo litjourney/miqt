@@ -65,6 +65,7 @@ public:
 
 	// cgo.Handle value for overwritten implementation
 	miqt_callback_handle<miqt_exec_callback_handle_release_QDesignerLayoutDecorationExtension> handle__itemInfo;
+	bool owns_return__itemInfo = false;
 
 	// Subclass to allow providing a Go implementation
 	virtual QRect itemInfo(int index) const override {
@@ -74,6 +75,10 @@ public:
 
 		int sigval1 = index;
 		QRect* callback_return_value = miqt_exec_callback_QDesignerLayoutDecorationExtension_itemInfo(this, handle__itemInfo.value(), sigval1);
+		std::unique_ptr<QRect> callback_return_value_owner;
+		if (owns_return__itemInfo) {
+			callback_return_value_owner.reset(callback_return_value);
+		}
 		return *callback_return_value;
 	}
 
@@ -387,6 +392,19 @@ bool QDesignerLayoutDecorationExtension_override_virtual_itemInfo(void* self, in
 	}
 
 	self_cast->handle__itemInfo = std::move(slot_handle);
+	self_cast->owns_return__itemInfo = false;
+	return true;
+}
+
+bool QDesignerLayoutDecorationExtension_override_virtual_owned_itemInfo(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QDesignerLayoutDecorationExtension> slot_handle(slot);
+	MiqtVirtualQDesignerLayoutDecorationExtension* self_cast = dynamic_cast<MiqtVirtualQDesignerLayoutDecorationExtension*>( (QDesignerLayoutDecorationExtension*)(self) );
+	if (self_cast == nullptr) {
+		return false;
+	}
+
+	self_cast->handle__itemInfo = std::move(slot_handle);
+	self_cast->owns_return__itemInfo = true;
 	return true;
 }
 

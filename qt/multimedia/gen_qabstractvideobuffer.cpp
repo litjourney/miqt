@@ -88,6 +88,7 @@ public:
 
 	// cgo.Handle value for overwritten implementation
 	miqt_callback_handle<miqt_exec_callback_handle_release_QAbstractVideoBuffer> handle__handle;
+	bool owns_return__handle = false;
 
 	// Subclass to allow providing a Go implementation
 	virtual QVariant handle() const override {
@@ -96,6 +97,10 @@ public:
 		}
 
 		QVariant* callback_return_value = miqt_exec_callback_QAbstractVideoBuffer_handle(this, handle__handle.value());
+		std::unique_ptr<QVariant> callback_return_value_owner;
+		if (owns_return__handle) {
+			callback_return_value_owner.reset(callback_return_value);
+		}
 		return *callback_return_value;
 	}
 
@@ -190,6 +195,19 @@ bool QAbstractVideoBuffer_override_virtual_handle(void* self, intptr_t slot) {
 	}
 
 	self_cast->handle__handle = std::move(slot_handle);
+	self_cast->owns_return__handle = false;
+	return true;
+}
+
+bool QAbstractVideoBuffer_override_virtual_owned_handle(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QAbstractVideoBuffer> slot_handle(slot);
+	MiqtVirtualQAbstractVideoBuffer* self_cast = dynamic_cast<MiqtVirtualQAbstractVideoBuffer*>( (QAbstractVideoBuffer*)(self) );
+	if (self_cast == nullptr) {
+		return false;
+	}
+
+	self_cast->handle__handle = std::move(slot_handle);
+	self_cast->owns_return__handle = true;
 	return true;
 }
 

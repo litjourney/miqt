@@ -166,10 +166,16 @@ func (this *QScriptClass) callVirtualBase_Property(object *QScriptValue, name *Q
 	return _goptr
 
 }
+
+type miqtVirtualCallback_QScriptClass_property struct {
+	callback   func(super func(object *QScriptValue, name *QScriptString, id uint) *QScriptValue, object *QScriptValue, name *QScriptString, id uint) *QScriptValue
+	ownsReturn bool
+}
+
 func (this *QScriptClass) OnProperty(slot func(super func(object *QScriptValue, name *QScriptString, id uint) *QScriptValue, object *QScriptValue, name *QScriptString, id uint) *QScriptValue) {
 	var slotHandle C.intptr_t
 	if slot != nil {
-		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QScriptClass_property{callback: slot}))
 	}
 	ok := C.QScriptClass_override_virtual_property(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
@@ -177,12 +183,26 @@ func (this *QScriptClass) OnProperty(slot func(super func(object *QScriptValue, 
 	}
 }
 
+// OnPropertyOwned installs a virtual override that transfers
+// ownership of each non-nil returned Qt value object to C++.
+func (this *QScriptClass) OnPropertyOwned(slot func(super func(object *QScriptValue, name *QScriptString, id uint) *QScriptValue, object *QScriptValue, name *QScriptString, id uint) *QScriptValue) {
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QScriptClass_property{callback: slot, ownsReturn: true}))
+	}
+	ok := C.QScriptClass_override_virtual_owned_property(unsafe.Pointer(this.h), slotHandle)
+	if !ok {
+		panic("miqt: can only override virtual methods for directly constructed types")
+	}
+}
+
 //export miqt_exec_callback_QScriptClass_property
 func miqt_exec_callback_QScriptClass_property(self *C.QScriptClass, cb C.intptr_t, object *C.QScriptValue, name *C.QScriptString, id C.uint) *C.QScriptValue {
-	gofunc, ok := cgo.Handle(cb).Value().(func(super func(object *QScriptValue, name *QScriptString, id uint) *QScriptValue, object *QScriptValue, name *QScriptString, id uint) *QScriptValue)
+	callbackData, ok := cgo.Handle(cb).Value().(miqtVirtualCallback_QScriptClass_property)
 	if !ok {
 		panic("miqt: callback of non-callback type (heap corruption?)")
 	}
+	gofunc := callbackData.callback
 
 	// Convert all CABI parameters to Go parameters
 	slotval1 := newQScriptValue(object)
@@ -192,6 +212,9 @@ func miqt_exec_callback_QScriptClass_property(self *C.QScriptClass, cb C.intptr_
 	slotval3 := (uint)(id)
 
 	virtualReturn := gofunc((&QScriptClass{h: self}).callVirtualBase_Property, slotval1, slotval2, slotval3)
+	if callbackData.ownsReturn && virtualReturn != nil {
+		runtime.SetFinalizer(virtualReturn, nil)
+	}
 
 	return virtualReturn.cPointer()
 
@@ -308,10 +331,16 @@ func (this *QScriptClass) callVirtualBase_Prototype() *QScriptValue {
 	return _goptr
 
 }
+
+type miqtVirtualCallback_QScriptClass_prototype struct {
+	callback   func(super func() *QScriptValue) *QScriptValue
+	ownsReturn bool
+}
+
 func (this *QScriptClass) OnPrototype(slot func(super func() *QScriptValue) *QScriptValue) {
 	var slotHandle C.intptr_t
 	if slot != nil {
-		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QScriptClass_prototype{callback: slot}))
 	}
 	ok := C.QScriptClass_override_virtual_prototype(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
@@ -319,14 +348,31 @@ func (this *QScriptClass) OnPrototype(slot func(super func() *QScriptValue) *QSc
 	}
 }
 
+// OnPrototypeOwned installs a virtual override that transfers
+// ownership of each non-nil returned Qt value object to C++.
+func (this *QScriptClass) OnPrototypeOwned(slot func(super func() *QScriptValue) *QScriptValue) {
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QScriptClass_prototype{callback: slot, ownsReturn: true}))
+	}
+	ok := C.QScriptClass_override_virtual_owned_prototype(unsafe.Pointer(this.h), slotHandle)
+	if !ok {
+		panic("miqt: can only override virtual methods for directly constructed types")
+	}
+}
+
 //export miqt_exec_callback_QScriptClass_prototype
 func miqt_exec_callback_QScriptClass_prototype(self *C.QScriptClass, cb C.intptr_t) *C.QScriptValue {
-	gofunc, ok := cgo.Handle(cb).Value().(func(super func() *QScriptValue) *QScriptValue)
+	callbackData, ok := cgo.Handle(cb).Value().(miqtVirtualCallback_QScriptClass_prototype)
 	if !ok {
 		panic("miqt: callback of non-callback type (heap corruption?)")
 	}
+	gofunc := callbackData.callback
 
 	virtualReturn := gofunc((&QScriptClass{h: self}).callVirtualBase_Prototype)
+	if callbackData.ownsReturn && virtualReturn != nil {
+		runtime.SetFinalizer(virtualReturn, nil)
+	}
 
 	return virtualReturn.cPointer()
 
@@ -405,10 +451,16 @@ func (this *QScriptClass) callVirtualBase_Extension(extension QScriptClass__Exte
 	return _goptr
 
 }
+
+type miqtVirtualCallback_QScriptClass_extension struct {
+	callback   func(super func(extension QScriptClass__Extension, argument *qt.QVariant) *qt.QVariant, extension QScriptClass__Extension, argument *qt.QVariant) *qt.QVariant
+	ownsReturn bool
+}
+
 func (this *QScriptClass) OnExtension(slot func(super func(extension QScriptClass__Extension, argument *qt.QVariant) *qt.QVariant, extension QScriptClass__Extension, argument *qt.QVariant) *qt.QVariant) {
 	var slotHandle C.intptr_t
 	if slot != nil {
-		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QScriptClass_extension{callback: slot}))
 	}
 	ok := C.QScriptClass_override_virtual_extension(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
@@ -416,12 +468,26 @@ func (this *QScriptClass) OnExtension(slot func(super func(extension QScriptClas
 	}
 }
 
+// OnExtensionOwned installs a virtual override that transfers
+// ownership of each non-nil returned Qt value object to C++.
+func (this *QScriptClass) OnExtensionOwned(slot func(super func(extension QScriptClass__Extension, argument *qt.QVariant) *qt.QVariant, extension QScriptClass__Extension, argument *qt.QVariant) *qt.QVariant) {
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QScriptClass_extension{callback: slot, ownsReturn: true}))
+	}
+	ok := C.QScriptClass_override_virtual_owned_extension(unsafe.Pointer(this.h), slotHandle)
+	if !ok {
+		panic("miqt: can only override virtual methods for directly constructed types")
+	}
+}
+
 //export miqt_exec_callback_QScriptClass_extension
 func miqt_exec_callback_QScriptClass_extension(self *C.QScriptClass, cb C.intptr_t, extension C.int, argument *C.QVariant) *C.QVariant {
-	gofunc, ok := cgo.Handle(cb).Value().(func(super func(extension QScriptClass__Extension, argument *qt.QVariant) *qt.QVariant, extension QScriptClass__Extension, argument *qt.QVariant) *qt.QVariant)
+	callbackData, ok := cgo.Handle(cb).Value().(miqtVirtualCallback_QScriptClass_extension)
 	if !ok {
 		panic("miqt: callback of non-callback type (heap corruption?)")
 	}
+	gofunc := callbackData.callback
 
 	// Convert all CABI parameters to Go parameters
 	slotval1 := (QScriptClass__Extension)(extension)
@@ -429,6 +495,9 @@ func miqt_exec_callback_QScriptClass_extension(self *C.QScriptClass, cb C.intptr
 	slotval2 := qt.UnsafeNewQVariant(unsafe.Pointer(argument))
 
 	virtualReturn := gofunc((&QScriptClass{h: self}).callVirtualBase_Extension, slotval1, slotval2)
+	if callbackData.ownsReturn && virtualReturn != nil {
+		runtime.SetFinalizer(virtualReturn, nil)
+	}
 
 	return (*C.QVariant)(virtualReturn.UnsafePointer())
 

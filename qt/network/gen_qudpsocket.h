@@ -93,6 +93,7 @@ bool QUdpSocket_virtualbase_setSocketDescriptor(void* self, intptr_t socketDescr
 bool QUdpSocket_override_virtual_setSocketOption(void* self, intptr_t slot);
 void QUdpSocket_virtualbase_setSocketOption(void* self, int option, QVariant* value);
 bool QUdpSocket_override_virtual_socketOption(void* self, intptr_t slot);
+bool QUdpSocket_override_virtual_owned_socketOption(void* self, intptr_t slot);
 QVariant* QUdpSocket_virtualbase_socketOption(void* self, int option);
 bool QUdpSocket_override_virtual_close(void* self, intptr_t slot);
 void QUdpSocket_virtualbase_close(void* self);

@@ -127,6 +127,7 @@ public:
 
 	// cgo.Handle value for overwritten implementation
 	miqt_callback_handle<miqt_exec_callback_handle_release_QwtScaleDraw> handle__label;
+	bool owns_return__label = false;
 
 	// Subclass to allow providing a Go implementation
 	virtual QwtText label(double param1) const override {
@@ -136,6 +137,10 @@ public:
 
 		double sigval1 = param1;
 		QwtText* callback_return_value = miqt_exec_callback_QwtScaleDraw_label(this, handle__label.value(), sigval1);
+		std::unique_ptr<QwtText> callback_return_value_owner;
+		if (owns_return__label) {
+			callback_return_value_owner.reset(callback_return_value);
+		}
 		return *callback_return_value;
 	}
 
@@ -329,6 +334,19 @@ bool QwtScaleDraw_override_virtual_label(void* self, intptr_t slot) {
 	}
 
 	self_cast->handle__label = std::move(slot_handle);
+	self_cast->owns_return__label = false;
+	return true;
+}
+
+bool QwtScaleDraw_override_virtual_owned_label(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtScaleDraw> slot_handle(slot);
+	MiqtVirtualQwtScaleDraw* self_cast = dynamic_cast<MiqtVirtualQwtScaleDraw*>( (QwtScaleDraw*)(self) );
+	if (self_cast == nullptr) {
+		return false;
+	}
+
+	self_cast->handle__label = std::move(slot_handle);
+	self_cast->owns_return__label = true;
 	return true;
 }
 

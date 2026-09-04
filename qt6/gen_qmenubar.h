@@ -146,8 +146,10 @@ void QMenuBar_setCornerWidget2(QMenuBar* self, QWidget* w, int corner);
 QWidget* QMenuBar_cornerWidgetWithCorner(const QMenuBar* self, int corner);
 
 bool QMenuBar_override_virtual_sizeHint(void* self, intptr_t slot);
+bool QMenuBar_override_virtual_owned_sizeHint(void* self, intptr_t slot);
 QSize* QMenuBar_virtualbase_sizeHint(const void* self);
 bool QMenuBar_override_virtual_minimumSizeHint(void* self, intptr_t slot);
+bool QMenuBar_override_virtual_owned_minimumSizeHint(void* self, intptr_t slot);
 QSize* QMenuBar_virtualbase_minimumSizeHint(const void* self);
 bool QMenuBar_override_virtual_heightForWidth(void* self, intptr_t slot);
 int QMenuBar_virtualbase_heightForWidth(const void* self, int param1);
@@ -230,6 +232,7 @@ QPainter* QMenuBar_virtualbase_sharedPainter(const void* self);
 bool QMenuBar_override_virtual_inputMethodEvent(void* self, intptr_t slot);
 void QMenuBar_virtualbase_inputMethodEvent(void* self, QInputMethodEvent* param1);
 bool QMenuBar_override_virtual_inputMethodQuery(void* self, intptr_t slot);
+bool QMenuBar_override_virtual_owned_inputMethodQuery(void* self, intptr_t slot);
 QVariant* QMenuBar_virtualbase_inputMethodQuery(const void* self, int param1);
 bool QMenuBar_override_virtual_focusNextPrevChild(void* self, intptr_t slot);
 bool QMenuBar_virtualbase_focusNextPrevChild(void* self, bool next);

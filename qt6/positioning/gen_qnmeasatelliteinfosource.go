@@ -387,10 +387,16 @@ func (this *QNmeaSatelliteInfoSource) callVirtualBase_BackendProperty(name strin
 	return _goptr
 
 }
+
+type miqtVirtualCallback_QNmeaSatelliteInfoSource_backendProperty struct {
+	callback   func(super func(name string) *qt6.QVariant, name string) *qt6.QVariant
+	ownsReturn bool
+}
+
 func (this *QNmeaSatelliteInfoSource) OnBackendProperty(slot func(super func(name string) *qt6.QVariant, name string) *qt6.QVariant) {
 	var slotHandle C.intptr_t
 	if slot != nil {
-		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QNmeaSatelliteInfoSource_backendProperty{callback: slot}))
 	}
 	ok := C.QNmeaSatelliteInfoSource_override_virtual_backendProperty(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
@@ -398,12 +404,26 @@ func (this *QNmeaSatelliteInfoSource) OnBackendProperty(slot func(super func(nam
 	}
 }
 
+// OnBackendPropertyOwned installs a virtual override that transfers
+// ownership of each non-nil returned Qt value object to C++.
+func (this *QNmeaSatelliteInfoSource) OnBackendPropertyOwned(slot func(super func(name string) *qt6.QVariant, name string) *qt6.QVariant) {
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QNmeaSatelliteInfoSource_backendProperty{callback: slot, ownsReturn: true}))
+	}
+	ok := C.QNmeaSatelliteInfoSource_override_virtual_owned_backendProperty(unsafe.Pointer(this.h), slotHandle)
+	if !ok {
+		panic("miqt: can only override virtual methods for directly constructed types")
+	}
+}
+
 //export miqt_exec_callback_QNmeaSatelliteInfoSource_backendProperty
 func miqt_exec_callback_QNmeaSatelliteInfoSource_backendProperty(self *C.QNmeaSatelliteInfoSource, cb C.intptr_t, name C.struct_miqt_string) *C.QVariant {
-	gofunc, ok := cgo.Handle(cb).Value().(func(super func(name string) *qt6.QVariant, name string) *qt6.QVariant)
+	callbackData, ok := cgo.Handle(cb).Value().(miqtVirtualCallback_QNmeaSatelliteInfoSource_backendProperty)
 	if !ok {
 		panic("miqt: callback of non-callback type (heap corruption?)")
 	}
+	gofunc := callbackData.callback
 
 	// Convert all CABI parameters to Go parameters
 	var name_ms C.struct_miqt_string = name
@@ -412,6 +432,9 @@ func miqt_exec_callback_QNmeaSatelliteInfoSource_backendProperty(self *C.QNmeaSa
 	slotval1 := name_ret
 
 	virtualReturn := gofunc((&QNmeaSatelliteInfoSource{h: self}).callVirtualBase_BackendProperty, slotval1)
+	if callbackData.ownsReturn && virtualReturn != nil {
+		runtime.SetFinalizer(virtualReturn, nil)
+	}
 
 	return (*C.QVariant)(virtualReturn.UnsafePointer())
 

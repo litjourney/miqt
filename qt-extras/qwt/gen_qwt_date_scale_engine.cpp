@@ -49,6 +49,7 @@ public:
 
 	// cgo.Handle value for overwritten implementation
 	miqt_callback_handle<miqt_exec_callback_handle_release_QwtDateScaleEngine> handle__divideScale;
+	bool owns_return__divideScale = false;
 
 	// Subclass to allow providing a Go implementation
 	virtual QwtScaleDiv divideScale(double x1, double x2, int maxMajorSteps, int maxMinorSteps, double stepSize) const override {
@@ -62,6 +63,10 @@ public:
 		int sigval4 = maxMinorSteps;
 		double sigval5 = stepSize;
 		QwtScaleDiv* callback_return_value = miqt_exec_callback_QwtDateScaleEngine_divideScale(this, handle__divideScale.value(), sigval1, sigval2, sigval3, sigval4, sigval5);
+		std::unique_ptr<QwtScaleDiv> callback_return_value_owner;
+		if (owns_return__divideScale) {
+			callback_return_value_owner.reset(callback_return_value);
+		}
 		return *callback_return_value;
 	}
 
@@ -91,6 +96,7 @@ public:
 
 	// cgo.Handle value for overwritten implementation
 	miqt_callback_handle<miqt_exec_callback_handle_release_QwtDateScaleEngine> handle__alignDate;
+	bool owns_return__alignDate = false;
 
 	// Subclass to allow providing a Go implementation
 	virtual QDateTime alignDate(const QDateTime& param1, double stepSize, QwtDate::IntervalType param3, bool up) const override {
@@ -106,6 +112,10 @@ public:
 		int sigval3 = static_cast<int>(param3_ret);
 		bool sigval4 = up;
 		QDateTime* callback_return_value = miqt_exec_callback_QwtDateScaleEngine_alignDate(this, handle__alignDate.value(), sigval1, sigval2, sigval3, sigval4);
+		std::unique_ptr<QDateTime> callback_return_value_owner;
+		if (owns_return__alignDate) {
+			callback_return_value_owner.reset(callback_return_value);
+		}
 		return *callback_return_value;
 	}
 
@@ -216,6 +226,19 @@ bool QwtDateScaleEngine_override_virtual_divideScale(void* self, intptr_t slot) 
 	}
 
 	self_cast->handle__divideScale = std::move(slot_handle);
+	self_cast->owns_return__divideScale = false;
+	return true;
+}
+
+bool QwtDateScaleEngine_override_virtual_owned_divideScale(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtDateScaleEngine> slot_handle(slot);
+	MiqtVirtualQwtDateScaleEngine* self_cast = dynamic_cast<MiqtVirtualQwtDateScaleEngine*>( (QwtDateScaleEngine*)(self) );
+	if (self_cast == nullptr) {
+		return false;
+	}
+
+	self_cast->handle__divideScale = std::move(slot_handle);
+	self_cast->owns_return__divideScale = true;
 	return true;
 }
 
@@ -247,6 +270,19 @@ bool QwtDateScaleEngine_override_virtual_alignDate(void* self, intptr_t slot) {
 	}
 
 	self_cast->handle__alignDate = std::move(slot_handle);
+	self_cast->owns_return__alignDate = false;
+	return true;
+}
+
+bool QwtDateScaleEngine_override_virtual_owned_alignDate(void* self, intptr_t slot) {
+	miqt_callback_handle<miqt_exec_callback_handle_release_QwtDateScaleEngine> slot_handle(slot);
+	MiqtVirtualQwtDateScaleEngine* self_cast = dynamic_cast<MiqtVirtualQwtDateScaleEngine*>( (QwtDateScaleEngine*)(self) );
+	if (self_cast == nullptr) {
+		return false;
+	}
+
+	self_cast->handle__alignDate = std::move(slot_handle);
+	self_cast->owns_return__alignDate = true;
 	return true;
 }
 

@@ -1125,10 +1125,16 @@ func miqt_exec_callback_QGraphicsItem_advance(self *C.QGraphicsItem, cb C.intptr
 	gofunc((&QGraphicsItem{h: self}).callVirtualBase_Advance, slotval1)
 
 }
+
+type miqtVirtualCallback_QGraphicsItem_boundingRect struct {
+	callback   func() *QRectF
+	ownsReturn bool
+}
+
 func (this *QGraphicsItem) OnBoundingRect(slot func() *QRectF) {
 	var slotHandle C.intptr_t
 	if slot != nil {
-		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QGraphicsItem_boundingRect{callback: slot}))
 	}
 	ok := C.QGraphicsItem_override_virtual_boundingRect(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
@@ -1136,14 +1142,31 @@ func (this *QGraphicsItem) OnBoundingRect(slot func() *QRectF) {
 	}
 }
 
+// OnBoundingRectOwned installs a virtual override that transfers
+// ownership of each non-nil returned Qt value object to C++.
+func (this *QGraphicsItem) OnBoundingRectOwned(slot func() *QRectF) {
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QGraphicsItem_boundingRect{callback: slot, ownsReturn: true}))
+	}
+	ok := C.QGraphicsItem_override_virtual_owned_boundingRect(unsafe.Pointer(this.h), slotHandle)
+	if !ok {
+		panic("miqt: can only override virtual methods for directly constructed types")
+	}
+}
+
 //export miqt_exec_callback_QGraphicsItem_boundingRect
 func miqt_exec_callback_QGraphicsItem_boundingRect(self *C.QGraphicsItem, cb C.intptr_t) *C.QRectF {
-	gofunc, ok := cgo.Handle(cb).Value().(func() *QRectF)
+	callbackData, ok := cgo.Handle(cb).Value().(miqtVirtualCallback_QGraphicsItem_boundingRect)
 	if !ok {
 		panic("miqt: callback of non-callback type (heap corruption?)")
 	}
+	gofunc := callbackData.callback
 
 	virtualReturn := gofunc()
+	if callbackData.ownsReturn && virtualReturn != nil {
+		runtime.SetFinalizer(virtualReturn, nil)
+	}
 
 	return virtualReturn.cPointer()
 
@@ -1156,10 +1179,16 @@ func (this *QGraphicsItem) callVirtualBase_Shape() *QPainterPath {
 	return _goptr
 
 }
+
+type miqtVirtualCallback_QGraphicsItem_shape struct {
+	callback   func(super func() *QPainterPath) *QPainterPath
+	ownsReturn bool
+}
+
 func (this *QGraphicsItem) OnShape(slot func(super func() *QPainterPath) *QPainterPath) {
 	var slotHandle C.intptr_t
 	if slot != nil {
-		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QGraphicsItem_shape{callback: slot}))
 	}
 	ok := C.QGraphicsItem_override_virtual_shape(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
@@ -1167,14 +1196,31 @@ func (this *QGraphicsItem) OnShape(slot func(super func() *QPainterPath) *QPaint
 	}
 }
 
+// OnShapeOwned installs a virtual override that transfers
+// ownership of each non-nil returned Qt value object to C++.
+func (this *QGraphicsItem) OnShapeOwned(slot func(super func() *QPainterPath) *QPainterPath) {
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QGraphicsItem_shape{callback: slot, ownsReturn: true}))
+	}
+	ok := C.QGraphicsItem_override_virtual_owned_shape(unsafe.Pointer(this.h), slotHandle)
+	if !ok {
+		panic("miqt: can only override virtual methods for directly constructed types")
+	}
+}
+
 //export miqt_exec_callback_QGraphicsItem_shape
 func miqt_exec_callback_QGraphicsItem_shape(self *C.QGraphicsItem, cb C.intptr_t) *C.QPainterPath {
-	gofunc, ok := cgo.Handle(cb).Value().(func(super func() *QPainterPath) *QPainterPath)
+	callbackData, ok := cgo.Handle(cb).Value().(miqtVirtualCallback_QGraphicsItem_shape)
 	if !ok {
 		panic("miqt: callback of non-callback type (heap corruption?)")
 	}
+	gofunc := callbackData.callback
 
 	virtualReturn := gofunc((&QGraphicsItem{h: self}).callVirtualBase_Shape)
+	if callbackData.ownsReturn && virtualReturn != nil {
+		runtime.SetFinalizer(virtualReturn, nil)
+	}
 
 	return virtualReturn.cPointer()
 
@@ -1319,10 +1365,16 @@ func (this *QGraphicsItem) callVirtualBase_OpaqueArea() *QPainterPath {
 	return _goptr
 
 }
+
+type miqtVirtualCallback_QGraphicsItem_opaqueArea struct {
+	callback   func(super func() *QPainterPath) *QPainterPath
+	ownsReturn bool
+}
+
 func (this *QGraphicsItem) OnOpaqueArea(slot func(super func() *QPainterPath) *QPainterPath) {
 	var slotHandle C.intptr_t
 	if slot != nil {
-		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QGraphicsItem_opaqueArea{callback: slot}))
 	}
 	ok := C.QGraphicsItem_override_virtual_opaqueArea(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
@@ -1330,14 +1382,31 @@ func (this *QGraphicsItem) OnOpaqueArea(slot func(super func() *QPainterPath) *Q
 	}
 }
 
+// OnOpaqueAreaOwned installs a virtual override that transfers
+// ownership of each non-nil returned Qt value object to C++.
+func (this *QGraphicsItem) OnOpaqueAreaOwned(slot func(super func() *QPainterPath) *QPainterPath) {
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QGraphicsItem_opaqueArea{callback: slot, ownsReturn: true}))
+	}
+	ok := C.QGraphicsItem_override_virtual_owned_opaqueArea(unsafe.Pointer(this.h), slotHandle)
+	if !ok {
+		panic("miqt: can only override virtual methods for directly constructed types")
+	}
+}
+
 //export miqt_exec_callback_QGraphicsItem_opaqueArea
 func miqt_exec_callback_QGraphicsItem_opaqueArea(self *C.QGraphicsItem, cb C.intptr_t) *C.QPainterPath {
-	gofunc, ok := cgo.Handle(cb).Value().(func(super func() *QPainterPath) *QPainterPath)
+	callbackData, ok := cgo.Handle(cb).Value().(miqtVirtualCallback_QGraphicsItem_opaqueArea)
 	if !ok {
 		panic("miqt: callback of non-callback type (heap corruption?)")
 	}
+	gofunc := callbackData.callback
 
 	virtualReturn := gofunc((&QGraphicsItem{h: self}).callVirtualBase_OpaqueArea)
+	if callbackData.ownsReturn && virtualReturn != nil {
+		runtime.SetFinalizer(virtualReturn, nil)
+	}
 
 	return virtualReturn.cPointer()
 
@@ -2013,10 +2082,16 @@ func (this *QGraphicsItem) callVirtualBase_InputMethodQuery(query InputMethodQue
 	return _goptr
 
 }
+
+type miqtVirtualCallback_QGraphicsItem_inputMethodQuery struct {
+	callback   func(super func(query InputMethodQuery) *QVariant, query InputMethodQuery) *QVariant
+	ownsReturn bool
+}
+
 func (this *QGraphicsItem) OnInputMethodQuery(slot func(super func(query InputMethodQuery) *QVariant, query InputMethodQuery) *QVariant) {
 	var slotHandle C.intptr_t
 	if slot != nil {
-		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QGraphicsItem_inputMethodQuery{callback: slot}))
 	}
 	ok := C.QGraphicsItem_override_virtual_inputMethodQuery(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
@@ -2024,17 +2099,34 @@ func (this *QGraphicsItem) OnInputMethodQuery(slot func(super func(query InputMe
 	}
 }
 
+// OnInputMethodQueryOwned installs a virtual override that transfers
+// ownership of each non-nil returned Qt value object to C++.
+func (this *QGraphicsItem) OnInputMethodQueryOwned(slot func(super func(query InputMethodQuery) *QVariant, query InputMethodQuery) *QVariant) {
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QGraphicsItem_inputMethodQuery{callback: slot, ownsReturn: true}))
+	}
+	ok := C.QGraphicsItem_override_virtual_owned_inputMethodQuery(unsafe.Pointer(this.h), slotHandle)
+	if !ok {
+		panic("miqt: can only override virtual methods for directly constructed types")
+	}
+}
+
 //export miqt_exec_callback_QGraphicsItem_inputMethodQuery
 func miqt_exec_callback_QGraphicsItem_inputMethodQuery(self *C.QGraphicsItem, cb C.intptr_t, query C.int) *C.QVariant {
-	gofunc, ok := cgo.Handle(cb).Value().(func(super func(query InputMethodQuery) *QVariant, query InputMethodQuery) *QVariant)
+	callbackData, ok := cgo.Handle(cb).Value().(miqtVirtualCallback_QGraphicsItem_inputMethodQuery)
 	if !ok {
 		panic("miqt: callback of non-callback type (heap corruption?)")
 	}
+	gofunc := callbackData.callback
 
 	// Convert all CABI parameters to Go parameters
 	slotval1 := (InputMethodQuery)(query)
 
 	virtualReturn := gofunc((&QGraphicsItem{h: self}).callVirtualBase_InputMethodQuery, slotval1)
+	if callbackData.ownsReturn && virtualReturn != nil {
+		runtime.SetFinalizer(virtualReturn, nil)
+	}
 
 	return virtualReturn.cPointer()
 
@@ -2047,10 +2139,16 @@ func (this *QGraphicsItem) callVirtualBase_ItemChange(change QGraphicsItem__Grap
 	return _goptr
 
 }
+
+type miqtVirtualCallback_QGraphicsItem_itemChange struct {
+	callback   func(super func(change QGraphicsItem__GraphicsItemChange, value *QVariant) *QVariant, change QGraphicsItem__GraphicsItemChange, value *QVariant) *QVariant
+	ownsReturn bool
+}
+
 func (this *QGraphicsItem) OnItemChange(slot func(super func(change QGraphicsItem__GraphicsItemChange, value *QVariant) *QVariant, change QGraphicsItem__GraphicsItemChange, value *QVariant) *QVariant) {
 	var slotHandle C.intptr_t
 	if slot != nil {
-		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QGraphicsItem_itemChange{callback: slot}))
 	}
 	ok := C.QGraphicsItem_override_virtual_itemChange(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
@@ -2058,12 +2156,26 @@ func (this *QGraphicsItem) OnItemChange(slot func(super func(change QGraphicsIte
 	}
 }
 
+// OnItemChangeOwned installs a virtual override that transfers
+// ownership of each non-nil returned Qt value object to C++.
+func (this *QGraphicsItem) OnItemChangeOwned(slot func(super func(change QGraphicsItem__GraphicsItemChange, value *QVariant) *QVariant, change QGraphicsItem__GraphicsItemChange, value *QVariant) *QVariant) {
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QGraphicsItem_itemChange{callback: slot, ownsReturn: true}))
+	}
+	ok := C.QGraphicsItem_override_virtual_owned_itemChange(unsafe.Pointer(this.h), slotHandle)
+	if !ok {
+		panic("miqt: can only override virtual methods for directly constructed types")
+	}
+}
+
 //export miqt_exec_callback_QGraphicsItem_itemChange
 func miqt_exec_callback_QGraphicsItem_itemChange(self *C.QGraphicsItem, cb C.intptr_t, change C.int, value *C.QVariant) *C.QVariant {
-	gofunc, ok := cgo.Handle(cb).Value().(func(super func(change QGraphicsItem__GraphicsItemChange, value *QVariant) *QVariant, change QGraphicsItem__GraphicsItemChange, value *QVariant) *QVariant)
+	callbackData, ok := cgo.Handle(cb).Value().(miqtVirtualCallback_QGraphicsItem_itemChange)
 	if !ok {
 		panic("miqt: callback of non-callback type (heap corruption?)")
 	}
+	gofunc := callbackData.callback
 
 	// Convert all CABI parameters to Go parameters
 	slotval1 := (QGraphicsItem__GraphicsItemChange)(change)
@@ -2071,6 +2183,9 @@ func miqt_exec_callback_QGraphicsItem_itemChange(self *C.QGraphicsItem, cb C.int
 	slotval2 := newQVariant(value)
 
 	virtualReturn := gofunc((&QGraphicsItem{h: self}).callVirtualBase_ItemChange, slotval1, slotval2)
+	if callbackData.ownsReturn && virtualReturn != nil {
+		runtime.SetFinalizer(virtualReturn, nil)
+	}
 
 	return virtualReturn.cPointer()
 
@@ -2147,10 +2262,16 @@ func (this *QGraphicsItem) callVirtualBase_Extension(variant *QVariant) *QVarian
 	return _goptr
 
 }
+
+type miqtVirtualCallback_QGraphicsItem_extension struct {
+	callback   func(super func(variant *QVariant) *QVariant, variant *QVariant) *QVariant
+	ownsReturn bool
+}
+
 func (this *QGraphicsItem) OnExtension(slot func(super func(variant *QVariant) *QVariant, variant *QVariant) *QVariant) {
 	var slotHandle C.intptr_t
 	if slot != nil {
-		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QGraphicsItem_extension{callback: slot}))
 	}
 	ok := C.QGraphicsItem_override_virtual_extension(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
@@ -2158,17 +2279,34 @@ func (this *QGraphicsItem) OnExtension(slot func(super func(variant *QVariant) *
 	}
 }
 
+// OnExtensionOwned installs a virtual override that transfers
+// ownership of each non-nil returned Qt value object to C++.
+func (this *QGraphicsItem) OnExtensionOwned(slot func(super func(variant *QVariant) *QVariant, variant *QVariant) *QVariant) {
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QGraphicsItem_extension{callback: slot, ownsReturn: true}))
+	}
+	ok := C.QGraphicsItem_override_virtual_owned_extension(unsafe.Pointer(this.h), slotHandle)
+	if !ok {
+		panic("miqt: can only override virtual methods for directly constructed types")
+	}
+}
+
 //export miqt_exec_callback_QGraphicsItem_extension
 func miqt_exec_callback_QGraphicsItem_extension(self *C.QGraphicsItem, cb C.intptr_t, variant *C.QVariant) *C.QVariant {
-	gofunc, ok := cgo.Handle(cb).Value().(func(super func(variant *QVariant) *QVariant, variant *QVariant) *QVariant)
+	callbackData, ok := cgo.Handle(cb).Value().(miqtVirtualCallback_QGraphicsItem_extension)
 	if !ok {
 		panic("miqt: callback of non-callback type (heap corruption?)")
 	}
+	gofunc := callbackData.callback
 
 	// Convert all CABI parameters to Go parameters
 	slotval1 := newQVariant(variant)
 
 	virtualReturn := gofunc((&QGraphicsItem{h: self}).callVirtualBase_Extension, slotval1)
+	if callbackData.ownsReturn && virtualReturn != nil {
+		runtime.SetFinalizer(virtualReturn, nil)
+	}
 
 	return virtualReturn.cPointer()
 
@@ -2876,10 +3014,16 @@ func miqt_exec_callback_QGraphicsObject_advance(self *C.QGraphicsObject, cb C.in
 	gofunc((&QGraphicsObject{h: self}).callVirtualBase_Advance, slotval1)
 
 }
+
+type miqtVirtualCallback_QGraphicsObject_boundingRect struct {
+	callback   func() *QRectF
+	ownsReturn bool
+}
+
 func (this *QGraphicsObject) OnBoundingRect(slot func() *QRectF) {
 	var slotHandle C.intptr_t
 	if slot != nil {
-		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QGraphicsObject_boundingRect{callback: slot}))
 	}
 	ok := C.QGraphicsObject_override_virtual_boundingRect(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
@@ -2887,14 +3031,31 @@ func (this *QGraphicsObject) OnBoundingRect(slot func() *QRectF) {
 	}
 }
 
+// OnBoundingRectOwned installs a virtual override that transfers
+// ownership of each non-nil returned Qt value object to C++.
+func (this *QGraphicsObject) OnBoundingRectOwned(slot func() *QRectF) {
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QGraphicsObject_boundingRect{callback: slot, ownsReturn: true}))
+	}
+	ok := C.QGraphicsObject_override_virtual_owned_boundingRect(unsafe.Pointer(this.h), slotHandle)
+	if !ok {
+		panic("miqt: can only override virtual methods for directly constructed types")
+	}
+}
+
 //export miqt_exec_callback_QGraphicsObject_boundingRect
 func miqt_exec_callback_QGraphicsObject_boundingRect(self *C.QGraphicsObject, cb C.intptr_t) *C.QRectF {
-	gofunc, ok := cgo.Handle(cb).Value().(func() *QRectF)
+	callbackData, ok := cgo.Handle(cb).Value().(miqtVirtualCallback_QGraphicsObject_boundingRect)
 	if !ok {
 		panic("miqt: callback of non-callback type (heap corruption?)")
 	}
+	gofunc := callbackData.callback
 
 	virtualReturn := gofunc()
+	if callbackData.ownsReturn && virtualReturn != nil {
+		runtime.SetFinalizer(virtualReturn, nil)
+	}
 
 	return virtualReturn.cPointer()
 
@@ -2907,10 +3068,16 @@ func (this *QGraphicsObject) callVirtualBase_Shape() *QPainterPath {
 	return _goptr
 
 }
+
+type miqtVirtualCallback_QGraphicsObject_shape struct {
+	callback   func(super func() *QPainterPath) *QPainterPath
+	ownsReturn bool
+}
+
 func (this *QGraphicsObject) OnShape(slot func(super func() *QPainterPath) *QPainterPath) {
 	var slotHandle C.intptr_t
 	if slot != nil {
-		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QGraphicsObject_shape{callback: slot}))
 	}
 	ok := C.QGraphicsObject_override_virtual_shape(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
@@ -2918,14 +3085,31 @@ func (this *QGraphicsObject) OnShape(slot func(super func() *QPainterPath) *QPai
 	}
 }
 
+// OnShapeOwned installs a virtual override that transfers
+// ownership of each non-nil returned Qt value object to C++.
+func (this *QGraphicsObject) OnShapeOwned(slot func(super func() *QPainterPath) *QPainterPath) {
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QGraphicsObject_shape{callback: slot, ownsReturn: true}))
+	}
+	ok := C.QGraphicsObject_override_virtual_owned_shape(unsafe.Pointer(this.h), slotHandle)
+	if !ok {
+		panic("miqt: can only override virtual methods for directly constructed types")
+	}
+}
+
 //export miqt_exec_callback_QGraphicsObject_shape
 func miqt_exec_callback_QGraphicsObject_shape(self *C.QGraphicsObject, cb C.intptr_t) *C.QPainterPath {
-	gofunc, ok := cgo.Handle(cb).Value().(func(super func() *QPainterPath) *QPainterPath)
+	callbackData, ok := cgo.Handle(cb).Value().(miqtVirtualCallback_QGraphicsObject_shape)
 	if !ok {
 		panic("miqt: callback of non-callback type (heap corruption?)")
 	}
+	gofunc := callbackData.callback
 
 	virtualReturn := gofunc((&QGraphicsObject{h: self}).callVirtualBase_Shape)
+	if callbackData.ownsReturn && virtualReturn != nil {
+		runtime.SetFinalizer(virtualReturn, nil)
+	}
 
 	return virtualReturn.cPointer()
 
@@ -3070,10 +3254,16 @@ func (this *QGraphicsObject) callVirtualBase_OpaqueArea() *QPainterPath {
 	return _goptr
 
 }
+
+type miqtVirtualCallback_QGraphicsObject_opaqueArea struct {
+	callback   func(super func() *QPainterPath) *QPainterPath
+	ownsReturn bool
+}
+
 func (this *QGraphicsObject) OnOpaqueArea(slot func(super func() *QPainterPath) *QPainterPath) {
 	var slotHandle C.intptr_t
 	if slot != nil {
-		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QGraphicsObject_opaqueArea{callback: slot}))
 	}
 	ok := C.QGraphicsObject_override_virtual_opaqueArea(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
@@ -3081,14 +3271,31 @@ func (this *QGraphicsObject) OnOpaqueArea(slot func(super func() *QPainterPath) 
 	}
 }
 
+// OnOpaqueAreaOwned installs a virtual override that transfers
+// ownership of each non-nil returned Qt value object to C++.
+func (this *QGraphicsObject) OnOpaqueAreaOwned(slot func(super func() *QPainterPath) *QPainterPath) {
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QGraphicsObject_opaqueArea{callback: slot, ownsReturn: true}))
+	}
+	ok := C.QGraphicsObject_override_virtual_owned_opaqueArea(unsafe.Pointer(this.h), slotHandle)
+	if !ok {
+		panic("miqt: can only override virtual methods for directly constructed types")
+	}
+}
+
 //export miqt_exec_callback_QGraphicsObject_opaqueArea
 func miqt_exec_callback_QGraphicsObject_opaqueArea(self *C.QGraphicsObject, cb C.intptr_t) *C.QPainterPath {
-	gofunc, ok := cgo.Handle(cb).Value().(func(super func() *QPainterPath) *QPainterPath)
+	callbackData, ok := cgo.Handle(cb).Value().(miqtVirtualCallback_QGraphicsObject_opaqueArea)
 	if !ok {
 		panic("miqt: callback of non-callback type (heap corruption?)")
 	}
+	gofunc := callbackData.callback
 
 	virtualReturn := gofunc((&QGraphicsObject{h: self}).callVirtualBase_OpaqueArea)
+	if callbackData.ownsReturn && virtualReturn != nil {
+		runtime.SetFinalizer(virtualReturn, nil)
+	}
 
 	return virtualReturn.cPointer()
 
@@ -3764,10 +3971,16 @@ func (this *QGraphicsObject) callVirtualBase_InputMethodQuery(query InputMethodQ
 	return _goptr
 
 }
+
+type miqtVirtualCallback_QGraphicsObject_inputMethodQuery struct {
+	callback   func(super func(query InputMethodQuery) *QVariant, query InputMethodQuery) *QVariant
+	ownsReturn bool
+}
+
 func (this *QGraphicsObject) OnInputMethodQuery(slot func(super func(query InputMethodQuery) *QVariant, query InputMethodQuery) *QVariant) {
 	var slotHandle C.intptr_t
 	if slot != nil {
-		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QGraphicsObject_inputMethodQuery{callback: slot}))
 	}
 	ok := C.QGraphicsObject_override_virtual_inputMethodQuery(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
@@ -3775,17 +3988,34 @@ func (this *QGraphicsObject) OnInputMethodQuery(slot func(super func(query Input
 	}
 }
 
+// OnInputMethodQueryOwned installs a virtual override that transfers
+// ownership of each non-nil returned Qt value object to C++.
+func (this *QGraphicsObject) OnInputMethodQueryOwned(slot func(super func(query InputMethodQuery) *QVariant, query InputMethodQuery) *QVariant) {
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QGraphicsObject_inputMethodQuery{callback: slot, ownsReturn: true}))
+	}
+	ok := C.QGraphicsObject_override_virtual_owned_inputMethodQuery(unsafe.Pointer(this.h), slotHandle)
+	if !ok {
+		panic("miqt: can only override virtual methods for directly constructed types")
+	}
+}
+
 //export miqt_exec_callback_QGraphicsObject_inputMethodQuery
 func miqt_exec_callback_QGraphicsObject_inputMethodQuery(self *C.QGraphicsObject, cb C.intptr_t, query C.int) *C.QVariant {
-	gofunc, ok := cgo.Handle(cb).Value().(func(super func(query InputMethodQuery) *QVariant, query InputMethodQuery) *QVariant)
+	callbackData, ok := cgo.Handle(cb).Value().(miqtVirtualCallback_QGraphicsObject_inputMethodQuery)
 	if !ok {
 		panic("miqt: callback of non-callback type (heap corruption?)")
 	}
+	gofunc := callbackData.callback
 
 	// Convert all CABI parameters to Go parameters
 	slotval1 := (InputMethodQuery)(query)
 
 	virtualReturn := gofunc((&QGraphicsObject{h: self}).callVirtualBase_InputMethodQuery, slotval1)
+	if callbackData.ownsReturn && virtualReturn != nil {
+		runtime.SetFinalizer(virtualReturn, nil)
+	}
 
 	return virtualReturn.cPointer()
 
@@ -3798,10 +4028,16 @@ func (this *QGraphicsObject) callVirtualBase_ItemChange(change QGraphicsItem__Gr
 	return _goptr
 
 }
+
+type miqtVirtualCallback_QGraphicsObject_itemChange struct {
+	callback   func(super func(change QGraphicsItem__GraphicsItemChange, value *QVariant) *QVariant, change QGraphicsItem__GraphicsItemChange, value *QVariant) *QVariant
+	ownsReturn bool
+}
+
 func (this *QGraphicsObject) OnItemChange(slot func(super func(change QGraphicsItem__GraphicsItemChange, value *QVariant) *QVariant, change QGraphicsItem__GraphicsItemChange, value *QVariant) *QVariant) {
 	var slotHandle C.intptr_t
 	if slot != nil {
-		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QGraphicsObject_itemChange{callback: slot}))
 	}
 	ok := C.QGraphicsObject_override_virtual_itemChange(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
@@ -3809,12 +4045,26 @@ func (this *QGraphicsObject) OnItemChange(slot func(super func(change QGraphicsI
 	}
 }
 
+// OnItemChangeOwned installs a virtual override that transfers
+// ownership of each non-nil returned Qt value object to C++.
+func (this *QGraphicsObject) OnItemChangeOwned(slot func(super func(change QGraphicsItem__GraphicsItemChange, value *QVariant) *QVariant, change QGraphicsItem__GraphicsItemChange, value *QVariant) *QVariant) {
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QGraphicsObject_itemChange{callback: slot, ownsReturn: true}))
+	}
+	ok := C.QGraphicsObject_override_virtual_owned_itemChange(unsafe.Pointer(this.h), slotHandle)
+	if !ok {
+		panic("miqt: can only override virtual methods for directly constructed types")
+	}
+}
+
 //export miqt_exec_callback_QGraphicsObject_itemChange
 func miqt_exec_callback_QGraphicsObject_itemChange(self *C.QGraphicsObject, cb C.intptr_t, change C.int, value *C.QVariant) *C.QVariant {
-	gofunc, ok := cgo.Handle(cb).Value().(func(super func(change QGraphicsItem__GraphicsItemChange, value *QVariant) *QVariant, change QGraphicsItem__GraphicsItemChange, value *QVariant) *QVariant)
+	callbackData, ok := cgo.Handle(cb).Value().(miqtVirtualCallback_QGraphicsObject_itemChange)
 	if !ok {
 		panic("miqt: callback of non-callback type (heap corruption?)")
 	}
+	gofunc := callbackData.callback
 
 	// Convert all CABI parameters to Go parameters
 	slotval1 := (QGraphicsItem__GraphicsItemChange)(change)
@@ -3822,6 +4072,9 @@ func miqt_exec_callback_QGraphicsObject_itemChange(self *C.QGraphicsObject, cb C
 	slotval2 := newQVariant(value)
 
 	virtualReturn := gofunc((&QGraphicsObject{h: self}).callVirtualBase_ItemChange, slotval1, slotval2)
+	if callbackData.ownsReturn && virtualReturn != nil {
+		runtime.SetFinalizer(virtualReturn, nil)
+	}
 
 	return virtualReturn.cPointer()
 
@@ -3898,10 +4151,16 @@ func (this *QGraphicsObject) callVirtualBase_Extension(variant *QVariant) *QVari
 	return _goptr
 
 }
+
+type miqtVirtualCallback_QGraphicsObject_extension struct {
+	callback   func(super func(variant *QVariant) *QVariant, variant *QVariant) *QVariant
+	ownsReturn bool
+}
+
 func (this *QGraphicsObject) OnExtension(slot func(super func(variant *QVariant) *QVariant, variant *QVariant) *QVariant) {
 	var slotHandle C.intptr_t
 	if slot != nil {
-		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QGraphicsObject_extension{callback: slot}))
 	}
 	ok := C.QGraphicsObject_override_virtual_extension(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
@@ -3909,17 +4168,34 @@ func (this *QGraphicsObject) OnExtension(slot func(super func(variant *QVariant)
 	}
 }
 
+// OnExtensionOwned installs a virtual override that transfers
+// ownership of each non-nil returned Qt value object to C++.
+func (this *QGraphicsObject) OnExtensionOwned(slot func(super func(variant *QVariant) *QVariant, variant *QVariant) *QVariant) {
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QGraphicsObject_extension{callback: slot, ownsReturn: true}))
+	}
+	ok := C.QGraphicsObject_override_virtual_owned_extension(unsafe.Pointer(this.h), slotHandle)
+	if !ok {
+		panic("miqt: can only override virtual methods for directly constructed types")
+	}
+}
+
 //export miqt_exec_callback_QGraphicsObject_extension
 func miqt_exec_callback_QGraphicsObject_extension(self *C.QGraphicsObject, cb C.intptr_t, variant *C.QVariant) *C.QVariant {
-	gofunc, ok := cgo.Handle(cb).Value().(func(super func(variant *QVariant) *QVariant, variant *QVariant) *QVariant)
+	callbackData, ok := cgo.Handle(cb).Value().(miqtVirtualCallback_QGraphicsObject_extension)
 	if !ok {
 		panic("miqt: callback of non-callback type (heap corruption?)")
 	}
+	gofunc := callbackData.callback
 
 	// Convert all CABI parameters to Go parameters
 	slotval1 := newQVariant(variant)
 
 	virtualReturn := gofunc((&QGraphicsObject{h: self}).callVirtualBase_Extension, slotval1)
+	if callbackData.ownsReturn && virtualReturn != nil {
+		runtime.SetFinalizer(virtualReturn, nil)
+	}
 
 	return virtualReturn.cPointer()
 
@@ -4109,10 +4385,16 @@ func (this *QAbstractGraphicsShapeItem) callVirtualBase_OpaqueArea() *QPainterPa
 	return _goptr
 
 }
+
+type miqtVirtualCallback_QAbstractGraphicsShapeItem_opaqueArea struct {
+	callback   func(super func() *QPainterPath) *QPainterPath
+	ownsReturn bool
+}
+
 func (this *QAbstractGraphicsShapeItem) OnOpaqueArea(slot func(super func() *QPainterPath) *QPainterPath) {
 	var slotHandle C.intptr_t
 	if slot != nil {
-		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QAbstractGraphicsShapeItem_opaqueArea{callback: slot}))
 	}
 	ok := C.QAbstractGraphicsShapeItem_override_virtual_opaqueArea(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
@@ -4120,14 +4402,31 @@ func (this *QAbstractGraphicsShapeItem) OnOpaqueArea(slot func(super func() *QPa
 	}
 }
 
+// OnOpaqueAreaOwned installs a virtual override that transfers
+// ownership of each non-nil returned Qt value object to C++.
+func (this *QAbstractGraphicsShapeItem) OnOpaqueAreaOwned(slot func(super func() *QPainterPath) *QPainterPath) {
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QAbstractGraphicsShapeItem_opaqueArea{callback: slot, ownsReturn: true}))
+	}
+	ok := C.QAbstractGraphicsShapeItem_override_virtual_owned_opaqueArea(unsafe.Pointer(this.h), slotHandle)
+	if !ok {
+		panic("miqt: can only override virtual methods for directly constructed types")
+	}
+}
+
 //export miqt_exec_callback_QAbstractGraphicsShapeItem_opaqueArea
 func miqt_exec_callback_QAbstractGraphicsShapeItem_opaqueArea(self *C.QAbstractGraphicsShapeItem, cb C.intptr_t) *C.QPainterPath {
-	gofunc, ok := cgo.Handle(cb).Value().(func(super func() *QPainterPath) *QPainterPath)
+	callbackData, ok := cgo.Handle(cb).Value().(miqtVirtualCallback_QAbstractGraphicsShapeItem_opaqueArea)
 	if !ok {
 		panic("miqt: callback of non-callback type (heap corruption?)")
 	}
+	gofunc := callbackData.callback
 
 	virtualReturn := gofunc((&QAbstractGraphicsShapeItem{h: self}).callVirtualBase_OpaqueArea)
+	if callbackData.ownsReturn && virtualReturn != nil {
+		runtime.SetFinalizer(virtualReturn, nil)
+	}
 
 	return virtualReturn.cPointer()
 
@@ -4162,10 +4461,16 @@ func miqt_exec_callback_QAbstractGraphicsShapeItem_advance(self *C.QAbstractGrap
 	gofunc((&QAbstractGraphicsShapeItem{h: self}).callVirtualBase_Advance, slotval1)
 
 }
+
+type miqtVirtualCallback_QAbstractGraphicsShapeItem_boundingRect struct {
+	callback   func() *QRectF
+	ownsReturn bool
+}
+
 func (this *QAbstractGraphicsShapeItem) OnBoundingRect(slot func() *QRectF) {
 	var slotHandle C.intptr_t
 	if slot != nil {
-		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QAbstractGraphicsShapeItem_boundingRect{callback: slot}))
 	}
 	ok := C.QAbstractGraphicsShapeItem_override_virtual_boundingRect(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
@@ -4173,14 +4478,31 @@ func (this *QAbstractGraphicsShapeItem) OnBoundingRect(slot func() *QRectF) {
 	}
 }
 
+// OnBoundingRectOwned installs a virtual override that transfers
+// ownership of each non-nil returned Qt value object to C++.
+func (this *QAbstractGraphicsShapeItem) OnBoundingRectOwned(slot func() *QRectF) {
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QAbstractGraphicsShapeItem_boundingRect{callback: slot, ownsReturn: true}))
+	}
+	ok := C.QAbstractGraphicsShapeItem_override_virtual_owned_boundingRect(unsafe.Pointer(this.h), slotHandle)
+	if !ok {
+		panic("miqt: can only override virtual methods for directly constructed types")
+	}
+}
+
 //export miqt_exec_callback_QAbstractGraphicsShapeItem_boundingRect
 func miqt_exec_callback_QAbstractGraphicsShapeItem_boundingRect(self *C.QAbstractGraphicsShapeItem, cb C.intptr_t) *C.QRectF {
-	gofunc, ok := cgo.Handle(cb).Value().(func() *QRectF)
+	callbackData, ok := cgo.Handle(cb).Value().(miqtVirtualCallback_QAbstractGraphicsShapeItem_boundingRect)
 	if !ok {
 		panic("miqt: callback of non-callback type (heap corruption?)")
 	}
+	gofunc := callbackData.callback
 
 	virtualReturn := gofunc()
+	if callbackData.ownsReturn && virtualReturn != nil {
+		runtime.SetFinalizer(virtualReturn, nil)
+	}
 
 	return virtualReturn.cPointer()
 
@@ -4193,10 +4515,16 @@ func (this *QAbstractGraphicsShapeItem) callVirtualBase_Shape() *QPainterPath {
 	return _goptr
 
 }
+
+type miqtVirtualCallback_QAbstractGraphicsShapeItem_shape struct {
+	callback   func(super func() *QPainterPath) *QPainterPath
+	ownsReturn bool
+}
+
 func (this *QAbstractGraphicsShapeItem) OnShape(slot func(super func() *QPainterPath) *QPainterPath) {
 	var slotHandle C.intptr_t
 	if slot != nil {
-		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QAbstractGraphicsShapeItem_shape{callback: slot}))
 	}
 	ok := C.QAbstractGraphicsShapeItem_override_virtual_shape(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
@@ -4204,14 +4532,31 @@ func (this *QAbstractGraphicsShapeItem) OnShape(slot func(super func() *QPainter
 	}
 }
 
+// OnShapeOwned installs a virtual override that transfers
+// ownership of each non-nil returned Qt value object to C++.
+func (this *QAbstractGraphicsShapeItem) OnShapeOwned(slot func(super func() *QPainterPath) *QPainterPath) {
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QAbstractGraphicsShapeItem_shape{callback: slot, ownsReturn: true}))
+	}
+	ok := C.QAbstractGraphicsShapeItem_override_virtual_owned_shape(unsafe.Pointer(this.h), slotHandle)
+	if !ok {
+		panic("miqt: can only override virtual methods for directly constructed types")
+	}
+}
+
 //export miqt_exec_callback_QAbstractGraphicsShapeItem_shape
 func miqt_exec_callback_QAbstractGraphicsShapeItem_shape(self *C.QAbstractGraphicsShapeItem, cb C.intptr_t) *C.QPainterPath {
-	gofunc, ok := cgo.Handle(cb).Value().(func(super func() *QPainterPath) *QPainterPath)
+	callbackData, ok := cgo.Handle(cb).Value().(miqtVirtualCallback_QAbstractGraphicsShapeItem_shape)
 	if !ok {
 		panic("miqt: callback of non-callback type (heap corruption?)")
 	}
+	gofunc := callbackData.callback
 
 	virtualReturn := gofunc((&QAbstractGraphicsShapeItem{h: self}).callVirtualBase_Shape)
+	if callbackData.ownsReturn && virtualReturn != nil {
+		runtime.SetFinalizer(virtualReturn, nil)
+	}
 
 	return virtualReturn.cPointer()
 
@@ -4987,10 +5332,16 @@ func (this *QAbstractGraphicsShapeItem) callVirtualBase_InputMethodQuery(query I
 	return _goptr
 
 }
+
+type miqtVirtualCallback_QAbstractGraphicsShapeItem_inputMethodQuery struct {
+	callback   func(super func(query InputMethodQuery) *QVariant, query InputMethodQuery) *QVariant
+	ownsReturn bool
+}
+
 func (this *QAbstractGraphicsShapeItem) OnInputMethodQuery(slot func(super func(query InputMethodQuery) *QVariant, query InputMethodQuery) *QVariant) {
 	var slotHandle C.intptr_t
 	if slot != nil {
-		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QAbstractGraphicsShapeItem_inputMethodQuery{callback: slot}))
 	}
 	ok := C.QAbstractGraphicsShapeItem_override_virtual_inputMethodQuery(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
@@ -4998,17 +5349,34 @@ func (this *QAbstractGraphicsShapeItem) OnInputMethodQuery(slot func(super func(
 	}
 }
 
+// OnInputMethodQueryOwned installs a virtual override that transfers
+// ownership of each non-nil returned Qt value object to C++.
+func (this *QAbstractGraphicsShapeItem) OnInputMethodQueryOwned(slot func(super func(query InputMethodQuery) *QVariant, query InputMethodQuery) *QVariant) {
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QAbstractGraphicsShapeItem_inputMethodQuery{callback: slot, ownsReturn: true}))
+	}
+	ok := C.QAbstractGraphicsShapeItem_override_virtual_owned_inputMethodQuery(unsafe.Pointer(this.h), slotHandle)
+	if !ok {
+		panic("miqt: can only override virtual methods for directly constructed types")
+	}
+}
+
 //export miqt_exec_callback_QAbstractGraphicsShapeItem_inputMethodQuery
 func miqt_exec_callback_QAbstractGraphicsShapeItem_inputMethodQuery(self *C.QAbstractGraphicsShapeItem, cb C.intptr_t, query C.int) *C.QVariant {
-	gofunc, ok := cgo.Handle(cb).Value().(func(super func(query InputMethodQuery) *QVariant, query InputMethodQuery) *QVariant)
+	callbackData, ok := cgo.Handle(cb).Value().(miqtVirtualCallback_QAbstractGraphicsShapeItem_inputMethodQuery)
 	if !ok {
 		panic("miqt: callback of non-callback type (heap corruption?)")
 	}
+	gofunc := callbackData.callback
 
 	// Convert all CABI parameters to Go parameters
 	slotval1 := (InputMethodQuery)(query)
 
 	virtualReturn := gofunc((&QAbstractGraphicsShapeItem{h: self}).callVirtualBase_InputMethodQuery, slotval1)
+	if callbackData.ownsReturn && virtualReturn != nil {
+		runtime.SetFinalizer(virtualReturn, nil)
+	}
 
 	return virtualReturn.cPointer()
 
@@ -5021,10 +5389,16 @@ func (this *QAbstractGraphicsShapeItem) callVirtualBase_ItemChange(change QGraph
 	return _goptr
 
 }
+
+type miqtVirtualCallback_QAbstractGraphicsShapeItem_itemChange struct {
+	callback   func(super func(change QGraphicsItem__GraphicsItemChange, value *QVariant) *QVariant, change QGraphicsItem__GraphicsItemChange, value *QVariant) *QVariant
+	ownsReturn bool
+}
+
 func (this *QAbstractGraphicsShapeItem) OnItemChange(slot func(super func(change QGraphicsItem__GraphicsItemChange, value *QVariant) *QVariant, change QGraphicsItem__GraphicsItemChange, value *QVariant) *QVariant) {
 	var slotHandle C.intptr_t
 	if slot != nil {
-		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QAbstractGraphicsShapeItem_itemChange{callback: slot}))
 	}
 	ok := C.QAbstractGraphicsShapeItem_override_virtual_itemChange(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
@@ -5032,12 +5406,26 @@ func (this *QAbstractGraphicsShapeItem) OnItemChange(slot func(super func(change
 	}
 }
 
+// OnItemChangeOwned installs a virtual override that transfers
+// ownership of each non-nil returned Qt value object to C++.
+func (this *QAbstractGraphicsShapeItem) OnItemChangeOwned(slot func(super func(change QGraphicsItem__GraphicsItemChange, value *QVariant) *QVariant, change QGraphicsItem__GraphicsItemChange, value *QVariant) *QVariant) {
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QAbstractGraphicsShapeItem_itemChange{callback: slot, ownsReturn: true}))
+	}
+	ok := C.QAbstractGraphicsShapeItem_override_virtual_owned_itemChange(unsafe.Pointer(this.h), slotHandle)
+	if !ok {
+		panic("miqt: can only override virtual methods for directly constructed types")
+	}
+}
+
 //export miqt_exec_callback_QAbstractGraphicsShapeItem_itemChange
 func miqt_exec_callback_QAbstractGraphicsShapeItem_itemChange(self *C.QAbstractGraphicsShapeItem, cb C.intptr_t, change C.int, value *C.QVariant) *C.QVariant {
-	gofunc, ok := cgo.Handle(cb).Value().(func(super func(change QGraphicsItem__GraphicsItemChange, value *QVariant) *QVariant, change QGraphicsItem__GraphicsItemChange, value *QVariant) *QVariant)
+	callbackData, ok := cgo.Handle(cb).Value().(miqtVirtualCallback_QAbstractGraphicsShapeItem_itemChange)
 	if !ok {
 		panic("miqt: callback of non-callback type (heap corruption?)")
 	}
+	gofunc := callbackData.callback
 
 	// Convert all CABI parameters to Go parameters
 	slotval1 := (QGraphicsItem__GraphicsItemChange)(change)
@@ -5045,6 +5433,9 @@ func miqt_exec_callback_QAbstractGraphicsShapeItem_itemChange(self *C.QAbstractG
 	slotval2 := newQVariant(value)
 
 	virtualReturn := gofunc((&QAbstractGraphicsShapeItem{h: self}).callVirtualBase_ItemChange, slotval1, slotval2)
+	if callbackData.ownsReturn && virtualReturn != nil {
+		runtime.SetFinalizer(virtualReturn, nil)
+	}
 
 	return virtualReturn.cPointer()
 
@@ -5121,10 +5512,16 @@ func (this *QAbstractGraphicsShapeItem) callVirtualBase_Extension(variant *QVari
 	return _goptr
 
 }
+
+type miqtVirtualCallback_QAbstractGraphicsShapeItem_extension struct {
+	callback   func(super func(variant *QVariant) *QVariant, variant *QVariant) *QVariant
+	ownsReturn bool
+}
+
 func (this *QAbstractGraphicsShapeItem) OnExtension(slot func(super func(variant *QVariant) *QVariant, variant *QVariant) *QVariant) {
 	var slotHandle C.intptr_t
 	if slot != nil {
-		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QAbstractGraphicsShapeItem_extension{callback: slot}))
 	}
 	ok := C.QAbstractGraphicsShapeItem_override_virtual_extension(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
@@ -5132,17 +5529,34 @@ func (this *QAbstractGraphicsShapeItem) OnExtension(slot func(super func(variant
 	}
 }
 
+// OnExtensionOwned installs a virtual override that transfers
+// ownership of each non-nil returned Qt value object to C++.
+func (this *QAbstractGraphicsShapeItem) OnExtensionOwned(slot func(super func(variant *QVariant) *QVariant, variant *QVariant) *QVariant) {
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QAbstractGraphicsShapeItem_extension{callback: slot, ownsReturn: true}))
+	}
+	ok := C.QAbstractGraphicsShapeItem_override_virtual_owned_extension(unsafe.Pointer(this.h), slotHandle)
+	if !ok {
+		panic("miqt: can only override virtual methods for directly constructed types")
+	}
+}
+
 //export miqt_exec_callback_QAbstractGraphicsShapeItem_extension
 func miqt_exec_callback_QAbstractGraphicsShapeItem_extension(self *C.QAbstractGraphicsShapeItem, cb C.intptr_t, variant *C.QVariant) *C.QVariant {
-	gofunc, ok := cgo.Handle(cb).Value().(func(super func(variant *QVariant) *QVariant, variant *QVariant) *QVariant)
+	callbackData, ok := cgo.Handle(cb).Value().(miqtVirtualCallback_QAbstractGraphicsShapeItem_extension)
 	if !ok {
 		panic("miqt: callback of non-callback type (heap corruption?)")
 	}
+	gofunc := callbackData.callback
 
 	// Convert all CABI parameters to Go parameters
 	slotval1 := newQVariant(variant)
 
 	virtualReturn := gofunc((&QAbstractGraphicsShapeItem{h: self}).callVirtualBase_Extension, slotval1)
+	if callbackData.ownsReturn && virtualReturn != nil {
+		runtime.SetFinalizer(virtualReturn, nil)
+	}
 
 	return virtualReturn.cPointer()
 
@@ -5326,10 +5740,16 @@ func (this *QGraphicsPathItem) callVirtualBase_BoundingRect() *QRectF {
 	return _goptr
 
 }
+
+type miqtVirtualCallback_QGraphicsPathItem_boundingRect struct {
+	callback   func(super func() *QRectF) *QRectF
+	ownsReturn bool
+}
+
 func (this *QGraphicsPathItem) OnBoundingRect(slot func(super func() *QRectF) *QRectF) {
 	var slotHandle C.intptr_t
 	if slot != nil {
-		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QGraphicsPathItem_boundingRect{callback: slot}))
 	}
 	ok := C.QGraphicsPathItem_override_virtual_boundingRect(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
@@ -5337,14 +5757,31 @@ func (this *QGraphicsPathItem) OnBoundingRect(slot func(super func() *QRectF) *Q
 	}
 }
 
+// OnBoundingRectOwned installs a virtual override that transfers
+// ownership of each non-nil returned Qt value object to C++.
+func (this *QGraphicsPathItem) OnBoundingRectOwned(slot func(super func() *QRectF) *QRectF) {
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QGraphicsPathItem_boundingRect{callback: slot, ownsReturn: true}))
+	}
+	ok := C.QGraphicsPathItem_override_virtual_owned_boundingRect(unsafe.Pointer(this.h), slotHandle)
+	if !ok {
+		panic("miqt: can only override virtual methods for directly constructed types")
+	}
+}
+
 //export miqt_exec_callback_QGraphicsPathItem_boundingRect
 func miqt_exec_callback_QGraphicsPathItem_boundingRect(self *C.QGraphicsPathItem, cb C.intptr_t) *C.QRectF {
-	gofunc, ok := cgo.Handle(cb).Value().(func(super func() *QRectF) *QRectF)
+	callbackData, ok := cgo.Handle(cb).Value().(miqtVirtualCallback_QGraphicsPathItem_boundingRect)
 	if !ok {
 		panic("miqt: callback of non-callback type (heap corruption?)")
 	}
+	gofunc := callbackData.callback
 
 	virtualReturn := gofunc((&QGraphicsPathItem{h: self}).callVirtualBase_BoundingRect)
+	if callbackData.ownsReturn && virtualReturn != nil {
+		runtime.SetFinalizer(virtualReturn, nil)
+	}
 
 	return virtualReturn.cPointer()
 
@@ -5357,10 +5794,16 @@ func (this *QGraphicsPathItem) callVirtualBase_Shape() *QPainterPath {
 	return _goptr
 
 }
+
+type miqtVirtualCallback_QGraphicsPathItem_shape struct {
+	callback   func(super func() *QPainterPath) *QPainterPath
+	ownsReturn bool
+}
+
 func (this *QGraphicsPathItem) OnShape(slot func(super func() *QPainterPath) *QPainterPath) {
 	var slotHandle C.intptr_t
 	if slot != nil {
-		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QGraphicsPathItem_shape{callback: slot}))
 	}
 	ok := C.QGraphicsPathItem_override_virtual_shape(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
@@ -5368,14 +5811,31 @@ func (this *QGraphicsPathItem) OnShape(slot func(super func() *QPainterPath) *QP
 	}
 }
 
+// OnShapeOwned installs a virtual override that transfers
+// ownership of each non-nil returned Qt value object to C++.
+func (this *QGraphicsPathItem) OnShapeOwned(slot func(super func() *QPainterPath) *QPainterPath) {
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QGraphicsPathItem_shape{callback: slot, ownsReturn: true}))
+	}
+	ok := C.QGraphicsPathItem_override_virtual_owned_shape(unsafe.Pointer(this.h), slotHandle)
+	if !ok {
+		panic("miqt: can only override virtual methods for directly constructed types")
+	}
+}
+
 //export miqt_exec_callback_QGraphicsPathItem_shape
 func miqt_exec_callback_QGraphicsPathItem_shape(self *C.QGraphicsPathItem, cb C.intptr_t) *C.QPainterPath {
-	gofunc, ok := cgo.Handle(cb).Value().(func(super func() *QPainterPath) *QPainterPath)
+	callbackData, ok := cgo.Handle(cb).Value().(miqtVirtualCallback_QGraphicsPathItem_shape)
 	if !ok {
 		panic("miqt: callback of non-callback type (heap corruption?)")
 	}
+	gofunc := callbackData.callback
 
 	virtualReturn := gofunc((&QGraphicsPathItem{h: self}).callVirtualBase_Shape)
+	if callbackData.ownsReturn && virtualReturn != nil {
+		runtime.SetFinalizer(virtualReturn, nil)
+	}
 
 	return virtualReturn.cPointer()
 
@@ -5486,10 +5946,16 @@ func (this *QGraphicsPathItem) callVirtualBase_OpaqueArea() *QPainterPath {
 	return _goptr
 
 }
+
+type miqtVirtualCallback_QGraphicsPathItem_opaqueArea struct {
+	callback   func(super func() *QPainterPath) *QPainterPath
+	ownsReturn bool
+}
+
 func (this *QGraphicsPathItem) OnOpaqueArea(slot func(super func() *QPainterPath) *QPainterPath) {
 	var slotHandle C.intptr_t
 	if slot != nil {
-		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QGraphicsPathItem_opaqueArea{callback: slot}))
 	}
 	ok := C.QGraphicsPathItem_override_virtual_opaqueArea(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
@@ -5497,14 +5963,31 @@ func (this *QGraphicsPathItem) OnOpaqueArea(slot func(super func() *QPainterPath
 	}
 }
 
+// OnOpaqueAreaOwned installs a virtual override that transfers
+// ownership of each non-nil returned Qt value object to C++.
+func (this *QGraphicsPathItem) OnOpaqueAreaOwned(slot func(super func() *QPainterPath) *QPainterPath) {
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QGraphicsPathItem_opaqueArea{callback: slot, ownsReturn: true}))
+	}
+	ok := C.QGraphicsPathItem_override_virtual_owned_opaqueArea(unsafe.Pointer(this.h), slotHandle)
+	if !ok {
+		panic("miqt: can only override virtual methods for directly constructed types")
+	}
+}
+
 //export miqt_exec_callback_QGraphicsPathItem_opaqueArea
 func miqt_exec_callback_QGraphicsPathItem_opaqueArea(self *C.QGraphicsPathItem, cb C.intptr_t) *C.QPainterPath {
-	gofunc, ok := cgo.Handle(cb).Value().(func(super func() *QPainterPath) *QPainterPath)
+	callbackData, ok := cgo.Handle(cb).Value().(miqtVirtualCallback_QGraphicsPathItem_opaqueArea)
 	if !ok {
 		panic("miqt: callback of non-callback type (heap corruption?)")
 	}
+	gofunc := callbackData.callback
 
 	virtualReturn := gofunc((&QGraphicsPathItem{h: self}).callVirtualBase_OpaqueArea)
+	if callbackData.ownsReturn && virtualReturn != nil {
+		runtime.SetFinalizer(virtualReturn, nil)
+	}
 
 	return virtualReturn.cPointer()
 
@@ -5610,10 +6093,16 @@ func (this *QGraphicsPathItem) callVirtualBase_Extension(variant *QVariant) *QVa
 	return _goptr
 
 }
+
+type miqtVirtualCallback_QGraphicsPathItem_extension struct {
+	callback   func(super func(variant *QVariant) *QVariant, variant *QVariant) *QVariant
+	ownsReturn bool
+}
+
 func (this *QGraphicsPathItem) OnExtension(slot func(super func(variant *QVariant) *QVariant, variant *QVariant) *QVariant) {
 	var slotHandle C.intptr_t
 	if slot != nil {
-		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QGraphicsPathItem_extension{callback: slot}))
 	}
 	ok := C.QGraphicsPathItem_override_virtual_extension(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
@@ -5621,17 +6110,34 @@ func (this *QGraphicsPathItem) OnExtension(slot func(super func(variant *QVarian
 	}
 }
 
+// OnExtensionOwned installs a virtual override that transfers
+// ownership of each non-nil returned Qt value object to C++.
+func (this *QGraphicsPathItem) OnExtensionOwned(slot func(super func(variant *QVariant) *QVariant, variant *QVariant) *QVariant) {
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QGraphicsPathItem_extension{callback: slot, ownsReturn: true}))
+	}
+	ok := C.QGraphicsPathItem_override_virtual_owned_extension(unsafe.Pointer(this.h), slotHandle)
+	if !ok {
+		panic("miqt: can only override virtual methods for directly constructed types")
+	}
+}
+
 //export miqt_exec_callback_QGraphicsPathItem_extension
 func miqt_exec_callback_QGraphicsPathItem_extension(self *C.QGraphicsPathItem, cb C.intptr_t, variant *C.QVariant) *C.QVariant {
-	gofunc, ok := cgo.Handle(cb).Value().(func(super func(variant *QVariant) *QVariant, variant *QVariant) *QVariant)
+	callbackData, ok := cgo.Handle(cb).Value().(miqtVirtualCallback_QGraphicsPathItem_extension)
 	if !ok {
 		panic("miqt: callback of non-callback type (heap corruption?)")
 	}
+	gofunc := callbackData.callback
 
 	// Convert all CABI parameters to Go parameters
 	slotval1 := newQVariant(variant)
 
 	virtualReturn := gofunc((&QGraphicsPathItem{h: self}).callVirtualBase_Extension, slotval1)
+	if callbackData.ownsReturn && virtualReturn != nil {
+		runtime.SetFinalizer(virtualReturn, nil)
+	}
 
 	return virtualReturn.cPointer()
 
@@ -6348,10 +6854,16 @@ func (this *QGraphicsPathItem) callVirtualBase_InputMethodQuery(query InputMetho
 	return _goptr
 
 }
+
+type miqtVirtualCallback_QGraphicsPathItem_inputMethodQuery struct {
+	callback   func(super func(query InputMethodQuery) *QVariant, query InputMethodQuery) *QVariant
+	ownsReturn bool
+}
+
 func (this *QGraphicsPathItem) OnInputMethodQuery(slot func(super func(query InputMethodQuery) *QVariant, query InputMethodQuery) *QVariant) {
 	var slotHandle C.intptr_t
 	if slot != nil {
-		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QGraphicsPathItem_inputMethodQuery{callback: slot}))
 	}
 	ok := C.QGraphicsPathItem_override_virtual_inputMethodQuery(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
@@ -6359,17 +6871,34 @@ func (this *QGraphicsPathItem) OnInputMethodQuery(slot func(super func(query Inp
 	}
 }
 
+// OnInputMethodQueryOwned installs a virtual override that transfers
+// ownership of each non-nil returned Qt value object to C++.
+func (this *QGraphicsPathItem) OnInputMethodQueryOwned(slot func(super func(query InputMethodQuery) *QVariant, query InputMethodQuery) *QVariant) {
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QGraphicsPathItem_inputMethodQuery{callback: slot, ownsReturn: true}))
+	}
+	ok := C.QGraphicsPathItem_override_virtual_owned_inputMethodQuery(unsafe.Pointer(this.h), slotHandle)
+	if !ok {
+		panic("miqt: can only override virtual methods for directly constructed types")
+	}
+}
+
 //export miqt_exec_callback_QGraphicsPathItem_inputMethodQuery
 func miqt_exec_callback_QGraphicsPathItem_inputMethodQuery(self *C.QGraphicsPathItem, cb C.intptr_t, query C.int) *C.QVariant {
-	gofunc, ok := cgo.Handle(cb).Value().(func(super func(query InputMethodQuery) *QVariant, query InputMethodQuery) *QVariant)
+	callbackData, ok := cgo.Handle(cb).Value().(miqtVirtualCallback_QGraphicsPathItem_inputMethodQuery)
 	if !ok {
 		panic("miqt: callback of non-callback type (heap corruption?)")
 	}
+	gofunc := callbackData.callback
 
 	// Convert all CABI parameters to Go parameters
 	slotval1 := (InputMethodQuery)(query)
 
 	virtualReturn := gofunc((&QGraphicsPathItem{h: self}).callVirtualBase_InputMethodQuery, slotval1)
+	if callbackData.ownsReturn && virtualReturn != nil {
+		runtime.SetFinalizer(virtualReturn, nil)
+	}
 
 	return virtualReturn.cPointer()
 
@@ -6382,10 +6911,16 @@ func (this *QGraphicsPathItem) callVirtualBase_ItemChange(change QGraphicsItem__
 	return _goptr
 
 }
+
+type miqtVirtualCallback_QGraphicsPathItem_itemChange struct {
+	callback   func(super func(change QGraphicsItem__GraphicsItemChange, value *QVariant) *QVariant, change QGraphicsItem__GraphicsItemChange, value *QVariant) *QVariant
+	ownsReturn bool
+}
+
 func (this *QGraphicsPathItem) OnItemChange(slot func(super func(change QGraphicsItem__GraphicsItemChange, value *QVariant) *QVariant, change QGraphicsItem__GraphicsItemChange, value *QVariant) *QVariant) {
 	var slotHandle C.intptr_t
 	if slot != nil {
-		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QGraphicsPathItem_itemChange{callback: slot}))
 	}
 	ok := C.QGraphicsPathItem_override_virtual_itemChange(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
@@ -6393,12 +6928,26 @@ func (this *QGraphicsPathItem) OnItemChange(slot func(super func(change QGraphic
 	}
 }
 
+// OnItemChangeOwned installs a virtual override that transfers
+// ownership of each non-nil returned Qt value object to C++.
+func (this *QGraphicsPathItem) OnItemChangeOwned(slot func(super func(change QGraphicsItem__GraphicsItemChange, value *QVariant) *QVariant, change QGraphicsItem__GraphicsItemChange, value *QVariant) *QVariant) {
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QGraphicsPathItem_itemChange{callback: slot, ownsReturn: true}))
+	}
+	ok := C.QGraphicsPathItem_override_virtual_owned_itemChange(unsafe.Pointer(this.h), slotHandle)
+	if !ok {
+		panic("miqt: can only override virtual methods for directly constructed types")
+	}
+}
+
 //export miqt_exec_callback_QGraphicsPathItem_itemChange
 func miqt_exec_callback_QGraphicsPathItem_itemChange(self *C.QGraphicsPathItem, cb C.intptr_t, change C.int, value *C.QVariant) *C.QVariant {
-	gofunc, ok := cgo.Handle(cb).Value().(func(super func(change QGraphicsItem__GraphicsItemChange, value *QVariant) *QVariant, change QGraphicsItem__GraphicsItemChange, value *QVariant) *QVariant)
+	callbackData, ok := cgo.Handle(cb).Value().(miqtVirtualCallback_QGraphicsPathItem_itemChange)
 	if !ok {
 		panic("miqt: callback of non-callback type (heap corruption?)")
 	}
+	gofunc := callbackData.callback
 
 	// Convert all CABI parameters to Go parameters
 	slotval1 := (QGraphicsItem__GraphicsItemChange)(change)
@@ -6406,6 +6955,9 @@ func miqt_exec_callback_QGraphicsPathItem_itemChange(self *C.QGraphicsPathItem, 
 	slotval2 := newQVariant(value)
 
 	virtualReturn := gofunc((&QGraphicsPathItem{h: self}).callVirtualBase_ItemChange, slotval1, slotval2)
+	if callbackData.ownsReturn && virtualReturn != nil {
+		runtime.SetFinalizer(virtualReturn, nil)
+	}
 
 	return virtualReturn.cPointer()
 
@@ -6605,10 +7157,16 @@ func (this *QGraphicsRectItem) callVirtualBase_BoundingRect() *QRectF {
 	return _goptr
 
 }
+
+type miqtVirtualCallback_QGraphicsRectItem_boundingRect struct {
+	callback   func(super func() *QRectF) *QRectF
+	ownsReturn bool
+}
+
 func (this *QGraphicsRectItem) OnBoundingRect(slot func(super func() *QRectF) *QRectF) {
 	var slotHandle C.intptr_t
 	if slot != nil {
-		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QGraphicsRectItem_boundingRect{callback: slot}))
 	}
 	ok := C.QGraphicsRectItem_override_virtual_boundingRect(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
@@ -6616,14 +7174,31 @@ func (this *QGraphicsRectItem) OnBoundingRect(slot func(super func() *QRectF) *Q
 	}
 }
 
+// OnBoundingRectOwned installs a virtual override that transfers
+// ownership of each non-nil returned Qt value object to C++.
+func (this *QGraphicsRectItem) OnBoundingRectOwned(slot func(super func() *QRectF) *QRectF) {
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QGraphicsRectItem_boundingRect{callback: slot, ownsReturn: true}))
+	}
+	ok := C.QGraphicsRectItem_override_virtual_owned_boundingRect(unsafe.Pointer(this.h), slotHandle)
+	if !ok {
+		panic("miqt: can only override virtual methods for directly constructed types")
+	}
+}
+
 //export miqt_exec_callback_QGraphicsRectItem_boundingRect
 func miqt_exec_callback_QGraphicsRectItem_boundingRect(self *C.QGraphicsRectItem, cb C.intptr_t) *C.QRectF {
-	gofunc, ok := cgo.Handle(cb).Value().(func(super func() *QRectF) *QRectF)
+	callbackData, ok := cgo.Handle(cb).Value().(miqtVirtualCallback_QGraphicsRectItem_boundingRect)
 	if !ok {
 		panic("miqt: callback of non-callback type (heap corruption?)")
 	}
+	gofunc := callbackData.callback
 
 	virtualReturn := gofunc((&QGraphicsRectItem{h: self}).callVirtualBase_BoundingRect)
+	if callbackData.ownsReturn && virtualReturn != nil {
+		runtime.SetFinalizer(virtualReturn, nil)
+	}
 
 	return virtualReturn.cPointer()
 
@@ -6636,10 +7211,16 @@ func (this *QGraphicsRectItem) callVirtualBase_Shape() *QPainterPath {
 	return _goptr
 
 }
+
+type miqtVirtualCallback_QGraphicsRectItem_shape struct {
+	callback   func(super func() *QPainterPath) *QPainterPath
+	ownsReturn bool
+}
+
 func (this *QGraphicsRectItem) OnShape(slot func(super func() *QPainterPath) *QPainterPath) {
 	var slotHandle C.intptr_t
 	if slot != nil {
-		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QGraphicsRectItem_shape{callback: slot}))
 	}
 	ok := C.QGraphicsRectItem_override_virtual_shape(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
@@ -6647,14 +7228,31 @@ func (this *QGraphicsRectItem) OnShape(slot func(super func() *QPainterPath) *QP
 	}
 }
 
+// OnShapeOwned installs a virtual override that transfers
+// ownership of each non-nil returned Qt value object to C++.
+func (this *QGraphicsRectItem) OnShapeOwned(slot func(super func() *QPainterPath) *QPainterPath) {
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QGraphicsRectItem_shape{callback: slot, ownsReturn: true}))
+	}
+	ok := C.QGraphicsRectItem_override_virtual_owned_shape(unsafe.Pointer(this.h), slotHandle)
+	if !ok {
+		panic("miqt: can only override virtual methods for directly constructed types")
+	}
+}
+
 //export miqt_exec_callback_QGraphicsRectItem_shape
 func miqt_exec_callback_QGraphicsRectItem_shape(self *C.QGraphicsRectItem, cb C.intptr_t) *C.QPainterPath {
-	gofunc, ok := cgo.Handle(cb).Value().(func(super func() *QPainterPath) *QPainterPath)
+	callbackData, ok := cgo.Handle(cb).Value().(miqtVirtualCallback_QGraphicsRectItem_shape)
 	if !ok {
 		panic("miqt: callback of non-callback type (heap corruption?)")
 	}
+	gofunc := callbackData.callback
 
 	virtualReturn := gofunc((&QGraphicsRectItem{h: self}).callVirtualBase_Shape)
+	if callbackData.ownsReturn && virtualReturn != nil {
+		runtime.SetFinalizer(virtualReturn, nil)
+	}
 
 	return virtualReturn.cPointer()
 
@@ -6765,10 +7363,16 @@ func (this *QGraphicsRectItem) callVirtualBase_OpaqueArea() *QPainterPath {
 	return _goptr
 
 }
+
+type miqtVirtualCallback_QGraphicsRectItem_opaqueArea struct {
+	callback   func(super func() *QPainterPath) *QPainterPath
+	ownsReturn bool
+}
+
 func (this *QGraphicsRectItem) OnOpaqueArea(slot func(super func() *QPainterPath) *QPainterPath) {
 	var slotHandle C.intptr_t
 	if slot != nil {
-		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QGraphicsRectItem_opaqueArea{callback: slot}))
 	}
 	ok := C.QGraphicsRectItem_override_virtual_opaqueArea(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
@@ -6776,14 +7380,31 @@ func (this *QGraphicsRectItem) OnOpaqueArea(slot func(super func() *QPainterPath
 	}
 }
 
+// OnOpaqueAreaOwned installs a virtual override that transfers
+// ownership of each non-nil returned Qt value object to C++.
+func (this *QGraphicsRectItem) OnOpaqueAreaOwned(slot func(super func() *QPainterPath) *QPainterPath) {
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QGraphicsRectItem_opaqueArea{callback: slot, ownsReturn: true}))
+	}
+	ok := C.QGraphicsRectItem_override_virtual_owned_opaqueArea(unsafe.Pointer(this.h), slotHandle)
+	if !ok {
+		panic("miqt: can only override virtual methods for directly constructed types")
+	}
+}
+
 //export miqt_exec_callback_QGraphicsRectItem_opaqueArea
 func miqt_exec_callback_QGraphicsRectItem_opaqueArea(self *C.QGraphicsRectItem, cb C.intptr_t) *C.QPainterPath {
-	gofunc, ok := cgo.Handle(cb).Value().(func(super func() *QPainterPath) *QPainterPath)
+	callbackData, ok := cgo.Handle(cb).Value().(miqtVirtualCallback_QGraphicsRectItem_opaqueArea)
 	if !ok {
 		panic("miqt: callback of non-callback type (heap corruption?)")
 	}
+	gofunc := callbackData.callback
 
 	virtualReturn := gofunc((&QGraphicsRectItem{h: self}).callVirtualBase_OpaqueArea)
+	if callbackData.ownsReturn && virtualReturn != nil {
+		runtime.SetFinalizer(virtualReturn, nil)
+	}
 
 	return virtualReturn.cPointer()
 
@@ -6889,10 +7510,16 @@ func (this *QGraphicsRectItem) callVirtualBase_Extension(variant *QVariant) *QVa
 	return _goptr
 
 }
+
+type miqtVirtualCallback_QGraphicsRectItem_extension struct {
+	callback   func(super func(variant *QVariant) *QVariant, variant *QVariant) *QVariant
+	ownsReturn bool
+}
+
 func (this *QGraphicsRectItem) OnExtension(slot func(super func(variant *QVariant) *QVariant, variant *QVariant) *QVariant) {
 	var slotHandle C.intptr_t
 	if slot != nil {
-		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QGraphicsRectItem_extension{callback: slot}))
 	}
 	ok := C.QGraphicsRectItem_override_virtual_extension(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
@@ -6900,17 +7527,34 @@ func (this *QGraphicsRectItem) OnExtension(slot func(super func(variant *QVarian
 	}
 }
 
+// OnExtensionOwned installs a virtual override that transfers
+// ownership of each non-nil returned Qt value object to C++.
+func (this *QGraphicsRectItem) OnExtensionOwned(slot func(super func(variant *QVariant) *QVariant, variant *QVariant) *QVariant) {
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QGraphicsRectItem_extension{callback: slot, ownsReturn: true}))
+	}
+	ok := C.QGraphicsRectItem_override_virtual_owned_extension(unsafe.Pointer(this.h), slotHandle)
+	if !ok {
+		panic("miqt: can only override virtual methods for directly constructed types")
+	}
+}
+
 //export miqt_exec_callback_QGraphicsRectItem_extension
 func miqt_exec_callback_QGraphicsRectItem_extension(self *C.QGraphicsRectItem, cb C.intptr_t, variant *C.QVariant) *C.QVariant {
-	gofunc, ok := cgo.Handle(cb).Value().(func(super func(variant *QVariant) *QVariant, variant *QVariant) *QVariant)
+	callbackData, ok := cgo.Handle(cb).Value().(miqtVirtualCallback_QGraphicsRectItem_extension)
 	if !ok {
 		panic("miqt: callback of non-callback type (heap corruption?)")
 	}
+	gofunc := callbackData.callback
 
 	// Convert all CABI parameters to Go parameters
 	slotval1 := newQVariant(variant)
 
 	virtualReturn := gofunc((&QGraphicsRectItem{h: self}).callVirtualBase_Extension, slotval1)
+	if callbackData.ownsReturn && virtualReturn != nil {
+		runtime.SetFinalizer(virtualReturn, nil)
+	}
 
 	return virtualReturn.cPointer()
 
@@ -7627,10 +8271,16 @@ func (this *QGraphicsRectItem) callVirtualBase_InputMethodQuery(query InputMetho
 	return _goptr
 
 }
+
+type miqtVirtualCallback_QGraphicsRectItem_inputMethodQuery struct {
+	callback   func(super func(query InputMethodQuery) *QVariant, query InputMethodQuery) *QVariant
+	ownsReturn bool
+}
+
 func (this *QGraphicsRectItem) OnInputMethodQuery(slot func(super func(query InputMethodQuery) *QVariant, query InputMethodQuery) *QVariant) {
 	var slotHandle C.intptr_t
 	if slot != nil {
-		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QGraphicsRectItem_inputMethodQuery{callback: slot}))
 	}
 	ok := C.QGraphicsRectItem_override_virtual_inputMethodQuery(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
@@ -7638,17 +8288,34 @@ func (this *QGraphicsRectItem) OnInputMethodQuery(slot func(super func(query Inp
 	}
 }
 
+// OnInputMethodQueryOwned installs a virtual override that transfers
+// ownership of each non-nil returned Qt value object to C++.
+func (this *QGraphicsRectItem) OnInputMethodQueryOwned(slot func(super func(query InputMethodQuery) *QVariant, query InputMethodQuery) *QVariant) {
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QGraphicsRectItem_inputMethodQuery{callback: slot, ownsReturn: true}))
+	}
+	ok := C.QGraphicsRectItem_override_virtual_owned_inputMethodQuery(unsafe.Pointer(this.h), slotHandle)
+	if !ok {
+		panic("miqt: can only override virtual methods for directly constructed types")
+	}
+}
+
 //export miqt_exec_callback_QGraphicsRectItem_inputMethodQuery
 func miqt_exec_callback_QGraphicsRectItem_inputMethodQuery(self *C.QGraphicsRectItem, cb C.intptr_t, query C.int) *C.QVariant {
-	gofunc, ok := cgo.Handle(cb).Value().(func(super func(query InputMethodQuery) *QVariant, query InputMethodQuery) *QVariant)
+	callbackData, ok := cgo.Handle(cb).Value().(miqtVirtualCallback_QGraphicsRectItem_inputMethodQuery)
 	if !ok {
 		panic("miqt: callback of non-callback type (heap corruption?)")
 	}
+	gofunc := callbackData.callback
 
 	// Convert all CABI parameters to Go parameters
 	slotval1 := (InputMethodQuery)(query)
 
 	virtualReturn := gofunc((&QGraphicsRectItem{h: self}).callVirtualBase_InputMethodQuery, slotval1)
+	if callbackData.ownsReturn && virtualReturn != nil {
+		runtime.SetFinalizer(virtualReturn, nil)
+	}
 
 	return virtualReturn.cPointer()
 
@@ -7661,10 +8328,16 @@ func (this *QGraphicsRectItem) callVirtualBase_ItemChange(change QGraphicsItem__
 	return _goptr
 
 }
+
+type miqtVirtualCallback_QGraphicsRectItem_itemChange struct {
+	callback   func(super func(change QGraphicsItem__GraphicsItemChange, value *QVariant) *QVariant, change QGraphicsItem__GraphicsItemChange, value *QVariant) *QVariant
+	ownsReturn bool
+}
+
 func (this *QGraphicsRectItem) OnItemChange(slot func(super func(change QGraphicsItem__GraphicsItemChange, value *QVariant) *QVariant, change QGraphicsItem__GraphicsItemChange, value *QVariant) *QVariant) {
 	var slotHandle C.intptr_t
 	if slot != nil {
-		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QGraphicsRectItem_itemChange{callback: slot}))
 	}
 	ok := C.QGraphicsRectItem_override_virtual_itemChange(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
@@ -7672,12 +8345,26 @@ func (this *QGraphicsRectItem) OnItemChange(slot func(super func(change QGraphic
 	}
 }
 
+// OnItemChangeOwned installs a virtual override that transfers
+// ownership of each non-nil returned Qt value object to C++.
+func (this *QGraphicsRectItem) OnItemChangeOwned(slot func(super func(change QGraphicsItem__GraphicsItemChange, value *QVariant) *QVariant, change QGraphicsItem__GraphicsItemChange, value *QVariant) *QVariant) {
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QGraphicsRectItem_itemChange{callback: slot, ownsReturn: true}))
+	}
+	ok := C.QGraphicsRectItem_override_virtual_owned_itemChange(unsafe.Pointer(this.h), slotHandle)
+	if !ok {
+		panic("miqt: can only override virtual methods for directly constructed types")
+	}
+}
+
 //export miqt_exec_callback_QGraphicsRectItem_itemChange
 func miqt_exec_callback_QGraphicsRectItem_itemChange(self *C.QGraphicsRectItem, cb C.intptr_t, change C.int, value *C.QVariant) *C.QVariant {
-	gofunc, ok := cgo.Handle(cb).Value().(func(super func(change QGraphicsItem__GraphicsItemChange, value *QVariant) *QVariant, change QGraphicsItem__GraphicsItemChange, value *QVariant) *QVariant)
+	callbackData, ok := cgo.Handle(cb).Value().(miqtVirtualCallback_QGraphicsRectItem_itemChange)
 	if !ok {
 		panic("miqt: callback of non-callback type (heap corruption?)")
 	}
+	gofunc := callbackData.callback
 
 	// Convert all CABI parameters to Go parameters
 	slotval1 := (QGraphicsItem__GraphicsItemChange)(change)
@@ -7685,6 +8372,9 @@ func miqt_exec_callback_QGraphicsRectItem_itemChange(self *C.QGraphicsRectItem, 
 	slotval2 := newQVariant(value)
 
 	virtualReturn := gofunc((&QGraphicsRectItem{h: self}).callVirtualBase_ItemChange, slotval1, slotval2)
+	if callbackData.ownsReturn && virtualReturn != nil {
+		runtime.SetFinalizer(virtualReturn, nil)
+	}
 
 	return virtualReturn.cPointer()
 
@@ -7900,10 +8590,16 @@ func (this *QGraphicsEllipseItem) callVirtualBase_BoundingRect() *QRectF {
 	return _goptr
 
 }
+
+type miqtVirtualCallback_QGraphicsEllipseItem_boundingRect struct {
+	callback   func(super func() *QRectF) *QRectF
+	ownsReturn bool
+}
+
 func (this *QGraphicsEllipseItem) OnBoundingRect(slot func(super func() *QRectF) *QRectF) {
 	var slotHandle C.intptr_t
 	if slot != nil {
-		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QGraphicsEllipseItem_boundingRect{callback: slot}))
 	}
 	ok := C.QGraphicsEllipseItem_override_virtual_boundingRect(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
@@ -7911,14 +8607,31 @@ func (this *QGraphicsEllipseItem) OnBoundingRect(slot func(super func() *QRectF)
 	}
 }
 
+// OnBoundingRectOwned installs a virtual override that transfers
+// ownership of each non-nil returned Qt value object to C++.
+func (this *QGraphicsEllipseItem) OnBoundingRectOwned(slot func(super func() *QRectF) *QRectF) {
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QGraphicsEllipseItem_boundingRect{callback: slot, ownsReturn: true}))
+	}
+	ok := C.QGraphicsEllipseItem_override_virtual_owned_boundingRect(unsafe.Pointer(this.h), slotHandle)
+	if !ok {
+		panic("miqt: can only override virtual methods for directly constructed types")
+	}
+}
+
 //export miqt_exec_callback_QGraphicsEllipseItem_boundingRect
 func miqt_exec_callback_QGraphicsEllipseItem_boundingRect(self *C.QGraphicsEllipseItem, cb C.intptr_t) *C.QRectF {
-	gofunc, ok := cgo.Handle(cb).Value().(func(super func() *QRectF) *QRectF)
+	callbackData, ok := cgo.Handle(cb).Value().(miqtVirtualCallback_QGraphicsEllipseItem_boundingRect)
 	if !ok {
 		panic("miqt: callback of non-callback type (heap corruption?)")
 	}
+	gofunc := callbackData.callback
 
 	virtualReturn := gofunc((&QGraphicsEllipseItem{h: self}).callVirtualBase_BoundingRect)
+	if callbackData.ownsReturn && virtualReturn != nil {
+		runtime.SetFinalizer(virtualReturn, nil)
+	}
 
 	return virtualReturn.cPointer()
 
@@ -7931,10 +8644,16 @@ func (this *QGraphicsEllipseItem) callVirtualBase_Shape() *QPainterPath {
 	return _goptr
 
 }
+
+type miqtVirtualCallback_QGraphicsEllipseItem_shape struct {
+	callback   func(super func() *QPainterPath) *QPainterPath
+	ownsReturn bool
+}
+
 func (this *QGraphicsEllipseItem) OnShape(slot func(super func() *QPainterPath) *QPainterPath) {
 	var slotHandle C.intptr_t
 	if slot != nil {
-		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QGraphicsEllipseItem_shape{callback: slot}))
 	}
 	ok := C.QGraphicsEllipseItem_override_virtual_shape(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
@@ -7942,14 +8661,31 @@ func (this *QGraphicsEllipseItem) OnShape(slot func(super func() *QPainterPath) 
 	}
 }
 
+// OnShapeOwned installs a virtual override that transfers
+// ownership of each non-nil returned Qt value object to C++.
+func (this *QGraphicsEllipseItem) OnShapeOwned(slot func(super func() *QPainterPath) *QPainterPath) {
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QGraphicsEllipseItem_shape{callback: slot, ownsReturn: true}))
+	}
+	ok := C.QGraphicsEllipseItem_override_virtual_owned_shape(unsafe.Pointer(this.h), slotHandle)
+	if !ok {
+		panic("miqt: can only override virtual methods for directly constructed types")
+	}
+}
+
 //export miqt_exec_callback_QGraphicsEllipseItem_shape
 func miqt_exec_callback_QGraphicsEllipseItem_shape(self *C.QGraphicsEllipseItem, cb C.intptr_t) *C.QPainterPath {
-	gofunc, ok := cgo.Handle(cb).Value().(func(super func() *QPainterPath) *QPainterPath)
+	callbackData, ok := cgo.Handle(cb).Value().(miqtVirtualCallback_QGraphicsEllipseItem_shape)
 	if !ok {
 		panic("miqt: callback of non-callback type (heap corruption?)")
 	}
+	gofunc := callbackData.callback
 
 	virtualReturn := gofunc((&QGraphicsEllipseItem{h: self}).callVirtualBase_Shape)
+	if callbackData.ownsReturn && virtualReturn != nil {
+		runtime.SetFinalizer(virtualReturn, nil)
+	}
 
 	return virtualReturn.cPointer()
 
@@ -8060,10 +8796,16 @@ func (this *QGraphicsEllipseItem) callVirtualBase_OpaqueArea() *QPainterPath {
 	return _goptr
 
 }
+
+type miqtVirtualCallback_QGraphicsEllipseItem_opaqueArea struct {
+	callback   func(super func() *QPainterPath) *QPainterPath
+	ownsReturn bool
+}
+
 func (this *QGraphicsEllipseItem) OnOpaqueArea(slot func(super func() *QPainterPath) *QPainterPath) {
 	var slotHandle C.intptr_t
 	if slot != nil {
-		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QGraphicsEllipseItem_opaqueArea{callback: slot}))
 	}
 	ok := C.QGraphicsEllipseItem_override_virtual_opaqueArea(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
@@ -8071,14 +8813,31 @@ func (this *QGraphicsEllipseItem) OnOpaqueArea(slot func(super func() *QPainterP
 	}
 }
 
+// OnOpaqueAreaOwned installs a virtual override that transfers
+// ownership of each non-nil returned Qt value object to C++.
+func (this *QGraphicsEllipseItem) OnOpaqueAreaOwned(slot func(super func() *QPainterPath) *QPainterPath) {
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QGraphicsEllipseItem_opaqueArea{callback: slot, ownsReturn: true}))
+	}
+	ok := C.QGraphicsEllipseItem_override_virtual_owned_opaqueArea(unsafe.Pointer(this.h), slotHandle)
+	if !ok {
+		panic("miqt: can only override virtual methods for directly constructed types")
+	}
+}
+
 //export miqt_exec_callback_QGraphicsEllipseItem_opaqueArea
 func miqt_exec_callback_QGraphicsEllipseItem_opaqueArea(self *C.QGraphicsEllipseItem, cb C.intptr_t) *C.QPainterPath {
-	gofunc, ok := cgo.Handle(cb).Value().(func(super func() *QPainterPath) *QPainterPath)
+	callbackData, ok := cgo.Handle(cb).Value().(miqtVirtualCallback_QGraphicsEllipseItem_opaqueArea)
 	if !ok {
 		panic("miqt: callback of non-callback type (heap corruption?)")
 	}
+	gofunc := callbackData.callback
 
 	virtualReturn := gofunc((&QGraphicsEllipseItem{h: self}).callVirtualBase_OpaqueArea)
+	if callbackData.ownsReturn && virtualReturn != nil {
+		runtime.SetFinalizer(virtualReturn, nil)
+	}
 
 	return virtualReturn.cPointer()
 
@@ -8184,10 +8943,16 @@ func (this *QGraphicsEllipseItem) callVirtualBase_Extension(variant *QVariant) *
 	return _goptr
 
 }
+
+type miqtVirtualCallback_QGraphicsEllipseItem_extension struct {
+	callback   func(super func(variant *QVariant) *QVariant, variant *QVariant) *QVariant
+	ownsReturn bool
+}
+
 func (this *QGraphicsEllipseItem) OnExtension(slot func(super func(variant *QVariant) *QVariant, variant *QVariant) *QVariant) {
 	var slotHandle C.intptr_t
 	if slot != nil {
-		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QGraphicsEllipseItem_extension{callback: slot}))
 	}
 	ok := C.QGraphicsEllipseItem_override_virtual_extension(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
@@ -8195,17 +8960,34 @@ func (this *QGraphicsEllipseItem) OnExtension(slot func(super func(variant *QVar
 	}
 }
 
+// OnExtensionOwned installs a virtual override that transfers
+// ownership of each non-nil returned Qt value object to C++.
+func (this *QGraphicsEllipseItem) OnExtensionOwned(slot func(super func(variant *QVariant) *QVariant, variant *QVariant) *QVariant) {
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QGraphicsEllipseItem_extension{callback: slot, ownsReturn: true}))
+	}
+	ok := C.QGraphicsEllipseItem_override_virtual_owned_extension(unsafe.Pointer(this.h), slotHandle)
+	if !ok {
+		panic("miqt: can only override virtual methods for directly constructed types")
+	}
+}
+
 //export miqt_exec_callback_QGraphicsEllipseItem_extension
 func miqt_exec_callback_QGraphicsEllipseItem_extension(self *C.QGraphicsEllipseItem, cb C.intptr_t, variant *C.QVariant) *C.QVariant {
-	gofunc, ok := cgo.Handle(cb).Value().(func(super func(variant *QVariant) *QVariant, variant *QVariant) *QVariant)
+	callbackData, ok := cgo.Handle(cb).Value().(miqtVirtualCallback_QGraphicsEllipseItem_extension)
 	if !ok {
 		panic("miqt: callback of non-callback type (heap corruption?)")
 	}
+	gofunc := callbackData.callback
 
 	// Convert all CABI parameters to Go parameters
 	slotval1 := newQVariant(variant)
 
 	virtualReturn := gofunc((&QGraphicsEllipseItem{h: self}).callVirtualBase_Extension, slotval1)
+	if callbackData.ownsReturn && virtualReturn != nil {
+		runtime.SetFinalizer(virtualReturn, nil)
+	}
 
 	return virtualReturn.cPointer()
 
@@ -8922,10 +9704,16 @@ func (this *QGraphicsEllipseItem) callVirtualBase_InputMethodQuery(query InputMe
 	return _goptr
 
 }
+
+type miqtVirtualCallback_QGraphicsEllipseItem_inputMethodQuery struct {
+	callback   func(super func(query InputMethodQuery) *QVariant, query InputMethodQuery) *QVariant
+	ownsReturn bool
+}
+
 func (this *QGraphicsEllipseItem) OnInputMethodQuery(slot func(super func(query InputMethodQuery) *QVariant, query InputMethodQuery) *QVariant) {
 	var slotHandle C.intptr_t
 	if slot != nil {
-		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QGraphicsEllipseItem_inputMethodQuery{callback: slot}))
 	}
 	ok := C.QGraphicsEllipseItem_override_virtual_inputMethodQuery(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
@@ -8933,17 +9721,34 @@ func (this *QGraphicsEllipseItem) OnInputMethodQuery(slot func(super func(query 
 	}
 }
 
+// OnInputMethodQueryOwned installs a virtual override that transfers
+// ownership of each non-nil returned Qt value object to C++.
+func (this *QGraphicsEllipseItem) OnInputMethodQueryOwned(slot func(super func(query InputMethodQuery) *QVariant, query InputMethodQuery) *QVariant) {
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QGraphicsEllipseItem_inputMethodQuery{callback: slot, ownsReturn: true}))
+	}
+	ok := C.QGraphicsEllipseItem_override_virtual_owned_inputMethodQuery(unsafe.Pointer(this.h), slotHandle)
+	if !ok {
+		panic("miqt: can only override virtual methods for directly constructed types")
+	}
+}
+
 //export miqt_exec_callback_QGraphicsEllipseItem_inputMethodQuery
 func miqt_exec_callback_QGraphicsEllipseItem_inputMethodQuery(self *C.QGraphicsEllipseItem, cb C.intptr_t, query C.int) *C.QVariant {
-	gofunc, ok := cgo.Handle(cb).Value().(func(super func(query InputMethodQuery) *QVariant, query InputMethodQuery) *QVariant)
+	callbackData, ok := cgo.Handle(cb).Value().(miqtVirtualCallback_QGraphicsEllipseItem_inputMethodQuery)
 	if !ok {
 		panic("miqt: callback of non-callback type (heap corruption?)")
 	}
+	gofunc := callbackData.callback
 
 	// Convert all CABI parameters to Go parameters
 	slotval1 := (InputMethodQuery)(query)
 
 	virtualReturn := gofunc((&QGraphicsEllipseItem{h: self}).callVirtualBase_InputMethodQuery, slotval1)
+	if callbackData.ownsReturn && virtualReturn != nil {
+		runtime.SetFinalizer(virtualReturn, nil)
+	}
 
 	return virtualReturn.cPointer()
 
@@ -8956,10 +9761,16 @@ func (this *QGraphicsEllipseItem) callVirtualBase_ItemChange(change QGraphicsIte
 	return _goptr
 
 }
+
+type miqtVirtualCallback_QGraphicsEllipseItem_itemChange struct {
+	callback   func(super func(change QGraphicsItem__GraphicsItemChange, value *QVariant) *QVariant, change QGraphicsItem__GraphicsItemChange, value *QVariant) *QVariant
+	ownsReturn bool
+}
+
 func (this *QGraphicsEllipseItem) OnItemChange(slot func(super func(change QGraphicsItem__GraphicsItemChange, value *QVariant) *QVariant, change QGraphicsItem__GraphicsItemChange, value *QVariant) *QVariant) {
 	var slotHandle C.intptr_t
 	if slot != nil {
-		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QGraphicsEllipseItem_itemChange{callback: slot}))
 	}
 	ok := C.QGraphicsEllipseItem_override_virtual_itemChange(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
@@ -8967,12 +9778,26 @@ func (this *QGraphicsEllipseItem) OnItemChange(slot func(super func(change QGrap
 	}
 }
 
+// OnItemChangeOwned installs a virtual override that transfers
+// ownership of each non-nil returned Qt value object to C++.
+func (this *QGraphicsEllipseItem) OnItemChangeOwned(slot func(super func(change QGraphicsItem__GraphicsItemChange, value *QVariant) *QVariant, change QGraphicsItem__GraphicsItemChange, value *QVariant) *QVariant) {
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QGraphicsEllipseItem_itemChange{callback: slot, ownsReturn: true}))
+	}
+	ok := C.QGraphicsEllipseItem_override_virtual_owned_itemChange(unsafe.Pointer(this.h), slotHandle)
+	if !ok {
+		panic("miqt: can only override virtual methods for directly constructed types")
+	}
+}
+
 //export miqt_exec_callback_QGraphicsEllipseItem_itemChange
 func miqt_exec_callback_QGraphicsEllipseItem_itemChange(self *C.QGraphicsEllipseItem, cb C.intptr_t, change C.int, value *C.QVariant) *C.QVariant {
-	gofunc, ok := cgo.Handle(cb).Value().(func(super func(change QGraphicsItem__GraphicsItemChange, value *QVariant) *QVariant, change QGraphicsItem__GraphicsItemChange, value *QVariant) *QVariant)
+	callbackData, ok := cgo.Handle(cb).Value().(miqtVirtualCallback_QGraphicsEllipseItem_itemChange)
 	if !ok {
 		panic("miqt: callback of non-callback type (heap corruption?)")
 	}
+	gofunc := callbackData.callback
 
 	// Convert all CABI parameters to Go parameters
 	slotval1 := (QGraphicsItem__GraphicsItemChange)(change)
@@ -8980,6 +9805,9 @@ func miqt_exec_callback_QGraphicsEllipseItem_itemChange(self *C.QGraphicsEllipse
 	slotval2 := newQVariant(value)
 
 	virtualReturn := gofunc((&QGraphicsEllipseItem{h: self}).callVirtualBase_ItemChange, slotval1, slotval2)
+	if callbackData.ownsReturn && virtualReturn != nil {
+		runtime.SetFinalizer(virtualReturn, nil)
+	}
 
 	return virtualReturn.cPointer()
 
@@ -9149,10 +9977,16 @@ func (this *QGraphicsPolygonItem) callVirtualBase_BoundingRect() *QRectF {
 	return _goptr
 
 }
+
+type miqtVirtualCallback_QGraphicsPolygonItem_boundingRect struct {
+	callback   func(super func() *QRectF) *QRectF
+	ownsReturn bool
+}
+
 func (this *QGraphicsPolygonItem) OnBoundingRect(slot func(super func() *QRectF) *QRectF) {
 	var slotHandle C.intptr_t
 	if slot != nil {
-		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QGraphicsPolygonItem_boundingRect{callback: slot}))
 	}
 	ok := C.QGraphicsPolygonItem_override_virtual_boundingRect(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
@@ -9160,14 +9994,31 @@ func (this *QGraphicsPolygonItem) OnBoundingRect(slot func(super func() *QRectF)
 	}
 }
 
+// OnBoundingRectOwned installs a virtual override that transfers
+// ownership of each non-nil returned Qt value object to C++.
+func (this *QGraphicsPolygonItem) OnBoundingRectOwned(slot func(super func() *QRectF) *QRectF) {
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QGraphicsPolygonItem_boundingRect{callback: slot, ownsReturn: true}))
+	}
+	ok := C.QGraphicsPolygonItem_override_virtual_owned_boundingRect(unsafe.Pointer(this.h), slotHandle)
+	if !ok {
+		panic("miqt: can only override virtual methods for directly constructed types")
+	}
+}
+
 //export miqt_exec_callback_QGraphicsPolygonItem_boundingRect
 func miqt_exec_callback_QGraphicsPolygonItem_boundingRect(self *C.QGraphicsPolygonItem, cb C.intptr_t) *C.QRectF {
-	gofunc, ok := cgo.Handle(cb).Value().(func(super func() *QRectF) *QRectF)
+	callbackData, ok := cgo.Handle(cb).Value().(miqtVirtualCallback_QGraphicsPolygonItem_boundingRect)
 	if !ok {
 		panic("miqt: callback of non-callback type (heap corruption?)")
 	}
+	gofunc := callbackData.callback
 
 	virtualReturn := gofunc((&QGraphicsPolygonItem{h: self}).callVirtualBase_BoundingRect)
+	if callbackData.ownsReturn && virtualReturn != nil {
+		runtime.SetFinalizer(virtualReturn, nil)
+	}
 
 	return virtualReturn.cPointer()
 
@@ -9180,10 +10031,16 @@ func (this *QGraphicsPolygonItem) callVirtualBase_Shape() *QPainterPath {
 	return _goptr
 
 }
+
+type miqtVirtualCallback_QGraphicsPolygonItem_shape struct {
+	callback   func(super func() *QPainterPath) *QPainterPath
+	ownsReturn bool
+}
+
 func (this *QGraphicsPolygonItem) OnShape(slot func(super func() *QPainterPath) *QPainterPath) {
 	var slotHandle C.intptr_t
 	if slot != nil {
-		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QGraphicsPolygonItem_shape{callback: slot}))
 	}
 	ok := C.QGraphicsPolygonItem_override_virtual_shape(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
@@ -9191,14 +10048,31 @@ func (this *QGraphicsPolygonItem) OnShape(slot func(super func() *QPainterPath) 
 	}
 }
 
+// OnShapeOwned installs a virtual override that transfers
+// ownership of each non-nil returned Qt value object to C++.
+func (this *QGraphicsPolygonItem) OnShapeOwned(slot func(super func() *QPainterPath) *QPainterPath) {
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QGraphicsPolygonItem_shape{callback: slot, ownsReturn: true}))
+	}
+	ok := C.QGraphicsPolygonItem_override_virtual_owned_shape(unsafe.Pointer(this.h), slotHandle)
+	if !ok {
+		panic("miqt: can only override virtual methods for directly constructed types")
+	}
+}
+
 //export miqt_exec_callback_QGraphicsPolygonItem_shape
 func miqt_exec_callback_QGraphicsPolygonItem_shape(self *C.QGraphicsPolygonItem, cb C.intptr_t) *C.QPainterPath {
-	gofunc, ok := cgo.Handle(cb).Value().(func(super func() *QPainterPath) *QPainterPath)
+	callbackData, ok := cgo.Handle(cb).Value().(miqtVirtualCallback_QGraphicsPolygonItem_shape)
 	if !ok {
 		panic("miqt: callback of non-callback type (heap corruption?)")
 	}
+	gofunc := callbackData.callback
 
 	virtualReturn := gofunc((&QGraphicsPolygonItem{h: self}).callVirtualBase_Shape)
+	if callbackData.ownsReturn && virtualReturn != nil {
+		runtime.SetFinalizer(virtualReturn, nil)
+	}
 
 	return virtualReturn.cPointer()
 
@@ -9309,10 +10183,16 @@ func (this *QGraphicsPolygonItem) callVirtualBase_OpaqueArea() *QPainterPath {
 	return _goptr
 
 }
+
+type miqtVirtualCallback_QGraphicsPolygonItem_opaqueArea struct {
+	callback   func(super func() *QPainterPath) *QPainterPath
+	ownsReturn bool
+}
+
 func (this *QGraphicsPolygonItem) OnOpaqueArea(slot func(super func() *QPainterPath) *QPainterPath) {
 	var slotHandle C.intptr_t
 	if slot != nil {
-		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QGraphicsPolygonItem_opaqueArea{callback: slot}))
 	}
 	ok := C.QGraphicsPolygonItem_override_virtual_opaqueArea(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
@@ -9320,14 +10200,31 @@ func (this *QGraphicsPolygonItem) OnOpaqueArea(slot func(super func() *QPainterP
 	}
 }
 
+// OnOpaqueAreaOwned installs a virtual override that transfers
+// ownership of each non-nil returned Qt value object to C++.
+func (this *QGraphicsPolygonItem) OnOpaqueAreaOwned(slot func(super func() *QPainterPath) *QPainterPath) {
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QGraphicsPolygonItem_opaqueArea{callback: slot, ownsReturn: true}))
+	}
+	ok := C.QGraphicsPolygonItem_override_virtual_owned_opaqueArea(unsafe.Pointer(this.h), slotHandle)
+	if !ok {
+		panic("miqt: can only override virtual methods for directly constructed types")
+	}
+}
+
 //export miqt_exec_callback_QGraphicsPolygonItem_opaqueArea
 func miqt_exec_callback_QGraphicsPolygonItem_opaqueArea(self *C.QGraphicsPolygonItem, cb C.intptr_t) *C.QPainterPath {
-	gofunc, ok := cgo.Handle(cb).Value().(func(super func() *QPainterPath) *QPainterPath)
+	callbackData, ok := cgo.Handle(cb).Value().(miqtVirtualCallback_QGraphicsPolygonItem_opaqueArea)
 	if !ok {
 		panic("miqt: callback of non-callback type (heap corruption?)")
 	}
+	gofunc := callbackData.callback
 
 	virtualReturn := gofunc((&QGraphicsPolygonItem{h: self}).callVirtualBase_OpaqueArea)
+	if callbackData.ownsReturn && virtualReturn != nil {
+		runtime.SetFinalizer(virtualReturn, nil)
+	}
 
 	return virtualReturn.cPointer()
 
@@ -9433,10 +10330,16 @@ func (this *QGraphicsPolygonItem) callVirtualBase_Extension(variant *QVariant) *
 	return _goptr
 
 }
+
+type miqtVirtualCallback_QGraphicsPolygonItem_extension struct {
+	callback   func(super func(variant *QVariant) *QVariant, variant *QVariant) *QVariant
+	ownsReturn bool
+}
+
 func (this *QGraphicsPolygonItem) OnExtension(slot func(super func(variant *QVariant) *QVariant, variant *QVariant) *QVariant) {
 	var slotHandle C.intptr_t
 	if slot != nil {
-		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QGraphicsPolygonItem_extension{callback: slot}))
 	}
 	ok := C.QGraphicsPolygonItem_override_virtual_extension(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
@@ -9444,17 +10347,34 @@ func (this *QGraphicsPolygonItem) OnExtension(slot func(super func(variant *QVar
 	}
 }
 
+// OnExtensionOwned installs a virtual override that transfers
+// ownership of each non-nil returned Qt value object to C++.
+func (this *QGraphicsPolygonItem) OnExtensionOwned(slot func(super func(variant *QVariant) *QVariant, variant *QVariant) *QVariant) {
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QGraphicsPolygonItem_extension{callback: slot, ownsReturn: true}))
+	}
+	ok := C.QGraphicsPolygonItem_override_virtual_owned_extension(unsafe.Pointer(this.h), slotHandle)
+	if !ok {
+		panic("miqt: can only override virtual methods for directly constructed types")
+	}
+}
+
 //export miqt_exec_callback_QGraphicsPolygonItem_extension
 func miqt_exec_callback_QGraphicsPolygonItem_extension(self *C.QGraphicsPolygonItem, cb C.intptr_t, variant *C.QVariant) *C.QVariant {
-	gofunc, ok := cgo.Handle(cb).Value().(func(super func(variant *QVariant) *QVariant, variant *QVariant) *QVariant)
+	callbackData, ok := cgo.Handle(cb).Value().(miqtVirtualCallback_QGraphicsPolygonItem_extension)
 	if !ok {
 		panic("miqt: callback of non-callback type (heap corruption?)")
 	}
+	gofunc := callbackData.callback
 
 	// Convert all CABI parameters to Go parameters
 	slotval1 := newQVariant(variant)
 
 	virtualReturn := gofunc((&QGraphicsPolygonItem{h: self}).callVirtualBase_Extension, slotval1)
+	if callbackData.ownsReturn && virtualReturn != nil {
+		runtime.SetFinalizer(virtualReturn, nil)
+	}
 
 	return virtualReturn.cPointer()
 
@@ -10171,10 +11091,16 @@ func (this *QGraphicsPolygonItem) callVirtualBase_InputMethodQuery(query InputMe
 	return _goptr
 
 }
+
+type miqtVirtualCallback_QGraphicsPolygonItem_inputMethodQuery struct {
+	callback   func(super func(query InputMethodQuery) *QVariant, query InputMethodQuery) *QVariant
+	ownsReturn bool
+}
+
 func (this *QGraphicsPolygonItem) OnInputMethodQuery(slot func(super func(query InputMethodQuery) *QVariant, query InputMethodQuery) *QVariant) {
 	var slotHandle C.intptr_t
 	if slot != nil {
-		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QGraphicsPolygonItem_inputMethodQuery{callback: slot}))
 	}
 	ok := C.QGraphicsPolygonItem_override_virtual_inputMethodQuery(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
@@ -10182,17 +11108,34 @@ func (this *QGraphicsPolygonItem) OnInputMethodQuery(slot func(super func(query 
 	}
 }
 
+// OnInputMethodQueryOwned installs a virtual override that transfers
+// ownership of each non-nil returned Qt value object to C++.
+func (this *QGraphicsPolygonItem) OnInputMethodQueryOwned(slot func(super func(query InputMethodQuery) *QVariant, query InputMethodQuery) *QVariant) {
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QGraphicsPolygonItem_inputMethodQuery{callback: slot, ownsReturn: true}))
+	}
+	ok := C.QGraphicsPolygonItem_override_virtual_owned_inputMethodQuery(unsafe.Pointer(this.h), slotHandle)
+	if !ok {
+		panic("miqt: can only override virtual methods for directly constructed types")
+	}
+}
+
 //export miqt_exec_callback_QGraphicsPolygonItem_inputMethodQuery
 func miqt_exec_callback_QGraphicsPolygonItem_inputMethodQuery(self *C.QGraphicsPolygonItem, cb C.intptr_t, query C.int) *C.QVariant {
-	gofunc, ok := cgo.Handle(cb).Value().(func(super func(query InputMethodQuery) *QVariant, query InputMethodQuery) *QVariant)
+	callbackData, ok := cgo.Handle(cb).Value().(miqtVirtualCallback_QGraphicsPolygonItem_inputMethodQuery)
 	if !ok {
 		panic("miqt: callback of non-callback type (heap corruption?)")
 	}
+	gofunc := callbackData.callback
 
 	// Convert all CABI parameters to Go parameters
 	slotval1 := (InputMethodQuery)(query)
 
 	virtualReturn := gofunc((&QGraphicsPolygonItem{h: self}).callVirtualBase_InputMethodQuery, slotval1)
+	if callbackData.ownsReturn && virtualReturn != nil {
+		runtime.SetFinalizer(virtualReturn, nil)
+	}
 
 	return virtualReturn.cPointer()
 
@@ -10205,10 +11148,16 @@ func (this *QGraphicsPolygonItem) callVirtualBase_ItemChange(change QGraphicsIte
 	return _goptr
 
 }
+
+type miqtVirtualCallback_QGraphicsPolygonItem_itemChange struct {
+	callback   func(super func(change QGraphicsItem__GraphicsItemChange, value *QVariant) *QVariant, change QGraphicsItem__GraphicsItemChange, value *QVariant) *QVariant
+	ownsReturn bool
+}
+
 func (this *QGraphicsPolygonItem) OnItemChange(slot func(super func(change QGraphicsItem__GraphicsItemChange, value *QVariant) *QVariant, change QGraphicsItem__GraphicsItemChange, value *QVariant) *QVariant) {
 	var slotHandle C.intptr_t
 	if slot != nil {
-		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QGraphicsPolygonItem_itemChange{callback: slot}))
 	}
 	ok := C.QGraphicsPolygonItem_override_virtual_itemChange(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
@@ -10216,12 +11165,26 @@ func (this *QGraphicsPolygonItem) OnItemChange(slot func(super func(change QGrap
 	}
 }
 
+// OnItemChangeOwned installs a virtual override that transfers
+// ownership of each non-nil returned Qt value object to C++.
+func (this *QGraphicsPolygonItem) OnItemChangeOwned(slot func(super func(change QGraphicsItem__GraphicsItemChange, value *QVariant) *QVariant, change QGraphicsItem__GraphicsItemChange, value *QVariant) *QVariant) {
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QGraphicsPolygonItem_itemChange{callback: slot, ownsReturn: true}))
+	}
+	ok := C.QGraphicsPolygonItem_override_virtual_owned_itemChange(unsafe.Pointer(this.h), slotHandle)
+	if !ok {
+		panic("miqt: can only override virtual methods for directly constructed types")
+	}
+}
+
 //export miqt_exec_callback_QGraphicsPolygonItem_itemChange
 func miqt_exec_callback_QGraphicsPolygonItem_itemChange(self *C.QGraphicsPolygonItem, cb C.intptr_t, change C.int, value *C.QVariant) *C.QVariant {
-	gofunc, ok := cgo.Handle(cb).Value().(func(super func(change QGraphicsItem__GraphicsItemChange, value *QVariant) *QVariant, change QGraphicsItem__GraphicsItemChange, value *QVariant) *QVariant)
+	callbackData, ok := cgo.Handle(cb).Value().(miqtVirtualCallback_QGraphicsPolygonItem_itemChange)
 	if !ok {
 		panic("miqt: callback of non-callback type (heap corruption?)")
 	}
+	gofunc := callbackData.callback
 
 	// Convert all CABI parameters to Go parameters
 	slotval1 := (QGraphicsItem__GraphicsItemChange)(change)
@@ -10229,6 +11192,9 @@ func miqt_exec_callback_QGraphicsPolygonItem_itemChange(self *C.QGraphicsPolygon
 	slotval2 := newQVariant(value)
 
 	virtualReturn := gofunc((&QGraphicsPolygonItem{h: self}).callVirtualBase_ItemChange, slotval1, slotval2)
+	if callbackData.ownsReturn && virtualReturn != nil {
+		runtime.SetFinalizer(virtualReturn, nil)
+	}
 
 	return virtualReturn.cPointer()
 
@@ -10438,10 +11404,16 @@ func (this *QGraphicsLineItem) callVirtualBase_BoundingRect() *QRectF {
 	return _goptr
 
 }
+
+type miqtVirtualCallback_QGraphicsLineItem_boundingRect struct {
+	callback   func(super func() *QRectF) *QRectF
+	ownsReturn bool
+}
+
 func (this *QGraphicsLineItem) OnBoundingRect(slot func(super func() *QRectF) *QRectF) {
 	var slotHandle C.intptr_t
 	if slot != nil {
-		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QGraphicsLineItem_boundingRect{callback: slot}))
 	}
 	ok := C.QGraphicsLineItem_override_virtual_boundingRect(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
@@ -10449,14 +11421,31 @@ func (this *QGraphicsLineItem) OnBoundingRect(slot func(super func() *QRectF) *Q
 	}
 }
 
+// OnBoundingRectOwned installs a virtual override that transfers
+// ownership of each non-nil returned Qt value object to C++.
+func (this *QGraphicsLineItem) OnBoundingRectOwned(slot func(super func() *QRectF) *QRectF) {
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QGraphicsLineItem_boundingRect{callback: slot, ownsReturn: true}))
+	}
+	ok := C.QGraphicsLineItem_override_virtual_owned_boundingRect(unsafe.Pointer(this.h), slotHandle)
+	if !ok {
+		panic("miqt: can only override virtual methods for directly constructed types")
+	}
+}
+
 //export miqt_exec_callback_QGraphicsLineItem_boundingRect
 func miqt_exec_callback_QGraphicsLineItem_boundingRect(self *C.QGraphicsLineItem, cb C.intptr_t) *C.QRectF {
-	gofunc, ok := cgo.Handle(cb).Value().(func(super func() *QRectF) *QRectF)
+	callbackData, ok := cgo.Handle(cb).Value().(miqtVirtualCallback_QGraphicsLineItem_boundingRect)
 	if !ok {
 		panic("miqt: callback of non-callback type (heap corruption?)")
 	}
+	gofunc := callbackData.callback
 
 	virtualReturn := gofunc((&QGraphicsLineItem{h: self}).callVirtualBase_BoundingRect)
+	if callbackData.ownsReturn && virtualReturn != nil {
+		runtime.SetFinalizer(virtualReturn, nil)
+	}
 
 	return virtualReturn.cPointer()
 
@@ -10469,10 +11458,16 @@ func (this *QGraphicsLineItem) callVirtualBase_Shape() *QPainterPath {
 	return _goptr
 
 }
+
+type miqtVirtualCallback_QGraphicsLineItem_shape struct {
+	callback   func(super func() *QPainterPath) *QPainterPath
+	ownsReturn bool
+}
+
 func (this *QGraphicsLineItem) OnShape(slot func(super func() *QPainterPath) *QPainterPath) {
 	var slotHandle C.intptr_t
 	if slot != nil {
-		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QGraphicsLineItem_shape{callback: slot}))
 	}
 	ok := C.QGraphicsLineItem_override_virtual_shape(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
@@ -10480,14 +11475,31 @@ func (this *QGraphicsLineItem) OnShape(slot func(super func() *QPainterPath) *QP
 	}
 }
 
+// OnShapeOwned installs a virtual override that transfers
+// ownership of each non-nil returned Qt value object to C++.
+func (this *QGraphicsLineItem) OnShapeOwned(slot func(super func() *QPainterPath) *QPainterPath) {
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QGraphicsLineItem_shape{callback: slot, ownsReturn: true}))
+	}
+	ok := C.QGraphicsLineItem_override_virtual_owned_shape(unsafe.Pointer(this.h), slotHandle)
+	if !ok {
+		panic("miqt: can only override virtual methods for directly constructed types")
+	}
+}
+
 //export miqt_exec_callback_QGraphicsLineItem_shape
 func miqt_exec_callback_QGraphicsLineItem_shape(self *C.QGraphicsLineItem, cb C.intptr_t) *C.QPainterPath {
-	gofunc, ok := cgo.Handle(cb).Value().(func(super func() *QPainterPath) *QPainterPath)
+	callbackData, ok := cgo.Handle(cb).Value().(miqtVirtualCallback_QGraphicsLineItem_shape)
 	if !ok {
 		panic("miqt: callback of non-callback type (heap corruption?)")
 	}
+	gofunc := callbackData.callback
 
 	virtualReturn := gofunc((&QGraphicsLineItem{h: self}).callVirtualBase_Shape)
+	if callbackData.ownsReturn && virtualReturn != nil {
+		runtime.SetFinalizer(virtualReturn, nil)
+	}
 
 	return virtualReturn.cPointer()
 
@@ -10598,10 +11610,16 @@ func (this *QGraphicsLineItem) callVirtualBase_OpaqueArea() *QPainterPath {
 	return _goptr
 
 }
+
+type miqtVirtualCallback_QGraphicsLineItem_opaqueArea struct {
+	callback   func(super func() *QPainterPath) *QPainterPath
+	ownsReturn bool
+}
+
 func (this *QGraphicsLineItem) OnOpaqueArea(slot func(super func() *QPainterPath) *QPainterPath) {
 	var slotHandle C.intptr_t
 	if slot != nil {
-		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QGraphicsLineItem_opaqueArea{callback: slot}))
 	}
 	ok := C.QGraphicsLineItem_override_virtual_opaqueArea(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
@@ -10609,14 +11627,31 @@ func (this *QGraphicsLineItem) OnOpaqueArea(slot func(super func() *QPainterPath
 	}
 }
 
+// OnOpaqueAreaOwned installs a virtual override that transfers
+// ownership of each non-nil returned Qt value object to C++.
+func (this *QGraphicsLineItem) OnOpaqueAreaOwned(slot func(super func() *QPainterPath) *QPainterPath) {
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QGraphicsLineItem_opaqueArea{callback: slot, ownsReturn: true}))
+	}
+	ok := C.QGraphicsLineItem_override_virtual_owned_opaqueArea(unsafe.Pointer(this.h), slotHandle)
+	if !ok {
+		panic("miqt: can only override virtual methods for directly constructed types")
+	}
+}
+
 //export miqt_exec_callback_QGraphicsLineItem_opaqueArea
 func miqt_exec_callback_QGraphicsLineItem_opaqueArea(self *C.QGraphicsLineItem, cb C.intptr_t) *C.QPainterPath {
-	gofunc, ok := cgo.Handle(cb).Value().(func(super func() *QPainterPath) *QPainterPath)
+	callbackData, ok := cgo.Handle(cb).Value().(miqtVirtualCallback_QGraphicsLineItem_opaqueArea)
 	if !ok {
 		panic("miqt: callback of non-callback type (heap corruption?)")
 	}
+	gofunc := callbackData.callback
 
 	virtualReturn := gofunc((&QGraphicsLineItem{h: self}).callVirtualBase_OpaqueArea)
+	if callbackData.ownsReturn && virtualReturn != nil {
+		runtime.SetFinalizer(virtualReturn, nil)
+	}
 
 	return virtualReturn.cPointer()
 
@@ -10722,10 +11757,16 @@ func (this *QGraphicsLineItem) callVirtualBase_Extension(variant *QVariant) *QVa
 	return _goptr
 
 }
+
+type miqtVirtualCallback_QGraphicsLineItem_extension struct {
+	callback   func(super func(variant *QVariant) *QVariant, variant *QVariant) *QVariant
+	ownsReturn bool
+}
+
 func (this *QGraphicsLineItem) OnExtension(slot func(super func(variant *QVariant) *QVariant, variant *QVariant) *QVariant) {
 	var slotHandle C.intptr_t
 	if slot != nil {
-		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QGraphicsLineItem_extension{callback: slot}))
 	}
 	ok := C.QGraphicsLineItem_override_virtual_extension(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
@@ -10733,17 +11774,34 @@ func (this *QGraphicsLineItem) OnExtension(slot func(super func(variant *QVarian
 	}
 }
 
+// OnExtensionOwned installs a virtual override that transfers
+// ownership of each non-nil returned Qt value object to C++.
+func (this *QGraphicsLineItem) OnExtensionOwned(slot func(super func(variant *QVariant) *QVariant, variant *QVariant) *QVariant) {
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QGraphicsLineItem_extension{callback: slot, ownsReturn: true}))
+	}
+	ok := C.QGraphicsLineItem_override_virtual_owned_extension(unsafe.Pointer(this.h), slotHandle)
+	if !ok {
+		panic("miqt: can only override virtual methods for directly constructed types")
+	}
+}
+
 //export miqt_exec_callback_QGraphicsLineItem_extension
 func miqt_exec_callback_QGraphicsLineItem_extension(self *C.QGraphicsLineItem, cb C.intptr_t, variant *C.QVariant) *C.QVariant {
-	gofunc, ok := cgo.Handle(cb).Value().(func(super func(variant *QVariant) *QVariant, variant *QVariant) *QVariant)
+	callbackData, ok := cgo.Handle(cb).Value().(miqtVirtualCallback_QGraphicsLineItem_extension)
 	if !ok {
 		panic("miqt: callback of non-callback type (heap corruption?)")
 	}
+	gofunc := callbackData.callback
 
 	// Convert all CABI parameters to Go parameters
 	slotval1 := newQVariant(variant)
 
 	virtualReturn := gofunc((&QGraphicsLineItem{h: self}).callVirtualBase_Extension, slotval1)
+	if callbackData.ownsReturn && virtualReturn != nil {
+		runtime.SetFinalizer(virtualReturn, nil)
+	}
 
 	return virtualReturn.cPointer()
 
@@ -11460,10 +12518,16 @@ func (this *QGraphicsLineItem) callVirtualBase_InputMethodQuery(query InputMetho
 	return _goptr
 
 }
+
+type miqtVirtualCallback_QGraphicsLineItem_inputMethodQuery struct {
+	callback   func(super func(query InputMethodQuery) *QVariant, query InputMethodQuery) *QVariant
+	ownsReturn bool
+}
+
 func (this *QGraphicsLineItem) OnInputMethodQuery(slot func(super func(query InputMethodQuery) *QVariant, query InputMethodQuery) *QVariant) {
 	var slotHandle C.intptr_t
 	if slot != nil {
-		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QGraphicsLineItem_inputMethodQuery{callback: slot}))
 	}
 	ok := C.QGraphicsLineItem_override_virtual_inputMethodQuery(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
@@ -11471,17 +12535,34 @@ func (this *QGraphicsLineItem) OnInputMethodQuery(slot func(super func(query Inp
 	}
 }
 
+// OnInputMethodQueryOwned installs a virtual override that transfers
+// ownership of each non-nil returned Qt value object to C++.
+func (this *QGraphicsLineItem) OnInputMethodQueryOwned(slot func(super func(query InputMethodQuery) *QVariant, query InputMethodQuery) *QVariant) {
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QGraphicsLineItem_inputMethodQuery{callback: slot, ownsReturn: true}))
+	}
+	ok := C.QGraphicsLineItem_override_virtual_owned_inputMethodQuery(unsafe.Pointer(this.h), slotHandle)
+	if !ok {
+		panic("miqt: can only override virtual methods for directly constructed types")
+	}
+}
+
 //export miqt_exec_callback_QGraphicsLineItem_inputMethodQuery
 func miqt_exec_callback_QGraphicsLineItem_inputMethodQuery(self *C.QGraphicsLineItem, cb C.intptr_t, query C.int) *C.QVariant {
-	gofunc, ok := cgo.Handle(cb).Value().(func(super func(query InputMethodQuery) *QVariant, query InputMethodQuery) *QVariant)
+	callbackData, ok := cgo.Handle(cb).Value().(miqtVirtualCallback_QGraphicsLineItem_inputMethodQuery)
 	if !ok {
 		panic("miqt: callback of non-callback type (heap corruption?)")
 	}
+	gofunc := callbackData.callback
 
 	// Convert all CABI parameters to Go parameters
 	slotval1 := (InputMethodQuery)(query)
 
 	virtualReturn := gofunc((&QGraphicsLineItem{h: self}).callVirtualBase_InputMethodQuery, slotval1)
+	if callbackData.ownsReturn && virtualReturn != nil {
+		runtime.SetFinalizer(virtualReturn, nil)
+	}
 
 	return virtualReturn.cPointer()
 
@@ -11494,10 +12575,16 @@ func (this *QGraphicsLineItem) callVirtualBase_ItemChange(change QGraphicsItem__
 	return _goptr
 
 }
+
+type miqtVirtualCallback_QGraphicsLineItem_itemChange struct {
+	callback   func(super func(change QGraphicsItem__GraphicsItemChange, value *QVariant) *QVariant, change QGraphicsItem__GraphicsItemChange, value *QVariant) *QVariant
+	ownsReturn bool
+}
+
 func (this *QGraphicsLineItem) OnItemChange(slot func(super func(change QGraphicsItem__GraphicsItemChange, value *QVariant) *QVariant, change QGraphicsItem__GraphicsItemChange, value *QVariant) *QVariant) {
 	var slotHandle C.intptr_t
 	if slot != nil {
-		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QGraphicsLineItem_itemChange{callback: slot}))
 	}
 	ok := C.QGraphicsLineItem_override_virtual_itemChange(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
@@ -11505,12 +12592,26 @@ func (this *QGraphicsLineItem) OnItemChange(slot func(super func(change QGraphic
 	}
 }
 
+// OnItemChangeOwned installs a virtual override that transfers
+// ownership of each non-nil returned Qt value object to C++.
+func (this *QGraphicsLineItem) OnItemChangeOwned(slot func(super func(change QGraphicsItem__GraphicsItemChange, value *QVariant) *QVariant, change QGraphicsItem__GraphicsItemChange, value *QVariant) *QVariant) {
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QGraphicsLineItem_itemChange{callback: slot, ownsReturn: true}))
+	}
+	ok := C.QGraphicsLineItem_override_virtual_owned_itemChange(unsafe.Pointer(this.h), slotHandle)
+	if !ok {
+		panic("miqt: can only override virtual methods for directly constructed types")
+	}
+}
+
 //export miqt_exec_callback_QGraphicsLineItem_itemChange
 func miqt_exec_callback_QGraphicsLineItem_itemChange(self *C.QGraphicsLineItem, cb C.intptr_t, change C.int, value *C.QVariant) *C.QVariant {
-	gofunc, ok := cgo.Handle(cb).Value().(func(super func(change QGraphicsItem__GraphicsItemChange, value *QVariant) *QVariant, change QGraphicsItem__GraphicsItemChange, value *QVariant) *QVariant)
+	callbackData, ok := cgo.Handle(cb).Value().(miqtVirtualCallback_QGraphicsLineItem_itemChange)
 	if !ok {
 		panic("miqt: callback of non-callback type (heap corruption?)")
 	}
+	gofunc := callbackData.callback
 
 	// Convert all CABI parameters to Go parameters
 	slotval1 := (QGraphicsItem__GraphicsItemChange)(change)
@@ -11518,6 +12619,9 @@ func miqt_exec_callback_QGraphicsLineItem_itemChange(self *C.QGraphicsLineItem, 
 	slotval2 := newQVariant(value)
 
 	virtualReturn := gofunc((&QGraphicsLineItem{h: self}).callVirtualBase_ItemChange, slotval1, slotval2)
+	if callbackData.ownsReturn && virtualReturn != nil {
+		runtime.SetFinalizer(virtualReturn, nil)
+	}
 
 	return virtualReturn.cPointer()
 
@@ -11731,10 +12835,16 @@ func (this *QGraphicsPixmapItem) callVirtualBase_BoundingRect() *QRectF {
 	return _goptr
 
 }
+
+type miqtVirtualCallback_QGraphicsPixmapItem_boundingRect struct {
+	callback   func(super func() *QRectF) *QRectF
+	ownsReturn bool
+}
+
 func (this *QGraphicsPixmapItem) OnBoundingRect(slot func(super func() *QRectF) *QRectF) {
 	var slotHandle C.intptr_t
 	if slot != nil {
-		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QGraphicsPixmapItem_boundingRect{callback: slot}))
 	}
 	ok := C.QGraphicsPixmapItem_override_virtual_boundingRect(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
@@ -11742,14 +12852,31 @@ func (this *QGraphicsPixmapItem) OnBoundingRect(slot func(super func() *QRectF) 
 	}
 }
 
+// OnBoundingRectOwned installs a virtual override that transfers
+// ownership of each non-nil returned Qt value object to C++.
+func (this *QGraphicsPixmapItem) OnBoundingRectOwned(slot func(super func() *QRectF) *QRectF) {
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QGraphicsPixmapItem_boundingRect{callback: slot, ownsReturn: true}))
+	}
+	ok := C.QGraphicsPixmapItem_override_virtual_owned_boundingRect(unsafe.Pointer(this.h), slotHandle)
+	if !ok {
+		panic("miqt: can only override virtual methods for directly constructed types")
+	}
+}
+
 //export miqt_exec_callback_QGraphicsPixmapItem_boundingRect
 func miqt_exec_callback_QGraphicsPixmapItem_boundingRect(self *C.QGraphicsPixmapItem, cb C.intptr_t) *C.QRectF {
-	gofunc, ok := cgo.Handle(cb).Value().(func(super func() *QRectF) *QRectF)
+	callbackData, ok := cgo.Handle(cb).Value().(miqtVirtualCallback_QGraphicsPixmapItem_boundingRect)
 	if !ok {
 		panic("miqt: callback of non-callback type (heap corruption?)")
 	}
+	gofunc := callbackData.callback
 
 	virtualReturn := gofunc((&QGraphicsPixmapItem{h: self}).callVirtualBase_BoundingRect)
+	if callbackData.ownsReturn && virtualReturn != nil {
+		runtime.SetFinalizer(virtualReturn, nil)
+	}
 
 	return virtualReturn.cPointer()
 
@@ -11762,10 +12889,16 @@ func (this *QGraphicsPixmapItem) callVirtualBase_Shape() *QPainterPath {
 	return _goptr
 
 }
+
+type miqtVirtualCallback_QGraphicsPixmapItem_shape struct {
+	callback   func(super func() *QPainterPath) *QPainterPath
+	ownsReturn bool
+}
+
 func (this *QGraphicsPixmapItem) OnShape(slot func(super func() *QPainterPath) *QPainterPath) {
 	var slotHandle C.intptr_t
 	if slot != nil {
-		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QGraphicsPixmapItem_shape{callback: slot}))
 	}
 	ok := C.QGraphicsPixmapItem_override_virtual_shape(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
@@ -11773,14 +12906,31 @@ func (this *QGraphicsPixmapItem) OnShape(slot func(super func() *QPainterPath) *
 	}
 }
 
+// OnShapeOwned installs a virtual override that transfers
+// ownership of each non-nil returned Qt value object to C++.
+func (this *QGraphicsPixmapItem) OnShapeOwned(slot func(super func() *QPainterPath) *QPainterPath) {
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QGraphicsPixmapItem_shape{callback: slot, ownsReturn: true}))
+	}
+	ok := C.QGraphicsPixmapItem_override_virtual_owned_shape(unsafe.Pointer(this.h), slotHandle)
+	if !ok {
+		panic("miqt: can only override virtual methods for directly constructed types")
+	}
+}
+
 //export miqt_exec_callback_QGraphicsPixmapItem_shape
 func miqt_exec_callback_QGraphicsPixmapItem_shape(self *C.QGraphicsPixmapItem, cb C.intptr_t) *C.QPainterPath {
-	gofunc, ok := cgo.Handle(cb).Value().(func(super func() *QPainterPath) *QPainterPath)
+	callbackData, ok := cgo.Handle(cb).Value().(miqtVirtualCallback_QGraphicsPixmapItem_shape)
 	if !ok {
 		panic("miqt: callback of non-callback type (heap corruption?)")
 	}
+	gofunc := callbackData.callback
 
 	virtualReturn := gofunc((&QGraphicsPixmapItem{h: self}).callVirtualBase_Shape)
+	if callbackData.ownsReturn && virtualReturn != nil {
+		runtime.SetFinalizer(virtualReturn, nil)
+	}
 
 	return virtualReturn.cPointer()
 
@@ -11891,10 +13041,16 @@ func (this *QGraphicsPixmapItem) callVirtualBase_OpaqueArea() *QPainterPath {
 	return _goptr
 
 }
+
+type miqtVirtualCallback_QGraphicsPixmapItem_opaqueArea struct {
+	callback   func(super func() *QPainterPath) *QPainterPath
+	ownsReturn bool
+}
+
 func (this *QGraphicsPixmapItem) OnOpaqueArea(slot func(super func() *QPainterPath) *QPainterPath) {
 	var slotHandle C.intptr_t
 	if slot != nil {
-		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QGraphicsPixmapItem_opaqueArea{callback: slot}))
 	}
 	ok := C.QGraphicsPixmapItem_override_virtual_opaqueArea(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
@@ -11902,14 +13058,31 @@ func (this *QGraphicsPixmapItem) OnOpaqueArea(slot func(super func() *QPainterPa
 	}
 }
 
+// OnOpaqueAreaOwned installs a virtual override that transfers
+// ownership of each non-nil returned Qt value object to C++.
+func (this *QGraphicsPixmapItem) OnOpaqueAreaOwned(slot func(super func() *QPainterPath) *QPainterPath) {
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QGraphicsPixmapItem_opaqueArea{callback: slot, ownsReturn: true}))
+	}
+	ok := C.QGraphicsPixmapItem_override_virtual_owned_opaqueArea(unsafe.Pointer(this.h), slotHandle)
+	if !ok {
+		panic("miqt: can only override virtual methods for directly constructed types")
+	}
+}
+
 //export miqt_exec_callback_QGraphicsPixmapItem_opaqueArea
 func miqt_exec_callback_QGraphicsPixmapItem_opaqueArea(self *C.QGraphicsPixmapItem, cb C.intptr_t) *C.QPainterPath {
-	gofunc, ok := cgo.Handle(cb).Value().(func(super func() *QPainterPath) *QPainterPath)
+	callbackData, ok := cgo.Handle(cb).Value().(miqtVirtualCallback_QGraphicsPixmapItem_opaqueArea)
 	if !ok {
 		panic("miqt: callback of non-callback type (heap corruption?)")
 	}
+	gofunc := callbackData.callback
 
 	virtualReturn := gofunc((&QGraphicsPixmapItem{h: self}).callVirtualBase_OpaqueArea)
+	if callbackData.ownsReturn && virtualReturn != nil {
+		runtime.SetFinalizer(virtualReturn, nil)
+	}
 
 	return virtualReturn.cPointer()
 
@@ -12015,10 +13188,16 @@ func (this *QGraphicsPixmapItem) callVirtualBase_Extension(variant *QVariant) *Q
 	return _goptr
 
 }
+
+type miqtVirtualCallback_QGraphicsPixmapItem_extension struct {
+	callback   func(super func(variant *QVariant) *QVariant, variant *QVariant) *QVariant
+	ownsReturn bool
+}
+
 func (this *QGraphicsPixmapItem) OnExtension(slot func(super func(variant *QVariant) *QVariant, variant *QVariant) *QVariant) {
 	var slotHandle C.intptr_t
 	if slot != nil {
-		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QGraphicsPixmapItem_extension{callback: slot}))
 	}
 	ok := C.QGraphicsPixmapItem_override_virtual_extension(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
@@ -12026,17 +13205,34 @@ func (this *QGraphicsPixmapItem) OnExtension(slot func(super func(variant *QVari
 	}
 }
 
+// OnExtensionOwned installs a virtual override that transfers
+// ownership of each non-nil returned Qt value object to C++.
+func (this *QGraphicsPixmapItem) OnExtensionOwned(slot func(super func(variant *QVariant) *QVariant, variant *QVariant) *QVariant) {
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QGraphicsPixmapItem_extension{callback: slot, ownsReturn: true}))
+	}
+	ok := C.QGraphicsPixmapItem_override_virtual_owned_extension(unsafe.Pointer(this.h), slotHandle)
+	if !ok {
+		panic("miqt: can only override virtual methods for directly constructed types")
+	}
+}
+
 //export miqt_exec_callback_QGraphicsPixmapItem_extension
 func miqt_exec_callback_QGraphicsPixmapItem_extension(self *C.QGraphicsPixmapItem, cb C.intptr_t, variant *C.QVariant) *C.QVariant {
-	gofunc, ok := cgo.Handle(cb).Value().(func(super func(variant *QVariant) *QVariant, variant *QVariant) *QVariant)
+	callbackData, ok := cgo.Handle(cb).Value().(miqtVirtualCallback_QGraphicsPixmapItem_extension)
 	if !ok {
 		panic("miqt: callback of non-callback type (heap corruption?)")
 	}
+	gofunc := callbackData.callback
 
 	// Convert all CABI parameters to Go parameters
 	slotval1 := newQVariant(variant)
 
 	virtualReturn := gofunc((&QGraphicsPixmapItem{h: self}).callVirtualBase_Extension, slotval1)
+	if callbackData.ownsReturn && virtualReturn != nil {
+		runtime.SetFinalizer(virtualReturn, nil)
+	}
 
 	return virtualReturn.cPointer()
 
@@ -12753,10 +13949,16 @@ func (this *QGraphicsPixmapItem) callVirtualBase_InputMethodQuery(query InputMet
 	return _goptr
 
 }
+
+type miqtVirtualCallback_QGraphicsPixmapItem_inputMethodQuery struct {
+	callback   func(super func(query InputMethodQuery) *QVariant, query InputMethodQuery) *QVariant
+	ownsReturn bool
+}
+
 func (this *QGraphicsPixmapItem) OnInputMethodQuery(slot func(super func(query InputMethodQuery) *QVariant, query InputMethodQuery) *QVariant) {
 	var slotHandle C.intptr_t
 	if slot != nil {
-		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QGraphicsPixmapItem_inputMethodQuery{callback: slot}))
 	}
 	ok := C.QGraphicsPixmapItem_override_virtual_inputMethodQuery(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
@@ -12764,17 +13966,34 @@ func (this *QGraphicsPixmapItem) OnInputMethodQuery(slot func(super func(query I
 	}
 }
 
+// OnInputMethodQueryOwned installs a virtual override that transfers
+// ownership of each non-nil returned Qt value object to C++.
+func (this *QGraphicsPixmapItem) OnInputMethodQueryOwned(slot func(super func(query InputMethodQuery) *QVariant, query InputMethodQuery) *QVariant) {
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QGraphicsPixmapItem_inputMethodQuery{callback: slot, ownsReturn: true}))
+	}
+	ok := C.QGraphicsPixmapItem_override_virtual_owned_inputMethodQuery(unsafe.Pointer(this.h), slotHandle)
+	if !ok {
+		panic("miqt: can only override virtual methods for directly constructed types")
+	}
+}
+
 //export miqt_exec_callback_QGraphicsPixmapItem_inputMethodQuery
 func miqt_exec_callback_QGraphicsPixmapItem_inputMethodQuery(self *C.QGraphicsPixmapItem, cb C.intptr_t, query C.int) *C.QVariant {
-	gofunc, ok := cgo.Handle(cb).Value().(func(super func(query InputMethodQuery) *QVariant, query InputMethodQuery) *QVariant)
+	callbackData, ok := cgo.Handle(cb).Value().(miqtVirtualCallback_QGraphicsPixmapItem_inputMethodQuery)
 	if !ok {
 		panic("miqt: callback of non-callback type (heap corruption?)")
 	}
+	gofunc := callbackData.callback
 
 	// Convert all CABI parameters to Go parameters
 	slotval1 := (InputMethodQuery)(query)
 
 	virtualReturn := gofunc((&QGraphicsPixmapItem{h: self}).callVirtualBase_InputMethodQuery, slotval1)
+	if callbackData.ownsReturn && virtualReturn != nil {
+		runtime.SetFinalizer(virtualReturn, nil)
+	}
 
 	return virtualReturn.cPointer()
 
@@ -12787,10 +14006,16 @@ func (this *QGraphicsPixmapItem) callVirtualBase_ItemChange(change QGraphicsItem
 	return _goptr
 
 }
+
+type miqtVirtualCallback_QGraphicsPixmapItem_itemChange struct {
+	callback   func(super func(change QGraphicsItem__GraphicsItemChange, value *QVariant) *QVariant, change QGraphicsItem__GraphicsItemChange, value *QVariant) *QVariant
+	ownsReturn bool
+}
+
 func (this *QGraphicsPixmapItem) OnItemChange(slot func(super func(change QGraphicsItem__GraphicsItemChange, value *QVariant) *QVariant, change QGraphicsItem__GraphicsItemChange, value *QVariant) *QVariant) {
 	var slotHandle C.intptr_t
 	if slot != nil {
-		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QGraphicsPixmapItem_itemChange{callback: slot}))
 	}
 	ok := C.QGraphicsPixmapItem_override_virtual_itemChange(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
@@ -12798,12 +14023,26 @@ func (this *QGraphicsPixmapItem) OnItemChange(slot func(super func(change QGraph
 	}
 }
 
+// OnItemChangeOwned installs a virtual override that transfers
+// ownership of each non-nil returned Qt value object to C++.
+func (this *QGraphicsPixmapItem) OnItemChangeOwned(slot func(super func(change QGraphicsItem__GraphicsItemChange, value *QVariant) *QVariant, change QGraphicsItem__GraphicsItemChange, value *QVariant) *QVariant) {
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QGraphicsPixmapItem_itemChange{callback: slot, ownsReturn: true}))
+	}
+	ok := C.QGraphicsPixmapItem_override_virtual_owned_itemChange(unsafe.Pointer(this.h), slotHandle)
+	if !ok {
+		panic("miqt: can only override virtual methods for directly constructed types")
+	}
+}
+
 //export miqt_exec_callback_QGraphicsPixmapItem_itemChange
 func miqt_exec_callback_QGraphicsPixmapItem_itemChange(self *C.QGraphicsPixmapItem, cb C.intptr_t, change C.int, value *C.QVariant) *C.QVariant {
-	gofunc, ok := cgo.Handle(cb).Value().(func(super func(change QGraphicsItem__GraphicsItemChange, value *QVariant) *QVariant, change QGraphicsItem__GraphicsItemChange, value *QVariant) *QVariant)
+	callbackData, ok := cgo.Handle(cb).Value().(miqtVirtualCallback_QGraphicsPixmapItem_itemChange)
 	if !ok {
 		panic("miqt: callback of non-callback type (heap corruption?)")
 	}
+	gofunc := callbackData.callback
 
 	// Convert all CABI parameters to Go parameters
 	slotval1 := (QGraphicsItem__GraphicsItemChange)(change)
@@ -12811,6 +14050,9 @@ func miqt_exec_callback_QGraphicsPixmapItem_itemChange(self *C.QGraphicsPixmapIt
 	slotval2 := newQVariant(value)
 
 	virtualReturn := gofunc((&QGraphicsPixmapItem{h: self}).callVirtualBase_ItemChange, slotval1, slotval2)
+	if callbackData.ownsReturn && virtualReturn != nil {
+		runtime.SetFinalizer(virtualReturn, nil)
+	}
 
 	return virtualReturn.cPointer()
 
@@ -13253,10 +14495,16 @@ func (this *QGraphicsTextItem) callVirtualBase_BoundingRect() *QRectF {
 	return _goptr
 
 }
+
+type miqtVirtualCallback_QGraphicsTextItem_boundingRect struct {
+	callback   func(super func() *QRectF) *QRectF
+	ownsReturn bool
+}
+
 func (this *QGraphicsTextItem) OnBoundingRect(slot func(super func() *QRectF) *QRectF) {
 	var slotHandle C.intptr_t
 	if slot != nil {
-		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QGraphicsTextItem_boundingRect{callback: slot}))
 	}
 	ok := C.QGraphicsTextItem_override_virtual_boundingRect(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
@@ -13264,14 +14512,31 @@ func (this *QGraphicsTextItem) OnBoundingRect(slot func(super func() *QRectF) *Q
 	}
 }
 
+// OnBoundingRectOwned installs a virtual override that transfers
+// ownership of each non-nil returned Qt value object to C++.
+func (this *QGraphicsTextItem) OnBoundingRectOwned(slot func(super func() *QRectF) *QRectF) {
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QGraphicsTextItem_boundingRect{callback: slot, ownsReturn: true}))
+	}
+	ok := C.QGraphicsTextItem_override_virtual_owned_boundingRect(unsafe.Pointer(this.h), slotHandle)
+	if !ok {
+		panic("miqt: can only override virtual methods for directly constructed types")
+	}
+}
+
 //export miqt_exec_callback_QGraphicsTextItem_boundingRect
 func miqt_exec_callback_QGraphicsTextItem_boundingRect(self *C.QGraphicsTextItem, cb C.intptr_t) *C.QRectF {
-	gofunc, ok := cgo.Handle(cb).Value().(func(super func() *QRectF) *QRectF)
+	callbackData, ok := cgo.Handle(cb).Value().(miqtVirtualCallback_QGraphicsTextItem_boundingRect)
 	if !ok {
 		panic("miqt: callback of non-callback type (heap corruption?)")
 	}
+	gofunc := callbackData.callback
 
 	virtualReturn := gofunc((&QGraphicsTextItem{h: self}).callVirtualBase_BoundingRect)
+	if callbackData.ownsReturn && virtualReturn != nil {
+		runtime.SetFinalizer(virtualReturn, nil)
+	}
 
 	return virtualReturn.cPointer()
 
@@ -13284,10 +14549,16 @@ func (this *QGraphicsTextItem) callVirtualBase_Shape() *QPainterPath {
 	return _goptr
 
 }
+
+type miqtVirtualCallback_QGraphicsTextItem_shape struct {
+	callback   func(super func() *QPainterPath) *QPainterPath
+	ownsReturn bool
+}
+
 func (this *QGraphicsTextItem) OnShape(slot func(super func() *QPainterPath) *QPainterPath) {
 	var slotHandle C.intptr_t
 	if slot != nil {
-		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QGraphicsTextItem_shape{callback: slot}))
 	}
 	ok := C.QGraphicsTextItem_override_virtual_shape(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
@@ -13295,14 +14566,31 @@ func (this *QGraphicsTextItem) OnShape(slot func(super func() *QPainterPath) *QP
 	}
 }
 
+// OnShapeOwned installs a virtual override that transfers
+// ownership of each non-nil returned Qt value object to C++.
+func (this *QGraphicsTextItem) OnShapeOwned(slot func(super func() *QPainterPath) *QPainterPath) {
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QGraphicsTextItem_shape{callback: slot, ownsReturn: true}))
+	}
+	ok := C.QGraphicsTextItem_override_virtual_owned_shape(unsafe.Pointer(this.h), slotHandle)
+	if !ok {
+		panic("miqt: can only override virtual methods for directly constructed types")
+	}
+}
+
 //export miqt_exec_callback_QGraphicsTextItem_shape
 func miqt_exec_callback_QGraphicsTextItem_shape(self *C.QGraphicsTextItem, cb C.intptr_t) *C.QPainterPath {
-	gofunc, ok := cgo.Handle(cb).Value().(func(super func() *QPainterPath) *QPainterPath)
+	callbackData, ok := cgo.Handle(cb).Value().(miqtVirtualCallback_QGraphicsTextItem_shape)
 	if !ok {
 		panic("miqt: callback of non-callback type (heap corruption?)")
 	}
+	gofunc := callbackData.callback
 
 	virtualReturn := gofunc((&QGraphicsTextItem{h: self}).callVirtualBase_Shape)
+	if callbackData.ownsReturn && virtualReturn != nil {
+		runtime.SetFinalizer(virtualReturn, nil)
+	}
 
 	return virtualReturn.cPointer()
 
@@ -13413,10 +14701,16 @@ func (this *QGraphicsTextItem) callVirtualBase_OpaqueArea() *QPainterPath {
 	return _goptr
 
 }
+
+type miqtVirtualCallback_QGraphicsTextItem_opaqueArea struct {
+	callback   func(super func() *QPainterPath) *QPainterPath
+	ownsReturn bool
+}
+
 func (this *QGraphicsTextItem) OnOpaqueArea(slot func(super func() *QPainterPath) *QPainterPath) {
 	var slotHandle C.intptr_t
 	if slot != nil {
-		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QGraphicsTextItem_opaqueArea{callback: slot}))
 	}
 	ok := C.QGraphicsTextItem_override_virtual_opaqueArea(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
@@ -13424,14 +14718,31 @@ func (this *QGraphicsTextItem) OnOpaqueArea(slot func(super func() *QPainterPath
 	}
 }
 
+// OnOpaqueAreaOwned installs a virtual override that transfers
+// ownership of each non-nil returned Qt value object to C++.
+func (this *QGraphicsTextItem) OnOpaqueAreaOwned(slot func(super func() *QPainterPath) *QPainterPath) {
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QGraphicsTextItem_opaqueArea{callback: slot, ownsReturn: true}))
+	}
+	ok := C.QGraphicsTextItem_override_virtual_owned_opaqueArea(unsafe.Pointer(this.h), slotHandle)
+	if !ok {
+		panic("miqt: can only override virtual methods for directly constructed types")
+	}
+}
+
 //export miqt_exec_callback_QGraphicsTextItem_opaqueArea
 func miqt_exec_callback_QGraphicsTextItem_opaqueArea(self *C.QGraphicsTextItem, cb C.intptr_t) *C.QPainterPath {
-	gofunc, ok := cgo.Handle(cb).Value().(func(super func() *QPainterPath) *QPainterPath)
+	callbackData, ok := cgo.Handle(cb).Value().(miqtVirtualCallback_QGraphicsTextItem_opaqueArea)
 	if !ok {
 		panic("miqt: callback of non-callback type (heap corruption?)")
 	}
+	gofunc := callbackData.callback
 
 	virtualReturn := gofunc((&QGraphicsTextItem{h: self}).callVirtualBase_OpaqueArea)
+	if callbackData.ownsReturn && virtualReturn != nil {
+		runtime.SetFinalizer(virtualReturn, nil)
+	}
 
 	return virtualReturn.cPointer()
 
@@ -14015,10 +15326,16 @@ func (this *QGraphicsTextItem) callVirtualBase_InputMethodQuery(query InputMetho
 	return _goptr
 
 }
+
+type miqtVirtualCallback_QGraphicsTextItem_inputMethodQuery struct {
+	callback   func(super func(query InputMethodQuery) *QVariant, query InputMethodQuery) *QVariant
+	ownsReturn bool
+}
+
 func (this *QGraphicsTextItem) OnInputMethodQuery(slot func(super func(query InputMethodQuery) *QVariant, query InputMethodQuery) *QVariant) {
 	var slotHandle C.intptr_t
 	if slot != nil {
-		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QGraphicsTextItem_inputMethodQuery{callback: slot}))
 	}
 	ok := C.QGraphicsTextItem_override_virtual_inputMethodQuery(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
@@ -14026,17 +15343,34 @@ func (this *QGraphicsTextItem) OnInputMethodQuery(slot func(super func(query Inp
 	}
 }
 
+// OnInputMethodQueryOwned installs a virtual override that transfers
+// ownership of each non-nil returned Qt value object to C++.
+func (this *QGraphicsTextItem) OnInputMethodQueryOwned(slot func(super func(query InputMethodQuery) *QVariant, query InputMethodQuery) *QVariant) {
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QGraphicsTextItem_inputMethodQuery{callback: slot, ownsReturn: true}))
+	}
+	ok := C.QGraphicsTextItem_override_virtual_owned_inputMethodQuery(unsafe.Pointer(this.h), slotHandle)
+	if !ok {
+		panic("miqt: can only override virtual methods for directly constructed types")
+	}
+}
+
 //export miqt_exec_callback_QGraphicsTextItem_inputMethodQuery
 func miqt_exec_callback_QGraphicsTextItem_inputMethodQuery(self *C.QGraphicsTextItem, cb C.intptr_t, query C.int) *C.QVariant {
-	gofunc, ok := cgo.Handle(cb).Value().(func(super func(query InputMethodQuery) *QVariant, query InputMethodQuery) *QVariant)
+	callbackData, ok := cgo.Handle(cb).Value().(miqtVirtualCallback_QGraphicsTextItem_inputMethodQuery)
 	if !ok {
 		panic("miqt: callback of non-callback type (heap corruption?)")
 	}
+	gofunc := callbackData.callback
 
 	// Convert all CABI parameters to Go parameters
 	slotval1 := (InputMethodQuery)(query)
 
 	virtualReturn := gofunc((&QGraphicsTextItem{h: self}).callVirtualBase_InputMethodQuery, slotval1)
+	if callbackData.ownsReturn && virtualReturn != nil {
+		runtime.SetFinalizer(virtualReturn, nil)
+	}
 
 	return virtualReturn.cPointer()
 
@@ -14113,10 +15447,16 @@ func (this *QGraphicsTextItem) callVirtualBase_Extension(variant *QVariant) *QVa
 	return _goptr
 
 }
+
+type miqtVirtualCallback_QGraphicsTextItem_extension struct {
+	callback   func(super func(variant *QVariant) *QVariant, variant *QVariant) *QVariant
+	ownsReturn bool
+}
+
 func (this *QGraphicsTextItem) OnExtension(slot func(super func(variant *QVariant) *QVariant, variant *QVariant) *QVariant) {
 	var slotHandle C.intptr_t
 	if slot != nil {
-		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QGraphicsTextItem_extension{callback: slot}))
 	}
 	ok := C.QGraphicsTextItem_override_virtual_extension(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
@@ -14124,17 +15464,34 @@ func (this *QGraphicsTextItem) OnExtension(slot func(super func(variant *QVarian
 	}
 }
 
+// OnExtensionOwned installs a virtual override that transfers
+// ownership of each non-nil returned Qt value object to C++.
+func (this *QGraphicsTextItem) OnExtensionOwned(slot func(super func(variant *QVariant) *QVariant, variant *QVariant) *QVariant) {
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QGraphicsTextItem_extension{callback: slot, ownsReturn: true}))
+	}
+	ok := C.QGraphicsTextItem_override_virtual_owned_extension(unsafe.Pointer(this.h), slotHandle)
+	if !ok {
+		panic("miqt: can only override virtual methods for directly constructed types")
+	}
+}
+
 //export miqt_exec_callback_QGraphicsTextItem_extension
 func miqt_exec_callback_QGraphicsTextItem_extension(self *C.QGraphicsTextItem, cb C.intptr_t, variant *C.QVariant) *C.QVariant {
-	gofunc, ok := cgo.Handle(cb).Value().(func(super func(variant *QVariant) *QVariant, variant *QVariant) *QVariant)
+	callbackData, ok := cgo.Handle(cb).Value().(miqtVirtualCallback_QGraphicsTextItem_extension)
 	if !ok {
 		panic("miqt: callback of non-callback type (heap corruption?)")
 	}
+	gofunc := callbackData.callback
 
 	// Convert all CABI parameters to Go parameters
 	slotval1 := newQVariant(variant)
 
 	virtualReturn := gofunc((&QGraphicsTextItem{h: self}).callVirtualBase_Extension, slotval1)
+	if callbackData.ownsReturn && virtualReturn != nil {
+		runtime.SetFinalizer(virtualReturn, nil)
+	}
 
 	return virtualReturn.cPointer()
 
@@ -14525,10 +15882,16 @@ func (this *QGraphicsTextItem) callVirtualBase_ItemChange(change QGraphicsItem__
 	return _goptr
 
 }
+
+type miqtVirtualCallback_QGraphicsTextItem_itemChange struct {
+	callback   func(super func(change QGraphicsItem__GraphicsItemChange, value *QVariant) *QVariant, change QGraphicsItem__GraphicsItemChange, value *QVariant) *QVariant
+	ownsReturn bool
+}
+
 func (this *QGraphicsTextItem) OnItemChange(slot func(super func(change QGraphicsItem__GraphicsItemChange, value *QVariant) *QVariant, change QGraphicsItem__GraphicsItemChange, value *QVariant) *QVariant) {
 	var slotHandle C.intptr_t
 	if slot != nil {
-		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QGraphicsTextItem_itemChange{callback: slot}))
 	}
 	ok := C.QGraphicsTextItem_override_virtual_itemChange(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
@@ -14536,12 +15899,26 @@ func (this *QGraphicsTextItem) OnItemChange(slot func(super func(change QGraphic
 	}
 }
 
+// OnItemChangeOwned installs a virtual override that transfers
+// ownership of each non-nil returned Qt value object to C++.
+func (this *QGraphicsTextItem) OnItemChangeOwned(slot func(super func(change QGraphicsItem__GraphicsItemChange, value *QVariant) *QVariant, change QGraphicsItem__GraphicsItemChange, value *QVariant) *QVariant) {
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QGraphicsTextItem_itemChange{callback: slot, ownsReturn: true}))
+	}
+	ok := C.QGraphicsTextItem_override_virtual_owned_itemChange(unsafe.Pointer(this.h), slotHandle)
+	if !ok {
+		panic("miqt: can only override virtual methods for directly constructed types")
+	}
+}
+
 //export miqt_exec_callback_QGraphicsTextItem_itemChange
 func miqt_exec_callback_QGraphicsTextItem_itemChange(self *C.QGraphicsTextItem, cb C.intptr_t, change C.int, value *C.QVariant) *C.QVariant {
-	gofunc, ok := cgo.Handle(cb).Value().(func(super func(change QGraphicsItem__GraphicsItemChange, value *QVariant) *QVariant, change QGraphicsItem__GraphicsItemChange, value *QVariant) *QVariant)
+	callbackData, ok := cgo.Handle(cb).Value().(miqtVirtualCallback_QGraphicsTextItem_itemChange)
 	if !ok {
 		panic("miqt: callback of non-callback type (heap corruption?)")
 	}
+	gofunc := callbackData.callback
 
 	// Convert all CABI parameters to Go parameters
 	slotval1 := (QGraphicsItem__GraphicsItemChange)(change)
@@ -14549,6 +15926,9 @@ func miqt_exec_callback_QGraphicsTextItem_itemChange(self *C.QGraphicsTextItem, 
 	slotval2 := newQVariant(value)
 
 	virtualReturn := gofunc((&QGraphicsTextItem{h: self}).callVirtualBase_ItemChange, slotval1, slotval2)
+	if callbackData.ownsReturn && virtualReturn != nil {
+		runtime.SetFinalizer(virtualReturn, nil)
+	}
 
 	return virtualReturn.cPointer()
 
@@ -14755,10 +16135,16 @@ func (this *QGraphicsSimpleTextItem) callVirtualBase_BoundingRect() *QRectF {
 	return _goptr
 
 }
+
+type miqtVirtualCallback_QGraphicsSimpleTextItem_boundingRect struct {
+	callback   func(super func() *QRectF) *QRectF
+	ownsReturn bool
+}
+
 func (this *QGraphicsSimpleTextItem) OnBoundingRect(slot func(super func() *QRectF) *QRectF) {
 	var slotHandle C.intptr_t
 	if slot != nil {
-		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QGraphicsSimpleTextItem_boundingRect{callback: slot}))
 	}
 	ok := C.QGraphicsSimpleTextItem_override_virtual_boundingRect(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
@@ -14766,14 +16152,31 @@ func (this *QGraphicsSimpleTextItem) OnBoundingRect(slot func(super func() *QRec
 	}
 }
 
+// OnBoundingRectOwned installs a virtual override that transfers
+// ownership of each non-nil returned Qt value object to C++.
+func (this *QGraphicsSimpleTextItem) OnBoundingRectOwned(slot func(super func() *QRectF) *QRectF) {
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QGraphicsSimpleTextItem_boundingRect{callback: slot, ownsReturn: true}))
+	}
+	ok := C.QGraphicsSimpleTextItem_override_virtual_owned_boundingRect(unsafe.Pointer(this.h), slotHandle)
+	if !ok {
+		panic("miqt: can only override virtual methods for directly constructed types")
+	}
+}
+
 //export miqt_exec_callback_QGraphicsSimpleTextItem_boundingRect
 func miqt_exec_callback_QGraphicsSimpleTextItem_boundingRect(self *C.QGraphicsSimpleTextItem, cb C.intptr_t) *C.QRectF {
-	gofunc, ok := cgo.Handle(cb).Value().(func(super func() *QRectF) *QRectF)
+	callbackData, ok := cgo.Handle(cb).Value().(miqtVirtualCallback_QGraphicsSimpleTextItem_boundingRect)
 	if !ok {
 		panic("miqt: callback of non-callback type (heap corruption?)")
 	}
+	gofunc := callbackData.callback
 
 	virtualReturn := gofunc((&QGraphicsSimpleTextItem{h: self}).callVirtualBase_BoundingRect)
+	if callbackData.ownsReturn && virtualReturn != nil {
+		runtime.SetFinalizer(virtualReturn, nil)
+	}
 
 	return virtualReturn.cPointer()
 
@@ -14786,10 +16189,16 @@ func (this *QGraphicsSimpleTextItem) callVirtualBase_Shape() *QPainterPath {
 	return _goptr
 
 }
+
+type miqtVirtualCallback_QGraphicsSimpleTextItem_shape struct {
+	callback   func(super func() *QPainterPath) *QPainterPath
+	ownsReturn bool
+}
+
 func (this *QGraphicsSimpleTextItem) OnShape(slot func(super func() *QPainterPath) *QPainterPath) {
 	var slotHandle C.intptr_t
 	if slot != nil {
-		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QGraphicsSimpleTextItem_shape{callback: slot}))
 	}
 	ok := C.QGraphicsSimpleTextItem_override_virtual_shape(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
@@ -14797,14 +16206,31 @@ func (this *QGraphicsSimpleTextItem) OnShape(slot func(super func() *QPainterPat
 	}
 }
 
+// OnShapeOwned installs a virtual override that transfers
+// ownership of each non-nil returned Qt value object to C++.
+func (this *QGraphicsSimpleTextItem) OnShapeOwned(slot func(super func() *QPainterPath) *QPainterPath) {
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QGraphicsSimpleTextItem_shape{callback: slot, ownsReturn: true}))
+	}
+	ok := C.QGraphicsSimpleTextItem_override_virtual_owned_shape(unsafe.Pointer(this.h), slotHandle)
+	if !ok {
+		panic("miqt: can only override virtual methods for directly constructed types")
+	}
+}
+
 //export miqt_exec_callback_QGraphicsSimpleTextItem_shape
 func miqt_exec_callback_QGraphicsSimpleTextItem_shape(self *C.QGraphicsSimpleTextItem, cb C.intptr_t) *C.QPainterPath {
-	gofunc, ok := cgo.Handle(cb).Value().(func(super func() *QPainterPath) *QPainterPath)
+	callbackData, ok := cgo.Handle(cb).Value().(miqtVirtualCallback_QGraphicsSimpleTextItem_shape)
 	if !ok {
 		panic("miqt: callback of non-callback type (heap corruption?)")
 	}
+	gofunc := callbackData.callback
 
 	virtualReturn := gofunc((&QGraphicsSimpleTextItem{h: self}).callVirtualBase_Shape)
+	if callbackData.ownsReturn && virtualReturn != nil {
+		runtime.SetFinalizer(virtualReturn, nil)
+	}
 
 	return virtualReturn.cPointer()
 
@@ -14915,10 +16341,16 @@ func (this *QGraphicsSimpleTextItem) callVirtualBase_OpaqueArea() *QPainterPath 
 	return _goptr
 
 }
+
+type miqtVirtualCallback_QGraphicsSimpleTextItem_opaqueArea struct {
+	callback   func(super func() *QPainterPath) *QPainterPath
+	ownsReturn bool
+}
+
 func (this *QGraphicsSimpleTextItem) OnOpaqueArea(slot func(super func() *QPainterPath) *QPainterPath) {
 	var slotHandle C.intptr_t
 	if slot != nil {
-		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QGraphicsSimpleTextItem_opaqueArea{callback: slot}))
 	}
 	ok := C.QGraphicsSimpleTextItem_override_virtual_opaqueArea(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
@@ -14926,14 +16358,31 @@ func (this *QGraphicsSimpleTextItem) OnOpaqueArea(slot func(super func() *QPaint
 	}
 }
 
+// OnOpaqueAreaOwned installs a virtual override that transfers
+// ownership of each non-nil returned Qt value object to C++.
+func (this *QGraphicsSimpleTextItem) OnOpaqueAreaOwned(slot func(super func() *QPainterPath) *QPainterPath) {
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QGraphicsSimpleTextItem_opaqueArea{callback: slot, ownsReturn: true}))
+	}
+	ok := C.QGraphicsSimpleTextItem_override_virtual_owned_opaqueArea(unsafe.Pointer(this.h), slotHandle)
+	if !ok {
+		panic("miqt: can only override virtual methods for directly constructed types")
+	}
+}
+
 //export miqt_exec_callback_QGraphicsSimpleTextItem_opaqueArea
 func miqt_exec_callback_QGraphicsSimpleTextItem_opaqueArea(self *C.QGraphicsSimpleTextItem, cb C.intptr_t) *C.QPainterPath {
-	gofunc, ok := cgo.Handle(cb).Value().(func(super func() *QPainterPath) *QPainterPath)
+	callbackData, ok := cgo.Handle(cb).Value().(miqtVirtualCallback_QGraphicsSimpleTextItem_opaqueArea)
 	if !ok {
 		panic("miqt: callback of non-callback type (heap corruption?)")
 	}
+	gofunc := callbackData.callback
 
 	virtualReturn := gofunc((&QGraphicsSimpleTextItem{h: self}).callVirtualBase_OpaqueArea)
+	if callbackData.ownsReturn && virtualReturn != nil {
+		runtime.SetFinalizer(virtualReturn, nil)
+	}
 
 	return virtualReturn.cPointer()
 
@@ -15039,10 +16488,16 @@ func (this *QGraphicsSimpleTextItem) callVirtualBase_Extension(variant *QVariant
 	return _goptr
 
 }
+
+type miqtVirtualCallback_QGraphicsSimpleTextItem_extension struct {
+	callback   func(super func(variant *QVariant) *QVariant, variant *QVariant) *QVariant
+	ownsReturn bool
+}
+
 func (this *QGraphicsSimpleTextItem) OnExtension(slot func(super func(variant *QVariant) *QVariant, variant *QVariant) *QVariant) {
 	var slotHandle C.intptr_t
 	if slot != nil {
-		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QGraphicsSimpleTextItem_extension{callback: slot}))
 	}
 	ok := C.QGraphicsSimpleTextItem_override_virtual_extension(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
@@ -15050,17 +16505,34 @@ func (this *QGraphicsSimpleTextItem) OnExtension(slot func(super func(variant *Q
 	}
 }
 
+// OnExtensionOwned installs a virtual override that transfers
+// ownership of each non-nil returned Qt value object to C++.
+func (this *QGraphicsSimpleTextItem) OnExtensionOwned(slot func(super func(variant *QVariant) *QVariant, variant *QVariant) *QVariant) {
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QGraphicsSimpleTextItem_extension{callback: slot, ownsReturn: true}))
+	}
+	ok := C.QGraphicsSimpleTextItem_override_virtual_owned_extension(unsafe.Pointer(this.h), slotHandle)
+	if !ok {
+		panic("miqt: can only override virtual methods for directly constructed types")
+	}
+}
+
 //export miqt_exec_callback_QGraphicsSimpleTextItem_extension
 func miqt_exec_callback_QGraphicsSimpleTextItem_extension(self *C.QGraphicsSimpleTextItem, cb C.intptr_t, variant *C.QVariant) *C.QVariant {
-	gofunc, ok := cgo.Handle(cb).Value().(func(super func(variant *QVariant) *QVariant, variant *QVariant) *QVariant)
+	callbackData, ok := cgo.Handle(cb).Value().(miqtVirtualCallback_QGraphicsSimpleTextItem_extension)
 	if !ok {
 		panic("miqt: callback of non-callback type (heap corruption?)")
 	}
+	gofunc := callbackData.callback
 
 	// Convert all CABI parameters to Go parameters
 	slotval1 := newQVariant(variant)
 
 	virtualReturn := gofunc((&QGraphicsSimpleTextItem{h: self}).callVirtualBase_Extension, slotval1)
+	if callbackData.ownsReturn && virtualReturn != nil {
+		runtime.SetFinalizer(virtualReturn, nil)
+	}
 
 	return virtualReturn.cPointer()
 
@@ -15777,10 +17249,16 @@ func (this *QGraphicsSimpleTextItem) callVirtualBase_InputMethodQuery(query Inpu
 	return _goptr
 
 }
+
+type miqtVirtualCallback_QGraphicsSimpleTextItem_inputMethodQuery struct {
+	callback   func(super func(query InputMethodQuery) *QVariant, query InputMethodQuery) *QVariant
+	ownsReturn bool
+}
+
 func (this *QGraphicsSimpleTextItem) OnInputMethodQuery(slot func(super func(query InputMethodQuery) *QVariant, query InputMethodQuery) *QVariant) {
 	var slotHandle C.intptr_t
 	if slot != nil {
-		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QGraphicsSimpleTextItem_inputMethodQuery{callback: slot}))
 	}
 	ok := C.QGraphicsSimpleTextItem_override_virtual_inputMethodQuery(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
@@ -15788,17 +17266,34 @@ func (this *QGraphicsSimpleTextItem) OnInputMethodQuery(slot func(super func(que
 	}
 }
 
+// OnInputMethodQueryOwned installs a virtual override that transfers
+// ownership of each non-nil returned Qt value object to C++.
+func (this *QGraphicsSimpleTextItem) OnInputMethodQueryOwned(slot func(super func(query InputMethodQuery) *QVariant, query InputMethodQuery) *QVariant) {
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QGraphicsSimpleTextItem_inputMethodQuery{callback: slot, ownsReturn: true}))
+	}
+	ok := C.QGraphicsSimpleTextItem_override_virtual_owned_inputMethodQuery(unsafe.Pointer(this.h), slotHandle)
+	if !ok {
+		panic("miqt: can only override virtual methods for directly constructed types")
+	}
+}
+
 //export miqt_exec_callback_QGraphicsSimpleTextItem_inputMethodQuery
 func miqt_exec_callback_QGraphicsSimpleTextItem_inputMethodQuery(self *C.QGraphicsSimpleTextItem, cb C.intptr_t, query C.int) *C.QVariant {
-	gofunc, ok := cgo.Handle(cb).Value().(func(super func(query InputMethodQuery) *QVariant, query InputMethodQuery) *QVariant)
+	callbackData, ok := cgo.Handle(cb).Value().(miqtVirtualCallback_QGraphicsSimpleTextItem_inputMethodQuery)
 	if !ok {
 		panic("miqt: callback of non-callback type (heap corruption?)")
 	}
+	gofunc := callbackData.callback
 
 	// Convert all CABI parameters to Go parameters
 	slotval1 := (InputMethodQuery)(query)
 
 	virtualReturn := gofunc((&QGraphicsSimpleTextItem{h: self}).callVirtualBase_InputMethodQuery, slotval1)
+	if callbackData.ownsReturn && virtualReturn != nil {
+		runtime.SetFinalizer(virtualReturn, nil)
+	}
 
 	return virtualReturn.cPointer()
 
@@ -15811,10 +17306,16 @@ func (this *QGraphicsSimpleTextItem) callVirtualBase_ItemChange(change QGraphics
 	return _goptr
 
 }
+
+type miqtVirtualCallback_QGraphicsSimpleTextItem_itemChange struct {
+	callback   func(super func(change QGraphicsItem__GraphicsItemChange, value *QVariant) *QVariant, change QGraphicsItem__GraphicsItemChange, value *QVariant) *QVariant
+	ownsReturn bool
+}
+
 func (this *QGraphicsSimpleTextItem) OnItemChange(slot func(super func(change QGraphicsItem__GraphicsItemChange, value *QVariant) *QVariant, change QGraphicsItem__GraphicsItemChange, value *QVariant) *QVariant) {
 	var slotHandle C.intptr_t
 	if slot != nil {
-		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QGraphicsSimpleTextItem_itemChange{callback: slot}))
 	}
 	ok := C.QGraphicsSimpleTextItem_override_virtual_itemChange(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
@@ -15822,12 +17323,26 @@ func (this *QGraphicsSimpleTextItem) OnItemChange(slot func(super func(change QG
 	}
 }
 
+// OnItemChangeOwned installs a virtual override that transfers
+// ownership of each non-nil returned Qt value object to C++.
+func (this *QGraphicsSimpleTextItem) OnItemChangeOwned(slot func(super func(change QGraphicsItem__GraphicsItemChange, value *QVariant) *QVariant, change QGraphicsItem__GraphicsItemChange, value *QVariant) *QVariant) {
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QGraphicsSimpleTextItem_itemChange{callback: slot, ownsReturn: true}))
+	}
+	ok := C.QGraphicsSimpleTextItem_override_virtual_owned_itemChange(unsafe.Pointer(this.h), slotHandle)
+	if !ok {
+		panic("miqt: can only override virtual methods for directly constructed types")
+	}
+}
+
 //export miqt_exec_callback_QGraphicsSimpleTextItem_itemChange
 func miqt_exec_callback_QGraphicsSimpleTextItem_itemChange(self *C.QGraphicsSimpleTextItem, cb C.intptr_t, change C.int, value *C.QVariant) *C.QVariant {
-	gofunc, ok := cgo.Handle(cb).Value().(func(super func(change QGraphicsItem__GraphicsItemChange, value *QVariant) *QVariant, change QGraphicsItem__GraphicsItemChange, value *QVariant) *QVariant)
+	callbackData, ok := cgo.Handle(cb).Value().(miqtVirtualCallback_QGraphicsSimpleTextItem_itemChange)
 	if !ok {
 		panic("miqt: callback of non-callback type (heap corruption?)")
 	}
+	gofunc := callbackData.callback
 
 	// Convert all CABI parameters to Go parameters
 	slotval1 := (QGraphicsItem__GraphicsItemChange)(change)
@@ -15835,6 +17350,9 @@ func miqt_exec_callback_QGraphicsSimpleTextItem_itemChange(self *C.QGraphicsSimp
 	slotval2 := newQVariant(value)
 
 	virtualReturn := gofunc((&QGraphicsSimpleTextItem{h: self}).callVirtualBase_ItemChange, slotval1, slotval2)
+	if callbackData.ownsReturn && virtualReturn != nil {
+		runtime.SetFinalizer(virtualReturn, nil)
+	}
 
 	return virtualReturn.cPointer()
 
@@ -15994,10 +17512,16 @@ func (this *QGraphicsItemGroup) callVirtualBase_BoundingRect() *QRectF {
 	return _goptr
 
 }
+
+type miqtVirtualCallback_QGraphicsItemGroup_boundingRect struct {
+	callback   func(super func() *QRectF) *QRectF
+	ownsReturn bool
+}
+
 func (this *QGraphicsItemGroup) OnBoundingRect(slot func(super func() *QRectF) *QRectF) {
 	var slotHandle C.intptr_t
 	if slot != nil {
-		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QGraphicsItemGroup_boundingRect{callback: slot}))
 	}
 	ok := C.QGraphicsItemGroup_override_virtual_boundingRect(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
@@ -16005,14 +17529,31 @@ func (this *QGraphicsItemGroup) OnBoundingRect(slot func(super func() *QRectF) *
 	}
 }
 
+// OnBoundingRectOwned installs a virtual override that transfers
+// ownership of each non-nil returned Qt value object to C++.
+func (this *QGraphicsItemGroup) OnBoundingRectOwned(slot func(super func() *QRectF) *QRectF) {
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QGraphicsItemGroup_boundingRect{callback: slot, ownsReturn: true}))
+	}
+	ok := C.QGraphicsItemGroup_override_virtual_owned_boundingRect(unsafe.Pointer(this.h), slotHandle)
+	if !ok {
+		panic("miqt: can only override virtual methods for directly constructed types")
+	}
+}
+
 //export miqt_exec_callback_QGraphicsItemGroup_boundingRect
 func miqt_exec_callback_QGraphicsItemGroup_boundingRect(self *C.QGraphicsItemGroup, cb C.intptr_t) *C.QRectF {
-	gofunc, ok := cgo.Handle(cb).Value().(func(super func() *QRectF) *QRectF)
+	callbackData, ok := cgo.Handle(cb).Value().(miqtVirtualCallback_QGraphicsItemGroup_boundingRect)
 	if !ok {
 		panic("miqt: callback of non-callback type (heap corruption?)")
 	}
+	gofunc := callbackData.callback
 
 	virtualReturn := gofunc((&QGraphicsItemGroup{h: self}).callVirtualBase_BoundingRect)
+	if callbackData.ownsReturn && virtualReturn != nil {
+		runtime.SetFinalizer(virtualReturn, nil)
+	}
 
 	return virtualReturn.cPointer()
 
@@ -16091,10 +17632,16 @@ func (this *QGraphicsItemGroup) callVirtualBase_OpaqueArea() *QPainterPath {
 	return _goptr
 
 }
+
+type miqtVirtualCallback_QGraphicsItemGroup_opaqueArea struct {
+	callback   func(super func() *QPainterPath) *QPainterPath
+	ownsReturn bool
+}
+
 func (this *QGraphicsItemGroup) OnOpaqueArea(slot func(super func() *QPainterPath) *QPainterPath) {
 	var slotHandle C.intptr_t
 	if slot != nil {
-		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QGraphicsItemGroup_opaqueArea{callback: slot}))
 	}
 	ok := C.QGraphicsItemGroup_override_virtual_opaqueArea(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
@@ -16102,14 +17649,31 @@ func (this *QGraphicsItemGroup) OnOpaqueArea(slot func(super func() *QPainterPat
 	}
 }
 
+// OnOpaqueAreaOwned installs a virtual override that transfers
+// ownership of each non-nil returned Qt value object to C++.
+func (this *QGraphicsItemGroup) OnOpaqueAreaOwned(slot func(super func() *QPainterPath) *QPainterPath) {
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QGraphicsItemGroup_opaqueArea{callback: slot, ownsReturn: true}))
+	}
+	ok := C.QGraphicsItemGroup_override_virtual_owned_opaqueArea(unsafe.Pointer(this.h), slotHandle)
+	if !ok {
+		panic("miqt: can only override virtual methods for directly constructed types")
+	}
+}
+
 //export miqt_exec_callback_QGraphicsItemGroup_opaqueArea
 func miqt_exec_callback_QGraphicsItemGroup_opaqueArea(self *C.QGraphicsItemGroup, cb C.intptr_t) *C.QPainterPath {
-	gofunc, ok := cgo.Handle(cb).Value().(func(super func() *QPainterPath) *QPainterPath)
+	callbackData, ok := cgo.Handle(cb).Value().(miqtVirtualCallback_QGraphicsItemGroup_opaqueArea)
 	if !ok {
 		panic("miqt: callback of non-callback type (heap corruption?)")
 	}
+	gofunc := callbackData.callback
 
 	virtualReturn := gofunc((&QGraphicsItemGroup{h: self}).callVirtualBase_OpaqueArea)
+	if callbackData.ownsReturn && virtualReturn != nil {
+		runtime.SetFinalizer(virtualReturn, nil)
+	}
 
 	return virtualReturn.cPointer()
 
@@ -16181,10 +17745,16 @@ func (this *QGraphicsItemGroup) callVirtualBase_Shape() *QPainterPath {
 	return _goptr
 
 }
+
+type miqtVirtualCallback_QGraphicsItemGroup_shape struct {
+	callback   func(super func() *QPainterPath) *QPainterPath
+	ownsReturn bool
+}
+
 func (this *QGraphicsItemGroup) OnShape(slot func(super func() *QPainterPath) *QPainterPath) {
 	var slotHandle C.intptr_t
 	if slot != nil {
-		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QGraphicsItemGroup_shape{callback: slot}))
 	}
 	ok := C.QGraphicsItemGroup_override_virtual_shape(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
@@ -16192,14 +17762,31 @@ func (this *QGraphicsItemGroup) OnShape(slot func(super func() *QPainterPath) *Q
 	}
 }
 
+// OnShapeOwned installs a virtual override that transfers
+// ownership of each non-nil returned Qt value object to C++.
+func (this *QGraphicsItemGroup) OnShapeOwned(slot func(super func() *QPainterPath) *QPainterPath) {
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QGraphicsItemGroup_shape{callback: slot, ownsReturn: true}))
+	}
+	ok := C.QGraphicsItemGroup_override_virtual_owned_shape(unsafe.Pointer(this.h), slotHandle)
+	if !ok {
+		panic("miqt: can only override virtual methods for directly constructed types")
+	}
+}
+
 //export miqt_exec_callback_QGraphicsItemGroup_shape
 func miqt_exec_callback_QGraphicsItemGroup_shape(self *C.QGraphicsItemGroup, cb C.intptr_t) *C.QPainterPath {
-	gofunc, ok := cgo.Handle(cb).Value().(func(super func() *QPainterPath) *QPainterPath)
+	callbackData, ok := cgo.Handle(cb).Value().(miqtVirtualCallback_QGraphicsItemGroup_shape)
 	if !ok {
 		panic("miqt: callback of non-callback type (heap corruption?)")
 	}
+	gofunc := callbackData.callback
 
 	virtualReturn := gofunc((&QGraphicsItemGroup{h: self}).callVirtualBase_Shape)
+	if callbackData.ownsReturn && virtualReturn != nil {
+		runtime.SetFinalizer(virtualReturn, nil)
+	}
 
 	return virtualReturn.cPointer()
 
@@ -16918,10 +18505,16 @@ func (this *QGraphicsItemGroup) callVirtualBase_InputMethodQuery(query InputMeth
 	return _goptr
 
 }
+
+type miqtVirtualCallback_QGraphicsItemGroup_inputMethodQuery struct {
+	callback   func(super func(query InputMethodQuery) *QVariant, query InputMethodQuery) *QVariant
+	ownsReturn bool
+}
+
 func (this *QGraphicsItemGroup) OnInputMethodQuery(slot func(super func(query InputMethodQuery) *QVariant, query InputMethodQuery) *QVariant) {
 	var slotHandle C.intptr_t
 	if slot != nil {
-		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QGraphicsItemGroup_inputMethodQuery{callback: slot}))
 	}
 	ok := C.QGraphicsItemGroup_override_virtual_inputMethodQuery(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
@@ -16929,17 +18522,34 @@ func (this *QGraphicsItemGroup) OnInputMethodQuery(slot func(super func(query In
 	}
 }
 
+// OnInputMethodQueryOwned installs a virtual override that transfers
+// ownership of each non-nil returned Qt value object to C++.
+func (this *QGraphicsItemGroup) OnInputMethodQueryOwned(slot func(super func(query InputMethodQuery) *QVariant, query InputMethodQuery) *QVariant) {
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QGraphicsItemGroup_inputMethodQuery{callback: slot, ownsReturn: true}))
+	}
+	ok := C.QGraphicsItemGroup_override_virtual_owned_inputMethodQuery(unsafe.Pointer(this.h), slotHandle)
+	if !ok {
+		panic("miqt: can only override virtual methods for directly constructed types")
+	}
+}
+
 //export miqt_exec_callback_QGraphicsItemGroup_inputMethodQuery
 func miqt_exec_callback_QGraphicsItemGroup_inputMethodQuery(self *C.QGraphicsItemGroup, cb C.intptr_t, query C.int) *C.QVariant {
-	gofunc, ok := cgo.Handle(cb).Value().(func(super func(query InputMethodQuery) *QVariant, query InputMethodQuery) *QVariant)
+	callbackData, ok := cgo.Handle(cb).Value().(miqtVirtualCallback_QGraphicsItemGroup_inputMethodQuery)
 	if !ok {
 		panic("miqt: callback of non-callback type (heap corruption?)")
 	}
+	gofunc := callbackData.callback
 
 	// Convert all CABI parameters to Go parameters
 	slotval1 := (InputMethodQuery)(query)
 
 	virtualReturn := gofunc((&QGraphicsItemGroup{h: self}).callVirtualBase_InputMethodQuery, slotval1)
+	if callbackData.ownsReturn && virtualReturn != nil {
+		runtime.SetFinalizer(virtualReturn, nil)
+	}
 
 	return virtualReturn.cPointer()
 
@@ -16952,10 +18562,16 @@ func (this *QGraphicsItemGroup) callVirtualBase_ItemChange(change QGraphicsItem_
 	return _goptr
 
 }
+
+type miqtVirtualCallback_QGraphicsItemGroup_itemChange struct {
+	callback   func(super func(change QGraphicsItem__GraphicsItemChange, value *QVariant) *QVariant, change QGraphicsItem__GraphicsItemChange, value *QVariant) *QVariant
+	ownsReturn bool
+}
+
 func (this *QGraphicsItemGroup) OnItemChange(slot func(super func(change QGraphicsItem__GraphicsItemChange, value *QVariant) *QVariant, change QGraphicsItem__GraphicsItemChange, value *QVariant) *QVariant) {
 	var slotHandle C.intptr_t
 	if slot != nil {
-		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QGraphicsItemGroup_itemChange{callback: slot}))
 	}
 	ok := C.QGraphicsItemGroup_override_virtual_itemChange(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
@@ -16963,12 +18579,26 @@ func (this *QGraphicsItemGroup) OnItemChange(slot func(super func(change QGraphi
 	}
 }
 
+// OnItemChangeOwned installs a virtual override that transfers
+// ownership of each non-nil returned Qt value object to C++.
+func (this *QGraphicsItemGroup) OnItemChangeOwned(slot func(super func(change QGraphicsItem__GraphicsItemChange, value *QVariant) *QVariant, change QGraphicsItem__GraphicsItemChange, value *QVariant) *QVariant) {
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QGraphicsItemGroup_itemChange{callback: slot, ownsReturn: true}))
+	}
+	ok := C.QGraphicsItemGroup_override_virtual_owned_itemChange(unsafe.Pointer(this.h), slotHandle)
+	if !ok {
+		panic("miqt: can only override virtual methods for directly constructed types")
+	}
+}
+
 //export miqt_exec_callback_QGraphicsItemGroup_itemChange
 func miqt_exec_callback_QGraphicsItemGroup_itemChange(self *C.QGraphicsItemGroup, cb C.intptr_t, change C.int, value *C.QVariant) *C.QVariant {
-	gofunc, ok := cgo.Handle(cb).Value().(func(super func(change QGraphicsItem__GraphicsItemChange, value *QVariant) *QVariant, change QGraphicsItem__GraphicsItemChange, value *QVariant) *QVariant)
+	callbackData, ok := cgo.Handle(cb).Value().(miqtVirtualCallback_QGraphicsItemGroup_itemChange)
 	if !ok {
 		panic("miqt: callback of non-callback type (heap corruption?)")
 	}
+	gofunc := callbackData.callback
 
 	// Convert all CABI parameters to Go parameters
 	slotval1 := (QGraphicsItem__GraphicsItemChange)(change)
@@ -16976,6 +18606,9 @@ func miqt_exec_callback_QGraphicsItemGroup_itemChange(self *C.QGraphicsItemGroup
 	slotval2 := newQVariant(value)
 
 	virtualReturn := gofunc((&QGraphicsItemGroup{h: self}).callVirtualBase_ItemChange, slotval1, slotval2)
+	if callbackData.ownsReturn && virtualReturn != nil {
+		runtime.SetFinalizer(virtualReturn, nil)
+	}
 
 	return virtualReturn.cPointer()
 
@@ -17052,10 +18685,16 @@ func (this *QGraphicsItemGroup) callVirtualBase_Extension(variant *QVariant) *QV
 	return _goptr
 
 }
+
+type miqtVirtualCallback_QGraphicsItemGroup_extension struct {
+	callback   func(super func(variant *QVariant) *QVariant, variant *QVariant) *QVariant
+	ownsReturn bool
+}
+
 func (this *QGraphicsItemGroup) OnExtension(slot func(super func(variant *QVariant) *QVariant, variant *QVariant) *QVariant) {
 	var slotHandle C.intptr_t
 	if slot != nil {
-		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QGraphicsItemGroup_extension{callback: slot}))
 	}
 	ok := C.QGraphicsItemGroup_override_virtual_extension(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
@@ -17063,17 +18702,34 @@ func (this *QGraphicsItemGroup) OnExtension(slot func(super func(variant *QVaria
 	}
 }
 
+// OnExtensionOwned installs a virtual override that transfers
+// ownership of each non-nil returned Qt value object to C++.
+func (this *QGraphicsItemGroup) OnExtensionOwned(slot func(super func(variant *QVariant) *QVariant, variant *QVariant) *QVariant) {
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QGraphicsItemGroup_extension{callback: slot, ownsReturn: true}))
+	}
+	ok := C.QGraphicsItemGroup_override_virtual_owned_extension(unsafe.Pointer(this.h), slotHandle)
+	if !ok {
+		panic("miqt: can only override virtual methods for directly constructed types")
+	}
+}
+
 //export miqt_exec_callback_QGraphicsItemGroup_extension
 func miqt_exec_callback_QGraphicsItemGroup_extension(self *C.QGraphicsItemGroup, cb C.intptr_t, variant *C.QVariant) *C.QVariant {
-	gofunc, ok := cgo.Handle(cb).Value().(func(super func(variant *QVariant) *QVariant, variant *QVariant) *QVariant)
+	callbackData, ok := cgo.Handle(cb).Value().(miqtVirtualCallback_QGraphicsItemGroup_extension)
 	if !ok {
 		panic("miqt: callback of non-callback type (heap corruption?)")
 	}
+	gofunc := callbackData.callback
 
 	// Convert all CABI parameters to Go parameters
 	slotval1 := newQVariant(variant)
 
 	virtualReturn := gofunc((&QGraphicsItemGroup{h: self}).callVirtualBase_Extension, slotval1)
+	if callbackData.ownsReturn && virtualReturn != nil {
+		runtime.SetFinalizer(virtualReturn, nil)
+	}
 
 	return virtualReturn.cPointer()
 

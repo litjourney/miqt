@@ -116,8 +116,10 @@ struct miqt_string QCheckBox_tr3(const char* s, const char* c, int n);
 void QCheckBox_setTristateWithBool(QCheckBox* self, bool y);
 
 bool QCheckBox_override_virtual_sizeHint(void* self, intptr_t slot);
+bool QCheckBox_override_virtual_owned_sizeHint(void* self, intptr_t slot);
 QSize* QCheckBox_virtualbase_sizeHint(const void* self);
 bool QCheckBox_override_virtual_minimumSizeHint(void* self, intptr_t slot);
+bool QCheckBox_override_virtual_owned_minimumSizeHint(void* self, intptr_t slot);
 QSize* QCheckBox_virtualbase_minimumSizeHint(const void* self);
 bool QCheckBox_override_virtual_event(void* self, intptr_t slot);
 bool QCheckBox_virtualbase_event(void* self, QEvent* e);
@@ -204,6 +206,7 @@ QPainter* QCheckBox_virtualbase_sharedPainter(const void* self);
 bool QCheckBox_override_virtual_inputMethodEvent(void* self, intptr_t slot);
 void QCheckBox_virtualbase_inputMethodEvent(void* self, QInputMethodEvent* param1);
 bool QCheckBox_override_virtual_inputMethodQuery(void* self, intptr_t slot);
+bool QCheckBox_override_virtual_owned_inputMethodQuery(void* self, intptr_t slot);
 QVariant* QCheckBox_virtualbase_inputMethodQuery(const void* self, int param1);
 bool QCheckBox_override_virtual_focusNextPrevChild(void* self, intptr_t slot);
 bool QCheckBox_virtualbase_focusNextPrevChild(void* self, bool next);

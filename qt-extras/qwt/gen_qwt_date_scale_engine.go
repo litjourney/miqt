@@ -327,10 +327,16 @@ func (this *QwtDateScaleEngine) callVirtualBase_DivideScale(x1 float64, x2 float
 	return _goptr
 
 }
+
+type miqtVirtualCallback_QwtDateScaleEngine_divideScale struct {
+	callback   func(super func(x1 float64, x2 float64, maxMajorSteps int, maxMinorSteps int, stepSize float64) *QwtScaleDiv, x1 float64, x2 float64, maxMajorSteps int, maxMinorSteps int, stepSize float64) *QwtScaleDiv
+	ownsReturn bool
+}
+
 func (this *QwtDateScaleEngine) OnDivideScale(slot func(super func(x1 float64, x2 float64, maxMajorSteps int, maxMinorSteps int, stepSize float64) *QwtScaleDiv, x1 float64, x2 float64, maxMajorSteps int, maxMinorSteps int, stepSize float64) *QwtScaleDiv) {
 	var slotHandle C.intptr_t
 	if slot != nil {
-		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QwtDateScaleEngine_divideScale{callback: slot}))
 	}
 	ok := C.QwtDateScaleEngine_override_virtual_divideScale(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
@@ -338,12 +344,26 @@ func (this *QwtDateScaleEngine) OnDivideScale(slot func(super func(x1 float64, x
 	}
 }
 
+// OnDivideScaleOwned installs a virtual override that transfers
+// ownership of each non-nil returned Qt value object to C++.
+func (this *QwtDateScaleEngine) OnDivideScaleOwned(slot func(super func(x1 float64, x2 float64, maxMajorSteps int, maxMinorSteps int, stepSize float64) *QwtScaleDiv, x1 float64, x2 float64, maxMajorSteps int, maxMinorSteps int, stepSize float64) *QwtScaleDiv) {
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QwtDateScaleEngine_divideScale{callback: slot, ownsReturn: true}))
+	}
+	ok := C.QwtDateScaleEngine_override_virtual_owned_divideScale(unsafe.Pointer(this.h), slotHandle)
+	if !ok {
+		panic("miqt: can only override virtual methods for directly constructed types")
+	}
+}
+
 //export miqt_exec_callback_QwtDateScaleEngine_divideScale
 func miqt_exec_callback_QwtDateScaleEngine_divideScale(self *C.QwtDateScaleEngine, cb C.intptr_t, x1 C.double, x2 C.double, maxMajorSteps C.int, maxMinorSteps C.int, stepSize C.double) *C.QwtScaleDiv {
-	gofunc, ok := cgo.Handle(cb).Value().(func(super func(x1 float64, x2 float64, maxMajorSteps int, maxMinorSteps int, stepSize float64) *QwtScaleDiv, x1 float64, x2 float64, maxMajorSteps int, maxMinorSteps int, stepSize float64) *QwtScaleDiv)
+	callbackData, ok := cgo.Handle(cb).Value().(miqtVirtualCallback_QwtDateScaleEngine_divideScale)
 	if !ok {
 		panic("miqt: callback of non-callback type (heap corruption?)")
 	}
+	gofunc := callbackData.callback
 
 	// Convert all CABI parameters to Go parameters
 	slotval1 := (float64)(x1)
@@ -357,6 +377,9 @@ func miqt_exec_callback_QwtDateScaleEngine_divideScale(self *C.QwtDateScaleEngin
 	slotval5 := (float64)(stepSize)
 
 	virtualReturn := gofunc((&QwtDateScaleEngine{h: self}).callVirtualBase_DivideScale, slotval1, slotval2, slotval3, slotval4, slotval5)
+	if callbackData.ownsReturn && virtualReturn != nil {
+		runtime.SetFinalizer(virtualReturn, nil)
+	}
 
 	return virtualReturn.cPointer()
 
@@ -405,10 +428,16 @@ func (this *QwtDateScaleEngine) callVirtualBase_AlignDate(param1 *qt.QDateTime, 
 	return _goptr
 
 }
+
+type miqtVirtualCallback_QwtDateScaleEngine_alignDate struct {
+	callback   func(super func(param1 *qt.QDateTime, stepSize float64, param3 QwtDate__IntervalType, up bool) *qt.QDateTime, param1 *qt.QDateTime, stepSize float64, param3 QwtDate__IntervalType, up bool) *qt.QDateTime
+	ownsReturn bool
+}
+
 func (this *QwtDateScaleEngine) OnAlignDate(slot func(super func(param1 *qt.QDateTime, stepSize float64, param3 QwtDate__IntervalType, up bool) *qt.QDateTime, param1 *qt.QDateTime, stepSize float64, param3 QwtDate__IntervalType, up bool) *qt.QDateTime) {
 	var slotHandle C.intptr_t
 	if slot != nil {
-		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QwtDateScaleEngine_alignDate{callback: slot}))
 	}
 	ok := C.QwtDateScaleEngine_override_virtual_alignDate(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
@@ -416,12 +445,26 @@ func (this *QwtDateScaleEngine) OnAlignDate(slot func(super func(param1 *qt.QDat
 	}
 }
 
+// OnAlignDateOwned installs a virtual override that transfers
+// ownership of each non-nil returned Qt value object to C++.
+func (this *QwtDateScaleEngine) OnAlignDateOwned(slot func(super func(param1 *qt.QDateTime, stepSize float64, param3 QwtDate__IntervalType, up bool) *qt.QDateTime, param1 *qt.QDateTime, stepSize float64, param3 QwtDate__IntervalType, up bool) *qt.QDateTime) {
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QwtDateScaleEngine_alignDate{callback: slot, ownsReturn: true}))
+	}
+	ok := C.QwtDateScaleEngine_override_virtual_owned_alignDate(unsafe.Pointer(this.h), slotHandle)
+	if !ok {
+		panic("miqt: can only override virtual methods for directly constructed types")
+	}
+}
+
 //export miqt_exec_callback_QwtDateScaleEngine_alignDate
 func miqt_exec_callback_QwtDateScaleEngine_alignDate(self *C.QwtDateScaleEngine, cb C.intptr_t, param1 *C.QDateTime, stepSize C.double, param3 C.int, up C.bool) *C.QDateTime {
-	gofunc, ok := cgo.Handle(cb).Value().(func(super func(param1 *qt.QDateTime, stepSize float64, param3 QwtDate__IntervalType, up bool) *qt.QDateTime, param1 *qt.QDateTime, stepSize float64, param3 QwtDate__IntervalType, up bool) *qt.QDateTime)
+	callbackData, ok := cgo.Handle(cb).Value().(miqtVirtualCallback_QwtDateScaleEngine_alignDate)
 	if !ok {
 		panic("miqt: callback of non-callback type (heap corruption?)")
 	}
+	gofunc := callbackData.callback
 
 	// Convert all CABI parameters to Go parameters
 	slotval1 := qt.UnsafeNewQDateTime(unsafe.Pointer(param1))
@@ -433,6 +476,9 @@ func miqt_exec_callback_QwtDateScaleEngine_alignDate(self *C.QwtDateScaleEngine,
 	slotval4 := (bool)(up)
 
 	virtualReturn := gofunc((&QwtDateScaleEngine{h: self}).callVirtualBase_AlignDate, slotval1, slotval2, slotval3, slotval4)
+	if callbackData.ownsReturn && virtualReturn != nil {
+		runtime.SetFinalizer(virtualReturn, nil)
+	}
 
 	return (*C.QDateTime)(virtualReturn.UnsafePointer())
 

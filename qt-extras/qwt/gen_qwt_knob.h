@@ -136,8 +136,10 @@ struct miqt_string QwtKnob_trUtf82(const char* s, const char* c);
 struct miqt_string QwtKnob_trUtf83(const char* s, const char* c, int n);
 
 bool QwtKnob_override_virtual_sizeHint(void* self, intptr_t slot);
+bool QwtKnob_override_virtual_owned_sizeHint(void* self, intptr_t slot);
 QSize* QwtKnob_virtualbase_sizeHint(const void* self);
 bool QwtKnob_override_virtual_minimumSizeHint(void* self, intptr_t slot);
+bool QwtKnob_override_virtual_owned_minimumSizeHint(void* self, intptr_t slot);
 QSize* QwtKnob_virtualbase_minimumSizeHint(const void* self);
 bool QwtKnob_override_virtual_paintEvent(void* self, intptr_t slot);
 void QwtKnob_virtualbase_paintEvent(void* self, QPaintEvent* param1);
@@ -228,6 +230,7 @@ QPainter* QwtKnob_virtualbase_sharedPainter(const void* self);
 bool QwtKnob_override_virtual_inputMethodEvent(void* self, intptr_t slot);
 void QwtKnob_virtualbase_inputMethodEvent(void* self, QInputMethodEvent* param1);
 bool QwtKnob_override_virtual_inputMethodQuery(void* self, intptr_t slot);
+bool QwtKnob_override_virtual_owned_inputMethodQuery(void* self, intptr_t slot);
 QVariant* QwtKnob_virtualbase_inputMethodQuery(const void* self, int param1);
 bool QwtKnob_override_virtual_focusNextPrevChild(void* self, intptr_t slot);
 bool QwtKnob_virtualbase_focusNextPrevChild(void* self, bool next);

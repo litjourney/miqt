@@ -91,6 +91,7 @@ bool QSctpSocket_virtualbase_setSocketDescriptor(void* self, intptr_t socketDesc
 bool QSctpSocket_override_virtual_setSocketOption(void* self, intptr_t slot);
 void QSctpSocket_virtualbase_setSocketOption(void* self, int option, QVariant* value);
 bool QSctpSocket_override_virtual_socketOption(void* self, intptr_t slot);
+bool QSctpSocket_override_virtual_owned_socketOption(void* self, intptr_t slot);
 QVariant* QSctpSocket_virtualbase_socketOption(void* self, int option);
 bool QSctpSocket_override_virtual_isSequential(void* self, intptr_t slot);
 bool QSctpSocket_virtualbase_isSequential(const void* self);

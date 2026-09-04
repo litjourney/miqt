@@ -43,6 +43,7 @@ void QwtTextEngine_operatorAssign(QwtTextEngine* self, QwtTextEngine* param1);
 bool QwtTextEngine_override_virtual_heightForWidth(void* self, intptr_t slot);
 double QwtTextEngine_virtualbase_heightForWidth(const void* self, QFont* font, int flags, struct miqt_string text, double width);
 bool QwtTextEngine_override_virtual_textSize(void* self, intptr_t slot);
+bool QwtTextEngine_override_virtual_owned_textSize(void* self, intptr_t slot);
 QSizeF* QwtTextEngine_virtualbase_textSize(const void* self, QFont* font, int flags, struct miqt_string text);
 bool QwtTextEngine_override_virtual_mightRender(void* self, intptr_t slot);
 bool QwtTextEngine_virtualbase_mightRender(const void* self, struct miqt_string text);
@@ -66,6 +67,7 @@ void QwtPlainTextEngine_operatorAssign(QwtPlainTextEngine* self, QwtPlainTextEng
 bool QwtPlainTextEngine_override_virtual_heightForWidth(void* self, intptr_t slot);
 double QwtPlainTextEngine_virtualbase_heightForWidth(const void* self, QFont* font, int flags, struct miqt_string text, double width);
 bool QwtPlainTextEngine_override_virtual_textSize(void* self, intptr_t slot);
+bool QwtPlainTextEngine_override_virtual_owned_textSize(void* self, intptr_t slot);
 QSizeF* QwtPlainTextEngine_virtualbase_textSize(const void* self, QFont* font, int flags, struct miqt_string text);
 bool QwtPlainTextEngine_override_virtual_draw(void* self, intptr_t slot);
 void QwtPlainTextEngine_virtualbase_draw(const void* self, QPainter* painter, QRectF* rect, int flags, struct miqt_string text);
@@ -89,6 +91,7 @@ void QwtRichTextEngine_operatorAssign(QwtRichTextEngine* self, QwtRichTextEngine
 bool QwtRichTextEngine_override_virtual_heightForWidth(void* self, intptr_t slot);
 double QwtRichTextEngine_virtualbase_heightForWidth(const void* self, QFont* font, int flags, struct miqt_string text, double width);
 bool QwtRichTextEngine_override_virtual_textSize(void* self, intptr_t slot);
+bool QwtRichTextEngine_override_virtual_owned_textSize(void* self, intptr_t slot);
 QSizeF* QwtRichTextEngine_virtualbase_textSize(const void* self, QFont* font, int flags, struct miqt_string text);
 bool QwtRichTextEngine_override_virtual_draw(void* self, intptr_t slot);
 void QwtRichTextEngine_virtualbase_draw(const void* self, QPainter* painter, QRectF* rect, int flags, struct miqt_string text);

@@ -63,6 +63,7 @@ bool QDesignerPropertySheetExtension_virtualbase_isAttribute(const void* self, i
 bool QDesignerPropertySheetExtension_override_virtual_setAttribute(void* self, intptr_t slot);
 void QDesignerPropertySheetExtension_virtualbase_setAttribute(void* self, int index, bool b);
 bool QDesignerPropertySheetExtension_override_virtual_property(void* self, intptr_t slot);
+bool QDesignerPropertySheetExtension_override_virtual_owned_property(void* self, intptr_t slot);
 QVariant* QDesignerPropertySheetExtension_virtualbase_property(const void* self, int index);
 bool QDesignerPropertySheetExtension_override_virtual_setProperty(void* self, intptr_t slot);
 void QDesignerPropertySheetExtension_virtualbase_setProperty(void* self, int index, QVariant* value);

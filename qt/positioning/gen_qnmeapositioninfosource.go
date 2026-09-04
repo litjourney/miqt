@@ -369,10 +369,16 @@ func miqt_exec_callback_QNmeaPositionInfoSource_setPreferredPositioningMethods(s
 	gofunc((&QNmeaPositionInfoSource{h: self}).callVirtualBase_SetPreferredPositioningMethods, slotval1)
 
 }
+
+type miqtVirtualCallback_QNmeaPositionInfoSource_lastKnownPosition struct {
+	callback   func(fromSatellitePositioningMethodsOnly bool) *QGeoPositionInfo
+	ownsReturn bool
+}
+
 func (this *QNmeaPositionInfoSource) OnLastKnownPosition(slot func(fromSatellitePositioningMethodsOnly bool) *QGeoPositionInfo) {
 	var slotHandle C.intptr_t
 	if slot != nil {
-		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QNmeaPositionInfoSource_lastKnownPosition{callback: slot}))
 	}
 	ok := C.QNmeaPositionInfoSource_override_virtual_lastKnownPosition(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
@@ -380,17 +386,34 @@ func (this *QNmeaPositionInfoSource) OnLastKnownPosition(slot func(fromSatellite
 	}
 }
 
+// OnLastKnownPositionOwned installs a virtual override that transfers
+// ownership of each non-nil returned Qt value object to C++.
+func (this *QNmeaPositionInfoSource) OnLastKnownPositionOwned(slot func(fromSatellitePositioningMethodsOnly bool) *QGeoPositionInfo) {
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QNmeaPositionInfoSource_lastKnownPosition{callback: slot, ownsReturn: true}))
+	}
+	ok := C.QNmeaPositionInfoSource_override_virtual_owned_lastKnownPosition(unsafe.Pointer(this.h), slotHandle)
+	if !ok {
+		panic("miqt: can only override virtual methods for directly constructed types")
+	}
+}
+
 //export miqt_exec_callback_QNmeaPositionInfoSource_lastKnownPosition
 func miqt_exec_callback_QNmeaPositionInfoSource_lastKnownPosition(self *C.QNmeaPositionInfoSource, cb C.intptr_t, fromSatellitePositioningMethodsOnly C.bool) *C.QGeoPositionInfo {
-	gofunc, ok := cgo.Handle(cb).Value().(func(fromSatellitePositioningMethodsOnly bool) *QGeoPositionInfo)
+	callbackData, ok := cgo.Handle(cb).Value().(miqtVirtualCallback_QNmeaPositionInfoSource_lastKnownPosition)
 	if !ok {
 		panic("miqt: callback of non-callback type (heap corruption?)")
 	}
+	gofunc := callbackData.callback
 
 	// Convert all CABI parameters to Go parameters
 	slotval1 := (bool)(fromSatellitePositioningMethodsOnly)
 
 	virtualReturn := gofunc(slotval1)
+	if callbackData.ownsReturn && virtualReturn != nil {
+		runtime.SetFinalizer(virtualReturn, nil)
+	}
 
 	return virtualReturn.cPointer()
 

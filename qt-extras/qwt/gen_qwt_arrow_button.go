@@ -229,10 +229,16 @@ func (this *QwtArrowButton) callVirtualBase_SizeHint() *qt.QSize {
 	return _goptr
 
 }
+
+type miqtVirtualCallback_QwtArrowButton_sizeHint struct {
+	callback   func(super func() *qt.QSize) *qt.QSize
+	ownsReturn bool
+}
+
 func (this *QwtArrowButton) OnSizeHint(slot func(super func() *qt.QSize) *qt.QSize) {
 	var slotHandle C.intptr_t
 	if slot != nil {
-		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QwtArrowButton_sizeHint{callback: slot}))
 	}
 	ok := C.QwtArrowButton_override_virtual_sizeHint(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
@@ -240,14 +246,31 @@ func (this *QwtArrowButton) OnSizeHint(slot func(super func() *qt.QSize) *qt.QSi
 	}
 }
 
+// OnSizeHintOwned installs a virtual override that transfers
+// ownership of each non-nil returned Qt value object to C++.
+func (this *QwtArrowButton) OnSizeHintOwned(slot func(super func() *qt.QSize) *qt.QSize) {
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QwtArrowButton_sizeHint{callback: slot, ownsReturn: true}))
+	}
+	ok := C.QwtArrowButton_override_virtual_owned_sizeHint(unsafe.Pointer(this.h), slotHandle)
+	if !ok {
+		panic("miqt: can only override virtual methods for directly constructed types")
+	}
+}
+
 //export miqt_exec_callback_QwtArrowButton_sizeHint
 func miqt_exec_callback_QwtArrowButton_sizeHint(self *C.QwtArrowButton, cb C.intptr_t) *C.QSize {
-	gofunc, ok := cgo.Handle(cb).Value().(func(super func() *qt.QSize) *qt.QSize)
+	callbackData, ok := cgo.Handle(cb).Value().(miqtVirtualCallback_QwtArrowButton_sizeHint)
 	if !ok {
 		panic("miqt: callback of non-callback type (heap corruption?)")
 	}
+	gofunc := callbackData.callback
 
 	virtualReturn := gofunc((&QwtArrowButton{h: self}).callVirtualBase_SizeHint)
+	if callbackData.ownsReturn && virtualReturn != nil {
+		runtime.SetFinalizer(virtualReturn, nil)
+	}
 
 	return (*C.QSize)(virtualReturn.UnsafePointer())
 
@@ -260,10 +283,16 @@ func (this *QwtArrowButton) callVirtualBase_MinimumSizeHint() *qt.QSize {
 	return _goptr
 
 }
+
+type miqtVirtualCallback_QwtArrowButton_minimumSizeHint struct {
+	callback   func(super func() *qt.QSize) *qt.QSize
+	ownsReturn bool
+}
+
 func (this *QwtArrowButton) OnMinimumSizeHint(slot func(super func() *qt.QSize) *qt.QSize) {
 	var slotHandle C.intptr_t
 	if slot != nil {
-		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QwtArrowButton_minimumSizeHint{callback: slot}))
 	}
 	ok := C.QwtArrowButton_override_virtual_minimumSizeHint(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
@@ -271,14 +300,31 @@ func (this *QwtArrowButton) OnMinimumSizeHint(slot func(super func() *qt.QSize) 
 	}
 }
 
+// OnMinimumSizeHintOwned installs a virtual override that transfers
+// ownership of each non-nil returned Qt value object to C++.
+func (this *QwtArrowButton) OnMinimumSizeHintOwned(slot func(super func() *qt.QSize) *qt.QSize) {
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QwtArrowButton_minimumSizeHint{callback: slot, ownsReturn: true}))
+	}
+	ok := C.QwtArrowButton_override_virtual_owned_minimumSizeHint(unsafe.Pointer(this.h), slotHandle)
+	if !ok {
+		panic("miqt: can only override virtual methods for directly constructed types")
+	}
+}
+
 //export miqt_exec_callback_QwtArrowButton_minimumSizeHint
 func miqt_exec_callback_QwtArrowButton_minimumSizeHint(self *C.QwtArrowButton, cb C.intptr_t) *C.QSize {
-	gofunc, ok := cgo.Handle(cb).Value().(func(super func() *qt.QSize) *qt.QSize)
+	callbackData, ok := cgo.Handle(cb).Value().(miqtVirtualCallback_QwtArrowButton_minimumSizeHint)
 	if !ok {
 		panic("miqt: callback of non-callback type (heap corruption?)")
 	}
+	gofunc := callbackData.callback
 
 	virtualReturn := gofunc((&QwtArrowButton{h: self}).callVirtualBase_MinimumSizeHint)
+	if callbackData.ownsReturn && virtualReturn != nil {
+		runtime.SetFinalizer(virtualReturn, nil)
+	}
 
 	return (*C.QSize)(virtualReturn.UnsafePointer())
 
@@ -385,10 +431,16 @@ func (this *QwtArrowButton) callVirtualBase_LabelRect() *qt.QRect {
 	return _goptr
 
 }
+
+type miqtVirtualCallback_QwtArrowButton_labelRect struct {
+	callback   func(super func() *qt.QRect) *qt.QRect
+	ownsReturn bool
+}
+
 func (this *QwtArrowButton) OnLabelRect(slot func(super func() *qt.QRect) *qt.QRect) {
 	var slotHandle C.intptr_t
 	if slot != nil {
-		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QwtArrowButton_labelRect{callback: slot}))
 	}
 	ok := C.QwtArrowButton_override_virtual_labelRect(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
@@ -396,14 +448,31 @@ func (this *QwtArrowButton) OnLabelRect(slot func(super func() *qt.QRect) *qt.QR
 	}
 }
 
+// OnLabelRectOwned installs a virtual override that transfers
+// ownership of each non-nil returned Qt value object to C++.
+func (this *QwtArrowButton) OnLabelRectOwned(slot func(super func() *qt.QRect) *qt.QRect) {
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QwtArrowButton_labelRect{callback: slot, ownsReturn: true}))
+	}
+	ok := C.QwtArrowButton_override_virtual_owned_labelRect(unsafe.Pointer(this.h), slotHandle)
+	if !ok {
+		panic("miqt: can only override virtual methods for directly constructed types")
+	}
+}
+
 //export miqt_exec_callback_QwtArrowButton_labelRect
 func miqt_exec_callback_QwtArrowButton_labelRect(self *C.QwtArrowButton, cb C.intptr_t) *C.QRect {
-	gofunc, ok := cgo.Handle(cb).Value().(func(super func() *qt.QRect) *qt.QRect)
+	callbackData, ok := cgo.Handle(cb).Value().(miqtVirtualCallback_QwtArrowButton_labelRect)
 	if !ok {
 		panic("miqt: callback of non-callback type (heap corruption?)")
 	}
+	gofunc := callbackData.callback
 
 	virtualReturn := gofunc((&QwtArrowButton{h: self}).callVirtualBase_LabelRect)
+	if callbackData.ownsReturn && virtualReturn != nil {
+		runtime.SetFinalizer(virtualReturn, nil)
+	}
 
 	return (*C.QRect)(virtualReturn.UnsafePointer())
 
@@ -416,10 +485,16 @@ func (this *QwtArrowButton) callVirtualBase_ArrowSize(param1 qt.ArrowType, bound
 	return _goptr
 
 }
+
+type miqtVirtualCallback_QwtArrowButton_arrowSize struct {
+	callback   func(super func(param1 qt.ArrowType, boundingSize *qt.QSize) *qt.QSize, param1 qt.ArrowType, boundingSize *qt.QSize) *qt.QSize
+	ownsReturn bool
+}
+
 func (this *QwtArrowButton) OnArrowSize(slot func(super func(param1 qt.ArrowType, boundingSize *qt.QSize) *qt.QSize, param1 qt.ArrowType, boundingSize *qt.QSize) *qt.QSize) {
 	var slotHandle C.intptr_t
 	if slot != nil {
-		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QwtArrowButton_arrowSize{callback: slot}))
 	}
 	ok := C.QwtArrowButton_override_virtual_arrowSize(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
@@ -427,12 +502,26 @@ func (this *QwtArrowButton) OnArrowSize(slot func(super func(param1 qt.ArrowType
 	}
 }
 
+// OnArrowSizeOwned installs a virtual override that transfers
+// ownership of each non-nil returned Qt value object to C++.
+func (this *QwtArrowButton) OnArrowSizeOwned(slot func(super func(param1 qt.ArrowType, boundingSize *qt.QSize) *qt.QSize, param1 qt.ArrowType, boundingSize *qt.QSize) *qt.QSize) {
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QwtArrowButton_arrowSize{callback: slot, ownsReturn: true}))
+	}
+	ok := C.QwtArrowButton_override_virtual_owned_arrowSize(unsafe.Pointer(this.h), slotHandle)
+	if !ok {
+		panic("miqt: can only override virtual methods for directly constructed types")
+	}
+}
+
 //export miqt_exec_callback_QwtArrowButton_arrowSize
 func miqt_exec_callback_QwtArrowButton_arrowSize(self *C.QwtArrowButton, cb C.intptr_t, param1 C.int, boundingSize *C.QSize) *C.QSize {
-	gofunc, ok := cgo.Handle(cb).Value().(func(super func(param1 qt.ArrowType, boundingSize *qt.QSize) *qt.QSize, param1 qt.ArrowType, boundingSize *qt.QSize) *qt.QSize)
+	callbackData, ok := cgo.Handle(cb).Value().(miqtVirtualCallback_QwtArrowButton_arrowSize)
 	if !ok {
 		panic("miqt: callback of non-callback type (heap corruption?)")
 	}
+	gofunc := callbackData.callback
 
 	// Convert all CABI parameters to Go parameters
 	slotval1 := (qt.ArrowType)(param1)
@@ -440,6 +529,9 @@ func miqt_exec_callback_QwtArrowButton_arrowSize(self *C.QwtArrowButton, cb C.in
 	slotval2 := qt.UnsafeNewQSize(unsafe.Pointer(boundingSize))
 
 	virtualReturn := gofunc((&QwtArrowButton{h: self}).callVirtualBase_ArrowSize, slotval1, slotval2)
+	if callbackData.ownsReturn && virtualReturn != nil {
+		runtime.SetFinalizer(virtualReturn, nil)
+	}
 
 	return (*C.QSize)(virtualReturn.UnsafePointer())
 
@@ -1667,10 +1759,16 @@ func (this *QwtArrowButton) callVirtualBase_InputMethodQuery(param1 qt.InputMeth
 	return _goptr
 
 }
+
+type miqtVirtualCallback_QwtArrowButton_inputMethodQuery struct {
+	callback   func(super func(param1 qt.InputMethodQuery) *qt.QVariant, param1 qt.InputMethodQuery) *qt.QVariant
+	ownsReturn bool
+}
+
 func (this *QwtArrowButton) OnInputMethodQuery(slot func(super func(param1 qt.InputMethodQuery) *qt.QVariant, param1 qt.InputMethodQuery) *qt.QVariant) {
 	var slotHandle C.intptr_t
 	if slot != nil {
-		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QwtArrowButton_inputMethodQuery{callback: slot}))
 	}
 	ok := C.QwtArrowButton_override_virtual_inputMethodQuery(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
@@ -1678,17 +1776,34 @@ func (this *QwtArrowButton) OnInputMethodQuery(slot func(super func(param1 qt.In
 	}
 }
 
+// OnInputMethodQueryOwned installs a virtual override that transfers
+// ownership of each non-nil returned Qt value object to C++.
+func (this *QwtArrowButton) OnInputMethodQueryOwned(slot func(super func(param1 qt.InputMethodQuery) *qt.QVariant, param1 qt.InputMethodQuery) *qt.QVariant) {
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QwtArrowButton_inputMethodQuery{callback: slot, ownsReturn: true}))
+	}
+	ok := C.QwtArrowButton_override_virtual_owned_inputMethodQuery(unsafe.Pointer(this.h), slotHandle)
+	if !ok {
+		panic("miqt: can only override virtual methods for directly constructed types")
+	}
+}
+
 //export miqt_exec_callback_QwtArrowButton_inputMethodQuery
 func miqt_exec_callback_QwtArrowButton_inputMethodQuery(self *C.QwtArrowButton, cb C.intptr_t, param1 C.int) *C.QVariant {
-	gofunc, ok := cgo.Handle(cb).Value().(func(super func(param1 qt.InputMethodQuery) *qt.QVariant, param1 qt.InputMethodQuery) *qt.QVariant)
+	callbackData, ok := cgo.Handle(cb).Value().(miqtVirtualCallback_QwtArrowButton_inputMethodQuery)
 	if !ok {
 		panic("miqt: callback of non-callback type (heap corruption?)")
 	}
+	gofunc := callbackData.callback
 
 	// Convert all CABI parameters to Go parameters
 	slotval1 := (qt.InputMethodQuery)(param1)
 
 	virtualReturn := gofunc((&QwtArrowButton{h: self}).callVirtualBase_InputMethodQuery, slotval1)
+	if callbackData.ownsReturn && virtualReturn != nil {
+		runtime.SetFinalizer(virtualReturn, nil)
+	}
 
 	return (*C.QVariant)(virtualReturn.UnsafePointer())
 

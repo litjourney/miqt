@@ -148,6 +148,7 @@ QStandardItem* QStandardItem_takeChild2(QStandardItem* self, int row, int column
 void QStandardItem_sortChildren2(QStandardItem* self, int column, int order);
 
 bool QStandardItem_override_virtual_data(void* self, intptr_t slot);
+bool QStandardItem_override_virtual_owned_data(void* self, intptr_t slot);
 QVariant* QStandardItem_virtualbase_data(const void* self, int role);
 bool QStandardItem_override_virtual_multiData(void* self, intptr_t slot);
 void QStandardItem_virtualbase_multiData(const void* self, QModelRoleDataSpan* roleDataSpan);
@@ -248,8 +249,10 @@ struct miqt_array /* of QStandardItem* */  QStandardItemModel_findItems3(const Q
 bool QStandardItemModel_override_virtual_roleNames(void* self, intptr_t slot);
 struct miqt_map /* of int to struct miqt_string */  QStandardItemModel_virtualbase_roleNames(const void* self);
 bool QStandardItemModel_override_virtual_index(void* self, intptr_t slot);
+bool QStandardItemModel_override_virtual_owned_index(void* self, intptr_t slot);
 QModelIndex* QStandardItemModel_virtualbase_index(const void* self, int row, int column, QModelIndex* parent);
 bool QStandardItemModel_override_virtual_parent(void* self, intptr_t slot);
+bool QStandardItemModel_override_virtual_owned_parent(void* self, intptr_t slot);
 QModelIndex* QStandardItemModel_virtualbase_parent(const void* self, QModelIndex* child);
 bool QStandardItemModel_override_virtual_rowCount(void* self, intptr_t slot);
 int QStandardItemModel_virtualbase_rowCount(const void* self, QModelIndex* parent);
@@ -258,6 +261,7 @@ int QStandardItemModel_virtualbase_columnCount(const void* self, QModelIndex* pa
 bool QStandardItemModel_override_virtual_hasChildren(void* self, intptr_t slot);
 bool QStandardItemModel_virtualbase_hasChildren(const void* self, QModelIndex* parent);
 bool QStandardItemModel_override_virtual_data(void* self, intptr_t slot);
+bool QStandardItemModel_override_virtual_owned_data(void* self, intptr_t slot);
 QVariant* QStandardItemModel_virtualbase_data(const void* self, QModelIndex* index, int role);
 bool QStandardItemModel_override_virtual_multiData(void* self, intptr_t slot);
 void QStandardItemModel_virtualbase_multiData(const void* self, QModelIndex* index, QModelRoleDataSpan* roleDataSpan);
@@ -266,6 +270,7 @@ bool QStandardItemModel_virtualbase_setData(void* self, QModelIndex* index, QVar
 bool QStandardItemModel_override_virtual_clearItemData(void* self, intptr_t slot);
 bool QStandardItemModel_virtualbase_clearItemData(void* self, QModelIndex* index);
 bool QStandardItemModel_override_virtual_headerData(void* self, intptr_t slot);
+bool QStandardItemModel_override_virtual_owned_headerData(void* self, intptr_t slot);
 QVariant* QStandardItemModel_virtualbase_headerData(const void* self, int section, int orientation, int role);
 bool QStandardItemModel_override_virtual_setHeaderData(void* self, intptr_t slot);
 bool QStandardItemModel_virtualbase_setHeaderData(void* self, int section, int orientation, QVariant* value, int role);
@@ -294,6 +299,7 @@ QMimeData* QStandardItemModel_virtualbase_mimeData(const void* self, struct miqt
 bool QStandardItemModel_override_virtual_dropMimeData(void* self, intptr_t slot);
 bool QStandardItemModel_virtualbase_dropMimeData(void* self, QMimeData* data, int action, int row, int column, QModelIndex* parent);
 bool QStandardItemModel_override_virtual_sibling(void* self, intptr_t slot);
+bool QStandardItemModel_override_virtual_owned_sibling(void* self, intptr_t slot);
 QModelIndex* QStandardItemModel_virtualbase_sibling(const void* self, int row, int column, QModelIndex* idx);
 bool QStandardItemModel_override_virtual_canDropMimeData(void* self, intptr_t slot);
 bool QStandardItemModel_virtualbase_canDropMimeData(const void* self, QMimeData* data, int action, int row, int column, QModelIndex* parent);
@@ -308,10 +314,12 @@ void QStandardItemModel_virtualbase_fetchMore(void* self, QModelIndex* parent);
 bool QStandardItemModel_override_virtual_canFetchMore(void* self, intptr_t slot);
 bool QStandardItemModel_virtualbase_canFetchMore(const void* self, QModelIndex* parent);
 bool QStandardItemModel_override_virtual_buddy(void* self, intptr_t slot);
+bool QStandardItemModel_override_virtual_owned_buddy(void* self, intptr_t slot);
 QModelIndex* QStandardItemModel_virtualbase_buddy(const void* self, QModelIndex* index);
 bool QStandardItemModel_override_virtual_match(void* self, intptr_t slot);
 struct miqt_array /* of QModelIndex* */  QStandardItemModel_virtualbase_match(const void* self, QModelIndex* start, int role, QVariant* value, int hits, int flags);
 bool QStandardItemModel_override_virtual_span(void* self, intptr_t slot);
+bool QStandardItemModel_override_virtual_owned_span(void* self, intptr_t slot);
 QSize* QStandardItemModel_virtualbase_span(const void* self, QModelIndex* index);
 bool QStandardItemModel_override_virtual_submit(void* self, intptr_t slot);
 bool QStandardItemModel_virtualbase_submit(void* self);

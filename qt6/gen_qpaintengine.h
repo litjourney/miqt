@@ -145,12 +145,15 @@ void QPaintEngine_virtualbase_drawTiledPixmap(void* self, QRectF* r, QPixmap* pi
 bool QPaintEngine_override_virtual_drawImage(void* self, intptr_t slot);
 void QPaintEngine_virtualbase_drawImage(void* self, QRectF* r, QImage* pm, QRectF* sr, int flags);
 bool QPaintEngine_override_virtual_coordinateOffset(void* self, intptr_t slot);
+bool QPaintEngine_override_virtual_owned_coordinateOffset(void* self, intptr_t slot);
 QPoint* QPaintEngine_virtualbase_coordinateOffset(const void* self);
 bool QPaintEngine_override_virtual_type(void* self, intptr_t slot);
 int QPaintEngine_virtualbase_type(const void* self);
 bool QPaintEngine_override_virtual_createPixmap(void* self, intptr_t slot);
+bool QPaintEngine_override_virtual_owned_createPixmap(void* self, intptr_t slot);
 QPixmap* QPaintEngine_virtualbase_createPixmap(void* self, QSize* size);
 bool QPaintEngine_override_virtual_createPixmapFromImage(void* self, intptr_t slot);
+bool QPaintEngine_override_virtual_owned_createPixmapFromImage(void* self, intptr_t slot);
 QPixmap* QPaintEngine_virtualbase_createPixmapFromImage(void* self, QImage* image, int flags);
 
 void QPaintEngine_delete(QPaintEngine* self);

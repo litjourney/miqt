@@ -76,10 +76,16 @@ func (this *QQmlAbstractUrlInterceptor) Intercept(path *qt6.QUrl, typeVal QQmlAb
 func (this *QQmlAbstractUrlInterceptor) OperatorAssign(param1 *QQmlAbstractUrlInterceptor) {
 	C.QQmlAbstractUrlInterceptor_operatorAssign(this.h, param1.cPointer())
 }
+
+type miqtVirtualCallback_QQmlAbstractUrlInterceptor_intercept struct {
+	callback   func(path *qt6.QUrl, typeVal QQmlAbstractUrlInterceptor__DataType) *qt6.QUrl
+	ownsReturn bool
+}
+
 func (this *QQmlAbstractUrlInterceptor) OnIntercept(slot func(path *qt6.QUrl, typeVal QQmlAbstractUrlInterceptor__DataType) *qt6.QUrl) {
 	var slotHandle C.intptr_t
 	if slot != nil {
-		slotHandle = C.intptr_t(cgo.NewHandle(slot))
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QQmlAbstractUrlInterceptor_intercept{callback: slot}))
 	}
 	ok := C.QQmlAbstractUrlInterceptor_override_virtual_intercept(unsafe.Pointer(this.h), slotHandle)
 	if !ok {
@@ -87,12 +93,26 @@ func (this *QQmlAbstractUrlInterceptor) OnIntercept(slot func(path *qt6.QUrl, ty
 	}
 }
 
+// OnInterceptOwned installs a virtual override that transfers
+// ownership of each non-nil returned Qt value object to C++.
+func (this *QQmlAbstractUrlInterceptor) OnInterceptOwned(slot func(path *qt6.QUrl, typeVal QQmlAbstractUrlInterceptor__DataType) *qt6.QUrl) {
+	var slotHandle C.intptr_t
+	if slot != nil {
+		slotHandle = C.intptr_t(cgo.NewHandle(miqtVirtualCallback_QQmlAbstractUrlInterceptor_intercept{callback: slot, ownsReturn: true}))
+	}
+	ok := C.QQmlAbstractUrlInterceptor_override_virtual_owned_intercept(unsafe.Pointer(this.h), slotHandle)
+	if !ok {
+		panic("miqt: can only override virtual methods for directly constructed types")
+	}
+}
+
 //export miqt_exec_callback_QQmlAbstractUrlInterceptor_intercept
 func miqt_exec_callback_QQmlAbstractUrlInterceptor_intercept(self *C.QQmlAbstractUrlInterceptor, cb C.intptr_t, path *C.QUrl, typeVal C.int) *C.QUrl {
-	gofunc, ok := cgo.Handle(cb).Value().(func(path *qt6.QUrl, typeVal QQmlAbstractUrlInterceptor__DataType) *qt6.QUrl)
+	callbackData, ok := cgo.Handle(cb).Value().(miqtVirtualCallback_QQmlAbstractUrlInterceptor_intercept)
 	if !ok {
 		panic("miqt: callback of non-callback type (heap corruption?)")
 	}
+	gofunc := callbackData.callback
 
 	// Convert all CABI parameters to Go parameters
 	slotval1 := qt6.UnsafeNewQUrl(unsafe.Pointer(path))
@@ -100,6 +120,9 @@ func miqt_exec_callback_QQmlAbstractUrlInterceptor_intercept(self *C.QQmlAbstrac
 	slotval2 := (QQmlAbstractUrlInterceptor__DataType)(typeVal)
 
 	virtualReturn := gofunc(slotval1, slotval2)
+	if callbackData.ownsReturn && virtualReturn != nil {
+		runtime.SetFinalizer(virtualReturn, nil)
+	}
 
 	return (*C.QUrl)(virtualReturn.UnsafePointer())
 
