@@ -1,0 +1,1235 @@
+CHANGELOG.md
+  s_b1677221371742::t_173c36a4fc4693 8-10
+cmd/genbindings/emitcabi.go
+  s_b1677221371742::t_17b3078b3e7528 343-353,357-379
+cmd/genbindings/emitgo.go
+  s_b1677221371742::t_3797ac9fedcce2 376-391,407-417,449,477,482,506,511,556-568,632,651,670,684,1267-1269
+cmd/genbindings/emitgo_free_test.go
+  s_b1677221371742::t_d920d24f4fbd4f 1-280
+qt-extras/qwt/gen_qwt_abstract_legend.go
+  s_b1677221371742::t_eb24dbb6dc572d 422
+qt-extras/qwt/gen_qwt_clipper.go
+  s_b1677221371742::t_928d02ddef9117 58
+qt-extras/qwt/gen_qwt_color_map.go
+  s_b1677221371742::t_4afe41bf5a74c3 106,178,316,416,575
+qt-extras/qwt/gen_qwt_compass.go
+  s_b1677221371742::t_bb6bef18740537 127-128
+qt-extras/qwt/gen_qwt_date_scale_engine.go
+  s_b1677221371742::t_ab6e1b976ee853 177,248
+qt-extras/qwt/gen_qwt_dyngrid_layout.go
+  s_b1677221371742::t_433aacff8cc0d6 170
+qt-extras/qwt/gen_qwt_event_pattern.go
+  s_b1677221371742::t_2b3b946243f539 140,153,166,179
+qt-extras/qwt/gen_qwt_legend.go
+  s_b1677221371742::t_e2533deb145e3e 134,747
+qt-extras/qwt/gen_qwt_legend_data.go
+  s_b1677221371742::t_6161565eb853ee 111-112
+qt-extras/qwt/gen_qwt_matrix_raster_data.go
+  s_b1677221371742::t_e909a7d38f9c99 101
+qt-extras/qwt/gen_qwt_picker_machine.go
+  s_b1677221371742::t_94ddca4532a781 93,220,232,344,356,468,480,592,604,716,728,840,852,964,976
+qt-extras/qwt/gen_qwt_plot.go
+  s_b1677221371742::t_66aea1a2381d36 495
+qt-extras/qwt/gen_qwt_plot_dict.go
+  s_b1677221371742::t_9b9939450622e2 69,80
+qt-extras/qwt/gen_qwt_plot_item.go
+  s_b1677221371742::t_480f7cfb601e19 248
+qt-extras/qwt/gen_qwt_plot_legenditem.go
+  s_b1677221371742::t_25a26ae90cf4b6 219,232
+qt-extras/qwt/gen_qwt_plot_multi_barchart.go
+  s_b1677221371742::t_a7b605c1ceb1c5 105,170
+qt-extras/qwt/gen_qwt_plot_picker.go
+  s_b1677221371742::t_8a1046dca0d9a1 208
+qt-extras/qwt/gen_qwt_plot_spectrogram.go
+  s_b1677221371742::t_4051f75ad01141 161
+qt-extras/qwt/gen_qwt_point_data.go
+  s_b1677221371742::t_7d85ed2c8703f0 108,119
+qt-extras/qwt/gen_qwt_scale_div.go
+  s_b1677221371742::t_69878d7d08fced 193
+qt-extras/qwt/gen_qwt_scale_engine.go
+  s_b1677221371742::t_b55b8e3b63d9e2 244,503,574,847,918
+qt-extras/qwt/gen_qwt_spline.go
+  s_b1677221371742::t_3b65f6371f5e05 98,109,120
+qt-extras/scintillaedit/gen_ScintillaEdit.go
+  s_b1677221371742::t_5cf725ddcdea87 9277-9278,9313-9314
+qt-restricted-extras/charts6/gen_qabstractbarseries.go
+  s_b1677221371742::t_291edb1eda9ca5 132,471,506
+qt-restricted-extras/charts6/gen_qabstractseries.go
+  s_b1677221371742::t_d7c9615b4259d2 158
+qt-restricted-extras/charts6/gen_qbarcategoryaxis.go
+  s_b1677221371742::t_1067557dfec932 172
+qt-restricted-extras/charts6/gen_qbarset.go
+  s_b1677221371742::t_c8276b9457ee08 300,704
+qt-restricted-extras/charts6/gen_qboxplotseries.go
+  s_b1677221371742::t_c52bfaf18ddd7d 127,411,446
+qt-restricted-extras/charts6/gen_qcandlestickseries.go
+  s_b1677221371742::t_91628dcc2bab36 137,378,413
+qt-restricted-extras/charts6/gen_qcategoryaxis.go
+  s_b1677221371742::t_aa867d2e297829 155
+qt-restricted-extras/charts6/gen_qchart.go
+  s_b1677221371742::t_e2c543a4e77e07 145,180,482,493
+qt-restricted-extras/charts6/gen_qlegend.go
+  s_b1677221371742::t_e8a971c2a31f3f 200,497
+qt-restricted-extras/charts6/gen_qpieseries.go
+  s_b1677221371742::t_6b321fe88f6d14 143,244,279
+qt-restricted-extras/charts6/gen_qpolarchart.go
+  s_b1677221371742::t_83d3b2ed66af12 114,151,162
+qt-restricted-extras/charts6/gen_qxyseries.go
+  s_b1677221371742::t_457846a9e1c17b 158,171,363,410-411,525-526,551-552,557-558,1184-1185,1190-1191
+qt-restricted-extras/qscintilla/gen_qsciabstractapis.go
+  s_b1677221371742::t_ed1633e1707889 155,288,300,371,384
+qt-restricted-extras/qscintilla/gen_qsciapis.go
+  s_b1677221371742::t_6b9706685f5c63 206,224,464,476,547,579,592
+qt-restricted-extras/qscintilla/gen_qscicommandset.go
+  s_b1677221371742::t_bfccce17228179 63
+qt-restricted-extras/qscintilla/gen_qscilexer.go
+  s_b1677221371742::t_6b704f2999aa09 132,680
+qt-restricted-extras/qscintilla/gen_qscilexeravs.go
+  s_b1677221371742::t_9bcbe756914972 506
+qt-restricted-extras/qscintilla/gen_qscilexerbash.go
+  s_b1677221371742::t_1385cb819016a6 515
+qt-restricted-extras/qscintilla/gen_qscilexerbatch.go
+  s_b1677221371742::t_ce3b95c22f4191 393
+qt-restricted-extras/qscintilla/gen_qscilexercmake.go
+  s_b1677221371742::t_ceb7608951e497 465
+qt-restricted-extras/qscintilla/gen_qscilexercoffeescript.go
+  s_b1677221371742::t_8b1b4f4ab8897d 148,525
+qt-restricted-extras/qscintilla/gen_qscilexercpp.go
+  s_b1677221371742::t_581c06c35dab52 186,769
+qt-restricted-extras/qscintilla/gen_qscilexercsharp.go
+  s_b1677221371742::t_4847960ea7e8b4 552
+qt-restricted-extras/qscintilla/gen_qscilexercss.go
+  s_b1677221371742::t_c7d9a3bde2d6ed 555
+qt-restricted-extras/qscintilla/gen_qscilexercustom.go
+  s_b1677221371742::t_811d53da1fe972 440
+qt-restricted-extras/qscintilla/gen_qscilexerd.go
+  s_b1677221371742::t_a37cc8bf967635 147,606
+qt-restricted-extras/qscintilla/gen_qscilexerdiff.go
+  s_b1677221371742::t_f871f42bca9b25 372
+qt-restricted-extras/qscintilla/gen_qscilexeredifact.go
+  s_b1677221371742::t_274c4a744de400 364
+qt-restricted-extras/qscintilla/gen_qscilexerfortran.go
+  s_b1677221371742::t_360c29ada782ba 408
+qt-restricted-extras/qscintilla/gen_qscilexerfortran77.go
+  s_b1677221371742::t_1940eafa9bb088 473
+qt-restricted-extras/qscintilla/gen_qscilexerhtml.go
+  s_b1677221371742::t_bd807d96762b18 682
+qt-restricted-extras/qscintilla/gen_qscilexeridl.go
+  s_b1677221371742::t_319386bbe8f3a9 536
+qt-restricted-extras/qscintilla/gen_qscilexerjava.go
+  s_b1677221371742::t_1c29abf51ec7ac 523
+qt-restricted-extras/qscintilla/gen_qscilexerjavascript.go
+  s_b1677221371742::t_0da7ab7a90f96d 552
+qt-restricted-extras/qscintilla/gen_qscilexerjson.go
+  s_b1677221371742::t_513a5e93306658 454
+qt-restricted-extras/qscintilla/gen_qscilexerlua.go
+  s_b1677221371742::t_76bedc384b5181 144,502
+qt-restricted-extras/qscintilla/gen_qscilexermakefile.go
+  s_b1677221371742::t_62813bf2dce700 383
+qt-restricted-extras/qscintilla/gen_qscilexermarkdown.go
+  s_b1677221371742::t_149c0d81c990ba 389
+qt-restricted-extras/qscintilla/gen_qscilexermatlab.go
+  s_b1677221371742::t_d9c2491d57666b 375
+qt-restricted-extras/qscintilla/gen_qscilexeroctave.go
+  s_b1677221371742::t_e7fea731095fc0 342
+qt-restricted-extras/qscintilla/gen_qscilexerpascal.go
+  s_b1677221371742::t_16e3745d6f1109 139,601
+qt-restricted-extras/qscintilla/gen_qscilexerperl.go
+  s_b1677221371742::t_4ed5b765d096df 165,600
+qt-restricted-extras/qscintilla/gen_qscilexerpo.go
+  s_b1677221371742::t_354f60439f2eb4 492
+qt-restricted-extras/qscintilla/gen_qscilexerpostscript.go
+  s_b1677221371742::t_b91ee997625da2 584
+qt-restricted-extras/qscintilla/gen_qscilexerpov.go
+  s_b1677221371742::t_98672c6698c4ec 556
+qt-restricted-extras/qscintilla/gen_qscilexerproperties.go
+  s_b1677221371742::t_47d52c180df01f 468
+qt-restricted-extras/qscintilla/gen_qscilexerpython.go
+  s_b1677221371742::t_aa0cff727d5faa 154,673
+qt-restricted-extras/qscintilla/gen_qscilexerruby.go
+  s_b1677221371742::t_a7777c25076870 497
+qt-restricted-extras/qscintilla/gen_qscilexerspice.go
+  s_b1677221371742::t_2f4dd1290c6a59 379
+qt-restricted-extras/qscintilla/gen_qscilexersql.go
+  s_b1677221371742::t_fc5ada60c132ca 596
+qt-restricted-extras/qscintilla/gen_qscilexertcl.go
+  s_b1677221371742::t_c1ccf9f68302a7 450
+qt-restricted-extras/qscintilla/gen_qscilexertex.go
+  s_b1677221371742::t_a4b95ce546e05f 443
+qt-restricted-extras/qscintilla/gen_qscilexerverilog.go
+  s_b1677221371742::t_d6056aa3d48e9d 503
+qt-restricted-extras/qscintilla/gen_qscilexervhdl.go
+  s_b1677221371742::t_6562aec903e820 626
+qt-restricted-extras/qscintilla/gen_qscilexerxml.go
+  s_b1677221371742::t_94ddfd97bb65a4 502
+qt-restricted-extras/qscintilla/gen_qscilexeryaml.go
+  s_b1677221371742::t_bbcc6e0aef6874 464
+qt-restricted-extras/qscintilla/gen_qsciscintilla.go
+  s_b1677221371742::t_f978978f93c45c 313,452,2115,4874-4876,4878
+qt-restricted-extras/qscintilla/gen_qsciscintillabase.go
+  s_b1677221371742::t_55bd8455e21d71 2579-2581,2583
+qt-restricted-extras/qscintilla6/gen_qsciabstractapis.go
+  s_b1677221371742::t_20eac962cfc2b9 146,257,269,340,353
+qt-restricted-extras/qscintilla6/gen_qsciapis.go
+  s_b1677221371742::t_4c15997d39fd2f 197,215,433,445,516,548,561
+qt-restricted-extras/qscintilla6/gen_qscicommandset.go
+  s_b1677221371742::t_06c2b28a9ed00f 63
+qt-restricted-extras/qscintilla6/gen_qscilexer.go
+  s_b1677221371742::t_36071f56fa00f1 123,649
+qt-restricted-extras/qscintilla6/gen_qscilexeravs.go
+  s_b1677221371742::t_2076df8eebacde 475
+qt-restricted-extras/qscintilla6/gen_qscilexerbash.go
+  s_b1677221371742::t_effe1f24e69b2a 484
+qt-restricted-extras/qscintilla6/gen_qscilexerbatch.go
+  s_b1677221371742::t_0e244ca8899b01 362
+qt-restricted-extras/qscintilla6/gen_qscilexercmake.go
+  s_b1677221371742::t_6ba02bcea7196a 434
+qt-restricted-extras/qscintilla6/gen_qscilexercoffeescript.go
+  s_b1677221371742::t_54d65b17821e9a 139,494
+qt-restricted-extras/qscintilla6/gen_qscilexercpp.go
+  s_b1677221371742::t_feb2c8fc25400d 177,738
+qt-restricted-extras/qscintilla6/gen_qscilexercsharp.go
+  s_b1677221371742::t_25ed4c3d98a9bc 521
+qt-restricted-extras/qscintilla6/gen_qscilexercss.go
+  s_b1677221371742::t_ec6226afc1c38d 524
+qt-restricted-extras/qscintilla6/gen_qscilexercustom.go
+  s_b1677221371742::t_dcf837ddd74447 409
+qt-restricted-extras/qscintilla6/gen_qscilexerd.go
+  s_b1677221371742::t_9c46e42a2b99d9 138,575
+qt-restricted-extras/qscintilla6/gen_qscilexerdiff.go
+  s_b1677221371742::t_370d8d83ca44c0 341
+qt-restricted-extras/qscintilla6/gen_qscilexeredifact.go
+  s_b1677221371742::t_5f19466a71d95b 333
+qt-restricted-extras/qscintilla6/gen_qscilexerfortran.go
+  s_b1677221371742::t_b508de0f68f3a9 377
+qt-restricted-extras/qscintilla6/gen_qscilexerfortran77.go
+  s_b1677221371742::t_bfd636aef403ea 442
+qt-restricted-extras/qscintilla6/gen_qscilexerhtml.go
+  s_b1677221371742::t_6c4e7dfc54a74f 651
+qt-restricted-extras/qscintilla6/gen_qscilexeridl.go
+  s_b1677221371742::t_ff71ddaa8d664f 505
+qt-restricted-extras/qscintilla6/gen_qscilexerjava.go
+  s_b1677221371742::t_c1115c008461ec 492
+qt-restricted-extras/qscintilla6/gen_qscilexerjavascript.go
+  s_b1677221371742::t_89a7560cf7335b 521
+qt-restricted-extras/qscintilla6/gen_qscilexerjson.go
+  s_b1677221371742::t_e6a6ce1fd0d326 423
+qt-restricted-extras/qscintilla6/gen_qscilexerlua.go
+  s_b1677221371742::t_903899a7b95c55 135,471
+qt-restricted-extras/qscintilla6/gen_qscilexermakefile.go
+  s_b1677221371742::t_d6f82191bfda75 352
+qt-restricted-extras/qscintilla6/gen_qscilexermarkdown.go
+  s_b1677221371742::t_9e22f3a4caaf2e 358
+qt-restricted-extras/qscintilla6/gen_qscilexermatlab.go
+  s_b1677221371742::t_811fb3eb695591 344
+qt-restricted-extras/qscintilla6/gen_qscilexeroctave.go
+  s_b1677221371742::t_8ff73750fbe132 311
+qt-restricted-extras/qscintilla6/gen_qscilexerpascal.go
+  s_b1677221371742::t_15d9b010f9952d 130,570
+qt-restricted-extras/qscintilla6/gen_qscilexerperl.go
+  s_b1677221371742::t_6b85ac57604a65 156,569
+qt-restricted-extras/qscintilla6/gen_qscilexerpo.go
+  s_b1677221371742::t_b6b32153a68753 461
+qt-restricted-extras/qscintilla6/gen_qscilexerpostscript.go
+  s_b1677221371742::t_8477c637051afc 553
+qt-restricted-extras/qscintilla6/gen_qscilexerpov.go
+  s_b1677221371742::t_da2c2d1a76b838 525
+qt-restricted-extras/qscintilla6/gen_qscilexerproperties.go
+  s_b1677221371742::t_c3148924c97834 437
+qt-restricted-extras/qscintilla6/gen_qscilexerpython.go
+  s_b1677221371742::t_0fa3ea665a9d92 145,642
+qt-restricted-extras/qscintilla6/gen_qscilexerruby.go
+  s_b1677221371742::t_697ecf85824f32 466
+qt-restricted-extras/qscintilla6/gen_qscilexerspice.go
+  s_b1677221371742::t_83c1b0eee5b89b 348
+qt-restricted-extras/qscintilla6/gen_qscilexersql.go
+  s_b1677221371742::t_32dbff44bbb63e 565
+qt-restricted-extras/qscintilla6/gen_qscilexertcl.go
+  s_b1677221371742::t_7f4c5046540331 419
+qt-restricted-extras/qscintilla6/gen_qscilexertex.go
+  s_b1677221371742::t_d14c711637a93a 412
+qt-restricted-extras/qscintilla6/gen_qscilexerverilog.go
+  s_b1677221371742::t_2df77ae2e884b5 472
+qt-restricted-extras/qscintilla6/gen_qscilexervhdl.go
+  s_b1677221371742::t_88e2681b9e6193 595
+qt-restricted-extras/qscintilla6/gen_qscilexerxml.go
+  s_b1677221371742::t_8b9b44fc248f0a 471
+qt-restricted-extras/qscintilla6/gen_qscilexeryaml.go
+  s_b1677221371742::t_58d5348225fb6c 433
+qt-restricted-extras/qscintilla6/gen_qsciscintilla.go
+  s_b1677221371742::t_932937165ea462 304,443,2072,4831-4833,4835
+qt-restricted-extras/qscintilla6/gen_qsciscintillabase.go
+  s_b1677221371742::t_ee5cffedd55d54 2536-2538,2540
+qt/cbor/gen_qcborarray.go
+  s_b1677221371742::t_f2486abf276305 352
+qt/cbor/gen_qcbormap.go
+  s_b1677221371742::t_c98557eeaa99c7 96,492-493,513-514,601-602,794-795
+qt/designer/gen_abstractformbuilder.go
+  s_b1677221371742::t_bf5b006ca9f09f 134-135,167-168
+qt/designer/gen_abstractformeditor.go
+  s_b1677221371742::t_f6146b105b3b45 165,214
+qt/designer/gen_abstractformwindow.go
+  s_b1677221371742::t_1eef77d05e0c3d 134,236,272,378
+qt/designer/gen_abstractformwindowmanager.go
+  s_b1677221371742::t_d4f6b53d2b8669 659
+qt/designer/gen_abstractintegration.go
+  s_b1677221371742::t_9a2f1ed7aeeeeb 390
+qt/designer/gen_abstractmetadatabase.go
+  s_b1677221371742::t_d5fd0f2abbd8c6 72,212
+qt/designer/gen_abstractpromotioninterface.go
+  s_b1677221371742::t_932dbdf6a76a49 57,72,83
+qt/designer/gen_abstractwidgetbox.go
+  s_b1677221371742::t_7640470c71dd6e 635
+qt/designer/gen_abstractwidgetdatabase.go
+  s_b1677221371742::t_f53123a7025bf1 216
+qt/designer/gen_formbuilder.go
+  s_b1677221371742::t_c0d98f66b6702f 75,153-154,186-187
+qt/designer/gen_layoutdecoration.go
+  s_b1677221371742::t_c5ee3e94fefb80 64,101-102
+qt/designer/gen_membersheet.go
+  s_b1677221371742::t_93f302d85c73fe 126,140
+qt/designer/gen_taskmenu.go
+  s_b1677221371742::t_758599f15d9920 60
+qt/gen_qabstracteventdispatcher.go
+  s_b1677221371742::t_e52b040ecee0f2 131
+qt/gen_qabstractitemdelegate.go
+  s_b1677221371742::t_01ceac255524b5 164,691
+qt/gen_qabstractitemmodel.cpp
+  s_b1677221371742::t_bb9fbf0713627d 607-608,1073-1078,3341-3342,3766-3771,5315-5316,5740-5745
+qt/gen_qabstractitemmodel.go
+  s_b1677221371742::t_33f0e4bd0466f5 485-486,519,628,652-653,858,895,932,971,1008,1312,1845-1846,1944-1945,1965,2039,2603,2719-2720,2748-2751,3798,4314-4315,4413-4414,4434,4508,5000,5116-5117,5145-5148,5872,6362-6363,6461-6462,6482,6556,7048,7164-7165,7193-7196
+qt/gen_qabstractitemview.go
+  s_b1677221371742::t_782ba7781bec3f 1542,2182
+qt/gen_qabstractproxymodel.cpp
+  s_b1677221371742::t_30dc40aadfd730 294-295,923-928
+qt/gen_qabstractproxymodel.go
+  s_b1677221371742::t_f78a828b9ec14a 164-165,262,598,1100-1101,1267-1268,1654,1754,2236,2295-2296,2324-2327
+qt/gen_qabstractscrollarea.go
+  s_b1677221371742::t_10aeee0b191c73 157
+qt/gen_qabstracttextdocumentlayout.go
+  s_b1677221371742::t_32bbae48cbc201 1229
+qt/gen_qabstracttransition.go
+  s_b1677221371742::t_1f6c1c75266999 124,165
+qt/gen_qaccessible.go
+  s_b1677221371742::t_12874b3412e125 320-321,404-405,411,844,855,952,993,1004,1114,1162
+qt/gen_qaccessiblewidget.go
+  s_b1677221371742::t_790e17dafea047 110-111,117,182,208
+qt/gen_qaction.go
+  s_b1677221371742::t_5cb9632a08f164 315,418,429
+qt/gen_qactiongroup.go
+  s_b1677221371742::t_fef05b38d7f77e 131
+qt/gen_qapplication.go
+  s_b1677221371742::t_a5c50ad2bb1ff9 213,224
+qt/gen_qbrush.go
+  s_b1677221371742::t_c31799df9edc22 543-544,550
+qt/gen_qbuttongroup.go
+  s_b1677221371742::t_36bf2798351895 121
+qt/gen_qcalendar.go
+  s_b1677221371742::t_2d392ba02c756d 205
+qt/gen_qcalendarwidget.go
+  s_b1677221371742::t_4028186992cbe5 253-254
+qt/gen_qcolor.go
+  s_b1677221371742::t_cdd23f08e1f7a8 188
+qt/gen_qcolormap.go
+  s_b1677221371742::t_dc4aebbcf7580e 111
+qt/gen_qcolumnview.go
+  s_b1677221371742::t_650d9f7fc5917a 191,1584,1960
+qt/gen_qcommandlineoption.go
+  s_b1677221371742::t_52eb5038f077d8 231,297
+qt/gen_qcommandlineparser.go
+  s_b1677221371742::t_f2ff998f030373 223,248,262,276,290
+qt/gen_qcompleter.go
+  s_b1677221371742::t_4e47dae84aab68 315,579
+qt/gen_qconcatenatetablesproxymodel.cpp
+  s_b1677221371742::t_ec45d7c9bfd06e 149-150,788-793
+qt/gen_qconcatenatetablesproxymodel.go
+  s_b1677221371742::t_21f1ddfd072156 105,153-154,217,569,748-749,847-848,1143,1217,1937,1996-1997,2025-2028
+qt/gen_qcoreapplication.go
+  s_b1677221371742::t_5533858f84ff49 132,314
+qt/gen_qdialogbuttonbox.go
+  s_b1677221371742::t_f5e97ed059c794 225
+qt/gen_qdir.go
+  s_b1677221371742::t_d998dedb5f1c18 251,339,402,416,440,453,476,601,736,750,774,798,811,824,847,870
+qt/gen_qdirmodel.cpp
+  s_b1677221371742::t_bc27a5c9f9bca7 454-455,793-798
+qt/gen_qdirmodel.go
+  s_b1677221371742::t_5bcc1449b2e383 196,250,694,1208,1282,1474-1475,1573-1574,2005,2121-2122,2150-2153
+qt/gen_qeasingcurve.go
+  s_b1677221371742::t_2925bffa85a092 177
+qt/gen_qevent.go
+  s_b1677221371742::t_8db30e39527fa8 2063,3369,4058
+qt/gen_qfactoryinterface.go
+  s_b1677221371742::t_b58d5450fdbab8 58
+qt/gen_qfiledialog.go
+  s_b1677221371742::t_93ab7c35675e0b 239,256,300,350,429,498,557,654,771,899,912,1277,1295,1317,1343,1356,1373,1390,1411
+qt/gen_qfileselector.go
+  s_b1677221371742::t_44c54dd99bc6a9 125,153
+qt/gen_qfilesystemmodel.cpp
+  s_b1677221371742::t_ec0ba6a5813dd8 527-528,829-834
+qt/gen_qfilesystemmodel.go
+  s_b1677221371742::t_3d47a7540cbc96 306,415,848,1485,1559,1752-1753,1851-1852,2221,2337-2338,2366-2369
+qt/gen_qfilesystemwatcher.go
+  s_b1677221371742::t_eae79b5b17a4db 158,190,204,218
+qt/gen_qfont.go
+  s_b1677221371742::t_f79bf69c879bec 266,555,569
+qt/gen_qfontdatabase.go
+  s_b1677221371742::t_4ba47e865c0c4d 111,122,137,151,169,184,203,362,394,413
+qt/gen_qgenericpluginfactory.go
+  s_b1677221371742::t_4681ff9b2d3c1b 58
+qt/gen_qgesture.go
+  s_b1677221371742::t_d1becb26f4c3da 2787,2802,2813
+qt/gen_qglyphrun.go
+  s_b1677221371742::t_ac8f75f73b79bc 99,122
+qt/gen_qgraphicsitem.go
+  s_b1677221371742::t_15a2691e5ad4ac 264,640,737,1064
+qt/gen_qgraphicsitemanimation.go
+  s_b1677221371742::t_8d30194621aed2 140-141,147,189-190,196,232-233,239,275-276,282,318-319,325
+qt/gen_qgraphicsscene.go
+  s_b1677221371742::t_dbd084030f9894 201,212,223,234,245,260,275,436,567,703,714,725,736,747,758,769,780,791,802,813,824
+qt/gen_qgraphicsview.go
+  s_b1677221371742::t_727c7fef8700f3 379,390,401,412,423,434,673,684,695
+qt/gen_qgraphicswidget.go
+  s_b1677221371742::t_c9a2d6b4ebc45e 343
+qt/gen_qguiapplication.go
+  s_b1677221371742::t_4f095aee0c9402 153,164,212
+qt/gen_qheaderview.go
+  s_b1677221371742::t_c42730ecff9f93 1777,2731
+qt/gen_qicon.go
+  s_b1677221371742::t_a94b3966942002 200,250,278,463,476
+qt/gen_qiconengine.go
+  s_b1677221371742::t_48fd588c849e7c 131,515,702
+qt/gen_qidentityproxymodel.cpp
+  s_b1677221371742::t_ae78bce425cc27 590-591,935-940
+qt/gen_qidentityproxymodel.go
+  s_b1677221371742::t_ad04cacf36088c 167,523,1174,1602-1603,1769-1770,2095,2155,2264-2265,2293-2296
+qt/gen_qimage.go
+  s_b1677221371742::t_5e727da213595a 398,656
+qt/gen_qimageiohandler.go
+  s_b1677221371742::t_7f487101b19d11 232-234,236
+qt/gen_qimagereader.go
+  s_b1677221371742::t_c714246a31b65d 205,309,400,414,435
+qt/gen_qimagewriter.go
+  s_b1677221371742::t_62484bb49b5de5 214,302,316,337
+qt/gen_qinputdialog.go
+  s_b1677221371742::t_c08bc05f4eda92 214
+qt/gen_qitemdelegate.go
+  s_b1677221371742::t_37a8f0a510d885 892
+qt/gen_qitemeditorfactory.go
+  s_b1677221371742::t_477d67ede32b4c 217-219,221
+qt/gen_qitemselectionmodel.go
+  s_b1677221371742::t_0fe166f88cb95d 186,330,343,356,593,606,1156
+qt/gen_qjsonarray.go
+  s_b1677221371742::t_a683057a346ad5 101
+qt/gen_qjsonobject.go
+  s_b1677221371742::t_cfa04bcb3ffd48 109-110,155-156,170
+qt/gen_qkeysequence.go
+  s_b1677221371742::t_dbf27867048cbf 239,279,359
+qt/gen_qlibraryinfo.go
+  s_b1677221371742::t_81b50e85c5c373 124
+qt/gen_qlistview.go
+  s_b1677221371742::t_f9ac03ef2b7b76 319,1125,1770
+qt/gen_qlistwidget.go
+  s_b1677221371742::t_ad787f75fe9e9a 853,868,1180,1762,1834,2210,2825
+qt/gen_qlocale.go
+  s_b1677221371742::t_ef4c7b9349e55d 1478,1641,1699,1710
+qt/gen_qmainwindow.go
+  s_b1677221371742::t_b9c83e9c65959f 292
+qt/gen_qmdiarea.go
+  s_b1677221371742::t_a1fc7ddf0ff0c9 146,333
+qt/gen_qmessagebox.go
+  s_b1677221371742::t_cc4ae9fc7cb93f 281
+qt/gen_qmetaobject.go
+  s_b1677221371742::t_2cccdfd27281cb 130,144
+qt/gen_qmimedata.go
+  s_b1677221371742::t_fd59c827e5649e 101,237,397
+qt/gen_qmimedatabase.go
+  s_b1677221371742::t_69884daf10bf4b 101,177
+qt/gen_qmimetype.go
+  s_b1677221371742::t_dd690a98cd572d 122,136,150,164,178
+qt/gen_qmovie.go
+  s_b1677221371742::t_07444fba2869f5 199
+qt/gen_qobject.go
+  s_b1677221371742::t_37d4bd46b0396c 166,246
+qt/gen_qpainterpath.go
+  s_b1677221371742::t_e53123b5d5d41f 536
+qt/gen_qpen.go
+  s_b1677221371742::t_c8589fd4cee296 119
+qt/gen_qpicture.go
+  s_b1677221371742::t_b97c180418c59e 172,186,200,214,670,684
+qt/gen_qplaintextedit.go
+  s_b1677221371742::t_63d09a2de5bfed 376
+qt/gen_qpluginloader.go
+  s_b1677221371742::t_63d61b6e69060b 135,148
+qt/gen_qprocess.go
+  s_b1677221371742::t_aea8afd64c786c 184,198,385,510,690
+qt/gen_qrawfont.go
+  s_b1677221371742::t_52a00204876cf1 174,193,212,332
+qt/gen_qregexp.go
+  s_b1677221371742::t_17b15f44ff6a9c 214,228
+qt/gen_qregion.go
+  s_b1677221371742::t_c85789a0a76885 216
+qt/gen_qregularexpression.go
+  s_b1677221371742::t_02b00322285d18 172,425
+qt/gen_qresource.go
+  s_b1677221371742::t_8b24b60805f904 165
+qt/gen_qscreen.go
+  s_b1677221371742::t_6d90bf8c43909b 183
+qt/gen_qscroller.go
+  s_b1677221371742::t_c5cd47b3e6c3f5 142
+qt/gen_qsessionmanager.go
+  s_b1677221371742::t_27075c6fa32c6d 150,178
+qt/gen_qsettings.go
+  s_b1677221371742::t_40b96d481c536e 356,370,384
+qt/gen_qsortfilterproxymodel.cpp
+  s_b1677221371742::t_162643fd04a578 862-863,1006-1011
+qt/gen_qsortfilterproxymodel.go
+  s_b1677221371742::t_a45a5b8387611b 365,389,899,1835,2189,2333,2469-2470,2568-2569,2742-2743,2771-2774
+qt/gen_qsplitter.go
+  s_b1677221371742::t_9f1fdce8f891b4 177
+qt/gen_qstandarditemmodel.cpp
+  s_b1677221371742::t_bc254f139088b3 1204-1205,1557-1562
+qt/gen_qstandarditemmodel.go
+  s_b1677221371742::t_30be8b0589bd7f 506,517,1033-1034,1210,1221,1252,1274,1385,1400,1684,2442-2443,2541-2542,2594,2668,2995,3111-3112,3140-3143
+qt/gen_qstandardpaths.go
+  s_b1677221371742::t_e13a0357725aab 96,125,184
+qt/gen_qstate.go
+  s_b1677221371742::t_c7686a57c867c5 157
+qt/gen_qstatemachine.go
+  s_b1677221371742::t_774573ad471e68 173,210,874
+qt/gen_qstorageinfo.go
+  s_b1677221371742::t_2547acb10f67a0 179
+qt/gen_qstringlistmodel.cpp
+  s_b1677221371742::t_2bc02b50c88597 274-275,729-734
+qt/gen_qstringlistmodel.go
+  s_b1677221371742::t_8e3f6e70e9c2c4 180-181,218,564,980-981,1079-1080,1361,1435,1754,1870-1871,1899-1902
+qt/gen_qstringview.go
+  s_b1677221371742::t_e685a5c71e49b0 103
+qt/gen_qstyleditemdelegate.go
+  s_b1677221371742::t_d39e2cf4b38998 691
+qt/gen_qstylefactory.go
+  s_b1677221371742::t_6fbd9b52228bcf 58
+qt/gen_qsurfaceformat.go
+  s_b1677221371742::t_8856d5d76ce9a9 223-224
+qt/gen_qtableview.go
+  s_b1677221371742::t_dc7a97a1cb5ec3 1405,1927
+qt/gen_qtablewidget.go
+  s_b1677221371742::t_e8070650e19fa6 913,924,939,1410,1948,2020,2721,3243
+qt/gen_qtextbrowser.go
+  s_b1677221371742::t_6035dc05304fa7 118
+qt/gen_qtextcodec.go
+  s_b1677221371742::t_3384d2dd93beb6 88,99,242
+qt/gen_qtextdocument.go
+  s_b1677221371742::t_5ac03a8548871e 492
+qt/gen_qtextdocumentwriter.go
+  s_b1677221371742::t_fab4a9e7289510 161
+qt/gen_qtextedit.go
+  s_b1677221371742::t_bd87bc839b0c15 445
+qt/gen_qtextformat.go
+  s_b1677221371742::t_69df0c2991ad6b 498,526-527,1033,1242,1752
+qt/gen_qtextlayout.go
+  s_b1677221371742::t_039afe02a428e2 294,321,444,489,502,677,706,719
+qt/gen_qtextlist.go
+  s_b1677221371742::t_7c7e8239168dd0 195
+qt/gen_qtextobject.go
+  s_b1677221371742::t_db444f14f2eb8d 363,907,1111,1124,1137
+qt/gen_qtextoption.go
+  s_b1677221371742::t_89f6b7ec641a31 165,188
+qt/gen_qtimezone.go
+  s_b1677221371742::t_a6a4fe3047476a 272,316,330,344,407,428
+qt/gen_qtouchdevice.go
+  s_b1677221371742::t_dab1963b0fcb7c 80
+qt/gen_qtransposeproxymodel.cpp
+  s_b1677221371742::t_53ff6fe1650bcd 265-266,935-940
+qt/gen_qtransposeproxymodel.go
+  s_b1677221371742::t_702967253219c7 159-160,540,856-857,938-939,2018,2118,2222,2281-2282,2310-2313
+qt/gen_qtreeview.go
+  s_b1677221371742::t_c7718ab4a5e238 1293,1673
+qt/gen_qtreewidget.go
+  s_b1677221371742::t_fe488b37369db4 530,1034,1049,1407,1425,2053,2125,2538,2918
+qt/gen_qundogroup.go
+  s_b1677221371742::t_5d5f2194b6d6fd 113
+qt/gen_qundoview.go
+  s_b1677221371742::t_0993f67532d65d 963,1608
+qt/gen_qurl.go
+  s_b1677221371742::t_58a1fcdcd11b5b 518,538,561,814
+qt/gen_qurlquery.go
+  s_b1677221371742::t_9ce123ebfcfdd7 196-197,203,260,320-321,327,356
+qt/gen_qvariant.go
+  s_b1677221371742::t_e30e8f3abbb153 563,600,620-621,641-642
+qt/gen_qvariantanimation.go
+  s_b1677221371742::t_6856f58f8a74ed 148-149,155
+qt/gen_qversionnumber.go
+  s_b1677221371742::t_9193ed93d5d9b2 123
+qt/gen_qwidget.go
+  s_b1677221371742::t_8b2210cbbb2271 1168
+qt/gen_qwidgetaction.go
+  s_b1677221371742::t_aefcff36aefe39 162
+qt/gen_qwizard.go
+  s_b1677221371742::t_138d925a5f360e 191,202,213
+qt/gen_qxmlstream.go
+  s_b1677221371742::t_5f1d9b299da8e8 878,905,918
+qt/multimedia/gen_qabstractvideosurface.go
+  s_b1677221371742::t_6a4dd2af7d604d 116
+qt/multimedia/gen_qaudiodeviceinfo.go
+  s_b1677221371742::t_e78ece6678b1f0 109,120,131,142,153,164,196
+qt/multimedia/gen_qaudioencodersettingscontrol.go
+  s_b1677221371742::t_df072302f88208 91,113
+qt/multimedia/gen_qaudioinputselectorcontrol.go
+  s_b1677221371742::t_066ba6c971dee6 97
+qt/multimedia/gen_qaudiooutputselectorcontrol.go
+  s_b1677221371742::t_b27bd07a902767 97
+qt/multimedia/gen_qaudiorecorder.go
+  s_b1677221371742::t_724b29192dcf28 109
+qt/multimedia/gen_qaudiorolecontrol.go
+  s_b1677221371742::t_be80a75ac617e5 102
+qt/multimedia/gen_qaudiosystem.go
+  s_b1677221371742::t_4b6a25884c2954 109,120,131,142,153,164
+qt/multimedia/gen_qaudiosystemplugin.go
+  s_b1677221371742::t_ad6cd684bd0f70 60,209,371-374
+qt/multimedia/gen_qcamera.go
+  s_b1677221371742::t_62b75e96f44573 234,315,328,341,352,670,683,696,707
+qt/multimedia/gen_qcameracapturebufferformatcontrol.go
+  s_b1677221371742::t_009f55f45d2c36 94
+qt/multimedia/gen_qcameraexposure.go
+  s_b1677221371742::t_ff77fa3a71e95c 213,224,235,478,489,500
+qt/multimedia/gen_qcameraexposurecontrol.go
+  s_b1677221371742::t_031c5828eaa9ae 116
+qt/multimedia/gen_qcamerafocus.go
+  s_b1677221371742::t_732dab6eeb0ed1 263
+qt/multimedia/gen_qcamerafocuscontrol.go
+  s_b1677221371742::t_f1f68f2ef70083 130
+qt/multimedia/gen_qcameraimagecapture.go
+  s_b1677221371742::t_64a0aedf2c4ace 163,187,208,525,538
+qt/multimedia/gen_qcamerainfo.go
+  s_b1677221371742::t_67eea3cc212be3 132,145
+qt/multimedia/gen_qcameraviewfindersettingscontrol.go
+  s_b1677221371742::t_ca568e7b8c60d1 237
+qt/multimedia/gen_qcustomaudiorolecontrol.go
+  s_b1677221371742::t_9c98aacf7fc593 112
+qt/multimedia/gen_qimageencodercontrol.go
+  s_b1677221371742::t_4383bbc3d278e3 91,115
+qt/multimedia/gen_qmediacontainercontrol.go
+  s_b1677221371742::t_93d87905dea72e 91
+qt/multimedia/gen_qmediacontent.go
+  s_b1677221371742::t_aa153d4d8f7e18 159
+qt/multimedia/gen_qmediaencodersettings.go
+  s_b1677221371742::t_dc828d92341624 158-159,355-356,528-529
+qt/multimedia/gen_qmediaobject.go
+  s_b1677221371742::t_a088d3de6ce47c 139
+qt/multimedia/gen_qmediaplayer.go
+  s_b1677221371742::t_ffa05fa67120cc 166,292,321,850
+qt/multimedia/gen_qmediarecorder.go
+  s_b1677221371742::t_80751675bb0637 201,226,248,262,286,297,376,742,753,766,779,790,801
+qt/multimedia/gen_qmediaserviceproviderplugin.go
+  s_b1677221371742::t_6bd5a4b411010d 162,317,388
+qt/multimedia/gen_qmediatimerange.go
+  s_b1677221371742::t_5422ad9d2c78df 193
+qt/multimedia/gen_qmetadatareadercontrol.go
+  s_b1677221371742::t_d2dea7d2ce80df 111
+qt/multimedia/gen_qmetadatawritercontrol.go
+  s_b1677221371742::t_56ff4d3826624c 123
+qt/multimedia/gen_qradiotuner.go
+  s_b1677221371742::t_ed465fe4814a35 175-176
+qt/multimedia/gen_qradiotunercontrol.go
+  s_b1677221371742::t_b74972754fe6a3 122-123
+qt/multimedia/gen_qsoundeffect.go
+  s_b1677221371742::t_6b8fd72d371882 136
+qt/multimedia/gen_qvideoencodersettingscontrol.go
+  s_b1677221371742::t_5f60365899d385 90,101,115
+qt/multimedia/gen_qvideoframe.go
+  s_b1677221371742::t_620afa4ea3d776 264-265
+qt/multimedia/gen_qvideosurfaceformat.go
+  s_b1677221371742::t_f23fb3cd2c31df 210
+qt/network/dtls/gen_qdtls.go
+  s_b1677221371742::t_992010229f5b3b 719
+qt/network/gen_qabstractnetworkcache.go
+  s_b1677221371742::t_8f586ae459aaea 113-114,120,204-205
+qt/network/gen_qauthenticator.go
+  s_b1677221371742::t_26a2e6e9130699 144-145
+qt/network/gen_qdnslookup.go
+  s_b1677221371742::t_3a3f82bbbe3c49 469,665,678,691,704,717,730,743
+qt/network/gen_qhostaddress.go
+  s_b1677221371742::t_078baafe7cb1c0 356-357
+qt/network/gen_qhostinfo.go
+  s_b1677221371742::t_9b4b505319f1d5 106
+qt/network/gen_qnetworkaccessmanager.go
+  s_b1677221371742::t_203572921a10f4 129,210,505,680
+qt/network/gen_qnetworkconfigmanager.go
+  s_b1677221371742::t_7170c35ab173d1 130,312
+qt/network/gen_qnetworkconfiguration.go
+  s_b1677221371742::t_ea5fa59262620e 168
+qt/network/gen_qnetworkcookie.go
+  s_b1677221371742::t_ecbc0ca53d320e 244
+qt/network/gen_qnetworkcookiejar.go
+  s_b1677221371742::t_840d9625ad3817 108,190,287,361
+qt/network/gen_qnetworkinterface.go
+  s_b1677221371742::t_821c6c36ae1147 310,354,367
+qt/network/gen_qnetworkproxy.go
+  s_b1677221371742::t_4361435b1c6036 588,690,715,728,745
+qt/network/gen_qnetworkreply.go
+  s_b1677221371742::t_6b31f9ca64c443 201,241-242,248,418
+qt/network/gen_qnetworkrequest.go
+  s_b1677221371742::t_fff2dc5e4093ea 219
+qt/network/gen_qsslcertificate.go
+  s_b1677221371742::t_81847d79fd07e3 184,205,219,240,268,282,313,351,368,381,401,420,452,469,482,502,525
+qt/network/gen_qsslconfiguration.go
+  s_b1677221371742::t_cd90274d393d96 122,161,194,217,230,275,324,347,457
+qt/network/gen_qsslsocket.go
+  s_b1677221371742::t_63c771f8c82510 282,319,342,373,414,427,472,517,530,563,576,700
+qt/pdf/gen_qpdfbookmarkmodel.cpp
+  s_b1677221371742::t_1a631b1874e165 213-218,354-355
+qt/pdf/gen_qpdfbookmarkmodel.go
+  s_b1677221371742::t_92e3d600e1b383 170-171,543,868-869,897-900,1156-1157,1255-1256,1276,1350,1914
+qt/pdf/gen_qpdfsearchmodel.cpp
+  s_b1677221371742::t_d09b1af3991ef8 105-110,353-354
+qt/pdf/gen_qpdfsearchmodel.go
+  s_b1677221371742::t_2db957886f23cc 119,154-155,555,639-640,668-671,1149-1150,1248-1249,1269,1343,1835
+qt/pdf/gen_qpdfsearchresult.go
+  s_b1677221371742::t_4872a43e7df999 88
+qt/positioning/gen_qgeoareamonitorinfo.go
+  s_b1677221371742::t_58a5417d0d7a02 153-154
+qt/positioning/gen_qgeoareamonitorsource.go
+  s_b1677221371742::t_aeb3421c34dc62 131,181,194
+qt/positioning/gen_qgeolocation.go
+  s_b1677221371742::t_8ae5126e485f0d 119-120
+qt/positioning/gen_qgeopath.go
+  s_b1677221371742::t_b440fd83eb2b82 126,153
+qt/positioning/gen_qgeopolygon.go
+  s_b1677221371742::t_bfe7e6fca9c456 114,141,154
+qt/positioning/gen_qgeopositioninfosource.go
+  s_b1677221371742::t_8e616ebace1562 238
+qt/positioning/gen_qgeopositioninfosourcefactory.go
+  s_b1677221371742::t_b3abf84266f2f6 324-325,369-370,414-415
+qt/positioning/gen_qgeosatelliteinfosource.go
+  s_b1677221371742::t_2b6248ea6aa1cb 174,244,281
+qt/printsupport/gen_qprinter.go
+  s_b1677221371742::t_5259e831abe417 419
+qt/printsupport/gen_qprinterinfo.go
+  s_b1677221371742::t_67b173a2d5d20f 124,157,183-184,190,201,216,231,245,258
+qt/script/gen_qscriptcontext.go
+  s_b1677221371742::t_7b341e711c779b 109,193
+qt/script/gen_qscriptcontextinfo.go
+  s_b1677221371742::t_dd42305aaba6cb 123
+qt/script/gen_qscriptengine.go
+  s_b1677221371742::t_32fa562a1bddc6 292,432,446
+qt/script/gen_qscriptextensionplugin.go
+  s_b1677221371742::t_e93673eb9e9ec7 112
+qt/sql/gen_qsqldatabase.go
+  s_b1677221371742::t_f305d1cf239c29 156,381,395,425
+qt/sql/gen_qsqldriver.go
+  s_b1677221371742::t_08c61264dba9bf 188,315,644,1204
+qt/sql/gen_qsqlquery.go
+  s_b1677221371742::t_4d928c556ecf60 295-296
+qt/sql/gen_qsqlquerymodel.cpp
+  s_b1677221371742::t_b6ef5604d339a5 307-312,489-490
+qt/sql/gen_qsqlquerymodel.go
+  s_b1677221371742::t_aee52f003b1be4 193-194,542,1009-1010,1038-1041,1383-1384,1482-1483,1503,1577,1935
+qt/sql/gen_qsqlrelationaltablemodel.cpp
+  s_b1677221371742::t_9f1b1c6f684245 799-804,918-919
+qt/sql/gen_qsqlrelationaltablemodel.go
+  s_b1677221371742::t_e74656e0ac027e 649,1858-1859,1887-1890,2107-2108,2206-2207,2227,2301,2555
+qt/sql/gen_qsqltablemodel.cpp
+  s_b1677221371742::t_7e244ea130e21c 699-704,818-819
+qt/sql/gen_qsqltablemodel.go
+  s_b1677221371742::t_2f9a06a2980654 743,1888-1889,1917-1920,2137-2138,2236-2237,2257,2331,2585
+qt/uitools/gen_quiloader.go
+  s_b1677221371742::t_148c0aa0cadb78 109,139,153
+qt/webchannel/gen_qwebchannel.go
+  s_b1677221371742::t_9135c4ef483b47 136-137
+qt/webengine/gen_qwebenginecertificateerror.go
+  s_b1677221371742::t_1432b82866598f 141
+qt/webengine/gen_qwebengineclientcertificateselection.go
+  s_b1677221371742::t_65aa837568a2d4 83
+qt/webengine/gen_qwebengineclientcertificatestore.go
+  s_b1677221371742::t_ae098a6c5b4294 61
+qt/webengine/gen_qwebenginecontextmenudata.go
+  s_b1677221371742::t_7bbb3dd757b1a6 167
+qt/webengine/gen_qwebenginehistory.go
+  s_b1677221371742::t_d705ca5170451a 157,170,183
+qt/webengine/gen_qwebenginehttprequest.go
+  s_b1677221371742::t_4374c036b8c39d 182
+qt/webengine/gen_qwebenginepage.go
+  s_b1677221371742::t_cd4e6c72bfcb17 1511,1545,1557
+qt/webengine/gen_qwebengineprofile.go
+  s_b1677221371742::t_581b2ffae7fc9e 337
+qt/webengine/gen_qwebenginescriptcollection.go
+  s_b1677221371742::t_f851488ae10762 87,122
+qt/webkit/gen_qwebelement.go
+  s_b1677221371742::t_da447ab8158e85 258,272,581,708
+qt/webkit/gen_qwebframe.go
+  s_b1677221371742::t_250f43ddfddcbe 382
+qt/webkit/gen_qwebhistory.go
+  s_b1677221371742::t_a3061b52bcc8b2 120-121,207,220,233,313-314
+qt/webkit/gen_qwebkitplatformplugin.go
+  s_b1677221371742::t_d18ef475fbc52f 1196
+qt/webkit/gen_qwebpage.go
+  s_b1677221371742::t_1d3b23a01eac78 517,1647,1659,2382,2466
+qt/webkit/gen_qwebpluginfactory.go
+  s_b1677221371742::t_da7f0390d346b0 108,342,354,745,872
+qt/webkit/gen_qwebsecurityorigin.go
+  s_b1677221371742::t_9154db3e4f85bd 77,107,178
+qt/webkit/gen_qwebsettings.go
+  s_b1677221371742::t_454c088d7f3ca6 256
+qt/websockets/gen_qwebsocket.go
+  s_b1677221371742::t_084af312cc8652 711
+qt/websockets/gen_qwebsocketserver.go
+  s_b1677221371742::t_73608b014e26a5 256,402
+qt6/cbor/gen_qcborarray.go
+  s_b1677221371742::t_af5e2de0d5faa9 352
+qt6/cbor/gen_qcbormap.go
+  s_b1677221371742::t_06e98e253c21cb 96,492-493,513-514,601-602,624-625,821-822,844-845
+qt6/designer/gen_abstractformeditor.go
+  s_b1677221371742::t_e643d304ff318e 156,205
+qt6/designer/gen_abstractformwindow.go
+  s_b1677221371742::t_3280efdb508a2e 125,227,263,369
+qt6/designer/gen_abstractformwindowmanager.go
+  s_b1677221371742::t_a05e27300c264e 628
+qt6/designer/gen_abstractintegration.go
+  s_b1677221371742::t_a2115c44577ec8 381
+qt6/designer/gen_abstractmetadatabase.go
+  s_b1677221371742::t_f10b8ecda303f4 83,210,369
+qt6/designer/gen_abstractpromotioninterface.go
+  s_b1677221371742::t_2385cb5a042c06 57,72,83
+qt6/designer/gen_abstractwidgetbox.go
+  s_b1677221371742::t_745728b47eb398 604
+qt6/designer/gen_abstractwidgetdatabase.go
+  s_b1677221371742::t_5b4c791256d052 227,886
+qt6/designer/gen_formbuilder.go
+  s_b1677221371742::t_5d08f071c2e1ba 75
+qt6/designer/gen_layoutdecoration.cpp
+  s_b1677221371742::t_7568f74cd76b26 154-155
+qt6/designer/gen_layoutdecoration.go
+  s_b1677221371742::t_b1f5573dd0edc1 76,113-114,416-417
+qt6/designer/gen_membersheet.go
+  s_b1677221371742::t_e2f45a4d756159 138,152,506-509,540-543
+qt6/designer/gen_taskmenu.go
+  s_b1677221371742::t_7695f150a23d1e 72
+qt6/gen_qabstracteventdispatcher.go
+  s_b1677221371742::t_9134450e6244a0 118
+qt6/gen_qabstractitemdelegate.go
+  s_b1677221371742::t_7cba77f83f2267 144,649
+qt6/gen_qabstractitemmodel.cpp
+  s_b1677221371742::t_ee1dc42d75733d 707-708,1191-1196,3503-3504,3946-3951,5531-5532,5974-5979
+qt6/gen_qabstractitemmodel.go
+  s_b1677221371742::t_b5afbcb5bc5697 654-655,692,801,825-826,1013,1050,1087,1126,1163,1455,1988-1989,2087-2088,2140,2214,2778,2894-2895,2923-2926,3991,4507-4508,4606-4607,4659,4733,5225,5341-5342,5370-5373,6115,6605-6606,6704-6705,6757,6831,7323,7439-7440,7468-7471
+qt6/gen_qabstractitemview.go
+  s_b1677221371742::t_8e207b1e2859c5 1483,2123
+qt6/gen_qabstractproxymodel.cpp
+  s_b1677221371742::t_366ab79164c8fe 298-299,709-714
+qt6/gen_qabstractproxymodel.go
+  s_b1677221371742::t_6e1eae90ef0fbd 155-156,257,283-284,594,1096-1097,1263-1264,1682,1782,1891-1892,1920-1923,2324
+qt6/gen_qabstractscrollarea.go
+  s_b1677221371742::t_f219b819ba5b6f 148
+qt6/gen_qabstracttextdocumentlayout.go
+  s_b1677221371742::t_1a3701a98a1b02 1198
+qt6/gen_qaccessible.go
+  s_b1677221371742::t_cc72bc930efb97 90-91,97,534,545,642,683,694,795,843
+qt6/gen_qaccessible_base.go
+  s_b1677221371742::t_a66c6ba58d03f1 309-310
+qt6/gen_qaccessiblewidget.go
+  s_b1677221371742::t_1839bffcffc8db 110-111,117,182,208
+qt6/gen_qaction.go
+  s_b1677221371742::t_c86a30c4c3c0f7 163,309
+qt6/gen_qactiongroup.go
+  s_b1677221371742::t_00dc0656f3d0f6 122
+qt6/gen_qapplication.go
+  s_b1677221371742::t_5be99582f6cf1d 178,189
+qt6/gen_qbrush.go
+  s_b1677221371742::t_31c6306e21aa86 535-536,542
+qt6/gen_qbuttongroup.go
+  s_b1677221371742::t_c7f1f0d64ee151 112
+qt6/gen_qcalendar.go
+  s_b1677221371742::t_3bcec3b843ced6 217
+qt6/gen_qcalendarwidget.go
+  s_b1677221371742::t_c492d62813fa99 244-245
+qt6/gen_qcolor.go
+  s_b1677221371742::t_406c774da8f51a 183
+qt6/gen_qcolormap.go
+  s_b1677221371742::t_57db4fcb3ebdb6 111
+qt6/gen_qcolumnview.go
+  s_b1677221371742::t_d9308b3380eaed 182,1521,1897
+qt6/gen_qcommandlineoption.go
+  s_b1677221371742::t_fd6f411cc69a2d 231,297
+qt6/gen_qcommandlineparser.go
+  s_b1677221371742::t_83c57aafae9b5a 214,239,253,267,281
+qt6/gen_qcompleter.go
+  s_b1677221371742::t_41fb6d9ecca4bb 306,548
+qt6/gen_qconcatenatetablesproxymodel.cpp
+  s_b1677221371742::t_913bbfeab5051a 153-154,810-815
+qt6/gen_qconcatenatetablesproxymodel.go
+  s_b1677221371742::t_064d9e027cef76 96,144-145,208,526,705-706,804-805,1100,1174,1926,1985-1986,2014-2017
+qt6/gen_qcoreapplication.go
+  s_b1677221371742::t_cb68b54e902215 123,297
+qt6/gen_qdialogbuttonbox.go
+  s_b1677221371742::t_74fddbff5c69ba 216
+qt6/gen_qdir.go
+  s_b1677221371742::t_3784d607ddaee9 235,323,386,400,424,437,460,593,728,742,766,790,803,816,839,862
+qt6/gen_qeasingcurve.go
+  s_b1677221371742::t_d39b8ad7d2c92d 177
+qt6/gen_qevent.go
+  s_b1677221371742::t_a5423336cb995f 338,4373,6443
+qt6/gen_qfactoryinterface.go
+  s_b1677221371742::t_fc3d919db10350 58
+qt6/gen_qfiledialog.go
+  s_b1677221371742::t_72fade39ec6cc8 228,245,281,331,394,455,514,611,728,856,869,1212,1230,1252,1278,1291,1308,1325,1346
+qt6/gen_qfileselector.go
+  s_b1677221371742::t_12f24f5ffb8cce 116,144
+qt6/gen_qfilesystemmodel.cpp
+  s_b1677221371742::t_b9eca8a82a8bab 475-480,560-561
+qt6/gen_qfilesystemmodel.go
+  s_b1677221371742::t_ef08390b6f4f60 297,333-334,425,824,1461,1535,1628-1629,1657-1660,1788-1789,1887-1888,2289
+qt6/gen_qfilesystemwatcher.go
+  s_b1677221371742::t_1cc078f55190de 149,181,195,209
+qt6/gen_qfont.go
+  s_b1677221371742::t_c6990c9d6fdc53 322,588,602
+qt6/gen_qfontdatabase.go
+  s_b1677221371742::t_a2fab2a6c285fd 111,122,137,151,169,184,203,362,390,409
+qt6/gen_qgenericpluginfactory.go
+  s_b1677221371742::t_9ac02491ce2e39 58
+qt6/gen_qgesture.go
+  s_b1677221371742::t_4cec98a16d4c5f 2606,2621,2632
+qt6/gen_qglyphrun.go
+  s_b1677221371742::t_9d63b166021847 99,122
+qt6/gen_qgraphicsitem.go
+  s_b1677221371742::t_eac3a26d9d9808 263,619,716,1039
+qt6/gen_qgraphicsitemanimation.go
+  s_b1677221371742::t_a9aa9c55ad3a9b 131-132,138,174-175,181,217-218,224,260-261,267,303-304,310
+qt6/gen_qgraphicsscene.go
+  s_b1677221371742::t_75a69055a33107 184,195,206,217,228,239,258,415,546,660,671,682,693,704,715,726,737,748,759,770,781
+qt6/gen_qgraphicsview.go
+  s_b1677221371742::t_da71e52bc92823 355,366,377,388,399,410,623,634,645
+qt6/gen_qgraphicswidget.go
+  s_b1677221371742::t_3e539543737443 334
+qt6/gen_qguiapplication.go
+  s_b1677221371742::t_e02a224a006068 144,155,203
+qt6/gen_qheaderview.go
+  s_b1677221371742::t_670519b02bb2d8 1712,2760
+qt6/gen_qicon.go
+  s_b1677221371742::t_aa0c75b9b9518f 206,256,284,481,494
+qt6/gen_qiconengine.go
+  s_b1677221371742::t_e5e11e91696728 123,507
+qt6/gen_qidentityproxymodel.cpp
+  s_b1677221371742::t_923b2db7adc7dc 594-595,957-962
+qt6/gen_qidentityproxymodel.go
+  s_b1677221371742::t_8cf7a5fc701bd4 158,496,1147,1575-1576,1742-1743,2100,2160,2269-2270,2298-2301
+qt6/gen_qimage.go
+  s_b1677221371742::t_b914eddbaece25 406,676
+qt6/gen_qimagereader.go
+  s_b1677221371742::t_5af6f5313ed681 196,292,383,397,418
+qt6/gen_qimagewriter.go
+  s_b1677221371742::t_d7778d11686f14 197,270,284,305
+qt6/gen_qinputdevice.go
+  s_b1677221371742::t_fb51eddf583adf 208,219
+qt6/gen_qinputdialog.go
+  s_b1677221371742::t_bfd6e3917a1475 205
+qt6/gen_qitemdelegate.go
+  s_b1677221371742::t_96b4e6f1b30c9c 847
+qt6/gen_qitemeditorfactory.go
+  s_b1677221371742::t_47d2ecdf677a45 217-219,221
+qt6/gen_qitemselectionmodel.go
+  s_b1677221371742::t_a8648c82cc0092 178,317,330,343,558,571,1121
+qt6/gen_qjsonarray.go
+  s_b1677221371742::t_aa351262297b0e 101
+qt6/gen_qjsonobject.go
+  s_b1677221371742::t_8e461559dc6bd9 109-110,155-156,170
+qt6/gen_qkeysequence.go
+  s_b1677221371742::t_3e44a68ebc02b0 263,303,385
+qt6/gen_qlibraryinfo.go
+  s_b1677221371742::t_ee4d7530350fc1 111
+qt6/gen_qlistview.go
+  s_b1677221371742::t_949b7b8d36ba2b 310,1030,1651
+qt6/gen_qlistwidget.go
+  s_b1677221371742::t_bfcef14099eea0 794,809,820,1559,1631,2007,2598
+qt6/gen_qlocale.go
+  s_b1677221371742::t_d810f772514ac7 1476,1610,1695,1706
+qt6/gen_qmainwindow.go
+  s_b1677221371742::t_7d8d8955e2056b 283
+qt6/gen_qmdiarea.go
+  s_b1677221371742::t_dae4aeb1f73fbe 137,302
+qt6/gen_qmessagebox.go
+  s_b1677221371742::t_defdc42efe12b2 272
+qt6/gen_qmetaobject.go
+  s_b1677221371742::t_dff4ca2c4023e8 142,163
+qt6/gen_qmimedata.go
+  s_b1677221371742::t_d85c1f2d7d4a91 92,228,366
+qt6/gen_qmimedatabase.go
+  s_b1677221371742::t_9fc8c526963bfd 101,177
+qt6/gen_qmimetype.go
+  s_b1677221371742::t_c86872a129e13e 122,136,150,164,178
+qt6/gen_qmovie.go
+  s_b1677221371742::t_6d554f63c359ad 190
+qt6/gen_qobject.go
+  s_b1677221371742::t_6b4b8d2659bf1e 157,229
+qt6/gen_qpageranges.go
+  s_b1677221371742::t_ab9d31d6e16aa2 85
+qt6/gen_qpainterpath.go
+  s_b1677221371742::t_030b9e125db31f 514
+qt6/gen_qpen.go
+  s_b1677221371742::t_a89934709302ba 119
+qt6/gen_qplaintextedit.go
+  s_b1677221371742::t_776e73ca3be4ff 355
+qt6/gen_qpluginloader.go
+  s_b1677221371742::t_9fbd75af0dbbb6 126,139
+qt6/gen_qprocess.go
+  s_b1677221371742::t_a1e08e936b6d86 200,214,382,499,601
+qt6/gen_qrawfont.go
+  s_b1677221371742::t_e2a2041c71c55b 174,193,212,332
+qt6/gen_qregularexpression.go
+  s_b1677221371742::t_7f42ac09b2da3d 178,454
+qt6/gen_qscreen.go
+  s_b1677221371742::t_9fec8b95ae7865 174
+qt6/gen_qscroller.go
+  s_b1677221371742::t_f17b441bc81f1a 133
+qt6/gen_qsessionmanager.go
+  s_b1677221371742::t_fb7547cea43ca2 141,169
+qt6/gen_qsettings.go
+  s_b1677221371742::t_9e05e16f5d1196 335,349,363
+qt6/gen_qshortcut.go
+  s_b1677221371742::t_fc7206e6cfcb7c 184
+qt6/gen_qsortfilterproxymodel.cpp
+  s_b1677221371742::t_e1fcd2c10558da 866-867,980-985
+qt6/gen_qsortfilterproxymodel.go
+  s_b1677221371742::t_f1d9e74d4130f3 342,366,892,1828,2182,2326,2462-2463,2561-2562,2687-2688,2716-2719
+qt6/gen_qsplitter.go
+  s_b1677221371742::t_6117e3693a6e5c 168
+qt6/gen_qstandarditemmodel.cpp
+  s_b1677221371742::t_1038e599bac806 904-909,1279-1280
+qt6/gen_qstandarditemmodel.go
+  s_b1677221371742::t_e2880d5f3699ed 502,513,974-975,1069-1070,1246,1257,1288,1310,1399,1414,1686,1770-1771,1799-1802,2509-2510,2608-2609,2661,2735,3123
+qt6/gen_qstandardpaths.go
+  s_b1677221371742::t_44a8296faf524d 97,126,181
+qt6/gen_qstorageinfo.go
+  s_b1677221371742::t_6f36c5ec123537 179
+qt6/gen_qstringlistmodel.cpp
+  s_b1677221371742::t_c7180d86865b78 296-297,751-756
+qt6/gen_qstringlistmodel.go
+  s_b1677221371742::t_43ab1a502a29f6 175-176,213,525,973-974,1072-1073,1354,1428,1747,1863-1864,1892-1895
+qt6/gen_qstringview.go
+  s_b1677221371742::t_15beb6a5a0ba92 107
+qt6/gen_qstyleditemdelegate.go
+  s_b1677221371742::t_dd77c55762fb63 660
+qt6/gen_qstylefactory.go
+  s_b1677221371742::t_534b6faef38636 58
+qt6/gen_qsurfaceformat.go
+  s_b1677221371742::t_bd2321f3c5b55f 224-225
+qt6/gen_qtableview.go
+  s_b1677221371742::t_11065123d50138 1282,1836
+qt6/gen_qtablewidget.go
+  s_b1677221371742::t_e1e9b4a4f30be5 748,895,906,921,1777,1849,2526,3080
+qt6/gen_qtextbrowser.go
+  s_b1677221371742::t_0d834ba94d7c86 109
+qt6/gen_qtextdocument.go
+  s_b1677221371742::t_47c6c55f2ff69f 496
+qt6/gen_qtextdocumentwriter.go
+  s_b1677221371742::t_e945bfebc6ca5c 153
+qt6/gen_qtextedit.go
+  s_b1677221371742::t_a2356c7d664ecf 424
+qt6/gen_qtextformat.go
+  s_b1677221371742::t_9c320553a066d0 504,532-533,1044,1257,1767
+qt6/gen_qtextlayout.go
+  s_b1677221371742::t_6f0dc6b42422a9 294,417,462,475,650,675,688
+qt6/gen_qtextlist.go
+  s_b1677221371742::t_b496afd7ed569d 160
+qt6/gen_qtextobject.go
+  s_b1677221371742::t_7b61f2d3b77d72 292,814,1018,1031,1044
+qt6/gen_qtextoption.go
+  s_b1677221371742::t_8b1779def6a430 157,180
+qt6/gen_qtimezone.go
+  s_b1677221371742::t_25aded69a82a00 276,320,334,348,411,432
+qt6/gen_qtransposeproxymodel.cpp
+  s_b1677221371742::t_a59c10a01b8ccb 269-270,925-930
+qt6/gen_qtransposeproxymodel.go
+  s_b1677221371742::t_d81a75488bc2b0 150-151,513,829-830,911-912,2023,2123,2232-2233,2261-2264,2287
+qt6/gen_qtreeview.go
+  s_b1677221371742::t_ea980acfc612bf 1194,1574
+qt6/gen_qtreewidget.go
+  s_b1677221371742::t_d70a9899b93f7f 518,1005,1020,1342,1831,1903,2316,2696
+qt6/gen_qundogroup.go
+  s_b1677221371742::t_db49680a2a40f7 104
+qt6/gen_qundoview.go
+  s_b1677221371742::t_81041d70b4b5bc 868,1489
+qt6/gen_qurl.go
+  s_b1677221371742::t_19514c581fc1fa 504,524,547,832
+qt6/gen_qurlquery.go
+  s_b1677221371742::t_3bd34ee07f5024 196-197,203,260,308-309,315,344
+qt6/gen_qvariant.go
+  s_b1677221371742::t_527d4d6a7cddb2 567,604,624-625,645-646
+qt6/gen_qvariantanimation.go
+  s_b1677221371742::t_e9eb5d302e8733 139-140,146
+qt6/gen_qversionnumber.go
+  s_b1677221371742::t_1f3df0f90074a2 123
+qt6/gen_qwidget.go
+  s_b1677221371742::t_998ce29b694587 1187
+qt6/gen_qwidgetaction.go
+  s_b1677221371742::t_cad289f53afdb2 131
+qt6/gen_qwizard.go
+  s_b1677221371742::t_f2ed8e2fccbd9b 182,193
+qt6/gen_qxmlstream.go
+  s_b1677221371742::t_564e5ac9381c73 753,780,793
+qt6/multimedia/gen_qaudiodevice.go
+  s_b1677221371742::t_6603397922d8c7 143
+qt6/multimedia/gen_qcameradevice.go
+  s_b1677221371742::t_fea7f15a499efc 208,221
+qt6/multimedia/gen_qimagecapture.go
+  s_b1677221371742::t_16b33c817cd6cc 160
+qt6/multimedia/gen_qmediadevices.go
+  s_b1677221371742::t_0d942f10f548a4 99,112,125
+qt6/multimedia/gen_qmediaformat.go
+  s_b1677221371742::t_844d0db56fba79 186,197,208
+qt6/multimedia/gen_qmediametadata.go
+  s_b1677221371742::t_b753b22188ad09 115
+qt6/multimedia/gen_qmediaplayer.go
+  s_b1677221371742::t_b016adf507f770 137,150,163
+qt6/multimedia/gen_qmediatimerange.go
+  s_b1677221371742::t_cb0177815a7448 105
+qt6/multimedia/gen_qsoundeffect.go
+  s_b1677221371742::t_00ceea0e73ce5e 127
+qt6/network/dtls/gen_qdtls.go
+  s_b1677221371742::t_beb306f69b3136 679
+qt6/network/gen_qabstractnetworkcache.go
+  s_b1677221371742::t_8b75a31af7bb82 113-114,120,204-205
+qt6/network/gen_qauthenticator.go
+  s_b1677221371742::t_afd030b0efecee 144-145
+qt6/network/gen_qdnslookup.go
+  s_b1677221371742::t_445c2b60126736 469,656,669,682,695,708,721,734
+qt6/network/gen_qhostaddress.go
+  s_b1677221371742::t_0d5015c7cbda64 334-335
+qt6/network/gen_qhostinfo.go
+  s_b1677221371742::t_e3f2555812ebe0 106
+qt6/network/gen_qnetworkaccessmanager.go
+  s_b1677221371742::t_12a83d7479a356 112,193,464,576,656
+qt6/network/gen_qnetworkcookie.go
+  s_b1677221371742::t_7d7aabcc9adb0f 261
+qt6/network/gen_qnetworkcookiejar.go
+  s_b1677221371742::t_6383c834366625 99,159,256,330
+qt6/network/gen_qnetworkinformation.go
+  s_b1677221371742::t_e85d0128075233 159
+qt6/network/gen_qnetworkinterface.go
+  s_b1677221371742::t_3e8dd5a5a6c05e 310,354,367
+qt6/network/gen_qnetworkproxy.go
+  s_b1677221371742::t_c7ce6d0dbcbbe2 502,604,629,642,659
+qt6/network/gen_qnetworkreply.go
+  s_b1677221371742::t_1a4570571a6a43 192,232-233,239,425
+qt6/network/gen_qnetworkrequest.go
+  s_b1677221371742::t_3c16856aa952ac 216
+qt6/network/gen_qsslcertificate.go
+  s_b1677221371742::t_9ca6092f83ff42 184,205,219,240,268,282,313,351,364,384,403,435,452,465,485,508
+qt6/network/gen_qsslconfiguration.go
+  s_b1677221371742::t_fde2a32ee9cda3 122,161,194,225,238,283,332,355,481
+qt6/network/gen_qsslserver.go
+  s_b1677221371742::t_61003d8c7e9ef3 141
+qt6/network/gen_qsslsocket.go
+  s_b1677221371742::t_f1f8e8f87afa7e 265,302,325,376,416,442,457,472,578,873,896,919
+qt6/pdf/gen_qpdfbookmarkmodel.cpp
+  s_b1677221371742::t_0d0b719e913474 216-221,357-358
+qt6/pdf/gen_qpdfbookmarkmodel.go
+  s_b1677221371742::t_41d089b9b05a9c 149-150,466,791-792,820-823,1079-1080,1178-1179,1231,1305,1869
+qt6/pdf/gen_qpdflink.go
+  s_b1677221371742::t_d38f410291ebcd 116
+qt6/pdf/gen_qpdfsearchmodel.cpp
+  s_b1677221371742::t_8631efc1d9a1b1 108-113,356-357
+qt6/pdf/gen_qpdfsearchmodel.go
+  s_b1677221371742::t_3b3780337e2e84 110,145-146,512,596-597,625-628,1106-1107,1205-1206,1258,1332,1824
+qt6/positioning/gen_qgeoareamonitorinfo.go
+  s_b1677221371742::t_96293c8e9c5ebc 149-150
+qt6/positioning/gen_qgeoareamonitorsource.go
+  s_b1677221371742::t_77fe27b5108069 122,172,185
+qt6/positioning/gen_qgeolocation.go
+  s_b1677221371742::t_f67737c16576a9 115-116
+qt6/positioning/gen_qgeopath.go
+  s_b1677221371742::t_227d3800abe801 118,145
+qt6/positioning/gen_qgeopolygon.go
+  s_b1677221371742::t_aee4f5c6f4d1db 106,133,146
+qt6/positioning/gen_qgeopositioninfosource.go
+  s_b1677221371742::t_47cbc243bbc970 230
+qt6/positioning/gen_qgeosatelliteinfosource.go
+  s_b1677221371742::t_909207584245aa 166,254,291
+qt6/positioning/gen_qnmeasatelliteinfosource.go
+  s_b1677221371742::t_3bc2eb92250247 570,624
+qt6/printsupport/gen_qprinter.go
+  s_b1677221371742::t_05125a5b3ea168 347
+qt6/printsupport/gen_qprinterinfo.go
+  s_b1677221371742::t_20d9a1cdcf96aa 124,157,172,187,201,214
+qt6/qml/gen_qjsmanagedvalue.go
+  s_b1677221371742::t_d86ec281d587c9 354
+qt6/qml/gen_qqmlapplicationengine.go
+  s_b1677221371742::t_d3490c59dcf42b 129
+qt6/qml/gen_qqmlcomponent.go
+  s_b1677221371742::t_26fd0452acbbc3 215
+qt6/qml/gen_qqmldebug.go
+  s_b1677221371742::t_0ba61047809b93 82,96,110,124
+qt6/qml/gen_qqmlengine.go
+  s_b1677221371742::t_76b38709547eab 231,267,354,528
+qt6/qml/gen_qqmlincubator.go
+  s_b1677221371742::t_0689f779f45b8f 117
+qt6/qml/gen_qqmlpropertymap.go
+  s_b1677221371742::t_3d31b55656db15 153
+qt6/sql/gen_qsqldatabase.go
+  s_b1677221371742::t_b05e39b9aefa8c 156,381,395,425
+qt6/sql/gen_qsqldriver.go
+  s_b1677221371742::t_93f28dd9358b1c 179,306,588,1148
+qt6/sql/gen_qsqlquery.go
+  s_b1677221371742::t_fda6f504c31796 292
+qt6/sql/gen_qsqlquerymodel.cpp
+  s_b1677221371742::t_57979e72c458fb 311-316,493-494
+qt6/sql/gen_qsqlquerymodel.go
+  s_b1677221371742::t_3f5c6c43bfe9b4 184-185,499,966-967,995-998,1340-1341,1439-1440,1492,1566,1924
+qt6/sql/gen_qsqlrelationaltablemodel.cpp
+  s_b1677221371742::t_1905af851692ad 821-826,940-941
+qt6/sql/gen_qsqlrelationaltablemodel.go
+  s_b1677221371742::t_743ef0872f8da4 606,1847-1848,1876-1879,2096-2097,2195-2196,2216,2290,2544
+qt6/sql/gen_qsqltablemodel.cpp
+  s_b1677221371742::t_26b27515e40a34 721-726,840-841
+qt6/sql/gen_qsqltablemodel.go
+  s_b1677221371742::t_abf0f338dc37d9 704,1881-1882,1910-1913,2130-2131,2229-2230,2250,2324,2578
+qt6/statemachine/gen_qabstracttransition.go
+  s_b1677221371742::t_44f3de59130e83 116,157
+qt6/statemachine/gen_qstate.go
+  s_b1677221371742::t_acb6213f86c261 149
+qt6/statemachine/gen_qstatemachine.go
+  s_b1677221371742::t_8cdc7c8ef770a9 165,202,849
+qt6/uitools/gen_quiloader.go
+  s_b1677221371742::t_002b92588a3e8f 100,130,144
+qt6/webchannel/gen_qwebchannel.go
+  s_b1677221371742::t_dd4f5d1a09a3a9 127-128
+qt6/webengine/gen_qwebenginecertificateerror.go
+  s_b1677221371742::t_9572895f5a7909 125
+qt6/webengine/gen_qwebengineclientcertificateselection.go
+  s_b1677221371742::t_d9586afec504c6 83
+qt6/webengine/gen_qwebengineclientcertificatestore.go
+  s_b1677221371742::t_d1c560d98641cb 61
+qt6/webengine/gen_qwebenginecontextmenurequest.go
+  s_b1677221371742::t_621221cb4b6c25 185
+qt6/webengine/gen_qwebenginehistory.go
+  s_b1677221371742::t_6585b9d5f6ee64 200-201,299,312,325
+qt6/webengine/gen_qwebenginehttprequest.go
+  s_b1677221371742::t_8ab16d09f78b61 182
+qt6/webengine/gen_qwebenginepage.go
+  s_b1677221371742::t_064709061dff8c 1613,1647,1659
+qt6/webengine/gen_qwebengineprofile.go
+  s_b1677221371742::t_da6e5e57d0a96b 324
+qt6/webengine/gen_qwebenginescriptcollection.go
+  s_b1677221371742::t_1e8d5a093badc6 73,108
+qt6/websockets/gen_qwebsocket.go
+  s_b1677221371742::t_7a28cd8c49978b 749
+qt6/websockets/gen_qwebsockethandshakeoptions.go
+  s_b1677221371742::t_59246bfc66d76a 78
+qt6/websockets/gen_qwebsocketserver.go
+  s_b1677221371742::t_e2fac6ef0830eb 244,275,421
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.24",
+  "base_commit_sha": "6e9113ea14095880f123fec8cb0af2ed4dd6a4d5",
+  "prompts": {},
+  "sessions": {
+    "s_b1677221371742": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "bb63593a-87d2-4bed-a5dd-8698a5f0a7ed",
+        "model": "claude-opus-5-5"
+      },
+      "human_author": "111557 <wanghao111557@wywk.cn>"
+    }
+  }
+}
