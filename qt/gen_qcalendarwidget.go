@@ -250,6 +250,8 @@ func (this *QCalendarWidget) DateTextFormat() map[QDate]QTextCharFormat {
 
 		_ret[_entry_Key] = _entry_Value
 	}
+	C.free(unsafe.Pointer(_mm.keys))
+	C.free(unsafe.Pointer(_mm.values))
 	return _ret
 }
 

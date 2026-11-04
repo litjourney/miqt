@@ -651,6 +651,8 @@ func (this *QAbstractItemModel) ItemData(index *QModelIndex) map[int]QVariant {
 
 		_ret[_entry_Key] = _entry_Value
 	}
+	C.free(unsafe.Pointer(_mm.keys))
+	C.free(unsafe.Pointer(_mm.values))
 	return _ret
 }
 
@@ -687,6 +689,7 @@ func (this *QAbstractItemModel) MimeTypes() []string {
 		C.free(unsafe.Pointer(_lv_ms.data))
 		_ret[i] = _lv_ret
 	}
+	C.free(unsafe.Pointer(_ma.data))
 	return _ret
 }
 
@@ -795,6 +798,7 @@ func (this *QAbstractItemModel) Match(start *QModelIndex, role int, value *QVari
 		_lv_goptr.GoGC() // Qt uses pass-by-value semantics for this type. Mimic with finalizer
 		_ret[i] = *_lv_goptr
 	}
+	C.free(unsafe.Pointer(_ma.data))
 	return _ret
 }
 
@@ -818,6 +822,8 @@ func (this *QAbstractItemModel) RoleNames() map[int][]byte {
 		_entry_Value := _hashval_ret
 		_ret[_entry_Key] = _entry_Value
 	}
+	C.free(unsafe.Pointer(_mm.keys))
+	C.free(unsafe.Pointer(_mm.values))
 	return _ret
 }
 
@@ -1004,6 +1010,7 @@ func miqt_exec_callback_QAbstractItemModel_dataChanged2(cb C.intptr_t, topLeft *
 	for i := 0; i < int(roles_ma.len); i++ {
 		roles_ret[i] = (int)(roles_outCast[i])
 	}
+	C.free(unsafe.Pointer(roles_ma.data))
 	slotval3 := roles_ret
 
 	gofunc(slotval1, slotval2, slotval3)
@@ -1040,6 +1047,7 @@ func miqt_exec_callback_QAbstractItemModel_layoutChangedWithParents(cb C.intptr_
 		parents_lv_goptr.GoGC() // Qt uses pass-by-value semantics for this type. Mimic with finalizer
 		parents_ret[i] = *parents_lv_goptr
 	}
+	C.free(unsafe.Pointer(parents_ma.data))
 	slotval1 := parents_ret
 
 	gofunc(slotval1)
@@ -1076,6 +1084,7 @@ func miqt_exec_callback_QAbstractItemModel_layoutChanged2(cb C.intptr_t, parents
 		parents_lv_goptr.GoGC() // Qt uses pass-by-value semantics for this type. Mimic with finalizer
 		parents_ret[i] = *parents_lv_goptr
 	}
+	C.free(unsafe.Pointer(parents_ma.data))
 	slotval1 := parents_ret
 
 	slotval2 := (QAbstractItemModel__LayoutChangeHint)(hint)
@@ -1114,6 +1123,7 @@ func miqt_exec_callback_QAbstractItemModel_layoutAboutToBeChangedWithParents(cb 
 		parents_lv_goptr.GoGC() // Qt uses pass-by-value semantics for this type. Mimic with finalizer
 		parents_ret[i] = *parents_lv_goptr
 	}
+	C.free(unsafe.Pointer(parents_ma.data))
 	slotval1 := parents_ret
 
 	gofunc(slotval1)
@@ -1150,6 +1160,7 @@ func miqt_exec_callback_QAbstractItemModel_layoutAboutToBeChanged2(cb C.intptr_t
 		parents_lv_goptr.GoGC() // Qt uses pass-by-value semantics for this type. Mimic with finalizer
 		parents_ret[i] = *parents_lv_goptr
 	}
+	C.free(unsafe.Pointer(parents_ma.data))
 	slotval1 := parents_ret
 
 	slotval2 := (QAbstractItemModel__LayoutChangeHint)(hint)
@@ -1441,6 +1452,7 @@ func (this *QAbstractItemModel) PersistentIndexList() []QModelIndex {
 		_lv_goptr.GoGC() // Qt uses pass-by-value semantics for this type. Mimic with finalizer
 		_ret[i] = *_lv_goptr
 	}
+	C.free(unsafe.Pointer(_ma.data))
 	_method_ret := _ret
 
 	if !_dynamic_cast_ok {
@@ -1973,6 +1985,8 @@ func (this *QAbstractItemModel) callVirtualBase_ItemData(index *QModelIndex) map
 
 		_ret[_entry_Key] = _entry_Value
 	}
+	C.free(unsafe.Pointer(_mm.keys))
+	C.free(unsafe.Pointer(_mm.values))
 	return _ret
 
 }
@@ -2070,6 +2084,8 @@ func miqt_exec_callback_QAbstractItemModel_setItemData(self *C.QAbstractItemMode
 
 		roles_ret[roles_entry_Key] = roles_entry_Value
 	}
+	C.free(unsafe.Pointer(roles_mm.keys))
+	C.free(unsafe.Pointer(roles_mm.values))
 	slotval2 := roles_ret
 
 	virtualReturn := gofunc((&QAbstractItemModel{h: self}).callVirtualBase_SetItemData, slotval1, slotval2)
@@ -2121,6 +2137,7 @@ func (this *QAbstractItemModel) callVirtualBase_MimeTypes() []string {
 		C.free(unsafe.Pointer(_lv_ms.data))
 		_ret[i] = _lv_ret
 	}
+	C.free(unsafe.Pointer(_ma.data))
 	return _ret
 
 }
@@ -2194,6 +2211,7 @@ func miqt_exec_callback_QAbstractItemModel_mimeData(self *C.QAbstractItemModel, 
 		indexes_lv_goptr.GoGC() // Qt uses pass-by-value semantics for this type. Mimic with finalizer
 		indexes_ret[i] = *indexes_lv_goptr
 	}
+	C.free(unsafe.Pointer(indexes_ma.data))
 	slotval1 := indexes_ret
 
 	virtualReturn := gofunc((&QAbstractItemModel{h: self}).callVirtualBase_MimeData, slotval1)
@@ -2757,6 +2775,7 @@ func (this *QAbstractItemModel) callVirtualBase_Match(start *QModelIndex, role i
 		_lv_goptr.GoGC() // Qt uses pass-by-value semantics for this type. Mimic with finalizer
 		_ret[i] = *_lv_goptr
 	}
+	C.free(unsafe.Pointer(_ma.data))
 	return _ret
 
 }
@@ -2872,6 +2891,8 @@ func (this *QAbstractItemModel) callVirtualBase_RoleNames() map[int][]byte {
 		_entry_Value := _hashval_ret
 		_ret[_entry_Key] = _entry_Value
 	}
+	C.free(unsafe.Pointer(_mm.keys))
+	C.free(unsafe.Pointer(_mm.values))
 	return _ret
 
 }
@@ -2899,14 +2920,10 @@ func miqt_exec_callback_QAbstractItemModel_roleNames(self *C.QAbstractItemModel,
 	virtualReturn_ctr := 0
 	for virtualReturn_k, virtualReturn_v := range virtualReturn {
 		virtualReturn_Keys_CArray[virtualReturn_ctr] = (C.int)(virtualReturn_k)
-		virtualReturn_v_alias := C.struct_miqt_string{}
-		if len(virtualReturn_v) > 0 {
-			virtualReturn_v_alias.data = (*C.char)(unsafe.Pointer(&virtualReturn_v[0]))
-		} else {
-			virtualReturn_v_alias.data = (*C.char)(unsafe.Pointer(nil))
-		}
-		virtualReturn_v_alias.len = C.size_t(len(virtualReturn_v))
-		virtualReturn_Values_CArray[virtualReturn_ctr] = virtualReturn_v_alias
+		virtualReturn_v_ms := C.struct_miqt_string{}
+		virtualReturn_v_ms.data = (*C.char)(C.CBytes(virtualReturn_v))
+		virtualReturn_v_ms.len = C.size_t(len(virtualReturn_v))
+		virtualReturn_Values_CArray[virtualReturn_ctr] = virtualReturn_v_ms
 		virtualReturn_ctr++
 	}
 	virtualReturn_mm := C.struct_miqt_map{
@@ -3971,6 +3988,7 @@ func (this *QAbstractTableModel) PersistentIndexList() []QModelIndex {
 		_lv_goptr.GoGC() // Qt uses pass-by-value semantics for this type. Mimic with finalizer
 		_ret[i] = *_lv_goptr
 	}
+	C.free(unsafe.Pointer(_ma.data))
 	_method_ret := _ret
 
 	if !_dynamic_cast_ok {
@@ -4486,6 +4504,8 @@ func (this *QAbstractTableModel) callVirtualBase_ItemData(index *QModelIndex) ma
 
 		_ret[_entry_Key] = _entry_Value
 	}
+	C.free(unsafe.Pointer(_mm.keys))
+	C.free(unsafe.Pointer(_mm.values))
 	return _ret
 
 }
@@ -4583,6 +4603,8 @@ func miqt_exec_callback_QAbstractTableModel_setItemData(self *C.QAbstractTableMo
 
 		roles_ret[roles_entry_Key] = roles_entry_Value
 	}
+	C.free(unsafe.Pointer(roles_mm.keys))
+	C.free(unsafe.Pointer(roles_mm.values))
 	slotval2 := roles_ret
 
 	virtualReturn := gofunc((&QAbstractTableModel{h: self}).callVirtualBase_SetItemData, slotval1, slotval2)
@@ -4634,6 +4656,7 @@ func (this *QAbstractTableModel) callVirtualBase_MimeTypes() []string {
 		C.free(unsafe.Pointer(_lv_ms.data))
 		_ret[i] = _lv_ret
 	}
+	C.free(unsafe.Pointer(_ma.data))
 	return _ret
 
 }
@@ -4707,6 +4730,7 @@ func miqt_exec_callback_QAbstractTableModel_mimeData(self *C.QAbstractTableModel
 		indexes_lv_goptr.GoGC() // Qt uses pass-by-value semantics for this type. Mimic with finalizer
 		indexes_ret[i] = *indexes_lv_goptr
 	}
+	C.free(unsafe.Pointer(indexes_ma.data))
 	slotval1 := indexes_ret
 
 	virtualReturn := gofunc((&QAbstractTableModel{h: self}).callVirtualBase_MimeData, slotval1)
@@ -5198,6 +5222,7 @@ func (this *QAbstractTableModel) callVirtualBase_Match(start *QModelIndex, role 
 		_lv_goptr.GoGC() // Qt uses pass-by-value semantics for this type. Mimic with finalizer
 		_ret[i] = *_lv_goptr
 	}
+	C.free(unsafe.Pointer(_ma.data))
 	return _ret
 
 }
@@ -5313,6 +5338,8 @@ func (this *QAbstractTableModel) callVirtualBase_RoleNames() map[int][]byte {
 		_entry_Value := _hashval_ret
 		_ret[_entry_Key] = _entry_Value
 	}
+	C.free(unsafe.Pointer(_mm.keys))
+	C.free(unsafe.Pointer(_mm.values))
 	return _ret
 
 }
@@ -5340,14 +5367,10 @@ func miqt_exec_callback_QAbstractTableModel_roleNames(self *C.QAbstractTableMode
 	virtualReturn_ctr := 0
 	for virtualReturn_k, virtualReturn_v := range virtualReturn {
 		virtualReturn_Keys_CArray[virtualReturn_ctr] = (C.int)(virtualReturn_k)
-		virtualReturn_v_alias := C.struct_miqt_string{}
-		if len(virtualReturn_v) > 0 {
-			virtualReturn_v_alias.data = (*C.char)(unsafe.Pointer(&virtualReturn_v[0]))
-		} else {
-			virtualReturn_v_alias.data = (*C.char)(unsafe.Pointer(nil))
-		}
-		virtualReturn_v_alias.len = C.size_t(len(virtualReturn_v))
-		virtualReturn_Values_CArray[virtualReturn_ctr] = virtualReturn_v_alias
+		virtualReturn_v_ms := C.struct_miqt_string{}
+		virtualReturn_v_ms.data = (*C.char)(C.CBytes(virtualReturn_v))
+		virtualReturn_v_ms.len = C.size_t(len(virtualReturn_v))
+		virtualReturn_Values_CArray[virtualReturn_ctr] = virtualReturn_v_ms
 		virtualReturn_ctr++
 	}
 	virtualReturn_mm := C.struct_miqt_map{
@@ -6089,6 +6112,7 @@ func (this *QAbstractListModel) PersistentIndexList() []QModelIndex {
 		_lv_goptr.GoGC() // Qt uses pass-by-value semantics for this type. Mimic with finalizer
 		_ret[i] = *_lv_goptr
 	}
+	C.free(unsafe.Pointer(_ma.data))
 	_method_ret := _ret
 
 	if !_dynamic_cast_ok {
@@ -6578,6 +6602,8 @@ func (this *QAbstractListModel) callVirtualBase_ItemData(index *QModelIndex) map
 
 		_ret[_entry_Key] = _entry_Value
 	}
+	C.free(unsafe.Pointer(_mm.keys))
+	C.free(unsafe.Pointer(_mm.values))
 	return _ret
 
 }
@@ -6675,6 +6701,8 @@ func miqt_exec_callback_QAbstractListModel_setItemData(self *C.QAbstractListMode
 
 		roles_ret[roles_entry_Key] = roles_entry_Value
 	}
+	C.free(unsafe.Pointer(roles_mm.keys))
+	C.free(unsafe.Pointer(roles_mm.values))
 	slotval2 := roles_ret
 
 	virtualReturn := gofunc((&QAbstractListModel{h: self}).callVirtualBase_SetItemData, slotval1, slotval2)
@@ -6726,6 +6754,7 @@ func (this *QAbstractListModel) callVirtualBase_MimeTypes() []string {
 		C.free(unsafe.Pointer(_lv_ms.data))
 		_ret[i] = _lv_ret
 	}
+	C.free(unsafe.Pointer(_ma.data))
 	return _ret
 
 }
@@ -6799,6 +6828,7 @@ func miqt_exec_callback_QAbstractListModel_mimeData(self *C.QAbstractListModel, 
 		indexes_lv_goptr.GoGC() // Qt uses pass-by-value semantics for this type. Mimic with finalizer
 		indexes_ret[i] = *indexes_lv_goptr
 	}
+	C.free(unsafe.Pointer(indexes_ma.data))
 	slotval1 := indexes_ret
 
 	virtualReturn := gofunc((&QAbstractListModel{h: self}).callVirtualBase_MimeData, slotval1)
@@ -7290,6 +7320,7 @@ func (this *QAbstractListModel) callVirtualBase_Match(start *QModelIndex, role i
 		_lv_goptr.GoGC() // Qt uses pass-by-value semantics for this type. Mimic with finalizer
 		_ret[i] = *_lv_goptr
 	}
+	C.free(unsafe.Pointer(_ma.data))
 	return _ret
 
 }
@@ -7405,6 +7436,8 @@ func (this *QAbstractListModel) callVirtualBase_RoleNames() map[int][]byte {
 		_entry_Value := _hashval_ret
 		_ret[_entry_Key] = _entry_Value
 	}
+	C.free(unsafe.Pointer(_mm.keys))
+	C.free(unsafe.Pointer(_mm.values))
 	return _ret
 
 }
@@ -7432,14 +7465,10 @@ func miqt_exec_callback_QAbstractListModel_roleNames(self *C.QAbstractListModel,
 	virtualReturn_ctr := 0
 	for virtualReturn_k, virtualReturn_v := range virtualReturn {
 		virtualReturn_Keys_CArray[virtualReturn_ctr] = (C.int)(virtualReturn_k)
-		virtualReturn_v_alias := C.struct_miqt_string{}
-		if len(virtualReturn_v) > 0 {
-			virtualReturn_v_alias.data = (*C.char)(unsafe.Pointer(&virtualReturn_v[0]))
-		} else {
-			virtualReturn_v_alias.data = (*C.char)(unsafe.Pointer(nil))
-		}
-		virtualReturn_v_alias.len = C.size_t(len(virtualReturn_v))
-		virtualReturn_Values_CArray[virtualReturn_ctr] = virtualReturn_v_alias
+		virtualReturn_v_ms := C.struct_miqt_string{}
+		virtualReturn_v_ms.data = (*C.char)(C.CBytes(virtualReturn_v))
+		virtualReturn_v_ms.len = C.size_t(len(virtualReturn_v))
+		virtualReturn_Values_CArray[virtualReturn_ctr] = virtualReturn_v_ms
 		virtualReturn_ctr++
 	}
 	virtualReturn_mm := C.struct_miqt_map{

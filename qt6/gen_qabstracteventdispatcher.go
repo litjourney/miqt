@@ -115,6 +115,7 @@ func (this *QAbstractEventDispatcher) RegisteredTimers(object *QObject) []QAbstr
 		_lv_goptr.GoGC() // Qt uses pass-by-value semantics for this type. Mimic with finalizer
 		_ret[i] = *_lv_goptr
 	}
+	C.free(unsafe.Pointer(_ma.data))
 	return _ret
 }
 

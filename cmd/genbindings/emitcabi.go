@@ -340,10 +340,41 @@ func emitCABI2CppFreeReturn(p CppParameter, varname, indent string) string {
 		s += indent + "free(" + varname + ".data);\n"
 		return s
 	}
-	// QMap/QPair and value/pointer types: no malloc'd top-level buffer is handed
-	// across for virtual returns in practice; leave a no-op rather than risk a
-	// wrong free.
+	if kType, vType, _, ok := p.QMapOf(); ok {
+		// Go malloc'd both the keys and the values arrays (emitGo2CABI).
+		np := makeNamePrefix(varname) + "_free"
+		return emitCABI2CppFreeEntries(kType, vType, varname, np+"_karr", np+"_varr", varname+".len", indent)
+	}
+	if kType, vType, ok := p.QPairOf(); ok {
+		// A pair is a one-entry miqt_map.
+		np := makeNamePrefix(varname) + "_free"
+		return emitCABI2CppFreeEntries(kType, vType, varname, np+"_first_arr", np+"_second_arr", "1", indent)
+	}
+	// Value/pointer types: nothing was malloc'd.
 	return ""
+}
+
+// emitCABI2CppFreeEntries frees the keys/values arrays of a miqt_map that a Go
+// virtual-override callback returned, after freeing each entry's own buffers.
+func emitCABI2CppFreeEntries(kType, vType CppParameter, varname, karr, varr, count, indent string) string {
+	kInner := emitCABI2CppFreeReturn(kType, karr+"[i]", indent+"\t")
+	vInner := emitCABI2CppFreeReturn(vType, varr+"[i]", indent+"\t")
+	s := ""
+	// As for lists, only walk the entries when some of them own memory.
+	if kInner != "" || vInner != "" {
+		if kInner != "" {
+			s += indent + kType.RenderTypeCabi() + "* " + karr + " = static_cast<" + kType.RenderTypeCabi() + "*>(" + varname + ".keys);\n"
+		}
+		if vInner != "" {
+			s += indent + vType.RenderTypeCabi() + "* " + varr + " = static_cast<" + vType.RenderTypeCabi() + "*>(" + varname + ".values);\n"
+		}
+		s += indent + "for(size_t i = 0; i < " + count + "; ++i) {\n"
+		s += kInner + vInner
+		s += indent + "}\n"
+	}
+	s += indent + "free(" + varname + ".keys);\n"
+	s += indent + "free(" + varname + ".values);\n"
+	return s
 }
 
 func emitCABI2CppForwarding(p CppParameter, indent string) (preamble string, forwarding string) {

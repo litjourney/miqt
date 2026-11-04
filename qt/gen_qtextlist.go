@@ -192,6 +192,7 @@ func (this *QTextList) BlockList() []QTextBlock {
 		_lv_goptr.GoGC() // Qt uses pass-by-value semantics for this type. Mimic with finalizer
 		_ret[i] = *_lv_goptr
 	}
+	C.free(unsafe.Pointer(_ma.data))
 	_method_ret := _ret
 
 	if !_dynamic_cast_ok {

@@ -2060,6 +2060,7 @@ func (this *QInputMethodEvent) Attributes() []QInputMethodEvent__Attribute {
 		_lv_goptr.GoGC() // Qt uses pass-by-value semantics for this type. Mimic with finalizer
 		_ret[i] = *_lv_goptr
 	}
+	C.free(unsafe.Pointer(_ma.data))
 	return _ret
 }
 
@@ -3365,6 +3366,7 @@ func (this *QTouchEvent) TouchPoints() []QTouchEvent__TouchPoint {
 		_lv_goptr.GoGC() // Qt uses pass-by-value semantics for this type. Mimic with finalizer
 		_ret[i] = *_lv_goptr
 	}
+	C.free(unsafe.Pointer(_ma.data))
 	return _ret
 }
 
@@ -4053,6 +4055,7 @@ func (this *QTouchEvent__TouchPoint) RawScreenPositions() []QPointF {
 		_vv_goptr.GoGC() // Qt uses pass-by-value semantics for this type. Mimic with finalizer
 		_ret[i] = *_vv_goptr
 	}
+	C.free(unsafe.Pointer(_ma.data))
 	return _ret
 }
 

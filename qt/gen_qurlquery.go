@@ -193,11 +193,14 @@ func (this *QUrlQuery) QueryItems() []struct {
 		_lv_second_ret := C.GoStringN(_lv_second_ms.data, C.int(int64(_lv_second_ms.len)))
 		C.free(unsafe.Pointer(_lv_second_ms.data))
 		_lv_entry_Second := _lv_second_ret
+		C.free(unsafe.Pointer(_lv_mm.keys))
+		C.free(unsafe.Pointer(_lv_mm.values))
 		_ret[i] = struct {
 			First  string
 			Second string
 		}{First: _lv_entry_First, Second: _lv_entry_Second}
 	}
+	C.free(unsafe.Pointer(_ma.data))
 	return _ret
 }
 
@@ -254,6 +257,7 @@ func (this *QUrlQuery) AllQueryItemValues(key string) []string {
 		C.free(unsafe.Pointer(_lv_ms.data))
 		_ret[i] = _lv_ret
 	}
+	C.free(unsafe.Pointer(_ma.data))
 	return _ret
 }
 
@@ -313,11 +317,14 @@ func (this *QUrlQuery) QueryItemsWithEncoding(encoding QUrl__ComponentFormatting
 		_lv_second_ret := C.GoStringN(_lv_second_ms.data, C.int(int64(_lv_second_ms.len)))
 		C.free(unsafe.Pointer(_lv_second_ms.data))
 		_lv_entry_Second := _lv_second_ret
+		C.free(unsafe.Pointer(_lv_mm.keys))
+		C.free(unsafe.Pointer(_lv_mm.values))
 		_ret[i] = struct {
 			First  string
 			Second string
 		}{First: _lv_entry_First, Second: _lv_entry_Second}
 	}
+	C.free(unsafe.Pointer(_ma.data))
 	return _ret
 }
 
@@ -346,6 +353,7 @@ func (this *QUrlQuery) AllQueryItemValues2(key string, encoding QUrl__ComponentF
 		C.free(unsafe.Pointer(_lv_ms.data))
 		_ret[i] = _lv_ret
 	}
+	C.free(unsafe.Pointer(_ma.data))
 	return _ret
 }
 

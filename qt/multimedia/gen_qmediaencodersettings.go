@@ -155,6 +155,8 @@ func (this *QAudioEncoderSettings) EncodingOptions() map[string]qt.QVariant {
 
 		_ret[_entry_Key] = _entry_Value
 	}
+	C.free(unsafe.Pointer(_mm.keys))
+	C.free(unsafe.Pointer(_mm.values))
 	return _ret
 }
 
@@ -350,6 +352,8 @@ func (this *QVideoEncoderSettings) EncodingOptions() map[string]qt.QVariant {
 
 		_ret[_entry_Key] = _entry_Value
 	}
+	C.free(unsafe.Pointer(_mm.keys))
+	C.free(unsafe.Pointer(_mm.values))
 	return _ret
 }
 
@@ -521,6 +525,8 @@ func (this *QImageEncoderSettings) EncodingOptions() map[string]qt.QVariant {
 
 		_ret[_entry_Key] = _entry_Value
 	}
+	C.free(unsafe.Pointer(_mm.keys))
+	C.free(unsafe.Pointer(_mm.values))
 	return _ret
 }
 

@@ -198,6 +198,7 @@ func (this *QMediaRecorder) SupportedContainers() []string {
 		C.free(unsafe.Pointer(_lv_ms.data))
 		_ret[i] = _lv_ret
 	}
+	C.free(unsafe.Pointer(_ma.data))
 	return _ret
 }
 
@@ -222,6 +223,7 @@ func (this *QMediaRecorder) SupportedAudioCodecs() []string {
 		C.free(unsafe.Pointer(_lv_ms.data))
 		_ret[i] = _lv_ret
 	}
+	C.free(unsafe.Pointer(_ma.data))
 	return _ret
 }
 
@@ -243,6 +245,7 @@ func (this *QMediaRecorder) SupportedAudioSampleRates() []int {
 	for i := 0; i < int(_ma.len); i++ {
 		_ret[i] = (int)(_outCast[i])
 	}
+	C.free(unsafe.Pointer(_ma.data))
 	return _ret
 }
 
@@ -256,6 +259,7 @@ func (this *QMediaRecorder) SupportedVideoCodecs() []string {
 		C.free(unsafe.Pointer(_lv_ms.data))
 		_ret[i] = _lv_ret
 	}
+	C.free(unsafe.Pointer(_ma.data))
 	return _ret
 }
 
@@ -279,6 +283,7 @@ func (this *QMediaRecorder) SupportedResolutions() []qt.QSize {
 		_lv_goptr.GoGC() // Qt uses pass-by-value semantics for this type. Mimic with finalizer
 		_ret[i] = *_lv_goptr
 	}
+	C.free(unsafe.Pointer(_ma.data))
 	return _ret
 }
 
@@ -289,6 +294,7 @@ func (this *QMediaRecorder) SupportedFrameRates() []float64 {
 	for i := 0; i < int(_ma.len); i++ {
 		_ret[i] = (float64)(_outCast[i])
 	}
+	C.free(unsafe.Pointer(_ma.data))
 	return _ret
 }
 
@@ -367,6 +373,7 @@ func (this *QMediaRecorder) AvailableMetaData() []string {
 		C.free(unsafe.Pointer(_lv_ms.data))
 		_ret[i] = _lv_ret
 	}
+	C.free(unsafe.Pointer(_ma.data))
 	return _ret
 }
 
@@ -732,6 +739,7 @@ func (this *QMediaRecorder) SupportedAudioSampleRatesWithSettings(settings *QAud
 	for i := 0; i < int(_ma.len); i++ {
 		_ret[i] = (int)(_outCast[i])
 	}
+	C.free(unsafe.Pointer(_ma.data))
 	return _ret
 }
 
@@ -742,6 +750,7 @@ func (this *QMediaRecorder) SupportedAudioSampleRates2(settings *QAudioEncoderSe
 	for i := 0; i < int(_ma.len); i++ {
 		_ret[i] = (int)(_outCast[i])
 	}
+	C.free(unsafe.Pointer(_ma.data))
 	return _ret
 }
 
@@ -754,6 +763,7 @@ func (this *QMediaRecorder) SupportedResolutionsWithSettings(settings *QVideoEnc
 		_lv_goptr.GoGC() // Qt uses pass-by-value semantics for this type. Mimic with finalizer
 		_ret[i] = *_lv_goptr
 	}
+	C.free(unsafe.Pointer(_ma.data))
 	return _ret
 }
 
@@ -766,6 +776,7 @@ func (this *QMediaRecorder) SupportedResolutions2(settings *QVideoEncoderSetting
 		_lv_goptr.GoGC() // Qt uses pass-by-value semantics for this type. Mimic with finalizer
 		_ret[i] = *_lv_goptr
 	}
+	C.free(unsafe.Pointer(_ma.data))
 	return _ret
 }
 
@@ -776,6 +787,7 @@ func (this *QMediaRecorder) SupportedFrameRatesWithSettings(settings *QVideoEnco
 	for i := 0; i < int(_ma.len); i++ {
 		_ret[i] = (float64)(_outCast[i])
 	}
+	C.free(unsafe.Pointer(_ma.data))
 	return _ret
 }
 
@@ -786,6 +798,7 @@ func (this *QMediaRecorder) SupportedFrameRates2(settings *QVideoEncoderSettings
 	for i := 0; i < int(_ma.len); i++ {
 		_ret[i] = (float64)(_outCast[i])
 	}
+	C.free(unsafe.Pointer(_ma.data))
 	return _ret
 }
 

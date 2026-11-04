@@ -1610,6 +1610,7 @@ func (this *QWebEnginePage) callVirtualBase_ChooseFiles(mode QWebEnginePage__Fil
 		C.free(unsafe.Pointer(_lv_ms.data))
 		_ret[i] = _lv_ret
 	}
+	C.free(unsafe.Pointer(_ma.data))
 	return _ret
 
 }
@@ -1643,6 +1644,7 @@ func miqt_exec_callback_QWebEnginePage_chooseFiles(self *C.QWebEnginePage, cb C.
 		C.free(unsafe.Pointer(oldFiles_lv_ms.data))
 		oldFiles_ret[i] = oldFiles_lv_ret
 	}
+	C.free(unsafe.Pointer(oldFiles_ma.data))
 	slotval2 := oldFiles_ret
 
 	var acceptedMimeTypes_ma C.struct_miqt_array = acceptedMimeTypes
@@ -1654,6 +1656,7 @@ func miqt_exec_callback_QWebEnginePage_chooseFiles(self *C.QWebEnginePage, cb C.
 		C.free(unsafe.Pointer(acceptedMimeTypes_lv_ms.data))
 		acceptedMimeTypes_ret[i] = acceptedMimeTypes_lv_ret
 	}
+	C.free(unsafe.Pointer(acceptedMimeTypes_ma.data))
 	slotval3 := acceptedMimeTypes_ret
 
 	virtualReturn := gofunc((&QWebEnginePage{h: self}).callVirtualBase_ChooseFiles, slotval1, slotval2, slotval3)

@@ -121,6 +121,7 @@ func (this *QPrinterInfo) SupportedPageSizes() []qt6.QPageSize {
 		_lv_goptr.GoGC() // Qt uses pass-by-value semantics for this type. Mimic with finalizer
 		_ret[i] = *_lv_goptr
 	}
+	C.free(unsafe.Pointer(_ma.data))
 	return _ret
 }
 
@@ -153,6 +154,7 @@ func (this *QPrinterInfo) SupportedResolutions() []int {
 	for i := 0; i < int(_ma.len); i++ {
 		_ret[i] = (int)(_outCast[i])
 	}
+	C.free(unsafe.Pointer(_ma.data))
 	return _ret
 }
 
@@ -167,6 +169,7 @@ func (this *QPrinterInfo) SupportedDuplexModes() []QPrinter__DuplexMode {
 	for i := 0; i < int(_ma.len); i++ {
 		_ret[i] = (QPrinter__DuplexMode)(_outCast[i])
 	}
+	C.free(unsafe.Pointer(_ma.data))
 	return _ret
 }
 
@@ -181,6 +184,7 @@ func (this *QPrinterInfo) SupportedColorModes() []QPrinter__ColorMode {
 	for i := 0; i < int(_ma.len); i++ {
 		_ret[i] = (QPrinter__ColorMode)(_outCast[i])
 	}
+	C.free(unsafe.Pointer(_ma.data))
 	return _ret
 }
 
@@ -194,6 +198,7 @@ func QPrinterInfo_AvailablePrinterNames() []string {
 		C.free(unsafe.Pointer(_lv_ms.data))
 		_ret[i] = _lv_ret
 	}
+	C.free(unsafe.Pointer(_ma.data))
 	return _ret
 }
 
@@ -206,6 +211,7 @@ func QPrinterInfo_AvailablePrinters() []QPrinterInfo {
 		_lv_goptr.GoGC() // Qt uses pass-by-value semantics for this type. Mimic with finalizer
 		_ret[i] = *_lv_goptr
 	}
+	C.free(unsafe.Pointer(_ma.data))
 	return _ret
 }
 

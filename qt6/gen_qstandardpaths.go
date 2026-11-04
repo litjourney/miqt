@@ -94,6 +94,7 @@ func QStandardPaths_StandardLocations(typeVal QStandardPaths__StandardLocation) 
 		C.free(unsafe.Pointer(_lv_ms.data))
 		_ret[i] = _lv_ret
 	}
+	C.free(unsafe.Pointer(_ma.data))
 	return _ret
 }
 
@@ -122,6 +123,7 @@ func QStandardPaths_LocateAll(typeVal QStandardPaths__StandardLocation, fileName
 		C.free(unsafe.Pointer(_lv_ms.data))
 		_ret[i] = _lv_ret
 	}
+	C.free(unsafe.Pointer(_ma.data))
 	return _ret
 }
 
@@ -176,6 +178,7 @@ func QStandardPaths_LocateAll2(typeVal QStandardPaths__StandardLocation, fileNam
 		C.free(unsafe.Pointer(_lv_ms.data))
 		_ret[i] = _lv_ret
 	}
+	C.free(unsafe.Pointer(_ma.data))
 	return _ret
 }
 

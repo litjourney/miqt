@@ -131,6 +131,7 @@ func (this *QwtLegend) LegendWidgets(param1 *qt.QVariant) []*qt.QWidget {
 	for i := 0; i < int(_ma.len); i++ {
 		_ret[i] = qt.UnsafeNewQWidget(unsafe.Pointer(_outCast[i]))
 	}
+	C.free(unsafe.Pointer(_ma.data))
 	return _ret
 }
 
@@ -743,6 +744,7 @@ func miqt_exec_callback_QwtLegend_updateLegend(self *C.QwtLegend, cb C.intptr_t,
 		param2_lv_goptr.GoGC() // Qt uses pass-by-value semantics for this type. Mimic with finalizer
 		param2_ret[i] = *param2_lv_goptr
 	}
+	C.free(unsafe.Pointer(param2_ma.data))
 	slotval2 := param2_ret
 
 	gofunc((&QwtLegend{h: self}).callVirtualBase_UpdateLegend, slotval1, slotval2)

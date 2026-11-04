@@ -875,6 +875,7 @@ func (this *QXmlStreamReader) NamespaceDeclarations() []QXmlStreamNamespaceDecla
 		_vv_goptr.GoGC() // Qt uses pass-by-value semantics for this type. Mimic with finalizer
 		_ret[i] = *_vv_goptr
 	}
+	C.free(unsafe.Pointer(_ma.data))
 	return _ret
 }
 
@@ -901,6 +902,7 @@ func (this *QXmlStreamReader) NotationDeclarations() []QXmlStreamNotationDeclara
 		_vv_goptr.GoGC() // Qt uses pass-by-value semantics for this type. Mimic with finalizer
 		_ret[i] = *_vv_goptr
 	}
+	C.free(unsafe.Pointer(_ma.data))
 	return _ret
 }
 
@@ -913,6 +915,7 @@ func (this *QXmlStreamReader) EntityDeclarations() []QXmlStreamEntityDeclaration
 		_vv_goptr.GoGC() // Qt uses pass-by-value semantics for this type. Mimic with finalizer
 		_ret[i] = *_vv_goptr
 	}
+	C.free(unsafe.Pointer(_ma.data))
 	return _ret
 }
 

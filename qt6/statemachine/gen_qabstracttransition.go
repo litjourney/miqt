@@ -113,6 +113,7 @@ func (this *QAbstractTransition) TargetStates() []*QAbstractState {
 	for i := 0; i < int(_ma.len); i++ {
 		_ret[i] = newQAbstractState(_outCast[i])
 	}
+	C.free(unsafe.Pointer(_ma.data))
 	return _ret
 }
 
@@ -153,6 +154,7 @@ func (this *QAbstractTransition) Animations() []*qt6.QAbstractAnimation {
 	for i := 0; i < int(_ma.len); i++ {
 		_ret[i] = qt6.UnsafeNewQAbstractAnimation(unsafe.Pointer(_outCast[i]))
 	}
+	C.free(unsafe.Pointer(_ma.data))
 	return _ret
 }
 

@@ -601,6 +601,7 @@ func miqt_exec_callback_QDesignerWidgetBoxInterface_dropWidgets(self *C.QDesigne
 	for i := 0; i < int(item_list_ma.len); i++ {
 		item_list_ret[i] = newQDesignerDnDItemInterface(item_list_outCast[i])
 	}
+	C.free(unsafe.Pointer(item_list_ma.data))
 	slotval1 := item_list_ret
 
 	slotval2 := qt6.UnsafeNewQPoint(unsafe.Pointer(global_mouse_pos))

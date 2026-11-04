@@ -171,6 +171,7 @@ func QGeoSatelliteInfoSource_AvailableSources() []string {
 		C.free(unsafe.Pointer(_lv_ms.data))
 		_ret[i] = _lv_ret
 	}
+	C.free(unsafe.Pointer(_ma.data))
 	return _ret
 }
 
@@ -240,6 +241,7 @@ func miqt_exec_callback_QGeoSatelliteInfoSource_satellitesInViewUpdated(cb C.int
 		satellites_lv_goptr.GoGC() // Qt uses pass-by-value semantics for this type. Mimic with finalizer
 		satellites_ret[i] = *satellites_lv_goptr
 	}
+	C.free(unsafe.Pointer(satellites_ma.data))
 	slotval1 := satellites_ret
 
 	gofunc(slotval1)
@@ -276,6 +278,7 @@ func miqt_exec_callback_QGeoSatelliteInfoSource_satellitesInUseUpdated(cb C.intp
 		satellites_lv_goptr.GoGC() // Qt uses pass-by-value semantics for this type. Mimic with finalizer
 		satellites_ret[i] = *satellites_lv_goptr
 	}
+	C.free(unsafe.Pointer(satellites_ma.data))
 	slotval1 := satellites_ret
 
 	gofunc(slotval1)

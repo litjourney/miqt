@@ -321,6 +321,8 @@ func miqt_exec_callback_QGeoPositionInfoSourceFactoryV2_positionInfoSourceWithPa
 
 		parameters_ret[parameters_entry_Key] = parameters_entry_Value
 	}
+	C.free(unsafe.Pointer(parameters_mm.keys))
+	C.free(unsafe.Pointer(parameters_mm.values))
 	slotval2 := parameters_ret
 
 	virtualReturn := gofunc(slotval1, slotval2)
@@ -364,6 +366,8 @@ func miqt_exec_callback_QGeoPositionInfoSourceFactoryV2_satelliteInfoSourceWithP
 
 		parameters_ret[parameters_entry_Key] = parameters_entry_Value
 	}
+	C.free(unsafe.Pointer(parameters_mm.keys))
+	C.free(unsafe.Pointer(parameters_mm.values))
 	slotval2 := parameters_ret
 
 	virtualReturn := gofunc(slotval1, slotval2)
@@ -407,6 +411,8 @@ func miqt_exec_callback_QGeoPositionInfoSourceFactoryV2_areaMonitorWithParameter
 
 		parameters_ret[parameters_entry_Key] = parameters_entry_Value
 	}
+	C.free(unsafe.Pointer(parameters_mm.keys))
+	C.free(unsafe.Pointer(parameters_mm.values))
 	slotval2 := parameters_ret
 
 	virtualReturn := gofunc(slotval1, slotval2)

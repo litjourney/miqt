@@ -1226,6 +1226,7 @@ func (this *QAbstractTextDocumentLayout__PaintContext) Selections() []QAbstractT
 		selections_vv_goptr.GoGC() // Qt uses pass-by-value semantics for this type. Mimic with finalizer
 		selections_ret[i] = *selections_vv_goptr
 	}
+	C.free(unsafe.Pointer(selections_ma.data))
 	return selections_ret
 }
 

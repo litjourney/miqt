@@ -121,6 +121,7 @@ func (this *QPrinterInfo) SupportedPageSizes() []qt.QPageSize {
 		_lv_goptr.GoGC() // Qt uses pass-by-value semantics for this type. Mimic with finalizer
 		_ret[i] = *_lv_goptr
 	}
+	C.free(unsafe.Pointer(_ma.data))
 	return _ret
 }
 
@@ -153,6 +154,7 @@ func (this *QPrinterInfo) SupportedPaperSizes() []qt.QPagedPaintDevice__PageSize
 	for i := 0; i < int(_ma.len); i++ {
 		_ret[i] = (qt.QPagedPaintDevice__PageSize)(_outCast[i])
 	}
+	C.free(unsafe.Pointer(_ma.data))
 	return _ret
 }
 
@@ -178,11 +180,14 @@ func (this *QPrinterInfo) SupportedSizesWithNames() []struct {
 		_lv_second_goptr.GoGC() // Qt uses pass-by-value semantics for this type. Mimic with finalizer
 		_lv_entry_Second := *_lv_second_goptr
 
+		C.free(unsafe.Pointer(_lv_mm.keys))
+		C.free(unsafe.Pointer(_lv_mm.values))
 		_ret[i] = struct {
 			First  string
 			Second qt.QSizeF
 		}{First: _lv_entry_First, Second: _lv_entry_Second}
 	}
+	C.free(unsafe.Pointer(_ma.data))
 	return _ret
 }
 
@@ -193,6 +198,7 @@ func (this *QPrinterInfo) SupportedResolutions() []int {
 	for i := 0; i < int(_ma.len); i++ {
 		_ret[i] = (int)(_outCast[i])
 	}
+	C.free(unsafe.Pointer(_ma.data))
 	return _ret
 }
 
@@ -207,6 +213,7 @@ func (this *QPrinterInfo) SupportedDuplexModes() []QPrinter__DuplexMode {
 	for i := 0; i < int(_ma.len); i++ {
 		_ret[i] = (QPrinter__DuplexMode)(_outCast[i])
 	}
+	C.free(unsafe.Pointer(_ma.data))
 	return _ret
 }
 
@@ -221,6 +228,7 @@ func (this *QPrinterInfo) SupportedColorModes() []QPrinter__ColorMode {
 	for i := 0; i < int(_ma.len); i++ {
 		_ret[i] = (QPrinter__ColorMode)(_outCast[i])
 	}
+	C.free(unsafe.Pointer(_ma.data))
 	return _ret
 }
 
@@ -234,6 +242,7 @@ func QPrinterInfo_AvailablePrinterNames() []string {
 		C.free(unsafe.Pointer(_lv_ms.data))
 		_ret[i] = _lv_ret
 	}
+	C.free(unsafe.Pointer(_ma.data))
 	return _ret
 }
 
@@ -246,6 +255,7 @@ func QPrinterInfo_AvailablePrinters() []QPrinterInfo {
 		_lv_goptr.GoGC() // Qt uses pass-by-value semantics for this type. Mimic with finalizer
 		_ret[i] = *_lv_goptr
 	}
+	C.free(unsafe.Pointer(_ma.data))
 	return _ret
 }
 

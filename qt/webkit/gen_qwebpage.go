@@ -514,6 +514,7 @@ func (this *QWebPage) SupportedContentTypes() []string {
 		C.free(unsafe.Pointer(_lv_ms.data))
 		_ret[i] = _lv_ret
 	}
+	C.free(unsafe.Pointer(_ma.data))
 	return _ret
 }
 
@@ -1643,6 +1644,7 @@ func miqt_exec_callback_QWebPage_createPlugin(self *C.QWebPage, cb C.intptr_t, c
 		C.free(unsafe.Pointer(paramNames_lv_ms.data))
 		paramNames_ret[i] = paramNames_lv_ret
 	}
+	C.free(unsafe.Pointer(paramNames_ma.data))
 	slotval3 := paramNames_ret
 
 	var paramValues_ma C.struct_miqt_array = paramValues
@@ -1654,6 +1656,7 @@ func miqt_exec_callback_QWebPage_createPlugin(self *C.QWebPage, cb C.intptr_t, c
 		C.free(unsafe.Pointer(paramValues_lv_ms.data))
 		paramValues_ret[i] = paramValues_lv_ret
 	}
+	C.free(unsafe.Pointer(paramValues_ma.data))
 	slotval4 := paramValues_ret
 
 	virtualReturn := gofunc((&QWebPage{h: self}).callVirtualBase_CreatePlugin, slotval1, slotval2, slotval3, slotval4)
@@ -2376,6 +2379,7 @@ func (this *QWebPage__ChooseMultipleFilesExtensionOption) SuggestedFileNames() [
 		C.free(unsafe.Pointer(suggestedFileNames_lv_ms.data))
 		suggestedFileNames_ret[i] = suggestedFileNames_lv_ret
 	}
+	C.free(unsafe.Pointer(suggestedFileNames_ma.data))
 	return suggestedFileNames_ret
 }
 
@@ -2459,6 +2463,7 @@ func (this *QWebPage__ChooseMultipleFilesExtensionReturn) FileNames() []string {
 		C.free(unsafe.Pointer(fileNames_lv_ms.data))
 		fileNames_ret[i] = fileNames_lv_ret
 	}
+	C.free(unsafe.Pointer(fileNames_ma.data))
 	return fileNames_ret
 }
 

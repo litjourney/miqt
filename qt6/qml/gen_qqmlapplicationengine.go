@@ -126,6 +126,7 @@ func (this *QQmlApplicationEngine) RootObjects() []*qt6.QObject {
 	for i := 0; i < int(_ma.len); i++ {
 		_ret[i] = qt6.UnsafeNewQObject(unsafe.Pointer(_outCast[i]))
 	}
+	C.free(unsafe.Pointer(_ma.data))
 	return _ret
 }
 

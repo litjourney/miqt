@@ -262,6 +262,7 @@ func (this *QSslSocket) LocalCertificateChain() []QSslCertificate {
 		_lv_goptr.GoGC() // Qt uses pass-by-value semantics for this type. Mimic with finalizer
 		_ret[i] = *_lv_goptr
 	}
+	C.free(unsafe.Pointer(_ma.data))
 	return _ret
 }
 
@@ -298,6 +299,7 @@ func (this *QSslSocket) PeerCertificateChain() []QSslCertificate {
 		_lv_goptr.GoGC() // Qt uses pass-by-value semantics for this type. Mimic with finalizer
 		_ret[i] = *_lv_goptr
 	}
+	C.free(unsafe.Pointer(_ma.data))
 	return _ret
 }
 
@@ -320,6 +322,7 @@ func (this *QSslSocket) OcspResponses() []QOcspResponse {
 		_lv_goptr.GoGC() // Qt uses pass-by-value semantics for this type. Mimic with finalizer
 		_ret[i] = *_lv_goptr
 	}
+	C.free(unsafe.Pointer(_ma.data))
 	return _ret
 }
 
@@ -370,6 +373,7 @@ func (this *QSslSocket) SslHandshakeErrors() []QSslError {
 		_lv_goptr.GoGC() // Qt uses pass-by-value semantics for this type. Mimic with finalizer
 		_ret[i] = *_lv_goptr
 	}
+	C.free(unsafe.Pointer(_ma.data))
 	return _ret
 }
 
@@ -409,6 +413,7 @@ func QSslSocket_AvailableBackends() []string {
 		C.free(unsafe.Pointer(_lv_ms.data))
 		_ret[i] = _lv_ret
 	}
+	C.free(unsafe.Pointer(_ma.data))
 	return _ret
 }
 
@@ -434,6 +439,7 @@ func QSslSocket_SupportedProtocols() []QSsl__SslProtocol {
 	for i := 0; i < int(_ma.len); i++ {
 		_ret[i] = (QSsl__SslProtocol)(_outCast[i])
 	}
+	C.free(unsafe.Pointer(_ma.data))
 	return _ret
 }
 
@@ -448,6 +454,7 @@ func QSslSocket_ImplementedClasses() []QSsl__ImplementedClass {
 	for i := 0; i < int(_ma.len); i++ {
 		_ret[i] = (QSsl__ImplementedClass)(_outCast[i])
 	}
+	C.free(unsafe.Pointer(_ma.data))
 	return _ret
 }
 
@@ -462,6 +469,7 @@ func QSslSocket_SupportedFeatures() []QSsl__SupportedFeature {
 	for i := 0; i < int(_ma.len); i++ {
 		_ret[i] = (QSsl__SupportedFeature)(_outCast[i])
 	}
+	C.free(unsafe.Pointer(_ma.data))
 	return _ret
 }
 
@@ -567,6 +575,7 @@ func miqt_exec_callback_QSslSocket_sslErrors(cb C.intptr_t, errors C.struct_miqt
 		errors_lv_goptr.GoGC() // Qt uses pass-by-value semantics for this type. Mimic with finalizer
 		errors_ret[i] = *errors_lv_goptr
 	}
+	C.free(unsafe.Pointer(errors_ma.data))
 	slotval1 := errors_ret
 
 	gofunc(slotval1)
@@ -861,6 +870,7 @@ func QSslSocket_SupportedProtocolsWithBackendName(backendName string) []QSsl__Ss
 	for i := 0; i < int(_ma.len); i++ {
 		_ret[i] = (QSsl__SslProtocol)(_outCast[i])
 	}
+	C.free(unsafe.Pointer(_ma.data))
 	return _ret
 }
 
@@ -883,6 +893,7 @@ func QSslSocket_ImplementedClassesWithBackendName(backendName string) []QSsl__Im
 	for i := 0; i < int(_ma.len); i++ {
 		_ret[i] = (QSsl__ImplementedClass)(_outCast[i])
 	}
+	C.free(unsafe.Pointer(_ma.data))
 	return _ret
 }
 
@@ -905,6 +916,7 @@ func QSslSocket_SupportedFeaturesWithBackendName(backendName string) []QSsl__Sup
 	for i := 0; i < int(_ma.len); i++ {
 		_ret[i] = (QSsl__SupportedFeature)(_outCast[i])
 	}
+	C.free(unsafe.Pointer(_ma.data))
 	return _ret
 }
 

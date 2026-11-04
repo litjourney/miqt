@@ -174,6 +174,7 @@ func (this *QwtDateScaleEngine) BuildMajorTicks(interval *QwtInterval, stepSize 
 	for i := 0; i < int(_ma.len); i++ {
 		_ret[i] = (float64)(_outCast[i])
 	}
+	C.free(unsafe.Pointer(_ma.data))
 	_method_ret := _ret
 
 	if !_dynamic_cast_ok {
@@ -244,6 +245,7 @@ func (this *QwtDateScaleEngine) Strip(param1 []float64, param2 *QwtInterval) []f
 	for i := 0; i < int(_ma.len); i++ {
 		_ret[i] = (float64)(_outCast[i])
 	}
+	C.free(unsafe.Pointer(_ma.data))
 	_method_ret := _ret
 
 	if !_dynamic_cast_ok {

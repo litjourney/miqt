@@ -167,6 +167,7 @@ func (this *QwtDynGridLayout) LayoutItems(param1 *qt.QRect, numColumns uint) []q
 		_lv_goptr.GoGC() // Qt uses pass-by-value semantics for this type. Mimic with finalizer
 		_ret[i] = *_lv_goptr
 	}
+	C.free(unsafe.Pointer(_ma.data))
 	return _ret
 }
 

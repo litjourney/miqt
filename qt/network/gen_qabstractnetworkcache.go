@@ -110,11 +110,14 @@ func (this *QNetworkCacheMetaData) RawHeaders() []struct {
 		_lv_second_ret := C.GoBytes(unsafe.Pointer(_lv_second_bytearray.data), C.int(int64(_lv_second_bytearray.len)))
 		C.free(unsafe.Pointer(_lv_second_bytearray.data))
 		_lv_entry_Second := _lv_second_ret
+		C.free(unsafe.Pointer(_lv_mm.keys))
+		C.free(unsafe.Pointer(_lv_mm.values))
 		_ret[i] = struct {
 			First  []byte
 			Second []byte
 		}{First: _lv_entry_First, Second: _lv_entry_Second}
 	}
+	C.free(unsafe.Pointer(_ma.data))
 	return _ret
 }
 
@@ -198,6 +201,8 @@ func (this *QNetworkCacheMetaData) Attributes() map[QNetworkRequest__Attribute]q
 
 		_ret[_entry_Key] = _entry_Value
 	}
+	C.free(unsafe.Pointer(_mm.keys))
+	C.free(unsafe.Pointer(_mm.values))
 	return _ret
 }
 

@@ -93,6 +93,7 @@ func (this *QCborMap) Keys() []QCborValue {
 		_lv_goptr.GoGC() // Qt uses pass-by-value semantics for this type. Mimic with finalizer
 		_ret[i] = *_lv_goptr
 	}
+	C.free(unsafe.Pointer(_ma.data))
 	return _ret
 }
 
@@ -488,6 +489,8 @@ func (this *QCborMap) ToVariantMap() map[string]qt6.QVariant {
 
 		_ret[_entry_Key] = _entry_Value
 	}
+	C.free(unsafe.Pointer(_mm.keys))
+	C.free(unsafe.Pointer(_mm.values))
 	return _ret
 }
 
@@ -507,6 +510,8 @@ func (this *QCborMap) ToVariantHash() map[string]qt6.QVariant {
 
 		_ret[_entry_Key] = _entry_Value
 	}
+	C.free(unsafe.Pointer(_mm.keys))
+	C.free(unsafe.Pointer(_mm.values))
 	return _ret
 }
 
@@ -593,6 +598,8 @@ func (this *QCborMap__Iterator) OperatorMultiply() struct {
 	_second_goptr.GoGC() // Qt uses pass-by-value semantics for this type. Mimic with finalizer
 	_entry_Second := *_second_goptr
 
+	C.free(unsafe.Pointer(_mm.keys))
+	C.free(unsafe.Pointer(_mm.values))
 	return struct {
 		First  QCborValueConstRef
 		Second QCborValueRef
@@ -614,6 +621,8 @@ func (this *QCborMap__Iterator) OperatorSubscript(j int64) struct {
 	_second_goptr.GoGC() // Qt uses pass-by-value semantics for this type. Mimic with finalizer
 	_entry_Second := *_second_goptr
 
+	C.free(unsafe.Pointer(_mm.keys))
+	C.free(unsafe.Pointer(_mm.values))
 	return struct {
 		First  QCborValueConstRef
 		Second QCborValueRef
@@ -809,6 +818,8 @@ func (this *QCborMap__ConstIterator) OperatorMultiply() struct {
 	_second_goptr.GoGC() // Qt uses pass-by-value semantics for this type. Mimic with finalizer
 	_entry_Second := *_second_goptr
 
+	C.free(unsafe.Pointer(_mm.keys))
+	C.free(unsafe.Pointer(_mm.values))
 	return struct {
 		First  QCborValueConstRef
 		Second QCborValueConstRef
@@ -830,6 +841,8 @@ func (this *QCborMap__ConstIterator) OperatorSubscript(j int64) struct {
 	_second_goptr.GoGC() // Qt uses pass-by-value semantics for this type. Mimic with finalizer
 	_entry_Second := *_second_goptr
 
+	C.free(unsafe.Pointer(_mm.keys))
+	C.free(unsafe.Pointer(_mm.values))
 	return struct {
 		First  QCborValueConstRef
 		Second QCborValueConstRef

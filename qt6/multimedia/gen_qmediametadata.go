@@ -112,6 +112,7 @@ func (this *QMediaMetaData) Keys() []QMediaMetaData__Key {
 	for i := 0; i < int(_ma.len); i++ {
 		_ret[i] = (QMediaMetaData__Key)(_outCast[i])
 	}
+	C.free(unsafe.Pointer(_ma.data))
 	return _ret
 }
 

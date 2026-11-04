@@ -100,6 +100,7 @@ func (this *QStringView) ToUcs4() []uint {
 	for i := 0; i < int(_ma.len); i++ {
 		_ret[i] = (uint)(_outCast[i])
 	}
+	C.free(unsafe.Pointer(_ma.data))
 	return _ret
 }
 

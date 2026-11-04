@@ -155,6 +155,7 @@ func (this *QXYSeries) Points() []qt6.QPointF {
 		_lv_goptr.GoGC() // Qt uses pass-by-value semantics for this type. Mimic with finalizer
 		_ret[i] = *_lv_goptr
 	}
+	C.free(unsafe.Pointer(_ma.data))
 	return _ret
 }
 
@@ -167,6 +168,7 @@ func (this *QXYSeries) PointsVector() []qt6.QPointF {
 		_lv_goptr.GoGC() // Qt uses pass-by-value semantics for this type. Mimic with finalizer
 		_ret[i] = *_lv_goptr
 	}
+	C.free(unsafe.Pointer(_ma.data))
 	return _ret
 }
 
@@ -358,6 +360,7 @@ func (this *QXYSeries) SelectedPoints() []int {
 	for i := 0; i < int(_ma.len); i++ {
 		_ret[i] = (int)(_outCast[i])
 	}
+	C.free(unsafe.Pointer(_ma.data))
 	return _ret
 }
 
@@ -404,6 +407,8 @@ func (this *QXYSeries) BestFitLineEquation(ok *bool) struct {
 
 	_entry_Second := (float64)(_Second_CArray[0])
 
+	C.free(unsafe.Pointer(_mm.keys))
+	C.free(unsafe.Pointer(_mm.values))
 	return struct {
 		First  float64
 		Second float64
@@ -517,6 +522,8 @@ func (this *QXYSeries) PointConfiguration(index int) map[QXYSeries__PointConfigu
 
 		_ret[_entry_Key] = _entry_Value
 	}
+	C.free(unsafe.Pointer(_mm.keys))
+	C.free(unsafe.Pointer(_mm.values))
 	return _ret
 }
 
@@ -541,10 +548,14 @@ func (this *QXYSeries) PointsConfiguration() map[int]map[QXYSeries__PointConfigu
 
 			_hashval_ret[_hashval_entry_Key] = _hashval_entry_Value
 		}
+		C.free(unsafe.Pointer(_hashval_mm.keys))
+		C.free(unsafe.Pointer(_hashval_mm.values))
 		_entry_Value := _hashval_ret
 
 		_ret[_entry_Key] = _entry_Value
 	}
+	C.free(unsafe.Pointer(_mm.keys))
+	C.free(unsafe.Pointer(_mm.values))
 	return _ret
 }
 
@@ -1170,10 +1181,14 @@ func miqt_exec_callback_QXYSeries_pointsConfigurationChanged(cb C.intptr_t, conf
 
 			configuration_hashval_ret[configuration_hashval_entry_Key] = configuration_hashval_entry_Value
 		}
+		C.free(unsafe.Pointer(configuration_hashval_mm.keys))
+		C.free(unsafe.Pointer(configuration_hashval_mm.values))
 		configuration_entry_Value := configuration_hashval_ret
 
 		configuration_ret[configuration_entry_Key] = configuration_entry_Value
 	}
+	C.free(unsafe.Pointer(configuration_mm.keys))
+	C.free(unsafe.Pointer(configuration_mm.values))
 	slotval1 := configuration_ret
 
 	gofunc(slotval1)

@@ -88,6 +88,7 @@ func (this *QAudioEncoderSettingsControl) SupportedAudioCodecs() []string {
 		C.free(unsafe.Pointer(_lv_ms.data))
 		_ret[i] = _lv_ret
 	}
+	C.free(unsafe.Pointer(_ma.data))
 	return _ret
 }
 
@@ -109,6 +110,7 @@ func (this *QAudioEncoderSettingsControl) SupportedSampleRates(settings *QAudioE
 	for i := 0; i < int(_ma.len); i++ {
 		_ret[i] = (int)(_outCast[i])
 	}
+	C.free(unsafe.Pointer(_ma.data))
 	return _ret
 }
 

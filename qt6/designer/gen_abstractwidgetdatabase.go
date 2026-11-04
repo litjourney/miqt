@@ -224,6 +224,7 @@ func (this *QDesignerWidgetDataBaseItemInterface) DefaultPropertyValues() []qt6.
 		_lv_goptr.GoGC() // Qt uses pass-by-value semantics for this type. Mimic with finalizer
 		_ret[i] = *_lv_goptr
 	}
+	C.free(unsafe.Pointer(_ma.data))
 	return _ret
 }
 func (this *QDesignerWidgetDataBaseItemInterface) OnName(slot func() string) {
@@ -882,6 +883,7 @@ func miqt_exec_callback_QDesignerWidgetDataBaseItemInterface_setDefaultPropertyV
 		list_lv_goptr.GoGC() // Qt uses pass-by-value semantics for this type. Mimic with finalizer
 		list_ret[i] = *list_lv_goptr
 	}
+	C.free(unsafe.Pointer(list_ma.data))
 	slotval1 := list_ret
 
 	gofunc(slotval1)

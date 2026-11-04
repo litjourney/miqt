@@ -197,6 +197,7 @@ func (this *QLegend) Markers() []*QLegendMarker {
 	for i := 0; i < int(_ma.len); i++ {
 		_ret[i] = newQLegendMarker(_outCast[i])
 	}
+	C.free(unsafe.Pointer(_ma.data))
 	return _ret
 }
 
@@ -493,6 +494,7 @@ func (this *QLegend) MarkersWithSeries(series *QAbstractSeries) []*QLegendMarker
 	for i := 0; i < int(_ma.len); i++ {
 		_ret[i] = newQLegendMarker(_outCast[i])
 	}
+	C.free(unsafe.Pointer(_ma.data))
 	return _ret
 }
 

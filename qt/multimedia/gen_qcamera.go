@@ -231,6 +231,7 @@ func QCamera_AvailableDevices() [][]byte {
 		C.free(unsafe.Pointer(_lv_bytearray.data))
 		_ret[i] = _lv_ret
 	}
+	C.free(unsafe.Pointer(_ma.data))
 	return _ret
 }
 
@@ -311,6 +312,7 @@ func (this *QCamera) SupportedViewfinderSettings() []QCameraViewfinderSettings {
 		_lv_goptr.GoGC() // Qt uses pass-by-value semantics for this type. Mimic with finalizer
 		_ret[i] = *_lv_goptr
 	}
+	C.free(unsafe.Pointer(_ma.data))
 	return _ret
 }
 
@@ -323,6 +325,7 @@ func (this *QCamera) SupportedViewfinderResolutions() []qt.QSize {
 		_lv_goptr.GoGC() // Qt uses pass-by-value semantics for this type. Mimic with finalizer
 		_ret[i] = *_lv_goptr
 	}
+	C.free(unsafe.Pointer(_ma.data))
 	return _ret
 }
 
@@ -335,6 +338,7 @@ func (this *QCamera) SupportedViewfinderFrameRateRanges() []QCamera__FrameRateRa
 		_lv_goptr.GoGC() // Qt uses pass-by-value semantics for this type. Mimic with finalizer
 		_ret[i] = *_lv_goptr
 	}
+	C.free(unsafe.Pointer(_ma.data))
 	return _ret
 }
 
@@ -345,6 +349,7 @@ func (this *QCamera) SupportedViewfinderPixelFormats() []QVideoFrame__PixelForma
 	for i := 0; i < int(_ma.len); i++ {
 		_ret[i] = (QVideoFrame__PixelFormat)(_outCast[i])
 	}
+	C.free(unsafe.Pointer(_ma.data))
 	return _ret
 }
 
@@ -662,6 +667,7 @@ func (this *QCamera) SupportedViewfinderSettingsWithSettings(settings *QCameraVi
 		_lv_goptr.GoGC() // Qt uses pass-by-value semantics for this type. Mimic with finalizer
 		_ret[i] = *_lv_goptr
 	}
+	C.free(unsafe.Pointer(_ma.data))
 	return _ret
 }
 
@@ -674,6 +680,7 @@ func (this *QCamera) SupportedViewfinderResolutionsWithSettings(settings *QCamer
 		_lv_goptr.GoGC() // Qt uses pass-by-value semantics for this type. Mimic with finalizer
 		_ret[i] = *_lv_goptr
 	}
+	C.free(unsafe.Pointer(_ma.data))
 	return _ret
 }
 
@@ -686,6 +693,7 @@ func (this *QCamera) SupportedViewfinderFrameRateRangesWithSettings(settings *QC
 		_lv_goptr.GoGC() // Qt uses pass-by-value semantics for this type. Mimic with finalizer
 		_ret[i] = *_lv_goptr
 	}
+	C.free(unsafe.Pointer(_ma.data))
 	return _ret
 }
 
@@ -696,6 +704,7 @@ func (this *QCamera) SupportedViewfinderPixelFormatsWithSettings(settings *QCame
 	for i := 0; i < int(_ma.len); i++ {
 		_ret[i] = (QVideoFrame__PixelFormat)(_outCast[i])
 	}
+	C.free(unsafe.Pointer(_ma.data))
 	return _ret
 }
 

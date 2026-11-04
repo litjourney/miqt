@@ -2784,6 +2784,7 @@ func (this *QGestureEvent) Gestures() []*QGesture {
 	for i := 0; i < int(_ma.len); i++ {
 		_ret[i] = newQGesture(_outCast[i])
 	}
+	C.free(unsafe.Pointer(_ma.data))
 	return _ret
 }
 
@@ -2798,6 +2799,7 @@ func (this *QGestureEvent) ActiveGestures() []*QGesture {
 	for i := 0; i < int(_ma.len); i++ {
 		_ret[i] = newQGesture(_outCast[i])
 	}
+	C.free(unsafe.Pointer(_ma.data))
 	return _ret
 }
 
@@ -2808,6 +2810,7 @@ func (this *QGestureEvent) CanceledGestures() []*QGesture {
 	for i := 0; i < int(_ma.len); i++ {
 		_ret[i] = newQGesture(_outCast[i])
 	}
+	C.free(unsafe.Pointer(_ma.data))
 	return _ret
 }
 

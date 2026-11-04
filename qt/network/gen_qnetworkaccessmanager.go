@@ -126,6 +126,7 @@ func (this *QNetworkAccessManager) SupportedSchemes() []string {
 		C.free(unsafe.Pointer(_lv_ms.data))
 		_ret[i] = _lv_ret
 	}
+	C.free(unsafe.Pointer(_ma.data))
 	return _ret
 }
 
@@ -206,6 +207,7 @@ func (this *QNetworkAccessManager) StrictTransportSecurityHosts() []QHstsPolicy 
 		_vv_goptr.GoGC() // Qt uses pass-by-value semantics for this type. Mimic with finalizer
 		_ret[i] = *_vv_goptr
 	}
+	C.free(unsafe.Pointer(_ma.data))
 	return _ret
 }
 
@@ -500,6 +502,7 @@ func miqt_exec_callback_QNetworkAccessManager_sslErrors(cb C.intptr_t, reply *C.
 		errors_lv_goptr.GoGC() // Qt uses pass-by-value semantics for this type. Mimic with finalizer
 		errors_ret[i] = *errors_lv_goptr
 	}
+	C.free(unsafe.Pointer(errors_ma.data))
 	slotval2 := errors_ret
 
 	gofunc(slotval1, slotval2)
@@ -674,6 +677,7 @@ func (this *QNetworkAccessManager) SupportedSchemesImplementation() []string {
 		C.free(unsafe.Pointer(_lv_ms.data))
 		_ret[i] = _lv_ret
 	}
+	C.free(unsafe.Pointer(_ma.data))
 	_method_ret := _ret
 
 	if !_dynamic_cast_ok {

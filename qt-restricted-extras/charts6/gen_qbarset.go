@@ -297,6 +297,7 @@ func (this *QBarSet) SelectedBars() []int {
 	for i := 0; i < int(_ma.len); i++ {
 		_ret[i] = (int)(_outCast[i])
 	}
+	C.free(unsafe.Pointer(_ma.data))
 	return _ret
 }
 
@@ -700,6 +701,7 @@ func miqt_exec_callback_QBarSet_selectedBarsChanged(cb C.intptr_t, indexes C.str
 	for i := 0; i < int(indexes_ma.len); i++ {
 		indexes_ret[i] = (int)(indexes_outCast[i])
 	}
+	C.free(unsafe.Pointer(indexes_ma.data))
 	slotval1 := indexes_ret
 
 	gofunc(slotval1)

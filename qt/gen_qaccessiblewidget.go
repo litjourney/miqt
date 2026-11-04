@@ -107,11 +107,14 @@ func (this *QAccessibleWidget) Relations(match QAccessible__RelationFlag) []stru
 
 		_vv_entry_Second := (QAccessible__RelationFlag)(_vv_Second_CArray[0])
 
+		C.free(unsafe.Pointer(_vv_mm.keys))
+		C.free(unsafe.Pointer(_vv_mm.values))
 		_ret[i] = struct {
 			First  *QAccessibleInterface
 			Second QAccessible__RelationFlag
 		}{First: _vv_entry_First, Second: _vv_entry_Second}
 	}
+	C.free(unsafe.Pointer(_ma.data))
 	return _ret
 }
 
@@ -176,6 +179,7 @@ func (this *QAccessibleWidget) ActionNames() []string {
 		C.free(unsafe.Pointer(_lv_ms.data))
 		_ret[i] = _lv_ret
 	}
+	C.free(unsafe.Pointer(_ma.data))
 	return _ret
 }
 
@@ -201,5 +205,6 @@ func (this *QAccessibleWidget) KeyBindingsForAction(actionName string) []string 
 		C.free(unsafe.Pointer(_lv_ms.data))
 		_ret[i] = _lv_ret
 	}
+	C.free(unsafe.Pointer(_ma.data))
 	return _ret
 }

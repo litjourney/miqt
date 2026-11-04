@@ -307,6 +307,7 @@ func miqt_exec_callback_QListView_indexesMoved(cb C.intptr_t, indexes C.struct_m
 		indexes_lv_goptr.GoGC() // Qt uses pass-by-value semantics for this type. Mimic with finalizer
 		indexes_ret[i] = *indexes_lv_goptr
 	}
+	C.free(unsafe.Pointer(indexes_ma.data))
 	slotval1 := indexes_ret
 
 	gofunc(slotval1)
@@ -1026,6 +1027,7 @@ func miqt_exec_callback_QListView_dataChanged(self *C.QListView, cb C.intptr_t, 
 	for i := 0; i < int(roles_ma.len); i++ {
 		roles_ret[i] = (int)(roles_outCast[i])
 	}
+	C.free(unsafe.Pointer(roles_ma.data))
 	slotval3 := roles_ret
 
 	gofunc((&QListView{h: self}).callVirtualBase_DataChanged, slotval1, slotval2, slotval3)
@@ -1646,6 +1648,7 @@ func (this *QListView) callVirtualBase_SelectedIndexes() []QModelIndex {
 		_lv_goptr.GoGC() // Qt uses pass-by-value semantics for this type. Mimic with finalizer
 		_ret[i] = *_lv_goptr
 	}
+	C.free(unsafe.Pointer(_ma.data))
 	return _ret
 
 }

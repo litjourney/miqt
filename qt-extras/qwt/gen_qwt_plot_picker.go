@@ -205,6 +205,7 @@ func miqt_exec_callback_QwtPlotPicker_selectedWithPa(cb C.intptr_t, pa C.struct_
 		pa_vv_goptr.GoGC() // Qt uses pass-by-value semantics for this type. Mimic with finalizer
 		pa_ret[i] = *pa_vv_goptr
 	}
+	C.free(unsafe.Pointer(pa_ma.data))
 	slotval1 := pa_ret
 
 	gofunc(slotval1)

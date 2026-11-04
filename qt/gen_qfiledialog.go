@@ -236,6 +236,7 @@ func (this *QFileDialog) SelectedFiles() []string {
 		C.free(unsafe.Pointer(_lv_ms.data))
 		_ret[i] = _lv_ret
 	}
+	C.free(unsafe.Pointer(_ma.data))
 	return _ret
 }
 
@@ -252,6 +253,7 @@ func (this *QFileDialog) SelectedUrls() []QUrl {
 		_lv_goptr.GoGC() // Qt uses pass-by-value semantics for this type. Mimic with finalizer
 		_ret[i] = *_lv_goptr
 	}
+	C.free(unsafe.Pointer(_ma.data))
 	return _ret
 }
 
@@ -295,6 +297,7 @@ func (this *QFileDialog) NameFilters() []string {
 		C.free(unsafe.Pointer(_lv_ms.data))
 		_ret[i] = _lv_ret
 	}
+	C.free(unsafe.Pointer(_ma.data))
 	return _ret
 }
 
@@ -344,6 +347,7 @@ func (this *QFileDialog) MimeTypeFilters() []string {
 		C.free(unsafe.Pointer(_lv_ms.data))
 		_ret[i] = _lv_ret
 	}
+	C.free(unsafe.Pointer(_ma.data))
 	return _ret
 }
 
@@ -422,6 +426,7 @@ func (this *QFileDialog) SidebarUrls() []QUrl {
 		_lv_goptr.GoGC() // Qt uses pass-by-value semantics for this type. Mimic with finalizer
 		_ret[i] = *_lv_goptr
 	}
+	C.free(unsafe.Pointer(_ma.data))
 	return _ret
 }
 
@@ -490,6 +495,7 @@ func (this *QFileDialog) History() []string {
 		C.free(unsafe.Pointer(_lv_ms.data))
 		_ret[i] = _lv_ret
 	}
+	C.free(unsafe.Pointer(_ma.data))
 	return _ret
 }
 
@@ -548,6 +554,7 @@ func (this *QFileDialog) SupportedSchemes() []string {
 		C.free(unsafe.Pointer(_lv_ms.data))
 		_ret[i] = _lv_ret
 	}
+	C.free(unsafe.Pointer(_ma.data))
 	return _ret
 }
 
@@ -644,6 +651,7 @@ func miqt_exec_callback_QFileDialog_filesSelected(cb C.intptr_t, files C.struct_
 		C.free(unsafe.Pointer(files_lv_ms.data))
 		files_ret[i] = files_lv_ret
 	}
+	C.free(unsafe.Pointer(files_ma.data))
 	slotval1 := files_ret
 
 	gofunc(slotval1)
@@ -760,6 +768,7 @@ func miqt_exec_callback_QFileDialog_urlsSelected(cb C.intptr_t, urls C.struct_mi
 		urls_lv_goptr.GoGC() // Qt uses pass-by-value semantics for this type. Mimic with finalizer
 		urls_ret[i] = *urls_lv_goptr
 	}
+	C.free(unsafe.Pointer(urls_ma.data))
 	slotval1 := urls_ret
 
 	gofunc(slotval1)
@@ -887,6 +896,7 @@ func QFileDialog_GetOpenFileNames() []string {
 		C.free(unsafe.Pointer(_lv_ms.data))
 		_ret[i] = _lv_ret
 	}
+	C.free(unsafe.Pointer(_ma.data))
 	return _ret
 }
 
@@ -899,6 +909,7 @@ func QFileDialog_GetOpenFileUrls() []QUrl {
 		_lv_goptr.GoGC() // Qt uses pass-by-value semantics for this type. Mimic with finalizer
 		_ret[i] = *_lv_goptr
 	}
+	C.free(unsafe.Pointer(_ma.data))
 	return _ret
 }
 
@@ -1263,6 +1274,7 @@ func QFileDialog_GetOpenFileNamesWithParent(parent *QWidget) []string {
 		C.free(unsafe.Pointer(_lv_ms.data))
 		_ret[i] = _lv_ret
 	}
+	C.free(unsafe.Pointer(_ma.data))
 	return _ret
 }
 
@@ -1280,6 +1292,7 @@ func QFileDialog_GetOpenFileNames2(parent *QWidget, caption string) []string {
 		C.free(unsafe.Pointer(_lv_ms.data))
 		_ret[i] = _lv_ret
 	}
+	C.free(unsafe.Pointer(_ma.data))
 	return _ret
 }
 
@@ -1301,6 +1314,7 @@ func QFileDialog_GetOpenFileNames3(parent *QWidget, caption string, dir string) 
 		C.free(unsafe.Pointer(_lv_ms.data))
 		_ret[i] = _lv_ret
 	}
+	C.free(unsafe.Pointer(_ma.data))
 	return _ret
 }
 
@@ -1326,6 +1340,7 @@ func QFileDialog_GetOpenFileNames4(parent *QWidget, caption string, dir string, 
 		C.free(unsafe.Pointer(_lv_ms.data))
 		_ret[i] = _lv_ret
 	}
+	C.free(unsafe.Pointer(_ma.data))
 	return _ret
 }
 
@@ -1338,6 +1353,7 @@ func QFileDialog_GetOpenFileUrlsWithParent(parent *QWidget) []QUrl {
 		_lv_goptr.GoGC() // Qt uses pass-by-value semantics for this type. Mimic with finalizer
 		_ret[i] = *_lv_goptr
 	}
+	C.free(unsafe.Pointer(_ma.data))
 	return _ret
 }
 
@@ -1354,6 +1370,7 @@ func QFileDialog_GetOpenFileUrls2(parent *QWidget, caption string) []QUrl {
 		_lv_goptr.GoGC() // Qt uses pass-by-value semantics for this type. Mimic with finalizer
 		_ret[i] = *_lv_goptr
 	}
+	C.free(unsafe.Pointer(_ma.data))
 	return _ret
 }
 
@@ -1370,6 +1387,7 @@ func QFileDialog_GetOpenFileUrls3(parent *QWidget, caption string, dir *QUrl) []
 		_lv_goptr.GoGC() // Qt uses pass-by-value semantics for this type. Mimic with finalizer
 		_ret[i] = *_lv_goptr
 	}
+	C.free(unsafe.Pointer(_ma.data))
 	return _ret
 }
 
@@ -1390,6 +1408,7 @@ func QFileDialog_GetOpenFileUrls4(parent *QWidget, caption string, dir *QUrl, fi
 		_lv_goptr.GoGC() // Qt uses pass-by-value semantics for this type. Mimic with finalizer
 		_ret[i] = *_lv_goptr
 	}
+	C.free(unsafe.Pointer(_ma.data))
 	return _ret
 }
 

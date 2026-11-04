@@ -61,6 +61,7 @@ func (this *QDesignerLayoutDecorationExtension) Widgets(layout *qt.QLayout) []*q
 	for i := 0; i < int(_ma.len); i++ {
 		_ret[i] = qt.UnsafeNewQWidget(unsafe.Pointer(_outCast[i]))
 	}
+	C.free(unsafe.Pointer(_ma.data))
 	return _ret
 }
 
@@ -97,6 +98,8 @@ func (this *QDesignerLayoutDecorationExtension) CurrentCell() struct {
 
 	_entry_Second := (int)(_Second_CArray[0])
 
+	C.free(unsafe.Pointer(_mm.keys))
+	C.free(unsafe.Pointer(_mm.values))
 	return struct {
 		First  int
 		Second int

@@ -378,6 +378,7 @@ func miqt_exec_callback_QDesignerIntegrationInterface_navigateToSlot(cb C.intptr
 		C.free(unsafe.Pointer(parameterNames_lv_ms.data))
 		parameterNames_ret[i] = parameterNames_lv_ret
 	}
+	C.free(unsafe.Pointer(parameterNames_ma.data))
 	slotval3 := parameterNames_ret
 
 	gofunc(slotval1, slotval2, slotval3)

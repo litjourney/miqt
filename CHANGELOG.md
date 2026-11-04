@@ -5,6 +5,9 @@
 - Fix leaked `runtime/cgo.Handle` values for generated signal callbacks and virtual overrides by tying them to their C++ owners.
 - Return `SignalConnection` from generated `OnSignal` methods and add `Disconnect()` for explicit callback teardown.
 - Fix callback handle leaks in `qt/mainthread` and `qt6/mainthread` when queued calls execute or are discarded.
+- Fix leaked C buffers of every container (`QList`, `QVector`, `QSet`, `QMap`, `QHash`, `QPair`) that C++ hands to Go: method results, virtual-base `super()` results and callback parameters now free their `miqt_array`/`miqt_map` storage after copying it.
+- Fix heap corruption when a Go virtual override returns `QByteArray` (also inside a container): the C++ trampoline `free()`d an alias of the Go slice; the bytes are now copied into C memory.
+- Fix leaked key/value buffers when a Go virtual override returns `QMap`, `QHash` or `QPair` (e.g. `QAbstractItemModel::itemData`, `roleNames`).
 
 ## 2026-06-01 v0.14.0
 

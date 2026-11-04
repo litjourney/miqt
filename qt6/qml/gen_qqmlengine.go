@@ -228,6 +228,7 @@ func (this *QQmlEngine) ImportPathList() []string {
 		C.free(unsafe.Pointer(_lv_ms.data))
 		_ret[i] = _lv_ret
 	}
+	C.free(unsafe.Pointer(_ma.data))
 	return _ret
 }
 
@@ -263,6 +264,7 @@ func (this *QQmlEngine) PluginPathList() []string {
 		C.free(unsafe.Pointer(_lv_ms.data))
 		_ret[i] = _lv_ret
 	}
+	C.free(unsafe.Pointer(_ma.data))
 	return _ret
 }
 
@@ -349,6 +351,7 @@ func (this *QQmlEngine) UrlInterceptors() []*QQmlAbstractUrlInterceptor {
 	for i := 0; i < int(_ma.len); i++ {
 		_ret[i] = newQQmlAbstractUrlInterceptor(_outCast[i])
 	}
+	C.free(unsafe.Pointer(_ma.data))
 	return _ret
 }
 
@@ -522,6 +525,7 @@ func miqt_exec_callback_QQmlEngine_warnings(cb C.intptr_t, warnings C.struct_miq
 		warnings_lv_goptr.GoGC() // Qt uses pass-by-value semantics for this type. Mimic with finalizer
 		warnings_ret[i] = *warnings_lv_goptr
 	}
+	C.free(unsafe.Pointer(warnings_ma.data))
 	slotval1 := warnings_ret
 
 	gofunc(slotval1)

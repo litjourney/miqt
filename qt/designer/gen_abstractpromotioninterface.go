@@ -54,6 +54,7 @@ func (this *QDesignerPromotionInterface) PromotedClasses() []QDesignerPromotionI
 		_lv_goptr.GoGC() // Qt uses pass-by-value semantics for this type. Mimic with finalizer
 		_ret[i] = *_lv_goptr
 	}
+	C.free(unsafe.Pointer(_ma.data))
 	return _ret
 }
 
@@ -68,6 +69,7 @@ func (this *QDesignerPromotionInterface) ReferencedPromotedClassNames() map[stri
 		_element := _sv_ret
 		_ret[_element] = struct{}{}
 	}
+	C.free(unsafe.Pointer(_ma.data))
 	return _ret
 }
 
@@ -78,6 +80,7 @@ func (this *QDesignerPromotionInterface) PromotionBaseClasses() []*QDesignerWidg
 	for i := 0; i < int(_ma.len); i++ {
 		_ret[i] = newQDesignerWidgetDataBaseItemInterface(_outCast[i])
 	}
+	C.free(unsafe.Pointer(_ma.data))
 	return _ret
 }
 

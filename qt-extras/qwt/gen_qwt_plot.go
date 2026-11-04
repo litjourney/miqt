@@ -492,6 +492,7 @@ func miqt_exec_callback_QwtPlot_legendDataChanged(cb C.intptr_t, itemInfo *C.QVa
 		data_lv_goptr.GoGC() // Qt uses pass-by-value semantics for this type. Mimic with finalizer
 		data_ret[i] = *data_lv_goptr
 	}
+	C.free(unsafe.Pointer(data_ma.data))
 	slotval2 := data_ret
 
 	gofunc(slotval1, slotval2)

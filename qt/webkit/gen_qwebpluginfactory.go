@@ -105,6 +105,7 @@ func (this *QWebPluginFactory) Plugins() []QWebPluginFactory__Plugin {
 		_lv_goptr.GoGC() // Qt uses pass-by-value semantics for this type. Mimic with finalizer
 		_ret[i] = *_lv_goptr
 	}
+	C.free(unsafe.Pointer(_ma.data))
 	return _ret
 }
 
@@ -338,6 +339,7 @@ func miqt_exec_callback_QWebPluginFactory_create(self *C.QWebPluginFactory, cb C
 		C.free(unsafe.Pointer(argumentNames_lv_ms.data))
 		argumentNames_ret[i] = argumentNames_lv_ret
 	}
+	C.free(unsafe.Pointer(argumentNames_ma.data))
 	slotval3 := argumentNames_ret
 
 	var argumentValues_ma C.struct_miqt_array = argumentValues
@@ -349,6 +351,7 @@ func miqt_exec_callback_QWebPluginFactory_create(self *C.QWebPluginFactory, cb C
 		C.free(unsafe.Pointer(argumentValues_lv_ms.data))
 		argumentValues_ret[i] = argumentValues_lv_ret
 	}
+	C.free(unsafe.Pointer(argumentValues_ma.data))
 	slotval4 := argumentValues_ret
 
 	virtualReturn := gofunc(slotval1, slotval2, slotval3, slotval4)
@@ -739,6 +742,7 @@ func (this *QWebPluginFactory__MimeType) FileExtensions() []string {
 		C.free(unsafe.Pointer(fileExtensions_lv_ms.data))
 		fileExtensions_ret[i] = fileExtensions_lv_ret
 	}
+	C.free(unsafe.Pointer(fileExtensions_ma.data))
 	return fileExtensions_ret
 }
 
@@ -865,6 +869,7 @@ func (this *QWebPluginFactory__Plugin) MimeTypes() []QWebPluginFactory__MimeType
 		mimeTypes_lv_goptr.GoGC() // Qt uses pass-by-value semantics for this type. Mimic with finalizer
 		mimeTypes_ret[i] = *mimeTypes_lv_goptr
 	}
+	C.free(unsafe.Pointer(mimeTypes_ma.data))
 	return mimeTypes_ret
 }
 

@@ -540,11 +540,14 @@ func (this *QGradient) Stops() []struct {
 		_vv_second_goptr.GoGC() // Qt uses pass-by-value semantics for this type. Mimic with finalizer
 		_vv_entry_Second := *_vv_second_goptr
 
+		C.free(unsafe.Pointer(_vv_mm.keys))
+		C.free(unsafe.Pointer(_vv_mm.values))
 		_ret[i] = struct {
 			First  float64
 			Second QColor
 		}{First: _vv_entry_First, Second: _vv_entry_Second}
 	}
+	C.free(unsafe.Pointer(_ma.data))
 	return _ret
 }
 

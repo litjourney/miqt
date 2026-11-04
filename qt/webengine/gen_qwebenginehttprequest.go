@@ -179,6 +179,7 @@ func (this *QWebEngineHttpRequest) Headers() [][]byte {
 		C.free(unsafe.Pointer(_vv_bytearray.data))
 		_ret[i] = _vv_ret
 	}
+	C.free(unsafe.Pointer(_ma.data))
 	return _ret
 }
 

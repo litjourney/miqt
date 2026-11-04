@@ -103,6 +103,7 @@ func (this *QwtColorMap) ColorTable(param1 *QwtInterval) []uint {
 	for i := 0; i < int(_ma.len); i++ {
 		_ret[i] = (uint)(_outCast[i])
 	}
+	C.free(unsafe.Pointer(_ma.data))
 	return _ret
 }
 
@@ -174,6 +175,7 @@ func (this *QwtColorMap) callVirtualBase_ColorTable(param1 *QwtInterval) []uint 
 	for i := 0; i < int(_ma.len); i++ {
 		_ret[i] = (uint)(_outCast[i])
 	}
+	C.free(unsafe.Pointer(_ma.data))
 	return _ret
 
 }
@@ -311,6 +313,7 @@ func (this *QwtLinearColorMap) ColorStops() []float64 {
 	for i := 0; i < int(_ma.len); i++ {
 		_ret[i] = (float64)(_outCast[i])
 	}
+	C.free(unsafe.Pointer(_ma.data))
 	return _ret
 }
 
@@ -410,6 +413,7 @@ func (this *QwtLinearColorMap) callVirtualBase_ColorTable(param1 *QwtInterval) [
 	for i := 0; i < int(_ma.len); i++ {
 		_ret[i] = (uint)(_outCast[i])
 	}
+	C.free(unsafe.Pointer(_ma.data))
 	return _ret
 
 }
@@ -568,6 +572,7 @@ func (this *QwtAlphaColorMap) callVirtualBase_ColorTable(param1 *QwtInterval) []
 	for i := 0; i < int(_ma.len); i++ {
 		_ret[i] = (uint)(_outCast[i])
 	}
+	C.free(unsafe.Pointer(_ma.data))
 	return _ret
 
 }

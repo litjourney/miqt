@@ -113,6 +113,7 @@ func (this *QAbstractVideoSurface) SupportedPixelFormats(typeVal QAbstractVideoB
 	for i := 0; i < int(_ma.len); i++ {
 		_ret[i] = (QVideoFrame__PixelFormat)(_outCast[i])
 	}
+	C.free(unsafe.Pointer(_ma.data))
 	return _ret
 }
 

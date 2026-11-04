@@ -139,6 +139,7 @@ func QScroller_ActiveScrollers() []*QScroller {
 	for i := 0; i < int(_ma.len); i++ {
 		_ret[i] = newQScroller(_outCast[i])
 	}
+	C.free(unsafe.Pointer(_ma.data))
 	return _ret
 }
 

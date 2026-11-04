@@ -181,6 +181,7 @@ func (this *QGraphicsScene) Items() []*QGraphicsItem {
 	for i := 0; i < int(_ma.len); i++ {
 		_ret[i] = newQGraphicsItem(_outCast[i])
 	}
+	C.free(unsafe.Pointer(_ma.data))
 	return _ret
 }
 
@@ -191,6 +192,7 @@ func (this *QGraphicsScene) ItemsWithPos(pos *QPointF) []*QGraphicsItem {
 	for i := 0; i < int(_ma.len); i++ {
 		_ret[i] = newQGraphicsItem(_outCast[i])
 	}
+	C.free(unsafe.Pointer(_ma.data))
 	return _ret
 }
 
@@ -201,6 +203,7 @@ func (this *QGraphicsScene) ItemsWithRect(rect *QRectF) []*QGraphicsItem {
 	for i := 0; i < int(_ma.len); i++ {
 		_ret[i] = newQGraphicsItem(_outCast[i])
 	}
+	C.free(unsafe.Pointer(_ma.data))
 	return _ret
 }
 
@@ -211,6 +214,7 @@ func (this *QGraphicsScene) ItemsWithPath(path *QPainterPath) []*QGraphicsItem {
 	for i := 0; i < int(_ma.len); i++ {
 		_ret[i] = newQGraphicsItem(_outCast[i])
 	}
+	C.free(unsafe.Pointer(_ma.data))
 	return _ret
 }
 
@@ -221,6 +225,7 @@ func (this *QGraphicsScene) Items2(x float64, y float64, w float64, h float64, m
 	for i := 0; i < int(_ma.len); i++ {
 		_ret[i] = newQGraphicsItem(_outCast[i])
 	}
+	C.free(unsafe.Pointer(_ma.data))
 	return _ret
 }
 
@@ -231,6 +236,7 @@ func (this *QGraphicsScene) CollidingItems(item *QGraphicsItem) []*QGraphicsItem
 	for i := 0; i < int(_ma.len); i++ {
 		_ret[i] = newQGraphicsItem(_outCast[i])
 	}
+	C.free(unsafe.Pointer(_ma.data))
 	return _ret
 }
 
@@ -249,6 +255,7 @@ func (this *QGraphicsScene) SelectedItems() []*QGraphicsItem {
 	for i := 0; i < int(_ma.len); i++ {
 		_ret[i] = newQGraphicsItem(_outCast[i])
 	}
+	C.free(unsafe.Pointer(_ma.data))
 	return _ret
 }
 
@@ -405,6 +412,7 @@ func (this *QGraphicsScene) Views() []*QGraphicsView {
 	for i := 0; i < int(_ma.len); i++ {
 		_ret[i] = newQGraphicsView(_outCast[i])
 	}
+	C.free(unsafe.Pointer(_ma.data))
 	return _ret
 }
 
@@ -535,6 +543,7 @@ func miqt_exec_callback_QGraphicsScene_changed(cb C.intptr_t, region C.struct_mi
 		region_lv_goptr.GoGC() // Qt uses pass-by-value semantics for this type. Mimic with finalizer
 		region_ret[i] = *region_lv_goptr
 	}
+	C.free(unsafe.Pointer(region_ma.data))
 	slotval1 := region_ret
 
 	gofunc(slotval1)
@@ -648,6 +657,7 @@ func (this *QGraphicsScene) ItemsWithOrder(order SortOrder) []*QGraphicsItem {
 	for i := 0; i < int(_ma.len); i++ {
 		_ret[i] = newQGraphicsItem(_outCast[i])
 	}
+	C.free(unsafe.Pointer(_ma.data))
 	return _ret
 }
 
@@ -658,6 +668,7 @@ func (this *QGraphicsScene) Items3(pos *QPointF, mode ItemSelectionMode) []*QGra
 	for i := 0; i < int(_ma.len); i++ {
 		_ret[i] = newQGraphicsItem(_outCast[i])
 	}
+	C.free(unsafe.Pointer(_ma.data))
 	return _ret
 }
 
@@ -668,6 +679,7 @@ func (this *QGraphicsScene) Items4(pos *QPointF, mode ItemSelectionMode, order S
 	for i := 0; i < int(_ma.len); i++ {
 		_ret[i] = newQGraphicsItem(_outCast[i])
 	}
+	C.free(unsafe.Pointer(_ma.data))
 	return _ret
 }
 
@@ -678,6 +690,7 @@ func (this *QGraphicsScene) Items5(pos *QPointF, mode ItemSelectionMode, order S
 	for i := 0; i < int(_ma.len); i++ {
 		_ret[i] = newQGraphicsItem(_outCast[i])
 	}
+	C.free(unsafe.Pointer(_ma.data))
 	return _ret
 }
 
@@ -688,6 +701,7 @@ func (this *QGraphicsScene) Items6(rect *QRectF, mode ItemSelectionMode) []*QGra
 	for i := 0; i < int(_ma.len); i++ {
 		_ret[i] = newQGraphicsItem(_outCast[i])
 	}
+	C.free(unsafe.Pointer(_ma.data))
 	return _ret
 }
 
@@ -698,6 +712,7 @@ func (this *QGraphicsScene) Items7(rect *QRectF, mode ItemSelectionMode, order S
 	for i := 0; i < int(_ma.len); i++ {
 		_ret[i] = newQGraphicsItem(_outCast[i])
 	}
+	C.free(unsafe.Pointer(_ma.data))
 	return _ret
 }
 
@@ -708,6 +723,7 @@ func (this *QGraphicsScene) Items8(rect *QRectF, mode ItemSelectionMode, order S
 	for i := 0; i < int(_ma.len); i++ {
 		_ret[i] = newQGraphicsItem(_outCast[i])
 	}
+	C.free(unsafe.Pointer(_ma.data))
 	return _ret
 }
 
@@ -718,6 +734,7 @@ func (this *QGraphicsScene) Items12(path *QPainterPath, mode ItemSelectionMode) 
 	for i := 0; i < int(_ma.len); i++ {
 		_ret[i] = newQGraphicsItem(_outCast[i])
 	}
+	C.free(unsafe.Pointer(_ma.data))
 	return _ret
 }
 
@@ -728,6 +745,7 @@ func (this *QGraphicsScene) Items13(path *QPainterPath, mode ItemSelectionMode, 
 	for i := 0; i < int(_ma.len); i++ {
 		_ret[i] = newQGraphicsItem(_outCast[i])
 	}
+	C.free(unsafe.Pointer(_ma.data))
 	return _ret
 }
 
@@ -738,6 +756,7 @@ func (this *QGraphicsScene) Items14(path *QPainterPath, mode ItemSelectionMode, 
 	for i := 0; i < int(_ma.len); i++ {
 		_ret[i] = newQGraphicsItem(_outCast[i])
 	}
+	C.free(unsafe.Pointer(_ma.data))
 	return _ret
 }
 
@@ -748,6 +767,7 @@ func (this *QGraphicsScene) Items15(x float64, y float64, w float64, h float64, 
 	for i := 0; i < int(_ma.len); i++ {
 		_ret[i] = newQGraphicsItem(_outCast[i])
 	}
+	C.free(unsafe.Pointer(_ma.data))
 	return _ret
 }
 
@@ -758,6 +778,7 @@ func (this *QGraphicsScene) CollidingItems2(item *QGraphicsItem, mode ItemSelect
 	for i := 0; i < int(_ma.len); i++ {
 		_ret[i] = newQGraphicsItem(_outCast[i])
 	}
+	C.free(unsafe.Pointer(_ma.data))
 	return _ret
 }
 

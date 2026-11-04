@@ -140,6 +140,7 @@ func (this *QPieSeries) Slices() []*QPieSlice {
 	for i := 0; i < int(_ma.len); i++ {
 		_ret[i] = newQPieSlice(_outCast[i])
 	}
+	C.free(unsafe.Pointer(_ma.data))
 	return _ret
 }
 
@@ -240,6 +241,7 @@ func miqt_exec_callback_QPieSeries_added(cb C.intptr_t, slices C.struct_miqt_arr
 	for i := 0; i < int(slices_ma.len); i++ {
 		slices_ret[i] = newQPieSlice(slices_outCast[i])
 	}
+	C.free(unsafe.Pointer(slices_ma.data))
 	slotval1 := slices_ret
 
 	gofunc(slotval1)
@@ -274,6 +276,7 @@ func miqt_exec_callback_QPieSeries_removed(cb C.intptr_t, slices C.struct_miqt_a
 	for i := 0; i < int(slices_ma.len); i++ {
 		slices_ret[i] = newQPieSlice(slices_outCast[i])
 	}
+	C.free(unsafe.Pointer(slices_ma.data))
 	slotval1 := slices_ret
 
 	gofunc(slotval1)

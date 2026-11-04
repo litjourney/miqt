@@ -1473,6 +1473,7 @@ func (this *QLocale) Weekdays() []DayOfWeek {
 	for i := 0; i < int(_ma.len); i++ {
 		_ret[i] = (DayOfWeek)(_outCast[i])
 	}
+	C.free(unsafe.Pointer(_ma.data))
 	return _ret
 }
 
@@ -1606,6 +1607,7 @@ func (this *QLocale) UiLanguages() []string {
 		C.free(unsafe.Pointer(_lv_ms.data))
 		_ret[i] = _lv_ret
 	}
+	C.free(unsafe.Pointer(_ma.data))
 	return _ret
 }
 
@@ -1690,6 +1692,7 @@ func QLocale_MatchingLocales(language QLocale__Language, script QLocale__Script,
 		_lv_goptr.GoGC() // Qt uses pass-by-value semantics for this type. Mimic with finalizer
 		_ret[i] = *_lv_goptr
 	}
+	C.free(unsafe.Pointer(_ma.data))
 	return _ret
 }
 
@@ -1700,6 +1703,7 @@ func QLocale_CountriesForLanguage(lang QLocale__Language) []QLocale__Country {
 	for i := 0; i < int(_ma.len); i++ {
 		_ret[i] = (QLocale__Country)(_outCast[i])
 	}
+	C.free(unsafe.Pointer(_ma.data))
 	return _ret
 }
 

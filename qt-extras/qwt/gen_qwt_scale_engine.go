@@ -241,6 +241,7 @@ func (this *QwtScaleEngine) Strip(param1 []float64, param2 *QwtInterval) []float
 	for i := 0; i < int(_ma.len); i++ {
 		_ret[i] = (float64)(_outCast[i])
 	}
+	C.free(unsafe.Pointer(_ma.data))
 	_method_ret := _ret
 
 	if !_dynamic_cast_ok {
@@ -499,6 +500,7 @@ func (this *QwtLinearScaleEngine) BuildMajorTicks(interval *QwtInterval, stepSiz
 	for i := 0; i < int(_ma.len); i++ {
 		_ret[i] = (float64)(_outCast[i])
 	}
+	C.free(unsafe.Pointer(_ma.data))
 	_method_ret := _ret
 
 	if !_dynamic_cast_ok {
@@ -569,6 +571,7 @@ func (this *QwtLinearScaleEngine) Strip(param1 []float64, param2 *QwtInterval) [
 	for i := 0; i < int(_ma.len); i++ {
 		_ret[i] = (float64)(_outCast[i])
 	}
+	C.free(unsafe.Pointer(_ma.data))
 	_method_ret := _ret
 
 	if !_dynamic_cast_ok {
@@ -841,6 +844,7 @@ func (this *QwtLogScaleEngine) BuildMajorTicks(interval *QwtInterval, stepSize f
 	for i := 0; i < int(_ma.len); i++ {
 		_ret[i] = (float64)(_outCast[i])
 	}
+	C.free(unsafe.Pointer(_ma.data))
 	_method_ret := _ret
 
 	if !_dynamic_cast_ok {
@@ -911,6 +915,7 @@ func (this *QwtLogScaleEngine) Strip(param1 []float64, param2 *QwtInterval) []fl
 	for i := 0; i < int(_ma.len); i++ {
 		_ret[i] = (float64)(_outCast[i])
 	}
+	C.free(unsafe.Pointer(_ma.data))
 	_method_ret := _ret
 
 	if !_dynamic_cast_ok {
