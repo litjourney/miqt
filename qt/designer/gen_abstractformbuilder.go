@@ -131,6 +131,8 @@ func (this *QAbstractFormBuilder) IconPaths(param1 *qt.QIcon) struct {
 	_second_ret := C.GoStringN(_second_ms.data, C.int(int64(_second_ms.len)))
 	C.free(unsafe.Pointer(_second_ms.data))
 	_entry_Second := _second_ret
+	C.free(unsafe.Pointer(_mm.keys))
+	C.free(unsafe.Pointer(_mm.values))
 	_method_ret := struct {
 		First  string
 		Second string
@@ -162,6 +164,8 @@ func (this *QAbstractFormBuilder) PixmapPaths(param1 *qt.QPixmap) struct {
 	_second_ret := C.GoStringN(_second_ms.data, C.int(int64(_second_ms.len)))
 	C.free(unsafe.Pointer(_second_ms.data))
 	_entry_Second := _second_ret
+	C.free(unsafe.Pointer(_mm.keys))
+	C.free(unsafe.Pointer(_mm.values))
 	_method_ret := struct {
 		First  string
 		Second string

@@ -128,6 +128,7 @@ func QGeoAreaMonitorSource_AvailableSources() []string {
 		C.free(unsafe.Pointer(_lv_ms.data))
 		_ret[i] = _lv_ret
 	}
+	C.free(unsafe.Pointer(_ma.data))
 	return _ret
 }
 
@@ -177,6 +178,7 @@ func (this *QGeoAreaMonitorSource) ActiveMonitors() []QGeoAreaMonitorInfo {
 		_lv_goptr.GoGC() // Qt uses pass-by-value semantics for this type. Mimic with finalizer
 		_ret[i] = *_lv_goptr
 	}
+	C.free(unsafe.Pointer(_ma.data))
 	return _ret
 }
 
@@ -189,6 +191,7 @@ func (this *QGeoAreaMonitorSource) ActiveMonitorsWithLookupArea(lookupArea *QGeo
 		_lv_goptr.GoGC() // Qt uses pass-by-value semantics for this type. Mimic with finalizer
 		_ret[i] = *_lv_goptr
 	}
+	C.free(unsafe.Pointer(_ma.data))
 	return _ret
 }
 

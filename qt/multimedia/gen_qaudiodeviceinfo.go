@@ -106,6 +106,7 @@ func (this *QAudioDeviceInfo) SupportedCodecs() []string {
 		C.free(unsafe.Pointer(_lv_ms.data))
 		_ret[i] = _lv_ret
 	}
+	C.free(unsafe.Pointer(_ma.data))
 	return _ret
 }
 
@@ -116,6 +117,7 @@ func (this *QAudioDeviceInfo) SupportedSampleRates() []int {
 	for i := 0; i < int(_ma.len); i++ {
 		_ret[i] = (int)(_outCast[i])
 	}
+	C.free(unsafe.Pointer(_ma.data))
 	return _ret
 }
 
@@ -126,6 +128,7 @@ func (this *QAudioDeviceInfo) SupportedChannelCounts() []int {
 	for i := 0; i < int(_ma.len); i++ {
 		_ret[i] = (int)(_outCast[i])
 	}
+	C.free(unsafe.Pointer(_ma.data))
 	return _ret
 }
 
@@ -136,6 +139,7 @@ func (this *QAudioDeviceInfo) SupportedSampleSizes() []int {
 	for i := 0; i < int(_ma.len); i++ {
 		_ret[i] = (int)(_outCast[i])
 	}
+	C.free(unsafe.Pointer(_ma.data))
 	return _ret
 }
 
@@ -146,6 +150,7 @@ func (this *QAudioDeviceInfo) SupportedByteOrders() []QAudioFormat__Endian {
 	for i := 0; i < int(_ma.len); i++ {
 		_ret[i] = (QAudioFormat__Endian)(_outCast[i])
 	}
+	C.free(unsafe.Pointer(_ma.data))
 	return _ret
 }
 
@@ -156,6 +161,7 @@ func (this *QAudioDeviceInfo) SupportedSampleTypes() []QAudioFormat__SampleType 
 	for i := 0; i < int(_ma.len); i++ {
 		_ret[i] = (QAudioFormat__SampleType)(_outCast[i])
 	}
+	C.free(unsafe.Pointer(_ma.data))
 	return _ret
 }
 
@@ -187,6 +193,7 @@ func QAudioDeviceInfo_AvailableDevices(mode QAudio__Mode) []QAudioDeviceInfo {
 		_lv_goptr.GoGC() // Qt uses pass-by-value semantics for this type. Mimic with finalizer
 		_ret[i] = *_lv_goptr
 	}
+	C.free(unsafe.Pointer(_ma.data))
 	return _ret
 }
 

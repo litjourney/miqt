@@ -106,6 +106,7 @@ func (this *QAbstractAudioDeviceInfo) SupportedCodecs() []string {
 		C.free(unsafe.Pointer(_lv_ms.data))
 		_ret[i] = _lv_ret
 	}
+	C.free(unsafe.Pointer(_ma.data))
 	return _ret
 }
 
@@ -116,6 +117,7 @@ func (this *QAbstractAudioDeviceInfo) SupportedSampleRates() []int {
 	for i := 0; i < int(_ma.len); i++ {
 		_ret[i] = (int)(_outCast[i])
 	}
+	C.free(unsafe.Pointer(_ma.data))
 	return _ret
 }
 
@@ -126,6 +128,7 @@ func (this *QAbstractAudioDeviceInfo) SupportedChannelCounts() []int {
 	for i := 0; i < int(_ma.len); i++ {
 		_ret[i] = (int)(_outCast[i])
 	}
+	C.free(unsafe.Pointer(_ma.data))
 	return _ret
 }
 
@@ -136,6 +139,7 @@ func (this *QAbstractAudioDeviceInfo) SupportedSampleSizes() []int {
 	for i := 0; i < int(_ma.len); i++ {
 		_ret[i] = (int)(_outCast[i])
 	}
+	C.free(unsafe.Pointer(_ma.data))
 	return _ret
 }
 
@@ -146,6 +150,7 @@ func (this *QAbstractAudioDeviceInfo) SupportedByteOrders() []QAudioFormat__Endi
 	for i := 0; i < int(_ma.len); i++ {
 		_ret[i] = (QAudioFormat__Endian)(_outCast[i])
 	}
+	C.free(unsafe.Pointer(_ma.data))
 	return _ret
 }
 
@@ -156,6 +161,7 @@ func (this *QAbstractAudioDeviceInfo) SupportedSampleTypes() []QAudioFormat__Sam
 	for i := 0; i < int(_ma.len); i++ {
 		_ret[i] = (QAudioFormat__SampleType)(_outCast[i])
 	}
+	C.free(unsafe.Pointer(_ma.data))
 	return _ret
 }
 

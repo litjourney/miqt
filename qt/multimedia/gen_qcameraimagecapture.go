@@ -160,6 +160,7 @@ func (this *QCameraImageCapture) SupportedImageCodecs() []string {
 		C.free(unsafe.Pointer(_lv_ms.data))
 		_ret[i] = _lv_ret
 	}
+	C.free(unsafe.Pointer(_ma.data))
 	return _ret
 }
 
@@ -183,6 +184,7 @@ func (this *QCameraImageCapture) SupportedResolutions() []qt.QSize {
 		_lv_goptr.GoGC() // Qt uses pass-by-value semantics for this type. Mimic with finalizer
 		_ret[i] = *_lv_goptr
 	}
+	C.free(unsafe.Pointer(_ma.data))
 	return _ret
 }
 
@@ -203,6 +205,7 @@ func (this *QCameraImageCapture) SupportedBufferFormats() []QVideoFrame__PixelFo
 	for i := 0; i < int(_ma.len); i++ {
 		_ret[i] = (QVideoFrame__PixelFormat)(_outCast[i])
 	}
+	C.free(unsafe.Pointer(_ma.data))
 	return _ret
 }
 
@@ -519,6 +522,7 @@ func (this *QCameraImageCapture) SupportedResolutionsWithSettings(settings *QIma
 		_lv_goptr.GoGC() // Qt uses pass-by-value semantics for this type. Mimic with finalizer
 		_ret[i] = *_lv_goptr
 	}
+	C.free(unsafe.Pointer(_ma.data))
 	return _ret
 }
 
@@ -531,6 +535,7 @@ func (this *QCameraImageCapture) SupportedResolutions2(settings *QImageEncoderSe
 		_lv_goptr.GoGC() // Qt uses pass-by-value semantics for this type. Mimic with finalizer
 		_ret[i] = *_lv_goptr
 	}
+	C.free(unsafe.Pointer(_ma.data))
 	return _ret
 }
 

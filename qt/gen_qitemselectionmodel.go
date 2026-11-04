@@ -183,6 +183,7 @@ func (this *QItemSelectionRange) Indexes() []QModelIndex {
 		_lv_goptr.GoGC() // Qt uses pass-by-value semantics for this type. Mimic with finalizer
 		_ret[i] = *_lv_goptr
 	}
+	C.free(unsafe.Pointer(_ma.data))
 	return _ret
 }
 
@@ -326,6 +327,7 @@ func (this *QItemSelectionModel) SelectedIndexes() []QModelIndex {
 		_lv_goptr.GoGC() // Qt uses pass-by-value semantics for this type. Mimic with finalizer
 		_ret[i] = *_lv_goptr
 	}
+	C.free(unsafe.Pointer(_ma.data))
 	return _ret
 }
 
@@ -338,6 +340,7 @@ func (this *QItemSelectionModel) SelectedRows() []QModelIndex {
 		_lv_goptr.GoGC() // Qt uses pass-by-value semantics for this type. Mimic with finalizer
 		_ret[i] = *_lv_goptr
 	}
+	C.free(unsafe.Pointer(_ma.data))
 	return _ret
 }
 
@@ -350,6 +353,7 @@ func (this *QItemSelectionModel) SelectedColumns() []QModelIndex {
 		_lv_goptr.GoGC() // Qt uses pass-by-value semantics for this type. Mimic with finalizer
 		_ret[i] = *_lv_goptr
 	}
+	C.free(unsafe.Pointer(_ma.data))
 	return _ret
 }
 
@@ -586,6 +590,7 @@ func (this *QItemSelectionModel) SelectedRowsWithColumn(column int) []QModelInde
 		_lv_goptr.GoGC() // Qt uses pass-by-value semantics for this type. Mimic with finalizer
 		_ret[i] = *_lv_goptr
 	}
+	C.free(unsafe.Pointer(_ma.data))
 	return _ret
 }
 
@@ -598,6 +603,7 @@ func (this *QItemSelectionModel) SelectedColumnsWithRow(row int) []QModelIndex {
 		_lv_goptr.GoGC() // Qt uses pass-by-value semantics for this type. Mimic with finalizer
 		_ret[i] = *_lv_goptr
 	}
+	C.free(unsafe.Pointer(_ma.data))
 	return _ret
 }
 
@@ -1147,6 +1153,7 @@ func (this *QItemSelection) Indexes() []QModelIndex {
 		_lv_goptr.GoGC() // Qt uses pass-by-value semantics for this type. Mimic with finalizer
 		_ret[i] = *_lv_goptr
 	}
+	C.free(unsafe.Pointer(_ma.data))
 	return _ret
 }
 

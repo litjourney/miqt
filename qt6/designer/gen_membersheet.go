@@ -135,6 +135,7 @@ func (this *QDesignerMemberSheetExtension) ParameterTypes(index int) [][]byte {
 		C.free(unsafe.Pointer(_lv_bytearray.data))
 		_ret[i] = _lv_ret
 	}
+	C.free(unsafe.Pointer(_ma.data))
 	return _ret
 }
 
@@ -148,6 +149,7 @@ func (this *QDesignerMemberSheetExtension) ParameterNames(index int) [][]byte {
 		C.free(unsafe.Pointer(_lv_bytearray.data))
 		_ret[i] = _lv_ret
 	}
+	C.free(unsafe.Pointer(_ma.data))
 	return _ret
 }
 func (this *QDesignerMemberSheetExtension) OnCount(slot func() int) {
@@ -501,14 +503,10 @@ func miqt_exec_callback_QDesignerMemberSheetExtension_parameterTypes(self *C.QDe
 	virtualReturn := gofunc(slotval1)
 	virtualReturn_CArray := (*[0xffff]C.struct_miqt_string)(C.malloc(C.size_t(int(unsafe.Sizeof(C.struct_miqt_string{})) * len(virtualReturn))))
 	for i := range virtualReturn {
-		virtualReturn_i_alias := C.struct_miqt_string{}
-		if len(virtualReturn[i]) > 0 {
-			virtualReturn_i_alias.data = (*C.char)(unsafe.Pointer(&virtualReturn[i][0]))
-		} else {
-			virtualReturn_i_alias.data = (*C.char)(unsafe.Pointer(nil))
-		}
-		virtualReturn_i_alias.len = C.size_t(len(virtualReturn[i]))
-		virtualReturn_CArray[i] = virtualReturn_i_alias
+		virtualReturn_i_ms := C.struct_miqt_string{}
+		virtualReturn_i_ms.data = (*C.char)(C.CBytes(virtualReturn[i]))
+		virtualReturn_i_ms.len = C.size_t(len(virtualReturn[i]))
+		virtualReturn_CArray[i] = virtualReturn_i_ms
 	}
 	virtualReturn_ma := C.struct_miqt_array{len: C.size_t(len(virtualReturn)), data: unsafe.Pointer(virtualReturn_CArray)}
 
@@ -539,14 +537,10 @@ func miqt_exec_callback_QDesignerMemberSheetExtension_parameterNames(self *C.QDe
 	virtualReturn := gofunc(slotval1)
 	virtualReturn_CArray := (*[0xffff]C.struct_miqt_string)(C.malloc(C.size_t(int(unsafe.Sizeof(C.struct_miqt_string{})) * len(virtualReturn))))
 	for i := range virtualReturn {
-		virtualReturn_i_alias := C.struct_miqt_string{}
-		if len(virtualReturn[i]) > 0 {
-			virtualReturn_i_alias.data = (*C.char)(unsafe.Pointer(&virtualReturn[i][0]))
-		} else {
-			virtualReturn_i_alias.data = (*C.char)(unsafe.Pointer(nil))
-		}
-		virtualReturn_i_alias.len = C.size_t(len(virtualReturn[i]))
-		virtualReturn_CArray[i] = virtualReturn_i_alias
+		virtualReturn_i_ms := C.struct_miqt_string{}
+		virtualReturn_i_ms.data = (*C.char)(C.CBytes(virtualReturn[i]))
+		virtualReturn_i_ms.len = C.size_t(len(virtualReturn[i]))
+		virtualReturn_CArray[i] = virtualReturn_i_ms
 	}
 	virtualReturn_ma := C.struct_miqt_array{len: C.size_t(len(virtualReturn)), data: unsafe.Pointer(virtualReturn_CArray)}
 

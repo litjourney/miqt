@@ -241,6 +241,7 @@ func (this *QWebSocketServer) SupportedSubprotocols() []string {
 		C.free(unsafe.Pointer(_lv_ms.data))
 		_ret[i] = _lv_ret
 	}
+	C.free(unsafe.Pointer(_ma.data))
 	return _ret
 }
 
@@ -271,6 +272,7 @@ func (this *QWebSocketServer) SupportedVersions() []QWebSocketProtocol__Version 
 	for i := 0; i < int(_ma.len); i++ {
 		_ret[i] = (QWebSocketProtocol__Version)(_outCast[i])
 	}
+	C.free(unsafe.Pointer(_ma.data))
 	return _ret
 }
 
@@ -416,6 +418,7 @@ func miqt_exec_callback_QWebSocketServer_sslErrors(cb C.intptr_t, errors C.struc
 		errors_lv_goptr.GoGC() // Qt uses pass-by-value semantics for this type. Mimic with finalizer
 		errors_ret[i] = *errors_lv_goptr
 	}
+	C.free(unsafe.Pointer(errors_ma.data))
 	slotval1 := errors_ret
 
 	gofunc(slotval1)

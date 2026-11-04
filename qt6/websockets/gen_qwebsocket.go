@@ -746,6 +746,7 @@ func miqt_exec_callback_QWebSocket_sslErrors(cb C.intptr_t, errors C.struct_miqt
 		errors_lv_goptr.GoGC() // Qt uses pass-by-value semantics for this type. Mimic with finalizer
 		errors_ret[i] = *errors_lv_goptr
 	}
+	C.free(unsafe.Pointer(errors_ma.data))
 	slotval1 := errors_ret
 
 	gofunc(slotval1)

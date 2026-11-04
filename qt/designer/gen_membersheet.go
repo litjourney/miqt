@@ -123,6 +123,7 @@ func (this *QDesignerMemberSheetExtension) ParameterTypes(index int) [][]byte {
 		C.free(unsafe.Pointer(_lv_bytearray.data))
 		_ret[i] = _lv_ret
 	}
+	C.free(unsafe.Pointer(_ma.data))
 	return _ret
 }
 
@@ -136,6 +137,7 @@ func (this *QDesignerMemberSheetExtension) ParameterNames(index int) [][]byte {
 		C.free(unsafe.Pointer(_lv_bytearray.data))
 		_ret[i] = _lv_ret
 	}
+	C.free(unsafe.Pointer(_ma.data))
 	return _ret
 }
 

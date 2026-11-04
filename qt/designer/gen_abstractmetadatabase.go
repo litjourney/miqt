@@ -69,6 +69,7 @@ func (this *QDesignerMetaDataBaseItemInterface) TabOrder() []*qt.QWidget {
 	for i := 0; i < int(_ma.len); i++ {
 		_ret[i] = qt.UnsafeNewQWidget(unsafe.Pointer(_outCast[i]))
 	}
+	C.free(unsafe.Pointer(_ma.data))
 	return _ret
 }
 
@@ -208,6 +209,7 @@ func (this *QDesignerMetaDataBaseInterface) Objects() []*qt.QObject {
 	for i := 0; i < int(_ma.len); i++ {
 		_ret[i] = qt.UnsafeNewQObject(unsafe.Pointer(_outCast[i]))
 	}
+	C.free(unsafe.Pointer(_ma.data))
 	return _ret
 }
 

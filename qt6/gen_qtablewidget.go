@@ -745,6 +745,7 @@ func (this *QTableWidget) Items(data *QMimeData) []*QTableWidgetItem {
 	for i := 0; i < int(_ma.len); i++ {
 		_ret[i] = newQTableWidgetItem(_outCast[i])
 	}
+	C.free(unsafe.Pointer(_ma.data))
 	return _ret
 }
 
@@ -891,6 +892,7 @@ func (this *QTableWidget) SelectedRanges() []QTableWidgetSelectionRange {
 		_lv_goptr.GoGC() // Qt uses pass-by-value semantics for this type. Mimic with finalizer
 		_ret[i] = *_lv_goptr
 	}
+	C.free(unsafe.Pointer(_ma.data))
 	return _ret
 }
 
@@ -901,6 +903,7 @@ func (this *QTableWidget) SelectedItems() []*QTableWidgetItem {
 	for i := 0; i < int(_ma.len); i++ {
 		_ret[i] = newQTableWidgetItem(_outCast[i])
 	}
+	C.free(unsafe.Pointer(_ma.data))
 	return _ret
 }
 
@@ -915,6 +918,7 @@ func (this *QTableWidget) FindItems(text string, flags MatchFlag) []*QTableWidge
 	for i := 0; i < int(_ma.len); i++ {
 		_ret[i] = newQTableWidgetItem(_outCast[i])
 	}
+	C.free(unsafe.Pointer(_ma.data))
 	return _ret
 }
 
@@ -1770,6 +1774,7 @@ func (this *QTableWidget) callVirtualBase_MimeTypes() []string {
 		C.free(unsafe.Pointer(_lv_ms.data))
 		_ret[i] = _lv_ret
 	}
+	C.free(unsafe.Pointer(_ma.data))
 	return _ret
 
 }
@@ -1841,6 +1846,7 @@ func miqt_exec_callback_QTableWidget_mimeData(self *C.QTableWidget, cb C.intptr_
 	for i := 0; i < int(items_ma.len); i++ {
 		items_ret[i] = newQTableWidgetItem(items_outCast[i])
 	}
+	C.free(unsafe.Pointer(items_ma.data))
 	slotval1 := items_ret
 
 	virtualReturn := gofunc((&QTableWidget{h: self}).callVirtualBase_MimeData, slotval1)
@@ -2517,6 +2523,7 @@ func (this *QTableWidget) callVirtualBase_SelectedIndexes() []QModelIndex {
 		_lv_goptr.GoGC() // Qt uses pass-by-value semantics for this type. Mimic with finalizer
 		_ret[i] = *_lv_goptr
 	}
+	C.free(unsafe.Pointer(_ma.data))
 	return _ret
 
 }
@@ -3070,6 +3077,7 @@ func miqt_exec_callback_QTableWidget_dataChanged(self *C.QTableWidget, cb C.intp
 	for i := 0; i < int(roles_ma.len); i++ {
 		roles_ret[i] = (int)(roles_outCast[i])
 	}
+	C.free(unsafe.Pointer(roles_ma.data))
 	slotval3 := roles_ret
 
 	gofunc((&QTableWidget{h: self}).callVirtualBase_DataChanged, slotval1, slotval2, slotval3)

@@ -625,6 +625,7 @@ func miqt_exec_callback_QDesignerFormWindowManagerInterface_dragItems(self *C.QD
 	for i := 0; i < int(item_list_ma.len); i++ {
 		item_list_ret[i] = newQDesignerDnDItemInterface(item_list_outCast[i])
 	}
+	C.free(unsafe.Pointer(item_list_ma.data))
 	slotval1 := item_list_ret
 
 	gofunc(slotval1)

@@ -172,6 +172,8 @@ func (this *QRadioTuner) FrequencyRange(band QRadioTuner__Band) struct {
 
 	_entry_Second := (int)(_Second_CArray[0])
 
+	C.free(unsafe.Pointer(_mm.keys))
+	C.free(unsafe.Pointer(_mm.values))
 	return struct {
 		First  int
 		Second int

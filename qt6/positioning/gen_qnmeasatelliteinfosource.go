@@ -567,6 +567,7 @@ func miqt_exec_callback_QNmeaSatelliteInfoSource_parseSatellitesInUseFromNmea(se
 	for i := 0; i < int(pnrsInUse_ma.len); i++ {
 		pnrsInUse_ret[i] = (int)(pnrsInUse_outCast[i])
 	}
+	C.free(unsafe.Pointer(pnrsInUse_ma.data))
 	slotval3 := pnrsInUse_ret
 
 	virtualReturn := gofunc((&QNmeaSatelliteInfoSource{h: self}).callVirtualBase_ParseSatellitesInUseFromNmea, slotval1, slotval2, slotval3)
@@ -620,6 +621,7 @@ func miqt_exec_callback_QNmeaSatelliteInfoSource_parseSatelliteInfoFromNmea(self
 		infos_lv_goptr.GoGC() // Qt uses pass-by-value semantics for this type. Mimic with finalizer
 		infos_ret[i] = *infos_lv_goptr
 	}
+	C.free(unsafe.Pointer(infos_ma.data))
 	slotval3 := infos_ret
 
 	slotval4 := (*QGeoSatelliteInfo__SatelliteSystem)(unsafe.Pointer(system))

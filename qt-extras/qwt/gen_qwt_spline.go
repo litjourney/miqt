@@ -95,6 +95,7 @@ func (this *QwtSpline) CoefficientsA() []float64 {
 	for i := 0; i < int(_ma.len); i++ {
 		_ret[i] = (float64)(_outCast[i])
 	}
+	C.free(unsafe.Pointer(_ma.data))
 	return _ret
 }
 
@@ -105,6 +106,7 @@ func (this *QwtSpline) CoefficientsB() []float64 {
 	for i := 0; i < int(_ma.len); i++ {
 		_ret[i] = (float64)(_outCast[i])
 	}
+	C.free(unsafe.Pointer(_ma.data))
 	return _ret
 }
 
@@ -115,6 +117,7 @@ func (this *QwtSpline) CoefficientsC() []float64 {
 	for i := 0; i < int(_ma.len); i++ {
 		_ret[i] = (float64)(_outCast[i])
 	}
+	C.free(unsafe.Pointer(_ma.data))
 	return _ret
 }
 

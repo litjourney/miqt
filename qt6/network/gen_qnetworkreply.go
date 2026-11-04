@@ -189,6 +189,7 @@ func (this *QNetworkReply) RawHeaderList() [][]byte {
 		C.free(unsafe.Pointer(_lv_bytearray.data))
 		_ret[i] = _lv_ret
 	}
+	C.free(unsafe.Pointer(_ma.data))
 	return _ret
 }
 
@@ -228,11 +229,14 @@ func (this *QNetworkReply) RawHeaderPairs() []struct {
 		_lv_second_ret := C.GoBytes(unsafe.Pointer(_lv_second_bytearray.data), C.int(int64(_lv_second_bytearray.len)))
 		C.free(unsafe.Pointer(_lv_second_bytearray.data))
 		_lv_entry_Second := _lv_second_ret
+		C.free(unsafe.Pointer(_lv_mm.keys))
+		C.free(unsafe.Pointer(_lv_mm.values))
 		_ret[i] = struct {
 			First  []byte
 			Second []byte
 		}{First: _lv_entry_First, Second: _lv_entry_Second}
 	}
+	C.free(unsafe.Pointer(_ma.data))
 	return _ret
 }
 
@@ -418,6 +422,7 @@ func miqt_exec_callback_QNetworkReply_sslErrors(cb C.intptr_t, errors C.struct_m
 		errors_lv_goptr.GoGC() // Qt uses pass-by-value semantics for this type. Mimic with finalizer
 		errors_ret[i] = *errors_lv_goptr
 	}
+	C.free(unsafe.Pointer(errors_ma.data))
 	slotval1 := errors_ret
 
 	gofunc(slotval1)

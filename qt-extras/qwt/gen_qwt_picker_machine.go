@@ -90,6 +90,7 @@ func (this *QwtPickerMachine) Transition(param1 *QwtEventPattern, param2 *qt.QEv
 	for i := 0; i < int(_ma.len); i++ {
 		_ret[i] = (QwtPickerMachine__Command)(_outCast[i])
 	}
+	C.free(unsafe.Pointer(_ma.data))
 	return _ret
 }
 
@@ -216,6 +217,7 @@ func (this *QwtPickerTrackerMachine) Transition(param1 *QwtEventPattern, param2 
 	for i := 0; i < int(_ma.len); i++ {
 		_ret[i] = (QwtPickerMachine__Command)(_outCast[i])
 	}
+	C.free(unsafe.Pointer(_ma.data))
 	return _ret
 }
 
@@ -227,6 +229,7 @@ func (this *QwtPickerTrackerMachine) callVirtualBase_Transition(param1 *QwtEvent
 	for i := 0; i < int(_ma.len); i++ {
 		_ret[i] = (QwtPickerMachine__Command)(_outCast[i])
 	}
+	C.free(unsafe.Pointer(_ma.data))
 	return _ret
 
 }
@@ -338,6 +341,7 @@ func (this *QwtPickerClickPointMachine) Transition(param1 *QwtEventPattern, para
 	for i := 0; i < int(_ma.len); i++ {
 		_ret[i] = (QwtPickerMachine__Command)(_outCast[i])
 	}
+	C.free(unsafe.Pointer(_ma.data))
 	return _ret
 }
 
@@ -349,6 +353,7 @@ func (this *QwtPickerClickPointMachine) callVirtualBase_Transition(param1 *QwtEv
 	for i := 0; i < int(_ma.len); i++ {
 		_ret[i] = (QwtPickerMachine__Command)(_outCast[i])
 	}
+	C.free(unsafe.Pointer(_ma.data))
 	return _ret
 
 }
@@ -460,6 +465,7 @@ func (this *QwtPickerDragPointMachine) Transition(param1 *QwtEventPattern, param
 	for i := 0; i < int(_ma.len); i++ {
 		_ret[i] = (QwtPickerMachine__Command)(_outCast[i])
 	}
+	C.free(unsafe.Pointer(_ma.data))
 	return _ret
 }
 
@@ -471,6 +477,7 @@ func (this *QwtPickerDragPointMachine) callVirtualBase_Transition(param1 *QwtEve
 	for i := 0; i < int(_ma.len); i++ {
 		_ret[i] = (QwtPickerMachine__Command)(_outCast[i])
 	}
+	C.free(unsafe.Pointer(_ma.data))
 	return _ret
 
 }
@@ -582,6 +589,7 @@ func (this *QwtPickerClickRectMachine) Transition(param1 *QwtEventPattern, param
 	for i := 0; i < int(_ma.len); i++ {
 		_ret[i] = (QwtPickerMachine__Command)(_outCast[i])
 	}
+	C.free(unsafe.Pointer(_ma.data))
 	return _ret
 }
 
@@ -593,6 +601,7 @@ func (this *QwtPickerClickRectMachine) callVirtualBase_Transition(param1 *QwtEve
 	for i := 0; i < int(_ma.len); i++ {
 		_ret[i] = (QwtPickerMachine__Command)(_outCast[i])
 	}
+	C.free(unsafe.Pointer(_ma.data))
 	return _ret
 
 }
@@ -704,6 +713,7 @@ func (this *QwtPickerDragRectMachine) Transition(param1 *QwtEventPattern, param2
 	for i := 0; i < int(_ma.len); i++ {
 		_ret[i] = (QwtPickerMachine__Command)(_outCast[i])
 	}
+	C.free(unsafe.Pointer(_ma.data))
 	return _ret
 }
 
@@ -715,6 +725,7 @@ func (this *QwtPickerDragRectMachine) callVirtualBase_Transition(param1 *QwtEven
 	for i := 0; i < int(_ma.len); i++ {
 		_ret[i] = (QwtPickerMachine__Command)(_outCast[i])
 	}
+	C.free(unsafe.Pointer(_ma.data))
 	return _ret
 
 }
@@ -826,6 +837,7 @@ func (this *QwtPickerDragLineMachine) Transition(param1 *QwtEventPattern, param2
 	for i := 0; i < int(_ma.len); i++ {
 		_ret[i] = (QwtPickerMachine__Command)(_outCast[i])
 	}
+	C.free(unsafe.Pointer(_ma.data))
 	return _ret
 }
 
@@ -837,6 +849,7 @@ func (this *QwtPickerDragLineMachine) callVirtualBase_Transition(param1 *QwtEven
 	for i := 0; i < int(_ma.len); i++ {
 		_ret[i] = (QwtPickerMachine__Command)(_outCast[i])
 	}
+	C.free(unsafe.Pointer(_ma.data))
 	return _ret
 
 }
@@ -948,6 +961,7 @@ func (this *QwtPickerPolygonMachine) Transition(param1 *QwtEventPattern, param2 
 	for i := 0; i < int(_ma.len); i++ {
 		_ret[i] = (QwtPickerMachine__Command)(_outCast[i])
 	}
+	C.free(unsafe.Pointer(_ma.data))
 	return _ret
 }
 
@@ -959,6 +973,7 @@ func (this *QwtPickerPolygonMachine) callVirtualBase_Transition(param1 *QwtEvent
 	for i := 0; i < int(_ma.len); i++ {
 		_ret[i] = (QwtPickerMachine__Command)(_outCast[i])
 	}
+	C.free(unsafe.Pointer(_ma.data))
 	return _ret
 
 }

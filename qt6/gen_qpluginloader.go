@@ -123,6 +123,7 @@ func QPluginLoader_StaticInstances() []*QObject {
 	for i := 0; i < int(_ma.len); i++ {
 		_ret[i] = newQObject(_outCast[i])
 	}
+	C.free(unsafe.Pointer(_ma.data))
 	return _ret
 }
 
@@ -135,6 +136,7 @@ func QPluginLoader_StaticPlugins() []QStaticPlugin {
 		_lv_goptr.GoGC() // Qt uses pass-by-value semantics for this type. Mimic with finalizer
 		_ret[i] = *_lv_goptr
 	}
+	C.free(unsafe.Pointer(_ma.data))
 	return _ret
 }
 

@@ -340,6 +340,7 @@ func (this *QGraphicsWidget) Actions() []*QAction {
 	for i := 0; i < int(_ma.len); i++ {
 		_ret[i] = newQAction(_outCast[i])
 	}
+	C.free(unsafe.Pointer(_ma.data))
 	return _ret
 }
 

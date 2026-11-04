@@ -175,6 +175,7 @@ func QApplication_AllWidgets() []*QWidget {
 	for i := 0; i < int(_ma.len); i++ {
 		_ret[i] = newQWidget(_outCast[i])
 	}
+	C.free(unsafe.Pointer(_ma.data))
 	return _ret
 }
 
@@ -185,6 +186,7 @@ func QApplication_TopLevelWidgets() []*QWidget {
 	for i := 0; i < int(_ma.len); i++ {
 		_ret[i] = newQWidget(_outCast[i])
 	}
+	C.free(unsafe.Pointer(_ma.data))
 	return _ret
 }
 

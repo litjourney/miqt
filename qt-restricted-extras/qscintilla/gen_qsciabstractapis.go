@@ -152,6 +152,7 @@ func (this *QsciAbstractAPIs) CallTips(context []string, commas int, style QsciS
 		C.free(unsafe.Pointer(_lv_ms.data))
 		_ret[i] = _lv_ret
 	}
+	C.free(unsafe.Pointer(_ma.data))
 	return _ret
 }
 
@@ -284,6 +285,7 @@ func miqt_exec_callback_QsciAbstractAPIs_updateAutoCompletionList(self *C.QsciAb
 		C.free(unsafe.Pointer(context_lv_ms.data))
 		context_ret[i] = context_lv_ret
 	}
+	C.free(unsafe.Pointer(context_ma.data))
 	slotval1 := context_ret
 
 	var list_ma C.struct_miqt_array = list
@@ -295,6 +297,7 @@ func miqt_exec_callback_QsciAbstractAPIs_updateAutoCompletionList(self *C.QsciAb
 		C.free(unsafe.Pointer(list_lv_ms.data))
 		list_ret[i] = list_lv_ret
 	}
+	C.free(unsafe.Pointer(list_ma.data))
 	slotval2 := list_ret
 
 	gofunc(slotval1, slotval2)
@@ -365,6 +368,7 @@ func miqt_exec_callback_QsciAbstractAPIs_callTips(self *C.QsciAbstractAPIs, cb C
 		C.free(unsafe.Pointer(context_lv_ms.data))
 		context_ret[i] = context_lv_ret
 	}
+	C.free(unsafe.Pointer(context_ma.data))
 	slotval1 := context_ret
 
 	slotval2 := (int)(commas)
@@ -377,6 +381,7 @@ func miqt_exec_callback_QsciAbstractAPIs_callTips(self *C.QsciAbstractAPIs, cb C
 	for i := 0; i < int(shifts_ma.len); i++ {
 		shifts_ret[i] = (int)(shifts_outCast[i])
 	}
+	C.free(unsafe.Pointer(shifts_ma.data))
 	slotval4 := shifts_ret
 
 	virtualReturn := gofunc(slotval1, slotval2, slotval3, slotval4)

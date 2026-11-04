@@ -106,6 +106,8 @@ func (this *QJsonObject) ToVariantMap() map[string]QVariant {
 
 		_ret[_entry_Key] = _entry_Value
 	}
+	C.free(unsafe.Pointer(_mm.keys))
+	C.free(unsafe.Pointer(_mm.values))
 	return _ret
 }
 
@@ -150,6 +152,8 @@ func (this *QJsonObject) ToVariantHash() map[string]QVariant {
 
 		_ret[_entry_Key] = _entry_Value
 	}
+	C.free(unsafe.Pointer(_mm.keys))
+	C.free(unsafe.Pointer(_mm.values))
 	return _ret
 }
 
@@ -163,6 +167,7 @@ func (this *QJsonObject) Keys() []string {
 		C.free(unsafe.Pointer(_lv_ms.data))
 		_ret[i] = _lv_ret
 	}
+	C.free(unsafe.Pointer(_ma.data))
 	return _ret
 }
 

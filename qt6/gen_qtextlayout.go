@@ -291,6 +291,7 @@ func (this *QTextLayout) Formats() []QTextLayout__FormatRange {
 		_lv_goptr.GoGC() // Qt uses pass-by-value semantics for this type. Mimic with finalizer
 		_ret[i] = *_lv_goptr
 	}
+	C.free(unsafe.Pointer(_ma.data))
 	return _ret
 }
 
@@ -413,6 +414,7 @@ func (this *QTextLayout) GlyphRuns() []QGlyphRun {
 		_lv_goptr.GoGC() // Qt uses pass-by-value semantics for this type. Mimic with finalizer
 		_ret[i] = *_lv_goptr
 	}
+	C.free(unsafe.Pointer(_ma.data))
 	return _ret
 }
 
@@ -457,6 +459,7 @@ func (this *QTextLayout) GlyphRunsWithFrom(from int) []QGlyphRun {
 		_lv_goptr.GoGC() // Qt uses pass-by-value semantics for this type. Mimic with finalizer
 		_ret[i] = *_lv_goptr
 	}
+	C.free(unsafe.Pointer(_ma.data))
 	return _ret
 }
 
@@ -469,6 +472,7 @@ func (this *QTextLayout) GlyphRuns2(from int, length int) []QGlyphRun {
 		_lv_goptr.GoGC() // Qt uses pass-by-value semantics for this type. Mimic with finalizer
 		_ret[i] = *_lv_goptr
 	}
+	C.free(unsafe.Pointer(_ma.data))
 	return _ret
 }
 
@@ -643,6 +647,7 @@ func (this *QTextLine) GlyphRuns() []QGlyphRun {
 		_lv_goptr.GoGC() // Qt uses pass-by-value semantics for this type. Mimic with finalizer
 		_ret[i] = *_lv_goptr
 	}
+	C.free(unsafe.Pointer(_ma.data))
 	return _ret
 }
 
@@ -667,6 +672,7 @@ func (this *QTextLine) GlyphRunsWithFrom(from int) []QGlyphRun {
 		_lv_goptr.GoGC() // Qt uses pass-by-value semantics for this type. Mimic with finalizer
 		_ret[i] = *_lv_goptr
 	}
+	C.free(unsafe.Pointer(_ma.data))
 	return _ret
 }
 
@@ -679,6 +685,7 @@ func (this *QTextLine) GlyphRuns2(from int, length int) []QGlyphRun {
 		_lv_goptr.GoGC() // Qt uses pass-by-value semantics for this type. Mimic with finalizer
 		_ret[i] = *_lv_goptr
 	}
+	C.free(unsafe.Pointer(_ma.data))
 	return _ret
 }
 

@@ -134,6 +134,7 @@ func (this *QCandlestickSeries) Sets() []*QCandlestickSet {
 	for i := 0; i < int(_ma.len); i++ {
 		_ret[i] = newQCandlestickSet(_outCast[i])
 	}
+	C.free(unsafe.Pointer(_ma.data))
 	return _ret
 }
 
@@ -374,6 +375,7 @@ func miqt_exec_callback_QCandlestickSeries_candlestickSetsAdded(cb C.intptr_t, s
 	for i := 0; i < int(sets_ma.len); i++ {
 		sets_ret[i] = newQCandlestickSet(sets_outCast[i])
 	}
+	C.free(unsafe.Pointer(sets_ma.data))
 	slotval1 := sets_ret
 
 	gofunc(slotval1)
@@ -408,6 +410,7 @@ func miqt_exec_callback_QCandlestickSeries_candlestickSetsRemoved(cb C.intptr_t,
 	for i := 0; i < int(sets_ma.len); i++ {
 		sets_ret[i] = newQCandlestickSet(sets_outCast[i])
 	}
+	C.free(unsafe.Pointer(sets_ma.data))
 	slotval1 := sets_ret
 
 	gofunc(slotval1)

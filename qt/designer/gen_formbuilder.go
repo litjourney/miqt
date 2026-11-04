@@ -72,6 +72,7 @@ func (this *QFormBuilder) PluginPaths() []string {
 		C.free(unsafe.Pointer(_lv_ms.data))
 		_ret[i] = _lv_ret
 	}
+	C.free(unsafe.Pointer(_ma.data))
 	return _ret
 }
 
@@ -149,6 +150,8 @@ func (this *QFormBuilder) IconPaths(param1 *qt.QIcon) struct {
 	_second_ret := C.GoStringN(_second_ms.data, C.int(int64(_second_ms.len)))
 	C.free(unsafe.Pointer(_second_ms.data))
 	_entry_Second := _second_ret
+	C.free(unsafe.Pointer(_mm.keys))
+	C.free(unsafe.Pointer(_mm.values))
 	_method_ret := struct {
 		First  string
 		Second string
@@ -180,6 +183,8 @@ func (this *QFormBuilder) PixmapPaths(param1 *qt.QPixmap) struct {
 	_second_ret := C.GoStringN(_second_ms.data, C.int(int64(_second_ms.len)))
 	C.free(unsafe.Pointer(_second_ms.data))
 	_entry_Second := _second_ret
+	C.free(unsafe.Pointer(_mm.keys))
+	C.free(unsafe.Pointer(_mm.values))
 	_method_ret := struct {
 		First  string
 		Second string

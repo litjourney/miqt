@@ -105,6 +105,7 @@ func (this *QNetworkCookieJar) CookiesForUrl(url *qt.QUrl) []QNetworkCookie {
 		_lv_goptr.GoGC() // Qt uses pass-by-value semantics for this type. Mimic with finalizer
 		_ret[i] = *_lv_goptr
 	}
+	C.free(unsafe.Pointer(_ma.data))
 	return _ret
 }
 
@@ -186,6 +187,7 @@ func (this *QNetworkCookieJar) AllCookies() []QNetworkCookie {
 		_lv_goptr.GoGC() // Qt uses pass-by-value semantics for this type. Mimic with finalizer
 		_ret[i] = *_lv_goptr
 	}
+	C.free(unsafe.Pointer(_ma.data))
 	_method_ret := _ret
 
 	if !_dynamic_cast_ok {
@@ -282,6 +284,7 @@ func (this *QNetworkCookieJar) callVirtualBase_CookiesForUrl(url *qt.QUrl) []QNe
 		_lv_goptr.GoGC() // Qt uses pass-by-value semantics for this type. Mimic with finalizer
 		_ret[i] = *_lv_goptr
 	}
+	C.free(unsafe.Pointer(_ma.data))
 	return _ret
 
 }
@@ -355,6 +358,7 @@ func miqt_exec_callback_QNetworkCookieJar_setCookiesFromUrl(self *C.QNetworkCook
 		cookieList_lv_goptr.GoGC() // Qt uses pass-by-value semantics for this type. Mimic with finalizer
 		cookieList_ret[i] = *cookieList_lv_goptr
 	}
+	C.free(unsafe.Pointer(cookieList_ma.data))
 	slotval1 := cookieList_ret
 
 	slotval2 := qt.UnsafeNewQUrl(unsafe.Pointer(url))

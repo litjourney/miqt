@@ -162,6 +162,7 @@ func (this *QStateMachine) DefaultAnimations() []*qt6.QAbstractAnimation {
 	for i := 0; i < int(_ma.len); i++ {
 		_ret[i] = qt6.UnsafeNewQAbstractAnimation(unsafe.Pointer(_outCast[i]))
 	}
+	C.free(unsafe.Pointer(_ma.data))
 	return _ret
 }
 
@@ -198,6 +199,7 @@ func (this *QStateMachine) Configuration() map[*QAbstractState]struct{} {
 
 		_ret[_element] = struct{}{}
 	}
+	C.free(unsafe.Pointer(_ma.data))
 	return _ret
 }
 
@@ -844,6 +846,7 @@ func (this *QStateMachine__SignalEvent) Arguments() []qt6.QVariant {
 		_lv_goptr.GoGC() // Qt uses pass-by-value semantics for this type. Mimic with finalizer
 		_ret[i] = *_lv_goptr
 	}
+	C.free(unsafe.Pointer(_ma.data))
 	return _ret
 }
 

@@ -533,6 +533,7 @@ func (this *QPainterPathStroker) DashPattern() []float64 {
 	for i := 0; i < int(_ma.len); i++ {
 		_ret[i] = (float64)(_outCast[i])
 	}
+	C.free(unsafe.Pointer(_ma.data))
 	return _ret
 }
 

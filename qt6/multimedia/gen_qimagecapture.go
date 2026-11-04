@@ -157,6 +157,7 @@ func QImageCapture_SupportedFormats() []QImageCapture__FileFormat {
 	for i := 0; i < int(_ma.len); i++ {
 		_ret[i] = (QImageCapture__FileFormat)(_outCast[i])
 	}
+	C.free(unsafe.Pointer(_ma.data))
 	return _ret
 }
 

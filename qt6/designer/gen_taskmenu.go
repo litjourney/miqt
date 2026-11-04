@@ -69,6 +69,7 @@ func (this *QDesignerTaskMenuExtension) TaskActions() []*qt6.QAction {
 	for i := 0; i < int(_ma.len); i++ {
 		_ret[i] = qt6.UnsafeNewQAction(unsafe.Pointer(_outCast[i]))
 	}
+	C.free(unsafe.Pointer(_ma.data))
 	return _ret
 }
 

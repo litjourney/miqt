@@ -210,6 +210,7 @@ func (this *QCameraExposure) SupportedIsoSensitivities() []int {
 	for i := 0; i < int(_ma.len); i++ {
 		_ret[i] = (int)(_outCast[i])
 	}
+	C.free(unsafe.Pointer(_ma.data))
 	return _ret
 }
 
@@ -220,6 +221,7 @@ func (this *QCameraExposure) SupportedApertures() []float64 {
 	for i := 0; i < int(_ma.len); i++ {
 		_ret[i] = (float64)(_outCast[i])
 	}
+	C.free(unsafe.Pointer(_ma.data))
 	return _ret
 }
 
@@ -230,6 +232,7 @@ func (this *QCameraExposure) SupportedShutterSpeeds() []float64 {
 	for i := 0; i < int(_ma.len); i++ {
 		_ret[i] = (float64)(_outCast[i])
 	}
+	C.free(unsafe.Pointer(_ma.data))
 	return _ret
 }
 
@@ -472,6 +475,7 @@ func (this *QCameraExposure) SupportedIsoSensitivitiesWithContinuous(continuous 
 	for i := 0; i < int(_ma.len); i++ {
 		_ret[i] = (int)(_outCast[i])
 	}
+	C.free(unsafe.Pointer(_ma.data))
 	return _ret
 }
 
@@ -482,6 +486,7 @@ func (this *QCameraExposure) SupportedAperturesWithContinuous(continuous *bool) 
 	for i := 0; i < int(_ma.len); i++ {
 		_ret[i] = (float64)(_outCast[i])
 	}
+	C.free(unsafe.Pointer(_ma.data))
 	return _ret
 }
 
@@ -492,5 +497,6 @@ func (this *QCameraExposure) SupportedShutterSpeedsWithContinuous(continuous *bo
 	for i := 0; i < int(_ma.len); i++ {
 		_ret[i] = (float64)(_outCast[i])
 	}
+	C.free(unsafe.Pointer(_ma.data))
 	return _ret
 }

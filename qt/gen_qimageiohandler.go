@@ -229,15 +229,11 @@ func miqt_exec_callback_QImageIOHandler_name(self *C.QImageIOHandler, cb C.intpt
 	}
 
 	virtualReturn := gofunc((&QImageIOHandler{h: self}).callVirtualBase_Name)
-	virtualReturn_alias := C.struct_miqt_string{}
-	if len(virtualReturn) > 0 {
-		virtualReturn_alias.data = (*C.char)(unsafe.Pointer(&virtualReturn[0]))
-	} else {
-		virtualReturn_alias.data = (*C.char)(unsafe.Pointer(nil))
-	}
-	virtualReturn_alias.len = C.size_t(len(virtualReturn))
+	virtualReturn_ms := C.struct_miqt_string{}
+	virtualReturn_ms.data = (*C.char)(C.CBytes(virtualReturn))
+	virtualReturn_ms.len = C.size_t(len(virtualReturn))
 
-	return virtualReturn_alias
+	return virtualReturn_ms
 
 }
 func (this *QImageIOHandler) OnCanRead(slot func() bool) {

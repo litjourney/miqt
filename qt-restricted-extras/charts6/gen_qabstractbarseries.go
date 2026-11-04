@@ -129,6 +129,7 @@ func (this *QAbstractBarSeries) BarSets() []*QBarSet {
 	for i := 0; i < int(_ma.len); i++ {
 		_ret[i] = newQBarSet(_outCast[i])
 	}
+	C.free(unsafe.Pointer(_ma.data))
 	return _ret
 }
 
@@ -467,6 +468,7 @@ func miqt_exec_callback_QAbstractBarSeries_barsetsAdded(cb C.intptr_t, sets C.st
 	for i := 0; i < int(sets_ma.len); i++ {
 		sets_ret[i] = newQBarSet(sets_outCast[i])
 	}
+	C.free(unsafe.Pointer(sets_ma.data))
 	slotval1 := sets_ret
 
 	gofunc(slotval1)
@@ -501,6 +503,7 @@ func miqt_exec_callback_QAbstractBarSeries_barsetsRemoved(cb C.intptr_t, sets C.
 	for i := 0; i < int(sets_ma.len); i++ {
 		sets_ret[i] = newQBarSet(sets_outCast[i])
 	}
+	C.free(unsafe.Pointer(sets_ma.data))
 	slotval1 := sets_ret
 
 	gofunc(slotval1)

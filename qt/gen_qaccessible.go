@@ -317,6 +317,8 @@ func QAccessible_QAccessibleTextBoundaryHelper(cursor *QTextCursor, boundaryType
 
 	_entry_Second := (int)(_Second_CArray[0])
 
+	C.free(unsafe.Pointer(_mm.keys))
+	C.free(unsafe.Pointer(_mm.values))
 	return struct {
 		First  int
 		Second int
@@ -399,11 +401,14 @@ func (this *QAccessibleInterface) Relations(match QAccessible__RelationFlag) []s
 
 		_vv_entry_Second := (QAccessible__RelationFlag)(_vv_Second_CArray[0])
 
+		C.free(unsafe.Pointer(_vv_mm.keys))
+		C.free(unsafe.Pointer(_vv_mm.values))
 		_ret[i] = struct {
 			First  *QAccessibleInterface
 			Second QAccessible__RelationFlag
 		}{First: _vv_entry_First, Second: _vv_entry_Second}
 	}
+	C.free(unsafe.Pointer(_ma.data))
 	return _ret
 }
 
@@ -836,6 +841,7 @@ func (this *QAccessibleTableCellInterface) ColumnHeaderCells() []*QAccessibleInt
 	for i := 0; i < int(_ma.len); i++ {
 		_ret[i] = newQAccessibleInterface(_outCast[i])
 	}
+	C.free(unsafe.Pointer(_ma.data))
 	return _ret
 }
 
@@ -846,6 +852,7 @@ func (this *QAccessibleTableCellInterface) RowHeaderCells() []*QAccessibleInterf
 	for i := 0; i < int(_ma.len); i++ {
 		_ret[i] = newQAccessibleInterface(_outCast[i])
 	}
+	C.free(unsafe.Pointer(_ma.data))
 	return _ret
 }
 
@@ -942,6 +949,7 @@ func (this *QAccessibleTableInterface) SelectedCells() []*QAccessibleInterface {
 	for i := 0; i < int(_ma.len); i++ {
 		_ret[i] = newQAccessibleInterface(_outCast[i])
 	}
+	C.free(unsafe.Pointer(_ma.data))
 	return _ret
 }
 
@@ -982,6 +990,7 @@ func (this *QAccessibleTableInterface) SelectedColumns() []int {
 	for i := 0; i < int(_ma.len); i++ {
 		_ret[i] = (int)(_outCast[i])
 	}
+	C.free(unsafe.Pointer(_ma.data))
 	return _ret
 }
 
@@ -992,6 +1001,7 @@ func (this *QAccessibleTableInterface) SelectedRows() []int {
 	for i := 0; i < int(_ma.len); i++ {
 		_ret[i] = (int)(_outCast[i])
 	}
+	C.free(unsafe.Pointer(_ma.data))
 	return _ret
 }
 
@@ -1101,6 +1111,7 @@ func (this *QAccessibleActionInterface) ActionNames() []string {
 		C.free(unsafe.Pointer(_lv_ms.data))
 		_ret[i] = _lv_ret
 	}
+	C.free(unsafe.Pointer(_ma.data))
 	return _ret
 }
 
@@ -1148,6 +1159,7 @@ func (this *QAccessibleActionInterface) KeyBindingsForAction(actionName string) 
 		C.free(unsafe.Pointer(_lv_ms.data))
 		_ret[i] = _lv_ret
 	}
+	C.free(unsafe.Pointer(_ma.data))
 	return _ret
 }
 

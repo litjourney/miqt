@@ -1193,6 +1193,7 @@ func (this *QWebSpellChecker__GrammarDetail) Guesses() []string {
 		C.free(unsafe.Pointer(guesses_lv_ms.data))
 		guesses_ret[i] = guesses_lv_ret
 	}
+	C.free(unsafe.Pointer(guesses_ma.data))
 	return guesses_ret
 }
 

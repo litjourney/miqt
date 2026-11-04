@@ -141,6 +141,7 @@ func (this *QAbstractItemDelegate) PaintingRoles() []int {
 	for i := 0; i < int(_ma.len); i++ {
 		_ret[i] = (int)(_outCast[i])
 	}
+	C.free(unsafe.Pointer(_ma.data))
 	return _ret
 }
 
@@ -645,6 +646,7 @@ func (this *QAbstractItemDelegate) callVirtualBase_PaintingRoles() []int {
 	for i := 0; i < int(_ma.len); i++ {
 		_ret[i] = (int)(_outCast[i])
 	}
+	C.free(unsafe.Pointer(_ma.data))
 	return _ret
 
 }

@@ -1191,6 +1191,7 @@ func miqt_exec_callback_QTreeView_dataChanged(self *C.QTreeView, cb C.intptr_t, 
 	for i := 0; i < int(roles_ma.len); i++ {
 		roles_ret[i] = (int)(roles_outCast[i])
 	}
+	C.free(unsafe.Pointer(roles_ma.data))
 	slotval3 := roles_ret
 
 	gofunc((&QTreeView{h: self}).callVirtualBase_DataChanged, slotval1, slotval2, slotval3)
@@ -1570,6 +1571,7 @@ func (this *QTreeView) callVirtualBase_SelectedIndexes() []QModelIndex {
 		_lv_goptr.GoGC() // Qt uses pass-by-value semantics for this type. Mimic with finalizer
 		_ret[i] = *_lv_goptr
 	}
+	C.free(unsafe.Pointer(_ma.data))
 	return _ret
 
 }

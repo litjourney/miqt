@@ -373,6 +373,22 @@ func stripDeferCFree(preamble string) string {
 }
 
 func (gfs *goFileState) emitParameterGo2CABIForwarding(p CppParameter) (preamble string, rvalue string) {
+	return gfs.emitGo2CABI(p, false)
+}
+
+// emitVirtualReturnGo2CABI converts a Go virtual-override return value into
+// CABI memory that the C++ trampoline takes ownership of: it copies the value
+// into the real Qt type and then frees every buffer (emitCABI2CppFreeReturn).
+// So every buffer must be C-allocated (no aliases of Go memory) and nothing may
+// be freed on the Go side.
+func (gfs *goFileState) emitVirtualReturnGo2CABI(p CppParameter) (preamble string, rvalue string) {
+	preamble, rvalue = gfs.emitGo2CABI(p, true)
+	return stripDeferCFree(preamble), rvalue
+}
+
+// emitGo2CABI converts a Go value to its CABI form. With owned, C++ frees the
+// result, so byte arrays are copied into C memory instead of aliasing Go memory.
+func (gfs *goFileState) emitGo2CABI(p CppParameter, owned bool) (preamble string, rvalue string) {
 
 	nameprefix := makeNamePrefix(p.goParameterName())
 
@@ -385,6 +401,17 @@ func (gfs *goFileState) emitParameterGo2CABIForwarding(p CppParameter) (preamble
 		preamble += nameprefix + "_ms.data = C.CString(" + p.goParameterName() + ")\n"
 		preamble += nameprefix + "_ms.len = C.size_t(len(" + p.goParameterName() + "))\n"
 		preamble += "defer C.free(unsafe.Pointer(" + nameprefix + "_ms.data))\n"
+
+		rvalue = nameprefix + "_ms"
+
+	} else if p.ParameterType == "QByteArray" && owned {
+		// The C++ caller free()s this after copying it, so it must be C memory:
+		// an alias of the Go slice would hand Go heap memory to free().
+
+		gfs.imports["unsafe"] = struct{}{}
+		preamble += nameprefix + "_ms := C.struct_miqt_string{}\n"
+		preamble += nameprefix + "_ms.data = (*C.char)(C.CBytes(" + p.goParameterName() + "))\n"
+		preamble += nameprefix + "_ms.len = C.size_t(len(" + p.goParameterName() + "))\n"
 
 		rvalue = nameprefix + "_ms"
 
@@ -419,7 +446,7 @@ func (gfs *goFileState) emitParameterGo2CABIForwarding(p CppParameter) (preamble
 		preamble += "for i := range " + p.goParameterName() + "{\n"
 
 		listType.ParameterName = p.goParameterName() + "[i]"
-		addPreamble, innerRvalue := gfs.emitParameterGo2CABIForwarding(listType)
+		addPreamble, innerRvalue := gfs.emitGo2CABI(listType, owned)
 		preamble += addPreamble
 		preamble += nameprefix + "_CArray[i] = " + innerRvalue + "\n"
 		preamble += "}\n"
@@ -447,12 +474,12 @@ func (gfs *goFileState) emitParameterGo2CABIForwarding(p CppParameter) (preamble
 		preamble += "for " + nameprefix + "_k, " + nameprefix + "_v := range " + p.goParameterName() + "{\n"
 
 		kType.ParameterName = nameprefix + "_k"
-		addPreamble, innerRvalue := gfs.emitParameterGo2CABIForwarding(kType)
+		addPreamble, innerRvalue := gfs.emitGo2CABI(kType, owned)
 		preamble += addPreamble
 		preamble += nameprefix + "_Keys_CArray[" + nameprefix + "_ctr] = " + innerRvalue + "\n"
 
 		vType.ParameterName = nameprefix + "_v"
-		addPreamble, innerRvalue = gfs.emitParameterGo2CABIForwarding(vType)
+		addPreamble, innerRvalue = gfs.emitGo2CABI(vType, owned)
 		preamble += addPreamble
 		preamble += nameprefix + "_Values_CArray[" + nameprefix + "_ctr] = " + innerRvalue + "\n"
 
@@ -476,12 +503,12 @@ func (gfs *goFileState) emitParameterGo2CABIForwarding(p CppParameter) (preamble
 		preamble += "defer C.free(unsafe.Pointer(" + nameprefix + "_Second_CArray))\n"
 
 		kType.ParameterName = p.goParameterName() + ".First"
-		addPreamble, innerRvalue := gfs.emitParameterGo2CABIForwarding(kType)
+		addPreamble, innerRvalue := gfs.emitGo2CABI(kType, owned)
 		preamble += addPreamble
 		preamble += nameprefix + "_First_CArray[0] = " + innerRvalue + "\n"
 
 		vType.ParameterName = p.goParameterName() + ".Second"
-		addPreamble, innerRvalue = gfs.emitParameterGo2CABIForwarding(vType)
+		addPreamble, innerRvalue = gfs.emitGo2CABI(vType, owned)
 		preamble += addPreamble
 		preamble += nameprefix + "_Second_CArray[0] = " + innerRvalue + "\n"
 
@@ -524,6 +551,19 @@ func (gfs *goFileState) emitParameterGo2CABIForwarding(p CppParameter) (preamble
 	}
 
 	return preamble, rvalue
+}
+
+// emitFreeCabiContainer frees the top-level buffers of a miqt_array/miqt_map
+// that C++ malloc'd for Go (method results, protected/virtual-base results and
+// callback parameters). The C++ side never frees these, so the Go side must,
+// after every element has been copied out (element conversions copy; nested
+// containers and strings free their own buffers).
+func emitFreeCabiContainer(buffers ...string) string {
+	ret := ""
+	for _, b := range buffers {
+		ret += "C.free(unsafe.Pointer(" + b + "))\n"
+	}
+	return ret
 }
 
 func (gfs *goFileState) emitCabiToGo(assignExpr string, rt CppParameter, rvalue string) string {
@@ -589,6 +629,7 @@ func (gfs *goFileState) emitCabiToGo(assignExpr string, rt CppParameter, rvalue 
 		afterword += gfs.emitCabiToGo(namePrefix+"_ret[i] = ", t, namePrefix+"_outCast[i]")
 
 		afterword += "}\n"
+		afterword += emitFreeCabiContainer(namePrefix + "_ma.data")
 
 		afterword += assignExpr + " " + namePrefix + "_ret\n"
 		return shouldReturn + " " + rvalue + "\n" + afterword
@@ -607,6 +648,7 @@ func (gfs *goFileState) emitCabiToGo(assignExpr string, rt CppParameter, rvalue 
 		afterword += namePrefix + "_ret[" + namePrefix + "_element] = struct{}{}\n"
 
 		afterword += "}\n"
+		afterword += emitFreeCabiContainer(namePrefix + "_ma.data")
 		afterword += assignExpr + " " + namePrefix + "_ret\n"
 		return shouldReturn + " " + rvalue + "\n" + afterword
 
@@ -625,6 +667,7 @@ func (gfs *goFileState) emitCabiToGo(assignExpr string, rt CppParameter, rvalue 
 		afterword += namePrefix + "_ret[" + namePrefix + "_entry_Key] = " + namePrefix + "_entry_Value\n"
 
 		afterword += "}\n"
+		afterword += emitFreeCabiContainer(namePrefix+"_mm.keys", namePrefix+"_mm.values")
 		afterword += assignExpr + " " + namePrefix + "_ret\n"
 		return shouldReturn + " " + rvalue + "\n" + afterword
 
@@ -638,6 +681,7 @@ func (gfs *goFileState) emitCabiToGo(assignExpr string, rt CppParameter, rvalue 
 
 		afterword += gfs.emitCabiToGo(namePrefix+"_entry_First := ", kType, namePrefix+"_First_CArray[0]") + "\n"
 		afterword += gfs.emitCabiToGo(namePrefix+"_entry_Second := ", vType, namePrefix+"_Second_CArray[0]") + "\n"
+		afterword += emitFreeCabiContainer(namePrefix+"_mm.keys", namePrefix+"_mm.values")
 
 		afterword += assignExpr + " " + rt.RenderTypeGo(gfs) + " { First: " + namePrefix + "_entry_First , Second: " + namePrefix + "_entry_Second }\n"
 		return shouldReturn + " " + rvalue + "\n" + afterword
@@ -1215,14 +1259,14 @@ import "C"
 					}
 					virtualRetP := m.ReturnType // copy
 					virtualRetP.ParameterName = "virtualReturn"
-					binding, rvalue := gfs.emitParameterGo2CABIForwarding(virtualRetP)
 					// A virtual-override callback hands ownership of any heap-allocated
 					// CABI return memory to the C++ caller, which copies it into the real
 					// Qt type. The `defer C.free(...)` emitted for argument forwarding would
 					// run on THIS function's return — before the C++ caller reads the data —
 					// a use-after-free (e.g. QAbstractItemModel::mimeTypes -> qBadAlloc).
-					// Strip them so the memory outlives the return; the C++ trampoline frees.
-					binding = stripDeferCFree(binding)
+					// The owned conversion strips them so the memory outlives the return,
+					// and copies byte arrays into C memory; the C++ trampoline frees.
+					binding, rvalue := gfs.emitVirtualReturnGo2CABI(virtualRetP)
 					ret.WriteString(binding + "\n")
 					ret.WriteString("return " + rvalue + "\n")
 				}

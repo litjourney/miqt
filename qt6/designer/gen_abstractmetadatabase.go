@@ -80,6 +80,7 @@ func (this *QDesignerMetaDataBaseItemInterface) TabOrder() []*qt6.QWidget {
 	for i := 0; i < int(_ma.len); i++ {
 		_ret[i] = qt6.UnsafeNewQWidget(unsafe.Pointer(_outCast[i]))
 	}
+	C.free(unsafe.Pointer(_ma.data))
 	return _ret
 }
 
@@ -206,6 +207,7 @@ func miqt_exec_callback_QDesignerMetaDataBaseItemInterface_setTabOrder(self *C.Q
 	for i := 0; i < int(tabOrder_ma.len); i++ {
 		tabOrder_ret[i] = qt6.UnsafeNewQWidget(unsafe.Pointer(tabOrder_outCast[i]))
 	}
+	C.free(unsafe.Pointer(tabOrder_ma.data))
 	slotval1 := tabOrder_ret
 
 	gofunc(slotval1)
@@ -364,6 +366,7 @@ func (this *QDesignerMetaDataBaseInterface) Objects() []*qt6.QObject {
 	for i := 0; i < int(_ma.len); i++ {
 		_ret[i] = qt6.UnsafeNewQObject(unsafe.Pointer(_outCast[i]))
 	}
+	C.free(unsafe.Pointer(_ma.data))
 	return _ret
 }
 

@@ -310,6 +310,7 @@ func (this *QsciScintilla) ApiContext(pos int, context_start *int, last_word_sta
 		C.free(unsafe.Pointer(_lv_ms.data))
 		_ret[i] = _lv_ret
 	}
+	C.free(unsafe.Pointer(_ma.data))
 	return _ret
 }
 
@@ -448,6 +449,7 @@ func (this *QsciScintilla) ContractedFolds() []int {
 	for i := 0; i < int(_ma.len); i++ {
 		_ret[i] = (int)(_outCast[i])
 	}
+	C.free(unsafe.Pointer(_ma.data))
 	return _ret
 }
 
@@ -2110,6 +2112,7 @@ func (this *QsciScintilla) callVirtualBase_ApiContext(pos int, context_start *in
 		C.free(unsafe.Pointer(_lv_ms.data))
 		_ret[i] = _lv_ret
 	}
+	C.free(unsafe.Pointer(_ma.data))
 	return _ret
 
 }
@@ -4868,15 +4871,11 @@ func miqt_exec_callback_QsciScintilla_fromMimeData(self *C.QsciScintilla, cb C.i
 	slotval2 := (*bool)(unsafe.Pointer(rectangular))
 
 	virtualReturn := gofunc((&QsciScintilla{h: self}).callVirtualBase_FromMimeData, slotval1, slotval2)
-	virtualReturn_alias := C.struct_miqt_string{}
-	if len(virtualReturn) > 0 {
-		virtualReturn_alias.data = (*C.char)(unsafe.Pointer(&virtualReturn[0]))
-	} else {
-		virtualReturn_alias.data = (*C.char)(unsafe.Pointer(nil))
-	}
-	virtualReturn_alias.len = C.size_t(len(virtualReturn))
+	virtualReturn_ms := C.struct_miqt_string{}
+	virtualReturn_ms.data = (*C.char)(C.CBytes(virtualReturn))
+	virtualReturn_ms.len = C.size_t(len(virtualReturn))
 
-	return virtualReturn_alias
+	return virtualReturn_ms
 
 }
 

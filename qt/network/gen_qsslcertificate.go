@@ -181,6 +181,7 @@ func (this *QSslCertificate) IssuerInfo(info QSslCertificate__SubjectInfo) []str
 		C.free(unsafe.Pointer(_lv_ms.data))
 		_ret[i] = _lv_ret
 	}
+	C.free(unsafe.Pointer(_ma.data))
 	return _ret
 }
 
@@ -201,6 +202,7 @@ func (this *QSslCertificate) IssuerInfoWithAttribute(attribute []byte) []string 
 		C.free(unsafe.Pointer(_lv_ms.data))
 		_ret[i] = _lv_ret
 	}
+	C.free(unsafe.Pointer(_ma.data))
 	return _ret
 }
 
@@ -214,6 +216,7 @@ func (this *QSslCertificate) SubjectInfo(info QSslCertificate__SubjectInfo) []st
 		C.free(unsafe.Pointer(_lv_ms.data))
 		_ret[i] = _lv_ret
 	}
+	C.free(unsafe.Pointer(_ma.data))
 	return _ret
 }
 
@@ -234,6 +237,7 @@ func (this *QSslCertificate) SubjectInfoWithAttribute(attribute []byte) []string
 		C.free(unsafe.Pointer(_lv_ms.data))
 		_ret[i] = _lv_ret
 	}
+	C.free(unsafe.Pointer(_ma.data))
 	return _ret
 }
 
@@ -261,6 +265,7 @@ func (this *QSslCertificate) SubjectInfoAttributes() [][]byte {
 		C.free(unsafe.Pointer(_lv_bytearray.data))
 		_ret[i] = _lv_ret
 	}
+	C.free(unsafe.Pointer(_ma.data))
 	return _ret
 }
 
@@ -274,6 +279,7 @@ func (this *QSslCertificate) IssuerInfoAttributes() [][]byte {
 		C.free(unsafe.Pointer(_lv_bytearray.data))
 		_ret[i] = _lv_ret
 	}
+	C.free(unsafe.Pointer(_ma.data))
 	return _ret
 }
 
@@ -304,6 +310,7 @@ func (this *QSslCertificate) Extensions() []QSslCertificateExtension {
 		_lv_goptr.GoGC() // Qt uses pass-by-value semantics for this type. Mimic with finalizer
 		_ret[i] = *_lv_goptr
 	}
+	C.free(unsafe.Pointer(_ma.data))
 	return _ret
 }
 
@@ -341,6 +348,7 @@ func QSslCertificate_FromPath(path string, format QSsl__EncodingFormat, syntax q
 		_lv_goptr.GoGC() // Qt uses pass-by-value semantics for this type. Mimic with finalizer
 		_ret[i] = *_lv_goptr
 	}
+	C.free(unsafe.Pointer(_ma.data))
 	return _ret
 }
 
@@ -357,6 +365,7 @@ func QSslCertificate_FromPathWithPath(path string) []QSslCertificate {
 		_lv_goptr.GoGC() // Qt uses pass-by-value semantics for this type. Mimic with finalizer
 		_ret[i] = *_lv_goptr
 	}
+	C.free(unsafe.Pointer(_ma.data))
 	return _ret
 }
 
@@ -369,6 +378,7 @@ func QSslCertificate_FromDevice(device *qt.QIODevice) []QSslCertificate {
 		_lv_goptr.GoGC() // Qt uses pass-by-value semantics for this type. Mimic with finalizer
 		_ret[i] = *_lv_goptr
 	}
+	C.free(unsafe.Pointer(_ma.data))
 	return _ret
 }
 
@@ -388,6 +398,7 @@ func QSslCertificate_FromData(data []byte) []QSslCertificate {
 		_lv_goptr.GoGC() // Qt uses pass-by-value semantics for this type. Mimic with finalizer
 		_ret[i] = *_lv_goptr
 	}
+	C.free(unsafe.Pointer(_ma.data))
 	return _ret
 }
 
@@ -406,6 +417,7 @@ func QSslCertificate_Verify(certificateChain []QSslCertificate) []QSslError {
 		_lv_goptr.GoGC() // Qt uses pass-by-value semantics for this type. Mimic with finalizer
 		_ret[i] = *_lv_goptr
 	}
+	C.free(unsafe.Pointer(_ma.data))
 	return _ret
 }
 
@@ -437,6 +449,7 @@ func QSslCertificate_FromPath2(path string, format QSsl__EncodingFormat) []QSslC
 		_lv_goptr.GoGC() // Qt uses pass-by-value semantics for this type. Mimic with finalizer
 		_ret[i] = *_lv_goptr
 	}
+	C.free(unsafe.Pointer(_ma.data))
 	return _ret
 }
 
@@ -453,6 +466,7 @@ func QSslCertificate_FromPath3(path string, format QSsl__EncodingFormat, syntax 
 		_lv_goptr.GoGC() // Qt uses pass-by-value semantics for this type. Mimic with finalizer
 		_ret[i] = *_lv_goptr
 	}
+	C.free(unsafe.Pointer(_ma.data))
 	return _ret
 }
 
@@ -465,6 +479,7 @@ func QSslCertificate_FromDevice2(device *qt.QIODevice, format QSsl__EncodingForm
 		_lv_goptr.GoGC() // Qt uses pass-by-value semantics for this type. Mimic with finalizer
 		_ret[i] = *_lv_goptr
 	}
+	C.free(unsafe.Pointer(_ma.data))
 	return _ret
 }
 
@@ -484,6 +499,7 @@ func QSslCertificate_FromData2(data []byte, format QSsl__EncodingFormat) []QSslC
 		_lv_goptr.GoGC() // Qt uses pass-by-value semantics for this type. Mimic with finalizer
 		_ret[i] = *_lv_goptr
 	}
+	C.free(unsafe.Pointer(_ma.data))
 	return _ret
 }
 
@@ -506,6 +522,7 @@ func QSslCertificate_Verify2(certificateChain []QSslCertificate, hostName string
 		_lv_goptr.GoGC() // Qt uses pass-by-value semantics for this type. Mimic with finalizer
 		_ret[i] = *_lv_goptr
 	}
+	C.free(unsafe.Pointer(_ma.data))
 	return _ret
 }
 

@@ -151,6 +151,8 @@ public:
 		int* callback_return_value_second_arr = static_cast<int*>(callback_return_value.values);
 		callback_return_value_QPair.first = static_cast<int>(callback_return_value_first_arr[0]);
 		callback_return_value_QPair.second = static_cast<int>(callback_return_value_second_arr[0]);
+		free(callback_return_value.keys);
+		free(callback_return_value.values);
 		return callback_return_value_QPair;
 	}
 

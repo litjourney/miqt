@@ -111,6 +111,7 @@ func (this *QPolarChart) Axes() []*QAbstractAxis {
 	for i := 0; i < int(_ma.len); i++ {
 		_ret[i] = newQAbstractAxis(_outCast[i])
 	}
+	C.free(unsafe.Pointer(_ma.data))
 	return _ret
 }
 
@@ -147,6 +148,7 @@ func (this *QPolarChart) AxesWithPolarOrientation(polarOrientation QPolarChart__
 	for i := 0; i < int(_ma.len); i++ {
 		_ret[i] = newQAbstractAxis(_outCast[i])
 	}
+	C.free(unsafe.Pointer(_ma.data))
 	return _ret
 }
 
@@ -157,6 +159,7 @@ func (this *QPolarChart) Axes2(polarOrientation QPolarChart__PolarOrientation, s
 	for i := 0; i < int(_ma.len); i++ {
 		_ret[i] = newQAbstractAxis(_outCast[i])
 	}
+	C.free(unsafe.Pointer(_ma.data))
 	return _ret
 }
 

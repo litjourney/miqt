@@ -84,6 +84,7 @@ func (this *QWebEngineScriptCollection) FindScripts(name string) []QWebEngineScr
 		_lv_goptr.GoGC() // Qt uses pass-by-value semantics for this type. Mimic with finalizer
 		_ret[i] = *_lv_goptr
 	}
+	C.free(unsafe.Pointer(_ma.data))
 	return _ret
 }
 
@@ -118,6 +119,7 @@ func (this *QWebEngineScriptCollection) ToList() []QWebEngineScript {
 		_lv_goptr.GoGC() // Qt uses pass-by-value semantics for this type. Mimic with finalizer
 		_ret[i] = *_lv_goptr
 	}
+	C.free(unsafe.Pointer(_ma.data))
 	return _ret
 }
 

@@ -124,6 +124,7 @@ func (this *QBoxPlotSeries) BoxSets() []*QBoxSet {
 	for i := 0; i < int(_ma.len); i++ {
 		_ret[i] = newQBoxSet(_outCast[i])
 	}
+	C.free(unsafe.Pointer(_ma.data))
 	return _ret
 }
 
@@ -407,6 +408,7 @@ func miqt_exec_callback_QBoxPlotSeries_boxsetsAdded(cb C.intptr_t, sets C.struct
 	for i := 0; i < int(sets_ma.len); i++ {
 		sets_ret[i] = newQBoxSet(sets_outCast[i])
 	}
+	C.free(unsafe.Pointer(sets_ma.data))
 	slotval1 := sets_ret
 
 	gofunc(slotval1)
@@ -441,6 +443,7 @@ func miqt_exec_callback_QBoxPlotSeries_boxsetsRemoved(cb C.intptr_t, sets C.stru
 	for i := 0; i < int(sets_ma.len); i++ {
 		sets_ret[i] = newQBoxSet(sets_outCast[i])
 	}
+	C.free(unsafe.Pointer(sets_ma.data))
 	slotval1 := sets_ret
 
 	gofunc(slotval1)

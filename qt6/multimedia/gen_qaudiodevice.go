@@ -140,6 +140,7 @@ func (this *QAudioDevice) SupportedSampleFormats() []QAudioFormat__SampleFormat 
 	for i := 0; i < int(_ma.len); i++ {
 		_ret[i] = (QAudioFormat__SampleFormat)(_outCast[i])
 	}
+	C.free(unsafe.Pointer(_ma.data))
 	return _ret
 }
 

@@ -154,6 +154,7 @@ func (this *QState) Transitions() []*QAbstractTransition {
 	for i := 0; i < int(_ma.len); i++ {
 		_ret[i] = newQAbstractTransition(_outCast[i])
 	}
+	C.free(unsafe.Pointer(_ma.data))
 	return _ret
 }
 

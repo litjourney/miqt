@@ -260,6 +260,7 @@ func (this *QGraphicsItem) ChildItems() []*QGraphicsItem {
 	for i := 0; i < int(_ma.len); i++ {
 		_ret[i] = newQGraphicsItem(_outCast[i])
 	}
+	C.free(unsafe.Pointer(_ma.data))
 	return _ret
 }
 
@@ -615,6 +616,7 @@ func (this *QGraphicsItem) Transformations() []*QGraphicsTransform {
 	for i := 0; i < int(_ma.len); i++ {
 		_ret[i] = newQGraphicsTransform(_outCast[i])
 	}
+	C.free(unsafe.Pointer(_ma.data))
 	return _ret
 }
 
@@ -711,6 +713,7 @@ func (this *QGraphicsItem) CollidingItems() []*QGraphicsItem {
 	for i := 0; i < int(_ma.len); i++ {
 		_ret[i] = newQGraphicsItem(_outCast[i])
 	}
+	C.free(unsafe.Pointer(_ma.data))
 	return _ret
 }
 
@@ -1033,6 +1036,7 @@ func (this *QGraphicsItem) CollidingItemsWithMode(mode ItemSelectionMode) []*QGr
 	for i := 0; i < int(_ma.len); i++ {
 		_ret[i] = newQGraphicsItem(_outCast[i])
 	}
+	C.free(unsafe.Pointer(_ma.data))
 	return _ret
 }
 

@@ -142,6 +142,7 @@ func (this *QChart) Series() []*QAbstractSeries {
 	for i := 0; i < int(_ma.len); i++ {
 		_ret[i] = newQAbstractSeries(_outCast[i])
 	}
+	C.free(unsafe.Pointer(_ma.data))
 	return _ret
 }
 
@@ -176,6 +177,7 @@ func (this *QChart) Axes() []*QAbstractAxis {
 	for i := 0; i < int(_ma.len); i++ {
 		_ret[i] = newQAbstractAxis(_outCast[i])
 	}
+	C.free(unsafe.Pointer(_ma.data))
 	return _ret
 }
 
@@ -477,6 +479,7 @@ func (this *QChart) AxesWithOrientation(orientation qt6.Orientation) []*QAbstrac
 	for i := 0; i < int(_ma.len); i++ {
 		_ret[i] = newQAbstractAxis(_outCast[i])
 	}
+	C.free(unsafe.Pointer(_ma.data))
 	return _ret
 }
 
@@ -487,6 +490,7 @@ func (this *QChart) Axes2(orientation qt6.Orientation, series *QAbstractSeries) 
 	for i := 0; i < int(_ma.len); i++ {
 		_ret[i] = newQAbstractAxis(_outCast[i])
 	}
+	C.free(unsafe.Pointer(_ma.data))
 	return _ret
 }
 

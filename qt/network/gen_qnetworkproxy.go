@@ -585,6 +585,7 @@ func (this *QNetworkProxy) RawHeaderList() [][]byte {
 		C.free(unsafe.Pointer(_lv_bytearray.data))
 		_ret[i] = _lv_ret
 	}
+	C.free(unsafe.Pointer(_ma.data))
 	return _ret
 }
 
@@ -686,6 +687,7 @@ func (this *QNetworkProxyFactory) QueryProxy(query *QNetworkProxyQuery) []QNetwo
 		_lv_goptr.GoGC() // Qt uses pass-by-value semantics for this type. Mimic with finalizer
 		_ret[i] = *_lv_goptr
 	}
+	C.free(unsafe.Pointer(_ma.data))
 	return _ret
 }
 
@@ -710,6 +712,7 @@ func QNetworkProxyFactory_ProxyForQuery(query *QNetworkProxyQuery) []QNetworkPro
 		_lv_goptr.GoGC() // Qt uses pass-by-value semantics for this type. Mimic with finalizer
 		_ret[i] = *_lv_goptr
 	}
+	C.free(unsafe.Pointer(_ma.data))
 	return _ret
 }
 
@@ -722,6 +725,7 @@ func QNetworkProxyFactory_SystemProxyForQuery() []QNetworkProxy {
 		_lv_goptr.GoGC() // Qt uses pass-by-value semantics for this type. Mimic with finalizer
 		_ret[i] = *_lv_goptr
 	}
+	C.free(unsafe.Pointer(_ma.data))
 	return _ret
 }
 
@@ -738,6 +742,7 @@ func QNetworkProxyFactory_SystemProxyForQueryWithQuery(query *QNetworkProxyQuery
 		_lv_goptr.GoGC() // Qt uses pass-by-value semantics for this type. Mimic with finalizer
 		_ret[i] = *_lv_goptr
 	}
+	C.free(unsafe.Pointer(_ma.data))
 	return _ret
 }
 func (this *QNetworkProxyFactory) OnQueryProxy(slot func(query *QNetworkProxyQuery) []QNetworkProxy) {

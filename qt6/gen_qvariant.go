@@ -564,6 +564,7 @@ func (this *QVariant) ToStringList() []string {
 		C.free(unsafe.Pointer(_lv_ms.data))
 		_ret[i] = _lv_ret
 	}
+	C.free(unsafe.Pointer(_ma.data))
 	return _ret
 }
 
@@ -600,6 +601,7 @@ func (this *QVariant) ToList() []QVariant {
 		_lv_goptr.GoGC() // Qt uses pass-by-value semantics for this type. Mimic with finalizer
 		_ret[i] = *_lv_goptr
 	}
+	C.free(unsafe.Pointer(_ma.data))
 	return _ret
 }
 
@@ -619,6 +621,8 @@ func (this *QVariant) ToMap() map[string]QVariant {
 
 		_ret[_entry_Key] = _entry_Value
 	}
+	C.free(unsafe.Pointer(_mm.keys))
+	C.free(unsafe.Pointer(_mm.values))
 	return _ret
 }
 
@@ -638,6 +642,8 @@ func (this *QVariant) ToHash() map[string]QVariant {
 
 		_ret[_entry_Key] = _entry_Value
 	}
+	C.free(unsafe.Pointer(_mm.keys))
+	C.free(unsafe.Pointer(_mm.values))
 	return _ret
 }
 

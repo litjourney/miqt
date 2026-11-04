@@ -143,6 +143,7 @@ func (this *QMdiArea) SubWindowList() []*QMdiSubWindow {
 	for i := 0; i < int(_ma.len); i++ {
 		_ret[i] = newQMdiSubWindow(_outCast[i])
 	}
+	C.free(unsafe.Pointer(_ma.data))
 	return _ret
 }
 
@@ -329,6 +330,7 @@ func (this *QMdiArea) SubWindowListWithOrder(order QMdiArea__WindowOrder) []*QMd
 	for i := 0; i < int(_ma.len); i++ {
 		_ret[i] = newQMdiSubWindow(_outCast[i])
 	}
+	C.free(unsafe.Pointer(_ma.data))
 	return _ret
 }
 

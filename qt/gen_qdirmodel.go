@@ -193,6 +193,7 @@ func (this *QDirModel) MimeTypes() []string {
 		C.free(unsafe.Pointer(_lv_ms.data))
 		_ret[i] = _lv_ret
 	}
+	C.free(unsafe.Pointer(_ma.data))
 	return _ret
 }
 
@@ -246,6 +247,7 @@ func (this *QDirModel) NameFilters() []string {
 		C.free(unsafe.Pointer(_lv_ms.data))
 		_ret[i] = _lv_ret
 	}
+	C.free(unsafe.Pointer(_ma.data))
 	return _ret
 }
 
@@ -689,6 +691,7 @@ func (this *QDirModel) PersistentIndexList() []QModelIndex {
 		_lv_goptr.GoGC() // Qt uses pass-by-value semantics for this type. Mimic with finalizer
 		_ret[i] = *_lv_goptr
 	}
+	C.free(unsafe.Pointer(_ma.data))
 	_method_ret := _ret
 
 	if !_dynamic_cast_ok {
@@ -1202,6 +1205,7 @@ func (this *QDirModel) callVirtualBase_MimeTypes() []string {
 		C.free(unsafe.Pointer(_lv_ms.data))
 		_ret[i] = _lv_ret
 	}
+	C.free(unsafe.Pointer(_ma.data))
 	return _ret
 
 }
@@ -1275,6 +1279,7 @@ func miqt_exec_callback_QDirModel_mimeData(self *C.QDirModel, cb C.intptr_t, ind
 		indexes_lv_goptr.GoGC() // Qt uses pass-by-value semantics for this type. Mimic with finalizer
 		indexes_ret[i] = *indexes_lv_goptr
 	}
+	C.free(unsafe.Pointer(indexes_ma.data))
 	slotval1 := indexes_ret
 
 	virtualReturn := gofunc((&QDirModel{h: self}).callVirtualBase_MimeData, slotval1)
@@ -1466,6 +1471,8 @@ func (this *QDirModel) callVirtualBase_ItemData(index *QModelIndex) map[int]QVar
 
 		_ret[_entry_Key] = _entry_Value
 	}
+	C.free(unsafe.Pointer(_mm.keys))
+	C.free(unsafe.Pointer(_mm.values))
 	return _ret
 
 }
@@ -1563,6 +1570,8 @@ func miqt_exec_callback_QDirModel_setItemData(self *C.QDirModel, cb C.intptr_t, 
 
 		roles_ret[roles_entry_Key] = roles_entry_Value
 	}
+	C.free(unsafe.Pointer(roles_mm.keys))
+	C.free(unsafe.Pointer(roles_mm.values))
 	slotval2 := roles_ret
 
 	virtualReturn := gofunc((&QDirModel{h: self}).callVirtualBase_SetItemData, slotval1, slotval2)
@@ -1993,6 +2002,7 @@ func (this *QDirModel) callVirtualBase_Match(start *QModelIndex, role int, value
 		_lv_goptr.GoGC() // Qt uses pass-by-value semantics for this type. Mimic with finalizer
 		_ret[i] = *_lv_goptr
 	}
+	C.free(unsafe.Pointer(_ma.data))
 	return _ret
 
 }
@@ -2108,6 +2118,8 @@ func (this *QDirModel) callVirtualBase_RoleNames() map[int][]byte {
 		_entry_Value := _hashval_ret
 		_ret[_entry_Key] = _entry_Value
 	}
+	C.free(unsafe.Pointer(_mm.keys))
+	C.free(unsafe.Pointer(_mm.values))
 	return _ret
 
 }
@@ -2135,14 +2147,10 @@ func miqt_exec_callback_QDirModel_roleNames(self *C.QDirModel, cb C.intptr_t) C.
 	virtualReturn_ctr := 0
 	for virtualReturn_k, virtualReturn_v := range virtualReturn {
 		virtualReturn_Keys_CArray[virtualReturn_ctr] = (C.int)(virtualReturn_k)
-		virtualReturn_v_alias := C.struct_miqt_string{}
-		if len(virtualReturn_v) > 0 {
-			virtualReturn_v_alias.data = (*C.char)(unsafe.Pointer(&virtualReturn_v[0]))
-		} else {
-			virtualReturn_v_alias.data = (*C.char)(unsafe.Pointer(nil))
-		}
-		virtualReturn_v_alias.len = C.size_t(len(virtualReturn_v))
-		virtualReturn_Values_CArray[virtualReturn_ctr] = virtualReturn_v_alias
+		virtualReturn_v_ms := C.struct_miqt_string{}
+		virtualReturn_v_ms.data = (*C.char)(C.CBytes(virtualReturn_v))
+		virtualReturn_v_ms.len = C.size_t(len(virtualReturn_v))
+		virtualReturn_Values_CArray[virtualReturn_ctr] = virtualReturn_v_ms
 		virtualReturn_ctr++
 	}
 	virtualReturn_mm := C.struct_miqt_map{

@@ -150,6 +150,7 @@ func QGuiApplication_AllWindows() []*QWindow {
 	for i := 0; i < int(_ma.len); i++ {
 		_ret[i] = newQWindow(_outCast[i])
 	}
+	C.free(unsafe.Pointer(_ma.data))
 	return _ret
 }
 
@@ -160,6 +161,7 @@ func QGuiApplication_TopLevelWindows() []*QWindow {
 	for i := 0; i < int(_ma.len); i++ {
 		_ret[i] = newQWindow(_outCast[i])
 	}
+	C.free(unsafe.Pointer(_ma.data))
 	return _ret
 }
 
@@ -207,6 +209,7 @@ func QGuiApplication_Screens() []*QScreen {
 	for i := 0; i < int(_ma.len); i++ {
 		_ret[i] = newQScreen(_outCast[i])
 	}
+	C.free(unsafe.Pointer(_ma.data))
 	return _ret
 }
 

@@ -183,6 +183,7 @@ func (this *QMediaFormat) SupportedFileFormats(m QMediaFormat__ConversionMode) [
 	for i := 0; i < int(_ma.len); i++ {
 		_ret[i] = (QMediaFormat__FileFormat)(_outCast[i])
 	}
+	C.free(unsafe.Pointer(_ma.data))
 	return _ret
 }
 
@@ -193,6 +194,7 @@ func (this *QMediaFormat) SupportedVideoCodecs(m QMediaFormat__ConversionMode) [
 	for i := 0; i < int(_ma.len); i++ {
 		_ret[i] = (QMediaFormat__VideoCodec)(_outCast[i])
 	}
+	C.free(unsafe.Pointer(_ma.data))
 	return _ret
 }
 
@@ -203,6 +205,7 @@ func (this *QMediaFormat) SupportedAudioCodecs(m QMediaFormat__ConversionMode) [
 	for i := 0; i < int(_ma.len); i++ {
 		_ret[i] = (QMediaFormat__AudioCodec)(_outCast[i])
 	}
+	C.free(unsafe.Pointer(_ma.data))
 	return _ret
 }
 
