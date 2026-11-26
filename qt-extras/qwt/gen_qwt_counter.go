@@ -1438,8 +1438,16 @@ func (this *QwtCounter) callVirtualBase_NativeEvent(eventType []byte, message un
 		eventType_alias.data = (*C.char)(unsafe.Pointer(nil))
 	}
 	eventType_alias.len = C.size_t(len(eventType))
+	// C long can be narrower than int64: pass a C-sized copy and copy it back
+	var result_cval C.long
+	var result_cptr *C.long
+	if result != nil {
+		result_cval = C.long(*result)
+		result_cptr = &result_cval
+		defer func() { *result = int64(result_cval) }()
+	}
 
-	return (bool)(C.QwtCounter_virtualbase_nativeEvent(unsafe.Pointer(this.h), eventType_alias, message, (*C.long)(unsafe.Pointer(result))))
+	return (bool)(C.QwtCounter_virtualbase_nativeEvent(unsafe.Pointer(this.h), eventType_alias, message, result_cptr))
 
 }
 func (this *QwtCounter) OnNativeEvent(slot func(super func(eventType []byte, message unsafe.Pointer, result *int64) bool, eventType []byte, message unsafe.Pointer, result *int64) bool) {
@@ -1467,7 +1475,14 @@ func miqt_exec_callback_QwtCounter_nativeEvent(self *C.QwtCounter, cb C.intptr_t
 	slotval1 := eventType_ret
 	slotval2 := (unsafe.Pointer)(message)
 
-	slotval3 := (*int64)(unsafe.Pointer(result))
+	// C long can be narrower than int64: pass a full-width copy and copy it back
+	var slotval3_val int64
+	var slotval3 *int64
+	if result != nil {
+		slotval3_val = int64(*result)
+		slotval3 = &slotval3_val
+		defer func() { *result = C.long(slotval3_val) }()
+	}
 
 	virtualReturn := gofunc((&QwtCounter{h: self}).callVirtualBase_NativeEvent, slotval1, slotval2, slotval3)
 

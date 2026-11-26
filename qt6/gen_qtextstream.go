@@ -312,11 +312,27 @@ func (this *QTextStream) OperatorShiftRightWithUnsignedint(i *uint) *QTextStream
 }
 
 func (this *QTextStream) OperatorShiftRightWithLong(i *int64) *QTextStream {
-	return newQTextStream(C.QTextStream_operatorShiftRightWithLong(this.h, (*C.long)(unsafe.Pointer(i))))
+	// C long can be narrower than int64: pass a C-sized copy and copy it back
+	var i_cval C.long
+	var i_cptr *C.long
+	if i != nil {
+		i_cval = C.long(*i)
+		i_cptr = &i_cval
+		defer func() { *i = int64(i_cval) }()
+	}
+	return newQTextStream(C.QTextStream_operatorShiftRightWithLong(this.h, i_cptr))
 }
 
 func (this *QTextStream) OperatorShiftRightWithUnsignedlong(i *uint64) *QTextStream {
-	return newQTextStream(C.QTextStream_operatorShiftRightWithUnsignedlong(this.h, (*C.ulong)(unsafe.Pointer(i))))
+	// C long can be narrower than uint64: pass a C-sized copy and copy it back
+	var i_cval C.ulong
+	var i_cptr *C.ulong
+	if i != nil {
+		i_cval = C.ulong(*i)
+		i_cptr = &i_cval
+		defer func() { *i = uint64(i_cval) }()
+	}
+	return newQTextStream(C.QTextStream_operatorShiftRightWithUnsignedlong(this.h, i_cptr))
 }
 
 func (this *QTextStream) OperatorShiftRightWithQlonglong(i *int64) *QTextStream {
