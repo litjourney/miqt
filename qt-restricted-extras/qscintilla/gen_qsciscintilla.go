@@ -530,7 +530,23 @@ func (this *QsciScintilla) FindNext() bool {
 }
 
 func (this *QsciScintilla) FindMatchingBrace(brace *int64, other *int64, mode QsciScintilla__BraceMatch) bool {
-	return (bool)(C.QsciScintilla_findMatchingBrace(this.h, (*C.long)(unsafe.Pointer(brace)), (*C.long)(unsafe.Pointer(other)), (C.int)(mode)))
+	// C long can be narrower than int64: pass a C-sized copy and copy it back
+	var brace_cval C.long
+	var brace_cptr *C.long
+	if brace != nil {
+		brace_cval = C.long(*brace)
+		brace_cptr = &brace_cval
+		defer func() { *brace = int64(brace_cval) }()
+	}
+	// C long can be narrower than int64: pass a C-sized copy and copy it back
+	var other_cval C.long
+	var other_cptr *C.long
+	if other != nil {
+		other_cval = C.long(*other)
+		other_cptr = &other_cval
+		defer func() { *other = int64(other_cval) }()
+	}
+	return (bool)(C.QsciScintilla_findMatchingBrace(this.h, brace_cptr, other_cptr, (C.int)(mode)))
 }
 
 func (this *QsciScintilla) FirstVisibleLine() int {
@@ -6148,8 +6164,16 @@ func (this *QsciScintilla) callVirtualBase_NativeEvent(eventType []byte, message
 		eventType_alias.data = (*C.char)(unsafe.Pointer(nil))
 	}
 	eventType_alias.len = C.size_t(len(eventType))
+	// C long can be narrower than int64: pass a C-sized copy and copy it back
+	var result_cval C.long
+	var result_cptr *C.long
+	if result != nil {
+		result_cval = C.long(*result)
+		result_cptr = &result_cval
+		defer func() { *result = int64(result_cval) }()
+	}
 
-	return (bool)(C.QsciScintilla_virtualbase_nativeEvent(unsafe.Pointer(this.h), eventType_alias, message, (*C.long)(unsafe.Pointer(result))))
+	return (bool)(C.QsciScintilla_virtualbase_nativeEvent(unsafe.Pointer(this.h), eventType_alias, message, result_cptr))
 
 }
 func (this *QsciScintilla) OnNativeEvent(slot func(super func(eventType []byte, message unsafe.Pointer, result *int64) bool, eventType []byte, message unsafe.Pointer, result *int64) bool) {
@@ -6177,7 +6201,14 @@ func miqt_exec_callback_QsciScintilla_nativeEvent(self *C.QsciScintilla, cb C.in
 	slotval1 := eventType_ret
 	slotval2 := (unsafe.Pointer)(message)
 
-	slotval3 := (*int64)(unsafe.Pointer(result))
+	// C long can be narrower than int64: pass a full-width copy and copy it back
+	var slotval3_val int64
+	var slotval3 *int64
+	if result != nil {
+		slotval3_val = int64(*result)
+		slotval3 = &slotval3_val
+		defer func() { *result = C.long(slotval3_val) }()
+	}
 
 	virtualReturn := gofunc((&QsciScintilla{h: self}).callVirtualBase_NativeEvent, slotval1, slotval2, slotval3)
 

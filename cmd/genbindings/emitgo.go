@@ -373,7 +373,70 @@ func stripDeferCFree(preamble string) string {
 }
 
 func (gfs *goFileState) emitParameterGo2CABIForwarding(p CppParameter) (preamble string, rvalue string) {
+	if p.isCLongPointer() {
+		return gfs.emitCLongPointerGo2CABI(p)
+	}
 	return gfs.emitGo2CABI(p, false)
+}
+
+// isCLongPointer reports whether p is a single-level pointer or reference to a
+// C `long` / `unsigned long`. The Go projection renders these as *int64 /
+// *uint64 because bindings are generated on an LP64 host, but C `long` is only
+// 4 bytes on Windows and on 32-bit platforms. The pointer therefore cannot be
+// reinterpreted across the boundary: the value must be copied through a
+// temporary of the right width in both directions.
+func (p CppParameter) isCLongPointer() bool {
+	switch p.ParameterType {
+	case "long", "unsigned long", "ulong":
+	default:
+		return false
+	}
+	return (p.Pointer && p.PointerCount == 1 && !p.ByRef) || (p.ByRef && !p.Pointer)
+}
+
+// emitCLongPointerGo2CABI forwards a Go *int64 / *uint64 argument to a C++
+// `long*` / `long&` parameter. C++ gets a pointer to a C-sized copy (or nil),
+// and the copy is written back when the calling Go function returns.
+func (gfs *goFileState) emitCLongPointerGo2CABI(p CppParameter) (preamble string, rvalue string) {
+	name := p.goParameterName()
+	nameprefix := makeNamePrefix(name)
+	goType := strings.TrimPrefix(p.RenderTypeGo(gfs), "*")
+	cType := strings.TrimPrefix(p.parameterTypeCgo(), "*")
+
+	preamble += "// C long can be narrower than " + goType + ": pass a C-sized copy and copy it back\n"
+	preamble += "var " + nameprefix + "_cval " + cType + "\n"
+	preamble += "var " + nameprefix + "_cptr *" + cType + "\n"
+	preamble += "if " + name + " != nil {\n"
+	preamble += nameprefix + "_cval = " + cType + "(*" + name + ")\n"
+	preamble += nameprefix + "_cptr = &" + nameprefix + "_cval\n"
+	preamble += "defer func() { *" + name + " = " + goType + "(" + nameprefix + "_cval) }()\n"
+	preamble += "}\n"
+
+	return preamble, nameprefix + "_cptr"
+}
+
+// emitCallbackParamCabiToGo converts one CABI parameter of a Go callback
+// (virtual override or signal) into the Go variable slotName.
+func (gfs *goFileState) emitCallbackParamCabiToGo(slotName string, p CppParameter) string {
+	if !p.isCLongPointer() {
+		return gfs.emitCabiToGo(slotName+" := ", p, p.goParameterName())
+	}
+
+	// The C++ caller owns a C-sized long. Hand the Go callback a pointer to a
+	// full-width copy (or nil), and copy it back when the callback returns.
+	name := p.goParameterName()
+	goType := strings.TrimPrefix(p.RenderTypeGo(gfs), "*")
+	cType := strings.TrimPrefix(p.parameterTypeCgo(), "*")
+
+	ret := "// C long can be narrower than " + goType + ": pass a full-width copy and copy it back\n"
+	ret += "var " + slotName + "_val " + goType + "\n"
+	ret += "var " + slotName + " *" + goType + "\n"
+	ret += "if " + name + " != nil {\n"
+	ret += slotName + "_val = " + goType + "(*" + name + ")\n"
+	ret += slotName + " = &" + slotName + "_val\n"
+	ret += "defer func() { *" + name + " = " + cType + "(" + slotName + "_val) }()\n"
+	ret += "}\n"
+	return ret
 }
 
 // emitVirtualReturnGo2CABI converts a Go virtual-override return value into
@@ -1057,7 +1120,7 @@ import "C"
 					cgoNamedParams = append(cgoNamedParams, pp.goParameterName()+" "+pp.parameterTypeCgo())
 
 					paramNames = append(paramNames, fmt.Sprintf("slotval%d", i+1))
-					conversion += gfs.emitCabiToGo(fmt.Sprintf("slotval%d := ", i+1), pp, pp.goParameterName()) + "\n"
+					conversion += gfs.emitCallbackParamCabiToGo(fmt.Sprintf("slotval%d", i+1), pp) + "\n"
 				}
 
 				goCbType := `func(` + gfs.emitParametersGo(m.Parameters) + `)`
@@ -1165,7 +1228,7 @@ import "C"
 					cgoNamedParams = append(cgoNamedParams, pp.goParameterName()+" "+pp.parameterTypeCgo())
 
 					paramNames = append(paramNames, fmt.Sprintf("slotval%d", i+1))
-					conversion += gfs.emitCabiToGo(fmt.Sprintf("slotval%d := ", i+1), pp, pp.goParameterName()) + "\n"
+					conversion += gfs.emitCallbackParamCabiToGo(fmt.Sprintf("slotval%d", i+1), pp) + "\n"
 				}
 
 				cabiReturnType := m.ReturnType.parameterTypeCgo()
@@ -1295,7 +1358,7 @@ import "C"
 				cgoNamedParams = append(cgoNamedParams, pp.goParameterName()+" "+pp.parameterTypeCgo())
 
 				paramNames = append(paramNames, fmt.Sprintf("slotval%d", i+1))
-				conversion += gfs.emitCabiToGo(fmt.Sprintf("slotval%d := ", i+1), pp, pp.goParameterName()) + "\n"
+				conversion += gfs.emitCallbackParamCabiToGo(fmt.Sprintf("slotval%d", i+1), pp) + "\n"
 			}
 
 			goCbType := `func(` + gfs.emitParametersGo(m.Parameters) + `)`

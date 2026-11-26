@@ -521,7 +521,23 @@ func (this *QsciScintilla) FindNext() bool {
 }
 
 func (this *QsciScintilla) FindMatchingBrace(brace *int64, other *int64, mode QsciScintilla__BraceMatch) bool {
-	return (bool)(C.QsciScintilla_findMatchingBrace(this.h, (*C.long)(unsafe.Pointer(brace)), (*C.long)(unsafe.Pointer(other)), (C.int)(mode)))
+	// C long can be narrower than int64: pass a C-sized copy and copy it back
+	var brace_cval C.long
+	var brace_cptr *C.long
+	if brace != nil {
+		brace_cval = C.long(*brace)
+		brace_cptr = &brace_cval
+		defer func() { *brace = int64(brace_cval) }()
+	}
+	// C long can be narrower than int64: pass a C-sized copy and copy it back
+	var other_cval C.long
+	var other_cptr *C.long
+	if other != nil {
+		other_cval = C.long(*other)
+		other_cptr = &other_cval
+		defer func() { *other = int64(other_cval) }()
+	}
+	return (bool)(C.QsciScintilla_findMatchingBrace(this.h, brace_cptr, other_cptr, (C.int)(mode)))
 }
 
 func (this *QsciScintilla) FirstVisibleLine() int {
